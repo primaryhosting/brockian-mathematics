@@ -96,9 +96,11 @@ brockian-mathematics/
     theorems.json           # GENERATED: build-derived fields + provenance-map fields (§5)
   provenance/
     verdicts.yaml           # HAND-AUTHORED source of truth for everything the compiled
-                            #   environment cannot supply: per-declaration verdict for
-                            #   SPLIT runs, ledger_run, quarantine, provenance_note, and
-                            #   the closed-module list. Reviewed artifact (§3.2, §5, §6).
+                            #   environment cannot supply: run-level provenance defaults +
+                            #   per-declaration overrides for SPLIT runs — verdict,
+                            #   failure_mode, ledger_run, quarantine, provenance_note,
+                            #   conditional_rung, and the closed-module list.
+                            #   Reviewed artifact (§3.2, §5, §6).
   scripts/
     gen_registry.py         # merge compiled-env facts + verdicts.yaml → theorems.json
     no_theater_lint.py      # grep known failure signatures → flags
@@ -164,14 +166,24 @@ machine-readable per-declaration list — e.g. run 22's "placeholder suite," run
 exhaustive declaration name. **The ledger alone therefore cannot mechanically decide
 ADMIT vs EXCLUDE for every declaration in a SPLIT run.**
 
-Resolution: a **hand-authored `provenance/verdicts.yaml`** is the source of truth for the
-per-declaration verdict. It is produced during ingest by reading the ledger prose and the
-`.lean` source together, one entry per declaration in a SPLIT (or otherwise
-non-trivially-classified) run, each carrying `verdict` (admit/exclude), `failure_mode`
-(for excludes), and the provenance fields of §5. Whole-run ADMIT and whole-run REJECT need
-no per-declaration entry (the run-level verdict applies). `verdicts.yaml` is a reviewed
-artifact — it is checked in, and its exclude entries must each cite the ledger line that
-justifies them.
+Resolution: a **hand-authored `provenance/verdicts.yaml`** is the source of truth for
+verdicts and provenance. It has two levels:
+
+- **Run-level entries** — one per ingested run, carrying the run's default provenance
+  (`ledger_run`, `quarantine`, `provenance_note`, `conditional_rung`) and its run-level
+  verdict (whole-run ADMIT or whole-run REJECT). These defaults apply to *every* keeper
+  declaration ingested from that run, so a whole-run-ADMIT run needs no per-declaration
+  rows.
+- **Per-declaration overrides** — required for SPLIT (or otherwise
+  non-trivially-classified) runs: one row per affected declaration, carrying `verdict`
+  (admit/exclude), `failure_mode` (for excludes), and any provenance field that differs
+  from the run default. These override the run-level entry by declaration name.
+
+`gen_registry.py` resolves each compiled declaration's provenance by override-then-default
+(§5), so the §5/§8 rule "every compiled PROVED/CONDITIONAL decl has a provenance entry" is
+satisfied by the run-level default when no override exists — there is no gap. `verdicts.yaml`
+is a reviewed, checked-in artifact, and every exclude (run-level or override) must cite the
+ledger line that justifies it.
 
 Then:
 
@@ -262,8 +274,9 @@ provenance/verdicts.yaml ──────────────────�
 - **Provenance-map (from `verdicts.yaml`, not recoverable from the environment):**
   `ledger_run`, `quarantine`, `provenance_note`, and the `conditional_rung` value for
   CONDITIONAL entries. These are human-maintained and reviewed; the generator merges them
-  by declaration name and errors if a compiled PROVED/CONDITIONAL declaration is missing
-  its required provenance entry.
+  by declaration name (per-declaration override, else run-level default per §3.2) and
+  errors only if a compiled PROVED/CONDITIONAL declaration resolves to *neither* an
+  override *nor* a run-level default.
 
 **Extraction scope:** `gen_registry.py` extracts **all declarations** in the `Brockian`
 namespace — `theorem`/`lemma` *and* `def`/Prop containers — so CONJECTURE-register
@@ -332,7 +345,10 @@ Sub-project 1 is done when:
 - [ ] `lake build` is green locally and in CI (cache-backed).
 - [ ] **Must-port coverage** — the build is *not* trivially-empty: it contains, in register
       PROVED (or, where the ledger admits them as such, CONDITIONAL/COMPUTATION with the
-      correct rung), the program's headline keepers:
+      correct rung), the program's **required keeper set** (a coverage bar for sub-project 1;
+      distinct from the §4 "headline claim" notion, which governs what sub-projects 2/3 may
+      *promote* — a quarantined theorem can be a required keeper here yet barred from being a
+      headline claim there):
       the q−ν admissibility law with its q=3 and q=5 corollaries (runs 74/49);
       `golden_unique_to_five` (run 73); `λ₂(C₅)=2−1/φ` (run 88); `Aut(C₅)≅D₅` and the
       pentagon golden-diagonal / two-distance geometry (runs 54/70/16); Dirichlet-on-rays
