@@ -30,8 +30,12 @@ Today the mathematics is credible in method but not yet independently checkable:
   conditionality ladder. It rejects its own overclaims. This is the program's core asset.
 - But: **no independent `lake build` has ever been run.** Axioms were only textually
   audited; compile hashes are "pending." (Ledger's own standing caveat.)
-- The keeper proofs are **scattered across three toolchains** (Lean 4.24 / 4.28 / 4.30)
-  and **at least seven filesystem locations** (the repo's 6 stale modules, the
+- The keeper proofs are **scattered across multiple toolchains** — the intake ledger
+  names Lean **4.24** (run 1) and **4.28** (runs 4 / 118 / 119, pinned 4.28.0); the July
+  campaign `.lean` files carry no verified pin; and the canonical repo's own
+  `lakefile.toml` pins mathlib **v4.14.0** against a `lean-toolchain` of **v4.24.0** (a
+  mismatch that means the repo would not build as-is) — and across **at least seven
+  filesystem locations** (the repo's 6 stale modules, the
   5,411-line `catalog/brockian_all_theorems.lean`, `~/Downloads/*.lean`, `~/Desktop/*.lean`,
   `~/Desktop/SAIR-RIEMANN-LABS-PACKAGE/`, `~/Projects/QuantumProof/riemann_labs_lean_snapshot/`,
   `/Volumes/BCC-Storage/Projects/Brockian-Math/lean/`).
@@ -89,10 +93,18 @@ brockian-mathematics/
                             #   the unbounded Hamiltonian stays OPEN
     Brockian.lean           # root: imports all of the above
   registry/
-    theorems.json           # GENERATED from the compiled environment (see §5)
+    theorems.json           # GENERATED: build-derived fields + provenance-map fields (§5)
+  provenance/
+    verdicts.yaml           # HAND-AUTHORED source of truth for everything the compiled
+                            #   environment cannot supply: per-declaration verdict for
+                            #   SPLIT runs, ledger_run, quarantine, provenance_note, and
+                            #   the closed-module list. Reviewed artifact (§3.2, §5, §6).
   scripts/
-    gen_registry.py         # extract declarations + #print axioms → theorems.json
+    gen_registry.py         # merge compiled-env facts + verdicts.yaml → theorems.json
     no_theater_lint.py      # grep known failure signatures → flags
+  Archive/                  # retired inputs kept for reference, OUTSIDE the lean_lib globs
+    catalog/                #   the old 5,411-line brockian_all_theorems.lean + JSON
+  paper/                    # LEFT UNTOUCHED this sub-project (owned by sub-project 2)
   .github/workflows/ci.yml  # cache get → lake build → axiom check → registry gen → gates
   EXCLUDED.md               # every REJECT/theater declaration dropped, with failure mode
   PORT-QUEUE.md             # keeper proofs that would not port this session (see §4)
@@ -100,10 +112,22 @@ brockian-mathematics/
   README.md                 # honest framing (already exists; updated)
 ```
 
+**Fate of existing repo contents.** The current `Brockian/` 6 modules are superseded by
+the consolidated module set and moved into the ingest (their keepers re-enter via §3;
+their origin, being the repo itself, is preserved in git history — that satisfies §3.1's
+"nothing deleted from origin"). `catalog/` (the 5,411-line `brockian_all_theorems.lean`
+and 1.75 MB JSON) is **moved to `Archive/catalog/`** and excluded from the `lean_lib`
+globs — retained as reference, not built. `paper/` is **left in place and untouched**;
+sub-project 2 owns it.
+
 **Module boundaries (isolation):** each `Brockian/*.lean` module owns one mathematical
-theme and imports only `Core` (and mathlib). A reader can understand any module's claims
-without reading the internals of another. The registry generator and the no-theater lint
-are each standalone scripts with a single input→output contract, independently testable.
+theme. The **aspirational default** is that a module imports only `Core` (and mathlib);
+this is not a hard constraint — `SpectralGate1` (ξ-bridge + RH schema) and the
+cross-referencing counting modules may legitimately import a sibling, and the port
+satisfies whatever the proofs actually need rather than forcing the default. A reader
+should still be able to understand any module's claims without reading another's
+internals. The registry generator and the no-theater lint are each standalone scripts
+with a single input→output contract, independently testable.
 
 ---
 
@@ -114,7 +138,8 @@ cache available** (so `lake exe cache get` makes CI minutes, not ~1 hour of full
 The exact tag is chosen at implementation time by checking cache availability; it is
 recorded in `lean-toolchain` and `lakefile.toml` and is the acceptance gate's named pin.
 
-The audited proofs were written against Lean 4.14→4.28. Porting to current mathlib **will**
+The audited proofs were written against Lean 4.24–4.28 (per the ledger; July files
+unpinned), and the repo currently pins mathlib v4.14.0. Porting to current mathlib **will**
 break some proofs on API drift. This is expected and handled by §4's convergence rule.
 We never raise `maxHeartbeats` to hide a hang, never add an axiom to force a close, and
 never fake a build to get a green.
@@ -132,14 +157,31 @@ deleted from its origin.
 
 ### 3.2 Verdict filter (only keepers are eligible)
 
-Cross-reference each declaration against the intake ledger's verdict for its run:
+The intake ledger records verdicts **per run (file)**, and a large fraction of admitted
+runs are **SPLIT** (ADMIT one part, REJECT another) described in *prose*, not as a
+machine-readable per-declaration list — e.g. run 22's "placeholder suite," run 50's
+"zero-determinant suite," run 53's "multiplicity-one suite" are named by theme, not by
+exhaustive declaration name. **The ledger alone therefore cannot mechanically decide
+ADMIT vs EXCLUDE for every declaration in a SPLIT run.**
 
-- **ADMIT / keeper** content → eligible for ingest.
-- **REJECT / theater / superseded / duplicate** content → **excluded**, and recorded in
-  `EXCLUDED.md` with the declaration name and its named failure mode (definitional theater,
-  degenerate witness, ℝ-mod collapse, Nat-division exponent, overtitling, ex-falso
-  conditional, instance-filled Prop, modus-ponens, etc.). The exclusion list is itself an
-  auditable artifact — dropping theater silently would violate the program's ethic.
+Resolution: a **hand-authored `provenance/verdicts.yaml`** is the source of truth for the
+per-declaration verdict. It is produced during ingest by reading the ledger prose and the
+`.lean` source together, one entry per declaration in a SPLIT (or otherwise
+non-trivially-classified) run, each carrying `verdict` (admit/exclude), `failure_mode`
+(for excludes), and the provenance fields of §5. Whole-run ADMIT and whole-run REJECT need
+no per-declaration entry (the run-level verdict applies). `verdicts.yaml` is a reviewed
+artifact — it is checked in, and its exclude entries must each cite the ledger line that
+justifies them.
+
+Then:
+
+- **ADMIT / keeper** declarations → eligible for ingest.
+- **REJECT / theater / superseded / duplicate** declarations → **excluded**, and rendered
+  into `EXCLUDED.md` (generated from `verdicts.yaml`) with the declaration name and its
+  named failure mode (definitional theater, degenerate witness, ℝ-mod collapse,
+  Nat-division exponent, overtitling, ex-falso conditional, instance-filled Prop,
+  modus-ponens, etc.). The exclusion list is itself an auditable artifact — dropping
+  theater silently would violate the program's ethic.
 
 ### 3.3 Consolidation
 
@@ -188,28 +230,44 @@ repo converges on the genuinely buildable set and reports the remainder truthful
 **Quarantine flag.** The ledger notes the run-119 consolidated package is "quarantine-side"
 — machine-checking it proves the *method*, and does not discharge the book's separate
 commitment (§19.10) to formalize its four core control theorems. Every registry entry
-carries a boolean `quarantine`. Nothing quarantined may be surfaced as a headline claim by
-sub-projects 2 or 3.
+carries a boolean `quarantine` (sourced from `verdicts.yaml`, §5). Nothing quarantined may
+be surfaced as a headline claim by sub-projects 2 or 3.
+
+**Closed-module tag.** A module is "fully closed" (no `sorry`/`admit` tolerated; the
+no-theater lint blocks on any) iff it is listed under `closed_modules:` in
+`verdicts.yaml`. The initial closed set is the run-119 modules 1/2/5, which map to
+`Brockian/Core.lean`, `Brockian/Admissibility.lean`, and `Brockian/TransitionKernel.lean`
+respectively. `SpectralGate1.lean` is explicitly **not** closed (its Hamiltonian core is
+honestly open).
 
 ---
 
 ## 5. Data flow — the registry
 
 ```
-Brockian/*.lean
-      │  lake build  (target toolchain, cache-backed)
-      ▼
-compiled environment  ──►  scripts/gen_registry.py
-                               │   (per declaration: name, kind, formal statement,
-                               │    module, source file+line, #print axioms output,
-                               │    native_decide?, sorry?, originating ledger run,
-                               │    quarantine flag → derived register)
-                               ▼
-                        registry/theorems.json  ──►  REGISTRY.md (human view)
-                               │
-                               ├─►  sub-project 2 (paper theorem environments)
-                               └─►  sub-project 3 (website PROVED badges + proof links)
+Brockian/*.lean ──lake build──► compiled environment ─┐
+                                                       ├─► scripts/gen_registry.py ─► registry/theorems.json ─► REGISTRY.md
+provenance/verdicts.yaml ─────────────────────────────┘         │                          │
+  (ledger_run, quarantine,                                       │                          ├─► sub-project 2 (paper)
+   provenance_note, verdict)                                     │                          └─► sub-project 3 (website)
 ```
+
+`gen_registry.py` has **two input sources**, and each field's origin is explicit:
+
+- **Build-derived (cannot disagree with the build):** `name`, `kind`, `statement`,
+  `module`, `source` file+line, `axioms` (from `#print axioms`), `flags`
+  (`native_decide` / `sorry` / `exact_search`), and therefore the **`register`** itself —
+  `register` is *computed* from `axioms` + `flags` + the `conditional_rung`, never
+  hand-asserted, so no declaration can wear a PROVED label its build does not earn.
+- **Provenance-map (from `verdicts.yaml`, not recoverable from the environment):**
+  `ledger_run`, `quarantine`, `provenance_note`, and the `conditional_rung` value for
+  CONDITIONAL entries. These are human-maintained and reviewed; the generator merges them
+  by declaration name and errors if a compiled PROVED/CONDITIONAL declaration is missing
+  its required provenance entry.
+
+**Extraction scope:** `gen_registry.py` extracts **all declarations** in the `Brockian`
+namespace — `theorem`/`lemma` *and* `def`/Prop containers — so CONJECTURE-register
+containers (which are `def`s by §4) appear in the registry alongside proved theorems.
 
 `theorems.json` schema (per entry):
 
@@ -269,14 +327,30 @@ The build is the primary test. Verification layers:
 Sub-project 1 is done when:
 
 - [ ] `primaryhosting/brockian-mathematics` is public, on one recorded toolchain pin.
+- [ ] A **pre-publish secret scan** (grep for key patterns + `git secrets`-style check over
+      full history) passes before the repo is made public.
 - [ ] `lake build` is green locally and in CI (cache-backed).
+- [ ] **Must-port coverage** — the build is *not* trivially-empty: it contains, in register
+      PROVED (or, where the ledger admits them as such, CONDITIONAL/COMPUTATION with the
+      correct rung), the program's headline keepers:
+      the q−ν admissibility law with its q=3 and q=5 corollaries (runs 74/49);
+      `golden_unique_to_five` (run 73); `λ₂(C₅)=2−1/φ` (run 88); `Aut(C₅)≅D₅` and the
+      pentagon golden-diagonal / two-distance geometry (runs 54/70/16); Dirichlet-on-rays
+      (run 97); the full constellation/transition classification + twin exclusion (runs
+      7/31/117); GC-1..3 Goldbach covariance (intake 18); and the silver-gap eigensystem
+      (intake 18). Any of these that will not port is a **release-blocking** PORT-QUEUE
+      item requiring explicit human sign-off to defer — unlike ordinary port-pending decls.
 - [ ] Every declaration in `Brockian/` carries a derived register; no PROVED decl violates
       its gate; `#print axioms` recorded for each.
-- [ ] `registry/theorems.json` is generated by CI and committed; `REGISTRY.md` renders it.
+- [ ] `registry/theorems.json` is generated by CI and committed; `REGISTRY.md` renders it;
+      every compiled PROVED/CONDITIONAL decl has its required `verdicts.yaml` provenance
+      entry (generator errors otherwise).
 - [ ] `EXCLUDED.md` lists every dropped REJECT/theater/superseded declaration with its
-      named failure mode; `PORT-QUEUE.md` lists every port-pending keeper with its error.
-- [ ] No `sorry`/`admit` in modules declared closed; open cores (Hamiltonian, RH, Goldbach
-      transfer) are explicitly and honestly marked open, not faked.
+      named failure mode; a **reverse check** confirms every exclude entry in
+      `verdicts.yaml` renders to `EXCLUDED.md` and vice-versa (no silent drops).
+- [ ] `PORT-QUEUE.md` lists every port-pending keeper with its blocking error.
+- [ ] No `sorry`/`admit` in modules on the `closed_modules` list; open cores (Hamiltonian,
+      RH, Goldbach transfer) are explicitly and honestly marked open, not faked.
 - [ ] The compile log + resolved mathlib hash are recorded (closes the ledger's standing
       "compile hashes pending" caveat).
 
