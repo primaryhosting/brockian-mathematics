@@ -1,6 +1,6 @@
 # Brockian Verified Core — Design (Sub-project 1 of 3)
 
-**Date:** 2026-07-30
+**Date:** 2026-07-30 (rev. 2026-07-31 — added §2A proving/verification engines)
 **Status:** design, pending review
 **Repo:** `github.com/primaryhosting/brockian-mathematics` (to be made public)
 
@@ -148,6 +148,53 @@ never fake a build to get a green.
 
 ---
 
+## 2A. Proving & verification engines (Aristotle + AXLE)
+
+The port/repair/verify work is driven by two external theorem-proving services already
+provisioned on this machine, with the intake-ledger discipline auditing their output —
+exactly as it audited the 118 Aristotle runs that built the corpus.
+
+### The three roles
+
+| Role | Engine | How it is invoked |
+|------|--------|-------------------|
+| **Generate / port / repair** | **Aristotle** (Harmonic) — `aristotle` CLI, `aristotlelib` 1.0.1, `ARISTOTLE_API_KEY` set | `aristotle submit "<instructions>" --project-dir DIR --wait --destination OUT`; `formalize <file>`; `result` / `list` / `cancel`. Produces Lean proofs from a target statement + context. This is the same engine that produced the corpus. |
+| **Independent verify + repair aids** | **AXLE** (Axiom Lean Engine) — cloud, `AXLE_API_KEY` set. Client `axle` + `axiom-axle-mcp` (MCP) **not yet installed**; **raw HTTP works now** | HTTP `POST https://axle.axiommath.ai/api/v1/check` (and per-tool endpoints) with `Authorization: Bearer $AXLE_API_KEY`, body `{content, environment}` where `environment` names the Lean/Mathlib version (e.g. `lean-4.28.0`). Tools: `verify_proof`, `check`, `repair_proofs`, `simplify_theorems`, `normalize`, `extract_theorems`, `disprove`, … |
+| **Audit** | the intake-ledger discipline + `scripts/no_theater_lint.py` | statement-fidelity check, register tagging, theater rejection — applied to every CLI/API return before it may enter the core. |
+
+**Installation note (honest state).** The pip package currently installed as `axiom-math`
+(`axiompy` 3.0.0) is a **namesake general-math library, not AXLE**. The real AXLE client is
+the `axle` package + `axiom-axle-mcp` MCP server; per the decision to wire Axle now, the
+plan installs `axiom-axle-mcp` (for direct agent tool-calls) and/or `axle` (CLI/scripts),
+but the **raw HTTP API is usable immediately** with the already-set `AXLE_API_KEY` and is
+the CI-scriptable path that needs no install.
+
+### What each buys the credibility story
+
+- **AXLE `verify_proof`** accepts a candidate only if its declarations *match a separate
+  formal-statement file* and constitute a valid proof — this mechanizes the ledger's #1
+  audit (statement fidelity: "a proof assistant guarantees the proof, never the statement")
+  as a callable service, independent of our own repo.
+- **AXLE runs Lean/Mathlib cloud-side per `environment`**, so *independent verification is
+  decoupled from the local build*: a theorem can be Axle-verified at the audit baseline
+  (`lean-4.28.0`) even before/independently of porting it to the local latest-stable core.
+- **AXLE `repair_proofs` / `simplify_theorems` / `normalize`** are deterministic porting
+  aids — repairing API drift and pinning `exact?` searches to named lemmas (the ledger's
+  standing obligation), a third lever beyond Aristotle and hand-porting.
+
+### Triple verification (the PROVED bar, strengthened)
+
+A declaration reaches register **PROVED** only when all three hold, recorded in the
+registry (§5): (1) local `lake build` green on the pinned toolchain; (2) local
+`#print axioms ⊆ {propext, Classical.choice, Quot.sound}` with no `native_decide` /
+residual `exact?`; (3) an **AXLE independent verdict = verified** at a named `environment`.
+Aristotle is a *generation* engine and is never itself treated as verification — its output
+is subject to all three gates like any other source (the ledger already caught Aristotle
+runs that self-reported success while smuggling `harmonicSorry` axioms; independent gates
+exist precisely for that).
+
+---
+
 ## 3. Ingest & triage pipeline
 
 ### 3.1 Discovery and deduplication
@@ -203,11 +250,22 @@ canonical anchors are runs 97 / 103 / 112 / 119; redundant re-proofs are dropped
 statement-stability value is noted in `EXCLUDED.md` as "corroborating replication," not
 deleted from history).
 
-### 3.4 Port
+### 3.4 Port (both-in-parallel race)
 
-Port eligible declarations to the target toolchain; repair API drift. Pin any stray
-`exact?` search tactics to named lemmas before a declaration may enter register PROVED
-(ledger obligation; worst offenders runs 44 ×29, 113 ×17).
+Each eligible declaration is ported to the target toolchain by **racing three levers per
+target and taking whichever verifies first** (§2A):
+
+1. **Aristotle** — `submit`/`formalize` the target statement + neighboring context.
+2. **Hand-port** — direct edit to repair API drift.
+3. **AXLE `repair_proofs` / `simplify_theorems` / `normalize`** — deterministic repair of
+   the existing proof, and pinning of stray `exact?` searches to named lemmas (ledger
+   obligation; worst offenders runs 44 ×29, 113 ×17).
+
+The first candidate that passes triple verification (§2A) wins and is integrated; the
+others are abandoned for that target. A target that no lever closes this session is
+`port-pending` per the convergence rule (§4). Every winning candidate is still audited for
+statement fidelity against the original ledger-admitted statement before integration — a
+proof that closes a *drifted* statement is a RETURN, not a win.
 
 ### 3.5 Register tagging
 
@@ -222,7 +280,7 @@ compiled environment**, so a label cannot lie about a build.
 
 | Register | Definition | CI gate |
 |----------|------------|---------|
-| **PROVED** | sorry-free **and** `#print axioms ⊆ {propext, Classical.choice, Quot.sound}` **and** no `native_decide` / `Lean.ofReduceBool` **and** no residual `exact?` | CI **fails** the PR if any PROVED-tagged decl violates any clause |
+| **PROVED** | sorry-free **and** `#print axioms ⊆ {propext, Classical.choice, Quot.sound}` **and** no `native_decide` / `Lean.ofReduceBool` **and** no residual `exact?` **and** an AXLE independent `verify_proof`/`check` verdict = verified at a named `environment` (§2A triple verification) | CI **fails** the PR if any PROVED-tagged decl violates any clause |
 | **COMPUTATION** | `decide` / `native_decide` finite checks | auto-demoted here; never PROVED |
 | **CONDITIONAL** | depends on a named hypothesis; **must** record its rung: `classical` (true, absent from mathlib) / `literature` (published, borrowed) / `open` (open-strength schema) | schema-rung conditionals are never counted as evidence |
 | **CONJECTURE** | a `def` / Prop container, never a `theorem` | must not be typed as a proof |
@@ -278,6 +336,12 @@ provenance/verdicts.yaml ──────────────────�
   errors only if a compiled PROVED/CONDITIONAL declaration resolves to *neither* an
   override *nor* a run-level default.
 
+- **External-verification (recorded, from §2A):** the `verification.axle` block —
+  `{verdict, environment, checked_at}` — is captured by calling AXLE at registry-gen time
+  on the declaration's proof, and `verification.lake_build` / `verification.axioms_ok`
+  record the local gates. These are attestations captured this run, not re-derivable from
+  the source text alone; a PROVED register requires all three to be affirmative (§2A).
+
 **Extraction scope:** `gen_registry.py` extracts **all declarations** in the `Brockian`
 namespace — `theorem`/`lemma` *and* `def`/Prop containers — so CONJECTURE-register
 containers (which are `def`s by §4) appear in the registry alongside proved theorems.
@@ -294,6 +358,11 @@ containers (which are `def`s by §4) appear in the registry alongside proved the
   "register": "PROVED",
   "axioms": ["propext", "Classical.choice", "Quot.sound"],
   "flags": { "native_decide": false, "sorry": false, "exact_search": false },
+  "verification": {
+    "lake_build": "green",
+    "axioms_ok": true,
+    "axle": { "verdict": "verified", "environment": "lean-4.28.0", "checked_at": "<iso8601>" }
+  },
   "conditional_rung": null,
   "quarantine": true,
   "ledger_run": "74 (a0ce…) / 119 module 2",
@@ -314,12 +383,17 @@ The build is the primary test. Verification layers:
 2. **Axiom assertion** per PROVED theorem: `gen_registry.py` runs `#print axioms` (via
    `lake env lean --run` on a generated probe, or Lean metaprogram) and the CI gate fails
    if any PROVED decl's axiom set exceeds the allowed three.
-3. **Registry round-trip test**: every PROVED entry maps to a real declaration that
+3. **AXLE independent verification**: every PROVED declaration carries an AXLE
+   `verify_proof`/`check` verdict = verified at a recorded `environment` (§2A). This is the
+   third-party leg the ledger's "no independent build" caveat has been waiting on; the
+   CI gate fails PROVED if the AXLE verdict is absent or not `verified`.
+4. **Registry round-trip test**: every PROVED entry maps to a real declaration that
    compiled this run; no orphan or stale entries.
-4. **No-theater lint** runs in CI as a non-blocking report (blocking only for `sorry` /
-   `admit` inside modules tagged as fully closed, e.g. run-119 modules 1/2/5).
-5. **Reproducibility**: CI records the `lake build` log and the resolved mathlib rev/hash
-   — the compile hashes the ledger has been waiting on finally enter the record.
+5. **No-theater lint** runs in CI as a non-blocking report (blocking only for `sorry` /
+   `admit` inside modules on the `closed_modules` list).
+6. **Reproducibility**: CI records the `lake build` log, the resolved mathlib rev/hash, and
+   the AXLE `environment` + verdicts — the independent verification the ledger has been
+   waiting on finally enters the record.
 
 ---
 
@@ -332,6 +406,8 @@ The build is the primary test. Verification layers:
 | Verdict cross-referencing is manual/error-prone at 118 runs | Ledger is already structured per-run; ingest keys on it and every inclusion/exclusion is written to `EXCLUDED.md` / registry `ledger_run` for audit. |
 | Accidental secret in repo before making public | Pre-publish scan (`git secrets` / grep for key patterns); repo is math-only, 2 clean commits — low risk, but gated. |
 | Over-consolidation loses a genuinely distinct proof | Consolidation keys on namespace + theorem-name set; anything ambiguous is kept, not merged; `EXCLUDED.md` records every drop with reason. |
+| AXLE cloud unavailable / rate-limited / environment mismatch during a run | AXLE verdict is captured at registry-gen and cached in `theorems.json`; a transient outage marks the decl `axle: pending` (not `verified`) → it cannot be PROVED until re-checked, but local `lake build` + `#print axioms` still hold, so the build stays green and the gap is explicit, never silently upgraded. Pick an `environment` AXLE actually supports; record it. |
+| Aristotle/AXLE self-report success while smuggling holes (ledger run 4 precedent: `harmonicSorry` axioms) | Never trust an engine's own verdict; the three independent gates (§2A) + no-theater lint + statement-fidelity audit run on every return regardless of what the engine claims. |
 
 ---
 
@@ -357,7 +433,10 @@ Sub-project 1 is done when:
       (intake 18). Any of these that will not port is a **release-blocking** PORT-QUEUE
       item requiring explicit human sign-off to defer — unlike ordinary port-pending decls.
 - [ ] Every declaration in `Brockian/` carries a derived register; no PROVED decl violates
-      its gate; `#print axioms` recorded for each.
+      its gate; `#print axioms` recorded for each; every PROVED decl carries an AXLE
+      independent `verified` verdict at a recorded `environment` (triple verification, §2A).
+- [ ] Axle is wired: `axiom-axle-mcp` and/or `axle` installed (or the HTTP path scripted),
+      `AXLE_API_KEY` confirmed working against `https://axle.axiommath.ai/api/v1`.
 - [ ] `registry/theorems.json` is generated by CI and committed; `REGISTRY.md` renders it;
       every compiled PROVED/CONDITIONAL decl has its required `verdicts.yaml` provenance
       entry (generator errors otherwise).
@@ -374,7 +453,13 @@ Sub-project 1 is done when:
 
 ## 9. Open questions deferred to the plan
 
-- Exact target toolchain tag (chosen by cache availability at implementation time).
+- Exact target toolchain tag for the local build (chosen by cache availability at
+  implementation time). Note AXLE verification is decoupled: a decl may be Axle-verified at
+  `lean-4.28.0` (the audit baseline) even while the local core pins a newer stable — the
+  registry records both, and the plan decides whether the two must match for PROVED or
+  whether Axle-at-baseline + local-build-at-latest jointly satisfy it.
+- AXLE access path: `axiom-axle-mcp` (direct agent tool-calls) vs `axle` CLI vs raw HTTP for
+  CI. Plan installs at least one; HTTP is the always-available fallback.
 - Whether `gen_registry.py` extracts axioms via a Lean metaprogram or `#print axioms`
   probe parsing (implementation detail; both satisfy §6.2).
 - Ingest orchestration shape (single pass vs per-module agents) — a plan/execution
