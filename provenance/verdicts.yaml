@@ -34,3 +34,16 @@ runs:
         verdict: admit
         conditional_rung: null
         provenance_note: "named transfer conjecture (Prop container) — CONJECTURE register, never claimed"
+
+  # ── intake run 63 (a0ce…): Hardy–Littlewood singular series for the q−ν law ──
+  "63":
+    module: Brockian.SingularSeries
+    verdict: admit
+    quarantine: true
+    ledger_run: "intake run 63 (a0ce…) — largest clean analytic run; singular series"
+    provenance_note: "local-factor positivity + summability; feeds the q−ν law's analytic side"
+    overrides:
+      - name: singular_series_pos
+        verdict: admit
+        conditional_rung: classical
+        provenance_note: "conditional on convergence-to-positive-limit (classical analytic fact, stated as explicit hypothesis h_conv, not axiomatized)"

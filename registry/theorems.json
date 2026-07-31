@@ -1,7 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 6
+    "PROVED": 30,
+    "CONDITIONAL": 1
   },
   "theorems": [
     {
@@ -101,6 +102,419 @@
       "provenance_note": "citation-grade ZMod q\u2212\u03bd law; q=3\u21921 (twin), q=5\u21923 (Brockian)"
     },
     {
+      "name": "Brockian.Core.binet_formula",
+      "kind": "theorem",
+      "module": "Brockian.Core",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Core.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Core.cos_2pi_5",
+      "kind": "theorem",
+      "module": "Brockian.Core",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Core.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Core.cos_pi_div_five_eq_phi_div_two",
+      "kind": "theorem",
+      "module": "Brockian.Core",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Core.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Core.each_ray_has_infinitely_many_primes",
+      "kind": "theorem",
+      "module": "Brockian.Core",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Core.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Core.fib_five_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Core",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Core.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Core.fifth_root_of_unity",
+      "kind": "theorem",
+      "module": "Brockian.Core",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Core.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Core.one_lt_phi",
+      "kind": "theorem",
+      "module": "Brockian.Core",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Core.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Core.phi_pos",
+      "kind": "theorem",
+      "module": "Brockian.Core",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Core.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Core.phi_sq",
+      "kind": "theorem",
+      "module": "Brockian.Core",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Core.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Core.ray_add",
+      "kind": "theorem",
+      "module": "Brockian.Core",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Core.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Core.ray_mul",
+      "kind": "theorem",
+      "module": "Brockian.Core",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Core.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Core.ray_ne_zero_infinite",
+      "kind": "theorem",
+      "module": "Brockian.Core",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Core.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Core.ray_zero_iff_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Core",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Core.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.GoldbachComb.gCount_centered",
       "kind": "theorem",
       "module": "Brockian.GoldbachComb",
@@ -195,6 +609,390 @@
       "quarantine": true,
       "ledger_run": "intake 18 (cabbba6e) \u2014 GC-1/2/3 KEEPER, exemplary",
       "provenance_note": "exact local covariance kernel; GC-4 rejected/omitted, GC-5 open (both excluded)"
+    },
+    {
+      "name": "Brockian.SingularSeries.localFactorAt_eq",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.localFactorAt_of_not_prime",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.localFactorAt_pos",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.local_factor_asymptotic",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.local_factor_denom_ne_zero",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.local_factor_of_nu_p_eq_p",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.local_factor_of_nu_p_eq_zero",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.local_factor_pos",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.nu_p_eq_image_card",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.nu_p_lt_p_of_admissible",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.singular_series_finite_pos",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.singular_series_pos",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "classical",
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "conditional on convergence-to-positive-limit (classical analytic fact, stated as explicit hypothesis h_conv, not axiomatized)"
     }
   ]
 }
