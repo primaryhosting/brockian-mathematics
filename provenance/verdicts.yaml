@@ -1,0 +1,36 @@
+# Hand-authored provenance + verdicts map (spec §3.2 / §5).
+# Two levels: run-level defaults (apply to every keeper from that run) and
+# per-declaration overrides for SPLIT runs. Every `exclude` must cite a ledger line.
+#
+# Registers are DERIVED by gen_registry.py from build facts + AXLE verdict + rung;
+# this file supplies only what the compiled environment cannot: provenance + verdicts.
+
+# Modules that are "fully closed": sorry/admit is BLOCKING there (spec §4).
+closed_modules:
+  - Core
+  - Admissibility
+  - TransitionKernel
+
+runs:
+  # ── run 74 / 119-module-2: the q−ν admissibility law ────────────────────────
+  "74":
+    module: Brockian.Admissibility
+    verdict: admit
+    quarantine: true
+    ledger_run: "74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2"
+    provenance_note: "citation-grade ZMod q−ν law; q=3→1 (twin), q=5→3 (Brockian)"
+
+  # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
+  "GC":
+    module: Brockian.GoldbachComb
+    verdict: admit
+    quarantine: true
+    ledger_run: "intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary"
+    provenance_note: "exact local covariance kernel; GC-4 rejected/omitted, GC-5 open (both excluded)"
+    overrides:
+      # GC-4 and GC-5 were shipped as comments in the source, never as theorems — nothing to exclude
+      # at declaration level; the transfer conjecture is a def (CONJECTURE), not a claim.
+      - name: GoldbachCovarianceTransfer
+        verdict: admit
+        conditional_rung: null
+        provenance_note: "named transfer conjecture (Prop container) — CONJECTURE register, never claimed"
