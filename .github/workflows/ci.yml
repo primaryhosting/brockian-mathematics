@@ -1,0 +1,51 @@
+name: verified-core
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install elan (Lean toolchain manager)
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o elan-init.sh
+          bash elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Fetch Mathlib cache
+        run: lake exe cache get || true
+
+      - name: lake build
+        run: lake build
+
+      - name: Python deps
+        run: python3 -m pip install --quiet pyyaml pytest
+
+      - name: Script unit tests
+        run: python3 -m pytest tests/test_gen_registry.py tests/test_no_theater_lint.py tests/test_ingest_discover.py -q
+
+      - name: No-theater lint (blocking on holes in closed modules)
+        run: |
+          CLOSED=$(python3 -c "import yaml;print(' '.join(yaml.safe_load(open('provenance/verdicts.yaml')).get('closed_modules',[])))")
+          python3 scripts/no_theater_lint.py Brockian/*.lean --closed $CLOSED
+
+      - name: AXLE independent verification + registry generation
+        env:
+          AXLE_API_KEY: ${{ secrets.AXLE_API_KEY }}
+        run: |
+          # Re-attest every module against AXLE at the pinned environment, then derive the registry.
+          # A PROVED register requires: axioms clean + AXLE verified (spec §2A triple verification;
+          # local `lake build` above is the third leg).
+          python3 scripts/gen_registry.py
+          git diff --exit-code registry/theorems.json REGISTRY.md \
+            || (echo "registry out of date — regenerate and commit" && exit 1)
+
+      - name: Record build provenance
+        run: |
+          lake env lean --version
+          echo "mathlib rev: $(python3 -c "import json;print(json.load(open('lake-manifest.json'))['packages'][0].get('rev',''))" 2>/dev/null || echo n/a)"

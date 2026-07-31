@@ -1,141 +1,92 @@
-# Verified Lean 4 Library: Fibonacci Fusion Algebra & Penrose Tiling Spectral Bounds
+# Brockian Mathematics — Verified Core
 
-A Lean 4 formalization of the algebraic data underlying Fibonacci anyon models, Penrose tiling spectral theory, and D5 representation theory. All proofs are kernel-checked against Mathlib.
+A Lean 4 formalization of the "Curved Number Line" / Brockian program: the pentagonal,
+golden-ratio structure of prime residues and constellations, its dihedral symmetry, and
+the honest scaffolding of a Hilbert–Pólya-style attack on the Riemann Hypothesis.
 
-## What's here
+**What makes this different from most AI-assisted math: every "PROVED" result is
+independently machine-verified, and the repository refuses to claim anything the build
+does not earn.**
 
-This library provides verified Lean 4 proofs in several areas. Some results overlap with existing Mathlib content (golden ratio identities, Fibonacci numbers); others appear to be new formalizations (transition-count kernels on ZMod, Penrose tiling L2 operator bounds, explicit D5 representation with trace computation).
+## The verification discipline
 
-**We welcome feedback on what is and isn't already in Mathlib.** If you identify overlap, please open an issue — we'd like to contribute the genuinely new parts upstream.
+Each declaration carries exactly one *register*, derived mechanically — never hand-asserted:
 
-## Contents
+| Register | Meaning | Gate |
+|----------|---------|------|
+| **PROVED** | sorry-free, `#print axioms ⊆ {propext, Classical.choice, Quot.sound}`, no `native_decide`, **and** independently verified by AXLE | all three legs must pass |
+| **COMPUTATION** | finite `decide` / `native_decide` checks | recorded as computation, never PROVED |
+| **CONDITIONAL** | depends on a named hypothesis; records its rung (classical / literature / open) | never counted as unconditional evidence |
+| **CONJECTURE** | a named `def` / Prop container | never typed as a theorem |
 
-### Transition-count kernel on ZMod 5 (likely new)
+The register lives in a machine-generated registry (`registry/theorems.json`, rendered in
+[`REGISTRY.md`](REGISTRY.md)) that the forthcoming paper and website both consume as the
+single source of truth. A theorem cannot be labelled PROVED unless the build and an
+independent third-party check both agree.
 
-A labeled dynamical system on Z/5Z with step `r -> r + 2`, domain `{1, 2, 4}`, and labels by quadratic residue character produces the transition matrix:
+### Triple verification
 
-```
-TK = [[1, 1],
-      [1, 0]]
-```
+A **PROVED** theorem passes three independent legs:
 
-This is the Fibonacci matrix. The construction is elementary (three transitions, two bins), and we don't claim deep significance — many binary-classification systems produce this matrix (de Bruijn graphs, substitution tilings, etc.). But the formalization of the *counting framework* (labeled systems, transition kernels, row/column/total sum theorems) may be useful infrastructure.
+1. **local `lake build`** on the pinned toolchain,
+2. **local `#print axioms`** — only the three standard axioms,
+3. **AXLE** ([axle.axiommath.ai](https://axle.axiommath.ai)) — an *independent* cloud
+   Lean 4 + Mathlib prover that re-checks the proof at a named environment (`lean-4.32.0`),
+   including statement fidelity.
 
-| Lean Name | Statement |
-|-----------|-----------|
-| `Twin.TK'_table` | TK(0,0)=1, TK(0,1)=1, TK(1,0)=1, TK(1,1)=0 |
-| `Twin.TK'_total` | sum TK(i,j) = 3 |
-| `Kernel.row_sum` | Row sums equal domain count per label |
-| `Kernel.col_sum` | Column sums equal codomain count per label |
-| `Count.good_start_law` | \|GoodStarts(Gamma)\| = q - \|Gamma\| |
-| `Count.card_badStarts` | \|BadStarts\| = \|Gamma\| (negation injective) |
+This directly closes the intake ledger's long-standing caveat that no independent build had
+ever been run. Per-declaration attestations live in `registry/attestations/`.
 
-### Golden ratio & Fibonacci (partially overlaps Mathlib)
+## Verified so far
 
-Standard identities, formalized with the specific matrix M = [[1,1],[1,0]]:
+See [`REGISTRY.md`](REGISTRY.md) for the live list. Current PROVED headline results:
 
-| Lean Name | Statement | In Mathlib? |
-|-----------|-----------|-------------|
-| `phi_squared` | phi^2 = phi + 1 | Likely yes |
-| `phi_sum_conjugate` | phi + psi = 1 | Likely yes |
-| `phi_product_conjugate` | phi * psi = -1 | Likely yes |
-| `phi_is_eigenvalue` | M * v = phi * v (explicit eigenvector) | Possibly no |
-| `psi_is_eigenvalue` | M * w = psi * w | Possibly no |
-| `M_charpoly` | det(xI - M) = x^2 - x - 1 | Possibly no |
-| `binet_formula` | F(n) = (phi^n - psi^n) / sqrt(5) | Likely yes |
-| `M_pow_fib` | M^n encodes Fibonacci numbers | Possibly no |
-| `spectral_gap_identity` | phi - 1/phi = 1 | Trivial from phi^2 = phi + 1 |
-| `psi_abs_lt_one` | \|psi\| < 1 | Likely yes |
+- **The q−ν admissibility law** (`Brockian.Admissibility`): over `ZMod q`, exactly `q − 2`
+  start residues are admissible for a nonzero gap; corollaries give **1** residue mod 3
+  (the twin-prime constraint) and **3** mod 5 (the Brockian case).
+- **The Goldbach local-covariance kernel** (`Brockian.GoldbachComb`): the exact local count
+  `g_p(c) = p − 2 + [c=0]`, its centered spike, and the two-case covariance theorem, for
+  every prime `p`. The transfer to the global Goldbach residual is a **named conjecture**,
+  not a claim.
 
-### D5 dihedral group (partially overlaps Mathlib)
+## Honesty commitments (non-negotiable, from the intake ledger)
 
-Explicit construction of D5 as a 10-element type with full multiplication table, plus a 2D matrix representation:
+- **Nothing is faked to get a green build**: no `sorry`/`admit`, no `maxHeartbeats`
+  inflation to hide a hang, no axiom added to force a close, no `native_decide` smuggled
+  into a PROVED theorem.
+- **Open problems stay open**: the unbounded Hamiltonian (Gate 1), the Riemann Hypothesis,
+  and the Goldbach transfer are honestly marked open — their scaffolding is formalized, their
+  open cores are not pretended shut.
+- **Excluded work is documented**: declarations rejected during the audit (definitional
+  theater, ℝ-mod collapse, Nat-division exponent traps, ex-falso conditionals, overtitling,
+  …) are listed with their failure mode, not silently dropped.
+- **Provers are never trusted on their own word**: the independent gates run on every
+  generated proof, because a self-reported success can smuggle a disguised `sorry`.
 
-| Lean Name | Statement | In Mathlib? |
-|-----------|-----------|-------------|
-| `D5.card_eq_10` | \|D5\| = 10 | Yes (via DihedralGroup) |
-| `D5.mul_assoc` | Associativity (all 1000 triples) | Yes |
-| `r_pow_five` | r^5 = e | Yes |
-| `s_squared` | s^2 = e | Yes |
-| `rho_mul` | rho(g*h) = rho(g)*rho(h) | Possibly no (explicit 2x2 matrices) |
-| `trace_rotation_eq_golden` | tr(rho(r)) = phi - 1 = 2*cos(2*pi/5) | Likely no |
-| `cos_2pi_5` | cos(2*pi/5) = (sqrt(5)-1)/4 | Possibly yes |
-| `charInner_golden` | <chi_golden, chi_golden> = 1 (irreducibility) | Likely no |
+## Environment
 
-### Penrose tiling spectral theory (likely new)
-
-L2 operator theory on a Penrose tiling vertex graph, defined via cut-and-project from Z^5. This appears to be new formalization territory:
-
-| Lean Name | Statement |
-|-----------|-----------|
-| `degree_bound` | Every Penrose vertex has degree <= 10 |
-| `adjacent_symm` | Adjacency is symmetric |
-| `adjacent_loopless` | No self-loops |
-| `A_raw_bound` | \|\|Af\|\|_{l2} <= 10 * \|\|f\|\|_{l2} |
-| `D_raw_norm_bound` | \|\|Df\|\| <= 10 * \|\|f\|\| |
-| `Delta_bounded` | \|\|Delta f\|\| <= 20 * \|\|f\|\| (Laplacian bounded) |
-| `memLp_A_raw` | Adjacency preserves L2 membership |
-
-### Ray structure on ZMod 5 (likely new)
-
-Partition of (Z/5Z)* into quadratic residues {1,4} and non-residues {2,3}:
-
-| Lean Name | Statement |
-|-----------|-----------|
-| `ray_partition` | Every nonzero residue is in Ray0 or Ray1 |
-| `ray_disjoint` | Rays are disjoint |
-| `neg_preserves_ray0` | Negation preserves ray classification |
-| `twin_admissible` | Twin-admissible residues are {1, 2, 4} |
-
-## Verification environment
-
-- **Lean 4** v4.24.0
-- **Mathlib** commit `f897ebcf72cd16f89ab4577d0c826cd14afaafc7` (v4.14.0)
-- **Proof generation**: Aristotle (Harmonic), a Lean 4 automated theorem prover — [aristotle.harmonic.fun](https://aristotle.harmonic.fun)
-- 171 independent verification projects
-- 64,538 total lines of Lean 4 source
-
-## File structure
-
-```
-Brockian/
-  PerfectEdition.lean   -- Complete framework: rays, D5, kernel, golden ratio, eigenvalues (50 thm, 0 sorry)
-  FullFramework.lean     -- Extended version with conjectures (76 thm, 1 sorry)
-  PenroseTiling.lean     -- D5 Penrose tiling, L2 spectral theory (45 thm, 1 sorry)
-  CoreFramework.lean     -- Foundations: rays, counting, kernel basics (24 thm, 0 sorry)
-  DihedralSeed.lean      -- D5 geometric embedding, rotation/reflection (8 thm, 0 sorry)
-  MarkovKernel.lean      -- Transition kernel computation (12 thm, 0 sorry)
-catalog/
-  brockian_theorem_catalog.json  -- Full catalog of 2,028 named declarations across all projects
-paper/
-  brockian-fibonacci-anyon.tex   -- Draft paper (needs revision before submission)
-  brockian-fibonacci-anyon.pdf   -- Compiled PDF
-```
+- **Lean** `leanprover/lean4:v4.32.0`, **Mathlib** `v4.32.0`.
+- **Proof generation / porting**: [Aristotle](https://aristotle.harmonic.fun) (Harmonic) and
+  hand-porting, raced per target.
+- **Independent verification**: [AXLE](https://axle.axiommath.ai) (Axiom Lean Engine).
 
 ## Building
 
 ```bash
-# Requires Lean 4 and elan
+lake exe cache get   # prebuilt Mathlib oleans
 lake build
 ```
 
-Note: The individual `.lean` files are self-contained (each imports Mathlib directly). They were generated by Aristotle as independent projects. A unified lakefile that builds them as a coherent library is a planned next step.
+## Layout
 
-## Status and known issues
-
-- The theorem catalog includes helper lemmas, decidability instances, and definitions alongside substantive theorems. The headline "2,028 theorems" overstates the number of *named mathematical results*; a more honest count of non-trivial theorems is probably in the range of 200-400.
-- Some Lean names use project-specific prefixes (e.g., `Brock.`, `HarmonicArch.`, `Golden.`) that should be unified.
-- The `FullFramework.lean` file has 1 sorry in a helper lemma. The `PenroseTiling.lean` file has 1 sorry in an L2 construction.
-- Self-referential naming (e.g., `brockian_spectral_gap` for the identity phi - 1/phi = 1) will be revised in a future cleanup.
-
-## Contributing
-
-Issues and PRs welcome. In particular:
-
-1. **Mathlib overlap audit**: Which of these results already exist in Mathlib? We want to identify the genuine delta.
-2. **Upstream candidates**: Which formalizations would be useful additions to Mathlib?
-3. **Lean style**: The files were generated by an AI prover and don't follow Mathlib style conventions. Help refactoring is appreciated.
-4. **Mathematical errors**: If any theorem statement is wrong or misleading, please flag it.
+```
+Brockian/            the verified theme modules (one mathematical theme each)
+registry/            theorems.json (generated) + per-module AXLE attestations
+provenance/          verdicts.yaml — hand-authored verdicts + provenance (audited)
+scripts/             axle_client.py, gen_registry.py, no_theater_lint.py, attest.py
+Archive/             retired inputs (old catalog), kept for reference, not built
+docs/superpowers/    the design spec and implementation plan
+```
 
 ## License
 
@@ -143,4 +94,6 @@ MIT License. Copyright 2026 Christopher Brock.
 
 ## Acknowledgments
 
-Proofs generated and verified using [Aristotle](https://aristotle.harmonic.fun) by Harmonic. Built on [Mathlib](https://github.com/leanprover-community/mathlib4) by the Lean community.
+Independent verification by [AXLE](https://axle.axiommath.ai) (Axiom) and
+[Aristotle](https://aristotle.harmonic.fun) (Harmonic). Built on
+[Mathlib](https://github.com/leanprover-community/mathlib4).
