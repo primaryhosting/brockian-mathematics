@@ -72,6 +72,22 @@ runs:
     ledger_run: "runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion"
     provenance_note: "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
 
+  # ── run 73: golden_unique_to_five (re-proved fresh, full biconditional) ──────
+  "73":
+    module: Brockian.Spectral
+    verdict: admit
+    quarantine: true
+    ledger_run: "run 73 (b666…) — re-proved fresh @ v4.32 via concrete circulant eigenvalues"
+    provenance_note: "φ−1 ∈ spec(C_p) ⟺ p=5 (full iff, both directions); −φ ∈ spec(C₅). THE 'why five' rigidity result."
+
+  # ── run 88: pentagon algebraic connectivity λ₂(C₅)=2−1/φ (re-proved fresh) ────
+  "88":
+    module: Brockian.Connectivity
+    verdict: admit
+    quarantine: true
+    ledger_run: "run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues"
+    provenance_note: "λ₂(C₅) = 2 − 1/φ = 3 − φ (algebraic connectivity is golden); ratio 1 − 1/(2φ)"
+
   # ── intake 18: silver eigensystem, twin pinning, phase-depth torus ───────────
   "18":
     module: Brockian.Sieve

@@ -5,3 +5,6 @@ import Brockian.SingularSeries
 import Brockian.Core
 import Brockian.Geometry
 import Brockian.TransitionKernel
+import Brockian.Sieve
+import Brockian.Spectral
+import Brockian.Connectivity

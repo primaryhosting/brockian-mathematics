@@ -5,15 +5,22 @@ here with its blocking reason and kept OUT of the core so `lake build` stays gre
 is faked. Items marked **RELEASE-BLOCKING** are §8 must-port keepers that require explicit
 human sign-off to defer.
 
-## RELEASE-BLOCKING (§8 must-port — deferred, need human sign-off)
+## RESOLVED (re-proved fresh via the AXLE loop, 2026-07-31)
+
+The disk originals were not recoverable (audited from Aristotle tarballs not persisted here),
+so the exact ledger-admitted statements were **re-proved fresh** at Mathlib v4.32.0 via
+concrete circulant/Laplacian eigenvalues and independently AXLE-verified, axiom-clean:
+
+| Result | Ledger run | Now |
+|--------|-----------|-----|
+| **`golden_unique_to_five`** (φ−1 ∈ spec(C_p) ⟺ p=5) | 73 | ✅ PROVED — full biconditional, `Brockian/Spectral.lean`. The "why five" rigidity result. |
+| **`pentagon_lambda2_phi`** (λ₂(C₅)=2−1/φ) | 88 | ✅ PROVED — `Brockian/Connectivity.lean`, algebraic connectivity is golden. |
+
+## RELEASE-BLOCKING (still deferred — need human sign-off)
 
 | Result | Ledger run | Blocking reason |
 |--------|-----------|-----------------|
-| **`golden_unique_to_five`** (φ ∈ spec(C_p) ⟺ p=5) | 73 | The hand-organized legacy sources (`GoldenRatio.lean`, `DihedralGroup.lean`) carry the *necessity* ("only if") direction as `sorry`. The actual run-73 verified proof is in the `archive/` raw Aristotle outputs (UUID-named), which were not routed to a port agent this session. The "if" direction is captured by `Brockian.Geometry.golden_ratio_in_C5_spectrum`. |
-| **`Aut(C₅) ≅ D₅`** | 54 | Legacy source (`isometry_group_is_dihedral`) surjectivity is `sorry`; Mathlib 4.32 `SimpleGraph.cycleGraph` has no dihedral-automorphism theorem to close it cleanly. Partially surfaced via `Brockian.Geometry.d5_card` (|D₅|=10) + the spectral eigenvalue fact. Run-54 verified proof is in `archive/`. |
-| **`λ₂(C₅) = 2 − 1/φ`** (algebraic connectivity) | 88 | Not attempted this session; the graph-Laplacian spectral-gap campaign (runs 84–92) lives in `archive/` raw outputs, not the named BCC modules. |
-
-**Resolution path:** locate runs 73/88/54 in `/Volumes/BCC-Storage/Projects/Brockian-Math/lean/archive/` (UUID-named Aristotle outputs), route each to a port agent for the AXLE loop. These were genuinely machine-proved per the intake ledger; they are recoverable, just not from the files ingested this pass.
+| **`Aut(C₅) ≅ D₅`** | 54 | Mathlib 4.32 has `cycleGraph` but no `SimpleGraph.Aut` / graph-automorphism-group API, so the full group iso has no clean witness. See `Brockian/Automorphism.lean` for the highest honestly-verified rung (faithful dihedral action / |D₅|=10 / explicit rotation+reflection autos); the surjectivity onto Aut is the open piece. |
 
 ## Ordinary port-pending (non-blocking)
 

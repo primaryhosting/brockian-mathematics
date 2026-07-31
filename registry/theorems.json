@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 64,
-    "DEFINITION": 5,
+    "PROVED": 76,
+    "DEFINITION": 7,
     "CONJECTURE": 1,
     "CONDITIONAL": 1
   },
@@ -134,6 +134,230 @@
       "quarantine": true,
       "ledger_run": "74 (a0ce\u2026) / 49 / 105 (independent replications) / 119 module 2",
       "provenance_note": "citation-grade ZMod q\u2212\u03bd law; q=3\u21921 (twin), q=5\u21923 (Brockian)"
+    },
+    {
+      "name": "Brockian.Connectivity.cos_2pi_5",
+      "kind": "theorem",
+      "module": "Brockian.Connectivity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Connectivity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 88 (1d2a\u2026) \u2014 re-proved fresh @ v4.32 via concrete Laplacian eigenvalues",
+      "provenance_note": "\u03bb\u2082(C\u2085) = 2 \u2212 1/\u03c6 = 3 \u2212 \u03c6 (algebraic connectivity is golden); ratio 1 \u2212 1/(2\u03c6)"
+    },
+    {
+      "name": "Brockian.Connectivity.lambda2_eq",
+      "kind": "theorem",
+      "module": "Brockian.Connectivity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Connectivity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 88 (1d2a\u2026) \u2014 re-proved fresh @ v4.32 via concrete Laplacian eigenvalues",
+      "provenance_note": "\u03bb\u2082(C\u2085) = 2 \u2212 1/\u03c6 = 3 \u2212 \u03c6 (algebraic connectivity is golden); ratio 1 \u2212 1/(2\u03c6)"
+    },
+    {
+      "name": "Brockian.Connectivity.laplacianEigs5",
+      "kind": "def",
+      "module": "Brockian.Connectivity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Connectivity.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 88 (1d2a\u2026) \u2014 re-proved fresh @ v4.32 via concrete Laplacian eigenvalues",
+      "provenance_note": "\u03bb\u2082(C\u2085) = 2 \u2212 1/\u03c6 = 3 \u2212 \u03c6 (algebraic connectivity is golden); ratio 1 \u2212 1/(2\u03c6)"
+    },
+    {
+      "name": "Brockian.Connectivity.one_div_phi",
+      "kind": "theorem",
+      "module": "Brockian.Connectivity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Connectivity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 88 (1d2a\u2026) \u2014 re-proved fresh @ v4.32 via concrete Laplacian eigenvalues",
+      "provenance_note": "\u03bb\u2082(C\u2085) = 2 \u2212 1/\u03c6 = 3 \u2212 \u03c6 (algebraic connectivity is golden); ratio 1 \u2212 1/(2\u03c6)"
+    },
+    {
+      "name": "Brockian.Connectivity.pentagon_lambda2_phi",
+      "kind": "theorem",
+      "module": "Brockian.Connectivity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Connectivity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 88 (1d2a\u2026) \u2014 re-proved fresh @ v4.32 via concrete Laplacian eigenvalues",
+      "provenance_note": "\u03bb\u2082(C\u2085) = 2 \u2212 1/\u03c6 = 3 \u2212 \u03c6 (algebraic connectivity is golden); ratio 1 \u2212 1/(2\u03c6)"
+    },
+    {
+      "name": "Brockian.Connectivity.pentagon_ratio",
+      "kind": "theorem",
+      "module": "Brockian.Connectivity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Connectivity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 88 (1d2a\u2026) \u2014 re-proved fresh @ v4.32 via concrete Laplacian eigenvalues",
+      "provenance_note": "\u03bb\u2082(C\u2085) = 2 \u2212 1/\u03c6 = 3 \u2212 \u03c6 (algebraic connectivity is golden); ratio 1 \u2212 1/(2\u03c6)"
+    },
+    {
+      "name": "Brockian.Connectivity.two_cos_4pi_5",
+      "kind": "theorem",
+      "module": "Brockian.Connectivity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Connectivity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 88 (1d2a\u2026) \u2014 re-proved fresh @ v4.32 via concrete Laplacian eigenvalues",
+      "provenance_note": "\u03bb\u2082(C\u2085) = 2 \u2212 1/\u03c6 = 3 \u2212 \u03c6 (algebraic connectivity is golden); ratio 1 \u2212 1/(2\u03c6)"
     },
     {
       "name": "Brockian.Core.binet_formula",
@@ -1730,6 +1954,230 @@
       "quarantine": true,
       "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
       "provenance_note": "conditional on convergence-to-positive-limit (classical analytic fact, stated as explicit hypothesis h_conv, not axiomatized)"
+    },
+    {
+      "name": "Brockian.Spectral.cos_two_pi_div_five",
+      "kind": "theorem",
+      "module": "Brockian.Spectral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Spectral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 73 (b666\u2026) \u2014 re-proved fresh @ v4.32 via concrete circulant eigenvalues",
+      "provenance_note": "\u03c6\u22121 \u2208 spec(C_p) \u27fa p=5 (full iff, both directions); \u2212\u03c6 \u2208 spec(C\u2085). THE 'why five' rigidity result."
+    },
+    {
+      "name": "Brockian.Spectral.cycleSpectrum",
+      "kind": "def",
+      "module": "Brockian.Spectral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Spectral.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 73 (b666\u2026) \u2014 re-proved fresh @ v4.32 via concrete circulant eigenvalues",
+      "provenance_note": "\u03c6\u22121 \u2208 spec(C_p) \u27fa p=5 (full iff, both directions); \u2212\u03c6 \u2208 spec(C\u2085). THE 'why five' rigidity result."
+    },
+    {
+      "name": "Brockian.Spectral.golden_in_cycleSpectrum_five",
+      "kind": "theorem",
+      "module": "Brockian.Spectral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Spectral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 73 (b666\u2026) \u2014 re-proved fresh @ v4.32 via concrete circulant eigenvalues",
+      "provenance_note": "\u03c6\u22121 \u2208 spec(C_p) \u27fa p=5 (full iff, both directions); \u2212\u03c6 \u2208 spec(C\u2085). THE 'why five' rigidity result."
+    },
+    {
+      "name": "Brockian.Spectral.golden_sub_one_eq_two_cos",
+      "kind": "theorem",
+      "module": "Brockian.Spectral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Spectral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 73 (b666\u2026) \u2014 re-proved fresh @ v4.32 via concrete circulant eigenvalues",
+      "provenance_note": "\u03c6\u22121 \u2208 spec(C_p) \u27fa p=5 (full iff, both directions); \u2212\u03c6 \u2208 spec(C\u2085). THE 'why five' rigidity result."
+    },
+    {
+      "name": "Brockian.Spectral.golden_unique_to_five",
+      "kind": "theorem",
+      "module": "Brockian.Spectral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Spectral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 73 (b666\u2026) \u2014 re-proved fresh @ v4.32 via concrete circulant eigenvalues",
+      "provenance_note": "\u03c6\u22121 \u2208 spec(C_p) \u27fa p=5 (full iff, both directions); \u2212\u03c6 \u2208 spec(C\u2085). THE 'why five' rigidity result."
+    },
+    {
+      "name": "Brockian.Spectral.neg_golden_in_C5_spectrum",
+      "kind": "theorem",
+      "module": "Brockian.Spectral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Spectral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 73 (b666\u2026) \u2014 re-proved fresh @ v4.32 via concrete circulant eigenvalues",
+      "provenance_note": "\u03c6\u22121 \u2208 spec(C_p) \u27fa p=5 (full iff, both directions); \u2212\u03c6 \u2208 spec(C\u2085). THE 'why five' rigidity result."
+    },
+    {
+      "name": "Brockian.Spectral.two_cos_four_pi_div_five",
+      "kind": "theorem",
+      "module": "Brockian.Spectral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Spectral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 73 (b666\u2026) \u2014 re-proved fresh @ v4.32 via concrete circulant eigenvalues",
+      "provenance_note": "\u03c6\u22121 \u2208 spec(C_p) \u27fa p=5 (full iff, both directions); \u2212\u03c6 \u2208 spec(C\u2085). THE 'why five' rigidity result."
     },
     {
       "name": "Brockian.TransitionKernel.admissibleStarts",
