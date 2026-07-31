@@ -8,3 +8,4 @@ import Brockian.TransitionKernel
 import Brockian.Sieve
 import Brockian.Spectral
 import Brockian.Connectivity
+import Brockian.Automorphism

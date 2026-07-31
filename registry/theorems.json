@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 76,
-    "DEFINITION": 7,
+    "PROVED": 84,
+    "DEFINITION": 14,
     "CONJECTURE": 1,
     "CONDITIONAL": 1
   },
@@ -134,6 +134,480 @@
       "quarantine": true,
       "ledger_run": "74 (a0ce\u2026) / 49 / 105 (independent replications) / 119 module 2",
       "provenance_note": "citation-grade ZMod q\u2212\u03bd law; q=3\u21921 (twin), q=5\u21923 (Brockian)"
+    },
+    {
+      "name": "Brockian.Automorphism.C5",
+      "kind": "def",
+      "module": "Brockian.Automorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Automorphism.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
+      "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Automorphism.act",
+      "kind": "def",
+      "module": "Brockian.Automorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Automorphism.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
+      "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Automorphism.dihedralHom",
+      "kind": "def",
+      "module": "Brockian.Automorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Automorphism.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
+      "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Automorphism.dihedral_action_faithful",
+      "kind": "theorem",
+      "module": "Brockian.Automorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Automorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
+      "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Automorphism.mul_rr",
+      "kind": "theorem",
+      "module": "Brockian.Automorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Automorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
+      "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Automorphism.mul_rsr",
+      "kind": "theorem",
+      "module": "Brockian.Automorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Automorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
+      "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Automorphism.mul_srr",
+      "kind": "theorem",
+      "module": "Brockian.Automorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Automorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
+      "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Automorphism.mul_srsr",
+      "kind": "theorem",
+      "module": "Brockian.Automorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Automorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
+      "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Automorphism.reflEquiv",
+      "kind": "def",
+      "module": "Brockian.Automorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Automorphism.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
+      "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Automorphism.reflIso",
+      "kind": "def",
+      "module": "Brockian.Automorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Automorphism.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
+      "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Automorphism.refl_map_adj",
+      "kind": "theorem",
+      "module": "Brockian.Automorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Automorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
+      "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Automorphism.rotEquiv",
+      "kind": "def",
+      "module": "Brockian.Automorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Automorphism.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
+      "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Automorphism.rotIso",
+      "kind": "def",
+      "module": "Brockian.Automorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Automorphism.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
+      "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Automorphism.rot_map_adj",
+      "kind": "theorem",
+      "module": "Brockian.Automorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Automorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
+      "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Automorphism.ten_le_card_aut",
+      "kind": "theorem",
+      "module": "Brockian.Automorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Automorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
+      "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
     },
     {
       "name": "Brockian.Connectivity.cos_2pi_5",

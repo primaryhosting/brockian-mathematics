@@ -88,6 +88,14 @@ runs:
     ledger_run: "run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues"
     provenance_note: "λ₂(C₅) = 2 − 1/φ = 3 − φ (algebraic connectivity is golden); ratio 1 − 1/(2φ)"
 
+  # ── run 54: dihedral action on C₅ (faithful-action partial, honest) ──────────
+  "54":
+    module: Brockian.Automorphism
+    verdict: admit
+    quarantine: true
+    ledger_run: "run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open)"
+    provenance_note: "D₅ →* Aut(C₅) injective (faithful), explicit rot/refl autos, 10 ≤ |Aut(C₅)|. Full Aut(C₅)≅D₅ iso NOT claimed (reverse bound |Aut|≤10 unavailable in Mathlib 4.32) — see PORT-QUEUE."
+
   # ── intake 18: silver eigensystem, twin pinning, phase-depth torus ───────────
   "18":
     module: Brockian.Sieve

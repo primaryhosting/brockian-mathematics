@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 1
 - **CONJECTURE**: 1
-- **DEFINITION**: 7
-- **PROVED**: 76
+- **DEFINITION**: 14
+- **PROVED**: 84
 
 ## Theorems
 
@@ -19,6 +19,21 @@
 | PROVED | `Brockian.Admissibility.admissibility_count_three` | ✓ | verified | lean-4.32.0 | 74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2 |
 | DEFINITION | `Brockian.Admissibility.admissibleResidues` | ✓ | verified | lean-4.32.0 | 74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2 |
 | PROVED | `Brockian.Admissibility.universal_admissibility_count` | ✓ | verified | lean-4.32.0 | 74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2 |
+| DEFINITION | `Brockian.Automorphism.C5` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
+| DEFINITION | `Brockian.Automorphism.act` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
+| DEFINITION | `Brockian.Automorphism.dihedralHom` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
+| PROVED | `Brockian.Automorphism.dihedral_action_faithful` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
+| PROVED | `Brockian.Automorphism.mul_rr` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
+| PROVED | `Brockian.Automorphism.mul_rsr` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
+| PROVED | `Brockian.Automorphism.mul_srr` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
+| PROVED | `Brockian.Automorphism.mul_srsr` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
+| DEFINITION | `Brockian.Automorphism.reflEquiv` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
+| DEFINITION | `Brockian.Automorphism.reflIso` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
+| PROVED | `Brockian.Automorphism.refl_map_adj` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
+| DEFINITION | `Brockian.Automorphism.rotEquiv` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
+| DEFINITION | `Brockian.Automorphism.rotIso` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
+| PROVED | `Brockian.Automorphism.rot_map_adj` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
+| PROVED | `Brockian.Automorphism.ten_le_card_aut` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
 | PROVED | `Brockian.Connectivity.cos_2pi_5` | ✓ | verified | lean-4.32.0 | run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues |
 | PROVED | `Brockian.Connectivity.lambda2_eq` | ✓ | verified | lean-4.32.0 | run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues |
 | DEFINITION | `Brockian.Connectivity.laplacianEigs5` | ✓ | verified | lean-4.32.0 | run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues |
