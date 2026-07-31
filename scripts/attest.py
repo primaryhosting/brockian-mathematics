@@ -22,6 +22,20 @@ import axle_client  # noqa: E402
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 
 
+def _kind_of(src: str, name: str) -> str:
+    """Detect a declaration's kind from the source (theorem/lemma vs def/abbrev)."""
+    if re.search(rf"^\s*(?:@\[[^\]]*\]\s*)*(?:noncomputable\s+)?(?:theorem|lemma)\s+{re.escape(name)}\b",
+                 src, re.MULTILINE):
+        return "theorem"
+    m = re.search(
+        rf"^\s*(?:@\[[^\]]*\]\s*)*(?:noncomputable\s+)?(?:def|abbrev)\s+{re.escape(name)}\b(.*?):=",
+        src, re.MULTILINE | re.DOTALL)
+    if m:
+        # a Prop-typed def is a conjecture container; any other def is a supporting definition
+        return "conjecture" if re.search(r":\s*Prop\b", m.group(1)) else "def"
+    return "theorem"
+
+
 def attest(lean_path: str, namespace: str, names: list[str], env: str) -> dict:
     src = open(lean_path, encoding="utf-8").read()
     probe = src + "\n" + "\n".join(
@@ -44,6 +58,7 @@ def attest(lean_path: str, namespace: str, names: list[str], env: str) -> dict:
         ax = axioms_for(n)
         decls.append({
             "name": f"{namespace}.{n}",
+            "kind": _kind_of(src, n),
             "axle_verdict": "verified" if r.verified else "failed",
             "axioms": ax,
             "axioms_ok": (ax is not None and set(ax).issubset(ALLOWED)),

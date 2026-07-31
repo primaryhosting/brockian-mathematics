@@ -1,7 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 30,
+    "PROVED": 64,
+    "DEFINITION": 5,
+    "CONJECTURE": 1,
     "CONDITIONAL": 1
   },
   "theorems": [
@@ -46,6 +48,38 @@
         "file": "Brockian/Admissibility.lean"
       },
       "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "74 (a0ce\u2026) / 49 / 105 (independent replications) / 119 module 2",
+      "provenance_note": "citation-grade ZMod q\u2212\u03bd law; q=3\u21921 (twin), q=5\u21923 (Brockian)"
+    },
+    {
+      "name": "Brockian.Admissibility.admissibleResidues",
+      "kind": "def",
+      "module": "Brockian.Admissibility",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Admissibility.lean"
+      },
+      "register": "DEFINITION",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -129,9 +163,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
+      "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
     },
     {
       "name": "Brockian.Core.cos_2pi_5",
@@ -161,9 +195,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
+      "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
     },
     {
       "name": "Brockian.Core.cos_pi_div_five_eq_phi_div_two",
@@ -193,9 +227,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
+      "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
     },
     {
       "name": "Brockian.Core.each_ray_has_infinitely_many_primes",
@@ -225,9 +259,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
+      "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
     },
     {
       "name": "Brockian.Core.fib_five_dvd",
@@ -256,9 +290,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
+      "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
     },
     {
       "name": "Brockian.Core.fifth_root_of_unity",
@@ -288,9 +322,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
+      "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
     },
     {
       "name": "Brockian.Core.one_lt_phi",
@@ -320,9 +354,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
+      "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
     },
     {
       "name": "Brockian.Core.phi_pos",
@@ -352,9 +386,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
+      "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
     },
     {
       "name": "Brockian.Core.phi_sq",
@@ -384,9 +418,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
+      "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
     },
     {
       "name": "Brockian.Core.ray_add",
@@ -415,9 +449,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
+      "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
     },
     {
       "name": "Brockian.Core.ray_mul",
@@ -446,9 +480,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
+      "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
     },
     {
       "name": "Brockian.Core.ray_ne_zero_infinite",
@@ -478,9 +512,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
+      "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
     },
     {
       "name": "Brockian.Core.ray_zero_iff_dvd",
@@ -510,9 +544,233 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
+      "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
+    },
+    {
+      "name": "Brockian.Geometry.d5_card",
+      "kind": "theorem",
+      "module": "Brockian.Geometry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Geometry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 16 / 54 / 70 / 73 \u2014 pentagon golden diagonal, two-distance, C\u2085 spectrum",
+      "provenance_note": "golden diagonal=\u03c6\u00b7side, two-distance, \u2212\u03c6\u2208spec(C\u2085); golden_unique_to_five NOT ported (see PORT-QUEUE)"
+    },
+    {
+      "name": "Brockian.Geometry.golden_ratio_in_C5_spectrum",
+      "kind": "theorem",
+      "module": "Brockian.Geometry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Geometry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 16 / 54 / 70 / 73 \u2014 pentagon golden diagonal, two-distance, C\u2085 spectrum",
+      "provenance_note": "golden diagonal=\u03c6\u00b7side, two-distance, \u2212\u03c6\u2208spec(C\u2085); golden_unique_to_five NOT ported (see PORT-QUEUE)"
+    },
+    {
+      "name": "Brockian.Geometry.pentagon_golden_diagonal",
+      "kind": "theorem",
+      "module": "Brockian.Geometry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Geometry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 16 / 54 / 70 / 73 \u2014 pentagon golden diagonal, two-distance, C\u2085 spectrum",
+      "provenance_note": "golden diagonal=\u03c6\u00b7side, two-distance, \u2212\u03c6\u2208spec(C\u2085); golden_unique_to_five NOT ported (see PORT-QUEUE)"
+    },
+    {
+      "name": "Brockian.Geometry.pentagon_two_distances",
+      "kind": "theorem",
+      "module": "Brockian.Geometry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Geometry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 16 / 54 / 70 / 73 \u2014 pentagon golden diagonal, two-distance, C\u2085 spectrum",
+      "provenance_note": "golden diagonal=\u03c6\u00b7side, two-distance, \u2212\u03c6\u2208spec(C\u2085); golden_unique_to_five NOT ported (see PORT-QUEUE)"
+    },
+    {
+      "name": "Brockian.GoldbachComb.GoldbachCovarianceTransfer",
+      "kind": "conjecture",
+      "module": "Brockian.GoldbachComb",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachComb.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (cabbba6e) \u2014 GC-1/2/3 KEEPER, exemplary",
+      "provenance_note": "named transfer conjecture (Prop container) \u2014 CONJECTURE register, never claimed"
+    },
+    {
+      "name": "Brockian.GoldbachComb.Kp",
+      "kind": "def",
+      "module": "Brockian.GoldbachComb",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachComb.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (cabbba6e) \u2014 GC-1/2/3 KEEPER, exemplary",
+      "provenance_note": "exact local covariance kernel; GC-4 rejected/omitted, GC-5 open (both excluded)"
+    },
+    {
+      "name": "Brockian.GoldbachComb.gCount",
+      "kind": "def",
+      "module": "Brockian.GoldbachComb",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachComb.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (cabbba6e) \u2014 GC-1/2/3 KEEPER, exemplary",
+      "provenance_note": "exact local covariance kernel; GC-4 rejected/omitted, GC-5 open (both excluded)"
     },
     {
       "name": "Brockian.GoldbachComb.gCount_centered",
@@ -609,6 +867,485 @@
       "quarantine": true,
       "ledger_run": "intake 18 (cabbba6e) \u2014 GC-1/2/3 KEEPER, exemplary",
       "provenance_note": "exact local covariance kernel; GC-4 rejected/omitted, GC-5 open (both excluded)"
+    },
+    {
+      "name": "Brockian.Sieve.H3_det",
+      "kind": "theorem",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.H3_ground",
+      "kind": "theorem",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.H3_middle",
+      "kind": "theorem",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.H3_top",
+      "kind": "theorem",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.H3_trace",
+      "kind": "theorem",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.compatible_closure",
+      "kind": "theorem",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.no_adjacent_admissible",
+      "kind": "theorem",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.run3_signature",
+      "kind": "theorem",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.run_cap",
+      "kind": "theorem",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.silver_gap_rigidity_finite",
+      "kind": "theorem",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.tau_injective_on_period",
+      "kind": "theorem",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.tau_minimal_period",
+      "kind": "theorem",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.tau_period",
+      "kind": "theorem",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.twin_admissible_card",
+      "kind": "theorem",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.twin_pins_mod_three",
+      "kind": "theorem",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
     },
     {
       "name": "Brockian.SingularSeries.localFactorAt_eq",
@@ -993,6 +1730,549 @@
       "quarantine": true,
       "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
       "provenance_note": "conditional on convergence-to-positive-limit (classical analytic fact, stated as explicit hypothesis h_conv, not axiomatized)"
+    },
+    {
+      "name": "Brockian.TransitionKernel.admissibleStarts",
+      "kind": "def",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.brockian_table_card",
+      "kind": "theorem",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.cousin_pins_mod_three",
+      "kind": "theorem",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.cousin_run_cap",
+      "kind": "theorem",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.forbidden_transition",
+      "kind": "theorem",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.gap10_run_cap",
+      "kind": "theorem",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.kernel",
+      "kind": "def",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.kernel_row_sum",
+      "kind": "theorem",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.mem_admissibleStarts",
+      "kind": "theorem",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.quadruplet_pins_mod_five",
+      "kind": "theorem",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.sexy_free_mod_three",
+      "kind": "theorem",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.sexy_run_cap",
+      "kind": "theorem",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.totalSum_count",
+      "kind": "theorem",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.totalSum_eq",
+      "kind": "theorem",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.twin_admissible_singleton",
+      "kind": "theorem",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.twin_pins_mod_three",
+      "kind": "theorem",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TransitionKernel.twin_table_card",
+      "kind": "theorem",
+      "module": "Brockian.TransitionKernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TransitionKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
+      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
     }
   ]
 }

@@ -40,3 +40,16 @@ def test_hole_is_blocking_only_in_closed_module():
 def test_sorry_in_comment_not_flagged_as_hole():
     text = "theorem t : True := trivial  -- no sorry here, honest\n"
     assert not any(f.mode == "hole" for f in lint.lint_text("Core.lean", text, {"Core"}))
+
+
+def test_sorry_in_block_docstring_not_flagged():
+    text = ('/-- Ported (the legacy source left this as `sorry`); discharged via Mathlib. -/\n'
+            'theorem binet : True := trivial\n')
+    assert not any(f.mode == "hole" for f in lint.lint_text("Core.lean", text, {"Core"}))
+
+
+def test_real_sorry_still_flagged_after_docstring():
+    text = ('/-- mentions sorry in doc -/\n'
+            'theorem t : True := by sorry\n')
+    holes = [f for f in lint.lint_text("Core.lean", text, {"Core"}) if f.mode == "hole"]
+    assert len(holes) == 1 and holes[0].line == 2 and holes[0].blocking

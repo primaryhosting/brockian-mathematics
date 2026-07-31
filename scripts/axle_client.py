@@ -62,9 +62,16 @@ def _post(tool: str, payload: dict[str, Any], timeout: int = 120) -> dict[str, A
 def _verdict_from_check(resp: dict[str, Any], environment: str) -> AxleResult:
     lean_msgs = resp.get("lean_messages") or {}
     errors = list(lean_msgs.get("errors") or [])
+    warnings = list(lean_msgs.get("warnings") or [])
     failed = list(resp.get("failed_declarations") or [])
     okay = bool(resp.get("okay", False))
-    verified = okay and not errors and not failed
+    # A `sorry` is a WARNING, not an error, so `okay` alone would pass it. Treat any
+    # sorry/admit warning as a hard failure — a proof with a hole is never verified.
+    sorry_hit = [w for w in warnings
+                 if "sorry" in str(w).lower() or "admit" in str(w).lower()]
+    if sorry_hit:
+        errors = errors + [f"contains sorry/admit: {str(sorry_hit[0])[:120]}"]
+    verified = okay and not errors and not failed and not sorry_hit
     return AxleResult(
         verified=verified,
         environment=(resp.get("info") or {}).get("environment", environment),

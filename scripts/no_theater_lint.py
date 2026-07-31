@@ -34,6 +34,15 @@ HOLE = re.compile(r"\b(sorry|admit)\b")
 # Comment-aware: strip line comments before hole scan to avoid the run-69 false positive
 # (the word "sorry" appearing in a comment).
 COMMENT = re.compile(r"--.*$")
+# Block comments /- ... -/ (incl. /-- docstrings -/). Non-nested; blanked in place so
+# line numbers are preserved. Prevents false "sorry" hits inside docstrings.
+BLOCK = re.compile(r"/-.*?-/", re.DOTALL)
+
+
+def _blank_block_comments(text: str) -> str:
+    def repl(m: re.Match) -> str:
+        return "".join("\n" if c == "\n" else " " for c in m.group(0))
+    return BLOCK.sub(repl, text)
 
 
 @dataclass
@@ -53,6 +62,7 @@ def _module_name(path: str) -> str:
 def lint_text(path: str, text: str, closed: set[str]) -> list[Finding]:
     findings: list[Finding] = []
     is_closed = _module_name(path) in closed
+    text = _blank_block_comments(text)  # neutralize /- -/ and /-- -/ before scanning
     for i, raw in enumerate(text.splitlines(), start=1):
         for mode, rx, msg in PATTERNS:
             if rx.search(raw):

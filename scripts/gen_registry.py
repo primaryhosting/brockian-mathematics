@@ -51,6 +51,10 @@ def derive_register(f: DeclFacts) -> str:
     A declaration that would be PROVED but fails any leg falls back to COMPUTATION
     (if native_decide) else is reported UNVERIFIED so it can never masquerade as proved.
     """
+    if f.kind == "conjecture":
+        return "CONJECTURE"
+    if f.kind in ("def", "abbrev"):
+        return "DEFINITION"
     if f.kind not in ("theorem", "lemma"):
         return "CONJECTURE"
     if f.conditional_rung is not None:
@@ -164,6 +168,11 @@ def render_markdown(reg: dict[str, Any]) -> str:
     lines = ["# Brockian Verified-Theorem Registry", "",
              "> Generated from AXLE independent verification attestations. "
              "`register` is derived from axioms + AXLE verdict, never hand-asserted (spec §5).", "",
+             "> **PROVED** includes theorems closed by the kernel-checked `decide` tactic "
+             "(finite `ZMod`/`Finset` checks — genuinely verified, ledger-consistent). "
+             "`native_decide` (compiler-trusted, adds `Lean.ofReduceBool`) is excluded from "
+             "PROVED by the axiom gate. `DEFINITION` = a supporting `def`; `CONJECTURE` = a "
+             "named Prop container (never a claim).", "",
              "## Summary", ""]
     for k, v in sorted(reg["summary"].items()):
         lines.append(f"- **{k}**: {v}")

@@ -56,8 +56,12 @@ def test_invalid_rung_raises():
         g.derive_register(facts(axioms=CLEAN, conditional_rung="bogus"))
 
 
-def test_def_is_conjecture():
-    assert g.derive_register(facts(kind="def", axioms=CLEAN, axle_verified=True)) == "CONJECTURE"
+def test_def_is_definition():
+    assert g.derive_register(facts(kind="def", axioms=CLEAN, axle_verified=True)) == "DEFINITION"
+
+
+def test_prop_container_is_conjecture():
+    assert g.derive_register(facts(kind="conjecture", axioms=CLEAN)) == "CONJECTURE"
 
 
 def test_build_entry_records_verification_block():
