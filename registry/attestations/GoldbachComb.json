@@ -5,6 +5,7 @@
   "declarations": [
     {
       "name": "Brockian.GoldbachComb.gCount_eq",
+      "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
         "propext",
@@ -15,6 +16,7 @@
     },
     {
       "name": "Brockian.GoldbachComb.gCount_centered",
+      "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
         "propext",
@@ -25,6 +27,40 @@
     },
     {
       "name": "Brockian.GoldbachComb.local_covariance",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.GoldbachComb.gCount",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.GoldbachComb.Kp",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.GoldbachComb.GoldbachCovarianceTransfer",
+      "kind": "conjecture",
       "axle_verdict": "verified",
       "axioms": [
         "propext",

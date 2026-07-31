@@ -1,17 +1,17 @@
-[package]
 name = "brockian"
 version = "0.1.0"
-leanOptions = [
-  { name = "pp.unicode.fun", value = true },
-  { name = "autoImplicit", value = false }
-]
+defaultTargets = ["Brockian"]
+
+[leanOptions]
+pp.unicode.fun = true
+autoImplicit = false
 
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4"
-rev = "v4.14.0"
+rev = "v4.32.0"
 
 [[lean_lib]]
 name = "Brockian"
-roots = ["Brockian.PerfectEdition"]
-globs = [{ submodules = "Brockian" }]
+roots = ["Brockian"]
+globs = ["Brockian.+"]
