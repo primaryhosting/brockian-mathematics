@@ -316,19 +316,17 @@ honestly open).
 
 ```
 Brockian/*.lean ──lake build──► compiled environment ─┐
-                                                       ├─► scripts/gen_registry.py ─► registry/theorems.json ─► REGISTRY.md
+AXLE api (verify_proof/check) ────────────────────────┤─► scripts/gen_registry.py ─► registry/theorems.json ─► REGISTRY.md
 provenance/verdicts.yaml ─────────────────────────────┘         │                          │
   (ledger_run, quarantine,                                       │                          ├─► sub-project 2 (paper)
    provenance_note, verdict)                                     │                          └─► sub-project 3 (website)
 ```
 
-`gen_registry.py` has **two input sources**, and each field's origin is explicit:
+`gen_registry.py` has **three input sources**, and each field's origin is explicit:
 
-- **Build-derived (cannot disagree with the build):** `name`, `kind`, `statement`,
+- **Build-derived (cannot disagree with the local build):** `name`, `kind`, `statement`,
   `module`, `source` file+line, `axioms` (from `#print axioms`), `flags`
-  (`native_decide` / `sorry` / `exact_search`), and therefore the **`register`** itself —
-  `register` is *computed* from `axioms` + `flags` + the `conditional_rung`, never
-  hand-asserted, so no declaration can wear a PROVED label its build does not earn.
+  (`native_decide` / `sorry` / `exact_search`).
 - **Provenance-map (from `verdicts.yaml`, not recoverable from the environment):**
   `ledger_run`, `quarantine`, `provenance_note`, and the `conditional_rung` value for
   CONDITIONAL entries. These are human-maintained and reviewed; the generator merges them
@@ -336,11 +334,17 @@ provenance/verdicts.yaml ──────────────────�
   errors only if a compiled PROVED/CONDITIONAL declaration resolves to *neither* an
   override *nor* a run-level default.
 
-- **External-verification (recorded, from §2A):** the `verification.axle` block —
-  `{verdict, environment, checked_at}` — is captured by calling AXLE at registry-gen time
-  on the declaration's proof, and `verification.lake_build` / `verification.axioms_ok`
-  record the local gates. These are attestations captured this run, not re-derivable from
-  the source text alone; a PROVED register requires all three to be affirmative (§2A).
+- **External-verification (recorded attestation, from §2A):** the `verification.axle`
+  block — `{verdict, environment, checked_at}` — is captured by calling AXLE at
+  registry-gen time on the declaration's proof, and `verification.lake_build` /
+  `verification.axioms_ok` record the local gates. These are attestations captured this
+  run, not re-derivable from the source text alone.
+
+The **`register`** itself is *computed*, never hand-asserted, from `axioms` + `flags`
+(build-derived) + the `verification.axle` verdict (recorded attestation) + `conditional_rung`
+(provenance-map): a decl reaches PROVED only when its axioms/flags are clean **and** the
+AXLE verdict is `verified` (§2A triple verification), so no declaration can wear a PROVED
+label that any of the three legs does not earn.
 
 **Extraction scope:** `gen_registry.py` extracts **all declarations** in the `Brockian`
 namespace — `theorem`/`lemma` *and* `def`/Prop containers — so CONJECTURE-register
@@ -371,7 +375,9 @@ containers (which are `def`s by §4) appear in the registry alongside proved the
 ```
 
 The register is **derived**, not hand-asserted: `gen_registry.py` computes it from the
-axiom list + flags, so the JSON cannot disagree with the build.
+axiom list + flags + the AXLE verdict + conditional rung (§2A triple verification), so the
+JSON cannot claim PROVED for anything the local build *and* the independent AXLE check did
+not both earn.
 
 ---
 
