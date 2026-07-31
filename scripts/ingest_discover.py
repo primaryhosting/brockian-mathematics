@@ -37,15 +37,27 @@ def discover(roots: list[str]) -> list[Source]:
     are ingested.
     """
     by_md5: dict[str, Source] = {}
-    skip_markers = (os.sep + ".lake" + os.sep, os.sep + "mathlib" + os.sep,
-                    os.sep + ".elan" + os.sep, os.sep + ".git" + os.sep,
-                    os.sep + ".Trash" + os.sep)
+    # Directory names that are vendored toolchains / deps / caches — never Brockian-authored.
+    prune_dirs = {
+        ".lake", ".elan", ".elan_local", ".git", ".Trash", ".cache", "build",
+        ".venv", ".venv-leandojo", ".leandojo_brockian_lean_repo", "lean_leandojo_repo",
+        "LeanDojo", "leandojo_traces", "lean_traced", "llmstep-upstream",
+        "toolchains", "node_modules", "__pycache__",
+    }
+    # Path substrings that also mark vendored trees (belt and suspenders).
+    skip_markers = (os.sep + "src" + os.sep + "lean" + os.sep, os.sep + "mathlib" + os.sep,
+                    os.sep + ".lake" + os.sep, os.sep + "toolchains" + os.sep)
+    # Vendored dependency library roots (Mathlib deps) by top-level module dir name.
+    dep_libs = {"Mathlib", "Batteries", "Aesop", "Qq", "ProofWidgets", "Cli", "Init",
+                "Std", "Lean", "LeanSearchClient", "ImportGraph", "Plausible", "Lake"}
     for root in roots:
         if os.path.isfile(root) and root.endswith(".lean"):
             files = [root]
         else:
             files = []
-            for dirpath, _dirs, names in os.walk(root):
+            for dirpath, dirs, names in os.walk(root):
+                # prune vendored / dependency directories in place
+                dirs[:] = [d for d in dirs if d not in prune_dirs and d not in dep_libs]
                 for n in names:
                     if n.endswith(".lean"):
                         files.append(os.path.join(dirpath, n))
