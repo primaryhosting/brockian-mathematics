@@ -1,10 +1,10 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 507,
-    "DEFINITION": 149,
-    "CONDITIONAL": 9,
-    "CONJECTURE": 2
+    "PROVED": 535,
+    "DEFINITION": 154,
+    "CONDITIONAL": 8,
+    "CONJECTURE": 1
   },
   "theorems": [
     {
@@ -3127,6 +3127,982 @@
       "quarantine": true,
       "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
       "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.D5Isotypic.character_orthogonality",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.coordSum_eigenmode",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.d5Pull_r_apply",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.d5Pull_r_eigenmode",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.d5Pull_r_mul",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.d5Pull_r_one_apply",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.d5Pull_r_one_eigenmode",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.eigenmode",
+      "kind": "def",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.eigenmode_apply",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.eigenmode_mem_zeroSumSubmodule",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.eigenmode_zero",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.eigenmode_zero_apply",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.isotypicProjector",
+      "kind": "def",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.isotypicProjector_eigenmode",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.isotypicProjector_eigenmode_of_ne",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.isotypicProjector_eigenmode_self",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.omega",
+      "kind": "def",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.omegaPow",
+      "kind": "def",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.omegaPow_add",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.omegaPow_neg",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.omegaPow_one",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.omegaPow_sub",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.omegaPow_zero",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.omega_isPrimitiveRoot",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.omega_pow_five",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.omega_pow_modEq",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.orderOf_omega",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.rotIso_symm_apply",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.sum_omegaPow",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.sum_omegaPow_ne_zero",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5Isotypic.sum_omegaPow_zero",
+      "kind": "theorem",
+      "module": "Brockian.D5Isotypic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Isotypic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.D5Representation.VertexSpace",
@@ -8780,13 +9756,13 @@
     },
     {
       "name": "Brockian.Sieve.SilverGapRigidityTarget",
-      "kind": "conjecture",
+      "kind": "def",
       "module": "Brockian.Sieve",
       "statement": "",
       "source": {
         "file": "Brockian/Sieve.lean"
       },
-      "register": "CONJECTURE",
+      "register": "DEFINITION",
       "axioms": [],
       "flags": {
         "native_decide": false,
@@ -8804,7 +9780,7 @@
       "conditional_rung": null,
       "quarantine": true,
       "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
-      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+      "provenance_note": "target Prop container already discharged by silver_gap_rigidity_finite; classify as a definition/target slot, not an open conjecture."
     },
     {
       "name": "Brockian.Sieve.TwinAdmissibleAt",
@@ -9853,7 +10829,7 @@
       "source": {
         "file": "Brockian/SingularSeries.lean"
       },
-      "register": "CONDITIONAL",
+      "register": "PROVED",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -9872,10 +10848,10 @@
           "environment": "lean-4.32.0"
         }
       },
-      "conditional_rung": "classical",
+      "conditional_rung": null,
       "quarantine": true,
       "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
-      "provenance_note": "conditional on convergence-to-positive-limit (classical analytic fact, stated as explicit hypothesis h_conv, not axiomatized)"
+      "provenance_note": "proved convergence-to-positive-limit eliminator; the missing h_conv is now discharged by Brockian.SingularSeries.Convergence.singularSeriesFinite_tendsto_pos, with citable unconditional theorem singular_series_pos'. No longer an open conditional."
     },
     {
       "name": "Brockian.SingularSeries.Convergence.err_bound",

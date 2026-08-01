@@ -269,6 +269,12 @@ keep boundedv-continuous.)
   Do **not** touch: WeylSchrodingerMinimal, MetallicFamily, WeylKatoUnbounded, FreeLaplacian
   (canonical Grok), OperatorChoice (canonical Grok), or any file with an active Claude claim.
 
+- 2026-08-01 — **Grok executes strategic top-3**: audited MulReal/Confining/CycleSpectrum/GoldbachParity
+  (already on main, registry live). **Shipped `D5Isotypic`** AXLE-verified @4.32 (eigenmodes +
+  character sums + projector diagonalization on eigenmodes). Registry summary after integrate:
+  PROVED ≈ 535+. Next per 20-move list: projector full-space idempotence, C5 spectral
+  multiplicities packaging, singular-series downstream rewiring, Mathlib-upstream candidates.
+
 - 2026-08-01 — **Claude ships `AffineSymmetry`** (paper audit target #3: retires the
   Papers 2 & 4 automorphism-conflation error). AXLE-verified @ lean-4.32.0, all 12
   declarations axiom-clean {propext, Classical.choice, Quot.sound}, no-theater lint clean.

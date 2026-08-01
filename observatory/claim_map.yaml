@@ -411,3 +411,50 @@ claims:
       - Brockian.Weyl.OperatorChoice.rh_operator_needs_unbounded_spectrum
       - Brockian.Weyl.OperatorChoice.primeGaussianMulCLM_opNorm_le_two
     notes: "Conditional on a zero outside ball of radius 2. Not RH; shape obstruction."
+
+  - id: GATE1-MUL-REAL
+    title: Real L∞ multiplication is essentially self-adjoint on L²
+    book: "Lean Weyl.MulReal (Grok swarm 2026-08-01)"
+    lean:
+      - Brockian.Weyl.MulReal.mulLpCLM_essentiallySelfAdjoint
+      - Brockian.Weyl.MulReal.constMul_essentiallySelfAdjoint
+      - Brockian.Weyl.MulReal.add_mulLpCLM_essentiallySelfAdjoint
+    notes: "Bounded free/potential model rung. Unbounded mult by x² open."
+
+  - id: GATE1-CONFINING
+    title: Confining vs decaying potential dichotomy (RH operator shape)
+    book: "Lean Weyl.Confining (Grok swarm 2026-08-01)"
+    lean:
+      - Brockian.Weyl.Confining.quadratic_isConfining
+      - Brockian.Weyl.Confining.not_isConfining_of_abs_le
+      - Brockian.Weyl.Confining.primeGaussian_not_isConfining
+      - Brockian.Weyl.Confining.gate1_vs_confining_shape
+    notes: "Not RH. Machine-checks that Gate-1 prime-Gaussian is not confining; quadratic is."
+
+  - id: D5-ISOTYPIC
+    title: Cyclic Fourier eigenmodes and isotypic projectors on Fin 5 → ℂ
+    book: "Lean D5Isotypic (Grok swarm 2026-08-01)"
+    lean:
+      - Brockian.D5Isotypic.d5Pull_r_eigenmode
+      - Brockian.D5Isotypic.character_orthogonality
+      - Brockian.D5Isotypic.isotypicProjector_eigenmode
+      - Brockian.D5Isotypic.sum_omegaPow
+    notes: "Rotation C5 ≤ D5 Fourier analysis. Full D5 real-irrep split not claimed."
+
+  - id: SPEC-CYCLE-FAMILY
+    title: Cycle adjacency spectrum for general C_n (no numerology)
+    book: "Lean CycleSpectrumFamily"
+    lean:
+      - Brockian.CycleSpectrumFamily.lambda_max_cycle
+      - Brockian.CycleSpectrumFamily.cycleSpectrum_subset_Icc
+      - Brockian.CycleSpectrumFamily.golden_unique_among_prime_cycles
+    notes: "φ uniqueness only restates golden_unique_to_five."
+
+  - id: GC-PARITY
+    title: Elementary Goldbach parity rung (not global Goldbach)
+    book: "Lean Goldbach.Parity"
+    lean:
+      - Brockian.Goldbach.Parity.gCount_two
+      - Brockian.Goldbach.Parity.hasGoldbachRep_odd_iff
+      - Brockian.Goldbach.Parity.gCount_five
+    notes: "Local p=2 and odd-representation facts only."

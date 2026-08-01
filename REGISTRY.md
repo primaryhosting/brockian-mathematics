@@ -6,10 +6,10 @@
 
 ## Summary
 
-- **CONDITIONAL**: 9
-- **CONJECTURE**: 2
-- **DEFINITION**: 149
-- **PROVED**: 507
+- **CONDITIONAL**: 8
+- **CONJECTURE**: 1
+- **DEFINITION**: 154
+- **PROVED**: 535
 
 ## Theorems
 
@@ -115,6 +115,37 @@
 | PROVED | `Brockian.CycleSpectrumFamily.two_cos_two_pi_div_three` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.two_mem_cycleSpectrum` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.zero_mem_laplacianCycleSpectrum` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.D5Isotypic.character_orthogonality` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.coordSum_eigenmode` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.d5Pull_r_apply` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.d5Pull_r_eigenmode` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.d5Pull_r_mul` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.d5Pull_r_one_apply` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.d5Pull_r_one_eigenmode` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.D5Isotypic.eigenmode` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.eigenmode_apply` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.eigenmode_mem_zeroSumSubmodule` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.eigenmode_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.eigenmode_zero_apply` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.D5Isotypic.isotypicProjector` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.isotypicProjector_eigenmode` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.isotypicProjector_eigenmode_of_ne` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.isotypicProjector_eigenmode_self` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.D5Isotypic.omega` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.D5Isotypic.omegaPow` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.omegaPow_add` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.omegaPow_neg` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.omegaPow_one` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.omegaPow_sub` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.omegaPow_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.omega_isPrimitiveRoot` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.omega_pow_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.omega_pow_modEq` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.orderOf_omega` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.rotIso_symm_apply` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.sum_omegaPow` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.sum_omegaPow_ne_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.sum_omegaPow_zero` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.D5Representation.VertexSpace` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
 | DEFINITION | `Brockian.D5Representation.autPull` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
 | PROVED | `Brockian.D5Representation.autPull_apply` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
@@ -298,7 +329,7 @@
 | PROVED | `Brockian.Sieve.H3_middle` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.H3_top` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.H3_trace` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
-| CONJECTURE | `Brockian.Sieve.SilverGapRigidityTarget` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
+| DEFINITION | `Brockian.Sieve.SilverGapRigidityTarget` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | DEFINITION | `Brockian.Sieve.TwinAdmissibleAt` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.compatible_closure` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.no_adjacent_admissible` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
@@ -333,7 +364,7 @@
 | DEFINITION | `Brockian.SingularSeries.singularSeries` | ✓ | verified | lean-4.32.0 | intake run 63 (a0ce…) — largest clean analytic run; singular series |
 | DEFINITION | `Brockian.SingularSeries.singularSeriesFinite` | ✓ | verified | lean-4.32.0 | intake run 63 (a0ce…) — largest clean analytic run; singular series |
 | PROVED | `Brockian.SingularSeries.singular_series_finite_pos` | ✓ | verified | lean-4.32.0 | intake run 63 (a0ce…) — largest clean analytic run; singular series |
-| CONDITIONAL | `Brockian.SingularSeries.singular_series_pos` | ✓ | verified | lean-4.32.0 | intake run 63 (a0ce…) — largest clean analytic run; singular series |
+| PROVED | `Brockian.SingularSeries.singular_series_pos` | ✓ | verified | lean-4.32.0 | intake run 63 (a0ce…) — largest clean analytic run; singular series |
 | PROVED | `Brockian.SingularSeries.Convergence.err_bound` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
 | PROVED | `Brockian.SingularSeries.Convergence.localFactor_sub_one_bound` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
 | PROVED | `Brockian.SingularSeries.Convergence.nu_p_eq_card_of_lt` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
