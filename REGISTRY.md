@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 4
 - **CONJECTURE**: 2
-- **DEFINITION**: 65
-- **PROVED**: 186
+- **DEFINITION**: 68
+- **PROVED**: 192
 
 ## Theorems
 
@@ -226,6 +226,15 @@
 | PROVED | `Brockian.Weyl.Closure.symmetric_domain_le_adjoint_domain` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | PROVED | `Brockian.Weyl.Closure.symmetric_isClosable` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | PROVED | `Brockian.Weyl.Closure.symmetric_le_adjoint` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| DEFINITION | `Brockian.Weyl.Dichotomy.IsLimitCircleRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
+| DEFINITION | `Brockian.Weyl.Dichotomy.IsLimitPointRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
+| PROVED | `Brockian.Weyl.Dichotomy.atTop_of_radius_tendsto_zero` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
+| PROVED | `Brockian.Weyl.Dichotomy.limitPointRadius_radius_tendsto_zero` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
+| PROVED | `Brockian.Weyl.Dichotomy.limitPoint_or_limitCircle_radius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
+| PROVED | `Brockian.Weyl.Dichotomy.radius_tendsto_zero_iff` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
+| PROVED | `Brockian.Weyl.Dichotomy.radius_tendsto_zero_of_atTop` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
+| PROVED | `Brockian.Weyl.Dichotomy.tendsto_atTop_of_monotone_not_bddAbove` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
+| DEFINITION | `Brockian.Weyl.Dichotomy.weylRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
 | DEFINITION | `Brockian.Weyl.Disk.Acoef` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | DEFINITION | `Brockian.Weyl.Disk.Pcoef` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | PROVED | `Brockian.Weyl.Disk.boundary_L2_identity` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |

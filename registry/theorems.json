@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 186,
-    "DEFINITION": 65,
+    "PROVED": 192,
+    "DEFINITION": 68,
     "CONJECTURE": 2,
     "CONDITIONAL": 4
   },
@@ -6534,6 +6534,282 @@
       "quarantine": true,
       "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
       "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.IsLimitCircleRadius",
+      "kind": "def",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 b\u2192\u221e radius dichotomy (pure analysis)",
+      "provenance_note": "radius_tendsto_zero_iff: 1/(2c\u00b7I)\u21920 \u2194 I\u2192+\u221e under eventual positivity; monotone+unbounded\u21d2atTop; EM limit-point/limit-circle radius predicates. Radius side ONLY \u2014 does not claim IsLimitPointAtInfty for general V, nor ran(T\u00b1i) density, nor -\u0394+V ess-self-adjoint."
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.IsLimitPointRadius",
+      "kind": "def",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 b\u2192\u221e radius dichotomy (pure analysis)",
+      "provenance_note": "radius_tendsto_zero_iff: 1/(2c\u00b7I)\u21920 \u2194 I\u2192+\u221e under eventual positivity; monotone+unbounded\u21d2atTop; EM limit-point/limit-circle radius predicates. Radius side ONLY \u2014 does not claim IsLimitPointAtInfty for general V, nor ran(T\u00b1i) density, nor -\u0394+V ess-self-adjoint."
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.atTop_of_radius_tendsto_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 b\u2192\u221e radius dichotomy (pure analysis)",
+      "provenance_note": "radius_tendsto_zero_iff: 1/(2c\u00b7I)\u21920 \u2194 I\u2192+\u221e under eventual positivity; monotone+unbounded\u21d2atTop; EM limit-point/limit-circle radius predicates. Radius side ONLY \u2014 does not claim IsLimitPointAtInfty for general V, nor ran(T\u00b1i) density, nor -\u0394+V ess-self-adjoint."
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.limitPointRadius_radius_tendsto_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 b\u2192\u221e radius dichotomy (pure analysis)",
+      "provenance_note": "radius_tendsto_zero_iff: 1/(2c\u00b7I)\u21920 \u2194 I\u2192+\u221e under eventual positivity; monotone+unbounded\u21d2atTop; EM limit-point/limit-circle radius predicates. Radius side ONLY \u2014 does not claim IsLimitPointAtInfty for general V, nor ran(T\u00b1i) density, nor -\u0394+V ess-self-adjoint."
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.limitPoint_or_limitCircle_radius",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 b\u2192\u221e radius dichotomy (pure analysis)",
+      "provenance_note": "radius_tendsto_zero_iff: 1/(2c\u00b7I)\u21920 \u2194 I\u2192+\u221e under eventual positivity; monotone+unbounded\u21d2atTop; EM limit-point/limit-circle radius predicates. Radius side ONLY \u2014 does not claim IsLimitPointAtInfty for general V, nor ran(T\u00b1i) density, nor -\u0394+V ess-self-adjoint."
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.radius_tendsto_zero_iff",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 b\u2192\u221e radius dichotomy (pure analysis)",
+      "provenance_note": "radius_tendsto_zero_iff: 1/(2c\u00b7I)\u21920 \u2194 I\u2192+\u221e under eventual positivity; monotone+unbounded\u21d2atTop; EM limit-point/limit-circle radius predicates. Radius side ONLY \u2014 does not claim IsLimitPointAtInfty for general V, nor ran(T\u00b1i) density, nor -\u0394+V ess-self-adjoint."
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.radius_tendsto_zero_of_atTop",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 b\u2192\u221e radius dichotomy (pure analysis)",
+      "provenance_note": "radius_tendsto_zero_iff: 1/(2c\u00b7I)\u21920 \u2194 I\u2192+\u221e under eventual positivity; monotone+unbounded\u21d2atTop; EM limit-point/limit-circle radius predicates. Radius side ONLY \u2014 does not claim IsLimitPointAtInfty for general V, nor ran(T\u00b1i) density, nor -\u0394+V ess-self-adjoint."
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.tendsto_atTop_of_monotone_not_bddAbove",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 b\u2192\u221e radius dichotomy (pure analysis)",
+      "provenance_note": "radius_tendsto_zero_iff: 1/(2c\u00b7I)\u21920 \u2194 I\u2192+\u221e under eventual positivity; monotone+unbounded\u21d2atTop; EM limit-point/limit-circle radius predicates. Radius side ONLY \u2014 does not claim IsLimitPointAtInfty for general V, nor ran(T\u00b1i) density, nor -\u0394+V ess-self-adjoint."
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.weylRadius",
+      "kind": "def",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 b\u2192\u221e radius dichotomy (pure analysis)",
+      "provenance_note": "radius_tendsto_zero_iff: 1/(2c\u00b7I)\u21920 \u2194 I\u2192+\u221e under eventual positivity; monotone+unbounded\u21d2atTop; EM limit-point/limit-circle radius predicates. Radius side ONLY \u2014 does not claim IsLimitPointAtInfty for general V, nor ran(T\u00b1i) density, nor -\u0394+V ess-self-adjoint."
     },
     {
       "name": "Brockian.Weyl.Disk.Acoef",
