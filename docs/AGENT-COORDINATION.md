@@ -370,3 +370,20 @@ keep boundedv-continuous.)
   AXLE-attest Lean modules at `lean-4.32.0`; for Gate-1/Weyl files also attempt
   `lean-4.28.0`; import into `Brockian.lean` only after canonical attestation; commit by
   explicit path only.
+
+- 2026-08-01 — **Claude swarm #5 launched** (AXLE @4.32 gate required for every ship; new files only).
+  Uncovered high-value territory — no overlap with Grok #3 / Codex #4 / prior swarms. Claims:
+  - `Brockian/PentagonalPartition.lean` — Euler's pentagonal number theorem / partition ↔ pentagonal
+    bridge (`Nat.Partition`; generating function ∏(1-xᵏ) = ∑(-1)ʲx^{j(3j-1)/2} and/or the p(n)
+    pentagonal recurrence). NEW territory — the headline Euler↔Ramanujan connection, absent from core.
+  - `Brockian/AdmissibilityKTuple.lean` — general admissible k-tuple configuration count over `ZMod q`
+    via CRT + inclusion–exclusion (generalizes `universal_admissibility_count`; replaces the
+    superseded `(q-1)^{k-1}` guess). Imports `Admissibility` only.
+  - `Brockian/GaloisGeneralDegree.lean` — attempt the general `[ℚ(2cos 2π/p):ℚ] = (p-1)/2`
+    (extends `GaloisWhyFive`'s concrete {3,5,7}); honest partial expected if Mathlib lacks the
+    maximal-real-subfield degree. Imports `GaloisWhyFive`/`Spectral` only.
+  Do NOT touch these files or Admissibility/GaloisWhyFive/Spectral internals (extend via import only).
+  Pipeline each: hole-free → `no_theater_lint` → AXLE `check` @lean-4.32.0 → attestation only if
+  `module_verified`. Claude integrates via explicit-path commit + registry regen.
+  Aristotle follow-up: `c6a46c07` (bridge-deficiency) DONE server-side but Harmonic API 500s on
+  download (unretrievable — not integrated); `2204b385` (boundedv-continuous) still RUNNING.
