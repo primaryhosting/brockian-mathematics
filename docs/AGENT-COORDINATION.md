@@ -334,3 +334,7 @@ keep boundedv-continuous.)
     declarations and cleanup requirements. Agent: Meitner (`019fbee7-45aa-7df3-b185-406e4e04aca3`).
   Do not let these agents edit `Brockian/*.lean`, registry attestations, or generated registry
   artifacts. Integration contract: review output → commit explicit paths only → no `git add -A`.
+  Integrated at `95ac7e3`: all three artifacts reviewed and committed by explicit path only.
+  Validation run: `python3 -m py_compile scripts/audit_registry_opens.py` and
+  `python3 scripts/audit_registry_opens.py`. Current open-surface audit reports 8 `CONDITIONAL`
+  entries + 1 `CONJECTURE`, no stale target Prop containers detected.
