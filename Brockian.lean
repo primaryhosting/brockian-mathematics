@@ -9,10 +9,12 @@ import Brockian.Sieve
 import Brockian.Spectral
 import Brockian.Connectivity
 import Brockian.CycleSpectrumFamily
+import Brockian.C5SpectralMultiplicities
 import Brockian.Automorphism
 import Brockian.AutomorphismFull
 import Brockian.D5Representation
 import Brockian.D5Isotypic
+import Brockian.D5LaplacianModes
 import Brockian.WeylLimitPoint
 import Brockian.SpectralGate1
 import Brockian.GoldbachSchema
@@ -39,6 +41,7 @@ import Brockian.WeylFreeLaplacian
 import Brockian.WeylMulReal
 import Brockian.WeylOperatorChoice
 import Brockian.MetallicFamily
+import Brockian.GoldenUniquenessSchema
 import Brockian.EquidistributionSchema
 import Brockian.AffineSymmetry
 import Brockian.WeylSelfAdjointExtension
@@ -47,5 +50,10 @@ import Brockian.AdmissibilityCRT
 import Brockian.PenroseL2
 import Brockian.WeylSchrodingerMinimal
 import Brockian.SingularSeriesConvergence
+import Brockian.SingularSeriesWire
 import Brockian.WeylFreeLaplacian2
 import Brockian.WeylConfining
+import Brockian.ConfiningSpectralShape
+import Brockian.GaloisWhyFive
+import Brockian.PentagonIsotypic
+import Brockian.WeylDeficiencyRegularity

@@ -6,10 +6,10 @@
 
 ## Summary
 
-- **CONDITIONAL**: 8
+- **CONDITIONAL**: 10
 - **CONJECTURE**: 1
-- **DEFINITION**: 154
-- **PROVED**: 534
+- **DEFINITION**: 181
+- **PROVED**: 686
 
 ## Theorems
 
@@ -55,6 +55,50 @@
 | PROVED | `Brockian.Automorphism.Full.card_aut_le_ten` | ✓ | verified | lean-4.32.0 | run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso |
 | PROVED | `Brockian.Automorphism.Full.dihedralHom_bijective` | ✓ | verified | lean-4.32.0 | run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso |
 | PROVED | `Brockian.Automorphism.Full.dihedralHom_surjective` | ✓ | verified | lean-4.32.0 | run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso |
+| DEFINITION | `Brockian.C5SpectralMultiplicities.c5DistinctEigs` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5DistinctEigs_card` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| DEFINITION | `Brockian.C5SpectralMultiplicities.c5LapMode` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5LapMode_four` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5LapMode_one` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5LapMode_three` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5LapMode_two` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5LapMode_zero` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| DEFINITION | `Brockian.C5SpectralMultiplicities.c5LaplacianMultiset` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5LaplacianMultiset_eq` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| DEFINITION | `Brockian.C5SpectralMultiplicities.c5Mode` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5Mode_four` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5Mode_mem_cycleSpectrum` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5Mode_one` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5Mode_one_eq_four` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5Mode_three` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5Mode_two` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5Mode_two_eq_three` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5Mode_zero` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| DEFINITION | `Brockian.C5SpectralMultiplicities.c5SpectrumMultiset` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5SpectrumMultiset_card` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5SpectrumMultiset_eq` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5SpectrumMultiset_toFinset` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5_arg_four` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5_arg_one` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5_arg_three` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5_arg_two` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.c5_eigs_pairwise_distinct` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.goldenRatio_lt_two` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.golden_sub_one_mem_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.golden_unique_to_five_setlevel` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.lap_gap_eq_connectivity` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.lap_large_eq` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.mem_c5SpectrumMultiset_iff` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.multiplicity_connectivity_gap` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.multiplicity_golden_sub_one` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.multiplicity_lap_gap` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.multiplicity_lap_large` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.multiplicity_lap_two_plus_phi` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.multiplicity_lap_zero` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.multiplicity_neg_golden` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.multiplicity_two` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.neg_golden_mem_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.C5SpectralMultiplicities.two_mem_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.Connectivity.cos_2pi_5` | ✓ | verified | lean-4.32.0 | run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues |
 | PROVED | `Brockian.Connectivity.lambda2_eq` | ✓ | verified | lean-4.32.0 | run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues |
 | DEFINITION | `Brockian.Connectivity.laplacianEigs5` | ✓ | verified | lean-4.32.0 | run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues |
@@ -145,6 +189,32 @@
 | PROVED | `Brockian.D5Isotypic.orderOf_omega` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.sum_omegaPow` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.sum_omegaPow_ne_zero` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.D5LaplacianModes.adjacency` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| DEFINITION | `Brockian.D5LaplacianModes.adjacencyLinear` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.adjacencyLinear_apply` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.adjacency_add` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.adjacency_apply` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.adjacency_commute_isotypicProjector_eigenmode` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.adjacency_eigenmode` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.adjacency_eigenmode_cos` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.adjacency_eigenmode_zero` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.adjacency_eq_pullbacks` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.adjacency_isotypicProjector_eigenmode` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.adjacency_smul` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| DEFINITION | `Brockian.D5LaplacianModes.laplacian` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| DEFINITION | `Brockian.D5LaplacianModes.laplacianLinear` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.laplacianLinear_apply` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.laplacian_add` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.laplacian_apply` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.laplacian_commute_isotypicProjector_eigenmode` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.laplacian_eigenmode` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.laplacian_eigenmode_zero` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.laplacian_eq` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.laplacian_isotypicProjector_eigenmode` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.laplacian_smul` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.omegaPow_add_inv_eq_two_cos` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.omegaPow_eq_exp` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.D5LaplacianModes.omegaPow_eq_exp_mul_I` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | DEFINITION | `Brockian.D5Representation.VertexSpace` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
 | DEFINITION | `Brockian.D5Representation.autPull` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
 | PROVED | `Brockian.D5Representation.autPull_apply` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
@@ -179,6 +249,27 @@
 | CONDITIONAL | `Brockian.Equidistribution.equidistribution_of_asymptotic_exists` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | PROVED | `Brockian.Equidistribution.prime_pair_config_admissible` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | DEFINITION | `Brockian.Equidistribution.totalConfigCount` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| DEFINITION | `Brockian.GaloisWhyFive.P7` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.P7_irreducible` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.P7_monic` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.P7_natDegree` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| DEFINITION | `Brockian.GaloisWhyFive.Q5` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.Q5_monic` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.Q5_natDegree` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.aeval_spectralGen_seven` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| DEFINITION | `Brockian.GaloisWhyFive.cubic7` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.cubic7_monic` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.cubic_identity_seven` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.degree_five` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.degree_seven` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.degree_three` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.goldenSubOne_irrational` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.quadratic_iff_five` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| DEFINITION | `Brockian.GaloisWhyFive.spectralGen` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.spectralGen_five` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.spectralGen_seven` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.spectralGen_three` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaloisWhyFive.why_five` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
 | PROVED | `Brockian.Geometry.d5_card` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.golden_ratio_in_C5_spectrum` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.pentagon_golden_diagonal` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
@@ -238,6 +329,26 @@
 | PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_four` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
 | PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_of_count_pos` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
 | PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_six` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| PROVED | `Brockian.GoldenUniqueness.C5_membership_layer` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.algebraic_connectivity_C5_eq` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.algebraic_connectivity_C5_props` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.algebraic_layer` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.cos_two_pi_div_five_eq_phi_sub_one_div_two` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.five_carries_golden` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.golden_algebraic_identity` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.golden_in_C5_family` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.golden_mem_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.golden_not_in_prime_cycle_ne_five` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.golden_ratio_in_C5_geometry` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.golden_sub_one_eq_two_cos` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.golden_unique_among_prime_cycles` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.golden_unique_to_five` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.inv_golden_eq_sub_one` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.neg_golden_mem_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.prime_cycle_golden_forces_five` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.prime_rigidity_layer` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.two_cos_four_pi_div_five_eq_neg_golden` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GoldenUniqueness.two_cos_fundamental_mode_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.MetallicFamily.H3_ground_metallic` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.MetallicFamily.inv_metallicMean_eq_sub` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.MetallicFamily.metallicConj_sq` | ✓ | verified | lean-4.32.0 |  |
@@ -315,6 +426,34 @@
 | DEFINITION | `Brockian.Penrose.zeta5` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
 | PROVED | `Brockian.Penrose.zeta5_norm` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
 | PROVED | `Brockian.Penrose.zeta5_pow_five` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.PentagonIsotypic.adjEigenvalue` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.adjEigenvalue_eq_two_cos` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.adjEigenvalue_four` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.adjEigenvalue_neg` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.adjEigenvalue_one` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.adjEigenvalue_three` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.adjEigenvalue_two` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.adjEigenvalue_zero` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| DEFINITION | `Brockian.PentagonIsotypic.adjacency` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.adjacency_apply` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.adjacency_eigenmode` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.adjacency_isotypicProjector` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| DEFINITION | `Brockian.PentagonIsotypic.eigenBasis` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.eigenmode_linearIndependent` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.eigenmode_ne_zero` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.eigenvalues_distinct` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.golden_eigenfrequencies` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.golden_eigenvector` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| DEFINITION | `Brockian.PentagonIsotypic.isotypicProjectorL` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.isotypicProjector_add` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.isotypicProjector_comp` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.isotypicProjector_completeness` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.isotypicProjector_idempotent` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.isotypicProjector_orthogonal` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.multiplicities` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.neg_golden_eigenfrequencies` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.rot_isotypic` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonIsotypic.two_eigenfrequency` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
 | DEFINITION | `Brockian.RiemannScaffold.BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannScaffold.Gammaℝ_ne_zero_of_nontrivial` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | CONDITIONAL | `Brockian.RiemannScaffold.RH_of_BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
@@ -370,6 +509,15 @@
 | PROVED | `Brockian.SingularSeries.Convergence.singularSeriesFinite_tendsto_pos` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
 | PROVED | `Brockian.SingularSeries.Convergence.singular_series_pos'` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
 | PROVED | `Brockian.SingularSeries.Convergence.summable_localFactorAt_sub_one` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
+| DEFINITION | `Brockian.SingularSeries.Wire.IsAdmissible` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Wire.h_conv_of_admissible` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Wire.isAdmissible_iff` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Wire.isAdmissible_raw` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Wire.singularSeriesFinite_tendsto_pos_of_admissible` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Wire.singular_series_finite_pos_of_admissible` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Wire.singular_series_pos_of_admissible` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Wire.singular_series_pos_supersedes_conditional` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Wire.singular_series_pos_unconditional` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.Spectral.cos_two_pi_div_five` | ✓ | verified | lean-4.32.0 | run 73 (b666…) — re-proved fresh @ v4.32 via concrete circulant eigenvalues |
 | DEFINITION | `Brockian.Spectral.cycleSpectrum` | ✓ | verified | lean-4.32.0 | run 73 (b666…) — re-proved fresh @ v4.32 via concrete circulant eigenvalues |
 | PROVED | `Brockian.Spectral.golden_in_cycleSpectrum_five` | ✓ | verified | lean-4.32.0 | run 73 (b666…) — re-proved fresh @ v4.32 via concrete circulant eigenvalues |
@@ -501,6 +649,29 @@
 | PROVED | `Brockian.Weyl.Confining.quadraticCandidate_V` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.Confining.quadratic_isConfining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.Confining.quadratic_unboundedMultiplierShape` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.ConfiningShape.CompactResolventShape` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| DEFINITION | `Brockian.Weyl.ConfiningShape.DiscreteSpectrumCandidate` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| DEFINITION | `Brockian.Weyl.ConfiningShape.EigenvalueCountingAsymptotic` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| DEFINITION | `Brockian.Weyl.ConfiningShape.EigenvalueCountingMatchesNT` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.brockian_eigenvalue_real_of_candidate` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.clm_bound_blocks_zeros_outside_ball` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.clm_bound_no_brockian_eigenvector` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.compactResolventShape_of_candidate` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.compactResolventShape_of_isConfining` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.confining_needed_for_shape_and_unbounded_spectrum` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.eigenvalueCountingAsymptotic_of_matches` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.eigenvalueCountingMatchesNT_comm` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.gate1_vs_confining_shape_package` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.not_compactResolventShape_of_abs_le` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.not_discreteSpectrumCandidate_of_bound` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.not_point_spectrum_unbounded_of_bound` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.primeGaussian_clm_blocks_large_zeros` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.primeGaussian_not_compactResolventShape` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| DEFINITION | `Brockian.Weyl.ConfiningShape.quadraticCandidate_reexport` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.quadratic_compactResolventShape` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.quadratic_isConfining_reexport` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.realizer_admits_no_finite_bound` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.Weyl.ConfiningShape.spectrum_real_of_symm` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.Weyl.ConstMass.continuous_growing_exp_normSq` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
 | PROVED | `Brockian.Weyl.ConstMass.exists_growing_mode_limitPointRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
 | PROVED | `Brockian.Weyl.ConstMass.growing_exp_IsLimitPointRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
@@ -510,6 +681,16 @@
 | PROVED | `Brockian.Weyl.ConstMass.integral_exp_mul_tendsto_atTop` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
 | PROVED | `Brockian.Weyl.ConstMass.integral_nonneg_mono` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
 | PROVED | `Brockian.Weyl.ConstMass.normSq_cexp_eq` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
+| DEFINITION | `Brockian.Weyl.DeficiencyODE.H2` | ✓ | verified | lean-4.32.0 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.DeficiencyODE.ReducedGate1Status` | ✓ | verified | lean-4.32.0 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.DeficiencyODE.WeakSolutionRegularity` | ✓ | verified | lean-4.32.0 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.DeficiencyODE.coeFn_potentialMul` | ✓ | verified | lean-4.32.0 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
+| CONDITIONAL | `Brockian.Weyl.DeficiencyODE.deficiencyRepresentsODE_of_weakRegularity` | ✓ | verified | lean-4.32.0 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.DeficiencyODE.inner_g_potential` | ✓ | verified | lean-4.32.0 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.DeficiencyODE.inner_g_schwartz` | ✓ | verified | lean-4.32.0 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.DeficiencyODE.inner_g_schwartz_D2` | ✓ | verified | lean-4.32.0 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.DeficiencyODE.reduced_gate1_status` | ✓ | verified | lean-4.32.0 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
+| CONDITIONAL | `Brockian.Weyl.DeficiencyODE.schrodinger_essentiallySelfAdjoint_of_weakRegularity` | ✓ | verified | lean-4.32.0 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
 | DEFINITION | `Brockian.Weyl.Dichotomy.IsLimitCircleRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
 | DEFINITION | `Brockian.Weyl.Dichotomy.IsLimitPointRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
 | PROVED | `Brockian.Weyl.Dichotomy.atTop_of_radius_tendsto_zero` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
