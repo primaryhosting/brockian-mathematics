@@ -192,3 +192,12 @@ Do not touch:
 ```
 
 Keep the note factual.  If a theorem is not AXLE-clean, it is not integrated.
+
+## Active Claims (append-only)
+
+- 2026-08-01 — **Claude claims `WeylSchrodingerMinimal`** (queue #1). Independently
+  re-audited `WeylBridge.no_nonzero_L2_solution` = VERIFIED @ both lean-4.32.0 and
+  lean-4.28.0, axiom-clean {propext, Classical.choice, Quot.sound}, statement faithful
+  (proved even without the boundedness/continuity hypotheses). Proceeding to define the
+  concrete minimal `T = -d²/dx²+V` and state/prove `DeficiencyRepresentsODE` for it.
+  Do not touch `Brockian/WeylSchrodingerMinimal.lean`.
