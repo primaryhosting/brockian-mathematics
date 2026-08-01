@@ -44,7 +44,7 @@ nothing was excluded. What genuinely verified is registered; what remains open i
 
 | Target | Verified this round | Still open |
 |--------|--------------------|-----------|
-| **Weyl / Gate 1** | Capstone + Kato + radius dichotomy + **Bridge** (`Weyl.Bridge.no_nonzero_L2_solution` — deficiency triviality: non-real L² solutions vanish) + Gate1Bounded (potential ESA) | **Still open:** continuous bounded-V ⇒ limit-point (`aristotle/boundedv-continuous`); construct minimal Schrödinger `T` and identify deficiency spaces with L² solutions; unbounded Laplacian `−Δ`; closed-range of `ran(T−z)` for general closed symmetric `T`. Bare-bounded-V **refuted**. |
+| **Weyl / Gate 1** | Bridge + Cayley + Chain + Kato + Gate1Bounded + **SchrodingerESA assembly** (`essentiallySelfAdjoint_of_ode_bridge` under `DeficiencyRepresentsODE`; potential ESA unconditional) | **Still open:** construct minimal `T=−Δ+V` and discharge `DeficiencyRepresentsODE`; continuous bounded-V ⇒ limit-point (`aristotle/boundedv-continuous`). |
 | **Goldbach** | `goldbach_from_spectral_model` (real implication, CONDITIONAL/open), singular-series factor lemmas, small base cases (`GoldbachSchema`, `GoldbachLemmas`) | instantiating a `SpectralModel` non-trivially — that is Goldbach-strength |
 | **Riemann Hypothesis** | the ξ-bridge (unconditional: `riemannXi`, Γ-nonvanishing, ξ-zero-from-ζ-zero, ξ-RH ⇒ Mathlib RH), `RH_of_BrockianSystem` (CONDITIONAL/open) (`RiemannScaffold`) | inhabiting `BrockianSystem` — a densely-defined symmetric operator with real spectrum whose eigenvalues realise the ζ-zeros. Hilbert–Pólya-strength. Not shown instantiable, and (crucially) not provably empty — so the conditional is an honest open schema, not ex-falso |
 

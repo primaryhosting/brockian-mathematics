@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-01T17:15:08Z",
+  "generated_at": "2026-08-01T17:22:59Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 248,
-      "DEFINITION": 72,
+      "PROVED": 254,
+      "DEFINITION": 75,
       "CONJECTURE": 2,
       "CONDITIONAL": 4
     }
@@ -14,9 +14,9 @@
   "charter": "Badges are derived from the Lean registry when `lean` is non-empty.\nPROVED requires AXLE-verified + axiom-clean theorems (see README).\nOpen problems (twins infinitude, Goldbach global, RH) stay not_claimed.",
   "version": 1,
   "summary": {
-    "claims": 39,
+    "claims": 40,
     "by_status": {
-      "proved": 30,
+      "proved": 31,
       "open": 1,
       "conjecture": 1,
       "conditional": 2,
@@ -24,8 +24,8 @@
       "aristotle": 1
     },
     "registry": {
-      "PROVED": 248,
-      "DEFINITION": 72,
+      "PROVED": 254,
+      "DEFINITION": 75,
       "CONJECTURE": 2,
       "CONDITIONAL": 4
     }
@@ -2009,6 +2009,87 @@
       "missing_lean": [],
       "declaration_count": 1,
       "proved_count": 1
+    },
+    {
+      "id": "GATE1-CHAIN",
+      "title": "End-to-end Gate-1 assembly (ODE bridge \u21d2 ESA under identification)",
+      "book": "Lean Weyl.SchrodingerESA",
+      "notes": "Full ESA of -\u0394+V requires constructing T and DeficiencyRepresentsODE. Potential term and abstract chain closed.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Weyl.SchrodingerESA.essentiallySelfAdjoint_of_ode_bridge",
+        "Brockian.Weyl.SchrodingerESA.deficiencySpace_eq_bot_of_ode_bridge",
+        "Brockian.Weyl.SchrodingerESA.primeGaussian_essentiallySelfAdjoint",
+        "Brockian.Weyl.SchrodingerESA.free_plus_primeGaussian_essentiallySelfAdjoint"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Weyl.SchrodingerESA.essentiallySelfAdjoint_of_ode_bridge",
+          "short": "essentiallySelfAdjoint_of_ode_bridge",
+          "module": "Brockian.Weyl.SchrodingerESA",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/SchrodingerESA.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "2026-08-01 \u2014 Gate-1 end-to-end assembly under ODE identification",
+          "provenance_note": "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+        },
+        {
+          "name": "Brockian.Weyl.SchrodingerESA.deficiencySpace_eq_bot_of_ode_bridge",
+          "short": "deficiencySpace_eq_bot_of_ode_bridge",
+          "module": "Brockian.Weyl.SchrodingerESA",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/SchrodingerESA.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "2026-08-01 \u2014 Gate-1 end-to-end assembly under ODE identification",
+          "provenance_note": "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+        },
+        {
+          "name": "Brockian.Weyl.SchrodingerESA.primeGaussian_essentiallySelfAdjoint",
+          "short": "primeGaussian_essentiallySelfAdjoint",
+          "module": "Brockian.Weyl.SchrodingerESA",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/SchrodingerESA.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "2026-08-01 \u2014 Gate-1 end-to-end assembly under ODE identification",
+          "provenance_note": "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+        },
+        {
+          "name": "Brockian.Weyl.SchrodingerESA.free_plus_primeGaussian_essentiallySelfAdjoint",
+          "short": "free_plus_primeGaussian_essentiallySelfAdjoint",
+          "module": "Brockian.Weyl.SchrodingerESA",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/SchrodingerESA.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "2026-08-01 \u2014 Gate-1 end-to-end assembly under ODE identification",
+          "provenance_note": "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 4
     }
   ],
   "all_declarations": [
@@ -5593,6 +5674,105 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/RadiusDichotomy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.DeficiencyRepresentsODE",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/SchrodingerESA.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.Gate1ChainStatus",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/SchrodingerESA.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.deficiencySpace_eq_bot_of_ode_bridge",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerESA.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.dense_ranges_of_ode_bridge",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerESA.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.essSelfAdjoint_of_ode_bridge_via_chain",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerESA.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.essentiallySelfAdjoint_of_ode_bridge",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerESA.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.free_plus_primeGaussian_essentiallySelfAdjoint",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerESA.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.gate1_chain_status",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/SchrodingerESA.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.primeGaussian_essentiallySelfAdjoint",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerESA.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"

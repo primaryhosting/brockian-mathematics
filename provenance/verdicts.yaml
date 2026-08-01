@@ -287,3 +287,12 @@ runs:
     quarantine: true
     ledger_run: "intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus"
     provenance_note: "H3 silver eigensystem (2±√2,2), twin_pins_mod_three, ℓ−2 grammar, τ period=25; 4 thms kernel-decide (finite checks)"
+
+  # ── Schrödinger ESA assembly (Aug 1) ───────────────────────────────────────
+  "weyl-schrodinger-esa":
+    module: Brockian.Weyl.SchrodingerESA
+    verdict: admit
+    quarantine: true
+    ledger_run: "2026-08-01 — Gate-1 end-to-end assembly under ODE identification"
+    provenance_note: "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+

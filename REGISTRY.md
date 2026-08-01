@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 4
 - **CONJECTURE**: 2
-- **DEFINITION**: 72
-- **PROVED**: 248
+- **DEFINITION**: 75
+- **PROVED**: 254
 
 ## Theorems
 
@@ -341,3 +341,12 @@
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_counterexample` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_of_pos` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_to_zero_of_mass_infinite` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
+| DEFINITION | `Brockian.Weyl.SchrodingerESA.DeficiencyRepresentsODE` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
+| DEFINITION | `Brockian.Weyl.SchrodingerESA.Gate1ChainStatus` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
+| PROVED | `Brockian.Weyl.SchrodingerESA.deficiencySpace_eq_bot_of_ode_bridge` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
+| PROVED | `Brockian.Weyl.SchrodingerESA.dense_ranges_of_ode_bridge` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
+| PROVED | `Brockian.Weyl.SchrodingerESA.essSelfAdjoint_of_ode_bridge_via_chain` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
+| PROVED | `Brockian.Weyl.SchrodingerESA.essentiallySelfAdjoint_of_ode_bridge` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
+| PROVED | `Brockian.Weyl.SchrodingerESA.free_plus_primeGaussian_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
+| DEFINITION | `Brockian.Weyl.SchrodingerESA.gate1_chain_status` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
+| PROVED | `Brockian.Weyl.SchrodingerESA.primeGaussian_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |

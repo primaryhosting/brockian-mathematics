@@ -351,3 +351,13 @@ claims:
     lean:
       - Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint
     notes: "Integrated and AXLE-verified; see WEYL-KATO."
+
+  - id: GATE1-CHAIN
+    title: End-to-end Gate-1 assembly (ODE bridge ⇒ ESA under identification)
+    book: "Lean Weyl.SchrodingerESA"
+    lean:
+      - Brockian.Weyl.SchrodingerESA.essentiallySelfAdjoint_of_ode_bridge
+      - Brockian.Weyl.SchrodingerESA.deficiencySpace_eq_bot_of_ode_bridge
+      - Brockian.Weyl.SchrodingerESA.primeGaussian_essentiallySelfAdjoint
+      - Brockian.Weyl.SchrodingerESA.free_plus_primeGaussian_essentiallySelfAdjoint
+    notes: "Full ESA of -Δ+V requires constructing T and DeficiencyRepresentsODE. Potential term and abstract chain closed."

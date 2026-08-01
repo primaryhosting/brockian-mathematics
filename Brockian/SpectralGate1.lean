@@ -92,7 +92,7 @@ theorem isSelfAdjoint_mulLpCLM (g : α → ℂ) (hg : MemLp g ⊤ μ) {C : ℝ} 
   rw [ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric]
   intro f h
   rw [L2.inner_def, L2.inner_def]
-  apply integral_congr_ae
+  apply MeasureTheory.integral_congr_ae
   filter_upwards [coeFn_mulLpCLM g hg hC hbd f, coeFn_mulLpCLM g hg hC hbd h, hreal]
     with x e1 e2 er
   simp only [ContinuousLinearMap.coe_coe, e1, e2, Pi.smul_apply, Pi.mul_apply, smul_eq_mul]

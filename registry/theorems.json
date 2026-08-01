@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 248,
-    "DEFINITION": 72,
+    "PROVED": 254,
+    "DEFINITION": 75,
     "CONJECTURE": 2,
     "CONDITIONAL": 4
   },
@@ -10134,6 +10134,282 @@
       "quarantine": true,
       "ledger_run": "Aristotle proj 50ca67ca \u2014 radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28)",
       "provenance_note": "radius_tendsto_zero_iff_of_pos (corrected dichotomy r->0 <-> I->inf, given mass positive somewhere) + two directional thms + counterexample refuting my naive iff (1/0=0 junk trap). Aristotle caught the flaw honestly. One Tendsto.comp line ported 4.28->4.32."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.DeficiencyRepresentsODE",
+      "kind": "def",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerESA.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 Gate-1 end-to-end assembly under ODE identification",
+      "provenance_note": "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.Gate1ChainStatus",
+      "kind": "def",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerESA.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 Gate-1 end-to-end assembly under ODE identification",
+      "provenance_note": "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.deficiencySpace_eq_bot_of_ode_bridge",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 Gate-1 end-to-end assembly under ODE identification",
+      "provenance_note": "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.dense_ranges_of_ode_bridge",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 Gate-1 end-to-end assembly under ODE identification",
+      "provenance_note": "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.essSelfAdjoint_of_ode_bridge_via_chain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 Gate-1 end-to-end assembly under ODE identification",
+      "provenance_note": "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.essentiallySelfAdjoint_of_ode_bridge",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 Gate-1 end-to-end assembly under ODE identification",
+      "provenance_note": "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.free_plus_primeGaussian_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 Gate-1 end-to-end assembly under ODE identification",
+      "provenance_note": "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.gate1_chain_status",
+      "kind": "def",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerESA.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 Gate-1 end-to-end assembly under ODE identification",
+      "provenance_note": "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerESA.primeGaussian_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 Gate-1 end-to-end assembly under ODE identification",
+      "provenance_note": "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
     }
   ]
 }
