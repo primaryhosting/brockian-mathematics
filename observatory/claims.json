@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-01T17:56:53Z",
+  "generated_at": "2026-08-01T18:20:39Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 274,
-      "DEFINITION": 80,
+      "PROVED": 389,
+      "DEFINITION": 125,
       "CONJECTURE": 2,
-      "CONDITIONAL": 4
+      "CONDITIONAL": 6
     }
   },
   "program": "Brockian Mathematics / Riemann Labs",
@@ -24,10 +24,10 @@
       "aristotle": 1
     },
     "registry": {
-      "PROVED": 274,
-      "DEFINITION": 80,
+      "PROVED": 389,
+      "DEFINITION": 125,
       "CONJECTURE": 2,
-      "CONDITIONAL": 4
+      "CONDITIONAL": 6
     }
   },
   "claims": [
@@ -2300,6 +2300,39 @@
       }
     },
     {
+      "name": "Brockian.Admissibility.CRT.admissibleResidues_crt_card",
+      "module": "Brockian.Admissibility.CRT",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CRT.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Admissibility.CRT.admissibleResidues_crt_card_two_primes",
+      "module": "Brockian.Admissibility.CRT",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CRT.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Admissibility.CRT.admissible_count_three_five",
+      "module": "Brockian.Admissibility.CRT",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CRT.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.Automorphism.C5",
       "module": "Brockian.Automorphism",
       "register": "DEFINITION",
@@ -2773,6 +2806,270 @@
       }
     },
     {
+      "name": "Brockian.D5Representation.VertexSpace",
+      "module": "Brockian.D5Representation",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.autPull",
+      "module": "Brockian.D5Representation",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.autPull_apply",
+      "module": "Brockian.D5Representation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.autPull_constant",
+      "module": "Brockian.D5Representation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.autPull_mem_constantLine",
+      "module": "Brockian.D5Representation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.autPull_mem_zeroSumSubmodule",
+      "module": "Brockian.D5Representation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.constantLine",
+      "module": "Brockian.D5Representation",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.constantLinear",
+      "module": "Brockian.D5Representation",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.constantLinear_apply",
+      "module": "Brockian.D5Representation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.constantVector",
+      "module": "Brockian.D5Representation",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.constantVector_mem_zeroSumSubmodule_iff",
+      "module": "Brockian.D5Representation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.coordSum",
+      "module": "Brockian.D5Representation",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.coordSumLinear",
+      "module": "Brockian.D5Representation",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.coordSumLinear_apply",
+      "module": "Brockian.D5Representation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.coordSum_autPull",
+      "module": "Brockian.D5Representation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.coordSum_constantVector",
+      "module": "Brockian.D5Representation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.coordSum_d5Pull",
+      "module": "Brockian.D5Representation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.d5AutEquiv",
+      "module": "Brockian.D5Representation",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.d5Pull",
+      "module": "Brockian.D5Representation",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.d5Pull_apply",
+      "module": "Brockian.D5Representation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.d5Pull_constant",
+      "module": "Brockian.D5Representation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.d5Pull_mem_constantLine",
+      "module": "Brockian.D5Representation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.d5Pull_mem_zeroSumSubmodule",
+      "module": "Brockian.D5Representation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5Representation.zeroSumSubmodule",
+      "module": "Brockian.D5Representation",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.Geometry.d5_card",
       "module": "Brockian.Geometry",
       "register": "PROVED",
@@ -3240,6 +3537,853 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/GoldbachSchema.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicFamily.H3_ground_metallic",
+      "module": "Brockian.MetallicFamily",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicFamily.inv_metallicMean_eq_sub",
+      "module": "Brockian.MetallicFamily",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicConj_sq",
+      "module": "Brockian.MetallicFamily",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicMean_add_conj",
+      "module": "Brockian.MetallicFamily",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicMean_mul_conj",
+      "module": "Brockian.MetallicFamily",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicMean_one",
+      "module": "Brockian.MetallicFamily",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicMean_pos_of_nonneg",
+      "module": "Brockian.MetallicFamily",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicMean_sq",
+      "module": "Brockian.MetallicFamily",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicMean_sub_conj",
+      "module": "Brockian.MetallicFamily",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicMean_two",
+      "module": "Brockian.MetallicFamily",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallic_one_unique_to_five",
+      "module": "Brockian.MetallicFamily",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallic_radicand_nonneg",
+      "module": "Brockian.MetallicFamily",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicFamily.silverGap_eq_three_sub_metallicMean_two",
+      "module": "Brockian.MetallicFamily",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.A",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.A_ae",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.A_ae_add",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.A_ae_coeFn",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.A_ae_memLp",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.A_ae_smul",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.A_raw",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.A_raw_bound",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.A_raw_ptwise_bound",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.D",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.D_ae",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.D_ae_add",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.D_ae_coeFn",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.D_ae_memLp",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.D_ae_smul",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.D_raw",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.D_raw_bound_ptwise",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.D_raw_norm_bound",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.Delta",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.Delta_bounded",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.L2",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.PenroseGraph",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.Vertices",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.Window",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.adjacent",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.adjacent_loopless",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.adjacent_symm",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.ae_eq_of_count",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.deg_fn",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.deg_fn_bound",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.degree_bound",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.gamma",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.lintegral_count_eq_tsum",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.lintegral_sum_neighbors_le",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.memLp_A_raw",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.memLp_D_raw",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.mu",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.neighbor_subset",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.norm_A_le",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.norm_D_le",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.pentagonVertex",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.pentagonVertex_norm",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.phi",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.phi_bar",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.phi_equation",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.phi_gt_one",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.phi_ne_zero",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.phi_pos",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.phi_product_conjugate",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.phi_reciprocal",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.phi_squared",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.phi_sum_conjugate",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.potentialNeighbors",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.potentialNeighbors_finite",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.proj_para",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.proj_perp",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.proj_perp_real",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.rotation_is_multiplication",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.sqrt5_gt_one",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.sqrt5_gt_two",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.sum_sq_le_card_mul_sum_sq",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.zeta5",
+      "module": "Brockian.Penrose",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.zeta5_norm",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Penrose.zeta5_pow_five",
+      "module": "Brockian.Penrose",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Penrose.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -5479,6 +6623,171 @@
       }
     },
     {
+      "name": "Brockian.Weyl.Extension.adjoint_closure",
+      "module": "Brockian.Weyl.Extension",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Extension.adjoint_eigen_I_eq_zero_of_essSA",
+      "module": "Brockian.Weyl.Extension",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Extension.adjoint_eigen_neg_I_eq_zero_of_essSA",
+      "module": "Brockian.Weyl.Extension",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Extension.adjoint_graph_topologicalClosure_eq",
+      "module": "Brockian.Weyl.Extension",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Extension.closure_eigenvalue_im_zero",
+      "module": "Brockian.Weyl.Extension",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Extension.closure_isSymmetric",
+      "module": "Brockian.Weyl.Extension",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Extension.closure_le_of_isClosed_extension",
+      "module": "Brockian.Weyl.Extension",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Extension.closure_le_of_isSelfAdjoint_extension",
+      "module": "Brockian.Weyl.Extension",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Extension.eigenvalue_im_zero",
+      "module": "Brockian.Weyl.Extension",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Extension.essentiallySelfAdjoint_iff'",
+      "module": "Brockian.Weyl.Extension",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Extension.isSelfAdjoint_closure_iff_eq_adjoint",
+      "module": "Brockian.Weyl.Extension",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Extension.isSymmetric_of_le_adjoint",
+      "module": "Brockian.Weyl.Extension",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Extension.le_closure_le_adjoint",
+      "module": "Brockian.Weyl.Extension",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Extension.smulPMap_closure_eigenvalue_im_zero",
+      "module": "Brockian.Weyl.Extension",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Extension.smulPMap_closure_isSymmetric",
+      "module": "Brockian.Weyl.Extension",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.Weyl.FreeLaplacian.FreeLaplacianModel",
       "module": "Brockian.Weyl.FreeLaplacian",
       "register": "PROVED",
@@ -5682,6 +6991,171 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/Kato.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.BoundedPerturbationTransfer",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/KatoUnbounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.boundedPerturbationTransfer_clm",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoUnbounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "register": "CONDITIONAL",
+      "kind": "theorem",
+      "source": "Brockian/KatoUnbounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb_iff",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoUnbounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/KatoUnbounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_apply",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoUnbounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_apply_ne_I_smul",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoUnbounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_apply_ne_neg_I_smul",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoUnbounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_clm_eq",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoUnbounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_clm_essentiallySelfAdjoint",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoUnbounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_dense_domain",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoUnbounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_domain",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoUnbounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_isSymmetric",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoUnbounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_norm_add_I_smul_eq",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoUnbounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_norm_sub_smul_ge",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoUnbounded.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -6210,6 +7684,314 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/SchrodingerESA.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.D2",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.D2_apply",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.H2",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.Lconj",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.Lconj_apply",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.MinimalGate1Status",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.coeFn_schwartzToL2",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.coreMap",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.coreMap_apply",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.coreMap_symm",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.deficiencyRepresentsODE_of_adjoint_eigenvector",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.inner_toLp",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.isSelfAdjoint_potentialMulCLM",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.kinetic_symm",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.minimal_gate1_status",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.potentialMulCLM",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.potential_symm",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schrodingerPMap",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_dense",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_domain",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_isSymmetric",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_toFun_ofInjective",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schrodinger_essentiallySelfAdjoint_of_ode",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "CONDITIONAL",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schwartzToL2",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schwartzToL2_apply",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schwartzToL2_injective",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schwartz_ibp1",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schwartz_ibp2",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerMinimal.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"

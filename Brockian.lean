@@ -10,6 +10,7 @@ import Brockian.Spectral
 import Brockian.Connectivity
 import Brockian.Automorphism
 import Brockian.AutomorphismFull
+import Brockian.D5Representation
 import Brockian.WeylLimitPoint
 import Brockian.SpectralGate1
 import Brockian.GoldbachSchema

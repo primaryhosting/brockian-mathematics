@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 6
 - **CONJECTURE**: 2
-- **DEFINITION**: 115
-- **PROVED**: 375
+- **DEFINITION**: 125
+- **PROVED**: 389
 
 ## Theorems
 
@@ -65,6 +65,30 @@
 | PROVED | `Brockian.Core.ray_mul` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.ray_ne_zero_infinite` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.ray_zero_iff_dvd` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
+| DEFINITION | `Brockian.D5Representation.VertexSpace` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| DEFINITION | `Brockian.D5Representation.autPull` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| PROVED | `Brockian.D5Representation.autPull_apply` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| PROVED | `Brockian.D5Representation.autPull_constant` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| PROVED | `Brockian.D5Representation.autPull_mem_constantLine` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| PROVED | `Brockian.D5Representation.autPull_mem_zeroSumSubmodule` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| DEFINITION | `Brockian.D5Representation.constantLine` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| DEFINITION | `Brockian.D5Representation.constantLinear` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| PROVED | `Brockian.D5Representation.constantLinear_apply` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| DEFINITION | `Brockian.D5Representation.constantVector` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| PROVED | `Brockian.D5Representation.constantVector_mem_zeroSumSubmodule_iff` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| DEFINITION | `Brockian.D5Representation.coordSum` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| DEFINITION | `Brockian.D5Representation.coordSumLinear` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| PROVED | `Brockian.D5Representation.coordSumLinear_apply` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| PROVED | `Brockian.D5Representation.coordSum_autPull` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| PROVED | `Brockian.D5Representation.coordSum_constantVector` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| PROVED | `Brockian.D5Representation.coordSum_d5Pull` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| DEFINITION | `Brockian.D5Representation.d5AutEquiv` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| DEFINITION | `Brockian.D5Representation.d5Pull` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| PROVED | `Brockian.D5Representation.d5Pull_apply` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| PROVED | `Brockian.D5Representation.d5Pull_constant` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| PROVED | `Brockian.D5Representation.d5Pull_mem_constantLine` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| PROVED | `Brockian.D5Representation.d5Pull_mem_zeroSumSubmodule` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| DEFINITION | `Brockian.D5Representation.zeroSumSubmodule` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
 | PROVED | `Brockian.Geometry.d5_card` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.golden_ratio_in_C5_spectrum` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.pentagon_golden_diagonal` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
