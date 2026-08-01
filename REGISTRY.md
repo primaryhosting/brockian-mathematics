@@ -10,7 +10,6 @@
 - **CONJECTURE**: 2
 - **DEFINITION**: 63
 - **PROVED**: 200
-- **UNVERIFIED**: 7
 
 ## Theorems
 
@@ -257,19 +256,12 @@
 | PROVED | `Brockian.Weyl.Disk.wronskian_isConst` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | PROVED | `Brockian.Weyl.Disk.wronskian_isConst` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | PROVED | `Brockian.Weyl.ESA.clm_deficiency_eq_bot` | ✓ | verified | lean-4.32.0 |  |
-| UNVERIFIED | `Brockian.Weyl.ESA.clm_deficiency_eq_bot` | ✓ | failed | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.ESA.clm_dense` | ✓ | verified | lean-4.32.0 |  |
-| UNVERIFIED | `Brockian.Weyl.ESA.clm_dense` | ✓ | failed | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.ESA.clm_domain` | ✓ | verified | lean-4.32.0 |  |
-| UNVERIFIED | `Brockian.Weyl.ESA.clm_domain` | ✓ | failed | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.ESA.clm_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
-| UNVERIFIED | `Brockian.Weyl.ESA.clm_essentiallySelfAdjoint` | ✓ | failed | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.ESA.clm_isSymmetric` | ✓ | verified | lean-4.32.0 |  |
-| UNVERIFIED | `Brockian.Weyl.ESA.clm_isSymmetric` | ✓ | failed | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.ESA.id_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
-| UNVERIFIED | `Brockian.Weyl.ESA.id_essentiallySelfAdjoint` | — | failed | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.ESA.vec_eq_zero_of_inner` | ✓ | verified | lean-4.32.0 |  |
-| UNVERIFIED | `Brockian.Weyl.ESA.vec_eq_zero_of_inner` | ✓ | failed | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.LP.IsLimitPointAtInfty` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |
 | DEFINITION | `Brockian.Weyl.LP.IsSolutionOn` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |
 | DEFINITION | `Brockian.Weyl.LP.L2NearInfty` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |

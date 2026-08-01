@@ -4,8 +4,7 @@
     "PROVED": 200,
     "DEFINITION": 63,
     "CONJECTURE": 2,
-    "CONDITIONAL": 4,
-    "UNVERIFIED": 7
+    "CONDITIONAL": 4
   },
   "theorems": [
     {
@@ -7481,38 +7480,6 @@
       "provenance_note": null
     },
     {
-      "name": "Brockian.Weyl.ESA.clm_deficiency_eq_bot",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.ESA",
-      "statement": "",
-      "source": {
-        "file": "Brockian/ESA.lean"
-      },
-      "register": "UNVERIFIED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "failed",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
       "name": "Brockian.Weyl.ESA.clm_dense",
       "kind": "theorem",
       "module": "Brockian.Weyl.ESA",
@@ -7536,38 +7503,6 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
-      "name": "Brockian.Weyl.ESA.clm_dense",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.ESA",
-      "statement": "",
-      "source": {
-        "file": "Brockian/ESA.lean"
-      },
-      "register": "UNVERIFIED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "failed",
           "environment": "lean-4.32.0"
         }
       },
@@ -7609,38 +7544,6 @@
       "provenance_note": null
     },
     {
-      "name": "Brockian.Weyl.ESA.clm_domain",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.ESA",
-      "statement": "",
-      "source": {
-        "file": "Brockian/ESA.lean"
-      },
-      "register": "UNVERIFIED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "failed",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
       "name": "Brockian.Weyl.ESA.clm_essentiallySelfAdjoint",
       "kind": "theorem",
       "module": "Brockian.Weyl.ESA",
@@ -7664,38 +7567,6 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
-      "name": "Brockian.Weyl.ESA.clm_essentiallySelfAdjoint",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.ESA",
-      "statement": "",
-      "source": {
-        "file": "Brockian/ESA.lean"
-      },
-      "register": "UNVERIFIED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "failed",
           "environment": "lean-4.32.0"
         }
       },
@@ -7737,104 +7608,7 @@
       "provenance_note": null
     },
     {
-      "name": "Brockian.Weyl.ESA.clm_isSymmetric",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.ESA",
-      "statement": "",
-      "source": {
-        "file": "Brockian/ESA.lean"
-      },
-      "register": "UNVERIFIED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "failed",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
       "name": "Brockian.Weyl.ESA.id_essentiallySelfAdjoint",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.ESA",
-      "statement": "",
-      "source": {
-        "file": "Brockian/ESA.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
-      "name": "Brockian.Weyl.ESA.id_essentiallySelfAdjoint",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.ESA",
-      "statement": "",
-      "source": {
-        "file": "Brockian/ESA.lean"
-      },
-      "register": "UNVERIFIED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext",
-        "sorryAx"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": false,
-        "axle": {
-          "verdict": "failed",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
-      "name": "Brockian.Weyl.ESA.vec_eq_zero_of_inner",
       "kind": "theorem",
       "module": "Brockian.Weyl.ESA",
       "statement": "",
@@ -7873,7 +7647,7 @@
       "source": {
         "file": "Brockian/ESA.lean"
       },
-      "register": "UNVERIFIED",
+      "register": "PROVED",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -7888,7 +7662,7 @@
         "lake_build": "pending",
         "axioms_ok": true,
         "axle": {
-          "verdict": "failed",
+          "verdict": "verified",
           "environment": "lean-4.32.0"
         }
       },
