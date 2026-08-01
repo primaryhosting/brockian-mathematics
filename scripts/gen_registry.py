@@ -137,8 +137,22 @@ def generate(attest_dir: str, verdicts_path: str) -> dict[str, Any]:
     import glob
     import os
     verdicts = _load_verdicts(verdicts_path)
+    # Tie the registry to the ACTUAL build: only attestations for modules imported in
+    # Brockian.lean count. This makes the registry robust against stray attestation files
+    # left by parallel tools (Grok/Codex) for non-integrated / non-verifying modules.
+    built = None
+    root = "Brockian.lean"
+    if os.path.exists(root):
+        built = set()
+        for line in open(root):
+            line = line.strip()
+            if line.startswith("import Brockian."):
+                built.add(line.split(".", 1)[1])  # e.g. "WeylChain"  (attestation file stem)
     entries: list[dict[str, Any]] = []
     for ap in sorted(glob.glob(os.path.join(attest_dir, "*.json"))):
+        stem = os.path.basename(ap)[:-5]
+        if built is not None and stem not in built:
+            continue  # skip attestations not backed by a root import (stray/parallel-tool)
         att = json.load(open(ap))
         module = att["module"]
         env = att.get("environment")
