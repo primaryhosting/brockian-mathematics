@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 10
 - **CONJECTURE**: 1
-- **DEFINITION**: 181
-- **PROVED**: 686
+- **DEFINITION**: 182
+- **PROVED**: 695
 
 ## Theorems
 
@@ -159,6 +159,16 @@
 | PROVED | `Brockian.CycleSpectrumFamily.two_cos_two_pi_div_three` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.two_mem_cycleSpectrum` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.zero_mem_laplacianCycleSpectrum` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| DEFINITION | `Brockian.D5FourierInversion.fourierCoeff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5FourierInversion.fourierCoeff_add` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5FourierInversion.fourierCoeff_eigenmode` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5FourierInversion.fourierCoeff_smul` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5FourierInversion.fourier_inversion` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5FourierInversion.isotypicProjector_add` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5FourierInversion.isotypicProjector_eq_fourierCoeff_smul` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5FourierInversion.isotypicProjector_idempotent` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5FourierInversion.isotypicProjector_orthogonal` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5FourierInversion.sum_isotypicProjectors` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.character_orthogonality` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.coordSum_eigenmode` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.d5Pull_r_apply` | ✓ | verified | lean-4.32.0 |  |

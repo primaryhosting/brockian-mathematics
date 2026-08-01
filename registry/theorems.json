@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 686,
-    "DEFINITION": 181,
+    "PROVED": 695,
+    "DEFINITION": 182,
     "CONDITIONAL": 10,
     "CONJECTURE": 1
   },
@@ -4515,6 +4515,322 @@
       "quarantine": true,
       "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
       "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.D5FourierInversion.fourierCoeff",
+      "kind": "def",
+      "module": "Brockian.D5FourierInversion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5FourierInversion.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5FourierInversion.fourierCoeff_add",
+      "kind": "theorem",
+      "module": "Brockian.D5FourierInversion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5FourierInversion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5FourierInversion.fourierCoeff_eigenmode",
+      "kind": "theorem",
+      "module": "Brockian.D5FourierInversion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5FourierInversion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5FourierInversion.fourierCoeff_smul",
+      "kind": "theorem",
+      "module": "Brockian.D5FourierInversion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5FourierInversion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5FourierInversion.fourier_inversion",
+      "kind": "theorem",
+      "module": "Brockian.D5FourierInversion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5FourierInversion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5FourierInversion.isotypicProjector_add",
+      "kind": "theorem",
+      "module": "Brockian.D5FourierInversion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5FourierInversion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5FourierInversion.isotypicProjector_eq_fourierCoeff_smul",
+      "kind": "theorem",
+      "module": "Brockian.D5FourierInversion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5FourierInversion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5FourierInversion.isotypicProjector_idempotent",
+      "kind": "theorem",
+      "module": "Brockian.D5FourierInversion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5FourierInversion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5FourierInversion.isotypicProjector_orthogonal",
+      "kind": "theorem",
+      "module": "Brockian.D5FourierInversion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5FourierInversion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.D5FourierInversion.sum_isotypicProjectors",
+      "kind": "theorem",
+      "module": "Brockian.D5FourierInversion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5FourierInversion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.D5Isotypic.character_orthogonality",

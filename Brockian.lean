@@ -14,6 +14,7 @@ import Brockian.Automorphism
 import Brockian.AutomorphismFull
 import Brockian.D5Representation
 import Brockian.D5Isotypic
+import Brockian.D5FourierInversion
 import Brockian.D5LaplacianModes
 import Brockian.WeylLimitPoint
 import Brockian.SpectralGate1

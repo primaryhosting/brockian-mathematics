@@ -504,3 +504,13 @@ claims:
       - Brockian.GoldenUniqueness.golden_sub_one_eq_two_cos
       - Brockian.GoldenUniqueness.golden_not_in_prime_cycle_ne_five
     notes: "Restates golden_unique_to_five; no numerology."
+
+  - id: D5-FOURIER-INVERSION
+    title: Full-space Fourier inversion and projector algebra on VertexSpace
+    book: "Lean D5FourierInversion (swarm #3 late)"
+    lean:
+      - Brockian.D5FourierInversion.fourier_inversion
+      - Brockian.D5FourierInversion.sum_isotypicProjectors
+      - Brockian.D5FourierInversion.isotypicProjector_idempotent
+      - Brockian.D5FourierInversion.isotypicProjector_orthogonal
+    notes: "Completes cyclic projector algebra on all f : Fin 5 → ℂ. Full D5 real-irrep split not claimed."

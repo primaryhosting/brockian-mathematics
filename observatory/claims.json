@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-01T20:31:18Z",
+  "generated_at": "2026-08-01T20:33:55Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 686,
-      "DEFINITION": 181,
+      "PROVED": 695,
+      "DEFINITION": 182,
       "CONDITIONAL": 10,
       "CONJECTURE": 1
     }
@@ -14,9 +14,9 @@
   "charter": "Badges are derived from the Lean registry when `lean` is non-empty.\nPROVED requires AXLE-verified + axiom-clean theorems (see README).\nOpen problems (twins infinitude, Goldbach global, RH) stay not_claimed.",
   "version": 1,
   "summary": {
-    "claims": 55,
+    "claims": 56,
     "by_status": {
-      "proved": 44,
+      "proved": 45,
       "open": 1,
       "conjecture": 1,
       "conditional": 4,
@@ -24,8 +24,8 @@
       "aristotle": 1
     },
     "registry": {
-      "PROVED": 686,
-      "DEFINITION": 181,
+      "PROVED": 695,
+      "DEFINITION": 182,
       "CONDITIONAL": 10,
       "CONJECTURE": 1
     }
@@ -3193,6 +3193,87 @@
       "missing_lean": [],
       "declaration_count": 3,
       "proved_count": 3
+    },
+    {
+      "id": "D5-FOURIER-INVERSION",
+      "title": "Full-space Fourier inversion and projector algebra on VertexSpace",
+      "book": "Lean D5FourierInversion (swarm #3 late)",
+      "notes": "Completes cyclic projector algebra on all f : Fin 5 \u2192 \u2102. Full D5 real-irrep split not claimed.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.D5FourierInversion.fourier_inversion",
+        "Brockian.D5FourierInversion.sum_isotypicProjectors",
+        "Brockian.D5FourierInversion.isotypicProjector_idempotent",
+        "Brockian.D5FourierInversion.isotypicProjector_orthogonal"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.D5FourierInversion.fourier_inversion",
+          "short": "fourier_inversion",
+          "module": "Brockian.D5FourierInversion",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/D5FourierInversion.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.D5FourierInversion.sum_isotypicProjectors",
+          "short": "sum_isotypicProjectors",
+          "module": "Brockian.D5FourierInversion",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/D5FourierInversion.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.D5FourierInversion.isotypicProjector_idempotent",
+          "short": "isotypicProjector_idempotent",
+          "module": "Brockian.D5FourierInversion",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/D5FourierInversion.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.D5FourierInversion.isotypicProjector_orthogonal",
+          "short": "isotypicProjector_orthogonal",
+          "module": "Brockian.D5FourierInversion",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/D5FourierInversion.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 4
     }
   ],
   "all_declarations": [
@@ -4775,6 +4856,116 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/CycleSpectrumFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5FourierInversion.fourierCoeff",
+      "module": "Brockian.D5FourierInversion",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/D5FourierInversion.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5FourierInversion.fourierCoeff_add",
+      "module": "Brockian.D5FourierInversion",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5FourierInversion.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5FourierInversion.fourierCoeff_eigenmode",
+      "module": "Brockian.D5FourierInversion",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5FourierInversion.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5FourierInversion.fourierCoeff_smul",
+      "module": "Brockian.D5FourierInversion",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5FourierInversion.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5FourierInversion.fourier_inversion",
+      "module": "Brockian.D5FourierInversion",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5FourierInversion.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5FourierInversion.isotypicProjector_add",
+      "module": "Brockian.D5FourierInversion",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5FourierInversion.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5FourierInversion.isotypicProjector_eq_fourierCoeff_smul",
+      "module": "Brockian.D5FourierInversion",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5FourierInversion.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5FourierInversion.isotypicProjector_idempotent",
+      "module": "Brockian.D5FourierInversion",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5FourierInversion.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5FourierInversion.isotypicProjector_orthogonal",
+      "module": "Brockian.D5FourierInversion",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5FourierInversion.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.D5FourierInversion.sum_isotypicProjectors",
+      "module": "Brockian.D5FourierInversion",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/D5FourierInversion.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
