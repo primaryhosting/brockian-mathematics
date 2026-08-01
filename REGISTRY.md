@@ -6,10 +6,10 @@
 
 ## Summary
 
-- **CONDITIONAL**: 6
+- **CONDITIONAL**: 9
 - **CONJECTURE**: 2
-- **DEFINITION**: 125
-- **PROVED**: 395
+- **DEFINITION**: 136
+- **PROVED**: 416
 
 ## Theorems
 
@@ -22,6 +22,18 @@
 | PROVED | `Brockian.Admissibility.CRT.admissibleResidues_crt_card` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
 | PROVED | `Brockian.Admissibility.CRT.admissibleResidues_crt_card_two_primes` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
 | PROVED | `Brockian.Admissibility.CRT.admissible_count_three_five` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
+| DEFINITION | `Brockian.AffineSymmetry.additiveAutEquivUnits` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.AffineSymmetry.additiveAut_card` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.AffineSymmetry.additiveAut_card_five` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.AffineSymmetry.affineGroup` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.AffineSymmetry.affinePerm` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.AffineSymmetry.dihAct` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.AffineSymmetry.dihedralToPerm` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.AffineSymmetry.dihedralToPerm_card` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.AffineSymmetry.dihedralToPerm_injective` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.AffineSymmetry.dihedralToPerm_range_le_affineGroup` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.AffineSymmetry.symmetry_separation` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.AffineSymmetry.units_isCyclic` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Automorphism.C5` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
 | DEFINITION | `Brockian.Automorphism.act` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
 | DEFINITION | `Brockian.Automorphism.dihedralHom` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
@@ -89,6 +101,16 @@
 | PROVED | `Brockian.D5Representation.d5Pull_mem_constantLine` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
 | PROVED | `Brockian.D5Representation.d5Pull_mem_zeroSumSubmodule` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
 | DEFINITION | `Brockian.D5Representation.zeroSumSubmodule` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| DEFINITION | `Brockian.Equidistribution.AsymptoticExists` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| DEFINITION | `Brockian.Equidistribution.PrimePairAsymptotic` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| PROVED | `Brockian.Equidistribution.asymptotic_shape_consistent` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| DEFINITION | `Brockian.Equidistribution.configCount` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| PROVED | `Brockian.Equidistribution.configCount_twelve_five_two_one` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| PROVED | `Brockian.Equidistribution.configCount_twenty_five_two_two` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| CONDITIONAL | `Brockian.Equidistribution.equidistribution_of_asymptotic` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| CONDITIONAL | `Brockian.Equidistribution.equidistribution_of_asymptotic_exists` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| PROVED | `Brockian.Equidistribution.prime_pair_config_admissible` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| DEFINITION | `Brockian.Equidistribution.totalConfigCount` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | PROVED | `Brockian.Geometry.d5_card` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.golden_ratio_in_C5_spectrum` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.pentagon_golden_diagonal` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
@@ -445,6 +467,19 @@
 | PROVED | `Brockian.Weyl.FreeLaplacian.isSelfAdjoint_conjCLM` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.FreeLaplacian.isSymmetric_vadd_clm` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.FreeLaplacian.vadd_clm_domain` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FreeLaplacian2.conjCLM_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.FreeLaplacian2.conjCLM_toPMap_essentiallySelfAdjoint_iff` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.FreeLaplacian2.dense_map_iff` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.FreeLaplacian2.essentiallySelfAdjoint_transfer` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
+| CONDITIONAL | `Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fourier` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.FreeLaplacian2.isSelfAdjoint_diagonal` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.FreeLaplacian2.isSelfAdjoint_multCLM` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.FreeLaplacian2.multCLM` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.FreeLaplacian2.multCLM_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.FreeLaplacian2.rangeSMulSub_image` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.FreeLaplacian2.sqMultCLM` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.FreeLaplacian2.sqMult_conj_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.FreeLaplacian2.sqMult_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.Gate1Bounded.add_primeGaussian_dense_range_sub` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2 |
 | PROVED | `Brockian.Weyl.Gate1Bounded.add_primeGaussian_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2 |
 | PROVED | `Brockian.Weyl.Gate1Bounded.add_primeGaussian_isSelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2 |

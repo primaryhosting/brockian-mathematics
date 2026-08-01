@@ -178,6 +178,19 @@ runs:
     ledger_run: "roadmap #17 — infinite-product convergence; AXLE @4.32"
     provenance_note: "err_bound (uniform |(1-x)^k-(1-kx)|≤k²x²), uniform tail |localFactor-1|≤2^k·k²/p², summable via ∑1/p², singularSeriesFinite_tendsto_pos (∃S>0), and singular_series_pos' UNCONDITIONAL. Discharges the h_conv that singular_series_pos assumed; the dropped singular_series_converges axiom is now a genuine proof."
 
+  # ── Free Laplacian ESA (Aug 1) — transfer core + mult model + conditional -Δ ──
+  "free-laplacian":
+    module: Brockian.Weyl.FreeLaplacian2
+    verdict: admit
+    quarantine: true
+    ledger_run: "roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32"
+    provenance_note: "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (ξ²) ESA, conjugation witnesses — all PROVED. Fully unconditional -Δ on L²(ℝ) conditional on Plancherel-Fourier unitary + unbounded ξ² ESA (both Mathlib-scale, named)."
+    overrides:
+      - name: freeLaplacian_essentiallySelfAdjoint_of_fourier
+        verdict: admit
+        conditional_rung: open
+        provenance_note: "-Δ ESA GIVEN a Fourier unitary intertwining with ξ²-multiplication (ESA) — the transfer core discharges everything else; Fourier/unbounded-ξ² is the named open input."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────
   "weyl-gate1-bounded":
@@ -304,6 +317,30 @@ runs:
         verdict: admit
         conditional_rung: open
         provenance_note: "existence of a model ⇒ Goldbach beyond N₀ — the honest hardness direction; OPEN-schema."
+
+  # Conditional equidistribution schema — converts Paper-3 / Conj 1.2 / Conj 6.1
+  # equidistribution OVERCLAIM into a legitimate CONDITIONAL (rung OPEN). NOT a proof.
+  "equidistribution-schema":
+    module: Brockian.Equidistribution
+    verdict: admit
+    quarantine: true
+    ledger_run: "paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema)"
+    provenance_note: "configCount = REAL gap-g prime-pair count by starting residue (12/5/2/1→1 via (11,13); 20/5/2/2→1 via (17,19), by decide). Complete transition support (prime_pair_config_admissible: pairs with p,p+g>q land in the q−2 admissible configs) PROVED unconditionally and is STRICTLY WEAKER than equidistribution. Equidistribution NOT proved."
+    overrides:
+      - name: prime_pair_config_admissible
+        verdict: admit
+        provenance_note: "complete transition support — every gap-g prime pair above the wheel lands in an admissible config; unconditional, weaker than equidistribution."
+      - name: equidistribution_of_asymptotic
+        verdict: admit
+        conditional_rung: open
+        provenance_note: "PrimePairAsymptotic (HL/BV uniform per-config asymptotic) ⇒ each of the q−2 admissible configs has density → 1/(q−2). Genuine two-asymptotic quotient work (config/main → C/(q−2); SUM using verified card=q−2 → total/main → C; Tendsto.div; (C/(q−2))/C = 1/(q−2)) — NOT modus ponens. Premise is HL/BV-strength (OPEN, not shown instantiable). NEVER citable as a proof of equidistribution."
+      - name: equidistribution_of_asymptotic_exists
+        verdict: admit
+        conditional_rung: open
+        provenance_note: "existence of an HL/BV asymptotic structure ⇒ equidistribution — the honest hardness direction; OPEN-schema."
+      - name: asymptotic_shape_consistent
+        verdict: admit
+        provenance_note: "Gate-0 non-vacuity: the non-count field constraints (C>0, main→∞, err/main→0) are jointly satisfiable, so the schema is not contradictory theater; only the tie to the real count is open."
 
   # Goldbach singular-series building blocks — all unconditional.
   "gb-lemmas":

@@ -1,10 +1,10 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 395,
-    "DEFINITION": 125,
-    "CONJECTURE": 2,
-    "CONDITIONAL": 6
+    "PROVED": 416,
+    "DEFINITION": 136,
+    "CONDITIONAL": 9,
+    "CONJECTURE": 2
   },
   "theorems": [
     {
@@ -226,6 +226,370 @@
       "quarantine": true,
       "ledger_run": "paper-audit target \u2014 CRT product |A_{q1q2}|=|A_q1|\u00b7|A_q2|; AXLE @4.32",
       "provenance_note": "general coprime CRT admissibility count = plain product (p-2)(q-2); REFUTES Paper_BV_Final \u00a76.1's correction factor (would give non-integer 5.25 for p=3,q=5)."
+    },
+    {
+      "name": "Brockian.AffineSymmetry.additiveAutEquivUnits",
+      "kind": "def",
+      "module": "Brockian.AffineSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSymmetry.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AffineSymmetry.additiveAut_card",
+      "kind": "theorem",
+      "module": "Brockian.AffineSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AffineSymmetry.additiveAut_card_five",
+      "kind": "theorem",
+      "module": "Brockian.AffineSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AffineSymmetry.affineGroup",
+      "kind": "def",
+      "module": "Brockian.AffineSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSymmetry.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AffineSymmetry.affinePerm",
+      "kind": "def",
+      "module": "Brockian.AffineSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSymmetry.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AffineSymmetry.dihAct",
+      "kind": "def",
+      "module": "Brockian.AffineSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSymmetry.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AffineSymmetry.dihedralToPerm",
+      "kind": "def",
+      "module": "Brockian.AffineSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSymmetry.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AffineSymmetry.dihedralToPerm_card",
+      "kind": "theorem",
+      "module": "Brockian.AffineSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AffineSymmetry.dihedralToPerm_injective",
+      "kind": "theorem",
+      "module": "Brockian.AffineSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AffineSymmetry.dihedralToPerm_range_le_affineGroup",
+      "kind": "theorem",
+      "module": "Brockian.AffineSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AffineSymmetry.symmetry_separation",
+      "kind": "theorem",
+      "module": "Brockian.AffineSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AffineSymmetry.units_isCyclic",
+      "kind": "theorem",
+      "module": "Brockian.AffineSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.Automorphism.C5",
@@ -2279,6 +2643,310 @@
       "quarantine": true,
       "ledger_run": "2026-08-01 \u2014 finite D5 permutation representation foothold",
       "provenance_note": "VertexSpace = Fin 5 -> C; pullback action of Aut(C5)/D5 on vertex functions; constants fixed; coordinate sum invariant; zero-sum hyperplane invariant; constant vector is zero-sum iff c=0. First rung for character/isotypic-projector work, downstream of Aut(C5) ~= D5."
+    },
+    {
+      "name": "Brockian.Equidistribution.AsymptoticExists",
+      "kind": "def",
+      "module": "Brockian.Equidistribution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Equidistribution.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "paper-audit target #1 2026-08-01 \u2014 HL/BV asymptotic \u21d2 1/(q\u22122) density (schema)",
+      "provenance_note": "configCount = REAL gap-g prime-pair count by starting residue (12/5/2/1\u21921 via (11,13); 20/5/2/2\u21921 via (17,19), by decide). Complete transition support (prime_pair_config_admissible: pairs with p,p+g>q land in the q\u22122 admissible configs) PROVED unconditionally and is STRICTLY WEAKER than equidistribution. Equidistribution NOT proved."
+    },
+    {
+      "name": "Brockian.Equidistribution.PrimePairAsymptotic",
+      "kind": "def",
+      "module": "Brockian.Equidistribution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Equidistribution.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "paper-audit target #1 2026-08-01 \u2014 HL/BV asymptotic \u21d2 1/(q\u22122) density (schema)",
+      "provenance_note": "configCount = REAL gap-g prime-pair count by starting residue (12/5/2/1\u21921 via (11,13); 20/5/2/2\u21921 via (17,19), by decide). Complete transition support (prime_pair_config_admissible: pairs with p,p+g>q land in the q\u22122 admissible configs) PROVED unconditionally and is STRICTLY WEAKER than equidistribution. Equidistribution NOT proved."
+    },
+    {
+      "name": "Brockian.Equidistribution.asymptotic_shape_consistent",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Equidistribution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "paper-audit target #1 2026-08-01 \u2014 HL/BV asymptotic \u21d2 1/(q\u22122) density (schema)",
+      "provenance_note": "Gate-0 non-vacuity: the non-count field constraints (C>0, main\u2192\u221e, err/main\u21920) are jointly satisfiable, so the schema is not contradictory theater; only the tie to the real count is open."
+    },
+    {
+      "name": "Brockian.Equidistribution.configCount",
+      "kind": "def",
+      "module": "Brockian.Equidistribution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Equidistribution.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "paper-audit target #1 2026-08-01 \u2014 HL/BV asymptotic \u21d2 1/(q\u22122) density (schema)",
+      "provenance_note": "configCount = REAL gap-g prime-pair count by starting residue (12/5/2/1\u21921 via (11,13); 20/5/2/2\u21921 via (17,19), by decide). Complete transition support (prime_pair_config_admissible: pairs with p,p+g>q land in the q\u22122 admissible configs) PROVED unconditionally and is STRICTLY WEAKER than equidistribution. Equidistribution NOT proved."
+    },
+    {
+      "name": "Brockian.Equidistribution.configCount_twelve_five_two_one",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Equidistribution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "paper-audit target #1 2026-08-01 \u2014 HL/BV asymptotic \u21d2 1/(q\u22122) density (schema)",
+      "provenance_note": "configCount = REAL gap-g prime-pair count by starting residue (12/5/2/1\u21921 via (11,13); 20/5/2/2\u21921 via (17,19), by decide). Complete transition support (prime_pair_config_admissible: pairs with p,p+g>q land in the q\u22122 admissible configs) PROVED unconditionally and is STRICTLY WEAKER than equidistribution. Equidistribution NOT proved."
+    },
+    {
+      "name": "Brockian.Equidistribution.configCount_twenty_five_two_two",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Equidistribution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "paper-audit target #1 2026-08-01 \u2014 HL/BV asymptotic \u21d2 1/(q\u22122) density (schema)",
+      "provenance_note": "configCount = REAL gap-g prime-pair count by starting residue (12/5/2/1\u21921 via (11,13); 20/5/2/2\u21921 via (17,19), by decide). Complete transition support (prime_pair_config_admissible: pairs with p,p+g>q land in the q\u22122 admissible configs) PROVED unconditionally and is STRICTLY WEAKER than equidistribution. Equidistribution NOT proved."
+    },
+    {
+      "name": "Brockian.Equidistribution.equidistribution_of_asymptotic",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Equidistribution.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "open",
+      "quarantine": true,
+      "ledger_run": "paper-audit target #1 2026-08-01 \u2014 HL/BV asymptotic \u21d2 1/(q\u22122) density (schema)",
+      "provenance_note": "PrimePairAsymptotic (HL/BV uniform per-config asymptotic) \u21d2 each of the q\u22122 admissible configs has density \u2192 1/(q\u22122). Genuine two-asymptotic quotient work (config/main \u2192 C/(q\u22122); SUM using verified card=q\u22122 \u2192 total/main \u2192 C; Tendsto.div; (C/(q\u22122))/C = 1/(q\u22122)) \u2014 NOT modus ponens. Premise is HL/BV-strength (OPEN, not shown instantiable). NEVER citable as a proof of equidistribution."
+    },
+    {
+      "name": "Brockian.Equidistribution.equidistribution_of_asymptotic_exists",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Equidistribution.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "open",
+      "quarantine": true,
+      "ledger_run": "paper-audit target #1 2026-08-01 \u2014 HL/BV asymptotic \u21d2 1/(q\u22122) density (schema)",
+      "provenance_note": "existence of an HL/BV asymptotic structure \u21d2 equidistribution \u2014 the honest hardness direction; OPEN-schema."
+    },
+    {
+      "name": "Brockian.Equidistribution.prime_pair_config_admissible",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Equidistribution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "paper-audit target #1 2026-08-01 \u2014 HL/BV asymptotic \u21d2 1/(q\u22122) density (schema)",
+      "provenance_note": "complete transition support \u2014 every gap-g prime pair above the wheel lands in an admissible config; unconditional, weaker than equidistribution."
+    },
+    {
+      "name": "Brockian.Equidistribution.totalConfigCount",
+      "kind": "def",
+      "module": "Brockian.Equidistribution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Equidistribution.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "paper-audit target #1 2026-08-01 \u2014 HL/BV asymptotic \u21d2 1/(q\u22122) density (schema)",
+      "provenance_note": "configCount = REAL gap-g prime-pair count by starting residue (12/5/2/1\u21921 via (11,13); 20/5/2/2\u21921 via (17,19), by decide). Complete transition support (prime_pair_config_admissible: pairs with p,p+g>q land in the q\u22122 admissible configs) PROVED unconditionally and is STRICTLY WEAKER than equidistribution. Equidistribution NOT proved."
     },
     {
       "name": "Brockian.Geometry.d5_card",
@@ -13350,6 +14018,414 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.conjCLM_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+      "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.conjCLM_toPMap_essentiallySelfAdjoint_iff",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+      "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.dense_map_iff",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+      "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.essentiallySelfAdjoint_transfer",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+      "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fourier",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian2.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "open",
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+      "provenance_note": "-\u0394 ESA GIVEN a Fourier unitary intertwining with \u03be\u00b2-multiplication (ESA) \u2014 the transfer core discharges everything else; Fourier/unbounded-\u03be\u00b2 is the named open input."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.isSelfAdjoint_diagonal",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+      "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.isSelfAdjoint_multCLM",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+      "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.multCLM",
+      "kind": "def",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian2.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+      "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.multCLM_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+      "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.rangeSMulSub_image",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+      "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.sqMultCLM",
+      "kind": "def",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian2.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+      "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.sqMult_conj_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+      "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.sqMult_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+      "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
     },
     {
       "name": "Brockian.Weyl.Gate1Bounded.add_primeGaussian_dense_range_sub",
