@@ -9,7 +9,7 @@
 - **CONDITIONAL**: 6
 - **CONJECTURE**: 2
 - **DEFINITION**: 125
-- **PROVED**: 389
+- **PROVED**: 395
 
 ## Theorems
 
@@ -258,6 +258,12 @@
 | DEFINITION | `Brockian.SingularSeries.singularSeriesFinite` | ✓ | verified | lean-4.32.0 | intake run 63 (a0ce…) — largest clean analytic run; singular series |
 | PROVED | `Brockian.SingularSeries.singular_series_finite_pos` | ✓ | verified | lean-4.32.0 | intake run 63 (a0ce…) — largest clean analytic run; singular series |
 | CONDITIONAL | `Brockian.SingularSeries.singular_series_pos` | ✓ | verified | lean-4.32.0 | intake run 63 (a0ce…) — largest clean analytic run; singular series |
+| PROVED | `Brockian.SingularSeries.Convergence.err_bound` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
+| PROVED | `Brockian.SingularSeries.Convergence.localFactor_sub_one_bound` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
+| PROVED | `Brockian.SingularSeries.Convergence.nu_p_eq_card_of_lt` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
+| PROVED | `Brockian.SingularSeries.Convergence.singularSeriesFinite_tendsto_pos` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
+| PROVED | `Brockian.SingularSeries.Convergence.singular_series_pos'` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
+| PROVED | `Brockian.SingularSeries.Convergence.summable_localFactorAt_sub_one` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
 | PROVED | `Brockian.Spectral.cos_two_pi_div_five` | ✓ | verified | lean-4.32.0 | run 73 (b666…) — re-proved fresh @ v4.32 via concrete circulant eigenvalues |
 | DEFINITION | `Brockian.Spectral.cycleSpectrum` | ✓ | verified | lean-4.32.0 | run 73 (b666…) — re-proved fresh @ v4.32 via concrete circulant eigenvalues |
 | PROVED | `Brockian.Spectral.golden_in_cycleSpectrum_five` | ✓ | verified | lean-4.32.0 | run 73 (b666…) — re-proved fresh @ v4.32 via concrete circulant eigenvalues |

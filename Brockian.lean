@@ -40,3 +40,4 @@ import Brockian.WeylKatoUnbounded
 import Brockian.AdmissibilityCRT
 import Brockian.PenroseL2
 import Brockian.WeylSchrodingerMinimal
+import Brockian.SingularSeriesConvergence

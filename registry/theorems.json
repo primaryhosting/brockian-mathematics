@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 389,
+    "PROVED": 395,
     "DEFINITION": 125,
     "CONJECTURE": 2,
     "CONDITIONAL": 6
@@ -7486,6 +7486,198 @@
       "quarantine": true,
       "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
       "provenance_note": "conditional on convergence-to-positive-limit (classical analytic fact, stated as explicit hypothesis h_conv, not axiomatized)"
+    },
+    {
+      "name": "Brockian.SingularSeries.Convergence.err_bound",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Convergence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Convergence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #17 \u2014 infinite-product convergence; AXLE @4.32",
+      "provenance_note": "err_bound (uniform |(1-x)^k-(1-kx)|\u2264k\u00b2x\u00b2), uniform tail |localFactor-1|\u22642^k\u00b7k\u00b2/p\u00b2, summable via \u22111/p\u00b2, singularSeriesFinite_tendsto_pos (\u2203S>0), and singular_series_pos' UNCONDITIONAL. Discharges the h_conv that singular_series_pos assumed; the dropped singular_series_converges axiom is now a genuine proof."
+    },
+    {
+      "name": "Brockian.SingularSeries.Convergence.localFactor_sub_one_bound",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Convergence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Convergence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #17 \u2014 infinite-product convergence; AXLE @4.32",
+      "provenance_note": "err_bound (uniform |(1-x)^k-(1-kx)|\u2264k\u00b2x\u00b2), uniform tail |localFactor-1|\u22642^k\u00b7k\u00b2/p\u00b2, summable via \u22111/p\u00b2, singularSeriesFinite_tendsto_pos (\u2203S>0), and singular_series_pos' UNCONDITIONAL. Discharges the h_conv that singular_series_pos assumed; the dropped singular_series_converges axiom is now a genuine proof."
+    },
+    {
+      "name": "Brockian.SingularSeries.Convergence.nu_p_eq_card_of_lt",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Convergence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Convergence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #17 \u2014 infinite-product convergence; AXLE @4.32",
+      "provenance_note": "err_bound (uniform |(1-x)^k-(1-kx)|\u2264k\u00b2x\u00b2), uniform tail |localFactor-1|\u22642^k\u00b7k\u00b2/p\u00b2, summable via \u22111/p\u00b2, singularSeriesFinite_tendsto_pos (\u2203S>0), and singular_series_pos' UNCONDITIONAL. Discharges the h_conv that singular_series_pos assumed; the dropped singular_series_converges axiom is now a genuine proof."
+    },
+    {
+      "name": "Brockian.SingularSeries.Convergence.singularSeriesFinite_tendsto_pos",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Convergence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Convergence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #17 \u2014 infinite-product convergence; AXLE @4.32",
+      "provenance_note": "err_bound (uniform |(1-x)^k-(1-kx)|\u2264k\u00b2x\u00b2), uniform tail |localFactor-1|\u22642^k\u00b7k\u00b2/p\u00b2, summable via \u22111/p\u00b2, singularSeriesFinite_tendsto_pos (\u2203S>0), and singular_series_pos' UNCONDITIONAL. Discharges the h_conv that singular_series_pos assumed; the dropped singular_series_converges axiom is now a genuine proof."
+    },
+    {
+      "name": "Brockian.SingularSeries.Convergence.singular_series_pos'",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Convergence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Convergence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #17 \u2014 infinite-product convergence; AXLE @4.32",
+      "provenance_note": "err_bound (uniform |(1-x)^k-(1-kx)|\u2264k\u00b2x\u00b2), uniform tail |localFactor-1|\u22642^k\u00b7k\u00b2/p\u00b2, summable via \u22111/p\u00b2, singularSeriesFinite_tendsto_pos (\u2203S>0), and singular_series_pos' UNCONDITIONAL. Discharges the h_conv that singular_series_pos assumed; the dropped singular_series_converges axiom is now a genuine proof."
+    },
+    {
+      "name": "Brockian.SingularSeries.Convergence.summable_localFactorAt_sub_one",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Convergence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Convergence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #17 \u2014 infinite-product convergence; AXLE @4.32",
+      "provenance_note": "err_bound (uniform |(1-x)^k-(1-kx)|\u2264k\u00b2x\u00b2), uniform tail |localFactor-1|\u22642^k\u00b7k\u00b2/p\u00b2, summable via \u22111/p\u00b2, singularSeriesFinite_tendsto_pos (\u2203S>0), and singular_series_pos' UNCONDITIONAL. Discharges the h_conv that singular_series_pos assumed; the dropped singular_series_converges axiom is now a genuine proof."
     },
     {
       "name": "Brockian.Spectral.cos_two_pi_div_five",
