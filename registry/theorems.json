@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 724,
+    "PROVED": 726,
     "DEFINITION": 186,
     "CONDITIONAL": 10,
     "CONJECTURE": 1
@@ -7971,6 +7971,70 @@
       "quarantine": true,
       "ledger_run": "paper-audit target #1 2026-08-01 \u2014 HL/BV asymptotic \u21d2 1/(q\u22122) density (schema)",
       "provenance_note": "configCount = REAL gap-g prime-pair count by starting residue (12/5/2/1\u21921 via (11,13); 20/5/2/2\u21921 via (17,19), by decide). Complete transition support (prime_pair_config_admissible: pairs with p,p+g>q land in the q\u22122 admissible configs) PROVED unconditionally and is STRICTLY WEAKER than equidistribution. Equidistribution NOT proved."
+    },
+    {
+      "name": "Brockian.GaloisGeneralDegree.quadratic_iff_five_general",
+      "kind": "theorem",
+      "module": "Brockian.GaloisGeneralDegree",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisGeneralDegree.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #13 GENERAL \u2014 full why-five degree theorem for all odd primes; AXLE @4.32",
+      "provenance_note": "CLOSES the general case GaloisWhyFive left open: [Q(2cos 2pi/p):Q] = (minpoly).natDegree = (p-1)/2 for every odd prime p (maximal real subfield Q(zeta_p)+), via the classical cyclotomic tower in C (cyclotomic irreducibility + conjugation-fixed subfield + X^2-alpha X+1 degree-2 step + tower law). quadratic_iff_five_general: the spectral field is golden-quadratic iff p=5, for ALL primes. p=2 (2cos(pi)=-2, degree 1) honestly excluded. Both unconditional PROVED, axiom-clean."
+    },
+    {
+      "name": "Brockian.GaloisGeneralDegree.real_subfield_degree",
+      "kind": "theorem",
+      "module": "Brockian.GaloisGeneralDegree",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisGeneralDegree.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #13 GENERAL \u2014 full why-five degree theorem for all odd primes; AXLE @4.32",
+      "provenance_note": "CLOSES the general case GaloisWhyFive left open: [Q(2cos 2pi/p):Q] = (minpoly).natDegree = (p-1)/2 for every odd prime p (maximal real subfield Q(zeta_p)+), via the classical cyclotomic tower in C (cyclotomic irreducibility + conjugation-fixed subfield + X^2-alpha X+1 degree-2 step + tower law). quadratic_iff_five_general: the spectral field is golden-quadratic iff p=5, for ALL primes. p=2 (2cos(pi)=-2, degree 1) honestly excluded. Both unconditional PROVED, axiom-clean."
     },
     {
       "name": "Brockian.GaloisWhyFive.P7",

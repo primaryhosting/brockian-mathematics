@@ -61,3 +61,4 @@ import Brockian.PentagonIsotypic
 import Brockian.WeylDeficiencyRegularity
 import Brockian.PentagonalPartition
 import Brockian.AdmissibilityKTuple
+import Brockian.GaloisGeneralDegree
