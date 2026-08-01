@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-01T15:52:05Z",
+  "generated_at": "2026-08-01T16:44:07Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 209,
+      "PROVED": 220,
       "DEFINITION": 69,
       "CONJECTURE": 2,
       "CONDITIONAL": 4
@@ -14,17 +14,17 @@
   "charter": "Badges are derived from the Lean registry when `lean` is non-empty.\nPROVED requires AXLE-verified + axiom-clean theorems (see README).\nOpen problems (twins infinitude, Goldbach global, RH) stay not_claimed.",
   "version": 1,
   "summary": {
-    "claims": 34,
+    "claims": 38,
     "by_status": {
-      "proved": 25,
+      "proved": 28,
       "open": 1,
       "conjecture": 1,
       "conditional": 2,
-      "not_claimed": 3,
+      "not_claimed": 4,
       "aristotle": 2
     },
     "registry": {
-      "PROVED": 209,
+      "PROVED": 220,
       "DEFINITION": 69,
       "CONJECTURE": 2,
       "CONDITIONAL": 4
@@ -882,14 +882,16 @@
       "id": "GATE1-POTENTIAL",
       "title": "Bounded prime-Gaussian multiplication operator (Gate 1 piece)",
       "book": "Lean SpectralGate1; Gate 1 partial",
-      "notes": "Potential term bounded; full \u2212\u0394+V ess-self-adjoint still open.",
+      "notes": "Potential term bounded + ESA + dense range of non-real shifts PROVED. Full \u2212\u0394+V still needs Laplacian + continuous-V bridge.",
       "status": "proved",
       "book_badge": "V3-LEAN-RUN",
       "derived_register": "PROVED",
       "badge_force": null,
       "lean": [
         "Brockian.SpectralGate1.abs_primeGaussian_le_two",
-        "Brockian.SpectralGate1.primeGaussianMulCLM"
+        "Brockian.SpectralGate1.isSelfAdjoint_primeGaussianMulCLM",
+        "Brockian.Weyl.Gate1Bounded.primeGaussianMul_essentiallySelfAdjoint",
+        "Brockian.Weyl.Gate1Bounded.primeGaussianMul_dense_range_sub"
       ],
       "declarations": [
         {
@@ -908,11 +910,11 @@
           "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
         },
         {
-          "name": "Brockian.SpectralGate1.primeGaussianMulCLM",
-          "short": "primeGaussianMulCLM",
+          "name": "Brockian.SpectralGate1.isSelfAdjoint_primeGaussianMulCLM",
+          "short": "isSelfAdjoint_primeGaussianMulCLM",
           "module": "Brockian.SpectralGate1",
-          "kind": "def",
-          "register": "DEFINITION",
+          "kind": "theorem",
+          "register": "PROVED",
           "source": "Brockian/SpectralGate1.lean",
           "axioms_ok": true,
           "axle": {
@@ -921,11 +923,187 @@
           },
           "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
           "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+        },
+        {
+          "name": "Brockian.Weyl.Gate1Bounded.primeGaussianMul_essentiallySelfAdjoint",
+          "short": "primeGaussianMul_essentiallySelfAdjoint",
+          "module": "Brockian.Weyl.Gate1Bounded",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Gate1Bounded.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "Weyl campaign 2026-08-01 \u2014 Gate 1 potential ESA + Kato dense range on L2",
+          "provenance_note": "primeGaussianMul_essentiallySelfAdjoint; dense_range of non-real shifts; add_primeGaussian_* for any bounded SA free part. NOT full -Delta+V."
+        },
+        {
+          "name": "Brockian.Weyl.Gate1Bounded.primeGaussianMul_dense_range_sub",
+          "short": "primeGaussianMul_dense_range_sub",
+          "module": "Brockian.Weyl.Gate1Bounded",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Gate1Bounded.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "Weyl campaign 2026-08-01 \u2014 Gate 1 potential ESA + Kato dense range on L2",
+          "provenance_note": "primeGaussianMul_essentiallySelfAdjoint; dense_range of non-real shifts; add_primeGaussian_* for any bounded SA free part. NOT full -Delta+V."
         }
       ],
       "missing_lean": [],
-      "declaration_count": 2,
-      "proved_count": 1
+      "declaration_count": 4,
+      "proved_count": 4
+    },
+    {
+      "id": "WEYL-KATO",
+      "title": "Bounded Kato\u2013Rellich (self-adjoint sum + dense range of shifts)",
+      "book": "Lean Weyl.Kato (Aristotle c595862c)",
+      "notes": "Bounded free + bounded SA potential. Unbounded free still open.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Weyl.Kato.isSelfAdjoint_add",
+        "Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint",
+        "Brockian.Weyl.Gate1Bounded.add_primeGaussian_essentiallySelfAdjoint"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Weyl.Kato.isSelfAdjoint_add",
+          "short": "isSelfAdjoint_add",
+          "module": "Brockian.Weyl.Kato",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Kato.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "Aristotle proj c595862c \u2014 bounded Kato-Rellich; independently AXLE-verified @ 4.32",
+          "provenance_note": "isSelfAdjoint_add; dense_range_add_sub_of_selfAdjoint (ran((T+B)-z) dense for non-real z, T,B bounded self-adjoint, via resolvent). Statement fidelity diff-checked vs target (unchanged). Feeds the -Delta+V perturbation route."
+        },
+        {
+          "name": "Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint",
+          "short": "dense_range_add_sub_of_selfAdjoint",
+          "module": "Brockian.Weyl.Kato",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Kato.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "Aristotle proj c595862c \u2014 bounded Kato-Rellich; independently AXLE-verified @ 4.32",
+          "provenance_note": "isSelfAdjoint_add; dense_range_add_sub_of_selfAdjoint (ran((T+B)-z) dense for non-real z, T,B bounded self-adjoint, via resolvent). Statement fidelity diff-checked vs target (unchanged). Feeds the -Delta+V perturbation route."
+        },
+        {
+          "name": "Brockian.Weyl.Gate1Bounded.add_primeGaussian_essentiallySelfAdjoint",
+          "short": "add_primeGaussian_essentiallySelfAdjoint",
+          "module": "Brockian.Weyl.Gate1Bounded",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Gate1Bounded.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "Weyl campaign 2026-08-01 \u2014 Gate 1 potential ESA + Kato dense range on L2",
+          "provenance_note": "primeGaussianMul_essentiallySelfAdjoint; dense_range of non-real shifts; add_primeGaussian_* for any bounded SA free part. NOT full -Delta+V."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 3,
+      "proved_count": 3
+    },
+    {
+      "id": "WEYL-RADIUS-DICHOTOMY",
+      "title": "Corrected b\u2192\u221e radius dichotomy (mass positive somewhere)",
+      "book": "Lean Weyl.RadiusDichotomy (Aristotle 50ca67ca)",
+      "notes": "Includes counterexample to naive iff (1/0=0). Complements Weyl.Dichotomy.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_of_pos",
+        "Brockian.Weyl.RadiusDichotomy.radius_to_zero_of_mass_infinite",
+        "Brockian.Weyl.RadiusDichotomy.radius_pos_limit_of_mass_finite",
+        "Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_counterexample"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_of_pos",
+          "short": "radius_tendsto_zero_iff_of_pos",
+          "module": "Brockian.Weyl.RadiusDichotomy",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/RadiusDichotomy.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "Aristotle proj 50ca67ca \u2014 radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28)",
+          "provenance_note": "radius_tendsto_zero_iff_of_pos (corrected dichotomy r->0 <-> I->inf, given mass positive somewhere) + two directional thms + counterexample refuting my naive iff (1/0=0 junk trap). Aristotle caught the flaw honestly. One Tendsto.comp line ported 4.28->4.32."
+        },
+        {
+          "name": "Brockian.Weyl.RadiusDichotomy.radius_to_zero_of_mass_infinite",
+          "short": "radius_to_zero_of_mass_infinite",
+          "module": "Brockian.Weyl.RadiusDichotomy",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/RadiusDichotomy.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "Aristotle proj 50ca67ca \u2014 radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28)",
+          "provenance_note": "radius_tendsto_zero_iff_of_pos (corrected dichotomy r->0 <-> I->inf, given mass positive somewhere) + two directional thms + counterexample refuting my naive iff (1/0=0 junk trap). Aristotle caught the flaw honestly. One Tendsto.comp line ported 4.28->4.32."
+        },
+        {
+          "name": "Brockian.Weyl.RadiusDichotomy.radius_pos_limit_of_mass_finite",
+          "short": "radius_pos_limit_of_mass_finite",
+          "module": "Brockian.Weyl.RadiusDichotomy",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/RadiusDichotomy.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "Aristotle proj 50ca67ca \u2014 radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28)",
+          "provenance_note": "radius_tendsto_zero_iff_of_pos (corrected dichotomy r->0 <-> I->inf, given mass positive somewhere) + two directional thms + counterexample refuting my naive iff (1/0=0 junk trap). Aristotle caught the flaw honestly. One Tendsto.comp line ported 4.28->4.32."
+        },
+        {
+          "name": "Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_counterexample",
+          "short": "radius_tendsto_zero_iff_counterexample",
+          "module": "Brockian.Weyl.RadiusDichotomy",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/RadiusDichotomy.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "Aristotle proj 50ca67ca \u2014 radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28)",
+          "provenance_note": "negative result: identically-zero mass refutes the un-guarded iff (Lean 1/0=0). A real disproof, not a claim."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 4
     },
     {
       "id": "WEYL-GREEN",
@@ -1673,9 +1851,39 @@
     },
     {
       "id": "ARISTOTLE-BOUNDED-V",
-      "title": "General bounded-V \u21d2 limit-point at \u221e",
+      "title": "General bounded-V \u21d2 limit-point (original statement REFUTED)",
       "book": "aristotle/bounded-v-limitpoint \u00b7 project 17ad1895",
-      "notes": "Sorry-target; integrate only if AXLE+axioms+lint pass.",
+      "notes": "Aristotle refuted: Dirichlet potential counterexample. Corrected target is cont. bounded V (ARISTOTLE-BOUNDED-V-CONT).",
+      "status": "not_claimed",
+      "book_badge": "NOT-CLAIMED",
+      "derived_register": null,
+      "badge_force": "not_claimed",
+      "lean": [],
+      "declarations": [],
+      "missing_lean": [],
+      "declaration_count": 0,
+      "proved_count": 0
+    },
+    {
+      "id": "ARISTOTLE-BOUNDED-V-CONT",
+      "title": "Continuous bounded-V \u21d2 limit-point at \u221e",
+      "book": "aristotle/boundedv-continuous \u00b7 project 2204b385",
+      "notes": "Corrected after Dirichlet refutation; continuity required.",
+      "status": "aristotle",
+      "book_badge": "ARISTOTLE-PENDING",
+      "derived_register": null,
+      "badge_force": "aristotle",
+      "lean": [],
+      "declarations": [],
+      "missing_lean": [],
+      "declaration_count": 0,
+      "proved_count": 0
+    },
+    {
+      "id": "ARISTOTLE-BRIDGE",
+      "title": "No nonzero global-L\u00b2 solution at non-real \u03bb (deficiency bridge)",
+      "book": "aristotle/bridge-deficiency \u00b7 project 403cd5ed",
+      "notes": "Symmetric-form deficiency triviality for continuous bounded V.",
       "status": "aristotle",
       "book_badge": "ARISTOTLE-PENDING",
       "derived_register": null,
@@ -1688,18 +1896,36 @@
     },
     {
       "id": "ARISTOTLE-KATO",
-      "title": "Kato bounded perturbation / range density",
-      "book": "aristotle/kato-bounded \u00b7 project c595862c",
-      "notes": "Sorry-target for \u2212\u0394+V route.",
-      "status": "aristotle",
-      "book_badge": "ARISTOTLE-PENDING",
-      "derived_register": null,
-      "badge_force": "aristotle",
-      "lean": [],
-      "declarations": [],
+      "title": "Kato bounded perturbation (INTEGRATED)",
+      "book": "Brockian.Weyl.Kato \u2014 was aristotle/kato-bounded c595862c",
+      "notes": "Integrated and AXLE-verified; see WEYL-KATO.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint",
+          "short": "dense_range_add_sub_of_selfAdjoint",
+          "module": "Brockian.Weyl.Kato",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Kato.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "Aristotle proj c595862c \u2014 bounded Kato-Rellich; independently AXLE-verified @ 4.32",
+          "provenance_note": "isSelfAdjoint_add; dense_range_add_sub_of_selfAdjoint (ran((T+B)-z) dense for non-real z, T,B bounded self-adjoint, via resolvent). Statement fidelity diff-checked vs target (unchanged). Feeds the -Delta+V perturbation route."
+        }
+      ],
       "missing_lean": [],
-      "declaration_count": 0,
-      "proved_count": 0
+      "declaration_count": 1,
+      "proved_count": 1
     }
   ],
   "all_declarations": [
@@ -4586,6 +4812,83 @@
       }
     },
     {
+      "name": "Brockian.Weyl.Gate1Bounded.add_primeGaussian_dense_range_sub",
+      "module": "Brockian.Weyl.Gate1Bounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gate1Bounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Gate1Bounded.add_primeGaussian_essentiallySelfAdjoint",
+      "module": "Brockian.Weyl.Gate1Bounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gate1Bounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Gate1Bounded.add_primeGaussian_isSelfAdjoint",
+      "module": "Brockian.Weyl.Gate1Bounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gate1Bounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Gate1Bounded.primeGaussianMul_dense_range_sub",
+      "module": "Brockian.Weyl.Gate1Bounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gate1Bounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Gate1Bounded.primeGaussianMul_essentiallySelfAdjoint",
+      "module": "Brockian.Weyl.Gate1Bounded",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gate1Bounded.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint",
+      "module": "Brockian.Weyl.Kato",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Kato.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Kato.isSelfAdjoint_add",
+      "module": "Brockian.Weyl.Kato",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Kato.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.Weyl.LP.IsLimitPointAtInfty",
       "module": "Brockian.Weyl.LP",
       "register": "DEFINITION",
@@ -4822,6 +5125,50 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/Operator.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.RadiusDichotomy.radius_pos_limit_of_mass_finite",
+      "module": "Brockian.Weyl.RadiusDichotomy",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RadiusDichotomy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_counterexample",
+      "module": "Brockian.Weyl.RadiusDichotomy",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RadiusDichotomy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_of_pos",
+      "module": "Brockian.Weyl.RadiusDichotomy",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RadiusDichotomy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.RadiusDichotomy.radius_to_zero_of_mass_infinite",
+      "module": "Brockian.Weyl.RadiusDichotomy",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RadiusDichotomy.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"

@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 215,
+    "PROVED": 220,
     "DEFINITION": 69,
     "CONJECTURE": 2,
     "CONDITIONAL": 4
@@ -8126,6 +8126,166 @@
       "quarantine": true,
       "ledger_run": "Weyl capstone 2026-08-01 \u2014 EssentiallySelfAdjoint genuinely inhabited",
       "provenance_note": "every bounded self-adjoint A is EssentiallySelfAdjoint (deficiency spaces = bot); identity is a concrete non-degenerate witness. Closes the Operator agent's open blocker; connects to SpectralGate1 (the prime-Gaussian potential mult op is bounded self-adjoint => ess-self-adjoint). Unbounded -Delta+V still OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.Gate1Bounded.add_primeGaussian_dense_range_sub",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Gate1Bounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gate1Bounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 Gate 1 potential ESA + Kato dense range on L2",
+      "provenance_note": "primeGaussianMul_essentiallySelfAdjoint; dense_range of non-real shifts; add_primeGaussian_* for any bounded SA free part. NOT full -Delta+V."
+    },
+    {
+      "name": "Brockian.Weyl.Gate1Bounded.add_primeGaussian_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Gate1Bounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gate1Bounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 Gate 1 potential ESA + Kato dense range on L2",
+      "provenance_note": "primeGaussianMul_essentiallySelfAdjoint; dense_range of non-real shifts; add_primeGaussian_* for any bounded SA free part. NOT full -Delta+V."
+    },
+    {
+      "name": "Brockian.Weyl.Gate1Bounded.add_primeGaussian_isSelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Gate1Bounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gate1Bounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 Gate 1 potential ESA + Kato dense range on L2",
+      "provenance_note": "primeGaussianMul_essentiallySelfAdjoint; dense_range of non-real shifts; add_primeGaussian_* for any bounded SA free part. NOT full -Delta+V."
+    },
+    {
+      "name": "Brockian.Weyl.Gate1Bounded.primeGaussianMul_dense_range_sub",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Gate1Bounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gate1Bounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 Gate 1 potential ESA + Kato dense range on L2",
+      "provenance_note": "primeGaussianMul_essentiallySelfAdjoint; dense_range of non-real shifts; add_primeGaussian_* for any bounded SA free part. NOT full -Delta+V."
+    },
+    {
+      "name": "Brockian.Weyl.Gate1Bounded.primeGaussianMul_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Gate1Bounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gate1Bounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 Gate 1 potential ESA + Kato dense range on L2",
+      "provenance_note": "primeGaussianMul_essentiallySelfAdjoint; dense_range of non-real shifts; add_primeGaussian_* for any bounded SA free part. NOT full -Delta+V."
     },
     {
       "name": "Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint",

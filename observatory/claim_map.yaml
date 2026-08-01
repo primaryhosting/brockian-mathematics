@@ -168,8 +168,29 @@ claims:
     book: "Lean SpectralGate1; Gate 1 partial"
     lean:
       - Brockian.SpectralGate1.abs_primeGaussian_le_two
-      - Brockian.SpectralGate1.primeGaussianMulCLM
-    notes: "Potential term bounded; full −Δ+V ess-self-adjoint still open."
+      - Brockian.SpectralGate1.isSelfAdjoint_primeGaussianMulCLM
+      - Brockian.Weyl.Gate1Bounded.primeGaussianMul_essentiallySelfAdjoint
+      - Brockian.Weyl.Gate1Bounded.primeGaussianMul_dense_range_sub
+    notes: "Potential term bounded + ESA + dense range of non-real shifts PROVED. Full −Δ+V still needs Laplacian + continuous-V bridge."
+
+  - id: WEYL-KATO
+    title: Bounded Kato–Rellich (self-adjoint sum + dense range of shifts)
+    book: "Lean Weyl.Kato (Aristotle c595862c)"
+    lean:
+      - Brockian.Weyl.Kato.isSelfAdjoint_add
+      - Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint
+      - Brockian.Weyl.Gate1Bounded.add_primeGaussian_essentiallySelfAdjoint
+    notes: "Bounded free + bounded SA potential. Unbounded free still open."
+
+  - id: WEYL-RADIUS-DICHOTOMY
+    title: Corrected b→∞ radius dichotomy (mass positive somewhere)
+    book: "Lean Weyl.RadiusDichotomy (Aristotle 50ca67ca)"
+    lean:
+      - Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_of_pos
+      - Brockian.Weyl.RadiusDichotomy.radius_to_zero_of_mass_infinite
+      - Brockian.Weyl.RadiusDichotomy.radius_pos_limit_of_mass_finite
+      - Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_counterexample
+    notes: "Includes counterexample to naive iff (1/0=0). Complements Weyl.Dichotomy."
 
   # ── Weyl campaign ──────────────────────────────────────────────────────────
   - id: WEYL-GREEN
@@ -295,15 +316,29 @@ claims:
 
   # ── Aristotle in flight (honest open formalizations) ───────────────────────
   - id: ARISTOTLE-BOUNDED-V
-    title: General bounded-V ⇒ limit-point at ∞
+    title: General bounded-V ⇒ limit-point (original statement REFUTED)
     book: "aristotle/bounded-v-limitpoint · project 17ad1895"
     lean: []
-    badge_force: aristotle
-    notes: "Sorry-target; integrate only if AXLE+axioms+lint pass."
+    badge_force: not_claimed
+    notes: "Aristotle refuted: Dirichlet potential counterexample. Corrected target is cont. bounded V (ARISTOTLE-BOUNDED-V-CONT)."
 
-  - id: ARISTOTLE-KATO
-    title: Kato bounded perturbation / range density
-    book: "aristotle/kato-bounded · project c595862c"
+  - id: ARISTOTLE-BOUNDED-V-CONT
+    title: Continuous bounded-V ⇒ limit-point at ∞
+    book: "aristotle/boundedv-continuous · project 2204b385"
     lean: []
     badge_force: aristotle
-    notes: "Sorry-target for −Δ+V route."
+    notes: "Corrected after Dirichlet refutation; continuity required."
+
+  - id: ARISTOTLE-BRIDGE
+    title: No nonzero global-L² solution at non-real λ (deficiency bridge)
+    book: "aristotle/bridge-deficiency · project 403cd5ed"
+    lean: []
+    badge_force: aristotle
+    notes: "Symmetric-form deficiency triviality for continuous bounded V."
+
+  - id: ARISTOTLE-KATO
+    title: Kato bounded perturbation (INTEGRATED)
+    book: "Brockian.Weyl.Kato — was aristotle/kato-bounded c595862c"
+    lean:
+      - Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint
+    notes: "Integrated and AXLE-verified; see WEYL-KATO."
