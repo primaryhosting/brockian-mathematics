@@ -340,3 +340,33 @@ keep boundedv-continuous.)
   8 `CONDITIONAL` entries + 1 `CONJECTURE`, no stale target Prop containers detected.
   After concurrent proof commits through `ad024f0`, the refreshed audit reports 695 `PROVED`,
   182 `DEFINITION`, 10 `CONDITIONAL`, and 1 `CONJECTURE` over 888 registry entries.
+
+- 2026-08-01 — **Codex swarm #5 launched: bigger six-lane attack** (proof + upstream
+  infrastructure; disjoint write scopes, no root-import or registry-generation until integration).
+  Current shared audit before launch: 695 `PROVED`, 182 `DEFINITION`, 10 `CONDITIONAL`,
+  1 `CONJECTURE` over 888 registry entries. Existing dirty lanes left untouched:
+  `aristotle/kato-bounded/KatoBounded.lean` and `registry/attestations/WeylConfining.json`.
+  Active agents:
+  - Sagan (`019fbf12-4034-7b01-959e-e68a2b0b64f2`) — `Brockian/WeylWeakRegularityScaffold.lean`.
+    Target: narrow `WeakSolutionRegularity` / `DeficiencyRepresentsODE` to verified pairing,
+    domain, or ODE-representation lemmas. No edits to existing `WeylDeficiency*` files.
+  - Harvey (`019fbf12-571d-71f0-93c9-c787b00c893f`) — `Brockian/WeylFourierMultiplier.lean`.
+    Target: Fourier/free-Laplacian route, especially unitary-equivalence, range-density, or
+    multiplication-model lemmas toward the open Fourier multiplier input.
+  - Sartre (`019fbf12-73b0-74e0-9b4e-515a51f077d0`) — `Brockian/WeylKatoRangeDensity.lean`.
+    Target: bounded/small-norm/range-density lemmas toward `BoundedPerturbationTransfer`.
+    Must not touch `WeylKatoUnbounded.lean` or Aristotle's Kato file.
+  - Huygens (`019fbf12-d0a9-7c71-8a00-82b991c9b18c`) —
+    `Brockian/GoldbachCovarianceScaffold.lean`. Target: finite/local covariance-kernel
+    consequences that reduce pressure on `GoldbachCovarianceTransfer` without claiming
+    Goldbach or prime asymptotics.
+  - Cicero (`019fbf12-e639-7e02-8b11-d4b26df3cc9c`) —
+    `Brockian/EquidistributionFiniteScaffold.lean`. Target: finite/support/counting
+    consequences around `PrimePairAsymptotic` and admissible configurations; no HL/BV claim.
+  - Mill (`019fbf12-fc65-75a1-8835-a4c4647d8e73`) —
+    `docs/MATHLIB-PR-BLUEPRINTS.md` and optionally `scripts/list_upstream_decls.py`.
+    Target: PR-sized upstream extraction plan and dependency/import audit; no Lean proof edits.
+  Integration contract for this swarm: accept only hole-free files; run `no_theater_lint`;
+  AXLE-attest Lean modules at `lean-4.32.0`; for Gate-1/Weyl files also attempt
+  `lean-4.28.0`; import into `Brockian.lean` only after canonical attestation; commit by
+  explicit path only.
