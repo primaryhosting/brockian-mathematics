@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 200,
-    "DEFINITION": 63,
+    "PROVED": 185,
+    "DEFINITION": 65,
     "CONJECTURE": 2,
     "CONDITIONAL": 4
   },
@@ -5752,12 +5752,12 @@
       "provenance_note": "Wronskian/Abel constancy, Lagrange + integrated Green identity, Gate-0 witness. Full limit-point criterion OPEN (Mathlib 4.32 has no Sturm-Liouville/deficiency-index API) \u2014 see PORT-QUEUE."
     },
     {
-      "name": "Brockian.Weyl.Closure.adjoint_isClosed'",
+      "name": "Brockian.Weyl.Cayley.apply_ne_I_smul",
       "kind": "theorem",
-      "module": "Brockian.Weyl.Closure",
+      "module": "Brockian.Weyl.Cayley",
       "statement": "",
       "source": {
-        "file": "Brockian/Closure.lean"
+        "file": "Brockian/Cayley.lean"
       },
       "register": "PROVED",
       "axioms": [
@@ -5780,16 +5780,16 @@
       },
       "conditional_rung": null,
       "quarantine": true,
-      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
-      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 abstract von Neumann ess-self-adjointness criterion",
+      "provenance_note": "essentiallySelfAdjoint_iff: EssentiallySelfAdjoint T <-> ran(T+i),ran(T-i) both dense \u2014 the genuine von Neumann criterion, content = orthogonality identity ker(T*-z)=(ran(T-zbar))perp + Cayley isometry norm form. Abstract criterion only; applying it to the unbounded -Delta+V (range density) still OPEN."
     },
     {
-      "name": "Brockian.Weyl.Closure.adjoint_isClosed'",
+      "name": "Brockian.Weyl.Cayley.apply_ne_neg_I_smul",
       "kind": "theorem",
-      "module": "Brockian.Weyl.Closure",
+      "module": "Brockian.Weyl.Cayley",
       "statement": "",
       "source": {
-        "file": "Brockian/Closure.lean"
+        "file": "Brockian/Cayley.lean"
       },
       "register": "PROVED",
       "axioms": [
@@ -5812,11 +5812,255 @@
       },
       "conditional_rung": null,
       "quarantine": true,
-      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
-      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 abstract von Neumann ess-self-adjointness criterion",
+      "provenance_note": "essentiallySelfAdjoint_iff: EssentiallySelfAdjoint T <-> ran(T+i),ran(T-i) both dense \u2014 the genuine von Neumann criterion, content = orthogonality identity ker(T*-z)=(ran(T-zbar))perp + Cayley isometry norm form. Abstract criterion only; applying it to the unbounded -Delta+V (range density) still OPEN."
     },
     {
-      "name": "Brockian.Weyl.Closure.closure_eq_self_of_isClosed",
+      "name": "Brockian.Weyl.Cayley.deficiencySpace_eq_bot_iff",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 abstract von Neumann ess-self-adjointness criterion",
+      "provenance_note": "essentiallySelfAdjoint_iff: EssentiallySelfAdjoint T <-> ran(T+i),ran(T-i) both dense \u2014 the genuine von Neumann criterion, content = orthogonality identity ker(T*-z)=(ran(T-zbar))perp + Cayley isometry norm form. Abstract criterion only; applying it to the unbounded -Delta+V (range density) still OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.Cayley.essentiallySelfAdjoint_iff",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 abstract von Neumann ess-self-adjointness criterion",
+      "provenance_note": "essentiallySelfAdjoint_iff: EssentiallySelfAdjoint T <-> ran(T+i),ran(T-i) both dense \u2014 the genuine von Neumann criterion, content = orthogonality identity ker(T*-z)=(ran(T-zbar))perp + Cayley isometry norm form. Abstract criterion only; applying it to the unbounded -Delta+V (range density) still OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.Cayley.mem_orthogonal_rangeSMulSub_iff",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 abstract von Neumann ess-self-adjointness criterion",
+      "provenance_note": "essentiallySelfAdjoint_iff: EssentiallySelfAdjoint T <-> ran(T+i),ran(T-i) both dense \u2014 the genuine von Neumann criterion, content = orthogonality identity ker(T*-z)=(ran(T-zbar))perp + Cayley isometry norm form. Abstract criterion only; applying it to the unbounded -Delta+V (range density) still OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.Cayley.mem_rangeSMulSub",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 abstract von Neumann ess-self-adjointness criterion",
+      "provenance_note": "essentiallySelfAdjoint_iff: EssentiallySelfAdjoint T <-> ran(T+i),ran(T-i) both dense \u2014 the genuine von Neumann criterion, content = orthogonality identity ker(T*-z)=(ran(T-zbar))perp + Cayley isometry norm form. Abstract criterion only; applying it to the unbounded -Delta+V (range density) still OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.Cayley.norm_add_I_smul_eq",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 abstract von Neumann ess-self-adjointness criterion",
+      "provenance_note": "essentiallySelfAdjoint_iff: EssentiallySelfAdjoint T <-> ran(T+i),ran(T-i) both dense \u2014 the genuine von Neumann criterion, content = orthogonality identity ker(T*-z)=(ran(T-zbar))perp + Cayley isometry norm form. Abstract criterion only; applying it to the unbounded -Delta+V (range density) still OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.Cayley.rangeAddI",
+      "kind": "def",
+      "module": "Brockian.Weyl.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 abstract von Neumann ess-self-adjointness criterion",
+      "provenance_note": "essentiallySelfAdjoint_iff: EssentiallySelfAdjoint T <-> ran(T+i),ran(T-i) both dense \u2014 the genuine von Neumann criterion, content = orthogonality identity ker(T*-z)=(ran(T-zbar))perp + Cayley isometry norm form. Abstract criterion only; applying it to the unbounded -Delta+V (range density) still OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.Cayley.rangeSMulSub",
+      "kind": "def",
+      "module": "Brockian.Weyl.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 abstract von Neumann ess-self-adjointness criterion",
+      "provenance_note": "essentiallySelfAdjoint_iff: EssentiallySelfAdjoint T <-> ran(T+i),ran(T-i) both dense \u2014 the genuine von Neumann criterion, content = orthogonality identity ker(T*-z)=(ran(T-zbar))perp + Cayley isometry norm form. Abstract criterion only; applying it to the unbounded -Delta+V (range density) still OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.Cayley.rangeSubI",
+      "kind": "def",
+      "module": "Brockian.Weyl.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 abstract von Neumann ess-self-adjointness criterion",
+      "provenance_note": "essentiallySelfAdjoint_iff: EssentiallySelfAdjoint T <-> ran(T+i),ran(T-i) both dense \u2014 the genuine von Neumann criterion, content = orthogonality identity ker(T*-z)=(ran(T-zbar))perp + Cayley isometry norm form. Abstract criterion only; applying it to the unbounded -Delta+V (range density) still OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.adjoint_isClosed'",
       "kind": "theorem",
       "module": "Brockian.Weyl.Closure",
       "statement": "",
@@ -5908,99 +6152,7 @@
       "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
     },
     {
-      "name": "Brockian.Weyl.Closure.deficiencySet",
-      "kind": "def",
-      "module": "Brockian.Weyl.Closure",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Closure.lean"
-      },
-      "register": "DEFINITION",
-      "axioms": [],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
-      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
-    },
-    {
       "name": "Brockian.Weyl.Closure.inner_adjoint_left",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Closure",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Closure.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
-      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
-    },
-    {
-      "name": "Brockian.Weyl.Closure.inner_adjoint_left",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Closure",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Closure.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
-      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
-    },
-    {
-      "name": "Brockian.Weyl.Closure.isClosed_deficiencySet",
       "kind": "theorem",
       "module": "Brockian.Weyl.Closure",
       "statement": "",
@@ -6096,103 +6248,7 @@
       "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
     },
     {
-      "name": "Brockian.Weyl.Closure.mem_deficiencySet_iff_mem_deficiencySpace",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Closure",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Closure.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
-      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
-    },
-    {
       "name": "Brockian.Weyl.Closure.smulPMap_adjoint_isClosed",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Closure",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Closure.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
-      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
-    },
-    {
-      "name": "Brockian.Weyl.Closure.smulPMap_adjoint_isClosed",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Closure",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Closure.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
-      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
-    },
-    {
-      "name": "Brockian.Weyl.Closure.smulPMap_dense",
       "kind": "theorem",
       "module": "Brockian.Weyl.Closure",
       "statement": "",
@@ -6288,103 +6344,7 @@
       "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
     },
     {
-      "name": "Brockian.Weyl.Closure.smulPMap_isClosable",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Closure",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Closure.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
-      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
-    },
-    {
       "name": "Brockian.Weyl.Closure.symmetric_adjoint_eq",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Closure",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Closure.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
-      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
-    },
-    {
-      "name": "Brockian.Weyl.Closure.symmetric_adjoint_eq",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Closure",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Closure.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
-      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
-    },
-    {
-      "name": "Brockian.Weyl.Closure.symmetric_closure_le_adjoint",
       "kind": "theorem",
       "module": "Brockian.Weyl.Closure",
       "statement": "",
@@ -6480,103 +6440,7 @@
       "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
     },
     {
-      "name": "Brockian.Weyl.Closure.symmetric_domain_le_adjoint_domain",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Closure",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Closure.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
-      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
-    },
-    {
       "name": "Brockian.Weyl.Closure.symmetric_isClosable",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Closure",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Closure.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
-      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
-    },
-    {
-      "name": "Brockian.Weyl.Closure.symmetric_isClosable",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Closure",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Closure.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
-      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
-    },
-    {
-      "name": "Brockian.Weyl.Closure.symmetric_le_adjoint",
       "kind": "theorem",
       "module": "Brockian.Weyl.Closure",
       "statement": "",
@@ -6728,38 +6592,6 @@
       "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
     },
     {
-      "name": "Brockian.Weyl.Disk.boundary_L2_identity",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Disk",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Disk.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
-      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
-    },
-    {
       "name": "Brockian.Weyl.Disk.circleEq",
       "kind": "def",
       "module": "Brockian.Weyl.Disk",
@@ -6769,38 +6601,6 @@
       },
       "register": "DEFINITION",
       "axioms": [],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
-      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
-    },
-    {
-      "name": "Brockian.Weyl.Disk.circle_key",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Disk",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Disk.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -6881,70 +6681,6 @@
     },
     {
       "name": "Brockian.Weyl.Disk.green_identity_integral",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Disk",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Disk.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
-      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
-    },
-    {
-      "name": "Brockian.Weyl.Disk.green_identity_integral",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Disk",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Disk.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
-      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
-    },
-    {
-      "name": "Brockian.Weyl.Disk.integral_normSq_mono",
       "kind": "theorem",
       "module": "Brockian.Weyl.Disk",
       "statement": "",
@@ -7072,38 +6808,6 @@
       "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
     },
     {
-      "name": "Brockian.Weyl.Disk.radius_formula",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Disk",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Disk.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
-      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
-    },
-    {
       "name": "Brockian.Weyl.Disk.sturmL",
       "kind": "def",
       "module": "Brockian.Weyl.Disk",
@@ -7164,103 +6868,7 @@
       "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
     },
     {
-      "name": "Brockian.Weyl.Disk.weyl_disk_circle",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Disk",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Disk.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
-      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
-    },
-    {
       "name": "Brockian.Weyl.Disk.weyl_nested_circle",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Disk",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Disk.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
-      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
-    },
-    {
-      "name": "Brockian.Weyl.Disk.weyl_nested_circle",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Disk",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Disk.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
-      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
-    },
-    {
-      "name": "Brockian.Weyl.Disk.weyl_radius_antitone",
       "kind": "theorem",
       "module": "Brockian.Weyl.Disk",
       "statement": "",
@@ -7353,38 +6961,6 @@
     },
     {
       "name": "Brockian.Weyl.Disk.wronskian_hasDerivAt",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Disk",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Disk.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
-      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
-    },
-    {
-      "name": "Brockian.Weyl.Disk.wronskian_isConst",
       "kind": "theorem",
       "module": "Brockian.Weyl.Disk",
       "statement": "",

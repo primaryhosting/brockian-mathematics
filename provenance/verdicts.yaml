@@ -28,6 +28,14 @@ runs:
     ledger_run: "Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited"
     provenance_note: "every bounded self-adjoint A is EssentiallySelfAdjoint (deficiency spaces = bot); identity is a concrete non-degenerate witness. Closes the Operator agent's open blocker; connects to SpectralGate1 (the prime-Gaussian potential mult op is bounded self-adjoint => ess-self-adjoint). Unbounded -Delta+V still OPEN."
 
+  # ── Weyl capstone (Aug 1): the von Neumann ess-self-adjointness CRITERION ─────
+  "weyl-cayley":
+    module: Brockian.Weyl.Cayley
+    verdict: admit
+    quarantine: true
+    ledger_run: "Weyl capstone 2026-08-01 — abstract von Neumann ess-self-adjointness criterion"
+    provenance_note: "essentiallySelfAdjoint_iff: EssentiallySelfAdjoint T <-> ran(T+i),ran(T-i) both dense — the genuine von Neumann criterion, content = orthogonality identity ker(T*-z)=(ran(T-zbar))perp + Cayley isometry norm form. Abstract criterion only; applying it to the unbounded -Delta+V (range density) still OPEN."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   "GC":
     module: Brockian.GoldbachComb
