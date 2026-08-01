@@ -17,9 +17,9 @@ Current counts:
 
 | Register | Count |
 |---|---:|
-| `PROVED` | 534 |
-| `DEFINITION` | 154 |
-| `CONDITIONAL` | 8 |
+| `PROVED` | 695 |
+| `DEFINITION` | 182 |
+| `CONDITIONAL` | 10 |
 | `CONJECTURE` | 1 |
 
 All remaining `CONDITIONAL` and `CONJECTURE` entries are AXLE-verified in
@@ -29,7 +29,7 @@ by the open premise/container discipline, not by AXLE failure.
 
 ## Public Import Surface
 
-`Brockian.lean` imports 51 modules. The import list is a public aggregation
+`Brockian.lean` imports 60 modules. The import list is a public aggregation
 surface, not by itself a mathematical dependency proof. The relevant clusters are:
 
 - Arithmetic, sieve, singular series, and Goldbach: `Admissibility`,
@@ -52,6 +52,8 @@ surface, not by itself a mathematical dependency proof. The relevant clusters ar
 | `CONDITIONAL` | `Brockian.GoldbachSchema.goldbach_from_spectral_model` | `SpectralModel -> Goldbach beyond N0`; the spectral-model instantiation is Goldbach-strength and open. |
 | `CONDITIONAL` | `Brockian.GoldbachSchema.goldbach_beyond_of_model` | Existence of the model implies Goldbach beyond `N0`; the model existence is the open hardness direction. |
 | `CONDITIONAL` | `Brockian.RiemannScaffold.RH_of_BrockianSystem` | A Hilbert-Polya-strength `BrockianSystem` with the required real-spectrum and zeros-to-spectrum fields implies RH; the system is open and not shown instantiable. |
+| `CONDITIONAL` | `Brockian.Weyl.DeficiencyODE.deficiencyRepresentsODE_of_weakRegularity` | Reduces the concrete deficiency-to-ODE representation to `WeakSolutionRegularity`, a named 1D elliptic-regularity input absent from Mathlib. |
+| `CONDITIONAL` | `Brockian.Weyl.DeficiencyODE.schrodinger_essentiallySelfAdjoint_of_weakRegularity` | Concrete Schrodinger ESA follows from the same weak-regularity input plus the already proved deficiency/Bridge plumbing. |
 | `CONDITIONAL` | `Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fourier` | `-Delta` ESA depends on a Fourier unitary intertwining with unbounded `xi^2` multiplication and ESA for that unbounded model. |
 | `CONDITIONAL` | `Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb` | `T+B` ESA depends on `BoundedPerturbationTransfer`, the unbounded range-density transfer. |
 | `CONDITIONAL` | `Brockian.Weyl.SchrodingerMinimal.schrodinger_essentiallySelfAdjoint_of_ode` | Concrete `-d^2/dx^2+V` ESA depends on `deficiencyRepresentsODE`, the elliptic-regularity/ODE-identification input. |
@@ -81,6 +83,10 @@ vanishing identity, but the provenance says this does not alone construct the
 operator or prove ESA. `Weyl.SchrodingerESA` assembles Bridge + Cayley under
 `DeficiencyRepresentsODE`, and `Weyl.SchrodingerMinimal` reduces the concrete
 Schrodinger operator to the one named elliptic-regularity premise.
+`Weyl.DeficiencyODE` narrows that premise further: the concrete
+deficiency-to-ODE representation and the corresponding Schrodinger ESA theorem
+are conditional on `WeakSolutionRegularity`, the classical 1D weak-solution
+regularity fact not yet present in Mathlib.
 
 `Weyl.Confining` is a shape audit for the RH-operator direction: the registry
 records that bounded/decaying prime-Gaussian operators miss large zeta zeros and

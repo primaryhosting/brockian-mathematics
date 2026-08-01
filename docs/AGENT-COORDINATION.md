@@ -336,5 +336,7 @@ keep boundedv-continuous.)
   artifacts. Integration contract: review output → commit explicit paths only → no `git add -A`.
   Integrated at `95ac7e3`: all three artifacts reviewed and committed by explicit path only.
   Validation run: `python3 -m py_compile scripts/audit_registry_opens.py` and
-  `python3 scripts/audit_registry_opens.py`. Current open-surface audit reports 8 `CONDITIONAL`
-  entries + 1 `CONJECTURE`, no stale target Prop containers detected.
+  `python3 scripts/audit_registry_opens.py`. Integration-time open-surface audit reported
+  8 `CONDITIONAL` entries + 1 `CONJECTURE`, no stale target Prop containers detected.
+  After concurrent proof commits through `ad024f0`, the refreshed audit reports 695 `PROVED`,
+  182 `DEFINITION`, 10 `CONDITIONAL`, and 1 `CONJECTURE` over 888 registry entries.
