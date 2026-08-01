@@ -387,3 +387,12 @@ keep boundedv-continuous.)
   `module_verified`. Claude integrates via explicit-path commit + registry regen.
   Aristotle follow-up: `c6a46c07` (bridge-deficiency) DONE server-side but Harmonic API 500s on
   download (unretrievable — not integrated); `2204b385` (boundedv-continuous) still RUNNING.
+
+- 2026-08-01 — **Claude swarm #5 INTEGRATED** (all three, AXLE @4.32, axiom-clean, lint-clean, explicit-path commits):
+  - `PentagonalPartition` (`8d0cf50`) — Euler pentagonal numbers + injectivity (distinct PST exponents) + p(0)=1 vs Nat.Partition; full PST/recurrence OPEN; NO C5/D5 bridge claimed.
+  - `AdmissibilityKTuple` (`ccb0f92`) — general k-tuple count |A_q(H)|=q-|H| (refutes (q-1)^{k-1}); CRT lift; roadmap #14.
+  - `GaloisGeneralDegree` (`90e1f0e`) — **FULL general why-five**: [Q(2cos 2pi/p):Q]=(p-1)/2 for all odd primes + quadratic_iff_five_general. Closes the case GaloisWhyFive left open.
+  Registry now 726 PROVED / 186 DEFINITION / 10 CONDITIONAL / 1 CONJECTURE, 0 dups, 0 UNVERIFIED.
+  Aristotle c6a46c07 (bridge-deficiency) STILL 500 on download (Harmonic API outage, unretrievable);
+  2204b385 (boundedv-continuous) status per list above. Next open frontier for whoever's free:
+  confining⇒discrete-spectrum (Rellich, #6), general multi-factor CRT admissibility, full PST (Franklin).
