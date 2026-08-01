@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 714,
-    "DEFINITION": 185,
+    "PROVED": 724,
+    "DEFINITION": 186,
     "CONDITIONAL": 10,
     "CONJECTURE": 1
   },
@@ -226,6 +226,354 @@
       "quarantine": true,
       "ledger_run": "paper-audit target \u2014 CRT product |A_{q1q2}|=|A_q1|\u00b7|A_q2|; AXLE @4.32",
       "provenance_note": "general coprime CRT admissibility count = plain product (p-2)(q-2); REFUTES Paper_BV_Final \u00a76.1's correction factor (would give non-integer 5.25 for p=3,q=5)."
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues",
+      "kind": "def",
+      "module": "Brockian.AdmissibilityKTuple",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityKTuple.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 \u2014 general admissible k-tuple configuration count; AXLE @4.32",
+      "provenance_note": "General k-tuple admissible count over ZMod q: |A_q(H)| = q - |H| for arbitrary finite offset set H (LINEAR in q; definitively refutes the paper's superseded (q-1)^{k-1} guess). k=2 recovers q-2 via universal_admissibility_count; k=3 gives q-3; composite-modulus CRT lift (q1-|H1|)(q2-|H2|). NOT proved (explicit): HL admissibility criterion, iterated multi-factor CRT, singular-series/density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_card",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityKTuple",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityKTuple.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 \u2014 general admissible k-tuple configuration count; AXLE @4.32",
+      "provenance_note": "General k-tuple admissible count over ZMod q: |A_q(H)| = q - |H| for arbitrary finite offset set H (LINEAR in q; definitively refutes the paper's superseded (q-1)^{k-1} guess). k=2 recovers q-2 via universal_admissibility_count; k=3 gives q-3; composite-modulus CRT lift (q1-|H1|)(q2-|H2|). NOT proved (explicit): HL admissibility criterion, iterated multi-factor CRT, singular-series/density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_pair",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityKTuple",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityKTuple.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 \u2014 general admissible k-tuple configuration count; AXLE @4.32",
+      "provenance_note": "General k-tuple admissible count over ZMod q: |A_q(H)| = q - |H| for arbitrary finite offset set H (LINEAR in q; definitively refutes the paper's superseded (q-1)^{k-1} guess). k=2 recovers q-2 via universal_admissibility_count; k=3 gives q-3; composite-modulus CRT lift (q1-|H1|)(q2-|H2|). NOT proved (explicit): HL admissibility criterion, iterated multi-factor CRT, singular-series/density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_triple",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityKTuple",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityKTuple.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 \u2014 general admissible k-tuple configuration count; AXLE @4.32",
+      "provenance_note": "General k-tuple admissible count over ZMod q: |A_q(H)| = q - |H| for arbitrary finite offset set H (LINEAR in q; definitively refutes the paper's superseded (q-1)^{k-1} guess). k=2 recovers q-2 via universal_admissibility_count; k=3 gives q-3; composite-modulus CRT lift (q1-|H1|)(q2-|H2|). NOT proved (explicit): HL admissibility criterion, iterated multi-factor CRT, singular-series/density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_crt_card",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityKTuple",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityKTuple.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 \u2014 general admissible k-tuple configuration count; AXLE @4.32",
+      "provenance_note": "General k-tuple admissible count over ZMod q: |A_q(H)| = q - |H| for arbitrary finite offset set H (LINEAR in q; definitively refutes the paper's superseded (q-1)^{k-1} guess). k=2 recovers q-2 via universal_admissibility_count; k=3 gives q-3; composite-modulus CRT lift (q1-|H1|)(q2-|H2|). NOT proved (explicit): HL admissibility criterion, iterated multi-factor CRT, singular-series/density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_crt_card_pair",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityKTuple",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityKTuple.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 \u2014 general admissible k-tuple configuration count; AXLE @4.32",
+      "provenance_note": "General k-tuple admissible count over ZMod q: |A_q(H)| = q - |H| for arbitrary finite offset set H (LINEAR in q; definitively refutes the paper's superseded (q-1)^{k-1} guess). k=2 recovers q-2 via universal_admissibility_count; k=3 gives q-3; composite-modulus CRT lift (q1-|H1|)(q2-|H2|). NOT proved (explicit): HL admissibility criterion, iterated multi-factor CRT, singular-series/density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_pair_eq",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityKTuple",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityKTuple.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 \u2014 general admissible k-tuple configuration count; AXLE @4.32",
+      "provenance_note": "General k-tuple admissible count over ZMod q: |A_q(H)| = q - |H| for arbitrary finite offset set H (LINEAR in q; definitively refutes the paper's superseded (q-1)^{k-1} guess). k=2 recovers q-2 via universal_admissibility_count; k=3 gives q-3; composite-modulus CRT lift (q1-|H1|)(q2-|H2|). NOT proved (explicit): HL admissibility criterion, iterated multi-factor CRT, singular-series/density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissible_ktuple_count_five",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityKTuple",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityKTuple.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 \u2014 general admissible k-tuple configuration count; AXLE @4.32",
+      "provenance_note": "General k-tuple admissible count over ZMod q: |A_q(H)| = q - |H| for arbitrary finite offset set H (LINEAR in q; definitively refutes the paper's superseded (q-1)^{k-1} guess). k=2 recovers q-2 via universal_admissibility_count; k=3 gives q-3; composite-modulus CRT lift (q1-|H1|)(q2-|H2|). NOT proved (explicit): HL admissibility criterion, iterated multi-factor CRT, singular-series/density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissible_ktuple_count_three",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityKTuple",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityKTuple.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 \u2014 general admissible k-tuple configuration count; AXLE @4.32",
+      "provenance_note": "General k-tuple admissible count over ZMod q: |A_q(H)| = q - |H| for arbitrary finite offset set H (LINEAR in q; definitively refutes the paper's superseded (q-1)^{k-1} guess). k=2 recovers q-2 via universal_admissibility_count; k=3 gives q-3; composite-modulus CRT lift (q1-|H1|)(q2-|H2|). NOT proved (explicit): HL admissibility criterion, iterated multi-factor CRT, singular-series/density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.crt_filter_card",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityKTuple",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityKTuple.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 \u2014 general admissible k-tuple configuration count; AXLE @4.32",
+      "provenance_note": "General k-tuple admissible count over ZMod q: |A_q(H)| = q - |H| for arbitrary finite offset set H (LINEAR in q; definitively refutes the paper's superseded (q-1)^{k-1} guess). k=2 recovers q-2 via universal_admissibility_count; k=3 gives q-3; composite-modulus CRT lift (q1-|H1|)(q2-|H2|). NOT proved (explicit): HL admissibility criterion, iterated multi-factor CRT, singular-series/density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.mem_admissibleTupleResidues",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityKTuple",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityKTuple.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 \u2014 general admissible k-tuple configuration count; AXLE @4.32",
+      "provenance_note": "General k-tuple admissible count over ZMod q: |A_q(H)| = q - |H| for arbitrary finite offset set H (LINEAR in q; definitively refutes the paper's superseded (q-1)^{k-1} guess). k=2 recovers q-2 via universal_admissibility_count; k=3 gives q-3; composite-modulus CRT lift (q1-|H1|)(q2-|H2|). NOT proved (explicit): HL admissibility criterion, iterated multi-factor CRT, singular-series/density/asymptotics."
     },
     {
       "name": "Brockian.AffineSymmetry.additiveAutEquivUnits",

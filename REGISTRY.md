@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 10
 - **CONJECTURE**: 1
-- **DEFINITION**: 185
-- **PROVED**: 714
+- **DEFINITION**: 186
+- **PROVED**: 724
 
 ## Theorems
 
@@ -22,6 +22,17 @@
 | PROVED | `Brockian.Admissibility.CRT.admissibleResidues_crt_card` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
 | PROVED | `Brockian.Admissibility.CRT.admissibleResidues_crt_card_two_primes` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
 | PROVED | `Brockian.Admissibility.CRT.admissible_count_three_five` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
+| DEFINITION | `Brockian.AdmissibilityKTuple.admissibleTupleResidues` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_card` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_pair` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_triple` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_crt_card` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_crt_card_pair` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_pair_eq` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityKTuple.admissible_ktuple_count_five` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityKTuple.admissible_ktuple_count_three` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityKTuple.crt_filter_card` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityKTuple.mem_admissibleTupleResidues` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
 | DEFINITION | `Brockian.AffineSymmetry.additiveAutEquivUnits` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
 | PROVED | `Brockian.AffineSymmetry.additiveAut_card` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
 | PROVED | `Brockian.AffineSymmetry.additiveAut_card_five` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
