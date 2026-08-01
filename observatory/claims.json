@@ -1,33 +1,33 @@
 {
-  "generated_at": "2026-08-01T18:20:39Z",
+  "generated_at": "2026-08-01T18:27:05Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 389,
-      "DEFINITION": 125,
-      "CONJECTURE": 2,
-      "CONDITIONAL": 6
+      "PROVED": 416,
+      "DEFINITION": 136,
+      "CONDITIONAL": 9,
+      "CONJECTURE": 2
     }
   },
   "program": "Brockian Mathematics / Riemann Labs",
   "charter": "Badges are derived from the Lean registry when `lean` is non-empty.\nPROVED requires AXLE-verified + axiom-clean theorems (see README).\nOpen problems (twins infinitude, Goldbach global, RH) stay not_claimed.",
   "version": 1,
   "summary": {
-    "claims": 42,
+    "claims": 45,
     "by_status": {
-      "proved": 33,
+      "proved": 34,
       "open": 1,
       "conjecture": 1,
-      "conditional": 2,
+      "conditional": 4,
       "not_claimed": 4,
       "aristotle": 1
     },
     "registry": {
-      "PROVED": 389,
-      "DEFINITION": 125,
-      "CONJECTURE": 2,
-      "CONDITIONAL": 6
+      "PROVED": 416,
+      "DEFINITION": 136,
+      "CONDITIONAL": 9,
+      "CONJECTURE": 2
     }
   },
   "claims": [
@@ -2173,6 +2173,249 @@
       "proved_count": 4
     },
     {
+      "id": "GATE1-FREE-TRANSFER2",
+      "title": "Unbounded LinearPMap ESA transfer + discrete \u03be\u00b2 free model",
+      "book": "Lean Weyl.FreeLaplacian2 (Claude swarm 2026-08-01)",
+      "notes": "Reusable deficiency-space transfer across unitaries for possibly unbounded LinearPMaps; discrete mult-by-\u03be\u00b2 ESA proved. freeLaplacian_essentiallySelfAdjoint_of_fourier is a proved implication packaging the Fourier route \u2014 Mathlib Plancherel L\u00b2 unitary + unbounded mult ESA on R remain open hypotheses, not faked.",
+      "status": "conditional",
+      "book_badge": "CONDITIONAL",
+      "derived_register": "CONDITIONAL",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Weyl.FreeLaplacian2.essentiallySelfAdjoint_transfer",
+        "Brockian.Weyl.FreeLaplacian2.dense_map_iff",
+        "Brockian.Weyl.FreeLaplacian2.sqMult_essentiallySelfAdjoint",
+        "Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fourier"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Weyl.FreeLaplacian2.essentiallySelfAdjoint_transfer",
+          "short": "essentiallySelfAdjoint_transfer",
+          "module": "Brockian.Weyl.FreeLaplacian2",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/FreeLaplacian2.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+          "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
+        },
+        {
+          "name": "Brockian.Weyl.FreeLaplacian2.dense_map_iff",
+          "short": "dense_map_iff",
+          "module": "Brockian.Weyl.FreeLaplacian2",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/FreeLaplacian2.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+          "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
+        },
+        {
+          "name": "Brockian.Weyl.FreeLaplacian2.sqMult_essentiallySelfAdjoint",
+          "short": "sqMult_essentiallySelfAdjoint",
+          "module": "Brockian.Weyl.FreeLaplacian2",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/FreeLaplacian2.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+          "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
+        },
+        {
+          "name": "Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fourier",
+          "short": "freeLaplacian_essentiallySelfAdjoint_of_fourier",
+          "module": "Brockian.Weyl.FreeLaplacian2",
+          "kind": "theorem",
+          "register": "CONDITIONAL",
+          "source": "Brockian/FreeLaplacian2.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #1 \u2014 ESA transfer across unitary + \u03be\u00b2 mult model; AXLE @4.32",
+          "provenance_note": "-\u0394 ESA GIVEN a Fourier unitary intertwining with \u03be\u00b2-multiplication (ESA) \u2014 the transfer core discharges everything else; Fourier/unbounded-\u03be\u00b2 is the named open input."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 3
+    },
+    {
+      "id": "GATE1-SCHRODINGER-MINIMAL",
+      "title": "Concrete minimal Schr\u00f6dinger operator T = \u2212d\u00b2/dx\u00b2 + V on Schwartz core",
+      "book": "Lean Weyl.SchrodingerMinimal (Claude 2026-08-01)",
+      "notes": "Concrete schrodingerPMap constructed and proved dense+symmetric. schrodinger_essentiallySelfAdjoint_of_ode is CONDITIONAL (open) on DeficiencyRepresentsODE \u2014 elliptic regularity / Mathlib gap. Does not claim unconditional ESA of \u2212\u0394+V.",
+      "status": "conditional",
+      "book_badge": "CONDITIONAL",
+      "derived_register": "CONDITIONAL",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_isSymmetric",
+        "Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_dense",
+        "Brockian.Weyl.SchrodingerMinimal.schwartz_ibp2",
+        "Brockian.Weyl.SchrodingerMinimal.schrodinger_essentiallySelfAdjoint_of_ode"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_isSymmetric",
+          "short": "schrodingerPMap_isSymmetric",
+          "module": "Brockian.Weyl.SchrodingerMinimal",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/SchrodingerMinimal.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+          "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+        },
+        {
+          "name": "Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_dense",
+          "short": "schrodingerPMap_dense",
+          "module": "Brockian.Weyl.SchrodingerMinimal",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/SchrodingerMinimal.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+          "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+        },
+        {
+          "name": "Brockian.Weyl.SchrodingerMinimal.schwartz_ibp2",
+          "short": "schwartz_ibp2",
+          "module": "Brockian.Weyl.SchrodingerMinimal",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/SchrodingerMinimal.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+          "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+        },
+        {
+          "name": "Brockian.Weyl.SchrodingerMinimal.schrodinger_essentiallySelfAdjoint_of_ode",
+          "short": "schrodinger_essentiallySelfAdjoint_of_ode",
+          "module": "Brockian.Weyl.SchrodingerMinimal",
+          "kind": "theorem",
+          "register": "CONDITIONAL",
+          "source": "Brockian/SchrodingerMinimal.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+          "provenance_note": "ESA of the concrete -d\u00b2/dx\u00b2+V GIVEN deficiencyRepresentsODE (elliptic regularity, Mathlib-absent). Composes Bridge.no_nonzero_L2_solution + SchrodingerESA. Implication carries real work."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 3
+    },
+    {
+      "id": "SS-CONV",
+      "title": "Singular-series infinite product converges (unconditional positivity)",
+      "book": "Lean SingularSeries.Convergence (Claude 2026-08-01)",
+      "notes": "Discharges h_conv of singular_series_pos; the old singular_series_converges PORT-QUEUE axiom is now a genuine proof (\u2211|localFactor\u22121| via 1/p\u00b2 comparison).",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.SingularSeries.Convergence.singular_series_pos'",
+        "Brockian.SingularSeries.Convergence.singularSeriesFinite_tendsto_pos",
+        "Brockian.SingularSeries.Convergence.summable_localFactorAt_sub_one",
+        "Brockian.SingularSeries.Convergence.localFactor_sub_one_bound"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.SingularSeries.Convergence.singular_series_pos'",
+          "short": "singular_series_pos'",
+          "module": "Brockian.SingularSeries.Convergence",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Convergence.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #17 \u2014 infinite-product convergence; AXLE @4.32",
+          "provenance_note": "err_bound (uniform |(1-x)^k-(1-kx)|\u2264k\u00b2x\u00b2), uniform tail |localFactor-1|\u22642^k\u00b7k\u00b2/p\u00b2, summable via \u22111/p\u00b2, singularSeriesFinite_tendsto_pos (\u2203S>0), and singular_series_pos' UNCONDITIONAL. Discharges the h_conv that singular_series_pos assumed; the dropped singular_series_converges axiom is now a genuine proof."
+        },
+        {
+          "name": "Brockian.SingularSeries.Convergence.singularSeriesFinite_tendsto_pos",
+          "short": "singularSeriesFinite_tendsto_pos",
+          "module": "Brockian.SingularSeries.Convergence",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Convergence.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #17 \u2014 infinite-product convergence; AXLE @4.32",
+          "provenance_note": "err_bound (uniform |(1-x)^k-(1-kx)|\u2264k\u00b2x\u00b2), uniform tail |localFactor-1|\u22642^k\u00b7k\u00b2/p\u00b2, summable via \u22111/p\u00b2, singularSeriesFinite_tendsto_pos (\u2203S>0), and singular_series_pos' UNCONDITIONAL. Discharges the h_conv that singular_series_pos assumed; the dropped singular_series_converges axiom is now a genuine proof."
+        },
+        {
+          "name": "Brockian.SingularSeries.Convergence.summable_localFactorAt_sub_one",
+          "short": "summable_localFactorAt_sub_one",
+          "module": "Brockian.SingularSeries.Convergence",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Convergence.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #17 \u2014 infinite-product convergence; AXLE @4.32",
+          "provenance_note": "err_bound (uniform |(1-x)^k-(1-kx)|\u2264k\u00b2x\u00b2), uniform tail |localFactor-1|\u22642^k\u00b7k\u00b2/p\u00b2, summable via \u22111/p\u00b2, singularSeriesFinite_tendsto_pos (\u2203S>0), and singular_series_pos' UNCONDITIONAL. Discharges the h_conv that singular_series_pos assumed; the dropped singular_series_converges axiom is now a genuine proof."
+        },
+        {
+          "name": "Brockian.SingularSeries.Convergence.localFactor_sub_one_bound",
+          "short": "localFactor_sub_one_bound",
+          "module": "Brockian.SingularSeries.Convergence",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Convergence.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #17 \u2014 infinite-product convergence; AXLE @4.32",
+          "provenance_note": "err_bound (uniform |(1-x)^k-(1-kx)|\u2264k\u00b2x\u00b2), uniform tail |localFactor-1|\u22642^k\u00b7k\u00b2/p\u00b2, summable via \u22111/p\u00b2, singularSeriesFinite_tendsto_pos (\u2203S>0), and singular_series_pos' UNCONDITIONAL. Discharges the h_conv that singular_series_pos assumed; the dropped singular_series_converges axiom is now a genuine proof."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 4
+    },
+    {
       "id": "GATE1-RH-SHAPE",
       "title": "Bounded decaying potential is not a Hilbert\u2013P\u00f3lya spectral candidate",
       "book": "Lean Weyl.OperatorChoice (Grok 2026-08-01)",
@@ -2327,6 +2570,138 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/CRT.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AffineSymmetry.additiveAutEquivUnits",
+      "module": "Brockian.AffineSymmetry",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/AffineSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AffineSymmetry.additiveAut_card",
+      "module": "Brockian.AffineSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AffineSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AffineSymmetry.additiveAut_card_five",
+      "module": "Brockian.AffineSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AffineSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AffineSymmetry.affineGroup",
+      "module": "Brockian.AffineSymmetry",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/AffineSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AffineSymmetry.affinePerm",
+      "module": "Brockian.AffineSymmetry",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/AffineSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AffineSymmetry.dihAct",
+      "module": "Brockian.AffineSymmetry",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/AffineSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AffineSymmetry.dihedralToPerm",
+      "module": "Brockian.AffineSymmetry",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/AffineSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AffineSymmetry.dihedralToPerm_card",
+      "module": "Brockian.AffineSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AffineSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AffineSymmetry.dihedralToPerm_injective",
+      "module": "Brockian.AffineSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AffineSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AffineSymmetry.dihedralToPerm_range_le_affineGroup",
+      "module": "Brockian.AffineSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AffineSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AffineSymmetry.symmetry_separation",
+      "module": "Brockian.AffineSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AffineSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AffineSymmetry.units_isCyclic",
+      "module": "Brockian.AffineSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AffineSymmetry.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -3064,6 +3439,116 @@
       "register": "DEFINITION",
       "kind": "def",
       "source": "Brockian/D5Representation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Equidistribution.AsymptoticExists",
+      "module": "Brockian.Equidistribution",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Equidistribution.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Equidistribution.PrimePairAsymptotic",
+      "module": "Brockian.Equidistribution",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Equidistribution.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Equidistribution.asymptotic_shape_consistent",
+      "module": "Brockian.Equidistribution",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Equidistribution.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Equidistribution.configCount",
+      "module": "Brockian.Equidistribution",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Equidistribution.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Equidistribution.configCount_twelve_five_two_one",
+      "module": "Brockian.Equidistribution",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Equidistribution.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Equidistribution.configCount_twenty_five_two_two",
+      "module": "Brockian.Equidistribution",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Equidistribution.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Equidistribution.equidistribution_of_asymptotic",
+      "module": "Brockian.Equidistribution",
+      "register": "CONDITIONAL",
+      "kind": "theorem",
+      "source": "Brockian/Equidistribution.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Equidistribution.equidistribution_of_asymptotic_exists",
+      "module": "Brockian.Equidistribution",
+      "register": "CONDITIONAL",
+      "kind": "theorem",
+      "source": "Brockian/Equidistribution.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Equidistribution.prime_pair_config_admissible",
+      "module": "Brockian.Equidistribution",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Equidistribution.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Equidistribution.totalConfigCount",
+      "module": "Brockian.Equidistribution",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Equidistribution.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -4923,6 +5408,72 @@
       "register": "CONDITIONAL",
       "kind": "theorem",
       "source": "Brockian/SingularSeries.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Convergence.err_bound",
+      "module": "Brockian.SingularSeries.Convergence",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Convergence.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Convergence.localFactor_sub_one_bound",
+      "module": "Brockian.SingularSeries.Convergence",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Convergence.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Convergence.nu_p_eq_card_of_lt",
+      "module": "Brockian.SingularSeries.Convergence",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Convergence.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Convergence.singularSeriesFinite_tendsto_pos",
+      "module": "Brockian.SingularSeries.Convergence",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Convergence.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Convergence.singular_series_pos'",
+      "module": "Brockian.SingularSeries.Convergence",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Convergence.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Convergence.summable_localFactorAt_sub_one",
+      "module": "Brockian.SingularSeries.Convergence",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Convergence.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -6914,6 +7465,149 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/FreeLaplacian.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.conjCLM_essentiallySelfAdjoint",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian2.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.conjCLM_toPMap_essentiallySelfAdjoint_iff",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian2.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.dense_map_iff",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian2.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.essentiallySelfAdjoint_transfer",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian2.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fourier",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "register": "CONDITIONAL",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian2.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.isSelfAdjoint_diagonal",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian2.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.isSelfAdjoint_multCLM",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian2.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.multCLM",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/FreeLaplacian2.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.multCLM_essentiallySelfAdjoint",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian2.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.rangeSMulSub_image",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian2.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.sqMultCLM",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/FreeLaplacian2.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.sqMult_conj_essentiallySelfAdjoint",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian2.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian2.sqMult_essentiallySelfAdjoint",
+      "module": "Brockian.Weyl.FreeLaplacian2",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian2.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"

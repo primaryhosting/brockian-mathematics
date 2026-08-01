@@ -1,6 +1,6 @@
 # Agent Coordination Queue
 
-Current checkpoint: 2026-08-01, after `bcdfd5a`.
+Current checkpoint: 2026-08-01, after integrator wire of FreeLaplacian2 + EquidistributionSchema + AffineSymmetry.
 
 This file is the shared handoff surface for Claude, Codex, Grok, Aristotle downloads,
 and any fresh proof agent.  Use it to avoid duplicate work and to keep the next attacks
@@ -222,3 +222,86 @@ keep boundedv-continuous.)
   Attestations: `registry/attestations/WeylFreeLaplacian.json`,
   `registry/attestations/WeylOperatorChoice.json`. Do not overwrite these two files
   without re-attesting.
+
+- 2026-08-01 — **Claude ships `WeylSelfAdjointExtension`** (queue #4, roadmap item #4).
+  AXLE-verified @ lean-4.32.0, all 15 declarations axiom-clean
+  {propext, Classical.choice, Quot.sound}, no-theater lint clean, imported in
+  `Brockian.lean`. Canonical file `Brockian/WeylSelfAdjointExtension.lean`
+  (namespace `Brockian.Weyl.Extension`), attestation
+  `registry/attestations/WeylSelfAdjointExtension.json`. Highlights:
+  `adjoint_closure` (`(T̄)* = T*`, the closure-blindness of the graph-adjoint),
+  `closure_isSymmetric` (closure of symmetric is symmetric — no graph-limit needed),
+  `closure_eigenvalue_im_zero` (real spectrum of `T̄`), `le_closure_le_adjoint`
+  (`T ⊆ T̄ ⊆ T*`), `closure_le_of_isSelfAdjoint_extension` (`T̄` minimal among
+  self-adjoint extensions), and the crisp Gate-isolator
+  `isSelfAdjoint_closure_iff_eq_adjoint` (**`T̄` self-adjoint ⟺ `T̄ = T*`**).
+  Does **NOT** prove `T̄ = T*` / strict uniqueness `S = T̄`: both reduce to the reverse
+  inclusion `T* ⊆ T̄`, i.e. the double-adjoint `T̄ = T** ` + "deficiency-free ⟹
+  self-adjoint" von Neumann fact absent from Mathlib v4.32.0. Blocker named, not faked.
+  Do not overwrite without re-attesting.
+
+- 2026-08-01 — **Claude ships `SingularSeriesConvergence`** (roadmap item #17, the dropped
+  `singular_series_converges` PORT-QUEUE axiom). AXLE-verified @ lean-4.32.0, all 6
+  declarations axiom-clean {propext, Classical.choice, Quot.sound}, no-theater lint clean.
+  Canonical file `Brockian/SingularSeriesConvergence.lean` (namespace
+  `Brockian.SingularSeries.Convergence`), attestation
+  `registry/attestations/SingularSeriesConvergence.json`. The analytic ∞-product convergence
+  is now PROVED, not axiomatized. Chain: `err_bound` (`|(1-x)^k-(1-kx)| ≤ k²x²`,
+  elementary induction) → `nu_p_eq_card_of_lt` (residue map injective for large `p`, so
+  `ν=k` on the tail) → `localFactor_sub_one_bound` (uniform tail bound
+  `|localFactor p − 1| ≤ 2^k·k²/p²`) → `summable_localFactorAt_sub_one` (comparison with
+  `∑ 1/p²`, small primes shifted past via `summable_nat_add_iff`) →
+  `singularSeriesFinite_tendsto_pos` (multipliable via `Real.multipliable_of_summable_log`;
+  limit `= rexp(∑ log …) > 0` via `Real.rexp_tsum_eq_tprod`) → **UNCONDITIONAL**
+  `singular_series_pos'` (discharges the `h_conv` hypothesis of the existing
+  `singular_series_pos`; admissibility alone now gives `0 < singularSeries G`). Does **not**
+  touch `Brockian/SingularSeries.lean` (only imports it). NOT yet imported in `Brockian.lean`
+  / registry (no git per task). Do not overwrite without re-attesting.
+
+- 2026-08-01 — **Grok swarm #2** claims the following *new* files only (do not take these):
+  - `Brockian/D5Isotypic.lean` — rotation eigenmodes + isotypic projectors on Fin 5 → ℂ
+  - `Brockian/WeylConfining.lean` — confining-potential necessary lemmas (not RH)
+  - `Brockian/WeylMulReal.lean` — real L∞ multiplication ESA (bounded free/potential model)
+  - `Brockian/GoldbachParity.lean` — small unconditional Goldbach/parity lemmas if hole-free
+  - `Brockian/CycleSpectrumFamily.lean` — C_n spectrum family (not MetallicFamily.lean)
+  - Integrator task: wire already-attested `SingularSeriesConvergence` + `WeylFreeLaplacian2`
+    into `Brockian.lean` + registry if not already integrated (surgical; no content rewrite).
+  Do **not** touch: WeylSchrodingerMinimal, MetallicFamily, WeylKatoUnbounded, FreeLaplacian
+  (canonical Grok), OperatorChoice (canonical Grok), or any file with an active Claude claim.
+
+- 2026-08-01 — **Claude ships `AffineSymmetry`** (paper audit target #3: retires the
+  Papers 2 & 4 automorphism-conflation error). AXLE-verified @ lean-4.32.0, all 12
+  declarations axiom-clean {propext, Classical.choice, Quot.sound}, no-theater lint clean.
+  Canonical file `Brockian/AffineSymmetry.lean` (namespace `Brockian.AffineSymmetry`),
+  attestation `registry/attestations/AffineSymmetry.json`. Cleanly SEPARATES the three
+  conflated groups:
+  - **additive-aut** `AddAut (ZMod p) ≃+ Additive (ZMod p)ˣ ≅ C_{p-1}` (`additiveAutEquivUnits`,
+    Mathlib `ZMod.AddAutEquivUnits`); order `p-1` general (`additiveAut_card`), `= 4` at p=5
+    (`additiveAut_card_five`); cyclic (`units_isCyclic`). This is mult-by-a-unit — NOT `D_p`.
+  - **graph-aut** `C₅ ≃g C₅ ≅ D₅` order 10 — references `Automorphism.Full.aut_card_eq_ten`.
+  - **±1-affine dihedral** `dihedralToPerm : DihedralGroup p →* Equiv.Perm (ZMod p)`
+    (`i ↦ ±i+c`), faithful (`dihedralToPerm_injective`, needs `(2:ZMod p)≠0`), order `2p`
+    (`dihedralToPerm_card`), living inside `Aff(1,F_p)` (`affineGroup`,
+    `dihedralToPerm_range_le_affineGroup`). THIS is the map the papers actually meant.
+  - `symmetry_separation`: orders 4 / 10 / 10 with `4 ≠ 10` — the additive-aut is NOT `D₅`.
+  Imports `Brockian.AutomorphismFull` only (reuses the completed `Aut(C₅) ≅ D₅`); touches no
+  other agent's file. NOT yet imported in `Brockian.lean` / registry (no git per task).
+  Do not overwrite without re-attesting.
+
+- 2026-08-01 — **INTEGRATOR (Grok) wires AXLE-attested modules into public surface** (import-only; no proof rewrites).
+  Root imports added/confirmed in `Brockian.lean`:
+  - `Brockian.SingularSeriesConvergence` (already present; registry already had 6 PROVED)
+  - `Brockian.WeylFreeLaplacian2` (**new** import; attestation `WeylFreeLaplacian2.json`)
+  - `Brockian.EquidistributionSchema` (**new** import; attestation `EquidistributionSchema.json`;
+    HL/BV ⇒ density theorems marked CONDITIONAL open via provenance)
+  - `Brockian.AffineSymmetry` (**new** import; attestation `AffineSymmetry.json`)
+  Previously integrated and re-confirmed present: MetallicFamily, WeylKatoUnbounded,
+  WeylSelfAdjointExtension, AdmissibilityCRT, PenroseL2, WeylSchrodingerMinimal, D5Representation.
+  **Not imported:** `CycleSpectrumFamily` (no attestation yet); never touch
+  `aristotle/kato-bounded/KatoBounded.lean`. Regenerated registry / claims / observatory /
+  paper tables. claim_map: SS-CONV, GATE1-FREE-TRANSFER2, GATE1-SCHRODINGER-MINIMAL.
+  Concurrent landings while integrating (already on main): `2a51d5c` FreeLaplacian2+EquidistributionSchema,
+  `13d9602` AffineSymmetry (+ accidental `WeylMulReal` root import without attestation/file).
+  Integrator removed `import Brockian.WeylMulReal` (no `module_verified` attestation; file still untracked
+  for the owning agent). Public PROVED: 395 → 416 (+21 from FreeLaplacian2/Equidistribution/Affine).
+

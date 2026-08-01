@@ -372,6 +372,36 @@ claims:
       - Brockian.Weyl.FreeLaplacian.id_essentiallySelfAdjoint
     notes: "Bounded-cutoff Fourier model only. Unbounded −Δ and range-density Kato open."
 
+  - id: GATE1-FREE-TRANSFER2
+    title: Unbounded LinearPMap ESA transfer + discrete ξ² free model
+    book: "Lean Weyl.FreeLaplacian2 (Claude swarm 2026-08-01)"
+    lean:
+      - Brockian.Weyl.FreeLaplacian2.essentiallySelfAdjoint_transfer
+      - Brockian.Weyl.FreeLaplacian2.dense_map_iff
+      - Brockian.Weyl.FreeLaplacian2.sqMult_essentiallySelfAdjoint
+      - Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fourier
+    notes: "Reusable deficiency-space transfer across unitaries for possibly unbounded LinearPMaps; discrete mult-by-ξ² ESA proved. freeLaplacian_essentiallySelfAdjoint_of_fourier is a proved implication packaging the Fourier route — Mathlib Plancherel L² unitary + unbounded mult ESA on R remain open hypotheses, not faked."
+
+  - id: GATE1-SCHRODINGER-MINIMAL
+    title: Concrete minimal Schrödinger operator T = −d²/dx² + V on Schwartz core
+    book: "Lean Weyl.SchrodingerMinimal (Claude 2026-08-01)"
+    lean:
+      - Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_isSymmetric
+      - Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_dense
+      - Brockian.Weyl.SchrodingerMinimal.schwartz_ibp2
+      - Brockian.Weyl.SchrodingerMinimal.schrodinger_essentiallySelfAdjoint_of_ode
+    notes: "Concrete schrodingerPMap constructed and proved dense+symmetric. schrodinger_essentiallySelfAdjoint_of_ode is CONDITIONAL (open) on DeficiencyRepresentsODE — elliptic regularity / Mathlib gap. Does not claim unconditional ESA of −Δ+V."
+
+  - id: SS-CONV
+    title: Singular-series infinite product converges (unconditional positivity)
+    book: "Lean SingularSeries.Convergence (Claude 2026-08-01)"
+    lean:
+      - Brockian.SingularSeries.Convergence.singular_series_pos'
+      - Brockian.SingularSeries.Convergence.singularSeriesFinite_tendsto_pos
+      - Brockian.SingularSeries.Convergence.summable_localFactorAt_sub_one
+      - Brockian.SingularSeries.Convergence.localFactor_sub_one_bound
+    notes: "Discharges h_conv of singular_series_pos; the old singular_series_converges PORT-QUEUE axiom is now a genuine proof (∑|localFactor−1| via 1/p² comparison)."
+
   - id: GATE1-RH-SHAPE
     title: Bounded decaying potential is not a Hilbert–Pólya spectral candidate
     book: "Lean Weyl.OperatorChoice (Grok 2026-08-01)"

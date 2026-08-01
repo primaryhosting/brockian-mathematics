@@ -36,7 +36,7 @@ concrete circulant/Laplacian eigenvalues and independently AXLE-verified, axiom-
 
 | Result | Source | Reason |
 |--------|--------|--------|
-| `singular_series_converges` | SingularSeries source | shipped as an `axiom` in source (analytic ∞-product convergence); dropped, surfaced as the `h_conv` hypothesis of `singular_series_pos` instead. Needs Mathlib ∑1/p² summability. |
+| ~~`singular_series_converges`~~ | SingularSeries source | **RESOLVED 2026-08-01** — proved in `Brockian.SingularSeries.Convergence` (`singularSeriesFinite_tendsto_pos`, `singular_series_pos'`); discharges `h_conv`. |
 | CA-6..CA-9 (`H4_golden_ground`, `twin_lag_support`, `twin_kernel_cases`) | ConstellationAlphabet.lean | spectral-alphabet / general-prime number theory; `sorry` targets in source, out of the TransitionKernel remit. |
 | `cos_5theta`, `golden_ratio_necessity`, `golden_is_geometric_invariant` | GoldenRatio.lean | Chebyshev-quintic / matrix-power arguments left as `sorry` in source. |
 
@@ -48,7 +48,7 @@ nothing was excluded. What genuinely verified is registered; what remains open i
 
 | Target | Verified this round | Still open |
 |--------|--------------------|-----------|
-| **Weyl / Gate 1** | Bridge + Cayley + Chain + Kato + Gate1Bounded + **SchrodingerESA assembly** + **FreeLaplacian** (unitary ESA transfer, Kato symmetry half) + **OperatorChoice** (bounded decaying V cannot realise large Hilbert–Pólya eigenvalues) | **Still open:** construct minimal `T=−Δ+V` and discharge `DeficiencyRepresentsODE` (Claude: `WeylSchrodingerMinimal`); continuous bounded-V ⇒ limit-point; unbounded −Δ; full unbounded Kato range-density. |
+| **Weyl / Gate 1** | Bridge + Cayley + Chain + Kato + Gate1Bounded + **SchrodingerESA assembly** + **FreeLaplacian** / **FreeLaplacian2** (bounded + unbounded ESA transfer, discrete ξ² model) + **SchrodingerMinimal** (concrete `T` dense+symmetric) + **OperatorChoice** (bounded decaying V cannot realise large Hilbert–Pólya eigenvalues) + KatoUnbounded / Extension | **Still open:** discharge `DeficiencyRepresentsODE` for concrete `T`; continuous bounded-V ⇒ limit-point; Mathlib Plancherel L² unitary for free −Δ; full unbounded Kato range-density. |
 | **Goldbach** | `goldbach_from_spectral_model` (real implication, CONDITIONAL/open), singular-series factor lemmas, small base cases (`GoldbachSchema`, `GoldbachLemmas`) | instantiating a `SpectralModel` non-trivially — that is Goldbach-strength |
 | **Riemann Hypothesis** | the ξ-bridge (unconditional: `riemannXi`, Γ-nonvanishing, ξ-zero-from-ζ-zero, ξ-RH ⇒ Mathlib RH), `RH_of_BrockianSystem` (CONDITIONAL/open) (`RiemannScaffold`) | inhabiting `BrockianSystem` — a densely-defined symmetric operator with real spectrum whose eigenvalues realise the ζ-zeros. Hilbert–Pólya-strength. Not shown instantiable, and (crucially) not provably empty — so the conditional is an honest open schema, not ex-falso |
 
