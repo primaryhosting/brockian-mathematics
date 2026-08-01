@@ -255,13 +255,13 @@
 | PROVED | `Brockian.Weyl.Disk.wronskian_hasDerivAt` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | PROVED | `Brockian.Weyl.Disk.wronskian_isConst` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | PROVED | `Brockian.Weyl.Disk.wronskian_isConst` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
-| PROVED | `Brockian.Weyl.ESA.clm_deficiency_eq_bot` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.ESA.clm_dense` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.ESA.clm_domain` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.ESA.clm_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.ESA.clm_isSymmetric` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.ESA.id_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.ESA.vec_eq_zero_of_inner` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ESA.clm_deficiency_eq_bot` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
+| PROVED | `Brockian.Weyl.ESA.clm_dense` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
+| PROVED | `Brockian.Weyl.ESA.clm_domain` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
+| PROVED | `Brockian.Weyl.ESA.clm_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
+| PROVED | `Brockian.Weyl.ESA.clm_isSymmetric` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
+| PROVED | `Brockian.Weyl.ESA.id_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
+| PROVED | `Brockian.Weyl.ESA.vec_eq_zero_of_inner` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
 | DEFINITION | `Brockian.Weyl.LP.IsLimitPointAtInfty` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |
 | DEFINITION | `Brockian.Weyl.LP.IsSolutionOn` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |
 | DEFINITION | `Brockian.Weyl.LP.L2NearInfty` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |

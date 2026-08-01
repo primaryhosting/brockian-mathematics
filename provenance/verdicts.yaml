@@ -20,6 +20,14 @@ runs:
     ledger_run: "74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2"
     provenance_note: "citation-grade ZMod q−ν law; q=3→1 (twin), q=5→3 (Brockian)"
 
+  # ── Weyl capstone (Aug 1): essential self-adjointness INHABITED ──────────────
+  "weyl-esa":
+    module: Brockian.Weyl.ESA
+    verdict: admit
+    quarantine: true
+    ledger_run: "Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited"
+    provenance_note: "every bounded self-adjoint A is EssentiallySelfAdjoint (deficiency spaces = bot); identity is a concrete non-degenerate witness. Closes the Operator agent's open blocker; connects to SpectralGate1 (the prime-Gaussian potential mult op is bounded self-adjoint => ess-self-adjoint). Unbounded -Delta+V still OPEN."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   "GC":
     module: Brockian.GoldbachComb
