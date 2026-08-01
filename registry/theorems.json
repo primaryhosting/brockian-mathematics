@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 254,
-    "DEFINITION": 75,
+    "PROVED": 274,
+    "DEFINITION": 80,
     "CONJECTURE": 2,
     "CONDITIONAL": 4
   },
@@ -9108,6 +9108,382 @@
       "provenance_note": "every bounded self-adjoint A is EssentiallySelfAdjoint (deficiency spaces = bot); identity is a concrete non-degenerate witness. Closes the Operator agent's open blocker; connects to SpectralGate1 (the prime-Gaussian potential mult op is bounded self-adjoint => ess-self-adjoint). Unbounded -Delta+V still OPEN."
     },
     {
+      "name": "Brockian.Weyl.FreeLaplacian.FreeLaplacianModel",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.conjCLM",
+      "kind": "def",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.dense_domain_vadd_clm",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.essentiallySelfAdjoint_conjCLM",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.essentiallySelfAdjoint_conj_id",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.id_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.identityFreeModel",
+      "kind": "def",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.inner_map_symm",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.inner_symm_map",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.isSelfAdjoint_conjCLM",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.isSymmetric_vadd_clm",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.vadd_clm_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreeLaplacian.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.Weyl.Gate1Bounded.add_primeGaussian_dense_range_sub",
       "kind": "theorem",
       "module": "Brockian.Weyl.Gate1Bounded",
@@ -10006,6 +10382,410 @@
       "quarantine": true,
       "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
       "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.ConfiningPotentialCandidate",
+      "kind": "def",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OperatorChoice.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.DecayingPotentialCandidate",
+      "kind": "def",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OperatorChoice.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.brockian_eigenvalue_norm",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OperatorChoice.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.norm_eigenvalue_le_of_bound",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OperatorChoice.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.norm_eigenvalue_le_opNorm",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OperatorChoice.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.norm_primeGaussianMulCLM_le",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OperatorChoice.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.not_eigenvalue_of_bound_lt",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OperatorChoice.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.not_realize_zero_of_bound_lt",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OperatorChoice.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.not_realize_zero_of_toPMap",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OperatorChoice.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.primeGaussianMulCLM_opNorm_le_two",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OperatorChoice.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.primeGaussian_decaying",
+      "kind": "def",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OperatorChoice.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.primeGaussian_not_realize_large_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OperatorChoice.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.rh_operator_needs_unbounded_spectrum",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OperatorChoice.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.Weyl.RadiusDichotomy.radius_pos_limit_of_mass_finite",

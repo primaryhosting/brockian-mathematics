@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 4
 - **CONJECTURE**: 2
-- **DEFINITION**: 75
-- **PROVED**: 254
+- **DEFINITION**: 80
+- **PROVED**: 274
 
 ## Theorems
 
@@ -308,6 +308,18 @@
 | PROVED | `Brockian.Weyl.ESA.clm_isSymmetric` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
 | PROVED | `Brockian.Weyl.ESA.id_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
 | PROVED | `Brockian.Weyl.ESA.vec_eq_zero_of_inner` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
+| PROVED | `Brockian.Weyl.FreeLaplacian.FreeLaplacianModel` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.FreeLaplacian.conjCLM` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FreeLaplacian.dense_domain_vadd_clm` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FreeLaplacian.essentiallySelfAdjoint_conjCLM` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FreeLaplacian.essentiallySelfAdjoint_conj_id` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FreeLaplacian.id_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.FreeLaplacian.identityFreeModel` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FreeLaplacian.inner_map_symm` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FreeLaplacian.inner_symm_map` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FreeLaplacian.isSelfAdjoint_conjCLM` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FreeLaplacian.isSymmetric_vadd_clm` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FreeLaplacian.vadd_clm_domain` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.Gate1Bounded.add_primeGaussian_dense_range_sub` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2 |
 | PROVED | `Brockian.Weyl.Gate1Bounded.add_primeGaussian_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2 |
 | PROVED | `Brockian.Weyl.Gate1Bounded.add_primeGaussian_isSelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2 |
@@ -337,6 +349,19 @@
 | DEFINITION | `Brockian.Weyl.Operator.smulPMap` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
 | PROVED | `Brockian.Weyl.Operator.smulPMap_domain` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
 | PROVED | `Brockian.Weyl.Operator.smulPMap_isSymmetric` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
+| DEFINITION | `Brockian.Weyl.OperatorChoice.ConfiningPotentialCandidate` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.OperatorChoice.DecayingPotentialCandidate` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.OperatorChoice.brockian_eigenvalue_norm` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.OperatorChoice.norm_eigenvalue_le_of_bound` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.OperatorChoice.norm_eigenvalue_le_opNorm` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.OperatorChoice.norm_primeGaussianMulCLM_le` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.OperatorChoice.not_eigenvalue_of_bound_lt` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.OperatorChoice.not_realize_zero_of_bound_lt` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.OperatorChoice.not_realize_zero_of_toPMap` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.OperatorChoice.primeGaussianMulCLM_opNorm_le_two` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.OperatorChoice.primeGaussian_decaying` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.OperatorChoice.primeGaussian_not_realize_large_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.OperatorChoice.rh_operator_needs_unbounded_spectrum` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_pos_limit_of_mass_finite` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_counterexample` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_of_pos` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |

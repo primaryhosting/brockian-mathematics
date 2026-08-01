@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-01T17:22:59Z",
+  "generated_at": "2026-08-01T17:56:53Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 254,
-      "DEFINITION": 75,
+      "PROVED": 274,
+      "DEFINITION": 80,
       "CONJECTURE": 2,
       "CONDITIONAL": 4
     }
@@ -14,9 +14,9 @@
   "charter": "Badges are derived from the Lean registry when `lean` is non-empty.\nPROVED requires AXLE-verified + axiom-clean theorems (see README).\nOpen problems (twins infinitude, Goldbach global, RH) stay not_claimed.",
   "version": 1,
   "summary": {
-    "claims": 40,
+    "claims": 42,
     "by_status": {
-      "proved": 31,
+      "proved": 33,
       "open": 1,
       "conjecture": 1,
       "conditional": 2,
@@ -24,8 +24,8 @@
       "aristotle": 1
     },
     "registry": {
-      "PROVED": 254,
-      "DEFINITION": 75,
+      "PROVED": 274,
+      "DEFINITION": 80,
       "CONJECTURE": 2,
       "CONDITIONAL": 4
     }
@@ -2085,6 +2085,168 @@
           },
           "ledger_run": "2026-08-01 \u2014 Gate-1 end-to-end assembly under ODE identification",
           "provenance_note": "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 4
+    },
+    {
+      "id": "GATE1-FREE-TRANSFER",
+      "title": "Free Laplacian model \u2014 unitary ESA transfer + Kato symmetry half",
+      "book": "Lean Weyl.FreeLaplacian (Grok 2026-08-01)",
+      "notes": "Bounded-cutoff Fourier model only. Unbounded \u2212\u0394 and range-density Kato open.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Weyl.FreeLaplacian.isSelfAdjoint_conjCLM",
+        "Brockian.Weyl.FreeLaplacian.essentiallySelfAdjoint_conjCLM",
+        "Brockian.Weyl.FreeLaplacian.isSymmetric_vadd_clm",
+        "Brockian.Weyl.FreeLaplacian.id_essentiallySelfAdjoint"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Weyl.FreeLaplacian.isSelfAdjoint_conjCLM",
+          "short": "isSelfAdjoint_conjCLM",
+          "module": "Brockian.Weyl.FreeLaplacian",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/FreeLaplacian.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Weyl.FreeLaplacian.essentiallySelfAdjoint_conjCLM",
+          "short": "essentiallySelfAdjoint_conjCLM",
+          "module": "Brockian.Weyl.FreeLaplacian",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/FreeLaplacian.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Weyl.FreeLaplacian.isSymmetric_vadd_clm",
+          "short": "isSymmetric_vadd_clm",
+          "module": "Brockian.Weyl.FreeLaplacian",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/FreeLaplacian.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Weyl.FreeLaplacian.id_essentiallySelfAdjoint",
+          "short": "id_essentiallySelfAdjoint",
+          "module": "Brockian.Weyl.FreeLaplacian",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/FreeLaplacian.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 4
+    },
+    {
+      "id": "GATE1-RH-SHAPE",
+      "title": "Bounded decaying potential is not a Hilbert\u2013P\u00f3lya spectral candidate",
+      "book": "Lean Weyl.OperatorChoice (Grok 2026-08-01)",
+      "notes": "Conditional on a zero outside ball of radius 2. Not RH; shape obstruction.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Weyl.OperatorChoice.norm_eigenvalue_le_of_bound",
+        "Brockian.Weyl.OperatorChoice.primeGaussian_not_realize_large_zero",
+        "Brockian.Weyl.OperatorChoice.rh_operator_needs_unbounded_spectrum",
+        "Brockian.Weyl.OperatorChoice.primeGaussianMulCLM_opNorm_le_two"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Weyl.OperatorChoice.norm_eigenvalue_le_of_bound",
+          "short": "norm_eigenvalue_le_of_bound",
+          "module": "Brockian.Weyl.OperatorChoice",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/OperatorChoice.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Weyl.OperatorChoice.primeGaussian_not_realize_large_zero",
+          "short": "primeGaussian_not_realize_large_zero",
+          "module": "Brockian.Weyl.OperatorChoice",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/OperatorChoice.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Weyl.OperatorChoice.rh_operator_needs_unbounded_spectrum",
+          "short": "rh_operator_needs_unbounded_spectrum",
+          "module": "Brockian.Weyl.OperatorChoice",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/OperatorChoice.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Weyl.OperatorChoice.primeGaussianMulCLM_opNorm_le_two",
+          "short": "primeGaussianMulCLM_opNorm_le_two",
+          "module": "Brockian.Weyl.OperatorChoice",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/OperatorChoice.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
         }
       ],
       "missing_lean": [],
@@ -5317,6 +5479,138 @@
       }
     },
     {
+      "name": "Brockian.Weyl.FreeLaplacian.FreeLaplacianModel",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.conjCLM",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/FreeLaplacian.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.dense_domain_vadd_clm",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.essentiallySelfAdjoint_conjCLM",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.essentiallySelfAdjoint_conj_id",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.id_essentiallySelfAdjoint",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.identityFreeModel",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/FreeLaplacian.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.inner_map_symm",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.inner_symm_map",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.isSelfAdjoint_conjCLM",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.isSymmetric_vadd_clm",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacian.vadd_clm_domain",
+      "module": "Brockian.Weyl.FreeLaplacian",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacian.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.Weyl.Gate1Bounded.add_primeGaussian_dense_range_sub",
       "module": "Brockian.Weyl.Gate1Bounded",
       "register": "PROVED",
@@ -5630,6 +5924,149 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/Operator.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.ConfiningPotentialCandidate",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/OperatorChoice.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.DecayingPotentialCandidate",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/OperatorChoice.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.brockian_eigenvalue_norm",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/OperatorChoice.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.norm_eigenvalue_le_of_bound",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/OperatorChoice.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.norm_eigenvalue_le_opNorm",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/OperatorChoice.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.norm_primeGaussianMulCLM_le",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/OperatorChoice.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.not_eigenvalue_of_bound_lt",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/OperatorChoice.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.not_realize_zero_of_bound_lt",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/OperatorChoice.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.not_realize_zero_of_toPMap",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/OperatorChoice.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.primeGaussianMulCLM_opNorm_le_two",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/OperatorChoice.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.primeGaussian_decaying",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/OperatorChoice.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.primeGaussian_not_realize_large_zero",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/OperatorChoice.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.OperatorChoice.rh_operator_needs_unbounded_spectrum",
+      "module": "Brockian.Weyl.OperatorChoice",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/OperatorChoice.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"

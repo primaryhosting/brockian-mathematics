@@ -361,3 +361,23 @@ claims:
       - Brockian.Weyl.SchrodingerESA.primeGaussian_essentiallySelfAdjoint
       - Brockian.Weyl.SchrodingerESA.free_plus_primeGaussian_essentiallySelfAdjoint
     notes: "Full ESA of -Δ+V requires constructing T and DeficiencyRepresentsODE. Potential term and abstract chain closed."
+
+  - id: GATE1-FREE-TRANSFER
+    title: Free Laplacian model — unitary ESA transfer + Kato symmetry half
+    book: "Lean Weyl.FreeLaplacian (Grok 2026-08-01)"
+    lean:
+      - Brockian.Weyl.FreeLaplacian.isSelfAdjoint_conjCLM
+      - Brockian.Weyl.FreeLaplacian.essentiallySelfAdjoint_conjCLM
+      - Brockian.Weyl.FreeLaplacian.isSymmetric_vadd_clm
+      - Brockian.Weyl.FreeLaplacian.id_essentiallySelfAdjoint
+    notes: "Bounded-cutoff Fourier model only. Unbounded −Δ and range-density Kato open."
+
+  - id: GATE1-RH-SHAPE
+    title: Bounded decaying potential is not a Hilbert–Pólya spectral candidate
+    book: "Lean Weyl.OperatorChoice (Grok 2026-08-01)"
+    lean:
+      - Brockian.Weyl.OperatorChoice.norm_eigenvalue_le_of_bound
+      - Brockian.Weyl.OperatorChoice.primeGaussian_not_realize_large_zero
+      - Brockian.Weyl.OperatorChoice.rh_operator_needs_unbounded_spectrum
+      - Brockian.Weyl.OperatorChoice.primeGaussianMulCLM_opNorm_le_two
+    notes: "Conditional on a zero outside ball of radius 2. Not RH; shape obstruction."

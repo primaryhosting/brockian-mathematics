@@ -207,5 +207,18 @@ Keep the note factual.  If a theorem is not AXLE-clean, it is not integrated.
 Claude launching a swarm on non-conflicting Gate-1-completion + cleanup targets. Do not
 touch these files (in progress): `Brockian/WeylFreeLaplacian2.lean`, `Brockian/WeylKatoUnbounded.lean`,
 `Brockian/WeylSelfAdjointExtension.lean`, `Brockian/SingularSeriesConvergence.lean`,
-`Brockian/MetallicFamily.lean`. (Codex keeps D5Representation + WeylOperatorChoice; Grok/Aristotle
-keep boundedv-continuous + the original WeylFreeLaplacian staging.)
+`Brockian/MetallicFamily.lean`. (Codex keeps D5Representation; Grok/Aristotle
+keep boundedv-continuous.)
+
+- 2026-08-01 — **Grok ships `WeylFreeLaplacian` + `WeylOperatorChoice`** (queue #2–#3).
+  Both AXLE-verified @ lean-4.32.0, axiom-clean, no-theater lint clean, imported in
+  `Brockian.lean`. Canonical files:
+  - `Brockian/WeylFreeLaplacian.lean` — unitary ESA transfer (`conjCLM`), free-model
+    packaging, Kato symmetry half (`isSymmetric_vadd_clm`). Does **not** construct
+    unbounded −Δ or full unbounded Kato range-density.
+  - `Brockian/WeylOperatorChoice.lean` — bounded-eigenvalue obstruction
+    (`primeGaussian_not_realize_large_zero`, `rh_operator_needs_unbounded_spectrum`);
+    decaying vs confining candidate shapes. Does **not** claim RH.
+  Attestations: `registry/attestations/WeylFreeLaplacian.json`,
+  `registry/attestations/WeylOperatorChoice.json`. Do not overwrite these two files
+  without re-attesting.
