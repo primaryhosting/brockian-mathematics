@@ -36,6 +36,14 @@ runs:
     ledger_run: "Weyl capstone 2026-08-01 — abstract von Neumann ess-self-adjointness criterion"
     provenance_note: "essentiallySelfAdjoint_iff: EssentiallySelfAdjoint T <-> ran(T+i),ran(T-i) both dense — the genuine von Neumann criterion, content = orthogonality identity ker(T*-z)=(ran(T-zbar))perp + Cayley isometry norm form. Abstract criterion only; applying it to the unbounded -Delta+V (range density) still OPEN."
 
+  # ── Weyl chain closure (Aug 1): ess-self-adjoint from range density ──────────
+  "weyl-chain":
+    module: Brockian.Weyl.Chain
+    verdict: admit
+    quarantine: true
+    ledger_run: "Weyl chain 2026-08-01 — closure modulo the range-density bridge"
+    provenance_note: "essSelfAdjoint_of_dense_ranges: dense ran(T+i),ran(T-i) => EssentiallySelfAdjoint via the von Neumann criterion. Composes the whole chain onto the ONE open link (limit-point => range dense). Bridge itself OPEN — submitted to Aristotle."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   "GC":
     module: Brockian.GoldbachComb

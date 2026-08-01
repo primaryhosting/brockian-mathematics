@@ -1,10 +1,11 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 185,
-    "DEFINITION": 65,
+    "PROVED": 186,
+    "DEFINITION": 68,
     "CONJECTURE": 2,
-    "CONDITIONAL": 4
+    "CONDITIONAL": 4,
+    "UNVERIFIED": 5
   },
   "theorems": [
     {
@@ -6060,6 +6061,38 @@
       "provenance_note": "essentiallySelfAdjoint_iff: EssentiallySelfAdjoint T <-> ran(T+i),ran(T-i) both dense \u2014 the genuine von Neumann criterion, content = orthogonality identity ker(T*-z)=(ran(T-zbar))perp + Cayley isometry norm form. Abstract criterion only; applying it to the unbounded -Delta+V (range density) still OPEN."
     },
     {
+      "name": "Brockian.Weyl.Chain.essSelfAdjoint_of_dense_ranges",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Chain",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Chain.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl chain 2026-08-01 \u2014 closure modulo the range-density bridge",
+      "provenance_note": "essSelfAdjoint_of_dense_ranges: dense ran(T+i),ran(T-i) => EssentiallySelfAdjoint via the von Neumann criterion. Composes the whole chain onto the ONE open link (limit-point => range dense). Bridge itself OPEN \u2014 submitted to Aristotle."
+    },
+    {
       "name": "Brockian.Weyl.Closure.adjoint_isClosed'",
       "kind": "theorem",
       "module": "Brockian.Weyl.Closure",
@@ -6502,6 +6535,255 @@
       "quarantine": true,
       "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
       "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.IsLimitCircleRadius",
+      "kind": "def",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "failed",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.IsLimitPointRadius",
+      "kind": "def",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "failed",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.integral_normSq_tendsto_atTop_of_not_bddAbove",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "UNVERIFIED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext",
+        "sorryAx"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": false,
+        "axle": {
+          "verdict": "failed",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.limitPointRadius_radius_tendsto_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "UNVERIFIED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext",
+        "sorryAx"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": false,
+        "axle": {
+          "verdict": "failed",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.limitPointRadius_tendsto_atTop",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "UNVERIFIED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext",
+        "sorryAx"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": false,
+        "axle": {
+          "verdict": "failed",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.limitPoint_or_limitCircle_radius",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "UNVERIFIED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext",
+        "sorryAx"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": false,
+        "axle": {
+          "verdict": "failed",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.radius_tendsto_zero_iff_integral_atTop",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "UNVERIFIED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext",
+        "sorryAx"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": false,
+        "axle": {
+          "verdict": "failed",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Dichotomy.weylRadius",
+      "kind": "def",
+      "module": "Brockian.Weyl.Dichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dichotomy.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "failed",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.Weyl.Disk.Acoef",

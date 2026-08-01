@@ -8,8 +8,9 @@
 
 - **CONDITIONAL**: 4
 - **CONJECTURE**: 2
-- **DEFINITION**: 65
-- **PROVED**: 185
+- **DEFINITION**: 68
+- **PROVED**: 186
+- **UNVERIFIED**: 5
 
 ## Theorems
 
@@ -211,6 +212,7 @@
 | DEFINITION | `Brockian.Weyl.Cayley.rangeAddI` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — abstract von Neumann ess-self-adjointness criterion |
 | DEFINITION | `Brockian.Weyl.Cayley.rangeSMulSub` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — abstract von Neumann ess-self-adjointness criterion |
 | DEFINITION | `Brockian.Weyl.Cayley.rangeSubI` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — abstract von Neumann ess-self-adjointness criterion |
+| PROVED | `Brockian.Weyl.Chain.essSelfAdjoint_of_dense_ranges` | ✓ | verified | lean-4.32.0 | Weyl chain 2026-08-01 — closure modulo the range-density bridge |
 | PROVED | `Brockian.Weyl.Closure.adjoint_isClosed'` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | PROVED | `Brockian.Weyl.Closure.closure_eq_self_of_isClosed` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | DEFINITION | `Brockian.Weyl.Closure.deficiencySet` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
@@ -225,6 +227,14 @@
 | PROVED | `Brockian.Weyl.Closure.symmetric_domain_le_adjoint_domain` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | PROVED | `Brockian.Weyl.Closure.symmetric_isClosable` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | PROVED | `Brockian.Weyl.Closure.symmetric_le_adjoint` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| DEFINITION | `Brockian.Weyl.Dichotomy.IsLimitCircleRadius` | ✓ | failed | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.Dichotomy.IsLimitPointRadius` | ✓ | failed | lean-4.32.0 |  |
+| UNVERIFIED | `Brockian.Weyl.Dichotomy.integral_normSq_tendsto_atTop_of_not_bddAbove` | — | failed | lean-4.32.0 |  |
+| UNVERIFIED | `Brockian.Weyl.Dichotomy.limitPointRadius_radius_tendsto_zero` | — | failed | lean-4.32.0 |  |
+| UNVERIFIED | `Brockian.Weyl.Dichotomy.limitPointRadius_tendsto_atTop` | — | failed | lean-4.32.0 |  |
+| UNVERIFIED | `Brockian.Weyl.Dichotomy.limitPoint_or_limitCircle_radius` | — | failed | lean-4.32.0 |  |
+| UNVERIFIED | `Brockian.Weyl.Dichotomy.radius_tendsto_zero_iff_integral_atTop` | — | failed | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.Dichotomy.weylRadius` | ✓ | failed | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.Disk.Acoef` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | DEFINITION | `Brockian.Weyl.Disk.Pcoef` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | PROVED | `Brockian.Weyl.Disk.boundary_L2_identity` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
