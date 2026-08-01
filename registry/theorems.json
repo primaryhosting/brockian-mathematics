@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 469,
-    "DEFINITION": 148,
+    "PROVED": 507,
+    "DEFINITION": 149,
     "CONDITIONAL": 9,
     "CONJECTURE": 2
   },
@@ -1915,6 +1915,1218 @@
       "quarantine": true,
       "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
       "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.algebraic_connectivity_five",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.algebraic_connectivity_five_props",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.algebraic_connectivity_le_four",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.algebraic_connectivity_mem",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.algebraic_connectivity_pos",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cos_four_pi_div_three",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cos_two_pi_div_three",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycle3_eig_one",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycle3_eig_two",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycle3_eig_zero",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycle4_eig_one",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycle4_eig_three",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycle4_eig_two",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycle4_eig_zero",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycle6_eig_five",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycle6_eig_four",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycle6_eig_one",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycle6_eig_three",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycle6_eig_two",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycle6_eig_zero",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycleSpectrum_ge_neg_two",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycleSpectrum_le_two",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycleSpectrum_subset_Icc",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.cycle_eig_one",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.golden_in_C5",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.golden_unique_among_prime_cycles",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.lambda_max_cycle",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.laplacianCycleSpectrum",
+      "kind": "def",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.laplacianCycleSpectrum_le_four",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.laplacianCycleSpectrum_nonneg",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.mem_cycleSpectrum",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.mem_laplacianCycleSpectrum",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.neg_golden_in_C5",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.two_cos_pi_div_three",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.two_cos_two_pi_div_five_eq_golden_sub_one",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.two_cos_two_pi_div_three",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.two_mem_cycleSpectrum",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CycleSpectrumFamily.zero_mem_laplacianCycleSpectrum",
+      "kind": "theorem",
+      "module": "Brockian.CycleSpectrumFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CycleSpectrumFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
+      "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
     },
     {
       "name": "Brockian.D5Representation.VertexSpace",
@@ -12847,6 +14059,38 @@
       },
       "register": "DEFINITION",
       "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.quadraticCandidate_V",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "flags": {
         "native_decide": false,
         "sorry": false,

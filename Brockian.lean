@@ -8,6 +8,7 @@ import Brockian.TransitionKernel
 import Brockian.Sieve
 import Brockian.Spectral
 import Brockian.Connectivity
+import Brockian.CycleSpectrumFamily
 import Brockian.Automorphism
 import Brockian.AutomorphismFull
 import Brockian.D5Representation

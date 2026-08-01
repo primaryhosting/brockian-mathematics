@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 9
 - **CONJECTURE**: 2
-- **DEFINITION**: 148
-- **PROVED**: 469
+- **DEFINITION**: 149
+- **PROVED**: 507
 
 ## Theorems
 
@@ -77,6 +77,44 @@
 | PROVED | `Brockian.Core.ray_mul` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.ray_ne_zero_infinite` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.ray_zero_iff_dvd` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
+| PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_five` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_five_props` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_le_four` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_mem` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_pos` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cos_four_pi_div_three` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cos_two_pi_div_three` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycle3_eig_one` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycle3_eig_two` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycle3_eig_zero` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycle4_eig_one` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycle4_eig_three` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycle4_eig_two` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycle4_eig_zero` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycle6_eig_five` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycle6_eig_four` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycle6_eig_one` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycle6_eig_three` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycle6_eig_two` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycle6_eig_zero` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycleSpectrum_ge_neg_two` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycleSpectrum_le_two` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycleSpectrum_subset_Icc` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.cycle_eig_one` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.golden_in_C5` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.golden_unique_among_prime_cycles` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.lambda_max_cycle` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| DEFINITION | `Brockian.CycleSpectrumFamily.laplacianCycleSpectrum` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.laplacianCycleSpectrum_le_four` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.laplacianCycleSpectrum_nonneg` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.mem_cycleSpectrum` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.mem_laplacianCycleSpectrum` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.neg_golden_in_C5` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.two_cos_pi_div_three` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.two_cos_two_pi_div_five_eq_golden_sub_one` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.two_cos_two_pi_div_three` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.two_mem_cycleSpectrum` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CycleSpectrumFamily.zero_mem_laplacianCycleSpectrum` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | DEFINITION | `Brockian.D5Representation.VertexSpace` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
 | DEFINITION | `Brockian.D5Representation.autPull` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
 | PROVED | `Brockian.D5Representation.autPull_apply` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
@@ -430,6 +468,7 @@
 | PROVED | `Brockian.Weyl.Confining.primeGaussian_not_isConfining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.Confining.primeGaussian_not_unboundedMultiplierShape` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
 | DEFINITION | `Brockian.Weyl.Confining.quadraticCandidate` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.quadraticCandidate_V` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.Confining.quadratic_isConfining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.Confining.quadratic_unboundedMultiplierShape` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.ConstMass.continuous_growing_exp_normSq` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
