@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 435,
-    "DEFINITION": 140,
+    "PROVED": 469,
+    "DEFINITION": 148,
     "CONDITIONAL": 9,
     "CONJECTURE": 2
   },
@@ -3075,6 +3075,516 @@
       "quarantine": true,
       "ledger_run": "runs 16 / 54 / 70 / 73 \u2014 pentagon golden diagonal, two-distance, C\u2085 spectrum",
       "provenance_note": "golden diagonal=\u03c6\u00b7side, two-distance, \u2212\u03c6\u2208spec(C\u2085); golden_unique_to_five NOT ported (see PORT-QUEUE)"
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.Kp_two",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.Kp_two_of_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.Kp_two_of_not_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.even_ge_four_eq_two_plus_even",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.even_of_odd_prime_add_odd_prime",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.gCount_eq_gResidues_card",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.gCount_five",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.gCount_two",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.gCount_two_of_ne_zero",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.gCount_two_one",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.gCount_two_zero",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.gResidues_five_card",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.hasGoldbachRep_odd_iff",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.hasGoldbachRep_odd_imp_two",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.hasGoldbachRep_two_plus_prime",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.Parity.odd_sub_of_even_sub_odd_prime",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.Parity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Parity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.GoldbachComb.GoldbachCovarianceTransfer",
@@ -16146,6 +16656,806 @@
       "quarantine": true,
       "ledger_run": "Weyl campaign 2026-08-01 \u2014 limit-point for constant potential",
       "provenance_note": "const_potential_isLimitPoint (V\u2261c incl 0 is limit-point at \u221e for non-real \u03bb \u2014 a real instance), non-integrability engine, Wronskian independence. General bounded-V limit-point OPEN (genuine analysis; agent correctly refused a false Wronskian\u21d2limit-point lemma)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.FreeMulModel",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.FreeMulModel.essentiallySelfAdjoint_mulOp",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.FreeMulModel.isSelfAdjoint_mulOp",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.FreeMulModel.mulOp",
+      "kind": "def",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.H2",
+      "kind": "def",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.add_clm_mul_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.add_constMul_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.add_mulLpCLM_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.add_mulLpCLM_isSelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.constFreeMulModel",
+      "kind": "def",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.constFreeMulModel_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.constFun",
+      "kind": "def",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.constFun_memLp_top",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.constFun_norm_le",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.constFun_real",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.constMulCLM",
+      "kind": "def",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.constMul_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.isSelfAdjoint_constMulCLM",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.isSelfAdjoint_oneMulCLM",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.mulLpCLM_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.oneFreeMulModel",
+      "kind": "def",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.oneMulCLM",
+      "kind": "def",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.oneMul_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.primeGaussianFreeMulModel",
+      "kind": "def",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.primeGaussianFreeMulModel_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.primeGaussianMul_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
     },
     {
       "name": "Brockian.Weyl.Operator.EssentiallySelfAdjoint",

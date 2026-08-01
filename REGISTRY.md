@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 9
 - **CONJECTURE**: 2
-- **DEFINITION**: 140
-- **PROVED**: 435
+- **DEFINITION**: 148
+- **PROVED**: 469
 
 ## Theorems
 
@@ -115,6 +115,22 @@
 | PROVED | `Brockian.Geometry.golden_ratio_in_C5_spectrum` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.pentagon_golden_diagonal` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.pentagon_two_distances` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
+| PROVED | `Brockian.Goldbach.Parity.Kp_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.Kp_two_of_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.Kp_two_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.even_ge_four_eq_two_plus_even` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.even_of_odd_prime_add_odd_prime` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.gCount_eq_gResidues_card` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.gCount_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.gCount_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.gCount_two_of_ne_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.gCount_two_one` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.gCount_two_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.gResidues_five_card` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.hasGoldbachRep_odd_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.hasGoldbachRep_odd_imp_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.hasGoldbachRep_two_plus_prime` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.odd_sub_of_even_sub_odd_prime` | ✓ | verified | lean-4.32.0 |  |
 | CONJECTURE | `Brockian.GoldbachComb.GoldbachCovarianceTransfer` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
 | DEFINITION | `Brockian.GoldbachComb.Kp` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
 | DEFINITION | `Brockian.GoldbachComb.gCount` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
@@ -535,6 +551,32 @@
 | DEFINITION | `Brockian.Weyl.LP.wronskian` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |
 | PROVED | `Brockian.Weyl.LP.wronskian_hasDerivAt` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |
 | PROVED | `Brockian.Weyl.LP.wronskian_isConst` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |
+| PROVED | `Brockian.Weyl.MulReal.FreeMulModel` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.FreeMulModel.essentiallySelfAdjoint_mulOp` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.FreeMulModel.isSelfAdjoint_mulOp` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.FreeMulModel.mulOp` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.H2` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.add_clm_mul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.add_constMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.add_mulLpCLM_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.add_mulLpCLM_isSelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.constFreeMulModel` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.constFreeMulModel_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.constFun` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.constFun_memLp_top` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.constFun_norm_le` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.constFun_real` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.constMulCLM` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.constMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.isSelfAdjoint_constMulCLM` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.isSelfAdjoint_oneMulCLM` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.mulLpCLM_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.oneFreeMulModel` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.oneMulCLM` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.oneMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.primeGaussianFreeMulModel` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.primeGaussianFreeMulModel_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.primeGaussianMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
 | DEFINITION | `Brockian.Weyl.Operator.EssentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
 | PROVED | `Brockian.Weyl.Operator.IsSymmetric` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
 | PROVED | `Brockian.Weyl.Operator.IsSymmetric.eq_zero_of_apply_eq_smul` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |

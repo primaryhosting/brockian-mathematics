@@ -207,6 +207,13 @@ runs:
     ledger_run: "roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32"
     provenance_note: "IsConfining (V→+∞); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying⇒not confining⇒unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum — the honest proof the current bounded operator cannot be the RH operator."
 
+  "weyl-mulreal":
+    module: Brockian.Weyl.MulReal
+    verdict: admit
+    quarantine: true
+    ledger_run: "Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32"
+    provenance_note: "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────
   "weyl-gate1-bounded":

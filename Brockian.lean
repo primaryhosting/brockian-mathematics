@@ -15,6 +15,7 @@ import Brockian.WeylLimitPoint
 import Brockian.SpectralGate1
 import Brockian.GoldbachSchema
 import Brockian.GoldbachLemmas
+import Brockian.GoldbachParity
 import Brockian.RiemannScaffold
 import Brockian.WeylOperator
 import Brockian.WeylDisk
@@ -33,6 +34,7 @@ import Brockian.WeylGate1Bounded
 import Brockian.WeylBridge
 import Brockian.WeylSchrodingerESA
 import Brockian.WeylFreeLaplacian
+import Brockian.WeylMulReal
 import Brockian.WeylOperatorChoice
 import Brockian.MetallicFamily
 import Brockian.EquidistributionSchema
