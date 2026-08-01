@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 209,
+    "PROVED": 211,
     "DEFINITION": 69,
     "CONJECTURE": 2,
     "CONDITIONAL": 4
@@ -8126,6 +8126,70 @@
       "quarantine": true,
       "ledger_run": "Weyl capstone 2026-08-01 \u2014 EssentiallySelfAdjoint genuinely inhabited",
       "provenance_note": "every bounded self-adjoint A is EssentiallySelfAdjoint (deficiency spaces = bot); identity is a concrete non-degenerate witness. Closes the Operator agent's open blocker; connects to SpectralGate1 (the prime-Gaussian potential mult op is bounded self-adjoint => ess-self-adjoint). Unbounded -Delta+V still OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Kato",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Kato.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle proj c595862c \u2014 bounded Kato-Rellich; independently AXLE-verified @ 4.32",
+      "provenance_note": "isSelfAdjoint_add; dense_range_add_sub_of_selfAdjoint (ran((T+B)-z) dense for non-real z, T,B bounded self-adjoint, via resolvent). Statement fidelity diff-checked vs target (unchanged). Feeds the -Delta+V perturbation route."
+    },
+    {
+      "name": "Brockian.Weyl.Kato.isSelfAdjoint_add",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Kato",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Kato.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle proj c595862c \u2014 bounded Kato-Rellich; independently AXLE-verified @ 4.32",
+      "provenance_note": "isSelfAdjoint_add; dense_range_add_sub_of_selfAdjoint (ran((T+B)-z) dense for non-real z, T,B bounded self-adjoint, via resolvent). Statement fidelity diff-checked vs target (unchanged). Feeds the -Delta+V perturbation route."
     },
     {
       "name": "Brockian.Weyl.LP.IsLimitPointAtInfty",
