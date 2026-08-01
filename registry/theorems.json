@@ -1,10 +1,11 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 167,
-    "DEFINITION": 61,
+    "PROVED": 200,
+    "DEFINITION": 63,
     "CONJECTURE": 2,
-    "CONDITIONAL": 4
+    "CONDITIONAL": 4,
+    "UNVERIFIED": 7
   },
   "theorems": [
     {
@@ -5752,6 +5753,894 @@
       "provenance_note": "Wronskian/Abel constancy, Lagrange + integrated Green identity, Gate-0 witness. Full limit-point criterion OPEN (Mathlib 4.32 has no Sturm-Liouville/deficiency-index API) \u2014 see PORT-QUEUE."
     },
     {
+      "name": "Brockian.Weyl.Closure.adjoint_isClosed'",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.adjoint_isClosed'",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.closure_eq_self_of_isClosed",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.closure_eq_self_of_isClosed",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.deficiencySet",
+      "kind": "def",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.deficiencySet",
+      "kind": "def",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.inner_adjoint_left",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.inner_adjoint_left",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.isClosed_deficiencySet",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.isClosed_deficiencySet",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.mem_deficiencySet_iff_mem_deficiencySpace",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.mem_deficiencySet_iff_mem_deficiencySpace",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.smulPMap_adjoint_isClosed",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.smulPMap_adjoint_isClosed",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.smulPMap_dense",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.smulPMap_dense",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.smulPMap_isClosable",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.smulPMap_isClosable",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.symmetric_adjoint_eq",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.symmetric_adjoint_eq",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.symmetric_closure_le_adjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.symmetric_closure_le_adjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.symmetric_domain_le_adjoint_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.symmetric_domain_le_adjoint_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.symmetric_isClosable",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.symmetric_isClosable",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.symmetric_le_adjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Closure.symmetric_le_adjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Closure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Closure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
+      "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
       "name": "Brockian.Weyl.Disk.Acoef",
       "kind": "def",
       "module": "Brockian.Weyl.Disk",
@@ -6558,6 +7447,455 @@
       "quarantine": true,
       "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
       "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.ESA.clm_deficiency_eq_bot",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ESA.clm_deficiency_eq_bot",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ESA.lean"
+      },
+      "register": "UNVERIFIED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "failed",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ESA.clm_dense",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ESA.clm_dense",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ESA.lean"
+      },
+      "register": "UNVERIFIED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "failed",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ESA.clm_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ESA.clm_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ESA.lean"
+      },
+      "register": "UNVERIFIED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "failed",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ESA.clm_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ESA.clm_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ESA.lean"
+      },
+      "register": "UNVERIFIED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "failed",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ESA.clm_isSymmetric",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ESA.clm_isSymmetric",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ESA.lean"
+      },
+      "register": "UNVERIFIED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "failed",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ESA.id_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ESA.id_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ESA.lean"
+      },
+      "register": "UNVERIFIED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext",
+        "sorryAx"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": false,
+        "axle": {
+          "verdict": "failed",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ESA.vec_eq_zero_of_inner",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ESA.vec_eq_zero_of_inner",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ESA.lean"
+      },
+      "register": "UNVERIFIED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "failed",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.Weyl.LP.IsLimitPointAtInfty",

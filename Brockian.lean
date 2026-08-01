@@ -17,3 +17,4 @@ import Brockian.RiemannScaffold
 import Brockian.WeylOperator
 import Brockian.WeylDisk
 import Brockian.WeylLimitPointBounded
+import Brockian.WeylClosure

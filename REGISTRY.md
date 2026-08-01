@@ -8,8 +8,9 @@
 
 - **CONDITIONAL**: 4
 - **CONJECTURE**: 2
-- **DEFINITION**: 61
-- **PROVED**: 167
+- **DEFINITION**: 63
+- **PROVED**: 200
+- **UNVERIFIED**: 7
 
 ## Theorems
 
@@ -201,6 +202,34 @@
 | PROVED | `Brockian.Weyl.wronskian_const_one_witness` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
 | PROVED | `Brockian.Weyl.wronskian_hasDerivAt` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
 | PROVED | `Brockian.Weyl.wronskian_isConst` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
+| PROVED | `Brockian.Weyl.Closure.adjoint_isClosed'` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.adjoint_isClosed'` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.closure_eq_self_of_isClosed` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.closure_eq_self_of_isClosed` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| DEFINITION | `Brockian.Weyl.Closure.deficiencySet` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| DEFINITION | `Brockian.Weyl.Closure.deficiencySet` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.inner_adjoint_left` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.inner_adjoint_left` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.isClosed_deficiencySet` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.isClosed_deficiencySet` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.mem_deficiencySet_iff_mem_deficiencySpace` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.mem_deficiencySet_iff_mem_deficiencySpace` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.smulPMap_adjoint_isClosed` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.smulPMap_adjoint_isClosed` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.smulPMap_dense` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.smulPMap_dense` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.smulPMap_isClosable` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.smulPMap_isClosable` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.symmetric_adjoint_eq` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.symmetric_adjoint_eq` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.symmetric_closure_le_adjoint` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.symmetric_closure_le_adjoint` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.symmetric_domain_le_adjoint_domain` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.symmetric_domain_le_adjoint_domain` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.symmetric_isClosable` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.symmetric_isClosable` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.symmetric_le_adjoint` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Closure.symmetric_le_adjoint` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | DEFINITION | `Brockian.Weyl.Disk.Acoef` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | DEFINITION | `Brockian.Weyl.Disk.Pcoef` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | PROVED | `Brockian.Weyl.Disk.boundary_L2_identity` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
@@ -227,6 +256,20 @@
 | PROVED | `Brockian.Weyl.Disk.wronskian_hasDerivAt` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | PROVED | `Brockian.Weyl.Disk.wronskian_isConst` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | PROVED | `Brockian.Weyl.Disk.wronskian_isConst` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
+| PROVED | `Brockian.Weyl.ESA.clm_deficiency_eq_bot` | ✓ | verified | lean-4.32.0 |  |
+| UNVERIFIED | `Brockian.Weyl.ESA.clm_deficiency_eq_bot` | ✓ | failed | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ESA.clm_dense` | ✓ | verified | lean-4.32.0 |  |
+| UNVERIFIED | `Brockian.Weyl.ESA.clm_dense` | ✓ | failed | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ESA.clm_domain` | ✓ | verified | lean-4.32.0 |  |
+| UNVERIFIED | `Brockian.Weyl.ESA.clm_domain` | ✓ | failed | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ESA.clm_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
+| UNVERIFIED | `Brockian.Weyl.ESA.clm_essentiallySelfAdjoint` | ✓ | failed | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ESA.clm_isSymmetric` | ✓ | verified | lean-4.32.0 |  |
+| UNVERIFIED | `Brockian.Weyl.ESA.clm_isSymmetric` | ✓ | failed | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ESA.id_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
+| UNVERIFIED | `Brockian.Weyl.ESA.id_essentiallySelfAdjoint` | — | failed | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ESA.vec_eq_zero_of_inner` | ✓ | verified | lean-4.32.0 |  |
+| UNVERIFIED | `Brockian.Weyl.ESA.vec_eq_zero_of_inner` | ✓ | failed | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.LP.IsLimitPointAtInfty` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |
 | DEFINITION | `Brockian.Weyl.LP.IsSolutionOn` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |
 | DEFINITION | `Brockian.Weyl.LP.L2NearInfty` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |
