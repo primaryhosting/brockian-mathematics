@@ -9,7 +9,7 @@
 - **CONDITIONAL**: 8
 - **CONJECTURE**: 1
 - **DEFINITION**: 154
-- **PROVED**: 535
+- **PROVED**: 534
 
 ## Theorems
 
@@ -123,29 +123,28 @@
 | PROVED | `Brockian.D5Isotypic.d5Pull_r_one_apply` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.d5Pull_r_one_eigenmode` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.D5Isotypic.eigenmode` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.D5Isotypic.eigenmode_apply` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.eigenmode_mem_zeroSumSubmodule` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.eigenmode_zero` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.D5Isotypic.eigenmode_zero_apply` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.D5Isotypic.isotypicProjector` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.isotypicProjector_apply` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.isotypicProjector_eigenmode` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.isotypicProjector_eigenmode_of_ne` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.isotypicProjector_eigenmode_self` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.isotypicProjector_idempotent_eigenmode` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.isotypicProjector_idempotent_self` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.isotypicProjector_orthogonal_eigenmode` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.isotypicProjector_smul` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.D5Isotypic.omega` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.D5Isotypic.omegaPow` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.omegaPow_add` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.omegaPow_neg` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.D5Isotypic.omegaPow_one` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.D5Isotypic.omegaPow_sub` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.D5Isotypic.omegaPow_zero` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.omega_isPrimitiveRoot` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5Isotypic.omega_pow_eq_one_iff` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.omega_pow_five` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.omega_pow_modEq` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.orderOf_omega` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.D5Isotypic.rotIso_symm_apply` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.sum_omegaPow` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5Isotypic.sum_omegaPow_ne_zero` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.D5Isotypic.sum_omegaPow_zero` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.D5Representation.VertexSpace` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
 | DEFINITION | `Brockian.D5Representation.autPull` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
 | PROVED | `Brockian.D5Representation.autPull_apply` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |

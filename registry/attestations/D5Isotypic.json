@@ -4,17 +4,6 @@
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.D5Isotypic.rotIso_symm_apply",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
       "name": "Brockian.D5Isotypic.d5Pull_r_apply",
       "kind": "theorem",
       "axle_verdict": "verified",
@@ -45,6 +34,13 @@
         "Classical.choice",
         "Quot.sound"
       ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.D5Isotypic.omega",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
       "axioms_ok": true
     },
     {
@@ -81,28 +77,6 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.D5Isotypic.omegaPow_zero",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.D5Isotypic.omegaPow_one",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
       "name": "Brockian.D5Isotypic.omega_pow_modEq",
       "kind": "theorem",
       "axle_verdict": "verified",
@@ -111,6 +85,13 @@
         "Classical.choice",
         "Quot.sound"
       ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.D5Isotypic.omegaPow",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
       "axioms_ok": true
     },
     {
@@ -136,7 +117,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.D5Isotypic.omegaPow_sub",
+      "name": "Brockian.D5Isotypic.omega_pow_eq_one_iff",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -147,29 +128,14 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.D5Isotypic.eigenmode_apply",
-      "kind": "theorem",
+      "name": "Brockian.D5Isotypic.eigenmode",
+      "kind": "def",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": null,
       "axioms_ok": true
     },
     {
       "name": "Brockian.D5Isotypic.eigenmode_zero",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.D5Isotypic.eigenmode_zero_apply",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -192,17 +158,6 @@
     },
     {
       "name": "Brockian.D5Isotypic.d5Pull_r_one_eigenmode",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.D5Isotypic.sum_omegaPow_zero",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -268,6 +223,24 @@
       "axioms_ok": true
     },
     {
+      "name": "Brockian.D5Isotypic.isotypicProjector",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.D5Isotypic.isotypicProjector_apply",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
       "name": "Brockian.D5Isotypic.isotypicProjector_eigenmode",
       "kind": "theorem",
       "axle_verdict": "verified",
@@ -301,31 +274,47 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.D5Isotypic.omega",
-      "kind": "def",
+      "name": "Brockian.D5Isotypic.isotypicProjector_smul",
+      "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": null,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
       "axioms_ok": true
     },
     {
-      "name": "Brockian.D5Isotypic.omegaPow",
-      "kind": "def",
+      "name": "Brockian.D5Isotypic.isotypicProjector_idempotent_eigenmode",
+      "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": null,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
       "axioms_ok": true
     },
     {
-      "name": "Brockian.D5Isotypic.eigenmode",
-      "kind": "def",
+      "name": "Brockian.D5Isotypic.isotypicProjector_idempotent_self",
+      "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": null,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
       "axioms_ok": true
     },
     {
-      "name": "Brockian.D5Isotypic.isotypicProjector",
-      "kind": "def",
+      "name": "Brockian.D5Isotypic.isotypicProjector_orthogonal_eigenmode",
+      "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": null,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
       "axioms_ok": true
     }
   ]
