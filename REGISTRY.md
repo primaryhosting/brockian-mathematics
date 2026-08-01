@@ -115,22 +115,22 @@
 | PROVED | `Brockian.Geometry.golden_ratio_in_C5_spectrum` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.pentagon_golden_diagonal` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.pentagon_two_distances` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
-| PROVED | `Brockian.Goldbach.Parity.Kp_two` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Goldbach.Parity.Kp_two_of_dvd` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Goldbach.Parity.Kp_two_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Goldbach.Parity.even_ge_four_eq_two_plus_even` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Goldbach.Parity.even_of_odd_prime_add_odd_prime` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Goldbach.Parity.gCount_eq_gResidues_card` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Goldbach.Parity.gCount_five` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Goldbach.Parity.gCount_two` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Goldbach.Parity.gCount_two_of_ne_zero` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Goldbach.Parity.gCount_two_one` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Goldbach.Parity.gCount_two_zero` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Goldbach.Parity.gResidues_five_card` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Goldbach.Parity.hasGoldbachRep_odd_iff` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Goldbach.Parity.hasGoldbachRep_odd_imp_two` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Goldbach.Parity.hasGoldbachRep_two_plus_prime` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Goldbach.Parity.odd_sub_of_even_sub_odd_prime` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.Parity.Kp_two` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| PROVED | `Brockian.Goldbach.Parity.Kp_two_of_dvd` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| PROVED | `Brockian.Goldbach.Parity.Kp_two_of_not_dvd` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| PROVED | `Brockian.Goldbach.Parity.even_ge_four_eq_two_plus_even` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| PROVED | `Brockian.Goldbach.Parity.even_of_odd_prime_add_odd_prime` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| PROVED | `Brockian.Goldbach.Parity.gCount_eq_gResidues_card` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| PROVED | `Brockian.Goldbach.Parity.gCount_five` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| PROVED | `Brockian.Goldbach.Parity.gCount_two` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| PROVED | `Brockian.Goldbach.Parity.gCount_two_of_ne_zero` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| PROVED | `Brockian.Goldbach.Parity.gCount_two_one` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| PROVED | `Brockian.Goldbach.Parity.gCount_two_zero` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| PROVED | `Brockian.Goldbach.Parity.gResidues_five_card` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| PROVED | `Brockian.Goldbach.Parity.hasGoldbachRep_odd_iff` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| PROVED | `Brockian.Goldbach.Parity.hasGoldbachRep_odd_imp_two` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| PROVED | `Brockian.Goldbach.Parity.hasGoldbachRep_two_plus_prime` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| PROVED | `Brockian.Goldbach.Parity.odd_sub_of_even_sub_odd_prime` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
 | CONJECTURE | `Brockian.GoldbachComb.GoldbachCovarianceTransfer` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
 | DEFINITION | `Brockian.GoldbachComb.Kp` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
 | DEFINITION | `Brockian.GoldbachComb.gCount` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
