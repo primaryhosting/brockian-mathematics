@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 416,
-    "DEFINITION": 136,
+    "PROVED": 435,
+    "DEFINITION": 140,
     "CONDITIONAL": 9,
     "CONJECTURE": 2
   },
@@ -11698,6 +11698,726 @@
       "quarantine": true,
       "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
       "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.ConfiningPotentialCandidate.isConfining",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.ConfiningPotentialCandidate.of_isConfining",
+      "kind": "def",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.IsConfining",
+      "kind": "def",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.UnboundedMultiplierShape",
+      "kind": "def",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.bound_C_blocks_zeros_outside_ball",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.brockian_realizer_admits_no_finite_bound",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.confiningCandidate_not_bddAbove",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.decaying_not_isConfining",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.gate1_vs_confining_shape",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.isConfining_iff_tendsto",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.isConfining_not_bddAbove",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.isConfining_unbounded",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.isConfining_unboundedMultiplierShape",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.no_brockian_eigenvector_outside_bound",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.not_both_decaying_and_confining",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.not_isConfining_of_abs_le",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.primeGaussian_blocks_zeros_outside_two",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.primeGaussian_is_decaying",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.primeGaussian_not_isConfining",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.primeGaussian_not_unboundedMultiplierShape",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.quadraticCandidate",
+      "kind": "def",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.quadratic_isConfining",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.quadratic_unboundedMultiplierShape",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Confining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
     },
     {
       "name": "Brockian.Weyl.ConstMass.continuous_growing_exp_normSq",

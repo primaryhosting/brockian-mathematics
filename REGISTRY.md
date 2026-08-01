@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 9
 - **CONJECTURE**: 2
-- **DEFINITION**: 136
-- **PROVED**: 416
+- **DEFINITION**: 140
+- **PROVED**: 435
 
 ## Theorems
 
@@ -393,6 +393,29 @@
 | PROVED | `Brockian.Weyl.Closure.symmetric_domain_le_adjoint_domain` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | PROVED | `Brockian.Weyl.Closure.symmetric_isClosable` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | PROVED | `Brockian.Weyl.Closure.symmetric_le_adjoint` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.Confining.ConfiningPotentialCandidate.isConfining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.Confining.ConfiningPotentialCandidate.of_isConfining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.Confining.IsConfining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.Confining.UnboundedMultiplierShape` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.bound_C_blocks_zeros_outside_ball` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.brockian_realizer_admits_no_finite_bound` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.confiningCandidate_not_bddAbove` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.decaying_not_isConfining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.gate1_vs_confining_shape` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.isConfining_iff_tendsto` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.isConfining_not_bddAbove` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.isConfining_unbounded` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.isConfining_unboundedMultiplierShape` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.no_brockian_eigenvector_outside_bound` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.not_both_decaying_and_confining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.not_isConfining_of_abs_le` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.primeGaussian_blocks_zeros_outside_two` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.primeGaussian_is_decaying` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.primeGaussian_not_isConfining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.primeGaussian_not_unboundedMultiplierShape` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.Confining.quadraticCandidate` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.quadratic_isConfining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.quadratic_unboundedMultiplierShape` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.ConstMass.continuous_growing_exp_normSq` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
 | PROVED | `Brockian.Weyl.ConstMass.exists_growing_mode_limitPointRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
 | PROVED | `Brockian.Weyl.ConstMass.growing_exp_IsLimitPointRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |

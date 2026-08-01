@@ -44,3 +44,4 @@ import Brockian.PenroseL2
 import Brockian.WeylSchrodingerMinimal
 import Brockian.SingularSeriesConvergence
 import Brockian.WeylFreeLaplacian2
+import Brockian.WeylConfining
