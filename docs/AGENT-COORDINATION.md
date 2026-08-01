@@ -311,3 +311,26 @@ keep boundedv-continuous.)
   Integrator removed `import Brockian.WeylMulReal` (no `module_verified` attestation; file still untracked
   for the owning agent). Public PROVED: 395 → 416 (+21 from FreeLaplacian2/Equidistribution/Affine).
 
+
+- 2026-08-01 — **Grok swarm #3** (AXLE pipeline required for every ship). Claims *new files only*:
+  - `Brockian/D5LaplacianModes.lean` — projectors diagonalize C5 adjacency/Laplacian
+  - `Brockian/C5SpectralMultiplicities.lean` — spectrum of C5 with multiplicities
+  - `Brockian/D5FourierInversion.lean` — full-space Fourier inversion / projector idempotence on VertexSpace
+  - `Brockian/SingularSeriesWire.lean` — re-export unconditional singular_series_pos' for downstream use
+  - `Brockian/ConfiningSpectralShape.lean` — necessary conditions packaging for confining operators (not RH)
+  - `Brockian/GoldenUniquenessSchema.lean` — reusable schema around golden_unique_to_five
+  Do not touch Minimal, MetallicFamily, FreeLaplacian*, OperatorChoice, D5Isotypic (extend via imports only).
+  Pipeline for each: hole-free proofs → `no_theater_lint` → `attest.py --env lean-4.32.0` →
+  `registry/attestations/<Module>.json` only if `module_verified: true`.
+
+- 2026-08-01 — **Codex swarm #4 launched** (documentation/infrastructure only; no Lean proof files).
+  Purpose: make the verification pipeline easier for Claude/Grok/Codex to share without
+  colliding with active proof work. Claimed write scopes:
+  - `docs/PROOF-DEPENDENCY-MAP.md` — registry-backed dependency map for Gate 1, D5/pentagonal,
+    singular-series/Goldbach, and RH scaffold. Agent: Singer (`019fbee7-1604-7d82-8fc5-1bc788c09d07`).
+  - `scripts/audit_registry_opens.py` — local audit for remaining CONDITIONAL/CONJECTURE entries
+    and stale-open patterns. Agent: Faraday (`019fbee7-2a69-7983-980c-9e71c3ee5a83`).
+  - `docs/MATHLIB-UPSTREAM-CANDIDATES.md` — upstream-candidate list with exact local
+    declarations and cleanup requirements. Agent: Meitner (`019fbee7-45aa-7df3-b185-406e4e04aca3`).
+  Do not let these agents edit `Brockian/*.lean`, registry attestations, or generated registry
+  artifacts. Integration contract: review output → commit explicit paths only → no `git add -A`.
