@@ -458,3 +458,49 @@ claims:
       - Brockian.Goldbach.Parity.hasGoldbachRep_odd_iff
       - Brockian.Goldbach.Parity.gCount_five
     notes: "Local p=2 and odd-representation facts only."
+
+  - id: D5-LAPLACIAN-MODES
+    title: C5 adjacency/Laplacian diagonalized by Fourier eigenmodes
+    book: "Lean D5LaplacianModes (swarm #3)"
+    lean:
+      - Brockian.D5LaplacianModes.adjacency_eigenmode_cos
+      - Brockian.D5LaplacianModes.laplacian_eigenmode
+      - Brockian.D5LaplacianModes.adjacency_eigenmode
+    notes: "Eigenmode diagonalization; full-space projector commute not claimed beyond modes."
+
+  - id: C5-MULTIPLICITIES
+    title: C5 spectrum with multiplicities (adjacency and Laplacian)
+    book: "Lean C5SpectralMultiplicities (swarm #3)"
+    lean:
+      - Brockian.C5SpectralMultiplicities.multiplicity_two
+      - Brockian.C5SpectralMultiplicities.multiplicity_golden_sub_one
+      - Brockian.C5SpectralMultiplicities.multiplicity_neg_golden
+      - Brockian.C5SpectralMultiplicities.c5SpectrumMultiset_eq
+    notes: "Multiset counts of circulant modes, not geometric eigenspace dims."
+
+  - id: SS-WIRE
+    title: Unconditional singular-series positivity API for downstream
+    book: "Lean SingularSeries.Wire (swarm #3)"
+    lean:
+      - Brockian.SingularSeries.Wire.singular_series_pos_unconditional
+      - Brockian.SingularSeries.Wire.singular_series_pos_of_admissible
+      - Brockian.SingularSeries.Wire.singular_series_pos_supersedes_conditional
+    notes: "Re-export of Convergence.singular_series_pos'; drop-in without h_conv."
+
+  - id: CONFINING-SHAPE
+    title: Confining spectral shape packages (not RH)
+    book: "Lean Weyl.ConfiningShape (swarm #3)"
+    lean:
+      - Brockian.Weyl.ConfiningShape.not_discreteSpectrumCandidate_of_bound
+      - Brockian.Weyl.ConfiningShape.quadratic_compactResolventShape
+      - Brockian.Weyl.ConfiningShape.primeGaussian_not_compactResolventShape
+    notes: "Prop bundles for discrete/compact-resolvent shape; counting schemas open."
+
+  - id: GOLDEN-SCHEMA
+    title: Golden uniqueness as layered algebraic/rigidity schema
+    book: "Lean GoldenUniqueness (swarm #3)"
+    lean:
+      - Brockian.GoldenUniqueness.golden_unique_to_five
+      - Brockian.GoldenUniqueness.golden_sub_one_eq_two_cos
+      - Brockian.GoldenUniqueness.golden_not_in_prime_cycle_ne_five
+    notes: "Restates golden_unique_to_five; no numerology."
