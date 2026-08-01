@@ -59,3 +59,4 @@ import Brockian.ConfiningSpectralShape
 import Brockian.GaloisWhyFive
 import Brockian.PentagonIsotypic
 import Brockian.WeylDeficiencyRegularity
+import Brockian.PentagonalPartition

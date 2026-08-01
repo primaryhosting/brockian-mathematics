@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 704,
-    "DEFINITION": 184,
+    "PROVED": 714,
+    "DEFINITION": 185,
     "CONDITIONAL": 10,
     "CONJECTURE": 1
   },
@@ -14357,6 +14357,354 @@
       "quarantine": true,
       "ledger_run": "roadmap #9-12 \u2014 D5/C5 isotypic decomposition; AXLE @4.32",
       "provenance_note": "Isotypic projectors P_k on Fin5->C: idempotent, mutually orthogonal, complete (sum=id) for ALL functions; adjacency A=rho+rho^-1 diagonalized A*P_k=2cos(2pi k/5)*P_k; golden eigenvector (k=1 -> phi-1); eigenBasis diagonalizes; multiplicities {2:1, phi-1:2, -phi:2}. Structurally explains the golden eigenvalue. Not restated via Mathlib finrank eigenspace API (operational content stronger)."
+    },
+    {
+      "name": "Brockian.PentagonalPartition.partition_zero_card",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler pentagonal numbers + partition contact; AXLE @4.32",
+      "provenance_note": "Generalized pentagonal numbers g_k=k(3k-1)/2: well-definedness (2|numerator), doubling identity, reflection/step recurrences, nonnegativity, and INJECTIVITY (why PST exponents 0,1,2,5,7,12,15 are distinct); p(0)=1 against Mathlib Nat.Partition. The full pentagonal number theorem prod(1-x^n)=sum(-1)^k x^{g_k} and the p(n) recurrence are explicitly OPEN (Mathlib-absent). Header states NO rigorous C5/D5 bridge is claimed."
+    },
+    {
+      "name": "Brockian.PentagonalPartition.pent",
+      "kind": "def",
+      "module": "Brockian.PentagonalPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalPartition.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler pentagonal numbers + partition contact; AXLE @4.32",
+      "provenance_note": "Generalized pentagonal numbers g_k=k(3k-1)/2: well-definedness (2|numerator), doubling identity, reflection/step recurrences, nonnegativity, and INJECTIVITY (why PST exponents 0,1,2,5,7,12,15 are distinct); p(0)=1 against Mathlib Nat.Partition. The full pentagonal number theorem prod(1-x^n)=sum(-1)^k x^{g_k} and the p(n) recurrence are explicitly OPEN (Mathlib-absent). Header states NO rigorous C5/D5 bridge is claimed."
+    },
+    {
+      "name": "Brockian.PentagonalPartition.pent_injective",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler pentagonal numbers + partition contact; AXLE @4.32",
+      "provenance_note": "Generalized pentagonal numbers g_k=k(3k-1)/2: well-definedness (2|numerator), doubling identity, reflection/step recurrences, nonnegativity, and INJECTIVITY (why PST exponents 0,1,2,5,7,12,15 are distinct); p(0)=1 against Mathlib Nat.Partition. The full pentagonal number theorem prod(1-x^n)=sum(-1)^k x^{g_k} and the p(n) recurrence are explicitly OPEN (Mathlib-absent). Header states NO rigorous C5/D5 bridge is claimed."
+    },
+    {
+      "name": "Brockian.PentagonalPartition.pent_lt_succ",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler pentagonal numbers + partition contact; AXLE @4.32",
+      "provenance_note": "Generalized pentagonal numbers g_k=k(3k-1)/2: well-definedness (2|numerator), doubling identity, reflection/step recurrences, nonnegativity, and INJECTIVITY (why PST exponents 0,1,2,5,7,12,15 are distinct); p(0)=1 against Mathlib Nat.Partition. The full pentagonal number theorem prod(1-x^n)=sum(-1)^k x^{g_k} and the p(n) recurrence are explicitly OPEN (Mathlib-absent). Header states NO rigorous C5/D5 bridge is claimed."
+    },
+    {
+      "name": "Brockian.PentagonalPartition.pent_nonneg",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler pentagonal numbers + partition contact; AXLE @4.32",
+      "provenance_note": "Generalized pentagonal numbers g_k=k(3k-1)/2: well-definedness (2|numerator), doubling identity, reflection/step recurrences, nonnegativity, and INJECTIVITY (why PST exponents 0,1,2,5,7,12,15 are distinct); p(0)=1 against Mathlib Nat.Partition. The full pentagonal number theorem prod(1-x^n)=sum(-1)^k x^{g_k} and the p(n) recurrence are explicitly OPEN (Mathlib-absent). Header states NO rigorous C5/D5 bridge is claimed."
+    },
+    {
+      "name": "Brockian.PentagonalPartition.pent_reflect",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler pentagonal numbers + partition contact; AXLE @4.32",
+      "provenance_note": "Generalized pentagonal numbers g_k=k(3k-1)/2: well-definedness (2|numerator), doubling identity, reflection/step recurrences, nonnegativity, and INJECTIVITY (why PST exponents 0,1,2,5,7,12,15 are distinct); p(0)=1 against Mathlib Nat.Partition. The full pentagonal number theorem prod(1-x^n)=sum(-1)^k x^{g_k} and the p(n) recurrence are explicitly OPEN (Mathlib-absent). Header states NO rigorous C5/D5 bridge is claimed."
+    },
+    {
+      "name": "Brockian.PentagonalPartition.pent_succ",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler pentagonal numbers + partition contact; AXLE @4.32",
+      "provenance_note": "Generalized pentagonal numbers g_k=k(3k-1)/2: well-definedness (2|numerator), doubling identity, reflection/step recurrences, nonnegativity, and INJECTIVITY (why PST exponents 0,1,2,5,7,12,15 are distinct); p(0)=1 against Mathlib Nat.Partition. The full pentagonal number theorem prod(1-x^n)=sum(-1)^k x^{g_k} and the p(n) recurrence are explicitly OPEN (Mathlib-absent). Header states NO rigorous C5/D5 bridge is claimed."
+    },
+    {
+      "name": "Brockian.PentagonalPartition.pent_values",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler pentagonal numbers + partition contact; AXLE @4.32",
+      "provenance_note": "Generalized pentagonal numbers g_k=k(3k-1)/2: well-definedness (2|numerator), doubling identity, reflection/step recurrences, nonnegativity, and INJECTIVITY (why PST exponents 0,1,2,5,7,12,15 are distinct); p(0)=1 against Mathlib Nat.Partition. The full pentagonal number theorem prod(1-x^n)=sum(-1)^k x^{g_k} and the p(n) recurrence are explicitly OPEN (Mathlib-absent). Header states NO rigorous C5/D5 bridge is claimed."
+    },
+    {
+      "name": "Brockian.PentagonalPartition.two_dvd_pentNum",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler pentagonal numbers + partition contact; AXLE @4.32",
+      "provenance_note": "Generalized pentagonal numbers g_k=k(3k-1)/2: well-definedness (2|numerator), doubling identity, reflection/step recurrences, nonnegativity, and INJECTIVITY (why PST exponents 0,1,2,5,7,12,15 are distinct); p(0)=1 against Mathlib Nat.Partition. The full pentagonal number theorem prod(1-x^n)=sum(-1)^k x^{g_k} and the p(n) recurrence are explicitly OPEN (Mathlib-absent). Header states NO rigorous C5/D5 bridge is claimed."
+    },
+    {
+      "name": "Brockian.PentagonalPartition.two_mul_pent",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler pentagonal numbers + partition contact; AXLE @4.32",
+      "provenance_note": "Generalized pentagonal numbers g_k=k(3k-1)/2: well-definedness (2|numerator), doubling identity, reflection/step recurrences, nonnegativity, and INJECTIVITY (why PST exponents 0,1,2,5,7,12,15 are distinct); p(0)=1 against Mathlib Nat.Partition. The full pentagonal number theorem prod(1-x^n)=sum(-1)^k x^{g_k} and the p(n) recurrence are explicitly OPEN (Mathlib-absent). Header states NO rigorous C5/D5 bridge is claimed."
+    },
+    {
+      "name": "Brockian.PentagonalPartition.two_mul_pent_expand",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler pentagonal numbers + partition contact; AXLE @4.32",
+      "provenance_note": "Generalized pentagonal numbers g_k=k(3k-1)/2: well-definedness (2|numerator), doubling identity, reflection/step recurrences, nonnegativity, and INJECTIVITY (why PST exponents 0,1,2,5,7,12,15 are distinct); p(0)=1 against Mathlib Nat.Partition. The full pentagonal number theorem prod(1-x^n)=sum(-1)^k x^{g_k} and the p(n) recurrence are explicitly OPEN (Mathlib-absent). Header states NO rigorous C5/D5 bridge is claimed."
     },
     {
       "name": "Brockian.RiemannScaffold.BrockianSystem",

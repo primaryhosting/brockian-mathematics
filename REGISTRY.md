@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 10
 - **CONJECTURE**: 1
-- **DEFINITION**: 184
-- **PROVED**: 704
+- **DEFINITION**: 185
+- **PROVED**: 714
 
 ## Theorems
 
@@ -475,6 +475,17 @@
 | PROVED | `Brockian.PentagonIsotypic.neg_golden_eigenfrequencies` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
 | PROVED | `Brockian.PentagonIsotypic.rot_isotypic` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
 | PROVED | `Brockian.PentagonIsotypic.two_eigenfrequency` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| PROVED | `Brockian.PentagonalPartition.partition_zero_card` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
+| DEFINITION | `Brockian.PentagonalPartition.pent` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
+| PROVED | `Brockian.PentagonalPartition.pent_injective` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
+| PROVED | `Brockian.PentagonalPartition.pent_lt_succ` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
+| PROVED | `Brockian.PentagonalPartition.pent_nonneg` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
+| PROVED | `Brockian.PentagonalPartition.pent_reflect` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
+| PROVED | `Brockian.PentagonalPartition.pent_succ` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
+| PROVED | `Brockian.PentagonalPartition.pent_values` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
+| PROVED | `Brockian.PentagonalPartition.two_dvd_pentNum` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
+| PROVED | `Brockian.PentagonalPartition.two_mul_pent` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
+| PROVED | `Brockian.PentagonalPartition.two_mul_pent_expand` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
 | DEFINITION | `Brockian.RiemannScaffold.BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannScaffold.Gammaℝ_ne_zero_of_nontrivial` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | CONDITIONAL | `Brockian.RiemannScaffold.RH_of_BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |

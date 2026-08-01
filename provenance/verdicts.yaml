@@ -283,6 +283,13 @@ runs:
     ledger_run: "parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence"
     provenance_note: "wires singular_series_pos' into downstream (roadmap #15). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; verdict re-checked by Claude's gate before integration."
 
+  "pentagonal-partition":
+    module: Brockian.PentagonalPartition
+    verdict: admit
+    quarantine: true
+    ledger_run: "roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32"
+    provenance_note: "Generalized pentagonal numbers g_k=k(3k-1)/2: well-definedness (2|numerator), doubling identity, reflection/step recurrences, nonnegativity, and INJECTIVITY (why PST exponents 0,1,2,5,7,12,15 are distinct); p(0)=1 against Mathlib Nat.Partition. The full pentagonal number theorem prod(1-x^n)=sum(-1)^k x^{g_k} and the p(n) recurrence are explicitly OPEN (Mathlib-absent). Header states NO rigorous C5/D5 bridge is claimed."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────
   "weyl-gate1-bounded":
