@@ -6,10 +6,10 @@
 
 ## Summary
 
-- **CONDITIONAL**: 5
+- **CONDITIONAL**: 6
 - **CONJECTURE**: 2
-- **DEFINITION**: 82
-- **PROVED**: 314
+- **DEFINITION**: 115
+- **PROVED**: 375
 
 ## Theorems
 
@@ -19,6 +19,9 @@
 | PROVED | `Brockian.Admissibility.admissibility_count_three` | ✓ | verified | lean-4.32.0 | 74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2 |
 | DEFINITION | `Brockian.Admissibility.admissibleResidues` | ✓ | verified | lean-4.32.0 | 74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2 |
 | PROVED | `Brockian.Admissibility.universal_admissibility_count` | ✓ | verified | lean-4.32.0 | 74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2 |
+| PROVED | `Brockian.Admissibility.CRT.admissibleResidues_crt_card` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
+| PROVED | `Brockian.Admissibility.CRT.admissibleResidues_crt_card_two_primes` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
+| PROVED | `Brockian.Admissibility.CRT.admissible_count_three_five` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
 | DEFINITION | `Brockian.Automorphism.C5` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
 | DEFINITION | `Brockian.Automorphism.act` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
 | DEFINITION | `Brockian.Automorphism.dihedralHom` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
@@ -118,6 +121,70 @@
 | PROVED | `Brockian.MetallicFamily.metallic_one_unique_to_five` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.MetallicFamily.metallic_radicand_nonneg` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.MetallicFamily.silverGap_eq_three_sub_metallicMean_two` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Penrose.A` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.A_ae` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.A_ae_add` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.A_ae_coeFn` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.A_ae_memLp` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.A_ae_smul` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.A_raw` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.A_raw_bound` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.A_raw_ptwise_bound` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.D` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.D_ae` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.D_ae_add` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.D_ae_coeFn` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.D_ae_memLp` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.D_ae_smul` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.D_raw` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.D_raw_bound_ptwise` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.D_raw_norm_bound` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.Delta` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.Delta_bounded` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.L2` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.PenroseGraph` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.Vertices` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.Window` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.adjacent` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.adjacent_loopless` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.adjacent_symm` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.ae_eq_of_count` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.deg_fn` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.deg_fn_bound` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.degree_bound` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.gamma` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.lintegral_count_eq_tsum` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.lintegral_sum_neighbors_le` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.memLp_A_raw` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.memLp_D_raw` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.mu` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.neighbor_subset` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.norm_A_le` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.norm_D_le` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.pentagonVertex` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.pentagonVertex_norm` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.phi` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.phi_bar` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.phi_equation` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.phi_gt_one` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.phi_ne_zero` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.phi_pos` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.phi_product_conjugate` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.phi_reciprocal` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.phi_squared` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.phi_sum_conjugate` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.potentialNeighbors` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.potentialNeighbors_finite` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.proj_para` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.proj_perp` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.proj_perp_real` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.rotation_is_multiplication` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.sqrt5_gt_one` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.sqrt5_gt_two` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.sum_sq_le_card_mul_sum_sq` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| DEFINITION | `Brockian.Penrose.zeta5` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.zeta5_norm` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.Penrose.zeta5_pow_five` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
 | DEFINITION | `Brockian.RiemannScaffold.BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannScaffold.Gammaℝ_ne_zero_of_nontrivial` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | CONDITIONAL | `Brockian.RiemannScaffold.RH_of_BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
@@ -321,21 +388,21 @@
 | PROVED | `Brockian.Weyl.ESA.clm_isSymmetric` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
 | PROVED | `Brockian.Weyl.ESA.id_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
 | PROVED | `Brockian.Weyl.ESA.vec_eq_zero_of_inner` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
-| PROVED | `Brockian.Weyl.Extension.adjoint_closure` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.Extension.adjoint_eigen_I_eq_zero_of_essSA` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.Extension.adjoint_eigen_neg_I_eq_zero_of_essSA` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.Extension.adjoint_graph_topologicalClosure_eq` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.Extension.closure_eigenvalue_im_zero` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.Extension.closure_isSymmetric` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.Extension.closure_le_of_isClosed_extension` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.Extension.closure_le_of_isSelfAdjoint_extension` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.Extension.eigenvalue_im_zero` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.Extension.essentiallySelfAdjoint_iff'` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.Extension.isSelfAdjoint_closure_iff_eq_adjoint` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.Extension.isSymmetric_of_le_adjoint` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.Extension.le_closure_le_adjoint` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.Extension.smulPMap_closure_eigenvalue_im_zero` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.Extension.smulPMap_closure_isSymmetric` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Extension.adjoint_closure` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Extension.adjoint_eigen_I_eq_zero_of_essSA` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Extension.adjoint_eigen_neg_I_eq_zero_of_essSA` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Extension.adjoint_graph_topologicalClosure_eq` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Extension.closure_eigenvalue_im_zero` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Extension.closure_isSymmetric` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Extension.closure_le_of_isClosed_extension` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Extension.closure_le_of_isSelfAdjoint_extension` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Extension.eigenvalue_im_zero` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Extension.essentiallySelfAdjoint_iff'` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Extension.isSelfAdjoint_closure_iff_eq_adjoint` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Extension.isSymmetric_of_le_adjoint` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Extension.le_closure_le_adjoint` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Extension.smulPMap_closure_eigenvalue_im_zero` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Extension.smulPMap_closure_isSymmetric` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.FreeLaplacian.FreeLaplacianModel` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.FreeLaplacian.conjCLM` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.FreeLaplacian.dense_domain_vadd_clm` | ✓ | verified | lean-4.32.0 |  |
@@ -418,3 +485,31 @@
 | PROVED | `Brockian.Weyl.SchrodingerESA.free_plus_primeGaussian_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
 | DEFINITION | `Brockian.Weyl.SchrodingerESA.gate1_chain_status` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
 | PROVED | `Brockian.Weyl.SchrodingerESA.primeGaussian_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
+| DEFINITION | `Brockian.Weyl.SchrodingerMinimal.D2` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.D2_apply` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| DEFINITION | `Brockian.Weyl.SchrodingerMinimal.H2` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| DEFINITION | `Brockian.Weyl.SchrodingerMinimal.Lconj` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.Lconj_apply` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| DEFINITION | `Brockian.Weyl.SchrodingerMinimal.MinimalGate1Status` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.coeFn_schwartzToL2` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| DEFINITION | `Brockian.Weyl.SchrodingerMinimal.coreMap` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.coreMap_apply` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.coreMap_symm` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| DEFINITION | `Brockian.Weyl.SchrodingerMinimal.deficiencyRepresentsODE_of_adjoint_eigenvector` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.inner_toLp` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.isSelfAdjoint_potentialMulCLM` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.kinetic_symm` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| DEFINITION | `Brockian.Weyl.SchrodingerMinimal.minimal_gate1_status` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| DEFINITION | `Brockian.Weyl.SchrodingerMinimal.potentialMulCLM` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.potential_symm` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| DEFINITION | `Brockian.Weyl.SchrodingerMinimal.schrodingerPMap` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_dense` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_domain` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_isSymmetric` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_toFun_ofInjective` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| CONDITIONAL | `Brockian.Weyl.SchrodingerMinimal.schrodinger_essentiallySelfAdjoint_of_ode` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| DEFINITION | `Brockian.Weyl.SchrodingerMinimal.schwartzToL2` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.schwartzToL2_apply` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.schwartzToL2_injective` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.schwartz_ibp1` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| PROVED | `Brockian.Weyl.SchrodingerMinimal.schwartz_ibp2` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |

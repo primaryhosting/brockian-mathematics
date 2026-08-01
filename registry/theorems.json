@@ -1,10 +1,10 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 314,
-    "DEFINITION": 82,
+    "PROVED": 375,
+    "DEFINITION": 115,
     "CONJECTURE": 2,
-    "CONDITIONAL": 5
+    "CONDITIONAL": 6
   },
   "theorems": [
     {
@@ -130,6 +130,102 @@
       "quarantine": true,
       "ledger_run": "74 (a0ce\u2026) / 49 / 105 (independent replications) / 119 module 2",
       "provenance_note": "citation-grade ZMod q\u2212\u03bd law; q=3\u21921 (twin), q=5\u21923 (Brockian)"
+    },
+    {
+      "name": "Brockian.Admissibility.CRT.admissibleResidues_crt_card",
+      "kind": "theorem",
+      "module": "Brockian.Admissibility.CRT",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CRT.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "paper-audit target \u2014 CRT product |A_{q1q2}|=|A_q1|\u00b7|A_q2|; AXLE @4.32",
+      "provenance_note": "general coprime CRT admissibility count = plain product (p-2)(q-2); REFUTES Paper_BV_Final \u00a76.1's correction factor (would give non-integer 5.25 for p=3,q=5)."
+    },
+    {
+      "name": "Brockian.Admissibility.CRT.admissibleResidues_crt_card_two_primes",
+      "kind": "theorem",
+      "module": "Brockian.Admissibility.CRT",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CRT.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "paper-audit target \u2014 CRT product |A_{q1q2}|=|A_q1|\u00b7|A_q2|; AXLE @4.32",
+      "provenance_note": "general coprime CRT admissibility count = plain product (p-2)(q-2); REFUTES Paper_BV_Final \u00a76.1's correction factor (would give non-integer 5.25 for p=3,q=5)."
+    },
+    {
+      "name": "Brockian.Admissibility.CRT.admissible_count_three_five",
+      "kind": "theorem",
+      "module": "Brockian.Admissibility.CRT",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CRT.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "paper-audit target \u2014 CRT product |A_{q1q2}|=|A_q1|\u00b7|A_q2|; AXLE @4.32",
+      "provenance_note": "general coprime CRT admissibility count = plain product (p-2)(q-2); REFUTES Paper_BV_Final \u00a76.1's correction factor (would give non-integer 5.25 for p=3,q=5)."
     },
     {
       "name": "Brockian.Automorphism.C5",
@@ -3203,6 +3299,1962 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.Penrose.A",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.A_ae",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.A_ae_add",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.A_ae_coeFn",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.A_ae_memLp",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.A_ae_smul",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.A_raw",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.A_raw_bound",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.A_raw_ptwise_bound",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.D",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.D_ae",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.D_ae_add",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.D_ae_coeFn",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.D_ae_memLp",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.D_ae_smul",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.D_raw",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.D_raw_bound_ptwise",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.D_raw_norm_bound",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.Delta",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.Delta_bounded",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.L2",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.PenroseGraph",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.Vertices",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.Window",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.adjacent",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.adjacent_loopless",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.adjacent_symm",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.ae_eq_of_count",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.deg_fn",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.deg_fn_bound",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.degree_bound",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.gamma",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.lintegral_count_eq_tsum",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.lintegral_sum_neighbors_le",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.memLp_A_raw",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.memLp_D_raw",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.mu",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.neighbor_subset",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.norm_A_le",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.norm_D_le",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.pentagonVertex",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.pentagonVertex_norm",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.phi",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.phi_bar",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.phi_equation",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.phi_gt_one",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.phi_ne_zero",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.phi_pos",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.phi_product_conjugate",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.phi_reciprocal",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.phi_squared",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.phi_sum_conjugate",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.potentialNeighbors",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.potentialNeighbors_finite",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.proj_para",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.proj_perp",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.proj_perp_real",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.rotation_is_multiplication",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.sqrt5_gt_one",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.sqrt5_gt_two",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.sum_sq_le_card_mul_sum_sq",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.zeta5",
+      "kind": "def",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.zeta5_norm",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.Penrose.zeta5_pow_five",
+      "kind": "theorem",
+      "module": "Brockian.Penrose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Penrose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
+      "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
     },
     {
       "name": "Brockian.RiemannScaffold.BrockianSystem",
@@ -9551,9 +11603,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
+      "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.Extension.adjoint_eigen_I_eq_zero_of_essSA",
@@ -9583,9 +11635,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
+      "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.Extension.adjoint_eigen_neg_I_eq_zero_of_essSA",
@@ -9615,9 +11667,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
+      "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.Extension.adjoint_graph_topologicalClosure_eq",
@@ -9647,9 +11699,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
+      "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.Extension.closure_eigenvalue_im_zero",
@@ -9679,9 +11731,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
+      "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.Extension.closure_isSymmetric",
@@ -9711,9 +11763,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
+      "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.Extension.closure_le_of_isClosed_extension",
@@ -9743,9 +11795,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
+      "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.Extension.closure_le_of_isSelfAdjoint_extension",
@@ -9775,9 +11827,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
+      "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.Extension.eigenvalue_im_zero",
@@ -9807,9 +11859,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
+      "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.Extension.essentiallySelfAdjoint_iff'",
@@ -9839,9 +11891,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
+      "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.Extension.isSelfAdjoint_closure_iff_eq_adjoint",
@@ -9871,9 +11923,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
+      "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.Extension.isSymmetric_of_le_adjoint",
@@ -9903,9 +11955,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
+      "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.Extension.le_closure_le_adjoint",
@@ -9935,9 +11987,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
+      "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.Extension.smulPMap_closure_eigenvalue_im_zero",
@@ -9967,9 +12019,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
+      "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.Extension.smulPMap_closure_isSymmetric",
@@ -9999,9 +12051,9 @@
         }
       },
       "conditional_rung": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
+      "quarantine": true,
+      "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
+      "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.FreeLaplacian.FreeLaplacianModel",
@@ -12558,6 +14610,862 @@
       "quarantine": true,
       "ledger_run": "2026-08-01 \u2014 Gate-1 end-to-end assembly under ODE identification",
       "provenance_note": "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.D2",
+      "kind": "def",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.D2_apply",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.H2",
+      "kind": "def",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.Lconj",
+      "kind": "def",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.Lconj_apply",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.MinimalGate1Status",
+      "kind": "def",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.coeFn_schwartzToL2",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.coreMap",
+      "kind": "def",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.coreMap_apply",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.coreMap_symm",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.deficiencyRepresentsODE_of_adjoint_eigenvector",
+      "kind": "def",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.inner_toLp",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.isSelfAdjoint_potentialMulCLM",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.kinetic_symm",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.minimal_gate1_status",
+      "kind": "def",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.potentialMulCLM",
+      "kind": "def",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.potential_symm",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schrodingerPMap",
+      "kind": "def",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_dense",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_isSymmetric",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schrodingerPMap_toFun_ofInjective",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schrodinger_essentiallySelfAdjoint_of_ode",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "open",
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "ESA of the concrete -d\u00b2/dx\u00b2+V GIVEN deficiencyRepresentsODE (elliptic regularity, Mathlib-absent). Composes Bridge.no_nonzero_L2_solution + SchrodingerESA. Implication carries real work."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schwartzToL2",
+      "kind": "def",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schwartzToL2_apply",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schwartzToL2_injective",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schwartz_ibp1",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerMinimal.schwartz_ibp2",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.SchrodingerMinimal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SchrodingerMinimal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
+      "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
     }
   ]
 }

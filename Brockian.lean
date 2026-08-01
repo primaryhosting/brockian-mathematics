@@ -36,3 +36,6 @@ import Brockian.WeylOperatorChoice
 import Brockian.MetallicFamily
 import Brockian.WeylSelfAdjointExtension
 import Brockian.WeylKatoUnbounded
+import Brockian.AdmissibilityCRT
+import Brockian.PenroseL2
+import Brockian.WeylSchrodingerMinimal
