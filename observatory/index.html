@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Observatory — Brockian Mathematics / Riemann Labs</title>
+<style>
+  :root {
+    --bg: #0f1218; --panel: #171c26; --text: #e8ecf4; --muted: #9aa3b5;
+    --line: #2a3344; --v3: #1f8a4c; --cond: #b8860b; --conj: #6b5b95;
+    --no: #8b2942; --ari: #2a6f97; --open: #5c6b7a; --def: #3d4f66;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    background: var(--bg); color: var(--text); line-height: 1.5;
+  }
+  header.hero {
+    padding: 2.5rem 1.5rem 1.5rem; border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, #141a24 0%, var(--bg) 100%);
+  }
+  header.hero h1 { margin: 0 0 0.35rem; font-weight: 600; letter-spacing: 0.02em; }
+  header.hero .sub { color: var(--muted); max-width: 48rem; }
+  header.hero .meta { margin-top: 1rem; color: var(--muted); font-size: 0.9rem; }
+  .pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+  .pill {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.75rem; padding: 0.25rem 0.55rem; border: 1px solid var(--line);
+    border-radius: 999px; background: var(--panel); color: var(--muted);
+  }
+  .pill.reg { border-color: #3a4a30; color: #b5d4a8; }
+  .pill b { color: var(--text); }
+  main { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+  .charter {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+    padding: 1rem 1.25rem; color: var(--muted); white-space: pre-wrap;
+    font-size: 0.95rem; margin-bottom: 2rem;
+  }
+  section.group { margin-bottom: 2.5rem; }
+  section.group h2 {
+    font-size: 1.15rem; font-weight: 600; border-bottom: 1px solid var(--line);
+    padding-bottom: 0.4rem; margin: 0 0 1rem;
+  }
+  section.group h2 .count {
+    font-family: ui-monospace, monospace; font-size: 0.8rem; color: var(--muted);
+    font-weight: 400; margin-left: 0.4rem;
+  }
+  .grid { display: grid; gap: 1rem; }
+  article.claim {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+    padding: 1rem 1.15rem;
+  }
+  article.claim header {
+    display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;
+    margin-bottom: 0.35rem;
+  }
+  .cid {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.8rem; color: #7eb8ff; letter-spacing: 0.03em;
+  }
+  article.claim h3 { margin: 0.2rem 0 0.35rem; font-size: 1.05rem; font-weight: 600; }
+  .book { color: var(--muted); font-size: 0.88rem; margin: 0 0 0.5rem; }
+  .notes { color: #c5cddc; font-size: 0.9rem; margin: 0.4rem 0 0.75rem; }
+  .warn { color: #f0a0a0; font-size: 0.85rem; }
+  table.decls {
+    width: 100%; border-collapse: collapse; font-size: 0.8rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  table.decls th, table.decls td {
+    text-align: left; padding: 0.35rem 0.4rem; border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  table.decls th { color: var(--muted); font-weight: 500; }
+  code { font-size: 0.85em; }
+  .badge {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em;
+    padding: 0.2rem 0.45rem; border-radius: 4px; white-space: nowrap;
+  }
+  .badge-v3 { background: var(--v3); color: #eafff0; }
+  .badge-cond { background: var(--cond); color: #1a1200; }
+  .badge-conj { background: var(--conj); color: #f3eeff; }
+  .badge-def { background: var(--def); color: #dce6f5; }
+  .badge-v2 { background: #2d5a7a; color: #e0f0ff; }
+  .badge-no { background: var(--no); color: #ffe8ee; }
+  .badge-v0 { background: #3a3a3a; color: #ddd; }
+  .badge-open { background: var(--open); color: #eef2f6; }
+  .badge-ari { background: var(--ari); color: #e8f6ff; }
+  .badge-bad { background: #5a1a1a; color: #ffd0d0; }
+  footer {
+    max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem 3rem;
+    color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line);
+  }
+  a { color: #8ec7ff; }
+  nav.toc { margin: 1rem 0 2rem; }
+  nav.toc a {
+    display: inline-block; margin: 0.15rem 0.35rem 0.15rem 0;
+    font-family: ui-monospace, monospace; font-size: 0.75rem;
+    color: #8ec7ff; text-decoration: none; border: 1px solid var(--line);
+    padding: 0.15rem 0.4rem; border-radius: 4px;
+  }
+  nav.toc a:hover { background: var(--panel); }
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>Observatory</h1>
+  <p class="sub">Brockian Mathematics / Riemann Labs — public claim surface. Badges are derived from the
+  machine-verified Lean registry; they are never hand-painted.</p>
+  <div class="pills"><span class='pill reg'>CONDITIONAL: <b>4</b></span> <span class='pill reg'>CONJECTURE: <b>2</b></span> <span class='pill reg'>DEFINITION: <b>69</b></span> <span class='pill reg'>PROVED: <b>209</b></span></div>
+  <div class="pills"><span class='pill'>proved: <b>25</b></span> <span class='pill'>not_claimed: <b>3</b></span> <span class='pill'>conditional: <b>2</b></span> <span class='pill'>aristotle: <b>2</b></span> <span class='pill'>open: <b>1</b></span> <span class='pill'>conjecture: <b>1</b></span></div>
+  <p class="meta">Generated 2026-08-01T15:52:05Z · from <code>registry/theorems.json</code> +
+  <code>observatory/claim_map.yaml</code></p>
+</header>
+<main>
+  <div class="charter">Badges are derived from the Lean registry when `lean` is non-empty.
+PROVED requires AXLE-verified + axiom-clean theorems (see README).
+Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
+  <nav class="toc" aria-label="Claim index">
+    <a href="#BM-MAP-001">BM-MAP-001</a><a href="#BM-RET-001">BM-RET-001</a><a href="#BM-PRIME-001">BM-PRIME-001</a><a href="#BM-TRANS-001">BM-TRANS-001</a><a href="#AS-1">AS-1</a><a href="#GEOM-C5">GEOM-C5</a><a href="#AUT-D5">AUT-D5</a><a href="#SPEC-GOLDEN-FIVE">SPEC-GOLDEN-FIVE</a><a href="#FIB-FIVE">FIB-FIVE</a><a href="#GC-1">GC-1</a><a href="#GC-2">GC-2</a><a href="#GC-3">GC-3</a><a href="#GC-TRANSFER">GC-TRANSFER</a><a href="#GC-SCHEMA">GC-SCHEMA</a><a href="#GC-HL">GC-HL</a><a href="#TWIN-GRAMMAR">TWIN-GRAMMAR</a><a href="#SILVER-GAP">SILVER-GAP</a><a href="#GATE1-POTENTIAL">GATE1-POTENTIAL</a><a href="#WEYL-GREEN">WEYL-GREEN</a><a href="#WEYL-DISK">WEYL-DISK</a><a href="#WEYL-OPERATOR">WEYL-OPERATOR</a><a href="#WEYL-ESA">WEYL-ESA</a><a href="#WEYL-CAYLEY">WEYL-CAYLEY</a><a href="#WEYL-CHAIN">WEYL-CHAIN</a><a href="#WEYL-DICHOTOMY">WEYL-DICHOTOMY</a><a href="#WEYL-LP-CONST">WEYL-LP-CONST</a><a href="#WEYL-CLOSURE">WEYL-CLOSURE</a><a href="#RH-XI-BRIDGE">RH-XI-BRIDGE</a><a href="#RH-BROCKIAN-SYSTEM">RH-BROCKIAN-SYSTEM</a><a href="#OPEN-TWIN-INF">OPEN-TWIN-INF</a><a href="#OPEN-GOLDBACH">OPEN-GOLDBACH</a><a href="#OPEN-RH">OPEN-RH</a><a href="#ARISTOTLE-BOUNDED-V">ARISTOTLE-BOUNDED-V</a><a href="#ARISTOTLE-KATO">ARISTOTLE-KATO</a>
+  </nav>
+  <section class='group'><h2>Proved (V3 / Lean-run) <span class='count'>25</span></h2><div class='grid'>
+    <article class="claim" id="BM-MAP-001">
+      <header>
+        <span class="cid">BM-MAP-001</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Canonical map B(n) = n ω^{n−1} (radial fidelity, phase law, injectivity)</h3>
+      <p class="book">Curved Number Line · Vol I · The Turn (BM-MAP-001)</p>
+      <p class='notes'>Book margin V3; Core holds the cyclotomic/φ identities that underwrite the figure.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>fifth_root_of_unity</code></td><td>PROVED</td><td><code>Brockian/Core.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>cos_2pi_5</code></td><td>PROVED</td><td><code>Brockian/Core.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="BM-PRIME-001">
+      <header>
+        <span class="cid">BM-PRIME-001</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Dirichlet on the four active rays (infinitely many primes per residue)</h3>
+      <p class="book">Curved Number Line · Vol I · The Primes Take Their Seats (BM-PRIME-001)</p>
+      <p class='notes'>Imported Dirichlet via Mathlib; V3 when registry PROVED.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>each_ray_has_infinitely_many_primes</code></td><td>PROVED</td><td><code>Brockian/Core.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="BM-TRANS-001">
+      <header>
+        <span class="cid">BM-TRANS-001</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Twin transitions mod 5 — only three roads (1→3, 2→4, 4→1)</h3>
+      <p class="book">Curved Number Line · Vol I · twin transitions figure</p>
+      <p class='notes'>Grammar of permitted jumps; infinitude of twins NOT claimed.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>forbidden_transition</code></td><td>PROVED</td><td><code>Brockian/TransitionKernel.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>kernel_row_sum</code></td><td>PROVED</td><td><code>Brockian/TransitionKernel.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>brockian_table_card</code></td><td>PROVED</td><td><code>Brockian/TransitionKernel.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="AS-1">
+      <header>
+        <span class="cid">AS-1</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Admissibility / selection rules (q−ν law)</h3>
+      <p class="book">Curved Number Line · Vol II · Affine selection</p>
+      <p class='notes'>q=3 → 1 (twin constraint); q=5 → 3 (Brockian).</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>universal_admissibility_count</code></td><td>PROVED</td><td><code>Brockian/Admissibility.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>admissibility_count_three</code></td><td>PROVED</td><td><code>Brockian/Admissibility.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>admissibility_count_five</code></td><td>PROVED</td><td><code>Brockian/Admissibility.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="GEOM-C5">
+      <header>
+        <span class="cid">GEOM-C5</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Pentagon geometry — two distances, golden diagonal</h3>
+      <p class="book">Curved Number Line · plates / Vol I–II geometry</p>
+      
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>pentagon_two_distances</code></td><td>PROVED</td><td><code>Brockian/Geometry.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>pentagon_golden_diagonal</code></td><td>PROVED</td><td><code>Brockian/Geometry.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>golden_ratio_in_C5_spectrum</code></td><td>PROVED</td><td><code>Brockian/Geometry.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>d5_card</code></td><td>PROVED</td><td><code>Brockian/Geometry.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="AUT-D5">
+      <header>
+        <span class="cid">AUT-D5</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Faithful D₅ action on C₅</h3>
+      <p class="book">Curved Number Line · dihedral symmetry</p>
+      <p class='notes'>Full Aut(C₅)≅D₅ iso not claimed (see PORT-QUEUE).</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>dihedral_action_faithful</code></td><td>PROVED</td><td><code>Brockian/Automorphism.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="SPEC-GOLDEN-FIVE">
+      <header>
+        <span class="cid">SPEC-GOLDEN-FIVE</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Golden ratio unique to five in cycle spectrum</h3>
+      <p class="book">Curved Number Line · Expansion · fingerprint</p>
+      <p class='notes'>Flagship recovered theorems (runs 73/88).</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>golden_unique_to_five</code></td><td>PROVED</td><td><code>Brockian/Spectral.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>pentagon_lambda2_phi</code></td><td>PROVED</td><td><code>Brockian/Connectivity.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>lambda2_eq</code></td><td>PROVED</td><td><code>Brockian/Connectivity.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="FIB-FIVE">
+      <header>
+        <span class="cid">FIB-FIVE</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Fibonacci–five divisibility</h3>
+      <p class="book">Curved Number Line · Expansion · 5 | F_n ⇔ 5 | n</p>
+      
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>fib_five_dvd</code></td><td>PROVED</td><td><code>Brockian/Core.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>binet_formula</code></td><td>PROVED</td><td><code>Brockian/Core.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="GC-1">
+      <header>
+        <span class="cid">GC-1</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Local Goldbach count g_p(c) = p − 2 + [c=0]</h3>
+      <p class="book">Curved Number Line · Expansion / Vol III · The Local Pulse</p>
+      <p class='notes'>Exact for every prime p.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>gCount_eq</code></td><td>PROVED</td><td><code>Brockian/GoldbachComb.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="GC-2">
+      <header>
+        <span class="cid">GC-2</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Centered local count</h3>
+      <p class="book">Curved Number Line · Goldbach comb</p>
+      
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>gCount_centered</code></td><td>PROVED</td><td><code>Brockian/GoldbachComb.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="GC-3">
+      <header>
+        <span class="cid">GC-3</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Local covariance theorem</h3>
+      <p class="book">Curved Number Line · Expansion · twin comb / covariance</p>
+      <p class='notes'>Local kernel only.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>local_covariance</code></td><td>PROVED</td><td><code>Brockian/GoldbachComb.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="GC-HL">
+      <header>
+        <span class="cid">GC-HL</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Hardy–Littlewood singular-series factor lemmas</h3>
+      <p class="book">Lean GoldbachLemmas / SingularSeries</p>
+      <p class='notes'>Unconditional factor structure; full singular-series positivity may be CONDITIONAL.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>gFactor_pos</code></td><td>PROVED</td><td><code>Brockian/GoldbachLemmas.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>gProduct_pos</code></td><td>PROVED</td><td><code>Brockian/GoldbachLemmas.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>localFactor</code></td><td>DEFINITION</td><td><code>Brockian/SingularSeries.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="TWIN-GRAMMAR">
+      <header>
+        <span class="cid">TWIN-GRAMMAR</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Twin / cousin run-caps and pins mod 3</h3>
+      <p class="book">Curved Number Line · Vol II · three roads</p>
+      <p class='notes'>Grammar and caps; twin infinitude not claimed.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>cousin_pins_mod_three</code></td><td>PROVED</td><td><code>Brockian/TransitionKernel.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>cousin_run_cap</code></td><td>PROVED</td><td><code>Brockian/TransitionKernel.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>gap10_run_cap</code></td><td>PROVED</td><td><code>Brockian/TransitionKernel.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="SILVER-GAP">
+      <header>
+        <span class="cid">SILVER-GAP</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Silver gap / five-line spectrum scaffolding</h3>
+      <p class="book">Curved Number Line · Expansion · five-line alphabet</p>
+      <p class='notes'>SilverGapRigidityTarget is CONJECTURE container if registered as such.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>silverGap</code></td><td>DEFINITION</td><td><code>Brockian/Sieve.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>H3_det</code></td><td>PROVED</td><td><code>Brockian/Sieve.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>H3_ground</code></td><td>PROVED</td><td><code>Brockian/Sieve.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>SilverGapRigidityTarget</code></td><td>CONJECTURE</td><td><code>Brockian/Sieve.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="GATE1-POTENTIAL">
+      <header>
+        <span class="cid">GATE1-POTENTIAL</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Bounded prime-Gaussian multiplication operator (Gate 1 piece)</h3>
+      <p class="book">Lean SpectralGate1; Gate 1 partial</p>
+      <p class='notes'>Potential term bounded; full −Δ+V ess-self-adjoint still open.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>abs_primeGaussian_le_two</code></td><td>PROVED</td><td><code>Brockian/SpectralGate1.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>primeGaussianMulCLM</code></td><td>DEFINITION</td><td><code>Brockian/SpectralGate1.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="WEYL-GREEN">
+      <header>
+        <span class="cid">WEYL-GREEN</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Wronskian constancy + integrated Green identity</h3>
+      <p class="book">Lean Weyl / Gate 1 ODE base</p>
+      
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>wronskian_isConst</code></td><td>PROVED</td><td><code>Brockian/Weyl.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>green_identity_integral</code></td><td>PROVED</td><td><code>Brockian/Weyl.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>lagrange_identity</code></td><td>PROVED</td><td><code>Brockian/Weyl.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="WEYL-DISK">
+      <header>
+        <span class="cid">WEYL-DISK</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Finite-b nested-circle geometry (exact radius, nesting)</h3>
+      <p class="book">Lean Weyl.Disk</p>
+      <p class='notes'>Finite-b complete; b→∞ dichotomy on radii in WEYL-DICHOTOMY.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>weyl_disk_circle</code></td><td>PROVED</td><td><code>Brockian/Disk.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>radius_formula</code></td><td>PROVED</td><td><code>Brockian/Disk.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>weyl_radius_antitone</code></td><td>PROVED</td><td><code>Brockian/Disk.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>weyl_nested_circle</code></td><td>PROVED</td><td><code>Brockian/Disk.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="WEYL-OPERATOR">
+      <header>
+        <span class="cid">WEYL-OPERATOR</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Symmetric LinearPMap framework + key inequality</h3>
+      <p class="book">Lean Weyl.Operator</p>
+      <p class='notes'>Predicate + inequality; ESA inhabited elsewhere.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>norm_sub_smul_ge</code></td><td>PROVED</td><td><code>Brockian/Operator.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>eq_zero_of_apply_eq_smul</code></td><td>PROVED</td><td><code>Brockian/Operator.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>EssentiallySelfAdjoint</code></td><td>DEFINITION</td><td><code>Brockian/Operator.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="WEYL-ESA">
+      <header>
+        <span class="cid">WEYL-ESA</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>EssentiallySelfAdjoint inhabited (bounded self-adjoint CLMs)</h3>
+      <p class="book">Lean Weyl.ESA</p>
+      <p class='notes'>Closes Operator open blocker for bounded case.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>clm_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/ESA.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>id_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/ESA.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="WEYL-CAYLEY">
+      <header>
+        <span class="cid">WEYL-CAYLEY</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Von Neumann criterion — ESA ↔ dense ran(T±i)</h3>
+      <p class="book">Lean Weyl.Cayley</p>
+      <p class='notes'>Abstract criterion; applying to −Δ+V still open.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>essentiallySelfAdjoint_iff</code></td><td>PROVED</td><td><code>Brockian/Cayley.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>mem_orthogonal_rangeSMulSub_iff</code></td><td>PROVED</td><td><code>Brockian/Cayley.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>norm_add_I_smul_eq</code></td><td>PROVED</td><td><code>Brockian/Cayley.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="WEYL-CHAIN">
+      <header>
+        <span class="cid">WEYL-CHAIN</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Dense ranges ⇒ EssentiallySelfAdjoint</h3>
+      <p class="book">Lean Weyl.Chain</p>
+      <p class='notes'>Glue; open link is producing density for the Schrödinger operator.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>essSelfAdjoint_of_dense_ranges</code></td><td>PROVED</td><td><code>Brockian/Chain.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="WEYL-DICHOTOMY">
+      <header>
+        <span class="cid">WEYL-DICHOTOMY</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>b→∞ radius dichotomy (r→0 ↔ I→∞)</h3>
+      <p class="book">Lean Weyl.Dichotomy (+ DiskBridge, ConstMass)</p>
+      <p class='notes'>Radius side PROVED. Aristotle 50ca67ca largely redundant; de-dupe on return.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>radius_tendsto_zero_iff</code></td><td>PROVED</td><td><code>Brockian/Dichotomy.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>limitPoint_or_limitCircle_radius</code></td><td>PROVED</td><td><code>Brockian/Dichotomy.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>limitPointRadius_radius_tendsto_zero</code></td><td>PROVED</td><td><code>Brockian/Dichotomy.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>diskRadius_eq_weylRadius</code></td><td>PROVED</td><td><code>Brockian/DiskBridge.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>growing_exp_radius_tendsto_zero</code></td><td>PROVED</td><td><code>Brockian/ConstMass.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>exists_growing_mode_limitPointRadius</code></td><td>PROVED</td><td><code>Brockian/ConstMass.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="WEYL-LP-CONST">
+      <header>
+        <span class="cid">WEYL-LP-CONST</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Constant potential is limit-point at ∞</h3>
+      <p class="book">Lean Weyl.LP</p>
+      <p class='notes'>Real instance; general bounded-V is Aristotle 17ad1895.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>const_potential_isLimitPoint</code></td><td>PROVED</td><td><code>Brockian/LP.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="WEYL-CLOSURE">
+      <header>
+        <span class="cid">WEYL-CLOSURE</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>Closure chain T ⊆ T̄ ⊆ T*, deficiency closed</h3>
+      <p class="book">Lean Weyl.Closure</p>
+      
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>symmetric_le_adjoint</code></td><td>PROVED</td><td><code>Brockian/Closure.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>symmetric_closure_le_adjoint</code></td><td>PROVED</td><td><code>Brockian/Closure.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>isClosed_deficiencySet</code></td><td>PROVED</td><td><code>Brockian/Closure.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="RH-XI-BRIDGE">
+      <header>
+        <span class="cid">RH-XI-BRIDGE</span>
+        <span class="badge badge-v3">V3-LEAN-RUN</span>
+      </header>
+      <h3>ξ-bridge (unconditional scaffolding toward Mathlib RH)</h3>
+      <p class="book">Lean RiemannScaffold</p>
+      <p class='notes'>Scaffold only. RH itself not claimed.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>riemannXi</code></td><td>DEFINITION</td><td><code>Brockian/RiemannScaffold.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>riemannXi_eq_zero_of_nontrivial_zeta_zero</code></td><td>PROVED</td><td><code>Brockian/RiemannScaffold.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>RiemannHypothesis_of_forall_xi_zero</code></td><td>PROVED</td><td><code>Brockian/RiemannScaffold.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>Gammaℝ_ne_zero_of_nontrivial</code></td><td>PROVED</td><td><code>Brockian/RiemannScaffold.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    </div></section><section class='group'><h2>Conditional schemas <span class='count'>2</span></h2><div class='grid'>
+    <article class="claim" id="GC-SCHEMA">
+      <header>
+        <span class="cid">GC-SCHEMA</span>
+        <span class="badge badge-cond">CONDITIONAL</span>
+      </header>
+      <h3>Spectral model ⇒ Goldbach (conditional schema)</h3>
+      <p class="book">Lean GoldbachSchema; Vol III bridge page</p>
+      <p class='notes'>CONDITIONAL: implication real; SpectralModel not inhabited non-trivially.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>goldbach_from_spectral_model</code></td><td>CONDITIONAL</td><td><code>Brockian/GoldbachSchema.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>goldbach_beyond_of_model</code></td><td>CONDITIONAL</td><td><code>Brockian/GoldbachSchema.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    
+
+    <article class="claim" id="RH-BROCKIAN-SYSTEM">
+      <header>
+        <span class="cid">RH-BROCKIAN-SYSTEM</span>
+        <span class="badge badge-cond">CONDITIONAL</span>
+      </header>
+      <h3>RH from BrockianSystem (conditional schema)</h3>
+      <p class="book">Lean RiemannScaffold; G0–G6 moonshot cage</p>
+      <p class='notes'>CONDITIONAL. System not shown inhabitable; not provably empty.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>RH_of_BrockianSystem</code></td><td>CONDITIONAL</td><td><code>Brockian/RiemannScaffold.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>BrockianSystem</code></td><td>DEFINITION</td><td><code>Brockian/RiemannScaffold.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    </div></section><section class='group'><h2>Named conjectures <span class='count'>1</span></h2><div class='grid'>
+    <article class="claim" id="GC-TRANSFER">
+      <header>
+        <span class="cid">GC-TRANSFER</span>
+        <span class="badge badge-conj">CONJECTURE</span>
+      </header>
+      <h3>Goldbach covariance transfer (global residual)</h3>
+      <p class="book">Curved Number Line · Vol III · The Prediction (pass or die)</p>
+      <p class='notes'>Named CONJECTURE container — never a PROVED theorem. Empirical pilot r≈0.9959 is V2, not Lean.</p>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>GoldbachCovarianceTransfer</code></td><td>CONJECTURE</td><td><code>Brockian/GoldbachComb.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+    </article>
+    </div></section><section class='group'><h2>Aristotle in flight <span class='count'>2</span></h2><div class='grid'>
+    <article class="claim" id="ARISTOTLE-BOUNDED-V">
+      <header>
+        <span class="cid">ARISTOTLE-BOUNDED-V</span>
+        <span class="badge badge-ari">ARISTOTLE-PENDING</span>
+      </header>
+      <h3>General bounded-V ⇒ limit-point at ∞</h3>
+      <p class="book">aristotle/bounded-v-limitpoint · project 17ad1895</p>
+      <p class='notes'>Sorry-target; integrate only if AXLE+axioms+lint pass.</p>
+      
+    </article>
+    
+
+    <article class="claim" id="ARISTOTLE-KATO">
+      <header>
+        <span class="cid">ARISTOTLE-KATO</span>
+        <span class="badge badge-ari">ARISTOTLE-PENDING</span>
+      </header>
+      <h3>Kato bounded perturbation / range density</h3>
+      <p class="book">aristotle/kato-bounded · project c595862c</p>
+      <p class='notes'>Sorry-target for −Δ+V route.</p>
+      
+    </article>
+    </div></section><section class='group'><h2>Open formalization targets <span class='count'>1</span></h2><div class='grid'>
+    <article class="claim" id="BM-RET-001">
+      <header>
+        <span class="cid">BM-RET-001</span>
+        <span class="badge badge-open">OPEN</span>
+      </header>
+      <h3>Phase returns, depth does not (return theorem / helix)</h3>
+      <p class="book">Curved Number Line · Vol I · Phase Is Not Position (BM-RET-001)</p>
+      <p class='notes'>Elementary return T^{5m} stated in book; full Lean formalization still a queued target.</p>
+      
+    </article>
+    </div></section><section class='group'><h2>Explicitly not claimed <span class='count'>3</span></h2><div class='grid'>
+    <article class="claim" id="OPEN-TWIN-INF">
+      <header>
+        <span class="cid">OPEN-TWIN-INF</span>
+        <span class="badge badge-no">NOT-CLAIMED</span>
+      </header>
+      <h3>Twin primes infinitude</h3>
+      <p class="book">Curved Number Line · Ledger · not claimed</p>
+      <p class='notes'>Grammar of roads PROVED; infinitude open.</p>
+      
+    </article>
+    
+
+    <article class="claim" id="OPEN-GOLDBACH">
+      <header>
+        <span class="cid">OPEN-GOLDBACH</span>
+        <span class="badge badge-no">NOT-CLAIMED</span>
+      </header>
+      <h3>Binary Goldbach (global)</h3>
+      <p class="book">Curved Number Line · Ledger · not claimed</p>
+      <p class='notes'>Local kernel PROVED; global statement not claimed.</p>
+      
+    </article>
+    
+
+    <article class="claim" id="OPEN-RH">
+      <header>
+        <span class="cid">OPEN-RH</span>
+        <span class="badge badge-no">NOT-CLAIMED</span>
+      </header>
+      <h3>Riemann Hypothesis</h3>
+      <p class="book">Curved Number Line · Ledger · not claimed; G0–G6 cage</p>
+      <p class='notes'>Scaffold only.</p>
+      
+    </article>
+    </div></section>
+</main>
+<footer>
+  <p>PROVED = sorry-free + axiom-clean + independent AXLE verification.
+  CONDITIONAL = real implication under a named open hypothesis.
+  CONJECTURE = named Prop container, not a theorem.
+  NOT-CLAIMED = explicit open problem (twins / Goldbach global / RH).</p>
+  <p>Regenerate: <code>python3 scripts/gen_claims.py && python3 scripts/gen_observatory.py</code></p>
+</footer>
+</body>
+</html>

@@ -77,13 +77,33 @@ lake exe cache get   # prebuilt Mathlib oleans
 lake build
 ```
 
+## Observatory (public claim surface)
+
+Book claim IDs (Curved Number Line margins, e.g. `GC-1`, `BM-MAP-001`) map to Lean
+declarations via a hand-authored table; **badges are derived** from the registry
+and never hand-painted.
+
+```bash
+python3 scripts/gen_registry.py      # registry/theorems.json from AXLE attestations
+python3 scripts/gen_claims.py        # observatory/claims.yaml + claims.json
+python3 scripts/gen_observatory.py   # observatory/index.html
+open observatory/index.html          # or any static file server
+```
+
+| Path | Role |
+|------|------|
+| `observatory/claim_map.yaml` | claim ID → Lean names (edited by hand) |
+| `observatory/claims.yaml` | generated claims + full declaration dump |
+| `observatory/index.html` | static page: badge, book ref, declarations, AXLE |
+
 ## Layout
 
 ```
 Brockian/            the verified theme modules (one mathematical theme each)
 registry/            theorems.json (generated) + per-module AXLE attestations
+observatory/         public claim surface (map + generated claims + HTML)
 provenance/          verdicts.yaml — hand-authored verdicts + provenance (audited)
-scripts/             axle_client.py, gen_registry.py, no_theater_lint.py, attest.py
+scripts/             axle_client.py, gen_registry.py, gen_claims.py, gen_observatory.py, …
 Archive/             retired inputs (old catalog), kept for reference, not built
 docs/superpowers/    the design spec and implementation plan
 ```

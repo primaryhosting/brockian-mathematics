@@ -1,0 +1,309 @@
+# Hand-authored claim map: Curved Number Line / book claim IDs → Lean declarations.
+# The *register* for each linked declaration is DERIVED from registry/theorems.json
+# by scripts/gen_claims.py — never hand-painted here.
+#
+# Fields:
+#   id:            stable public claim ID (book margin / Observatory primary key)
+#   title:         short human title
+#   book:          where it appears (volume / section)
+#   lean:          list of fully-qualified Brockian.* declaration names (may be empty)
+#   badge_force:   optional override when there is no Lean yet:
+#                    not_claimed | prose | empirical | open | aristotle
+#   notes:         honesty / scope (never used to upgrade a register)
+
+version: 1
+program: Brockian Mathematics / Riemann Labs
+charter: |
+  Badges are derived from the Lean registry when `lean` is non-empty.
+  PROVED requires AXLE-verified + axiom-clean theorems (see README).
+  Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.
+
+claims:
+  # ── Volume I / map geometry ────────────────────────────────────────────────
+  - id: BM-MAP-001
+    title: Canonical map B(n) = n ω^{n−1} (radial fidelity, phase law, injectivity)
+    book: "Curved Number Line · Vol I · The Turn (BM-MAP-001)"
+    lean:
+      - Brockian.Core.fifth_root_of_unity
+      - Brockian.Core.cos_2pi_5
+    notes: "Book margin V3; Core holds the cyclotomic/φ identities that underwrite the figure."
+
+  - id: BM-RET-001
+    title: Phase returns, depth does not (return theorem / helix)
+    book: "Curved Number Line · Vol I · Phase Is Not Position (BM-RET-001)"
+    lean: []
+    badge_force: open
+    notes: "Elementary return T^{5m} stated in book; full Lean formalization still a queued target."
+
+  - id: BM-PRIME-001
+    title: Dirichlet on the four active rays (infinitely many primes per residue)
+    book: "Curved Number Line · Vol I · The Primes Take Their Seats (BM-PRIME-001)"
+    lean:
+      - Brockian.Core.each_ray_has_infinitely_many_primes
+    notes: "Imported Dirichlet via Mathlib; V3 when registry PROVED."
+
+  - id: BM-TRANS-001
+    title: Twin transitions mod 5 — only three roads (1→3, 2→4, 4→1)
+    book: "Curved Number Line · Vol I · twin transitions figure"
+    lean:
+      - Brockian.TransitionKernel.forbidden_transition
+      - Brockian.TransitionKernel.kernel_row_sum
+      - Brockian.TransitionKernel.brockian_table_card
+    notes: "Grammar of permitted jumps; infinitude of twins NOT claimed."
+
+  # ── Volume II / selection & geometry ───────────────────────────────────────
+  - id: AS-1
+    title: Admissibility / selection rules (q−ν law)
+    book: "Curved Number Line · Vol II · Affine selection"
+    lean:
+      - Brockian.Admissibility.universal_admissibility_count
+      - Brockian.Admissibility.admissibility_count_three
+      - Brockian.Admissibility.admissibility_count_five
+    notes: "q=3 → 1 (twin constraint); q=5 → 3 (Brockian)."
+
+  - id: GEOM-C5
+    title: Pentagon geometry — two distances, golden diagonal
+    book: "Curved Number Line · plates / Vol I–II geometry"
+    lean:
+      - Brockian.Geometry.pentagon_two_distances
+      - Brockian.Geometry.pentagon_golden_diagonal
+      - Brockian.Geometry.golden_ratio_in_C5_spectrum
+      - Brockian.Geometry.d5_card
+    notes: ""
+
+  - id: AUT-D5
+    title: Faithful D₅ action on C₅
+    book: "Curved Number Line · dihedral symmetry"
+    lean:
+      - Brockian.Automorphism.dihedral_action_faithful
+    notes: "Full Aut(C₅)≅D₅ iso not claimed (see PORT-QUEUE)."
+
+  - id: SPEC-GOLDEN-FIVE
+    title: Golden ratio unique to five in cycle spectrum
+    book: "Curved Number Line · Expansion · fingerprint"
+    lean:
+      - Brockian.Spectral.golden_unique_to_five
+      - Brockian.Connectivity.pentagon_lambda2_phi
+      - Brockian.Connectivity.lambda2_eq
+    notes: "Flagship recovered theorems (runs 73/88)."
+
+  - id: FIB-FIVE
+    title: Fibonacci–five divisibility
+    book: "Curved Number Line · Expansion · 5 | F_n ⇔ 5 | n"
+    lean:
+      - Brockian.Core.fib_five_dvd
+      - Brockian.Core.binet_formula
+    notes: ""
+
+  # ── Goldbach comb (Vol II/III) ─────────────────────────────────────────────
+  - id: GC-1
+    title: Local Goldbach count g_p(c) = p − 2 + [c=0]
+    book: "Curved Number Line · Expansion / Vol III · The Local Pulse"
+    lean:
+      - Brockian.GoldbachComb.gCount_eq
+    notes: "Exact for every prime p."
+
+  - id: GC-2
+    title: Centered local count
+    book: "Curved Number Line · Goldbach comb"
+    lean:
+      - Brockian.GoldbachComb.gCount_centered
+    notes: ""
+
+  - id: GC-3
+    title: Local covariance theorem
+    book: "Curved Number Line · Expansion · twin comb / covariance"
+    lean:
+      - Brockian.GoldbachComb.local_covariance
+    notes: "Local kernel only."
+
+  - id: GC-TRANSFER
+    title: Goldbach covariance transfer (global residual)
+    book: "Curved Number Line · Vol III · The Prediction (pass or die)"
+    lean:
+      - Brockian.GoldbachComb.GoldbachCovarianceTransfer
+    notes: "Named CONJECTURE container — never a PROVED theorem. Empirical pilot r≈0.9959 is V2, not Lean."
+
+  - id: GC-SCHEMA
+    title: Spectral model ⇒ Goldbach (conditional schema)
+    book: "Lean GoldbachSchema; Vol III bridge page"
+    lean:
+      - Brockian.GoldbachSchema.goldbach_from_spectral_model
+      - Brockian.GoldbachSchema.goldbach_beyond_of_model
+    notes: "CONDITIONAL: implication real; SpectralModel not inhabited non-trivially."
+
+  - id: GC-HL
+    title: Hardy–Littlewood singular-series factor lemmas
+    book: "Lean GoldbachLemmas / SingularSeries"
+    lean:
+      - Brockian.GoldbachLemmas.gFactor_pos
+      - Brockian.GoldbachLemmas.gProduct_pos
+      - Brockian.SingularSeries.localFactor
+    notes: "Unconditional factor structure; full singular-series positivity may be CONDITIONAL."
+
+  # ── Twin roads / transition kernel ─────────────────────────────────────────
+  - id: TWIN-GRAMMAR
+    title: Twin / cousin run-caps and pins mod 3
+    book: "Curved Number Line · Vol II · three roads"
+    lean:
+      - Brockian.TransitionKernel.cousin_pins_mod_three
+      - Brockian.TransitionKernel.cousin_run_cap
+      - Brockian.TransitionKernel.gap10_run_cap
+    notes: "Grammar and caps; twin infinitude not claimed."
+
+  # ── Sieve / silver ─────────────────────────────────────────────────────────
+  - id: SILVER-GAP
+    title: Silver gap / five-line spectrum scaffolding
+    book: "Curved Number Line · Expansion · five-line alphabet"
+    lean:
+      - Brockian.Sieve.silverGap
+      - Brockian.Sieve.H3_det
+      - Brockian.Sieve.H3_ground
+      - Brockian.Sieve.SilverGapRigidityTarget
+    notes: "SilverGapRigidityTarget is CONJECTURE container if registered as such."
+
+  # ── Spectral Gate 1 / potential ────────────────────────────────────────────
+  - id: GATE1-POTENTIAL
+    title: Bounded prime-Gaussian multiplication operator (Gate 1 piece)
+    book: "Lean SpectralGate1; Gate 1 partial"
+    lean:
+      - Brockian.SpectralGate1.abs_primeGaussian_le_two
+      - Brockian.SpectralGate1.primeGaussianMulCLM
+    notes: "Potential term bounded; full −Δ+V ess-self-adjoint still open."
+
+  # ── Weyl campaign ──────────────────────────────────────────────────────────
+  - id: WEYL-GREEN
+    title: Wronskian constancy + integrated Green identity
+    book: "Lean Weyl / Gate 1 ODE base"
+    lean:
+      - Brockian.Weyl.wronskian_isConst
+      - Brockian.Weyl.green_identity_integral
+      - Brockian.Weyl.lagrange_identity
+    notes: ""
+
+  - id: WEYL-DISK
+    title: Finite-b nested-circle geometry (exact radius, nesting)
+    book: "Lean Weyl.Disk"
+    lean:
+      - Brockian.Weyl.Disk.weyl_disk_circle
+      - Brockian.Weyl.Disk.radius_formula
+      - Brockian.Weyl.Disk.weyl_radius_antitone
+      - Brockian.Weyl.Disk.weyl_nested_circle
+    notes: "Finite-b complete; b→∞ dichotomy on radii in WEYL-DICHOTOMY."
+
+  - id: WEYL-OPERATOR
+    title: Symmetric LinearPMap framework + key inequality
+    book: "Lean Weyl.Operator"
+    lean:
+      - Brockian.Weyl.Operator.IsSymmetric.norm_sub_smul_ge
+      - Brockian.Weyl.Operator.IsSymmetric.eq_zero_of_apply_eq_smul
+      - Brockian.Weyl.Operator.EssentiallySelfAdjoint
+    notes: "Predicate + inequality; ESA inhabited elsewhere."
+
+  - id: WEYL-ESA
+    title: EssentiallySelfAdjoint inhabited (bounded self-adjoint CLMs)
+    book: "Lean Weyl.ESA"
+    lean:
+      - Brockian.Weyl.ESA.clm_essentiallySelfAdjoint
+      - Brockian.Weyl.ESA.id_essentiallySelfAdjoint
+    notes: "Closes Operator open blocker for bounded case."
+
+  - id: WEYL-CAYLEY
+    title: Von Neumann criterion — ESA ↔ dense ran(T±i)
+    book: "Lean Weyl.Cayley"
+    lean:
+      - Brockian.Weyl.Cayley.essentiallySelfAdjoint_iff
+      - Brockian.Weyl.Cayley.mem_orthogonal_rangeSMulSub_iff
+      - Brockian.Weyl.Cayley.norm_add_I_smul_eq
+    notes: "Abstract criterion; applying to −Δ+V still open."
+
+  - id: WEYL-CHAIN
+    title: Dense ranges ⇒ EssentiallySelfAdjoint
+    book: "Lean Weyl.Chain"
+    lean:
+      - Brockian.Weyl.Chain.essSelfAdjoint_of_dense_ranges
+    notes: "Glue; open link is producing density for the Schrödinger operator."
+
+  - id: WEYL-DICHOTOMY
+    title: b→∞ radius dichotomy (r→0 ↔ I→∞)
+    book: "Lean Weyl.Dichotomy (+ DiskBridge, ConstMass)"
+    lean:
+      - Brockian.Weyl.Dichotomy.radius_tendsto_zero_iff
+      - Brockian.Weyl.Dichotomy.limitPoint_or_limitCircle_radius
+      - Brockian.Weyl.Dichotomy.limitPointRadius_radius_tendsto_zero
+      - Brockian.Weyl.DiskBridge.diskRadius_eq_weylRadius
+      - Brockian.Weyl.ConstMass.growing_exp_radius_tendsto_zero
+      - Brockian.Weyl.ConstMass.exists_growing_mode_limitPointRadius
+    notes: "Radius side PROVED. Aristotle 50ca67ca largely redundant; de-dupe on return."
+
+  - id: WEYL-LP-CONST
+    title: Constant potential is limit-point at ∞
+    book: "Lean Weyl.LP"
+    lean:
+      - Brockian.Weyl.LP.const_potential_isLimitPoint
+    notes: "Real instance; general bounded-V is Aristotle 17ad1895."
+
+  - id: WEYL-CLOSURE
+    title: Closure chain T ⊆ T̄ ⊆ T*, deficiency closed
+    book: "Lean Weyl.Closure"
+    lean:
+      - Brockian.Weyl.Closure.symmetric_le_adjoint
+      - Brockian.Weyl.Closure.symmetric_closure_le_adjoint
+      - Brockian.Weyl.Closure.isClosed_deficiencySet
+    notes: ""
+
+  # ── RH scaffold (caged) ────────────────────────────────────────────────────
+  - id: RH-XI-BRIDGE
+    title: ξ-bridge (unconditional scaffolding toward Mathlib RH)
+    book: "Lean RiemannScaffold"
+    lean:
+      - Brockian.RiemannScaffold.riemannXi
+      - Brockian.RiemannScaffold.riemannXi_eq_zero_of_nontrivial_zeta_zero
+      - Brockian.RiemannScaffold.RiemannHypothesis_of_forall_xi_zero
+      - Brockian.RiemannScaffold.Gammaℝ_ne_zero_of_nontrivial
+    notes: "Scaffold only. RH itself not claimed."
+
+  - id: RH-BROCKIAN-SYSTEM
+    title: RH from BrockianSystem (conditional schema)
+    book: "Lean RiemannScaffold; G0–G6 moonshot cage"
+    lean:
+      - Brockian.RiemannScaffold.RH_of_BrockianSystem
+      - Brockian.RiemannScaffold.BrockianSystem
+    notes: "CONDITIONAL. System not shown inhabitable; not provably empty."
+
+  # ── Explicitly not claimed (book ledger) ───────────────────────────────────
+  - id: OPEN-TWIN-INF
+    title: Twin primes infinitude
+    book: "Curved Number Line · Ledger · not claimed"
+    lean: []
+    badge_force: not_claimed
+    notes: "Grammar of roads PROVED; infinitude open."
+
+  - id: OPEN-GOLDBACH
+    title: Binary Goldbach (global)
+    book: "Curved Number Line · Ledger · not claimed"
+    lean: []
+    badge_force: not_claimed
+    notes: "Local kernel PROVED; global statement not claimed."
+
+  - id: OPEN-RH
+    title: Riemann Hypothesis
+    book: "Curved Number Line · Ledger · not claimed; G0–G6 cage"
+    lean: []
+    badge_force: not_claimed
+    notes: "Scaffold only."
+
+  # ── Aristotle in flight (honest open formalizations) ───────────────────────
+  - id: ARISTOTLE-BOUNDED-V
+    title: General bounded-V ⇒ limit-point at ∞
+    book: "aristotle/bounded-v-limitpoint · project 17ad1895"
+    lean: []
+    badge_force: aristotle
+    notes: "Sorry-target; integrate only if AXLE+axioms+lint pass."
+
+  - id: ARISTOTLE-KATO
+    title: Kato bounded perturbation / range density
+    book: "aristotle/kato-bounded · project c595862c"
+    lean: []
+    badge_force: aristotle
+    notes: "Sorry-target for −Δ+V route."
