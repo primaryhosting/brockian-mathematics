@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 4
 - **CONJECTURE**: 2
-- **DEFINITION**: 69
-- **PROVED**: 220
+- **DEFINITION**: 70
+- **PROVED**: 225
 
 ## Theorems
 
@@ -34,6 +34,12 @@
 | DEFINITION | `Brockian.Automorphism.rotIso` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
 | PROVED | `Brockian.Automorphism.rot_map_adj` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
 | PROVED | `Brockian.Automorphism.ten_le_card_aut` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
+| DEFINITION | `Brockian.Automorphism.Full.autEquivDihedral` | ✓ | verified | lean-4.32.0 | run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso |
+| PROVED | `Brockian.Automorphism.Full.aut_card_eq_ten` | ✓ | verified | lean-4.32.0 | run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso |
+| PROVED | `Brockian.Automorphism.Full.aut_equiv_dihedral` | ✓ | verified | lean-4.32.0 | run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso |
+| PROVED | `Brockian.Automorphism.Full.card_aut_le_ten` | ✓ | verified | lean-4.32.0 | run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso |
+| PROVED | `Brockian.Automorphism.Full.dihedralHom_bijective` | ✓ | verified | lean-4.32.0 | run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso |
+| PROVED | `Brockian.Automorphism.Full.dihedralHom_surjective` | ✓ | verified | lean-4.32.0 | run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso |
 | PROVED | `Brockian.Connectivity.cos_2pi_5` | ✓ | verified | lean-4.32.0 | run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues |
 | PROVED | `Brockian.Connectivity.lambda2_eq` | ✓ | verified | lean-4.32.0 | run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues |
 | DEFINITION | `Brockian.Connectivity.laplacianEigs5` | ✓ | verified | lean-4.32.0 | run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues |

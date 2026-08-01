@@ -16,7 +16,13 @@ concrete circulant/Laplacian eigenvalues and independently AXLE-verified, axiom-
 | **`golden_unique_to_five`** (φ−1 ∈ spec(C_p) ⟺ p=5) | 73 | ✅ PROVED — full biconditional, `Brockian/Spectral.lean`. The "why five" rigidity result. |
 | **`pentagon_lambda2_phi`** (λ₂(C₅)=2−1/φ) | 88 | ✅ PROVED — `Brockian/Connectivity.lean`, algebraic connectivity is golden. |
 
-## PARTIAL — honest strong partial shipped; one direction open
+## RESOLVED (2026-08-01) — full iso now proved
+
+| Result | Ledger run | Now |
+|--------|-----------|-----|
+| **`Aut(C₅) ≅ D₅`** | 54 | ✅ PROVED — `Brockian.Automorphism.Full.autEquivDihedral : DihedralGroup 5 ≃* (C5 ≃g C5)`, via the `|Aut(C₅)|≤10` pinning/surjectivity argument (omega on `Fin 5`). Reverse bound closed; full isomorphism, axiom-clean. |
+
+## PARTIAL — (superseded above; kept for history)
 
 | Result | Ledger run | Status |
 |--------|-----------|--------|

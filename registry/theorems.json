@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 220,
-    "DEFINITION": 69,
+    "PROVED": 225,
+    "DEFINITION": 70,
     "CONJECTURE": 2,
     "CONDITIONAL": 4
   },
@@ -578,6 +578,194 @@
       "quarantine": true,
       "ledger_run": "run 54 (bce0\u2026) \u2014 re-proved fresh @ v4.32; faithful D\u2085 action (full iso open)",
       "provenance_note": "D\u2085 \u2192* Aut(C\u2085) injective (faithful), explicit rot/refl autos, 10 \u2264 |Aut(C\u2085)|. Full Aut(C\u2085)\u2245D\u2085 iso NOT claimed (reverse bound |Aut|\u226410 unavailable in Mathlib 4.32) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Automorphism.Full.autEquivDihedral",
+      "kind": "def",
+      "module": "Brockian.Automorphism.Full",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Full.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 completed 2026-08-01 \u2014 |Aut(C5)|<=10 reverse bound + full iso",
+      "provenance_note": "card_aut_le_ten, aut_card_eq_ten (=10), dihedralHom_surjective (pinning), autEquivDihedral : DihedralGroup 5 \u2243* (C5 \u2243g C5) \u2014 the FULL Aut(C5)\u2245D5 iso. Upgrades run-54 partial to complete. Axiom-clean."
+    },
+    {
+      "name": "Brockian.Automorphism.Full.aut_card_eq_ten",
+      "kind": "theorem",
+      "module": "Brockian.Automorphism.Full",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Full.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 completed 2026-08-01 \u2014 |Aut(C5)|<=10 reverse bound + full iso",
+      "provenance_note": "card_aut_le_ten, aut_card_eq_ten (=10), dihedralHom_surjective (pinning), autEquivDihedral : DihedralGroup 5 \u2243* (C5 \u2243g C5) \u2014 the FULL Aut(C5)\u2245D5 iso. Upgrades run-54 partial to complete. Axiom-clean."
+    },
+    {
+      "name": "Brockian.Automorphism.Full.aut_equiv_dihedral",
+      "kind": "theorem",
+      "module": "Brockian.Automorphism.Full",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Full.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 completed 2026-08-01 \u2014 |Aut(C5)|<=10 reverse bound + full iso",
+      "provenance_note": "card_aut_le_ten, aut_card_eq_ten (=10), dihedralHom_surjective (pinning), autEquivDihedral : DihedralGroup 5 \u2243* (C5 \u2243g C5) \u2014 the FULL Aut(C5)\u2245D5 iso. Upgrades run-54 partial to complete. Axiom-clean."
+    },
+    {
+      "name": "Brockian.Automorphism.Full.card_aut_le_ten",
+      "kind": "theorem",
+      "module": "Brockian.Automorphism.Full",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Full.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 completed 2026-08-01 \u2014 |Aut(C5)|<=10 reverse bound + full iso",
+      "provenance_note": "card_aut_le_ten, aut_card_eq_ten (=10), dihedralHom_surjective (pinning), autEquivDihedral : DihedralGroup 5 \u2243* (C5 \u2243g C5) \u2014 the FULL Aut(C5)\u2245D5 iso. Upgrades run-54 partial to complete. Axiom-clean."
+    },
+    {
+      "name": "Brockian.Automorphism.Full.dihedralHom_bijective",
+      "kind": "theorem",
+      "module": "Brockian.Automorphism.Full",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Full.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 completed 2026-08-01 \u2014 |Aut(C5)|<=10 reverse bound + full iso",
+      "provenance_note": "card_aut_le_ten, aut_card_eq_ten (=10), dihedralHom_surjective (pinning), autEquivDihedral : DihedralGroup 5 \u2243* (C5 \u2243g C5) \u2014 the FULL Aut(C5)\u2245D5 iso. Upgrades run-54 partial to complete. Axiom-clean."
+    },
+    {
+      "name": "Brockian.Automorphism.Full.dihedralHom_surjective",
+      "kind": "theorem",
+      "module": "Brockian.Automorphism.Full",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Full.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "run 54 completed 2026-08-01 \u2014 |Aut(C5)|<=10 reverse bound + full iso",
+      "provenance_note": "card_aut_le_ten, aut_card_eq_ten (=10), dihedralHom_surjective (pinning), autEquivDihedral : DihedralGroup 5 \u2243* (C5 \u2243g C5) \u2014 the FULL Aut(C5)\u2245D5 iso. Upgrades run-54 partial to complete. Axiom-clean."
     },
     {
       "name": "Brockian.Connectivity.cos_2pi_5",
