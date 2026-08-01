@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 192,
-    "DEFINITION": 68,
+    "PROVED": 209,
+    "DEFINITION": 69,
     "CONJECTURE": 2,
     "CONDITIONAL": 4
   },
@@ -6092,6 +6092,134 @@
       "provenance_note": "essSelfAdjoint_of_dense_ranges: dense ran(T+i),ran(T-i) => EssentiallySelfAdjoint via the von Neumann criterion. Composes the whole chain onto the ONE open link (limit-point => range dense). Bridge itself OPEN \u2014 submitted to Aristotle."
     },
     {
+      "name": "Brockian.Weyl.ClosedRange.eq_univ_of_dense_isClosed",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ClosedRange",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ClosedRange.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 dense+closed\u21d2univ; smulPMap closed",
+      "provenance_note": "range_eq_top_of_essentiallySelfAdjoint_of_isClosed_ranges (topology half); smulPMap_isClosed. Full isClosed_rangeSMulSub for general closed T left open (not competing with Aristotle Kato/bounded-V targets)."
+    },
+    {
+      "name": "Brockian.Weyl.ClosedRange.range_eq_top_of_essentiallySelfAdjoint_of_isClosed_ranges",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ClosedRange",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ClosedRange.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 dense+closed\u21d2univ; smulPMap closed",
+      "provenance_note": "range_eq_top_of_essentiallySelfAdjoint_of_isClosed_ranges (topology half); smulPMap_isClosed. Full isClosed_rangeSMulSub for general closed T left open (not competing with Aristotle Kato/bounded-V targets)."
+    },
+    {
+      "name": "Brockian.Weyl.ClosedRange.smulPMap_isClosed",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ClosedRange",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ClosedRange.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 dense+closed\u21d2univ; smulPMap closed",
+      "provenance_note": "range_eq_top_of_essentiallySelfAdjoint_of_isClosed_ranges (topology half); smulPMap_isClosed. Full isClosed_rangeSMulSub for general closed T left open (not competing with Aristotle Kato/bounded-V targets)."
+    },
+    {
+      "name": "Brockian.Weyl.ClosedRange.smulPMap_isClosed_and_symmetric",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ClosedRange",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ClosedRange.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 dense+closed\u21d2univ; smulPMap closed",
+      "provenance_note": "range_eq_top_of_essentiallySelfAdjoint_of_isClosed_ranges (topology half); smulPMap_isClosed. Full isClosed_rangeSMulSub for general closed T left open (not competing with Aristotle Kato/bounded-V targets)."
+    },
+    {
       "name": "Brockian.Weyl.Closure.adjoint_isClosed'",
       "kind": "theorem",
       "module": "Brockian.Weyl.Closure",
@@ -6534,6 +6662,294 @@
       "quarantine": true,
       "ledger_run": "Weyl capstone 2026-08-01 \u2014 closure/adjoint/deficiency (von Neumann inclusion chain)",
       "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
+    },
+    {
+      "name": "Brockian.Weyl.ConstMass.continuous_growing_exp_normSq",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ConstMass",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstMass.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 growing-mode mass diverges + radius\u21920",
+      "provenance_note": "growing_exp_mass_tendsto_atTop; growing_exp_radius_tendsto_zero; exists_growing_mode_limitPointRadius for non-real \u03bb. Const/free instance of radius dichotomy \u2014 NOT general bounded-V (Aristotle target)."
+    },
+    {
+      "name": "Brockian.Weyl.ConstMass.exists_growing_mode_limitPointRadius",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ConstMass",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstMass.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 growing-mode mass diverges + radius\u21920",
+      "provenance_note": "growing_exp_mass_tendsto_atTop; growing_exp_radius_tendsto_zero; exists_growing_mode_limitPointRadius for non-real \u03bb. Const/free instance of radius dichotomy \u2014 NOT general bounded-V (Aristotle target)."
+    },
+    {
+      "name": "Brockian.Weyl.ConstMass.growing_exp_IsLimitPointRadius",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ConstMass",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstMass.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 growing-mode mass diverges + radius\u21920",
+      "provenance_note": "growing_exp_mass_tendsto_atTop; growing_exp_radius_tendsto_zero; exists_growing_mode_limitPointRadius for non-real \u03bb. Const/free instance of radius dichotomy \u2014 NOT general bounded-V (Aristotle target)."
+    },
+    {
+      "name": "Brockian.Weyl.ConstMass.growing_exp_mass_monotone",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ConstMass",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstMass.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 growing-mode mass diverges + radius\u21920",
+      "provenance_note": "growing_exp_mass_tendsto_atTop; growing_exp_radius_tendsto_zero; exists_growing_mode_limitPointRadius for non-real \u03bb. Const/free instance of radius dichotomy \u2014 NOT general bounded-V (Aristotle target)."
+    },
+    {
+      "name": "Brockian.Weyl.ConstMass.growing_exp_mass_tendsto_atTop",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ConstMass",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstMass.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 growing-mode mass diverges + radius\u21920",
+      "provenance_note": "growing_exp_mass_tendsto_atTop; growing_exp_radius_tendsto_zero; exists_growing_mode_limitPointRadius for non-real \u03bb. Const/free instance of radius dichotomy \u2014 NOT general bounded-V (Aristotle target)."
+    },
+    {
+      "name": "Brockian.Weyl.ConstMass.growing_exp_radius_tendsto_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ConstMass",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstMass.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 growing-mode mass diverges + radius\u21920",
+      "provenance_note": "growing_exp_mass_tendsto_atTop; growing_exp_radius_tendsto_zero; exists_growing_mode_limitPointRadius for non-real \u03bb. Const/free instance of radius dichotomy \u2014 NOT general bounded-V (Aristotle target)."
+    },
+    {
+      "name": "Brockian.Weyl.ConstMass.integral_exp_mul_tendsto_atTop",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ConstMass",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstMass.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 growing-mode mass diverges + radius\u21920",
+      "provenance_note": "growing_exp_mass_tendsto_atTop; growing_exp_radius_tendsto_zero; exists_growing_mode_limitPointRadius for non-real \u03bb. Const/free instance of radius dichotomy \u2014 NOT general bounded-V (Aristotle target)."
+    },
+    {
+      "name": "Brockian.Weyl.ConstMass.integral_nonneg_mono",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ConstMass",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstMass.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 growing-mode mass diverges + radius\u21920",
+      "provenance_note": "growing_exp_mass_tendsto_atTop; growing_exp_radius_tendsto_zero; exists_growing_mode_limitPointRadius for non-real \u03bb. Const/free instance of radius dichotomy \u2014 NOT general bounded-V (Aristotle target)."
+    },
+    {
+      "name": "Brockian.Weyl.ConstMass.normSq_cexp_eq",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ConstMass",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstMass.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 growing-mode mass diverges + radius\u21920",
+      "provenance_note": "growing_exp_mass_tendsto_atTop; growing_exp_radius_tendsto_zero; exists_growing_mode_limitPointRadius for non-real \u03bb. Const/free instance of radius dichotomy \u2014 NOT general bounded-V (Aristotle target)."
     },
     {
       "name": "Brockian.Weyl.Dichotomy.IsLimitCircleRadius",
@@ -7330,6 +7746,162 @@
       "quarantine": true,
       "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
       "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.DiskBridge.diskRadius",
+      "kind": "def",
+      "module": "Brockian.Weyl.DiskBridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DiskBridge.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 Disk radius = Dichotomy weylRadius + mass\u21d2r\u21920",
+      "provenance_note": "diskRadius_eq_weylRadius; mass atTop \u21d2 diskRadius\u21920; limit-point radius + continuous \u03c6 \u21d2 diskRadius\u21920. Glue only."
+    },
+    {
+      "name": "Brockian.Weyl.DiskBridge.diskRadius_eq_weylRadius",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.DiskBridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DiskBridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 Disk radius = Dichotomy weylRadius + mass\u21d2r\u21920",
+      "provenance_note": "diskRadius_eq_weylRadius; mass atTop \u21d2 diskRadius\u21920; limit-point radius + continuous \u03c6 \u21d2 diskRadius\u21920. Glue only."
+    },
+    {
+      "name": "Brockian.Weyl.DiskBridge.diskRadius_tendsto_zero_of_limitPointRadius",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.DiskBridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DiskBridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 Disk radius = Dichotomy weylRadius + mass\u21d2r\u21920",
+      "provenance_note": "diskRadius_eq_weylRadius; mass atTop \u21d2 diskRadius\u21920; limit-point radius + continuous \u03c6 \u21d2 diskRadius\u21920. Glue only."
+    },
+    {
+      "name": "Brockian.Weyl.DiskBridge.diskRadius_tendsto_zero_of_mass_atTop",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.DiskBridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DiskBridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 Disk radius = Dichotomy weylRadius + mass\u21d2r\u21920",
+      "provenance_note": "diskRadius_eq_weylRadius; mass atTop \u21d2 diskRadius\u21920; limit-point radius + continuous \u03c6 \u21d2 diskRadius\u21920. Glue only."
+    },
+    {
+      "name": "Brockian.Weyl.DiskBridge.mass_monotone",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.DiskBridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DiskBridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 Disk radius = Dichotomy weylRadius + mass\u21d2r\u21920",
+      "provenance_note": "diskRadius_eq_weylRadius; mass atTop \u21d2 diskRadius\u21920; limit-point radius + continuous \u03c6 \u21d2 diskRadius\u21920. Glue only."
     },
     {
       "name": "Brockian.Weyl.ESA.clm_deficiency_eq_bot",

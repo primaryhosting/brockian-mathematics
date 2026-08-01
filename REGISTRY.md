@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 4
 - **CONJECTURE**: 2
-- **DEFINITION**: 68
-- **PROVED**: 192
+- **DEFINITION**: 69
+- **PROVED**: 209
 
 ## Theorems
 
@@ -212,6 +212,10 @@
 | DEFINITION | `Brockian.Weyl.Cayley.rangeSMulSub` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — abstract von Neumann ess-self-adjointness criterion |
 | DEFINITION | `Brockian.Weyl.Cayley.rangeSubI` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — abstract von Neumann ess-self-adjointness criterion |
 | PROVED | `Brockian.Weyl.Chain.essSelfAdjoint_of_dense_ranges` | ✓ | verified | lean-4.32.0 | Weyl chain 2026-08-01 — closure modulo the range-density bridge |
+| PROVED | `Brockian.Weyl.ClosedRange.eq_univ_of_dense_isClosed` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — dense+closed⇒univ; smulPMap closed |
+| PROVED | `Brockian.Weyl.ClosedRange.range_eq_top_of_essentiallySelfAdjoint_of_isClosed_ranges` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — dense+closed⇒univ; smulPMap closed |
+| PROVED | `Brockian.Weyl.ClosedRange.smulPMap_isClosed` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — dense+closed⇒univ; smulPMap closed |
+| PROVED | `Brockian.Weyl.ClosedRange.smulPMap_isClosed_and_symmetric` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — dense+closed⇒univ; smulPMap closed |
 | PROVED | `Brockian.Weyl.Closure.adjoint_isClosed'` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | PROVED | `Brockian.Weyl.Closure.closure_eq_self_of_isClosed` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | DEFINITION | `Brockian.Weyl.Closure.deficiencySet` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
@@ -226,6 +230,15 @@
 | PROVED | `Brockian.Weyl.Closure.symmetric_domain_le_adjoint_domain` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | PROVED | `Brockian.Weyl.Closure.symmetric_isClosable` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | PROVED | `Brockian.Weyl.Closure.symmetric_le_adjoint` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
+| PROVED | `Brockian.Weyl.ConstMass.continuous_growing_exp_normSq` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
+| PROVED | `Brockian.Weyl.ConstMass.exists_growing_mode_limitPointRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
+| PROVED | `Brockian.Weyl.ConstMass.growing_exp_IsLimitPointRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
+| PROVED | `Brockian.Weyl.ConstMass.growing_exp_mass_monotone` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
+| PROVED | `Brockian.Weyl.ConstMass.growing_exp_mass_tendsto_atTop` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
+| PROVED | `Brockian.Weyl.ConstMass.growing_exp_radius_tendsto_zero` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
+| PROVED | `Brockian.Weyl.ConstMass.integral_exp_mul_tendsto_atTop` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
+| PROVED | `Brockian.Weyl.ConstMass.integral_nonneg_mono` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
+| PROVED | `Brockian.Weyl.ConstMass.normSq_cexp_eq` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0 |
 | DEFINITION | `Brockian.Weyl.Dichotomy.IsLimitCircleRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
 | DEFINITION | `Brockian.Weyl.Dichotomy.IsLimitPointRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
 | PROVED | `Brockian.Weyl.Dichotomy.atTop_of_radius_tendsto_zero` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
@@ -252,6 +265,11 @@
 | DEFINITION | `Brockian.Weyl.Disk.wronskian` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | PROVED | `Brockian.Weyl.Disk.wronskian_hasDerivAt` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | PROVED | `Brockian.Weyl.Disk.wronskian_isConst` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
+| DEFINITION | `Brockian.Weyl.DiskBridge.diskRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Disk radius = Dichotomy weylRadius + mass⇒r→0 |
+| PROVED | `Brockian.Weyl.DiskBridge.diskRadius_eq_weylRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Disk radius = Dichotomy weylRadius + mass⇒r→0 |
+| PROVED | `Brockian.Weyl.DiskBridge.diskRadius_tendsto_zero_of_limitPointRadius` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Disk radius = Dichotomy weylRadius + mass⇒r→0 |
+| PROVED | `Brockian.Weyl.DiskBridge.diskRadius_tendsto_zero_of_mass_atTop` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Disk radius = Dichotomy weylRadius + mass⇒r→0 |
+| PROVED | `Brockian.Weyl.DiskBridge.mass_monotone` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Disk radius = Dichotomy weylRadius + mass⇒r→0 |
 | PROVED | `Brockian.Weyl.ESA.clm_deficiency_eq_bot` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
 | PROVED | `Brockian.Weyl.ESA.clm_dense` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
 | PROVED | `Brockian.Weyl.ESA.clm_domain` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |

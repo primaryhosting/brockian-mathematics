@@ -22,3 +22,6 @@ import Brockian.WeylEssSelfAdjoint
 import Brockian.WeylCayley
 import Brockian.WeylChain
 import Brockian.WeylDichotomy
+import Brockian.WeylDiskBridge
+import Brockian.WeylConstMass
+import Brockian.WeylClosedRange

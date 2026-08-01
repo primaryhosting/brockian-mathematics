@@ -52,6 +52,30 @@ runs:
     ledger_run: "Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis)"
     provenance_note: "radius_tendsto_zero_iff: 1/(2c·I)→0 ↔ I→+∞ under eventual positivity; monotone+unbounded⇒atTop; EM limit-point/limit-circle radius predicates. Radius side ONLY — does not claim IsLimitPointAtInfty for general V, nor ran(T±i) density, nor -Δ+V ess-self-adjoint."
 
+  # ── Weyl Disk↔Dichotomy glue (Aug 1, Grok) ──────────────────────────────────
+  "weyl-disk-bridge":
+    module: Brockian.Weyl.DiskBridge
+    verdict: admit
+    quarantine: true
+    ledger_run: "Weyl campaign 2026-08-01 — Disk radius = Dichotomy weylRadius + mass⇒r→0"
+    provenance_note: "diskRadius_eq_weylRadius; mass atTop ⇒ diskRadius→0; limit-point radius + continuous φ ⇒ diskRadius→0. Glue only."
+
+  # ── Weyl const-mode mass/radius (Aug 1, Grok) ───────────────────────────────
+  "weyl-const-mass":
+    module: Brockian.Weyl.ConstMass
+    verdict: admit
+    quarantine: true
+    ledger_run: "Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0"
+    provenance_note: "growing_exp_mass_tendsto_atTop; growing_exp_radius_tendsto_zero; exists_growing_mode_limitPointRadius for non-real λ. Const/free instance of radius dichotomy — NOT general bounded-V (Aristotle target)."
+
+  # ── Weyl closed-range consequences (Aug 1, Grok) ────────────────────────────
+  "weyl-closed-range":
+    module: Brockian.Weyl.ClosedRange
+    verdict: admit
+    quarantine: true
+    ledger_run: "Weyl campaign 2026-08-01 — dense+closed⇒univ; smulPMap closed"
+    provenance_note: "range_eq_top_of_essentiallySelfAdjoint_of_isClosed_ranges (topology half); smulPMap_isClosed. Full isClosed_rangeSMulSub for general closed T left open (not competing with Aristotle Kato/bounded-V targets)."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   "GC":
     module: Brockian.GoldbachComb
