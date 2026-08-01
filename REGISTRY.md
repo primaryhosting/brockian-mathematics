@@ -6,10 +6,10 @@
 
 ## Summary
 
-- **CONDITIONAL**: 4
+- **CONDITIONAL**: 5
 - **CONJECTURE**: 2
-- **DEFINITION**: 80
-- **PROVED**: 287
+- **DEFINITION**: 82
+- **PROVED**: 314
 
 ## Theorems
 
@@ -321,6 +321,21 @@
 | PROVED | `Brockian.Weyl.ESA.clm_isSymmetric` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
 | PROVED | `Brockian.Weyl.ESA.id_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
 | PROVED | `Brockian.Weyl.ESA.vec_eq_zero_of_inner` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited |
+| PROVED | `Brockian.Weyl.Extension.adjoint_closure` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Extension.adjoint_eigen_I_eq_zero_of_essSA` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Extension.adjoint_eigen_neg_I_eq_zero_of_essSA` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Extension.adjoint_graph_topologicalClosure_eq` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Extension.closure_eigenvalue_im_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Extension.closure_isSymmetric` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Extension.closure_le_of_isClosed_extension` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Extension.closure_le_of_isSelfAdjoint_extension` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Extension.eigenvalue_im_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Extension.essentiallySelfAdjoint_iff'` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Extension.isSelfAdjoint_closure_iff_eq_adjoint` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Extension.isSymmetric_of_le_adjoint` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Extension.le_closure_le_adjoint` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Extension.smulPMap_closure_eigenvalue_im_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Extension.smulPMap_closure_isSymmetric` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.FreeLaplacian.FreeLaplacianModel` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.FreeLaplacian.conjCLM` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.FreeLaplacian.dense_domain_vadd_clm` | ✓ | verified | lean-4.32.0 |  |
@@ -340,6 +355,21 @@
 | PROVED | `Brockian.Weyl.Gate1Bounded.primeGaussianMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2 |
 | PROVED | `Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint` | ✓ | verified | lean-4.32.0 | Aristotle proj c595862c — bounded Kato-Rellich; independently AXLE-verified @ 4.32 |
 | PROVED | `Brockian.Weyl.Kato.isSelfAdjoint_add` | ✓ | verified | lean-4.32.0 | Aristotle proj c595862c — bounded Kato-Rellich; independently AXLE-verified @ 4.32 |
+| DEFINITION | `Brockian.Weyl.KatoUnbounded.BoundedPerturbationTransfer` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
+| PROVED | `Brockian.Weyl.KatoUnbounded.boundedPerturbationTransfer_clm` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
+| CONDITIONAL | `Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
+| PROVED | `Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb_iff` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
+| DEFINITION | `Brockian.Weyl.KatoUnbounded.perturb` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
+| PROVED | `Brockian.Weyl.KatoUnbounded.perturb_apply` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
+| PROVED | `Brockian.Weyl.KatoUnbounded.perturb_apply_ne_I_smul` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
+| PROVED | `Brockian.Weyl.KatoUnbounded.perturb_apply_ne_neg_I_smul` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
+| PROVED | `Brockian.Weyl.KatoUnbounded.perturb_clm_eq` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
+| PROVED | `Brockian.Weyl.KatoUnbounded.perturb_clm_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
+| PROVED | `Brockian.Weyl.KatoUnbounded.perturb_dense_domain` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
+| PROVED | `Brockian.Weyl.KatoUnbounded.perturb_domain` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
+| PROVED | `Brockian.Weyl.KatoUnbounded.perturb_isSymmetric` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
+| PROVED | `Brockian.Weyl.KatoUnbounded.perturb_norm_add_I_smul_eq` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
+| PROVED | `Brockian.Weyl.KatoUnbounded.perturb_norm_sub_smul_ge` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
 | DEFINITION | `Brockian.Weyl.LP.IsLimitPointAtInfty` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |
 | DEFINITION | `Brockian.Weyl.LP.IsSolutionOn` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |
 | DEFINITION | `Brockian.Weyl.LP.L2NearInfty` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |

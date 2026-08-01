@@ -1,10 +1,10 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 287,
-    "DEFINITION": 80,
+    "PROVED": 314,
+    "DEFINITION": 82,
     "CONJECTURE": 2,
-    "CONDITIONAL": 4
+    "CONDITIONAL": 5
   },
   "theorems": [
     {
@@ -9524,6 +9524,486 @@
       "provenance_note": "every bounded self-adjoint A is EssentiallySelfAdjoint (deficiency spaces = bot); identity is a concrete non-degenerate witness. Closes the Operator agent's open blocker; connects to SpectralGate1 (the prime-Gaussian potential mult op is bounded self-adjoint => ess-self-adjoint). Unbounded -Delta+V still OPEN."
     },
     {
+      "name": "Brockian.Weyl.Extension.adjoint_closure",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Extension",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Extension.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Extension.adjoint_eigen_I_eq_zero_of_essSA",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Extension",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Extension.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Extension.adjoint_eigen_neg_I_eq_zero_of_essSA",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Extension",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Extension.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Extension.adjoint_graph_topologicalClosure_eq",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Extension",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Extension.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Extension.closure_eigenvalue_im_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Extension",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Extension.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Extension.closure_isSymmetric",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Extension",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Extension.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Extension.closure_le_of_isClosed_extension",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Extension",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Extension.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Extension.closure_le_of_isSelfAdjoint_extension",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Extension",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Extension.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Extension.eigenvalue_im_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Extension",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Extension.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Extension.essentiallySelfAdjoint_iff'",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Extension",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Extension.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Extension.isSelfAdjoint_closure_iff_eq_adjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Extension",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Extension.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Extension.isSymmetric_of_le_adjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Extension",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Extension.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Extension.le_closure_le_adjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Extension",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Extension.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Extension.smulPMap_closure_eigenvalue_im_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Extension",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Extension.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Extension.smulPMap_closure_isSymmetric",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Extension",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Extension.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.Weyl.FreeLaplacian.FreeLaplacianModel",
       "kind": "theorem",
       "module": "Brockian.Weyl.FreeLaplacian",
@@ -10122,6 +10602,478 @@
       "quarantine": true,
       "ledger_run": "Aristotle proj c595862c \u2014 bounded Kato-Rellich; independently AXLE-verified @ 4.32",
       "provenance_note": "isSelfAdjoint_add; dense_range_add_sub_of_selfAdjoint (ran((T+B)-z) dense for non-real z, T,B bounded self-adjoint, via resolvent). Statement fidelity diff-checked vs target (unchanged). Feeds the -Delta+V perturbation route."
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.BoundedPerturbationTransfer",
+      "kind": "def",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoUnbounded.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
+      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.boundedPerturbationTransfer_clm",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoUnbounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
+      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoUnbounded.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "open",
+      "quarantine": true,
+      "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
+      "provenance_note": "T+B ESA GIVEN BoundedPerturbationTransfer (the ran((T+B)\u00b1i)-density transfer) \u2014 open-strength for unbounded T; the implication carries real work, not modus-ponens."
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb_iff",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoUnbounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
+      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb",
+      "kind": "def",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoUnbounded.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
+      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_apply",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoUnbounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
+      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_apply_ne_I_smul",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoUnbounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
+      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_apply_ne_neg_I_smul",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoUnbounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
+      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_clm_eq",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoUnbounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
+      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_clm_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoUnbounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
+      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_dense_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoUnbounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
+      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoUnbounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
+      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_isSymmetric",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoUnbounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
+      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_norm_add_I_smul_eq",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoUnbounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
+      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.Weyl.KatoUnbounded.perturb_norm_sub_smul_ge",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoUnbounded",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoUnbounded.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
+      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
     },
     {
       "name": "Brockian.Weyl.LP.IsLimitPointAtInfty",

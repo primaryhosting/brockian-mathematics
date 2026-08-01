@@ -34,3 +34,5 @@ import Brockian.WeylSchrodingerESA
 import Brockian.WeylFreeLaplacian
 import Brockian.WeylOperatorChoice
 import Brockian.MetallicFamily
+import Brockian.WeylSelfAdjointExtension
+import Brockian.WeylKatoUnbounded
