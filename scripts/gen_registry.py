@@ -119,7 +119,8 @@ def _provenance_for(module: str, name: str, verdicts: dict[str, Any]) -> dict[st
         if run.get("module") != module:
             continue
         prov = {k: run.get(k) for k in ("module", "quarantine", "ledger_run",
-                                        "provenance_note", "conditional_rung")}
+                                        "provenance_note", "conditional_rung",
+                                        "kind_override")}
         for ov in (run.get("overrides") or []):
             if ov.get("name") == short:
                 prov.update({k: v for k, v in ov.items() if k != "name"})
@@ -166,6 +167,8 @@ def generate(attest_dir: str, verdicts_path: str) -> dict[str, Any]:
                 axle_verified=True if axl else (False if d.get("axle_verdict") == "failed" else None),
             )
             prov = _provenance_for(module, d["name"], verdicts)
+            if prov.get("kind_override") is not None:
+                facts.kind = prov["kind_override"]
             facts.conditional_rung = prov.get("conditional_rung")
             entries.append(build_entry(
                 facts, prov,

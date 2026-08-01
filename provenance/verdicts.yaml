@@ -270,8 +270,8 @@ runs:
     overrides:
       - name: singular_series_pos
         verdict: admit
-        conditional_rung: classical
-        provenance_note: "conditional on convergence-to-positive-limit (classical analytic fact, stated as explicit hypothesis h_conv, not axiomatized)"
+        conditional_rung: null
+        provenance_note: "proved convergence-to-positive-limit eliminator; the missing h_conv is now discharged by Brockian.SingularSeries.Convergence.singularSeriesFinite_tendsto_pos, with citable unconditional theorem singular_series_pos'. No longer an open conditional."
 
   # ── run 97 / 103 / 112: φ-algebra, ray ring, Dirichlet-on-rays ───────────────
   "97":
@@ -435,6 +435,11 @@ runs:
     quarantine: true
     ledger_run: "intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus"
     provenance_note: "H3 silver eigensystem (2±√2,2), twin_pins_mod_three, ℓ−2 grammar, τ period=25; 4 thms kernel-decide (finite checks)"
+    overrides:
+      - name: SilverGapRigidityTarget
+        verdict: admit
+        kind_override: def
+        provenance_note: "target Prop container already discharged by silver_gap_rigidity_finite; classify as a definition/target slot, not an open conjecture."
 
   # ── Schrödinger ESA assembly (Aug 1) ───────────────────────────────────────
   "weyl-schrodinger-esa":
