@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 274,
+    "PROVED": 287,
     "DEFINITION": 80,
     "CONJECTURE": 2,
     "CONDITIONAL": 4
@@ -2787,6 +2787,422 @@
       "quarantine": true,
       "ledger_run": "swarm 2026-08-01 \u2014 spectral-model \u21d2 Goldbach implication (schema)",
       "provenance_note": "goldbachCount = REAL prime-pair count (4\u21921, 10\u21923 by decide); base cases proved. Goldbach NOT proved."
+    },
+    {
+      "name": "Brockian.MetallicFamily.H3_ground_metallic",
+      "kind": "theorem",
+      "module": "Brockian.MetallicFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MetallicFamily.inv_metallicMean_eq_sub",
+      "kind": "theorem",
+      "module": "Brockian.MetallicFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicConj_sq",
+      "kind": "theorem",
+      "module": "Brockian.MetallicFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicMean_add_conj",
+      "kind": "theorem",
+      "module": "Brockian.MetallicFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicMean_mul_conj",
+      "kind": "theorem",
+      "module": "Brockian.MetallicFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicMean_one",
+      "kind": "theorem",
+      "module": "Brockian.MetallicFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicMean_pos_of_nonneg",
+      "kind": "theorem",
+      "module": "Brockian.MetallicFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicMean_sq",
+      "kind": "theorem",
+      "module": "Brockian.MetallicFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicMean_sub_conj",
+      "kind": "theorem",
+      "module": "Brockian.MetallicFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallicMean_two",
+      "kind": "theorem",
+      "module": "Brockian.MetallicFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallic_one_unique_to_five",
+      "kind": "theorem",
+      "module": "Brockian.MetallicFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MetallicFamily.metallic_radicand_nonneg",
+      "kind": "theorem",
+      "module": "Brockian.MetallicFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MetallicFamily.silverGap_eq_three_sub_metallicMean_two",
+      "kind": "theorem",
+      "module": "Brockian.MetallicFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.RiemannScaffold.BrockianSystem",

@@ -9,7 +9,7 @@
 - **CONDITIONAL**: 4
 - **CONJECTURE**: 2
 - **DEFINITION**: 80
-- **PROVED**: 274
+- **PROVED**: 287
 
 ## Theorems
 
@@ -105,6 +105,19 @@
 | PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_four` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
 | PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_of_count_pos` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
 | PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_six` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| PROVED | `Brockian.MetallicFamily.H3_ground_metallic` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.MetallicFamily.inv_metallicMean_eq_sub` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.MetallicFamily.metallicConj_sq` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.MetallicFamily.metallicMean_add_conj` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.MetallicFamily.metallicMean_mul_conj` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.MetallicFamily.metallicMean_one` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.MetallicFamily.metallicMean_pos_of_nonneg` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.MetallicFamily.metallicMean_sq` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.MetallicFamily.metallicMean_sub_conj` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.MetallicFamily.metallicMean_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.MetallicFamily.metallic_one_unique_to_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.MetallicFamily.metallic_radicand_nonneg` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.MetallicFamily.silverGap_eq_three_sub_metallicMean_two` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.RiemannScaffold.BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannScaffold.Gammaℝ_ne_zero_of_nontrivial` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | CONDITIONAL | `Brockian.RiemannScaffold.RH_of_BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
