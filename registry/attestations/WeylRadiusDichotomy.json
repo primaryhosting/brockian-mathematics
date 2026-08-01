@@ -1,0 +1,51 @@
+{
+  "module": "Brockian.Weyl.RadiusDichotomy",
+  "environment": "lean-4.32.0",
+  "module_verified": true,
+  "declarations": [
+    {
+      "name": "Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_counterexample",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_of_pos",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.RadiusDichotomy.radius_to_zero_of_mass_infinite",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.RadiusDichotomy.radius_pos_limit_of_mass_finite",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    }
+  ]
+}

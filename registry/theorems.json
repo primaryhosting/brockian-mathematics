@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 211,
+    "PROVED": 215,
     "DEFINITION": 69,
     "CONJECTURE": 2,
     "CONDITIONAL": 4
@@ -8866,6 +8866,134 @@
       "quarantine": true,
       "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
       "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.RadiusDichotomy.radius_pos_limit_of_mass_finite",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.RadiusDichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RadiusDichotomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle proj 50ca67ca \u2014 radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28)",
+      "provenance_note": "radius_tendsto_zero_iff_of_pos (corrected dichotomy r->0 <-> I->inf, given mass positive somewhere) + two directional thms + counterexample refuting my naive iff (1/0=0 junk trap). Aristotle caught the flaw honestly. One Tendsto.comp line ported 4.28->4.32."
+    },
+    {
+      "name": "Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_counterexample",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.RadiusDichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RadiusDichotomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle proj 50ca67ca \u2014 radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28)",
+      "provenance_note": "negative result: identically-zero mass refutes the un-guarded iff (Lean 1/0=0). A real disproof, not a claim."
+    },
+    {
+      "name": "Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_of_pos",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.RadiusDichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RadiusDichotomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle proj 50ca67ca \u2014 radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28)",
+      "provenance_note": "radius_tendsto_zero_iff_of_pos (corrected dichotomy r->0 <-> I->inf, given mass positive somewhere) + two directional thms + counterexample refuting my naive iff (1/0=0 junk trap). Aristotle caught the flaw honestly. One Tendsto.comp line ported 4.28->4.32."
+    },
+    {
+      "name": "Brockian.Weyl.RadiusDichotomy.radius_to_zero_of_mass_infinite",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.RadiusDichotomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RadiusDichotomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle proj 50ca67ca \u2014 radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28)",
+      "provenance_note": "radius_tendsto_zero_iff_of_pos (corrected dichotomy r->0 <-> I->inf, given mass positive somewhere) + two directional thms + counterexample refuting my naive iff (1/0=0 junk trap). Aristotle caught the flaw honestly. One Tendsto.comp line ported 4.28->4.32."
     }
   ]
 }

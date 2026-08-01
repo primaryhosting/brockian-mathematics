@@ -9,7 +9,7 @@
 - **CONDITIONAL**: 4
 - **CONJECTURE**: 2
 - **DEFINITION**: 69
-- **PROVED**: 211
+- **PROVED**: 215
 
 ## Theorems
 
@@ -301,3 +301,7 @@
 | DEFINITION | `Brockian.Weyl.Operator.smulPMap` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
 | PROVED | `Brockian.Weyl.Operator.smulPMap_domain` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
 | PROVED | `Brockian.Weyl.Operator.smulPMap_isSymmetric` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
+| PROVED | `Brockian.Weyl.RadiusDichotomy.radius_pos_limit_of_mass_finite` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
+| PROVED | `Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_counterexample` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
+| PROVED | `Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_of_pos` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
+| PROVED | `Brockian.Weyl.RadiusDichotomy.radius_to_zero_of_mass_infinite` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |

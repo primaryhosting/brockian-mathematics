@@ -84,6 +84,18 @@ runs:
     ledger_run: "Aristotle proj c595862c — bounded Kato-Rellich; independently AXLE-verified @ 4.32"
     provenance_note: "isSelfAdjoint_add; dense_range_add_sub_of_selfAdjoint (ran((T+B)-z) dense for non-real z, T,B bounded self-adjoint, via resolvent). Statement fidelity diff-checked vs target (unchanged). Feeds the -Delta+V perturbation route."
 
+  # ── Aristotle-proved (Aug 1): the b→∞ radius dichotomy (corrected) ────────────
+  "weyl-radius-dichotomy":
+    module: Brockian.Weyl.RadiusDichotomy
+    verdict: admit
+    quarantine: true
+    ledger_run: "Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28)"
+    provenance_note: "radius_tendsto_zero_iff_of_pos (corrected dichotomy r->0 <-> I->inf, given mass positive somewhere) + two directional thms + counterexample refuting my naive iff (1/0=0 junk trap). Aristotle caught the flaw honestly. One Tendsto.comp line ported 4.28->4.32."
+    overrides:
+      - name: radius_tendsto_zero_iff_counterexample
+        verdict: admit
+        provenance_note: "negative result: identically-zero mass refutes the un-guarded iff (Lean 1/0=0). A real disproof, not a claim."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   "GC":
     module: Brockian.GoldbachComb

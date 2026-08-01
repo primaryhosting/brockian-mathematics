@@ -46,6 +46,25 @@ The next honest, *achievable* step is the Weyl limit-point criterion (a classica
 an open problem): closing it would unconditionally discharge Gate 1's self-adjointness clause.
 It is a Mathlib-infrastructure task, not a research gamble.
 
+
+## Aristotle statement-fidelity catches (2026-08-01) — the prover refuted 2 of my targets
+
+Submitting to Aristotle v3 (proj IDs below), the untrusted prover CAUGHT REAL FLAWS in my
+target statements rather than faking proofs — the methodology working end to end:
+
+- **`boundedV_isLimitPoint` (proj 17ad1895) — REFUTED, statement was false.** "Bounded V" is
+  too weak for the strong pointwise `IsSolution` (y''=(V−λ)y everywhere): the Dirichlet
+  potential (0 on ℚ, 1 on ℝ∖ℚ) is bounded yet forces every classical solution ≡ 0, so no
+  nontrivial solution exists and limit-point fails. Aristotle proved the counterexample and
+  commented out my target. FIX for a future run: require V **continuous** (or locally
+  integrable) — then bounded ⇒ limit-point is the genuine classical theorem.
+- **`radius_tendsto_zero_iff` (proj 50ca67ca) — REFUTED, junk-value trap.** With `I ≡ 0`,
+  Lean's `1/0 = 0` makes the radius "→0" while the mass doesn't diverge. Aristotle refuted it
+  and proved the corrected `radius_tendsto_zero_iff_of_pos` (mass positive somewhere) — now
+  integrated as `Brockian.Weyl.RadiusDichotomy`.
+
+Both are now genuinely-verified NEGATIVE results + corrected positive theorems in the core.
+
 ## Local `lake build` leg — environment-blocked (not a proof gap)
 
 The dependency graph resolves (manifest + all 9 packages cloned), but `lake exe cache get`
