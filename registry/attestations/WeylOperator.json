@@ -1,17 +1,17 @@
 {
-  "module": "Brockian.Core",
+  "module": "Brockian.Weyl.Operator",
   "environment": "lean-4.32.0",
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.Core.Ray",
+      "name": "Brockian.Weyl.Operator.EssentiallySelfAdjoint",
       "kind": "def",
       "axle_verdict": "verified",
       "axioms": null,
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.binet_formula",
+      "name": "Brockian.Weyl.Operator.IsSymmetric",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -22,7 +22,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.cos_2pi_5",
+      "name": "Brockian.Weyl.Operator.IsSymmetric.eq_zero_of_apply_eq_smul",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -33,7 +33,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.cos_pi_div_five_eq_phi_div_two",
+      "name": "Brockian.Weyl.Operator.IsSymmetric.im_eq_zero_of_apply_eq_smul",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -44,7 +44,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.each_ray_has_infinitely_many_primes",
+      "name": "Brockian.Weyl.Operator.IsSymmetric.inner_apply",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -55,17 +55,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.fib_five_dvd",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Core.fifth_root_of_unity",
+      "name": "Brockian.Weyl.Operator.IsSymmetric.inner_self_im",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -76,7 +66,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.one_lt_phi",
+      "name": "Brockian.Weyl.Operator.IsSymmetric.norm_sub_smul_ge",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -87,14 +77,14 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.phi",
+      "name": "Brockian.Weyl.Operator.deficiencySpace",
       "kind": "def",
       "axle_verdict": "verified",
       "axioms": null,
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.phi_pos",
+      "name": "Brockian.Weyl.Operator.mem_deficiencySpace_iff",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -105,7 +95,14 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.phi_sq",
+      "name": "Brockian.Weyl.Operator.smulPMap",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.Operator.smulPMap_domain",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -116,38 +113,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.ray_add",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Core.ray_mul",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Core.ray_ne_zero_infinite",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Core.ray_zero_iff_dvd",
+      "name": "Brockian.Weyl.Operator.smulPMap_isSymmetric",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [

@@ -1,31 +1,31 @@
 {
-  "module": "Brockian.Automorphism",
+  "module": "Brockian.Weyl.LP",
   "environment": "lean-4.32.0",
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.Automorphism.C5",
+      "name": "Brockian.Weyl.LP.IsLimitPointAtInfty",
       "kind": "def",
       "axle_verdict": "verified",
       "axioms": null,
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Automorphism.act",
+      "name": "Brockian.Weyl.LP.IsSolutionOn",
       "kind": "def",
       "axle_verdict": "verified",
       "axioms": null,
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Automorphism.dihedralHom",
+      "name": "Brockian.Weyl.LP.L2NearInfty",
       "kind": "def",
       "axle_verdict": "verified",
       "axioms": null,
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Automorphism.dihedral_action_faithful",
+      "name": "Brockian.Weyl.LP.const_potential_isLimitPoint",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -36,61 +36,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Automorphism.mul_rr",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Automorphism.mul_rsr",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Automorphism.mul_srr",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Automorphism.mul_srsr",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Automorphism.reflEquiv",
-      "kind": "def",
-      "axle_verdict": "verified",
-      "axioms": null,
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Automorphism.reflIso",
-      "kind": "def",
-      "axle_verdict": "verified",
-      "axioms": null,
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Automorphism.refl_map_adj",
+      "name": "Brockian.Weyl.LP.exists_sqrt_pos_re",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -101,21 +47,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Automorphism.rotEquiv",
-      "kind": "def",
-      "axle_verdict": "verified",
-      "axioms": null,
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Automorphism.rotIso",
-      "kind": "def",
-      "axle_verdict": "verified",
-      "axioms": null,
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Automorphism.rot_map_adj",
+      "name": "Brockian.Weyl.LP.indep_of_wronskian_ne_zero",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -126,7 +58,36 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Automorphism.ten_le_card_aut",
+      "name": "Brockian.Weyl.LP.not_integrableOn_exp_mul_Ioi",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.LP.wronskian",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.LP.wronskian_hasDerivAt",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.LP.wronskian_isConst",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [

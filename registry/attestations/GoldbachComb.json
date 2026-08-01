@@ -4,14 +4,24 @@
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.GoldbachComb.gCount_eq",
-      "kind": "theorem",
+      "name": "Brockian.GoldbachComb.GoldbachCovarianceTransfer",
+      "kind": "conjecture",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.GoldbachComb.Kp",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.GoldbachComb.gCount",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
       "axioms_ok": true
     },
     {
@@ -26,7 +36,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.GoldbachComb.local_covariance",
+      "name": "Brockian.GoldbachComb.gCount_eq",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -37,30 +47,8 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.GoldbachComb.gCount",
-      "kind": "def",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.GoldbachComb.Kp",
-      "kind": "def",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.GoldbachComb.GoldbachCovarianceTransfer",
-      "kind": "conjecture",
+      "name": "Brockian.GoldbachComb.local_covariance",
+      "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
         "propext",

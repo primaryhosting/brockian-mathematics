@@ -1,45 +1,111 @@
 {
-  "module": "Brockian.SingularSeries",
+  "module": "Brockian.Weyl.Disk",
   "environment": "lean-4.32.0",
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.SingularSeries.compute_local_factor",
+      "name": "Brockian.Weyl.Disk.Acoef",
       "kind": "def",
       "axle_verdict": "verified",
       "axioms": null,
       "axioms_ok": true
     },
     {
-      "name": "Brockian.SingularSeries.compute_nu_p",
+      "name": "Brockian.Weyl.Disk.Pcoef",
       "kind": "def",
       "axle_verdict": "verified",
       "axioms": null,
       "axioms_ok": true
     },
     {
-      "name": "Brockian.SingularSeries.compute_singular_series_finite",
+      "name": "Brockian.Weyl.Disk.boundary_L2_identity",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.Disk.circleEq",
       "kind": "def",
       "axle_verdict": "verified",
       "axioms": null,
       "axioms_ok": true
     },
     {
-      "name": "Brockian.SingularSeries.localFactor",
+      "name": "Brockian.Weyl.Disk.circle_key",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.Disk.diskCenter",
       "kind": "def",
       "axle_verdict": "verified",
       "axioms": null,
       "axioms_ok": true
     },
     {
-      "name": "Brockian.SingularSeries.localFactorAt",
+      "name": "Brockian.Weyl.Disk.green_identity_integral",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.Disk.integral_normSq_mono",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.Disk.lagrange_identity",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.Disk.radius_formula",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.Disk.sturmL",
       "kind": "def",
       "axle_verdict": "verified",
       "axioms": null,
       "axioms_ok": true
     },
     {
-      "name": "Brockian.SingularSeries.localFactorAt_eq",
+      "name": "Brockian.Weyl.Disk.weyl_disk_circle",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -50,7 +116,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.SingularSeries.localFactorAt_of_not_prime",
+      "name": "Brockian.Weyl.Disk.weyl_nested_circle",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -61,7 +127,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.SingularSeries.localFactorAt_pos",
+      "name": "Brockian.Weyl.Disk.weyl_radius_antitone",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -72,69 +138,14 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.SingularSeries.local_factor_asymptotic",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.SingularSeries.local_factor_denom_ne_zero",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.SingularSeries.local_factor_of_nu_p_eq_p",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.SingularSeries.local_factor_of_nu_p_eq_zero",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.SingularSeries.local_factor_pos",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.SingularSeries.nu_p",
+      "name": "Brockian.Weyl.Disk.wronskian",
       "kind": "def",
       "axle_verdict": "verified",
       "axioms": null,
       "axioms_ok": true
     },
     {
-      "name": "Brockian.SingularSeries.nu_p'",
+      "name": "Brockian.Weyl.Disk.wronskian_hasDerivAt",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -145,54 +156,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.SingularSeries.nu_p_eq_image_card",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.SingularSeries.nu_p_lt_p_of_admissible",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.SingularSeries.singularSeries",
-      "kind": "def",
-      "axle_verdict": "verified",
-      "axioms": null,
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.SingularSeries.singularSeriesFinite",
-      "kind": "def",
-      "axle_verdict": "verified",
-      "axioms": null,
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.SingularSeries.singular_series_finite_pos",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.SingularSeries.singular_series_pos",
+      "name": "Brockian.Weyl.Disk.wronskian_isConst",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [

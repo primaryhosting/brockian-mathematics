@@ -4,17 +4,6 @@
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.Spectral.cycleSpectrum",
-      "kind": "def",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
       "name": "Brockian.Spectral.cos_two_pi_div_five",
       "kind": "theorem",
       "axle_verdict": "verified",
@@ -26,7 +15,14 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Spectral.two_cos_four_pi_div_five",
+      "name": "Brockian.Spectral.cycleSpectrum",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Spectral.golden_in_cycleSpectrum_five",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -48,7 +44,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Spectral.golden_in_cycleSpectrum_five",
+      "name": "Brockian.Spectral.golden_unique_to_five",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -70,7 +66,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Spectral.golden_unique_to_five",
+      "name": "Brockian.Spectral.two_cos_four_pi_div_five",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [

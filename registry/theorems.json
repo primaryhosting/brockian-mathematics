@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 125,
-    "DEFINITION": 24,
-    "CONJECTURE": 3,
+    "PROVED": 167,
+    "DEFINITION": 61,
+    "CONJECTURE": 2,
     "CONDITIONAL": 4
   },
   "theorems": [
@@ -80,11 +80,7 @@
         "file": "Brockian/Admissibility.lean"
       },
       "register": "DEFINITION",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -144,11 +140,7 @@
         "file": "Brockian/Automorphism.lean"
       },
       "register": "DEFINITION",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -176,11 +168,7 @@
         "file": "Brockian/Automorphism.lean"
       },
       "register": "DEFINITION",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -208,11 +196,7 @@
         "file": "Brockian/Automorphism.lean"
       },
       "register": "DEFINITION",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -396,10 +380,7 @@
         "file": "Brockian/Automorphism.lean"
       },
       "register": "DEFINITION",
-      "axioms": [
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -427,11 +408,7 @@
         "file": "Brockian/Automorphism.lean"
       },
       "register": "DEFINITION",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -491,10 +468,7 @@
         "file": "Brockian/Automorphism.lean"
       },
       "register": "DEFINITION",
-      "axioms": [
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -522,11 +496,7 @@
         "file": "Brockian/Automorphism.lean"
       },
       "register": "DEFINITION",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -682,11 +652,7 @@
         "file": "Brockian/Connectivity.lean"
       },
       "register": "DEFINITION",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -832,6 +798,34 @@
       "quarantine": true,
       "ledger_run": "run 88 (1d2a\u2026) \u2014 re-proved fresh @ v4.32 via concrete Laplacian eigenvalues",
       "provenance_note": "\u03bb\u2082(C\u2085) = 2 \u2212 1/\u03c6 = 3 \u2212 \u03c6 (algebraic connectivity is golden); ratio 1 \u2212 1/(2\u03c6)"
+    },
+    {
+      "name": "Brockian.Core.Ray",
+      "kind": "def",
+      "module": "Brockian.Core",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Core.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
+      "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
     },
     {
       "name": "Brockian.Core.binet_formula",
@@ -1038,6 +1032,34 @@
         "Quot.sound",
         "propext"
       ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
+      "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
+    },
+    {
+      "name": "Brockian.Core.phi",
+      "kind": "def",
+      "module": "Brockian.Core",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Core.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -1383,11 +1405,7 @@
         "file": "Brockian/GoldbachComb.lean"
       },
       "register": "CONJECTURE",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -1415,11 +1433,7 @@
         "file": "Brockian/GoldbachComb.lean"
       },
       "register": "DEFINITION",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -1447,11 +1461,7 @@
         "file": "Brockian/GoldbachComb.lean"
       },
       "register": "DEFINITION",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -2224,13 +2234,13 @@
     },
     {
       "name": "Brockian.GoldbachSchema.HasGoldbachRep",
-      "kind": "conjecture",
+      "kind": "def",
       "module": "Brockian.GoldbachSchema",
       "statement": "",
       "source": {
         "file": "Brockian/GoldbachSchema.lean"
       },
-      "register": "CONJECTURE",
+      "register": "DEFINITION",
       "axioms": [],
       "flags": {
         "native_decide": false,
@@ -2280,13 +2290,13 @@
     },
     {
       "name": "Brockian.GoldbachSchema.SpectralModelBeyond",
-      "kind": "conjecture",
+      "kind": "def",
       "module": "Brockian.GoldbachSchema",
       "statement": "",
       "source": {
         "file": "Brockian/GoldbachSchema.lean"
       },
-      "register": "CONJECTURE",
+      "register": "DEFINITION",
       "axioms": [],
       "flags": {
         "native_decide": false,
@@ -2807,6 +2817,34 @@
       "provenance_note": "\u03be-bridge (riemannXi, \u0393-factor nonvanishing, \u03be-zero from \u03b6-zero, \u03be-RH \u21d2 Mathlib RH) UNCONDITIONAL; guards s\u22600,1 prevent ex-falso. RH NOT claimed."
     },
     {
+      "name": "Brockian.Sieve.H3",
+      "kind": "def",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
       "name": "Brockian.Sieve.H3_det",
       "kind": "theorem",
       "module": "Brockian.Sieve",
@@ -2967,6 +3005,62 @@
       "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
     },
     {
+      "name": "Brockian.Sieve.SilverGapRigidityTarget",
+      "kind": "conjecture",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.TwinAdmissibleAt",
+      "kind": "def",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
       "name": "Brockian.Sieve.compatible_closure",
       "kind": "theorem",
       "module": "Brockian.Sieve",
@@ -3012,6 +3106,34 @@
         "Quot.sound",
         "propext"
       ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.phi",
+      "kind": "def",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -3095,6 +3217,34 @@
       "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
     },
     {
+      "name": "Brockian.Sieve.silverGap",
+      "kind": "def",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
       "name": "Brockian.Sieve.silver_gap_rigidity_finite",
       "kind": "theorem",
       "module": "Brockian.Sieve",
@@ -3108,6 +3258,34 @@
         "Quot.sound",
         "propext"
       ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
+      "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.Sieve.tau",
+      "kind": "def",
+      "module": "Brockian.Sieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Sieve.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -3284,6 +3462,146 @@
       "quarantine": true,
       "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
       "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.SingularSeries.compute_local_factor",
+      "kind": "def",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.compute_nu_p",
+      "kind": "def",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.compute_singular_series_finite",
+      "kind": "def",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.localFactor",
+      "kind": "def",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.localFactorAt",
+      "kind": "def",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
     },
     {
       "name": "Brockian.SingularSeries.localFactorAt_eq",
@@ -3542,6 +3860,66 @@
       "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
     },
     {
+      "name": "Brockian.SingularSeries.nu_p",
+      "kind": "def",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.nu_p'",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
       "name": "Brockian.SingularSeries.nu_p_eq_image_card",
       "kind": "theorem",
       "module": "Brockian.SingularSeries",
@@ -3587,6 +3965,62 @@
         "Quot.sound",
         "propext"
       ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.singularSeries",
+      "kind": "def",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "intake run 63 (a0ce\u2026) \u2014 largest clean analytic run; singular series",
+      "provenance_note": "local-factor positivity + summability; feeds the q\u2212\u03bd law's analytic side"
+    },
+    {
+      "name": "Brockian.SingularSeries.singularSeriesFinite",
+      "kind": "def",
+      "module": "Brockian.SingularSeries",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeries.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -3710,11 +4144,7 @@
         "file": "Brockian/Spectral.lean"
       },
       "register": "DEFINITION",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -3958,7 +4388,71 @@
       "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
     },
     {
+      "name": "Brockian.SpectralGate1.coeFn_mulLpFun",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
       "name": "Brockian.SpectralGate1.coeFn_primeGaussianMulCLM",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.continuous_primeBump",
       "kind": "theorem",
       "module": "Brockian.SpectralGate1",
       "statement": "",
@@ -4118,7 +4612,363 @@
       "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
     },
     {
+      "name": "Brockian.SpectralGate1.mulLpCLM",
+      "kind": "def",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.mulLpFun",
+      "kind": "def",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.mulLp\u2097",
+      "kind": "def",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeBump",
+      "kind": "def",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeBump_le_geom",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeBump_nonneg",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeGaussian",
+      "kind": "def",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeGaussianMulCLM",
+      "kind": "def",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeGaussian_le_two",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeGaussian_nonneg",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeGaussian\u2102",
+      "kind": "def",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
       "name": "Brockian.SpectralGate1.primeGaussian\u2102_memLp_top",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeGaussian\u2102_norm_le",
       "kind": "theorem",
       "module": "Brockian.SpectralGate1",
       "statement": "",
@@ -4190,11 +5040,7 @@
         "file": "Brockian/TransitionKernel.lean"
       },
       "register": "DEFINITION",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -4382,10 +5228,7 @@
         "file": "Brockian/TransitionKernel.lean"
       },
       "register": "DEFINITION",
-      "axioms": [
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -4406,38 +5249,6 @@
     },
     {
       "name": "Brockian.TransitionKernel.kernel_row_sum",
-      "kind": "theorem",
-      "module": "Brockian.TransitionKernel",
-      "statement": "",
-      "source": {
-        "file": "Brockian/TransitionKernel.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "quarantine": true,
-      "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
-      "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
-    },
-    {
-      "name": "Brockian.TransitionKernel.mem_admissibleStarts",
       "kind": "theorem",
       "module": "Brockian.TransitionKernel",
       "statement": "",
@@ -4939,6 +5750,1490 @@
       "quarantine": true,
       "ledger_run": "swarm 2026-08-01 \u2014 Weyl/Green functional-analytic core (base rung)",
       "provenance_note": "Wronskian/Abel constancy, Lagrange + integrated Green identity, Gate-0 witness. Full limit-point criterion OPEN (Mathlib 4.32 has no Sturm-Liouville/deficiency-index API) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.Acoef",
+      "kind": "def",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.Pcoef",
+      "kind": "def",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.boundary_L2_identity",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.boundary_L2_identity",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.circleEq",
+      "kind": "def",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.circle_key",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.circle_key",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.diskCenter",
+      "kind": "def",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.green_identity_integral",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.green_identity_integral",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.integral_normSq_mono",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.integral_normSq_mono",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.lagrange_identity",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.radius_formula",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.radius_formula",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.sturmL",
+      "kind": "def",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.weyl_disk_circle",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.weyl_disk_circle",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.weyl_nested_circle",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.weyl_nested_circle",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.weyl_radius_antitone",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.weyl_radius_antitone",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.wronskian",
+      "kind": "def",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.wronskian_hasDerivAt",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.wronskian_isConst",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.Disk.wronskian_isConst",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Disk",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Disk.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 finite-b nested-circle geometry (COMPLETE)",
+      "provenance_note": "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im \u03bb|\u222b|\u03c6|\u00b2), nesting antitone, boundary L\u00b2 identity. The b\u2192\u221e dichotomy OPEN (needs deficiency-index machinery)."
+    },
+    {
+      "name": "Brockian.Weyl.LP.IsLimitPointAtInfty",
+      "kind": "def",
+      "module": "Brockian.Weyl.LP",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LP.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 limit-point for constant potential",
+      "provenance_note": "const_potential_isLimitPoint (V\u2261c incl 0 is limit-point at \u221e for non-real \u03bb \u2014 a real instance), non-integrability engine, Wronskian independence. General bounded-V limit-point OPEN (genuine analysis; agent correctly refused a false Wronskian\u21d2limit-point lemma)."
+    },
+    {
+      "name": "Brockian.Weyl.LP.IsSolutionOn",
+      "kind": "def",
+      "module": "Brockian.Weyl.LP",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LP.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 limit-point for constant potential",
+      "provenance_note": "const_potential_isLimitPoint (V\u2261c incl 0 is limit-point at \u221e for non-real \u03bb \u2014 a real instance), non-integrability engine, Wronskian independence. General bounded-V limit-point OPEN (genuine analysis; agent correctly refused a false Wronskian\u21d2limit-point lemma)."
+    },
+    {
+      "name": "Brockian.Weyl.LP.L2NearInfty",
+      "kind": "def",
+      "module": "Brockian.Weyl.LP",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LP.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 limit-point for constant potential",
+      "provenance_note": "const_potential_isLimitPoint (V\u2261c incl 0 is limit-point at \u221e for non-real \u03bb \u2014 a real instance), non-integrability engine, Wronskian independence. General bounded-V limit-point OPEN (genuine analysis; agent correctly refused a false Wronskian\u21d2limit-point lemma)."
+    },
+    {
+      "name": "Brockian.Weyl.LP.const_potential_isLimitPoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.LP",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LP.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 limit-point for constant potential",
+      "provenance_note": "const_potential_isLimitPoint (V\u2261c incl 0 is limit-point at \u221e for non-real \u03bb \u2014 a real instance), non-integrability engine, Wronskian independence. General bounded-V limit-point OPEN (genuine analysis; agent correctly refused a false Wronskian\u21d2limit-point lemma)."
+    },
+    {
+      "name": "Brockian.Weyl.LP.exists_sqrt_pos_re",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.LP",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LP.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 limit-point for constant potential",
+      "provenance_note": "const_potential_isLimitPoint (V\u2261c incl 0 is limit-point at \u221e for non-real \u03bb \u2014 a real instance), non-integrability engine, Wronskian independence. General bounded-V limit-point OPEN (genuine analysis; agent correctly refused a false Wronskian\u21d2limit-point lemma)."
+    },
+    {
+      "name": "Brockian.Weyl.LP.indep_of_wronskian_ne_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.LP",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LP.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 limit-point for constant potential",
+      "provenance_note": "const_potential_isLimitPoint (V\u2261c incl 0 is limit-point at \u221e for non-real \u03bb \u2014 a real instance), non-integrability engine, Wronskian independence. General bounded-V limit-point OPEN (genuine analysis; agent correctly refused a false Wronskian\u21d2limit-point lemma)."
+    },
+    {
+      "name": "Brockian.Weyl.LP.not_integrableOn_exp_mul_Ioi",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.LP",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LP.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 limit-point for constant potential",
+      "provenance_note": "const_potential_isLimitPoint (V\u2261c incl 0 is limit-point at \u221e for non-real \u03bb \u2014 a real instance), non-integrability engine, Wronskian independence. General bounded-V limit-point OPEN (genuine analysis; agent correctly refused a false Wronskian\u21d2limit-point lemma)."
+    },
+    {
+      "name": "Brockian.Weyl.LP.wronskian",
+      "kind": "def",
+      "module": "Brockian.Weyl.LP",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LP.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 limit-point for constant potential",
+      "provenance_note": "const_potential_isLimitPoint (V\u2261c incl 0 is limit-point at \u221e for non-real \u03bb \u2014 a real instance), non-integrability engine, Wronskian independence. General bounded-V limit-point OPEN (genuine analysis; agent correctly refused a false Wronskian\u21d2limit-point lemma)."
+    },
+    {
+      "name": "Brockian.Weyl.LP.wronskian_hasDerivAt",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.LP",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LP.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 limit-point for constant potential",
+      "provenance_note": "const_potential_isLimitPoint (V\u2261c incl 0 is limit-point at \u221e for non-real \u03bb \u2014 a real instance), non-integrability engine, Wronskian independence. General bounded-V limit-point OPEN (genuine analysis; agent correctly refused a false Wronskian\u21d2limit-point lemma)."
+    },
+    {
+      "name": "Brockian.Weyl.LP.wronskian_isConst",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.LP",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LP.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 limit-point for constant potential",
+      "provenance_note": "const_potential_isLimitPoint (V\u2261c incl 0 is limit-point at \u221e for non-real \u03bb \u2014 a real instance), non-integrability engine, Wronskian independence. General bounded-V limit-point OPEN (genuine analysis; agent correctly refused a false Wronskian\u21d2limit-point lemma)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.EssentiallySelfAdjoint",
+      "kind": "def",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Operator.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.IsSymmetric",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Operator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.IsSymmetric.eq_zero_of_apply_eq_smul",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Operator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.IsSymmetric.im_eq_zero_of_apply_eq_smul",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Operator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.IsSymmetric.inner_apply",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Operator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.IsSymmetric.inner_self_im",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Operator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.IsSymmetric.norm_sub_smul_ge",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Operator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.deficiencySpace",
+      "kind": "def",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Operator.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.mem_deficiencySpace_iff",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Operator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.smulPMap",
+      "kind": "def",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Operator.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.smulPMap_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Operator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.smulPMap_isSymmetric",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Operator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
     }
   ]
 }

@@ -31,8 +31,12 @@ def _kind_of(src: str, name: str) -> str:
         rf"^\s*(?:@\[[^\]]*\]\s*)*(?:noncomputable\s+)?(?:def|abbrev)\s+{re.escape(name)}\b(.*?):=",
         src, re.MULTILINE | re.DOTALL)
     if m:
-        # a Prop-typed def is a conjecture container; any other def is a supporting definition
-        return "conjecture" if re.search(r":\s*Prop\b", m.group(1)) else "def"
+        sig = m.group(1)
+        # A conjecture container is a NULLARY Prop claim (`def C : Prop := …`), standing in
+        # for an open statement. A parameterized Prop-def is a predicate → a definition.
+        if re.search(r":\s*Prop\b", sig) and sig.split(":")[0].strip() == "":
+            return "conjecture"
+        return "def"
     # structures/classes/inductives are definitions, not theorems
     if re.search(rf"^\s*(?:@\[[^\]]*\]\s*)*(?:structure|class|inductive)\s+{re.escape(name)}\b",
                  src, re.MULTILINE):

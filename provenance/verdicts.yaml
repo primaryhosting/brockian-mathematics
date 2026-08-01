@@ -151,6 +151,26 @@ runs:
         conditional_rung: open
         provenance_note: "densely-defined symmetric operator with real-spectrum + zeros↔spectrum fields ⇒ RH; BrockianSystem is Hilbert-Pólya-strength (OPEN, NOT shown instantiable, NOT provably empty — no ex-falso). Never citable as RH progress."
 
+  # ── Weyl campaign (Aug 1): the criterion decomposed, three fronts ────────────
+  "weyl-operator":
+    module: Brockian.Weyl.Operator
+    verdict: admit
+    quarantine: true
+    ledger_run: "Weyl campaign 2026-08-01 — symmetric unbounded-operator framework"
+    provenance_note: "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|‖v‖ ≤ ‖(T−z)v‖, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+  "weyl-disk":
+    module: Brockian.Weyl.Disk
+    verdict: admit
+    quarantine: true
+    ledger_run: "Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE)"
+    provenance_note: "weyl_disk_circle (exact nested circle), Gram identity, radius = 1/(2|Im λ|∫|φ|²), nesting antitone, boundary L² identity. The b→∞ dichotomy OPEN (needs deficiency-index machinery)."
+  "weyl-lp":
+    module: Brockian.Weyl.LP
+    verdict: admit
+    quarantine: true
+    ledger_run: "Weyl campaign 2026-08-01 — limit-point for constant potential"
+    provenance_note: "const_potential_isLimitPoint (V≡c incl 0 is limit-point at ∞ for non-real λ — a real instance), non-integrability engine, Wronskian independence. General bounded-V limit-point OPEN (genuine analysis; agent correctly refused a false Wronskian⇒limit-point lemma)."
+
   # ── intake 18: silver eigensystem, twin pinning, phase-depth torus ───────────
   "18":
     module: Brockian.Sieve

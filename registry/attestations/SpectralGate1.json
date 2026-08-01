@@ -4,7 +4,7 @@
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.SpectralGate1.isSelfAdjoint_mulLpCLM",
+      "name": "Brockian.SpectralGate1.abs_primeGaussian_le_two",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -26,18 +26,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.SpectralGate1.eLpNorm_mulLpFun_le",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.SpectralGate1.isSelfAdjoint_primeGaussianMulCLM",
+      "name": "Brockian.SpectralGate1.coeFn_mulLpFun",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -59,29 +48,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.SpectralGate1.primeGaussian\u2102_memLp_top",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.SpectralGate1.abs_primeGaussian_le_two",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.SpectralGate1.summable_primeBump",
+      "name": "Brockian.SpectralGate1.continuous_primeBump",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -93,6 +60,165 @@
     },
     {
       "name": "Brockian.SpectralGate1.continuous_primeGaussian",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.eLpNorm_mulLpFun_le",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.isSelfAdjoint_mulLpCLM",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.isSelfAdjoint_primeGaussianMulCLM",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.mulLpCLM",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.mulLpFun",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.mulLp\u2097",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeBump",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeBump_le_geom",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeBump_nonneg",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeGaussian",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeGaussianMulCLM",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeGaussian_le_two",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeGaussian_nonneg",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeGaussian\u2102",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeGaussian\u2102_memLp_top",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeGaussian\u2102_norm_le",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.SpectralGate1.summable_primeBump",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [

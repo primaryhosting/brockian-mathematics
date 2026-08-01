@@ -4,40 +4,14 @@
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.Sieve.twin_pins_mod_three",
-      "kind": "theorem",
+      "name": "Brockian.Sieve.H3",
+      "kind": "def",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": null,
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Sieve.no_adjacent_admissible",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Sieve.run_cap",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Sieve.run3_signature",
+      "name": "Brockian.Sieve.H3_det",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -92,7 +66,21 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Sieve.H3_det",
+      "name": "Brockian.Sieve.SilverGapRigidityTarget",
+      "kind": "conjecture",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Sieve.TwinAdmissibleAt",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Sieve.compatible_closure",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -100,6 +88,53 @@
         "Classical.choice",
         "Quot.sound"
       ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Sieve.no_adjacent_admissible",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Sieve.phi",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Sieve.run3_signature",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Sieve.run_cap",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Sieve.silverGap",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
       "axioms_ok": true
     },
     {
@@ -114,7 +149,14 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Sieve.twin_admissible_card",
+      "name": "Brockian.Sieve.tau",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Sieve.tau_injective_on_period",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -125,7 +167,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Sieve.compatible_closure",
+      "name": "Brockian.Sieve.tau_minimal_period",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -146,7 +188,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Sieve.tau_minimal_period",
+      "name": "Brockian.Sieve.twin_admissible_card",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -157,7 +199,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Sieve.tau_injective_on_period",
+      "name": "Brockian.Sieve.twin_pins_mod_three",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [

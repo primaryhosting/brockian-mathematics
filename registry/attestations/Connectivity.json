@@ -15,28 +15,6 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Connectivity.two_cos_4pi_5",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Connectivity.one_div_phi",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
       "name": "Brockian.Connectivity.lambda2_eq",
       "kind": "theorem",
       "axle_verdict": "verified",
@@ -50,6 +28,13 @@
     {
       "name": "Brockian.Connectivity.laplacianEigs5",
       "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Connectivity.one_div_phi",
+      "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
         "propext",
@@ -71,6 +56,17 @@
     },
     {
       "name": "Brockian.Connectivity.pentagon_ratio",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Connectivity.two_cos_4pi_5",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [

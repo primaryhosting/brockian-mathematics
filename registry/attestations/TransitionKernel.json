@@ -4,72 +4,14 @@
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.TransitionKernel.kernel",
-      "kind": "def",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
       "name": "Brockian.TransitionKernel.admissibleStarts",
       "kind": "def",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": null,
       "axioms_ok": true
     },
     {
-      "name": "Brockian.TransitionKernel.mem_admissibleStarts",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.TransitionKernel.kernel_row_sum",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.TransitionKernel.totalSum_eq",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.TransitionKernel.totalSum_count",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.TransitionKernel.twin_pins_mod_three",
+      "name": "Brockian.TransitionKernel.brockian_table_card",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -91,51 +33,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.TransitionKernel.sexy_free_mod_three",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.TransitionKernel.quadruplet_pins_mod_five",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
       "name": "Brockian.TransitionKernel.cousin_run_cap",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.TransitionKernel.sexy_run_cap",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.TransitionKernel.gap10_run_cap",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -157,6 +55,90 @@
       "axioms_ok": true
     },
     {
+      "name": "Brockian.TransitionKernel.gap10_run_cap",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.TransitionKernel.kernel",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.TransitionKernel.kernel_row_sum",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.TransitionKernel.quadruplet_pins_mod_five",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.TransitionKernel.sexy_free_mod_three",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.TransitionKernel.sexy_run_cap",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.TransitionKernel.totalSum_count",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.TransitionKernel.totalSum_eq",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
       "name": "Brockian.TransitionKernel.twin_admissible_singleton",
       "kind": "theorem",
       "axle_verdict": "verified",
@@ -168,7 +150,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.TransitionKernel.twin_table_card",
+      "name": "Brockian.TransitionKernel.twin_pins_mod_three",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -179,7 +161,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.TransitionKernel.brockian_table_card",
+      "name": "Brockian.TransitionKernel.twin_table_card",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [

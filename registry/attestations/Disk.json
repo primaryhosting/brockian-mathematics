@@ -1,17 +1,10 @@
 {
-  "module": "Brockian.Core",
+  "module": "Brockian.Weyl.Disk",
   "environment": "lean-4.32.0",
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.Core.Ray",
-      "kind": "def",
-      "axle_verdict": "verified",
-      "axioms": null,
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Core.binet_formula",
+      "name": "Brockian.Weyl.Disk.circle_key",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -22,7 +15,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.cos_2pi_5",
+      "name": "Brockian.Weyl.Disk.weyl_disk_circle",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -33,7 +26,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.cos_pi_div_five_eq_phi_div_two",
+      "name": "Brockian.Weyl.Disk.boundary_L2_identity",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -44,7 +37,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.each_ray_has_infinitely_many_primes",
+      "name": "Brockian.Weyl.Disk.radius_formula",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -55,17 +48,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.fib_five_dvd",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Core.fifth_root_of_unity",
+      "name": "Brockian.Weyl.Disk.integral_normSq_mono",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -76,7 +59,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.one_lt_phi",
+      "name": "Brockian.Weyl.Disk.weyl_nested_circle",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -87,14 +70,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.phi",
-      "kind": "def",
-      "axle_verdict": "verified",
-      "axioms": null,
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Core.phi_pos",
+      "name": "Brockian.Weyl.Disk.weyl_radius_antitone",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -105,7 +81,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.phi_sq",
+      "name": "Brockian.Weyl.Disk.green_identity_integral",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -116,38 +92,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Core.ray_add",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Core.ray_mul",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Core.ray_ne_zero_infinite",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Core.ray_zero_iff_dvd",
+      "name": "Brockian.Weyl.Disk.wronskian_isConst",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [

@@ -4,7 +4,7 @@
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.Admissibility.universal_admissibility_count",
+      "name": "Brockian.Admissibility.admissibility_count_five",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -26,19 +26,15 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Admissibility.admissibility_count_five",
-      "kind": "theorem",
+      "name": "Brockian.Admissibility.admissibleResidues",
+      "kind": "def",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": null,
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Admissibility.admissibleResidues",
-      "kind": "def",
+      "name": "Brockian.Admissibility.universal_admissibility_count",
+      "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
         "propext",

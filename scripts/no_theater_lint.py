@@ -34,15 +34,30 @@ HOLE = re.compile(r"\b(sorry|admit)\b")
 # Comment-aware: strip line comments before hole scan to avoid the run-69 false positive
 # (the word "sorry" appearing in a comment).
 COMMENT = re.compile(r"--.*$")
-# Block comments /- ... -/ (incl. /-- docstrings -/). Non-nested; blanked in place so
-# line numbers are preserved. Prevents false "sorry" hits inside docstrings.
-BLOCK = re.compile(r"/-.*?-/", re.DOTALL)
-
-
 def _blank_block_comments(text: str) -> str:
-    def repl(m: re.Match) -> str:
-        return "".join("\n" if c == "\n" else " " for c in m.group(0))
-    return BLOCK.sub(repl, text)
+    """Blank Lean block comments /- ... -/ (incl. /-- docstrings -/), preserving newlines
+    so line numbers are unchanged. Handles NESTING (Lean block comments nest), so a
+    docstring inside a block comment does not prematurely end it — which would otherwise
+    expose commented-out `theorem`/`sorry` tokens."""
+    out = list(text)
+    depth = 0
+    i = 0
+    n = len(text)
+    while i < n:
+        if text[i] == "/" and i + 1 < n and text[i + 1] == "-":
+            depth += 1
+            out[i] = out[i + 1] = " "
+            i += 2
+            continue
+        if text[i] == "-" and i + 1 < n and text[i + 1] == "/" and depth > 0:
+            depth -= 1
+            out[i] = out[i + 1] = " "
+            i += 2
+            continue
+        if depth > 0 and text[i] != "\n":
+            out[i] = " "
+        i += 1
+    return "".join(out)
 
 
 @dataclass
