@@ -5,6 +5,10 @@ here with its blocking reason and kept OUT of the core so `lake build` stays gre
 is faked. Items marked **RELEASE-BLOCKING** are §8 must-port keepers that require explicit
 human sign-off to defer.
 
+For multi-agent work, use [`docs/AGENT-COORDINATION.md`](docs/AGENT-COORDINATION.md) as
+the shared queue: it records the next attackable targets, ownership suggestions, and the
+explicit verification/integration contract.
+
 ## RESOLVED (re-proved fresh via the AXLE loop, 2026-07-31)
 
 The disk originals were not recoverable (audited from Aristotle tarballs not persisted here),
