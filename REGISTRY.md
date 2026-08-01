@@ -6,10 +6,10 @@
 
 ## Summary
 
-- **CONDITIONAL**: 1
-- **CONJECTURE**: 1
-- **DEFINITION**: 14
-- **PROVED**: 84
+- **CONDITIONAL**: 4
+- **CONJECTURE**: 3
+- **DEFINITION**: 24
+- **PROVED**: 125
 
 ## Theorems
 
@@ -64,6 +64,46 @@
 | PROVED | `Brockian.GoldbachComb.gCount_centered` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
 | PROVED | `Brockian.GoldbachComb.gCount_eq` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
 | PROVED | `Brockian.GoldbachComb.local_covariance` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
+| PROVED | `Brockian.GoldbachLemmas.factor_ratio` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| DEFINITION | `Brockian.GoldbachLemmas.gFactor` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.gFactor_eq_one_add` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.gFactor_pos` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.gFactor_pos_prime` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| DEFINITION | `Brockian.GoldbachLemmas.gProduct` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.gProduct_le_of_subset` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.gProduct_pos` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| DEFINITION | `Brockian.GoldbachLemmas.gResidues` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.gResidues_card_ne_zero` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.gResidues_card_zero` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.localDensity_ne` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.localDensity_zero` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.one_le_gProduct` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.one_lt_gFactor` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.one_lt_gFactor_prime` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| DEFINITION | `Brockian.GoldbachLemmas.tFactor` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.tFactor_eq` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.tFactor_lt_one` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.tFactor_pos` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| PROVED | `Brockian.GoldbachLemmas.three_le_of_prime_ne_two` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional) |
+| CONJECTURE | `Brockian.GoldbachSchema.HasGoldbachRep` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| DEFINITION | `Brockian.GoldbachSchema.SpectralModel` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| CONJECTURE | `Brockian.GoldbachSchema.SpectralModelBeyond` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| DEFINITION | `Brockian.GoldbachSchema.goldbachCount` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| PROVED | `Brockian.GoldbachSchema.goldbachCount_four` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| PROVED | `Brockian.GoldbachSchema.goldbachCount_ten` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| CONDITIONAL | `Brockian.GoldbachSchema.goldbach_beyond_of_model` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| CONDITIONAL | `Brockian.GoldbachSchema.goldbach_from_spectral_model` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_eight` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_four` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_of_count_pos` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_six` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| DEFINITION | `Brockian.RiemannScaffold.BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
+| PROVED | `Brockian.RiemannScaffold.Gammaℝ_ne_zero_of_nontrivial` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
+| CONDITIONAL | `Brockian.RiemannScaffold.RH_of_BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
+| PROVED | `Brockian.RiemannScaffold.RiemannHypothesis_of_forall_xi_zero` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
+| DEFINITION | `Brockian.RiemannScaffold.riemannXi` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
+| PROVED | `Brockian.RiemannScaffold.riemannXi_eq_zero_of_nontrivial_zeta_zero` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
+| PROVED | `Brockian.RiemannScaffold.symmetric_eigenvalue_im_zero` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.Sieve.H3_det` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.H3_ground` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.H3_middle` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
@@ -98,6 +138,15 @@
 | PROVED | `Brockian.Spectral.golden_unique_to_five` | ✓ | verified | lean-4.32.0 | run 73 (b666…) — re-proved fresh @ v4.32 via concrete circulant eigenvalues |
 | PROVED | `Brockian.Spectral.neg_golden_in_C5_spectrum` | ✓ | verified | lean-4.32.0 | run 73 (b666…) — re-proved fresh @ v4.32 via concrete circulant eigenvalues |
 | PROVED | `Brockian.Spectral.two_cos_four_pi_div_five` | ✓ | verified | lean-4.32.0 | run 73 (b666…) — re-proved fresh @ v4.32 via concrete circulant eigenvalues |
+| PROVED | `Brockian.SpectralGate1.abs_primeGaussian_le_two` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — bounded-potential multiplication operator (honest Gate-1 piece) |
+| PROVED | `Brockian.SpectralGate1.coeFn_mulLpCLM` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — bounded-potential multiplication operator (honest Gate-1 piece) |
+| PROVED | `Brockian.SpectralGate1.coeFn_primeGaussianMulCLM` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — bounded-potential multiplication operator (honest Gate-1 piece) |
+| PROVED | `Brockian.SpectralGate1.continuous_primeGaussian` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — bounded-potential multiplication operator (honest Gate-1 piece) |
+| PROVED | `Brockian.SpectralGate1.eLpNorm_mulLpFun_le` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — bounded-potential multiplication operator (honest Gate-1 piece) |
+| PROVED | `Brockian.SpectralGate1.isSelfAdjoint_mulLpCLM` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — bounded-potential multiplication operator (honest Gate-1 piece) |
+| PROVED | `Brockian.SpectralGate1.isSelfAdjoint_primeGaussianMulCLM` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — bounded-potential multiplication operator (honest Gate-1 piece) |
+| PROVED | `Brockian.SpectralGate1.primeGaussianℂ_memLp_top` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — bounded-potential multiplication operator (honest Gate-1 piece) |
+| PROVED | `Brockian.SpectralGate1.summable_primeBump` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — bounded-potential multiplication operator (honest Gate-1 piece) |
 | DEFINITION | `Brockian.TransitionKernel.admissibleStarts` | ✓ | verified | lean-4.32.0 | runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion |
 | PROVED | `Brockian.TransitionKernel.brockian_table_card` | ✓ | verified | lean-4.32.0 | runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion |
 | PROVED | `Brockian.TransitionKernel.cousin_pins_mod_three` | ✓ | verified | lean-4.32.0 | runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion |
@@ -115,3 +164,10 @@
 | PROVED | `Brockian.TransitionKernel.twin_admissible_singleton` | ✓ | verified | lean-4.32.0 | runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion |
 | PROVED | `Brockian.TransitionKernel.twin_pins_mod_three` | ✓ | verified | lean-4.32.0 | runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion |
 | PROVED | `Brockian.TransitionKernel.twin_table_card` | ✓ | verified | lean-4.32.0 | runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion |
+| PROVED | `Brockian.Weyl.green_identity_integral` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
+| PROVED | `Brockian.Weyl.lagrange_identity` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
+| DEFINITION | `Brockian.Weyl.sturmL` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
+| DEFINITION | `Brockian.Weyl.wronskian` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
+| PROVED | `Brockian.Weyl.wronskian_const_one_witness` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
+| PROVED | `Brockian.Weyl.wronskian_hasDerivAt` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
+| PROVED | `Brockian.Weyl.wronskian_isConst` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |

@@ -30,6 +30,22 @@ concrete circulant/Laplacian eigenvalues and independently AXLE-verified, axiom-
 | CA-6..CA-9 (`H4_golden_ground`, `twin_lag_support`, `twin_kernel_cases`) | ConstellationAlphabet.lean | spectral-alphabet / general-prime number theory; `sorry` targets in source, out of the TransitionKernel remit. |
 | `cos_5theta`, `golden_ratio_necessity`, `golden_is_geometric_invariant` | GoldenRatio.lean | Chebyshev-quintic / matrix-power arguments left as `sorry` in source. |
 
+## Open frontier — the hard targets (attempted 2026-08-01, honestly open)
+
+A swarm attacked Goldbach / Weyl / Riemann under strict anti-fakery discipline. None of the
+open problems fell (as expected); every agent produced honest partials, no theater was found,
+nothing was excluded. What genuinely verified is registered; what remains open is here.
+
+| Target | Verified this round | Still open |
+|--------|--------------------|-----------|
+| **Weyl limit-point criterion** | Wronskian/Abel constancy, Lagrange + integrated Green identity, Gate-0 witness (`Brockian.Weyl`) | the criterion itself + essential self-adjointness of unbounded −Δ+V — Mathlib 4.32 has no Sturm–Liouville / deficiency-index / unbounded-`LinearPMap` self-adjointness API |
+| **Goldbach** | `goldbach_from_spectral_model` (real implication, CONDITIONAL/open), singular-series factor lemmas, small base cases (`GoldbachSchema`, `GoldbachLemmas`) | instantiating a `SpectralModel` non-trivially — that is Goldbach-strength |
+| **Riemann Hypothesis** | the ξ-bridge (unconditional: `riemannXi`, Γ-nonvanishing, ξ-zero-from-ζ-zero, ξ-RH ⇒ Mathlib RH), `RH_of_BrockianSystem` (CONDITIONAL/open) (`RiemannScaffold`) | inhabiting `BrockianSystem` — a densely-defined symmetric operator with real spectrum whose eigenvalues realise the ζ-zeros. Hilbert–Pólya-strength. Not shown instantiable, and (crucially) not provably empty — so the conditional is an honest open schema, not ex-falso |
+
+The next honest, *achievable* step is the Weyl limit-point criterion (a classical theorem, not
+an open problem): closing it would unconditionally discharge Gate 1's self-adjointness clause.
+It is a Mathlib-infrastructure task, not a research gamble.
+
 ## Local `lake build` leg — environment-blocked (not a proof gap)
 
 The dependency graph resolves (manifest + all 9 packages cloned), but `lake exe cache get`

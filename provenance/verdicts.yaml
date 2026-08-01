@@ -96,6 +96,61 @@ runs:
     ledger_run: "run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open)"
     provenance_note: "D₅ →* Aut(C₅) injective (faithful), explicit rot/refl autos, 10 ≤ |Aut(C₅)|. Full Aut(C₅)≅D₅ iso NOT claimed (reverse bound |Aut|≤10 unavailable in Mathlib 4.32) — see PORT-QUEUE."
 
+  # ── swarm (Aug 1): open-problem attempts under strict anti-fakery discipline ──
+  # Weyl limit-point groundwork (classical theorem; Mathlib lacks the full criterion).
+  "weyl":
+    module: Brockian.Weyl
+    verdict: admit
+    quarantine: true
+    ledger_run: "swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung)"
+    provenance_note: "Wronskian/Abel constancy, Lagrange + integrated Green identity, Gate-0 witness. Full limit-point criterion OPEN (Mathlib 4.32 has no Sturm-Liouville/deficiency-index API) — see PORT-QUEUE."
+
+  # Bounded prime-Gaussian potential as a self-adjoint multiplication operator (Gate 1 piece).
+  "gate1":
+    module: Brockian.SpectralGate1
+    verdict: admit
+    quarantine: true
+    ledger_run: "swarm 2026-08-01 — bounded-potential multiplication operator (honest Gate-1 piece)"
+    provenance_note: "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L² (action pinned, not the zero-operator degenerate witness). Unbounded −Δ+V ess. self-adjointness OPEN (waits on Weyl)."
+
+  # Goldbach conditional metatheorem — real count, honest implication, model OPEN.
+  "gb-schema":
+    module: Brockian.GoldbachSchema
+    verdict: admit
+    quarantine: true
+    ledger_run: "swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema)"
+    provenance_note: "goldbachCount = REAL prime-pair count (4→1, 10→3 by decide); base cases proved. Goldbach NOT proved."
+    overrides:
+      - name: goldbach_from_spectral_model
+        verdict: admit
+        conditional_rung: open
+        provenance_note: "SpectralModel ⇒ Goldbach beyond N₀ — genuine implication; SpectralModel instantiation is Goldbach-strength (OPEN), never citable as progress."
+      - name: goldbach_beyond_of_model
+        verdict: admit
+        conditional_rung: open
+        provenance_note: "existence of a model ⇒ Goldbach beyond N₀ — the honest hardness direction; OPEN-schema."
+
+  # Goldbach singular-series building blocks — all unconditional.
+  "gb-lemmas":
+    module: Brockian.GoldbachLemmas
+    verdict: admit
+    quarantine: true
+    ledger_run: "swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional)"
+    provenance_note: "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+
+  # Riemann scaffolding — unconditional ξ-bridge + honest OPEN Hilbert-Pólya conditional.
+  "rh-scaffold":
+    module: Brockian.RiemannScaffold
+    verdict: admit
+    quarantine: true
+    ledger_run: "swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN)"
+    provenance_note: "ξ-bridge (riemannXi, Γ-factor nonvanishing, ξ-zero from ζ-zero, ξ-RH ⇒ Mathlib RH) UNCONDITIONAL; guards s≠0,1 prevent ex-falso. RH NOT claimed."
+    overrides:
+      - name: RH_of_BrockianSystem
+        verdict: admit
+        conditional_rung: open
+        provenance_note: "densely-defined symmetric operator with real-spectrum + zeros↔spectrum fields ⇒ RH; BrockianSystem is Hilbert-Pólya-strength (OPEN, NOT shown instantiable, NOT provably empty — no ex-falso). Never citable as RH progress."
+
   # ── intake 18: silver eigensystem, twin pinning, phase-depth torus ───────────
   "18":
     module: Brockian.Sieve

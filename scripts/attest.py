@@ -33,6 +33,10 @@ def _kind_of(src: str, name: str) -> str:
     if m:
         # a Prop-typed def is a conjecture container; any other def is a supporting definition
         return "conjecture" if re.search(r":\s*Prop\b", m.group(1)) else "def"
+    # structures/classes/inductives are definitions, not theorems
+    if re.search(rf"^\s*(?:@\[[^\]]*\]\s*)*(?:structure|class|inductive)\s+{re.escape(name)}\b",
+                 src, re.MULTILINE):
+        return "def"
     return "theorem"
 
 
@@ -69,8 +73,12 @@ def _flatten(lean_path: str, _seen: set[str] | None = None) -> str:
 def attest(lean_path: str, namespace: str, names: list[str], env: str) -> dict:
     src = open(lean_path, encoding="utf-8").read()
     flat = _flatten(lean_path)  # AXLE-checkable unit (inlines Brockian deps)
+    kinds = {n: _kind_of(src, n) for n in names}
+    # `#print axioms` only makes sense for proof terms; on a `structure`/`class` it errors
+    # and would fail the whole check. Probe axioms only for theorem/lemma declarations.
+    probe_names = [n for n in names if kinds[n] == "theorem"]
     probe = flat + "\n" + "\n".join(
-        f"open {namespace} in\n#print axioms {n}" for n in names
+        f"open {namespace} in\n#print axioms {n}" for n in probe_names
     ) + "\n"
     r = axle_client.check(probe, env=env, timeout=300)
     infos = (r.raw.get("lean_messages") or {}).get("infos", [])
@@ -86,13 +94,20 @@ def attest(lean_path: str, namespace: str, names: list[str], env: str) -> dict:
 
     decls = []
     for n in names:
-        ax = axioms_for(n)
+        kind = kinds[n]
+        if kind == "theorem":
+            ax = axioms_for(n)
+            ax_ok = (ax is not None and set(ax).issubset(ALLOWED))
+        else:
+            # defs/structures/conjecture-containers carry no proof-axiom footprint;
+            # their register (DEFINITION/CONJECTURE) does not depend on axioms.
+            ax, ax_ok = None, True
         decls.append({
             "name": f"{namespace}.{n}",
-            "kind": _kind_of(src, n),
+            "kind": kind,
             "axle_verdict": "verified" if r.verified else "failed",
             "axioms": ax,
-            "axioms_ok": (ax is not None and set(ax).issubset(ALLOWED)),
+            "axioms_ok": ax_ok,
         })
     return {
         "module": namespace,

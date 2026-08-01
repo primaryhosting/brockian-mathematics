@@ -1,10 +1,10 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 84,
-    "DEFINITION": 14,
-    "CONJECTURE": 1,
-    "CONDITIONAL": 1
+    "PROVED": 125,
+    "DEFINITION": 24,
+    "CONJECTURE": 3,
+    "CONDITIONAL": 4
   },
   "theorems": [
     {
@@ -1567,6 +1567,1246 @@
       "provenance_note": "exact local covariance kernel; GC-4 rejected/omitted, GC-5 open (both excluded)"
     },
     {
+      "name": "Brockian.GoldbachLemmas.factor_ratio",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.gFactor",
+      "kind": "def",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.gFactor_eq_one_add",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.gFactor_pos",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.gFactor_pos_prime",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.gProduct",
+      "kind": "def",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.gProduct_le_of_subset",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.gProduct_pos",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.gResidues",
+      "kind": "def",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.gResidues_card_ne_zero",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.gResidues_card_zero",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.localDensity_ne",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.localDensity_zero",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.one_le_gProduct",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.one_lt_gFactor",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.one_lt_gFactor_prime",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.tFactor",
+      "kind": "def",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.tFactor_eq",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.tFactor_lt_one",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.tFactor_pos",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachLemmas.three_le_of_prime_ne_two",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachLemmas",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachLemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Hardy-Littlewood Goldbach factor lemmas (unconditional)",
+      "provenance_note": "gFactor=(p-1)/(p-2), ratio identity, product positivity/monotonicity, exact mod-p rep counts (p-2 / p-1). Constant lower bound quantified outside the set."
+    },
+    {
+      "name": "Brockian.GoldbachSchema.HasGoldbachRep",
+      "kind": "conjecture",
+      "module": "Brockian.GoldbachSchema",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachSchema.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 spectral-model \u21d2 Goldbach implication (schema)",
+      "provenance_note": "goldbachCount = REAL prime-pair count (4\u21921, 10\u21923 by decide); base cases proved. Goldbach NOT proved."
+    },
+    {
+      "name": "Brockian.GoldbachSchema.SpectralModel",
+      "kind": "def",
+      "module": "Brockian.GoldbachSchema",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachSchema.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 spectral-model \u21d2 Goldbach implication (schema)",
+      "provenance_note": "goldbachCount = REAL prime-pair count (4\u21921, 10\u21923 by decide); base cases proved. Goldbach NOT proved."
+    },
+    {
+      "name": "Brockian.GoldbachSchema.SpectralModelBeyond",
+      "kind": "conjecture",
+      "module": "Brockian.GoldbachSchema",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachSchema.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 spectral-model \u21d2 Goldbach implication (schema)",
+      "provenance_note": "goldbachCount = REAL prime-pair count (4\u21921, 10\u21923 by decide); base cases proved. Goldbach NOT proved."
+    },
+    {
+      "name": "Brockian.GoldbachSchema.goldbachCount",
+      "kind": "def",
+      "module": "Brockian.GoldbachSchema",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachSchema.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 spectral-model \u21d2 Goldbach implication (schema)",
+      "provenance_note": "goldbachCount = REAL prime-pair count (4\u21921, 10\u21923 by decide); base cases proved. Goldbach NOT proved."
+    },
+    {
+      "name": "Brockian.GoldbachSchema.goldbachCount_four",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachSchema",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachSchema.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 spectral-model \u21d2 Goldbach implication (schema)",
+      "provenance_note": "goldbachCount = REAL prime-pair count (4\u21921, 10\u21923 by decide); base cases proved. Goldbach NOT proved."
+    },
+    {
+      "name": "Brockian.GoldbachSchema.goldbachCount_ten",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachSchema",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachSchema.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 spectral-model \u21d2 Goldbach implication (schema)",
+      "provenance_note": "goldbachCount = REAL prime-pair count (4\u21921, 10\u21923 by decide); base cases proved. Goldbach NOT proved."
+    },
+    {
+      "name": "Brockian.GoldbachSchema.goldbach_beyond_of_model",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachSchema",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachSchema.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "open",
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 spectral-model \u21d2 Goldbach implication (schema)",
+      "provenance_note": "existence of a model \u21d2 Goldbach beyond N\u2080 \u2014 the honest hardness direction; OPEN-schema."
+    },
+    {
+      "name": "Brockian.GoldbachSchema.goldbach_from_spectral_model",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachSchema",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachSchema.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "open",
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 spectral-model \u21d2 Goldbach implication (schema)",
+      "provenance_note": "SpectralModel \u21d2 Goldbach beyond N\u2080 \u2014 genuine implication; SpectralModel instantiation is Goldbach-strength (OPEN), never citable as progress."
+    },
+    {
+      "name": "Brockian.GoldbachSchema.hasGoldbachRep_eight",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachSchema",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachSchema.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 spectral-model \u21d2 Goldbach implication (schema)",
+      "provenance_note": "goldbachCount = REAL prime-pair count (4\u21921, 10\u21923 by decide); base cases proved. Goldbach NOT proved."
+    },
+    {
+      "name": "Brockian.GoldbachSchema.hasGoldbachRep_four",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachSchema",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachSchema.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 spectral-model \u21d2 Goldbach implication (schema)",
+      "provenance_note": "goldbachCount = REAL prime-pair count (4\u21921, 10\u21923 by decide); base cases proved. Goldbach NOT proved."
+    },
+    {
+      "name": "Brockian.GoldbachSchema.hasGoldbachRep_of_count_pos",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachSchema",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachSchema.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 spectral-model \u21d2 Goldbach implication (schema)",
+      "provenance_note": "goldbachCount = REAL prime-pair count (4\u21921, 10\u21923 by decide); base cases proved. Goldbach NOT proved."
+    },
+    {
+      "name": "Brockian.GoldbachSchema.hasGoldbachRep_six",
+      "kind": "theorem",
+      "module": "Brockian.GoldbachSchema",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldbachSchema.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 spectral-model \u21d2 Goldbach implication (schema)",
+      "provenance_note": "goldbachCount = REAL prime-pair count (4\u21921, 10\u21923 by decide); base cases proved. Goldbach NOT proved."
+    },
+    {
+      "name": "Brockian.RiemannScaffold.BrockianSystem",
+      "kind": "def",
+      "module": "Brockian.RiemannScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 \u03be-bridge (unconditional) + Hilbert-P\u00f3lya conditional (OPEN)",
+      "provenance_note": "\u03be-bridge (riemannXi, \u0393-factor nonvanishing, \u03be-zero from \u03b6-zero, \u03be-RH \u21d2 Mathlib RH) UNCONDITIONAL; guards s\u22600,1 prevent ex-falso. RH NOT claimed."
+    },
+    {
+      "name": "Brockian.RiemannScaffold.Gamma\u211d_ne_zero_of_nontrivial",
+      "kind": "theorem",
+      "module": "Brockian.RiemannScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 \u03be-bridge (unconditional) + Hilbert-P\u00f3lya conditional (OPEN)",
+      "provenance_note": "\u03be-bridge (riemannXi, \u0393-factor nonvanishing, \u03be-zero from \u03b6-zero, \u03be-RH \u21d2 Mathlib RH) UNCONDITIONAL; guards s\u22600,1 prevent ex-falso. RH NOT claimed."
+    },
+    {
+      "name": "Brockian.RiemannScaffold.RH_of_BrockianSystem",
+      "kind": "theorem",
+      "module": "Brockian.RiemannScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannScaffold.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "open",
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 \u03be-bridge (unconditional) + Hilbert-P\u00f3lya conditional (OPEN)",
+      "provenance_note": "densely-defined symmetric operator with real-spectrum + zeros\u2194spectrum fields \u21d2 RH; BrockianSystem is Hilbert-P\u00f3lya-strength (OPEN, NOT shown instantiable, NOT provably empty \u2014 no ex-falso). Never citable as RH progress."
+    },
+    {
+      "name": "Brockian.RiemannScaffold.RiemannHypothesis_of_forall_xi_zero",
+      "kind": "theorem",
+      "module": "Brockian.RiemannScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 \u03be-bridge (unconditional) + Hilbert-P\u00f3lya conditional (OPEN)",
+      "provenance_note": "\u03be-bridge (riemannXi, \u0393-factor nonvanishing, \u03be-zero from \u03b6-zero, \u03be-RH \u21d2 Mathlib RH) UNCONDITIONAL; guards s\u22600,1 prevent ex-falso. RH NOT claimed."
+    },
+    {
+      "name": "Brockian.RiemannScaffold.riemannXi",
+      "kind": "def",
+      "module": "Brockian.RiemannScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 \u03be-bridge (unconditional) + Hilbert-P\u00f3lya conditional (OPEN)",
+      "provenance_note": "\u03be-bridge (riemannXi, \u0393-factor nonvanishing, \u03be-zero from \u03b6-zero, \u03be-RH \u21d2 Mathlib RH) UNCONDITIONAL; guards s\u22600,1 prevent ex-falso. RH NOT claimed."
+    },
+    {
+      "name": "Brockian.RiemannScaffold.riemannXi_eq_zero_of_nontrivial_zeta_zero",
+      "kind": "theorem",
+      "module": "Brockian.RiemannScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 \u03be-bridge (unconditional) + Hilbert-P\u00f3lya conditional (OPEN)",
+      "provenance_note": "\u03be-bridge (riemannXi, \u0393-factor nonvanishing, \u03be-zero from \u03b6-zero, \u03be-RH \u21d2 Mathlib RH) UNCONDITIONAL; guards s\u22600,1 prevent ex-falso. RH NOT claimed."
+    },
+    {
+      "name": "Brockian.RiemannScaffold.symmetric_eigenvalue_im_zero",
+      "kind": "theorem",
+      "module": "Brockian.RiemannScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 \u03be-bridge (unconditional) + Hilbert-P\u00f3lya conditional (OPEN)",
+      "provenance_note": "\u03be-bridge (riemannXi, \u0393-factor nonvanishing, \u03be-zero from \u03b6-zero, \u03be-RH \u21d2 Mathlib RH) UNCONDITIONAL; guards s\u22600,1 prevent ex-falso. RH NOT claimed."
+    },
+    {
       "name": "Brockian.Sieve.H3_det",
       "kind": "theorem",
       "module": "Brockian.Sieve",
@@ -2654,6 +3894,294 @@
       "provenance_note": "\u03c6\u22121 \u2208 spec(C_p) \u27fa p=5 (full iff, both directions); \u2212\u03c6 \u2208 spec(C\u2085). THE 'why five' rigidity result."
     },
     {
+      "name": "Brockian.SpectralGate1.abs_primeGaussian_le_two",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.coeFn_mulLpCLM",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.coeFn_primeGaussianMulCLM",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.continuous_primeGaussian",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.eLpNorm_mulLpFun_le",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.isSelfAdjoint_mulLpCLM",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.isSelfAdjoint_primeGaussianMulCLM",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.primeGaussian\u2102_memLp_top",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SpectralGate1.summable_primeBump",
+      "kind": "theorem",
+      "module": "Brockian.SpectralGate1",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SpectralGate1.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
+      "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
       "name": "Brockian.TransitionKernel.admissibleStarts",
       "kind": "def",
       "module": "Brockian.TransitionKernel",
@@ -3195,6 +4723,222 @@
       "quarantine": true,
       "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
       "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.Weyl.green_identity_integral",
+      "kind": "theorem",
+      "module": "Brockian.Weyl",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Weyl.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Weyl/Green functional-analytic core (base rung)",
+      "provenance_note": "Wronskian/Abel constancy, Lagrange + integrated Green identity, Gate-0 witness. Full limit-point criterion OPEN (Mathlib 4.32 has no Sturm-Liouville/deficiency-index API) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Weyl.lagrange_identity",
+      "kind": "theorem",
+      "module": "Brockian.Weyl",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Weyl.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Weyl/Green functional-analytic core (base rung)",
+      "provenance_note": "Wronskian/Abel constancy, Lagrange + integrated Green identity, Gate-0 witness. Full limit-point criterion OPEN (Mathlib 4.32 has no Sturm-Liouville/deficiency-index API) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Weyl.sturmL",
+      "kind": "def",
+      "module": "Brockian.Weyl",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Weyl.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Weyl/Green functional-analytic core (base rung)",
+      "provenance_note": "Wronskian/Abel constancy, Lagrange + integrated Green identity, Gate-0 witness. Full limit-point criterion OPEN (Mathlib 4.32 has no Sturm-Liouville/deficiency-index API) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Weyl.wronskian",
+      "kind": "def",
+      "module": "Brockian.Weyl",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Weyl.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Weyl/Green functional-analytic core (base rung)",
+      "provenance_note": "Wronskian/Abel constancy, Lagrange + integrated Green identity, Gate-0 witness. Full limit-point criterion OPEN (Mathlib 4.32 has no Sturm-Liouville/deficiency-index API) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Weyl.wronskian_const_one_witness",
+      "kind": "theorem",
+      "module": "Brockian.Weyl",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Weyl.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Weyl/Green functional-analytic core (base rung)",
+      "provenance_note": "Wronskian/Abel constancy, Lagrange + integrated Green identity, Gate-0 witness. Full limit-point criterion OPEN (Mathlib 4.32 has no Sturm-Liouville/deficiency-index API) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Weyl.wronskian_hasDerivAt",
+      "kind": "theorem",
+      "module": "Brockian.Weyl",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Weyl.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Weyl/Green functional-analytic core (base rung)",
+      "provenance_note": "Wronskian/Abel constancy, Lagrange + integrated Green identity, Gate-0 witness. Full limit-point criterion OPEN (Mathlib 4.32 has no Sturm-Liouville/deficiency-index API) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Weyl.wronskian_isConst",
+      "kind": "theorem",
+      "module": "Brockian.Weyl",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Weyl.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "swarm 2026-08-01 \u2014 Weyl/Green functional-analytic core (base rung)",
+      "provenance_note": "Wronskian/Abel constancy, Lagrange + integrated Green identity, Gate-0 witness. Full limit-point criterion OPEN (Mathlib 4.32 has no Sturm-Liouville/deficiency-index API) \u2014 see PORT-QUEUE."
     }
   ]
 }
