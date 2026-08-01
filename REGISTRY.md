@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 10
 - **CONJECTURE**: 1
-- **DEFINITION**: 182
-- **PROVED**: 695
+- **DEFINITION**: 184
+- **PROVED**: 704
 
 ## Theorems
 
@@ -372,6 +372,17 @@
 | PROVED | `Brockian.MetallicFamily.metallic_one_unique_to_five` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.MetallicFamily.metallic_radicand_nonneg` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.MetallicFamily.silverGap_eq_three_sub_metallicMean_two` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.NewEra.ReadingPath` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.NewEra.brockian_admissible_count` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.NewEra.decaying_potential_cannot_realize_large_zeros` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.NewEra.golden_lives_on_the_pentagon` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.NewEra.neg_golden_lives_on_the_pentagon` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.NewEra.pentagon_cosine_is_golden` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.NewEra.primeGaussian_not_confining` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.NewEra.quadratic_is_confining` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.NewEra.readingPath` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.NewEra.twin_admissible_count` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.NewEra.why_five` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Penrose.A` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
 | DEFINITION | `Brockian.Penrose.A_ae` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
 | PROVED | `Brockian.Penrose.A_ae_add` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |

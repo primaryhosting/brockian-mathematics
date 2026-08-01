@@ -27,6 +27,9 @@ python3 scripts/gen_observatory.py
 
 Open `index.html` in a browser (no server required).
 
+**New Era gallery:** open `era.html` — charter surface for the verified core.
+Full prose charter: `../docs/NEW-ERA.md`.
+
 ## Editing the map
 
 Add or adjust entries in `claim_map.yaml`:

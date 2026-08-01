@@ -514,3 +514,13 @@ claims:
       - Brockian.D5FourierInversion.isotypicProjector_idempotent
       - Brockian.D5FourierInversion.isotypicProjector_orthogonal
     notes: "Completes cyclic projector algebra on all f : Fin 5 → ℂ. Full D5 real-irrep split not claimed."
+
+  - id: NEW-ERA
+    title: New Era reading path — flagship package (why five, selection, shape honesty)
+    book: "docs/NEW-ERA.md · observatory/era.html"
+    lean:
+      - Brockian.NewEra.why_five
+      - Brockian.NewEra.pentagon_cosine_is_golden
+      - Brockian.NewEra.decaying_potential_cannot_realize_large_zeros
+      - Brockian.NewEra.readingPath
+    notes: "Gallery re-exports only. Not RH. Public charter in docs/NEW-ERA.md."

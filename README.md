@@ -77,6 +77,10 @@ lake exe cache get   # prebuilt Mathlib oleans
 lake build
 ```
 
+## New Era Mathematics
+
+Charter: [`docs/NEW-ERA.md`](docs/NEW-ERA.md) · Gallery: [`observatory/era.html`](observatory/era.html)
+
 ## Observatory (public claim surface)
 
 Book claim IDs (Curved Number Line margins, e.g. `GC-1`, `BM-MAP-001`) map to Lean
@@ -88,6 +92,7 @@ python3 scripts/gen_registry.py      # registry/theorems.json from AXLE attestat
 python3 scripts/gen_claims.py        # observatory/claims.yaml + claims.json
 python3 scripts/gen_observatory.py   # observatory/index.html
 open observatory/index.html          # or any static file server
+open observatory/era.html            # New Era gallery (charter surface)
 ```
 
 | Path | Role |

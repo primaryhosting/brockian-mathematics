@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-01T20:33:55Z",
+  "generated_at": "2026-08-01T20:48:01Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 695,
-      "DEFINITION": 182,
+      "PROVED": 704,
+      "DEFINITION": 184,
       "CONDITIONAL": 10,
       "CONJECTURE": 1
     }
@@ -14,9 +14,9 @@
   "charter": "Badges are derived from the Lean registry when `lean` is non-empty.\nPROVED requires AXLE-verified + axiom-clean theorems (see README).\nOpen problems (twins infinitude, Goldbach global, RH) stay not_claimed.",
   "version": 1,
   "summary": {
-    "claims": 56,
+    "claims": 57,
     "by_status": {
-      "proved": 45,
+      "proved": 46,
       "open": 1,
       "conjecture": 1,
       "conditional": 4,
@@ -24,8 +24,8 @@
       "aristotle": 1
     },
     "registry": {
-      "PROVED": 695,
-      "DEFINITION": 182,
+      "PROVED": 704,
+      "DEFINITION": 184,
       "CONDITIONAL": 10,
       "CONJECTURE": 1
     }
@@ -3274,6 +3274,87 @@
       "missing_lean": [],
       "declaration_count": 4,
       "proved_count": 4
+    },
+    {
+      "id": "NEW-ERA",
+      "title": "New Era reading path \u2014 flagship package (why five, selection, shape honesty)",
+      "book": "docs/NEW-ERA.md \u00b7 observatory/era.html",
+      "notes": "Gallery re-exports only. Not RH. Public charter in docs/NEW-ERA.md.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.NewEra.why_five",
+        "Brockian.NewEra.pentagon_cosine_is_golden",
+        "Brockian.NewEra.decaying_potential_cannot_realize_large_zeros",
+        "Brockian.NewEra.readingPath"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.NewEra.why_five",
+          "short": "why_five",
+          "module": "Brockian.NewEra",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/NewEra.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.NewEra.pentagon_cosine_is_golden",
+          "short": "pentagon_cosine_is_golden",
+          "module": "Brockian.NewEra",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/NewEra.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.NewEra.decaying_potential_cannot_realize_large_zeros",
+          "short": "decaying_potential_cannot_realize_large_zeros",
+          "module": "Brockian.NewEra",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/NewEra.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.NewEra.readingPath",
+          "short": "readingPath",
+          "module": "Brockian.NewEra",
+          "kind": "def",
+          "register": "DEFINITION",
+          "source": "Brockian/NewEra.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 3
     }
   ],
   "all_declarations": [
@@ -7199,6 +7280,127 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/MetallicFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.NewEra.ReadingPath",
+      "module": "Brockian.NewEra",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/NewEra.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.NewEra.brockian_admissible_count",
+      "module": "Brockian.NewEra",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/NewEra.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.NewEra.decaying_potential_cannot_realize_large_zeros",
+      "module": "Brockian.NewEra",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/NewEra.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.NewEra.golden_lives_on_the_pentagon",
+      "module": "Brockian.NewEra",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/NewEra.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.NewEra.neg_golden_lives_on_the_pentagon",
+      "module": "Brockian.NewEra",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/NewEra.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.NewEra.pentagon_cosine_is_golden",
+      "module": "Brockian.NewEra",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/NewEra.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.NewEra.primeGaussian_not_confining",
+      "module": "Brockian.NewEra",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/NewEra.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.NewEra.quadratic_is_confining",
+      "module": "Brockian.NewEra",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/NewEra.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.NewEra.readingPath",
+      "module": "Brockian.NewEra",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/NewEra.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.NewEra.twin_admissible_count",
+      "module": "Brockian.NewEra",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/NewEra.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.NewEra.why_five",
+      "module": "Brockian.NewEra",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/NewEra.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"

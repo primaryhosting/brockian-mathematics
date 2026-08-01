@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>New Era Mathematics — Brockian Verified Core</title>
+<meta name="description" content="A public gallery of machine-verified theorems: why five, the pentagon spectrum, Gate 1 honesty, and the refusal to fake open problems."/>
+<style>
+  :root {
+    --ink: #0c0b0a;
+    --paper: #f4efe6;
+    --cream: #ebe4d6;
+    --gold: #c4a35a;
+    --gold-dim: #8a7340;
+    --ember: #a63d2f;
+    --moss: #2f5d4a;
+    --slate: #3a3834;
+    --mute: #6e6860;
+    --line: rgba(12,11,10,0.12);
+    --glow: rgba(196,163,90,0.18);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    background: var(--ink);
+    color: var(--paper);
+    line-height: 1.65;
+    font-size: 1.05rem;
+  }
+  .grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 0 1.5rem 6rem; }
+
+  /* Hero */
+  .hero {
+    min-height: 92vh; display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 4rem 0 3.5rem; border-bottom: 1px solid var(--line);
+  }
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--gold); margin: 0 0 1.75rem;
+  }
+  h1 {
+    font-size: clamp(2.6rem, 8vw, 4.2rem); font-weight: 500; line-height: 1.05;
+    letter-spacing: -0.02em; margin: 0 0 1.5rem; max-width: 14ch;
+  }
+  h1 em { font-style: italic; color: var(--gold); font-weight: 400; }
+  .lede {
+    font-size: 1.2rem; color: var(--cream); max-width: 36rem; margin: 0 0 2.5rem;
+    font-weight: 400;
+  }
+  .counts {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;
+    max-width: 28rem;
+  }
+  @media (max-width: 540px) { .counts { grid-template-columns: repeat(2, 1fr); } }
+  .count {
+    border: 1px solid var(--line); padding: 0.85rem 0.75rem; background: rgba(244,239,230,0.03);
+  }
+  .count b {
+    display: block; font-family: ui-monospace, Menlo, monospace;
+    font-size: 1.35rem; color: var(--gold); font-weight: 500;
+  }
+  .count span {
+    font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--mute); font-family: ui-monospace, Menlo, monospace;
+  }
+
+  /* Sections */
+  section { padding: 3.5rem 0; border-bottom: 1px solid var(--line); }
+  section h2 {
+    font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold-dim); font-weight: 500; margin: 0 0 1.25rem;
+    font-family: ui-monospace, Menlo, monospace;
+  }
+  section h3 {
+    font-size: 1.65rem; font-weight: 500; margin: 0 0 1rem; letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+  p { margin: 0 0 1.1rem; color: var(--cream); }
+  p.dim { color: var(--mute); }
+  blockquote {
+    margin: 2rem 0; padding: 0 0 0 1.25rem; border-left: 2px solid var(--gold);
+    font-size: 1.25rem; color: var(--paper); font-style: italic; line-height: 1.45;
+  }
+  blockquote cite {
+    display: block; margin-top: 0.85rem; font-size: 0.75rem; font-style: normal;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute);
+    font-family: ui-monospace, Menlo, monospace;
+  }
+
+  /* Pillars */
+  .pillars { display: grid; gap: 1rem; margin-top: 1.5rem; }
+  .pillar {
+    padding: 1.35rem 1.25rem; border: 1px solid var(--line);
+    background: linear-gradient(145deg, rgba(196,163,90,0.06) 0%, transparent 55%);
+  }
+  .pillar .tag {
+    font-family: ui-monospace, Menlo, monospace; font-size: 0.68rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .pillar h4 { margin: 0 0 0.5rem; font-size: 1.15rem; font-weight: 500; }
+  .pillar p { margin: 0; font-size: 0.95rem; color: var(--mute); }
+  .pillar code {
+    font-family: ui-monospace, Menlo, monospace; font-size: 0.78rem;
+    color: #b8c4d4; background: rgba(255,255,255,0.04); padding: 0.1rem 0.35rem;
+  }
+
+  /* Refusal table */
+  .refuse {
+    width: 100%; border-collapse: collapse; font-size: 0.95rem; margin-top: 1rem;
+  }
+  .refuse th, .refuse td {
+    text-align: left; padding: 0.75rem 0.5rem; border-top: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .refuse th {
+    font-family: ui-monospace, Menlo, monospace; font-size: 0.68rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); font-weight: 500;
+  }
+  .refuse td:first-child { color: var(--ember); width: 42%; }
+  .refuse td:last-child { color: var(--cream); }
+
+  /* Links */
+  a { color: var(--gold); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .15s; }
+  a:hover { border-bottom-color: var(--gold); }
+  .nav {
+    display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 2rem;
+    font-family: ui-monospace, Menlo, monospace; font-size: 0.78rem; letter-spacing: 0.04em;
+  }
+  .nav a { color: var(--cream); }
+  .nav a:hover { color: var(--gold); }
+
+  footer {
+    padding: 3rem 0 1rem; color: var(--mute); font-size: 0.88rem;
+  }
+  footer .sig {
+    font-style: italic; color: var(--cream); margin-bottom: 0.75rem;
+  }
+
+  .eq {
+    font-family: "Iowan Old Style", Palatino, Georgia, serif;
+    font-style: italic; color: var(--gold); display: block;
+    margin: 1.25rem 0; font-size: 1.15rem; text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Brockian · Riemann Labs · Verified Core</p>
+    <h1>New Era <em>Mathematics</em></h1>
+    <p class="lede">
+      Not louder claims. Clearer light. A formal school where every PROVED theorem
+      is independently machine-checked — and every open problem stays open until the proof earns the badge.
+    </p>
+    <div class="counts" aria-label="Registry summary">
+      <div class="count"><b id="n-proved">704</b><span>Proved</span></div>
+      <div class="count"><b id="n-def">184</b><span>Definitions</span></div>
+      <div class="count"><b id="n-cond">10</b><span>Conditional</span></div>
+      <div class="count"><b id="n-conj">1</b><span>Conjecture</span></div>
+    </div>
+    <nav class="nav">
+      <a href="index.html">← Full Observatory</a>
+      <a href="../docs/NEW-ERA.md">Charter (markdown)</a>
+      <a href="../REGISTRY.md">Registry ledger</a>
+      <a href="https://github.com/primaryhosting/brockian-mathematics">Source</a>
+    </nav>
+  </header>
+
+  <section id="charter">
+    <h2>I · The epoch</h2>
+    <h3>A third room between cathedral and casino</h3>
+    <p>
+      Classical mathematics built cathedrals: slow, human, permanent.
+      Mechanized proving built casinos of green lights: fast, silent, sometimes fake.
+    </p>
+    <p>
+      This core builds a <strong>third room</strong>. A theorem may only be called
+      <em>proved</em> when it is sorry-free, axiom-clean, and re-verified by an
+      independent engine (AXLE) at a pinned Lean and Mathlib version.
+      Badges are derived from the registry — never hand-painted.
+    </p>
+    <blockquote>
+      Every theorem we mark proved is a theorem.<br/>
+      Every open problem is labeled open.<br/>
+      Every beautiful figure has a proof underneath.
+      <cite>The New Era promise</cite>
+    </blockquote>
+  </section>
+
+  <section id="forms">
+    <h2>II · Forms that hold</h2>
+    <h3>Beauty as inevitability under proof</h3>
+    <div class="pillars">
+      <article class="pillar">
+        <div class="tag">Why five · SPEC-GOLDEN-FIVE</div>
+        <h4>Rigidity, not numerology</h4>
+        <p>
+          For primes <em>p</em>, φ − 1 lies in the adjacency spectrum of the cycle
+          <em>C<sub>p</sub></em> if and only if <em>p</em> = 5.
+          Layered as algebra, membership, and prime rigidity —
+          <code>golden_unique_to_five</code>, Galois degree facts, uniqueness schema.
+        </p>
+      </article>
+      <article class="pillar">
+        <div class="tag">Pentagon · D5-ISOTYPIC · D5-FOURIER</div>
+        <h4>The pentagon as an operator</h4>
+        <p class="eq">A v<sub>j</sub> = 2 cos(2π j / 5) · v<sub>j</sub></p>
+        <p>
+          Fourier modes on Fin 5 → ℂ diagonalize the cycle; projectors resolve the
+          identity on the full space. Spectrum multiplicities:
+          2 (once), φ−1 (twice), −φ (twice). The golden eigenvalue is isotypic structure.
+        </p>
+      </article>
+      <article class="pillar">
+        <div class="tag">Selection · AS-1 · GC-1 · SS-WIRE</div>
+        <h4>Grammar before conjecture</h4>
+        <p>
+          Admissibility: <em>q</em> − 2 starts mod <em>q</em>. Local Goldbach kernels
+          exact for every prime. Singular series positivity unconditional under
+          admissibility alone — no hidden convergence hypothesis for the positive wire.
+        </p>
+      </article>
+      <article class="pillar">
+        <div class="tag">Gate 1 · honesty</div>
+        <h4>Named gaps, not fog</h4>
+        <p>
+          Minimal Schrödinger operator constructed on a Schwartz core; symmetry and density proved.
+          Essential self-adjointness waits on a single classical regularity obligation —
+          stated, not faked. Decaying potentials are proved <em>wrong shape</em> for Hilbert–Pólya.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section id="refusal">
+    <h2>III · The refusal</h2>
+    <h3>What we will not pretend</h3>
+    <table class="refuse">
+      <thead>
+        <tr><th>Temptation</th><th>Refusal</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>“RH is essentially done”</td>
+          <td>Riemann Hypothesis remains open. No inhabited BrockianSystem.</td>
+        </tr>
+        <tr>
+          <td>Green build as proof</td>
+          <td>PROVED requires AXLE + clean axiom set + no sorry.</td>
+        </tr>
+        <tr>
+          <td>Vacuous conditionals</td>
+          <td>Conditional theorems name classical / literature / open rungs.</td>
+        </tr>
+        <tr>
+          <td>Silent holes</td>
+          <td>No-theater lint blocks sorry in closed modules.</td>
+        </tr>
+        <tr>
+          <td>Cosmic five</td>
+          <td>Only biconditionals and counts — no metaphysical overclaim.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="dim" style="margin-top:1.5rem">
+      The refusal is not weakness. It is how light stays clean.
+    </p>
+  </section>
+
+  <section id="enter">
+    <h2>IV · Enter the core</h2>
+    <h3>Read the ledger, then the proofs</h3>
+    <p>
+      Start with the <a href="index.html">Observatory</a> claim grid — book margin IDs
+      mapped to Lean names with derived badges. Then open the
+      <a href="../REGISTRY.md">machine registry</a>. Then the modules themselves under
+      <code>Brockian/</code>.
+    </p>
+    <p class="dim">
+      Triple verification: local build · print axioms · independent AXLE recheck at lean-4.32.0.
+      Mathlib is a peer, not a crutch for silent axioms.
+    </p>
+    <nav class="nav">
+      <a href="index.html">Observatory claims →</a>
+      <a href="../docs/NEW-ERA.md">Full charter →</a>
+      <a href="../PORT-QUEUE.md">Open frontier →</a>
+    </nav>
+  </section>
+
+  <footer>
+    <p class="sig">Not faster mythology. Slower light.</p>
+    <p>
+      Brockian Mathematics / Riemann Labs · Lean 4.32 · Mathlib · AXLE<br/>
+      Live counts are approximate to the last registry generation; see REGISTRY.md for authority.
+    </p>
+  </footer>
+
+</div>
+<script>
+  // Best-effort live counts from claims.json if served from same folder
+  fetch('claims.json').then(r => r.json()).then(data => {
+    const s = (data.registry_summary || data.summary || {});
+    const map = {
+      'n-proved': s.PROVED, 'n-def': s.DEFINITION,
+      'n-cond': s.CONDITIONAL, 'n-conj': s.CONJECTURE
+    };
+    for (const [id, v] of Object.entries(map)) {
+      if (v != null) document.getElementById(id).textContent = v;
+    }
+  }).catch(() => {});
+</script>
+</body>
+</html>
