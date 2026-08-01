@@ -33,6 +33,7 @@ import Brockian.WeylGate1Bounded
 import Brockian.WeylBridge
 import Brockian.WeylSchrodingerESA
 import Brockian.WeylFreeLaplacian
+import Brockian.WeylMulReal
 import Brockian.WeylOperatorChoice
 import Brockian.MetallicFamily
 import Brockian.EquidistributionSchema

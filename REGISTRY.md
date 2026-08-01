@@ -22,18 +22,18 @@
 | PROVED | `Brockian.Admissibility.CRT.admissibleResidues_crt_card` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
 | PROVED | `Brockian.Admissibility.CRT.admissibleResidues_crt_card_two_primes` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
 | PROVED | `Brockian.Admissibility.CRT.admissible_count_three_five` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
-| DEFINITION | `Brockian.AffineSymmetry.additiveAutEquivUnits` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.AffineSymmetry.additiveAut_card` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.AffineSymmetry.additiveAut_card_five` | ✓ | verified | lean-4.32.0 |  |
-| DEFINITION | `Brockian.AffineSymmetry.affineGroup` | ✓ | verified | lean-4.32.0 |  |
-| DEFINITION | `Brockian.AffineSymmetry.affinePerm` | ✓ | verified | lean-4.32.0 |  |
-| DEFINITION | `Brockian.AffineSymmetry.dihAct` | ✓ | verified | lean-4.32.0 |  |
-| DEFINITION | `Brockian.AffineSymmetry.dihedralToPerm` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.AffineSymmetry.dihedralToPerm_card` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.AffineSymmetry.dihedralToPerm_injective` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.AffineSymmetry.dihedralToPerm_range_le_affineGroup` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.AffineSymmetry.symmetry_separation` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.AffineSymmetry.units_isCyclic` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.AffineSymmetry.additiveAutEquivUnits` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
+| PROVED | `Brockian.AffineSymmetry.additiveAut_card` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
+| PROVED | `Brockian.AffineSymmetry.additiveAut_card_five` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
+| DEFINITION | `Brockian.AffineSymmetry.affineGroup` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
+| DEFINITION | `Brockian.AffineSymmetry.affinePerm` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
+| DEFINITION | `Brockian.AffineSymmetry.dihAct` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
+| DEFINITION | `Brockian.AffineSymmetry.dihedralToPerm` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
+| PROVED | `Brockian.AffineSymmetry.dihedralToPerm_card` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
+| PROVED | `Brockian.AffineSymmetry.dihedralToPerm_injective` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
+| PROVED | `Brockian.AffineSymmetry.dihedralToPerm_range_le_affineGroup` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
+| PROVED | `Brockian.AffineSymmetry.symmetry_separation` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
+| PROVED | `Brockian.AffineSymmetry.units_isCyclic` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
 | DEFINITION | `Brockian.Automorphism.C5` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
 | DEFINITION | `Brockian.Automorphism.act` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
 | DEFINITION | `Brockian.Automorphism.dihedralHom` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
