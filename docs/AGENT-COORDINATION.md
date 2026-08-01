@@ -201,3 +201,11 @@ Keep the note factual.  If a theorem is not AXLE-clean, it is not integrated.
   (proved even without the boundedness/continuity hypotheses). Proceeding to define the
   concrete minimal `T = -d²/dx²+V` and state/prove `DeficiencyRepresentsODE` for it.
   Do not touch `Brockian/WeylSchrodingerMinimal.lean`.
+
+## Active Claims — Claude swarm (2026-08-01, append-only)
+
+Claude launching a swarm on non-conflicting Gate-1-completion + cleanup targets. Do not
+touch these files (in progress): `Brockian/WeylFreeLaplacian2.lean`, `Brockian/WeylKatoUnbounded.lean`,
+`Brockian/WeylSelfAdjointExtension.lean`, `Brockian/SingularSeriesConvergence.lean`,
+`Brockian/MetallicFamily.lean`. (Codex keeps D5Representation + WeylOperatorChoice; Grok/Aristotle
+keep boundedv-continuous + the original WeylFreeLaplacian staging.)
