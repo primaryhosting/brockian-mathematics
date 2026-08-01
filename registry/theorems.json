@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 225,
-    "DEFINITION": 70,
+    "PROVED": 248,
+    "DEFINITION": 72,
     "CONJECTURE": 2,
     "CONDITIONAL": 4
   },
@@ -5938,6 +5938,798 @@
       "quarantine": true,
       "ledger_run": "swarm 2026-08-01 \u2014 Weyl/Green functional-analytic core (base rung)",
       "provenance_note": "Wronskian/Abel constancy, Lagrange + integrated Green identity, Gate-0 witness. Full limit-point criterion OPEN (Mathlib 4.32 has no Sturm-Liouville/deficiency-index API) \u2014 see PORT-QUEUE."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.IsL2Solution",
+      "kind": "def",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.coeff_ne_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.continuous_y",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.continuous_y'",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.global_boundary_identity",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.hasDerivAt_wronskianConj",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.integrable_normSq",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.integrable_normSq_add",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.integrable_wronskianConj_deriv",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.integrable_y'_normSq",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.integrable_y_normSq",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.integral_wronskianConj_eq",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.integral_wronskianConj_eq_mul",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.limUnder_wronskianConj_atBot_eq_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.limUnder_wronskianConj_atTop_eq_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.no_nonzero_L2_solution",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.norm_wronskianConj_le",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.not_integrableOn_const_pos_Ici",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.not_integrableOn_const_pos_Iic",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.tendsto_wronskianConj_atBot",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.tendsto_wronskianConj_atBot_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.tendsto_wronskianConj_atTop",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.tendsto_wronskianConj_atTop_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.wronskianConj",
+      "kind": "def",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.wronskianConj_eq_two_I_im",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Bridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Bridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+      "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
     },
     {
       "name": "Brockian.Weyl.Cayley.apply_ne_I_smul",

@@ -1,10 +1,10 @@
-generated_at: '2026-08-01T16:44:07Z'
+generated_at: '2026-08-01T17:15:08Z'
 generated_from:
   registry: registry/theorems.json
   claim_map: observatory/claim_map.yaml
   registry_summary: &id001
-    PROVED: 220
-    DEFINITION: 69
+    PROVED: 248
+    DEFINITION: 72
     CONJECTURE: 2
     CONDITIONAL: 4
 program: Brockian Mathematics / Riemann Labs
@@ -15,14 +15,14 @@ charter: 'Badges are derived from the Lean registry when `lean` is non-empty.
   Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.'
 version: 1
 summary:
-  claims: 38
+  claims: 39
   by_status:
-    proved: 28
+    proved: 30
     open: 1
     conjecture: 1
     conditional: 2
     not_claimed: 4
-    aristotle: 2
+    aristotle: 1
   registry: *id001
 claims:
 - id: BM-MAP-001
@@ -45,7 +45,7 @@ claims:
     register: PROVED
     source: Brockian/Core.lean
     axioms_ok: true
-    axle: &id013
+    axle: &id014
       verdict: verified
       environment: lean-4.32.0
     ledger_run: runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays
@@ -58,7 +58,7 @@ claims:
     register: PROVED
     source: Brockian/Core.lean
     axioms_ok: true
-    axle: &id010
+    axle: &id011
       verdict: verified
       environment: lean-4.32.0
     ledger_run: runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays
@@ -99,7 +99,7 @@ claims:
     register: PROVED
     source: Brockian/Core.lean
     axioms_ok: true
-    axle: &id011
+    axle: &id012
       verdict: verified
       environment: lean-4.32.0
     ledger_run: runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays
@@ -128,7 +128,7 @@ claims:
     register: PROVED
     source: Brockian/TransitionKernel.lean
     axioms_ok: true
-    axle: &id043
+    axle: &id044
       verdict: verified
       environment: lean-4.32.0
     ledger_run: runs 7 / 31 / 117 — kernel double-count, constellation classification,
@@ -142,7 +142,7 @@ claims:
     register: PROVED
     source: Brockian/TransitionKernel.lean
     axioms_ok: true
-    axle: &id045
+    axle: &id046
       verdict: verified
       environment: lean-4.32.0
     ledger_run: runs 7 / 31 / 117 — kernel double-count, constellation classification,
@@ -156,7 +156,7 @@ claims:
     register: PROVED
     source: Brockian/TransitionKernel.lean
     axioms_ok: true
-    axle: &id040
+    axle: &id041
       verdict: verified
       environment: lean-4.32.0
     ledger_run: runs 7 / 31 / 117 — kernel double-count, constellation classification,
@@ -186,7 +186,7 @@ claims:
     register: PROVED
     source: Brockian/Admissibility.lean
     axioms_ok: true
-    axle: &id005
+    axle: &id006
       verdict: verified
       environment: lean-4.32.0
     ledger_run: 74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2
@@ -198,7 +198,7 @@ claims:
     register: PROVED
     source: Brockian/Admissibility.lean
     axioms_ok: true
-    axle: &id004
+    axle: &id005
       verdict: verified
       environment: lean-4.32.0
     ledger_run: 74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2
@@ -210,7 +210,7 @@ claims:
     register: PROVED
     source: Brockian/Admissibility.lean
     axioms_ok: true
-    axle: &id003
+    axle: &id004
       verdict: verified
       environment: lean-4.32.0
     ledger_run: 74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2
@@ -239,7 +239,7 @@ claims:
     register: PROVED
     source: Brockian/Geometry.lean
     axioms_ok: true
-    axle: &id017
+    axle: &id018
       verdict: verified
       environment: lean-4.32.0
     ledger_run: runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅
@@ -253,7 +253,7 @@ claims:
     register: PROVED
     source: Brockian/Geometry.lean
     axioms_ok: true
-    axle: &id016
+    axle: &id017
       verdict: verified
       environment: lean-4.32.0
     ledger_run: runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅
@@ -267,7 +267,7 @@ claims:
     register: PROVED
     source: Brockian/Geometry.lean
     axioms_ok: true
-    axle: &id015
+    axle: &id016
       verdict: verified
       environment: lean-4.32.0
     ledger_run: runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅
@@ -281,7 +281,7 @@ claims:
     register: PROVED
     source: Brockian/Geometry.lean
     axioms_ok: true
-    axle: &id014
+    axle: &id015
       verdict: verified
       environment: lean-4.32.0
     ledger_run: runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅
@@ -309,7 +309,7 @@ claims:
     register: PROVED
     source: Brockian/Automorphism.lean
     axioms_ok: true
-    axle: &id006
+    axle: &id007
       verdict: verified
       environment: lean-4.32.0
     ledger_run: run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full
@@ -340,7 +340,7 @@ claims:
     register: PROVED
     source: Brockian/Spectral.lean
     axioms_ok: true
-    axle: &id037
+    axle: &id038
       verdict: verified
       environment: lean-4.32.0
     ledger_run: run 73 (b666…) — re-proved fresh @ v4.32 via concrete circulant eigenvalues
@@ -353,7 +353,7 @@ claims:
     register: PROVED
     source: Brockian/Connectivity.lean
     axioms_ok: true
-    axle: &id008
+    axle: &id009
       verdict: verified
       environment: lean-4.32.0
     ledger_run: run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues
@@ -366,7 +366,7 @@ claims:
     register: PROVED
     source: Brockian/Connectivity.lean
     axioms_ok: true
-    axle: &id007
+    axle: &id008
       verdict: verified
       environment: lean-4.32.0
     ledger_run: run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues
@@ -394,7 +394,7 @@ claims:
     register: PROVED
     source: Brockian/Core.lean
     axioms_ok: true
-    axle: &id012
+    axle: &id013
       verdict: verified
       environment: lean-4.32.0
     ledger_run: runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays
@@ -407,7 +407,7 @@ claims:
     register: PROVED
     source: Brockian/Core.lean
     axioms_ok: true
-    axle: &id009
+    axle: &id010
       verdict: verified
       environment: lean-4.32.0
     ledger_run: runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays
@@ -434,7 +434,7 @@ claims:
     register: PROVED
     source: Brockian/GoldbachComb.lean
     axioms_ok: true
-    axle: &id020
+    axle: &id021
       verdict: verified
       environment: lean-4.32.0
     ledger_run: intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary
@@ -461,7 +461,7 @@ claims:
     register: PROVED
     source: Brockian/GoldbachComb.lean
     axioms_ok: true
-    axle: &id019
+    axle: &id020
       verdict: verified
       environment: lean-4.32.0
     ledger_run: intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary
@@ -488,7 +488,7 @@ claims:
     register: PROVED
     source: Brockian/GoldbachComb.lean
     axioms_ok: true
-    axle: &id021
+    axle: &id022
       verdict: verified
       environment: lean-4.32.0
     ledger_run: intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary
@@ -516,7 +516,7 @@ claims:
     register: CONJECTURE
     source: Brockian/GoldbachComb.lean
     axioms_ok: true
-    axle: &id018
+    axle: &id019
       verdict: verified
       environment: lean-4.32.0
     ledger_run: intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary
@@ -544,7 +544,7 @@ claims:
     register: CONDITIONAL
     source: Brockian/GoldbachSchema.lean
     axioms_ok: true
-    axle: &id025
+    axle: &id026
       verdict: verified
       environment: lean-4.32.0
     ledger_run: swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema)
@@ -557,7 +557,7 @@ claims:
     register: CONDITIONAL
     source: Brockian/GoldbachSchema.lean
     axioms_ok: true
-    axle: &id024
+    axle: &id025
       verdict: verified
       environment: lean-4.32.0
     ledger_run: swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema)
@@ -586,7 +586,7 @@ claims:
     register: PROVED
     source: Brockian/GoldbachLemmas.lean
     axioms_ok: true
-    axle: &id022
+    axle: &id023
       verdict: verified
       environment: lean-4.32.0
     ledger_run: swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional)
@@ -600,7 +600,7 @@ claims:
     register: PROVED
     source: Brockian/GoldbachLemmas.lean
     axioms_ok: true
-    axle: &id023
+    axle: &id024
       verdict: verified
       environment: lean-4.32.0
     ledger_run: swarm 2026-08-01 — Hardy-Littlewood Goldbach factor lemmas (unconditional)
@@ -614,7 +614,7 @@ claims:
     register: DEFINITION
     source: Brockian/SingularSeries.lean
     axioms_ok: true
-    axle: &id036
+    axle: &id037
       verdict: verified
       environment: lean-4.32.0
     ledger_run: intake run 63 (a0ce…) — largest clean analytic run; singular series
@@ -643,7 +643,7 @@ claims:
     register: PROVED
     source: Brockian/TransitionKernel.lean
     axioms_ok: true
-    axle: &id041
+    axle: &id042
       verdict: verified
       environment: lean-4.32.0
     ledger_run: runs 7 / 31 / 117 — kernel double-count, constellation classification,
@@ -657,7 +657,7 @@ claims:
     register: PROVED
     source: Brockian/TransitionKernel.lean
     axioms_ok: true
-    axle: &id042
+    axle: &id043
       verdict: verified
       environment: lean-4.32.0
     ledger_run: runs 7 / 31 / 117 — kernel double-count, constellation classification,
@@ -671,7 +671,7 @@ claims:
     register: PROVED
     source: Brockian/TransitionKernel.lean
     axioms_ok: true
-    axle: &id044
+    axle: &id045
       verdict: verified
       environment: lean-4.32.0
     ledger_run: runs 7 / 31 / 117 — kernel double-count, constellation classification,
@@ -702,7 +702,7 @@ claims:
     register: DEFINITION
     source: Brockian/Sieve.lean
     axioms_ok: true
-    axle: &id035
+    axle: &id036
       verdict: verified
       environment: lean-4.32.0
     ledger_run: intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap,
@@ -716,7 +716,7 @@ claims:
     register: PROVED
     source: Brockian/Sieve.lean
     axioms_ok: true
-    axle: &id032
+    axle: &id033
       verdict: verified
       environment: lean-4.32.0
     ledger_run: intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap,
@@ -730,7 +730,7 @@ claims:
     register: PROVED
     source: Brockian/Sieve.lean
     axioms_ok: true
-    axle: &id033
+    axle: &id034
       verdict: verified
       environment: lean-4.32.0
     ledger_run: intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap,
@@ -744,7 +744,7 @@ claims:
     register: CONJECTURE
     source: Brockian/Sieve.lean
     axioms_ok: true
-    axle: &id034
+    axle: &id035
       verdict: verified
       environment: lean-4.32.0
     ledger_run: intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap,
@@ -776,7 +776,7 @@ claims:
     register: PROVED
     source: Brockian/SpectralGate1.lean
     axioms_ok: true
-    axle: &id038
+    axle: &id039
       verdict: verified
       environment: lean-4.32.0
     ledger_run: swarm 2026-08-01 — bounded-potential multiplication operator (honest
@@ -791,7 +791,7 @@ claims:
     register: PROVED
     source: Brockian/SpectralGate1.lean
     axioms_ok: true
-    axle: &id039
+    axle: &id040
       verdict: verified
       environment: lean-4.32.0
     ledger_run: swarm 2026-08-01 — bounded-potential multiplication operator (honest
@@ -806,7 +806,7 @@ claims:
     register: PROVED
     source: Brockian/Gate1Bounded.lean
     axioms_ok: true
-    axle: &id070
+    axle: &id073
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range
@@ -820,7 +820,7 @@ claims:
     register: PROVED
     source: Brockian/Gate1Bounded.lean
     axioms_ok: true
-    axle: &id069
+    axle: &id072
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range
@@ -850,7 +850,7 @@ claims:
     register: PROVED
     source: Brockian/Kato.lean
     axioms_ok: true
-    axle: &id071
+    axle: &id074
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Aristotle proj c595862c — bounded Kato-Rellich; independently AXLE-verified
@@ -865,7 +865,7 @@ claims:
     register: PROVED
     source: Brockian/Kato.lean
     axioms_ok: true
-    axle: &id002
+    axle: &id003
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Aristotle proj c595862c — bounded Kato-Rellich; independently AXLE-verified
@@ -880,7 +880,7 @@ claims:
     register: PROVED
     source: Brockian/Gate1Bounded.lean
     axioms_ok: true
-    axle: &id068
+    axle: &id071
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range
@@ -911,7 +911,7 @@ claims:
     register: PROVED
     source: Brockian/RadiusDichotomy.lean
     axioms_ok: true
-    axle: &id078
+    axle: &id081
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line
@@ -927,7 +927,7 @@ claims:
     register: PROVED
     source: Brockian/RadiusDichotomy.lean
     axioms_ok: true
-    axle: &id079
+    axle: &id082
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line
@@ -943,7 +943,7 @@ claims:
     register: PROVED
     source: Brockian/RadiusDichotomy.lean
     axioms_ok: true
-    axle: &id076
+    axle: &id079
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line
@@ -959,7 +959,7 @@ claims:
     register: PROVED
     source: Brockian/RadiusDichotomy.lean
     axioms_ok: true
-    axle: &id077
+    axle: &id080
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line
@@ -989,7 +989,7 @@ claims:
     register: PROVED
     source: Brockian/Weyl.lean
     axioms_ok: true
-    axle: &id048
+    axle: &id049
       verdict: verified
       environment: lean-4.32.0
     ledger_run: swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung)
@@ -1003,7 +1003,7 @@ claims:
     register: PROVED
     source: Brockian/Weyl.lean
     axioms_ok: true
-    axle: &id046
+    axle: &id047
       verdict: verified
       environment: lean-4.32.0
     ledger_run: swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung)
@@ -1017,7 +1017,7 @@ claims:
     register: PROVED
     source: Brockian/Weyl.lean
     axioms_ok: true
-    axle: &id047
+    axle: &id048
       verdict: verified
       environment: lean-4.32.0
     ledger_run: swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung)
@@ -1048,7 +1048,7 @@ claims:
     register: PROVED
     source: Brockian/Disk.lean
     axioms_ok: true
-    axle: &id062
+    axle: &id065
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE)
@@ -1062,7 +1062,7 @@ claims:
     register: PROVED
     source: Brockian/Disk.lean
     axioms_ok: true
-    axle: &id061
+    axle: &id064
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE)
@@ -1076,7 +1076,7 @@ claims:
     register: PROVED
     source: Brockian/Disk.lean
     axioms_ok: true
-    axle: &id064
+    axle: &id067
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE)
@@ -1090,7 +1090,7 @@ claims:
     register: PROVED
     source: Brockian/Disk.lean
     axioms_ok: true
-    axle: &id063
+    axle: &id066
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE)
@@ -1120,7 +1120,7 @@ claims:
     register: PROVED
     source: Brockian/Operator.lean
     axioms_ok: true
-    axle: &id075
+    axle: &id078
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — symmetric unbounded-operator framework
@@ -1134,7 +1134,7 @@ claims:
     register: PROVED
     source: Brockian/Operator.lean
     axioms_ok: true
-    axle: &id074
+    axle: &id077
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — symmetric unbounded-operator framework
@@ -1148,7 +1148,7 @@ claims:
     register: DEFINITION
     source: Brockian/Operator.lean
     axioms_ok: true
-    axle: &id073
+    axle: &id076
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — symmetric unbounded-operator framework
@@ -1177,7 +1177,7 @@ claims:
     register: PROVED
     source: Brockian/ESA.lean
     axioms_ok: true
-    axle: &id066
+    axle: &id069
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited
@@ -1193,7 +1193,7 @@ claims:
     register: PROVED
     source: Brockian/ESA.lean
     axioms_ok: true
-    axle: &id067
+    axle: &id070
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl capstone 2026-08-01 — EssentiallySelfAdjoint genuinely inhabited
@@ -1225,7 +1225,7 @@ claims:
     register: PROVED
     source: Brockian/Cayley.lean
     axioms_ok: true
-    axle: &id049
+    axle: &id052
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl capstone 2026-08-01 — abstract von Neumann ess-self-adjointness
@@ -1241,7 +1241,7 @@ claims:
     register: PROVED
     source: Brockian/Cayley.lean
     axioms_ok: true
-    axle: &id050
+    axle: &id053
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl capstone 2026-08-01 — abstract von Neumann ess-self-adjointness
@@ -1257,7 +1257,7 @@ claims:
     register: PROVED
     source: Brockian/Cayley.lean
     axioms_ok: true
-    axle: &id051
+    axle: &id054
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl capstone 2026-08-01 — abstract von Neumann ess-self-adjointness
@@ -1287,7 +1287,7 @@ claims:
     register: PROVED
     source: Brockian/Chain.lean
     axioms_ok: true
-    axle: &id052
+    axle: &id055
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl chain 2026-08-01 — closure modulo the range-density bridge
@@ -1320,7 +1320,7 @@ claims:
     register: PROVED
     source: Brockian/Dichotomy.lean
     axioms_ok: true
-    axle: &id060
+    axle: &id063
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis)
@@ -1335,7 +1335,7 @@ claims:
     register: PROVED
     source: Brockian/Dichotomy.lean
     axioms_ok: true
-    axle: &id059
+    axle: &id062
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis)
@@ -1350,7 +1350,7 @@ claims:
     register: PROVED
     source: Brockian/Dichotomy.lean
     axioms_ok: true
-    axle: &id058
+    axle: &id061
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis)
@@ -1365,7 +1365,7 @@ claims:
     register: PROVED
     source: Brockian/DiskBridge.lean
     axioms_ok: true
-    axle: &id065
+    axle: &id068
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — Disk radius = Dichotomy weylRadius + mass⇒r→0
@@ -1378,7 +1378,7 @@ claims:
     register: PROVED
     source: Brockian/ConstMass.lean
     axioms_ok: true
-    axle: &id057
+    axle: &id060
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0
@@ -1392,7 +1392,7 @@ claims:
     register: PROVED
     source: Brockian/ConstMass.lean
     axioms_ok: true
-    axle: &id056
+    axle: &id059
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — growing-mode mass diverges + radius→0
@@ -1420,7 +1420,7 @@ claims:
     register: PROVED
     source: Brockian/LP.lean
     axioms_ok: true
-    axle: &id072
+    axle: &id075
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl campaign 2026-08-01 — limit-point for constant potential
@@ -1451,7 +1451,7 @@ claims:
     register: PROVED
     source: Brockian/Closure.lean
     axioms_ok: true
-    axle: &id055
+    axle: &id058
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann
@@ -1466,7 +1466,7 @@ claims:
     register: PROVED
     source: Brockian/Closure.lean
     axioms_ok: true
-    axle: &id054
+    axle: &id057
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann
@@ -1481,7 +1481,7 @@ claims:
     register: PROVED
     source: Brockian/Closure.lean
     axioms_ok: true
-    axle: &id053
+    axle: &id056
       verdict: verified
       environment: lean-4.32.0
     ledger_run: Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann
@@ -1513,7 +1513,7 @@ claims:
     register: DEFINITION
     source: Brockian/RiemannScaffold.lean
     axioms_ok: true
-    axle: &id030
+    axle: &id031
       verdict: verified
       environment: lean-4.32.0
     ledger_run: swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional
@@ -1527,7 +1527,7 @@ claims:
     register: PROVED
     source: Brockian/RiemannScaffold.lean
     axioms_ok: true
-    axle: &id031
+    axle: &id032
       verdict: verified
       environment: lean-4.32.0
     ledger_run: swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional
@@ -1541,7 +1541,7 @@ claims:
     register: PROVED
     source: Brockian/RiemannScaffold.lean
     axioms_ok: true
-    axle: &id029
+    axle: &id030
       verdict: verified
       environment: lean-4.32.0
     ledger_run: swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional
@@ -1555,7 +1555,7 @@ claims:
     register: PROVED
     source: Brockian/RiemannScaffold.lean
     axioms_ok: true
-    axle: &id027
+    axle: &id028
       verdict: verified
       environment: lean-4.32.0
     ledger_run: swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional
@@ -1584,7 +1584,7 @@ claims:
     register: CONDITIONAL
     source: Brockian/RiemannScaffold.lean
     axioms_ok: true
-    axle: &id028
+    axle: &id029
       verdict: verified
       environment: lean-4.32.0
     ledger_run: swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional
@@ -1599,7 +1599,7 @@ claims:
     register: DEFINITION
     source: Brockian/RiemannScaffold.lean
     axioms_ok: true
-    axle: &id026
+    axle: &id027
       verdict: verified
       environment: lean-4.32.0
     ledger_run: swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional
@@ -1675,19 +1675,91 @@ claims:
   missing_lean: []
   declaration_count: 0
   proved_count: 0
-- id: ARISTOTLE-BRIDGE
+- id: WEYL-BRIDGE
   title: No nonzero global-L² solution at non-real λ (deficiency bridge)
-  book: aristotle/bridge-deficiency · project 403cd5ed
-  notes: Symmetric-form deficiency triviality for continuous bounded V.
-  status: aristotle
-  book_badge: ARISTOTLE-PENDING
-  derived_register: null
-  badge_force: aristotle
-  lean: []
-  declarations: []
+  book: Lean Weyl.Bridge (Codex plan; energy/Wronskian identity)
+  notes: 'PROVED: W'' = −2i (Im λ)|y|², limits of W at ±∞ vanish, mass zero. Aristotle
+    target 403cd5ed can be closed/superseded.'
+  status: proved
+  book_badge: V3-LEAN-RUN
+  derived_register: PROVED
+  badge_force: null
+  lean:
+  - Brockian.Weyl.Bridge.no_nonzero_L2_solution
+  - Brockian.Weyl.Bridge.hasDerivAt_wronskianConj
+  - Brockian.Weyl.Bridge.global_boundary_identity
+  declarations:
+  - name: Brockian.Weyl.Bridge.no_nonzero_L2_solution
+    short: no_nonzero_L2_solution
+    module: Brockian.Weyl.Bridge
+    kind: theorem
+    register: PROVED
+    source: Brockian/Bridge.lean
+    axioms_ok: true
+    axle: &id002
+      verdict: verified
+      environment: lean-4.32.0
+    ledger_run: 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity)
+    provenance_note: Non-real L2 solutions of -y''+Vy=λy vanish (V real). W'=−2i(Imλ)|y|²;
+      limits of W at ±∞ vanish; mass zero. Core analysis bridge toward deficiency
+      indices. Does not alone construct T or prove ESA of -Δ+V.
+  - name: Brockian.Weyl.Bridge.hasDerivAt_wronskianConj
+    short: hasDerivAt_wronskianConj
+    module: Brockian.Weyl.Bridge
+    kind: theorem
+    register: PROVED
+    source: Brockian/Bridge.lean
+    axioms_ok: true
+    axle: &id051
+      verdict: verified
+      environment: lean-4.32.0
+    ledger_run: 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity)
+    provenance_note: Non-real L2 solutions of -y''+Vy=λy vanish (V real). W'=−2i(Imλ)|y|²;
+      limits of W at ±∞ vanish; mass zero. Core analysis bridge toward deficiency
+      indices. Does not alone construct T or prove ESA of -Δ+V.
+  - name: Brockian.Weyl.Bridge.global_boundary_identity
+    short: global_boundary_identity
+    module: Brockian.Weyl.Bridge
+    kind: theorem
+    register: PROVED
+    source: Brockian/Bridge.lean
+    axioms_ok: true
+    axle: &id050
+      verdict: verified
+      environment: lean-4.32.0
+    ledger_run: 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity)
+    provenance_note: Non-real L2 solutions of -y''+Vy=λy vanish (V real). W'=−2i(Imλ)|y|²;
+      limits of W at ±∞ vanish; mass zero. Core analysis bridge toward deficiency
+      indices. Does not alone construct T or prove ESA of -Δ+V.
   missing_lean: []
-  declaration_count: 0
-  proved_count: 0
+  declaration_count: 3
+  proved_count: 3
+- id: ARISTOTLE-BRIDGE
+  title: Deficiency bridge (superseded by WEYL-BRIDGE if integrated)
+  book: aristotle/bridge-deficiency · project 403cd5ed
+  notes: Core statement now in Brockian.Weyl.Bridge.
+  status: proved
+  book_badge: V3-LEAN-RUN
+  derived_register: PROVED
+  badge_force: null
+  lean:
+  - Brockian.Weyl.Bridge.no_nonzero_L2_solution
+  declarations:
+  - name: Brockian.Weyl.Bridge.no_nonzero_L2_solution
+    short: no_nonzero_L2_solution
+    module: Brockian.Weyl.Bridge
+    kind: theorem
+    register: PROVED
+    source: Brockian/Bridge.lean
+    axioms_ok: true
+    axle: *id002
+    ledger_run: 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity)
+    provenance_note: Non-real L2 solutions of -y''+Vy=λy vanish (V real). W'=−2i(Imλ)|y|²;
+      limits of W at ±∞ vanish; mass zero. Core analysis bridge toward deficiency
+      indices. Does not alone construct T or prove ESA of -Δ+V.
+  missing_lean: []
+  declaration_count: 1
+  proved_count: 1
 - id: ARISTOTLE-KATO
   title: Kato bounded perturbation (INTEGRATED)
   book: Brockian.Weyl.Kato — was aristotle/kato-bounded c595862c
@@ -1706,7 +1778,7 @@ claims:
     register: PROVED
     source: Brockian/Kato.lean
     axioms_ok: true
-    axle: *id002
+    axle: *id003
     ledger_run: Aristotle proj c595862c — bounded Kato-Rellich; independently AXLE-verified
       @ 4.32
     provenance_note: isSelfAdjoint_add; dense_range_add_sub_of_selfAdjoint (ran((T+B)-z)
@@ -1721,13 +1793,13 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Admissibility.lean
-  axle: *id003
+  axle: *id004
 - name: Brockian.Admissibility.admissibility_count_three
   module: Brockian.Admissibility
   register: PROVED
   kind: theorem
   source: Brockian/Admissibility.lean
-  axle: *id004
+  axle: *id005
 - name: Brockian.Admissibility.admissibleResidues
   module: Brockian.Admissibility
   register: DEFINITION
@@ -1741,7 +1813,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Admissibility.lean
-  axle: *id005
+  axle: *id006
 - name: Brockian.Automorphism.C5
   module: Brockian.Automorphism
   register: DEFINITION
@@ -1771,7 +1843,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Automorphism.lean
-  axle: *id006
+  axle: *id007
 - name: Brockian.Automorphism.mul_rr
   module: Brockian.Automorphism
   register: PROVED
@@ -1860,6 +1932,54 @@ all_declarations:
   axle:
     verdict: verified
     environment: lean-4.32.0
+- name: Brockian.Automorphism.Full.autEquivDihedral
+  module: Brockian.Automorphism.Full
+  register: DEFINITION
+  kind: def
+  source: Brockian/Full.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Automorphism.Full.aut_card_eq_ten
+  module: Brockian.Automorphism.Full
+  register: PROVED
+  kind: theorem
+  source: Brockian/Full.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Automorphism.Full.aut_equiv_dihedral
+  module: Brockian.Automorphism.Full
+  register: PROVED
+  kind: theorem
+  source: Brockian/Full.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Automorphism.Full.card_aut_le_ten
+  module: Brockian.Automorphism.Full
+  register: PROVED
+  kind: theorem
+  source: Brockian/Full.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Automorphism.Full.dihedralHom_bijective
+  module: Brockian.Automorphism.Full
+  register: PROVED
+  kind: theorem
+  source: Brockian/Full.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Automorphism.Full.dihedralHom_surjective
+  module: Brockian.Automorphism.Full
+  register: PROVED
+  kind: theorem
+  source: Brockian/Full.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
 - name: Brockian.Connectivity.cos_2pi_5
   module: Brockian.Connectivity
   register: PROVED
@@ -1873,7 +1993,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Connectivity.lean
-  axle: *id007
+  axle: *id008
 - name: Brockian.Connectivity.laplacianEigs5
   module: Brockian.Connectivity
   register: DEFINITION
@@ -1895,7 +2015,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Connectivity.lean
-  axle: *id008
+  axle: *id009
 - name: Brockian.Connectivity.pentagon_ratio
   module: Brockian.Connectivity
   register: PROVED
@@ -1925,13 +2045,13 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Core.lean
-  axle: *id009
+  axle: *id010
 - name: Brockian.Core.cos_2pi_5
   module: Brockian.Core
   register: PROVED
   kind: theorem
   source: Brockian/Core.lean
-  axle: *id010
+  axle: *id011
 - name: Brockian.Core.cos_pi_div_five_eq_phi_div_two
   module: Brockian.Core
   register: PROVED
@@ -1945,19 +2065,19 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Core.lean
-  axle: *id011
+  axle: *id012
 - name: Brockian.Core.fib_five_dvd
   module: Brockian.Core
   register: PROVED
   kind: theorem
   source: Brockian/Core.lean
-  axle: *id012
+  axle: *id013
 - name: Brockian.Core.fifth_root_of_unity
   module: Brockian.Core
   register: PROVED
   kind: theorem
   source: Brockian/Core.lean
-  axle: *id013
+  axle: *id014
 - name: Brockian.Core.one_lt_phi
   module: Brockian.Core
   register: PROVED
@@ -2027,31 +2147,31 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Geometry.lean
-  axle: *id014
+  axle: *id015
 - name: Brockian.Geometry.golden_ratio_in_C5_spectrum
   module: Brockian.Geometry
   register: PROVED
   kind: theorem
   source: Brockian/Geometry.lean
-  axle: *id015
+  axle: *id016
 - name: Brockian.Geometry.pentagon_golden_diagonal
   module: Brockian.Geometry
   register: PROVED
   kind: theorem
   source: Brockian/Geometry.lean
-  axle: *id016
+  axle: *id017
 - name: Brockian.Geometry.pentagon_two_distances
   module: Brockian.Geometry
   register: PROVED
   kind: theorem
   source: Brockian/Geometry.lean
-  axle: *id017
+  axle: *id018
 - name: Brockian.GoldbachComb.GoldbachCovarianceTransfer
   module: Brockian.GoldbachComb
   register: CONJECTURE
   kind: conjecture
   source: Brockian/GoldbachComb.lean
-  axle: *id018
+  axle: *id019
 - name: Brockian.GoldbachComb.Kp
   module: Brockian.GoldbachComb
   register: DEFINITION
@@ -2073,19 +2193,19 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/GoldbachComb.lean
-  axle: *id019
+  axle: *id020
 - name: Brockian.GoldbachComb.gCount_eq
   module: Brockian.GoldbachComb
   register: PROVED
   kind: theorem
   source: Brockian/GoldbachComb.lean
-  axle: *id020
+  axle: *id021
 - name: Brockian.GoldbachComb.local_covariance
   module: Brockian.GoldbachComb
   register: PROVED
   kind: theorem
   source: Brockian/GoldbachComb.lean
-  axle: *id021
+  axle: *id022
 - name: Brockian.GoldbachLemmas.factor_ratio
   module: Brockian.GoldbachLemmas
   register: PROVED
@@ -2115,7 +2235,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/GoldbachLemmas.lean
-  axle: *id022
+  axle: *id023
 - name: Brockian.GoldbachLemmas.gFactor_pos_prime
   module: Brockian.GoldbachLemmas
   register: PROVED
@@ -2145,7 +2265,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/GoldbachLemmas.lean
-  axle: *id023
+  axle: *id024
 - name: Brockian.GoldbachLemmas.gResidues
   module: Brockian.GoldbachLemmas
   register: DEFINITION
@@ -2303,13 +2423,13 @@ all_declarations:
   register: CONDITIONAL
   kind: theorem
   source: Brockian/GoldbachSchema.lean
-  axle: *id024
+  axle: *id025
 - name: Brockian.GoldbachSchema.goldbach_from_spectral_model
   module: Brockian.GoldbachSchema
   register: CONDITIONAL
   kind: theorem
   source: Brockian/GoldbachSchema.lean
-  axle: *id025
+  axle: *id026
 - name: Brockian.GoldbachSchema.hasGoldbachRep_eight
   module: Brockian.GoldbachSchema
   register: PROVED
@@ -2347,37 +2467,37 @@ all_declarations:
   register: DEFINITION
   kind: def
   source: Brockian/RiemannScaffold.lean
-  axle: *id026
+  axle: *id027
 - name: Brockian.RiemannScaffold.Gammaℝ_ne_zero_of_nontrivial
   module: Brockian.RiemannScaffold
   register: PROVED
   kind: theorem
   source: Brockian/RiemannScaffold.lean
-  axle: *id027
+  axle: *id028
 - name: Brockian.RiemannScaffold.RH_of_BrockianSystem
   module: Brockian.RiemannScaffold
   register: CONDITIONAL
   kind: theorem
   source: Brockian/RiemannScaffold.lean
-  axle: *id028
+  axle: *id029
 - name: Brockian.RiemannScaffold.RiemannHypothesis_of_forall_xi_zero
   module: Brockian.RiemannScaffold
   register: PROVED
   kind: theorem
   source: Brockian/RiemannScaffold.lean
-  axle: *id029
+  axle: *id030
 - name: Brockian.RiemannScaffold.riemannXi
   module: Brockian.RiemannScaffold
   register: DEFINITION
   kind: def
   source: Brockian/RiemannScaffold.lean
-  axle: *id030
+  axle: *id031
 - name: Brockian.RiemannScaffold.riemannXi_eq_zero_of_nontrivial_zeta_zero
   module: Brockian.RiemannScaffold
   register: PROVED
   kind: theorem
   source: Brockian/RiemannScaffold.lean
-  axle: *id031
+  axle: *id032
 - name: Brockian.RiemannScaffold.symmetric_eigenvalue_im_zero
   module: Brockian.RiemannScaffold
   register: PROVED
@@ -2399,13 +2519,13 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Sieve.lean
-  axle: *id032
+  axle: *id033
 - name: Brockian.Sieve.H3_ground
   module: Brockian.Sieve
   register: PROVED
   kind: theorem
   source: Brockian/Sieve.lean
-  axle: *id033
+  axle: *id034
 - name: Brockian.Sieve.H3_middle
   module: Brockian.Sieve
   register: PROVED
@@ -2435,7 +2555,7 @@ all_declarations:
   register: CONJECTURE
   kind: conjecture
   source: Brockian/Sieve.lean
-  axle: *id034
+  axle: *id035
 - name: Brockian.Sieve.TwinAdmissibleAt
   module: Brockian.Sieve
   register: DEFINITION
@@ -2489,7 +2609,7 @@ all_declarations:
   register: DEFINITION
   kind: def
   source: Brockian/Sieve.lean
-  axle: *id035
+  axle: *id036
 - name: Brockian.Sieve.silver_gap_rigidity_finite
   module: Brockian.Sieve
   register: PROVED
@@ -2575,7 +2695,7 @@ all_declarations:
   register: DEFINITION
   kind: def
   source: Brockian/SingularSeries.lean
-  axle: *id036
+  axle: *id037
 - name: Brockian.SingularSeries.localFactorAt
   module: Brockian.SingularSeries
   register: DEFINITION
@@ -2749,7 +2869,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Spectral.lean
-  axle: *id037
+  axle: *id038
 - name: Brockian.Spectral.neg_golden_in_C5_spectrum
   module: Brockian.Spectral
   register: PROVED
@@ -2771,7 +2891,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/SpectralGate1.lean
-  axle: *id038
+  axle: *id039
 - name: Brockian.SpectralGate1.coeFn_mulLpCLM
   module: Brockian.SpectralGate1
   register: PROVED
@@ -2833,7 +2953,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/SpectralGate1.lean
-  axle: *id039
+  axle: *id040
 - name: Brockian.SpectralGate1.mulLpCLM
   module: Brockian.SpectralGate1
   register: DEFINITION
@@ -2959,31 +3079,31 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/TransitionKernel.lean
-  axle: *id040
+  axle: *id041
 - name: Brockian.TransitionKernel.cousin_pins_mod_three
   module: Brockian.TransitionKernel
   register: PROVED
   kind: theorem
   source: Brockian/TransitionKernel.lean
-  axle: *id041
+  axle: *id042
 - name: Brockian.TransitionKernel.cousin_run_cap
   module: Brockian.TransitionKernel
   register: PROVED
   kind: theorem
   source: Brockian/TransitionKernel.lean
-  axle: *id042
+  axle: *id043
 - name: Brockian.TransitionKernel.forbidden_transition
   module: Brockian.TransitionKernel
   register: PROVED
   kind: theorem
   source: Brockian/TransitionKernel.lean
-  axle: *id043
+  axle: *id044
 - name: Brockian.TransitionKernel.gap10_run_cap
   module: Brockian.TransitionKernel
   register: PROVED
   kind: theorem
   source: Brockian/TransitionKernel.lean
-  axle: *id044
+  axle: *id045
 - name: Brockian.TransitionKernel.kernel
   module: Brockian.TransitionKernel
   register: DEFINITION
@@ -2997,7 +3117,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/TransitionKernel.lean
-  axle: *id045
+  axle: *id046
 - name: Brockian.TransitionKernel.quadruplet_pins_mod_five
   module: Brockian.TransitionKernel
   register: PROVED
@@ -3067,13 +3187,13 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Weyl.lean
-  axle: *id046
+  axle: *id047
 - name: Brockian.Weyl.lagrange_identity
   module: Brockian.Weyl
   register: PROVED
   kind: theorem
   source: Brockian/Weyl.lean
-  axle: *id047
+  axle: *id048
 - name: Brockian.Weyl.sturmL
   module: Brockian.Weyl
   register: DEFINITION
@@ -3111,7 +3231,201 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Weyl.lean
-  axle: *id048
+  axle: *id049
+- name: Brockian.Weyl.Bridge.IsL2Solution
+  module: Brockian.Weyl.Bridge
+  register: DEFINITION
+  kind: def
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.coeff_ne_zero
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.continuous_y
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.continuous_y'
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.global_boundary_identity
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle: *id050
+- name: Brockian.Weyl.Bridge.hasDerivAt_wronskianConj
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle: *id051
+- name: Brockian.Weyl.Bridge.integrable_normSq
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.integrable_normSq_add
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.integrable_wronskianConj_deriv
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.integrable_y'_normSq
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.integrable_y_normSq
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.integral_wronskianConj_eq
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.integral_wronskianConj_eq_mul
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.limUnder_wronskianConj_atBot_eq_zero
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.limUnder_wronskianConj_atTop_eq_zero
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.no_nonzero_L2_solution
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle: *id002
+- name: Brockian.Weyl.Bridge.norm_wronskianConj_le
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.not_integrableOn_const_pos_Ici
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.not_integrableOn_const_pos_Iic
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.tendsto_wronskianConj_atBot
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.tendsto_wronskianConj_atBot_zero
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.tendsto_wronskianConj_atTop
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.tendsto_wronskianConj_atTop_zero
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.wronskianConj
+  module: Brockian.Weyl.Bridge
+  register: DEFINITION
+  kind: def
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.Bridge.wronskianConj_eq_two_I_im
+  module: Brockian.Weyl.Bridge
+  register: PROVED
+  kind: theorem
+  source: Brockian/Bridge.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
 - name: Brockian.Weyl.Cayley.apply_ne_I_smul
   module: Brockian.Weyl.Cayley
   register: PROVED
@@ -3141,13 +3455,13 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Cayley.lean
-  axle: *id049
+  axle: *id052
 - name: Brockian.Weyl.Cayley.mem_orthogonal_rangeSMulSub_iff
   module: Brockian.Weyl.Cayley
   register: PROVED
   kind: theorem
   source: Brockian/Cayley.lean
-  axle: *id050
+  axle: *id053
 - name: Brockian.Weyl.Cayley.mem_rangeSMulSub
   module: Brockian.Weyl.Cayley
   register: PROVED
@@ -3161,7 +3475,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Cayley.lean
-  axle: *id051
+  axle: *id054
 - name: Brockian.Weyl.Cayley.rangeAddI
   module: Brockian.Weyl.Cayley
   register: DEFINITION
@@ -3191,7 +3505,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Chain.lean
-  axle: *id052
+  axle: *id055
 - name: Brockian.Weyl.ClosedRange.eq_univ_of_dense_isClosed
   module: Brockian.Weyl.ClosedRange
   register: PROVED
@@ -3261,7 +3575,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Closure.lean
-  axle: *id053
+  axle: *id056
 - name: Brockian.Weyl.Closure.mem_deficiencySet_iff_mem_deficiencySpace
   module: Brockian.Weyl.Closure
   register: PROVED
@@ -3307,7 +3621,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Closure.lean
-  axle: *id054
+  axle: *id057
 - name: Brockian.Weyl.Closure.symmetric_domain_le_adjoint_domain
   module: Brockian.Weyl.Closure
   register: PROVED
@@ -3329,7 +3643,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Closure.lean
-  axle: *id055
+  axle: *id058
 - name: Brockian.Weyl.ConstMass.continuous_growing_exp_normSq
   module: Brockian.Weyl.ConstMass
   register: PROVED
@@ -3343,7 +3657,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/ConstMass.lean
-  axle: *id056
+  axle: *id059
 - name: Brockian.Weyl.ConstMass.growing_exp_IsLimitPointRadius
   module: Brockian.Weyl.ConstMass
   register: PROVED
@@ -3373,7 +3687,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/ConstMass.lean
-  axle: *id057
+  axle: *id060
 - name: Brockian.Weyl.ConstMass.integral_exp_mul_tendsto_atTop
   module: Brockian.Weyl.ConstMass
   register: PROVED
@@ -3427,19 +3741,19 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Dichotomy.lean
-  axle: *id058
+  axle: *id061
 - name: Brockian.Weyl.Dichotomy.limitPoint_or_limitCircle_radius
   module: Brockian.Weyl.Dichotomy
   register: PROVED
   kind: theorem
   source: Brockian/Dichotomy.lean
-  axle: *id059
+  axle: *id062
 - name: Brockian.Weyl.Dichotomy.radius_tendsto_zero_iff
   module: Brockian.Weyl.Dichotomy
   register: PROVED
   kind: theorem
   source: Brockian/Dichotomy.lean
-  axle: *id060
+  axle: *id063
 - name: Brockian.Weyl.Dichotomy.radius_tendsto_zero_of_atTop
   module: Brockian.Weyl.Dichotomy
   register: PROVED
@@ -3541,7 +3855,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Disk.lean
-  axle: *id061
+  axle: *id064
 - name: Brockian.Weyl.Disk.sturmL
   module: Brockian.Weyl.Disk
   register: DEFINITION
@@ -3555,19 +3869,19 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Disk.lean
-  axle: *id062
+  axle: *id065
 - name: Brockian.Weyl.Disk.weyl_nested_circle
   module: Brockian.Weyl.Disk
   register: PROVED
   kind: theorem
   source: Brockian/Disk.lean
-  axle: *id063
+  axle: *id066
 - name: Brockian.Weyl.Disk.weyl_radius_antitone
   module: Brockian.Weyl.Disk
   register: PROVED
   kind: theorem
   source: Brockian/Disk.lean
-  axle: *id064
+  axle: *id067
 - name: Brockian.Weyl.Disk.wronskian
   module: Brockian.Weyl.Disk
   register: DEFINITION
@@ -3605,7 +3919,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/DiskBridge.lean
-  axle: *id065
+  axle: *id068
 - name: Brockian.Weyl.DiskBridge.diskRadius_tendsto_zero_of_limitPointRadius
   module: Brockian.Weyl.DiskBridge
   register: PROVED
@@ -3659,7 +3973,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/ESA.lean
-  axle: *id066
+  axle: *id069
 - name: Brockian.Weyl.ESA.clm_isSymmetric
   module: Brockian.Weyl.ESA
   register: PROVED
@@ -3673,7 +3987,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/ESA.lean
-  axle: *id067
+  axle: *id070
 - name: Brockian.Weyl.ESA.vec_eq_zero_of_inner
   module: Brockian.Weyl.ESA
   register: PROVED
@@ -3695,7 +4009,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Gate1Bounded.lean
-  axle: *id068
+  axle: *id071
 - name: Brockian.Weyl.Gate1Bounded.add_primeGaussian_isSelfAdjoint
   module: Brockian.Weyl.Gate1Bounded
   register: PROVED
@@ -3709,25 +4023,25 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Gate1Bounded.lean
-  axle: *id069
+  axle: *id072
 - name: Brockian.Weyl.Gate1Bounded.primeGaussianMul_essentiallySelfAdjoint
   module: Brockian.Weyl.Gate1Bounded
   register: PROVED
   kind: theorem
   source: Brockian/Gate1Bounded.lean
-  axle: *id070
+  axle: *id073
 - name: Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint
   module: Brockian.Weyl.Kato
   register: PROVED
   kind: theorem
   source: Brockian/Kato.lean
-  axle: *id002
+  axle: *id003
 - name: Brockian.Weyl.Kato.isSelfAdjoint_add
   module: Brockian.Weyl.Kato
   register: PROVED
   kind: theorem
   source: Brockian/Kato.lean
-  axle: *id071
+  axle: *id074
 - name: Brockian.Weyl.LP.IsLimitPointAtInfty
   module: Brockian.Weyl.LP
   register: DEFINITION
@@ -3757,7 +4071,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/LP.lean
-  axle: *id072
+  axle: *id075
 - name: Brockian.Weyl.LP.exists_sqrt_pos_re
   module: Brockian.Weyl.LP
   register: PROVED
@@ -3811,7 +4125,7 @@ all_declarations:
   register: DEFINITION
   kind: def
   source: Brockian/Operator.lean
-  axle: *id073
+  axle: *id076
 - name: Brockian.Weyl.Operator.IsSymmetric
   module: Brockian.Weyl.Operator
   register: PROVED
@@ -3825,7 +4139,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Operator.lean
-  axle: *id074
+  axle: *id077
 - name: Brockian.Weyl.Operator.IsSymmetric.im_eq_zero_of_apply_eq_smul
   module: Brockian.Weyl.Operator
   register: PROVED
@@ -3855,7 +4169,7 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Operator.lean
-  axle: *id075
+  axle: *id078
 - name: Brockian.Weyl.Operator.deficiencySpace
   module: Brockian.Weyl.Operator
   register: DEFINITION
@@ -3901,22 +4215,22 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/RadiusDichotomy.lean
-  axle: *id076
+  axle: *id079
 - name: Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_counterexample
   module: Brockian.Weyl.RadiusDichotomy
   register: PROVED
   kind: theorem
   source: Brockian/RadiusDichotomy.lean
-  axle: *id077
+  axle: *id080
 - name: Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_of_pos
   module: Brockian.Weyl.RadiusDichotomy
   register: PROVED
   kind: theorem
   source: Brockian/RadiusDichotomy.lean
-  axle: *id078
+  axle: *id081
 - name: Brockian.Weyl.RadiusDichotomy.radius_to_zero_of_mass_infinite
   module: Brockian.Weyl.RadiusDichotomy
   register: PROVED
   kind: theorem
   source: Brockian/RadiusDichotomy.lean
-  axle: *id079
+  axle: *id082

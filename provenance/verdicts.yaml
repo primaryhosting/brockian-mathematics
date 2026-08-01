@@ -113,6 +113,15 @@ runs:
     ledger_run: "Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2"
     provenance_note: "primeGaussianMul_essentiallySelfAdjoint; dense_range of non-real shifts; add_primeGaussian_* for any bounded SA free part. NOT full -Delta+V."
 
+
+  # ── Bridge: deficiency triviality (Aug 1) ───────────────────────────────────
+  "weyl-bridge":
+    module: Brockian.Weyl.Bridge
+    verdict: admit
+    quarantine: true
+    ledger_run: "2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity)"
+    provenance_note: "Non-real L2 solutions of -y''+Vy=λy vanish (V real). W'=−2i(Imλ)|y|²; limits of W at ±∞ vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -Δ+V."
+
   "GC":
     module: Brockian.GoldbachComb
     verdict: admit

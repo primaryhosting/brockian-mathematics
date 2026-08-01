@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-01T16:44:07Z",
+  "generated_at": "2026-08-01T17:15:08Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 220,
-      "DEFINITION": 69,
+      "PROVED": 248,
+      "DEFINITION": 72,
       "CONJECTURE": 2,
       "CONDITIONAL": 4
     }
@@ -14,18 +14,18 @@
   "charter": "Badges are derived from the Lean registry when `lean` is non-empty.\nPROVED requires AXLE-verified + axiom-clean theorems (see README).\nOpen problems (twins infinitude, Goldbach global, RH) stay not_claimed.",
   "version": 1,
   "summary": {
-    "claims": 38,
+    "claims": 39,
     "by_status": {
-      "proved": 28,
+      "proved": 30,
       "open": 1,
       "conjecture": 1,
       "conditional": 2,
       "not_claimed": 4,
-      "aristotle": 2
+      "aristotle": 1
     },
     "registry": {
-      "PROVED": 220,
-      "DEFINITION": 69,
+      "PROVED": 248,
+      "DEFINITION": 72,
       "CONJECTURE": 2,
       "CONDITIONAL": 4
     }
@@ -1880,19 +1880,102 @@
       "proved_count": 0
     },
     {
-      "id": "ARISTOTLE-BRIDGE",
+      "id": "WEYL-BRIDGE",
       "title": "No nonzero global-L\u00b2 solution at non-real \u03bb (deficiency bridge)",
-      "book": "aristotle/bridge-deficiency \u00b7 project 403cd5ed",
-      "notes": "Symmetric-form deficiency triviality for continuous bounded V.",
-      "status": "aristotle",
-      "book_badge": "ARISTOTLE-PENDING",
-      "derived_register": null,
-      "badge_force": "aristotle",
-      "lean": [],
-      "declarations": [],
+      "book": "Lean Weyl.Bridge (Codex plan; energy/Wronskian identity)",
+      "notes": "PROVED: W' = \u22122i (Im \u03bb)|y|\u00b2, limits of W at \u00b1\u221e vanish, mass zero. Aristotle target 403cd5ed can be closed/superseded.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Weyl.Bridge.no_nonzero_L2_solution",
+        "Brockian.Weyl.Bridge.hasDerivAt_wronskianConj",
+        "Brockian.Weyl.Bridge.global_boundary_identity"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Weyl.Bridge.no_nonzero_L2_solution",
+          "short": "no_nonzero_L2_solution",
+          "module": "Brockian.Weyl.Bridge",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Bridge.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+          "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+        },
+        {
+          "name": "Brockian.Weyl.Bridge.hasDerivAt_wronskianConj",
+          "short": "hasDerivAt_wronskianConj",
+          "module": "Brockian.Weyl.Bridge",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Bridge.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+          "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+        },
+        {
+          "name": "Brockian.Weyl.Bridge.global_boundary_identity",
+          "short": "global_boundary_identity",
+          "module": "Brockian.Weyl.Bridge",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Bridge.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+          "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+        }
+      ],
       "missing_lean": [],
-      "declaration_count": 0,
-      "proved_count": 0
+      "declaration_count": 3,
+      "proved_count": 3
+    },
+    {
+      "id": "ARISTOTLE-BRIDGE",
+      "title": "Deficiency bridge (superseded by WEYL-BRIDGE if integrated)",
+      "book": "aristotle/bridge-deficiency \u00b7 project 403cd5ed",
+      "notes": "Core statement now in Brockian.Weyl.Bridge.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Weyl.Bridge.no_nonzero_L2_solution"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Weyl.Bridge.no_nonzero_L2_solution",
+          "short": "no_nonzero_L2_solution",
+          "module": "Brockian.Weyl.Bridge",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Bridge.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "2026-08-01 \u2014 no_nonzero_L2_solution (Wronskian energy identity)",
+          "provenance_note": "Non-real L2 solutions of -y''+Vy=\u03bby vanish (V real). W'=\u22122i(Im\u03bb)|y|\u00b2; limits of W at \u00b1\u221e vanish; mass zero. Core analysis bridge toward deficiency indices. Does not alone construct T or prove ESA of -\u0394+V."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 1,
+      "proved_count": 1
     },
     {
       "id": "ARISTOTLE-KATO",
@@ -2133,6 +2216,72 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/Automorphism.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Automorphism.Full.autEquivDihedral",
+      "module": "Brockian.Automorphism.Full",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Full.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Automorphism.Full.aut_card_eq_ten",
+      "module": "Brockian.Automorphism.Full",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Full.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Automorphism.Full.aut_equiv_dihedral",
+      "module": "Brockian.Automorphism.Full",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Full.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Automorphism.Full.card_aut_le_ten",
+      "module": "Brockian.Automorphism.Full",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Full.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Automorphism.Full.dihedralHom_bijective",
+      "module": "Brockian.Automorphism.Full",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Full.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Automorphism.Full.dihedralHom_surjective",
+      "module": "Brockian.Automorphism.Full",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Full.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -3970,6 +4119,281 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/Weyl.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.IsL2Solution",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.coeff_ne_zero",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.continuous_y",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.continuous_y'",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.global_boundary_identity",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.hasDerivAt_wronskianConj",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.integrable_normSq",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.integrable_normSq_add",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.integrable_wronskianConj_deriv",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.integrable_y'_normSq",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.integrable_y_normSq",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.integral_wronskianConj_eq",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.integral_wronskianConj_eq_mul",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.limUnder_wronskianConj_atBot_eq_zero",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.limUnder_wronskianConj_atTop_eq_zero",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.no_nonzero_L2_solution",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.norm_wronskianConj_le",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.not_integrableOn_const_pos_Ici",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.not_integrableOn_const_pos_Iic",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.tendsto_wronskianConj_atBot",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.tendsto_wronskianConj_atBot_zero",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.tendsto_wronskianConj_atTop",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.tendsto_wronskianConj_atTop_zero",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.wronskianConj",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/Bridge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.Bridge.wronskianConj_eq_two_I_im",
+      "module": "Brockian.Weyl.Bridge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Bridge.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"

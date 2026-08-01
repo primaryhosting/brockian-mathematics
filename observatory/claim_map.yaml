@@ -329,12 +329,21 @@ claims:
     badge_force: aristotle
     notes: "Corrected after Dirichlet refutation; continuity required."
 
-  - id: ARISTOTLE-BRIDGE
+  - id: WEYL-BRIDGE
     title: No nonzero global-L² solution at non-real λ (deficiency bridge)
+    book: "Lean Weyl.Bridge (Codex plan; energy/Wronskian identity)"
+    lean:
+      - Brockian.Weyl.Bridge.no_nonzero_L2_solution
+      - Brockian.Weyl.Bridge.hasDerivAt_wronskianConj
+      - Brockian.Weyl.Bridge.global_boundary_identity
+    notes: "PROVED: W' = −2i (Im λ)|y|², limits of W at ±∞ vanish, mass zero. Aristotle target 403cd5ed can be closed/superseded."
+
+  - id: ARISTOTLE-BRIDGE
+    title: Deficiency bridge (superseded by WEYL-BRIDGE if integrated)
     book: "aristotle/bridge-deficiency · project 403cd5ed"
-    lean: []
-    badge_force: aristotle
-    notes: "Symmetric-form deficiency triviality for continuous bounded V."
+    lean:
+      - Brockian.Weyl.Bridge.no_nonzero_L2_solution
+    notes: "Core statement now in Brockian.Weyl.Bridge."
 
   - id: ARISTOTLE-KATO
     title: Kato bounded perturbation (INTEGRATED)

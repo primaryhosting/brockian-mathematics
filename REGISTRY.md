@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 4
 - **CONJECTURE**: 2
-- **DEFINITION**: 70
-- **PROVED**: 225
+- **DEFINITION**: 72
+- **PROVED**: 248
 
 ## Theorems
 
@@ -207,6 +207,31 @@
 | PROVED | `Brockian.Weyl.wronskian_const_one_witness` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
 | PROVED | `Brockian.Weyl.wronskian_hasDerivAt` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
 | PROVED | `Brockian.Weyl.wronskian_isConst` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
+| DEFINITION | `Brockian.Weyl.Bridge.IsL2Solution` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.coeff_ne_zero` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.continuous_y` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.continuous_y'` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.global_boundary_identity` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.hasDerivAt_wronskianConj` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.integrable_normSq` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.integrable_normSq_add` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.integrable_wronskianConj_deriv` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.integrable_y'_normSq` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.integrable_y_normSq` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.integral_wronskianConj_eq` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.integral_wronskianConj_eq_mul` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.limUnder_wronskianConj_atBot_eq_zero` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.limUnder_wronskianConj_atTop_eq_zero` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.no_nonzero_L2_solution` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.norm_wronskianConj_le` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.not_integrableOn_const_pos_Ici` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.not_integrableOn_const_pos_Iic` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.tendsto_wronskianConj_atBot` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.tendsto_wronskianConj_atBot_zero` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.tendsto_wronskianConj_atTop` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.tendsto_wronskianConj_atTop_zero` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| DEFINITION | `Brockian.Weyl.Bridge.wronskianConj` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
+| PROVED | `Brockian.Weyl.Bridge.wronskianConj_eq_two_I_im` | ✓ | verified | lean-4.32.0 | 2026-08-01 — no_nonzero_L2_solution (Wronskian energy identity) |
 | PROVED | `Brockian.Weyl.Cayley.apply_ne_I_smul` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — abstract von Neumann ess-self-adjointness criterion |
 | PROVED | `Brockian.Weyl.Cayley.apply_ne_neg_I_smul` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — abstract von Neumann ess-self-adjointness criterion |
 | PROVED | `Brockian.Weyl.Cayley.deficiencySpace_eq_bot_iff` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — abstract von Neumann ess-self-adjointness criterion |
