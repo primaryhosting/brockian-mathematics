@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1184,
-    "DEFINITION": 253,
+    "PROVED": 1200,
+    "DEFINITION": 259,
     "CONDITIONAL": 24,
     "CONJECTURE": 1
   },
@@ -12765,6 +12765,686 @@
       "quarantine": true,
       "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
       "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.d_mem",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.downMs",
+      "kind": "def",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.downMs_card",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.downMs_nodup",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.downPart",
+      "kind": "def",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.downPart_ne",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.downPart_sign",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.franklinMap_of",
+      "kind": "def",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.nodup_of_sdiff",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.phi",
+      "kind": "def",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.phiMem",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.phi_ne",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.phi_parts_nodup",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.phi_sign",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.sPart_le_largest",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.sPart_pos",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.upMs",
+      "kind": "def",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.upMs_card",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.upMs_nodup",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.upPart",
+      "kind": "def",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.upPart_ne",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.upPart_sign",
+      "kind": "theorem",
+      "module": "Brockian.FranklinMapConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinMapConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32",
+      "provenance_note": "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup \u2014 the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
     },
     {
       "name": "Brockian.GaloisCyclicGroup.alphaSub",

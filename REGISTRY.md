@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 24
 - **CONJECTURE**: 1
-- **DEFINITION**: 253
-- **PROVED**: 1184
+- **DEFINITION**: 259
+- **PROVED**: 1200
 
 ## Theorems
 
@@ -422,6 +422,28 @@
 | PROVED | `Brockian.FranklinInvolutionProof.stair_pos` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolutionProof.stair_sum` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolutionProof.stair_sum_eq` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.d_mem` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinMapConstruction.downMs` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.downMs_card` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.downMs_nodup` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinMapConstruction.downPart` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.downPart_ne` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.downPart_sign` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinMapConstruction.franklinMap_of` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.nodup_of_sdiff` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinMapConstruction.phi` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.phiMem` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.phi_ne` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.phi_parts_nodup` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.phi_sign` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.sPart_le_largest` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.sPart_pos` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinMapConstruction.upMs` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.upMs_card` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.upMs_nodup` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinMapConstruction.upPart` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.upPart_ne` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| PROVED | `Brockian.FranklinMapConstruction.upPart_sign` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
 | DEFINITION | `Brockian.GaloisCyclicGroup.alphaSub` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
 | PROVED | `Brockian.GaloisCyclicGroup.cycExt` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
 | PROVED | `Brockian.GaloisCyclicGroup.primRoot` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |

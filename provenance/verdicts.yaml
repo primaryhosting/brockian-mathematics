@@ -439,6 +439,13 @@ runs:
       - name: pentagonalNumberTheorem_of_franklinMap
         conditional_rung: literature
 
+  "franklin-map-construction":
+    module: Brockian.FranklinMapConstruction
+    verdict: admit
+    quarantine: true
+    ledger_run: "roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32"
+    provenance_note: "Builds Franklin's involution phi concretely (down/up moves as 3-element Multiset surgeries reusing the proved sum-invariants). PROVED unconditionally: Nodup(distinctness)-preservation (downMs_nodup/upMs_nodup — the hard core), sign-reversal (phi_sign), no-fixed-point (phi_ne), positivity/sum (downPart/upPart). franklinMap_of assembles a full FranklinMap from the residual hypotheses (proved implication, no sorry/ex-falso). Remaining obstruction reduced to ONE source: fixedPart is opaque (Exists.choose), so a fixed-point classification p in fixedPart m <-> overlap condition on (s,t,L) + involutivity algebra closes forall m FranklinMap -> PST unconditional."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────
   "weyl-gate1-bounded":
