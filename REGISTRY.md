@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 294
+- **DEFINITION**: 295
 - **DISCHARGED**: 6
-- **PROVED**: 1449
+- **PROVED**: 1455
 
 ## Theorems
 
@@ -1556,6 +1556,13 @@
 | PROVED | `Brockian.Weyl.KatoRellichTransfer.essentiallySelfAdjoint_perturb_of_resolvent_norm_mul_lt_one_via_chain` | ✓ | verified | lean-4.32.0 | roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.KatoRellichTransfer.perturbed_ranges_eq_univ_of_resolvent_norm_lt_one` | ✓ | verified | lean-4.32.0 | roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.KatoRellichTransfer.perturbed_ranges_eq_univ_of_resolvent_norm_mul_lt_one` | ✓ | verified | lean-4.32.0 | roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.KatoResolventPackage.ResolventAtI` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoResolventPackage.ResolventAtI.boundedPerturbationTransfer` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoResolventPackage.ResolventAtI.norm_mul_add_lt_one` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoResolventPackage.ResolventAtI.norm_mul_sub_lt_one` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoResolventPackage.ResolventAtI.perturbed_ranges_eq_univ` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoResolventPackage.essentiallySelfAdjoint_perturb_of_resolventAtI` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoResolventPackage.essentiallySelfAdjoint_perturb_of_resolventAtI_via_chain` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.KatoUnbounded.BoundedPerturbationTransfer` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
 | PROVED | `Brockian.Weyl.KatoUnbounded.boundedPerturbationTransfer_clm` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
 | CONDITIONAL | `Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |

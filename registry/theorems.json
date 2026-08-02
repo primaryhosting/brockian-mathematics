@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1449,
-    "DEFINITION": 294,
+    "PROVED": 1455,
+    "DEFINITION": 295,
     "CONDITIONAL": 21,
     "DISCHARGED": 6,
     "CONJECTURE": 1
@@ -49889,6 +49889,233 @@
       "quarantine": true,
       "ledger_run": "roadmap A4 \u2014 Kato/Rellich Neumann transfer; AXLE @4.32",
       "provenance_note": "Right resolvents for T\u00b1i plus Neumann-small bounded factors (or product estimates \u2016B\u2016\u2016R\u00b1\u2016<1) give full shifted perturbed ranges, BoundedPerturbationTransfer, and EssentiallySelfAdjoint(perturb T B). This is a real transfer theorem, but not the unconditional Kato-Rellich theorem: constructing closure resolvents and their bounds remains Mathlib-infra work."
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventPackage.ResolventAtI",
+      "kind": "def",
+      "module": "Brockian.Weyl.KatoResolventPackage",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoResolventPackage.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventPackage.ResolventAtI.boundedPerturbationTransfer",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoResolventPackage",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoResolventPackage.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventPackage.ResolventAtI.norm_mul_add_lt_one",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoResolventPackage",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoResolventPackage.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventPackage.ResolventAtI.norm_mul_sub_lt_one",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoResolventPackage",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoResolventPackage.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventPackage.ResolventAtI.perturbed_ranges_eq_univ",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoResolventPackage",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoResolventPackage.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventPackage.essentiallySelfAdjoint_perturb_of_resolventAtI",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoResolventPackage",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoResolventPackage.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventPackage.essentiallySelfAdjoint_perturb_of_resolventAtI_via_chain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoResolventPackage",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoResolventPackage.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.BoundedPerturbationTransfer",

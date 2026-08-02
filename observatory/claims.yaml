@@ -1,10 +1,10 @@
-generated_at: '2026-08-02T16:12:33Z'
+generated_at: '2026-08-02T16:24:28Z'
 generated_from:
   registry: registry/theorems.json
   claim_map: observatory/claim_map.yaml
   registry_summary: &id001
-    PROVED: 1449
-    DEFINITION: 294
+    PROVED: 1455
+    DEFINITION: 295
     CONDITIONAL: 21
     DISCHARGED: 6
     CONJECTURE: 1
@@ -16248,6 +16248,62 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/KatoRellichTransfer.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoResolventPackage.ResolventAtI
+  module: Brockian.Weyl.KatoResolventPackage
+  register: DEFINITION
+  kind: def
+  source: Brockian/KatoResolventPackage.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoResolventPackage.ResolventAtI.boundedPerturbationTransfer
+  module: Brockian.Weyl.KatoResolventPackage
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoResolventPackage.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoResolventPackage.ResolventAtI.norm_mul_add_lt_one
+  module: Brockian.Weyl.KatoResolventPackage
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoResolventPackage.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoResolventPackage.ResolventAtI.norm_mul_sub_lt_one
+  module: Brockian.Weyl.KatoResolventPackage
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoResolventPackage.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoResolventPackage.ResolventAtI.perturbed_ranges_eq_univ
+  module: Brockian.Weyl.KatoResolventPackage
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoResolventPackage.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoResolventPackage.essentiallySelfAdjoint_perturb_of_resolventAtI
+  module: Brockian.Weyl.KatoResolventPackage
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoResolventPackage.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoResolventPackage.essentiallySelfAdjoint_perturb_of_resolventAtI_via_chain
+  module: Brockian.Weyl.KatoResolventPackage
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoResolventPackage.lean
   axle:
     verdict: verified
     environment: lean-4.32.0
