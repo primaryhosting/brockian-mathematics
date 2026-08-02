@@ -466,6 +466,13 @@ runs:
     ledger_run: "parallel-tool; AXLE @4.32; committed by Claude for coherence"
     provenance_note: "AXLE-verified @lean-4.32.0, axiom-clean, lint clean; concurrent-tool authored, re-gated, backing committed."
 
+  "weyl-kato-rellich-transfer":
+    module: Brockian.Weyl.KatoRellichTransfer
+    verdict: admit
+    quarantine: true
+    ledger_run: "roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32"
+    provenance_note: "Right resolvents for T±i plus Neumann-small bounded factors (or product estimates ‖B‖‖R±‖<1) give full shifted perturbed ranges, BoundedPerturbationTransfer, and EssentiallySelfAdjoint(perturb T B). This is a real transfer theorem, but not the unconditional Kato-Rellich theorem: constructing closure resolvents and their bounds remains Mathlib-infra work."
+
   "free-laplacian-plancherel":
     module: Brockian.FreeLaplacianPlancherel
     verdict: admit
@@ -475,6 +482,13 @@ runs:
     overrides:
       - name: freeLaplacian_essentiallySelfAdjoint_via_plancherel
         conditional_rung: open
+
+  "weyl-weak-regularity-discharge":
+    module: Brockian.WeylWeakRegularityDischarge
+    verdict: admit
+    quarantine: true
+    ledger_run: "roadmap A1 — weak regularity discharge layer; AXLE @4.32"
+    provenance_note: "Discharges Mathlib-supported analytic plumbing around the remaining weak-regularity gap: L2 representatives are locally integrable, bounded continuous V makes ((V:ℂ)-z)g locally integrable, interval-integral primitives are continuous, and PrimitiveSchrodingerModel implies the existing WeakToIntegral/WeakToClassical/Gate-1 conditional chain. Full distributional elliptic regularity is NOT claimed; it is isolated as WeakToPrimitiveRegularity."
 
   "equidistribution-uniformity":
     module: Brockian.EquidistributionUniformity
@@ -487,6 +501,13 @@ runs:
         conditional_rung: literature
       - name: equidistribution_of_transitive_symmetry
         conditional_rung: literature
+
+  "equidistribution-uniformity-closure":
+    module: Brockian.EquidistributionUniformityClosure
+    verdict: admit
+    quarantine: true
+    ledger_run: "roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32"
+    provenance_note: "Turns the prior prose boundary into Lean: for q=5,g=2, any affine map x↦u*x+c preserving the forbidden endpoints {0,-2} is identity or the reflection; every such map fixes class 4, so affine_stabilizer_five_not_transitive proves no affine endpoint-stabilizer can discharge IterTransitive. This is a negative/guardrail theorem, not singular-series uniformity."
 
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────

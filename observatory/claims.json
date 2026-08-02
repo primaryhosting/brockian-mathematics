@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-08-02T13:21:49Z",
+  "generated_at": "2026-08-02T16:12:33Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 1409,
-      "DEFINITION": 280,
-      "CONDITIONAL": 18,
+      "PROVED": 1449,
+      "DEFINITION": 294,
+      "CONDITIONAL": 21,
       "DISCHARGED": 6,
       "CONJECTURE": 1
     }
@@ -26,9 +26,9 @@
       "definition": 1
     },
     "registry": {
-      "PROVED": 1409,
-      "DEFINITION": 280,
-      "CONDITIONAL": 18,
+      "PROVED": 1449,
+      "DEFINITION": 294,
+      "CONDITIONAL": 21,
       "DISCHARGED": 6,
       "CONJECTURE": 1
     }
@@ -9449,6 +9449,303 @@
       }
     },
     {
+      "name": "Brockian.EquidistributionUniformity.IterTransitive",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.PreservesAdmissible",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.SingInvariant",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.equidistribution_of_transitive_symmetry",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "CONDITIONAL",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.equidistribution_three",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.iterate_mem_admissible",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_affine",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_five_fixes_four",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_five_four_orbit",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_five_swaps_one",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_five_swaps_two",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_involutive",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_preservesAdmissible",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_preserves_admissible",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflection_not_transitive_five",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.sing_iterate",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.sing_uniform_of_transitive",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "CONDITIONAL",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.sing_uniform_three",
+      "module": "Brockian.EquidistributionUniformity",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformity.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformityClosure.AffineStabilizesForbiddenFive",
+      "module": "Brockian.EquidistributionUniformityClosure",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/EquidistributionUniformityClosure.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformityClosure.affineMapFive",
+      "module": "Brockian.EquidistributionUniformityClosure",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/EquidistributionUniformityClosure.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformityClosure.affine_stabilizer_five_classification",
+      "module": "Brockian.EquidistributionUniformityClosure",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformityClosure.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformityClosure.affine_stabilizer_five_fixes_four",
+      "module": "Brockian.EquidistributionUniformityClosure",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformityClosure.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformityClosure.affine_stabilizer_five_four_orbit",
+      "module": "Brockian.EquidistributionUniformityClosure",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformityClosure.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformityClosure.affine_stabilizer_five_not_transitive",
+      "module": "Brockian.EquidistributionUniformityClosure",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionUniformityClosure.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformityClosure.forbiddenFive",
+      "module": "Brockian.EquidistributionUniformityClosure",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/EquidistributionUniformityClosure.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionUniformityClosure.forbiddenImageFive",
+      "module": "Brockian.EquidistributionUniformityClosure",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/EquidistributionUniformityClosure.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.Fin5InnerProduct.conj_omega",
       "module": "Brockian.Fin5InnerProduct",
       "register": "PROVED",
@@ -10642,6 +10939,72 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FreeLaplacianPlancherel.L2R",
+      "module": "Brockian.FreeLaplacianPlancherel",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/FreeLaplacianPlancherel.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FreeLaplacianPlancherel.essentiallySelfAdjoint_fourierConj",
+      "module": "Brockian.FreeLaplacianPlancherel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacianPlancherel.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FreeLaplacianPlancherel.fourierL2",
+      "module": "Brockian.FreeLaplacianPlancherel",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/FreeLaplacianPlancherel.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FreeLaplacianPlancherel.fourierL2_inner_map",
+      "module": "Brockian.FreeLaplacianPlancherel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacianPlancherel.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FreeLaplacianPlancherel.fourierL2_norm_map",
+      "module": "Brockian.FreeLaplacianPlancherel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacianPlancherel.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FreeLaplacianPlancherel.freeLaplacian_essentiallySelfAdjoint_via_plancherel",
+      "module": "Brockian.FreeLaplacianPlancherel",
+      "register": "CONDITIONAL",
+      "kind": "theorem",
+      "source": "Brockian/FreeLaplacianPlancherel.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -15724,6 +16087,17 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/RiemannXiSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Sanity.brockian_sanity",
+      "module": "Brockian.Sanity",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Sanity.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -21274,6 +21648,105 @@
       }
     },
     {
+      "name": "Brockian.Weyl.KatoRellichTransfer.boundedPerturbationTransfer_of_ranges_eq_univ",
+      "module": "Brockian.Weyl.KatoRellichTransfer",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoRellichTransfer.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichTransfer.boundedPerturbationTransfer_of_resolvent_comp_norm_lt_one",
+      "module": "Brockian.Weyl.KatoRellichTransfer",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoRellichTransfer.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichTransfer.boundedPerturbationTransfer_of_resolvent_product_norm_lt_one",
+      "module": "Brockian.Weyl.KatoRellichTransfer",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoRellichTransfer.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichTransfer.essentiallySelfAdjoint_perturb_of_ranges_eq_univ",
+      "module": "Brockian.Weyl.KatoRellichTransfer",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoRellichTransfer.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichTransfer.essentiallySelfAdjoint_perturb_of_resolvent_norm_lt_one",
+      "module": "Brockian.Weyl.KatoRellichTransfer",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoRellichTransfer.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichTransfer.essentiallySelfAdjoint_perturb_of_resolvent_norm_mul_lt_one",
+      "module": "Brockian.Weyl.KatoRellichTransfer",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoRellichTransfer.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichTransfer.essentiallySelfAdjoint_perturb_of_resolvent_norm_mul_lt_one_via_chain",
+      "module": "Brockian.Weyl.KatoRellichTransfer",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoRellichTransfer.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichTransfer.perturbed_ranges_eq_univ_of_resolvent_norm_lt_one",
+      "module": "Brockian.Weyl.KatoRellichTransfer",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoRellichTransfer.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichTransfer.perturbed_ranges_eq_univ_of_resolvent_norm_mul_lt_one",
+      "module": "Brockian.Weyl.KatoRellichTransfer",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoRellichTransfer.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.Weyl.KatoUnbounded.BoundedPerturbationTransfer",
       "module": "Brockian.Weyl.KatoUnbounded",
       "register": "DEFINITION",
@@ -23446,6 +23919,160 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/WeylWeakRegularityCore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityDischarge.PrimitiveSchrodingerModel",
+      "module": "Brockian.WeylWeakRegularityDischarge",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/WeylWeakRegularityDischarge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityDischarge.WeakRegularityDischargeStatus",
+      "module": "Brockian.WeylWeakRegularityDischarge",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/WeylWeakRegularityDischarge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityDischarge.WeakToPrimitiveRegularity",
+      "module": "Brockian.WeylWeakRegularityDischarge",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/WeylWeakRegularityDischarge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityDischarge.coeFn_integrableOn_Icc",
+      "module": "Brockian.WeylWeakRegularityDischarge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityDischarge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityDischarge.coeFn_locallyIntegrable",
+      "module": "Brockian.WeylWeakRegularityDischarge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityDischarge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityDischarge.continuous_rhs_primitive_of_coeFn",
+      "module": "Brockian.WeylWeakRegularityDischarge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityDischarge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityDischarge.integralModel_of_primitiveModel",
+      "module": "Brockian.WeylWeakRegularityDischarge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityDischarge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityDischarge.locallyIntegrable_continuous_primitive",
+      "module": "Brockian.WeylWeakRegularityDischarge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityDischarge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityDischarge.locallyIntegrable_intervalIntegrable",
+      "module": "Brockian.WeylWeakRegularityDischarge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityDischarge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityDischarge.schrodingerRHS_coeFn_locallyIntegrable",
+      "module": "Brockian.WeylWeakRegularityDischarge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityDischarge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityDischarge.schrodinger_essentiallySelfAdjoint_of_weakToPrimitive",
+      "module": "Brockian.WeylWeakRegularityDischarge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityDischarge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityDischarge.weakRegularityDischargeStatus",
+      "module": "Brockian.WeylWeakRegularityDischarge",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/WeylWeakRegularityDischarge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityDischarge.weakToClassicalRegularity_of_weakToPrimitive",
+      "module": "Brockian.WeylWeakRegularityDischarge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityDischarge.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityDischarge.weakToIntegralRegularity_of_weakToPrimitive",
+      "module": "Brockian.WeylWeakRegularityDischarge",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityDischarge.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"

@@ -84,10 +84,12 @@ import Brockian.CosTraceNormEleven
 import Brockian.WeylFourierMultiplier
 import Brockian.WeylWeakRegularityScaffold
 import Brockian.WeylWeakRegularityCore
+import Brockian.WeylWeakRegularityDischarge
 import Brockian.WeylPlancherelScaffold
 import Brockian.WeylKatoRellichScaffold
 import Brockian.WeylKatoNeumann
 import Brockian.WeylKatoNeumannEstimates
+import Brockian.WeylKatoRellichTransfer
 import Brockian.RiemannXiSymmetry
 import Brockian.GoldbachCovarianceScaffold
 import Brockian.GoldbachWheelK2357
@@ -110,3 +112,4 @@ import Brockian.FranklinMapConstruction
 import Brockian.FranklinFixedPoint
 import Brockian.FreeLaplacianPlancherel
 import Brockian.EquidistributionUniformity
+import Brockian.EquidistributionUniformityClosure

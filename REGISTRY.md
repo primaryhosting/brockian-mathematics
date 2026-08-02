@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 286
+- **DEFINITION**: 294
 - **DISCHARGED**: 6
-- **PROVED**: 1425
+- **PROVED**: 1449
 
 ## Theorems
 
@@ -457,6 +457,14 @@
 | PROVED | `Brockian.EquidistributionUniformity.sing_iterate` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
 | CONDITIONAL | `Brockian.EquidistributionUniformity.sing_uniform_of_transitive` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
 | PROVED | `Brockian.EquidistributionUniformity.sing_uniform_three` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| DEFINITION | `Brockian.EquidistributionUniformityClosure.AffineStabilizesForbiddenFive` | ✓ | verified | lean-4.32.0 | roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32 |
+| DEFINITION | `Brockian.EquidistributionUniformityClosure.affineMapFive` | ✓ | verified | lean-4.32.0 | roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformityClosure.affine_stabilizer_five_classification` | ✓ | verified | lean-4.32.0 | roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformityClosure.affine_stabilizer_five_fixes_four` | ✓ | verified | lean-4.32.0 | roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformityClosure.affine_stabilizer_five_four_orbit` | ✓ | verified | lean-4.32.0 | roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformityClosure.affine_stabilizer_five_not_transitive` | ✓ | verified | lean-4.32.0 | roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32 |
+| DEFINITION | `Brockian.EquidistributionUniformityClosure.forbiddenFive` | ✓ | verified | lean-4.32.0 | roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32 |
+| DEFINITION | `Brockian.EquidistributionUniformityClosure.forbiddenImageFive` | ✓ | verified | lean-4.32.0 | roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32 |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omega` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omegaPow` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omega_pow` | ✓ | verified | lean-4.32.0 |  |
@@ -1034,6 +1042,7 @@
 | PROVED | `Brockian.RiemannXiSymmetry.riemannXi_zeroSet_preimage_reflect` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_reflect_zero` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Sanity.brockian_sanity` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Sieve.H3` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.H3_det` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.H3_ground` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
@@ -1538,6 +1547,15 @@
 | PROVED | `Brockian.Weyl.KatoRellichScaffold.rangeSMulSub_eq_univ_of_rightResolvent` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.KatoRellichScaffold.rangeSubI_perturb_eq_univ_of_resolvent_factor` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.KatoRellichScaffold.rightResolvent_perturb_of_factor_rightInverse` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRellichTransfer.boundedPerturbationTransfer_of_ranges_eq_univ` | ✓ | verified | lean-4.32.0 | roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.KatoRellichTransfer.boundedPerturbationTransfer_of_resolvent_comp_norm_lt_one` | ✓ | verified | lean-4.32.0 | roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.KatoRellichTransfer.boundedPerturbationTransfer_of_resolvent_product_norm_lt_one` | ✓ | verified | lean-4.32.0 | roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.KatoRellichTransfer.essentiallySelfAdjoint_perturb_of_ranges_eq_univ` | ✓ | verified | lean-4.32.0 | roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.KatoRellichTransfer.essentiallySelfAdjoint_perturb_of_resolvent_norm_lt_one` | ✓ | verified | lean-4.32.0 | roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.KatoRellichTransfer.essentiallySelfAdjoint_perturb_of_resolvent_norm_mul_lt_one` | ✓ | verified | lean-4.32.0 | roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.KatoRellichTransfer.essentiallySelfAdjoint_perturb_of_resolvent_norm_mul_lt_one_via_chain` | ✓ | verified | lean-4.32.0 | roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.KatoRellichTransfer.perturbed_ranges_eq_univ_of_resolvent_norm_lt_one` | ✓ | verified | lean-4.32.0 | roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.KatoRellichTransfer.perturbed_ranges_eq_univ_of_resolvent_norm_mul_lt_one` | ✓ | verified | lean-4.32.0 | roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32 |
 | DEFINITION | `Brockian.Weyl.KatoUnbounded.BoundedPerturbationTransfer` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
 | PROVED | `Brockian.Weyl.KatoUnbounded.boundedPerturbationTransfer_clm` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
 | CONDITIONAL | `Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
@@ -1736,6 +1754,20 @@
 | PROVED | `Brockian.WeylWeakRegularityCore.schrodinger_essentiallySelfAdjoint_of_weakToIntegral` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityCore.weakRegularityCoreStatus` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.WeylWeakRegularityCore.weakToClassicalRegularity_of_weakToIntegral` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityDischarge.PrimitiveSchrodingerModel` | ✓ | verified | lean-4.32.0 | roadmap A1 — weak regularity discharge layer; AXLE @4.32 |
+| DEFINITION | `Brockian.WeylWeakRegularityDischarge.WeakRegularityDischargeStatus` | ✓ | verified | lean-4.32.0 | roadmap A1 — weak regularity discharge layer; AXLE @4.32 |
+| DEFINITION | `Brockian.WeylWeakRegularityDischarge.WeakToPrimitiveRegularity` | ✓ | verified | lean-4.32.0 | roadmap A1 — weak regularity discharge layer; AXLE @4.32 |
+| PROVED | `Brockian.WeylWeakRegularityDischarge.coeFn_integrableOn_Icc` | ✓ | verified | lean-4.32.0 | roadmap A1 — weak regularity discharge layer; AXLE @4.32 |
+| PROVED | `Brockian.WeylWeakRegularityDischarge.coeFn_locallyIntegrable` | ✓ | verified | lean-4.32.0 | roadmap A1 — weak regularity discharge layer; AXLE @4.32 |
+| PROVED | `Brockian.WeylWeakRegularityDischarge.continuous_rhs_primitive_of_coeFn` | ✓ | verified | lean-4.32.0 | roadmap A1 — weak regularity discharge layer; AXLE @4.32 |
+| PROVED | `Brockian.WeylWeakRegularityDischarge.integralModel_of_primitiveModel` | ✓ | verified | lean-4.32.0 | roadmap A1 — weak regularity discharge layer; AXLE @4.32 |
+| PROVED | `Brockian.WeylWeakRegularityDischarge.locallyIntegrable_continuous_primitive` | ✓ | verified | lean-4.32.0 | roadmap A1 — weak regularity discharge layer; AXLE @4.32 |
+| PROVED | `Brockian.WeylWeakRegularityDischarge.locallyIntegrable_intervalIntegrable` | ✓ | verified | lean-4.32.0 | roadmap A1 — weak regularity discharge layer; AXLE @4.32 |
+| PROVED | `Brockian.WeylWeakRegularityDischarge.schrodingerRHS_coeFn_locallyIntegrable` | ✓ | verified | lean-4.32.0 | roadmap A1 — weak regularity discharge layer; AXLE @4.32 |
+| PROVED | `Brockian.WeylWeakRegularityDischarge.schrodinger_essentiallySelfAdjoint_of_weakToPrimitive` | ✓ | verified | lean-4.32.0 | roadmap A1 — weak regularity discharge layer; AXLE @4.32 |
+| DEFINITION | `Brockian.WeylWeakRegularityDischarge.weakRegularityDischargeStatus` | ✓ | verified | lean-4.32.0 | roadmap A1 — weak regularity discharge layer; AXLE @4.32 |
+| PROVED | `Brockian.WeylWeakRegularityDischarge.weakToClassicalRegularity_of_weakToPrimitive` | ✓ | verified | lean-4.32.0 | roadmap A1 — weak regularity discharge layer; AXLE @4.32 |
+| PROVED | `Brockian.WeylWeakRegularityDischarge.weakToIntegralRegularity_of_weakToPrimitive` | ✓ | verified | lean-4.32.0 | roadmap A1 — weak regularity discharge layer; AXLE @4.32 |
 | DEFINITION | `Brockian.WeylWeakRegularityScaffold.ClassicalL2Representative` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityScaffold.H2` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityScaffold.WeakRegularityPipelineStatus` | ✓ | verified | lean-4.32.0 |  |
