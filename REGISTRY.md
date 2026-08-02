@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 310
+- **DEFINITION**: 316
 - **DISCHARGED**: 6
-- **PROVED**: 1530
+- **PROVED**: 1590
 
 ## Theorems
 
@@ -258,6 +258,13 @@
 | PROVED | `Brockian.CosTraceNormEleven.trace_adjoin_gen_eq_neg_nextCoeff` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormEleven.trace_norm_eleven_pack` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormEleven.trace_spectralGen_eleven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSeventeen.degree_seventeen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSeventeen.isIntegral_and_degree_seventeen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSeventeen.isIntegral_spectralGen_seventeen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSeventeen.isIntegral_spectralGen_seventeen_Q` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSeventeen.prime_seventeen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSeventeen.seventeen_ne_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSeventeen.seventeen_pack` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormThirteen.degree_thirteen` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormThirteen.isIntegral_and_degree_thirteen` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormThirteen.isIntegral_spectralGen_thirteen` | ✓ | verified | lean-4.32.0 |  |
@@ -775,6 +782,10 @@
 | PROVED | `Brockian.Goldbach.WheelK235711.K2_11_eq` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.WheelK235711.K2_11_of_not_two_dvd` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.WheelK235711.K2_11_of_two_and_eleven_dvd` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Goldbach.WheelK2_13.K2_13` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_13.K2_13_eq` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_13.K2_13_of_not_two_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_13.K2_13_of_two_and_thirteen_dvd` | ✓ | verified | lean-4.32.0 |  |
 | CONJECTURE | `Brockian.GoldbachComb.GoldbachCovarianceTransfer` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
 | DEFINITION | `Brockian.GoldbachComb.Kp` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
 | DEFINITION | `Brockian.GoldbachComb.gCount` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
@@ -1194,6 +1205,35 @@
 | PROVED | `Brockian.SingularSeries.Gaps2230.singular_series_pos_evenPair_twentyFour` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.SingularSeries.Gaps2230.singular_series_pos_evenPair_twentySix` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.SingularSeries.Gaps2230.singular_series_pos_evenPair_twentyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.evenPair_card_forty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.evenPair_card_thirtyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.evenPair_card_thirtyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.evenPair_card_thirtySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.evenPair_card_thirtyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.isAdmissible_evenPair_forty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.isAdmissible_evenPair_thirtyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.isAdmissible_evenPair_thirtyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.isAdmissible_evenPair_thirtySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.isAdmissible_evenPair_thirtyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.localFactor_forty_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.localFactor_thirtyTwo_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.nu_p_forty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.nu_p_forty_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.nu_p_thirtyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.nu_p_thirtyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.nu_p_thirtySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.nu_p_thirtyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.nu_p_thirtyTwo_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.singular_series_finite_pos_evenPair_forty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.singular_series_finite_pos_evenPair_thirtyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.singular_series_finite_pos_evenPair_thirtyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.singular_series_finite_pos_evenPair_thirtySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.singular_series_finite_pos_evenPair_thirtyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.singular_series_pos_evenPair_forty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.singular_series_pos_evenPair_thirtyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.singular_series_pos_evenPair_thirtyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.singular_series_pos_evenPair_thirtySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps3240.singular_series_pos_evenPair_thirtyTwo` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.SingularSeries.MoreExamples.evenPair_card_eight` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.SingularSeries.MoreExamples.evenPair_card_four` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.SingularSeries.MoreExamples.evenPair_card_of_ne_zero` | ✓ | verified | lean-4.32.0 |  |
@@ -1381,6 +1421,19 @@
 | PROVED | `Brockian.Weyl.ClosedRangeClosure.isClosed_rangeAddI_and_rangeSubI` | ✓ | verified | lean-4.32.0 | Gate-1 closed-range upgrade — closed symmetric op has closed non-real shifted range; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.ClosedRangeClosure.isClosed_rangeSMulSub_of_isClosed_of_isSymmetric` | ✓ | verified | lean-4.32.0 | Gate-1 closed-range upgrade — closed symmetric op has closed non-real shifted range; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.ClosedRangeClosure.rangeSMulSub_mono` | ✓ | verified | lean-4.32.0 | Gate-1 closed-range upgrade — closed symmetric op has closed non-real shifted range; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.ClosedShiftedRanges.adjoint_domain_le_closure_domain_of_essentiallySelfAdjoint_of_rangeAddI` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.ClosedShiftedRanges.closureResolventAtIOfEssentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.ClosedShiftedRanges.closureResolventAtIOfEssentiallySelfAdjointOfIsClosedRanges` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ClosedShiftedRanges.closure_eq_adjoint_of_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ClosedShiftedRanges.closure_eq_adjoint_of_essentiallySelfAdjoint_of_isClosed_ranges` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ClosedShiftedRanges.closure_isSelfAdjoint_of_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ClosedShiftedRanges.closure_isSelfAdjoint_of_essentiallySelfAdjoint_of_isClosed_ranges` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ClosedShiftedRanges.closure_shifted_ranges_eq_univ_of_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ClosedShiftedRanges.closure_shifted_ranges_eq_univ_of_essentiallySelfAdjoint_of_isClosed` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ClosedShiftedRanges.dense_closure_shifted_ranges_of_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ClosedShiftedRanges.isClosed_closure_shifted_ranges` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ClosedShiftedRanges.rangeAddI_le_closure` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ClosedShiftedRanges.rangeSubI_le_closure` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.Closure.adjoint_isClosed'` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | PROVED | `Brockian.Weyl.Closure.closure_eq_self_of_isClosed` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | DEFINITION | `Brockian.Weyl.Closure.deficiencySet` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
@@ -1747,6 +1800,19 @@
 | PROVED | `Brockian.Weyl.SchrodingerESA.free_plus_primeGaussian_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
 | DEFINITION | `Brockian.Weyl.SchrodingerESA.gate1_chain_status` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
 | PROVED | `Brockian.Weyl.SchrodingerESA.primeGaussian_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
+| DEFINITION | `Brockian.Weyl.SchrodingerGate1Final.L2R` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.SchrodingerGate1Final.freeCoreMap` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SchrodingerGate1Final.freeCoreMap_apply` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.SchrodingerGate1Final.freeSchrodingerPMap` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SchrodingerGate1Final.freeSchrodingerPMap_dense` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SchrodingerGate1Final.freeSchrodingerPMap_domain` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SchrodingerGate1Final.freeSchrodingerPMap_isSymmetric` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SchrodingerGate1Final.freeSchrodingerPMap_toFun_ofInjective` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SchrodingerGate1Final.schrodingerPMap_eq_perturb_free` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SchrodingerGate1Final.schrodinger_essentiallySelfAdjoint_iff_katoTransfer` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SchrodingerGate1Final.schrodinger_essentiallySelfAdjoint_of_distributionalPrimitiveIdentity` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SchrodingerGate1Final.schrodinger_essentiallySelfAdjoint_of_katoTransfer` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SchrodingerGate1Final.schrodinger_essentiallySelfAdjoint_of_weakSolutionVanishing` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.SchrodingerMinimal.D2` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
 | PROVED | `Brockian.Weyl.SchrodingerMinimal.D2_apply` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
 | DEFINITION | `Brockian.Weyl.SchrodingerMinimal.H2` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
