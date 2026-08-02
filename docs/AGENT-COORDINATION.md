@@ -479,6 +479,33 @@ keep boundedv-continuous.)
   `TwinPrimeConstant`, `WeylLawTarget`, `Fin5InnerProduct`, `GoldbachLocalWheel`,
   `WeylSymmetryPackage`, or Claude-owned Admissibility/Galois/Pentagonal files.
 
+- 2026-08-02 — **Codex swarm #6 INTEGRATED / closed**. All six handles closed after
+  integration or final audit. Landed pieces:
+  - #35 overclaim firewall: `scripts/audit_dependency_firewall.py` +
+    `docs/DEPENDENCY-FIREWALL.md` (`eafd7b7`, also carried in `aacaf27`). Current
+    `--fail-on-high` mode exits cleanly: no HIGH direct citation from a `PROVED` entry to
+    an open declaration; only LOW mixed-module warnings remain.
+  - #36 registry consistency: `scripts/audit_registry_consistency.py` +
+    `docs/REGISTRY-CONSISTENCY.md` (`d8ff917`, also carried in `aacaf27`). Current strict
+    audit has `ERROR: 0`, no stale open entries, no duplicate registry names.
+  - #39 paper theorem table: `scripts/gen_paper_theorem_table.py`,
+    `paper/theorem_table.md`, `docs/PAPER-TABLE-GENERATION.md` (`5f9d32b`).
+  - #11 local admissibility criterion scaffold: `AdmissibilityCriterionScaffold`
+    (`3955765`) proves the finite `ν(q) < q` local criterion and the prime-local wrapper;
+    no prime distribution theorem claimed.
+  - #19 finite deviation-bound package: `EquidistributionDeviationBound` (`3a3afd9`)
+    packages per-config/total/pair-count normalized finite deviations from explicit
+    `PrimePairAsymptotic` + finite-window error-budget hypotheses; no HL/BV claim.
+  - #28 xi functional equation bridge: `RiemannXiFunctionalEquation` (`72a4194`)
+    uses Mathlib's `completedRiemannZeta_one_sub` to prove `riemannXi (1-s)=riemannXi s`
+    and zero-set symmetry.
+  Current shared registry after concurrent Claude/Grok landings through `0b7eec6`:
+  1018 `PROVED`, 234 `DEFINITION`, 19 `CONDITIONAL`, 1 `CONJECTURE` over 1272 entries.
+  Open-entry audit is clean by register discipline; the added `FranklinInvolution` and
+  `WeylLawTarget` entries are honest conditional frontiers. Remaining local dirt observed:
+  Aristotle's `aristotle/kato-bounded/KatoBounded.lean` plus noncanonical short-name
+  duplicate attestations `FourierMultiplier.json` and `LocalWheel.json`; do not stage them.
+
 - 2026-08-01 — **Claude swarm #7 on 39-move map** (804 baseline; AXLE @4.32 gate; new files only).
   Takes the UN-claimed closeable targets in lanes A/B/C/F — explicitly avoids Grok #6
   (#4 OddDistinct, #10 CosAlgInt, #12 AdmissibilityDiagonal, #15 TwinPrimeConstant, #25 WeylLawTarget,
