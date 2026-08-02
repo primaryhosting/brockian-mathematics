@@ -1,10 +1,10 @@
-generated_at: '2026-08-02T13:09:44Z'
+generated_at: '2026-08-02T13:13:51Z'
 generated_from:
   registry: registry/theorems.json
   claim_map: observatory/claim_map.yaml
   registry_summary: &id001
-    PROVED: 1260
-    DEFINITION: 261
+    PROVED: 1289
+    DEFINITION: 264
     CONDITIONAL: 18
     DISCHARGED: 6
     CONJECTURE: 1
@@ -5999,6 +5999,78 @@ all_declarations:
   axle:
     verdict: verified
     environment: lean-4.32.0
+- name: Brockian.D5CharacterTable.d5Character
+  module: Brockian.D5CharacterTable
+  register: DEFINITION
+  kind: def
+  source: Brockian/D5CharacterTable.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterTable.d5Character_eq_sum_fixed
+  module: Brockian.D5CharacterTable
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterTable.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterTable.d5Character_one
+  module: Brockian.D5CharacterTable
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterTable.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterTable.d5Character_reflection
+  module: Brockian.D5CharacterTable
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterTable.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterTable.d5Character_rotation
+  module: Brockian.D5CharacterTable
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterTable.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterTable.d5Character_rotation_ne_zero
+  module: Brockian.D5CharacterTable
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterTable.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterTable.d5PermutationMatrix
+  module: Brockian.D5CharacterTable
+  register: DEFINITION
+  kind: def
+  source: Brockian/D5CharacterTable.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterTable.d5PermutationMatrix_apply
+  module: Brockian.D5CharacterTable
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterTable.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterTable.d5PermutationMatrix_mulVec
+  module: Brockian.D5CharacterTable
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterTable.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
 - name: Brockian.D5FourierInversion.fourierCoeff
   module: Brockian.D5FourierInversion
   register: DEFINITION
@@ -8948,6 +9020,190 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/WheelExtended.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357
+  module: Brockian.Goldbach.WheelK2357
+  register: DEFINITION
+  kind: def
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_aligned_gt_K235_aligned
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_aligned_gt_K23_aligned
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_aligned_gt_baseline
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_cases
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_eq
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_eq_K235_mul_Kp_seven
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_eq_K23_mul_Kp_five_mul_Kp_seven
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_eq_aligned_iff
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_eq_zero_iff_not_two_dvd
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_excess_nonneg_of_even
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_le_aligned
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_nonneg
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_of_not_two_dvd
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_of_two_dvd_not_three_not_five_not_seven
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_of_two_five_dvd_not_three_not_seven
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_of_two_five_seven_dvd_not_three
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_of_two_seven_dvd_not_three_not_five
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_of_two_three_dvd_not_five_not_seven
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_of_two_three_five_dvd_not_seven
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_of_two_three_five_seven_dvd
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_of_two_three_seven_dvd_not_five
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2357.K2357_pos_iff_two_dvd
+  module: Brockian.Goldbach.WheelK2357
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2357.lean
   axle:
     verdict: verified
     environment: lean-4.32.0

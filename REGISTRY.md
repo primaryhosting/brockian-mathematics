@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 18
 - **CONJECTURE**: 1
-- **DEFINITION**: 261
+- **DEFINITION**: 264
 - **DISCHARGED**: 6
-- **PROVED**: 1260
+- **PROVED**: 1289
 
 ## Theorems
 
@@ -264,6 +264,15 @@
 | PROVED | `Brockian.CyclotomicRealDegree.spectral_degree_general` | ✓ | verified | lean-4.32.0 | roadmap #6+#8 — composite-n real cyclotomic degree + quadratic classification; AXLE @4.32 |
 | PROVED | `Brockian.CyclotomicRealDegree.spectral_natDegree_two_mul` | ✓ | verified | lean-4.32.0 | roadmap #6+#8 — composite-n real cyclotomic degree + quadratic classification; AXLE @4.32 |
 | PROVED | `Brockian.CyclotomicRealDegree.totient_eq_four_iff` | ✓ | verified | lean-4.32.0 | roadmap #6+#8 — composite-n real cyclotomic degree + quadratic classification; AXLE @4.32 |
+| DEFINITION | `Brockian.D5CharacterTable.d5Character` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5CharacterTable.d5Character_eq_sum_fixed` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5CharacterTable.d5Character_one` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5CharacterTable.d5Character_reflection` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5CharacterTable.d5Character_rotation` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5CharacterTable.d5Character_rotation_ne_zero` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.D5CharacterTable.d5PermutationMatrix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5CharacterTable.d5PermutationMatrix_apply` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.D5CharacterTable.d5PermutationMatrix_mulVec` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.D5FourierInversion.fourierCoeff` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5FourierInversion.fourierCoeff_add` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5FourierInversion.fourierCoeff_eigenmode` | ✓ | verified | lean-4.32.0 |  |
@@ -641,6 +650,29 @@
 | PROVED | `Brockian.Goldbach.WheelExtended.gCount_thirteen_zero` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.WheelExtended.gResidues_eleven_card` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.WheelExtended.gResidues_thirteen_card` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Goldbach.WheelK2357.K2357` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_aligned_gt_K235_aligned` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_aligned_gt_K23_aligned` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_aligned_gt_baseline` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_cases` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_eq` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_eq_K235_mul_Kp_seven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_eq_K23_mul_Kp_five_mul_Kp_seven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_eq_aligned_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_eq_zero_iff_not_two_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_excess_nonneg_of_even` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_le_aligned` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_nonneg` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_of_not_two_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_of_two_dvd_not_three_not_five_not_seven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_of_two_five_dvd_not_three_not_seven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_of_two_five_seven_dvd_not_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_of_two_seven_dvd_not_three_not_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_of_two_three_dvd_not_five_not_seven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_of_two_three_five_dvd_not_seven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_of_two_three_five_seven_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_of_two_three_seven_dvd_not_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2357.K2357_pos_iff_two_dvd` | ✓ | verified | lean-4.32.0 |  |
 | CONJECTURE | `Brockian.GoldbachComb.GoldbachCovarianceTransfer` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
 | DEFINITION | `Brockian.GoldbachComb.Kp` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
 | DEFINITION | `Brockian.GoldbachComb.gCount` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |

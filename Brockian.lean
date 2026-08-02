@@ -16,6 +16,7 @@ import Brockian.C5SpectralMultiplicities
 import Brockian.Automorphism
 import Brockian.AutomorphismFull
 import Brockian.D5Representation
+import Brockian.D5CharacterTable
 import Brockian.D5Isotypic
 import Brockian.D5FourierInversion
 import Brockian.D5LaplacianModes
@@ -84,6 +85,7 @@ import Brockian.WeylKatoNeumann
 import Brockian.WeylKatoNeumannEstimates
 import Brockian.RiemannXiSymmetry
 import Brockian.GoldbachCovarianceScaffold
+import Brockian.GoldbachWheelK2357
 import Brockian.AdmissibilityCRTGeneral
 import Brockian.PentagonalTheoremFranklin
 import Brockian.OddDistinctPartition
