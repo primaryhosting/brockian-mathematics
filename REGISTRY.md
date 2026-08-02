@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 295
+- **DEFINITION**: 304
 - **DISCHARGED**: 6
-- **PROVED**: 1455
+- **PROVED**: 1476
 
 ## Theorems
 
@@ -1669,6 +1669,22 @@
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_counterexample` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_of_pos` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_to_zero_of_mass_infinite` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
+| PROVED | `Brockian.Weyl.ResolventFromESA.exists_rightResolvent_of_range_eq_univ` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ResolventFromESA.norm_le_inv_im_mul_norm_shifted` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ResolventFromESA.norm_rightResolventOfRangeEqUniv_le` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.ResolventFromESA.rightResolventOfRangeEqUniv` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ResolventFromESA.rightResolventOfRangeEqUniv_maps_domain` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ResolventFromESA.rightResolventOfRangeEqUniv_right_inverse` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ResolventFromESA.rightResolvents_of_essentiallySelfAdjoint_of_isClosed_ranges` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ResolventFromESA.rightResolvents_of_surjective_shifted_ranges` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.ResolventFromESA.shiftedMap` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ResolventFromESA.shiftedMap_surjective_of_range_eq_univ` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.ResolventFromESA.shiftedResolventLinearMap` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ResolventFromESA.shiftedResolventLinearMap_bound` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ResolventFromESA.shiftedResolventLinearMap_maps_domain` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ResolventFromESA.shiftedResolventLinearMap_right_inverse` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.ResolventFromESA.shiftedRightInverseLinearMap` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.ResolventFromESA.shiftedRightInverseLinearMap_spec` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.SchrodingerESA.DeficiencyRepresentsODE` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
 | DEFINITION | `Brockian.Weyl.SchrodingerESA.Gate1ChainStatus` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
 | PROVED | `Brockian.Weyl.SchrodingerESA.deficiencySpace_eq_bot_of_ode_bridge` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
@@ -1747,6 +1763,20 @@
 | DEFINITION | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.toFourierMultiplierInput` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.WeylPlancherelScaffold.essentiallySelfAdjoint_of_plancherel_multiplier_dense_ranges` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.WeylPlancherelScaffold.isPlancherelUnitary` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakPrimitiveClassical.DistributionalPrimitiveData` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakPrimitiveClassical.DistributionalPrimitiveIdentity` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakPrimitiveClassical.WeakPrimitiveClassicalStatus` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakPrimitiveClassical.WeakSolutionVanishing` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakPrimitiveClassical.integral_identity_of_hasDerivAt` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakPrimitiveClassical.memLp_of_l2_representative` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakPrimitiveClassical.primitiveModel_of_distributionalPrimitiveData` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakPrimitiveClassical.primitiveModel_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakPrimitiveClassical.rhs_integral_identity_of_hasDerivAt` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakPrimitiveClassical.weakPrimitiveClassicalStatus` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakPrimitiveClassical.weakToPrimitiveRegularity_of_continuous_bounded_of_distributionalPrimitiveIdentity` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakPrimitiveClassical.weakToPrimitiveRegularity_of_continuous_bounded_of_weakSolutionVanishing` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakPrimitiveClassical.weakToPrimitiveRegularity_of_distributionalPrimitiveIdentity` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakPrimitiveClassical.weakToPrimitiveRegularity_of_weakSolutionVanishing` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityCore.IntegralSchrodingerModel` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityCore.WeakRegularityCoreStatus` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityCore.WeakToIntegralRegularity` | ✓ | verified | lean-4.32.0 |  |

@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1455,
-    "DEFINITION": 295,
+    "PROVED": 1476,
+    "DEFINITION": 304,
     "CONDITIONAL": 21,
     "DISCHARGED": 6,
     "CONJECTURE": 1
@@ -53508,6 +53508,518 @@
       "provenance_note": "radius_tendsto_zero_iff_of_pos (corrected dichotomy r->0 <-> I->inf, given mass positive somewhere) + two directional thms + counterexample refuting my naive iff (1/0=0 junk trap). Aristotle caught the flaw honestly. One Tendsto.comp line ported 4.28->4.32."
     },
     {
+      "name": "Brockian.Weyl.ResolventFromESA.exists_rightResolvent_of_range_eq_univ",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.norm_le_inv_im_mul_norm_shifted",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.norm_rightResolventOfRangeEqUniv_le",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.rightResolventOfRangeEqUniv",
+      "kind": "def",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.rightResolventOfRangeEqUniv_maps_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.rightResolventOfRangeEqUniv_right_inverse",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.rightResolvents_of_essentiallySelfAdjoint_of_isClosed_ranges",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.rightResolvents_of_surjective_shifted_ranges",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.shiftedMap",
+      "kind": "def",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.shiftedMap_surjective_of_range_eq_univ",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.shiftedResolventLinearMap",
+      "kind": "def",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.shiftedResolventLinearMap_bound",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.shiftedResolventLinearMap_maps_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.shiftedResolventLinearMap_right_inverse",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.shiftedRightInverseLinearMap",
+      "kind": "def",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.shiftedRightInverseLinearMap_spec",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ResolventFromESA.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.Weyl.SchrodingerESA.DeficiencyRepresentsODE",
       "kind": "def",
       "module": "Brockian.Weyl.SchrodingerESA",
@@ -55951,6 +56463,448 @@
       "statement": "",
       "source": {
         "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveClassical.DistributionalPrimitiveData",
+      "kind": "def",
+      "module": "Brockian.WeylWeakPrimitiveClassical",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveClassical.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveClassical.DistributionalPrimitiveIdentity",
+      "kind": "def",
+      "module": "Brockian.WeylWeakPrimitiveClassical",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveClassical.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveClassical.WeakPrimitiveClassicalStatus",
+      "kind": "def",
+      "module": "Brockian.WeylWeakPrimitiveClassical",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveClassical.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveClassical.WeakSolutionVanishing",
+      "kind": "def",
+      "module": "Brockian.WeylWeakPrimitiveClassical",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveClassical.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveClassical.integral_identity_of_hasDerivAt",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakPrimitiveClassical",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveClassical.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveClassical.memLp_of_l2_representative",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakPrimitiveClassical",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveClassical.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveClassical.primitiveModel_of_distributionalPrimitiveData",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakPrimitiveClassical",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveClassical.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveClassical.primitiveModel_zero",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakPrimitiveClassical",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveClassical.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveClassical.rhs_integral_identity_of_hasDerivAt",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakPrimitiveClassical",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveClassical.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveClassical.weakPrimitiveClassicalStatus",
+      "kind": "def",
+      "module": "Brockian.WeylWeakPrimitiveClassical",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveClassical.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveClassical.weakToPrimitiveRegularity_of_continuous_bounded_of_distributionalPrimitiveIdentity",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakPrimitiveClassical",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveClassical.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveClassical.weakToPrimitiveRegularity_of_continuous_bounded_of_weakSolutionVanishing",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakPrimitiveClassical",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveClassical.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveClassical.weakToPrimitiveRegularity_of_distributionalPrimitiveIdentity",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakPrimitiveClassical",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveClassical.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveClassical.weakToPrimitiveRegularity_of_weakSolutionVanishing",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakPrimitiveClassical",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveClassical.lean"
       },
       "register": "PROVED",
       "axioms": [

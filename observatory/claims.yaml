@@ -1,10 +1,10 @@
-generated_at: '2026-08-02T16:24:28Z'
+generated_at: '2026-08-02T16:27:30Z'
 generated_from:
   registry: registry/theorems.json
   claim_map: observatory/claim_map.yaml
   registry_summary: &id001
-    PROVED: 1455
-    DEFINITION: 295
+    PROVED: 1476
+    DEFINITION: 304
     CONDITIONAL: 21
     DISCHARGED: 6
     CONJECTURE: 1
@@ -17119,6 +17119,134 @@ all_declarations:
   kind: theorem
   source: Brockian/RadiusDichotomy.lean
   axle: *id198
+- name: Brockian.Weyl.ResolventFromESA.exists_rightResolvent_of_range_eq_univ
+  module: Brockian.Weyl.ResolventFromESA
+  register: PROVED
+  kind: theorem
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.ResolventFromESA.norm_le_inv_im_mul_norm_shifted
+  module: Brockian.Weyl.ResolventFromESA
+  register: PROVED
+  kind: theorem
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.ResolventFromESA.norm_rightResolventOfRangeEqUniv_le
+  module: Brockian.Weyl.ResolventFromESA
+  register: PROVED
+  kind: theorem
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.ResolventFromESA.rightResolventOfRangeEqUniv
+  module: Brockian.Weyl.ResolventFromESA
+  register: DEFINITION
+  kind: def
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.ResolventFromESA.rightResolventOfRangeEqUniv_maps_domain
+  module: Brockian.Weyl.ResolventFromESA
+  register: PROVED
+  kind: theorem
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.ResolventFromESA.rightResolventOfRangeEqUniv_right_inverse
+  module: Brockian.Weyl.ResolventFromESA
+  register: PROVED
+  kind: theorem
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.ResolventFromESA.rightResolvents_of_essentiallySelfAdjoint_of_isClosed_ranges
+  module: Brockian.Weyl.ResolventFromESA
+  register: PROVED
+  kind: theorem
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.ResolventFromESA.rightResolvents_of_surjective_shifted_ranges
+  module: Brockian.Weyl.ResolventFromESA
+  register: PROVED
+  kind: theorem
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.ResolventFromESA.shiftedMap
+  module: Brockian.Weyl.ResolventFromESA
+  register: DEFINITION
+  kind: def
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.ResolventFromESA.shiftedMap_surjective_of_range_eq_univ
+  module: Brockian.Weyl.ResolventFromESA
+  register: PROVED
+  kind: theorem
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.ResolventFromESA.shiftedResolventLinearMap
+  module: Brockian.Weyl.ResolventFromESA
+  register: DEFINITION
+  kind: def
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.ResolventFromESA.shiftedResolventLinearMap_bound
+  module: Brockian.Weyl.ResolventFromESA
+  register: PROVED
+  kind: theorem
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.ResolventFromESA.shiftedResolventLinearMap_maps_domain
+  module: Brockian.Weyl.ResolventFromESA
+  register: PROVED
+  kind: theorem
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.ResolventFromESA.shiftedResolventLinearMap_right_inverse
+  module: Brockian.Weyl.ResolventFromESA
+  register: PROVED
+  kind: theorem
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.ResolventFromESA.shiftedRightInverseLinearMap
+  module: Brockian.Weyl.ResolventFromESA
+  register: DEFINITION
+  kind: def
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.ResolventFromESA.shiftedRightInverseLinearMap_spec
+  module: Brockian.Weyl.ResolventFromESA
+  register: PROVED
+  kind: theorem
+  source: Brockian/ResolventFromESA.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
 - name: Brockian.Weyl.SchrodingerESA.DeficiencyRepresentsODE
   module: Brockian.Weyl.SchrodingerESA
   register: DEFINITION
@@ -17712,6 +17840,118 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/WeylPlancherelScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakPrimitiveClassical.DistributionalPrimitiveData
+  module: Brockian.WeylWeakPrimitiveClassical
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakPrimitiveClassical.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakPrimitiveClassical.DistributionalPrimitiveIdentity
+  module: Brockian.WeylWeakPrimitiveClassical
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakPrimitiveClassical.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakPrimitiveClassical.WeakPrimitiveClassicalStatus
+  module: Brockian.WeylWeakPrimitiveClassical
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakPrimitiveClassical.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakPrimitiveClassical.WeakSolutionVanishing
+  module: Brockian.WeylWeakPrimitiveClassical
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakPrimitiveClassical.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakPrimitiveClassical.integral_identity_of_hasDerivAt
+  module: Brockian.WeylWeakPrimitiveClassical
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakPrimitiveClassical.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakPrimitiveClassical.memLp_of_l2_representative
+  module: Brockian.WeylWeakPrimitiveClassical
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakPrimitiveClassical.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakPrimitiveClassical.primitiveModel_of_distributionalPrimitiveData
+  module: Brockian.WeylWeakPrimitiveClassical
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakPrimitiveClassical.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakPrimitiveClassical.primitiveModel_zero
+  module: Brockian.WeylWeakPrimitiveClassical
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakPrimitiveClassical.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakPrimitiveClassical.rhs_integral_identity_of_hasDerivAt
+  module: Brockian.WeylWeakPrimitiveClassical
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakPrimitiveClassical.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakPrimitiveClassical.weakPrimitiveClassicalStatus
+  module: Brockian.WeylWeakPrimitiveClassical
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakPrimitiveClassical.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakPrimitiveClassical.weakToPrimitiveRegularity_of_continuous_bounded_of_distributionalPrimitiveIdentity
+  module: Brockian.WeylWeakPrimitiveClassical
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakPrimitiveClassical.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakPrimitiveClassical.weakToPrimitiveRegularity_of_continuous_bounded_of_weakSolutionVanishing
+  module: Brockian.WeylWeakPrimitiveClassical
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakPrimitiveClassical.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakPrimitiveClassical.weakToPrimitiveRegularity_of_distributionalPrimitiveIdentity
+  module: Brockian.WeylWeakPrimitiveClassical
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakPrimitiveClassical.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakPrimitiveClassical.weakToPrimitiveRegularity_of_weakSolutionVanishing
+  module: Brockian.WeylWeakPrimitiveClassical
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakPrimitiveClassical.lean
   axle:
     verdict: verified
     environment: lean-4.32.0
