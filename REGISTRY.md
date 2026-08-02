@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 322
+- **DEFINITION**: 323
 - **DISCHARGED**: 6
-- **PROVED**: 1686
+- **PROVED**: 1709
 
 ## Theorems
 
@@ -1057,6 +1057,30 @@
 | PROVED | `Brockian.PentagonIsotypic.neg_golden_eigenfrequencies` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
 | PROVED | `Brockian.PentagonIsotypic.rot_isotypic` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
 | PROVED | `Brockian.PentagonIsotypic.two_eigenfrequency` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
+| DEFINITION | `Brockian.PentagonMultiplicities.adjL` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.adjL_apply` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.adjL_eigenmode` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.eigenBasis_apply` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.eigenIndices_golden` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.eigenIndices_neg_golden` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.eigenIndices_two` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.eigenspace_eq_span_group` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.eigenspace_golden_eq` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.eigenspace_neg_golden_eq` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.eigenspace_two_eq` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.eigenspaces_span_top` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.finrank_eigenspace_golden` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.finrank_eigenspace_neg_golden` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.finrank_eigenspace_pair` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.finrank_eigenspace_two` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.finrank_vertexSpace` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.hasEigenvalue_golden` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.hasEigenvalue_neg_golden` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.hasEigenvalue_two` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.hasEigenvector_eigenmode` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.multiplicities_sum_eq_finrank` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.range_matrix_two` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonMultiplicities.repr_eq_zero_of_ne` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
 | PROVED | `Brockian.PentagonalPartition.partition_zero_card` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
 | DEFINITION | `Brockian.PentagonalPartition.pent` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
 | PROVED | `Brockian.PentagonalPartition.pent_injective` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |

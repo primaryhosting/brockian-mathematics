@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1686,
-    "DEFINITION": 322,
+    "PROVED": 1709,
+    "DEFINITION": 323,
     "CONDITIONAL": 21,
     "DISCHARGED": 6,
     "CONJECTURE": 1
@@ -33699,6 +33699,794 @@
       "quarantine": true,
       "ledger_run": "roadmap #9-12 \u2014 D5/C5 isotypic decomposition; AXLE @4.32",
       "provenance_note": "Isotypic projectors P_k on Fin5->C: idempotent, mutually orthogonal, complete (sum=id) for ALL functions; adjacency A=rho+rho^-1 diagonalized A*P_k=2cos(2pi k/5)*P_k; golden eigenvector (k=1 -> phi-1); eigenBasis diagonalizes; multiplicities {2:1, phi-1:2, -phi:2}. Structurally explains the golden eigenvalue. Not restated via Mathlib finrank eigenspace API (operational content stronger)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.adjL",
+      "kind": "def",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.adjL_apply",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.adjL_eigenmode",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.eigenBasis_apply",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.eigenIndices_golden",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.eigenIndices_neg_golden",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.eigenIndices_two",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.eigenspace_eq_span_group",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.eigenspace_golden_eq",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.eigenspace_neg_golden_eq",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.eigenspace_two_eq",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.eigenspaces_span_top",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.finrank_eigenspace_golden",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.finrank_eigenspace_neg_golden",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.finrank_eigenspace_pair",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.finrank_eigenspace_two",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.finrank_vertexSpace",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.hasEigenvalue_golden",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.hasEigenvalue_neg_golden",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.hasEigenvalue_two",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.hasEigenvector_eigenmode",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.multiplicities_sum_eq_finrank",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.range_matrix_two",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonMultiplicities.repr_eq_zero_of_ne",
+      "kind": "theorem",
+      "module": "Brockian.PentagonMultiplicities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonMultiplicities.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
+      "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
     },
     {
       "name": "Brockian.PentagonalPartition.partition_zero_card",
