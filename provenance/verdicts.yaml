@@ -551,6 +551,13 @@ runs:
     ledger_run: "Erdős #604 harvest — verified unconditional entropy inequalities (one omitted in the paper); AXLE @4.32"
     provenance_note: "The load-bearing UNCONDITIONAL lemmas of the pinned-distance paper: Renyi monotonicity exp(sum mu_i log mu_i) <= sum mu_i^2 (paper Lemma 3.2, whose proof the paper OMITTED — now machine-verified via Jensen/strictConcaveOn_log) and entropy_le_log_card H <= log|support| (Lemma 3.4). General-purpose Jensen entropy bounds. The paper's conditional pinned bound (Thm 4.1) is genuine/non-circular but NOT harvested (analytic); §5 structure theorem is a SKETCH with real gaps (threshold mismatch, unproven incidence lemma, mis-cited Pach-de Zeeuw) — NOT taken as proved."
 
+  "partition-recurrence":
+    module: Brockian.PartitionRecurrence
+    verdict: admit
+    quarantine: true
+    ledger_run: "batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32"
+    provenance_note: "New content unlocked by the now-unconditional pentagonalNumberTheorem: partitionGF * genFun pstChar = 1 (partition series = inverse of the Euler product, factor-by-factor); partition_pentagonal_convolution (sum p(i)*pentCoeff(j)=0 for n>=1); partition_recurrence p(n) = -sum_{k<n} p(k)*pentCoeff(n-k) (Euler's recurrence, isolated). Fully pentagonal-indexed form = mechanical reindexing, documented not-carried-out (NOT open). Ramanujan p(5n+4)=0 mod5 stays OPEN — recurrence carries no mod-5 structure; obstruction = Mathlib-absent modular forms."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────
   "weyl-gate1-bounded":

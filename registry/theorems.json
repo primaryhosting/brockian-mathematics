@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1762,
-    "DEFINITION": 325,
+    "PROVED": 1770,
+    "DEFINITION": 326,
     "CONDITIONAL": 21,
     "DISCHARGED": 6,
     "CONJECTURE": 1
@@ -31617,6 +31617,299 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.PartitionRecurrence.factor_eq_geo",
+      "kind": "theorem",
+      "module": "Brockian.PartitionRecurrence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PartitionRecurrence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32",
+      "provenance_note": "New content unlocked by the now-unconditional pentagonalNumberTheorem: partitionGF * genFun pstChar = 1 (partition series = inverse of the Euler product, factor-by-factor); partition_pentagonal_convolution (sum p(i)*pentCoeff(j)=0 for n>=1); partition_recurrence p(n) = -sum_{k<n} p(k)*pentCoeff(n-k) (Euler's recurrence, isolated). Fully pentagonal-indexed form = mechanical reindexing, documented not-carried-out (NOT open). Ramanujan p(5n+4)=0 mod5 stays OPEN \u2014 recurrence carries no mod-5 structure; obstruction = Mathlib-absent modular forms."
+    },
+    {
+      "name": "Brockian.PartitionRecurrence.geo",
+      "kind": "def",
+      "module": "Brockian.PartitionRecurrence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PartitionRecurrence.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32",
+      "provenance_note": "New content unlocked by the now-unconditional pentagonalNumberTheorem: partitionGF * genFun pstChar = 1 (partition series = inverse of the Euler product, factor-by-factor); partition_pentagonal_convolution (sum p(i)*pentCoeff(j)=0 for n>=1); partition_recurrence p(n) = -sum_{k<n} p(k)*pentCoeff(n-k) (Euler's recurrence, isolated). Fully pentagonal-indexed form = mechanical reindexing, documented not-carried-out (NOT open). Ramanujan p(5n+4)=0 mod5 stays OPEN \u2014 recurrence carries no mod-5 structure; obstruction = Mathlib-absent modular forms."
+    },
+    {
+      "name": "Brockian.PartitionRecurrence.geo_mul",
+      "kind": "theorem",
+      "module": "Brockian.PartitionRecurrence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PartitionRecurrence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32",
+      "provenance_note": "New content unlocked by the now-unconditional pentagonalNumberTheorem: partitionGF * genFun pstChar = 1 (partition series = inverse of the Euler product, factor-by-factor); partition_pentagonal_convolution (sum p(i)*pentCoeff(j)=0 for n>=1); partition_recurrence p(n) = -sum_{k<n} p(k)*pentCoeff(n-k) (Euler's recurrence, isolated). Fully pentagonal-indexed form = mechanical reindexing, documented not-carried-out (NOT open). Ramanujan p(5n+4)=0 mod5 stays OPEN \u2014 recurrence carries no mod-5 structure; obstruction = Mathlib-absent modular forms."
+    },
+    {
+      "name": "Brockian.PartitionRecurrence.partitionGF_eq_tprod_geo",
+      "kind": "theorem",
+      "module": "Brockian.PartitionRecurrence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PartitionRecurrence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32",
+      "provenance_note": "New content unlocked by the now-unconditional pentagonalNumberTheorem: partitionGF * genFun pstChar = 1 (partition series = inverse of the Euler product, factor-by-factor); partition_pentagonal_convolution (sum p(i)*pentCoeff(j)=0 for n>=1); partition_recurrence p(n) = -sum_{k<n} p(k)*pentCoeff(n-k) (Euler's recurrence, isolated). Fully pentagonal-indexed form = mechanical reindexing, documented not-carried-out (NOT open). Ramanujan p(5n+4)=0 mod5 stays OPEN \u2014 recurrence carries no mod-5 structure; obstruction = Mathlib-absent modular forms."
+    },
+    {
+      "name": "Brockian.PartitionRecurrence.partitionGF_mul_pentagonalProduct",
+      "kind": "theorem",
+      "module": "Brockian.PartitionRecurrence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PartitionRecurrence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32",
+      "provenance_note": "New content unlocked by the now-unconditional pentagonalNumberTheorem: partitionGF * genFun pstChar = 1 (partition series = inverse of the Euler product, factor-by-factor); partition_pentagonal_convolution (sum p(i)*pentCoeff(j)=0 for n>=1); partition_recurrence p(n) = -sum_{k<n} p(k)*pentCoeff(n-k) (Euler's recurrence, isolated). Fully pentagonal-indexed form = mechanical reindexing, documented not-carried-out (NOT open). Ramanujan p(5n+4)=0 mod5 stays OPEN \u2014 recurrence carries no mod-5 structure; obstruction = Mathlib-absent modular forms."
+    },
+    {
+      "name": "Brockian.PartitionRecurrence.partition_pentagonal_convolution",
+      "kind": "theorem",
+      "module": "Brockian.PartitionRecurrence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PartitionRecurrence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32",
+      "provenance_note": "New content unlocked by the now-unconditional pentagonalNumberTheorem: partitionGF * genFun pstChar = 1 (partition series = inverse of the Euler product, factor-by-factor); partition_pentagonal_convolution (sum p(i)*pentCoeff(j)=0 for n>=1); partition_recurrence p(n) = -sum_{k<n} p(k)*pentCoeff(n-k) (Euler's recurrence, isolated). Fully pentagonal-indexed form = mechanical reindexing, documented not-carried-out (NOT open). Ramanujan p(5n+4)=0 mod5 stays OPEN \u2014 recurrence carries no mod-5 structure; obstruction = Mathlib-absent modular forms."
+    },
+    {
+      "name": "Brockian.PartitionRecurrence.partition_pentagonal_convolution_range",
+      "kind": "theorem",
+      "module": "Brockian.PartitionRecurrence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PartitionRecurrence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32",
+      "provenance_note": "New content unlocked by the now-unconditional pentagonalNumberTheorem: partitionGF * genFun pstChar = 1 (partition series = inverse of the Euler product, factor-by-factor); partition_pentagonal_convolution (sum p(i)*pentCoeff(j)=0 for n>=1); partition_recurrence p(n) = -sum_{k<n} p(k)*pentCoeff(n-k) (Euler's recurrence, isolated). Fully pentagonal-indexed form = mechanical reindexing, documented not-carried-out (NOT open). Ramanujan p(5n+4)=0 mod5 stays OPEN \u2014 recurrence carries no mod-5 structure; obstruction = Mathlib-absent modular forms."
+    },
+    {
+      "name": "Brockian.PartitionRecurrence.partition_recurrence",
+      "kind": "theorem",
+      "module": "Brockian.PartitionRecurrence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PartitionRecurrence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32",
+      "provenance_note": "New content unlocked by the now-unconditional pentagonalNumberTheorem: partitionGF * genFun pstChar = 1 (partition series = inverse of the Euler product, factor-by-factor); partition_pentagonal_convolution (sum p(i)*pentCoeff(j)=0 for n>=1); partition_recurrence p(n) = -sum_{k<n} p(k)*pentCoeff(n-k) (Euler's recurrence, isolated). Fully pentagonal-indexed form = mechanical reindexing, documented not-carried-out (NOT open). Ramanujan p(5n+4)=0 mod5 stays OPEN \u2014 recurrence carries no mod-5 structure; obstruction = Mathlib-absent modular forms."
+    },
+    {
+      "name": "Brockian.PartitionRecurrence.pentCoeff_zero",
+      "kind": "theorem",
+      "module": "Brockian.PartitionRecurrence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PartitionRecurrence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32",
+      "provenance_note": "New content unlocked by the now-unconditional pentagonalNumberTheorem: partitionGF * genFun pstChar = 1 (partition series = inverse of the Euler product, factor-by-factor); partition_pentagonal_convolution (sum p(i)*pentCoeff(j)=0 for n>=1); partition_recurrence p(n) = -sum_{k<n} p(k)*pentCoeff(n-k) (Euler's recurrence, isolated). Fully pentagonal-indexed form = mechanical reindexing, documented not-carried-out (NOT open). Ramanujan p(5n+4)=0 mod5 stays OPEN \u2014 recurrence carries no mod-5 structure; obstruction = Mathlib-absent modular forms."
     },
     {
       "name": "Brockian.Penrose.A",

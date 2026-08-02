@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 325
+- **DEFINITION**: 326
 - **DISCHARGED**: 6
-- **PROVED**: 1762
+- **PROVED**: 1770
 
 ## Theorems
 
@@ -991,6 +991,15 @@
 | PROVED | `Brockian.OddDistinctPartition.parts_subset_Icc` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.OddDistinctPartition.powerSeries_odds_eq_distincts` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.OddDistinctPartition.toFinset_inj_on_distincts` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.PartitionRecurrence.factor_eq_geo` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
+| DEFINITION | `Brockian.PartitionRecurrence.geo` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
+| PROVED | `Brockian.PartitionRecurrence.geo_mul` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
+| PROVED | `Brockian.PartitionRecurrence.partitionGF_eq_tprod_geo` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
+| PROVED | `Brockian.PartitionRecurrence.partitionGF_mul_pentagonalProduct` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
+| PROVED | `Brockian.PartitionRecurrence.partition_pentagonal_convolution` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
+| PROVED | `Brockian.PartitionRecurrence.partition_pentagonal_convolution_range` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
+| PROVED | `Brockian.PartitionRecurrence.partition_recurrence` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
+| PROVED | `Brockian.PartitionRecurrence.pentCoeff_zero` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
 | DEFINITION | `Brockian.Penrose.A` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
 | DEFINITION | `Brockian.Penrose.A_ae` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
 | PROVED | `Brockian.Penrose.A_ae_add` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
