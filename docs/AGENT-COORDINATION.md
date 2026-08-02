@@ -572,3 +572,23 @@ keep boundedv-continuous.)
   - WeakSolutionRegularity (1D elliptic regularity, continuous V) → project `c400008b-5931-4ec5-9dc0-df7900be07eb`. If closed: DeficiencyODE Gate-1 conditionals discharge. (Codex's Weyl lane — coordinate on integration.)
   Our own AXLE-verified swarm keeps the retrievable path; Aristotle is a redundant stronger-prover race.
   NOTE: Harmonic download API has been flaky (old job c6a46c07 still 500s); results may need retry to pull.
+
+- 2026-08-02 — **Franklin CONDITIONAL cleanup (hygiene)**. Unconditional PST is already
+  PROVED as `Brockian.FranklinFixedPoint.pentagonalNumberTheorem` (no hyps; AXLE @4.32).
+  Registry post-pass marks the six Franklin reduction lemmas `DISCHARGED` via
+  `discharged_by: pentagonalNumberTheorem` — **no Franklin entry remains CONDITIONAL**.
+  Remaining open CONDITIONALs are non-Franklin: equidistribution/BV, Goldbach spectral model,
+  RH_of_BrockianSystem, DeficiencyODE/weak regularity, FreeLaplacian2 Fourier, KatoUnbounded
+  transfer, SchrodingerMinimal ODE, WeylLawTarget counting (18 total). Documented in
+  `PORT-QUEUE.md` RESOLVED (2026-08-02).
+
+- 2026-08-02 — **Orphan re-attest pass**. `no_theater_lint` clean on all three.
+  - `RiemannXiSymmetry` — re-attested `module_verified: true` (15 decls); imported in
+    `Brockian.lean`; ships.
+  - `WeylKatoNeumann` — re-attested `module_verified: true` (already imported/canonical
+    `WeylKatoNeumann.json`); ships refresh.
+  - `D5CharacterTable` — AXLE `module_verified: false` (`sorryAx` footprint in rotation/
+    reflection character proofs under flatten); **not shipped** (lean file stays local WIP).
+  Hygiene: removed failed short dup `FourierMultiplier.json` and non-canonical short
+  `LocalWheel.json` / `KatoNeumann.json` (canonicals `WeylFourierMultiplier` /
+  `GoldbachLocalWheel` / `WeylKatoNeumann` remain). Never stage `aristotle/kato-bounded`.

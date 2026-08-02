@@ -1,12 +1,13 @@
 {
-  "generated_at": "2026-08-02T10:48:06Z",
+  "generated_at": "2026-08-02T13:04:16Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 1184,
-      "DEFINITION": 253,
-      "CONDITIONAL": 24,
+      "PROVED": 1254,
+      "DEFINITION": 261,
+      "CONDITIONAL": 18,
+      "DISCHARGED": 6,
       "CONJECTURE": 1
     }
   },
@@ -25,9 +26,10 @@
       "definition": 1
     },
     "registry": {
-      "PROVED": 1184,
-      "DEFINITION": 253,
-      "CONDITIONAL": 24,
+      "PROVED": 1254,
+      "DEFINITION": 261,
+      "CONDITIONAL": 18,
+      "DISCHARGED": 6,
       "CONJECTURE": 1
     }
   },
@@ -8625,6 +8627,391 @@
       }
     },
     {
+      "name": "Brockian.FranklinFixedPoint.downMs_upPart",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.downOverlap_stair",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.downPart_largest",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.downPart_notFixed",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.downPart_sPart_gt",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.downPart_tDiag",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.down_L_ge",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.fixedPart_mem_iff",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.fixedPart_overlap",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.franklinMap_exists",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.hd_of_mem",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.hu_of_mem",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.largestPart_eq_of",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.largestPart_of_stair_neg",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.largestPart_of_stair_pos",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.mem_stair_natCast",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.mem_stair_neg_natCast",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.parts_ne_zero_of_mem",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.pentagonalNumberTheorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.phi_notFixed",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.phi_parts",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.phi_phi_eq",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.sPart_eq_of",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.sPart_of_stair_neg",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.sPart_of_stair_pos",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.stair_mem_iff",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.tDiag_of_stair_neg",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.tDiag_of_stair_pos",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.upMs_downPart",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.upOverlap_stair",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.upPart_largest",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.upPart_le_branch",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.upPart_notFixed",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.upPart_sPart",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.up_L_gt",
+      "module": "Brockian.FranklinFixedPoint",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinFixedPoint.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.FranklinInvolution.FranklinData",
       "module": "Brockian.FranklinInvolution",
       "register": "DEFINITION",
@@ -8638,7 +9025,7 @@
     {
       "name": "Brockian.FranklinInvolution.franklin_of_franklinData",
       "module": "Brockian.FranklinInvolution",
-      "register": "CONDITIONAL",
+      "register": "DISCHARGED",
       "kind": "theorem",
       "source": "Brockian/FranklinInvolution.lean",
       "axle": {
@@ -8704,7 +9091,7 @@
     {
       "name": "Brockian.FranklinInvolution.pentagonalNumberTheorem_of_franklinData",
       "module": "Brockian.FranklinInvolution",
-      "register": "CONDITIONAL",
+      "register": "DISCHARGED",
       "kind": "theorem",
       "source": "Brockian/FranklinInvolution.lean",
       "axle": {
@@ -8781,7 +9168,7 @@
     {
       "name": "Brockian.FranklinInvolution.signedSum_eq_pentCoeff_of_franklinData",
       "module": "Brockian.FranklinInvolution",
-      "register": "CONDITIONAL",
+      "register": "DISCHARGED",
       "kind": "theorem",
       "source": "Brockian/FranklinInvolution.lean",
       "axle": {
@@ -8924,7 +9311,7 @@
     {
       "name": "Brockian.FranklinInvolutionProof.pentagonalNumberTheorem_of_franklinMap",
       "module": "Brockian.FranklinInvolutionProof",
-      "register": "CONDITIONAL",
+      "register": "DISCHARGED",
       "kind": "theorem",
       "source": "Brockian/FranklinInvolutionProof.lean",
       "axle": {
@@ -9015,6 +9402,248 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/FranklinInvolutionProof.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.d_mem",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.downMs",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.downMs_card",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.downMs_nodup",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.downPart",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.downPart_ne",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.downPart_sign",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.franklinMap_of",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.nodup_of_sdiff",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.phi",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.phiMem",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.phi_ne",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.phi_parts_nodup",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.phi_sign",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.sPart_le_largest",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.sPart_pos",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.upMs",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.upMs_card",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.upMs_nodup",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.upPart",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.upPart_ne",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.FranklinMapConstruction.upPart_sign",
+      "module": "Brockian.FranklinMapConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FranklinMapConstruction.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -13467,7 +14096,7 @@
     {
       "name": "Brockian.PentagonalTheoremFranklin.pentagonalNumberTheorem_of_franklin",
       "module": "Brockian.PentagonalTheoremFranklin",
-      "register": "CONDITIONAL",
+      "register": "DISCHARGED",
       "kind": "theorem",
       "source": "Brockian/PentagonalTheoremFranklin.lean",
       "axle": {
@@ -13478,7 +14107,7 @@
     {
       "name": "Brockian.PentagonalTheoremFranklin.pentagonalProduct_coeff_of_franklin",
       "module": "Brockian.PentagonalTheoremFranklin",
-      "register": "CONDITIONAL",
+      "register": "DISCHARGED",
       "kind": "theorem",
       "source": "Brockian/PentagonalTheoremFranklin.lean",
       "axle": {
@@ -13635,6 +14264,171 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/RiemannScaffold.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.criticalLine_re_iff_reflect_re_eq",
+      "module": "Brockian.RiemannXiSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RiemannXiSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.reflect_fixed_iff",
+      "module": "Brockian.RiemannXiSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RiemannXiSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.reflect_re",
+      "module": "Brockian.RiemannXiSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RiemannXiSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.reflect_re_eq_half_iff",
+      "module": "Brockian.RiemannXiSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RiemannXiSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.reflect_re_eq_self_iff",
+      "module": "Brockian.RiemannXiSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RiemannXiSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.reflect_reflect",
+      "module": "Brockian.RiemannXiSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RiemannXiSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_eq_zero_iff_reflect",
+      "module": "Brockian.RiemannXiSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RiemannXiSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_eq_zero_reflect",
+      "module": "Brockian.RiemannXiSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RiemannXiSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_reflect",
+      "module": "Brockian.RiemannXiSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RiemannXiSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_reflect_eq_zero_iff",
+      "module": "Brockian.RiemannXiSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RiemannXiSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_reflect_zero_and_criticalLine",
+      "module": "Brockian.RiemannXiSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RiemannXiSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_zeroSet_image_reflect",
+      "module": "Brockian.RiemannXiSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RiemannXiSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_zeroSet_preimage_reflect",
+      "module": "Brockian.RiemannXiSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RiemannXiSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_reflect_zero",
+      "module": "Brockian.RiemannXiSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RiemannXiSymmetry.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_zero",
+      "module": "Brockian.RiemannXiSymmetry",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/RiemannXiSymmetry.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -18266,6 +19060,72 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/Kato.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumann.boundedPerturbationTransfer_of_resolvent_norm_lt_one",
+      "module": "Brockian.Weyl.KatoNeumann",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoNeumann.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumann.katoFactorInverseOfNormLtOne",
+      "module": "Brockian.Weyl.KatoNeumann",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/KatoNeumann.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumann.katoFactor_rightInverse_of_norm_lt_one",
+      "module": "Brockian.Weyl.KatoNeumann",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoNeumann.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumann.rangeAddI_perturb_eq_univ_of_resolvent_norm_lt_one",
+      "module": "Brockian.Weyl.KatoNeumann",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoNeumann.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumann.rangeSubI_perturb_eq_univ_of_resolvent_norm_lt_one",
+      "module": "Brockian.Weyl.KatoNeumann",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoNeumann.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumann.rightResolvent_perturb_of_norm_lt_one",
+      "module": "Brockian.Weyl.KatoNeumann",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoNeumann.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"

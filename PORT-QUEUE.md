@@ -26,6 +26,23 @@ concrete circulant/Laplacian eigenvalues and independently AXLE-verified, axiom-
 |--------|-----------|-----|
 | **`Aut(C₅) ≅ D₅`** | 54 | ✅ PROVED — `Brockian.Automorphism.Full.autEquivDihedral : DihedralGroup 5 ≃* (C5 ≃g C5)`, via the `|Aut(C₅)|≤10` pinning/surjectivity argument (omega on `Fin 5`). Reverse bound closed; full isomorphism, axiom-clean. |
 
+## RESOLVED (2026-08-02) — Euler pentagonal number theorem (Franklin) unconditional
+
+| Result | Ledger run | Now |
+|--------|-----------|-----|
+| **`pentagonalNumberTheorem`** | FranklinFixedPoint close | ✅ PROVED — `Brockian.FranklinFixedPoint.pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n`, no hypotheses, AXLE @4.32, axiom-clean. Keystone `fixedPart_mem_iff` + `franklinMap_exists : ∀ m, FranklinMap m`. |
+
+**Franklin CONDITIONAL residual:** **none open.** The six reduction-form lemmas remain only as `DISCHARGED` scaffolding (not open frontier, not re-counted as PROVED):
+
+- `PentagonalTheoremFranklin.pentagonalNumberTheorem_of_franklin`
+- `PentagonalTheoremFranklin.pentagonalProduct_coeff_of_franklin`
+- `FranklinInvolution.franklin_of_franklinData`
+- `FranklinInvolution.pentagonalNumberTheorem_of_franklinData`
+- `FranklinInvolution.signedSum_eq_pentCoeff_of_franklinData`
+- `FranklinInvolutionProof.pentagonalNumberTheorem_of_franklinMap`
+
+All six carry `discharged_by: pentagonalNumberTheorem` in `provenance/verdicts.yaml`. No Franklin entry remains `CONDITIONAL`.
+
 ## PARTIAL — (superseded above; kept for history)
 
 | Result | Ledger run | Status |

@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1239,
+    "PROVED": 1254,
     "DEFINITION": 261,
     "CONDITIONAL": 18,
     "DISCHARGED": 6,
@@ -28630,6 +28630,501 @@
       "quarantine": true,
       "ledger_run": "swarm 2026-08-01 \u2014 \u03be-bridge (unconditional) + Hilbert-P\u00f3lya conditional (OPEN)",
       "provenance_note": "\u03be-bridge (riemannXi, \u0393-factor nonvanishing, \u03be-zero from \u03b6-zero, \u03be-RH \u21d2 Mathlib RH) UNCONDITIONAL; guards s\u22600,1 prevent ex-falso. RH NOT claimed."
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.criticalLine_re_iff_reflect_re_eq",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.reflect_fixed_iff",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.reflect_re",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.reflect_re_eq_half_iff",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.reflect_re_eq_self_iff",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.reflect_reflect",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_eq_zero_iff_reflect",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_eq_zero_reflect",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_reflect",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_reflect_eq_zero_iff",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_reflect_zero_and_criticalLine",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_zeroSet_image_reflect",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_zeroSet_preimage_reflect",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_reflect_zero",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_zero",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.Sieve.H3",

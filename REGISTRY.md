@@ -10,7 +10,7 @@
 - **CONJECTURE**: 1
 - **DEFINITION**: 261
 - **DISCHARGED**: 6
-- **PROVED**: 1239
+- **PROVED**: 1254
 
 ## Theorems
 
@@ -900,6 +900,21 @@
 | DEFINITION | `Brockian.RiemannScaffold.riemannXi` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannScaffold.riemannXi_eq_zero_of_nontrivial_zeta_zero` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannScaffold.symmetric_eigenvalue_im_zero` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
+| PROVED | `Brockian.RiemannXiSymmetry.criticalLine_re_iff_reflect_re_eq` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.reflect_fixed_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.reflect_re` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.reflect_re_eq_half_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.reflect_re_eq_self_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.reflect_reflect` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.riemannXi_eq_zero_iff_reflect` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.riemannXi_eq_zero_reflect` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.riemannXi_reflect` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.riemannXi_reflect_eq_zero_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.riemannXi_reflect_zero_and_criticalLine` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.riemannXi_zeroSet_image_reflect` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.riemannXi_zeroSet_preimage_reflect` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_reflect_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_zero` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Sieve.H3` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.H3_det` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.H3_ground` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
