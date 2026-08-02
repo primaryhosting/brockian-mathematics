@@ -9,7 +9,7 @@
 - **CONDITIONAL**: 12
 - **CONJECTURE**: 1
 - **DEFINITION**: 201
-- **PROVED**: 782
+- **PROVED**: 804
 
 ## Theorems
 
@@ -124,6 +124,28 @@
 | PROVED | `Brockian.Connectivity.pentagon_lambda2_phi` | ✓ | verified | lean-4.32.0 | run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues |
 | PROVED | `Brockian.Connectivity.pentagon_ratio` | ✓ | verified | lean-4.32.0 | run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues |
 | PROVED | `Brockian.Connectivity.two_cos_4pi_5` | ✓ | verified | lean-4.32.0 | run 88 (1d2a…) — re-proved fresh @ v4.32 via concrete Laplacian eigenvalues |
+| PROVED | `Brockian.ConnectivityGoldenBridge.algebraic_connectivity_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.algebraic_connectivity_C5_schema` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.algebraic_connectivity_schema` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.cos_two_pi_div_five_eq` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.golden_sub_one_eq_two_cos` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.golden_sub_one_mem_adjacency_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.inv_phi_eq_phi_sub_one` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.lambda2_eq_cos_form` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.lambda2_eq_three_minus_phi` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.lambda2_eq_two_minus_phi_sub_one` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.lambda2_eq_two_minus_two_cos` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.lambda2_le_large_eig` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.lambda2_le_two_plus_phi` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.lambda2_mem_laplacianEigs5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.lambda2_over_degree` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.lambda2_pos` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.lambda2_triple_identity` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.laplacian_gap_from_adjacency_mode` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.large_eig_eq_two_plus_phi` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.neg_phi_mem_adjacency_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.two_cos_four_pi_div_five_eq_neg_phi` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConnectivityGoldenBridge.two_cos_four_pi_div_five_geometry` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
 | DEFINITION | `Brockian.Core.Ray` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.binet_formula` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.cos_2pi_5` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
@@ -589,21 +611,21 @@
 | PROVED | `Brockian.SingularSeries.Convergence.singularSeriesFinite_tendsto_pos` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
 | PROVED | `Brockian.SingularSeries.Convergence.singular_series_pos'` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
 | PROVED | `Brockian.SingularSeries.Convergence.summable_localFactorAt_sub_one` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
-| DEFINITION | `Brockian.SingularSeries.Examples.evenPair` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.SingularSeries.Examples.evenPair_card_le_two` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.SingularSeries.Examples.isAdmissible_evenPair` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.SingularSeries.Examples.isAdmissible_evenPair_four` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.SingularSeries.Examples.isAdmissible_evenPair_six` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.SingularSeries.Examples.isAdmissible_evenPair_two` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.SingularSeries.Examples.isAdmissible_twinGap` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.SingularSeries.Examples.singular_series_finite_pos_twinGap` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_evenPair` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_evenPair_four` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_evenPair_six` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_evenPair_two` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_twinGap` | ✓ | verified | lean-4.32.0 |  |
-| DEFINITION | `Brockian.SingularSeries.Examples.twinGap` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.SingularSeries.Examples.twinGap_eq` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.SingularSeries.Examples.evenPair` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Examples.evenPair_card_le_two` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Examples.isAdmissible_evenPair` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Examples.isAdmissible_evenPair_four` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Examples.isAdmissible_evenPair_six` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Examples.isAdmissible_evenPair_two` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Examples.isAdmissible_twinGap` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Examples.singular_series_finite_pos_twinGap` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_evenPair` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_evenPair_four` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_evenPair_six` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_evenPair_two` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_twinGap` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| DEFINITION | `Brockian.SingularSeries.Examples.twinGap` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.Examples.twinGap_eq` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
 | DEFINITION | `Brockian.SingularSeries.Wire.IsAdmissible` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.SingularSeries.Wire.h_conv_of_admissible` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.SingularSeries.Wire.isAdmissible_iff` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
