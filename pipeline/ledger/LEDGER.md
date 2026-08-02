@@ -9,10 +9,10 @@
 
 | Register | Count |
 |---|---|
-| OPEN | 5 |
 | SCAFFOLD | 5 |
+| OPEN | 4 |
+| PARTIAL | 3 |
 | CONDITIONAL | 2 |
-| PARTIAL | 2 |
 | COMPUTATION | 1 |
 | LITERATURE | 1 |
 
@@ -35,6 +35,7 @@
 | PARTIAL | `distill-etp-stage1` | distillation | partial | 3 | 90 | SAIR Mathematics Distillation Challenge — Equational Theorie |
 | SCAFFOLD | `math-gate1-lp-continuous-bounded` | math | partial | 5 | 85 | Gate 1: continuous bounded potential → limit-point |
 | SCAFFOLD | `math-goldbach-local-wheels` | math | partial | 3 | 80 | Goldbach local wheels & singular series (finite layer) |
+| PARTIAL | `math-physlean-import` | math | partial | 3 | 75 | Physlib / Mathlib harvest queue (inspect → index → optional  |
 | SCAFFOLD | `distill-etp-stage2` | distillation | open | 4 | 75 | SAIR Distillation Stage 2 — proof or counterexample |
 | PARTIAL | `cs-settle-factory` | cs | partial | 2 | 72 | Certificate settle factory wired into pipeline formalize mod |
 | SCAFFOLD | `quantum-free-laplacian-plancherel` | quantum | scaffolded | 4 | 72 | Free Laplacian Plancherel / Fourier multiplier scaffold |
@@ -43,7 +44,6 @@
 | SCAFFOLD | `math-torus-honesty` | math | partial | 3 | 68 | Sieve phase–depth torus: period / injectivity honesty ledger |
 | COMPUTATION | `cs-sieve-count-parity` | cs | partial | 2 | 65 | Executable sieve counts match Lean admissibility cards |
 | OPEN | `sair-program-tracker` | sair | open | 2 | 60 | SAIR.foundation program & challenge tracker |
-| OPEN | `math-physlean-import` | math | open | 3 | 55 | PhysLean / Mathlib import queue for spectral bridges |
 | OPEN | `erdos-52` | erdos | open | 5 | 55 | Erdős–Turán conjectures family (seed) |
 | OPEN | `erdos-1` | erdos | open | 5 | 40 | Erdős problem 1 (seed placeholder — verify statement on site |
 | CONDITIONAL | `math-rh-schema` | math | conditional | 5 | 30 | RH schema (honest conditional — never claim PROVED) |

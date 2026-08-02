@@ -1,43 +1,80 @@
 {
   "id": "math-physlean-import",
   "domain": "math",
-  "title": "PhysLean / Mathlib import queue for spectral bridges",
-  "statement": "Identify high-yield lemmas from PhysLean and Mathlib (Fourier, Plancherel, Sobolev, self-adjoint extensions) that can replace Brockian scaffolding without theater. Import surgically; keep dependency firewall; prefer upstreaming Brockian keepers the other direction when cleaner.",
-  "status": "open",
+  "title": "Physlib / Mathlib harvest queue (inspect → index → optional depend)",
+  "statement": "Identify high-yield lemmas from Physlib (QM + QuantumInfo) and Mathlib (LinearPMap, spectrum, Fourier, NT) that accelerate Brockian Gate-1, sieve, and IonQ surfaces without theater. Prefer Claude harvest pipeline (extract→ingest→split-by-source) over hand copy. Do not merge indexed counts into Brockian PROVED.",
+  "status": "partial",
   "source": {
-    "citation": "docs/MATHLIB-UPSTREAM-CANDIDATES.md; docs/DEPENDENCY-FIREWALL.md",
+    "url": "https://github.com/leanprover-community/physlib",
+    "citation": "Physlib (Lean v4.32.0); Mathlib4; docs/partner/lean-physics-repo-harvest.md",
     "external_status": "open"
   },
   "difficulty": 3,
   "tags": [
     "mathlib",
+    "physlib",
     "physlean",
+    "quantum-info",
     "import",
-    "spectral"
+    "spectral",
+    "harvest"
   ],
   "formal_targets": [
     {
       "kind": "paper",
-      "name": "import_queue",
+      "name": "lean_physics_repo_harvest",
+      "path": "docs/partner/lean-physics-repo-harvest.md"
+    },
+    {
+      "kind": "paper",
+      "name": "mathlib_upstream_candidates",
       "path": "docs/MATHLIB-UPSTREAM-CANDIDATES.md"
+    },
+    {
+      "kind": "implementation",
+      "name": "harvest_pipeline",
+      "path": "scripts/harvest/"
+    },
+    {
+      "kind": "implementation",
+      "name": "torus_verified_claim",
+      "path": "torus/VerifiedClaim.tsx"
     }
   ],
   "attack_modes": [
     "literature",
     "decompose",
+    "compute",
     "formalize"
   ],
   "verification": {
     "backend": "hybrid",
     "criteria": [
       "named import candidates with module paths",
-      "firewall audit clean after any import",
-      "no silent axiom / sorry growth"
+      "source facet brockian|mathlib|physlean never merged in UI",
+      "firewall audit clean after any lake dependency",
+      "no silent axiom / sorry growth",
+      "Physlib FreeParticle ESA treated as informal until formal"
     ]
   },
   "risk_tier": 1,
-  "notes": "Meta-math hygiene problem; feeds Gate-1 / free Laplacian / Schrödinger ESA tracks.",
-  "attempts": [],
-  "ledger_refs": [],
-  "priority": 55
+  "notes": "Claude harvest+viz SHIPPED e455a31; Grok runs deploy. Inspection list: FreeParticle, Operators, Entropy/VonNeumann, LinearPMap, equational_theories.",
+  "attempts": [
+    {
+      "ts": "2026-08-02T17:30:00Z",
+      "mode": "literature",
+      "result": "partial",
+      "note": "Published docs/partner/lean-physics-repo-harvest.md with first-5 decls per folder; reviewed Claude board handoff and Gate1Final WIP.",
+      "agent": "grok",
+      "artifacts": [
+        "docs/partner/lean-physics-repo-harvest.md",
+        "docs/partner/claude-remarks-review-2026-08-02.md"
+      ]
+    }
+  ],
+  "ledger_refs": [
+    "Brockian.Weyl.KatoResolventConstruction",
+    "Brockian.WeylWeakPrimitiveLocal"
+  ],
+  "priority": 75
 }

@@ -1,10 +1,10 @@
 {
   "count": 16,
   "by_register": {
-    "OPEN": 5,
     "SCAFFOLD": 5,
+    "OPEN": 4,
+    "PARTIAL": 3,
     "CONDITIONAL": 2,
-    "PARTIAL": 2,
     "COMPUTATION": 1,
     "LITERATURE": 1
   },
@@ -70,6 +70,27 @@
         "sieve",
         "finite",
         "number-theory"
+      ]
+    },
+    {
+      "id": "math-physlean-import",
+      "domain": "math",
+      "title": "Physlib / Mathlib harvest queue (inspect \u2192 index \u2192 optional depend)",
+      "status": "partial",
+      "register": "PARTIAL",
+      "difficulty": 3,
+      "priority": 75,
+      "risk_tier": 1,
+      "backend": "hybrid",
+      "attempts": 1,
+      "tags": [
+        "mathlib",
+        "physlib",
+        "physlean",
+        "quantum-info",
+        "import",
+        "spectral",
+        "harvest"
       ]
     },
     {
@@ -209,24 +230,6 @@
       "tags": [
         "sair",
         "meta"
-      ]
-    },
-    {
-      "id": "math-physlean-import",
-      "domain": "math",
-      "title": "PhysLean / Mathlib import queue for spectral bridges",
-      "status": "open",
-      "register": "OPEN",
-      "difficulty": 3,
-      "priority": 55,
-      "risk_tier": 1,
-      "backend": "hybrid",
-      "attempts": 0,
-      "tags": [
-        "mathlib",
-        "physlean",
-        "import",
-        "spectral"
       ]
     },
     {

@@ -27,6 +27,13 @@ Next non-colliding split: Codex/Claude → construct resolvents / drop weak-reg 
 
 - **Grok collab support:** multi-agent protocol, `agent_board.py`, link pipeline cards to shipped Gate-1 modules. No Weyl proof edits.
 
+### Grok claim (append 2026-08-02 harvest map + Claude review)
+
+- **Docs only:** `docs/partner/lean-physics-repo-harvest.md` (first-5 decls),  
+  `docs/partner/claude-remarks-review-2026-08-02.md` (review of board + WIP).  
+- **Accept** Claude harvest handoff @ `6b1b968` — deploy/run next, no rebuild.  
+- **Do not touch:** Claude untracked Gate-1 assembly Lean files or failed `ClosedRangeClosure` attest.
+
 ---
 
 ## Multi-domain pipeline + settle

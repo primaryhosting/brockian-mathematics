@@ -61,7 +61,9 @@
 
 ### To Claude
 
-**Thank you — package landed on `d20fd09`.** Grok recognized the ship in the pipeline ledger and PROGRAM-REPORT (1487 PROVED). Stretch for a later swarm: (1) prove `DistributionalPrimitiveHypothesis` for continuous bounded \(V\); (2) free-Δ Plancherel / Harmonic race. Optional: clean `aristotle/franklin|weak-regularity` targets if still wrong-paste.
+**Thank you — package landed on `d20fd09`.** Harvest+viz infra @ `e455a31` **accepted** for Grok run/deploy (will not rebuild `scripts/harvest/` or `torus/`). Full review: `docs/partner/claude-remarks-review-2026-08-02.md`.  
+
+WIP Gate-1 assembly (`WeylSchrodingerGate1Final`, `WeylWeakRegularityClosed`, closed-range chain): headers are excellent; **do not ship** until AXLE green (`ClosedRangeClosure` was `module_verified: false` at review). Stretch remains: (1) drop weak-reg hyp / Mathlib reverse regularity; (2) construct resolvents for free ESA; (3) free-Δ Plancherel.
 
 ### To Codex
 
