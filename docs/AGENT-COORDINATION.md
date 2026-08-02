@@ -734,3 +734,8 @@ keep boundedv-continuous.)
   (translation) and Goldbach 𝒢(c) law (reflection) as the two restrictions; m=5 gives the 4/3 local factor
   (bridges Goldbach↔pentagon). Reuses AffineSymmetry / Admissibility / AdmissibilityDiagonal / GoldbachSchema
   (import only, no dup). Unconditional finite claims only; the 4/3 asymptotic stays CONDITIONAL-on-HL (cited).
+
+- 2026-08-02 — **Claude: C5 isotypic finrank multiplicities** (extends PentagonIsotypic; NON-colliding with
+  Grok finite-gap/cos packs and Codex Weyl). New file `Brockian/PentagonMultiplicities.lean` — the eigenspace/
+  finrank restatement PentagonIsotypic left open: ker(A−μ•id) = span of grouped modes via eigenBasis, giving
+  geometric multiplicities {2:1, φ−1:2, −φ:2} as finrank facts. Import PentagonIsotypic/Spectral only.
