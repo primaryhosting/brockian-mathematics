@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 19
 - **CONJECTURE**: 1
-- **DEFINITION**: 229
-- **PROVED**: 979
+- **DEFINITION**: 233
+- **PROVED**: 985
 
 ## Theorems
 
@@ -372,6 +372,16 @@
 | DEFINITION | `Brockian.FranklinInvolution.tDiag` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolution.tDiag_gap_exists` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolution.tDiag_notMem` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| DEFINITION | `Brockian.GaloisCyclicGroup.alphaSub` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
+| PROVED | `Brockian.GaloisCyclicGroup.cycExt` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
+| PROVED | `Brockian.GaloisCyclicGroup.primRoot` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
+| DEFINITION | `Brockian.GaloisCyclicGroup.realSubfield` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
+| PROVED | `Brockian.GaloisCyclicGroup.realSubfield_facts` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
+| PROVED | `Brockian.GaloisCyclicGroup.realSubfield_gal_card` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
+| PROVED | `Brockian.GaloisCyclicGroup.realSubfield_gal_isCyclic` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
+| PROVED | `Brockian.GaloisCyclicGroup.realSubfield_isGalois` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
+| DEFINITION | `Brockian.GaloisCyclicGroup.zetaC` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
+| DEFINITION | `Brockian.GaloisCyclicGroup.zetaSub` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
 | PROVED | `Brockian.GaloisGeneralDegree.quadratic_iff_five_general` | ✓ | verified | lean-4.32.0 | roadmap #13 GENERAL — full why-five degree theorem for all odd primes; AXLE @4.32 |
 | PROVED | `Brockian.GaloisGeneralDegree.real_subfield_degree` | ✓ | verified | lean-4.32.0 | roadmap #13 GENERAL — full why-five degree theorem for all odd primes; AXLE @4.32 |
 | PROVED | `Brockian.GaloisMinPolyFamily.C_facts` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |

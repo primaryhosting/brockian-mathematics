@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 979,
-    "DEFINITION": 229,
+    "PROVED": 985,
+    "DEFINITION": 233,
     "CONDITIONAL": 19,
     "CONJECTURE": 1
   },
@@ -11195,6 +11195,310 @@
       "quarantine": true,
       "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
       "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.alphaSub",
+      "kind": "def",
+      "module": "Brockian.GaloisCyclicGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisCyclicGroup.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #7 \u2014 Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32",
+      "provenance_note": "For every odd prime p: Q(2cos 2pi/p)/Q is Galois (abelian), its Galois group is CYCLIC (IsCyclic) of order (p-1)/2, on the actual field automorphism group (via cyclotomic Gal=(Z/p)^x cyclic, restrictNormalHom surjectivity, card_aut_eq_finrank + real_subfield_degree). Full target, not a reduction. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.cycExt",
+      "kind": "theorem",
+      "module": "Brockian.GaloisCyclicGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisCyclicGroup.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #7 \u2014 Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32",
+      "provenance_note": "For every odd prime p: Q(2cos 2pi/p)/Q is Galois (abelian), its Galois group is CYCLIC (IsCyclic) of order (p-1)/2, on the actual field automorphism group (via cyclotomic Gal=(Z/p)^x cyclic, restrictNormalHom surjectivity, card_aut_eq_finrank + real_subfield_degree). Full target, not a reduction. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.primRoot",
+      "kind": "theorem",
+      "module": "Brockian.GaloisCyclicGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisCyclicGroup.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #7 \u2014 Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32",
+      "provenance_note": "For every odd prime p: Q(2cos 2pi/p)/Q is Galois (abelian), its Galois group is CYCLIC (IsCyclic) of order (p-1)/2, on the actual field automorphism group (via cyclotomic Gal=(Z/p)^x cyclic, restrictNormalHom surjectivity, card_aut_eq_finrank + real_subfield_degree). Full target, not a reduction. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.realSubfield",
+      "kind": "def",
+      "module": "Brockian.GaloisCyclicGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisCyclicGroup.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #7 \u2014 Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32",
+      "provenance_note": "For every odd prime p: Q(2cos 2pi/p)/Q is Galois (abelian), its Galois group is CYCLIC (IsCyclic) of order (p-1)/2, on the actual field automorphism group (via cyclotomic Gal=(Z/p)^x cyclic, restrictNormalHom surjectivity, card_aut_eq_finrank + real_subfield_degree). Full target, not a reduction. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.realSubfield_facts",
+      "kind": "theorem",
+      "module": "Brockian.GaloisCyclicGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisCyclicGroup.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #7 \u2014 Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32",
+      "provenance_note": "For every odd prime p: Q(2cos 2pi/p)/Q is Galois (abelian), its Galois group is CYCLIC (IsCyclic) of order (p-1)/2, on the actual field automorphism group (via cyclotomic Gal=(Z/p)^x cyclic, restrictNormalHom surjectivity, card_aut_eq_finrank + real_subfield_degree). Full target, not a reduction. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.realSubfield_gal_card",
+      "kind": "theorem",
+      "module": "Brockian.GaloisCyclicGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisCyclicGroup.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #7 \u2014 Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32",
+      "provenance_note": "For every odd prime p: Q(2cos 2pi/p)/Q is Galois (abelian), its Galois group is CYCLIC (IsCyclic) of order (p-1)/2, on the actual field automorphism group (via cyclotomic Gal=(Z/p)^x cyclic, restrictNormalHom surjectivity, card_aut_eq_finrank + real_subfield_degree). Full target, not a reduction. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.realSubfield_gal_isCyclic",
+      "kind": "theorem",
+      "module": "Brockian.GaloisCyclicGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisCyclicGroup.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #7 \u2014 Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32",
+      "provenance_note": "For every odd prime p: Q(2cos 2pi/p)/Q is Galois (abelian), its Galois group is CYCLIC (IsCyclic) of order (p-1)/2, on the actual field automorphism group (via cyclotomic Gal=(Z/p)^x cyclic, restrictNormalHom surjectivity, card_aut_eq_finrank + real_subfield_degree). Full target, not a reduction. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.realSubfield_isGalois",
+      "kind": "theorem",
+      "module": "Brockian.GaloisCyclicGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisCyclicGroup.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #7 \u2014 Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32",
+      "provenance_note": "For every odd prime p: Q(2cos 2pi/p)/Q is Galois (abelian), its Galois group is CYCLIC (IsCyclic) of order (p-1)/2, on the actual field automorphism group (via cyclotomic Gal=(Z/p)^x cyclic, restrictNormalHom surjectivity, card_aut_eq_finrank + real_subfield_degree). Full target, not a reduction. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.zetaC",
+      "kind": "def",
+      "module": "Brockian.GaloisCyclicGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisCyclicGroup.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #7 \u2014 Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32",
+      "provenance_note": "For every odd prime p: Q(2cos 2pi/p)/Q is Galois (abelian), its Galois group is CYCLIC (IsCyclic) of order (p-1)/2, on the actual field automorphism group (via cyclotomic Gal=(Z/p)^x cyclic, restrictNormalHom surjectivity, card_aut_eq_finrank + real_subfield_degree). Full target, not a reduction. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.zetaSub",
+      "kind": "def",
+      "module": "Brockian.GaloisCyclicGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisCyclicGroup.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #7 \u2014 Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32",
+      "provenance_note": "For every odd prime p: Q(2cos 2pi/p)/Q is Galois (abelian), its Galois group is CYCLIC (IsCyclic) of order (p-1)/2, on the actual field automorphism group (via cyclotomic Gal=(Z/p)^x cyclic, restrictNormalHom surjectivity, card_aut_eq_finrank + real_subfield_degree). Full target, not a reduction. p=2 excluded (degenerate)."
     },
     {
       "name": "Brockian.GaloisGeneralDegree.quadratic_iff_five_general",
