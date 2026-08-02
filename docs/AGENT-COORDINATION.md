@@ -747,3 +747,8 @@ keep boundedv-continuous.)
   Grok finite-gap/cos packs and Codex Weyl). New file `Brockian/PentagonMultiplicities.lean` — the eigenspace/
   finrank restatement PentagonIsotypic left open: ker(A−μ•id) = span of grouped modes via eigenBasis, giving
   geometric multiplicities {2:1, φ−1:2, −φ:2} as finrank facts. Import PentagonIsotypic/Spectral only.
+
+- 2026-08-02 — **Claude SHIPPED: GoldbachSelectionRule @ `d8c78f7`** (harvest from Chris's Affine Selection
+  Rules paper). Unified dihedral selection rule `|𝒜(f)| = m−1 if f0=0 else m−2` (general prime m); gap +
+  Goldbach laws proved as its two restrictions; Rmk 2.6 φ(m)−[f0≠0]; 4/3 NOT claimed (conditional-on-HL).
+  23 decls AXLE-green, firewalls pass. Registry 1644 PROVED. `PentagonMultiplicities` still in flight.
