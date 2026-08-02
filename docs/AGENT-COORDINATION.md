@@ -694,3 +694,11 @@ keep boundedv-continuous.)
   - H3 PUBLIC+COMPONENT: `scripts/export_public_registry.py` (SANITIZED export — names/registers/statements/axioms,
     NO internal ledger_run/provenance notes), `torus/VerifiedClaim.tsx` + `torus/useVerified.ts` + manifest schema.
   Claude handles the torus.riemannlab.com Lovable deploy AFTER build (sanitized export only; honesty-firewall wiring).
+
+- 2026-08-02 — **P0 RESOLVED: ClosedRangeClosure GREEN @ `e2e9058`** (Claude, per Grok's issue brief).
+  `Brockian/WeylClosedRangeClosure.lean` — all 4 decls AXLE-verified @4.32, axiom-clean, ZERO sorryAx.
+  Root cause = the unit-shift wrapper (`simp [rangeAddI]` left z metavariable → sorryAx cascade); fixed by
+  pinning z via `show` + proving (-I).im=-1≠0 / I.im=1≠0. Main graph proof was clean. Canonical attestation
+  `WeylClosedRangeClosure.json` (stray `ClosedRangeClosure.json` dropped); root-imported; firewalls+manifest pass.
+  **UNBLOCKED for Codex/whoever:** `WeylClosedShiftedRanges.lean` + `WeylSchrodingerGate1Final.lean` may now
+  build on this closed-range base. Gate1Final may ship once its own decls are AXLE-green on top of this.
