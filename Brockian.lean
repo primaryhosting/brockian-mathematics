@@ -95,3 +95,4 @@ import Brockian.XiFunctionalEquation
 import Brockian.EquidistributionBVReduction
 import Brockian.FranklinInvolutionProof
 import Brockian.FranklinMapConstruction
+import Brockian.FranklinFixedPoint

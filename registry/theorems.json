@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1200,
-    "DEFINITION": 259,
+    "PROVED": 1234,
+    "DEFINITION": 260,
     "CONDITIONAL": 24,
     "CONJECTURE": 1
   },
@@ -11659,6 +11659,1122 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.downMs_upPart",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.downOverlap_stair",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.downPart_largest",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.downPart_notFixed",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.downPart_sPart_gt",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.downPart_tDiag",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.down_L_ge",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.fixedPart_mem_iff",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.fixedPart_overlap",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.franklinMap_exists",
+      "kind": "def",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.hd_of_mem",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.hu_of_mem",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.largestPart_eq_of",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.largestPart_of_stair_neg",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.largestPart_of_stair_pos",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.mem_stair_natCast",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.mem_stair_neg_natCast",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.parts_ne_zero_of_mem",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.pentagonalNumberTheorem",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.phi_notFixed",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.phi_parts",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.phi_phi_eq",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.sPart_eq_of",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.sPart_of_stair_neg",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.sPart_of_stair_pos",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.stair_mem_iff",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.tDiag_of_stair_neg",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.tDiag_of_stair_pos",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.upMs_downPart",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.upOverlap_stair",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.upPart_largest",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.upPart_le_branch",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.upPart_notFixed",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.upPart_sPart",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
+    },
+    {
+      "name": "Brockian.FranklinFixedPoint.up_L_gt",
+      "kind": "theorem",
+      "module": "Brockian.FranklinFixedPoint",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinFixedPoint.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 CLOSED \u2014 Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32",
+      "provenance_note": "THE CLOSE. fixedPart_mem_iff de-opaques fixedPart (Exists.choose cancelled via pentagonal_injective): p in fixedPart m iff exists k, pentagonal k = m and p.parts = stair k. From it: all four FranklinMap residuals (hd/hu/hnotfixed/hinv) discharged, giving franklinMap_exists : forall m, FranklinMap m (a genuine term). Hence pentagonalNumberTheorem : (genFun pstChar).coeff n = pentCoeff n \u2014 the Euler pentagonal number theorem, UNCONDITIONAL, no hypotheses, axiom-clean. Discharges the 6 Franklin conditional lemmas across FranklinInvolution/PentagonalTheoremFranklin/FranklinInvolutionProof (which remain as the proved reduction scaffolding this theorem is built on). No sorry/ex-falso/native_decide."
     },
     {
       "name": "Brockian.FranklinInvolution.FranklinData",

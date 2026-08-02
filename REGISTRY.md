@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 24
 - **CONJECTURE**: 1
-- **DEFINITION**: 259
-- **PROVED**: 1200
+- **DEFINITION**: 260
+- **PROVED**: 1234
 
 ## Theorems
 
@@ -386,6 +386,41 @@
 | PROVED | `Brockian.Fin5InnerProduct.hermInner_smul_left` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.hermInner_smul_right` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.norm_omega` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.FranklinFixedPoint.downMs_upPart` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.downOverlap_stair` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.downPart_largest` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.downPart_notFixed` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.downPart_sPart_gt` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.downPart_tDiag` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.down_L_ge` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.fixedPart_mem_iff` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.fixedPart_overlap` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinFixedPoint.franklinMap_exists` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.hd_of_mem` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.hu_of_mem` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.largestPart_eq_of` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.largestPart_of_stair_neg` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.largestPart_of_stair_pos` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.mem_stair_natCast` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.mem_stair_neg_natCast` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.parts_ne_zero_of_mem` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.pentagonalNumberTheorem` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.phi_notFixed` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.phi_parts` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.phi_phi_eq` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.sPart_eq_of` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.sPart_of_stair_neg` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.sPart_of_stair_pos` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.stair_mem_iff` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.tDiag_of_stair_neg` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.tDiag_of_stair_pos` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.upMs_downPart` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.upOverlap_stair` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.upPart_largest` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.upPart_le_branch` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.upPart_notFixed` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.upPart_sPart` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
+| PROVED | `Brockian.FranklinFixedPoint.up_L_gt` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
 | DEFINITION | `Brockian.FranklinInvolution.FranklinData` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | CONDITIONAL | `Brockian.FranklinInvolution.franklin_of_franklinData` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | DEFINITION | `Brockian.FranklinInvolution.largestPart` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
