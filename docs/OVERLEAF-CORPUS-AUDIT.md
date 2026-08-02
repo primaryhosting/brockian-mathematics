@@ -113,3 +113,32 @@ Referee read + machine check:
 - **§5 structure theorem — NOT a proof:** GAP1 threshold mismatch (`E_∘` below what Lemma 5.2 needs),
   GAP2 unproven "standard" incidence lemma, GAP3 mis-stated Pach–de Zeeuw citation, GAP4 internally
   circular `E_∘` bound. Labeled a sketch by the author; not established, not harvested.
+
+### Erdős #320 ("Spectral Completion") — NOT HONEST; mostly FALSE; NOT harvested (corrects the triage above)
+**Correction:** the initial keyword/structure triage (§GOLD) wrongly listed `Erdos 304`/#320 as gold.
+Proof-verification DEMOTES it. Findings:
+- **Only Lemma 3.1** (telescoping identity + `0 ≤ −log(1−t) ≤ t/(1−t) ≤ 2t`) is sound (machine-verified,
+  but a generic elementary log inequality — NOT novel, NOT on-thesis).
+- **Provably false / broken:** Lemma 3.2 (inequality backwards, self-refuting); Lemma 3.3 (circular —
+  character-identical to Conjecture 4.1, "proved" and "conjectured"); Theorem 3.4 (renewal eq
+  `ρ=∫_{z−1}^z 2ρ` does not admit `ρ~2z`; true solution `~N(log N)^{0.59}>N`); Lemma 4.2 (unproven,
+  false `τ(n)³` collision bound); **Lemma 5.7 FALSE** (`αI+βA+γJ` on C₅ has ≤3 distinct eigenvalues
+  mult 1,2,2 — cannot be the claimed 5-distinct set; `2cos144°=−φ` ∉ claimed set; the "omitted
+  computation" disproves it).
+- **Central premise `E(N)=o(U(N))` is REFUTED** by BGMS + the paper's own correct Lemma 3.1
+  (which forces `E(N)=Θ(N)`). The "three falsifiable conjectures" framing is not honest — the reduction
+  is glued by false lemmas, not a clean weakening.
+- **Decision: NOT harvested.** The one sound lemma is generic; importing it as "#320 content" would
+  overstate a mostly-false paper.
+
+## Verification summary (all four referee passes)
+| Paper | Verdict | Harvested |
+|-------|---------|-----------|
+| Erdős #604 (pinned distances) | **honest**, conditional reduction genuine/non-circular; §5 a sketch w/ gaps | ✅ 2 unconditional entropy lemmas (one closed a paper omission) — `Brockian.ErdosPinned` |
+| Erdős #236 (`f(n)` growth) | **honest-conditional**; math sound; paper's OWN Lean overstated (elided lemma, false j=0 step) | ✅ 1 unconditional trivial bound — `Brockian.Erdos236` |
+| Erdős #320 (spectral completion) | **NOT honest** — multiple provably-false steps + refuted premise + circular | ❌ nothing (only a generic log inequality survived) |
+| RH cluster (RIEMANN BROCK SUBMIT et al.) | **does NOT prove RH** — 4 exact gaps; scaffold vindicated | ❌ nothing (RH stays CONDITIONAL) |
+
+**Net:** the pull yielded 3 genuinely-verified unconditional lemmas across 2 honest Erdős papers;
+the other two are mostly-false/overclaim and correctly rejected. "Ensure the proofs work" caught
+the difference — a structure-only triage would have wrongly harvested #320.
