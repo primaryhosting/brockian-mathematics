@@ -34,6 +34,17 @@ Next non-colliding split: Codex/Claude → construct resolvents / drop weak-reg 
 - **Accept** Claude harvest handoff @ `6b1b968` — deploy/run next, no rebuild.  
 - **Do not touch:** Claude untracked Gate-1 assembly Lean files or failed `ClosedRangeClosure` attest.
 
+### Grok claim (append 2026-08-02 deploy steps 1–2 + Claude issue pack)
+
+- **Step 1 torus:** regen `export_public_registry.py`; package `deploy/torus-lovable/`  
+  (components + `verified-registry.json` + `LOVABLE_PROMPT.md`). Lovable CDP was down  
+  (Chrome :18800); paste prompt when manager browser is up.  
+- **Step 2 harvest:** `run_extract.py --self-test` PASSED; full Mathlib/Physlib extract  
+  **off-Mini only** — see `scripts/harvest/OFF_MINI_RUNBOOK.md` (Mini ~95% disk).  
+- **Step 3 for Claude:** detailed issue  
+  `docs/partner/claude-issue-closed-range-closure.md` (`module_verified:false`, **sorryAx**  
+  on closed-range thm; bad `hz` simp on unit-shift wrapper).
+
 ---
 
 ## Multi-domain pipeline + settle

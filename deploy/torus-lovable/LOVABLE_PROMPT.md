@@ -1,0 +1,83 @@
+# Lovable prompt — wire VerifiedClaim honesty firewall
+
+**Project:** torus.riemannlab.com (Riemann Labs / Spectral / AI Mathematician)  
+**Goal:** Install the verified-claim surface so public UI cannot show PROVED badges without a registry hit.  
+**Honesty:** Sources never merge; CONJECTURE/CONDITIONAL never render as green verified.
+
+## Tasks
+
+### 1. Add components
+
+Create these files exactly (paths may use `@/` alias if the project already has it):
+
+- `src/components/verified/VerifiedClaim.tsx`
+- `src/components/verified/useVerified.ts`
+
+Copy content from the repo package:
+
+- `deploy/torus-lovable/src/components/verified/VerifiedClaim.tsx`
+- `deploy/torus-lovable/src/components/verified/useVerified.ts`
+
+If you cannot read the host filesystem, the operator will paste the two TypeScript files in the next message. Keep them side-by-side so `import { useVerified } from "./useVerified"` resolves.
+
+### 2. Static registry asset
+
+Place `public/verified-registry.json` at the site root public path so it is served as:
+
+`/verified-registry.json`
+
+Source file: `deploy/torus-lovable/public/verified-registry.json` (~1 MB, sanitized).  
+Do not minify away the `summary` or `theorems` arrays. Do not invent extra PROVED rows.
+
+### 3. Demo mount (required for verification)
+
+On a low-traffic admin or “Verification” panel (or bottom of About), render:
+
+```tsx
+import { VerifiedClaim } from "@/components/verified/VerifiedClaim";
+
+export function VerificationHonestyDemo() {
+  return (
+    <div className="space-y-3 p-4">
+      <h2 className="text-lg font-semibold">Verification honesty demo</h2>
+      <VerifiedClaim
+        claim="Exactly 3 admissible start residues mod 5 for a nonzero gap (q−ν law)"
+        theorem="Brockian.Admissibility.admissibility_count_five"
+      />
+      <VerifiedClaim
+        claim="The Riemann Hypothesis is true"
+        theorem="Brockian.Nonexistent.rh_is_true"
+      />
+      <p className="text-sm opacity-70">
+        First badge must resolve from /verified-registry.json. Second must show ⊘ UNVERIFIED.
+        Never call open problems “verified.”
+      </p>
+    </div>
+  );
+}
+```
+
+Wire this component into an existing route (About, Observatory, or Settings). Do **not** put it only in dead code.
+
+### 4. Copy / counter hygiene (P0 honesty)
+
+If the site still shows hard-coded “53 theorems / 41 proved / dual Lean+Rocq verified / premier / on-chain verified / Proving the unprovable”, replace or soft-gate:
+
+- Prefer live counts from `verified-registry.json` → `summary` / by_register if present.
+- Remove “on-chain verified” and “proving the unprovable”.
+- Dual Lean+Rocq: only if both backends resolve; otherwise say “Lean 4 + Mathlib; Rocq optional”.
+- Open problems (RH, global Goldbach, full Gate-1 ESA) must never use a green Verified badge.
+
+### 5. Acceptance checks
+
+- [ ] `/verified-registry.json` returns 200 JSON with theorems array.
+- [ ] Demo PROVED theorem shows green Verified.
+- [ ] Fake theorem shows red ⊘ UNVERIFIED (not a spinner forever).
+- [ ] No new claim of RH/Goldbach solved.
+- [ ] Publish to production CDN.
+
+### 6. Non-goals
+
+- Do not rebuild the Lean registry in the browser.
+- Do not merge Mathlib/Physlib index counts until those sources appear in the JSON `source` facet.
+- Do not call AXLE from the frontend.

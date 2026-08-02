@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://torus.riemannlab.com/schema/lab-manifest.schema.json",
+  "title": "Torus Lab Manifest",
+  "description": "Binds a lab's visual/textual claims to fully-qualified verified theorem names. Every visible claim in a lab MUST appear here with the theorem that backs it; a claim with no theorem (or a theorem absent from the verified registry) renders as BLOCKED (⊘ UNVERIFIED) by the VerifiedClaim component. A picture cannot show a claim the registry does not back.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["labId", "claims"],
+  "properties": {
+    "labId": {
+      "type": "string",
+      "description": "Stable identifier for the lab (e.g. 'pentagonal-law', 'goldbach-comb').",
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-facing lab title."
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description of what the lab visualizes."
+    },
+    "registrySchema": {
+      "type": "string",
+      "description": "Expected public-registry schema version this manifest was authored against.",
+      "default": "brockian-public-verified-registry/v1"
+    },
+    "claims": {
+      "type": "array",
+      "description": "The claim-to-theorem bindings for this lab.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim", "theorem"],
+        "properties": {
+          "claim": {
+            "type": "string",
+            "description": "The human-facing assertion the visual makes (e.g. 'exactly 5 admissible residues mod 5').",
+            "minLength": 1
+          },
+          "theorem": {
+            "type": "string",
+            "description": "Fully-qualified theorem name used as the verified-registry key (e.g. 'Brockian.Admissibility.admissibility_count_five'). MUST resolve in the public registry or the claim renders BLOCKED.",
+            "minLength": 1
+          },
+          "visualRef": {
+            "type": "string",
+            "description": "Optional reference to the visual element the claim annotates (DOM id, figure key, frame index, etc.)."
+          }
+        }
+      }
+    }
+  }
+}
