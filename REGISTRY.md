@@ -10,7 +10,7 @@
 - **CONJECTURE**: 1
 - **DEFINITION**: 335
 - **DISCHARGED**: 6
-- **PROVED**: 1830
+- **PROVED**: 1832
 
 ## Theorems
 
@@ -1925,6 +1925,8 @@
 | PROVED | `Brockian.Weyl.KatoResolventPackage.ResolventAtI.perturbed_ranges_eq_univ` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.KatoResolventPackage.essentiallySelfAdjoint_perturb_of_resolventAtI` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.KatoResolventPackage.essentiallySelfAdjoint_perturb_of_resolventAtI_via_chain` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoTarget.dense_range_add_sub_of_selfAdjoint` | ✓ | verified | lean-4.32.0 | Aristotle/Harmonic close; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.KatoTarget.isSelfAdjoint_add` | ✓ | verified | lean-4.32.0 | Aristotle/Harmonic close; AXLE @4.32 |
 | DEFINITION | `Brockian.Weyl.KatoUnbounded.BoundedPerturbationTransfer` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
 | PROVED | `Brockian.Weyl.KatoUnbounded.boundedPerturbationTransfer_clm` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
 | CONDITIONAL | `Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |

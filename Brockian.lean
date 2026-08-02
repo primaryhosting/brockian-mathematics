@@ -142,3 +142,4 @@ import Brockian.Erdos236Lemmas
 import Brockian.ErdosPinnedLemmas
 import Brockian.PartitionRecurrence
 import Brockian.D5CharacterComplete
+import Brockian.KatoBounded

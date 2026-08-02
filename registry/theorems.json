@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1830,
+    "PROVED": 1832,
     "DEFINITION": 335,
     "CONDITIONAL": 21,
     "DISCHARGED": 6,
@@ -61945,6 +61945,72 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoTarget.dense_range_add_sub_of_selfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoTarget.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle/Harmonic close; AXLE @4.32",
+      "provenance_note": "Bounded-case Kato-Rellich (Aristotle/Harmonic close, independently AXLE-verified @4.32, axiom-clean): sum of two bounded self-adjoint operators is self-adjoint; a non-real scalar shift of that sum has full (hence dense) range -- the range-density input the essential-self-adjointness criterion consumes. Abstract/general with inlined hypotheses; the BOUNDED case only. Does NOT by itself discharge Gate 1 for the UNBOUNDED Brockian Schrodinger operator -- it is the bounded operator-theory link on the -Delta+V route."
+    },
+    {
+      "name": "Brockian.Weyl.KatoTarget.isSelfAdjoint_add",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoTarget.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle/Harmonic close; AXLE @4.32",
+      "provenance_note": "Bounded-case Kato-Rellich (Aristotle/Harmonic close, independently AXLE-verified @4.32, axiom-clean): sum of two bounded self-adjoint operators is self-adjoint; a non-real scalar shift of that sum has full (hence dense) range -- the range-density input the essential-self-adjointness criterion consumes. Abstract/general with inlined hypotheses; the BOUNDED case only. Does NOT by itself discharge Gate 1 for the UNBOUNDED Brockian Schrodinger operator -- it is the bounded operator-theory link on the -Delta+V route."
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.BoundedPerturbationTransfer",
