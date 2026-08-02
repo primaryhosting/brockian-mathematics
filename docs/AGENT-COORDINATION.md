@@ -47,6 +47,14 @@ Next non-colliding split: **Codex/Claude** → Gate1Final / ClosedShiftedRanges 
   `docs/partner/claude-issue-closed-range-closure.md` (`module_verified:false`, **sorryAx**  
   on closed-range thm; bad `hz` simp on unit-shift wrapper).
 
+### Grok claim (append 2026-08-02 — gaps 42–50 + Cos p=19)
+
+- **Shipped (non-colliding with Claude GoldbachSelectionRule / PentagonMultiplicities):**
+  - `SingularSeriesGaps4250` — even gaps 42–50 (AXLE green)
+  - `CosTraceNormNineteen` — p=19 degree 9 solid pack (AXLE green)
+- **Registry after integrate:** **1626 PROVED** / 316 DEF / 21 COND / 6 DISCH / 1 CONJ
+- **Not touched:** Claude untracked SelectionRule / Gate1 / WeakEnergy / WeakRegularityClosed
+
 ### Grok claim (append 2026-08-02 corpus push — finite + SAIR)
 
 - **New modules (AXLE @4.32, root-imported):**

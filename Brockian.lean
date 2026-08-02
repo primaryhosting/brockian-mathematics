@@ -69,6 +69,7 @@ import Brockian.SingularSeriesMoreExamples
 import Brockian.SingularSeriesEvenMore
 import Brockian.SingularSeriesGaps2230
 import Brockian.SingularSeriesGaps3240
+import Brockian.SingularSeriesGaps4250
 import Brockian.TwinPrimeConstant
 import Brockian.WeylFreeLaplacian2
 import Brockian.WeylConfining
@@ -85,6 +86,7 @@ import Brockian.CosTraceNorm
 import Brockian.CosTraceNormEleven
 import Brockian.CosTraceNormThirteen
 import Brockian.CosTraceNormSeventeen
+import Brockian.CosTraceNormNineteen
 import Brockian.WeylFourierMultiplier
 import Brockian.WeylWeakRegularityScaffold
 import Brockian.WeylWeakRegularityCore
