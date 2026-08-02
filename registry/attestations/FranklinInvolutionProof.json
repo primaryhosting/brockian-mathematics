@@ -1,0 +1,179 @@
+{
+  "module": "Brockian.FranklinInvolutionProof",
+  "environment": "lean-4.32.0",
+  "module_verified": true,
+  "declarations": [
+    {
+      "name": "Brockian.FranklinInvolutionProof.FranklinMap",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.fixedPart",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.fixedPart_subset",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.fixedPart_sum",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.franklinData_of_franklinMap",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.franklin_sum_invariant_down",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.franklin_sum_invariant_up",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.gauss_int",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.neg_one_pow_natAbs",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.pentagonalNumberTheorem_of_franklinMap",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stair",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stairBase",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stairPartAt",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stair_card",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stair_nodup",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stair_pos",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stair_sum",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stair_sum_eq",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    }
+  ]
+}

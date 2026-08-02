@@ -6,10 +6,10 @@
 
 ## Summary
 
-- **CONDITIONAL**: 23
+- **CONDITIONAL**: 24
 - **CONJECTURE**: 1
-- **DEFINITION**: 235
-- **PROVED**: 1020
+- **DEFINITION**: 241
+- **PROVED**: 1031
 
 ## Theorems
 
@@ -379,6 +379,24 @@
 | DEFINITION | `Brockian.FranklinInvolution.tDiag` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolution.tDiag_gap_exists` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolution.tDiag_notMem` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinInvolutionProof.FranklinMap` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinInvolutionProof.fixedPart` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolutionProof.fixedPart_subset` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolutionProof.fixedPart_sum` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinInvolutionProof.franklinData_of_franklinMap` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolutionProof.franklin_sum_invariant_down` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolutionProof.franklin_sum_invariant_up` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolutionProof.gauss_int` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolutionProof.neg_one_pow_natAbs` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| CONDITIONAL | `Brockian.FranklinInvolutionProof.pentagonalNumberTheorem_of_franklinMap` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinInvolutionProof.stair` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinInvolutionProof.stairBase` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinInvolutionProof.stairPartAt` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolutionProof.stair_card` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolutionProof.stair_nodup` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolutionProof.stair_pos` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolutionProof.stair_sum` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolutionProof.stair_sum_eq` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
 | DEFINITION | `Brockian.GaloisCyclicGroup.alphaSub` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
 | PROVED | `Brockian.GaloisCyclicGroup.cycExt` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
 | PROVED | `Brockian.GaloisCyclicGroup.primRoot` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |

@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1020,
-    "DEFINITION": 235,
-    "CONDITIONAL": 23,
+    "PROVED": 1031,
+    "DEFINITION": 241,
+    "CONDITIONAL": 24,
     "CONJECTURE": 1
   },
   "theorems": [
@@ -11415,6 +11415,556 @@
       "quarantine": true,
       "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
       "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.FranklinMap",
+      "kind": "def",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.fixedPart",
+      "kind": "def",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.fixedPart_subset",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.fixedPart_sum",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.franklinData_of_franklinMap",
+      "kind": "def",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.franklin_sum_invariant_down",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.franklin_sum_invariant_up",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.gauss_int",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.neg_one_pow_natAbs",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.pentagonalNumberTheorem_of_franklinMap",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "literature",
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stair",
+      "kind": "def",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stairBase",
+      "kind": "def",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stairPartAt",
+      "kind": "def",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stair_card",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stair_nodup",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stair_pos",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stair_sum",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
+    },
+    {
+      "name": "Brockian.FranklinInvolutionProof.stair_sum_eq",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolutionProof",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolutionProof.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 sharpening \u2014 Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32",
+      "provenance_note": "Proves Franklin's ENTIRE fixed-point side unconditionally: staircase multiset sums to pentagonal g_k (stair_sum), fixedPart subset distincts, fixedPart_sum = pentCoeff, + the moves' sum-preservation (stay in Nat.Partition m). Collapses the residual from all of FranklinData to a single object FranklinMap (the sign-reversing involution); franklinData_of_franklinMap completes it. pentagonalNumberTheorem_of_franklinMap: PST unconditional GIVEN (forall m, FranklinMap m) \u2014 the sole remaining sub-property (Nodup-preservation + involutivity glue, Mathlib-absent). Strict sharpening of FranklinInvolution's obstruction."
     },
     {
       "name": "Brockian.GaloisCyclicGroup.alphaSub",
