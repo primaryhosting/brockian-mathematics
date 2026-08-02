@@ -6,11 +6,11 @@
 
 ## Summary
 
-- **CONDITIONAL**: 19
+- **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 282
+- **DEFINITION**: 286
 - **DISCHARGED**: 6
-- **PROVED**: 1412
+- **PROVED**: 1425
 
 ## Theorems
 
@@ -438,6 +438,25 @@
 | CONDITIONAL | `Brockian.EquidistributionBVReduction.configCount_over_main_tendsto` | ✓ | verified | lean-4.32.0 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
 | CONDITIONAL | `Brockian.EquidistributionBVReduction.equidistribution_of_BV_uniform` | ✓ | verified | lean-4.32.0 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
 | CONDITIONAL | `Brockian.EquidistributionBVReduction.total_over_main_tendsto` | ✓ | verified | lean-4.32.0 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
+| DEFINITION | `Brockian.EquidistributionUniformity.IterTransitive` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| DEFINITION | `Brockian.EquidistributionUniformity.PreservesAdmissible` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| DEFINITION | `Brockian.EquidistributionUniformity.SingInvariant` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| CONDITIONAL | `Brockian.EquidistributionUniformity.equidistribution_of_transitive_symmetry` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformity.equidistribution_three` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformity.iterate_mem_admissible` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| DEFINITION | `Brockian.EquidistributionUniformity.reflect` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformity.reflect_affine` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformity.reflect_five_fixes_four` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformity.reflect_five_four_orbit` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformity.reflect_five_swaps_one` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformity.reflect_five_swaps_two` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformity.reflect_involutive` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformity.reflect_preservesAdmissible` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformity.reflect_preserves_admissible` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformity.reflection_not_transitive_five` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformity.sing_iterate` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| CONDITIONAL | `Brockian.EquidistributionUniformity.sing_uniform_of_transitive` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionUniformity.sing_uniform_three` | ✓ | verified | lean-4.32.0 | roadmap B1 — equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32 |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omega` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omegaPow` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omega_pow` | ✓ | verified | lean-4.32.0 |  |

@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1412,
-    "DEFINITION": 282,
-    "CONDITIONAL": 19,
+    "PROVED": 1425,
+    "DEFINITION": 286,
+    "CONDITIONAL": 21,
     "DISCHARGED": 6,
     "CONJECTURE": 1
   },
@@ -13670,6 +13670,611 @@
       "quarantine": true,
       "ledger_run": "roadmap #18 \u2014 honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32",
       "provenance_note": "Reduces the vague open equidistribution asymptotic to a NAMED Bombieri-Vinogradov/HL prime-pair hypothesis (BVPrimePairAsymptotic, strictly weaker: per-class singular series, absolute-count vs growing main term). configCount_density_of_BV proves density -> sing_a/sum sing_b (NOT 1/(q-2)) \u2014 honestly exposing that equidistribution needs an EXTRA symmetry HL alone does not give; equidistribution_of_BV_uniform collapses to 1/(q-2) only under the separately-cited uniformity. admissible_reflection_symmetry (a |-> -g-a) proved unconditionally. Not modus-ponens theater: hypothesis != conclusion, reduction is real algebra. BV itself + full uniformity NOT derived."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.IterTransitive",
+      "kind": "def",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.PreservesAdmissible",
+      "kind": "def",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.SingInvariant",
+      "kind": "def",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.equidistribution_of_transitive_symmetry",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "literature",
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.equidistribution_three",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.iterate_mem_admissible",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect",
+      "kind": "def",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_affine",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_five_fixes_four",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_five_four_orbit",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_five_swaps_one",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_five_swaps_two",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_involutive",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_preservesAdmissible",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflect_preserves_admissible",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.reflection_not_transitive_five",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.sing_iterate",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.sing_uniform_of_transitive",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "literature",
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
+    },
+    {
+      "name": "Brockian.EquidistributionUniformity.sing_uniform_three",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionUniformity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionUniformity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap B1 \u2014 equidistribution uniformity symmetry; q=3 unconditional, q=5 obstruction proved; AXLE @4.32",
+      "provenance_note": "The uniformity symmetry attack. q=3: sing_uniform_three + equidistribution_three PROVED UNCONDITIONALLY (1 admissible class -> trivially uniform -> density 1). q=5: NEGATIVE result PROVED \u2014 reflection fixes 4, swaps 1<->2, so reflection_not_transitive_five: the reflection is NOT transitive on {1,2,4}, hence the naive symmetry cannot give q=5 uniformity. q>=5 reduced to two named hypotheses IterTransitive + SingInvariant (genuinely weaker than the conclusion, not theater); sing_uniform_of_transitive + equidistribution_of_transitive_symmetry conditional/literature. SingInvariant (HL singular-product invariance) stays cited."
     },
     {
       "name": "Brockian.Fin5InnerProduct.conj_omega",

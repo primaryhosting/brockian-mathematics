@@ -109,3 +109,4 @@ import Brockian.FranklinInvolutionProof
 import Brockian.FranklinMapConstruction
 import Brockian.FranklinFixedPoint
 import Brockian.FreeLaplacianPlancherel
+import Brockian.EquidistributionUniformity
