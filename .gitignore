@@ -30,3 +30,6 @@ registry/certificates/
 
 # generated refutation targets (regenerable by scripts/refute.py)
 aristotle/refute-*/
+
+# generated sanitized public export (regenerate via scripts/export_public_registry.py before deploy)
+torus/public/verified-registry.json
