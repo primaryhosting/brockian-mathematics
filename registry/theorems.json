@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 985,
-    "DEFINITION": 233,
+    "PROVED": 1012,
+    "DEFINITION": 234,
     "CONDITIONAL": 19,
     "CONJECTURE": 1
   },
@@ -17241,6 +17241,898 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.MetallicRealization.det_eq_prod_roots",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.eigvec_conj_ne_zero",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.eigvec_mean_ne_zero",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.fibQ_charpoly",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.fibQ_mulVec_golden",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.goldenRatio_irrational",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.golden_hasEigenvalue",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicConj_isRoot",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix",
+      "kind": "def",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_charpoly",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_charpoly_natDegree",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_det",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_eigenvalue_iff",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_hasEigenvalue_conj",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_hasEigenvalue_mean",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_isSymm",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_mulVec_conj",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_mulVec_mean",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_one",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_trace",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMean_irrational",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMean_isRoot",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMean_notMem_cycleSpectrum",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMean_two_notMem_cycleSpectrum",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicPoly_factor",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicPoly_natDegree",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.trace_eq_sum_roots",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+    },
+    {
+      "name": "Brockian.MetallicRealization.two_lt_metallicMean",
+      "kind": "theorem",
+      "module": "Brockian.MetallicRealization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MetallicRealization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+      "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
     },
     {
       "name": "Brockian.NewEra.ReadingPath",

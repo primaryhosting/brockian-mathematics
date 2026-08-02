@@ -83,3 +83,4 @@ import Brockian.FranklinInvolution
 import Brockian.AdmissibilityHLCriterion
 import Brockian.CyclotomicRealDegree
 import Brockian.GaloisCyclicGroup
+import Brockian.MetallicRealization

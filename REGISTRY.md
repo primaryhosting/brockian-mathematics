@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 19
 - **CONJECTURE**: 1
-- **DEFINITION**: 233
-- **PROVED**: 985
+- **DEFINITION**: 234
+- **PROVED**: 1012
 
 ## Theorems
 
@@ -564,6 +564,34 @@
 | PROVED | `Brockian.MetallicFamily.metallic_one_unique_to_five` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.MetallicFamily.metallic_radicand_nonneg` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.MetallicFamily.silverGap_eq_three_sub_metallicMean_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.MetallicRealization.det_eq_prod_roots` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.eigvec_conj_ne_zero` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.eigvec_mean_ne_zero` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.fibQ_charpoly` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.fibQ_mulVec_golden` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.goldenRatio_irrational` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.golden_hasEigenvalue` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicConj_isRoot` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| DEFINITION | `Brockian.MetallicRealization.metallicMatrix` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicMatrix_charpoly` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicMatrix_charpoly_natDegree` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicMatrix_det` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicMatrix_eigenvalue_iff` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicMatrix_hasEigenvalue_conj` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicMatrix_hasEigenvalue_mean` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicMatrix_isSymm` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicMatrix_mulVec_conj` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicMatrix_mulVec_mean` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicMatrix_one` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicMatrix_trace` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicMean_irrational` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicMean_isRoot` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicMean_notMem_cycleSpectrum` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicMean_two_notMem_cycleSpectrum` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicPoly_factor` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.metallicPoly_natDegree` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.trace_eq_sum_roots` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MetallicRealization.two_lt_metallicMean` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
 | DEFINITION | `Brockian.NewEra.ReadingPath` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.NewEra.brockian_admissible_count` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.NewEra.decaying_potential_cannot_realize_large_zeros` | ✓ | verified | lean-4.32.0 |  |
