@@ -3,7 +3,7 @@
   "domain": "cs",
   "title": "Certificate settle factory wired into pipeline formalize mode",
   "statement": "Hook pipeline attempt --mode formalize to scripts/settle.py (AXLE + no-theater lint + axioms audit) so formal targets produce machine certificates under registry/certificates/ and derived registers join the pipeline ledger. Dual-race prove/refute → BLOCKED on both-verify.",
-  "status": "open",
+  "status": "partial",
   "source": {
     "citation": "scripts/settle.py; docs/superpowers/plans/2026-08-02-problem-attack-pipeline.md §Next",
     "external_status": "open"
@@ -37,7 +37,16 @@
   },
   "risk_tier": 1,
   "notes": "v1 pipeline hook; theorem-level PROVED still via attest + gen_registry.",
-  "attempts": [],
+  "attempts": [
+    {
+      "ts": "2026-08-02T16:58:11Z",
+      "mode": "formalize",
+      "result": "partial",
+      "note": "Claude/Codex Gate-1 package is live certificate material; settle.py path documented in SETTLE-FACTORY + MULTI-AGENT-COLLAB.",
+      "agent": "grok-collab",
+      "artifacts": []
+    }
+  ],
   "ledger_refs": [],
   "priority": 72
 }

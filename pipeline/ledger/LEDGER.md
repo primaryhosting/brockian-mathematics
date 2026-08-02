@@ -9,12 +9,12 @@
 
 | Register | Count |
 |---|---|
-| OPEN | 6 |
+| OPEN | 5 |
 | SCAFFOLD | 5 |
 | CONDITIONAL | 2 |
+| PARTIAL | 2 |
 | COMPUTATION | 1 |
 | LITERATURE | 1 |
-| PARTIAL | 1 |
 
 ## By domain
 
@@ -36,7 +36,7 @@
 | SCAFFOLD | `math-gate1-lp-continuous-bounded` | math | partial | 5 | 85 | Gate 1: continuous bounded potential → limit-point |
 | SCAFFOLD | `math-goldbach-local-wheels` | math | partial | 3 | 80 | Goldbach local wheels & singular series (finite layer) |
 | SCAFFOLD | `distill-etp-stage2` | distillation | open | 4 | 75 | SAIR Distillation Stage 2 — proof or counterexample |
-| OPEN | `cs-settle-factory` | cs | open | 2 | 72 | Certificate settle factory wired into pipeline formalize mod |
+| PARTIAL | `cs-settle-factory` | cs | partial | 2 | 72 | Certificate settle factory wired into pipeline formalize mod |
 | SCAFFOLD | `quantum-free-laplacian-plancherel` | quantum | scaffolded | 4 | 72 | Free Laplacian Plancherel / Fourier multiplier scaffold |
 | OPEN | `erdos-28` | erdos | open | 4 | 70 | Distinct distances (related seed) |
 | CONDITIONAL | `physics-schrodinger-esa-bridge` | physics | conditional | 4 | 70 | Schrödinger operator essential self-adjointness (model) |

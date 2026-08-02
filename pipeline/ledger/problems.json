@@ -1,12 +1,12 @@
 {
   "count": 16,
   "by_register": {
-    "OPEN": 6,
+    "OPEN": 5,
     "SCAFFOLD": 5,
     "CONDITIONAL": 2,
+    "PARTIAL": 2,
     "COMPUTATION": 1,
-    "LITERATURE": 1,
-    "PARTIAL": 1
+    "LITERATURE": 1
   },
   "by_domain": {
     "math": 5,
@@ -46,7 +46,7 @@
       "priority": 85,
       "risk_tier": 1,
       "backend": "lean_axle",
-      "attempts": 0,
+      "attempts": 1,
       "tags": [
         "spectral",
         "analysis",
@@ -94,13 +94,13 @@
       "id": "cs-settle-factory",
       "domain": "cs",
       "title": "Certificate settle factory wired into pipeline formalize mode",
-      "status": "open",
-      "register": "OPEN",
+      "status": "partial",
+      "register": "PARTIAL",
       "difficulty": 2,
       "priority": 72,
       "risk_tier": 1,
       "backend": "hybrid",
-      "attempts": 0,
+      "attempts": 1,
       "tags": [
         "tooling",
         "certificates",

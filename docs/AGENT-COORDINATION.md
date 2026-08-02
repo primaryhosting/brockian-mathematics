@@ -1,6 +1,32 @@
 # Agent Coordination Queue
 
-Current checkpoint: 2026-08-02, swarm integrated — partner pack + pipeline artifacts + settle bridge.
+Current checkpoint: 2026-08-02 — **LIVE multi-agent collab (Claude × Codex × Grok)**.
+
+**Full protocol:** [`docs/MULTI-AGENT-COLLAB.md`](MULTI-AGENT-COLLAB.md)  
+**Status board:** `python3 scripts/agent_board.py`
+
+---
+
+## LIVE BOARD (2026-08-02) — read before every edit
+
+| Agent | Owns right now | Do not touch |
+|-------|----------------|--------------|
+| **Claude / Codex** | **SHIPPED** Gate-1 package @ `d20fd09` (`WeylWeakPrimitiveLocal` + `WeylKatoResolventConstruction`). Optional: remaining `aristotle/*` scratch | Grok pipeline/partner files mid-edit |
+| **Grok** | `pipeline/`, `docs/partner/`, `docs/MULTI-AGENT-COLLAB.md`, `scripts/agent_board.py`, settle/refute/distill, finite sieve certs | Stretch Weyl proofs Claude/Codex own next; leave their `aristotle/*` alone |
+| **Aristotle** | Race targets under `aristotle/` (owner of each job) | Brockian root without AXLE |
+
+### Shipped together (collab recognition)
+
+1. Grok `7489f9e` — verified-intelligence pipeline + partner pack  
+2. Claude/Codex `d20fd09` — Gate-1 weak primitive + Kato resolvent reductions  
+
+Next non-colliding split: Codex/Claude → construct resolvents / drop weak-reg hypothesis; Grok → SAIR refute + torus honesty + Mathlib harvest.
+
+### Grok claim (append 2026-08-02 collab)
+
+- **Grok collab support:** multi-agent protocol, `agent_board.py`, link pipeline cards to shipped Gate-1 modules. No Weyl proof edits.
+
+---
 
 ## Multi-domain pipeline + settle
 

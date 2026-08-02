@@ -1,7 +1,7 @@
 {
   "id": "math-gate1-lp-continuous-bounded",
   "domain": "math",
-  "title": "Gate 1: continuous bounded potential → limit-point",
+  "title": "Gate 1: continuous bounded potential \u2192 limit-point",
   "statement": "Extend Weyl limit-point results beyond continuous-constant and special cases toward continuous bounded V. Do not claim full Gate 1 ESA until deficiencies close.",
   "status": "partial",
   "source": {
@@ -20,6 +20,16 @@
       "kind": "lean_theorem",
       "name": "Brockian.Weyl.LimitPointContinuous.*",
       "path": "Brockian/WeylLimitPointContinuous.lean"
+    },
+    {
+      "kind": "lean_theorem",
+      "name": "Brockian.WeylWeakPrimitiveLocal.*",
+      "path": "Brockian/WeylWeakPrimitiveLocal.lean"
+    },
+    {
+      "kind": "lean_theorem",
+      "name": "Brockian.Weyl.KatoResolventConstruction.*",
+      "path": "Brockian/WeylKatoResolventConstruction.lean"
     }
   ],
   "attack_modes": [
@@ -36,10 +46,24 @@
     ]
   },
   "risk_tier": 1,
-  "notes": "Linked to Brockian formal program.",
-  "attempts": [],
+  "notes": "Linked to Brockian formal program. Collab: see docs/MULTI-AGENT-COLLAB.md; Gate-1 package d20fd09.",
+  "attempts": [
+    {
+      "ts": "2026-08-02T16:58:11Z",
+      "mode": "formalize",
+      "result": "partial",
+      "note": "Collab: Claude/Codex shipped WeylWeakPrimitiveLocal + WeylKatoResolventConstruction @ d20fd09 (AXLE). Reduces Gate-1; ESA stretch still open. Grok does not edit those files.",
+      "agent": "grok-collab",
+      "artifacts": [
+        "Brockian/WeylWeakPrimitiveLocal.lean",
+        "Brockian/WeylKatoResolventConstruction.lean"
+      ]
+    }
+  ],
   "ledger_refs": [
-    "Brockian.Weyl.LimitPointContinuous"
+    "Brockian.Weyl.KatoResolventConstruction.essentiallySelfAdjoint_perturb_of_unitShiftRightResolvents_norm_lt_one",
+    "Brockian.Weyl.LimitPointContinuous",
+    "Brockian.WeylWeakPrimitiveLocal.weakToPrimitiveRegularity_of_distributional_primitives"
   ],
   "priority": 85
 }
