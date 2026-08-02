@@ -1,0 +1,38 @@
+{
+  "labId": "why-five-grand",
+  "title": "Why Five? — The Grand Equivalence",
+  "description": "The four faces of five — arithmetic, spectral, Galois, trigonometric — shown to be one theorem, plus the divisibility law across all cycles. Every claim binds to a machine-checked theorem in the Brockian verified core; unbacked claims render BLOCKED. A picture cannot outrun its proof.",
+  "registrySchema": "brockian-public-verified-registry/v1",
+  "claims": [
+    {
+      "claim": "For a prime p, these are equivalent: p=5; φ−1 is a C_p eigenvalue; ℚ(2cos 2π/p) is quadratic; 2cos(2π/p)=φ−1.",
+      "theorem": "Brockian.PentagonGrandEquivalence.pentagon_grand_equivalence",
+      "visualRef": "tfae-wheel"
+    },
+    {
+      "claim": "φ − 1 is an adjacency eigenvalue of the cycle Cₙ if and only if 5 divides n.",
+      "theorem": "Brockian.GoldenDivisibility.golden_in_cycleSpectrum_iff_five_dvd",
+      "visualRef": "divisibility-ladder"
+    },
+    {
+      "claim": "The prime uniqueness theorem is recovered as a corollary: φ−1 ∈ spec(C_p) ⟺ p=5.",
+      "theorem": "Brockian.GoldenDivisibility.golden_unique_to_five_recovered",
+      "visualRef": "prime-corollary"
+    },
+    {
+      "claim": "The pentagon's fundamental mode equals the golden value: 2·cos(2π/5) = φ − 1.",
+      "theorem": "Brockian.CycleSpectrumFamily.two_cos_two_pi_div_five_eq_golden_sub_one",
+      "visualRef": "golden-seam"
+    },
+    {
+      "claim": "[ℚ(2cos 2π/p):ℚ] = (p−1)/2 for every odd prime p — the general Galois degree.",
+      "theorem": "Brockian.GaloisGeneralDegree.real_subfield_degree",
+      "visualRef": "galois-degree"
+    },
+    {
+      "claim": "Every circulant mode 2·cos(2πk/n) is an adjacency eigenvalue of Cₙ.",
+      "theorem": "Brockian.CycleSpectrumFamily.mem_cycleSpectrum",
+      "visualRef": "spectrum-modes"
+    }
+  ]
+}
