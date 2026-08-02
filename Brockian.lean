@@ -9,6 +9,7 @@ import Brockian.TransitionKernel
 import Brockian.Sieve
 import Brockian.Spectral
 import Brockian.Connectivity
+import Brockian.ConnectivityGoldenBridge
 import Brockian.CycleSpectrumFamily
 import Brockian.C5SpectralMultiplicities
 import Brockian.Automorphism
@@ -53,6 +54,7 @@ import Brockian.PenroseL2
 import Brockian.WeylSchrodingerMinimal
 import Brockian.SingularSeriesConvergence
 import Brockian.SingularSeriesWire
+import Brockian.SingularSeriesExamples
 import Brockian.WeylFreeLaplacian2
 import Brockian.WeylConfining
 import Brockian.ConfiningSpectralShape
@@ -66,3 +68,4 @@ import Brockian.WeylFourierMultiplier
 import Brockian.WeylWeakRegularityScaffold
 import Brockian.GoldbachCovarianceScaffold
 import Brockian.AdmissibilityCRTGeneral
+import Brockian.PentagonalTheoremFranklin

@@ -6,10 +6,10 @@
 
 ## Summary
 
-- **CONDITIONAL**: 10
+- **CONDITIONAL**: 12
 - **CONJECTURE**: 1
-- **DEFINITION**: 196
-- **PROVED**: 765
+- **DEFINITION**: 201
+- **PROVED**: 782
 
 ## Theorems
 
@@ -525,6 +525,15 @@
 | PROVED | `Brockian.PentagonalPartition.two_dvd_pentNum` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
 | PROVED | `Brockian.PentagonalPartition.two_mul_pent` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
 | PROVED | `Brockian.PentagonalPartition.two_mul_pent_expand` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
+| PROVED | `Brockian.PentagonalTheoremFranklin.coeff_genFun_pstChar` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
+| PROVED | `Brockian.PentagonalTheoremFranklin.genFun_pstChar_eq_prod` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
+| PROVED | `Brockian.PentagonalTheoremFranklin.natCast_pentagonal_eq_pent` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
+| DEFINITION | `Brockian.PentagonalTheoremFranklin.pentCoeff` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
+| DEFINITION | `Brockian.PentagonalTheoremFranklin.pentSign` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
+| CONDITIONAL | `Brockian.PentagonalTheoremFranklin.pentagonalNumberTheorem_of_franklin` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
+| CONDITIONAL | `Brockian.PentagonalTheoremFranklin.pentagonalProduct_coeff_of_franklin` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
+| PROVED | `Brockian.PentagonalTheoremFranklin.prod_pstChar_eq` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
+| DEFINITION | `Brockian.PentagonalTheoremFranklin.pstChar` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
 | DEFINITION | `Brockian.RiemannScaffold.BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannScaffold.Gammaℝ_ne_zero_of_nontrivial` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | CONDITIONAL | `Brockian.RiemannScaffold.RH_of_BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
@@ -580,6 +589,21 @@
 | PROVED | `Brockian.SingularSeries.Convergence.singularSeriesFinite_tendsto_pos` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
 | PROVED | `Brockian.SingularSeries.Convergence.singular_series_pos'` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
 | PROVED | `Brockian.SingularSeries.Convergence.summable_localFactorAt_sub_one` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
+| DEFINITION | `Brockian.SingularSeries.Examples.evenPair` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Examples.evenPair_card_le_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Examples.isAdmissible_evenPair` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Examples.isAdmissible_evenPair_four` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Examples.isAdmissible_evenPair_six` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Examples.isAdmissible_evenPair_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Examples.isAdmissible_twinGap` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Examples.singular_series_finite_pos_twinGap` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_evenPair` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_evenPair_four` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_evenPair_six` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_evenPair_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_twinGap` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.SingularSeries.Examples.twinGap` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Examples.twinGap_eq` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.SingularSeries.Wire.IsAdmissible` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.SingularSeries.Wire.h_conv_of_admissible` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.SingularSeries.Wire.isAdmissible_iff` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |

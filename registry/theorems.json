@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 765,
-    "DEFINITION": 196,
-    "CONDITIONAL": 10,
+    "PROVED": 782,
+    "DEFINITION": 201,
+    "CONDITIONAL": 12,
     "CONJECTURE": 1
   },
   "theorems": [
@@ -15939,6 +15939,282 @@
       "provenance_note": "Generalized pentagonal numbers g_k=k(3k-1)/2: well-definedness (2|numerator), doubling identity, reflection/step recurrences, nonnegativity, and INJECTIVITY (why PST exponents 0,1,2,5,7,12,15 are distinct); p(0)=1 against Mathlib Nat.Partition. The full pentagonal number theorem prod(1-x^n)=sum(-1)^k x^{g_k} and the p(n) recurrence are explicitly OPEN (Mathlib-absent). Header states NO rigorous C5/D5 bridge is claimed."
     },
     {
+      "name": "Brockian.PentagonalTheoremFranklin.coeff_genFun_pstChar",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalTheoremFranklin",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalTheoremFranklin.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler PST reduced to Franklin involution; AXLE @4.32",
+      "provenance_note": "Fully proves the Euler-product side: genFun_pstChar_eq_prod = prod(1-X^n) in Z[[X]], coeff_genFun_pstChar (coefficient = signed distinct-partition count via Mathlib Partition.GenFun), pstChar character product, pentagonal bridge to PentagonalPartition.pent. The full pentagonal number theorem is CONDITIONAL on the single named hypothesis hFranklin (Franklin sign-reversing involution \u2014 true, classical, Mathlib-absent), theorems honestly suffixed _of_franklin. NOT ex-falso: hFranklin is satisfiable/true."
+    },
+    {
+      "name": "Brockian.PentagonalTheoremFranklin.genFun_pstChar_eq_prod",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalTheoremFranklin",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalTheoremFranklin.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler PST reduced to Franklin involution; AXLE @4.32",
+      "provenance_note": "Fully proves the Euler-product side: genFun_pstChar_eq_prod = prod(1-X^n) in Z[[X]], coeff_genFun_pstChar (coefficient = signed distinct-partition count via Mathlib Partition.GenFun), pstChar character product, pentagonal bridge to PentagonalPartition.pent. The full pentagonal number theorem is CONDITIONAL on the single named hypothesis hFranklin (Franklin sign-reversing involution \u2014 true, classical, Mathlib-absent), theorems honestly suffixed _of_franklin. NOT ex-falso: hFranklin is satisfiable/true."
+    },
+    {
+      "name": "Brockian.PentagonalTheoremFranklin.natCast_pentagonal_eq_pent",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalTheoremFranklin",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalTheoremFranklin.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler PST reduced to Franklin involution; AXLE @4.32",
+      "provenance_note": "Fully proves the Euler-product side: genFun_pstChar_eq_prod = prod(1-X^n) in Z[[X]], coeff_genFun_pstChar (coefficient = signed distinct-partition count via Mathlib Partition.GenFun), pstChar character product, pentagonal bridge to PentagonalPartition.pent. The full pentagonal number theorem is CONDITIONAL on the single named hypothesis hFranklin (Franklin sign-reversing involution \u2014 true, classical, Mathlib-absent), theorems honestly suffixed _of_franklin. NOT ex-falso: hFranklin is satisfiable/true."
+    },
+    {
+      "name": "Brockian.PentagonalTheoremFranklin.pentCoeff",
+      "kind": "def",
+      "module": "Brockian.PentagonalTheoremFranklin",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalTheoremFranklin.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler PST reduced to Franklin involution; AXLE @4.32",
+      "provenance_note": "Fully proves the Euler-product side: genFun_pstChar_eq_prod = prod(1-X^n) in Z[[X]], coeff_genFun_pstChar (coefficient = signed distinct-partition count via Mathlib Partition.GenFun), pstChar character product, pentagonal bridge to PentagonalPartition.pent. The full pentagonal number theorem is CONDITIONAL on the single named hypothesis hFranklin (Franklin sign-reversing involution \u2014 true, classical, Mathlib-absent), theorems honestly suffixed _of_franklin. NOT ex-falso: hFranklin is satisfiable/true."
+    },
+    {
+      "name": "Brockian.PentagonalTheoremFranklin.pentSign",
+      "kind": "def",
+      "module": "Brockian.PentagonalTheoremFranklin",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalTheoremFranklin.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler PST reduced to Franklin involution; AXLE @4.32",
+      "provenance_note": "Fully proves the Euler-product side: genFun_pstChar_eq_prod = prod(1-X^n) in Z[[X]], coeff_genFun_pstChar (coefficient = signed distinct-partition count via Mathlib Partition.GenFun), pstChar character product, pentagonal bridge to PentagonalPartition.pent. The full pentagonal number theorem is CONDITIONAL on the single named hypothesis hFranklin (Franklin sign-reversing involution \u2014 true, classical, Mathlib-absent), theorems honestly suffixed _of_franklin. NOT ex-falso: hFranklin is satisfiable/true."
+    },
+    {
+      "name": "Brockian.PentagonalTheoremFranklin.pentagonalNumberTheorem_of_franklin",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalTheoremFranklin",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalTheoremFranklin.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "literature",
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler PST reduced to Franklin involution; AXLE @4.32",
+      "provenance_note": "Fully proves the Euler-product side: genFun_pstChar_eq_prod = prod(1-X^n) in Z[[X]], coeff_genFun_pstChar (coefficient = signed distinct-partition count via Mathlib Partition.GenFun), pstChar character product, pentagonal bridge to PentagonalPartition.pent. The full pentagonal number theorem is CONDITIONAL on the single named hypothesis hFranklin (Franklin sign-reversing involution \u2014 true, classical, Mathlib-absent), theorems honestly suffixed _of_franklin. NOT ex-falso: hFranklin is satisfiable/true."
+    },
+    {
+      "name": "Brockian.PentagonalTheoremFranklin.pentagonalProduct_coeff_of_franklin",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalTheoremFranklin",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalTheoremFranklin.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "literature",
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler PST reduced to Franklin involution; AXLE @4.32",
+      "provenance_note": "Fully proves the Euler-product side: genFun_pstChar_eq_prod = prod(1-X^n) in Z[[X]], coeff_genFun_pstChar (coefficient = signed distinct-partition count via Mathlib Partition.GenFun), pstChar character product, pentagonal bridge to PentagonalPartition.pent. The full pentagonal number theorem is CONDITIONAL on the single named hypothesis hFranklin (Franklin sign-reversing involution \u2014 true, classical, Mathlib-absent), theorems honestly suffixed _of_franklin. NOT ex-falso: hFranklin is satisfiable/true."
+    },
+    {
+      "name": "Brockian.PentagonalTheoremFranklin.prod_pstChar_eq",
+      "kind": "theorem",
+      "module": "Brockian.PentagonalTheoremFranklin",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalTheoremFranklin.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler PST reduced to Franklin involution; AXLE @4.32",
+      "provenance_note": "Fully proves the Euler-product side: genFun_pstChar_eq_prod = prod(1-X^n) in Z[[X]], coeff_genFun_pstChar (coefficient = signed distinct-partition count via Mathlib Partition.GenFun), pstChar character product, pentagonal bridge to PentagonalPartition.pent. The full pentagonal number theorem is CONDITIONAL on the single named hypothesis hFranklin (Franklin sign-reversing involution \u2014 true, classical, Mathlib-absent), theorems honestly suffixed _of_franklin. NOT ex-falso: hFranklin is satisfiable/true."
+    },
+    {
+      "name": "Brockian.PentagonalTheoremFranklin.pstChar",
+      "kind": "def",
+      "module": "Brockian.PentagonalTheoremFranklin",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonalTheoremFranklin.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap harvest \u2014 Euler PST reduced to Franklin involution; AXLE @4.32",
+      "provenance_note": "Fully proves the Euler-product side: genFun_pstChar_eq_prod = prod(1-X^n) in Z[[X]], coeff_genFun_pstChar (coefficient = signed distinct-partition count via Mathlib Partition.GenFun), pstChar character product, pentagonal bridge to PentagonalPartition.pent. The full pentagonal number theorem is CONDITIONAL on the single named hypothesis hFranklin (Franklin sign-reversing involution \u2014 true, classical, Mathlib-absent), theorems honestly suffixed _of_franklin. NOT ex-falso: hFranklin is satisfiable/true."
+    },
+    {
       "name": "Brockian.RiemannScaffold.BrockianSystem",
       "kind": "def",
       "module": "Brockian.RiemannScaffold",
@@ -17632,6 +17908,477 @@
       "quarantine": true,
       "ledger_run": "roadmap #17 \u2014 infinite-product convergence; AXLE @4.32",
       "provenance_note": "err_bound (uniform |(1-x)^k-(1-kx)|\u2264k\u00b2x\u00b2), uniform tail |localFactor-1|\u22642^k\u00b7k\u00b2/p\u00b2, summable via \u22111/p\u00b2, singularSeriesFinite_tendsto_pos (\u2203S>0), and singular_series_pos' UNCONDITIONAL. Discharges the h_conv that singular_series_pos assumed; the dropped singular_series_converges axiom is now a genuine proof."
+    },
+    {
+      "name": "Brockian.SingularSeries.Examples.evenPair",
+      "kind": "def",
+      "module": "Brockian.SingularSeries.Examples",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Examples.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Examples.evenPair_card_le_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Examples",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Examples.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Examples.isAdmissible_evenPair",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Examples",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Examples.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Examples.isAdmissible_evenPair_four",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Examples",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Examples.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Examples.isAdmissible_evenPair_six",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Examples",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Examples.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Examples.isAdmissible_evenPair_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Examples",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Examples.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Examples.isAdmissible_twinGap",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Examples",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Examples.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Examples.singular_series_finite_pos_twinGap",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Examples",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Examples.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Examples.singular_series_pos_evenPair",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Examples",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Examples.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Examples.singular_series_pos_evenPair_four",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Examples",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Examples.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Examples.singular_series_pos_evenPair_six",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Examples",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Examples.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Examples.singular_series_pos_evenPair_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Examples",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Examples.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Examples.singular_series_pos_twinGap",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Examples",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Examples.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Examples.twinGap",
+      "kind": "def",
+      "module": "Brockian.SingularSeries.Examples",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Examples.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Examples.twinGap_eq",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Examples",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Examples.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.SingularSeries.Wire.IsAdmissible",
