@@ -17,7 +17,7 @@ Generated from `brockian-mathematics` tip. **Do not hand-edit** `public/verified
 ```bash
 cd ~/Projects/brockian-mathematics
 python3 scripts/export_public_registry.py
-# HONESTY CHECK PASSED; split-by-source [brockian] PROVED=1487 …
+# HONESTY CHECK PASSED; split-by-source [brockian] PROVED=1832 …
 cp torus/public/verified-registry.json deploy/torus-lovable/public/
 cp torus/VerifiedClaim.tsx torus/useVerified.ts deploy/torus-lovable/src/components/verified/
 ```
@@ -29,10 +29,24 @@ cp torus/VerifiedClaim.tsx torus/useVerified.ts deploy/torus-lovable/src/compone
 3. After files land: **Publish**.
 4. Verify preview:
    - One badge with `Brockian.Admissibility.admissibility_count_five` → green **Verified**.
-   - One badge with `Brockian.Nonexistent.rh_is_true` → red **⊘ UNVERIFIED**.
+   - One badge with `Brockian.Nonexistent.rh_is_true` → red **⊘ UNVERIFIED** (name must not exist in registry).
 5. Do **not** change any lab copy to claim RH/Goldbach/Gate-1 closed.
 
-## Status (2026-08-02)
+## Status (2026-08-02 — Grok 1+2+3 pass)
 
-- Public registry: **1824** records, source **`brockian` only** (Mathlib/Physlib index pending off-Mini harvest).
-- Lovable Manager API: health OK; project list via CDP **blocked** this session (Chrome :18800 not reachable) — use paste prompt or restore OpenClaw browser profile.
+| Item | Result |
+|------|--------|
+| Public registry | **2195** records; **PROVED=1832** source **`brockian` only** |
+| Honesty check | **PASSED** (allowlist strip; split-by-source) |
+| Demo theorem | `admissibility_count_five` present as PROVED |
+| Negative demo | `Brockian.Nonexistent.rh_is_true` **absent** (UNVERIFIED path) |
+| Lovable Manager | `:18793` health OK |
+| Chrome CDP | **DOWN** (`:18800` / `:9222`) — `lovable_projects` returns 500; **paste** `LOVABLE_PROMPT.md` + upload `public/verified-registry.json` |
+| Mathlib/Physlib index | Pending off-Mini harvest → then re-export shows multi-source split |
+
+## Acceptance demo (after publish)
+
+| Badge claim | Theorem id | Expected UI |
+|-------------|------------|-------------|
+| Exactly 3 admissible start residues mod 5… | `Brockian.Admissibility.admissibility_count_five` | Green verified (brockian/AXLE) |
+| The Riemann Hypothesis is true | `Brockian.Nonexistent.rh_is_true` | Red ⊘ UNVERIFIED |

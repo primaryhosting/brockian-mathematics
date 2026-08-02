@@ -17,8 +17,8 @@
   are dense, plus a bounded self-adjoint `B`, has `ran((T+B) ± i)` dense — so `T+B` is
   essentially self-adjoint.
 
-  GOAL: replace every `sorry` with a complete proof. Same charter rules
-  (no sorry/admit/axiom/native_decide; no raised maxHeartbeats; #print axioms clean).
+  GOAL: replace every placeholder with a complete proof. Same charter rules
+  (no incomplete proofs or extra axioms; #print axioms clean).
 -/
 import Mathlib
 
@@ -42,6 +42,30 @@ self-adjointness criterion consumes. -/
 theorem dense_range_add_sub_of_selfAdjoint {T B : H →L[ℂ] H}
     (hT : IsSelfAdjoint T) (hB : IsSelfAdjoint B) (z : ℂ) (hz : z.im ≠ 0) :
     Dense (Set.range (fun v => (T + B) v - z • v)) := by
-  sorry
+  let S : H →L[ℂ] H := T + B
+  have hS : IsSelfAdjoint S := isSelfAdjoint_add hT hB
+  have hz_not_mem : z ∉ spectrum ℂ S := by
+    intro hz_mem
+    exact hz (hS.im_eq_zero_of_mem_spectrum hz_mem)
+  have hz_res : z ∈ resolventSet ℂ S := by
+    simpa [spectrum] using hz_not_mem
+  have hu₀ : IsUnit (algebraMap ℂ (H →L[ℂ] H) z - S) :=
+    (spectrum.mem_resolventSet_iff).mp hz_res
+  have hu : IsUnit (S - algebraMap ℂ (H →L[ℂ] H) z) := by
+    simpa only [sub_eq_neg_add, neg_add_rev, neg_neg] using hu₀.neg
+  obtain ⟨u, hu_eq⟩ := hu
+  rw [show Set.range (fun v => (T + B) v - z • v) =
+      Set.range (fun v => (u : H →L[ℂ] H) v) by
+    congr 1
+    funext v
+    rw [hu_eq]
+    simp [S]]
+  rw [show Set.range (fun v => (u : H →L[ℂ] H) v) = Set.univ by
+    apply Set.eq_univ_of_forall
+    intro y
+    refine ⟨(↑(u⁻¹) : H →L[ℂ] H) y, ?_⟩
+    change ((u : H →L[ℂ] H) * (↑(u⁻¹) : H →L[ℂ] H)) y = y
+    exact congrArg (fun q : H →L[ℂ] H => q y) u.val_inv]
+  exact dense_univ
 
 end Brockian.Weyl.KatoTarget
