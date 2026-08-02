@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-08-02T04:19:06Z",
+  "generated_at": "2026-08-02T10:28:27Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 979,
-      "DEFINITION": 229,
-      "CONDITIONAL": 19,
+      "PROVED": 1020,
+      "DEFINITION": 235,
+      "CONDITIONAL": 23,
       "CONJECTURE": 1
     }
   },
@@ -14,19 +14,20 @@
   "charter": "Badges are derived from the Lean registry when `lean` is non-empty.\nPROVED requires AXLE-verified + axiom-clean theorems (see README).\nOpen problems (twins infinitude, Goldbach global, RH) stay not_claimed.",
   "version": 1,
   "summary": {
-    "claims": 57,
+    "claims": 70,
     "by_status": {
-      "proved": 46,
+      "proved": 58,
       "open": 1,
       "conjecture": 1,
       "conditional": 4,
       "not_claimed": 4,
-      "aristotle": 1
+      "aristotle": 1,
+      "definition": 1
     },
     "registry": {
-      "PROVED": 979,
-      "DEFINITION": 229,
-      "CONDITIONAL": 19,
+      "PROVED": 1020,
+      "DEFINITION": 235,
+      "CONDITIONAL": 23,
       "CONJECTURE": 1
     }
   },
@@ -3354,6 +3355,979 @@
       ],
       "missing_lean": [],
       "declaration_count": 4,
+      "proved_count": 3
+    },
+    {
+      "id": "A4-ODD-DISTINCT",
+      "title": "Euler odd = distinct partitions (Mathlib wire)",
+      "book": "Lane A #4 \u00b7 OddDistinctPartition",
+      "notes": "Wires Mathlib Glaisher m=2; not Franklin PST.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.OddDistinctPartition.euler_odd_eq_distinct",
+        "Brockian.OddDistinctPartition.glaisher",
+        "Brockian.OddDistinctPartition.euler_via_glaisher"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.OddDistinctPartition.euler_odd_eq_distinct",
+          "short": "euler_odd_eq_distinct",
+          "module": "Brockian.OddDistinctPartition",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/OddDistinctPartition.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.OddDistinctPartition.glaisher",
+          "short": "glaisher",
+          "module": "Brockian.OddDistinctPartition",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/OddDistinctPartition.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.OddDistinctPartition.euler_via_glaisher",
+          "short": "euler_via_glaisher",
+          "module": "Brockian.OddDistinctPartition",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/OddDistinctPartition.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 3,
+      "proved_count": 3
+    },
+    {
+      "id": "C15-TWIN-CONSTANT",
+      "title": "Twin-prime singular series local-factor reduction",
+      "book": "Lane C #15 \u00b7 TwinPrimeConstant",
+      "notes": "Not twin-prime infinitude; product / local-factor reduction of \ud835\udd16({0,2}) only.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.TwinPrimeConstant.nu_p_twin",
+        "Brockian.TwinPrimeConstant.twinPrimeConstant",
+        "Brockian.TwinPrimeConstant.isAdmissible_twinOffsets",
+        "Brockian.TwinPrimeConstant.localFactorAt_twin_eq_tFactor",
+        "Brockian.TwinPrimeConstant.localFactor_twin_eq_tFactor"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.TwinPrimeConstant.nu_p_twin",
+          "short": "nu_p_twin",
+          "module": "Brockian.TwinPrimeConstant",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/TwinPrimeConstant.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.TwinPrimeConstant.twinPrimeConstant",
+          "short": "twinPrimeConstant",
+          "module": "Brockian.TwinPrimeConstant",
+          "kind": "def",
+          "register": "DEFINITION",
+          "source": "Brockian/TwinPrimeConstant.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.TwinPrimeConstant.isAdmissible_twinOffsets",
+          "short": "isAdmissible_twinOffsets",
+          "module": "Brockian.TwinPrimeConstant",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/TwinPrimeConstant.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.TwinPrimeConstant.localFactorAt_twin_eq_tFactor",
+          "short": "localFactorAt_twin_eq_tFactor",
+          "module": "Brockian.TwinPrimeConstant",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/TwinPrimeConstant.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.TwinPrimeConstant.localFactor_twin_eq_tFactor",
+          "short": "localFactor_twin_eq_tFactor",
+          "module": "Brockian.TwinPrimeConstant",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/TwinPrimeConstant.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 5,
+      "proved_count": 4
+    },
+    {
+      "id": "E25-WEYL-LAW",
+      "title": "Weyl-law counting target for RH-shaped operators (CONDITIONAL schema)",
+      "book": "Lane E #25 \u00b7 WeylLawTarget",
+      "notes": "Schema only; no Weyl law proved.",
+      "status": "definition",
+      "book_badge": "DEFINITION",
+      "derived_register": "DEFINITION",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Weyl.WeylLawTarget.WeylLawMatch",
+        "Brockian.Weyl.WeylLawTarget.MatchesRiemannVonMangoldt"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Weyl.WeylLawTarget.WeylLawMatch",
+          "short": "WeylLawMatch",
+          "module": "Brockian.Weyl.WeylLawTarget",
+          "kind": "def",
+          "register": "DEFINITION",
+          "source": "Brockian/WeylLawTarget.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+          "provenance_note": "Honest CONDITIONAL schema only. Abstract N_op/N_model, WeylLawMatch (ratio\u21921), riemannVonMangoldtMain shape, DiscreteSpectrumCandidate packaging. Pure analysis (main-term\u2192\u221e, match\u21d2counting diverges) is proved; NO Weyl law for \u2212\u0394+V, NO RH, NO Hilbert\u2013P\u00f3lya instance. Gate-0 WeylLawCandidateExists left OPEN."
+        },
+        {
+          "name": "Brockian.Weyl.WeylLawTarget.MatchesRiemannVonMangoldt",
+          "short": "MatchesRiemannVonMangoldt",
+          "module": "Brockian.Weyl.WeylLawTarget",
+          "kind": "def",
+          "register": "DEFINITION",
+          "source": "Brockian/WeylLawTarget.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+          "provenance_note": "Honest CONDITIONAL schema only. Abstract N_op/N_model, WeylLawMatch (ratio\u21921), riemannVonMangoldtMain shape, DiscreteSpectrumCandidate packaging. Pure analysis (main-term\u2192\u221e, match\u21d2counting diverges) is proved; NO Weyl law for \u2212\u0394+V, NO RH, NO Hilbert\u2013P\u00f3lya instance. Gate-0 WeylLawCandidateExists left OPEN."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 2,
+      "proved_count": 0
+    },
+    {
+      "id": "COS-ALG-INT",
+      "title": "Algebraic integer status of 2 cos(2\u03c0/n) and spectral generators",
+      "book": "Lean CosAlgebraicInteger \u00b7 cyclotomic real subfield hooks",
+      "notes": "Integrality + small-prime degree packs. CosTraceNorm not present in registry. No numerology beyond [\u211a(\u03b1_p):\u211a]=(p\u22121)/2.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.CosAlgebraicInteger.isIntegral_two_cos_two_pi_div",
+        "Brockian.CosAlgebraicInteger.isIntegral_spectralGen",
+        "Brockian.CosAlgebraicInteger.degree_five_pack",
+        "Brockian.CosAlgebraicInteger.quadratic_iff_five_pack"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.CosAlgebraicInteger.isIntegral_two_cos_two_pi_div",
+          "short": "isIntegral_two_cos_two_pi_div",
+          "module": "Brockian.CosAlgebraicInteger",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/CosAlgebraicInteger.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+          "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+        },
+        {
+          "name": "Brockian.CosAlgebraicInteger.isIntegral_spectralGen",
+          "short": "isIntegral_spectralGen",
+          "module": "Brockian.CosAlgebraicInteger",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/CosAlgebraicInteger.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+          "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+        },
+        {
+          "name": "Brockian.CosAlgebraicInteger.degree_five_pack",
+          "short": "degree_five_pack",
+          "module": "Brockian.CosAlgebraicInteger",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/CosAlgebraicInteger.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+          "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+        },
+        {
+          "name": "Brockian.CosAlgebraicInteger.quadratic_iff_five_pack",
+          "short": "quadratic_iff_five_pack",
+          "module": "Brockian.CosAlgebraicInteger",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/CosAlgebraicInteger.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+          "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 4
+    },
+    {
+      "id": "SS-EXAMPLES",
+      "title": "Concrete admissible constellations with positive singular series",
+      "book": "Lean SingularSeries.Examples \u00b7 twin gap / even pairs",
+      "notes": "Instances of Wire/Convergence API on {0,2} and even pairs. Not twin-prime density or HL conjecture. SingularSeriesMoreExamples absent.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.SingularSeries.Examples.isAdmissible_twinGap",
+        "Brockian.SingularSeries.Examples.singular_series_pos_twinGap",
+        "Brockian.SingularSeries.Examples.isAdmissible_evenPair",
+        "Brockian.SingularSeries.Examples.singular_series_pos_evenPair"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.SingularSeries.Examples.isAdmissible_twinGap",
+          "short": "isAdmissible_twinGap",
+          "module": "Brockian.SingularSeries.Examples",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Examples.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence",
+          "provenance_note": "Singular-series worked examples. AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing files committed to keep the registry tip coherent."
+        },
+        {
+          "name": "Brockian.SingularSeries.Examples.singular_series_pos_twinGap",
+          "short": "singular_series_pos_twinGap",
+          "module": "Brockian.SingularSeries.Examples",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Examples.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence",
+          "provenance_note": "Singular-series worked examples. AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing files committed to keep the registry tip coherent."
+        },
+        {
+          "name": "Brockian.SingularSeries.Examples.isAdmissible_evenPair",
+          "short": "isAdmissible_evenPair",
+          "module": "Brockian.SingularSeries.Examples",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Examples.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence",
+          "provenance_note": "Singular-series worked examples. AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing files committed to keep the registry tip coherent."
+        },
+        {
+          "name": "Brockian.SingularSeries.Examples.singular_series_pos_evenPair",
+          "short": "singular_series_pos_evenPair",
+          "module": "Brockian.SingularSeries.Examples",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Examples.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence",
+          "provenance_note": "Singular-series worked examples. AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing files committed to keep the registry tip coherent."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 4
+    },
+    {
+      "id": "GC-LOCAL-WHEEL",
+      "title": "Finite local Goldbach wheel (g_p and K_p at small primes)",
+      "book": "Lean Goldbach.LocalWheel \u00b7 mod-2/3 finite predictor",
+      "notes": "Exact local counts/covariances only. Not global Goldbach. GoldbachWheelExtended not in registry.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Goldbach.LocalWheel.gCount_three",
+        "Brockian.Goldbach.LocalWheel.Kp_five",
+        "Brockian.Goldbach.LocalWheel.K23_eq",
+        "Brockian.Goldbach.LocalWheel.K23_eq_nine_quarters_iff"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Goldbach.LocalWheel.gCount_three",
+          "short": "gCount_three",
+          "module": "Brockian.Goldbach.LocalWheel",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/LocalWheel.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Goldbach.LocalWheel.Kp_five",
+          "short": "Kp_five",
+          "module": "Brockian.Goldbach.LocalWheel",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/LocalWheel.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Goldbach.LocalWheel.K23_eq",
+          "short": "K23_eq",
+          "module": "Brockian.Goldbach.LocalWheel",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/LocalWheel.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Goldbach.LocalWheel.K23_eq_nine_quarters_iff",
+          "short": "K23_eq_nine_quarters_iff",
+          "module": "Brockian.Goldbach.LocalWheel",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/LocalWheel.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 4
+    },
+    {
+      "id": "FIN5-INNER",
+      "title": "Hermitian inner product and C\u2085 Fourier eigenmode orthogonality",
+      "book": "Lean Fin5InnerProduct \u00b7 VertexSpace L\u00b2 structure",
+      "notes": "Finite C\u2085 Hilbert structure for isotypic analysis; not continuous L\u00b2 Plancherel.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Fin5InnerProduct.hermInner",
+        "Brockian.Fin5InnerProduct.eigenmode_orthogonal",
+        "Brockian.Fin5InnerProduct.hermInner_eigenmode",
+        "Brockian.Fin5InnerProduct.hermInner_self_eq_zero_iff"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Fin5InnerProduct.hermInner",
+          "short": "hermInner",
+          "module": "Brockian.Fin5InnerProduct",
+          "kind": "def",
+          "register": "DEFINITION",
+          "source": "Brockian/Fin5InnerProduct.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Fin5InnerProduct.eigenmode_orthogonal",
+          "short": "eigenmode_orthogonal",
+          "module": "Brockian.Fin5InnerProduct",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Fin5InnerProduct.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Fin5InnerProduct.hermInner_eigenmode",
+          "short": "hermInner_eigenmode",
+          "module": "Brockian.Fin5InnerProduct",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Fin5InnerProduct.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Fin5InnerProduct.hermInner_self_eq_zero_iff",
+          "short": "hermInner_self_eq_zero_iff",
+          "module": "Brockian.Fin5InnerProduct",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/Fin5InnerProduct.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 3
+    },
+    {
+      "id": "WEYL-SYMM-PKG",
+      "title": "Symmetric-operator real-spectrum package (New Era gallery)",
+      "book": "Lean Weyl.SymmetryPackage \u00b7 re-export of Operator rung",
+      "notes": "Gallery re-exports from Weyl.Operator. Not ESA, not T\u0304=T*, not RH.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Weyl.SymmetryPackage.quadratic_form_im_zero",
+        "Brockian.Weyl.SymmetryPackage.eigenvalue_im_zero",
+        "Brockian.Weyl.SymmetryPackage.not_eigenvalue_of_im_ne_zero",
+        "Brockian.Weyl.SymmetryPackage.injective_of_im_ne_zero"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Weyl.SymmetryPackage.quadratic_form_im_zero",
+          "short": "quadratic_form_im_zero",
+          "module": "Brockian.Weyl.SymmetryPackage",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/SymmetryPackage.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Weyl.SymmetryPackage.eigenvalue_im_zero",
+          "short": "eigenvalue_im_zero",
+          "module": "Brockian.Weyl.SymmetryPackage",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/SymmetryPackage.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Weyl.SymmetryPackage.not_eigenvalue_of_im_ne_zero",
+          "short": "not_eigenvalue_of_im_ne_zero",
+          "module": "Brockian.Weyl.SymmetryPackage",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/SymmetryPackage.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Weyl.SymmetryPackage.injective_of_im_ne_zero",
+          "short": "injective_of_im_ne_zero",
+          "module": "Brockian.Weyl.SymmetryPackage",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/SymmetryPackage.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 4
+    },
+    {
+      "id": "CONN-GOLDEN",
+      "title": "C\u2085 algebraic connectivity = 3\u2212\u03c6 (golden bridge)",
+      "book": "Lean ConnectivityGoldenBridge \u00b7 Laplacian \u03bb\u2082",
+      "notes": "Exact C\u2085 Laplacian identities linking \u03c6 and 2cos(2\u03c0/5). Graph-spectrum only.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.ConnectivityGoldenBridge.algebraic_connectivity_C5",
+        "Brockian.ConnectivityGoldenBridge.golden_sub_one_eq_two_cos",
+        "Brockian.ConnectivityGoldenBridge.lambda2_eq_three_minus_phi",
+        "Brockian.ConnectivityGoldenBridge.lambda2_eq_two_minus_two_cos"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.ConnectivityGoldenBridge.algebraic_connectivity_C5",
+          "short": "algebraic_connectivity_C5",
+          "module": "Brockian.ConnectivityGoldenBridge",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/ConnectivityGoldenBridge.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence",
+          "provenance_note": "Bridges algebraic connectivity lambda2(C5) to the golden ratio. AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing files committed to keep the registry tip coherent."
+        },
+        {
+          "name": "Brockian.ConnectivityGoldenBridge.golden_sub_one_eq_two_cos",
+          "short": "golden_sub_one_eq_two_cos",
+          "module": "Brockian.ConnectivityGoldenBridge",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/ConnectivityGoldenBridge.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence",
+          "provenance_note": "Bridges algebraic connectivity lambda2(C5) to the golden ratio. AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing files committed to keep the registry tip coherent."
+        },
+        {
+          "name": "Brockian.ConnectivityGoldenBridge.lambda2_eq_three_minus_phi",
+          "short": "lambda2_eq_three_minus_phi",
+          "module": "Brockian.ConnectivityGoldenBridge",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/ConnectivityGoldenBridge.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence",
+          "provenance_note": "Bridges algebraic connectivity lambda2(C5) to the golden ratio. AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing files committed to keep the registry tip coherent."
+        },
+        {
+          "name": "Brockian.ConnectivityGoldenBridge.lambda2_eq_two_minus_two_cos",
+          "short": "lambda2_eq_two_minus_two_cos",
+          "module": "Brockian.ConnectivityGoldenBridge",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/ConnectivityGoldenBridge.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence",
+          "provenance_note": "Bridges algebraic connectivity lambda2(C5) to the golden ratio. AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing files committed to keep the registry tip coherent."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 4
+    },
+    {
+      "id": "AS-DIAGONAL",
+      "title": "Diagonal (q=\u03bd) admissibility count dichotomy",
+      "book": "Lean AdmissibilityDiagonal \u00b7 selection diagonal case",
+      "notes": "Diagonal residue case of q\u2212\u03bd law; not full k-tuple sieve.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.AdmissibilityDiagonal.diagonal_admissibility_count",
+        "Brockian.AdmissibilityDiagonal.diagonal_count_five",
+        "Brockian.AdmissibilityDiagonal.admissibility_count_dichotomy"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.AdmissibilityDiagonal.diagonal_admissibility_count",
+          "short": "diagonal_admissibility_count",
+          "module": "Brockian.AdmissibilityDiagonal",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/AdmissibilityDiagonal.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence",
+          "provenance_note": "Divisible-case diagonal admissibility count (g=0 mod q -> q-1 configs). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+        },
+        {
+          "name": "Brockian.AdmissibilityDiagonal.diagonal_count_five",
+          "short": "diagonal_count_five",
+          "module": "Brockian.AdmissibilityDiagonal",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/AdmissibilityDiagonal.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence",
+          "provenance_note": "Divisible-case diagonal admissibility count (g=0 mod q -> q-1 configs). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+        },
+        {
+          "name": "Brockian.AdmissibilityDiagonal.admissibility_count_dichotomy",
+          "short": "admissibility_count_dichotomy",
+          "module": "Brockian.AdmissibilityDiagonal",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/AdmissibilityDiagonal.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence",
+          "provenance_note": "Divisible-case diagonal admissibility count (g=0 mod q -> q-1 configs). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 3,
+      "proved_count": 3
+    },
+    {
+      "id": "GAL-CYCLIC",
+      "title": "Real cyclotomic subfield is Galois cyclic",
+      "book": "Lean GaloisCyclicGroup \u00b7 real subfield of \u211a(\u03b6)",
+      "notes": "Structural Galois facts for the real subfield; complements CosAlgebraicInteger degree packs.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.GaloisCyclicGroup.realSubfield_isGalois",
+        "Brockian.GaloisCyclicGroup.realSubfield_gal_isCyclic",
+        "Brockian.GaloisCyclicGroup.realSubfield_gal_card"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.GaloisCyclicGroup.realSubfield_isGalois",
+          "short": "realSubfield_isGalois",
+          "module": "Brockian.GaloisCyclicGroup",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/GaloisCyclicGroup.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #7 \u2014 Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32",
+          "provenance_note": "For every odd prime p: Q(2cos 2pi/p)/Q is Galois (abelian), its Galois group is CYCLIC (IsCyclic) of order (p-1)/2, on the actual field automorphism group (via cyclotomic Gal=(Z/p)^x cyclic, restrictNormalHom surjectivity, card_aut_eq_finrank + real_subfield_degree). Full target, not a reduction. p=2 excluded (degenerate)."
+        },
+        {
+          "name": "Brockian.GaloisCyclicGroup.realSubfield_gal_isCyclic",
+          "short": "realSubfield_gal_isCyclic",
+          "module": "Brockian.GaloisCyclicGroup",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/GaloisCyclicGroup.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #7 \u2014 Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32",
+          "provenance_note": "For every odd prime p: Q(2cos 2pi/p)/Q is Galois (abelian), its Galois group is CYCLIC (IsCyclic) of order (p-1)/2, on the actual field automorphism group (via cyclotomic Gal=(Z/p)^x cyclic, restrictNormalHom surjectivity, card_aut_eq_finrank + real_subfield_degree). Full target, not a reduction. p=2 excluded (degenerate)."
+        },
+        {
+          "name": "Brockian.GaloisCyclicGroup.realSubfield_gal_card",
+          "short": "realSubfield_gal_card",
+          "module": "Brockian.GaloisCyclicGroup",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/GaloisCyclicGroup.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #7 \u2014 Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32",
+          "provenance_note": "For every odd prime p: Q(2cos 2pi/p)/Q is Galois (abelian), its Galois group is CYCLIC (IsCyclic) of order (p-1)/2, on the actual field automorphism group (via cyclotomic Gal=(Z/p)^x cyclic, restrictNormalHom surjectivity, card_aut_eq_finrank + real_subfield_degree). Full target, not a reduction. p=2 excluded (degenerate)."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 3,
+      "proved_count": 3
+    },
+    {
+      "id": "METALLIC-REAL",
+      "title": "Metallic / golden matrix realization (eigenvalue packaging)",
+      "book": "Lean MetallicRealization \u00b7 companion metallic matrices",
+      "notes": "Linear-algebra packaging of metallic means; not a number-field uniqueness claim beyond stated eigenvalues.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.MetallicRealization.golden_hasEigenvalue",
+        "Brockian.MetallicRealization.metallicMatrix_eigenvalue_iff",
+        "Brockian.MetallicRealization.metallicMatrix_charpoly",
+        "Brockian.MetallicRealization.goldenRatio_irrational"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.MetallicRealization.golden_hasEigenvalue",
+          "short": "golden_hasEigenvalue",
+          "module": "Brockian.MetallicRealization",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/MetallicRealization.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+          "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+        },
+        {
+          "name": "Brockian.MetallicRealization.metallicMatrix_eigenvalue_iff",
+          "short": "metallicMatrix_eigenvalue_iff",
+          "module": "Brockian.MetallicRealization",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/MetallicRealization.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+          "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+        },
+        {
+          "name": "Brockian.MetallicRealization.metallicMatrix_charpoly",
+          "short": "metallicMatrix_charpoly",
+          "module": "Brockian.MetallicRealization",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/MetallicRealization.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+          "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+        },
+        {
+          "name": "Brockian.MetallicRealization.goldenRatio_irrational",
+          "short": "goldenRatio_irrational",
+          "module": "Brockian.MetallicRealization",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/MetallicRealization.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #9 \u2014 metallic-mean spectral realization; AXLE @4.32",
+          "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 4
+    },
+    {
+      "id": "XI-FUNC-EQ",
+      "title": "Riemann \u03be functional equation (Mathlib completed-zeta wire)",
+      "book": "Lean XiFunctionalEquation \u00b7 RH scaffold support",
+      "notes": "Unconditional \u03be / completed-zeta functional equation wiring. Not RH; zeros on critical line not claimed.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.XiFunctionalEquation.riemannXi_functional_equation",
+        "Brockian.XiFunctionalEquation.completedRiemannZeta_functional_equation",
+        "Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_zeta_zero_of_mem_critical_strip"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.XiFunctionalEquation.riemannXi_functional_equation",
+          "short": "riemannXi_functional_equation",
+          "module": "Brockian.XiFunctionalEquation",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/XiFunctionalEquation.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+          "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+        },
+        {
+          "name": "Brockian.XiFunctionalEquation.completedRiemannZeta_functional_equation",
+          "short": "completedRiemannZeta_functional_equation",
+          "module": "Brockian.XiFunctionalEquation",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/XiFunctionalEquation.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+          "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+        },
+        {
+          "name": "Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_zeta_zero_of_mem_critical_strip",
+          "short": "riemannXi_eq_zero_iff_zeta_zero_of_mem_critical_strip",
+          "module": "Brockian.XiFunctionalEquation",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/XiFunctionalEquation.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+          "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 3,
       "proved_count": 3
     }
   ],
@@ -6912,6 +7886,83 @@
       }
     },
     {
+      "name": "Brockian.EquidistributionBVReduction.BVPrimePairAsymptotic",
+      "module": "Brockian.EquidistributionBVReduction",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/EquidistributionBVReduction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.admissible_reflection_symmetry",
+      "module": "Brockian.EquidistributionBVReduction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionBVReduction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.bv_shape_consistent",
+      "module": "Brockian.EquidistributionBVReduction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionBVReduction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.configCount_density_of_BV",
+      "module": "Brockian.EquidistributionBVReduction",
+      "register": "CONDITIONAL",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionBVReduction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.configCount_over_main_tendsto",
+      "module": "Brockian.EquidistributionBVReduction",
+      "register": "CONDITIONAL",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionBVReduction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.equidistribution_of_BV_uniform",
+      "module": "Brockian.EquidistributionBVReduction",
+      "register": "CONDITIONAL",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionBVReduction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.total_over_main_tendsto",
+      "module": "Brockian.EquidistributionBVReduction",
+      "register": "CONDITIONAL",
+      "kind": "theorem",
+      "source": "Brockian/EquidistributionBVReduction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.Fin5InnerProduct.conj_omega",
       "module": "Brockian.Fin5InnerProduct",
       "register": "PROVED",
@@ -7280,6 +8331,116 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/FranklinInvolution.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.alphaSub",
+      "module": "Brockian.GaloisCyclicGroup",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/GaloisCyclicGroup.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.cycExt",
+      "module": "Brockian.GaloisCyclicGroup",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisCyclicGroup.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.primRoot",
+      "module": "Brockian.GaloisCyclicGroup",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisCyclicGroup.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.realSubfield",
+      "module": "Brockian.GaloisCyclicGroup",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/GaloisCyclicGroup.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.realSubfield_facts",
+      "module": "Brockian.GaloisCyclicGroup",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisCyclicGroup.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.realSubfield_gal_card",
+      "module": "Brockian.GaloisCyclicGroup",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisCyclicGroup.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.realSubfield_gal_isCyclic",
+      "module": "Brockian.GaloisCyclicGroup",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisCyclicGroup.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.realSubfield_isGalois",
+      "module": "Brockian.GaloisCyclicGroup",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisCyclicGroup.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.zetaC",
+      "module": "Brockian.GaloisCyclicGroup",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/GaloisCyclicGroup.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisCyclicGroup.zetaSub",
+      "module": "Brockian.GaloisCyclicGroup",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/GaloisCyclicGroup.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -9282,6 +10443,314 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/MetallicFamily.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.det_eq_prod_roots",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.eigvec_conj_ne_zero",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.eigvec_mean_ne_zero",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.fibQ_charpoly",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.fibQ_mulVec_golden",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.goldenRatio_irrational",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.golden_hasEigenvalue",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicConj_isRoot",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix",
+      "module": "Brockian.MetallicRealization",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_charpoly",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_charpoly_natDegree",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_det",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_eigenvalue_iff",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_hasEigenvalue_conj",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_hasEigenvalue_mean",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_isSymm",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_mulVec_conj",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_mulVec_mean",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_one",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMatrix_trace",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMean_irrational",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMean_isRoot",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMean_notMem_cycleSpectrum",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicMean_two_notMem_cycleSpectrum",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicPoly_factor",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.metallicPoly_natDegree",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.trace_eq_sum_roots",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MetallicRealization.two_lt_metallicMean",
+      "module": "Brockian.MetallicRealization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MetallicRealization.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -16861,6 +18330,72 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/WeylWeakRegularityScaffold.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.completedRiemannZeta_functional_equation",
+      "module": "Brockian.XiFunctionalEquation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/XiFunctionalEquation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_apply",
+      "module": "Brockian.XiFunctionalEquation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/XiFunctionalEquation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_zeta_zero_of_mem_critical_strip",
+      "module": "Brockian.XiFunctionalEquation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/XiFunctionalEquation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_functional_equation",
+      "module": "Brockian.XiFunctionalEquation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/XiFunctionalEquation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.zeta_zero_of_riemannXi_zero",
+      "module": "Brockian.XiFunctionalEquation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/XiFunctionalEquation.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.zeta_zero_one_sub_of_mem_critical_strip",
+      "module": "Brockian.XiFunctionalEquation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/XiFunctionalEquation.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"

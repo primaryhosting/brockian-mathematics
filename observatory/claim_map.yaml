@@ -531,6 +531,7 @@ claims:
     lean:
       - Brockian.OddDistinctPartition.euler_odd_eq_distinct
       - Brockian.OddDistinctPartition.glaisher
+      - Brockian.OddDistinctPartition.euler_via_glaisher
     notes: "Wires Mathlib Glaisher m=2; not Franklin PST."
 
   - id: C15-TWIN-CONSTANT
@@ -539,7 +540,10 @@ claims:
     lean:
       - Brockian.TwinPrimeConstant.nu_p_twin
       - Brockian.TwinPrimeConstant.twinPrimeConstant
-    notes: "Not twin-prime infinitude; product reduction of 𝔖({0,2})."
+      - Brockian.TwinPrimeConstant.isAdmissible_twinOffsets
+      - Brockian.TwinPrimeConstant.localFactorAt_twin_eq_tFactor
+      - Brockian.TwinPrimeConstant.localFactor_twin_eq_tFactor
+    notes: "Not twin-prime infinitude; product / local-factor reduction of 𝔖({0,2}) only."
 
   - id: E25-WEYL-LAW
     title: Weyl-law counting target for RH-shaped operators (CONDITIONAL schema)
@@ -548,3 +552,101 @@ claims:
       - Brockian.Weyl.WeylLawTarget.WeylLawMatch
       - Brockian.Weyl.WeylLawTarget.MatchesRiemannVonMangoldt
     notes: "Schema only; no Weyl law proved."
+
+  # ── Tier-1 claim sync (cos / sieve / goldbach / gallery) ───────────────────
+  - id: COS-ALG-INT
+    title: Algebraic integer status of 2 cos(2π/n) and spectral generators
+    book: "Lean CosAlgebraicInteger · cyclotomic real subfield hooks"
+    lean:
+      - Brockian.CosAlgebraicInteger.isIntegral_two_cos_two_pi_div
+      - Brockian.CosAlgebraicInteger.isIntegral_spectralGen
+      - Brockian.CosAlgebraicInteger.degree_five_pack
+      - Brockian.CosAlgebraicInteger.quadratic_iff_five_pack
+    notes: "Integrality + small-prime degree packs. CosTraceNorm not present in registry. No numerology beyond [ℚ(α_p):ℚ]=(p−1)/2."
+
+  - id: SS-EXAMPLES
+    title: Concrete admissible constellations with positive singular series
+    book: "Lean SingularSeries.Examples · twin gap / even pairs"
+    lean:
+      - Brockian.SingularSeries.Examples.isAdmissible_twinGap
+      - Brockian.SingularSeries.Examples.singular_series_pos_twinGap
+      - Brockian.SingularSeries.Examples.isAdmissible_evenPair
+      - Brockian.SingularSeries.Examples.singular_series_pos_evenPair
+    notes: "Instances of Wire/Convergence API on {0,2} and even pairs. Not twin-prime density or HL conjecture. SingularSeriesMoreExamples absent."
+
+  - id: GC-LOCAL-WHEEL
+    title: Finite local Goldbach wheel (g_p and K_p at small primes)
+    book: "Lean Goldbach.LocalWheel · mod-2/3 finite predictor"
+    lean:
+      - Brockian.Goldbach.LocalWheel.gCount_three
+      - Brockian.Goldbach.LocalWheel.Kp_five
+      - Brockian.Goldbach.LocalWheel.K23_eq
+      - Brockian.Goldbach.LocalWheel.K23_eq_nine_quarters_iff
+    notes: "Exact local counts/covariances only. Not global Goldbach. GoldbachWheelExtended not in registry."
+
+  - id: FIN5-INNER
+    title: Hermitian inner product and C₅ Fourier eigenmode orthogonality
+    book: "Lean Fin5InnerProduct · VertexSpace L² structure"
+    lean:
+      - Brockian.Fin5InnerProduct.hermInner
+      - Brockian.Fin5InnerProduct.eigenmode_orthogonal
+      - Brockian.Fin5InnerProduct.hermInner_eigenmode
+      - Brockian.Fin5InnerProduct.hermInner_self_eq_zero_iff
+    notes: "Finite C₅ Hilbert structure for isotypic analysis; not continuous L² Plancherel."
+
+  - id: WEYL-SYMM-PKG
+    title: Symmetric-operator real-spectrum package (New Era gallery)
+    book: "Lean Weyl.SymmetryPackage · re-export of Operator rung"
+    lean:
+      - Brockian.Weyl.SymmetryPackage.quadratic_form_im_zero
+      - Brockian.Weyl.SymmetryPackage.eigenvalue_im_zero
+      - Brockian.Weyl.SymmetryPackage.not_eigenvalue_of_im_ne_zero
+      - Brockian.Weyl.SymmetryPackage.injective_of_im_ne_zero
+    notes: "Gallery re-exports from Weyl.Operator. Not ESA, not T̄=T*, not RH."
+
+  - id: CONN-GOLDEN
+    title: C₅ algebraic connectivity = 3−φ (golden bridge)
+    book: "Lean ConnectivityGoldenBridge · Laplacian λ₂"
+    lean:
+      - Brockian.ConnectivityGoldenBridge.algebraic_connectivity_C5
+      - Brockian.ConnectivityGoldenBridge.golden_sub_one_eq_two_cos
+      - Brockian.ConnectivityGoldenBridge.lambda2_eq_three_minus_phi
+      - Brockian.ConnectivityGoldenBridge.lambda2_eq_two_minus_two_cos
+    notes: "Exact C₅ Laplacian identities linking φ and 2cos(2π/5). Graph-spectrum only."
+
+  - id: AS-DIAGONAL
+    title: Diagonal (q=ν) admissibility count dichotomy
+    book: "Lean AdmissibilityDiagonal · selection diagonal case"
+    lean:
+      - Brockian.AdmissibilityDiagonal.diagonal_admissibility_count
+      - Brockian.AdmissibilityDiagonal.diagonal_count_five
+      - Brockian.AdmissibilityDiagonal.admissibility_count_dichotomy
+    notes: "Diagonal residue case of q−ν law; not full k-tuple sieve."
+
+  - id: GAL-CYCLIC
+    title: Real cyclotomic subfield is Galois cyclic
+    book: "Lean GaloisCyclicGroup · real subfield of ℚ(ζ)"
+    lean:
+      - Brockian.GaloisCyclicGroup.realSubfield_isGalois
+      - Brockian.GaloisCyclicGroup.realSubfield_gal_isCyclic
+      - Brockian.GaloisCyclicGroup.realSubfield_gal_card
+    notes: "Structural Galois facts for the real subfield; complements CosAlgebraicInteger degree packs."
+
+  - id: METALLIC-REAL
+    title: Metallic / golden matrix realization (eigenvalue packaging)
+    book: "Lean MetallicRealization · companion metallic matrices"
+    lean:
+      - Brockian.MetallicRealization.golden_hasEigenvalue
+      - Brockian.MetallicRealization.metallicMatrix_eigenvalue_iff
+      - Brockian.MetallicRealization.metallicMatrix_charpoly
+      - Brockian.MetallicRealization.goldenRatio_irrational
+    notes: "Linear-algebra packaging of metallic means; not a number-field uniqueness claim beyond stated eigenvalues."
+
+  - id: XI-FUNC-EQ
+    title: Riemann ξ functional equation (Mathlib completed-zeta wire)
+    book: "Lean XiFunctionalEquation · RH scaffold support"
+    lean:
+      - Brockian.XiFunctionalEquation.riemannXi_functional_equation
+      - Brockian.XiFunctionalEquation.completedRiemannZeta_functional_equation
+      - Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_zeta_zero_of_mem_critical_strip
+    notes: "Unconditional ξ / completed-zeta functional equation wiring. Not RH; zeros on critical line not claimed."
