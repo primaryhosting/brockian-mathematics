@@ -412,3 +412,69 @@ keep boundedv-continuous.)
     Imports PentagonalPartition only.
   Do NOT touch those files or Admissibility*/Galois*/Pentagonal* internals (extend by import only).
   Pipeline each: hole-free → no_theater_lint → AXLE check @lean-4.32.0 → attestation only if module_verified.
+
+- 2026-08-01 — **Grok swarm #4** (keep proving; AXLE @4.32 required). New files only:
+  - `Brockian/Fin5InnerProduct.lean` — Hermitian product on VertexSpace; eigenmode orthogonality
+  - `Brockian/GoldbachLocalWheel.lean` — finite K₂/K₃ wheel lemmas (not global Goldbach)
+  - `Brockian/SingularSeriesExamples.lean` — concrete admissible G examples with positive series
+  - `Brockian/ConnectivityGoldenBridge.lean` — λ₂(C₅)=2−1/φ packaging lemmas
+  - `Brockian/WeylSymmetryPackage.lean` — short package of IsSymmetric real-spectrum facts for reading path
+  - Integrator: ship `WeylFourierMultiplier` (already AXLE verified) into Brockian.lean + registry
+  Also attempt repair (optional, same claim): KatoRangeDensity / WeakRegularityScaffold if still failing.
+  Pipeline: hole-free → no_theater_lint → attest.py → json only if module_verified.
+  Do not touch PentagonalPartition, AdmissibilityKTuple, GaloisGeneralDegree, NewEra internals.
+
+- 2026-08-01 — **Grok swarm #6 on 39-move map** (804 PROVED baseline). New files; AXLE @4.32 required:
+  - Lane A#4 `Brockian/OddDistinctPartition.lean` — p_odd=p_distinct wire Mathlib
+  - Lane B#10 `Brockian/CosAlgebraicInteger.lean` — 2cos(2π/p) algebraic integer / minpoly degree hooks
+  - Lane C#12 `Brockian/AdmissibilityDiagonal.lean` — g≡0 mod q → count q−1
+  - Lane C#15 `Brockian/TwinPrimeConstant.lean` — 𝔖({0,2}) concrete reduction
+  - Lane E#25 `Brockian/WeylLawTarget.lean` — N(T)~(T/2π)log conditional schema (CONDITIONAL)
+  - Lane G#34 / integrate: finish+ship Fin5InnerProduct, GoldbachLocalWheel, WeylSymmetryPackage if verified
+  Do not fake Franklin PST, RH, full free −Δ, or Brun sieve. Pipeline: hole-free → lint → attest → json if verified.
+
+- 2026-08-01 — **Codex swarm #5 INTEGRATED** (six-lane bigger attack; all accepted lanes
+  AXLE/lint-gated, no root-import without attestation):
+  - `WeylFourierMultiplier` (`e4cf92f` + integration `acd864e`) — Fourier multiplier dense-range
+    transfer layer. Independently rechecked by Codex: no-theater lint clean, canonical
+    `WeylFourierMultiplier.json` verified @4.32, extra read-only AXLE cross-check verified @4.28.
+    Full free `-Δ` ESA still needs Plancherel + unbounded `ξ²` multiplier dense ranges +
+    domain/action intertwining.
+  - `WeylWeakRegularityScaffold` (integrated in `7b07d26`) — deficiency vector now unpacks to
+    the weak Schrodinger equation; remaining analysis is exactly weak-to-classical regularity.
+  - `WeylKatoRangeDensity` (`6cd3878`) — faithful range-density transfer API, closed-range
+    upgrades, zero perturbation, bounded self-adjoint witness; verified @4.32 and @4.28.
+    Does not prove unbounded Kato-Rellich.
+  - `GoldbachCovarianceScaffold` (`230a41f` + integration `7b07d26`) — finite p=2,3 wheel
+    and singular-series local inputs; does not prove `GoldbachCovarianceTransfer`.
+  - `EquidistributionFiniteScaffold` (`7aaf495`) — finite prime-pair config partition,
+    non-admissible-zero and finite deviation bounds; no HL/BV or global equidistribution claim.
+  - `docs/MATHLIB-PR-BLUEPRINTS.md` + `scripts/list_upstream_decls.py` (`c12fb00`) —
+    16 PR-sized upstream extraction plan; script is read-only and `py_compile` clean.
+
+- 2026-08-01 — **Codex swarm #6 launched from the 39-move map** (non-overlap with active
+  Claude/Grok claims; AXLE @4.32 required for Lean files, explicit-path integration only).
+  Initial audit baseline after current integrations: 804 `PROVED`, 201 `DEFINITION`,
+  12 `CONDITIONAL`, 1 `CONJECTURE` over 1018 registry entries.
+  Active agents:
+  - Maxwell (`019fc09e-5d83-76b3-9db9-9b3781a36f18`) — item #35,
+    `scripts/audit_dependency_firewall.py` + `docs/DEPENDENCY-FIREWALL.md`; read-only
+    overclaim-firewall audit.
+  - Schrodinger (`019fc09e-7a23-76b3-9bc2-62fa29d4942b`) — item #36,
+    `scripts/audit_registry_consistency.py` + `docs/REGISTRY-CONSISTENCY.md`; read-only
+    conditional/conjecture/provenance self-consistency audit.
+  - Popper (`019fc09e-8f65-7893-973b-abca4ba3b94f`) — item #39,
+    `scripts/gen_paper_theorem_table.py`, `paper/theorem_table.md`,
+    `docs/PAPER-TABLE-GENERATION.md`; paper-ready theorem table generator.
+  - Dewey (`019fc09e-b43d-7580-83c4-8353554f6782`) — item #11, retargeted after collision
+    with Grok's `AdmissibilityDiagonal`: now `Brockian/AdmissibilityCriterionScaffold.lean`
+    only, toward local admissibility-criterion equivalences.
+  - Gibbs (`019fc09e-d1d4-7852-a43b-61d11f60882d`) — item #19, retargeted after collision
+    with Grok's `TwinPrimeConstant`: now `Brockian/EquidistributionDeviationBound.lean`
+    only, finite deviation-bound packaging.
+  - Herschel (`019fc09e-eb4d-7832-8ff6-05a4fc2c2f62`) — item #28,
+    `Brockian/RiemannXiFunctionalEquation.lean` only if Mathlib has enough xi/functional
+    equation API; otherwise report the exact blocker and write no theorem.
+  Do not touch Grok-owned `OddDistinctPartition`, `CosAlgebraicInteger`, `AdmissibilityDiagonal`,
+  `TwinPrimeConstant`, `WeylLawTarget`, `Fin5InnerProduct`, `GoldbachLocalWheel`,
+  `WeylSymmetryPackage`, or Claude-owned Admissibility/Galois/Pentagonal files.
