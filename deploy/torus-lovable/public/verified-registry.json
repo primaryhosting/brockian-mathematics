@@ -19,25 +19,25 @@
     "verified_by"
   ],
   "summary": {
-    "total": 1828,
+    "total": 1868,
     "by_source": {
       "brockian": {
-        "total": 1828,
+        "total": 1868,
         "by_register": {
           "CONDITIONAL": 21,
           "CONJECTURE": 1,
-          "DEFINITION": 309,
+          "DEFINITION": 310,
           "DISCHARGED": 6,
-          "PROVED": 1491
+          "PROVED": 1530
         }
       }
     },
     "by_register": {
       "CONDITIONAL": 21,
       "CONJECTURE": 1,
-      "DEFINITION": 309,
+      "DEFINITION": 310,
       "DISCHARGED": 6,
-      "PROVED": 1491
+      "PROVED": 1530
     }
   },
   "theorems": [
@@ -4721,6 +4721,142 @@
     {
       "name": "Brockian.CosTraceNormEleven.trace_spectralGen_eleven",
       "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.CosTraceNormThirteen.degree_thirteen",
+      "module": "Brockian.CosTraceNormThirteen",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.CosTraceNormThirteen.isIntegral_and_degree_thirteen",
+      "module": "Brockian.CosTraceNormThirteen",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.CosTraceNormThirteen.isIntegral_spectralGen_thirteen",
+      "module": "Brockian.CosTraceNormThirteen",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.CosTraceNormThirteen.isIntegral_spectralGen_thirteen_Q",
+      "module": "Brockian.CosTraceNormThirteen",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.CosTraceNormThirteen.prime_thirteen",
+      "module": "Brockian.CosTraceNormThirteen",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.CosTraceNormThirteen.thirteen_ne_two",
+      "module": "Brockian.CosTraceNormThirteen",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.CosTraceNormThirteen.thirteen_pack",
+      "module": "Brockian.CosTraceNormThirteen",
       "register": "PROVED",
       "kind": "theorem",
       "statement": "",
@@ -14553,6 +14689,82 @@
       "verified_by": "AXLE"
     },
     {
+      "name": "Brockian.Goldbach.WheelK235711.K2_11",
+      "module": "Brockian.Goldbach.WheelK235711",
+      "register": "DEFINITION",
+      "kind": "def",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK235711.K2_11_eq",
+      "module": "Brockian.Goldbach.WheelK235711",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK235711.K2_11_of_not_two_dvd",
+      "module": "Brockian.Goldbach.WheelK235711",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK235711.K2_11_of_two_and_eleven_dvd",
+      "module": "Brockian.Goldbach.WheelK235711",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
       "name": "Brockian.GoldbachComb.GoldbachCovarianceTransfer",
       "module": "Brockian.GoldbachComb",
       "register": "CONJECTURE",
@@ -22074,6 +22286,586 @@
       "conditional_rung": null,
       "discharged_by": null,
       "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.evenPair_card_thirty",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.evenPair_card_twentyEight",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.evenPair_card_twentyFour",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.evenPair_card_twentySix",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.evenPair_card_twentyTwo",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.isAdmissible_evenPair_thirty",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.isAdmissible_evenPair_twentyEight",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.isAdmissible_evenPair_twentyFour",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.isAdmissible_evenPair_twentySix",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.isAdmissible_evenPair_twentyTwo",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.localFactor_thirty_two",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.localFactor_twentyTwo_two",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.nu_p_thirty",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.nu_p_thirty_two",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.nu_p_twentyEight",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.nu_p_twentyFour",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.nu_p_twentySix",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.nu_p_twentyTwo",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.nu_p_twentyTwo_two",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_finite_pos_evenPair_thirty",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_finite_pos_evenPair_twentyEight",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_finite_pos_evenPair_twentyFour",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_finite_pos_evenPair_twentySix",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_finite_pos_evenPair_twentyTwo",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_pos_evenPair_thirty",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_pos_evenPair_twentyEight",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_pos_evenPair_twentyFour",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_pos_evenPair_twentySix",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_pos_evenPair_twentyTwo",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
         "Quot.sound",
         "propext"
       ],

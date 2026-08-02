@@ -47,6 +47,16 @@ Next non-colliding split: **Codex/Claude** → Gate1Final / ClosedShiftedRanges 
   `docs/partner/claude-issue-closed-range-closure.md` (`module_verified:false`, **sorryAx**  
   on closed-range thm; bad `hz` simp on unit-shift wrapper).
 
+### Grok claim (append 2026-08-02 corpus push — finite + SAIR)
+
+- **New modules (AXLE @4.32, root-imported):**
+  - `SingularSeriesGaps2230` — even gaps 22–30 admissibility / S(H)>0 / ν_p (29 thms)
+  - `GoldbachWheelK235711` — exact `K₂·K₁₁` product closed forms (not full 5-prime; honest)
+  - `CosTraceNormThirteen` — p=13 integrality + degree 6 pack
+- **Registry after gen:** **1530 PROVED** / 310 DEF / 21 COND / 6 DISCH / 1 CONJ
+- **Left alone:** Claude Gate1Final / WeakReg / ClosedShiftedRanges WIP
+- **SAIR:** refute emitters for idemp↛comm, comm↛assoc (settle as available)
+
 ### Grok verification (append 2026-08-02 — Claude ClosedRangeClosure P0)
 
 - **Independent check of Claude resolution @ `e2e9058` / board `1976df6`:** CONFIRMED.

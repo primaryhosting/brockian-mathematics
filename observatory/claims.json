@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-02T16:55:12Z",
+  "generated_at": "2026-08-02T17:47:42Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 1482,
-      "DEFINITION": 308,
+      "PROVED": 1530,
+      "DEFINITION": 310,
       "CONDITIONAL": 21,
       "DISCHARGED": 6,
       "CONJECTURE": 1
@@ -26,8 +26,8 @@
       "definition": 1
     },
     "registry": {
-      "PROVED": 1482,
-      "DEFINITION": 308,
+      "PROVED": 1530,
+      "DEFINITION": 310,
       "CONDITIONAL": 21,
       "DISCHARGED": 6,
       "CONJECTURE": 1
@@ -7469,6 +7469,83 @@
       }
     },
     {
+      "name": "Brockian.CosTraceNormThirteen.degree_thirteen",
+      "module": "Brockian.CosTraceNormThirteen",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormThirteen.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormThirteen.isIntegral_and_degree_thirteen",
+      "module": "Brockian.CosTraceNormThirteen",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormThirteen.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormThirteen.isIntegral_spectralGen_thirteen",
+      "module": "Brockian.CosTraceNormThirteen",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormThirteen.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormThirteen.isIntegral_spectralGen_thirteen_Q",
+      "module": "Brockian.CosTraceNormThirteen",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormThirteen.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormThirteen.prime_thirteen",
+      "module": "Brockian.CosTraceNormThirteen",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormThirteen.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormThirteen.thirteen_ne_two",
+      "module": "Brockian.CosTraceNormThirteen",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormThirteen.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormThirteen.thirteen_pack",
+      "module": "Brockian.CosTraceNormThirteen",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormThirteen.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.CycleSpectrumFamily.algebraic_connectivity_five",
       "module": "Brockian.CycleSpectrumFamily",
       "register": "PROVED",
@@ -13035,6 +13112,50 @@
       }
     },
     {
+      "name": "Brockian.Goldbach.WheelK235711.K2_11",
+      "module": "Brockian.Goldbach.WheelK235711",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/WheelK235711.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK235711.K2_11_eq",
+      "module": "Brockian.Goldbach.WheelK235711",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelK235711.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK235711.K2_11_of_not_two_dvd",
+      "module": "Brockian.Goldbach.WheelK235711",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelK235711.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK235711.K2_11_of_two_and_eleven_dvd",
+      "module": "Brockian.Goldbach.WheelK235711",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelK235711.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.GoldbachComb.GoldbachCovarianceTransfer",
       "module": "Brockian.GoldbachComb",
       "register": "CONJECTURE",
@@ -17325,6 +17446,325 @@
       }
     },
     {
+      "name": "Brockian.SingularSeries.Gaps2230.evenPair_card_thirty",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.evenPair_card_twentyEight",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.evenPair_card_twentyFour",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.evenPair_card_twentySix",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.evenPair_card_twentyTwo",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.isAdmissible_evenPair_thirty",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.isAdmissible_evenPair_twentyEight",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.isAdmissible_evenPair_twentyFour",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.isAdmissible_evenPair_twentySix",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.isAdmissible_evenPair_twentyTwo",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.localFactor_thirty_two",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.localFactor_twentyTwo_two",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.nu_p_thirty",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.nu_p_thirty_two",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.nu_p_twentyEight",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.nu_p_twentyFour",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.nu_p_twentySix",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.nu_p_twentyTwo",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.nu_p_twentyTwo_two",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_finite_pos_evenPair_thirty",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_finite_pos_evenPair_twentyEight",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_finite_pos_evenPair_twentyFour",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_finite_pos_evenPair_twentySix",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_finite_pos_evenPair_twentyTwo",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_pos_evenPair_thirty",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_pos_evenPair_twentyEight",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_pos_evenPair_twentyFour",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_pos_evenPair_twentySix",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps2230.singular_series_pos_evenPair_twentyTwo",
+      "module": "Brockian.SingularSeries.Gaps2230",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/Gaps2230.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.SingularSeries.MoreExamples.evenPair_card_eight",
       "module": "Brockian.SingularSeries.MoreExamples",
       "register": "PROVED",
@@ -19332,6 +19772,50 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/ClosedRange.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.ClosedRangeClosure.dense_rangeSMulSub_of_le",
+      "module": "Brockian.Weyl.ClosedRangeClosure",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/ClosedRangeClosure.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.ClosedRangeClosure.isClosed_rangeAddI_and_rangeSubI",
+      "module": "Brockian.Weyl.ClosedRangeClosure",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/ClosedRangeClosure.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.ClosedRangeClosure.isClosed_rangeSMulSub_of_isClosed_of_isSymmetric",
+      "module": "Brockian.Weyl.ClosedRangeClosure",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/ClosedRangeClosure.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.ClosedRangeClosure.rangeSMulSub_mono",
+      "module": "Brockian.Weyl.ClosedRangeClosure",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/ClosedRangeClosure.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -21741,6 +22225,72 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/KatoRellichTransfer.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventConstruction.UnitShiftRightResolvents",
+      "module": "Brockian.Weyl.KatoResolventConstruction",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/KatoResolventConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventConstruction.boundedPerturbationTransfer_of_unitShiftRightResolvents_norm_lt_one",
+      "module": "Brockian.Weyl.KatoResolventConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoResolventConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventConstruction.essentiallySelfAdjoint_perturb_of_unitShiftRightResolvents_norm_lt_one",
+      "module": "Brockian.Weyl.KatoResolventConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoResolventConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventConstruction.essentiallySelfAdjoint_perturb_of_unitShiftRightResolvents_norm_lt_one_via_chain",
+      "module": "Brockian.Weyl.KatoResolventConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoResolventConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventConstruction.norm_mul_Radd_lt_one_of_unitShiftRightResolvents",
+      "module": "Brockian.Weyl.KatoResolventConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoResolventConstruction.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventConstruction.norm_mul_Rsub_lt_one_of_unitShiftRightResolvents",
+      "module": "Brockian.Weyl.KatoResolventConstruction",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoResolventConstruction.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"

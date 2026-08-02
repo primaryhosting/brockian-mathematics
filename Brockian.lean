@@ -67,6 +67,7 @@ import Brockian.SingularSeriesWire
 import Brockian.SingularSeriesExamples
 import Brockian.SingularSeriesMoreExamples
 import Brockian.SingularSeriesEvenMore
+import Brockian.SingularSeriesGaps2230
 import Brockian.TwinPrimeConstant
 import Brockian.WeylFreeLaplacian2
 import Brockian.WeylConfining
@@ -81,6 +82,7 @@ import Brockian.GaloisGeneralDegree
 import Brockian.CosAlgebraicInteger
 import Brockian.CosTraceNorm
 import Brockian.CosTraceNormEleven
+import Brockian.CosTraceNormThirteen
 import Brockian.WeylFourierMultiplier
 import Brockian.WeylWeakRegularityScaffold
 import Brockian.WeylWeakRegularityCore
@@ -98,6 +100,7 @@ import Brockian.WeylResolventFromESA
 import Brockian.RiemannXiSymmetry
 import Brockian.GoldbachCovarianceScaffold
 import Brockian.GoldbachWheelK2357
+import Brockian.GoldbachWheelK235711
 import Brockian.AdmissibilityCRTGeneral
 import Brockian.PentagonalTheoremFranklin
 import Brockian.OddDistinctPartition
