@@ -26,6 +26,7 @@ import Brockian.GoldbachSchema
 import Brockian.GoldbachLemmas
 import Brockian.GoldbachParity
 import Brockian.GoldbachLocalWheel
+import Brockian.GoldbachWheelExtended
 import Brockian.RiemannScaffold
 import Brockian.WeylOperator
 import Brockian.WeylSymmetryPackage
@@ -60,6 +61,7 @@ import Brockian.WeylSchrodingerMinimal
 import Brockian.SingularSeriesConvergence
 import Brockian.SingularSeriesWire
 import Brockian.SingularSeriesExamples
+import Brockian.SingularSeriesMoreExamples
 import Brockian.TwinPrimeConstant
 import Brockian.WeylFreeLaplacian2
 import Brockian.WeylConfining
@@ -72,6 +74,7 @@ import Brockian.PentagonalPartition
 import Brockian.AdmissibilityKTuple
 import Brockian.GaloisGeneralDegree
 import Brockian.CosAlgebraicInteger
+import Brockian.CosTraceNorm
 import Brockian.WeylFourierMultiplier
 import Brockian.WeylWeakRegularityScaffold
 import Brockian.WeylWeakRegularityCore

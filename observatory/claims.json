@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-02T10:32:22Z",
+  "generated_at": "2026-08-02T10:48:06Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 1068,
-      "DEFINITION": 252,
+      "PROVED": 1184,
+      "DEFINITION": 253,
       "CONDITIONAL": 24,
       "CONJECTURE": 1
     }
@@ -14,9 +14,9 @@
   "charter": "Badges are derived from the Lean registry when `lean` is non-empty.\nPROVED requires AXLE-verified + axiom-clean theorems (see README).\nOpen problems (twins infinitude, Goldbach global, RH) stay not_claimed.",
   "version": 1,
   "summary": {
-    "claims": 70,
+    "claims": 73,
     "by_status": {
-      "proved": 58,
+      "proved": 61,
       "open": 1,
       "conjecture": 1,
       "conditional": 4,
@@ -25,8 +25,8 @@
       "definition": 1
     },
     "registry": {
-      "PROVED": 1068,
-      "DEFINITION": 252,
+      "PROVED": 1184,
+      "DEFINITION": 253,
       "CONDITIONAL": 24,
       "CONJECTURE": 1
     }
@@ -4329,6 +4329,217 @@
       "missing_lean": [],
       "declaration_count": 3,
       "proved_count": 3
+    },
+    {
+      "id": "COS-TRACE-NORM",
+      "title": "Trace and Norm of 2cos(2\u03c0/p) for p=3,5,7",
+      "book": "Tier-1 CosTraceNorm",
+      "notes": "Algebraic Trace/Norm from monic minpoly; not numerology.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.CosTraceNorm.trace_spectralGen_five",
+        "Brockian.CosTraceNorm.norm_spectralGen_five",
+        "Brockian.CosTraceNorm.trace_spectralGen_seven",
+        "Brockian.CosTraceNorm.trace_adjoin_gen_eq_neg_nextCoeff"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.CosTraceNorm.trace_spectralGen_five",
+          "short": "trace_spectralGen_five",
+          "module": "Brockian.CosTraceNorm",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/CosTraceNorm.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.CosTraceNorm.norm_spectralGen_five",
+          "short": "norm_spectralGen_five",
+          "module": "Brockian.CosTraceNorm",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/CosTraceNorm.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.CosTraceNorm.trace_spectralGen_seven",
+          "short": "trace_spectralGen_seven",
+          "module": "Brockian.CosTraceNorm",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/CosTraceNorm.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.CosTraceNorm.trace_adjoin_gen_eq_neg_nextCoeff",
+          "short": "trace_adjoin_gen_eq_neg_nextCoeff",
+          "module": "Brockian.CosTraceNorm",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/CosTraceNorm.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 4,
+      "proved_count": 4
+    },
+    {
+      "id": "SS-MORE-EXAMPLES",
+      "title": "Singular series positivity for even pairs {0,4},{0,6},{0,8},{0,10}",
+      "book": "Tier-1 SingularSeriesMoreExamples",
+      "notes": "Local factors + positivity; not twin-prime asymptotic.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.SingularSeries.MoreExamples.singular_series_pos_evenPair_four",
+        "Brockian.SingularSeries.MoreExamples.localFactor_four_two",
+        "Brockian.SingularSeries.MoreExamples.localFactor_six_three"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.SingularSeries.MoreExamples.singular_series_pos_evenPair_four",
+          "short": "singular_series_pos_evenPair_four",
+          "module": "Brockian.SingularSeries.MoreExamples",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/MoreExamples.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.SingularSeries.MoreExamples.localFactor_four_two",
+          "short": "localFactor_four_two",
+          "module": "Brockian.SingularSeries.MoreExamples",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/MoreExamples.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.SingularSeries.MoreExamples.localFactor_six_three",
+          "short": "localFactor_six_three",
+          "module": "Brockian.SingularSeries.MoreExamples",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/MoreExamples.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 3,
+      "proved_count": 3
+    },
+    {
+      "id": "GC-WHEEL-EXT",
+      "title": "Goldbach local wheels K11, K13 and K235 product",
+      "book": "Tier-1 GoldbachWheelExtended",
+      "notes": "Finite local arithmetic only; not Goldbach.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Goldbach.WheelExtended.Kp_eleven",
+        "Brockian.Goldbach.WheelExtended.Kp_thirteen",
+        "Brockian.Goldbach.WheelExtended.K235_cases"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Goldbach.WheelExtended.Kp_eleven",
+          "short": "Kp_eleven",
+          "module": "Brockian.Goldbach.WheelExtended",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/WheelExtended.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Goldbach.WheelExtended.Kp_thirteen",
+          "short": "Kp_thirteen",
+          "module": "Brockian.Goldbach.WheelExtended",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/WheelExtended.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Goldbach.WheelExtended.K235_cases",
+          "short": "K235_cases",
+          "module": "Brockian.Goldbach.WheelExtended",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/WheelExtended.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 3,
+      "proved_count": 3
     }
   ],
   "all_declarations": [
@@ -6296,6 +6507,281 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/CosAlgebraicInteger.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.coeff_zero_minpoly_five",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.coeff_zero_minpoly_seven",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.coeff_zero_minpoly_three",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.isIntegral_spectralGen",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.isIntegral_spectralGen_five_\u211a",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.isIntegral_spectralGen_seven_\u211a",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.isIntegral_spectralGen_three_\u211a",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.isIntegral_spectralGen_\u211a",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.isIntegral_two_cos_two_pi_div",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.isIntegral_two_cos_two_pi_div_\u211a",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.minpoly_five",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.minpoly_seven",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.minpoly_three",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.nextCoeff_minpoly_five",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.nextCoeff_minpoly_seven",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.nextCoeff_minpoly_three",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.norm_adjoin_gen_eq_coeff_zero",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.norm_spectralGen_five",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.norm_spectralGen_seven",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.norm_spectralGen_three",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.trace_adjoin_gen_eq_neg_nextCoeff",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.trace_norm_pack",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.trace_spectralGen_five",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.trace_spectralGen_seven",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNorm.trace_spectralGen_three",
+      "module": "Brockian.CosTraceNorm",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNorm.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -9855,6 +10341,457 @@
       }
     },
     {
+      "name": "Brockian.Goldbach.WheelExtended.K235",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_above_even_baseline_iff",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_aligned_gt_K23_aligned",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_aligned_gt_baseline",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_cases",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_eq",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_eq_K23_mul_Kp_five",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_eq_aligned_iff",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_excess_nonneg_of_even",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_le_aligned",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_nonneg",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_of_not_two_dvd",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_of_two_dvd_not_three_not_five",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_of_two_five_dvd_not_three",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_of_two_three_dvd_not_five",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_of_two_three_five_dvd",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.K235_pos_iff_two_dvd",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.Kp_eleven",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.Kp_eleven_aligned_gt_misaligned",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.Kp_eleven_gt_one_iff",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.Kp_eleven_le_aligned",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.Kp_eleven_of_dvd",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.Kp_eleven_of_not_dvd",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.Kp_eleven_pos",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.Kp_thirteen",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.Kp_thirteen_aligned_gt_misaligned",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.Kp_thirteen_gt_one_iff",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.Kp_thirteen_le_aligned",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.Kp_thirteen_of_dvd",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.Kp_thirteen_of_not_dvd",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.Kp_thirteen_pos",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.gCount_eleven",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.gCount_eleven_eq_gResidues_card",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.gCount_eleven_of_ne_zero",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.gCount_eleven_zero",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.gCount_thirteen",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.gCount_thirteen_eq_gResidues_card",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.gCount_thirteen_of_ne_zero",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.gCount_thirteen_zero",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.gResidues_eleven_card",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Goldbach.WheelExtended.gResidues_thirteen_card",
+      "module": "Brockian.Goldbach.WheelExtended",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WheelExtended.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.GoldbachComb.GoldbachCovarianceTransfer",
       "module": "Brockian.GoldbachComb",
       "register": "CONJECTURE",
@@ -13391,6 +14328,567 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/Examples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.evenPair_card_eight",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.evenPair_card_four",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.evenPair_card_of_ne_zero",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.evenPair_card_six",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.evenPair_card_ten",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.isAdmissible_evenPair_eight",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.isAdmissible_evenPair_four",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.isAdmissible_evenPair_six",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.isAdmissible_evenPair_ten",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactorAt_eight_two",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactorAt_evenPair_two",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactorAt_four_five",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactorAt_four_odd",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactorAt_four_three",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactorAt_four_two",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactorAt_six_five",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactorAt_six_odd_ne_three",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactorAt_six_three",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactorAt_six_two",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactorAt_ten_two",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactor_eight_two",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactor_evenPair_two",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactor_four_five",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactor_four_odd",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactor_four_three",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactor_four_two",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactor_six_five",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactor_six_odd_ne_three",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactor_six_three",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactor_six_two",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.localFactor_ten_two",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.nu_p_evenPair",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.nu_p_evenPair_odd_of_dvd",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.nu_p_evenPair_odd_of_not_dvd",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.nu_p_evenPair_two",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.nu_p_four",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.nu_p_four_odd",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.nu_p_four_two",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.nu_p_six",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.nu_p_six_odd_ne_three",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.nu_p_six_three",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.nu_p_six_two",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.singular_series_finite_pos_evenPair",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.singular_series_finite_pos_evenPair_eight",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.singular_series_finite_pos_evenPair_four",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.singular_series_finite_pos_evenPair_six",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.singular_series_finite_pos_evenPair_ten",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.singular_series_pos_evenPair_eight",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.singular_series_pos_evenPair_four",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.singular_series_pos_evenPair_six",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.MoreExamples.singular_series_pos_evenPair_ten",
+      "module": "Brockian.SingularSeries.MoreExamples",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MoreExamples.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"

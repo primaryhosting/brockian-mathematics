@@ -650,3 +650,31 @@ claims:
       - Brockian.XiFunctionalEquation.completedRiemannZeta_functional_equation
       - Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_zeta_zero_of_mem_critical_strip
     notes: "Unconditional ξ / completed-zeta functional equation wiring. Not RH; zeros on critical line not claimed."
+
+  - id: COS-TRACE-NORM
+    title: Trace and Norm of 2cos(2π/p) for p=3,5,7
+    book: "Tier-1 CosTraceNorm"
+    lean:
+      - Brockian.CosTraceNorm.trace_spectralGen_five
+      - Brockian.CosTraceNorm.norm_spectralGen_five
+      - Brockian.CosTraceNorm.trace_spectralGen_seven
+      - Brockian.CosTraceNorm.trace_adjoin_gen_eq_neg_nextCoeff
+    notes: "Algebraic Trace/Norm from monic minpoly; not numerology."
+
+  - id: SS-MORE-EXAMPLES
+    title: Singular series positivity for even pairs {0,4},{0,6},{0,8},{0,10}
+    book: "Tier-1 SingularSeriesMoreExamples"
+    lean:
+      - Brockian.SingularSeries.MoreExamples.singular_series_pos_evenPair_four
+      - Brockian.SingularSeries.MoreExamples.localFactor_four_two
+      - Brockian.SingularSeries.MoreExamples.localFactor_six_three
+    notes: "Local factors + positivity; not twin-prime asymptotic."
+
+  - id: GC-WHEEL-EXT
+    title: Goldbach local wheels K11, K13 and K235 product
+    book: "Tier-1 GoldbachWheelExtended"
+    lean:
+      - Brockian.Goldbach.WheelExtended.Kp_eleven
+      - Brockian.Goldbach.WheelExtended.Kp_thirteen
+      - Brockian.Goldbach.WheelExtended.K235_cases
+    notes: "Finite local arithmetic only; not Goldbach."

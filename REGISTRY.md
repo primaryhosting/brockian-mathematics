@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 24
 - **CONJECTURE**: 1
-- **DEFINITION**: 252
-- **PROVED**: 1068
+- **DEFINITION**: 253
+- **PROVED**: 1184
 
 ## Theorems
 
@@ -194,6 +194,31 @@
 | PROVED | `Brockian.CosAlgebraicInteger.quadratic_iff_five_pack` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.CosAlgebraicInteger.real_subfield_degree_pack` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.CosAlgebraicInteger.two_pi_div_eq_rat_mul_pi` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.CosTraceNorm.coeff_zero_minpoly_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.coeff_zero_minpoly_seven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.coeff_zero_minpoly_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.isIntegral_spectralGen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.isIntegral_spectralGen_five_ℚ` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.isIntegral_spectralGen_seven_ℚ` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.isIntegral_spectralGen_three_ℚ` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.isIntegral_spectralGen_ℚ` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.isIntegral_two_cos_two_pi_div` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.isIntegral_two_cos_two_pi_div_ℚ` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.minpoly_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.minpoly_seven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.minpoly_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.nextCoeff_minpoly_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.nextCoeff_minpoly_seven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.nextCoeff_minpoly_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.norm_adjoin_gen_eq_coeff_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.norm_spectralGen_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.norm_spectralGen_seven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.norm_spectralGen_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.trace_adjoin_gen_eq_neg_nextCoeff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.trace_norm_pack` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.trace_spectralGen_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.trace_spectralGen_seven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNorm.trace_spectralGen_three` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_five` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_five_props` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_le_four` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
@@ -517,6 +542,47 @@
 | PROVED | `Brockian.Goldbach.Parity.hasGoldbachRep_odd_imp_two` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
 | PROVED | `Brockian.Goldbach.Parity.hasGoldbachRep_two_plus_prime` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
 | PROVED | `Brockian.Goldbach.Parity.odd_sub_of_even_sub_odd_prime` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
+| DEFINITION | `Brockian.Goldbach.WheelExtended.K235` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_above_even_baseline_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_aligned_gt_K23_aligned` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_aligned_gt_baseline` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_cases` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_eq` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_eq_K23_mul_Kp_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_eq_aligned_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_excess_nonneg_of_even` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_le_aligned` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_nonneg` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_of_not_two_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_of_two_dvd_not_three_not_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_of_two_five_dvd_not_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_of_two_three_dvd_not_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_of_two_three_five_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.K235_pos_iff_two_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.Kp_eleven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.Kp_eleven_aligned_gt_misaligned` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.Kp_eleven_gt_one_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.Kp_eleven_le_aligned` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.Kp_eleven_of_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.Kp_eleven_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.Kp_eleven_pos` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.Kp_thirteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.Kp_thirteen_aligned_gt_misaligned` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.Kp_thirteen_gt_one_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.Kp_thirteen_le_aligned` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.Kp_thirteen_of_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.Kp_thirteen_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.Kp_thirteen_pos` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.gCount_eleven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.gCount_eleven_eq_gResidues_card` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.gCount_eleven_of_ne_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.gCount_eleven_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.gCount_thirteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.gCount_thirteen_eq_gResidues_card` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.gCount_thirteen_of_ne_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.gCount_thirteen_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.gResidues_eleven_card` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelExtended.gResidues_thirteen_card` | ✓ | verified | lean-4.32.0 |  |
 | CONJECTURE | `Brockian.GoldbachComb.GoldbachCovarianceTransfer` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
 | DEFINITION | `Brockian.GoldbachComb.Kp` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
 | DEFINITION | `Brockian.GoldbachComb.gCount` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
@@ -839,6 +905,57 @@
 | PROVED | `Brockian.SingularSeries.Examples.singular_series_pos_twinGap` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
 | DEFINITION | `Brockian.SingularSeries.Examples.twinGap` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.SingularSeries.Examples.twinGap_eq` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeries.MoreExamples.evenPair_card_eight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.evenPair_card_four` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.evenPair_card_of_ne_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.evenPair_card_six` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.evenPair_card_ten` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.isAdmissible_evenPair_eight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.isAdmissible_evenPair_four` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.isAdmissible_evenPair_six` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.isAdmissible_evenPair_ten` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactorAt_eight_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactorAt_evenPair_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactorAt_four_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactorAt_four_odd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactorAt_four_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactorAt_four_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactorAt_six_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactorAt_six_odd_ne_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactorAt_six_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactorAt_six_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactorAt_ten_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactor_eight_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactor_evenPair_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactor_four_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactor_four_odd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactor_four_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactor_four_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactor_six_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactor_six_odd_ne_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactor_six_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactor_six_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.localFactor_ten_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.nu_p_evenPair` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.nu_p_evenPair_odd_of_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.nu_p_evenPair_odd_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.nu_p_evenPair_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.nu_p_four` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.nu_p_four_odd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.nu_p_four_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.nu_p_six` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.nu_p_six_odd_ne_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.nu_p_six_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.nu_p_six_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.singular_series_finite_pos_evenPair` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.singular_series_finite_pos_evenPair_eight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.singular_series_finite_pos_evenPair_four` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.singular_series_finite_pos_evenPair_six` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.singular_series_finite_pos_evenPair_ten` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.singular_series_pos_evenPair_eight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.singular_series_pos_evenPair_four` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.singular_series_pos_evenPair_six` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.MoreExamples.singular_series_pos_evenPair_ten` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.SingularSeries.Wire.IsAdmissible` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.SingularSeries.Wire.h_conv_of_admissible` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.SingularSeries.Wire.isAdmissible_iff` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
