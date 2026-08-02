@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 921,
-    "DEFINITION": 217,
-    "CONDITIONAL": 15,
+    "PROVED": 979,
+    "DEFINITION": 229,
+    "CONDITIONAL": 19,
     "CONJECTURE": 1
   },
   "theorems": [
@@ -17283,6 +17283,774 @@
       "provenance_note": null
     },
     {
+      "name": "Brockian.OddDistinctPartition.card_distincts_le_partition",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.card_distincts_le_powerset",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.card_oddDistincts_le_distincts",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.card_oddDistincts_le_odds",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.card_odds_le_partition",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.countRestricted_two_eq_distincts",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.distincts_one_card",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.distincts_zero_card",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.euler_odd_eq_distinct",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.euler_one",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.euler_via_glaisher",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.euler_zero",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.glaisher",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.mem_distincts_iff",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.mem_odds_iff",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.oddDistincts_subset_distincts",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.oddDistincts_subset_odds",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.odds_one_card",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.odds_zero_card",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.parts_nodup_of_mem_distincts",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.parts_odd_of_mem_odds",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.parts_subset_Icc",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.powerSeries_odds_eq_distincts",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddDistinctPartition.toFinset_inj_on_distincts",
+      "kind": "theorem",
+      "module": "Brockian.OddDistinctPartition",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddDistinctPartition.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.Penrose.A",
       "kind": "def",
       "module": "Brockian.Penrose",
@@ -24773,6 +25541,949 @@
       "quarantine": true,
       "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
       "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.isAdmissible_twinOffsets",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.localFactorAt_twin",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.localFactorAt_twin_eq_tFactor",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.localFactorAt_twin_five",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.localFactorAt_twin_odd",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.localFactorAt_twin_seven",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.localFactorAt_twin_three",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.localFactorAt_twin_two",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.localFactor_twin_eq_tFactor",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.localFactor_twin_five",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.localFactor_twin_odd",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.localFactor_twin_seven",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.localFactor_twin_three",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.localFactor_twin_two",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.nu_p_twin",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.nu_p_twin_odd",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.nu_p_twin_two",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.oddPrimesUpTo",
+      "kind": "def",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.singularSeriesFinite_twin_eq",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.singularSeriesFinite_twin_of_two_le",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.singularSeriesFinite_twin_pos",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.singularSeries_twin_eq_two_mul_constant",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.singularSeries_twin_pos",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.twinOffsets",
+      "kind": "def",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.twinOffsets_card",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.twinOffsets_eq",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.twinPrimeConstant",
+      "kind": "def",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.twinPrimeConstantFinite",
+      "kind": "def",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.twinPrimeConstantFinite_pos",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimeConstant.twinPrimeConstant_pos",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimeConstant",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimeConstant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.Weyl.green_identity_integral",
@@ -35657,6 +37368,614 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.MatchesRiemannVonMangoldt",
+      "kind": "def",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Honest CONDITIONAL schema only. Abstract N_op/N_model, WeylLawMatch (ratio\u21921), riemannVonMangoldtMain shape, DiscreteSpectrumCandidate packaging. Pure analysis (main-term\u2192\u221e, match\u21d2counting diverges) is proved; NO Weyl law for \u2212\u0394+V, NO RH, NO Hilbert\u2013P\u00f3lya instance. Gate-0 WeylLawCandidateExists left OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.N_model",
+      "kind": "def",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Honest CONDITIONAL schema only. Abstract N_op/N_model, WeylLawMatch (ratio\u21921), riemannVonMangoldtMain shape, DiscreteSpectrumCandidate packaging. Pure analysis (main-term\u2192\u221e, match\u21d2counting diverges) is proved; NO Weyl law for \u2212\u0394+V, NO RH, NO Hilbert\u2013P\u00f3lya instance. Gate-0 WeylLawCandidateExists left OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.N_op",
+      "kind": "def",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Honest CONDITIONAL schema only. Abstract N_op/N_model, WeylLawMatch (ratio\u21921), riemannVonMangoldtMain shape, DiscreteSpectrumCandidate packaging. Pure analysis (main-term\u2192\u221e, match\u21d2counting diverges) is proved; NO Weyl law for \u2212\u0394+V, NO RH, NO Hilbert\u2013P\u00f3lya instance. Gate-0 WeylLawCandidateExists left OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.N_op_tendsto_atTop_of_WeylLawMatch",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Pure analysis: ratio\u21921 + model\u2192\u221e \u21d2 N_op\u2192\u221e. Abstract counting functions only."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.N_op_tendsto_atTop_of_matches_rvm",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Pure analysis: MatchesRiemannVonMangoldt \u21d2 N_op\u2192\u221e via classical main-term divergence. Not RH."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.WeylLawCandidate",
+      "kind": "def",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Honest CONDITIONAL schema only. Abstract N_op/N_model, WeylLawMatch (ratio\u21921), riemannVonMangoldtMain shape, DiscreteSpectrumCandidate packaging. Pure analysis (main-term\u2192\u221e, match\u21d2counting diverges) is proved; NO Weyl law for \u2212\u0394+V, NO RH, NO Hilbert\u2013P\u00f3lya instance. Gate-0 WeylLawCandidateExists left OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.WeylLawCandidateExists",
+      "kind": "def",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Honest CONDITIONAL schema only. Abstract N_op/N_model, WeylLawMatch (ratio\u21921), riemannVonMangoldtMain shape, DiscreteSpectrumCandidate packaging. Pure analysis (main-term\u2192\u221e, match\u21d2counting diverges) is proved; NO Weyl law for \u2212\u0394+V, NO RH, NO Hilbert\u2013P\u00f3lya instance. Gate-0 WeylLawCandidateExists left OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.WeylLawMatch",
+      "kind": "def",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Honest CONDITIONAL schema only. Abstract N_op/N_model, WeylLawMatch (ratio\u21921), riemannVonMangoldtMain shape, DiscreteSpectrumCandidate packaging. Pure analysis (main-term\u2192\u221e, match\u21d2counting diverges) is proved; NO Weyl law for \u2212\u0394+V, NO RH, NO Hilbert\u2013P\u00f3lya instance. Gate-0 WeylLawCandidateExists left OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.WeylLawMatchDiff",
+      "kind": "def",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Honest CONDITIONAL schema only. Abstract N_op/N_model, WeylLawMatch (ratio\u21921), riemannVonMangoldtMain shape, DiscreteSpectrumCandidate packaging. Pure analysis (main-term\u2192\u221e, match\u21d2counting diverges) is proved; NO Weyl law for \u2212\u0394+V, NO RH, NO Hilbert\u2013P\u00f3lya instance. Gate-0 WeylLawCandidateExists left OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.WeylLawMatchDiff_iff_eigenvalueCountingMatchesNT",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Honest CONDITIONAL schema only. Abstract N_op/N_model, WeylLawMatch (ratio\u21921), riemannVonMangoldtMain shape, DiscreteSpectrumCandidate packaging. Pure analysis (main-term\u2192\u221e, match\u21d2counting diverges) is proved; NO Weyl law for \u2212\u0394+V, NO RH, NO Hilbert\u2013P\u00f3lya instance. Gate-0 WeylLawCandidateExists left OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.WeylLawMatch_iff_eigenvalueCountingAsymptotic",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Honest CONDITIONAL schema only. Abstract N_op/N_model, WeylLawMatch (ratio\u21921), riemannVonMangoldtMain shape, DiscreteSpectrumCandidate packaging. Pure analysis (main-term\u2192\u221e, match\u21d2counting diverges) is proved; NO Weyl law for \u2212\u0394+V, NO RH, NO Hilbert\u2013P\u00f3lya instance. Gate-0 WeylLawCandidateExists left OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.WeylLawMatch_of_diff",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Difference match + model\u2192\u221e \u21d2 ratio match (reuses ConfiningShape packaging). Not a Weyl law."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.WeylLawMatch_of_eigenvalueCountingMatchesNT",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Honest CONDITIONAL schema only. Abstract N_op/N_model, WeylLawMatch (ratio\u21921), riemannVonMangoldtMain shape, DiscreteSpectrumCandidate packaging. Pure analysis (main-term\u2192\u221e, match\u21d2counting diverges) is proved; NO Weyl law for \u2212\u0394+V, NO RH, NO Hilbert\u2013P\u00f3lya instance. Gate-0 WeylLawCandidateExists left OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_candidate",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "open",
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "WeylLawCandidate \u21d2 N_op\u2192\u221e \u2014 real implication from match+model divergence; inhabiting WeylLawCandidate is Hilbert\u2013P\u00f3lya+Weyl-law strength (OPEN)."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_WeylLawMatch",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "open",
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "DiscreteSpectrumCandidate + WeylLawMatch + model\u2192\u221e \u21d2 N_op\u2192\u221e. Packaging of RH-shaped counting half; not a spectral theorem. OPEN schema."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_rvm",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "open",
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "DiscreteSpectrumCandidate + MatchesRiemannVonMangoldt \u21d2 N_op\u2192\u221e. Classical main-term model; no \u03b6 zero-count proved. OPEN schema."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_exists",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "open",
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "WeylLawCandidateExists \u21d2 \u2203 N_op with N_op\u2192\u221e \u2014 hardness direction; Gate-0 existence OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.point_spectrum_unbounded_of_candidate",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Honest CONDITIONAL schema only. Abstract N_op/N_model, WeylLawMatch (ratio\u21921), riemannVonMangoldtMain shape, DiscreteSpectrumCandidate packaging. Pure analysis (main-term\u2192\u221e, match\u21d2counting diverges) is proved; NO Weyl law for \u2212\u0394+V, NO RH, NO Hilbert\u2013P\u00f3lya instance. Gate-0 WeylLawCandidateExists left OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.riemannVonMangoldtMain",
+      "kind": "def",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Honest CONDITIONAL schema only. Abstract N_op/N_model, WeylLawMatch (ratio\u21921), riemannVonMangoldtMain shape, DiscreteSpectrumCandidate packaging. Pure analysis (main-term\u2192\u221e, match\u21d2counting diverges) is proved; NO Weyl law for \u2212\u0394+V, NO RH, NO Hilbert\u2013P\u00f3lya instance. Gate-0 WeylLawCandidateExists left OPEN."
+    },
+    {
+      "name": "Brockian.Weyl.WeylLawTarget.riemannVonMangoldtMain_tendsto_atTop",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeylLawTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylLawTarget.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
+      "provenance_note": "Pure real analysis: (T/2\u03c0)log(T/2\u03c0)\u2192\u221e. Shape definition only \u2014 not a zero-counting theorem."
     },
     {
       "name": "Brockian.WeylWeakRegularityScaffold.ClassicalL2Representative",

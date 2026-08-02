@@ -612,3 +612,40 @@ runs:
     quarantine: true
     ledger_run: "2026-08-01 — Gate-1 end-to-end assembly under ODE identification"
     provenance_note: "essentiallySelfAdjoint_of_ode_bridge: Bridge + Cayley under DeficiencyRepresentsODE. primeGaussian_essentiallySelfAdjoint unconditional. Full -Delta+V still needs constructing T and discharging DeficiencyRepresentsODE."
+
+  # ── Lane E#25: Weyl-law / RVM counting CONDITIONAL schema (OPEN) ────────────
+  "weyl-law-target":
+    module: Brockian.Weyl.WeylLawTarget
+    verdict: admit
+    quarantine: true
+    ledger_run: "Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL)"
+    provenance_note: "Honest CONDITIONAL schema only. Abstract N_op/N_model, WeylLawMatch (ratio→1), riemannVonMangoldtMain shape, DiscreteSpectrumCandidate packaging. Pure analysis (main-term→∞, match⇒counting diverges) is proved; NO Weyl law for −Δ+V, NO RH, NO Hilbert–Pólya instance. Gate-0 WeylLawCandidateExists left OPEN."
+    overrides:
+      - name: counting_diverges_of_candidate
+        verdict: admit
+        conditional_rung: open
+        provenance_note: "WeylLawCandidate ⇒ N_op→∞ — real implication from match+model divergence; inhabiting WeylLawCandidate is Hilbert–Pólya+Weyl-law strength (OPEN)."
+      - name: counting_diverges_of_discrete_and_WeylLawMatch
+        verdict: admit
+        conditional_rung: open
+        provenance_note: "DiscreteSpectrumCandidate + WeylLawMatch + model→∞ ⇒ N_op→∞. Packaging of RH-shaped counting half; not a spectral theorem. OPEN schema."
+      - name: counting_diverges_of_discrete_and_rvm
+        verdict: admit
+        conditional_rung: open
+        provenance_note: "DiscreteSpectrumCandidate + MatchesRiemannVonMangoldt ⇒ N_op→∞. Classical main-term model; no ζ zero-count proved. OPEN schema."
+      - name: counting_diverges_of_exists
+        verdict: admit
+        conditional_rung: open
+        provenance_note: "WeylLawCandidateExists ⇒ ∃ N_op with N_op→∞ — hardness direction; Gate-0 existence OPEN."
+      - name: N_op_tendsto_atTop_of_matches_rvm
+        verdict: admit
+        provenance_note: "Pure analysis: MatchesRiemannVonMangoldt ⇒ N_op→∞ via classical main-term divergence. Not RH."
+      - name: riemannVonMangoldtMain_tendsto_atTop
+        verdict: admit
+        provenance_note: "Pure real analysis: (T/2π)log(T/2π)→∞. Shape definition only — not a zero-counting theorem."
+      - name: N_op_tendsto_atTop_of_WeylLawMatch
+        verdict: admit
+        provenance_note: "Pure analysis: ratio→1 + model→∞ ⇒ N_op→∞. Abstract counting functions only."
+      - name: WeylLawMatch_of_diff
+        verdict: admit
+        provenance_note: "Difference match + model→∞ ⇒ ratio match (reuses ConfiningShape packaging). Not a Weyl law."

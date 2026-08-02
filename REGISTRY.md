@@ -6,10 +6,10 @@
 
 ## Summary
 
-- **CONDITIONAL**: 15
+- **CONDITIONAL**: 19
 - **CONJECTURE**: 1
-- **DEFINITION**: 217
-- **PROVED**: 921
+- **DEFINITION**: 229
+- **PROVED**: 979
 
 ## Theorems
 
@@ -565,6 +565,30 @@
 | DEFINITION | `Brockian.NewEra.readingPath` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.NewEra.twin_admissible_count` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.NewEra.why_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.card_distincts_le_partition` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.card_distincts_le_powerset` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.card_oddDistincts_le_distincts` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.card_oddDistincts_le_odds` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.card_odds_le_partition` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.countRestricted_two_eq_distincts` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.distincts_one_card` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.distincts_zero_card` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.euler_odd_eq_distinct` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.euler_one` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.euler_via_glaisher` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.euler_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.glaisher` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.mem_distincts_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.mem_odds_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.oddDistincts_subset_distincts` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.oddDistincts_subset_odds` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.odds_one_card` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.odds_zero_card` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.parts_nodup_of_mem_distincts` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.parts_odd_of_mem_odds` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.parts_subset_Icc` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.powerSeries_odds_eq_distincts` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.OddDistinctPartition.toFinset_inj_on_distincts` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Penrose.A` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
 | DEFINITION | `Brockian.Penrose.A_ae` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
 | PROVED | `Brockian.Penrose.A_ae_add` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
@@ -807,6 +831,36 @@
 | PROVED | `Brockian.TransitionKernel.twin_admissible_singleton` | ✓ | verified | lean-4.32.0 | runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion |
 | PROVED | `Brockian.TransitionKernel.twin_pins_mod_three` | ✓ | verified | lean-4.32.0 | runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion |
 | PROVED | `Brockian.TransitionKernel.twin_table_card` | ✓ | verified | lean-4.32.0 | runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion |
+| PROVED | `Brockian.TwinPrimeConstant.isAdmissible_twinOffsets` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.localFactorAt_twin` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.localFactorAt_twin_eq_tFactor` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.localFactorAt_twin_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.localFactorAt_twin_odd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.localFactorAt_twin_seven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.localFactorAt_twin_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.localFactorAt_twin_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.localFactor_twin_eq_tFactor` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.localFactor_twin_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.localFactor_twin_odd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.localFactor_twin_seven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.localFactor_twin_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.localFactor_twin_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.nu_p_twin` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.nu_p_twin_odd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.nu_p_twin_two` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.TwinPrimeConstant.oddPrimesUpTo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.singularSeriesFinite_twin_eq` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.singularSeriesFinite_twin_of_two_le` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.singularSeriesFinite_twin_pos` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.singularSeries_twin_eq_two_mul_constant` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.singularSeries_twin_pos` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.TwinPrimeConstant.twinOffsets` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.twinOffsets_card` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.twinOffsets_eq` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.TwinPrimeConstant.twinPrimeConstant` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.TwinPrimeConstant.twinPrimeConstantFinite` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.twinPrimeConstantFinite_pos` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.TwinPrimeConstant.twinPrimeConstant_pos` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.green_identity_integral` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
 | PROVED | `Brockian.Weyl.lagrange_identity` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
 | DEFINITION | `Brockian.Weyl.sturmL` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
@@ -1156,6 +1210,26 @@
 | PROVED | `Brockian.Weyl.SymmetryPackage.smulPMap_not_eigenvalue_of_im_ne_zero` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.SymmetryPackage.smulPMap_quadratic_form_im_zero` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.SymmetryPackage.symmetricRealSpectrum` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.WeylLawTarget.MatchesRiemannVonMangoldt` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| DEFINITION | `Brockian.Weyl.WeylLawTarget.N_model` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| DEFINITION | `Brockian.Weyl.WeylLawTarget.N_op` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| PROVED | `Brockian.Weyl.WeylLawTarget.N_op_tendsto_atTop_of_WeylLawMatch` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| PROVED | `Brockian.Weyl.WeylLawTarget.N_op_tendsto_atTop_of_matches_rvm` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| DEFINITION | `Brockian.Weyl.WeylLawTarget.WeylLawCandidate` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| DEFINITION | `Brockian.Weyl.WeylLawTarget.WeylLawCandidateExists` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| DEFINITION | `Brockian.Weyl.WeylLawTarget.WeylLawMatch` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| DEFINITION | `Brockian.Weyl.WeylLawTarget.WeylLawMatchDiff` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| PROVED | `Brockian.Weyl.WeylLawTarget.WeylLawMatchDiff_iff_eigenvalueCountingMatchesNT` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| PROVED | `Brockian.Weyl.WeylLawTarget.WeylLawMatch_iff_eigenvalueCountingAsymptotic` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| PROVED | `Brockian.Weyl.WeylLawTarget.WeylLawMatch_of_diff` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| PROVED | `Brockian.Weyl.WeylLawTarget.WeylLawMatch_of_eigenvalueCountingMatchesNT` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| CONDITIONAL | `Brockian.Weyl.WeylLawTarget.counting_diverges_of_candidate` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| CONDITIONAL | `Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_WeylLawMatch` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| CONDITIONAL | `Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_rvm` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| CONDITIONAL | `Brockian.Weyl.WeylLawTarget.counting_diverges_of_exists` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| PROVED | `Brockian.Weyl.WeylLawTarget.point_spectrum_unbounded_of_candidate` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| DEFINITION | `Brockian.Weyl.WeylLawTarget.riemannVonMangoldtMain` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| PROVED | `Brockian.Weyl.WeylLawTarget.riemannVonMangoldtMain_tendsto_atTop` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
 | DEFINITION | `Brockian.WeylWeakRegularityScaffold.ClassicalL2Representative` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityScaffold.H2` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityScaffold.WeakRegularityPipelineStatus` | ✓ | verified | lean-4.32.0 |  |

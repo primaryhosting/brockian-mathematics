@@ -63,6 +63,7 @@ import Brockian.TwinPrimeConstant
 import Brockian.WeylFreeLaplacian2
 import Brockian.WeylConfining
 import Brockian.ConfiningSpectralShape
+import Brockian.WeylLawTarget
 import Brockian.GaloisWhyFive
 import Brockian.PentagonIsotypic
 import Brockian.WeylDeficiencyRegularity
@@ -75,6 +76,7 @@ import Brockian.WeylWeakRegularityScaffold
 import Brockian.GoldbachCovarianceScaffold
 import Brockian.AdmissibilityCRTGeneral
 import Brockian.PentagonalTheoremFranklin
+import Brockian.OddDistinctPartition
 import Brockian.GaloisMinPolyFamily
 import Brockian.RamanujanCongruence
 import Brockian.FranklinInvolution

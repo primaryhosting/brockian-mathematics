@@ -524,3 +524,27 @@ claims:
       - Brockian.NewEra.decaying_potential_cannot_realize_large_zeros
       - Brockian.NewEra.readingPath
     notes: "Gallery re-exports only. Not RH. Public charter in docs/NEW-ERA.md."
+
+  - id: A4-ODD-DISTINCT
+    title: Euler odd = distinct partitions (Mathlib wire)
+    book: "Lane A #4 · OddDistinctPartition"
+    lean:
+      - Brockian.OddDistinctPartition.euler_odd_eq_distinct
+      - Brockian.OddDistinctPartition.glaisher
+    notes: "Wires Mathlib Glaisher m=2; not Franklin PST."
+
+  - id: C15-TWIN-CONSTANT
+    title: Twin-prime singular series local-factor reduction
+    book: "Lane C #15 · TwinPrimeConstant"
+    lean:
+      - Brockian.TwinPrimeConstant.nu_p_twin
+      - Brockian.TwinPrimeConstant.twinPrimeConstant
+    notes: "Not twin-prime infinitude; product reduction of 𝔖({0,2})."
+
+  - id: E25-WEYL-LAW
+    title: Weyl-law counting target for RH-shaped operators (CONDITIONAL schema)
+    book: "Lane E #25 · WeylLawTarget"
+    lean:
+      - Brockian.Weyl.WeylLawTarget.WeylLawMatch
+      - Brockian.Weyl.WeylLawTarget.MatchesRiemannVonMangoldt
+    notes: "Schema only; no Weyl law proved."
