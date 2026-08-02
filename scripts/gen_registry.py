@@ -96,6 +96,7 @@ def build_entry(f: DeclFacts, prov: dict[str, Any], source: dict[str, Any],
             },
         },
         "conditional_rung": f.conditional_rung,
+        "discharged_by": prov.get("discharged_by"),
         "quarantine": bool(prov.get("quarantine", False)),
         "ledger_run": prov.get("ledger_run"),
         "provenance_note": prov.get("provenance_note"),
@@ -120,7 +121,7 @@ def _provenance_for(module: str, name: str, verdicts: dict[str, Any]) -> dict[st
             continue
         prov = {k: run.get(k) for k in ("module", "quarantine", "ledger_run",
                                         "provenance_note", "conditional_rung",
-                                        "kind_override")}
+                                        "kind_override", "discharged_by")}
         for ov in (run.get("overrides") or []):
             if ov.get("name") == short:
                 prov.update({k: v for k, v in ov.items() if k != "name"})
@@ -175,6 +176,16 @@ def generate(attest_dir: str, verdicts_path: str) -> dict[str, Any]:
                 source={"file": f"Brockian/{module.split('.')[-1]}.lean"},
                 statement=d.get("statement", ""), axle_env=env))
     entries.sort(key=lambda e: (e["module"], e["name"]))
+    # DISCHARGED post-pass: a CONDITIONAL whose `discharged_by` names a PROVED theorem in-core
+    # (its hypothesis/conclusion is now proved elsewhere) is reclassified DISCHARGED — no longer
+    # open frontier, but distinct from PROVED since it is a conditional-form lemma. Honest count:
+    # DISCHARGED is NOT counted as an open conditional and NOT as an unconditional PROVED.
+    proved = {e["name"] for e in entries if e["register"] == "PROVED"}
+    proved |= {e["name"].split(".")[-1] for e in entries if e["register"] == "PROVED"}
+    for e in entries:
+        db = e.get("discharged_by")
+        if e["register"] == "CONDITIONAL" and db and db in proved:
+            e["register"] = "DISCHARGED"
     by_reg: dict[str, int] = {}
     for e in entries:
         by_reg[e["register"]] = by_reg.get(e["register"], 0) + 1

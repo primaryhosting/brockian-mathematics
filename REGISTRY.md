@@ -6,10 +6,11 @@
 
 ## Summary
 
-- **CONDITIONAL**: 24
+- **CONDITIONAL**: 18
 - **CONJECTURE**: 1
-- **DEFINITION**: 260
-- **PROVED**: 1234
+- **DEFINITION**: 261
+- **DISCHARGED**: 6
+- **PROVED**: 1239
 
 ## Theorems
 
@@ -422,20 +423,20 @@
 | PROVED | `Brockian.FranklinFixedPoint.upPart_sPart` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
 | PROVED | `Brockian.FranklinFixedPoint.up_L_gt` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
 | DEFINITION | `Brockian.FranklinInvolution.FranklinData` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
-| CONDITIONAL | `Brockian.FranklinInvolution.franklin_of_franklinData` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| DISCHARGED | `Brockian.FranklinInvolution.franklin_of_franklinData` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | DEFINITION | `Brockian.FranklinInvolution.largestPart` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolution.largestPart_mem` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolution.le_largestPart` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolution.mem_of_lt_tDiag` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolution.one_le_tDiag` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
-| CONDITIONAL | `Brockian.FranklinInvolution.pentagonalNumberTheorem_of_franklinData` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| DISCHARGED | `Brockian.FranklinInvolution.pentagonalNumberTheorem_of_franklinData` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | DEFINITION | `Brockian.FranklinInvolution.sPart` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolution.sPart_le` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolution.sPart_mem` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | DEFINITION | `Brockian.FranklinInvolution.signOf` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolution.signOf_ne_zero` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolution.signedSum_eq_fixed_of_involution` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
-| CONDITIONAL | `Brockian.FranklinInvolution.signedSum_eq_pentCoeff_of_franklinData` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| DISCHARGED | `Brockian.FranklinInvolution.signedSum_eq_pentCoeff_of_franklinData` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | DEFINITION | `Brockian.FranklinInvolution.tDiag` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolution.tDiag_gap_exists` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolution.tDiag_notMem` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
@@ -448,7 +449,7 @@
 | PROVED | `Brockian.FranklinInvolutionProof.franklin_sum_invariant_up` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolutionProof.gauss_int` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
 | PROVED | `Brockian.FranklinInvolutionProof.neg_one_pow_natAbs` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
-| CONDITIONAL | `Brockian.FranklinInvolutionProof.pentagonalNumberTheorem_of_franklinMap` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
+| DISCHARGED | `Brockian.FranklinInvolutionProof.pentagonalNumberTheorem_of_franklinMap` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
 | DEFINITION | `Brockian.FranklinInvolutionProof.stair` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
 | DEFINITION | `Brockian.FranklinInvolutionProof.stairBase` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
 | DEFINITION | `Brockian.FranklinInvolutionProof.stairPartAt` | ✓ | verified | lean-4.32.0 | roadmap #1 sharpening — Franklin fixed-point side (F2) proved; residual reduced to FranklinMap; AXLE @4.32 |
@@ -883,8 +884,8 @@
 | PROVED | `Brockian.PentagonalTheoremFranklin.natCast_pentagonal_eq_pent` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
 | DEFINITION | `Brockian.PentagonalTheoremFranklin.pentCoeff` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
 | DEFINITION | `Brockian.PentagonalTheoremFranklin.pentSign` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
-| CONDITIONAL | `Brockian.PentagonalTheoremFranklin.pentagonalNumberTheorem_of_franklin` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
-| CONDITIONAL | `Brockian.PentagonalTheoremFranklin.pentagonalProduct_coeff_of_franklin` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
+| DISCHARGED | `Brockian.PentagonalTheoremFranklin.pentagonalNumberTheorem_of_franklin` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
+| DISCHARGED | `Brockian.PentagonalTheoremFranklin.pentagonalProduct_coeff_of_franklin` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
 | PROVED | `Brockian.PentagonalTheoremFranklin.prod_pstChar_eq` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
 | DEFINITION | `Brockian.PentagonalTheoremFranklin.pstChar` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
 | PROVED | `Brockian.RamanujanCongruence.coeff_partitionGF` | ✓ | verified | lean-4.32.0 | roadmap #3 — genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32 |
@@ -1320,6 +1321,12 @@
 | PROVED | `Brockian.Weyl.Gate1Bounded.primeGaussianMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2 |
 | PROVED | `Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint` | ✓ | verified | lean-4.32.0 | Aristotle proj c595862c — bounded Kato-Rellich; independently AXLE-verified @ 4.32 |
 | PROVED | `Brockian.Weyl.Kato.isSelfAdjoint_add` | ✓ | verified | lean-4.32.0 | Aristotle proj c595862c — bounded Kato-Rellich; independently AXLE-verified @ 4.32 |
+| PROVED | `Brockian.Weyl.KatoNeumann.boundedPerturbationTransfer_of_resolvent_norm_lt_one` | ✓ | verified | lean-4.32.0 | parallel-tool; AXLE @4.32; committed by Claude for coherence |
+| DEFINITION | `Brockian.Weyl.KatoNeumann.katoFactorInverseOfNormLtOne` | ✓ | verified | lean-4.32.0 | parallel-tool; AXLE @4.32; committed by Claude for coherence |
+| PROVED | `Brockian.Weyl.KatoNeumann.katoFactor_rightInverse_of_norm_lt_one` | ✓ | verified | lean-4.32.0 | parallel-tool; AXLE @4.32; committed by Claude for coherence |
+| PROVED | `Brockian.Weyl.KatoNeumann.rangeAddI_perturb_eq_univ_of_resolvent_norm_lt_one` | ✓ | verified | lean-4.32.0 | parallel-tool; AXLE @4.32; committed by Claude for coherence |
+| PROVED | `Brockian.Weyl.KatoNeumann.rangeSubI_perturb_eq_univ_of_resolvent_norm_lt_one` | ✓ | verified | lean-4.32.0 | parallel-tool; AXLE @4.32; committed by Claude for coherence |
+| PROVED | `Brockian.Weyl.KatoNeumann.rightResolvent_perturb_of_norm_lt_one` | ✓ | verified | lean-4.32.0 | parallel-tool; AXLE @4.32; committed by Claude for coherence |
 | PROVED | `Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_iff_dense_ranges` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_of_essentiallySelfAdjoint_perturb` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_zero_of_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |

@@ -58,12 +58,20 @@ def check_firewall(thms: list[dict]) -> list[str]:
 def check_self_consistency(thms: list[dict]) -> list[str]:
     """#36 — honest use of the register vocabulary."""
     v = []
+    proved = {t["name"] for t in thms if t.get("register") == "PROVED"}
+    proved |= {t["name"].split(".")[-1] for t in thms if t.get("register") == "PROVED"}
     for t in thms:
         reg, name, kind = t.get("register"), t["name"], t.get("kind")
         if reg == "CONDITIONAL":
             rung = t.get("conditional_rung")
             if rung not in VALID_RUNGS:
                 v.append(f"[consistency] CONDITIONAL {name}: rung {rung!r} not in {sorted(VALID_RUNGS)}")
+        if reg == "DISCHARGED":
+            db = t.get("discharged_by")
+            if not db:
+                v.append(f"[consistency] DISCHARGED {name}: no discharged_by recorded")
+            elif db not in proved:
+                v.append(f"[consistency] DISCHARGED {name}: discharged_by {db!r} is not a PROVED theorem in-core")
         if reg == "CONJECTURE" and kind in ("theorem", "lemma"):
             v.append(f"[consistency] CONJECTURE {name}: kind is {kind!r} — a conjecture must be a Prop container, not a theorem")
     # stale-open: a Prop-container target that already has a proving sibling in the same module
@@ -92,8 +100,9 @@ def main() -> int:
     sc = check_self_consistency(thms)
     n_proved = sum(1 for t in thms if t.get("register") == "PROVED")
     n_cond = sum(1 for t in thms if t.get("register") == "CONDITIONAL")
+    n_disc = sum(1 for t in thms if t.get("register") == "DISCHARGED")
     n_conj = sum(1 for t in thms if t.get("register") == "CONJECTURE")
-    print(f"registry: {len(thms)} entries | PROVED {n_proved} | CONDITIONAL {n_cond} | CONJECTURE {n_conj}")
+    print(f"registry: {len(thms)} entries | PROVED {n_proved} | CONDITIONAL {n_cond} | DISCHARGED {n_disc} | CONJECTURE {n_conj}")
     if not fw:
         print(f"#35 overclaim-firewall: CLEAN — all {n_proved} PROVED are axiom-clean, no native_decide, AXLE-verified")
     else:

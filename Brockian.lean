@@ -80,6 +80,7 @@ import Brockian.WeylWeakRegularityScaffold
 import Brockian.WeylWeakRegularityCore
 import Brockian.WeylPlancherelScaffold
 import Brockian.WeylKatoRellichScaffold
+import Brockian.WeylKatoNeumann
 import Brockian.GoldbachCovarianceScaffold
 import Brockian.AdmissibilityCRTGeneral
 import Brockian.PentagonalTheoremFranklin
