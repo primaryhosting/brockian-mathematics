@@ -592,3 +592,10 @@ keep boundedv-continuous.)
   Hygiene: removed failed short dup `FourierMultiplier.json` and non-canonical short
   `LocalWheel.json` / `KatoNeumann.json` (canonicals `WeylFourierMultiplier` /
   `GoldbachLocalWheel` / `WeylKatoNeumann` remain). Never stage `aristotle/kato-bounded`.
+
+- 2026-08-02 — **CONDITIONAL ATTACK dispatch** (full plan: docs/CONDITIONAL-ATTACK-PLAN.md). Assignments:
+  - **Codex (Weyl lane):** A1 `WeakSolutionRegularity` (1D elliptic regularity → discharges DeficiencyODE ×2 + SchrodingerMinimal), A4 Kato–Rellich `essentiallySelfAdjoint_perturb`. AXLE-gate each.
+  - **Grok (reduce-only, do NOT fake):** C1 sharpen Hilbert–Pólya criterion (RH_of_BrockianSystem), C2 local SpectralModel structure (Goldbach), C3 circle-method major-arc as a NEW conditional (keep GoldbachCovarianceTransfer conjecture), C4 WeylLawTarget schemas → wire to a concrete confining candidate. These stay CONDITIONAL/CONJECTURE — never claim RH/Goldbach closed.
+  - **Claude + Harmonic:** A3 free-Δ Plancherel (`freeLaplacian_essentiallySelfAdjoint_of_fourier`) — AXLE swarm + Harmonic submit; B1 equidistribution uniformity symmetry (`sing a = sing b`).
+  - **Harmonic:** A1 weak-regularity job `c400008b` RUNNING (Claude monitoring for sorry-free close).
+  Frontier honesty: RH/Goldbach/WeylLaw are open-problem-strength — dispatched as reduce/strengthen, not full proofs.
