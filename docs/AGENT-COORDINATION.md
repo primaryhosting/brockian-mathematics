@@ -521,3 +521,18 @@ keep boundedv-continuous.)
   Claude ALSO does #35 (overclaim-firewall CI invariant) + #36 (registry self-consistency audit) as tooling directly.
   Do not touch these files or Pentagonal*/Galois*/Admissibility*/MetallicFamily/RiemannScaffold internals (import only).
   Honesty: #1/#3/#6 may return honest reductions/partials; frontier (#16/#29/#30/#32) stay CONDITIONAL, never faked.
+
+- 2026-08-02 — **Claude swarm #8: attack the CONDITIONALs** (AXLE-only; NO local lake build / #print axioms
+  — that thrash-locked the 16GB machine; attest.py obtains axioms via AXLE). Focus = discharge/reduce
+  the 19 CONDITIONAL + 1 CONJECTURE. Claude takes the ones it owns; leaves the Weyl conditionals
+  (DeficiencyODE #20 WeakSolutionRegularity, FreeLaplacian2 #21 Plancherel, KatoUnbounded #22) to Codex,
+  and the frontier (RH_of_BrockianSystem, goldbach_from_spectral_model, GoldbachCovarianceTransfer,
+  WeylLawTarget) stay CONDITIONAL/CONJECTURE — never faked. Claims:
+  - `Brockian/FranklinInvolutionProof.lean` — construct (∀ m, FranklinData m): the explicit sign-reversing
+    involution on Nat.Partition.distincts (smallest-part s / top-diagonal t case split), discharging the 5
+    Franklin CONDITIONALs → makes the Euler pentagonal number theorem UNCONDITIONAL. Imports
+    FranklinInvolution/PentagonalTheoremFranklin/PentagonalPartition (extend by import only).
+  - `Brockian/EquidistributionBVReduction.lean` — reduce `equidistribution_of_asymptotic` (rung=open) to a
+    named Bombieri–Vinogradov-strength hypothesis (honest rung open→literature): prove every algebra/limit
+    step, isolating the single cited analytic input. Imports Equidistribution (extend by import only).
+  Do not touch FranklinInvolution/PentagonalTheoremFranklin/Equidistribution internals (import only).
