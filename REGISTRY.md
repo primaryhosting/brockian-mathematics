@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 12
 - **CONJECTURE**: 1
-- **DEFINITION**: 205
-- **PROVED**: 863
+- **DEFINITION**: 206
+- **PROVED**: 873
 
 ## Theorems
 
@@ -317,6 +317,17 @@
 | PROVED | `Brockian.Fin5InnerProduct.norm_omega` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.GaloisGeneralDegree.quadratic_iff_five_general` | ✓ | verified | lean-4.32.0 | roadmap #13 GENERAL — full why-five degree theorem for all odd primes; AXLE @4.32 |
 | PROVED | `Brockian.GaloisGeneralDegree.real_subfield_degree` | ✓ | verified | lean-4.32.0 | roadmap #13 GENERAL — full why-five degree theorem for all odd primes; AXLE @4.32 |
+| PROVED | `Brockian.GaloisMinPolyFamily.C_facts` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |
+| DEFINITION | `Brockian.GaloisMinPolyFamily.Psi` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |
+| PROVED | `Brockian.GaloisMinPolyFamily.Psi_eq_minpoly` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |
+| PROVED | `Brockian.GaloisMinPolyFamily.Psi_five` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |
+| PROVED | `Brockian.GaloisMinPolyFamily.Psi_monic` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |
+| PROVED | `Brockian.GaloisMinPolyFamily.Psi_natDegree` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |
+| PROVED | `Brockian.GaloisMinPolyFamily.Psi_seven` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |
+| PROVED | `Brockian.GaloisMinPolyFamily.aeval_spectralGen_Psi` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |
+| PROVED | `Brockian.GaloisMinPolyFamily.minpoly_five` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |
+| PROVED | `Brockian.GaloisMinPolyFamily.minpoly_seven` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |
+| PROVED | `Brockian.GaloisMinPolyFamily.psiAux` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |
 | DEFINITION | `Brockian.GaloisWhyFive.P7` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
 | PROVED | `Brockian.GaloisWhyFive.P7_irreducible` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
 | PROVED | `Brockian.GaloisWhyFive.P7_monic` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |

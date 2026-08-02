@@ -72,3 +72,4 @@ import Brockian.WeylWeakRegularityScaffold
 import Brockian.GoldbachCovarianceScaffold
 import Brockian.AdmissibilityCRTGeneral
 import Brockian.PentagonalTheoremFranklin
+import Brockian.GaloisMinPolyFamily

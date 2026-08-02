@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 863,
-    "DEFINITION": 205,
+    "PROVED": 873,
+    "DEFINITION": 206,
     "CONDITIONAL": 12,
     "CONJECTURE": 1
   },
@@ -9471,6 +9471,354 @@
       "quarantine": true,
       "ledger_run": "roadmap #13 GENERAL \u2014 full why-five degree theorem for all odd primes; AXLE @4.32",
       "provenance_note": "CLOSES the general case GaloisWhyFive left open: [Q(2cos 2pi/p):Q] = (minpoly).natDegree = (p-1)/2 for every odd prime p (maximal real subfield Q(zeta_p)+), via the classical cyclotomic tower in C (cyclotomic irreducibility + conjugation-fixed subfield + X^2-alpha X+1 degree-2 step + tower law). quadratic_iff_five_general: the spectral field is golden-quadratic iff p=5, for ALL primes. p=2 (2cos(pi)=-2, degree 1) honestly excluded. Both unconditional PROVED, axiom-clean."
+    },
+    {
+      "name": "Brockian.GaloisMinPolyFamily.C_facts",
+      "kind": "theorem",
+      "module": "Brockian.GaloisMinPolyFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisMinPolyFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 \u2014 explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32",
+      "provenance_note": "Psi_p = 1 + sum_{k=1}^{(p-1)/2} C_k (monic rescaled Chebyshev) proved monic of degree (p-1)/2, annihilates 2cos(2pi/p), and EQUALS minpoly Q (2cos 2pi/p) for all odd primes (Level 3). Includes a monicity/degree engine for Chebyshev.C (Mathlib-absent). Sanity: Psi_5=X^2+X-1, Psi_7=X^3+X^2-2X-1. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisMinPolyFamily.Psi",
+      "kind": "def",
+      "module": "Brockian.GaloisMinPolyFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisMinPolyFamily.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 \u2014 explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32",
+      "provenance_note": "Psi_p = 1 + sum_{k=1}^{(p-1)/2} C_k (monic rescaled Chebyshev) proved monic of degree (p-1)/2, annihilates 2cos(2pi/p), and EQUALS minpoly Q (2cos 2pi/p) for all odd primes (Level 3). Includes a monicity/degree engine for Chebyshev.C (Mathlib-absent). Sanity: Psi_5=X^2+X-1, Psi_7=X^3+X^2-2X-1. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisMinPolyFamily.Psi_eq_minpoly",
+      "kind": "theorem",
+      "module": "Brockian.GaloisMinPolyFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisMinPolyFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 \u2014 explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32",
+      "provenance_note": "Psi_p = 1 + sum_{k=1}^{(p-1)/2} C_k (monic rescaled Chebyshev) proved monic of degree (p-1)/2, annihilates 2cos(2pi/p), and EQUALS minpoly Q (2cos 2pi/p) for all odd primes (Level 3). Includes a monicity/degree engine for Chebyshev.C (Mathlib-absent). Sanity: Psi_5=X^2+X-1, Psi_7=X^3+X^2-2X-1. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisMinPolyFamily.Psi_five",
+      "kind": "theorem",
+      "module": "Brockian.GaloisMinPolyFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisMinPolyFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 \u2014 explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32",
+      "provenance_note": "Psi_p = 1 + sum_{k=1}^{(p-1)/2} C_k (monic rescaled Chebyshev) proved monic of degree (p-1)/2, annihilates 2cos(2pi/p), and EQUALS minpoly Q (2cos 2pi/p) for all odd primes (Level 3). Includes a monicity/degree engine for Chebyshev.C (Mathlib-absent). Sanity: Psi_5=X^2+X-1, Psi_7=X^3+X^2-2X-1. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisMinPolyFamily.Psi_monic",
+      "kind": "theorem",
+      "module": "Brockian.GaloisMinPolyFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisMinPolyFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 \u2014 explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32",
+      "provenance_note": "Psi_p = 1 + sum_{k=1}^{(p-1)/2} C_k (monic rescaled Chebyshev) proved monic of degree (p-1)/2, annihilates 2cos(2pi/p), and EQUALS minpoly Q (2cos 2pi/p) for all odd primes (Level 3). Includes a monicity/degree engine for Chebyshev.C (Mathlib-absent). Sanity: Psi_5=X^2+X-1, Psi_7=X^3+X^2-2X-1. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisMinPolyFamily.Psi_natDegree",
+      "kind": "theorem",
+      "module": "Brockian.GaloisMinPolyFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisMinPolyFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 \u2014 explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32",
+      "provenance_note": "Psi_p = 1 + sum_{k=1}^{(p-1)/2} C_k (monic rescaled Chebyshev) proved monic of degree (p-1)/2, annihilates 2cos(2pi/p), and EQUALS minpoly Q (2cos 2pi/p) for all odd primes (Level 3). Includes a monicity/degree engine for Chebyshev.C (Mathlib-absent). Sanity: Psi_5=X^2+X-1, Psi_7=X^3+X^2-2X-1. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisMinPolyFamily.Psi_seven",
+      "kind": "theorem",
+      "module": "Brockian.GaloisMinPolyFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisMinPolyFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 \u2014 explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32",
+      "provenance_note": "Psi_p = 1 + sum_{k=1}^{(p-1)/2} C_k (monic rescaled Chebyshev) proved monic of degree (p-1)/2, annihilates 2cos(2pi/p), and EQUALS minpoly Q (2cos 2pi/p) for all odd primes (Level 3). Includes a monicity/degree engine for Chebyshev.C (Mathlib-absent). Sanity: Psi_5=X^2+X-1, Psi_7=X^3+X^2-2X-1. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisMinPolyFamily.aeval_spectralGen_Psi",
+      "kind": "theorem",
+      "module": "Brockian.GaloisMinPolyFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisMinPolyFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 \u2014 explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32",
+      "provenance_note": "Psi_p = 1 + sum_{k=1}^{(p-1)/2} C_k (monic rescaled Chebyshev) proved monic of degree (p-1)/2, annihilates 2cos(2pi/p), and EQUALS minpoly Q (2cos 2pi/p) for all odd primes (Level 3). Includes a monicity/degree engine for Chebyshev.C (Mathlib-absent). Sanity: Psi_5=X^2+X-1, Psi_7=X^3+X^2-2X-1. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisMinPolyFamily.minpoly_five",
+      "kind": "theorem",
+      "module": "Brockian.GaloisMinPolyFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisMinPolyFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 \u2014 explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32",
+      "provenance_note": "Psi_p = 1 + sum_{k=1}^{(p-1)/2} C_k (monic rescaled Chebyshev) proved monic of degree (p-1)/2, annihilates 2cos(2pi/p), and EQUALS minpoly Q (2cos 2pi/p) for all odd primes (Level 3). Includes a monicity/degree engine for Chebyshev.C (Mathlib-absent). Sanity: Psi_5=X^2+X-1, Psi_7=X^3+X^2-2X-1. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisMinPolyFamily.minpoly_seven",
+      "kind": "theorem",
+      "module": "Brockian.GaloisMinPolyFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisMinPolyFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 \u2014 explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32",
+      "provenance_note": "Psi_p = 1 + sum_{k=1}^{(p-1)/2} C_k (monic rescaled Chebyshev) proved monic of degree (p-1)/2, annihilates 2cos(2pi/p), and EQUALS minpoly Q (2cos 2pi/p) for all odd primes (Level 3). Includes a monicity/degree engine for Chebyshev.C (Mathlib-absent). Sanity: Psi_5=X^2+X-1, Psi_7=X^3+X^2-2X-1. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisMinPolyFamily.psiAux",
+      "kind": "theorem",
+      "module": "Brockian.GaloisMinPolyFamily",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisMinPolyFamily.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 \u2014 explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32",
+      "provenance_note": "Psi_p = 1 + sum_{k=1}^{(p-1)/2} C_k (monic rescaled Chebyshev) proved monic of degree (p-1)/2, annihilates 2cos(2pi/p), and EQUALS minpoly Q (2cos 2pi/p) for all odd primes (Level 3). Includes a monicity/degree engine for Chebyshev.C (Mathlib-absent). Sanity: Psi_5=X^2+X-1, Psi_7=X^3+X^2-2X-1. p=2 excluded (degenerate)."
     },
     {
       "name": "Brockian.GaloisWhyFive.P7",

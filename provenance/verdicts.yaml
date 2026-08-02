@@ -337,6 +337,13 @@ runs:
     ledger_run: "parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence"
     provenance_note: "Bridges algebraic connectivity lambda2(C5) to the golden ratio. AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing files committed to keep the registry tip coherent."
 
+  "galois-minpoly-family":
+    module: Brockian.GaloisMinPolyFamily
+    verdict: admit
+    quarantine: true
+    ledger_run: "roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32"
+    provenance_note: "Psi_p = 1 + sum_{k=1}^{(p-1)/2} C_k (monic rescaled Chebyshev) proved monic of degree (p-1)/2, annihilates 2cos(2pi/p), and EQUALS minpoly Q (2cos 2pi/p) for all odd primes (Level 3). Includes a monicity/degree engine for Chebyshev.C (Mathlib-absent). Sanity: Psi_5=X^2+X-1, Psi_7=X^3+X^2-2X-1. p=2 excluded (degenerate)."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────
   "weyl-gate1-bounded":
