@@ -536,3 +536,25 @@ keep boundedv-continuous.)
     named Bombieri–Vinogradov-strength hypothesis (honest rung open→literature): prove every algebra/limit
     step, isolating the single cited analytic input. Imports Equidistribution (extend by import only).
   Do not touch FranklinInvolution/PentagonalTheoremFranklin/Equidistribution internals (import only).
+
+- 2026-08-02 — **Codex swarm #7 launched: Weyl/Gate-1 conditionals + registry hygiene**.
+  Baseline after concurrent landings through `5f2ea2a`: 1020 `PROVED`, 235 `DEFINITION`,
+  23 `CONDITIONAL`, 1 `CONJECTURE` over 1279 entries. This swarm explicitly avoids Claude #8
+  Franklin/equidistribution files and Grok finite-arithmetic files. Claims:
+  - Archimedes (`019fc1fd-bfbb-7011-b987-bbdec72dac20`) —
+    `Brockian/WeylWeakRegularityCore.lean`; target #20 weak-to-classical regularity core
+    reductions. No edits to `WeylWeakRegularityScaffold.lean` or `DeficiencyODE` internals.
+  - Plato (`019fc1fd-da35-78a0-bcb3-d7c9d786f6b3`) —
+    `Brockian/WeylPlancherelScaffold.lean`; target #21 Plancherel/free-Laplacian Fourier
+    input interface toward `FourierMultiplierInput`. No edits to existing `WeylFourier*`
+    or `WeylFreeLaplacian*` files.
+  - Laplace (`019fc1fd-f4b0-7443-a805-c779113d0edb`) —
+    `Brockian/WeylKatoRellichScaffold.lean`; target #22 Kato-Rellich/resolvent transfer
+    scaffold. No edits to `WeylKatoUnbounded.lean`, `WeylKatoRangeDensity.lean`, or
+    Aristotle's Kato file.
+  - Nash (`019fc1fe-0971-7613-b51a-257084a17593`) —
+    `docs/REGISTRY-HYGIENE-QUEUE.md` and optionally `scripts/list_attestation_smells.py`;
+    read-only report/helper for noncanonical duplicate attestations and root-import mismatches.
+  AXLE @4.32 required for Lean files; Weyl files should attempt read-only @4.28 if cheap.
+  Do not run long local `lake build`; previous agents observed heavy-import silent stalls.
+  Import into `Brockian.lean` only after canonical attestation and explicit integration.
