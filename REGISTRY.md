@@ -9,7 +9,7 @@
 - **CONDITIONAL**: 19
 - **CONJECTURE**: 1
 - **DEFINITION**: 234
-- **PROVED**: 1012
+- **PROVED**: 1018
 
 ## Theorems
 
@@ -1281,3 +1281,9 @@
 | DEFINITION | `Brockian.WeylWeakRegularityScaffold.weakRegularityPipelineStatus` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.WeylWeakRegularityScaffold.weakToClassicalRegularity_iff_existing` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.WeylWeakRegularityScaffold.weakToClassicalRegularity_of_existing` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.XiFunctionalEquation.completedRiemannZeta_functional_equation` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannXi_apply` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_zeta_zero_of_mem_critical_strip` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannXi_functional_equation` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.zeta_zero_of_riemannXi_zero` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.zeta_zero_one_sub_of_mem_critical_strip` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
