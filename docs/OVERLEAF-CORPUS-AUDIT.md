@@ -62,3 +62,32 @@ Patent`, `Pentagonal Turing Machine Patent(s)`, `EXPMATH TECH OVERVIEW` — appl
 
 **Bottom line:** the pull is worth it for exactly one seam — the Erdős problems, formalized as honest
 conditionals. The rest is either already in the core, RH-overclaim the firewall rejects, or non-math.
+
+## Proof verification (2026-08-02) — "ensure the proofs actually work"
+
+Referee agents read the FULL proofs (not just statements); finite content was AXLE-formalized as the
+definitive test. First finding:
+
+### RH-proof cluster — VERIFIED TO NOT PROVE RH (four exact gaps)
+Flagship `RIEMANN BROCK SUBMIT/main.tex` ("Complete Spectral-Geometric Resolution of RH", Mar 2025)
+claims a self-adjoint `B̂ = −Δ_B + V` on `ℍ/Γ₀(5)` with eigenvalues bijecting the zeta zeros. It does
+**not** prove RH:
+1. **Determinant identity asserted, not proved** — `det_reg(s−B̂)=C·ζ(s+½)·G(s)` (§3.2) has no derivation
+   ("Appendix C" is a generic template); the sibling `Riemann Brock Proof` says "through careful analysis
+   … we establish the identity" — a prose `sorry`. This identity IS the Hilbert–Pólya open core.
+2. **Circular bijection** — writes `ρ=½+iγ` to derive `λ=γ²+¼` (assumes RH to prove RH); internally
+   contradictory (`λ=−γ²` vs `λ=γ²+¼`).
+3. **Numerics as proof** — "holds for j≤10⁹ with error <10⁻¹²" (finite ≠ all), and the table contradicts
+   it (`λ₁=199.936` vs `γ₁²+¼=200.040`, ~0.1 off).
+4. **Ill-defined operator** — `V` piles all primes onto 5 fixed centers with coefficients summing to
+   `∑ log p/p` (divergent); Kato–Rellich applied to a divergent potential.
+
+**Cross-check:** the honest sibling `Oct 7 Tier I/II` itself splits Tier-I (unconditional scaffold:
+KLMN self-adjointness, trace-class, relative-determinant existence) from Tier-II (CONJECTURAL:
+PGPT + Conjecture G ⇒ correspondence ⇒ RH) — exactly the shape of our `RH_of_BrockianSystem`.
+`Brockian/RiemannScaffold.lean` already encodes the honest state (Part 1 PROVED: ξ functional eq +
+ζ→ξ; Part 2 CONDITIONAL rung OPEN: `RH_of_BrockianSystem`, Gate-0 note = no BrockianSystem constructed).
+**The papers' content beyond the scaffold is precisely the unproven `eigen_of_zero` inhabitation — the
+firewall's conditional line is vindicated.** No RH content enters the registry.
+
+(Erdős proof verifications appended as they complete.)
