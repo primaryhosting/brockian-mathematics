@@ -223,40 +223,66 @@ theorem rightResolvents_of_essentiallySelfAdjoint_of_isClosed_ranges
 /-! ### Packaging into the Kato resolvent API -/
 
 /-- Surjective shifted ranges produce the `ResolventAtI` package used by the
-norm-small Kato transfer. -/
-theorem resolventAtI_of_surjective_shifted_ranges
+norm-small Kato transfer.
+
+This is a `def`, not a theorem: `ResolventAtI T` carries the actual bounded
+operators, so it lives in `Type`. -/
+noncomputable def resolventAtIOfSurjectiveShiftedRanges
     {T : H →ₗ.[ℂ] H} (hT : IsSymmetric T)
     (hadd : (rangeAddI T : Set H) = Set.univ)
     (hsub : (rangeSubI T : Set H) = Set.univ) :
-    ResolventAtI T := by
-  obtain ⟨Radd, Rsub, hRadd, hRsub, hnadd, hnsub⟩ :=
-    rightResolvents_of_surjective_shifted_ranges hT hadd hsub
-  exact
-    { Radd := Radd
-      Rsub := Rsub
-      right_add := hRadd
-      right_sub := hRsub
-      norm_add := hnadd
-      norm_sub := hnsub }
+    ResolventAtI T :=
+  let hwadd : (-Complex.I).im ≠ 0 := by
+    rw [Complex.neg_im, Complex.I_im]
+    exact neg_ne_zero.mpr one_ne_zero
+  let hwsub : Complex.I.im ≠ 0 := by
+    rw [Complex.I_im]
+    exact one_ne_zero
+  let Radd := rightResolventOfRangeEqUniv T hT (-Complex.I) hwadd
+    (by simpa [rangeAddI] using hadd)
+  let Rsub := rightResolventOfRangeEqUniv T hT Complex.I hwsub
+    (by simpa [rangeSubI] using hsub)
+  { Radd := Radd
+    Rsub := Rsub
+    right_add :=
+      { maps_domain :=
+          rightResolventOfRangeEqUniv_maps_domain T hT (-Complex.I) hwadd
+            (by simpa [rangeAddI] using hadd)
+        right_inverse :=
+          rightResolventOfRangeEqUniv_right_inverse T hT (-Complex.I) hwadd
+            (by simpa [rangeAddI] using hadd) }
+    right_sub :=
+      { maps_domain :=
+          rightResolventOfRangeEqUniv_maps_domain T hT Complex.I hwsub
+            (by simpa [rangeSubI] using hsub)
+        right_inverse :=
+          rightResolventOfRangeEqUniv_right_inverse T hT Complex.I hwsub
+            (by simpa [rangeSubI] using hsub) }
+    norm_add := by
+      have hn :=
+        norm_rightResolventOfRangeEqUniv_le T hT (-Complex.I) hwadd
+          (by simpa [rangeAddI] using hadd)
+      have hnorm : |(-Complex.I).im|⁻¹ = (1 : ℝ) := by norm_num [Complex.I_im]
+      simpa [Radd, hnorm] using hn
+    norm_sub := by
+      have hn :=
+        norm_rightResolventOfRangeEqUniv_le T hT Complex.I hwsub
+          (by simpa [rangeSubI] using hsub)
+      have hnorm : |Complex.I.im|⁻¹ = (1 : ℝ) := by norm_num [Complex.I_im]
+      simpa [Rsub, hnorm] using hn }
 
 /-- ESA plus closed shifted ranges produces the `ResolventAtI` package.  The
 closed-range hypotheses are the remaining classical unbounded-operator input. -/
-theorem resolventAtI_of_essentiallySelfAdjoint_of_isClosed_ranges
+noncomputable def resolventAtIOfEssentiallySelfAdjointOfIsClosedRanges
     {T : H →ₗ.[ℂ] H} (hd : Dense (T.domain : Set H))
     (hT : IsSymmetric T) (hESA : EssentiallySelfAdjoint T)
     (hcl_add : IsClosed (rangeAddI T : Set H))
     (hcl_sub : IsClosed (rangeSubI T : Set H)) :
-    ResolventAtI T := by
-  obtain ⟨Radd, Rsub, hRadd, hRsub, hnadd, hnsub⟩ :=
-    rightResolvents_of_essentiallySelfAdjoint_of_isClosed_ranges
-      hd hT hESA hcl_add hcl_sub
-  exact
-    { Radd := Radd
-      Rsub := Rsub
-      right_add := hRadd
-      right_sub := hRsub
-      norm_add := hnadd
-      norm_sub := hnsub }
+    ResolventAtI T :=
+  let hranges :=
+    range_eq_top_of_essentiallySelfAdjoint_of_isClosed_ranges
+      hd hESA hcl_add hcl_sub
+  resolventAtIOfSurjectiveShiftedRanges hT hranges.1 hranges.2
 
 /-- **Closed-range Kato transfer.** An essentially self-adjoint symmetric `T`
 whose shifted ranges are closed admits the norm-small bounded perturbation
@@ -271,7 +297,7 @@ theorem essentiallySelfAdjoint_perturb_of_essentiallySelfAdjoint_of_isClosed_ran
     (hBsmall : ‖B‖ < 1) :
     EssentiallySelfAdjoint (perturb T B) :=
   essentiallySelfAdjoint_perturb_of_resolventAtI hd
-    (resolventAtI_of_essentiallySelfAdjoint_of_isClosed_ranges
+    (resolventAtIOfEssentiallySelfAdjointOfIsClosedRanges
       hd hT hESA hcl_add hcl_sub)
     hBsmall
 

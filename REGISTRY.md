@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 304
+- **DEFINITION**: 306
 - **DISCHARGED**: 6
-- **PROVED**: 1476
+- **PROVED**: 1477
 
 ## Theorems
 
@@ -1669,9 +1669,12 @@
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_counterexample` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_of_pos` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_to_zero_of_mass_infinite` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
+| PROVED | `Brockian.Weyl.ResolventFromESA.essentiallySelfAdjoint_perturb_of_essentiallySelfAdjoint_of_isClosed_ranges` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.ResolventFromESA.exists_rightResolvent_of_range_eq_univ` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.ResolventFromESA.norm_le_inv_im_mul_norm_shifted` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.ResolventFromESA.norm_rightResolventOfRangeEqUniv_le` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.ResolventFromESA.resolventAtIOfEssentiallySelfAdjointOfIsClosedRanges` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.ResolventFromESA.resolventAtIOfSurjectiveShiftedRanges` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.ResolventFromESA.rightResolventOfRangeEqUniv` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.ResolventFromESA.rightResolventOfRangeEqUniv_maps_domain` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.ResolventFromESA.rightResolventOfRangeEqUniv_right_inverse` | ✓ | verified | lean-4.32.0 |  |

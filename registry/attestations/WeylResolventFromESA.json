@@ -162,6 +162,31 @@
         "Quot.sound"
       ],
       "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.resolventAtIOfSurjectiveShiftedRanges",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.resolventAtIOfEssentiallySelfAdjointOfIsClosedRanges",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.essentiallySelfAdjoint_perturb_of_essentiallySelfAdjoint_of_isClosed_ranges",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
     }
   ]
 }

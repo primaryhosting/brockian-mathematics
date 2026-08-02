@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-02T16:27:30Z",
+  "generated_at": "2026-08-02T16:35:30Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 1476,
-      "DEFINITION": 304,
+      "PROVED": 1477,
+      "DEFINITION": 306,
       "CONDITIONAL": 21,
       "DISCHARGED": 6,
       "CONJECTURE": 1
@@ -26,8 +26,8 @@
       "definition": 1
     },
     "registry": {
-      "PROVED": 1476,
-      "DEFINITION": 304,
+      "PROVED": 1477,
+      "DEFINITION": 306,
       "CONDITIONAL": 21,
       "DISCHARGED": 6,
       "CONJECTURE": 1
@@ -22990,6 +22990,17 @@
       }
     },
     {
+      "name": "Brockian.Weyl.ResolventFromESA.essentiallySelfAdjoint_perturb_of_essentiallySelfAdjoint_of_isClosed_ranges",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/ResolventFromESA.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.Weyl.ResolventFromESA.exists_rightResolvent_of_range_eq_univ",
       "module": "Brockian.Weyl.ResolventFromESA",
       "register": "PROVED",
@@ -23016,6 +23027,28 @@
       "module": "Brockian.Weyl.ResolventFromESA",
       "register": "PROVED",
       "kind": "theorem",
+      "source": "Brockian/ResolventFromESA.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.resolventAtIOfEssentiallySelfAdjointOfIsClosedRanges",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/ResolventFromESA.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.ResolventFromESA.resolventAtIOfSurjectiveShiftedRanges",
+      "module": "Brockian.Weyl.ResolventFromESA",
+      "register": "DEFINITION",
+      "kind": "def",
       "source": "Brockian/ResolventFromESA.lean",
       "axle": {
         "verdict": "verified",
