@@ -663,3 +663,15 @@ keep boundedv-continuous.)
   AXLE @ lean-4.32.0 + `no_theater_lint` + axiom-clean required before any integration.
   If either lane cannot close, return the exact missing Mathlib API/theorem, not a weakened
   fake.
+
+- 2026-08-02 — **Claude harvest+viz swarm** (infra/tooling, NOT Lean proofs — new areas, no collision).
+  Implements the Mathlib+PhysLean harvest spec (docs/superpowers/specs/2026-08-02-mathlib-physlean-harvest-design.md).
+  New areas claimed (do not touch): `scripts/harvest/`, `scripts/export_public_registry.py`, `torus/` (component package).
+  - H1 EXTRACTOR: `scripts/harvest/extract_env.lean` + `scripts/harvest/run_extract.py` — Lean env-dump
+    (Environment.constants + collectAxioms → NDJSON: name/kind/module/type/axioms/sorryFree). AXLE-typecheck the Lean tool.
+  - H2 STORE+API: `scripts/harvest/schema.sql` (verified_declarations w/ source+verified_by facets),
+    `scripts/harvest/ingest.py` (NDJSON→store, dedup vs Brockian-original, derive register+provenance),
+    `scripts/harvest/search_api.py` (GET /api/verified/search). Extend honesty: split-by-source, never merge.
+  - H3 PUBLIC+COMPONENT: `scripts/export_public_registry.py` (SANITIZED export — names/registers/statements/axioms,
+    NO internal ledger_run/provenance notes), `torus/VerifiedClaim.tsx` + `torus/useVerified.ts` + manifest schema.
+  Claude handles the torus.riemannlab.com Lovable deploy AFTER build (sanitized export only; honesty-firewall wiring).
