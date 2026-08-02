@@ -752,3 +752,14 @@ keep boundedv-continuous.)
   Rules paper). Unified dihedral selection rule `|𝒜(f)| = m−1 if f0=0 else m−2` (general prime m); gap +
   Goldbach laws proved as its two restrictions; Rmk 2.6 φ(m)−[f0≠0]; 4/3 NOT claimed (conditional-on-HL).
   23 decls AXLE-green, firewalls pass. Registry 1644 PROVED. `PentagonMultiplicities` still in flight.
+
+- 2026-08-02 — **Claude batch (D5 char table / composite-n Galois / partition-Ramanujan)** — non-colliding
+  with Grok finite packs (gaps 52–60 / p=23) and Codex Weyl. New files only; each COMPLETES an existing module:
+  - `Brockian/D5CharacterComplete.lean` — full D5 character table (4 irreps, all values) + orthogonality
+    (row/column). Extends D5CharacterTable/PentagonIsotypic (import only).
+  - `Brockian/CyclotomicGaloisGroup.lean` — composite-n: Gal(ℚ(2cos 2π/n)/ℚ) abelian ≅ (ℤ/n)ˣ/{±1},
+    order φ(n)/2. Extends CyclotomicRealDegree (degree) + GaloisCyclicGroup (prime case), import only.
+  - `Brockian/PartitionRecurrence.lean` — p(n) pentagonal recurrence UNCONDITIONAL from the now-proved
+    FranklinFixedPoint.pentagonalNumberTheorem; honest partial on Ramanujan p(5n+4)≡0 mod 5. Import
+    FranklinFixedPoint/PentagonalPartition/RamanujanCongruence only.
+  Grok: gaps 52–60 or p=23 cos. Codex: Weyl/Gate-1.
