@@ -678,3 +678,44 @@ claims:
       - Brockian.Goldbach.WheelExtended.Kp_thirteen
       - Brockian.Goldbach.WheelExtended.K235_cases
     notes: "Finite local arithmetic only; not Goldbach."
+
+  - id: COS-TRACE-11
+    title: Trace/Norm of 2cos(2π/11) and degree-5 pack
+    book: "Option 2 · CosTraceNormEleven"
+    lean:
+      - Brockian.CosTraceNormEleven.trace_spectralGen_eleven
+      - Brockian.CosTraceNormEleven.norm_spectralGen_eleven
+      - Brockian.CosTraceNormEleven.minpoly_eleven
+    notes: "Via Chebyshev/minpoly family; Trace=-1 Norm=-1."
+
+  - id: SS-EVEN-MORE
+    title: Singular series for even pairs n=12..20
+    book: "Option 2 · SingularSeriesEvenMore"
+    lean:
+      - Brockian.SingularSeries.EvenMore.singular_series_pos_evenPair_twelve
+      - Brockian.SingularSeries.EvenMore.localFactor_twelve_two
+    notes: "Positivity + local factors; not twin infinitude."
+
+  - id: GC-K2357
+    title: Goldbach local wheel K2 K3 K5 K7 product
+    book: "Option 2 · GoldbachWheelK2357"
+    lean:
+      - Brockian.Goldbach.WheelK2357.K2357
+      - Brockian.Goldbach.WheelK2357.K2357_le_aligned
+    notes: "Finite local wheel only."
+
+  - id: WEYL-LP-CONT
+    title: Continuous bounded V limit-point (constants full; general reduced)
+    book: "Option 3 · WeylLimitPointContinuous"
+    lean:
+      - Brockian.Weyl.LimitPointContinuous.const_continuous_isLimitPoint
+      - Brockian.Weyl.LimitPointContinuous.no_nonzero_global_L2_of_contBounded
+      - Brockian.Weyl.LimitPointContinuous.contBounded_isLimitPoint_of_FS_obligation
+    notes: "Requires Continuous V (not bare-bounded). Full general LP needs FS existence."
+
+  - id: XI-SYMMETRY
+    title: xi functional equation symmetry consequences
+    book: "Option 1 · RiemannXiSymmetry"
+    lean:
+      - Brockian.RiemannXiSymmetry.riemannXi_reflect
+    notes: "Not RH; consequences of FE only."

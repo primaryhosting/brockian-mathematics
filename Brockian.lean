@@ -33,6 +33,7 @@ import Brockian.WeylOperator
 import Brockian.WeylSymmetryPackage
 import Brockian.WeylDisk
 import Brockian.WeylLimitPointBounded
+import Brockian.WeylLimitPointContinuous
 import Brockian.WeylClosure
 import Brockian.WeylEssSelfAdjoint
 import Brockian.WeylCayley
@@ -63,6 +64,7 @@ import Brockian.SingularSeriesConvergence
 import Brockian.SingularSeriesWire
 import Brockian.SingularSeriesExamples
 import Brockian.SingularSeriesMoreExamples
+import Brockian.SingularSeriesEvenMore
 import Brockian.TwinPrimeConstant
 import Brockian.WeylFreeLaplacian2
 import Brockian.WeylConfining
@@ -76,6 +78,7 @@ import Brockian.AdmissibilityKTuple
 import Brockian.GaloisGeneralDegree
 import Brockian.CosAlgebraicInteger
 import Brockian.CosTraceNorm
+import Brockian.CosTraceNormEleven
 import Brockian.WeylFourierMultiplier
 import Brockian.WeylWeakRegularityScaffold
 import Brockian.WeylWeakRegularityCore

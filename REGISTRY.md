@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 18
 - **CONJECTURE**: 1
-- **DEFINITION**: 264
+- **DEFINITION**: 272
 - **DISCHARGED**: 6
-- **PROVED**: 1289
+- **PROVED**: 1380
 
 ## Theorems
 
@@ -220,6 +220,31 @@
 | PROVED | `Brockian.CosTraceNorm.trace_spectralGen_five` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNorm.trace_spectralGen_seven` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNorm.trace_spectralGen_three` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.CosTraceNormEleven.P11` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.P11_monic` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.P11_natDegree` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.Psi_eleven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.coeff_zero_minpoly_eleven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.degree_eleven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.degree_eleven_pack` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.degree_odd_prime` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.eleven_ne_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.eleven_pack` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.isIntegral_and_degree_eleven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.isIntegral_and_degree_odd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.isIntegral_spectralGen_eleven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.isIntegral_spectralGen_eleven_ℚ` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.isIntegral_spectralGen_odd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.isIntegral_spectralGen_odd_ℚ` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.minpoly_eleven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.minpoly_eq_Psi` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.nextCoeff_minpoly_eleven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.norm_adjoin_gen_eq_coeff_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.norm_spectralGen_eleven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.prime_eleven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.trace_adjoin_gen_eq_neg_nextCoeff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.trace_norm_eleven_pack` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormEleven.trace_spectralGen_eleven` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_five` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_five_props` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_le_four` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
@@ -995,6 +1020,54 @@
 | PROVED | `Brockian.SingularSeries.Convergence.singularSeriesFinite_tendsto_pos` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
 | PROVED | `Brockian.SingularSeries.Convergence.singular_series_pos'` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
 | PROVED | `Brockian.SingularSeries.Convergence.summable_localFactorAt_sub_one` | ✓ | verified | lean-4.32.0 | roadmap #17 — infinite-product convergence; AXLE @4.32 |
+| PROVED | `Brockian.SingularSeries.EvenMore.evenPair_card_eighteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.evenPair_card_fourteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.evenPair_card_sixteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.evenPair_card_twelve` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.evenPair_card_twenty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.isAdmissible_evenPair_eighteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.isAdmissible_evenPair_fourteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.isAdmissible_evenPair_sixteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.isAdmissible_evenPair_twelve` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.isAdmissible_evenPair_twenty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactorAt_eighteen_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactorAt_fourteen_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactorAt_sixteen_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactorAt_twelve_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactorAt_twelve_odd_ne_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactorAt_twelve_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactorAt_twelve_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactorAt_twenty_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactor_eighteen_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactor_fourteen_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactor_sixteen_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactor_twelve_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactor_twelve_odd_ne_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactor_twelve_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactor_twelve_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.localFactor_twenty_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.nu_p_eighteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.nu_p_eighteen_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.nu_p_fourteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.nu_p_fourteen_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.nu_p_sixteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.nu_p_sixteen_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.nu_p_twelve` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.nu_p_twelve_odd_ne_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.nu_p_twelve_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.nu_p_twelve_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.nu_p_twenty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.nu_p_twenty_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.singular_series_finite_pos_evenPair_eighteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.singular_series_finite_pos_evenPair_fourteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.singular_series_finite_pos_evenPair_sixteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.singular_series_finite_pos_evenPair_twelve` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.singular_series_finite_pos_evenPair_twenty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.singular_series_pos_evenPair_eighteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.singular_series_pos_evenPair_fourteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.singular_series_pos_evenPair_sixteen` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.singular_series_pos_evenPair_twelve` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.EvenMore.singular_series_pos_evenPair_twenty` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.SingularSeries.Examples.evenPair` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.SingularSeries.Examples.evenPair_card_le_two` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.SingularSeries.Examples.isAdmissible_evenPair` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
@@ -1428,6 +1501,32 @@
 | DEFINITION | `Brockian.Weyl.LP.wronskian` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |
 | PROVED | `Brockian.Weyl.LP.wronskian_hasDerivAt` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |
 | PROVED | `Brockian.Weyl.LP.wronskian_isConst` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — limit-point for constant potential |
+| DEFINITION | `Brockian.Weyl.LimitPointContinuous.FundSystemLimitPointObligation` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.LimitPointContinuous.HasFundamentalSystem` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.LimitPointContinuous.IsLimitPointAtInfty` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.LimitPointContinuous.IsSolution` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.LimitPointContinuous.L2NearInfty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.L2NearInfty_of_strong` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.LimitPointContinuous.StrongL2NearInfty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.abs_le_const_potential` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.const_continuous_isLimitPoint` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.contBounded_const_isLimitPoint` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.contBounded_isLimitPoint_of_FS_obligation` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.continuous_const_potential` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.continuous_deriv_of_isSolution` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.continuous_of_isSolution` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.isLimitPoint_of_LP_const` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.isLimitPoint_of_fundSystem_member_not_L2` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.isLimitPoint_of_fundSystem_not_both_L2` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.isLimitPoint_of_non_L2_solution` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.isSolution_iff_isSolutionOn` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.no_nonzero_global_L2_of_contBounded` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.normSq_y''_le_of_bounded` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.norm_y''_le_of_bounded` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.LimitPointContinuous.wronskian` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.wronskian_const_of_solutions` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.wronskian_hasDerivAt` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.LimitPointContinuous.wronskian_isConst` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.MulReal.FreeMulModel` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.MulReal.FreeMulModel.essentiallySelfAdjoint_mulOp` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.MulReal.FreeMulModel.isSelfAdjoint_mulOp` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |

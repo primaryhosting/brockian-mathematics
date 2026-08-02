@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-02T13:13:51Z",
+  "generated_at": "2026-08-02T13:19:39Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 1289,
-      "DEFINITION": 264,
+      "PROVED": 1380,
+      "DEFINITION": 272,
       "CONDITIONAL": 18,
       "DISCHARGED": 6,
       "CONJECTURE": 1
@@ -15,9 +15,9 @@
   "charter": "Badges are derived from the Lean registry when `lean` is non-empty.\nPROVED requires AXLE-verified + axiom-clean theorems (see README).\nOpen problems (twins infinitude, Goldbach global, RH) stay not_claimed.",
   "version": 1,
   "summary": {
-    "claims": 73,
+    "claims": 78,
     "by_status": {
-      "proved": 61,
+      "proved": 66,
       "open": 1,
       "conjecture": 1,
       "conditional": 4,
@@ -26,8 +26,8 @@
       "definition": 1
     },
     "registry": {
-      "PROVED": 1289,
-      "DEFINITION": 264,
+      "PROVED": 1380,
+      "DEFINITION": 272,
       "CONDITIONAL": 18,
       "DISCHARGED": 6,
       "CONJECTURE": 1
@@ -4542,6 +4542,267 @@
       "missing_lean": [],
       "declaration_count": 3,
       "proved_count": 3
+    },
+    {
+      "id": "COS-TRACE-11",
+      "title": "Trace/Norm of 2cos(2\u03c0/11) and degree-5 pack",
+      "book": "Option 2 \u00b7 CosTraceNormEleven",
+      "notes": "Via Chebyshev/minpoly family; Trace=-1 Norm=-1.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.CosTraceNormEleven.trace_spectralGen_eleven",
+        "Brockian.CosTraceNormEleven.norm_spectralGen_eleven",
+        "Brockian.CosTraceNormEleven.minpoly_eleven"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.CosTraceNormEleven.trace_spectralGen_eleven",
+          "short": "trace_spectralGen_eleven",
+          "module": "Brockian.CosTraceNormEleven",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/CosTraceNormEleven.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.CosTraceNormEleven.norm_spectralGen_eleven",
+          "short": "norm_spectralGen_eleven",
+          "module": "Brockian.CosTraceNormEleven",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/CosTraceNormEleven.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.CosTraceNormEleven.minpoly_eleven",
+          "short": "minpoly_eleven",
+          "module": "Brockian.CosTraceNormEleven",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/CosTraceNormEleven.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 3,
+      "proved_count": 3
+    },
+    {
+      "id": "SS-EVEN-MORE",
+      "title": "Singular series for even pairs n=12..20",
+      "book": "Option 2 \u00b7 SingularSeriesEvenMore",
+      "notes": "Positivity + local factors; not twin infinitude.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.SingularSeries.EvenMore.singular_series_pos_evenPair_twelve",
+        "Brockian.SingularSeries.EvenMore.localFactor_twelve_two"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.SingularSeries.EvenMore.singular_series_pos_evenPair_twelve",
+          "short": "singular_series_pos_evenPair_twelve",
+          "module": "Brockian.SingularSeries.EvenMore",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/EvenMore.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.SingularSeries.EvenMore.localFactor_twelve_two",
+          "short": "localFactor_twelve_two",
+          "module": "Brockian.SingularSeries.EvenMore",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/EvenMore.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 2,
+      "proved_count": 2
+    },
+    {
+      "id": "GC-K2357",
+      "title": "Goldbach local wheel K2 K3 K5 K7 product",
+      "book": "Option 2 \u00b7 GoldbachWheelK2357",
+      "notes": "Finite local wheel only.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Goldbach.WheelK2357.K2357",
+        "Brockian.Goldbach.WheelK2357.K2357_le_aligned"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Goldbach.WheelK2357.K2357",
+          "short": "K2357",
+          "module": "Brockian.Goldbach.WheelK2357",
+          "kind": "def",
+          "register": "DEFINITION",
+          "source": "Brockian/WheelK2357.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Goldbach.WheelK2357.K2357_le_aligned",
+          "short": "K2357_le_aligned",
+          "module": "Brockian.Goldbach.WheelK2357",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/WheelK2357.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 2,
+      "proved_count": 1
+    },
+    {
+      "id": "WEYL-LP-CONT",
+      "title": "Continuous bounded V limit-point (constants full; general reduced)",
+      "book": "Option 3 \u00b7 WeylLimitPointContinuous",
+      "notes": "Requires Continuous V (not bare-bounded). Full general LP needs FS existence.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.Weyl.LimitPointContinuous.const_continuous_isLimitPoint",
+        "Brockian.Weyl.LimitPointContinuous.no_nonzero_global_L2_of_contBounded",
+        "Brockian.Weyl.LimitPointContinuous.contBounded_isLimitPoint_of_FS_obligation"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.Weyl.LimitPointContinuous.const_continuous_isLimitPoint",
+          "short": "const_continuous_isLimitPoint",
+          "module": "Brockian.Weyl.LimitPointContinuous",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/LimitPointContinuous.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Weyl.LimitPointContinuous.no_nonzero_global_L2_of_contBounded",
+          "short": "no_nonzero_global_L2_of_contBounded",
+          "module": "Brockian.Weyl.LimitPointContinuous",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/LimitPointContinuous.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        },
+        {
+          "name": "Brockian.Weyl.LimitPointContinuous.contBounded_isLimitPoint_of_FS_obligation",
+          "short": "contBounded_isLimitPoint_of_FS_obligation",
+          "module": "Brockian.Weyl.LimitPointContinuous",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/LimitPointContinuous.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 3,
+      "proved_count": 3
+    },
+    {
+      "id": "XI-SYMMETRY",
+      "title": "xi functional equation symmetry consequences",
+      "book": "Option 1 \u00b7 RiemannXiSymmetry",
+      "notes": "Not RH; consequences of FE only.",
+      "status": "proved",
+      "book_badge": "V3-LEAN-RUN",
+      "derived_register": "PROVED",
+      "badge_force": null,
+      "lean": [
+        "Brockian.RiemannXiSymmetry.riemannXi_reflect"
+      ],
+      "declarations": [
+        {
+          "name": "Brockian.RiemannXiSymmetry.riemannXi_reflect",
+          "short": "riemannXi_reflect",
+          "module": "Brockian.RiemannXiSymmetry",
+          "kind": "theorem",
+          "register": "PROVED",
+          "source": "Brockian/RiemannXiSymmetry.lean",
+          "axioms_ok": true,
+          "axle": {
+            "verdict": "verified",
+            "environment": "lean-4.32.0"
+          },
+          "ledger_run": null,
+          "provenance_note": null
+        }
+      ],
+      "missing_lean": [],
+      "declaration_count": 1,
+      "proved_count": 1
     }
   ],
   "all_declarations": [
@@ -6784,6 +7045,281 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/CosTraceNorm.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.P11",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.P11_monic",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.P11_natDegree",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.Psi_eleven",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.coeff_zero_minpoly_eleven",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.degree_eleven",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.degree_eleven_pack",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.degree_odd_prime",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.eleven_ne_two",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.eleven_pack",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.isIntegral_and_degree_eleven",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.isIntegral_and_degree_odd",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.isIntegral_spectralGen_eleven",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.isIntegral_spectralGen_eleven_\u211a",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.isIntegral_spectralGen_odd",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.isIntegral_spectralGen_odd_\u211a",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.minpoly_eleven",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.minpoly_eq_Psi",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.nextCoeff_minpoly_eleven",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.norm_adjoin_gen_eq_coeff_zero",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.norm_spectralGen_eleven",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.prime_eleven",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.trace_adjoin_gen_eq_neg_nextCoeff",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.trace_norm_eleven_pack",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.CosTraceNormEleven.trace_spectralGen_eleven",
+      "module": "Brockian.CosTraceNormEleven",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/CosTraceNormEleven.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -15315,6 +15851,534 @@
       }
     },
     {
+      "name": "Brockian.SingularSeries.EvenMore.evenPair_card_eighteen",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.evenPair_card_fourteen",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.evenPair_card_sixteen",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.evenPair_card_twelve",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.evenPair_card_twenty",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.isAdmissible_evenPair_eighteen",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.isAdmissible_evenPair_fourteen",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.isAdmissible_evenPair_sixteen",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.isAdmissible_evenPair_twelve",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.isAdmissible_evenPair_twenty",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactorAt_eighteen_two",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactorAt_fourteen_two",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactorAt_sixteen_two",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactorAt_twelve_five",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactorAt_twelve_odd_ne_three",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactorAt_twelve_three",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactorAt_twelve_two",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactorAt_twenty_two",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactor_eighteen_two",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactor_fourteen_two",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactor_sixteen_two",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactor_twelve_five",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactor_twelve_odd_ne_three",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactor_twelve_three",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactor_twelve_two",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.localFactor_twenty_two",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.nu_p_eighteen",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.nu_p_eighteen_two",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.nu_p_fourteen",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.nu_p_fourteen_two",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.nu_p_sixteen",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.nu_p_sixteen_two",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.nu_p_twelve",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.nu_p_twelve_odd_ne_three",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.nu_p_twelve_three",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.nu_p_twelve_two",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.nu_p_twenty",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.nu_p_twenty_two",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.singular_series_finite_pos_evenPair_eighteen",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.singular_series_finite_pos_evenPair_fourteen",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.singular_series_finite_pos_evenPair_sixteen",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.singular_series_finite_pos_evenPair_twelve",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.singular_series_finite_pos_evenPair_twenty",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.singular_series_pos_evenPair_eighteen",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.singular_series_pos_evenPair_fourteen",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.singular_series_pos_evenPair_sixteen",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.singular_series_pos_evenPair_twelve",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.SingularSeries.EvenMore.singular_series_pos_evenPair_twenty",
+      "module": "Brockian.SingularSeries.EvenMore",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/EvenMore.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.SingularSeries.Examples.evenPair",
       "module": "Brockian.SingularSeries.Examples",
       "register": "DEFINITION",
@@ -20072,6 +21136,292 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/LP.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.FundSystemLimitPointObligation",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.HasFundamentalSystem",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.IsLimitPointAtInfty",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.IsSolution",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.L2NearInfty",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.L2NearInfty_of_strong",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.StrongL2NearInfty",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.abs_le_const_potential",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.const_continuous_isLimitPoint",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.contBounded_const_isLimitPoint",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.contBounded_isLimitPoint_of_FS_obligation",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.continuous_const_potential",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.continuous_deriv_of_isSolution",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.continuous_of_isSolution",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.isLimitPoint_of_LP_const",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.isLimitPoint_of_fundSystem_member_not_L2",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.isLimitPoint_of_fundSystem_not_both_L2",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.isLimitPoint_of_non_L2_solution",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.isSolution_iff_isSolutionOn",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.no_nonzero_global_L2_of_contBounded",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.normSq_y''_le_of_bounded",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.norm_y''_le_of_bounded",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.wronskian",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.wronskian_const_of_solutions",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.wronskian_hasDerivAt",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.LimitPointContinuous.wronskian_isConst",
+      "module": "Brockian.Weyl.LimitPointContinuous",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/LimitPointContinuous.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
