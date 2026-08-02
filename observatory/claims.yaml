@@ -1,10 +1,10 @@
-generated_at: '2026-08-02T13:19:39Z'
+generated_at: '2026-08-02T13:21:49Z'
 generated_from:
   registry: registry/theorems.json
   claim_map: observatory/claim_map.yaml
   registry_summary: &id001
-    PROVED: 1380
-    DEFINITION: 272
+    PROVED: 1409
+    DEFINITION: 280
     CONDITIONAL: 18
     DISCHARGED: 6
     CONJECTURE: 1
@@ -4339,6 +4339,110 @@ all_declarations:
   axle:
     verdict: verified
     environment: lean-4.32.0
+- name: Brockian.Admissibility.CriterionScaffold.LocalIntegerTupleAdmissible
+  module: Brockian.Admissibility.CriterionScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/CriterionScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Admissibility.CriterionScaffold.LocalTupleAdmissible
+  module: Brockian.Admissibility.CriterionScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/CriterionScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Admissibility.CriterionScaffold.PrimeLocalAdmissible
+  module: Brockian.Admissibility.CriterionScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/CriterionScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Admissibility.CriterionScaffold.localIntegerTupleAdmissible_iff_localNu_lt
+  module: Brockian.Admissibility.CriterionScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CriterionScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Admissibility.CriterionScaffold.localNu
+  module: Brockian.Admissibility.CriterionScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/CriterionScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Admissibility.CriterionScaffold.localNu_eq_card_localResidueSet
+  module: Brockian.Admissibility.CriterionScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CriterionScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Admissibility.CriterionScaffold.localResidueSet
+  module: Brockian.Admissibility.CriterionScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/CriterionScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Admissibility.CriterionScaffold.localTupleAdmissible_iff_exists_avoids
+  module: Brockian.Admissibility.CriterionScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CriterionScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Admissibility.CriterionScaffold.localTupleAdmissible_iff_obstruction_lt
+  module: Brockian.Admissibility.CriterionScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CriterionScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Admissibility.CriterionScaffold.not_localTupleAdmissible_iff_modulus_le_obstruction
+  module: Brockian.Admissibility.CriterionScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CriterionScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Admissibility.CriterionScaffold.not_localTupleAdmissible_iff_obstruction_eq_modulus
+  module: Brockian.Admissibility.CriterionScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CriterionScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Admissibility.CriterionScaffold.primeLocalAdmissible_iff_every_prime_has_local_start
+  module: Brockian.Admissibility.CriterionScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CriterionScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Admissibility.CriterionScaffold.residueSet_card_le_modulus
+  module: Brockian.Admissibility.CriterionScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CriterionScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
 - name: Brockian.AdmissibilityCRTGeneral.admissibleTupleResidues_prodCRT_card
   module: Brockian.AdmissibilityCRTGeneral
   register: PROVED
@@ -7248,6 +7352,166 @@ all_declarations:
   register: DEFINITION
   kind: def
   source: Brockian/Equidistribution.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.DeviationBound.FiniteRangeErrorBudget
+  module: Brockian.Equidistribution.DeviationBound
+  register: DEFINITION
+  kind: def
+  source: Brockian/DeviationBound.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.DeviationBound.pairCount_deviation_le_scaled_err_of_large_pairs
+  module: Brockian.Equidistribution.DeviationBound
+  register: PROVED
+  kind: theorem
+  source: Brockian/DeviationBound.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.DeviationBound.pairCount_normalized_deviation_le_scaled_epsilon_of_large_pairs
+  module: Brockian.Equidistribution.DeviationBound
+  register: PROVED
+  kind: theorem
+  source: Brockian/DeviationBound.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.DeviationBound.perConfig_deviation_le_err
+  module: Brockian.Equidistribution.DeviationBound
+  register: PROVED
+  kind: theorem
+  source: Brockian/DeviationBound.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.DeviationBound.perConfig_normalized_deviation_le_epsilon
+  module: Brockian.Equidistribution.DeviationBound
+  register: PROVED
+  kind: theorem
+  source: Brockian/DeviationBound.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.DeviationBound.perConfig_normalized_deviation_le_one_third
+  module: Brockian.Equidistribution.DeviationBound
+  register: PROVED
+  kind: theorem
+  source: Brockian/DeviationBound.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.DeviationBound.totalConfig_deviation_le_scaled_err
+  module: Brockian.Equidistribution.DeviationBound
+  register: PROVED
+  kind: theorem
+  source: Brockian/DeviationBound.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.DeviationBound.totalConfig_normalized_deviation_le_one_third_scaled
+  module: Brockian.Equidistribution.DeviationBound
+  register: PROVED
+  kind: theorem
+  source: Brockian/DeviationBound.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.DeviationBound.totalConfig_normalized_deviation_le_scaled_epsilon
+  module: Brockian.Equidistribution.DeviationBound
+  register: PROVED
+  kind: theorem
+  source: Brockian/DeviationBound.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.FiniteScaffold.configCount_deviation_bound
+  module: Brockian.Equidistribution.FiniteScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/FiniteScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.FiniteScaffold.configCount_eq_zero_of_not_admissible_of_large_pairs
+  module: Brockian.Equidistribution.FiniteScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/FiniteScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.FiniteScaffold.configCount_le_window
+  module: Brockian.Equidistribution.FiniteScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/FiniteScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.FiniteScaffold.mem_pairStarts
+  module: Brockian.Equidistribution.FiniteScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/FiniteScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.FiniteScaffold.pairCount
+  module: Brockian.Equidistribution.FiniteScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/FiniteScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.FiniteScaffold.pairStarts
+  module: Brockian.Equidistribution.FiniteScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/FiniteScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.FiniteScaffold.sum_configCount_univ_eq_pairCount
+  module: Brockian.Equidistribution.FiniteScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/FiniteScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.FiniteScaffold.totalConfigCount_deviation_bound
+  module: Brockian.Equidistribution.FiniteScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/FiniteScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.FiniteScaffold.totalConfigCount_eq_pairCount_of_large_pairs
+  module: Brockian.Equidistribution.FiniteScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/FiniteScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.FiniteScaffold.totalConfigCount_le_admissible_card_mul_window
+  module: Brockian.Equidistribution.FiniteScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/FiniteScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Equidistribution.FiniteScaffold.totalConfigCount_le_q_sub_two_mul_window
+  module: Brockian.Equidistribution.FiniteScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/FiniteScaffold.lean
   axle:
     verdict: verified
     environment: lean-4.32.0
@@ -11618,6 +11882,38 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/RiemannScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.RiemannXiFunctionalEquation.completedRiemannZeta_functional_equation
+  module: Brockian.RiemannXiFunctionalEquation
+  register: PROVED
+  kind: theorem
+  source: Brockian/RiemannXiFunctionalEquation.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.RiemannXiFunctionalEquation.riemannXi_one_sub
+  module: Brockian.RiemannXiFunctionalEquation
+  register: PROVED
+  kind: theorem
+  source: Brockian/RiemannXiFunctionalEquation.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.RiemannXiFunctionalEquation.riemannXi_one_sub_eq_zero
+  module: Brockian.RiemannXiFunctionalEquation
+  register: PROVED
+  kind: theorem
+  source: Brockian/RiemannXiFunctionalEquation.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.RiemannXiFunctionalEquation.riemannXi_one_sub_eq_zero_iff
+  module: Brockian.RiemannXiFunctionalEquation
+  register: PROVED
+  kind: theorem
+  source: Brockian/RiemannXiFunctionalEquation.lean
   axle:
     verdict: verified
     environment: lean-4.32.0

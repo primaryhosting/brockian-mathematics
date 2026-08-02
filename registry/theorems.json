@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1380,
-    "DEFINITION": 272,
+    "PROVED": 1409,
+    "DEFINITION": 280,
     "CONDITIONAL": 18,
     "DISCHARGED": 6,
     "CONJECTURE": 1
@@ -234,6 +234,415 @@
       "quarantine": true,
       "ledger_run": "paper-audit target \u2014 CRT product |A_{q1q2}|=|A_q1|\u00b7|A_q2|; AXLE @4.32",
       "provenance_note": "general coprime CRT admissibility count = plain product (p-2)(q-2); REFUTES Paper_BV_Final \u00a76.1's correction factor (would give non-integer 5.25 for p=3,q=5)."
+    },
+    {
+      "name": "Brockian.Admissibility.CriterionScaffold.LocalIntegerTupleAdmissible",
+      "kind": "def",
+      "module": "Brockian.Admissibility.CriterionScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CriterionScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Admissibility.CriterionScaffold.LocalTupleAdmissible",
+      "kind": "def",
+      "module": "Brockian.Admissibility.CriterionScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CriterionScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Admissibility.CriterionScaffold.PrimeLocalAdmissible",
+      "kind": "def",
+      "module": "Brockian.Admissibility.CriterionScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CriterionScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Admissibility.CriterionScaffold.localIntegerTupleAdmissible_iff_localNu_lt",
+      "kind": "theorem",
+      "module": "Brockian.Admissibility.CriterionScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CriterionScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Admissibility.CriterionScaffold.localNu",
+      "kind": "def",
+      "module": "Brockian.Admissibility.CriterionScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CriterionScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Admissibility.CriterionScaffold.localNu_eq_card_localResidueSet",
+      "kind": "theorem",
+      "module": "Brockian.Admissibility.CriterionScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CriterionScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Admissibility.CriterionScaffold.localResidueSet",
+      "kind": "def",
+      "module": "Brockian.Admissibility.CriterionScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CriterionScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Admissibility.CriterionScaffold.localTupleAdmissible_iff_exists_avoids",
+      "kind": "theorem",
+      "module": "Brockian.Admissibility.CriterionScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CriterionScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Admissibility.CriterionScaffold.localTupleAdmissible_iff_obstruction_lt",
+      "kind": "theorem",
+      "module": "Brockian.Admissibility.CriterionScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CriterionScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Admissibility.CriterionScaffold.not_localTupleAdmissible_iff_modulus_le_obstruction",
+      "kind": "theorem",
+      "module": "Brockian.Admissibility.CriterionScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CriterionScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Admissibility.CriterionScaffold.not_localTupleAdmissible_iff_obstruction_eq_modulus",
+      "kind": "theorem",
+      "module": "Brockian.Admissibility.CriterionScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CriterionScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Admissibility.CriterionScaffold.primeLocalAdmissible_iff_every_prime_has_local_start",
+      "kind": "theorem",
+      "module": "Brockian.Admissibility.CriterionScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CriterionScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Admissibility.CriterionScaffold.residueSet_card_le_modulus",
+      "kind": "theorem",
+      "module": "Brockian.Admissibility.CriterionScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CriterionScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.AdmissibilityCRTGeneral.admissibleTupleResidues_prodCRT_card",
@@ -12386,6 +12795,654 @@
       "quarantine": true,
       "ledger_run": "paper-audit target #1 2026-08-01 \u2014 HL/BV asymptotic \u21d2 1/(q\u22122) density (schema)",
       "provenance_note": "configCount = REAL gap-g prime-pair count by starting residue (12/5/2/1\u21921 via (11,13); 20/5/2/2\u21921 via (17,19), by decide). Complete transition support (prime_pair_config_admissible: pairs with p,p+g>q land in the q\u22122 admissible configs) PROVED unconditionally and is STRICTLY WEAKER than equidistribution. Equidistribution NOT proved."
+    },
+    {
+      "name": "Brockian.Equidistribution.DeviationBound.FiniteRangeErrorBudget",
+      "kind": "def",
+      "module": "Brockian.Equidistribution.DeviationBound",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DeviationBound.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.DeviationBound.pairCount_deviation_le_scaled_err_of_large_pairs",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.DeviationBound",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DeviationBound.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.DeviationBound.pairCount_normalized_deviation_le_scaled_epsilon_of_large_pairs",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.DeviationBound",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DeviationBound.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.DeviationBound.perConfig_deviation_le_err",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.DeviationBound",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DeviationBound.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.DeviationBound.perConfig_normalized_deviation_le_epsilon",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.DeviationBound",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DeviationBound.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.DeviationBound.perConfig_normalized_deviation_le_one_third",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.DeviationBound",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DeviationBound.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.DeviationBound.totalConfig_deviation_le_scaled_err",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.DeviationBound",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DeviationBound.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.DeviationBound.totalConfig_normalized_deviation_le_one_third_scaled",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.DeviationBound",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DeviationBound.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.DeviationBound.totalConfig_normalized_deviation_le_scaled_epsilon",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.DeviationBound",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DeviationBound.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.FiniteScaffold.configCount_deviation_bound",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.FiniteScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FiniteScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.FiniteScaffold.configCount_eq_zero_of_not_admissible_of_large_pairs",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.FiniteScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FiniteScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.FiniteScaffold.configCount_le_window",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.FiniteScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FiniteScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.FiniteScaffold.mem_pairStarts",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.FiniteScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FiniteScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.FiniteScaffold.pairCount",
+      "kind": "def",
+      "module": "Brockian.Equidistribution.FiniteScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FiniteScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.FiniteScaffold.pairStarts",
+      "kind": "def",
+      "module": "Brockian.Equidistribution.FiniteScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FiniteScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.FiniteScaffold.sum_configCount_univ_eq_pairCount",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.FiniteScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FiniteScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.FiniteScaffold.totalConfigCount_deviation_bound",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.FiniteScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FiniteScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.FiniteScaffold.totalConfigCount_eq_pairCount_of_large_pairs",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.FiniteScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FiniteScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.FiniteScaffold.totalConfigCount_le_admissible_card_mul_window",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.FiniteScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FiniteScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Equidistribution.FiniteScaffold.totalConfigCount_le_q_sub_two_mul_window",
+      "kind": "theorem",
+      "module": "Brockian.Equidistribution.FiniteScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FiniteScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.EquidistributionBVReduction.BVPrimePairAsymptotic",
@@ -30491,6 +31548,138 @@
       "quarantine": true,
       "ledger_run": "swarm 2026-08-01 \u2014 \u03be-bridge (unconditional) + Hilbert-P\u00f3lya conditional (OPEN)",
       "provenance_note": "\u03be-bridge (riemannXi, \u0393-factor nonvanishing, \u03be-zero from \u03b6-zero, \u03be-RH \u21d2 Mathlib RH) UNCONDITIONAL; guards s\u22600,1 prevent ex-falso. RH NOT claimed."
+    },
+    {
+      "name": "Brockian.RiemannXiFunctionalEquation.completedRiemannZeta_functional_equation",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiFunctionalEquation.riemannXi_one_sub",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiFunctionalEquation.riemannXi_one_sub_eq_zero",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiFunctionalEquation.riemannXi_one_sub_eq_zero_iff",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.RiemannXiSymmetry.criticalLine_re_iff_reflect_re_eq",

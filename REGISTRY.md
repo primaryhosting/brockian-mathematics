@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 18
 - **CONJECTURE**: 1
-- **DEFINITION**: 272
+- **DEFINITION**: 280
 - **DISCHARGED**: 6
-- **PROVED**: 1380
+- **PROVED**: 1409
 
 ## Theorems
 
@@ -23,6 +23,19 @@
 | PROVED | `Brockian.Admissibility.CRT.admissibleResidues_crt_card` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
 | PROVED | `Brockian.Admissibility.CRT.admissibleResidues_crt_card_two_primes` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
 | PROVED | `Brockian.Admissibility.CRT.admissible_count_three_five` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
+| DEFINITION | `Brockian.Admissibility.CriterionScaffold.LocalIntegerTupleAdmissible` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Admissibility.CriterionScaffold.LocalTupleAdmissible` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Admissibility.CriterionScaffold.PrimeLocalAdmissible` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Admissibility.CriterionScaffold.localIntegerTupleAdmissible_iff_localNu_lt` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Admissibility.CriterionScaffold.localNu` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Admissibility.CriterionScaffold.localNu_eq_card_localResidueSet` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Admissibility.CriterionScaffold.localResidueSet` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Admissibility.CriterionScaffold.localTupleAdmissible_iff_exists_avoids` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Admissibility.CriterionScaffold.localTupleAdmissible_iff_obstruction_lt` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Admissibility.CriterionScaffold.not_localTupleAdmissible_iff_modulus_le_obstruction` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Admissibility.CriterionScaffold.not_localTupleAdmissible_iff_obstruction_eq_modulus` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Admissibility.CriterionScaffold.primeLocalAdmissible_iff_every_prime_has_local_start` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Admissibility.CriterionScaffold.residueSet_card_le_modulus` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.AdmissibilityCRTGeneral.admissibleTupleResidues_prodCRT_card` | ✓ | verified | lean-4.32.0 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityCRTGeneral.admissibleTupleResidues_prodCRT_primes_card` | ✓ | verified | lean-4.32.0 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityCRTGeneral.admissibleTuple_pi_card` | ✓ | verified | lean-4.32.0 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
@@ -398,6 +411,26 @@
 | CONDITIONAL | `Brockian.Equidistribution.equidistribution_of_asymptotic_exists` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | PROVED | `Brockian.Equidistribution.prime_pair_config_admissible` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | DEFINITION | `Brockian.Equidistribution.totalConfigCount` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| DEFINITION | `Brockian.Equidistribution.DeviationBound.FiniteRangeErrorBudget` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.DeviationBound.pairCount_deviation_le_scaled_err_of_large_pairs` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.DeviationBound.pairCount_normalized_deviation_le_scaled_epsilon_of_large_pairs` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.DeviationBound.perConfig_deviation_le_err` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.DeviationBound.perConfig_normalized_deviation_le_epsilon` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.DeviationBound.perConfig_normalized_deviation_le_one_third` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.DeviationBound.totalConfig_deviation_le_scaled_err` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.DeviationBound.totalConfig_normalized_deviation_le_one_third_scaled` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.DeviationBound.totalConfig_normalized_deviation_le_scaled_epsilon` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.FiniteScaffold.configCount_deviation_bound` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.FiniteScaffold.configCount_eq_zero_of_not_admissible_of_large_pairs` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.FiniteScaffold.configCount_le_window` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.FiniteScaffold.mem_pairStarts` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Equidistribution.FiniteScaffold.pairCount` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Equidistribution.FiniteScaffold.pairStarts` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.FiniteScaffold.sum_configCount_univ_eq_pairCount` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.FiniteScaffold.totalConfigCount_deviation_bound` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.FiniteScaffold.totalConfigCount_eq_pairCount_of_large_pairs` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.FiniteScaffold.totalConfigCount_le_admissible_card_mul_window` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Equidistribution.FiniteScaffold.totalConfigCount_le_q_sub_two_mul_window` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.EquidistributionBVReduction.BVPrimePairAsymptotic` | ✓ | verified | lean-4.32.0 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
 | PROVED | `Brockian.EquidistributionBVReduction.admissible_reflection_symmetry` | ✓ | verified | lean-4.32.0 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
 | PROVED | `Brockian.EquidistributionBVReduction.bv_shape_consistent` | ✓ | verified | lean-4.32.0 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
@@ -957,6 +990,10 @@
 | DEFINITION | `Brockian.RiemannScaffold.riemannXi` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannScaffold.riemannXi_eq_zero_of_nontrivial_zeta_zero` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannScaffold.symmetric_eigenvalue_im_zero` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
+| PROVED | `Brockian.RiemannXiFunctionalEquation.completedRiemannZeta_functional_equation` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiFunctionalEquation.riemannXi_one_sub` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiFunctionalEquation.riemannXi_one_sub_eq_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.RiemannXiFunctionalEquation.riemannXi_one_sub_eq_zero_iff` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.criticalLine_re_iff_reflect_re_eq` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.reflect_fixed_iff` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.reflect_re` | ✓ | verified | lean-4.32.0 |  |
