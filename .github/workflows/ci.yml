@@ -45,6 +45,18 @@ jobs:
           git diff --exit-code registry/theorems.json REGISTRY.md \
             || (echo "registry out of date — regenerate and commit" && exit 1)
 
+      - name: Overclaim firewall + registry self-consistency (#35 / #36, blocking)
+        run: |
+          # No PROVED theorem may rest on an open node; every CONDITIONAL carries a rung;
+          # every CONJECTURE is a container; every DISCHARGED points to a real PROVED theorem.
+          python3 scripts/verify_firewall.py
+
+      - name: Manifest firewall — labs may not cite unbacked claims (blocking)
+        run: |
+          # Every visual claim in every torus lab manifest must resolve to a registry theorem
+          # with a green register; absent/UNVERIFIED fails the build. A picture cannot outrun its proof.
+          python3 scripts/validate_manifests.py
+
       - name: Record build provenance
         run: |
           lake env lean --version
