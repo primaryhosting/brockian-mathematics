@@ -478,3 +478,19 @@ keep boundedv-continuous.)
   Do not touch Grok-owned `OddDistinctPartition`, `CosAlgebraicInteger`, `AdmissibilityDiagonal`,
   `TwinPrimeConstant`, `WeylLawTarget`, `Fin5InnerProduct`, `GoldbachLocalWheel`,
   `WeylSymmetryPackage`, or Claude-owned Admissibility/Galois/Pentagonal files.
+
+- 2026-08-01 — **Claude swarm #7 on 39-move map** (804 baseline; AXLE @4.32 gate; new files only).
+  Takes the UN-claimed closeable targets in lanes A/B/C/F — explicitly avoids Grok #6
+  (#4 OddDistinct, #10 CosAlgInt, #12 AdmissibilityDiagonal, #15 TwinPrimeConstant, #25 WeylLawTarget,
+  Fin5InnerProduct/GoldbachLocalWheel/WeylSymmetryPackage) and Codex Weyl lane (#20-27). Claims:
+  - #1 `Brockian/FranklinInvolution.lean` — discharge the Franklin sign-reversing involution
+    (makes PentagonalTheoremFranklin unconditional). Imports PentagonalPartition/PentagonalTheoremFranklin.
+  - #3 `Brockian/RamanujanCongruence.lean` — p(5n+4) ≡ 0 (mod 5) (the Euler↔five headline).
+  - #6 `Brockian/CyclotomicRealDegree.lean` — composite-n degree [ℚ(2cos 2π/n):ℚ]=φ(n)/2 (+ #8 which-n-quadratic).
+  - #7 `Brockian/GaloisCyclicGroup.lean` — Gal(ℚ(2cos 2π/p)/ℚ) cyclic of order (p−1)/2.
+  - #9 `Brockian/MetallicRealization.lean` — metallic-means spectral realization (extends MetallicFamily, import-only).
+  - #11 `Brockian/AdmissibilityHLCriterion.lean` — HL criterion: admissible ⟺ ν(p)<p ∀p (imports Admissibility*).
+  - #28 `Brockian/XiFunctionalEquation.lean` — ξ(s)=ξ(1−s) via Mathlib completedRiemannZeta (imports RiemannScaffold).
+  Claude ALSO does #35 (overclaim-firewall CI invariant) + #36 (registry self-consistency audit) as tooling directly.
+  Do not touch these files or Pentagonal*/Galois*/Admissibility*/MetallicFamily/RiemannScaffold internals (import only).
+  Honesty: #1/#3/#6 may return honest reductions/partials; frontier (#16/#29/#30/#32) stay CONDITIONAL, never faked.
