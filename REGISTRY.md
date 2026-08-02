@@ -6,11 +6,11 @@
 
 ## Summary
 
-- **CONDITIONAL**: 18
+- **CONDITIONAL**: 19
 - **CONJECTURE**: 1
-- **DEFINITION**: 280
+- **DEFINITION**: 282
 - **DISCHARGED**: 6
-- **PROVED**: 1409
+- **PROVED**: 1412
 
 ## Theorems
 
@@ -547,6 +547,12 @@
 | DEFINITION | `Brockian.FranklinMapConstruction.upPart` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
 | PROVED | `Brockian.FranklinMapConstruction.upPart_ne` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
 | PROVED | `Brockian.FranklinMapConstruction.upPart_sign` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin involution CONSTRUCTED, 3/4 fields proved; residual = one fixed-point classification lemma; AXLE @4.32 |
+| DEFINITION | `Brockian.FreeLaplacianPlancherel.L2R` | ✓ | verified | lean-4.32.0 | roadmap A3 — free-Laplacian ESA: unitary half discharged via genuine Mathlib Plancherel; AXLE @4.32 |
+| PROVED | `Brockian.FreeLaplacianPlancherel.essentiallySelfAdjoint_fourierConj` | ✓ | verified | lean-4.32.0 | roadmap A3 — free-Laplacian ESA: unitary half discharged via genuine Mathlib Plancherel; AXLE @4.32 |
+| DEFINITION | `Brockian.FreeLaplacianPlancherel.fourierL2` | ✓ | verified | lean-4.32.0 | roadmap A3 — free-Laplacian ESA: unitary half discharged via genuine Mathlib Plancherel; AXLE @4.32 |
+| PROVED | `Brockian.FreeLaplacianPlancherel.fourierL2_inner_map` | ✓ | verified | lean-4.32.0 | roadmap A3 — free-Laplacian ESA: unitary half discharged via genuine Mathlib Plancherel; AXLE @4.32 |
+| PROVED | `Brockian.FreeLaplacianPlancherel.fourierL2_norm_map` | ✓ | verified | lean-4.32.0 | roadmap A3 — free-Laplacian ESA: unitary half discharged via genuine Mathlib Plancherel; AXLE @4.32 |
+| CONDITIONAL | `Brockian.FreeLaplacianPlancherel.freeLaplacian_essentiallySelfAdjoint_via_plancherel` | ✓ | verified | lean-4.32.0 | roadmap A3 — free-Laplacian ESA: unitary half discharged via genuine Mathlib Plancherel; AXLE @4.32 |
 | DEFINITION | `Brockian.GaloisCyclicGroup.alphaSub` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
 | PROVED | `Brockian.GaloisCyclicGroup.cycExt` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
 | PROVED | `Brockian.GaloisCyclicGroup.primRoot` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
