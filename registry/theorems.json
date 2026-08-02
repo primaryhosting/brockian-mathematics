@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1760,
+    "PROVED": 1762,
     "DEFINITION": 325,
     "CONDITIONAL": 21,
     "DISCHARGED": 6,
@@ -15984,6 +15984,72 @@
       "quarantine": true,
       "ledger_run": "Erd\u0151s #236 harvest \u2014 ONLY the verified unconditional trivial bound; AXLE @4.32",
       "provenance_note": "Erd\u0151s #236 f(n)=#{k: 2^k<=n, n-2^k prime}: the UNCONDITIONAL trivial upper bound f(n)<=log_2 n + 1, formalized on the paper's own definition of f, AXLE-verified (via Nat.le_log_of_pow_le; the paper's cited lemma name did not exist). The conditional main bound (on PDCH/BPRH) is NOT harvested: referee found the paper's own Lean has an elided load-bearing core lemma, an assumed (not derived) Fourier identity with a wrap-around gap, and a written step broken/false at j=0. Only the clean unconditional lemma enters."
+    },
+    {
+      "name": "Brockian.ErdosPinned.entropy_le_log_card",
+      "kind": "theorem",
+      "module": "Brockian.ErdosPinned",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ErdosPinned.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Erd\u0151s #604 harvest \u2014 verified unconditional entropy inequalities (one omitted in the paper); AXLE @4.32",
+      "provenance_note": "The load-bearing UNCONDITIONAL lemmas of the pinned-distance paper: Renyi monotonicity exp(sum mu_i log mu_i) <= sum mu_i^2 (paper Lemma 3.2, whose proof the paper OMITTED \u2014 now machine-verified via Jensen/strictConcaveOn_log) and entropy_le_log_card H <= log|support| (Lemma 3.4). General-purpose Jensen entropy bounds. The paper's conditional pinned bound (Thm 4.1) is genuine/non-circular but NOT harvested (analytic); \u00a75 structure theorem is a SKETCH with real gaps (threshold mismatch, unproven incidence lemma, mis-cited Pach-de Zeeuw) \u2014 NOT taken as proved."
+    },
+    {
+      "name": "Brockian.ErdosPinned.exp_neg_entropy_le_sum_sq",
+      "kind": "theorem",
+      "module": "Brockian.ErdosPinned",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ErdosPinned.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Erd\u0151s #604 harvest \u2014 verified unconditional entropy inequalities (one omitted in the paper); AXLE @4.32",
+      "provenance_note": "The load-bearing UNCONDITIONAL lemmas of the pinned-distance paper: Renyi monotonicity exp(sum mu_i log mu_i) <= sum mu_i^2 (paper Lemma 3.2, whose proof the paper OMITTED \u2014 now machine-verified via Jensen/strictConcaveOn_log) and entropy_le_log_card H <= log|support| (Lemma 3.4). General-purpose Jensen entropy bounds. The paper's conditional pinned bound (Thm 4.1) is genuine/non-circular but NOT harvested (analytic); \u00a75 structure theorem is a SKETCH with real gaps (threshold mismatch, unproven incidence lemma, mis-cited Pach-de Zeeuw) \u2014 NOT taken as proved."
     },
     {
       "name": "Brockian.Fin5InnerProduct.conj_omega",

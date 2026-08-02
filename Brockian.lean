@@ -139,3 +139,4 @@ import Brockian.GoldbachSelectionRule
 import Brockian.PentagonMultiplicities
 import Brockian.CyclotomicGaloisGroup
 import Brockian.Erdos236Lemmas
+import Brockian.ErdosPinnedLemmas

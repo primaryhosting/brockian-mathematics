@@ -103,3 +103,13 @@ Referee read + machine check:
   `FourierIdentity` is assumed not derived, and the written `hSup` is broken/false at `j=0`
   (`|C(n,0)|≈n` exceeds the PDCH bound). Only the clean unconditional bound harvested; the conditional
   main theorem is NOT taken as ours.
+
+### Erdős #604 (pinned distances) — unconditional lemmas SOUND & harvested (one closed a paper omission); §5 is a sketch
+- **Harvested (AXLE-verified):** `Brockian.ErdosPinned.exp_neg_entropy_le_sum_sq` (Rényi monotonicity
+  `e^{−H} ≤ Σμ²` — the paper OMITTED this proof; now machine-verified via Jensen) and
+  `entropy_le_log_card` (`H ≤ log|support|`). Prop 2.1 (radial/Cauchy–Schwarz) + §6 grid also sound.
+- **Conditional Thm 4.1/Cor 4.2 — GENUINE, non-circular** reduction of #604 to the isosceles-energy
+  bound `ΣT_x ≪ n^{2+o(1)}`; exponent dictionary `α=3−k` correct & consistent with Katz–Tardos. Not harvested (analytic).
+- **§5 structure theorem — NOT a proof:** GAP1 threshold mismatch (`E_∘` below what Lemma 5.2 needs),
+  GAP2 unproven "standard" incidence lemma, GAP3 mis-stated Pach–de Zeeuw citation, GAP4 internally
+  circular `E_∘` bound. Labeled a sketch by the author; not established, not harvested.
