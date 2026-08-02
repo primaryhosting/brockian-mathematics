@@ -123,3 +123,4 @@ import Brockian.EquidistributionUniformity
 import Brockian.EquidistributionUniformityClosure
 import Brockian.WeylClosedRangeClosure
 import Brockian.WeylClosedShiftedRanges
+import Brockian.WeylSchrodingerGate1Final
