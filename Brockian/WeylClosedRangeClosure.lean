@@ -103,7 +103,11 @@ theorem isClosed_rangeAddI_and_rangeSubI
     {T : H →ₗ.[ℂ] H} (hclosed : T.IsClosed) (hT : IsSymmetric T) :
     IsClosed (rangeAddI T : Set H) ∧ IsClosed (rangeSubI T : Set H) := by
   constructor
-  · exact isClosed_rangeSMulSub_of_isClosed_of_isSymmetric hclosed hT (by simp [rangeAddI])
-  · exact isClosed_rangeSMulSub_of_isClosed_of_isSymmetric hclosed hT (by simp [rangeSubI])
+  · show IsClosed (rangeSMulSub T (-Complex.I) : Set H)
+    exact isClosed_rangeSMulSub_of_isClosed_of_isSymmetric hclosed hT
+      (by rw [Complex.neg_im, Complex.I_im]; exact neg_ne_zero.mpr one_ne_zero)
+  · show IsClosed (rangeSMulSub T Complex.I : Set H)
+    exact isClosed_rangeSMulSub_of_isClosed_of_isSymmetric hclosed hT
+      (by rw [Complex.I_im]; exact one_ne_zero)
 
 end Brockian.Weyl.ClosedRangeClosure

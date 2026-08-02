@@ -10,7 +10,7 @@
 - **CONJECTURE**: 1
 - **DEFINITION**: 309
 - **DISCHARGED**: 6
-- **PROVED**: 1487
+- **PROVED**: 1491
 
 ## Theorems
 
@@ -1337,6 +1337,10 @@
 | PROVED | `Brockian.Weyl.ClosedRange.range_eq_top_of_essentiallySelfAdjoint_of_isClosed_ranges` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — dense+closed⇒univ; smulPMap closed |
 | PROVED | `Brockian.Weyl.ClosedRange.smulPMap_isClosed` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — dense+closed⇒univ; smulPMap closed |
 | PROVED | `Brockian.Weyl.ClosedRange.smulPMap_isClosed_and_symmetric` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — dense+closed⇒univ; smulPMap closed |
+| PROVED | `Brockian.Weyl.ClosedRangeClosure.dense_rangeSMulSub_of_le` | ✓ | verified | lean-4.32.0 | Gate-1 closed-range upgrade — closed symmetric op has closed non-real shifted range; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.ClosedRangeClosure.isClosed_rangeAddI_and_rangeSubI` | ✓ | verified | lean-4.32.0 | Gate-1 closed-range upgrade — closed symmetric op has closed non-real shifted range; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.ClosedRangeClosure.isClosed_rangeSMulSub_of_isClosed_of_isSymmetric` | ✓ | verified | lean-4.32.0 | Gate-1 closed-range upgrade — closed symmetric op has closed non-real shifted range; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.ClosedRangeClosure.rangeSMulSub_mono` | ✓ | verified | lean-4.32.0 | Gate-1 closed-range upgrade — closed symmetric op has closed non-real shifted range; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.Closure.adjoint_isClosed'` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | PROVED | `Brockian.Weyl.Closure.closure_eq_self_of_isClosed` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | DEFINITION | `Brockian.Weyl.Closure.deficiencySet` | ✓ | verified | lean-4.32.0 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |

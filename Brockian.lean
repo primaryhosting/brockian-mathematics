@@ -118,3 +118,4 @@ import Brockian.FranklinFixedPoint
 import Brockian.FreeLaplacianPlancherel
 import Brockian.EquidistributionUniformity
 import Brockian.EquidistributionUniformityClosure
+import Brockian.WeylClosedRangeClosure

@@ -509,6 +509,13 @@ runs:
     ledger_run: "roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32"
     provenance_note: "Turns the prior prose boundary into Lean: for q=5,g=2, any affine map x↦u*x+c preserving the forbidden endpoints {0,-2} is identity or the reflection; every such map fixes class 4, so affine_stabilizer_five_not_transitive proves no affine endpoint-stabilizer can discharge IterTransitive. This is a negative/guardrail theorem, not singular-series uniformity."
 
+  "weyl-closed-range-closure":
+    module: Brockian.Weyl.ClosedRangeClosure
+    verdict: admit
+    quarantine: true
+    ledger_run: "Gate-1 closed-range upgrade — closed symmetric op has closed non-real shifted range; AXLE @4.32"
+    provenance_note: "For a closed symmetric LinearPMap T and non-real z, range(T-z) is closed (graph/Cauchy argument from the symmetric lower bound ||(T-z)v|| >= |Im z|*||v||); + range monotonicity/density under extension; + both unit shifts (rangeAddI=T-(-I), rangeSubI=T-I) closed. Upgrades dense core ranges to closed closure ranges. P0 fix (Grok-flagged): wrapper hz obligation was mis-proved (simp on the range abbrev left z metavariable -> sorryAx cascade); fixed by pinning z via show + proving (-I).im=-1/=0, I.im=1/=0. All 4 AXLE-verified, axiom-clean, zero sorryAx."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────
   "weyl-gate1-bounded":

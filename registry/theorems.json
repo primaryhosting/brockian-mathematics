@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1487,
+    "PROVED": 1491,
     "DEFINITION": 309,
     "CONDITIONAL": 21,
     "DISCHARGED": 6,
@@ -42794,6 +42794,138 @@
       "quarantine": true,
       "ledger_run": "Weyl campaign 2026-08-01 \u2014 dense+closed\u21d2univ; smulPMap closed",
       "provenance_note": "range_eq_top_of_essentiallySelfAdjoint_of_isClosed_ranges (topology half); smulPMap_isClosed. Full isClosed_rangeSMulSub for general closed T left open (not competing with Aristotle Kato/bounded-V targets)."
+    },
+    {
+      "name": "Brockian.Weyl.ClosedRangeClosure.dense_rangeSMulSub_of_le",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ClosedRangeClosure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ClosedRangeClosure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Gate-1 closed-range upgrade \u2014 closed symmetric op has closed non-real shifted range; AXLE @4.32",
+      "provenance_note": "For a closed symmetric LinearPMap T and non-real z, range(T-z) is closed (graph/Cauchy argument from the symmetric lower bound ||(T-z)v|| >= |Im z|*||v||); + range monotonicity/density under extension; + both unit shifts (rangeAddI=T-(-I), rangeSubI=T-I) closed. Upgrades dense core ranges to closed closure ranges. P0 fix (Grok-flagged): wrapper hz obligation was mis-proved (simp on the range abbrev left z metavariable -> sorryAx cascade); fixed by pinning z via show + proving (-I).im=-1/=0, I.im=1/=0. All 4 AXLE-verified, axiom-clean, zero sorryAx."
+    },
+    {
+      "name": "Brockian.Weyl.ClosedRangeClosure.isClosed_rangeAddI_and_rangeSubI",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ClosedRangeClosure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ClosedRangeClosure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Gate-1 closed-range upgrade \u2014 closed symmetric op has closed non-real shifted range; AXLE @4.32",
+      "provenance_note": "For a closed symmetric LinearPMap T and non-real z, range(T-z) is closed (graph/Cauchy argument from the symmetric lower bound ||(T-z)v|| >= |Im z|*||v||); + range monotonicity/density under extension; + both unit shifts (rangeAddI=T-(-I), rangeSubI=T-I) closed. Upgrades dense core ranges to closed closure ranges. P0 fix (Grok-flagged): wrapper hz obligation was mis-proved (simp on the range abbrev left z metavariable -> sorryAx cascade); fixed by pinning z via show + proving (-I).im=-1/=0, I.im=1/=0. All 4 AXLE-verified, axiom-clean, zero sorryAx."
+    },
+    {
+      "name": "Brockian.Weyl.ClosedRangeClosure.isClosed_rangeSMulSub_of_isClosed_of_isSymmetric",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ClosedRangeClosure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ClosedRangeClosure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Gate-1 closed-range upgrade \u2014 closed symmetric op has closed non-real shifted range; AXLE @4.32",
+      "provenance_note": "For a closed symmetric LinearPMap T and non-real z, range(T-z) is closed (graph/Cauchy argument from the symmetric lower bound ||(T-z)v|| >= |Im z|*||v||); + range monotonicity/density under extension; + both unit shifts (rangeAddI=T-(-I), rangeSubI=T-I) closed. Upgrades dense core ranges to closed closure ranges. P0 fix (Grok-flagged): wrapper hz obligation was mis-proved (simp on the range abbrev left z metavariable -> sorryAx cascade); fixed by pinning z via show + proving (-I).im=-1/=0, I.im=1/=0. All 4 AXLE-verified, axiom-clean, zero sorryAx."
+    },
+    {
+      "name": "Brockian.Weyl.ClosedRangeClosure.rangeSMulSub_mono",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.ClosedRangeClosure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ClosedRangeClosure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Gate-1 closed-range upgrade \u2014 closed symmetric op has closed non-real shifted range; AXLE @4.32",
+      "provenance_note": "For a closed symmetric LinearPMap T and non-real z, range(T-z) is closed (graph/Cauchy argument from the symmetric lower bound ||(T-z)v|| >= |Im z|*||v||); + range monotonicity/density under extension; + both unit shifts (rangeAddI=T-(-I), rangeSubI=T-I) closed. Upgrades dense core ranges to closed closure ranges. P0 fix (Grok-flagged): wrapper hz obligation was mis-proved (simp on the range abbrev left z metavariable -> sorryAx cascade); fixed by pinning z via show + proving (-I).im=-1/=0, I.im=1/=0. All 4 AXLE-verified, axiom-clean, zero sorryAx."
     },
     {
       "name": "Brockian.Weyl.Closure.adjoint_isClosed'",
