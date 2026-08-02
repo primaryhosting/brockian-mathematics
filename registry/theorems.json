@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1751,
+    "PROVED": 1759,
     "DEFINITION": 324,
     "CONDITIONAL": 21,
     "DISCHARGED": 6,
@@ -10235,6 +10235,270 @@
       "quarantine": true,
       "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
       "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CyclotomicGaloisGroup.realSubfield_facts_general",
+      "kind": "theorem",
+      "module": "Brockian.CyclotomicGaloisGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CyclotomicGaloisGroup.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 composite-n Galois group of the real cyclotomic subfield; AXLE @4.32",
+      "provenance_note": "For all n>=3: Q(2cos 2pi/n)/Q is Galois + ABELIAN with |Gal| = phi(n)/2 (CLOSED, via autEquivPow (ZMod n)^x + tower_bot + card_aut_eq_finrank). Gal \u2245 (ZMod n)^x / ker (quotient presentation, first iso thm); prime case adds cyclic (bridge to GaloisCyclicGroup). Explicit \u2245 (ZMod n)^x/{\u00b11} left OPEN: the one missing Mathlib fact is autEquivPow(complex conjugation)=-1 (documented). Agent corrected a prompt error (n=8,12 are cyclic order-2, not non-cyclic) \u2014 no overclaim."
+    },
+    {
+      "name": "Brockian.CyclotomicGaloisGroup.realSubfield_gal_card",
+      "kind": "theorem",
+      "module": "Brockian.CyclotomicGaloisGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CyclotomicGaloisGroup.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 composite-n Galois group of the real cyclotomic subfield; AXLE @4.32",
+      "provenance_note": "For all n>=3: Q(2cos 2pi/n)/Q is Galois + ABELIAN with |Gal| = phi(n)/2 (CLOSED, via autEquivPow (ZMod n)^x + tower_bot + card_aut_eq_finrank). Gal \u2245 (ZMod n)^x / ker (quotient presentation, first iso thm); prime case adds cyclic (bridge to GaloisCyclicGroup). Explicit \u2245 (ZMod n)^x/{\u00b11} left OPEN: the one missing Mathlib fact is autEquivPow(complex conjugation)=-1 (documented). Agent corrected a prompt error (n=8,12 are cyclic order-2, not non-cyclic) \u2014 no overclaim."
+    },
+    {
+      "name": "Brockian.CyclotomicGaloisGroup.realSubfield_gal_equivUnitsQuotient",
+      "kind": "theorem",
+      "module": "Brockian.CyclotomicGaloisGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CyclotomicGaloisGroup.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 composite-n Galois group of the real cyclotomic subfield; AXLE @4.32",
+      "provenance_note": "For all n>=3: Q(2cos 2pi/n)/Q is Galois + ABELIAN with |Gal| = phi(n)/2 (CLOSED, via autEquivPow (ZMod n)^x + tower_bot + card_aut_eq_finrank). Gal \u2245 (ZMod n)^x / ker (quotient presentation, first iso thm); prime case adds cyclic (bridge to GaloisCyclicGroup). Explicit \u2245 (ZMod n)^x/{\u00b11} left OPEN: the one missing Mathlib fact is autEquivPow(complex conjugation)=-1 (documented). Agent corrected a prompt error (n=8,12 are cyclic order-2, not non-cyclic) \u2014 no overclaim."
+    },
+    {
+      "name": "Brockian.CyclotomicGaloisGroup.realSubfield_gal_isCyclic_of_prime",
+      "kind": "theorem",
+      "module": "Brockian.CyclotomicGaloisGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CyclotomicGaloisGroup.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 composite-n Galois group of the real cyclotomic subfield; AXLE @4.32",
+      "provenance_note": "For all n>=3: Q(2cos 2pi/n)/Q is Galois + ABELIAN with |Gal| = phi(n)/2 (CLOSED, via autEquivPow (ZMod n)^x + tower_bot + card_aut_eq_finrank). Gal \u2245 (ZMod n)^x / ker (quotient presentation, first iso thm); prime case adds cyclic (bridge to GaloisCyclicGroup). Explicit \u2245 (ZMod n)^x/{\u00b11} left OPEN: the one missing Mathlib fact is autEquivPow(complex conjugation)=-1 (documented). Agent corrected a prompt error (n=8,12 are cyclic order-2, not non-cyclic) \u2014 no overclaim."
+    },
+    {
+      "name": "Brockian.CyclotomicGaloisGroup.realSubfield_gal_isQuotientOfUnits",
+      "kind": "theorem",
+      "module": "Brockian.CyclotomicGaloisGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CyclotomicGaloisGroup.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 composite-n Galois group of the real cyclotomic subfield; AXLE @4.32",
+      "provenance_note": "For all n>=3: Q(2cos 2pi/n)/Q is Galois + ABELIAN with |Gal| = phi(n)/2 (CLOSED, via autEquivPow (ZMod n)^x + tower_bot + card_aut_eq_finrank). Gal \u2245 (ZMod n)^x / ker (quotient presentation, first iso thm); prime case adds cyclic (bridge to GaloisCyclicGroup). Explicit \u2245 (ZMod n)^x/{\u00b11} left OPEN: the one missing Mathlib fact is autEquivPow(complex conjugation)=-1 (documented). Agent corrected a prompt error (n=8,12 are cyclic order-2, not non-cyclic) \u2014 no overclaim."
+    },
+    {
+      "name": "Brockian.CyclotomicGaloisGroup.realSubfield_gal_units_presentation",
+      "kind": "theorem",
+      "module": "Brockian.CyclotomicGaloisGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CyclotomicGaloisGroup.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 composite-n Galois group of the real cyclotomic subfield; AXLE @4.32",
+      "provenance_note": "For all n>=3: Q(2cos 2pi/n)/Q is Galois + ABELIAN with |Gal| = phi(n)/2 (CLOSED, via autEquivPow (ZMod n)^x + tower_bot + card_aut_eq_finrank). Gal \u2245 (ZMod n)^x / ker (quotient presentation, first iso thm); prime case adds cyclic (bridge to GaloisCyclicGroup). Explicit \u2245 (ZMod n)^x/{\u00b11} left OPEN: the one missing Mathlib fact is autEquivPow(complex conjugation)=-1 (documented). Agent corrected a prompt error (n=8,12 are cyclic order-2, not non-cyclic) \u2014 no overclaim."
+    },
+    {
+      "name": "Brockian.CyclotomicGaloisGroup.realSubfield_isAbelianGalois",
+      "kind": "theorem",
+      "module": "Brockian.CyclotomicGaloisGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CyclotomicGaloisGroup.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 composite-n Galois group of the real cyclotomic subfield; AXLE @4.32",
+      "provenance_note": "For all n>=3: Q(2cos 2pi/n)/Q is Galois + ABELIAN with |Gal| = phi(n)/2 (CLOSED, via autEquivPow (ZMod n)^x + tower_bot + card_aut_eq_finrank). Gal \u2245 (ZMod n)^x / ker (quotient presentation, first iso thm); prime case adds cyclic (bridge to GaloisCyclicGroup). Explicit \u2245 (ZMod n)^x/{\u00b11} left OPEN: the one missing Mathlib fact is autEquivPow(complex conjugation)=-1 (documented). Agent corrected a prompt error (n=8,12 are cyclic order-2, not non-cyclic) \u2014 no overclaim."
+    },
+    {
+      "name": "Brockian.CyclotomicGaloisGroup.realSubfield_isGalois",
+      "kind": "theorem",
+      "module": "Brockian.CyclotomicGaloisGroup",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CyclotomicGaloisGroup.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 composite-n Galois group of the real cyclotomic subfield; AXLE @4.32",
+      "provenance_note": "For all n>=3: Q(2cos 2pi/n)/Q is Galois + ABELIAN with |Gal| = phi(n)/2 (CLOSED, via autEquivPow (ZMod n)^x + tower_bot + card_aut_eq_finrank). Gal \u2245 (ZMod n)^x / ker (quotient presentation, first iso thm); prime case adds cyclic (bridge to GaloisCyclicGroup). Explicit \u2245 (ZMod n)^x/{\u00b11} left OPEN: the one missing Mathlib fact is autEquivPow(complex conjugation)=-1 (documented). Agent corrected a prompt error (n=8,12 are cyclic order-2, not non-cyclic) \u2014 no overclaim."
     },
     {
       "name": "Brockian.CyclotomicRealDegree.pentagon_quadratic",

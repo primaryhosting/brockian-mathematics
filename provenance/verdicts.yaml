@@ -530,6 +530,13 @@ runs:
     ledger_run: "roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32"
     provenance_note: "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors — span_top + finrank sum — are both proved)."
 
+  "cyclotomic-galois-group":
+    module: Brockian.CyclotomicGaloisGroup
+    verdict: admit
+    quarantine: true
+    ledger_run: "batch — composite-n Galois group of the real cyclotomic subfield; AXLE @4.32"
+    provenance_note: "For all n>=3: Q(2cos 2pi/n)/Q is Galois + ABELIAN with |Gal| = phi(n)/2 (CLOSED, via autEquivPow (ZMod n)^x + tower_bot + card_aut_eq_finrank). Gal ≅ (ZMod n)^x / ker (quotient presentation, first iso thm); prime case adds cyclic (bridge to GaloisCyclicGroup). Explicit ≅ (ZMod n)^x/{±1} left OPEN: the one missing Mathlib fact is autEquivPow(complex conjugation)=-1 (documented). Agent corrected a prompt error (n=8,12 are cyclic order-2, not non-cyclic) — no overclaim."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────
   "weyl-gate1-bounded":

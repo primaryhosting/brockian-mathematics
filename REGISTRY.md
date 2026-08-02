@@ -10,7 +10,7 @@
 - **CONJECTURE**: 1
 - **DEFINITION**: 324
 - **DISCHARGED**: 6
-- **PROVED**: 1751
+- **PROVED**: 1759
 
 ## Theorems
 
@@ -331,6 +331,14 @@
 | PROVED | `Brockian.CycleSpectrumFamily.two_cos_two_pi_div_three` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.two_mem_cycleSpectrum` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.zero_mem_laplacianCycleSpectrum` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CyclotomicGaloisGroup.realSubfield_facts_general` | ✓ | verified | lean-4.32.0 | batch — composite-n Galois group of the real cyclotomic subfield; AXLE @4.32 |
+| PROVED | `Brockian.CyclotomicGaloisGroup.realSubfield_gal_card` | ✓ | verified | lean-4.32.0 | batch — composite-n Galois group of the real cyclotomic subfield; AXLE @4.32 |
+| PROVED | `Brockian.CyclotomicGaloisGroup.realSubfield_gal_equivUnitsQuotient` | ✓ | verified | lean-4.32.0 | batch — composite-n Galois group of the real cyclotomic subfield; AXLE @4.32 |
+| PROVED | `Brockian.CyclotomicGaloisGroup.realSubfield_gal_isCyclic_of_prime` | ✓ | verified | lean-4.32.0 | batch — composite-n Galois group of the real cyclotomic subfield; AXLE @4.32 |
+| PROVED | `Brockian.CyclotomicGaloisGroup.realSubfield_gal_isQuotientOfUnits` | ✓ | verified | lean-4.32.0 | batch — composite-n Galois group of the real cyclotomic subfield; AXLE @4.32 |
+| PROVED | `Brockian.CyclotomicGaloisGroup.realSubfield_gal_units_presentation` | ✓ | verified | lean-4.32.0 | batch — composite-n Galois group of the real cyclotomic subfield; AXLE @4.32 |
+| PROVED | `Brockian.CyclotomicGaloisGroup.realSubfield_isAbelianGalois` | ✓ | verified | lean-4.32.0 | batch — composite-n Galois group of the real cyclotomic subfield; AXLE @4.32 |
+| PROVED | `Brockian.CyclotomicGaloisGroup.realSubfield_isGalois` | ✓ | verified | lean-4.32.0 | batch — composite-n Galois group of the real cyclotomic subfield; AXLE @4.32 |
 | PROVED | `Brockian.CyclotomicRealDegree.pentagon_quadratic` | ✓ | verified | lean-4.32.0 | roadmap #6+#8 — composite-n real cyclotomic degree + quadratic classification; AXLE @4.32 |
 | PROVED | `Brockian.CyclotomicRealDegree.quadratic_iff_mem` | ✓ | verified | lean-4.32.0 | roadmap #6+#8 — composite-n real cyclotomic degree + quadratic classification; AXLE @4.32 |
 | PROVED | `Brockian.CyclotomicRealDegree.quadratic_iff_totient_four` | ✓ | verified | lean-4.32.0 | roadmap #6+#8 — composite-n real cyclotomic degree + quadratic classification; AXLE @4.32 |
