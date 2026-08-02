@@ -6,10 +6,10 @@
 
 ## Summary
 
-- **CONDITIONAL**: 19
+- **CONDITIONAL**: 23
 - **CONJECTURE**: 1
-- **DEFINITION**: 234
-- **PROVED**: 1018
+- **DEFINITION**: 235
+- **PROVED**: 1020
 
 ## Theorems
 
@@ -338,6 +338,13 @@
 | CONDITIONAL | `Brockian.Equidistribution.equidistribution_of_asymptotic_exists` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | PROVED | `Brockian.Equidistribution.prime_pair_config_admissible` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | DEFINITION | `Brockian.Equidistribution.totalConfigCount` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| DEFINITION | `Brockian.EquidistributionBVReduction.BVPrimePairAsymptotic` | ✓ | verified | lean-4.32.0 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionBVReduction.admissible_reflection_symmetry` | ✓ | verified | lean-4.32.0 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
+| PROVED | `Brockian.EquidistributionBVReduction.bv_shape_consistent` | ✓ | verified | lean-4.32.0 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
+| CONDITIONAL | `Brockian.EquidistributionBVReduction.configCount_density_of_BV` | ✓ | verified | lean-4.32.0 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
+| CONDITIONAL | `Brockian.EquidistributionBVReduction.configCount_over_main_tendsto` | ✓ | verified | lean-4.32.0 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
+| CONDITIONAL | `Brockian.EquidistributionBVReduction.equidistribution_of_BV_uniform` | ✓ | verified | lean-4.32.0 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
+| CONDITIONAL | `Brockian.EquidistributionBVReduction.total_over_main_tendsto` | ✓ | verified | lean-4.32.0 | roadmap #18 — honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32 |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omega` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omegaPow` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omega_pow` | ✓ | verified | lean-4.32.0 |  |

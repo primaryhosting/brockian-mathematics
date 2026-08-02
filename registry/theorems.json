@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1018,
-    "DEFINITION": 234,
-    "CONDITIONAL": 19,
+    "PROVED": 1020,
+    "DEFINITION": 235,
+    "CONDITIONAL": 23,
     "CONJECTURE": 1
   },
   "theorems": [
@@ -10131,6 +10131,226 @@
       "quarantine": true,
       "ledger_run": "paper-audit target #1 2026-08-01 \u2014 HL/BV asymptotic \u21d2 1/(q\u22122) density (schema)",
       "provenance_note": "configCount = REAL gap-g prime-pair count by starting residue (12/5/2/1\u21921 via (11,13); 20/5/2/2\u21921 via (17,19), by decide). Complete transition support (prime_pair_config_admissible: pairs with p,p+g>q land in the q\u22122 admissible configs) PROVED unconditionally and is STRICTLY WEAKER than equidistribution. Equidistribution NOT proved."
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.BVPrimePairAsymptotic",
+      "kind": "def",
+      "module": "Brockian.EquidistributionBVReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionBVReduction.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #18 \u2014 honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32",
+      "provenance_note": "Reduces the vague open equidistribution asymptotic to a NAMED Bombieri-Vinogradov/HL prime-pair hypothesis (BVPrimePairAsymptotic, strictly weaker: per-class singular series, absolute-count vs growing main term). configCount_density_of_BV proves density -> sing_a/sum sing_b (NOT 1/(q-2)) \u2014 honestly exposing that equidistribution needs an EXTRA symmetry HL alone does not give; equidistribution_of_BV_uniform collapses to 1/(q-2) only under the separately-cited uniformity. admissible_reflection_symmetry (a |-> -g-a) proved unconditionally. Not modus-ponens theater: hypothesis != conclusion, reduction is real algebra. BV itself + full uniformity NOT derived."
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.admissible_reflection_symmetry",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionBVReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionBVReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #18 \u2014 honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32",
+      "provenance_note": "Reduces the vague open equidistribution asymptotic to a NAMED Bombieri-Vinogradov/HL prime-pair hypothesis (BVPrimePairAsymptotic, strictly weaker: per-class singular series, absolute-count vs growing main term). configCount_density_of_BV proves density -> sing_a/sum sing_b (NOT 1/(q-2)) \u2014 honestly exposing that equidistribution needs an EXTRA symmetry HL alone does not give; equidistribution_of_BV_uniform collapses to 1/(q-2) only under the separately-cited uniformity. admissible_reflection_symmetry (a |-> -g-a) proved unconditionally. Not modus-ponens theater: hypothesis != conclusion, reduction is real algebra. BV itself + full uniformity NOT derived."
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.bv_shape_consistent",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionBVReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionBVReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #18 \u2014 honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32",
+      "provenance_note": "Reduces the vague open equidistribution asymptotic to a NAMED Bombieri-Vinogradov/HL prime-pair hypothesis (BVPrimePairAsymptotic, strictly weaker: per-class singular series, absolute-count vs growing main term). configCount_density_of_BV proves density -> sing_a/sum sing_b (NOT 1/(q-2)) \u2014 honestly exposing that equidistribution needs an EXTRA symmetry HL alone does not give; equidistribution_of_BV_uniform collapses to 1/(q-2) only under the separately-cited uniformity. admissible_reflection_symmetry (a |-> -g-a) proved unconditionally. Not modus-ponens theater: hypothesis != conclusion, reduction is real algebra. BV itself + full uniformity NOT derived."
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.configCount_density_of_BV",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionBVReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionBVReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "literature",
+      "quarantine": true,
+      "ledger_run": "roadmap #18 \u2014 honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32",
+      "provenance_note": "Reduces the vague open equidistribution asymptotic to a NAMED Bombieri-Vinogradov/HL prime-pair hypothesis (BVPrimePairAsymptotic, strictly weaker: per-class singular series, absolute-count vs growing main term). configCount_density_of_BV proves density -> sing_a/sum sing_b (NOT 1/(q-2)) \u2014 honestly exposing that equidistribution needs an EXTRA symmetry HL alone does not give; equidistribution_of_BV_uniform collapses to 1/(q-2) only under the separately-cited uniformity. admissible_reflection_symmetry (a |-> -g-a) proved unconditionally. Not modus-ponens theater: hypothesis != conclusion, reduction is real algebra. BV itself + full uniformity NOT derived."
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.configCount_over_main_tendsto",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionBVReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionBVReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "literature",
+      "quarantine": true,
+      "ledger_run": "roadmap #18 \u2014 honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32",
+      "provenance_note": "Reduces the vague open equidistribution asymptotic to a NAMED Bombieri-Vinogradov/HL prime-pair hypothesis (BVPrimePairAsymptotic, strictly weaker: per-class singular series, absolute-count vs growing main term). configCount_density_of_BV proves density -> sing_a/sum sing_b (NOT 1/(q-2)) \u2014 honestly exposing that equidistribution needs an EXTRA symmetry HL alone does not give; equidistribution_of_BV_uniform collapses to 1/(q-2) only under the separately-cited uniformity. admissible_reflection_symmetry (a |-> -g-a) proved unconditionally. Not modus-ponens theater: hypothesis != conclusion, reduction is real algebra. BV itself + full uniformity NOT derived."
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.equidistribution_of_BV_uniform",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionBVReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionBVReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "literature",
+      "quarantine": true,
+      "ledger_run": "roadmap #18 \u2014 honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32",
+      "provenance_note": "Reduces the vague open equidistribution asymptotic to a NAMED Bombieri-Vinogradov/HL prime-pair hypothesis (BVPrimePairAsymptotic, strictly weaker: per-class singular series, absolute-count vs growing main term). configCount_density_of_BV proves density -> sing_a/sum sing_b (NOT 1/(q-2)) \u2014 honestly exposing that equidistribution needs an EXTRA symmetry HL alone does not give; equidistribution_of_BV_uniform collapses to 1/(q-2) only under the separately-cited uniformity. admissible_reflection_symmetry (a |-> -g-a) proved unconditionally. Not modus-ponens theater: hypothesis != conclusion, reduction is real algebra. BV itself + full uniformity NOT derived."
+    },
+    {
+      "name": "Brockian.EquidistributionBVReduction.total_over_main_tendsto",
+      "kind": "theorem",
+      "module": "Brockian.EquidistributionBVReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EquidistributionBVReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "literature",
+      "quarantine": true,
+      "ledger_run": "roadmap #18 \u2014 honest reduction of equidistribution to a named BV hypothesis (rung open->literature); AXLE @4.32",
+      "provenance_note": "Reduces the vague open equidistribution asymptotic to a NAMED Bombieri-Vinogradov/HL prime-pair hypothesis (BVPrimePairAsymptotic, strictly weaker: per-class singular series, absolute-count vs growing main term). configCount_density_of_BV proves density -> sing_a/sum sing_b (NOT 1/(q-2)) \u2014 honestly exposing that equidistribution needs an EXTRA symmetry HL alone does not give; equidistribution_of_BV_uniform collapses to 1/(q-2) only under the separately-cited uniformity. admissible_reflection_symmetry (a |-> -g-a) proved unconditionally. Not modus-ponens theater: hypothesis != conclusion, reduction is real algebra. BV itself + full uniformity NOT derived."
     },
     {
       "name": "Brockian.Fin5InnerProduct.conj_omega",

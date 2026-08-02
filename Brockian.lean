@@ -85,3 +85,4 @@ import Brockian.CyclotomicRealDegree
 import Brockian.GaloisCyclicGroup
 import Brockian.MetallicRealization
 import Brockian.XiFunctionalEquation
+import Brockian.EquidistributionBVReduction
