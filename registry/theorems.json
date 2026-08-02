@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1254,
+    "PROVED": 1260,
     "DEFINITION": 261,
     "CONDITIONAL": 18,
     "DISCHARGED": 6,
@@ -42941,6 +42941,204 @@
       "quarantine": true,
       "ledger_run": "parallel-tool; AXLE @4.32; committed by Claude for coherence",
       "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, lint clean; concurrent-tool authored, re-gated, backing committed."
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumannEstimates.boundedPerturbationTransfer_of_resolvent_norm_mul_lt_one",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoNeumannEstimates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoNeumannEstimates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumannEstimates.katoFactor_rightInverse_of_norm_mul_lt_one",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoNeumannEstimates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoNeumannEstimates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumannEstimates.norm_comp_lt_one_of_norm_mul_lt_one",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoNeumannEstimates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoNeumannEstimates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumannEstimates.rangeAddI_perturb_eq_univ_of_resolvent_norm_mul_lt_one",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoNeumannEstimates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoNeumannEstimates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumannEstimates.rangeSubI_perturb_eq_univ_of_resolvent_norm_mul_lt_one",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoNeumannEstimates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoNeumannEstimates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumannEstimates.rightResolvent_perturb_of_norm_mul_lt_one",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoNeumannEstimates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoNeumannEstimates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_iff_dense_ranges",

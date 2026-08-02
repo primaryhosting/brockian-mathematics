@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-02T13:04:16Z",
+  "generated_at": "2026-08-02T13:09:44Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 1254,
+      "PROVED": 1260,
       "DEFINITION": 261,
       "CONDITIONAL": 18,
       "DISCHARGED": 6,
@@ -26,7 +26,7 @@
       "definition": 1
     },
     "registry": {
-      "PROVED": 1254,
+      "PROVED": 1260,
       "DEFINITION": 261,
       "CONDITIONAL": 18,
       "DISCHARGED": 6,
@@ -19126,6 +19126,72 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/KatoNeumann.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumannEstimates.boundedPerturbationTransfer_of_resolvent_norm_mul_lt_one",
+      "module": "Brockian.Weyl.KatoNeumannEstimates",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoNeumannEstimates.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumannEstimates.katoFactor_rightInverse_of_norm_mul_lt_one",
+      "module": "Brockian.Weyl.KatoNeumannEstimates",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoNeumannEstimates.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumannEstimates.norm_comp_lt_one_of_norm_mul_lt_one",
+      "module": "Brockian.Weyl.KatoNeumannEstimates",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoNeumannEstimates.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumannEstimates.rangeAddI_perturb_eq_univ_of_resolvent_norm_mul_lt_one",
+      "module": "Brockian.Weyl.KatoNeumannEstimates",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoNeumannEstimates.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumannEstimates.rangeSubI_perturb_eq_univ_of_resolvent_norm_mul_lt_one",
+      "module": "Brockian.Weyl.KatoNeumannEstimates",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoNeumannEstimates.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.KatoNeumannEstimates.rightResolvent_perturb_of_norm_mul_lt_one",
+      "module": "Brockian.Weyl.KatoNeumannEstimates",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/KatoNeumannEstimates.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"

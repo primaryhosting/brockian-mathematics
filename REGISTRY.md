@@ -10,7 +10,7 @@
 - **CONJECTURE**: 1
 - **DEFINITION**: 261
 - **DISCHARGED**: 6
-- **PROVED**: 1254
+- **PROVED**: 1260
 
 ## Theorems
 
@@ -1342,6 +1342,12 @@
 | PROVED | `Brockian.Weyl.KatoNeumann.rangeAddI_perturb_eq_univ_of_resolvent_norm_lt_one` | ✓ | verified | lean-4.32.0 | parallel-tool; AXLE @4.32; committed by Claude for coherence |
 | PROVED | `Brockian.Weyl.KatoNeumann.rangeSubI_perturb_eq_univ_of_resolvent_norm_lt_one` | ✓ | verified | lean-4.32.0 | parallel-tool; AXLE @4.32; committed by Claude for coherence |
 | PROVED | `Brockian.Weyl.KatoNeumann.rightResolvent_perturb_of_norm_lt_one` | ✓ | verified | lean-4.32.0 | parallel-tool; AXLE @4.32; committed by Claude for coherence |
+| PROVED | `Brockian.Weyl.KatoNeumannEstimates.boundedPerturbationTransfer_of_resolvent_norm_mul_lt_one` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoNeumannEstimates.katoFactor_rightInverse_of_norm_mul_lt_one` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoNeumannEstimates.norm_comp_lt_one_of_norm_mul_lt_one` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoNeumannEstimates.rangeAddI_perturb_eq_univ_of_resolvent_norm_mul_lt_one` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoNeumannEstimates.rangeSubI_perturb_eq_univ_of_resolvent_norm_mul_lt_one` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoNeumannEstimates.rightResolvent_perturb_of_norm_mul_lt_one` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_iff_dense_ranges` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_of_essentiallySelfAdjoint_perturb` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_zero_of_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
