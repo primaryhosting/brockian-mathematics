@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 735,
-    "DEFINITION": 187,
+    "PROVED": 758,
+    "DEFINITION": 196,
     "CONDITIONAL": 10,
     "CONJECTURE": 1
   },
@@ -8819,6 +8819,602 @@
       "quarantine": true,
       "ledger_run": "runs 16 / 54 / 70 / 73 \u2014 pentagon golden diagonal, two-distance, C\u2085 spectrum",
       "provenance_note": "golden diagonal=\u03c6\u00b7side, two-distance, \u2212\u03c6\u2208spec(C\u2085); golden_unique_to_five NOT ported (see PORT-QUEUE)"
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.K23",
+      "kind": "def",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.K23_above_even_nonthree_baseline_iff",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.K23_of_not_two_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.K23_of_two_dvd_not_three_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.K23_of_two_dvd_three_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.K23_pos_iff_two_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.Kp_three_excess_neg_iff",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.Kp_three_excess_pos_iff",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.Kp_three_gt_one_iff",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.Kp_three_of_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.Kp_three_of_not_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.Kp_two_eq_zero_iff",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.Kp_two_pos_iff",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.goldbachPairTuple",
+      "kind": "def",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.goldbachPairTuple_card_le_two",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.goldbachPairTuple_raw_admissible_of_even",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.scaledK23Excess",
+      "kind": "def",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.scaledK23Excess_pos_iff",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.CovarianceScaffold.singular_series_finite_goldbachPairTuple_pos_of_even",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.CovarianceScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CovarianceScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.Goldbach.Parity.Kp_two",
@@ -29100,6 +29696,398 @@
       "quarantine": true,
       "ledger_run": "roadmap #3 \u2014 concrete T=-d\u00b2/dx\u00b2+V on L\u00b2(\u211d); AXLE @4.32 AND @4.28",
       "provenance_note": "schwartzToL2 embedding, schwartz_ibp2 (double IBP), schrodingerPMap concrete + dense + symmetric. deficiencyRepresentsODE_of_adjoint_eigenvector = the exact remaining hypothesis (elliptic regularity). Gate 1 reduced to that ONE named statement."
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityScaffold.ClassicalL2Representative",
+      "kind": "def",
+      "module": "Brockian.WeylWeakRegularityScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityScaffold.H2",
+      "kind": "def",
+      "module": "Brockian.WeylWeakRegularityScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityScaffold.WeakRegularityPipelineStatus",
+      "kind": "def",
+      "module": "Brockian.WeylWeakRegularityScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityScaffold.WeakSchrodingerEquation",
+      "kind": "def",
+      "module": "Brockian.WeylWeakRegularityScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityScaffold.WeakToClassicalRegularity",
+      "kind": "def",
+      "module": "Brockian.WeylWeakRegularityScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityScaffold.classicalL2Representative_eq_zero_of_bounded_nonreal",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityScaffold.deficiencyRepresentsODE_of_weakToClassical",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityScaffold.deficiencyVector_weakSchrodingerEquation",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityScaffold.existingWeakRegularity_of_weakToClassical",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityScaffold.schrodinger_essentiallySelfAdjoint_of_weakToClassical",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityScaffold.weakRegularityPipelineStatus",
+      "kind": "def",
+      "module": "Brockian.WeylWeakRegularityScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityScaffold.weakToClassicalRegularity_iff_existing",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityScaffold.weakToClassicalRegularity_of_existing",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     }
   ]
 }

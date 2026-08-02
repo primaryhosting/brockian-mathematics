@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 10
 - **CONJECTURE**: 1
-- **DEFINITION**: 187
-- **PROVED**: 735
+- **DEFINITION**: 196
+- **PROVED**: 758
 
 ## Theorems
 
@@ -297,6 +297,25 @@
 | PROVED | `Brockian.Geometry.golden_ratio_in_C5_spectrum` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.pentagon_golden_diagonal` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.pentagon_two_distances` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
+| DEFINITION | `Brockian.Goldbach.CovarianceScaffold.K23` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.K23_above_even_nonthree_baseline_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.K23_of_not_two_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.K23_of_two_dvd_not_three_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.K23_of_two_dvd_three_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.K23_pos_iff_two_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.Kp_three_excess_neg_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.Kp_three_excess_pos_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.Kp_three_gt_one_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.Kp_three_of_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.Kp_three_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.Kp_two_eq_zero_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.Kp_two_pos_iff` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Goldbach.CovarianceScaffold.goldbachPairTuple` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.goldbachPairTuple_card_le_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.goldbachPairTuple_raw_admissible_of_even` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Goldbach.CovarianceScaffold.scaledK23Excess` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.scaledK23Excess_pos_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.CovarianceScaffold.singular_series_finite_goldbachPairTuple_pos_of_even` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.Parity.Kp_two` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
 | PROVED | `Brockian.Goldbach.Parity.Kp_two_of_dvd` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
 | PROVED | `Brockian.Goldbach.Parity.Kp_two_of_not_dvd` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
@@ -948,3 +967,16 @@
 | PROVED | `Brockian.Weyl.SchrodingerMinimal.schwartzToL2_injective` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
 | PROVED | `Brockian.Weyl.SchrodingerMinimal.schwartz_ibp1` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
 | PROVED | `Brockian.Weyl.SchrodingerMinimal.schwartz_ibp2` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| DEFINITION | `Brockian.WeylWeakRegularityScaffold.ClassicalL2Representative` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityScaffold.H2` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityScaffold.WeakRegularityPipelineStatus` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityScaffold.WeakSchrodingerEquation` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityScaffold.WeakToClassicalRegularity` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityScaffold.classicalL2Representative_eq_zero_of_bounded_nonreal` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityScaffold.deficiencyRepresentsODE_of_weakToClassical` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityScaffold.deficiencyVector_weakSchrodingerEquation` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityScaffold.existingWeakRegularity_of_weakToClassical` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityScaffold.schrodinger_essentiallySelfAdjoint_of_weakToClassical` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityScaffold.weakRegularityPipelineStatus` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityScaffold.weakToClassicalRegularity_iff_existing` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityScaffold.weakToClassicalRegularity_of_existing` | ✓ | verified | lean-4.32.0 |  |

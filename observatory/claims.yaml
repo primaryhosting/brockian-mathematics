@@ -1,10 +1,10 @@
-generated_at: '2026-08-02T03:36:27Z'
+generated_at: '2026-08-02T03:37:16Z'
 generated_from:
   registry: registry/theorems.json
   claim_map: observatory/claim_map.yaml
   registry_summary: &id001
-    PROVED: 735
-    DEFINITION: 187
+    PROVED: 758
+    DEFINITION: 196
     CONDITIONAL: 10
     CONJECTURE: 1
 program: Brockian Mathematics / Riemann Labs
@@ -5203,6 +5203,158 @@ all_declarations:
   kind: theorem
   source: Brockian/Geometry.lean
   axle: *id036
+- name: Brockian.Goldbach.CovarianceScaffold.K23
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.K23_above_even_nonthree_baseline_iff
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.K23_of_not_two_dvd
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.K23_of_two_dvd_not_three_dvd
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.K23_of_two_dvd_three_dvd
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.K23_pos_iff_two_dvd
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.Kp_three_excess_neg_iff
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.Kp_three_excess_pos_iff
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.Kp_three_gt_one_iff
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.Kp_three_of_dvd
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.Kp_three_of_not_dvd
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.Kp_two_eq_zero_iff
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.Kp_two_pos_iff
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.goldbachPairTuple
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.goldbachPairTuple_card_le_two
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.goldbachPairTuple_raw_admissible_of_even
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.scaledK23Excess
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.scaledK23Excess_pos_iff
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.CovarianceScaffold.singular_series_finite_goldbachPairTuple_pos_of_even
+  module: Brockian.Goldbach.CovarianceScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/CovarianceScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
 - name: Brockian.Goldbach.Parity.Kp_two
   module: Brockian.Goldbach.Parity
   register: PROVED
@@ -10185,3 +10337,107 @@ all_declarations:
   kind: theorem
   source: Brockian/SchrodingerMinimal.lean
   axle: *id147
+- name: Brockian.WeylWeakRegularityScaffold.ClassicalL2Representative
+  module: Brockian.WeylWeakRegularityScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakRegularityScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityScaffold.H2
+  module: Brockian.WeylWeakRegularityScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakRegularityScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityScaffold.WeakRegularityPipelineStatus
+  module: Brockian.WeylWeakRegularityScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakRegularityScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityScaffold.WeakSchrodingerEquation
+  module: Brockian.WeylWeakRegularityScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakRegularityScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityScaffold.WeakToClassicalRegularity
+  module: Brockian.WeylWeakRegularityScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakRegularityScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityScaffold.classicalL2Representative_eq_zero_of_bounded_nonreal
+  module: Brockian.WeylWeakRegularityScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityScaffold.deficiencyRepresentsODE_of_weakToClassical
+  module: Brockian.WeylWeakRegularityScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityScaffold.deficiencyVector_weakSchrodingerEquation
+  module: Brockian.WeylWeakRegularityScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityScaffold.existingWeakRegularity_of_weakToClassical
+  module: Brockian.WeylWeakRegularityScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityScaffold.schrodinger_essentiallySelfAdjoint_of_weakToClassical
+  module: Brockian.WeylWeakRegularityScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityScaffold.weakRegularityPipelineStatus
+  module: Brockian.WeylWeakRegularityScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakRegularityScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityScaffold.weakToClassicalRegularity_iff_existing
+  module: Brockian.WeylWeakRegularityScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityScaffold.weakToClassicalRegularity_of_existing
+  module: Brockian.WeylWeakRegularityScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
