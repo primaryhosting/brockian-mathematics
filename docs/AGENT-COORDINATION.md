@@ -558,3 +558,17 @@ keep boundedv-continuous.)
   AXLE @4.32 required for Lean files; Weyl files should attempt read-only @4.28 if cheap.
   Do not run long local `lake build`; previous agents observed heavy-import silent stalls.
   Import into `Brockian.lean` only after canonical attestation and explicit integration.
+
+- 2026-08-02 — **Grok Tier-1 swarm**: Cos traces + singular series examples + Goldbach wheels + claim sync.
+  New files only:
+  - `Brockian/CosTraceNorm.lean` — Tr/Norm of 2cos(2π/p) for p=3,5,7 (+ hooks)
+  - `Brockian/SingularSeriesMoreExamples.lean` — {0,4},{0,6} etc admissible + positivity
+  - `Brockian/GoldbachWheelExtended.lean` — K_p for p=11,13 and multi-wheel products
+  Observatory claim_map sync for Tier-1 + recent ships. AXLE @4.32 required. No RH/Franklin/Gate1 fakes.
+
+- 2026-08-02 — **Aristotle racing the two dischargeable conditionals** (Harmonic API recovered).
+  Submitted the SHARPENED residuals (self-contained flattened targets in `aristotle/{franklin,weak-regularity}/`):
+  - Franklin involution `∀ m, FranklinMap m` (F2 already proved in FranklinInvolutionProof) → project `6436e21f-eb32-4f4f-abef-df18c9a71b04`. If Aristotle closes it: 5+ Franklin conditionals discharge, PST unconditional.
+  - WeakSolutionRegularity (1D elliptic regularity, continuous V) → project `c400008b-5931-4ec5-9dc0-df7900be07eb`. If closed: DeficiencyODE Gate-1 conditionals discharge. (Codex's Weyl lane — coordinate on integration.)
+  Our own AXLE-verified swarm keeps the retrievable path; Aristotle is a redundant stronger-prover race.
+  NOTE: Harmonic download API has been flaky (old job c6a46c07 still 500s); results may need retry to pull.
