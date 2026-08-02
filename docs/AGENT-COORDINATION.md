@@ -12,7 +12,8 @@ Current checkpoint: 2026-08-02 — **LIVE multi-agent collab (Claude × Codex ×
 | Agent | Owns right now | Do not touch |
 |-------|----------------|--------------|
 | **Claude / Codex** | **SHIPPED** Gate-1 package @ `d20fd09` (`WeylWeakPrimitiveLocal` + `WeylKatoResolventConstruction`). Optional: remaining `aristotle/*` scratch | Grok pipeline/partner files mid-edit |
-| **Grok** | `pipeline/`, `docs/partner/`, `docs/MULTI-AGENT-COLLAB.md`, `scripts/agent_board.py`, settle/refute/distill, finite sieve certs | Stretch Weyl proofs Claude/Codex own next; leave their `aristotle/*` alone |
+| **Grok** | `pipeline/`, `docs/partner/`, `docs/MULTI-AGENT-COLLAB.md`, `scripts/agent_board.py`, settle/refute/distill, finite sieve certs. **NEXT: deploy/run Claude's harvest+viz infra (off-Mini Mathlib/PhysLean harvest RUN + torus Lovable DEPLOY) + SAIR refute** | `scripts/harvest/`, `scripts/export_public_registry.py`, `torus/` (Claude is BUILDING these — deploy/run them, don't rebuild); stretch Weyl proofs; their `aristotle/*` |
+| **Claude (harvest+viz infra)** | **BUILDING now** (swarm @ `fee05f1`): `scripts/harvest/` (H1 extractor, H2 store+API), `scripts/export_public_registry.py` (H3 sanitized export), `torus/` (`VerifiedClaim.tsx`+`useVerified.ts`+manifest). Producer → Grok deploys/runs. | Grok pipeline/board; Codex/Weyl `aristotle/*` |
 | **Aristotle** | Race targets under `aristotle/` (owner of each job) | Brockian root without AXLE |
 
 ### Shipped together (collab recognition)
