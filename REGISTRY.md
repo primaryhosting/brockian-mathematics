@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 324
+- **DEFINITION**: 325
 - **DISCHARGED**: 6
-- **PROVED**: 1759
+- **PROVED**: 1760
 
 ## Theorems
 
@@ -508,6 +508,8 @@
 | PROVED | `Brockian.EquidistributionUniformityClosure.affine_stabilizer_five_not_transitive` | ✓ | verified | lean-4.32.0 | roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32 |
 | DEFINITION | `Brockian.EquidistributionUniformityClosure.forbiddenFive` | ✓ | verified | lean-4.32.0 | roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32 |
 | DEFINITION | `Brockian.EquidistributionUniformityClosure.forbiddenImageFive` | ✓ | verified | lean-4.32.0 | roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32 |
+| DEFINITION | `Brockian.Erdos236.f` | ✓ | verified | lean-4.32.0 | Erdős #236 harvest — ONLY the verified unconditional trivial bound; AXLE @4.32 |
+| PROVED | `Brockian.Erdos236.f_le_log` | ✓ | verified | lean-4.32.0 | Erdős #236 harvest — ONLY the verified unconditional trivial bound; AXLE @4.32 |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omega` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omegaPow` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omega_pow` | ✓ | verified | lean-4.32.0 |  |

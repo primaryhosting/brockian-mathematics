@@ -91,3 +91,15 @@ PGPT + Conjecture G ⇒ correspondence ⇒ RH) — exactly the shape of our `RH_
 firewall's conditional line is vindicated.** No RH content enters the registry.
 
 (Erdős proof verifications appended as they complete.)
+
+### Erdős #236 — math sound & honestly conditional; paper's own Lean OVERSTATED; one lemma harvested
+Referee read + machine check:
+- **Trivial bound `f(n) ≤ ⌊log₂n⌋+1` — SOUND, UNCONDITIONAL, AXLE-VERIFIED** (harvested as
+  `Brockian.Erdos236.f_le_log`, on the paper's own `f`; the paper's cited lemma name did not exist —
+  used Mathlib `Nat.le_log_of_pow_le`).
+- **Main bound — sound, NON-circular, conditional on PDCH/BPRH** (GRH-strength, honestly labeled).
+- **Defects found:** the Fourier step `g_N(n)=f(n)` glosses a wrap-around justification; and the
+  paper's OWN Lean overstates — core lemma `f_le_sup_SD` has an elided (`...`) load-bearing body,
+  `FourierIdentity` is assumed not derived, and the written `hSup` is broken/false at `j=0`
+  (`|C(n,0)|≈n` exceeds the PDCH bound). Only the clean unconditional bound harvested; the conditional
+  main theorem is NOT taken as ours.
