@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 15
 - **CONJECTURE**: 1
-- **DEFINITION**: 213
-- **PROVED**: 892
+- **DEFINITION**: 217
+- **PROVED**: 915
 
 ## Theorems
 
@@ -35,6 +35,19 @@
 | PROVED | `Brockian.AdmissibilityDiagonal.diagonal_admissibility_count_of_eq_zero` | ✓ | verified | lean-4.32.0 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.AdmissibilityDiagonal.diagonal_count_five` | ✓ | verified | lean-4.32.0 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.AdmissibilityDiagonal.diagonal_count_three` | ✓ | verified | lean-4.32.0 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
+| DEFINITION | `Brockian.AdmissibilityHLCriterion.Admissible` | ✓ | verified | lean-4.32.0 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| DEFINITION | `Brockian.AdmissibilityHLCriterion.OmitsResidue` | ✓ | verified | lean-4.32.0 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.admissible_iff_card_image_lt` | ✓ | verified | lean-4.32.0 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.admissible_iff_count_pos` | ✓ | verified | lean-4.32.0 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.admissible_iff_exists_avoiding_start` | ✓ | verified | lean-4.32.0 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.admissible_iff_nu_lt` | ✓ | verified | lean-4.32.0 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.admissible_iff_nu_lt_of_le_card` | ✓ | verified | lean-4.32.0 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.admissible_zero_two` | ✓ | verified | lean-4.32.0 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.not_admissible_zero_two_four` | ✓ | verified | lean-4.32.0 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| DEFINITION | `Brockian.AdmissibilityHLCriterion.nu` | ✓ | verified | lean-4.32.0 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.omitsResidue_iff_ne_univ` | ✓ | verified | lean-4.32.0 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.omitsResidue_iff_nu_lt` | ✓ | verified | lean-4.32.0 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| DEFINITION | `Brockian.AdmissibilityHLCriterion.residueImage` | ✓ | verified | lean-4.32.0 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
 | DEFINITION | `Brockian.AdmissibilityKTuple.admissibleTupleResidues` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_card` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_pair` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
@@ -167,6 +180,20 @@
 | PROVED | `Brockian.Core.ray_mul` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.ray_ne_zero_infinite` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.ray_zero_iff_dvd` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
+| PROVED | `Brockian.CosAlgebraicInteger.aeval_spectralGen_five_X_sq_add_X_sub_one` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.CosAlgebraicInteger.aeval_spectralGen_seven_cubic7` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.CosAlgebraicInteger.aeval_spectralGen_three_X_add_one` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.CosAlgebraicInteger.degree_five_pack` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.CosAlgebraicInteger.degree_seven_pack` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.CosAlgebraicInteger.degree_three_pack` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.CosAlgebraicInteger.isIntegral_and_degree` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.CosAlgebraicInteger.isIntegral_spectralGen` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.CosAlgebraicInteger.isIntegral_spectralGen_ℚ` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.CosAlgebraicInteger.isIntegral_two_cos_two_pi_div` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.CosAlgebraicInteger.isIntegral_two_cos_two_pi_div_ℚ` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.CosAlgebraicInteger.quadratic_iff_five_pack` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.CosAlgebraicInteger.real_subfield_degree_pack` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.CosAlgebraicInteger.two_pi_div_eq_rat_mul_pi` | ✓ | verified | lean-4.32.0 | parallel-tool module; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_five` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_five_props` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_le_four` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |

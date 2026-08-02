@@ -68,6 +68,7 @@ import Brockian.WeylDeficiencyRegularity
 import Brockian.PentagonalPartition
 import Brockian.AdmissibilityKTuple
 import Brockian.GaloisGeneralDegree
+import Brockian.CosAlgebraicInteger
 import Brockian.WeylFourierMultiplier
 import Brockian.WeylWeakRegularityScaffold
 import Brockian.GoldbachCovarianceScaffold
@@ -76,3 +77,4 @@ import Brockian.PentagonalTheoremFranklin
 import Brockian.GaloisMinPolyFamily
 import Brockian.RamanujanCongruence
 import Brockian.FranklinInvolution
+import Brockian.AdmissibilityHLCriterion

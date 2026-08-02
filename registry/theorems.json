@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 892,
-    "DEFINITION": 213,
+    "PROVED": 915,
+    "DEFINITION": 217,
     "CONDITIONAL": 15,
     "CONJECTURE": 1
   },
@@ -642,6 +642,406 @@
       "quarantine": true,
       "ledger_run": "parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence",
       "provenance_note": "Divisible-case diagonal admissibility count (g=0 mod q -> q-1 configs). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.Admissible",
+      "kind": "def",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.OmitsResidue",
+      "kind": "def",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.admissible_iff_card_image_lt",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.admissible_iff_count_pos",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.admissible_iff_exists_avoiding_start",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.admissible_iff_nu_lt",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.admissible_iff_nu_lt_of_le_card",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.admissible_zero_two",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.not_admissible_zero_two_four",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.nu",
+      "kind": "def",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.omitsResidue_iff_ne_univ",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.omitsResidue_iff_nu_lt",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.residueImage",
+      "kind": "def",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
     },
     {
       "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues",
@@ -4771,6 +5171,454 @@
       "quarantine": true,
       "ledger_run": "runs 97 / 103 / 112 (consolidation anchors) \u2014 \u03c6 stack, ray ring, Dirichlet-on-rays",
       "provenance_note": "\u03c6\u00b2=\u03c6+1, cos \u03c0/5=\u03c6/2, Binet, ray ring homs, each active ray has \u221e primes (Dirichlet)"
+    },
+    {
+      "name": "Brockian.CosAlgebraicInteger.aeval_spectralGen_five_X_sq_add_X_sub_one",
+      "kind": "theorem",
+      "module": "Brockian.CosAlgebraicInteger",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosAlgebraicInteger.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.CosAlgebraicInteger.aeval_spectralGen_seven_cubic7",
+      "kind": "theorem",
+      "module": "Brockian.CosAlgebraicInteger",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosAlgebraicInteger.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.CosAlgebraicInteger.aeval_spectralGen_three_X_add_one",
+      "kind": "theorem",
+      "module": "Brockian.CosAlgebraicInteger",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosAlgebraicInteger.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.CosAlgebraicInteger.degree_five_pack",
+      "kind": "theorem",
+      "module": "Brockian.CosAlgebraicInteger",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosAlgebraicInteger.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.CosAlgebraicInteger.degree_seven_pack",
+      "kind": "theorem",
+      "module": "Brockian.CosAlgebraicInteger",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosAlgebraicInteger.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.CosAlgebraicInteger.degree_three_pack",
+      "kind": "theorem",
+      "module": "Brockian.CosAlgebraicInteger",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosAlgebraicInteger.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.CosAlgebraicInteger.isIntegral_and_degree",
+      "kind": "theorem",
+      "module": "Brockian.CosAlgebraicInteger",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosAlgebraicInteger.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.CosAlgebraicInteger.isIntegral_spectralGen",
+      "kind": "theorem",
+      "module": "Brockian.CosAlgebraicInteger",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosAlgebraicInteger.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.CosAlgebraicInteger.isIntegral_spectralGen_\u211a",
+      "kind": "theorem",
+      "module": "Brockian.CosAlgebraicInteger",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosAlgebraicInteger.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.CosAlgebraicInteger.isIntegral_two_cos_two_pi_div",
+      "kind": "theorem",
+      "module": "Brockian.CosAlgebraicInteger",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosAlgebraicInteger.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.CosAlgebraicInteger.isIntegral_two_cos_two_pi_div_\u211a",
+      "kind": "theorem",
+      "module": "Brockian.CosAlgebraicInteger",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosAlgebraicInteger.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.CosAlgebraicInteger.quadratic_iff_five_pack",
+      "kind": "theorem",
+      "module": "Brockian.CosAlgebraicInteger",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosAlgebraicInteger.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.CosAlgebraicInteger.real_subfield_degree_pack",
+      "kind": "theorem",
+      "module": "Brockian.CosAlgebraicInteger",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosAlgebraicInteger.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.CosAlgebraicInteger.two_pi_div_eq_rat_mul_pi",
+      "kind": "theorem",
+      "module": "Brockian.CosAlgebraicInteger",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosAlgebraicInteger.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool module; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
     },
     {
       "name": "Brockian.CycleSpectrumFamily.algebraic_connectivity_five",
