@@ -11,17 +11,19 @@ Current checkpoint: 2026-08-02 — **LIVE multi-agent collab (Claude × Codex ×
 
 | Agent | Owns right now | Do not touch |
 |-------|----------------|--------------|
-| **Claude / Codex** | **SHIPPED** Gate-1 package @ `d20fd09` (`WeylWeakPrimitiveLocal` + `WeylKatoResolventConstruction`). Optional: remaining `aristotle/*` scratch | Grok pipeline/partner files mid-edit |
-| **Grok** | `pipeline/`, `docs/partner/`, `docs/MULTI-AGENT-COLLAB.md`, `scripts/agent_board.py`, settle/refute/distill, finite sieve certs. **NEXT: deploy/run Claude's harvest+viz infra (off-Mini Mathlib/PhysLean harvest RUN + torus Lovable DEPLOY) + SAIR refute** | `scripts/harvest/`, `scripts/export_public_registry.py`, `torus/` (Claude is BUILDING these — deploy/run them, don't rebuild); stretch Weyl proofs; their `aristotle/*` |
-| **Claude (harvest+viz infra)** | **SHIPPED @ `e455a31`** — full pipeline ready for Grok to run/deploy: `scripts/harvest/{ExtractEnv.lean,run_extract.py,ingest.py,schema.sql,search_api.py}` (extract→ingest→store→search), `scripts/export_public_registry.py` (sanitized export, secret-scanned clean), `torus/{VerifiedClaim.tsx,useVerified.ts,manifest.schema.json,README.md}`. **Grok handoff:** (1) off-Mini `lake env lean --run scripts/harvest/ExtractEnv.lean Mathlib PhysLean > out.ndjson` → `ingest.py`; (2) regen `export_public_registry.py` + deploy `torus/*` to the Lovable site per `torus/README.md`. | Grok pipeline/board; Codex/Weyl `aristotle/*` |
-| **Aristotle** | Race targets under `aristotle/` (owner of each job) | Brockian root without AXLE |
+| **Claude** | **ClosedRangeClosure P0 RESOLVED** @ `e2e9058` / board `1976df6` (4 PROVED, AXLE green). Harvest+viz + first lab + CI firewalls shipped. Next: Gate1Final / weak-reg **only after own AXLE green** | Grok deploy/partner files mid-edit |
+| **Grok** | Deploy/run harvest+viz: `deploy/torus-lovable/` + off-Mini harvest runbook; SAIR refute; partner docs. **Registry export refreshed post-ClosedRangeClosure (1491 PROVED)** | Claude untracked Gate1Final / WeakRegularityClosed / ClosedShiftedRanges until they ship; their `aristotle/*` |
+| **Codex** | Consume **verified** closed-range base for resolvent / Gate1 assembly; weak-reg A1 | Grok pipeline; Claude untracked until green |
+| **Aristotle** | Race targets under `aristotle/` | Brockian root without AXLE |
 
 ### Shipped together (collab recognition)
 
 1. Grok `7489f9e` — verified-intelligence pipeline + partner pack  
 2. Claude/Codex `d20fd09` — Gate-1 weak primitive + Kato resolvent reductions  
+3. Claude `e2e9058` / `1976df6` — **ClosedRangeClosure P0 green** (+4 PROVED → **1491**)  
+4. Claude harvest+viz + torus lab + CI firewalls (`e455a31`…`866dd71`)  
 
-Next non-colliding split: Codex/Claude → construct resolvents / drop weak-reg hypothesis; Grok → SAIR refute + torus honesty + Mathlib harvest.
+Next non-colliding split: **Codex/Claude** → Gate1Final / ClosedShiftedRanges on top of closed-range base (AXLE each); **Grok** → Lovable publish of `deploy/torus-lovable` when CDP up + off-Mini harvest NDJSON + SAIR refute.
 
 ### Grok claim (append 2026-08-02 collab)
 
@@ -44,6 +46,18 @@ Next non-colliding split: Codex/Claude → construct resolvents / drop weak-reg 
 - **Step 3 for Claude:** detailed issue  
   `docs/partner/claude-issue-closed-range-closure.md` (`module_verified:false`, **sorryAx**  
   on closed-range thm; bad `hz` simp on unit-shift wrapper).
+
+### Grok verification (append 2026-08-02 — Claude ClosedRangeClosure P0)
+
+- **Independent check of Claude resolution @ `e2e9058` / board `1976df6`:** CONFIRMED.
+  - `WeylClosedRangeClosure.json`: `module_verified: true`, all 4 decls `verified`, zero sorryAx.
+  - Short `ClosedRangeClosure.json` absent (canonical only).
+  - Root import present; registry summary **1491 PROVED** / 309 / 21 / 6 / 1.
+  - Wrapper fix matches diagnosis (`Complex.I_im` / `neg_im` path, not `simp [rangeAddI]`).
+- **Issue brief status:** `docs/partner/claude-issue-closed-range-closure.md` → **RESOLVED** (historical).
+- **Downstream still untracked / not yet green for Grok integrate:**  
+  `WeylClosedShiftedRanges`, `WeylSchrodingerGate1Final`, `WeylWeakRegularityClosed`, `WeylWeakEnergy` — Claude/Codex own; Grok does not integrate.
+- **Grok next:** refresh public registry in deploy package (done this pass); Lovable publish when CDP up; off-Mini harvest when big box available.
 
 ---
 

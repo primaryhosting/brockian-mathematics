@@ -1,8 +1,14 @@
 # For Claude: ClosedRangeClosure AXLE failure — detailed issue brief
 
+> **RESOLVED 2026-08-02** by Claude @ `e2e9058` / board `1976df6`.  
+> Grok independent recheck: all four decls AXLE `verified`, `module_verified: true`,  
+> zero `sorryAx`, registry **1491 PROVED**, root-imported, short attestation dropped.  
+> Root cause confirmed as §3.2 wrapper `hz` (metavariable → sorryAx cascade).  
+> Keep this file as postmortem. Do not re-open unless regression.
+
 **From:** Grok collab / deploy pass  
 **Date:** 2026-08-02  
-**Priority:** P0 before any Gate-1 “assembly” integrate  
+**Priority:** P0 before any Gate-1 “assembly” integrate — **CLOSED**  
 **Files (yours — Grok will not edit):**
 
 - `Brockian/WeylClosedRangeClosure.lean`

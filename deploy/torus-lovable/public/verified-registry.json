@@ -19,16 +19,16 @@
     "verified_by"
   ],
   "summary": {
-    "total": 1824,
+    "total": 1828,
     "by_source": {
       "brockian": {
-        "total": 1824,
+        "total": 1828,
         "by_register": {
           "CONDITIONAL": 21,
           "CONJECTURE": 1,
           "DEFINITION": 309,
           "DISCHARGED": 6,
-          "PROVED": 1487
+          "PROVED": 1491
         }
       }
     },
@@ -37,7 +37,7 @@
       "CONJECTURE": 1,
       "DEFINITION": 309,
       "DISCHARGED": 6,
-      "PROVED": 1487
+      "PROVED": 1491
     }
   },
   "theorems": [
@@ -25638,6 +25638,86 @@
     {
       "name": "Brockian.Weyl.ClosedRange.smulPMap_isClosed_and_symmetric",
       "module": "Brockian.Weyl.ClosedRange",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Weyl.ClosedRangeClosure.dense_rangeSMulSub_of_le",
+      "module": "Brockian.Weyl.ClosedRangeClosure",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Weyl.ClosedRangeClosure.isClosed_rangeAddI_and_rangeSubI",
+      "module": "Brockian.Weyl.ClosedRangeClosure",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Weyl.ClosedRangeClosure.isClosed_rangeSMulSub_of_isClosed_of_isSymmetric",
+      "module": "Brockian.Weyl.ClosedRangeClosure",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Weyl.ClosedRangeClosure.rangeSMulSub_mono",
+      "module": "Brockian.Weyl.ClosedRangeClosure",
       "register": "PROVED",
       "kind": "theorem",
       "statement": "",
