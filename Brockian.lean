@@ -65,3 +65,4 @@ import Brockian.GaloisGeneralDegree
 import Brockian.WeylFourierMultiplier
 import Brockian.WeylWeakRegularityScaffold
 import Brockian.GoldbachCovarianceScaffold
+import Brockian.AdmissibilityCRTGeneral

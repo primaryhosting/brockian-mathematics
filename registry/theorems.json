@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 758,
+    "PROVED": 765,
     "DEFINITION": 196,
     "CONDITIONAL": 10,
     "CONJECTURE": 1
@@ -226,6 +226,230 @@
       "quarantine": true,
       "ledger_run": "paper-audit target \u2014 CRT product |A_{q1q2}|=|A_q1|\u00b7|A_q2|; AXLE @4.32",
       "provenance_note": "general coprime CRT admissibility count = plain product (p-2)(q-2); REFUTES Paper_BV_Final \u00a76.1's correction factor (would give non-integer 5.25 for p=3,q=5)."
+    },
+    {
+      "name": "Brockian.AdmissibilityCRTGeneral.admissibleTupleResidues_prodCRT_card",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityCRTGeneral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityCRTGeneral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 iterated \u2014 multi-factor CRT admissible count; AXLE @4.32",
+      "provenance_note": "Iterated multi-factor CRT admissible count prod_i (q_i - |H_i|) over pairwise-coprime moduli via ZMod.prodEquivPi; pi-count over product space; singular-series prime product prod (p_i - |H_i|) for distinct primes; concrete mod-15 = (3-2)(5-3)=2. Exact finite COUNT only. NOT proved: HL admissibility criterion, analytic singular series (infinite product/convergence/density)."
+    },
+    {
+      "name": "Brockian.AdmissibilityCRTGeneral.admissibleTupleResidues_prodCRT_primes_card",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityCRTGeneral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityCRTGeneral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 iterated \u2014 multi-factor CRT admissible count; AXLE @4.32",
+      "provenance_note": "Iterated multi-factor CRT admissible count prod_i (q_i - |H_i|) over pairwise-coprime moduli via ZMod.prodEquivPi; pi-count over product space; singular-series prime product prod (p_i - |H_i|) for distinct primes; concrete mod-15 = (3-2)(5-3)=2. Exact finite COUNT only. NOT proved: HL admissibility criterion, analytic singular series (infinite product/convergence/density)."
+    },
+    {
+      "name": "Brockian.AdmissibilityCRTGeneral.admissibleTuple_pi_card",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityCRTGeneral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityCRTGeneral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 iterated \u2014 multi-factor CRT admissible count; AXLE @4.32",
+      "provenance_note": "Iterated multi-factor CRT admissible count prod_i (q_i - |H_i|) over pairwise-coprime moduli via ZMod.prodEquivPi; pi-count over product space; singular-series prime product prod (p_i - |H_i|) for distinct primes; concrete mod-15 = (3-2)(5-3)=2. Exact finite COUNT only. NOT proved: HL admissibility criterion, analytic singular series (infinite product/convergence/density)."
+    },
+    {
+      "name": "Brockian.AdmissibilityCRTGeneral.admissible_crt_count_fifteen",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityCRTGeneral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityCRTGeneral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 iterated \u2014 multi-factor CRT admissible count; AXLE @4.32",
+      "provenance_note": "Iterated multi-factor CRT admissible count prod_i (q_i - |H_i|) over pairwise-coprime moduli via ZMod.prodEquivPi; pi-count over product space; singular-series prime product prod (p_i - |H_i|) for distinct primes; concrete mod-15 = (3-2)(5-3)=2. Exact finite COUNT only. NOT proved: HL admissibility criterion, analytic singular series (infinite product/convergence/density)."
+    },
+    {
+      "name": "Brockian.AdmissibilityCRTGeneral.admissible_ktuple_count_fifteen_factors",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityCRTGeneral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityCRTGeneral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 iterated \u2014 multi-factor CRT admissible count; AXLE @4.32",
+      "provenance_note": "Iterated multi-factor CRT admissible count prod_i (q_i - |H_i|) over pairwise-coprime moduli via ZMod.prodEquivPi; pi-count over product space; singular-series prime product prod (p_i - |H_i|) for distinct primes; concrete mod-15 = (3-2)(5-3)=2. Exact finite COUNT only. NOT proved: HL admissibility criterion, analytic singular series (infinite product/convergence/density)."
+    },
+    {
+      "name": "Brockian.AdmissibilityCRTGeneral.neZero_prod",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityCRTGeneral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityCRTGeneral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 iterated \u2014 multi-factor CRT admissible count; AXLE @4.32",
+      "provenance_note": "Iterated multi-factor CRT admissible count prod_i (q_i - |H_i|) over pairwise-coprime moduli via ZMod.prodEquivPi; pi-count over product space; singular-series prime product prod (p_i - |H_i|) for distinct primes; concrete mod-15 = (3-2)(5-3)=2. Exact finite COUNT only. NOT proved: HL admissibility criterion, analytic singular series (infinite product/convergence/density)."
+    },
+    {
+      "name": "Brockian.AdmissibilityCRTGeneral.pairwise_coprime_of_primes",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityCRTGeneral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityCRTGeneral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #14 iterated \u2014 multi-factor CRT admissible count; AXLE @4.32",
+      "provenance_note": "Iterated multi-factor CRT admissible count prod_i (q_i - |H_i|) over pairwise-coprime moduli via ZMod.prodEquivPi; pi-count over product space; singular-series prime product prod (p_i - |H_i|) for distinct primes; concrete mod-15 = (3-2)(5-3)=2. Exact finite COUNT only. NOT proved: HL admissibility criterion, analytic singular series (infinite product/convergence/density)."
     },
     {
       "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues",

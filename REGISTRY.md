@@ -9,7 +9,7 @@
 - **CONDITIONAL**: 10
 - **CONJECTURE**: 1
 - **DEFINITION**: 196
-- **PROVED**: 758
+- **PROVED**: 765
 
 ## Theorems
 
@@ -22,6 +22,13 @@
 | PROVED | `Brockian.Admissibility.CRT.admissibleResidues_crt_card` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
 | PROVED | `Brockian.Admissibility.CRT.admissibleResidues_crt_card_two_primes` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
 | PROVED | `Brockian.Admissibility.CRT.admissible_count_three_five` | ✓ | verified | lean-4.32.0 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityCRTGeneral.admissibleTupleResidues_prodCRT_card` | ✓ | verified | lean-4.32.0 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityCRTGeneral.admissibleTupleResidues_prodCRT_primes_card` | ✓ | verified | lean-4.32.0 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityCRTGeneral.admissibleTuple_pi_card` | ✓ | verified | lean-4.32.0 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityCRTGeneral.admissible_crt_count_fifteen` | ✓ | verified | lean-4.32.0 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityCRTGeneral.admissible_ktuple_count_fifteen_factors` | ✓ | verified | lean-4.32.0 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityCRTGeneral.neZero_prod` | ✓ | verified | lean-4.32.0 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityCRTGeneral.pairwise_coprime_of_primes` | ✓ | verified | lean-4.32.0 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
 | DEFINITION | `Brockian.AdmissibilityKTuple.admissibleTupleResidues` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_card` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_pair` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
