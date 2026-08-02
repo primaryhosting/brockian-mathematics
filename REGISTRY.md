@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 24
 - **CONJECTURE**: 1
-- **DEFINITION**: 241
-- **PROVED**: 1031
+- **DEFINITION**: 252
+- **PROVED**: 1068
 
 ## Theorems
 
@@ -1146,6 +1146,29 @@
 | PROVED | `Brockian.Weyl.Gate1Bounded.primeGaussianMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2 |
 | PROVED | `Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint` | ✓ | verified | lean-4.32.0 | Aristotle proj c595862c — bounded Kato-Rellich; independently AXLE-verified @ 4.32 |
 | PROVED | `Brockian.Weyl.Kato.isSelfAdjoint_add` | ✓ | verified | lean-4.32.0 | Aristotle proj c595862c — bounded Kato-Rellich; independently AXLE-verified @ 4.32 |
+| PROVED | `Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_iff_dense_ranges` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_of_essentiallySelfAdjoint_perturb` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_zero_of_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRangeDensity.boundedSelfAdjoint_perturb_dense_ranges` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRangeDensity.boundedSelfAdjoint_perturb_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRangeDensity.dense_rangeAddI_perturb_of_transfer` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRangeDensity.dense_rangeSubI_perturb_of_transfer` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRangeDensity.essentiallySelfAdjoint_perturb_iff_transfer` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRangeDensity.perturb_zero_eq` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRangeDensity.perturbed_ranges_eq_univ_of_transfer_of_isClosed` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRangeDensity.rangeAddI_perturb_eq_univ_of_transfer_of_isClosed` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRangeDensity.rangeSubI_perturb_eq_univ_of_transfer_of_isClosed` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.KatoRellichScaffold.CLMRightInverse` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.KatoRellichScaffold.RightResolvent` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRellichScaffold.boundedPerturbationTransfer_of_resolvent_factors` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRellichScaffold.boundedPerturbationTransfer_zero_of_rightResolvents` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRellichScaffold.dense_rangeSMulSub_of_rightResolvent` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRellichScaffold.factorRightInverse_zero` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.KatoRellichScaffold.katoFactor` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRellichScaffold.rangeAddI_perturb_eq_univ_of_resolvent_factor` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRellichScaffold.rangeSMulSub_eq_univ_of_rightResolvent` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRellichScaffold.rangeSubI_perturb_eq_univ_of_resolvent_factor` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRellichScaffold.rightResolvent_perturb_of_factor_rightInverse` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.KatoUnbounded.BoundedPerturbationTransfer` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
 | PROVED | `Brockian.Weyl.KatoUnbounded.boundedPerturbationTransfer_clm` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
 | CONDITIONAL | `Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
@@ -1293,6 +1316,31 @@
 | PROVED | `Brockian.Weyl.WeylLawTarget.point_spectrum_unbounded_of_candidate` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
 | DEFINITION | `Brockian.Weyl.WeylLawTarget.riemannVonMangoldtMain` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
 | PROVED | `Brockian.Weyl.WeylLawTarget.riemannVonMangoldtMain_tendsto_atTop` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
+| DEFINITION | `Brockian.WeylPlancherelScaffold.IsPlancherelUnitary` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.dense_domain_position` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.dense_range_addI_position` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.dense_range_subI_position` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.essentiallySelfAdjoint_position` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.essentiallySelfAdjoint_position_of_multiplier_esa` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.isPlancherel` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.toFourierMultiplierInput` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.essentiallySelfAdjoint_of_plancherel_multiplier_dense_ranges` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.isPlancherelUnitary` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityCore.IntegralSchrodingerModel` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityCore.WeakRegularityCoreStatus` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityCore.WeakToIntegralRegularity` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityCore.classicalL2Representative_of_integralModel` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityCore.continuous_representatives_eq_of_ae` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityCore.continuous_schrodingerRHS` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityCore.integralModel_hasDerivAt_y` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityCore.integralModel_hasDerivAt_yPrime` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityCore.integralModel_isL2Solution` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityCore.integralModel_representative_unique` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityCore.schrodingerRHS` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityCore.schrodinger_essentiallySelfAdjoint_of_weakToIntegral` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityCore.weakRegularityCoreStatus` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityCore.weakToClassicalRegularity_of_weakToIntegral` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityScaffold.ClassicalL2Representative` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityScaffold.H2` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityScaffold.WeakRegularityPipelineStatus` | ✓ | verified | lean-4.32.0 |  |

@@ -1,11 +1,11 @@
-generated_at: '2026-08-02T10:28:27Z'
+generated_at: '2026-08-02T10:32:22Z'
 generated_from:
   registry: registry/theorems.json
   claim_map: observatory/claim_map.yaml
   registry_summary: &id001
-    PROVED: 1020
-    DEFINITION: 235
-    CONDITIONAL: 23
+    PROVED: 1068
+    DEFINITION: 252
+    CONDITIONAL: 24
     CONJECTURE: 1
 program: Brockian Mathematics / Riemann Labs
 charter: 'Badges are derived from the Lean registry when `lean` is non-empty.
@@ -6735,6 +6735,150 @@ all_declarations:
   axle:
     verdict: verified
     environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.FranklinMap
+  module: Brockian.FranklinInvolutionProof
+  register: DEFINITION
+  kind: def
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.fixedPart
+  module: Brockian.FranklinInvolutionProof
+  register: DEFINITION
+  kind: def
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.fixedPart_subset
+  module: Brockian.FranklinInvolutionProof
+  register: PROVED
+  kind: theorem
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.fixedPart_sum
+  module: Brockian.FranklinInvolutionProof
+  register: PROVED
+  kind: theorem
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.franklinData_of_franklinMap
+  module: Brockian.FranklinInvolutionProof
+  register: DEFINITION
+  kind: def
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.franklin_sum_invariant_down
+  module: Brockian.FranklinInvolutionProof
+  register: PROVED
+  kind: theorem
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.franklin_sum_invariant_up
+  module: Brockian.FranklinInvolutionProof
+  register: PROVED
+  kind: theorem
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.gauss_int
+  module: Brockian.FranklinInvolutionProof
+  register: PROVED
+  kind: theorem
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.neg_one_pow_natAbs
+  module: Brockian.FranklinInvolutionProof
+  register: PROVED
+  kind: theorem
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.pentagonalNumberTheorem_of_franklinMap
+  module: Brockian.FranklinInvolutionProof
+  register: CONDITIONAL
+  kind: theorem
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.stair
+  module: Brockian.FranklinInvolutionProof
+  register: DEFINITION
+  kind: def
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.stairBase
+  module: Brockian.FranklinInvolutionProof
+  register: DEFINITION
+  kind: def
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.stairPartAt
+  module: Brockian.FranklinInvolutionProof
+  register: DEFINITION
+  kind: def
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.stair_card
+  module: Brockian.FranklinInvolutionProof
+  register: PROVED
+  kind: theorem
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.stair_nodup
+  module: Brockian.FranklinInvolutionProof
+  register: PROVED
+  kind: theorem
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.stair_pos
+  module: Brockian.FranklinInvolutionProof
+  register: PROVED
+  kind: theorem
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.stair_sum
+  module: Brockian.FranklinInvolutionProof
+  register: PROVED
+  kind: theorem
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.FranklinInvolutionProof.stair_sum_eq
+  module: Brockian.FranklinInvolutionProof
+  register: PROVED
+  kind: theorem
+  source: Brockian/FranklinInvolutionProof.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
 - name: Brockian.GaloisCyclicGroup.alphaSub
   module: Brockian.GaloisCyclicGroup
   register: DEFINITION
@@ -12493,6 +12637,190 @@ all_declarations:
   kind: theorem
   source: Brockian/Kato.lean
   axle: *id162
+- name: Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_iff_dense_ranges
+  module: Brockian.Weyl.KatoRangeDensity
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRangeDensity.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_of_essentiallySelfAdjoint_perturb
+  module: Brockian.Weyl.KatoRangeDensity
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRangeDensity.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_zero_of_essentiallySelfAdjoint
+  module: Brockian.Weyl.KatoRangeDensity
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRangeDensity.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRangeDensity.boundedSelfAdjoint_perturb_dense_ranges
+  module: Brockian.Weyl.KatoRangeDensity
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRangeDensity.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRangeDensity.boundedSelfAdjoint_perturb_essentiallySelfAdjoint
+  module: Brockian.Weyl.KatoRangeDensity
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRangeDensity.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRangeDensity.dense_rangeAddI_perturb_of_transfer
+  module: Brockian.Weyl.KatoRangeDensity
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRangeDensity.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRangeDensity.dense_rangeSubI_perturb_of_transfer
+  module: Brockian.Weyl.KatoRangeDensity
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRangeDensity.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRangeDensity.essentiallySelfAdjoint_perturb_iff_transfer
+  module: Brockian.Weyl.KatoRangeDensity
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRangeDensity.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRangeDensity.perturb_zero_eq
+  module: Brockian.Weyl.KatoRangeDensity
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRangeDensity.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRangeDensity.perturbed_ranges_eq_univ_of_transfer_of_isClosed
+  module: Brockian.Weyl.KatoRangeDensity
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRangeDensity.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRangeDensity.rangeAddI_perturb_eq_univ_of_transfer_of_isClosed
+  module: Brockian.Weyl.KatoRangeDensity
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRangeDensity.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRangeDensity.rangeSubI_perturb_eq_univ_of_transfer_of_isClosed
+  module: Brockian.Weyl.KatoRangeDensity
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRangeDensity.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRellichScaffold.CLMRightInverse
+  module: Brockian.Weyl.KatoRellichScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/KatoRellichScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRellichScaffold.RightResolvent
+  module: Brockian.Weyl.KatoRellichScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/KatoRellichScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRellichScaffold.boundedPerturbationTransfer_of_resolvent_factors
+  module: Brockian.Weyl.KatoRellichScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRellichScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRellichScaffold.boundedPerturbationTransfer_zero_of_rightResolvents
+  module: Brockian.Weyl.KatoRellichScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRellichScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRellichScaffold.dense_rangeSMulSub_of_rightResolvent
+  module: Brockian.Weyl.KatoRellichScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRellichScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRellichScaffold.factorRightInverse_zero
+  module: Brockian.Weyl.KatoRellichScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRellichScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRellichScaffold.katoFactor
+  module: Brockian.Weyl.KatoRellichScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/KatoRellichScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRellichScaffold.rangeAddI_perturb_eq_univ_of_resolvent_factor
+  module: Brockian.Weyl.KatoRellichScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRellichScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRellichScaffold.rangeSMulSub_eq_univ_of_rightResolvent
+  module: Brockian.Weyl.KatoRellichScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRellichScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRellichScaffold.rangeSubI_perturb_eq_univ_of_resolvent_factor
+  module: Brockian.Weyl.KatoRellichScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRellichScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoRellichScaffold.rightResolvent_perturb_of_factor_rightInverse
+  module: Brockian.Weyl.KatoRellichScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoRellichScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
 - name: Brockian.Weyl.KatoUnbounded.BoundedPerturbationTransfer
   module: Brockian.Weyl.KatoUnbounded
   register: DEFINITION
@@ -13608,6 +13936,206 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/WeylLawTarget.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylPlancherelScaffold.IsPlancherelUnitary
+  module: Brockian.WeylPlancherelScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylPlancherelScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput
+  module: Brockian.WeylPlancherelScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylPlancherelScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.dense_domain_position
+  module: Brockian.WeylPlancherelScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylPlancherelScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.dense_range_addI_position
+  module: Brockian.WeylPlancherelScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylPlancherelScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.dense_range_subI_position
+  module: Brockian.WeylPlancherelScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylPlancherelScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.essentiallySelfAdjoint_position
+  module: Brockian.WeylPlancherelScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylPlancherelScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.essentiallySelfAdjoint_position_of_multiplier_esa
+  module: Brockian.WeylPlancherelScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylPlancherelScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.isPlancherel
+  module: Brockian.WeylPlancherelScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylPlancherelScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.toFourierMultiplierInput
+  module: Brockian.WeylPlancherelScaffold
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylPlancherelScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylPlancherelScaffold.essentiallySelfAdjoint_of_plancherel_multiplier_dense_ranges
+  module: Brockian.WeylPlancherelScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylPlancherelScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylPlancherelScaffold.isPlancherelUnitary
+  module: Brockian.WeylPlancherelScaffold
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylPlancherelScaffold.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityCore.IntegralSchrodingerModel
+  module: Brockian.WeylWeakRegularityCore
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakRegularityCore.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityCore.WeakRegularityCoreStatus
+  module: Brockian.WeylWeakRegularityCore
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakRegularityCore.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityCore.WeakToIntegralRegularity
+  module: Brockian.WeylWeakRegularityCore
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakRegularityCore.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityCore.classicalL2Representative_of_integralModel
+  module: Brockian.WeylWeakRegularityCore
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityCore.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityCore.continuous_representatives_eq_of_ae
+  module: Brockian.WeylWeakRegularityCore
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityCore.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityCore.continuous_schrodingerRHS
+  module: Brockian.WeylWeakRegularityCore
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityCore.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityCore.integralModel_hasDerivAt_y
+  module: Brockian.WeylWeakRegularityCore
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityCore.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityCore.integralModel_hasDerivAt_yPrime
+  module: Brockian.WeylWeakRegularityCore
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityCore.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityCore.integralModel_isL2Solution
+  module: Brockian.WeylWeakRegularityCore
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityCore.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityCore.integralModel_representative_unique
+  module: Brockian.WeylWeakRegularityCore
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityCore.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityCore.schrodingerRHS
+  module: Brockian.WeylWeakRegularityCore
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakRegularityCore.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityCore.schrodinger_essentiallySelfAdjoint_of_weakToIntegral
+  module: Brockian.WeylWeakRegularityCore
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityCore.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityCore.weakRegularityCoreStatus
+  module: Brockian.WeylWeakRegularityCore
+  register: DEFINITION
+  kind: def
+  source: Brockian/WeylWeakRegularityCore.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.WeylWeakRegularityCore.weakToClassicalRegularity_of_weakToIntegral
+  module: Brockian.WeylWeakRegularityCore
+  register: PROVED
+  kind: theorem
+  source: Brockian/WeylWeakRegularityCore.lean
   axle:
     verdict: verified
     environment: lean-4.32.0

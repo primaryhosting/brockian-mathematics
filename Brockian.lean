@@ -40,6 +40,7 @@ import Brockian.WeylDiskBridge
 import Brockian.WeylConstMass
 import Brockian.WeylClosedRange
 import Brockian.WeylKato
+import Brockian.WeylKatoRangeDensity
 import Brockian.WeylRadiusDichotomy
 import Brockian.WeylGate1Bounded
 import Brockian.WeylBridge
@@ -73,6 +74,9 @@ import Brockian.GaloisGeneralDegree
 import Brockian.CosAlgebraicInteger
 import Brockian.WeylFourierMultiplier
 import Brockian.WeylWeakRegularityScaffold
+import Brockian.WeylWeakRegularityCore
+import Brockian.WeylPlancherelScaffold
+import Brockian.WeylKatoRellichScaffold
 import Brockian.GoldbachCovarianceScaffold
 import Brockian.AdmissibilityCRTGeneral
 import Brockian.PentagonalTheoremFranklin

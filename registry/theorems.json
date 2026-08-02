@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1031,
-    "DEFINITION": 241,
+    "PROVED": 1068,
+    "DEFINITION": 252,
     "CONDITIONAL": 24,
     "CONJECTURE": 1
   },
@@ -35412,6 +35412,730 @@
       "provenance_note": "isSelfAdjoint_add; dense_range_add_sub_of_selfAdjoint (ran((T+B)-z) dense for non-real z, T,B bounded self-adjoint, via resolvent). Statement fidelity diff-checked vs target (unchanged). Feeds the -Delta+V perturbation route."
     },
     {
+      "name": "Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_iff_dense_ranges",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRangeDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRangeDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_of_essentiallySelfAdjoint_perturb",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRangeDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRangeDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRangeDensity.boundedPerturbationTransfer_zero_of_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRangeDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRangeDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRangeDensity.boundedSelfAdjoint_perturb_dense_ranges",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRangeDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRangeDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRangeDensity.boundedSelfAdjoint_perturb_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRangeDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRangeDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRangeDensity.dense_rangeAddI_perturb_of_transfer",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRangeDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRangeDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRangeDensity.dense_rangeSubI_perturb_of_transfer",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRangeDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRangeDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRangeDensity.essentiallySelfAdjoint_perturb_iff_transfer",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRangeDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRangeDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRangeDensity.perturb_zero_eq",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRangeDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRangeDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRangeDensity.perturbed_ranges_eq_univ_of_transfer_of_isClosed",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRangeDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRangeDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRangeDensity.rangeAddI_perturb_eq_univ_of_transfer_of_isClosed",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRangeDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRangeDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRangeDensity.rangeSubI_perturb_eq_univ_of_transfer_of_isClosed",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRangeDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRangeDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichScaffold.CLMRightInverse",
+      "kind": "def",
+      "module": "Brockian.Weyl.KatoRellichScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRellichScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichScaffold.RightResolvent",
+      "kind": "def",
+      "module": "Brockian.Weyl.KatoRellichScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRellichScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichScaffold.boundedPerturbationTransfer_of_resolvent_factors",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRellichScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRellichScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichScaffold.boundedPerturbationTransfer_zero_of_rightResolvents",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRellichScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRellichScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichScaffold.dense_rangeSMulSub_of_rightResolvent",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRellichScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRellichScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichScaffold.factorRightInverse_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRellichScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRellichScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichScaffold.katoFactor",
+      "kind": "def",
+      "module": "Brockian.Weyl.KatoRellichScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRellichScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichScaffold.rangeAddI_perturb_eq_univ_of_resolvent_factor",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRellichScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRellichScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichScaffold.rangeSMulSub_eq_univ_of_rightResolvent",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRellichScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRellichScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichScaffold.rangeSubI_perturb_eq_univ_of_resolvent_factor",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRellichScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRellichScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellichScaffold.rightResolvent_perturb_of_factor_rightInverse",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRellichScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoRellichScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.Weyl.KatoUnbounded.BoundedPerturbationTransfer",
       "kind": "def",
       "module": "Brockian.Weyl.KatoUnbounded",
@@ -39942,6 +40666,774 @@
       "quarantine": true,
       "ledger_run": "Grok swarm 2026-08-01 Lane E#25 \u2014 N(T)~(T/2\u03c0)log conditional schema (CONDITIONAL)",
       "provenance_note": "Pure real analysis: (T/2\u03c0)log(T/2\u03c0)\u2192\u221e. Shape definition only \u2014 not a zero-counting theorem."
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.IsPlancherelUnitary",
+      "kind": "def",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput",
+      "kind": "def",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.dense_domain_position",
+      "kind": "theorem",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.dense_range_addI_position",
+      "kind": "theorem",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.dense_range_subI_position",
+      "kind": "theorem",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.essentiallySelfAdjoint_position",
+      "kind": "theorem",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.essentiallySelfAdjoint_position_of_multiplier_esa",
+      "kind": "theorem",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.isPlancherel",
+      "kind": "theorem",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.toFourierMultiplierInput",
+      "kind": "def",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.essentiallySelfAdjoint_of_plancherel_multiplier_dense_ranges",
+      "kind": "theorem",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.isPlancherelUnitary",
+      "kind": "theorem",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityCore.IntegralSchrodingerModel",
+      "kind": "def",
+      "module": "Brockian.WeylWeakRegularityCore",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityCore.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityCore.WeakRegularityCoreStatus",
+      "kind": "def",
+      "module": "Brockian.WeylWeakRegularityCore",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityCore.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityCore.WeakToIntegralRegularity",
+      "kind": "def",
+      "module": "Brockian.WeylWeakRegularityCore",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityCore.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityCore.classicalL2Representative_of_integralModel",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityCore",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityCore.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityCore.continuous_representatives_eq_of_ae",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityCore",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityCore.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityCore.continuous_schrodingerRHS",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityCore",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityCore.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityCore.integralModel_hasDerivAt_y",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityCore",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityCore.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityCore.integralModel_hasDerivAt_yPrime",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityCore",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityCore.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityCore.integralModel_isL2Solution",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityCore",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityCore.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityCore.integralModel_representative_unique",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityCore",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityCore.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityCore.schrodingerRHS",
+      "kind": "def",
+      "module": "Brockian.WeylWeakRegularityCore",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityCore.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityCore.schrodinger_essentiallySelfAdjoint_of_weakToIntegral",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityCore",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityCore.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityCore.weakRegularityCoreStatus",
+      "kind": "def",
+      "module": "Brockian.WeylWeakRegularityCore",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityCore.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityCore.weakToClassicalRegularity_of_weakToIntegral",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakRegularityCore",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakRegularityCore.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.WeylWeakRegularityScaffold.ClassicalL2Representative",
