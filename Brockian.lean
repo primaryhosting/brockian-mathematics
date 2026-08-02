@@ -62,3 +62,4 @@ import Brockian.WeylDeficiencyRegularity
 import Brockian.PentagonalPartition
 import Brockian.AdmissibilityKTuple
 import Brockian.GaloisGeneralDegree
+import Brockian.WeylFourierMultiplier

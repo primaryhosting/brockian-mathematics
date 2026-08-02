@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 10
 - **CONJECTURE**: 1
-- **DEFINITION**: 186
-- **PROVED**: 726
+- **DEFINITION**: 187
+- **PROVED**: 735
 
 ## Theorems
 
@@ -789,6 +789,16 @@
 | PROVED | `Brockian.Weyl.Extension.le_closure_le_adjoint` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.Extension.smulPMap_closure_eigenvalue_im_zero` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.Extension.smulPMap_closure_isSymmetric` | ✓ | verified | lean-4.32.0 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.FourierMultiplier.FourierMultiplierInput` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.FourierMultiplierInput.dense_domain_position` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.FourierMultiplierInput.essentiallySelfAdjoint_position` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.dense_domain_transfer` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.dense_rangeAddI_transfer_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.dense_rangeSMulSub_transfer_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.dense_rangeSubI_transfer_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_of_multiplier_dense_ranges` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_of_multiplier_esa` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_of_multiplier_shift_dense` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.FreeLaplacian.FreeLaplacianModel` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.FreeLaplacian.conjCLM` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.FreeLaplacian.dense_domain_vadd_clm` | ✓ | verified | lean-4.32.0 |  |

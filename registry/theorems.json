@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 726,
-    "DEFINITION": 186,
+    "PROVED": 735,
+    "DEFINITION": 187,
     "CONDITIONAL": 10,
     "CONJECTURE": 1
   },
@@ -24164,6 +24164,322 @@
       "quarantine": true,
       "ledger_run": "roadmap #4 \u2014 closure/adjoint/uniqueness/real-spectrum; AXLE @4.32",
       "provenance_note": "adjoint_closure ((T\u0304)*=T*, new fact), closure symmetric + real spectrum, minimality/uniqueness of the closed extension. Full T\u0304=T* named (needs double-adjoint T\u0304=T**, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.FourierMultiplierInput",
+      "kind": "def",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FourierMultiplier.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.FourierMultiplierInput.dense_domain_position",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FourierMultiplier.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.FourierMultiplierInput.essentiallySelfAdjoint_position",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FourierMultiplier.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.dense_domain_transfer",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FourierMultiplier.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.dense_rangeAddI_transfer_iff",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FourierMultiplier.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.dense_rangeSMulSub_transfer_iff",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FourierMultiplier.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.dense_rangeSubI_transfer_iff",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FourierMultiplier.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_of_multiplier_dense_ranges",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FourierMultiplier.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_of_multiplier_esa",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FourierMultiplier.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_of_multiplier_shift_dense",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FourierMultiplier.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.Weyl.FreeLaplacian.FreeLaplacianModel",

@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-01T20:48:01Z",
+  "generated_at": "2026-08-02T03:36:27Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 704,
-      "DEFINITION": 184,
+      "PROVED": 735,
+      "DEFINITION": 187,
       "CONDITIONAL": 10,
       "CONJECTURE": 1
     }
@@ -24,8 +24,8 @@
       "aristotle": 1
     },
     "registry": {
-      "PROVED": 704,
-      "DEFINITION": 184,
+      "PROVED": 735,
+      "DEFINITION": 187,
       "CONDITIONAL": 10,
       "CONJECTURE": 1
     }
@@ -3436,6 +3436,127 @@
       }
     },
     {
+      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues",
+      "module": "Brockian.AdmissibilityKTuple",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/AdmissibilityKTuple.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_card",
+      "module": "Brockian.AdmissibilityKTuple",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AdmissibilityKTuple.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_pair",
+      "module": "Brockian.AdmissibilityKTuple",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AdmissibilityKTuple.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_triple",
+      "module": "Brockian.AdmissibilityKTuple",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AdmissibilityKTuple.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_crt_card",
+      "module": "Brockian.AdmissibilityKTuple",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AdmissibilityKTuple.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_crt_card_pair",
+      "module": "Brockian.AdmissibilityKTuple",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AdmissibilityKTuple.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_pair_eq",
+      "module": "Brockian.AdmissibilityKTuple",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AdmissibilityKTuple.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissible_ktuple_count_five",
+      "module": "Brockian.AdmissibilityKTuple",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AdmissibilityKTuple.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.admissible_ktuple_count_three",
+      "module": "Brockian.AdmissibilityKTuple",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AdmissibilityKTuple.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.crt_filter_card",
+      "module": "Brockian.AdmissibilityKTuple",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AdmissibilityKTuple.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.AdmissibilityKTuple.mem_admissibleTupleResidues",
+      "module": "Brockian.AdmissibilityKTuple",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/AdmissibilityKTuple.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.AffineSymmetry.additiveAutEquivUnits",
       "module": "Brockian.AffineSymmetry",
       "register": "DEFINITION",
@@ -6043,6 +6164,28 @@
       }
     },
     {
+      "name": "Brockian.GaloisGeneralDegree.quadratic_iff_five_general",
+      "module": "Brockian.GaloisGeneralDegree",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisGeneralDegree.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisGeneralDegree.real_subfield_degree",
+      "module": "Brockian.GaloisGeneralDegree",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisGeneralDegree.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.GaloisWhyFive.P7",
       "module": "Brockian.GaloisWhyFive",
       "register": "DEFINITION",
@@ -8413,6 +8556,127 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/PentagonIsotypic.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.PentagonalPartition.partition_zero_card",
+      "module": "Brockian.PentagonalPartition",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/PentagonalPartition.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.PentagonalPartition.pent",
+      "module": "Brockian.PentagonalPartition",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/PentagonalPartition.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.PentagonalPartition.pent_injective",
+      "module": "Brockian.PentagonalPartition",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/PentagonalPartition.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.PentagonalPartition.pent_lt_succ",
+      "module": "Brockian.PentagonalPartition",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/PentagonalPartition.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.PentagonalPartition.pent_nonneg",
+      "module": "Brockian.PentagonalPartition",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/PentagonalPartition.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.PentagonalPartition.pent_reflect",
+      "module": "Brockian.PentagonalPartition",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/PentagonalPartition.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.PentagonalPartition.pent_succ",
+      "module": "Brockian.PentagonalPartition",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/PentagonalPartition.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.PentagonalPartition.pent_values",
+      "module": "Brockian.PentagonalPartition",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/PentagonalPartition.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.PentagonalPartition.two_dvd_pentNum",
+      "module": "Brockian.PentagonalPartition",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/PentagonalPartition.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.PentagonalPartition.two_mul_pent",
+      "module": "Brockian.PentagonalPartition",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/PentagonalPartition.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.PentagonalPartition.two_mul_pent_expand",
+      "module": "Brockian.PentagonalPartition",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/PentagonalPartition.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -11603,6 +11867,116 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/Extension.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.FourierMultiplierInput",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/FourierMultiplier.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.FourierMultiplierInput.dense_domain_position",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FourierMultiplier.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.FourierMultiplierInput.essentiallySelfAdjoint_position",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FourierMultiplier.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.dense_domain_transfer",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FourierMultiplier.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.dense_rangeAddI_transfer_iff",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FourierMultiplier.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.dense_rangeSMulSub_transfer_iff",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FourierMultiplier.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.dense_rangeSubI_transfer_iff",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FourierMultiplier.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_of_multiplier_dense_ranges",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FourierMultiplier.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_of_multiplier_esa",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FourierMultiplier.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_of_multiplier_shift_dense",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/FourierMultiplier.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
