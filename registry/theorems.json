@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 915,
+    "PROVED": 921,
     "DEFINITION": 217,
     "CONDITIONAL": 15,
     "CONJECTURE": 1
@@ -6831,6 +6831,198 @@
       "quarantine": true,
       "ledger_run": "Spectral generalization \u2014 cycle spectrum for general C_n; AXLE @4.32",
       "provenance_note": "Adjacency spectrum of C_n generalized without numerology: universal bounds (spec in [-2,2], lambda_max=2), k=1 mode, explicit C3/C4/C6 spectra, Laplacian spectrum + algebraic connectivity lambda2=2-2cos(2pi/n). Golden rigidity for phi-1 claimed ONLY as golden_unique_to_five already states (among primes, phi-1 in spec(C_p) iff p=5). No cosmic-five overclaim."
+    },
+    {
+      "name": "Brockian.CyclotomicRealDegree.pentagon_quadratic",
+      "kind": "theorem",
+      "module": "Brockian.CyclotomicRealDegree",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CyclotomicRealDegree.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #6+#8 \u2014 composite-n real cyclotomic degree + quadratic classification; AXLE @4.32",
+      "provenance_note": "FULLY GENERAL: [Q(2cos 2pi/n):Q]=phi(n)/2 for all n>=3 (maximal real subfield Q(zeta_n)+, Euler totient, composite n included); classification phi(n)=4 iff n in {5,8,10,12} iff the real subfield is quadratic. n=5 is the golden case. n in {0,1,2} degenerate, excluded. Unconditional PROVED."
+    },
+    {
+      "name": "Brockian.CyclotomicRealDegree.quadratic_iff_mem",
+      "kind": "theorem",
+      "module": "Brockian.CyclotomicRealDegree",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CyclotomicRealDegree.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #6+#8 \u2014 composite-n real cyclotomic degree + quadratic classification; AXLE @4.32",
+      "provenance_note": "FULLY GENERAL: [Q(2cos 2pi/n):Q]=phi(n)/2 for all n>=3 (maximal real subfield Q(zeta_n)+, Euler totient, composite n included); classification phi(n)=4 iff n in {5,8,10,12} iff the real subfield is quadratic. n=5 is the golden case. n in {0,1,2} degenerate, excluded. Unconditional PROVED."
+    },
+    {
+      "name": "Brockian.CyclotomicRealDegree.quadratic_iff_totient_four",
+      "kind": "theorem",
+      "module": "Brockian.CyclotomicRealDegree",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CyclotomicRealDegree.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #6+#8 \u2014 composite-n real cyclotomic degree + quadratic classification; AXLE @4.32",
+      "provenance_note": "FULLY GENERAL: [Q(2cos 2pi/n):Q]=phi(n)/2 for all n>=3 (maximal real subfield Q(zeta_n)+, Euler totient, composite n included); classification phi(n)=4 iff n in {5,8,10,12} iff the real subfield is quadratic. n=5 is the golden case. n in {0,1,2} degenerate, excluded. Unconditional PROVED."
+    },
+    {
+      "name": "Brockian.CyclotomicRealDegree.spectral_degree_general",
+      "kind": "theorem",
+      "module": "Brockian.CyclotomicRealDegree",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CyclotomicRealDegree.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #6+#8 \u2014 composite-n real cyclotomic degree + quadratic classification; AXLE @4.32",
+      "provenance_note": "FULLY GENERAL: [Q(2cos 2pi/n):Q]=phi(n)/2 for all n>=3 (maximal real subfield Q(zeta_n)+, Euler totient, composite n included); classification phi(n)=4 iff n in {5,8,10,12} iff the real subfield is quadratic. n=5 is the golden case. n in {0,1,2} degenerate, excluded. Unconditional PROVED."
+    },
+    {
+      "name": "Brockian.CyclotomicRealDegree.spectral_natDegree_two_mul",
+      "kind": "theorem",
+      "module": "Brockian.CyclotomicRealDegree",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CyclotomicRealDegree.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #6+#8 \u2014 composite-n real cyclotomic degree + quadratic classification; AXLE @4.32",
+      "provenance_note": "FULLY GENERAL: [Q(2cos 2pi/n):Q]=phi(n)/2 for all n>=3 (maximal real subfield Q(zeta_n)+, Euler totient, composite n included); classification phi(n)=4 iff n in {5,8,10,12} iff the real subfield is quadratic. n=5 is the golden case. n in {0,1,2} degenerate, excluded. Unconditional PROVED."
+    },
+    {
+      "name": "Brockian.CyclotomicRealDegree.totient_eq_four_iff",
+      "kind": "theorem",
+      "module": "Brockian.CyclotomicRealDegree",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CyclotomicRealDegree.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #6+#8 \u2014 composite-n real cyclotomic degree + quadratic classification; AXLE @4.32",
+      "provenance_note": "FULLY GENERAL: [Q(2cos 2pi/n):Q]=phi(n)/2 for all n>=3 (maximal real subfield Q(zeta_n)+, Euler totient, composite n included); classification phi(n)=4 iff n in {5,8,10,12} iff the real subfield is quadratic. n=5 is the golden case. n in {0,1,2} degenerate, excluded. Unconditional PROVED."
     },
     {
       "name": "Brockian.D5FourierInversion.fourierCoeff",

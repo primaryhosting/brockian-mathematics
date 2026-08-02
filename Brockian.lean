@@ -59,6 +59,7 @@ import Brockian.WeylSchrodingerMinimal
 import Brockian.SingularSeriesConvergence
 import Brockian.SingularSeriesWire
 import Brockian.SingularSeriesExamples
+import Brockian.TwinPrimeConstant
 import Brockian.WeylFreeLaplacian2
 import Brockian.WeylConfining
 import Brockian.ConfiningSpectralShape
@@ -78,3 +79,4 @@ import Brockian.GaloisMinPolyFamily
 import Brockian.RamanujanCongruence
 import Brockian.FranklinInvolution
 import Brockian.AdmissibilityHLCriterion
+import Brockian.CyclotomicRealDegree

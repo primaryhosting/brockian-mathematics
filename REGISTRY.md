@@ -9,7 +9,7 @@
 - **CONDITIONAL**: 15
 - **CONJECTURE**: 1
 - **DEFINITION**: 217
-- **PROVED**: 915
+- **PROVED**: 921
 
 ## Theorems
 
@@ -232,6 +232,12 @@
 | PROVED | `Brockian.CycleSpectrumFamily.two_cos_two_pi_div_three` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.two_mem_cycleSpectrum` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.zero_mem_laplacianCycleSpectrum` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
+| PROVED | `Brockian.CyclotomicRealDegree.pentagon_quadratic` | ✓ | verified | lean-4.32.0 | roadmap #6+#8 — composite-n real cyclotomic degree + quadratic classification; AXLE @4.32 |
+| PROVED | `Brockian.CyclotomicRealDegree.quadratic_iff_mem` | ✓ | verified | lean-4.32.0 | roadmap #6+#8 — composite-n real cyclotomic degree + quadratic classification; AXLE @4.32 |
+| PROVED | `Brockian.CyclotomicRealDegree.quadratic_iff_totient_four` | ✓ | verified | lean-4.32.0 | roadmap #6+#8 — composite-n real cyclotomic degree + quadratic classification; AXLE @4.32 |
+| PROVED | `Brockian.CyclotomicRealDegree.spectral_degree_general` | ✓ | verified | lean-4.32.0 | roadmap #6+#8 — composite-n real cyclotomic degree + quadratic classification; AXLE @4.32 |
+| PROVED | `Brockian.CyclotomicRealDegree.spectral_natDegree_two_mul` | ✓ | verified | lean-4.32.0 | roadmap #6+#8 — composite-n real cyclotomic degree + quadratic classification; AXLE @4.32 |
+| PROVED | `Brockian.CyclotomicRealDegree.totient_eq_four_iff` | ✓ | verified | lean-4.32.0 | roadmap #6+#8 — composite-n real cyclotomic degree + quadratic classification; AXLE @4.32 |
 | DEFINITION | `Brockian.D5FourierInversion.fourierCoeff` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5FourierInversion.fourierCoeff_add` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5FourierInversion.fourierCoeff_eigenmode` | ✓ | verified | lean-4.32.0 |  |
