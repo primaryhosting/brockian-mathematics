@@ -1,0 +1,58 @@
+{
+  "labId": "pentagon-why-five",
+  "title": "Why Five? — The Pentagon's Spectrum",
+  "description": "Interactive C_n cycle graph and its adjacency spectrum. Every eigenvalue and every rigidity claim is bound to a machine-checked theorem in the Brockian verified core; unbacked claims render BLOCKED. A picture cannot outrun its proof.",
+  "registrySchema": "brockian-public-verified-registry/v1",
+  "claims": [
+    {
+      "claim": "The eigenvalues of Cₙ are exactly the circulant modes 2·cos(2πk/n).",
+      "theorem": "Brockian.CycleSpectrumFamily.mem_cycleSpectrum",
+      "visualRef": "spectrum-strip"
+    },
+    {
+      "claim": "λ = 2 is always the largest eigenvalue of Cₙ.",
+      "theorem": "Brockian.CycleSpectrumFamily.lambda_max_cycle",
+      "visualRef": "eig-2"
+    },
+    {
+      "claim": "The whole spectrum lies in the interval [−2, 2].",
+      "theorem": "Brockian.CycleSpectrumFamily.cycleSpectrum_subset_Icc",
+      "visualRef": "spectrum-axis"
+    },
+    {
+      "claim": "For the pentagon, 2·cos(2π/5) = φ − 1 — the golden eigenvalue.",
+      "theorem": "Brockian.CycleSpectrumFamily.two_cos_two_pi_div_five_eq_golden_sub_one",
+      "visualRef": "eig-golden"
+    },
+    {
+      "claim": "The pentagon's second adjacency eigenvalue is −φ.",
+      "theorem": "Brockian.PentagonIsotypic.adjEigenvalue_two",
+      "visualRef": "eig-neg-golden"
+    },
+    {
+      "claim": "Among primes, φ − 1 lies in spec(C_p) if and only if p = 5.",
+      "theorem": "Brockian.Spectral.golden_unique_to_five",
+      "visualRef": "verdict"
+    },
+    {
+      "claim": "[ℚ(2cos 2π/p):ℚ] = (p−1)/2 for every odd prime p.",
+      "theorem": "Brockian.GaloisGeneralDegree.real_subfield_degree",
+      "visualRef": "verdict-degree"
+    },
+    {
+      "claim": "The spectral field is real-quadratic (golden) iff n ∈ {5, 8, 10, 12}.",
+      "theorem": "Brockian.CyclotomicRealDegree.quadratic_iff_mem",
+      "visualRef": "verdict-classification"
+    },
+    {
+      "claim": "The pentagon's algebraic connectivity is λ₂(C₅) = 2 − 1/φ.",
+      "theorem": "Brockian.Connectivity.pentagon_lambda2_phi",
+      "visualRef": "lambda2-callout"
+    },
+    {
+      "claim": "The full automorphism group of the pentagon is the dihedral group D₅.",
+      "theorem": "Brockian.Automorphism.Full.aut_equiv_dihedral",
+      "visualRef": "symmetry-callout"
+    }
+  ]
+}
