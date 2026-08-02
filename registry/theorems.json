@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1770,
-    "DEFINITION": 326,
+    "PROVED": 1830,
+    "DEFINITION": 335,
     "CONDITIONAL": 21,
     "DISCHARGED": 6,
     "CONJECTURE": 1
@@ -10697,6 +10697,2246 @@
       "quarantine": true,
       "ledger_run": "roadmap #6+#8 \u2014 composite-n real cyclotomic degree + quadratic classification; AXLE @4.32",
       "provenance_note": "FULLY GENERAL: [Q(2cos 2pi/n):Q]=phi(n)/2 for all n>=3 (maximal real subfield Q(zeta_n)+, Euler totient, composite n included); classification phi(n)=4 iff n in {5,8,10,12} iff the real subfield is quadratic. n=5 is the golden case. n in {0,1,2} degenerate, excluded. Unconditional PROVED."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.charInner",
+      "kind": "def",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.charInner_eq_pairSum",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.chiConjugate",
+      "kind": "def",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.chiConjugate_one",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.chiConjugate_real",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.chiGolden",
+      "kind": "def",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.chiGolden_one",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.chiGolden_real",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.chiSign",
+      "kind": "def",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.chiSign_one",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.chiSign_real",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.chiTrivial",
+      "kind": "def",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.chiTrivial_one",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.chiTrivial_real",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.colInner",
+      "kind": "def",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.colInner_one_one",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.colInner_one_r1",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.colInner_one_r2",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.colInner_one_sr0",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.colInner_r1_r1",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.colInner_r1_r2",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.colInner_r1_sr0",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.colInner_r2_r2",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.colInner_r2_sr0",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.colInner_sr0_sr0",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.col_orthogonal",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.conjRot",
+      "kind": "def",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.conjRot_col",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.conjRot_one",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.conjRot_real",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.conjRot_two",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.conjRot_zero",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.dimension_identity",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.dimension_identity_card",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.goldenRatio_sq_complex",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.goldenRot",
+      "kind": "def",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.goldenRot_col",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.goldenRot_eq_adjEigenvalue",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.goldenRot_one",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.goldenRot_real",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.goldenRot_two",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.goldenRot_zero",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.golden_char_eq_two_cos",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.golden_char_rotation_class",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.omegaPow_col_mul",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.one_eq_r0",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.pairSum",
+      "kind": "def",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.pairSum_split",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.rot_CC",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.rot_C_sum",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.rot_GC",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.rot_GG",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.rot_G_sum",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.row_CC",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.row_GC",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.row_GG",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.row_SC",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.row_SG",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.row_SS",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.row_TC",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.row_TG",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.row_TS",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.row_TT",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.row_orthonormal",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.star_omega",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.star_omegaPow",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.sum_dihedral5",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.sum_omega_binom",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
+    },
+    {
+      "name": "Brockian.D5CharacterComplete.sum_omega_binom_prod",
+      "kind": "theorem",
+      "module": "Brockian.D5CharacterComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5CharacterComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "batch \u2014 full D5 irreducible character table + orthogonality; AXLE @4.32",
+      "provenance_note": "Full D5 irrep character table: four irreps (trivial/sign/golden/conjugate) with explicit class values (2, phi-1, -phi via goldenRot/conjRot omega-calculus); ROW orthogonality (all 10 <chi_i,chi_j>=delta_ij) and COLUMN orthogonality (diagonals 10,5,5,2 = centralizer orders, off-diag 0); dimension identity 1+1+4+4=10=|D5|; golden tie chiGolden(r1)=phi-1=2cos(2pi/5) chained to PentagonIsotypic.adjEigenvalue. Completeness (class-functions span) NOT packaged (no concrete character-table API in Mathlib 4.32) \u2014 documented, not faked."
     },
     {
       "name": "Brockian.D5CharacterTable.d5Character",

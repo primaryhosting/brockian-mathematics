@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 326
+- **DEFINITION**: 335
 - **DISCHARGED**: 6
-- **PROVED**: 1770
+- **PROVED**: 1830
 
 ## Theorems
 
@@ -345,6 +345,75 @@
 | PROVED | `Brockian.CyclotomicRealDegree.spectral_degree_general` | ✓ | verified | lean-4.32.0 | roadmap #6+#8 — composite-n real cyclotomic degree + quadratic classification; AXLE @4.32 |
 | PROVED | `Brockian.CyclotomicRealDegree.spectral_natDegree_two_mul` | ✓ | verified | lean-4.32.0 | roadmap #6+#8 — composite-n real cyclotomic degree + quadratic classification; AXLE @4.32 |
 | PROVED | `Brockian.CyclotomicRealDegree.totient_eq_four_iff` | ✓ | verified | lean-4.32.0 | roadmap #6+#8 — composite-n real cyclotomic degree + quadratic classification; AXLE @4.32 |
+| DEFINITION | `Brockian.D5CharacterComplete.charInner` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.charInner_eq_pairSum` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| DEFINITION | `Brockian.D5CharacterComplete.chiConjugate` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.chiConjugate_one` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.chiConjugate_real` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| DEFINITION | `Brockian.D5CharacterComplete.chiGolden` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.chiGolden_one` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.chiGolden_real` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| DEFINITION | `Brockian.D5CharacterComplete.chiSign` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.chiSign_one` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.chiSign_real` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| DEFINITION | `Brockian.D5CharacterComplete.chiTrivial` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.chiTrivial_one` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.chiTrivial_real` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| DEFINITION | `Brockian.D5CharacterComplete.colInner` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.colInner_one_one` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.colInner_one_r1` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.colInner_one_r2` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.colInner_one_sr0` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.colInner_r1_r1` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.colInner_r1_r2` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.colInner_r1_sr0` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.colInner_r2_r2` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.colInner_r2_sr0` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.colInner_sr0_sr0` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.col_orthogonal` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| DEFINITION | `Brockian.D5CharacterComplete.conjRot` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.conjRot_col` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.conjRot_one` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.conjRot_real` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.conjRot_two` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.conjRot_zero` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.dimension_identity` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.dimension_identity_card` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.goldenRatio_sq_complex` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| DEFINITION | `Brockian.D5CharacterComplete.goldenRot` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.goldenRot_col` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.goldenRot_eq_adjEigenvalue` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.goldenRot_one` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.goldenRot_real` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.goldenRot_two` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.goldenRot_zero` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.golden_char_eq_two_cos` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.golden_char_rotation_class` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.omegaPow_col_mul` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.one_eq_r0` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| DEFINITION | `Brockian.D5CharacterComplete.pairSum` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.pairSum_split` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.rot_CC` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.rot_C_sum` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.rot_GC` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.rot_GG` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.rot_G_sum` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.row_CC` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.row_GC` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.row_GG` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.row_SC` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.row_SG` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.row_SS` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.row_TC` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.row_TG` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.row_TS` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.row_TT` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.row_orthonormal` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.star_omega` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.star_omegaPow` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.sum_dihedral5` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.sum_omega_binom` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
+| PROVED | `Brockian.D5CharacterComplete.sum_omega_binom_prod` | ✓ | verified | lean-4.32.0 | batch — full D5 irreducible character table + orthogonality; AXLE @4.32 |
 | DEFINITION | `Brockian.D5CharacterTable.d5Character` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5CharacterTable.d5Character_eq_sum_fixed` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.D5CharacterTable.d5Character_one` | ✓ | verified | lean-4.32.0 |  |
