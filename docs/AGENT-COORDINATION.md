@@ -716,3 +716,11 @@ keep boundedv-continuous.)
   `WeylClosedRangeClosure.json` (stray `ClosedRangeClosure.json` dropped); root-imported; firewalls+manifest pass.
   **UNBLOCKED for Codex/whoever:** `WeylClosedShiftedRanges.lean` + `WeylSchrodingerGate1Final.lean` may now
   build on this closed-range base. Gate1Final may ship once its own decls are AXLE-green on top of this.
+
+- 2026-08-02 — **Claude harvest: Pentagonal Selection Rule for Goldbach** (from Chris's June-2026 paper,
+  Drive/Downloads; honesty-first, review-hardened, invites zero-sorry Lean). New file only, no collision.
+  Claims `Brockian/GoldbachSelectionRule.lean` — the UNIFIED dihedral selection theorem the core lacks:
+  affine maps Σ = {x↦x+a} ∪ {x↦a−x} ≅ D_m acting on ZMod m; |𝒜(f)| = φ(m) − [f(0)≠0]; gap law
+  (translation) and Goldbach 𝒢(c) law (reflection) as the two restrictions; m=5 gives the 4/3 local factor
+  (bridges Goldbach↔pentagon). Reuses AffineSymmetry / Admissibility / AdmissibilityDiagonal / GoldbachSchema
+  (import only, no dup). Unconditional finite claims only; the 4/3 asymptotic stays CONDITIONAL-on-HL (cited).
