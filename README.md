@@ -8,6 +8,25 @@ the honest scaffolding of a Hilbert–Pólya-style attack on the Riemann Hypothe
 independently machine-verified, and the repository refuses to claim anything the build
 does not earn.**
 
+## Multi-domain problem attack pipeline
+
+The same process (intake → triage → decompose → attack → verify → **derived register** → publish)
+is generalized beyond Brockian Lean for:
+
+- **Erdős problems** ([erdosproblems.com](https://www.erdosproblems.com/))
+- **SAIR distillation challenges** (equational theories cheat sheets ≤10KB)
+- **SAIR.foundation** program tracking
+- **Mathematics, physics, CS, quantum** open problems
+
+See [`pipeline/README.md`](pipeline/README.md) and the design spec
+[`docs/superpowers/specs/2026-08-02-problem-attack-pipeline.md`](docs/superpowers/specs/2026-08-02-problem-attack-pipeline.md).
+
+```bash
+python3 -m pipeline.scripts.seed_catalog
+python3 -m pipeline.scripts.pipeline_cli queue
+python3 -m pipeline.scripts.pipeline_cli ledger
+```
+
 ## The verification discipline
 
 Each declaration carries exactly one *register*, derived mechanically — never hand-asserted:

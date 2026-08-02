@@ -1,0 +1,57 @@
+{
+  "id": "cs-sieve-count-parity",
+  "domain": "cs",
+  "title": "Executable sieve counts match Lean admissibility cards",
+  "statement": "Implement a small Python/C reference that computes admissible residue counts for k-tuples and matches Lean theorems (CRT product, diagonal cases).",
+  "status": "partial",
+  "source": {
+    "citation": "Brockian Admissibility*",
+    "external_status": "open"
+  },
+  "difficulty": 2,
+  "tags": [
+    "sieve",
+    "implementation",
+    "testing"
+  ],
+  "formal_targets": [
+    {
+      "kind": "implementation",
+      "name": "sieve_counts",
+      "path": "pipeline/artifacts/cs/sieve_counts.py"
+    },
+    {
+      "kind": "compute_cert",
+      "name": "golden_counts",
+      "path": "pipeline/artifacts/cs/sieve_counts.py"
+    }
+  ],
+  "attack_modes": [
+    "compute",
+    "formalize"
+  ],
+  "verification": {
+    "backend": "compute",
+    "criteria": [
+      "golden hash match",
+      "optional Lean link"
+    ]
+  },
+  "risk_tier": 1,
+  "notes": "Executable cert: python3 -m pipeline.artifacts.cs.sieve_counts --check (14 goldens). COMPUTATION register via compute attempt.",
+  "attempts": [
+    {
+      "ts": "2026-08-02T16:41:11Z",
+      "mode": "compute",
+      "result": "partial",
+      "note": "sieve_counts.py: 14/14 golden match Lean (q-nu, diagonal, CRT 3x5=3, k-tuple, twin card). --check exits 0.",
+      "agent": "PIPELINE-BUILD",
+      "artifacts": [
+        "pipeline/artifacts/cs/sieve_counts.py",
+        "pipeline/tests/test_sieve_counts.py"
+      ]
+    }
+  ],
+  "ledger_refs": [],
+  "priority": 65
+}

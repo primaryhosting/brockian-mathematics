@@ -1,0 +1,55 @@
+# ETP / SAIR Distillation Cheat Sheet v0 (draft)
+# Pipeline: brockian-mathematics/pipeline
+# Hard limit: 10 KB. Goal: lift weak models on magma equation implications.
+# NOT a competition submit — human review required.
+
+## Task
+Given equations E1..Ek as axioms for a binary op * on a set M (magma),
+decide if target equation T holds for all elements. Answer TRUE or FALSE.
+
+## Decision protocol (order matters)
+1. TRIVIAL: if T is alphabetic rename of an axiom → TRUE.
+2. SUBSTITUTION: try short rewrites (≤4 steps) replacing subterms using axioms L→R and R→L when equational.
+3. FINITE SEARCH: if no short proof, search counterexample magmas of size n=1..4 (then 5 if time).
+4. If counterexample found → FALSE. If saturated small n with no cex and short proof fails → UNKNOWN (prefer FALSE only with cex; else TRUE only with proof — Stage1 T/F: use heuristics below carefully).
+
+## Rewrite tactics (encode patterns, not full tables)
+- Assoc probes: (x*y)*z vs x*(y*z); many ETP eqs are non-associative.
+- Projection laws: x*y=x or x*y=y collapse quickly — check if axioms force left/right projection.
+- Constant laws: x*y=c → everything collapses; targets often TRUE.
+- Commute: x*y=y*x; use to normalize variable order.
+- Absorption / idempotent: x*x=x; reduce squares first.
+- Linear/affine over Z/p: for n=2,3 try all op tables consistent with axioms (2^(n^2) raw; prune by axioms).
+
+## Counterexample recipe (FALSE certificates)
+- Enumerate ops on {0,1}, {0,1,2} as tables T[i][j].
+- Filter tables satisfying all axioms for all assignments.
+- Evaluate target; if any table fails target → FALSE.
+- Prefer smallest n. Record one table as certificate (Stage 2).
+
+## TRUE certificate sketch (Stage 2 / for distill insight)
+- Equational proof = sequence of rewrites from axioms (term rewriting / Knuth-Bendix lite).
+- If axioms imply a finite basis known to decide T, cite pattern (do not invent theorem names).
+
+## Cheap-model prompt habits
+- Restate axioms with consistent variable names x,y,z,w.
+- Ask: "If FALSE, give magma size and table; if TRUE, give rewrite steps."
+- Forbid: "probably", "in general math", vacuous "let M be empty" (empty magma issues — assume nonempty unless stated).
+- Prefer structure: CASE on whether * is commutative / has identity / is projection.
+
+## Brockian-adjacent finite algebra notes
+- Finite checks + CRT style counting transfer: when implication is about counts of solutions mod q, reduce mod primes first.
+- Dihedral / cyclic small groups: if * is group operation restricted, standard laws apply — but ETP ops are free magmas, not groups unless forced.
+
+## Anti-patterns (avoid)
+- Claiming TRUE without rewrite or FALSE without table.
+- Overfitting verbal lore that contradicts small-n tables.
+- Sheets >10KB or dense dumps of 22M implications (useless for weak models).
+
+## Minimal worked pattern
+Axiom: x*(y*z)=(z*w)*w. Target: x*(y*x)=(x*y)*z ?
+- Try n=2 brute force first (often settles).
+- If all models of axiom satisfy target → lean TRUE; else emit cex table.
+
+## Size discipline
+Keep this sheet under 10240 bytes. Prefer algorithms over example dumps.

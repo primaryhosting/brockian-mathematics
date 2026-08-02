@@ -1,0 +1,38 @@
+{
+  "id": "erdos-90",
+  "domain": "erdos",
+  "title": "Unit distance problem (planar)",
+  "statement": "What is the maximum number of unit distances among n points in the plane?",
+  "status": "literature",
+  "source": {
+    "url": "https://www.erdosproblems.com/90",
+    "citation": "Erdős problem 90",
+    "external_status": "solved"
+  },
+  "difficulty": 5,
+  "tags": [
+    "erdos",
+    "geometry",
+    "combinatorics"
+  ],
+  "formal_targets": [],
+  "attack_modes": [
+    "literature",
+    "decompose",
+    "formalize",
+    "compute",
+    "refute"
+  ],
+  "verification": {
+    "backend": "literature",
+    "criteria": [
+      "Do not claim PROVED without Lean+AXLE or accepted literature formalization",
+      "AI prose solutions without independent check → BLOCKED"
+    ]
+  },
+  "risk_tier": 1,
+  "notes": "External solved (2026 reports). LITERATURE unless we re-formalize.",
+  "attempts": [],
+  "ledger_refs": [],
+  "priority": 20
+}

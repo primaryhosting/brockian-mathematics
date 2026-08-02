@@ -1,0 +1,43 @@
+{
+  "id": "cs-settle-factory",
+  "domain": "cs",
+  "title": "Certificate settle factory wired into pipeline formalize mode",
+  "statement": "Hook pipeline attempt --mode formalize to scripts/settle.py (AXLE + no-theater lint + axioms audit) so formal targets produce machine certificates under registry/certificates/ and derived registers join the pipeline ledger. Dual-race prove/refute → BLOCKED on both-verify.",
+  "status": "open",
+  "source": {
+    "citation": "scripts/settle.py; docs/superpowers/plans/2026-08-02-problem-attack-pipeline.md §Next",
+    "external_status": "open"
+  },
+  "difficulty": 2,
+  "tags": [
+    "tooling",
+    "certificates",
+    "axle",
+    "pipeline"
+  ],
+  "formal_targets": [
+    {
+      "kind": "implementation",
+      "name": "settle_pipeline_hook",
+      "path": "scripts/settle.py"
+    }
+  ],
+  "attack_modes": [
+    "compute",
+    "formalize",
+    "dual_prover"
+  ],
+  "verification": {
+    "backend": "hybrid",
+    "criteria": [
+      "settle exits 0 on known PROVED module",
+      "dual-race both-verify → BLOCKED",
+      "pipeline attempt records certificate path"
+    ]
+  },
+  "risk_tier": 1,
+  "notes": "v1 pipeline hook; theorem-level PROVED still via attest + gen_registry.",
+  "attempts": [],
+  "ledger_refs": [],
+  "priority": 72
+}

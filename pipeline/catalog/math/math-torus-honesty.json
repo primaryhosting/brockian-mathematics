@@ -1,0 +1,56 @@
+{
+  "id": "math-torus-honesty",
+  "domain": "math",
+  "title": "Sieve phase–depth torus: period / injectivity honesty ledger",
+  "statement": "Track Brockian.Sieve torus claims (tau_period, tau_minimal_period, tau_injective_on_period, compatible_closure, run_cap, no_adjacent_admissible) as finite honesty artifacts — not asymptotic twin-prime conclusions. Attack residual gaps only; never promote local torus facts to global prime-pair density PROVED.",
+  "status": "partial",
+  "source": {
+    "citation": "Brockian.Sieve (intake 18 — silver eigensystem, no-go, run-cap, torus)",
+    "external_status": "partial"
+  },
+  "difficulty": 3,
+  "tags": [
+    "sieve",
+    "finite",
+    "honesty",
+    "number-theory"
+  ],
+  "formal_targets": [
+    {
+      "kind": "lean_theorem",
+      "name": "Brockian.Sieve.tau_period",
+      "path": "Brockian/Sieve.lean"
+    },
+    {
+      "kind": "lean_theorem",
+      "name": "Brockian.Sieve.tau_injective_on_period",
+      "path": "Brockian/Sieve.lean"
+    },
+    {
+      "kind": "lean_theorem",
+      "name": "Brockian.Sieve.twin_admissible_card",
+      "path": "Brockian/Sieve.lean"
+    }
+  ],
+  "attack_modes": [
+    "formalize",
+    "decompose",
+    "compute"
+  ],
+  "verification": {
+    "backend": "lean_axle",
+    "criteria": [
+      "AXLE on Sieve.lean targets",
+      "no overclaim to twin-prime conjecture",
+      "register join via attest"
+    ]
+  },
+  "risk_tier": 1,
+  "notes": "Finite local layer only. Pair with cs-sieve-count-parity for count parity.",
+  "attempts": [],
+  "ledger_refs": [
+    "Brockian.Sieve.tau_period",
+    "Brockian.Sieve.twin_admissible_card"
+  ],
+  "priority": 68
+}

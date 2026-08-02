@@ -1,0 +1,41 @@
+{
+  "id": "quantum-free-laplacian-plancherel",
+  "domain": "quantum",
+  "title": "Free Laplacian Plancherel / Fourier multiplier scaffold",
+  "statement": "Formal and analytic control of free −Δ on L²(ℝⁿ) via Fourier multipliers / Plancherel. Supports quantum kinetic energy term in Gate-1 style models.",
+  "status": "scaffolded",
+  "source": {
+    "citation": "Brockian FreeLaplacianPlancherel / WeylFreeLaplacian",
+    "external_status": "partial"
+  },
+  "difficulty": 4,
+  "tags": [
+    "quantum",
+    "spectral",
+    "fourier"
+  ],
+  "formal_targets": [
+    {
+      "kind": "lean_theorem",
+      "name": "Brockian.FreeLaplacian*",
+      "path": "Brockian/FreeLaplacianPlancherel.lean"
+    }
+  ],
+  "attack_modes": [
+    "formalize",
+    "decompose",
+    "dual_prover"
+  ],
+  "verification": {
+    "backend": "lean_axle",
+    "criteria": [
+      "AXLE",
+      "no overclaim of interacting case"
+    ]
+  },
+  "risk_tier": 1,
+  "notes": "",
+  "attempts": [],
+  "ledger_refs": [],
+  "priority": 72
+}

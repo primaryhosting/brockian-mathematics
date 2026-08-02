@@ -1,0 +1,40 @@
+{
+  "id": "physics-schrodinger-esa-bridge",
+  "domain": "physics",
+  "title": "Schrödinger operator essential self-adjointness (model)",
+  "statement": "Mathematical model: essential self-adjointness of −Δ+V under named deficiency / Kato-class hypotheses. Experimental physics claims are out of scope; prove math about the model.",
+  "status": "conditional",
+  "source": {
+    "citation": "Brockian WeylSchrodingerESA",
+    "external_status": "partial"
+  },
+  "difficulty": 4,
+  "tags": [
+    "spectral",
+    "schrodinger",
+    "operator-theory"
+  ],
+  "formal_targets": [
+    {
+      "kind": "lean_theorem",
+      "name": "Brockian.Weyl.SchrodingerESA.*",
+      "path": "Brockian/WeylSchrodingerESA.lean"
+    }
+  ],
+  "attack_modes": [
+    "formalize",
+    "decompose"
+  ],
+  "verification": {
+    "backend": "lean_axle",
+    "criteria": [
+      "named hypotheses explicit",
+      "AXLE"
+    ]
+  },
+  "risk_tier": 2,
+  "notes": "",
+  "attempts": [],
+  "ledger_refs": [],
+  "priority": 70
+}

@@ -1,0 +1,45 @@
+{
+  "id": "math-gate1-lp-continuous-bounded",
+  "domain": "math",
+  "title": "Gate 1: continuous bounded potential → limit-point",
+  "statement": "Extend Weyl limit-point results beyond continuous-constant and special cases toward continuous bounded V. Do not claim full Gate 1 ESA until deficiencies close.",
+  "status": "partial",
+  "source": {
+    "citation": "Brockian WeylLimitPointContinuous + scaffolds",
+    "external_status": "partial"
+  },
+  "difficulty": 5,
+  "tags": [
+    "spectral",
+    "analysis",
+    "weyl",
+    "gate1"
+  ],
+  "formal_targets": [
+    {
+      "kind": "lean_theorem",
+      "name": "Brockian.Weyl.LimitPointContinuous.*",
+      "path": "Brockian/WeylLimitPointContinuous.lean"
+    }
+  ],
+  "attack_modes": [
+    "formalize",
+    "decompose",
+    "dual_prover"
+  ],
+  "verification": {
+    "backend": "lean_axle",
+    "criteria": [
+      "AXLE verified",
+      "axioms clean",
+      "no theater"
+    ]
+  },
+  "risk_tier": 1,
+  "notes": "Linked to Brockian formal program.",
+  "attempts": [],
+  "ledger_refs": [
+    "Brockian.Weyl.LimitPointContinuous"
+  ],
+  "priority": 85
+}

@@ -1,6 +1,22 @@
 # Agent Coordination Queue
 
-Current checkpoint: 2026-08-01, after integrator wire of FreeLaplacian2 + EquidistributionSchema + AffineSymmetry.
+Current checkpoint: 2026-08-02, swarm integrated — partner pack + pipeline artifacts + settle bridge.
+
+## Multi-domain pipeline + settle
+
+Problem cards: `pipeline/catalog/<domain>/`. Certificate unit of progress: `scripts/settle.py`
+(see `docs/SETTLE-FACTORY.md`). Dry-run formalize→verify plan:
+
+```bash
+python3 scripts/pipeline_attest_bridge.py Brockian/Foo.lean
+python3 -m pipeline.scripts.pipeline_cli ledger
+python3 scripts/gen_program_report.py
+python3 -m pipeline.artifacts.cs.sieve_counts --check
+```
+
+Partner pack: `docs/partner/` (strategy, torus audit, Mathlib/PhysLean harvest, QP targets).
+Do not invent PROVED at problem level without AXLE. Lean still requires
+`no_theater_lint` + `attest.py` before `Brockian.lean` import.
 
 This file is the shared handoff surface for Claude, Codex, Grok, Aristotle downloads,
 and any fresh proof agent.  Use it to avoid duplicate work and to keep the next attacks
@@ -599,3 +615,25 @@ keep boundedv-continuous.)
   - **Claude + Harmonic:** A3 free-Δ Plancherel (`freeLaplacian_essentiallySelfAdjoint_of_fourier`) — AXLE swarm + Harmonic submit; B1 equidistribution uniformity symmetry (`sing a = sing b`).
   - **Harmonic:** A1 weak-regularity job `c400008b` RUNNING (Claude monitoring for sorry-free close).
   Frontier honesty: RH/Goldbach/WeylLaw are open-problem-strength — dispatched as reduce/strengthen, not full proofs.
+
+- 2026-08-02 — **Codex swarm #8 launched: prove both remaining Gate-1 attackables**.
+  Baseline `55bb46f`: 1449 PROVED / 294 DEFINITION / 21 CONDITIONAL / 6 DISCHARGED /
+  1 CONJECTURE; dirty paths are only Aristotle scratch plus pipeline/docs drafts. New-file
+  claims only; never touch `aristotle/kato-bounded/KatoBounded.lean`, `aristotle/franklin/`,
+  `aristotle/weak-regularity/`, or another agent's generated registry artifacts.
+  - Weak primitive/local lane — `Brockian/WeylWeakPrimitiveLocal.lean`. Primary target:
+    discharge or sharply reduce
+    `Brockian.WeylWeakRegularityDischarge.WeakToPrimitiveRegularity` by a local
+    primitive/fundamental-lemma route. Acceptable partials: a precise
+    `DistributionalPrimitiveIdentity` / `WeakEqualsPrimitiveODE` predicate and proofs that it
+    implies `WeakToPrimitiveRegularity`, plus uniqueness/normalization/a.e.-representative
+    transport lemmas. No restating the conclusion under a vacuous name.
+  - Kato resolvent lane — `Brockian/WeylKatoResolventConstruction.lean` (or a strictly
+    narrower fresh Kato module if the API demands it). Primary target: construct the bounded
+    right-resolvent/smallness hypotheses needed by `WeylKatoRellichTransfer` from the strongest
+    already-verified ESA/free-Laplacian inputs. Acceptable partials: exact non-vacuous
+    `RightResolvent` construction interfaces and theorem(s) composing them with
+    `essentiallySelfAdjoint_perturb_of_resolvent_norm_mul_lt_one`.
+  AXLE @ lean-4.32.0 + `no_theater_lint` + axiom-clean required before any integration.
+  If either lane cannot close, return the exact missing Mathlib API/theorem, not a weakened
+  fake.

@@ -1,0 +1,60 @@
+{
+  "id": "distill-etp-stage1",
+  "domain": "distillation",
+  "title": "SAIR Mathematics Distillation Challenge \u2014 Equational Theories Stage 1",
+  "statement": "Design a cheat sheet (\u226410 KB) that improves weak LLM accuracy on true/false universal-algebra implications from the Equational Theories Project (~22M implications). Stage 1 is T/F only; do not overclaim Stage 2 proof ability.",
+  "status": "partial",
+  "source": {
+    "url": "https://competition.sair.foundation/competitions/mathematics-distillation-challenge-equational-theories-stage1/overview",
+    "citation": "Tao\u2013Davis, SAIR Mathematics Distillation Challenge (2026)",
+    "external_status": "open"
+  },
+  "difficulty": 3,
+  "tags": [
+    "distillation",
+    "equational",
+    "sair",
+    "llm"
+  ],
+  "formal_targets": [
+    {
+      "kind": "cheatsheet",
+      "name": "etp_stage1",
+      "path": "pipeline/distill/cheatsheets/etp_v1.txt"
+    },
+    {
+      "kind": "cheatsheet",
+      "name": "etp_v0",
+      "path": "pipeline/distill/cheatsheets/etp_v0.txt"
+    }
+  ],
+  "attack_modes": [
+    "distill",
+    "compute",
+    "refute"
+  ],
+  "verification": {
+    "backend": "distillation_harness",
+    "criteria": [
+      "size \u2264 10240 bytes",
+      "accuracy lift vs baseline on held-out set",
+      "human review before competition submit"
+    ]
+  },
+  "risk_tier": 1,
+  "notes": "Primary distillation track. Build cheatsheets under pipeline/distill/cheatsheets/.",
+  "attempts": [
+    {
+      "ts": "2026-08-02T16:41:11Z",
+      "mode": "distill",
+      "result": "partial",
+      "note": "etp_v1 cheatsheet: actionable rewrite/cex tactics; distill-check size_ok (4837/10240).",
+      "agent": "PIPELINE-BUILD",
+      "artifacts": [
+        "pipeline/distill/cheatsheets/etp_v1.txt"
+      ]
+    }
+  ],
+  "ledger_refs": [],
+  "priority": 90
+}

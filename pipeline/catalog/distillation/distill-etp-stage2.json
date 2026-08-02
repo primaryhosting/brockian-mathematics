@@ -1,0 +1,49 @@
+{
+  "id": "distill-etp-stage2",
+  "domain": "distillation",
+  "title": "SAIR Distillation Stage 2 — proof or counterexample",
+  "statement": "Beyond T/F: supply probability plus a deterministically verifiable certificate (Lean proof or explicit counterexample magma) for equational implications.",
+  "status": "open",
+  "source": {
+    "url": "https://competition.sair.foundation/",
+    "citation": "SAIR Stage 2 (design evolving)",
+    "external_status": "open"
+  },
+  "difficulty": 4,
+  "tags": [
+    "distillation",
+    "equational",
+    "lean",
+    "sair"
+  ],
+  "formal_targets": [
+    {
+      "kind": "lean_theorem",
+      "name": null,
+      "path": null
+    },
+    {
+      "kind": "counterexample",
+      "name": null,
+      "path": null
+    }
+  ],
+  "attack_modes": [
+    "formalize",
+    "refute",
+    "dual_prover",
+    "distill"
+  ],
+  "verification": {
+    "backend": "hybrid",
+    "criteria": [
+      "Lean kernel check or explicit finite counterexample",
+      "optional AXLE"
+    ]
+  },
+  "risk_tier": 1,
+  "notes": "",
+  "attempts": [],
+  "ledger_refs": [],
+  "priority": 75
+}

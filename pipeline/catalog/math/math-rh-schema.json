@@ -1,0 +1,40 @@
+{
+  "id": "math-rh-schema",
+  "domain": "math",
+  "title": "RH schema (honest conditional — never claim PROVED)",
+  "statement": "Riemann Hypothesis remains open. Pipeline tracks the Brockian spectral/ξ schema and reductions only. Any 'proof' without independent formal verification is BLOCKED.",
+  "status": "conditional",
+  "source": {
+    "citation": "Brockian RiemannScaffold / SpectralGate1",
+    "external_status": "open"
+  },
+  "difficulty": 5,
+  "tags": [
+    "rh",
+    "number-theory",
+    "spectral"
+  ],
+  "formal_targets": [
+    {
+      "kind": "lean_def",
+      "name": "Brockian.Riemann.*",
+      "path": "Brockian/RiemannScaffold.lean"
+    }
+  ],
+  "attack_modes": [
+    "decompose",
+    "formalize"
+  ],
+  "verification": {
+    "backend": "lean_axle",
+    "criteria": [
+      "schema only",
+      "overclaim firewall"
+    ]
+  },
+  "risk_tier": 3,
+  "notes": "risk_tier=3 millennium-class. Register stays CONDITIONAL/SCAFFOLD.",
+  "attempts": [],
+  "ledger_refs": [],
+  "priority": 30
+}

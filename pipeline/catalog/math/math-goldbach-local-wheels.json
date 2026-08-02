@@ -1,0 +1,41 @@
+{
+  "id": "math-goldbach-local-wheels",
+  "domain": "math",
+  "title": "Goldbach local wheels & singular series (finite layer)",
+  "statement": "Continue finite Goldbach covariance / local wheel / singular series formalization. Full Goldbach remains open; do not promote local results to global PROVED.",
+  "status": "partial",
+  "source": {
+    "citation": "Brockian Goldbach* SingularSeries*",
+    "external_status": "partial"
+  },
+  "difficulty": 3,
+  "tags": [
+    "goldbach",
+    "sieve",
+    "finite",
+    "number-theory"
+  ],
+  "formal_targets": [
+    {
+      "kind": "lean_theorem",
+      "name": "Brockian.Goldbach*",
+      "path": "Brockian/"
+    }
+  ],
+  "attack_modes": [
+    "formalize",
+    "compute"
+  ],
+  "verification": {
+    "backend": "lean_axle",
+    "criteria": [
+      "AXLE",
+      "honest local claims"
+    ]
+  },
+  "risk_tier": 1,
+  "notes": "",
+  "attempts": [],
+  "ledger_refs": [],
+  "priority": 80
+}

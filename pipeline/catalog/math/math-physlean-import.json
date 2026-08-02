@@ -1,0 +1,43 @@
+{
+  "id": "math-physlean-import",
+  "domain": "math",
+  "title": "PhysLean / Mathlib import queue for spectral bridges",
+  "statement": "Identify high-yield lemmas from PhysLean and Mathlib (Fourier, Plancherel, Sobolev, self-adjoint extensions) that can replace Brockian scaffolding without theater. Import surgically; keep dependency firewall; prefer upstreaming Brockian keepers the other direction when cleaner.",
+  "status": "open",
+  "source": {
+    "citation": "docs/MATHLIB-UPSTREAM-CANDIDATES.md; docs/DEPENDENCY-FIREWALL.md",
+    "external_status": "open"
+  },
+  "difficulty": 3,
+  "tags": [
+    "mathlib",
+    "physlean",
+    "import",
+    "spectral"
+  ],
+  "formal_targets": [
+    {
+      "kind": "paper",
+      "name": "import_queue",
+      "path": "docs/MATHLIB-UPSTREAM-CANDIDATES.md"
+    }
+  ],
+  "attack_modes": [
+    "literature",
+    "decompose",
+    "formalize"
+  ],
+  "verification": {
+    "backend": "hybrid",
+    "criteria": [
+      "named import candidates with module paths",
+      "firewall audit clean after any import",
+      "no silent axiom / sorry growth"
+    ]
+  },
+  "risk_tier": 1,
+  "notes": "Meta-math hygiene problem; feeds Gate-1 / free Laplacian / Schrödinger ESA tracks.",
+  "attempts": [],
+  "ledger_refs": [],
+  "priority": 55
+}

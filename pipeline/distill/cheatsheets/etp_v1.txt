@@ -1,0 +1,83 @@
+# ETP / SAIR Distillation Cheat Sheet v1
+# Pipeline: brockian-mathematics/pipeline/distill/cheatsheets
+# Hard limit: 10240 bytes. Stage-1 T/F only. Human review before submit.
+# Goal: lift weak models on magma equation implications (axioms ⇒ target).
+
+## Task
+Binary op * on nonempty set M (magma). Axioms E1..Ek are identities (∀ vars).
+Decide if target T is a consequence (TRUE) or not (FALSE). Prefer certificates.
+
+## Decision protocol (strict order)
+1. RENAME: T alphabetic rename of an axiom → TRUE.
+2. ONE-STEP: T equals axiom after one subterm rewrite L↔R → TRUE.
+3. SHORT PROOF: breadth-first rewrite ≤6 steps (both directions if bi-equational).
+4. CEX n=1..4: enumerate magma tables consistent with all axioms; if any fails T → FALSE.
+5. n=5 only if n≤4 saturated and no short proof (costly).
+6. Stage-1 guess when stuck: if many models of axioms, check T on them; unanimous → lean TRUE else FALSE. Never claim certainty without proof/cex for Stage 2.
+
+## Normalization (do before search)
+- Alpha: rename vars to x,y,z,w,u,v in first-appearance order.
+- Orient: prefer left-assoc form (x*y)*z over x*(y*z) when both appear as goals.
+- Square-first: reduce x*x when idempotent or projection laws present.
+- Commute-sort: if x*y=y*x forced, sort args by variable name at each node.
+- Delete trivial axioms x=x; ignore vacuous empty-carrier arguments (nonempty M).
+
+## Rewrite tactics (actionable)
+- Subst: replace any occurrence of axiom LHS by RHS (and reverse).
+- Congruence: if a→b then t[a]→t[b] under context * and nesting.
+- Assoc probe: rewrite (x*y)*z ↔ x*(y*z) only if an axiom/eq allows; else keep both forms as distinct terms.
+- Projection collapse: if x*y=x (left proj) then every term ≡ its leftmost leaf; targets often TRUE/FALSE by leaf count.
+- Right proj x*y=y → rightmost leaf.
+- Constant: x*y=c (constant op) → all closed terms equal; any identity TRUE.
+- Absorb: x*(x*y)=x or dual; shrink nested same-head towers.
+- Idempotent x*x=x: collapse squares before longer rewrites.
+- Medial / paramedial patterns: (x*y)*(z*w)=(x*z)*(y*w) — try 2×2 block rewrites.
+- Linear ansatz (small n): treat * as affine over Z/p; solve for coefficients; only as heuristic.
+
+## Counterexample recipe (FALSE certificates)
+1. For n=2: 2^(n²)=16 raw tables; n=3: 3^9=19683 — filter hard.
+2. Represent op as n×n matrix T[i][j]∈{0..n-1}.
+3. For each axiom, for all assignments of free vars, require LHS==RHS under T.
+4. Prune early: fix T[0][0] first; reject partial tables that break ground instances.
+5. After axiom filter, evaluate T on all assignments; if fails → FALSE + emit one matrix.
+6. Prefer least n, then lexicographically least matrix as Stage-2 certificate.
+7. Dual-race: if both a rewrite proof and a cex exist → BLOCKED (bug in statement).
+
+## TRUE certificate sketch (Stage 2)
+- Sequence of terms t0=LHS(T) … tk=RHS(T) with each step an axiom instance + congruence.
+- Or: show all models up to n=N with N large enough only if theory is known locally finite — usually not; prefer equational proof.
+- Do not invent theorem names; cite rewrite steps only.
+
+## High-yield implication patterns
+- If axioms force left projection, target is TRUE iff both sides reduce to same variable.
+- Commutative + associative + idempotent → semilattice; meet-like identities often TRUE.
+- Single axiom of high complexity: start cex at n=2 before multi-step rewrite.
+- If target has more variables than axioms ever relate, try constant models first (all products = 0).
+- Homogeneous equations: scale-invariant; n=2 often decides.
+
+## Weak-model prompt habits
+- Restate: "Axioms: … Target: … Answer TRUE or FALSE. If FALSE give n and table; if TRUE give ≤6 rewrites."
+- Forbid: "probably", "in general algebra", empty magma, changing the signature.
+- CASE split: commutative? has left unit e with e*x=x? projection?
+- Ask for one concrete witness, not philosophy.
+
+## Finite-algebra transfer (Brockian-adjacent)
+- Counting solutions mod q: reduce mod primes; product over CRT factors (no extra correction).
+- Dihedral/cyclic laws apply only if axioms force group structure — default ETP ops are free magmas.
+
+## Anti-patterns
+- TRUE without rewrite or model-universal check; FALSE without table.
+- Dumping huge implication lists; sheets >10KB.
+- Using group lore (inverses, cancellation) unless axioms force it.
+- Claiming Stage-2 proof from Stage-1 heuristic alone.
+
+## Minimal worked template
+Axiom: x*(y*z)=(x*y)*z (assoc). Target: (x*y)*z=x*(y*z).
+→ TRUE by rename/orient (same identity).
+Axiom: x*y=x. Target: (x*y)*z=x*z.
+→ TRUE: left proj, both sides → x after reduce.
+Axiom: x*y=y*x. Target: x*(y*z)=(x*y)*z.
+→ FALSE often: n=2 non-assoc commutative magma (check tables).
+
+## Size discipline
+≤10240 bytes. Algorithms + patterns > example dumps. Version: etp_v1.

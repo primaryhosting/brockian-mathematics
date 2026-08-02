@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brockian.local/pipeline/problem.schema.json",
+  "title": "ProblemCard",
+  "type": "object",
+  "required": ["id", "domain", "title", "statement", "status", "verification"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{1,64}$",
+      "description": "Stable problem id, e.g. erdos-90, distill-etp-stage1"
+    },
+    "domain": {
+      "type": "string",
+      "enum": ["erdos", "distillation", "sair", "math", "physics", "cs", "quantum"]
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "statement": { "type": "string", "minLength": 1 },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "url": { "type": "string" },
+        "citation": { "type": "string" },
+        "external_status": {
+          "type": "string",
+          "enum": ["open", "solved", "partial", "unknown", "withdrawn"]
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "partial",
+        "scaffolded",
+        "conditional",
+        "proved",
+        "refuted",
+        "distilled",
+        "blocked",
+        "literature"
+      ]
+    },
+    "difficulty": { "type": "integer", "minimum": 1, "maximum": 5 },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "formal_targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind"],
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "lean_theorem",
+              "lean_def",
+              "counterexample",
+              "compute_cert",
+              "cheatsheet",
+              "implementation",
+              "paper"
+            ]
+          },
+          "name": { "type": "string" },
+          "path": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "attack_modes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "literature",
+          "formalize",
+          "refute",
+          "compute",
+          "distill",
+          "decompose",
+          "dual_prover"
+        ]
+      }
+    },
+    "verification": {
+      "type": "object",
+      "required": ["backend"],
+      "additionalProperties": false,
+      "properties": {
+        "backend": {
+          "type": "string",
+          "enum": [
+            "lean_axle",
+            "literature",
+            "compute",
+            "distillation_harness",
+            "hybrid"
+          ]
+        },
+        "criteria": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "risk_tier": { "type": "integer", "minimum": 1, "maximum": 3 },
+    "notes": { "type": "string" },
+    "attempts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["ts", "mode", "result"],
+        "additionalProperties": false,
+        "properties": {
+          "ts": { "type": "string" },
+          "mode": { "type": "string" },
+          "result": {
+            "type": "string",
+            "enum": [
+              "open",
+              "scaffold",
+              "partial",
+              "conditional",
+              "proved",
+              "refuted",
+              "distilled",
+              "failed",
+              "blocked",
+              "literature"
+            ]
+          },
+          "note": { "type": "string" },
+          "artifacts": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "agent": { "type": "string" }
+        }
+      }
+    },
+    "ledger_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Links into registry/theorems.json names or attestation paths"
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Higher = sooner in attack queue"
+    }
+  }
+}

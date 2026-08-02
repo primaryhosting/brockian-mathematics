@@ -1,0 +1,40 @@
+{
+  "id": "sair-program-tracker",
+  "domain": "sair",
+  "title": "SAIR.foundation program & challenge tracker",
+  "statement": "Track SAIR (Foundation for Science and AI Research) challenges and cooperative programs. AI-for-science and science-for-AI: every claim needs a verification backend.",
+  "status": "open",
+  "source": {
+    "url": "https://sair.foundation/",
+    "citation": "SAIR — Tao et al.",
+    "external_status": "open"
+  },
+  "difficulty": 2,
+  "tags": [
+    "sair",
+    "meta"
+  ],
+  "formal_targets": [
+    {
+      "kind": "paper",
+      "name": "tracker",
+      "path": null
+    }
+  ],
+  "attack_modes": [
+    "literature",
+    "decompose"
+  ],
+  "verification": {
+    "backend": "literature",
+    "criteria": [
+      "citation freshness",
+      "no auto-submit"
+    ]
+  },
+  "risk_tier": 1,
+  "notes": "Meta card: spawn child cards when new challenges launch.",
+  "attempts": [],
+  "ledger_refs": [],
+  "priority": 60
+}
