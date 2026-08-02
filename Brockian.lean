@@ -1,6 +1,7 @@
 import Brockian.Sanity
 import Brockian.NewEra
 import Brockian.Admissibility
+import Brockian.AdmissibilityDiagonal
 import Brockian.GoldbachComb
 import Brockian.SingularSeries
 import Brockian.Core
@@ -73,3 +74,5 @@ import Brockian.GoldbachCovarianceScaffold
 import Brockian.AdmissibilityCRTGeneral
 import Brockian.PentagonalTheoremFranklin
 import Brockian.GaloisMinPolyFamily
+import Brockian.RamanujanCongruence
+import Brockian.FranklinInvolution

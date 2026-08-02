@@ -6,10 +6,10 @@
 
 ## Summary
 
-- **CONDITIONAL**: 12
+- **CONDITIONAL**: 15
 - **CONJECTURE**: 1
-- **DEFINITION**: 206
-- **PROVED**: 873
+- **DEFINITION**: 213
+- **PROVED**: 892
 
 ## Theorems
 
@@ -29,6 +29,12 @@
 | PROVED | `Brockian.AdmissibilityCRTGeneral.admissible_ktuple_count_fifteen_factors` | ✓ | verified | lean-4.32.0 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityCRTGeneral.neZero_prod` | ✓ | verified | lean-4.32.0 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityCRTGeneral.pairwise_coprime_of_primes` | ✓ | verified | lean-4.32.0 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityDiagonal.admissibility_count_dichotomy` | ✓ | verified | lean-4.32.0 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.AdmissibilityDiagonal.admissibleResidues_zero_eq` | ✓ | verified | lean-4.32.0 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.AdmissibilityDiagonal.diagonal_admissibility_count` | ✓ | verified | lean-4.32.0 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.AdmissibilityDiagonal.diagonal_admissibility_count_of_eq_zero` | ✓ | verified | lean-4.32.0 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.AdmissibilityDiagonal.diagonal_count_five` | ✓ | verified | lean-4.32.0 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.AdmissibilityDiagonal.diagonal_count_three` | ✓ | verified | lean-4.32.0 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
 | DEFINITION | `Brockian.AdmissibilityKTuple.admissibleTupleResidues` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_card` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_pair` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
@@ -315,6 +321,24 @@
 | PROVED | `Brockian.Fin5InnerProduct.hermInner_smul_left` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.hermInner_smul_right` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.norm_omega` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.FranklinInvolution.FranklinData` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| CONDITIONAL | `Brockian.FranklinInvolution.franklin_of_franklinData` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinInvolution.largestPart` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolution.largestPart_mem` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolution.le_largestPart` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolution.mem_of_lt_tDiag` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolution.one_le_tDiag` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| CONDITIONAL | `Brockian.FranklinInvolution.pentagonalNumberTheorem_of_franklinData` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinInvolution.sPart` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolution.sPart_le` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolution.sPart_mem` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinInvolution.signOf` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolution.signOf_ne_zero` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolution.signedSum_eq_fixed_of_involution` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| CONDITIONAL | `Brockian.FranklinInvolution.signedSum_eq_pentCoeff_of_franklinData` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| DEFINITION | `Brockian.FranklinInvolution.tDiag` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolution.tDiag_gap_exists` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
+| PROVED | `Brockian.FranklinInvolution.tDiag_notMem` | ✓ | verified | lean-4.32.0 | roadmap #1 — Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32 |
 | PROVED | `Brockian.GaloisGeneralDegree.quadratic_iff_five_general` | ✓ | verified | lean-4.32.0 | roadmap #13 GENERAL — full why-five degree theorem for all odd primes; AXLE @4.32 |
 | PROVED | `Brockian.GaloisGeneralDegree.real_subfield_degree` | ✓ | verified | lean-4.32.0 | roadmap #13 GENERAL — full why-five degree theorem for all odd primes; AXLE @4.32 |
 | PROVED | `Brockian.GaloisMinPolyFamily.C_facts` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |
@@ -620,6 +644,11 @@
 | CONDITIONAL | `Brockian.PentagonalTheoremFranklin.pentagonalProduct_coeff_of_franklin` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
 | PROVED | `Brockian.PentagonalTheoremFranklin.prod_pstChar_eq` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
 | DEFINITION | `Brockian.PentagonalTheoremFranklin.pstChar` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
+| PROVED | `Brockian.RamanujanCongruence.coeff_partitionGF` | ✓ | verified | lean-4.32.0 | roadmap #3 — genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32 |
+| PROVED | `Brockian.RamanujanCongruence.coeff_partitionGF_zero` | ✓ | verified | lean-4.32.0 | roadmap #3 — genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32 |
+| PROVED | `Brockian.RamanujanCongruence.five_dvd_of_dissection` | ✓ | verified | lean-4.32.0 | roadmap #3 — genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32 |
+| DEFINITION | `Brockian.RamanujanCongruence.p` | ✓ | verified | lean-4.32.0 | roadmap #3 — genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32 |
+| DEFINITION | `Brockian.RamanujanCongruence.partitionGF` | ✓ | verified | lean-4.32.0 | roadmap #3 — genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32 |
 | DEFINITION | `Brockian.RiemannScaffold.BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannScaffold.Gammaℝ_ne_zero_of_nontrivial` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | CONDITIONAL | `Brockian.RiemannScaffold.RH_of_BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |

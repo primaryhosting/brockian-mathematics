@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 873,
-    "DEFINITION": 206,
-    "CONDITIONAL": 12,
+    "PROVED": 892,
+    "DEFINITION": 213,
+    "CONDITIONAL": 15,
     "CONJECTURE": 1
   },
   "theorems": [
@@ -450,6 +450,198 @@
       "quarantine": true,
       "ledger_run": "roadmap #14 iterated \u2014 multi-factor CRT admissible count; AXLE @4.32",
       "provenance_note": "Iterated multi-factor CRT admissible count prod_i (q_i - |H_i|) over pairwise-coprime moduli via ZMod.prodEquivPi; pi-count over product space; singular-series prime product prod (p_i - |H_i|) for distinct primes; concrete mod-15 = (3-2)(5-3)=2. Exact finite COUNT only. NOT proved: HL admissibility criterion, analytic singular series (infinite product/convergence/density)."
+    },
+    {
+      "name": "Brockian.AdmissibilityDiagonal.admissibility_count_dichotomy",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityDiagonal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityDiagonal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "Divisible-case diagonal admissibility count (g=0 mod q -> q-1 configs). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.AdmissibilityDiagonal.admissibleResidues_zero_eq",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityDiagonal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityDiagonal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "Divisible-case diagonal admissibility count (g=0 mod q -> q-1 configs). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.AdmissibilityDiagonal.diagonal_admissibility_count",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityDiagonal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityDiagonal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "Divisible-case diagonal admissibility count (g=0 mod q -> q-1 configs). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.AdmissibilityDiagonal.diagonal_admissibility_count_of_eq_zero",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityDiagonal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityDiagonal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "Divisible-case diagonal admissibility count (g=0 mod q -> q-1 configs). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.AdmissibilityDiagonal.diagonal_count_five",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityDiagonal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityDiagonal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "Divisible-case diagonal admissibility count (g=0 mod q -> q-1 configs). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+    },
+    {
+      "name": "Brockian.AdmissibilityDiagonal.diagonal_count_three",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityDiagonal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityDiagonal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence",
+      "provenance_note": "Divisible-case diagonal admissibility count (g=0 mod q -> q-1 configs). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
     },
     {
       "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues",
@@ -9407,6 +9599,562 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.FranklinInvolution.FranklinData",
+      "kind": "def",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.franklin_of_franklinData",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "literature",
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.largestPart",
+      "kind": "def",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.largestPart_mem",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.le_largestPart",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.mem_of_lt_tDiag",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.one_le_tDiag",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.pentagonalNumberTheorem_of_franklinData",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "literature",
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.sPart",
+      "kind": "def",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.sPart_le",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.sPart_mem",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.signOf",
+      "kind": "def",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.signOf_ne_zero",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.signedSum_eq_fixed_of_involution",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.signedSum_eq_pentCoeff_of_franklinData",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": "literature",
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.tDiag",
+      "kind": "def",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.tDiag_gap_exists",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
+    },
+    {
+      "name": "Brockian.FranklinInvolution.tDiag_notMem",
+      "kind": "theorem",
+      "module": "Brockian.FranklinInvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FranklinInvolution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Franklin cancellation heart proved; PST reduced to explicit involution data; AXLE @4.32",
+      "provenance_note": "Proves Franklin's cancellation ENGINE (signedSum_eq_fixed_of_involution via Finset.sum_involution) + the s(p)/t(p)/largest-part statistics unconditionally, shrinking hFranklin to the strictly-sharper structure FranklinData (an explicit sign-reversing Nat.Partition involution + fixed-set=pentagonal-staircases). PST conditioned on (forall m, FranklinData m) \u2014 a real reduction, NOT equivalent to the conclusion, NOT ex-falso. Residual = constructing the involution map (Multiset surgery, Mathlib-absent)."
     },
     {
       "name": "Brockian.GaloisGeneralDegree.quadratic_iff_five_general",
@@ -18953,6 +19701,156 @@
       "quarantine": true,
       "ledger_run": "roadmap harvest \u2014 Euler PST reduced to Franklin involution; AXLE @4.32",
       "provenance_note": "Fully proves the Euler-product side: genFun_pstChar_eq_prod = prod(1-X^n) in Z[[X]], coeff_genFun_pstChar (coefficient = signed distinct-partition count via Mathlib Partition.GenFun), pstChar character product, pentagonal bridge to PentagonalPartition.pent. The full pentagonal number theorem is CONDITIONAL on the single named hypothesis hFranklin (Franklin sign-reversing involution \u2014 true, classical, Mathlib-absent), theorems honestly suffixed _of_franklin. NOT ex-falso: hFranklin is satisfiable/true."
+    },
+    {
+      "name": "Brockian.RamanujanCongruence.coeff_partitionGF",
+      "kind": "theorem",
+      "module": "Brockian.RamanujanCongruence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RamanujanCongruence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32",
+      "provenance_note": "Genuine unconditional content only: coeff_partitionGF proves Mathlib's genFun at the all-ones character equals sum p(n)X^n (partition-count bridge), p(0)=1, a reusable divisibility lemma. The Ramanujan congruence p(5n+4)=0 mod 5 is documented OPEN (NO theorem, NO fronting hypothesis) \u2014 Mathlib lacks Frobenius congruence, Jacobi \u220f(1-X^n)^3, the 5-dissection, and reciprocal-series-mod-5. The self-equivalent conditional was removed as modus-ponens theater."
+    },
+    {
+      "name": "Brockian.RamanujanCongruence.coeff_partitionGF_zero",
+      "kind": "theorem",
+      "module": "Brockian.RamanujanCongruence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RamanujanCongruence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32",
+      "provenance_note": "Genuine unconditional content only: coeff_partitionGF proves Mathlib's genFun at the all-ones character equals sum p(n)X^n (partition-count bridge), p(0)=1, a reusable divisibility lemma. The Ramanujan congruence p(5n+4)=0 mod 5 is documented OPEN (NO theorem, NO fronting hypothesis) \u2014 Mathlib lacks Frobenius congruence, Jacobi \u220f(1-X^n)^3, the 5-dissection, and reciprocal-series-mod-5. The self-equivalent conditional was removed as modus-ponens theater."
+    },
+    {
+      "name": "Brockian.RamanujanCongruence.five_dvd_of_dissection",
+      "kind": "theorem",
+      "module": "Brockian.RamanujanCongruence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RamanujanCongruence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32",
+      "provenance_note": "Genuine unconditional content only: coeff_partitionGF proves Mathlib's genFun at the all-ones character equals sum p(n)X^n (partition-count bridge), p(0)=1, a reusable divisibility lemma. The Ramanujan congruence p(5n+4)=0 mod 5 is documented OPEN (NO theorem, NO fronting hypothesis) \u2014 Mathlib lacks Frobenius congruence, Jacobi \u220f(1-X^n)^3, the 5-dissection, and reciprocal-series-mod-5. The self-equivalent conditional was removed as modus-ponens theater."
+    },
+    {
+      "name": "Brockian.RamanujanCongruence.p",
+      "kind": "def",
+      "module": "Brockian.RamanujanCongruence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RamanujanCongruence.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32",
+      "provenance_note": "Genuine unconditional content only: coeff_partitionGF proves Mathlib's genFun at the all-ones character equals sum p(n)X^n (partition-count bridge), p(0)=1, a reusable divisibility lemma. The Ramanujan congruence p(5n+4)=0 mod 5 is documented OPEN (NO theorem, NO fronting hypothesis) \u2014 Mathlib lacks Frobenius congruence, Jacobi \u220f(1-X^n)^3, the 5-dissection, and reciprocal-series-mod-5. The self-equivalent conditional was removed as modus-ponens theater."
+    },
+    {
+      "name": "Brockian.RamanujanCongruence.partitionGF",
+      "kind": "def",
+      "module": "Brockian.RamanujanCongruence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RamanujanCongruence.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #3 \u2014 genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32",
+      "provenance_note": "Genuine unconditional content only: coeff_partitionGF proves Mathlib's genFun at the all-ones character equals sum p(n)X^n (partition-count bridge), p(0)=1, a reusable divisibility lemma. The Ramanujan congruence p(5n+4)=0 mod 5 is documented OPEN (NO theorem, NO fronting hypothesis) \u2014 Mathlib lacks Frobenius congruence, Jacobi \u220f(1-X^n)^3, the 5-dissection, and reciprocal-series-mod-5. The self-equivalent conditional was removed as modus-ponens theater."
     },
     {
       "name": "Brockian.RiemannScaffold.BrockianSystem",
