@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 316
+- **DEFINITION**: 321
 - **DISCHARGED**: 6
-- **PROVED**: 1626
+- **PROVED**: 1644
 
 ## Theorems
 
@@ -832,6 +832,29 @@
 | PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_four` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
 | PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_of_count_pos` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
 | PROVED | `Brockian.GoldbachSchema.hasGoldbachRep_six` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — spectral-model ⇒ Goldbach implication (schema) |
+| DEFINITION | `Brockian.GoldbachSelectionRule.admissibleUnits` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.admissibleUnits_card` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.admissibleUnits_card_totient` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.admissibleUnits_eq_sdiff` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.admissibleUnits_reflection_eq_residues` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.admissibleUnits_translation_eq_residues` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.admissible_card_dihedral` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.admissible_reflection_card` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.admissible_translation_card` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.admissible_translation_matches_dichotomy` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| DEFINITION | `Brockian.GoldbachSelectionRule.gapPairs` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.gapPairs_card` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.gap_pairs_eq_translation_admissible` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| DEFINITION | `Brockian.GoldbachSelectionRule.goldbachPairs` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.goldbachPairs_card` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.goldbach_pairs_eq_reflection_admissible` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.mem_admissibleUnits_iff` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| DEFINITION | `Brockian.GoldbachSelectionRule.reflection` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.reflection_eq_dihedral` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.sigma_card` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| DEFINITION | `Brockian.GoldbachSelectionRule.translation` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.translation_eq_dihedral` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldbachSelectionRule.units_card` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
 | PROVED | `Brockian.GoldenUniqueness.C5_membership_layer` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.algebraic_connectivity_C5_eq` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.algebraic_connectivity_C5_props` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
