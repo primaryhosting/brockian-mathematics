@@ -8,8 +8,8 @@
 
 - **CONDITIONAL**: 12
 - **CONJECTURE**: 1
-- **DEFINITION**: 201
-- **PROVED**: 804
+- **DEFINITION**: 205
+- **PROVED**: 863
 
 ## Theorems
 
@@ -299,6 +299,22 @@
 | CONDITIONAL | `Brockian.Equidistribution.equidistribution_of_asymptotic_exists` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | PROVED | `Brockian.Equidistribution.prime_pair_config_admissible` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | DEFINITION | `Brockian.Equidistribution.totalConfigCount` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
+| PROVED | `Brockian.Fin5InnerProduct.conj_omega` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Fin5InnerProduct.conj_omegaPow` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Fin5InnerProduct.conj_omega_pow` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Fin5InnerProduct.eigenmode_orthogonal` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Fin5InnerProduct.hermInner` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Fin5InnerProduct.hermInner_add_left` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Fin5InnerProduct.hermInner_add_right` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Fin5InnerProduct.hermInner_conj_symm` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Fin5InnerProduct.hermInner_eigenmode` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Fin5InnerProduct.hermInner_eigenmode_self` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Fin5InnerProduct.hermInner_eigenmode_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Fin5InnerProduct.hermInner_self` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Fin5InnerProduct.hermInner_self_eq_zero_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Fin5InnerProduct.hermInner_smul_left` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Fin5InnerProduct.hermInner_smul_right` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Fin5InnerProduct.norm_omega` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.GaloisGeneralDegree.quadratic_iff_five_general` | ✓ | verified | lean-4.32.0 | roadmap #13 GENERAL — full why-five degree theorem for all odd primes; AXLE @4.32 |
 | PROVED | `Brockian.GaloisGeneralDegree.real_subfield_degree` | ✓ | verified | lean-4.32.0 | roadmap #13 GENERAL — full why-five degree theorem for all odd primes; AXLE @4.32 |
 | DEFINITION | `Brockian.GaloisWhyFive.P7` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
@@ -345,6 +361,43 @@
 | DEFINITION | `Brockian.Goldbach.CovarianceScaffold.scaledK23Excess` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.CovarianceScaffold.scaledK23Excess_pos_iff` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.CovarianceScaffold.singular_series_finite_goldbachPairTuple_pos_of_even` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Goldbach.LocalWheel.K23` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.K23_above_even_nonthree_baseline_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.K23_aligned_gt_baseline` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.K23_eq` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.K23_eq_nine_quarters_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.K23_excess_nonneg_of_even` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.K23_excess_pos_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.K23_le_nine_quarters` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.K23_nonneg` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.K23_of_not_two_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.K23_of_two_dvd_not_three_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.K23_of_two_dvd_three_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.K23_pos_iff_two_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.Kp_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.Kp_five_of_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.Kp_five_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.Kp_seven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.Kp_seven_of_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.Kp_seven_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.Kp_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.Kp_three_aligned_gt_misaligned` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.Kp_three_gt_one_iff` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.Kp_three_of_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.Kp_three_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.gCount_seven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.gCount_seven_of_ne_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.gCount_seven_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.gCount_three` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.gCount_three_eq_gResidues_card` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.gCount_three_of_ne_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.gCount_three_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.gResidues_three_card` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.local_covariance_three_ne_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.local_covariance_three_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.local_covariance_three_zero_gt_ne_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.local_covariance_two_ne_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.LocalWheel.local_covariance_two_zero` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.Parity.Kp_two` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
 | PROVED | `Brockian.Goldbach.Parity.Kp_two_of_dvd` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
 | PROVED | `Brockian.Goldbach.Parity.Kp_two_of_not_dvd` | ✓ | verified | lean-4.32.0 | Goldbach parity rung — elementary unconditional facts; AXLE @4.32 |
@@ -1020,6 +1073,16 @@
 | PROVED | `Brockian.Weyl.SchrodingerMinimal.schwartzToL2_injective` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
 | PROVED | `Brockian.Weyl.SchrodingerMinimal.schwartz_ibp1` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
 | PROVED | `Brockian.Weyl.SchrodingerMinimal.schwartz_ibp2` | ✓ | verified | lean-4.32.0 | roadmap #3 — concrete T=-d²/dx²+V on L²(ℝ); AXLE @4.32 AND @4.28 |
+| DEFINITION | `Brockian.Weyl.SymmetryPackage.SymmetricRealSpectrum` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SymmetryPackage.eigenvalue_im_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SymmetryPackage.injective_of_im_ne_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SymmetryPackage.norm_sub_smul_ge` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SymmetryPackage.not_eigenvalue_of_im_ne_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SymmetryPackage.quadratic_form_im_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SymmetryPackage.smulPMap_isSymmetric` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SymmetryPackage.smulPMap_not_eigenvalue_of_im_ne_zero` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SymmetryPackage.smulPMap_quadratic_form_im_zero` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.SymmetryPackage.symmetricRealSpectrum` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityScaffold.ClassicalL2Representative` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityScaffold.H2` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityScaffold.WeakRegularityPipelineStatus` | ✓ | verified | lean-4.32.0 |  |
