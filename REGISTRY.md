@@ -10,7 +10,7 @@
 - **CONJECTURE**: 1
 - **DEFINITION**: 335
 - **DISCHARGED**: 6
-- **PROVED**: 1832
+- **PROVED**: 1835
 
 ## Theorems
 
@@ -964,6 +964,8 @@
 | DEFINITION | `Brockian.GoldbachSelectionRule.translation` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
 | PROVED | `Brockian.GoldbachSelectionRule.translation_eq_dihedral` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
 | PROVED | `Brockian.GoldbachSelectionRule.units_card` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
+| PROVED | `Brockian.GoldenDivisibility.golden_in_cycleSpectrum_iff_five_dvd` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
+| PROVED | `Brockian.GoldenDivisibility.golden_unique_to_five_recovered` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
 | PROVED | `Brockian.GoldenUniqueness.C5_membership_layer` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.algebraic_connectivity_C5_eq` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.algebraic_connectivity_C5_props` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
@@ -1133,6 +1135,7 @@
 | DEFINITION | `Brockian.Penrose.zeta5` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
 | PROVED | `Brockian.Penrose.zeta5_norm` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
 | PROVED | `Brockian.Penrose.zeta5_pow_five` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.PentagonGrandEquivalence.pentagon_grand_equivalence` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
 | DEFINITION | `Brockian.PentagonIsotypic.adjEigenvalue` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
 | PROVED | `Brockian.PentagonIsotypic.adjEigenvalue_eq_two_cos` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
 | PROVED | `Brockian.PentagonIsotypic.adjEigenvalue_four` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |

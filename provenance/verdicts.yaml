@@ -572,6 +572,20 @@ runs:
     ledger_run: "Aristotle/Harmonic close; AXLE @4.32"
     provenance_note: "Bounded-case Kato-Rellich (Aristotle/Harmonic close, independently AXLE-verified @4.32, axiom-clean): sum of two bounded self-adjoint operators is self-adjoint; a non-real scalar shift of that sum has full (hence dense) range -- the range-density input the essential-self-adjointness criterion consumes. Abstract/general with inlined hypotheses; the BOUNDED case only. Does NOT by itself discharge Gate 1 for the UNBOUNDED Brockian Schrodinger operator -- it is the bounded operator-theory link on the -Delta+V route."
 
+  "golden-divisibility-law":
+    module: Brockian.GoldenDivisibility
+    verdict: admit
+    quarantine: true
+    ledger_run: "swarm capstone; AXLE @4.32"
+    provenance_note: "The Golden Divisibility Law: for every n>=1, phi-1 is an adjacency eigenvalue of the cycle C_n IFF 5 divides n (full iff, both directions). Generalizes the prime uniqueness theorem golden_unique_to_five (5|p forces p=5) to ALL cycles: the pentagon n=5 is the smallest, every fifth cycle inherits the golden mode. Forward reuses the cos_eq_cos_iff -> 5k=n(5m+-1) -> 5|n chain (no primality); backward uses the k=j witness at n=5j. Corollary golden_unique_to_five_recovered specializes back to the prime case. AXLE @4.32, axiom-clean."
+
+  "pentagon-grand-equivalence":
+    module: Brockian.PentagonGrandEquivalence
+    verdict: admit
+    quarantine: true
+    ledger_run: "swarm capstone; AXLE @4.32"
+    provenance_note: "The Grand Pentagon Equivalence: for a prime p, a 4-way List.TFAE proving p=5 <=> (phi-1 in spec C_p, spectral) <=> (minpoly of 2cos(2pi/p) over Q has degree 2, i.e. the real cyclotomic field is quadratic, Galois) <=> (2cos(2pi/p)=phi-1, trigonometric). Unifies four independent proofs that 'five is special' into one theorem via the hub p=5, routing through golden_unique_to_five, real_subfield_degree, two_cos_two_pi_div_five_eq_golden_sub_one, mem_cycleSpectrum. p=2 edge dispatched (alpha_2=-2 rational, degree 1). AXLE @4.32, axiom-clean."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────
   "weyl-gate1-bounded":

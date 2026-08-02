@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1832,
+    "PROVED": 1835,
     "DEFINITION": 335,
     "CONDITIONAL": 21,
     "DISCHARGED": 6,
@@ -30703,6 +30703,72 @@
       "provenance_note": "THE UNIFICATION (paper Thm 2.5): for any perm f of ZMod m, |admissibleUnits f| = m-1 if f 0 = 0 else m-2 (admissibleUnits_card, general prime m, real reasoning: univ minus {0, f^-1 0}, coincide iff f 0 = 0); admissible_card_dihedral across the affine group Sigma = D_m. Gap law (translation) and Goldbach law (reflection) proved to be its two restrictions (gap_pairs_eq_translation_admissible / goldbach_pairs_eq_reflection_admissible); m=5 concrete tables by decide. Rmk 2.6: phi(m)-[f0!=0]. Reuses AffineSymmetry/Admissibility/AdmissibilityDiagonal, no dup. The 4/3 asymptotic (Thm 3.1) is NOT claimed (conditional-on-HL, documented). Goldbach untouched."
     },
     {
+      "name": "Brockian.GoldenDivisibility.golden_in_cycleSpectrum_iff_five_dvd",
+      "kind": "theorem",
+      "module": "Brockian.GoldenDivisibility",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldenDivisibility.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "The Golden Divisibility Law: for every n>=1, phi-1 is an adjacency eigenvalue of the cycle C_n IFF 5 divides n (full iff, both directions). Generalizes the prime uniqueness theorem golden_unique_to_five (5|p forces p=5) to ALL cycles: the pentagon n=5 is the smallest, every fifth cycle inherits the golden mode. Forward reuses the cos_eq_cos_iff -> 5k=n(5m+-1) -> 5|n chain (no primality); backward uses the k=j witness at n=5j. Corollary golden_unique_to_five_recovered specializes back to the prime case. AXLE @4.32, axiom-clean."
+    },
+    {
+      "name": "Brockian.GoldenDivisibility.golden_unique_to_five_recovered",
+      "kind": "theorem",
+      "module": "Brockian.GoldenDivisibility",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldenDivisibility.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "The Golden Divisibility Law: for every n>=1, phi-1 is an adjacency eigenvalue of the cycle C_n IFF 5 divides n (full iff, both directions). Generalizes the prime uniqueness theorem golden_unique_to_five (5|p forces p=5) to ALL cycles: the pentagon n=5 is the smallest, every fifth cycle inherits the golden mode. Forward reuses the cos_eq_cos_iff -> 5k=n(5m+-1) -> 5|n chain (no primality); backward uses the k=j witness at n=5j. Corollary golden_unique_to_five_recovered specializes back to the prime case. AXLE @4.32, axiom-clean."
+    },
+    {
       "name": "Brockian.GoldenUniqueness.C5_membership_layer",
       "kind": "theorem",
       "module": "Brockian.GoldenUniqueness",
@@ -36170,6 +36236,39 @@
       "quarantine": true,
       "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
       "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.PentagonGrandEquivalence.pentagon_grand_equivalence",
+      "kind": "theorem",
+      "module": "Brockian.PentagonGrandEquivalence",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonGrandEquivalence.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "The Grand Pentagon Equivalence: for a prime p, a 4-way List.TFAE proving p=5 <=> (phi-1 in spec C_p, spectral) <=> (minpoly of 2cos(2pi/p) over Q has degree 2, i.e. the real cyclotomic field is quadratic, Galois) <=> (2cos(2pi/p)=phi-1, trigonometric). Unifies four independent proofs that 'five is special' into one theorem via the hub p=5, routing through golden_unique_to_five, real_subfield_degree, two_cos_two_pi_div_five_eq_golden_sub_one, mem_cycleSpectrum. p=2 edge dispatched (alpha_2=-2 rational, degree 1). AXLE @4.32, axiom-clean."
     },
     {
       "name": "Brockian.PentagonIsotypic.adjEigenvalue",

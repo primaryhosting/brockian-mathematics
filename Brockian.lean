@@ -143,3 +143,5 @@ import Brockian.ErdosPinnedLemmas
 import Brockian.PartitionRecurrence
 import Brockian.D5CharacterComplete
 import Brockian.KatoBounded
+import Brockian.GoldenDivisibility
+import Brockian.PentagonGrandEquivalence
