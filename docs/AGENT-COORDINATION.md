@@ -396,3 +396,19 @@ keep boundedv-continuous.)
   Aristotle c6a46c07 (bridge-deficiency) STILL 500 on download (Harmonic API outage, unretrievable);
   2204b385 (boundedv-continuous) status per list above. Next open frontier for whoever's free:
   confining⇒discrete-spectrum (Rellich, #6), general multi-factor CRT admissibility, full PST (Franklin).
+
+- 2026-08-01 — **Claude swarm #6 launched** (AXLE @4.32 gate; new files only; each cleanly extends a
+  Claude-owned module — NO overlap with Grok/Codex Weyl/Goldbach/equidistribution scaffolds in flight
+  [WeylFourierMultiplier, WeylKatoRangeDensity, WeylWeakRegularityScaffold, GoldbachCovarianceScaffold,
+  EquidistributionFiniteScaffold] or C5SpectralMultiplicities finrank work). Claims:
+  - `Brockian/AdmissibilityCRTGeneral.lean` — iterated multi-factor CRT admissible count
+    `∏ᵢ (qᵢ − |Hᵢ|)` over arbitrary pairwise-coprime moduli (extends AdmissibilityKTuple + AdmissibilityCRT
+    beyond the 2-factor lift). Imports AdmissibilityKTuple/AdmissibilityCRT only.
+  - `Brockian/GaloisMinPolyFamily.lean` — explicit minimal polynomial of 2cos(2π/p): the monic integer
+    polynomial of degree (p−1)/2 (Ψ_p / real-cyclotomic, Chebyshev-related) = minpoly ℚ (spectralGen p);
+    generalizes the concrete Q5=X²+X−1, P7=X³+X²−2X−1 in GaloisWhyFive. Imports GaloisGeneralDegree/GaloisWhyFive/Spectral only.
+  - `Brockian/PentagonalTheoremFranklin.lean` — attempt the full Euler pentagonal number theorem
+    (Franklin involution) or the p(n) pentagonal recurrence; honest partial expected (Mathlib-absent).
+    Imports PentagonalPartition only.
+  Do NOT touch those files or Admissibility*/Galois*/Pentagonal* internals (extend by import only).
+  Pipeline each: hole-free → no_theater_lint → AXLE check @lean-4.32.0 → attestation only if module_verified.
