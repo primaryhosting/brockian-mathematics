@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 306
+- **DEFINITION**: 309
 - **DISCHARGED**: 6
-- **PROVED**: 1477
+- **PROVED**: 1487
 
 ## Theorems
 
@@ -1556,6 +1556,12 @@
 | PROVED | `Brockian.Weyl.KatoRellichTransfer.essentiallySelfAdjoint_perturb_of_resolvent_norm_mul_lt_one_via_chain` | ✓ | verified | lean-4.32.0 | roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.KatoRellichTransfer.perturbed_ranges_eq_univ_of_resolvent_norm_lt_one` | ✓ | verified | lean-4.32.0 | roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.KatoRellichTransfer.perturbed_ranges_eq_univ_of_resolvent_norm_mul_lt_one` | ✓ | verified | lean-4.32.0 | roadmap A4 — Kato/Rellich Neumann transfer; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.KatoResolventConstruction.UnitShiftRightResolvents` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoResolventConstruction.boundedPerturbationTransfer_of_unitShiftRightResolvents_norm_lt_one` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoResolventConstruction.essentiallySelfAdjoint_perturb_of_unitShiftRightResolvents_norm_lt_one` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoResolventConstruction.essentiallySelfAdjoint_perturb_of_unitShiftRightResolvents_norm_lt_one_via_chain` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoResolventConstruction.norm_mul_Radd_lt_one_of_unitShiftRightResolvents` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoResolventConstruction.norm_mul_Rsub_lt_one_of_unitShiftRightResolvents` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.KatoResolventPackage.ResolventAtI` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.KatoResolventPackage.ResolventAtI.boundedPerturbationTransfer` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.KatoResolventPackage.ResolventAtI.norm_mul_add_lt_one` | ✓ | verified | lean-4.32.0 |  |
@@ -1780,6 +1786,13 @@
 | PROVED | `Brockian.WeylWeakPrimitiveClassical.weakToPrimitiveRegularity_of_continuous_bounded_of_weakSolutionVanishing` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.WeylWeakPrimitiveClassical.weakToPrimitiveRegularity_of_distributionalPrimitiveIdentity` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.WeylWeakPrimitiveClassical.weakToPrimitiveRegularity_of_weakSolutionVanishing` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakPrimitiveLocal.DistributionalPrimitiveHypothesis` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakPrimitiveLocal.DistributionalPrimitiveIdentity` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakPrimitiveLocal.primitiveModel_of_distributionalPrimitiveIdentity` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakPrimitiveLocal.primitiveModel_y_eq_coe_of_canonical_continuous` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakPrimitiveLocal.schrodinger_essentiallySelfAdjoint_of_distributional_primitives` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakPrimitiveLocal.weakToIntegralRegularity_of_distributional_primitives` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakPrimitiveLocal.weakToPrimitiveRegularity_of_distributional_primitives` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityCore.IntegralSchrodingerModel` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityCore.WeakRegularityCoreStatus` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityCore.WeakToIntegralRegularity` | ✓ | verified | lean-4.32.0 |  |

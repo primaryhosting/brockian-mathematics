@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-02T16:35:30Z",
+  "generated_at": "2026-08-02T16:55:12Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 1477,
-      "DEFINITION": 306,
+      "PROVED": 1482,
+      "DEFINITION": 308,
       "CONDITIONAL": 21,
       "DISCHARGED": 6,
       "CONJECTURE": 1
@@ -26,8 +26,8 @@
       "definition": 1
     },
     "registry": {
-      "PROVED": 1477,
-      "DEFINITION": 306,
+      "PROVED": 1482,
+      "DEFINITION": 308,
       "CONDITIONAL": 21,
       "DISCHARGED": 6,
       "CONJECTURE": 1
@@ -24205,6 +24205,83 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/WeylWeakPrimitiveClassical.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveLocal.DistributionalPrimitiveHypothesis",
+      "module": "Brockian.WeylWeakPrimitiveLocal",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/WeylWeakPrimitiveLocal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveLocal.DistributionalPrimitiveIdentity",
+      "module": "Brockian.WeylWeakPrimitiveLocal",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/WeylWeakPrimitiveLocal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveLocal.primitiveModel_of_distributionalPrimitiveIdentity",
+      "module": "Brockian.WeylWeakPrimitiveLocal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakPrimitiveLocal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveLocal.primitiveModel_y_eq_coe_of_canonical_continuous",
+      "module": "Brockian.WeylWeakPrimitiveLocal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakPrimitiveLocal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveLocal.schrodinger_essentiallySelfAdjoint_of_distributional_primitives",
+      "module": "Brockian.WeylWeakPrimitiveLocal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakPrimitiveLocal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveLocal.weakToIntegralRegularity_of_distributional_primitives",
+      "module": "Brockian.WeylWeakPrimitiveLocal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakPrimitiveLocal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveLocal.weakToPrimitiveRegularity_of_distributional_primitives",
+      "module": "Brockian.WeylWeakPrimitiveLocal",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakPrimitiveLocal.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"

@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1477,
-    "DEFINITION": 306,
+    "PROVED": 1487,
+    "DEFINITION": 309,
     "CONDITIONAL": 21,
     "DISCHARGED": 6,
     "CONJECTURE": 1
@@ -49891,6 +49891,200 @@
       "provenance_note": "Right resolvents for T\u00b1i plus Neumann-small bounded factors (or product estimates \u2016B\u2016\u2016R\u00b1\u2016<1) give full shifted perturbed ranges, BoundedPerturbationTransfer, and EssentiallySelfAdjoint(perturb T B). This is a real transfer theorem, but not the unconditional Kato-Rellich theorem: constructing closure resolvents and their bounds remains Mathlib-infra work."
     },
     {
+      "name": "Brockian.Weyl.KatoResolventConstruction.UnitShiftRightResolvents",
+      "kind": "def",
+      "module": "Brockian.Weyl.KatoResolventConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoResolventConstruction.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventConstruction.boundedPerturbationTransfer_of_unitShiftRightResolvents_norm_lt_one",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoResolventConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoResolventConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventConstruction.essentiallySelfAdjoint_perturb_of_unitShiftRightResolvents_norm_lt_one",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoResolventConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoResolventConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventConstruction.essentiallySelfAdjoint_perturb_of_unitShiftRightResolvents_norm_lt_one_via_chain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoResolventConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoResolventConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventConstruction.norm_mul_Radd_lt_one_of_unitShiftRightResolvents",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoResolventConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoResolventConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventConstruction.norm_mul_Rsub_lt_one_of_unitShiftRightResolvents",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoResolventConstruction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KatoResolventConstruction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.Weyl.KatoResolventPackage.ResolventAtI",
       "kind": "def",
       "module": "Brockian.Weyl.KatoResolventPackage",
@@ -56996,6 +57190,229 @@
       "statement": "",
       "source": {
         "file": "Brockian/WeylWeakPrimitiveClassical.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveLocal.DistributionalPrimitiveHypothesis",
+      "kind": "def",
+      "module": "Brockian.WeylWeakPrimitiveLocal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveLocal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveLocal.DistributionalPrimitiveIdentity",
+      "kind": "def",
+      "module": "Brockian.WeylWeakPrimitiveLocal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveLocal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveLocal.primitiveModel_of_distributionalPrimitiveIdentity",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakPrimitiveLocal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveLocal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveLocal.primitiveModel_y_eq_coe_of_canonical_continuous",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakPrimitiveLocal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveLocal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveLocal.schrodinger_essentiallySelfAdjoint_of_distributional_primitives",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakPrimitiveLocal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveLocal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveLocal.weakToIntegralRegularity_of_distributional_primitives",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakPrimitiveLocal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveLocal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylWeakPrimitiveLocal.weakToPrimitiveRegularity_of_distributional_primitives",
+      "kind": "theorem",
+      "module": "Brockian.WeylWeakPrimitiveLocal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeakPrimitiveLocal.lean"
       },
       "register": "PROVED",
       "axioms": [

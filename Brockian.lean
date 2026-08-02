@@ -86,11 +86,13 @@ import Brockian.WeylWeakRegularityScaffold
 import Brockian.WeylWeakRegularityCore
 import Brockian.WeylWeakRegularityDischarge
 import Brockian.WeylWeakPrimitiveClassical
+import Brockian.WeylWeakPrimitiveLocal
 import Brockian.WeylPlancherelScaffold
 import Brockian.WeylKatoRellichScaffold
 import Brockian.WeylKatoNeumann
 import Brockian.WeylKatoNeumannEstimates
 import Brockian.WeylKatoRellichTransfer
+import Brockian.WeylKatoResolventConstruction
 import Brockian.WeylKatoResolventPackage
 import Brockian.WeylResolventFromESA
 import Brockian.RiemannXiSymmetry
