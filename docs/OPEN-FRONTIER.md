@@ -555,6 +555,22 @@ perfect number. Open. Module: `Brockian.OreHarmonicNumbers`. `OddHarmonicExists`
 
 ---
 
+## Erdős Problem #320 — spectral completion (open; unconditional analytic core proved)
+
+**Claim.** Erdős #320 (a spectral/completion problem) is approached in the manuscript "A Spectral
+Completion" (C. Brock) via a reduction whose downstream steps are all *conditional* on named
+conjectures. Erdős #320 itself remains **OPEN**. Module: `Brockian.Erdos320`.
+
+**PROVED (the one unconditional link).** Lemma 3.1's load-bearing real-inequality chain: for
+0 ≤ t ≤ 1/2,  0 ≤ −log(1−t) ≤ t/(1−t) ≤ 2t, giving the loss bound 0 ≤ L(N) ≤ 2·E(N)
+(`neg_log_one_sub_nonneg`, `neg_log_one_sub_le_div`, `neg_log_one_sub_le_two_mul`,
+`log_ratio_bounds`, `step_loss_bounds`; all axiom-clean, AXLE @4.32). This is the exact step that must
+hold with no hypotheses — everything else in the paper is explicitly conditional.
+
+**OPEN.** Erdős #320 itself, and every step of the paper that rests on its named conjectures.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:
