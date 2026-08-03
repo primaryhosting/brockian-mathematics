@@ -58,6 +58,13 @@ Next non-colliding split: **Codex** → confining-potential form and compact-res
   `docs/partner/claude-issue-closed-range-closure.md` (`module_verified:false`, **sorryAx**  
   on closed-range thm; bad `hz` simp on unit-shift wrapper).
 
+
+### Grok overnight (2026-08-02/03 wave1)
+
+- Gaps **102–130** + Cos **p=43/47/53** + K₂×**37/41** — all AXLE green.
+- Wave generator: `scripts/overnight_corpus_wave.py`
+- 15m durable scheduler active for next ~7h.
+
 ### Grok claim (append 2026-08-02 — EPIC STRIKE)
 
 - **Century corpus:** Gaps **72–100** (`7280`/`8290`/`92100`), Cos **p=31/37/41**,  
