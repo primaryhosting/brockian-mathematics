@@ -30,6 +30,7 @@ claim is not backed.
 | `useVerified.ts` | Hook: resolves a theorem name → certificate record or `null`. Tries `GET /api/verified/search?name=…`, falls back to the static JSON. Memoized. |
 | `VerifiedClaim.tsx` | Component: renders the certificate badge or the BLOCKED state. |
 | `manifest.schema.json` | JSON Schema for a lab manifest binding claims → theorem names. |
+| `labs/riemann-gate1-operator.manifest.json` | Gate-1 operator results, the non-confining obstruction, and the conditional RH boundary. |
 
 ## Regenerating the public registry
 
@@ -43,6 +44,17 @@ python3 scripts/export_public_registry.py
 
 Re-run it whenever `registry/theorems.json` changes, and republish the resulting
 `verified-registry.json` with the site.
+
+Validate every lab binding before deployment:
+
+```bash
+python3 scripts/validate_manifests.py
+```
+
+The Riemann operator manifest deliberately includes one `CONDITIONAL` theorem.
+It must render as an open, non-green state. The bounded-potential
+essential-self-adjointness results are verified; the spectral correspondence
+needed for RH is not.
 
 ## Dropping these into the torus Lovable project
 

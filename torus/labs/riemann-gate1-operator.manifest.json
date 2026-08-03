@@ -1,0 +1,38 @@
+{
+  "labId": "riemann-gate1-operator",
+  "title": "Riemann Operator Program - Gate 1",
+  "description": "The verified essential-self-adjointness layer of the Brockian operator program, together with the precise spectral-shape obstruction and the still-open RH boundary. Verified results render green; the RH implication renders as an honest conditional state.",
+  "registrySchema": "brockian-public-verified-registry/v1",
+  "claims": [
+    {
+      "claim": "A bounded self-adjoint perturbation preserves essential self-adjointness of a densely defined symmetric operator.",
+      "theorem": "Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation",
+      "visualRef": "kato-rellich"
+    },
+    {
+      "claim": "For every continuous bounded real potential V, the concrete one-dimensional Schwartz-core Schrodinger operator is essentially self-adjoint via Kato-Rellich.",
+      "theorem": "Brockian.Weyl.KatoConcreteApplication.schrodinger_essentiallySelfAdjoint_via_kato_rellich",
+      "visualRef": "gate1-concrete"
+    },
+    {
+      "claim": "The Fourier-normalized spectral free Laplacian with symbol 4*pi^2*xi^2 is essentially self-adjoint.",
+      "theorem": "Brockian.Weyl.FreeLaplacianCorrected.spectralFreeLaplacian_essentiallySelfAdjoint",
+      "visualRef": "free-laplacian"
+    },
+    {
+      "claim": "For a densely defined symmetric operator, essential self-adjointness is equivalent to self-adjointness of its graph closure.",
+      "theorem": "Brockian.Weyl.Upstream.essentiallySelfAdjoint_iff_closure_isSelfAdjoint",
+      "visualRef": "closure-criterion"
+    },
+    {
+      "claim": "The current bounded prime-Gaussian potential is not confining, so Gate 1 alone does not supply the discrete spectral shape required by an RH operator.",
+      "theorem": "Brockian.Weyl.Confining.primeGaussian_not_isConfining",
+      "visualRef": "shape-obstruction"
+    },
+    {
+      "claim": "An inhabited BrockianSystem would imply the Riemann Hypothesis; constructing the required spectral correspondence remains open.",
+      "theorem": "Brockian.RiemannScaffold.RH_of_BrockianSystem",
+      "visualRef": "rh-boundary"
+    }
+  ]
+}

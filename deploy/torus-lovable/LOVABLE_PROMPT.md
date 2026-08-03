@@ -26,7 +26,7 @@ Place `public/verified-registry.json` at the site root public path so it is serv
 
 `/verified-registry.json`
 
-Source file: `deploy/torus-lovable/public/verified-registry.json` (~1 MB, sanitized).  
+Source file: `deploy/torus-lovable/public/verified-registry.json` (sanitized).
 Do not minify away the `summary` or `theorems` arrays. Do not invent extra PROVED rows.
 
 ### 3. Demo mount (required for verification)
@@ -69,6 +69,17 @@ If the site has an Observatory / Labs route, also mount claims from
 `torus/labs/why-five-grand.manifest.json` (each `theorem` field → `VerifiedClaim`).
 Do **not** invent extra PROVED rows.
 
+### Required: Riemann Gate 1 panel
+
+Mount every claim from:
+
+`public/labs/riemann-gate1-operator.manifest.json`
+
+Render each `theorem` through `VerifiedClaim`. The five `PROVED` claims must be
+green. `Brockian.RiemannScaffold.RH_of_BrockianSystem` is `CONDITIONAL` and must
+remain amber/open. Its implication does not construct a BrockianSystem and does
+not prove RH.
+
 ### 4. Copy / counter hygiene (P0 honesty)
 
 If the site still shows hard-coded “53 theorems / 41 proved / dual Lean+Rocq verified / premier / on-chain verified / Proving the unprovable”, replace or soft-gate:
@@ -76,12 +87,15 @@ If the site still shows hard-coded “53 theorems / 41 proved / dual Lean+Rocq v
 - Prefer live counts from `verified-registry.json` → `summary` / by_register if present.
 - Remove “on-chain verified” and “proving the unprovable”.
 - Dual Lean+Rocq: only if both backends resolve; otherwise say “Lean 4 + Mathlib; Rocq optional”.
-- Open problems (RH, global Goldbach, full Gate-1 ESA) must never use a green Verified badge.
+- Open problems (RH, global Goldbach, oscillator ESA, compact resolvent, and the RH spectral correspondence) must never use a green Verified badge.
+- The bounded-continuous-potential Gate-1 theorem may render green only under its exact registered statement.
 
 ### 5. Acceptance checks
 
 - [ ] `/verified-registry.json` returns 200 JSON with theorems array.
 - [ ] Demo PROVED theorem shows green Verified.
+- [ ] Concrete bounded-potential Gate-1 theorem shows green Verified.
+- [ ] `RH_of_BrockianSystem` shows amber Conditional/open, never green.
 - [ ] Fake theorem shows red ⊘ UNVERIFIED (not a spinner forever).
 - [ ] No new claim of RH/Goldbach solved.
 - [ ] Publish to production CDN.

@@ -9,6 +9,19 @@
 
 Current checkpoint: 2026-08-02 — **LIVE multi-agent collab (Claude × Codex × Grok)**.
 
+## Riemann Labs handoff - 2026-08-03
+
+- Codex owns the Torus/Lovable refresh under `torus/` and
+  `deploy/torus-lovable/`; do not edit those paths until the handoff commit lands.
+- The public export is being regenerated from the AXLE-backed root registry at
+  **10568 PROVED / 581 DEFINITION / 20 CONDITIONAL / 7 DISCHARGED / 40 CONJECTURE**.
+- New lab manifest: `torus/labs/riemann-gate1-operator.manifest.json`.
+- Public scope: concrete bounded-continuous-potential Gate 1 is verified; the
+  prime-Gaussian potential is non-confining; the RH spectral correspondence
+  remains explicitly conditional.
+- Existing untracked `aristotle/` peer work and the duplicate
+  `registry/attestations/BrocardGap.json` remain untouched.
+
 ## Codex operator execution - 2026-08-03
 
 - Owns the five-step operator continuation requested by the user: Harmonic
