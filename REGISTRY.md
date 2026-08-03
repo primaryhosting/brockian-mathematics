@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 361
+- **DEFINITION**: 362
 - **DISCHARGED**: 6
-- **PROVED**: 2590
+- **PROVED**: 2596
 
 ## Theorems
 
@@ -1027,6 +1027,13 @@
 | PROVED | `Brockian.Goldbach.WheelK2_23.Kp_twentyThree` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.WheelK2_23.Kp_twentyThree_of_dvd` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.WheelK2_23.Kp_twentyThree_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Goldbach.WheelK2_29.K2_29` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_29.K2_29_eq` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_29.K2_29_of_not_two_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_29.K2_29_of_two_and_twentyNine_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_29.Kp_twentyNine` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_29.Kp_twentyNine_of_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_29.Kp_twentyNine_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Goldbach.WheelK2_31.K2_31` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.WheelK2_31.K2_31_eq` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.WheelK2_31.K2_31_of_not_two_dvd` | ✓ | verified | lean-4.32.0 |  |

@@ -812,3 +812,11 @@ keep boundedv-continuous.)
     FranklinFixedPoint.pentagonalNumberTheorem; honest partial on Ramanujan p(5n+4)≡0 mod 5. Import
     FranklinFixedPoint/PentagonalPartition/RamanujanCongruence only.
   Grok: gaps 52–60 or p=23 cos. Codex: Weyl/Gate-1.
+
+- 2026-08-02 (overnight Grok) — **K2×29 fill-in @ PROVED 2596**. Concurrent waves already
+  shipped Gaps102–250 + Cos p=43…97 + K2×37…71 (tip `7d2b2a3` / scoreboard `9827f94`).
+  This cycle closed the missing prime hole `GoldbachWheelK2_29` (7 decls AXLE-green @4.32,
+  fractions 21953/21952 and 614655/614656). Root-import + registry re-export.
+  **Next packs:** Gaps252–260+; Cos p=101,103,…; K2×73,79,83,…; skip RH/Goldbach/twin overclaims;
+  do not touch Claude red WeylWeak* / franklin unless already green.
+

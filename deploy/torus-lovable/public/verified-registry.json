@@ -19,25 +19,25 @@
     "verified_by"
   ],
   "summary": {
-    "total": 2979,
+    "total": 2986,
     "by_source": {
       "brockian": {
-        "total": 2979,
+        "total": 2986,
         "by_register": {
           "CONDITIONAL": 21,
           "CONJECTURE": 1,
-          "DEFINITION": 361,
+          "DEFINITION": 362,
           "DISCHARGED": 6,
-          "PROVED": 2590
+          "PROVED": 2596
         }
       }
     },
     "by_register": {
       "CONDITIONAL": 21,
       "CONJECTURE": 1,
-      "DEFINITION": 361,
+      "DEFINITION": 362,
       "DISCHARGED": 6,
-      "PROVED": 2590
+      "PROVED": 2596
     }
   },
   "theorems": [
@@ -19645,6 +19645,142 @@
     {
       "name": "Brockian.Goldbach.WheelK2_23.Kp_twentyThree_of_not_dvd",
       "module": "Brockian.Goldbach.WheelK2_23",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_29.K2_29",
+      "module": "Brockian.Goldbach.WheelK2_29",
+      "register": "DEFINITION",
+      "kind": "def",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_29.K2_29_eq",
+      "module": "Brockian.Goldbach.WheelK2_29",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_29.K2_29_of_not_two_dvd",
+      "module": "Brockian.Goldbach.WheelK2_29",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_29.K2_29_of_two_and_twentyNine_dvd",
+      "module": "Brockian.Goldbach.WheelK2_29",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_29.Kp_twentyNine",
+      "module": "Brockian.Goldbach.WheelK2_29",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_29.Kp_twentyNine_of_dvd",
+      "module": "Brockian.Goldbach.WheelK2_29",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_29.Kp_twentyNine_of_not_dvd",
+      "module": "Brockian.Goldbach.WheelK2_29",
       "register": "PROVED",
       "kind": "theorem",
       "statement": "",

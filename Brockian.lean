@@ -146,6 +146,7 @@ import Brockian.GoldbachWheelK2_13
 import Brockian.GoldbachWheelK2_17
 import Brockian.GoldbachWheelK2_19
 import Brockian.GoldbachWheelK2_23
+import Brockian.GoldbachWheelK2_29
 import Brockian.GoldbachWheelK2_31
 import Brockian.GoldbachWheelK2_37
 import Brockian.GoldbachWheelK2_41
