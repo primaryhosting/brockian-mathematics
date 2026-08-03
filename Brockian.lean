@@ -737,3 +737,4 @@ import Brockian.EgyptianFraction
 import Brockian.AbundantClosure
 import Brockian.DivisorCountStructure
 import Brockian.MultiperfectStructure
+import Brockian.Wolstenholme

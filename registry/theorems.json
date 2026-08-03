@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10542,
+    "PROVED": 10543,
     "DEFINITION": 574,
     "CONJECTURE": 40,
     "CONDITIONAL": 21,
@@ -365149,6 +365149,39 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY Wilson primes (open-territory loop, AXLE @4.32, axiom-clean). WilsonPrime p := p.Prime and p^2 | ((p-1)!+1). CONCRETE: wilson_5 (25|4!+1) and wilson_13 (169|12!+1=479001601); only 3 known (5,13,563) and 563 is out of computational reach ((562)! astronomical) so honestly scoped to the two small ones. GROUNDING prime_dvd_factorial_add_one: Wilson's theorem (p | (p-1)!+1 for all primes, via Mathlib ZMod.wilsons_lemma) -- Wilson primes strengthen p to p^2. Non-example seven_not_wilson (49 does NOT divide 6!+1=721). WilsonPrimeInfinitude (infinitely many Wilson primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.Wolstenholme.wolstenholme",
+      "kind": "theorem",
+      "module": "Brockian.Wolstenholme",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Wolstenholme.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle a056fe3c; Codex AXLE audit @ lean-4.32.0",
+      "provenance_note": "Exact archive-free Wolstenholme theorem: for prime p >= 5, p^3 divides choose(2p,p)-2 over the integers. Returned Lean 4.28 proof passed independent AXLE verification unchanged at Lean 4.32; axioms only propext/Classical.choice/Quot.sound."
     },
     {
       "name": "Brockian.XiFunctionalEquation.completedRiemannZeta_functional_equation",

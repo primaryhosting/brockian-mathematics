@@ -1348,3 +1348,10 @@ runs:
     quarantine: true
     ledger_run: "Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit"
     provenance_note: "General odd-prime affine selection count for epsilon = +/-1, gap and Goldbach specializations, p=5 4-versus-3 finite law, quadratic-character inverse/Jacobi identities, and the exact mod-5 twin-road sector split. Returned dihedral-isomorphism and general quadratic-correlation sorries plus the placeholder asymptotic were excluded."
+
+  "wolstenholme":
+    module: Brockian.Wolstenholme
+    verdict: admit
+    quarantine: true
+    ledger_run: "Aristotle a056fe3c; Codex AXLE audit @ lean-4.32.0"
+    provenance_note: "Exact archive-free Wolstenholme theorem: for prime p >= 5, p^3 divides choose(2p,p)-2 over the integers. Returned Lean 4.28 proof passed independent AXLE verification unchanged at Lean 4.32; axioms only propext/Classical.choice/Quot.sound."

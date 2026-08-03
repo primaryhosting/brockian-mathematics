@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 574
 - **DISCHARGED**: 6
-- **PROVED**: 10542
+- **PROVED**: 10543
 
 ## Theorems
 
@@ -11182,6 +11182,7 @@
 | PROVED | `Brockian.WilsonPrimes.seven_not_wilson` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.WilsonPrimes.wilson_13` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.WilsonPrimes.wilson_5` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.Wolstenholme.wolstenholme` | ✓ | verified | lean-4.32.0 | Aristotle a056fe3c; Codex AXLE audit @ lean-4.32.0 |
 | PROVED | `Brockian.XiFunctionalEquation.completedRiemannZeta_functional_equation` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
 | PROVED | `Brockian.XiFunctionalEquation.riemannXi_apply` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
 | PROVED | `Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_zeta_zero_of_mem_critical_strip` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
