@@ -725,3 +725,4 @@ import Brockian.ErdosGinzburgZiv
 import Brockian.TwoSquares
 import Brockian.LucasTheorem
 import Brockian.FrobeniusMcNugget
+import Brockian.DivisorSumStructure

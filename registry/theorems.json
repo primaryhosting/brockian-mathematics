@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10447,
+    "PROVED": 10452,
     "DEFINITION": 554,
     "CONJECTURE": 40,
     "CONDITIONAL": 21,
@@ -57929,6 +57929,171 @@
       "quarantine": true,
       "ledger_run": "2026-08-01 \u2014 finite D5 permutation representation foothold",
       "provenance_note": "VertexSpace = Fin 5 -> C; pullback action of Aut(C5)/D5 on vertex functions; constants fixed; coordinate sum invariant; zero-sum hyperplane invariant; constant vector is zero-sum iff c=0. First rung for character/isotypic-projector work, downstream of Aut(C5) ~= D5."
+    },
+    {
+      "name": "Brockian.DivisorSumStructure.perfect_not_prime",
+      "kind": "theorem",
+      "module": "Brockian.DivisorSumStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DivisorSumStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general divisor-sum (sigma) structure theorems (AXLE @4.32, axiom-clean). Uses ArithmeticFunction.sigma (Nat.sigma does not exist in this Mathlib). GENERAL theorems constraining the perfect/abundant/deficient frontier: sigma_ge_succ (sigma(n) >= n+1 for n>1); sigma_eq_succ_iff_prime (sigma(n)=n+1 IFF n prime -- a clean characterization of primality by the divisor sum); prime_pow_deficient (prime powers are deficient, sigma(p^k) < 2 p^k); perfect_not_prime (a perfect number is not prime); prime_pow_not_perfect (no prime power is perfect). Reusable structural facts, not concrete instances."
+    },
+    {
+      "name": "Brockian.DivisorSumStructure.prime_pow_deficient",
+      "kind": "theorem",
+      "module": "Brockian.DivisorSumStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DivisorSumStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general divisor-sum (sigma) structure theorems (AXLE @4.32, axiom-clean). Uses ArithmeticFunction.sigma (Nat.sigma does not exist in this Mathlib). GENERAL theorems constraining the perfect/abundant/deficient frontier: sigma_ge_succ (sigma(n) >= n+1 for n>1); sigma_eq_succ_iff_prime (sigma(n)=n+1 IFF n prime -- a clean characterization of primality by the divisor sum); prime_pow_deficient (prime powers are deficient, sigma(p^k) < 2 p^k); perfect_not_prime (a perfect number is not prime); prime_pow_not_perfect (no prime power is perfect). Reusable structural facts, not concrete instances."
+    },
+    {
+      "name": "Brockian.DivisorSumStructure.prime_pow_not_perfect",
+      "kind": "theorem",
+      "module": "Brockian.DivisorSumStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DivisorSumStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general divisor-sum (sigma) structure theorems (AXLE @4.32, axiom-clean). Uses ArithmeticFunction.sigma (Nat.sigma does not exist in this Mathlib). GENERAL theorems constraining the perfect/abundant/deficient frontier: sigma_ge_succ (sigma(n) >= n+1 for n>1); sigma_eq_succ_iff_prime (sigma(n)=n+1 IFF n prime -- a clean characterization of primality by the divisor sum); prime_pow_deficient (prime powers are deficient, sigma(p^k) < 2 p^k); perfect_not_prime (a perfect number is not prime); prime_pow_not_perfect (no prime power is perfect). Reusable structural facts, not concrete instances."
+    },
+    {
+      "name": "Brockian.DivisorSumStructure.sigma_eq_succ_iff_prime",
+      "kind": "theorem",
+      "module": "Brockian.DivisorSumStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DivisorSumStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general divisor-sum (sigma) structure theorems (AXLE @4.32, axiom-clean). Uses ArithmeticFunction.sigma (Nat.sigma does not exist in this Mathlib). GENERAL theorems constraining the perfect/abundant/deficient frontier: sigma_ge_succ (sigma(n) >= n+1 for n>1); sigma_eq_succ_iff_prime (sigma(n)=n+1 IFF n prime -- a clean characterization of primality by the divisor sum); prime_pow_deficient (prime powers are deficient, sigma(p^k) < 2 p^k); perfect_not_prime (a perfect number is not prime); prime_pow_not_perfect (no prime power is perfect). Reusable structural facts, not concrete instances."
+    },
+    {
+      "name": "Brockian.DivisorSumStructure.sigma_ge_succ",
+      "kind": "theorem",
+      "module": "Brockian.DivisorSumStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DivisorSumStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general divisor-sum (sigma) structure theorems (AXLE @4.32, axiom-clean). Uses ArithmeticFunction.sigma (Nat.sigma does not exist in this Mathlib). GENERAL theorems constraining the perfect/abundant/deficient frontier: sigma_ge_succ (sigma(n) >= n+1 for n>1); sigma_eq_succ_iff_prime (sigma(n)=n+1 IFF n prime -- a clean characterization of primality by the divisor sum); prime_pow_deficient (prime powers are deficient, sigma(p^k) < 2 p^k); perfect_not_prime (a perfect number is not prime); prime_pow_not_perfect (no prime power is perfect). Reusable structural facts, not concrete instances."
     },
     {
       "name": "Brockian.Equidistribution.AsymptoticExists",
