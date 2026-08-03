@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10353,
-    "DEFINITION": 532,
-    "CONJECTURE": 34,
+    "PROVED": 10360,
+    "DEFINITION": 534,
+    "CONJECTURE": 36,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -3447,6 +3447,353 @@
       "quarantine": true,
       "ledger_run": "run 54 completed 2026-08-01 \u2014 |Aut(C5)|<=10 reverse bound + full iso",
       "provenance_note": "card_aut_le_ten, aut_card_eq_ten (=10), dihedralHom_surjective (pinning), autEquivDihedral : DihedralGroup 5 \u2243* (C5 \u2243g C5) \u2014 the FULL Aut(C5)\u2245D5 iso. Upgrades run-54 partial to complete. Axiom-clean."
+    },
+    {
+      "name": "Brockian.BetrothedNumbers.Betrothed",
+      "kind": "def",
+      "module": "Brockian.BetrothedNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BetrothedNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY betrothed (quasi-amicable) numbers (open-territory loop, AXLE @4.32, axiom-clean). Betrothed m n := s(m)=n+1 and s(n)=m+1 (s = aliquot sum), the off-by-one cousin of amicable pairs. CONCRETE: betrothed_{48_75,140_195,1050_1925}; structural betrothed_symm/betrothed_ne; opposite-parity illustrations. BetrothedInfinitude (infinitely many pairs) and SameParityBetrothedExists (does a same-parity pair exist? all known are opposite-parity) are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BetrothedNumbers.BetrothedInfinitude",
+      "kind": "conjecture",
+      "module": "Brockian.BetrothedNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BetrothedNumbers.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY betrothed (quasi-amicable) numbers (open-territory loop, AXLE @4.32, axiom-clean). Betrothed m n := s(m)=n+1 and s(n)=m+1 (s = aliquot sum), the off-by-one cousin of amicable pairs. CONCRETE: betrothed_{48_75,140_195,1050_1925}; structural betrothed_symm/betrothed_ne; opposite-parity illustrations. BetrothedInfinitude (infinitely many pairs) and SameParityBetrothedExists (does a same-parity pair exist? all known are opposite-parity) are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BetrothedNumbers.SameParityBetrothedExists",
+      "kind": "conjecture",
+      "module": "Brockian.BetrothedNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BetrothedNumbers.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY betrothed (quasi-amicable) numbers (open-territory loop, AXLE @4.32, axiom-clean). Betrothed m n := s(m)=n+1 and s(n)=m+1 (s = aliquot sum), the off-by-one cousin of amicable pairs. CONCRETE: betrothed_{48_75,140_195,1050_1925}; structural betrothed_symm/betrothed_ne; opposite-parity illustrations. BetrothedInfinitude (infinitely many pairs) and SameParityBetrothedExists (does a same-parity pair exist? all known are opposite-parity) are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BetrothedNumbers.aliquot",
+      "kind": "def",
+      "module": "Brockian.BetrothedNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BetrothedNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY betrothed (quasi-amicable) numbers (open-territory loop, AXLE @4.32, axiom-clean). Betrothed m n := s(m)=n+1 and s(n)=m+1 (s = aliquot sum), the off-by-one cousin of amicable pairs. CONCRETE: betrothed_{48_75,140_195,1050_1925}; structural betrothed_symm/betrothed_ne; opposite-parity illustrations. BetrothedInfinitude (infinitely many pairs) and SameParityBetrothedExists (does a same-parity pair exist? all known are opposite-parity) are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BetrothedNumbers.betrothed_1050_1925",
+      "kind": "theorem",
+      "module": "Brockian.BetrothedNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BetrothedNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY betrothed (quasi-amicable) numbers (open-territory loop, AXLE @4.32, axiom-clean). Betrothed m n := s(m)=n+1 and s(n)=m+1 (s = aliquot sum), the off-by-one cousin of amicable pairs. CONCRETE: betrothed_{48_75,140_195,1050_1925}; structural betrothed_symm/betrothed_ne; opposite-parity illustrations. BetrothedInfinitude (infinitely many pairs) and SameParityBetrothedExists (does a same-parity pair exist? all known are opposite-parity) are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BetrothedNumbers.betrothed_140_195",
+      "kind": "theorem",
+      "module": "Brockian.BetrothedNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BetrothedNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY betrothed (quasi-amicable) numbers (open-territory loop, AXLE @4.32, axiom-clean). Betrothed m n := s(m)=n+1 and s(n)=m+1 (s = aliquot sum), the off-by-one cousin of amicable pairs. CONCRETE: betrothed_{48_75,140_195,1050_1925}; structural betrothed_symm/betrothed_ne; opposite-parity illustrations. BetrothedInfinitude (infinitely many pairs) and SameParityBetrothedExists (does a same-parity pair exist? all known are opposite-parity) are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BetrothedNumbers.betrothed_140_195_opposite_parity",
+      "kind": "theorem",
+      "module": "Brockian.BetrothedNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BetrothedNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY betrothed (quasi-amicable) numbers (open-territory loop, AXLE @4.32, axiom-clean). Betrothed m n := s(m)=n+1 and s(n)=m+1 (s = aliquot sum), the off-by-one cousin of amicable pairs. CONCRETE: betrothed_{48_75,140_195,1050_1925}; structural betrothed_symm/betrothed_ne; opposite-parity illustrations. BetrothedInfinitude (infinitely many pairs) and SameParityBetrothedExists (does a same-parity pair exist? all known are opposite-parity) are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BetrothedNumbers.betrothed_48_75",
+      "kind": "theorem",
+      "module": "Brockian.BetrothedNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BetrothedNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY betrothed (quasi-amicable) numbers (open-territory loop, AXLE @4.32, axiom-clean). Betrothed m n := s(m)=n+1 and s(n)=m+1 (s = aliquot sum), the off-by-one cousin of amicable pairs. CONCRETE: betrothed_{48_75,140_195,1050_1925}; structural betrothed_symm/betrothed_ne; opposite-parity illustrations. BetrothedInfinitude (infinitely many pairs) and SameParityBetrothedExists (does a same-parity pair exist? all known are opposite-parity) are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BetrothedNumbers.betrothed_48_75_opposite_parity",
+      "kind": "theorem",
+      "module": "Brockian.BetrothedNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BetrothedNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY betrothed (quasi-amicable) numbers (open-territory loop, AXLE @4.32, axiom-clean). Betrothed m n := s(m)=n+1 and s(n)=m+1 (s = aliquot sum), the off-by-one cousin of amicable pairs. CONCRETE: betrothed_{48_75,140_195,1050_1925}; structural betrothed_symm/betrothed_ne; opposite-parity illustrations. BetrothedInfinitude (infinitely many pairs) and SameParityBetrothedExists (does a same-parity pair exist? all known are opposite-parity) are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BetrothedNumbers.betrothed_ne",
+      "kind": "theorem",
+      "module": "Brockian.BetrothedNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BetrothedNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY betrothed (quasi-amicable) numbers (open-territory loop, AXLE @4.32, axiom-clean). Betrothed m n := s(m)=n+1 and s(n)=m+1 (s = aliquot sum), the off-by-one cousin of amicable pairs. CONCRETE: betrothed_{48_75,140_195,1050_1925}; structural betrothed_symm/betrothed_ne; opposite-parity illustrations. BetrothedInfinitude (infinitely many pairs) and SameParityBetrothedExists (does a same-parity pair exist? all known are opposite-parity) are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BetrothedNumbers.betrothed_symm",
+      "kind": "theorem",
+      "module": "Brockian.BetrothedNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BetrothedNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY betrothed (quasi-amicable) numbers (open-territory loop, AXLE @4.32, axiom-clean). Betrothed m n := s(m)=n+1 and s(n)=m+1 (s = aliquot sum), the off-by-one cousin of amicable pairs. CONCRETE: betrothed_{48_75,140_195,1050_1925}; structural betrothed_symm/betrothed_ne; opposite-parity illustrations. BetrothedInfinitude (infinitely many pairs) and SameParityBetrothedExists (does a same-parity pair exist? all known are opposite-parity) are unproven defs -- OPEN, never asserted."
     },
     {
       "name": "Brockian.BrocardGap.BrocardGapConjecture",

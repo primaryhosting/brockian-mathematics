@@ -703,3 +703,4 @@ import Brockian.QuasiperfectNumbers
 import Brockian.SuperperfectNumbers
 import Brockian.HyperperfectNumbers
 import Brockian.UnitaryPerfect
+import Brockian.BetrothedNumbers

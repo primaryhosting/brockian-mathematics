@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 34
-- **DEFINITION**: 532
+- **CONJECTURE**: 36
+- **DEFINITION**: 534
 - **DISCHARGED**: 6
-- **PROVED**: 10353
+- **PROVED**: 10360
 
 ## Theorems
 
@@ -124,6 +124,17 @@
 | PROVED | `Brockian.Automorphism.Full.card_aut_le_ten` | ✓ | verified | lean-4.32.0 | run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso |
 | PROVED | `Brockian.Automorphism.Full.dihedralHom_bijective` | ✓ | verified | lean-4.32.0 | run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso |
 | PROVED | `Brockian.Automorphism.Full.dihedralHom_surjective` | ✓ | verified | lean-4.32.0 | run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso |
+| DEFINITION | `Brockian.BetrothedNumbers.Betrothed` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.BetrothedNumbers.BetrothedInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.BetrothedNumbers.SameParityBetrothedExists` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.BetrothedNumbers.aliquot` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BetrothedNumbers.betrothed_1050_1925` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BetrothedNumbers.betrothed_140_195` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BetrothedNumbers.betrothed_140_195_opposite_parity` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BetrothedNumbers.betrothed_48_75` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BetrothedNumbers.betrothed_48_75_opposite_parity` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BetrothedNumbers.betrothed_ne` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BetrothedNumbers.betrothed_symm` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.BrocardGap.BrocardGapConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.BrocardGap.ConsecutivePrimes` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.BrocardGap.FourPrimesBetweenSquares` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |

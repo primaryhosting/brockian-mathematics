@@ -508,6 +508,23 @@ known: 6, 60, 90, 87360, and a 24-digit number. Open. Module: `Brockian.UnitaryP
 
 ---
 
+## Betrothed (quasi-amicable) numbers (open)
+
+**Claim.** Are there infinitely many betrothed pairs — (m,n) with s(m)=n+1 and s(n)=m+1 (s = aliquot
+sum)? And does any pair have both members of the same parity? Both open (all known pairs are
+opposite-parity). Module: `Brockian.BetrothedNumbers`. `BetrothedInfinitude`,
+`SameParityBetrothedExists` are unproven `def`s.
+
+**PROVED (concrete + structural):**
+- **Three betrothed pairs**: (48,75), (140,195), (1050,1925) (`betrothed_48_75`, `betrothed_140_195`,
+  `betrothed_1050_1925`).
+- Structural: symmetry (`betrothed_symm`), distinctness (`betrothed_ne`); opposite-parity of the
+  known pairs illustrated.
+
+**OPEN.** Infinitude, and whether any same-parity betrothed pair exists.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:
