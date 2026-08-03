@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 39
-- **DEFINITION**: 553
+- **CONJECTURE**: 40
+- **DEFINITION**: 554
 - **DISCHARGED**: 6
-- **PROVED**: 10429
+- **PROVED**: 10438
 
 ## Theorems
 
@@ -11064,3 +11064,14 @@
 | PROVED | `Brockian.XiFunctionalEquation.riemannXi_functional_equation` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
 | PROVED | `Brockian.XiFunctionalEquation.zeta_zero_of_riemannXi_zero` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
 | PROVED | `Brockian.XiFunctionalEquation.zeta_zero_one_sub_of_mem_critical_strip` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| CONJECTURE | `Brockian.ZumkellerNumbers.OddZumkellerFrom3Structure` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| DEFINITION | `Brockian.ZumkellerNumbers.Zumkeller` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.not_zumkeller_prime` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.zumkeller_sigma_even` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.zumkeller_six` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.zumkeller_thirty` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.zumkeller_twelve` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.zumkeller_twenty` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.zumkeller_twentyeight` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.zumkeller_twentyfour` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.zumkeller_two_mul_le_sigma` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
