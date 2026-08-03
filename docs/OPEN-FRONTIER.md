@@ -87,6 +87,22 @@ Module: `Brockian.CollatzPartial`. `CollatzConjecture` is an unproven `def` (CON
 
 ---
 
+## Sierpiński numbers (problem open since 1960)
+
+**Claim.** Is 78557 the *smallest* Sierpiński number (odd k with k·2ⁿ+1 composite for all n ≥ 1)?
+Module: `Brockian.SierpinskiCovering`. `SierpinskiProblem` is an unproven `def`.
+
+**PROVED (a concrete verified membership):**
+- **78557 IS a Sierpiński number** (`sierpinski_78557`): for every n ≥ 1, 78557·2ⁿ+1 is composite —
+  proved via the covering set {3,5,7,13,19,37,73}. Supporting: `two_pow_periodic`
+  (2ⁿ ≡ 2^(n mod 36) mod p, since 2³⁶ ≡ 1 mod each p), `covering_table` (all 36 residues covered,
+  by `decide`), `composite_of` (divisibility transfer + primality exclusion).
+
+**OPEN.** Whether 78557 is the *smallest* such k (the remaining candidates below it are unresolved).
+This is a concrete verified membership in an open problem's exceptional set — not a resolution.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 3
-- **DEFINITION**: 397
+- **CONJECTURE**: 4
+- **DEFINITION**: 398
 - **DISCHARGED**: 6
-- **PROVED**: 4540
+- **PROVED**: 4544
 
 ## Theorems
 
@@ -2005,6 +2005,12 @@
 | PROVED | `Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_reflect_zero` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_zero` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Sanity.brockian_sanity` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.SierpinskiCovering.IsSierpinski` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.SierpinskiCovering.SierpinskiProblem` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SierpinskiCovering.composite_of` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SierpinskiCovering.covering_table` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SierpinskiCovering.sierpinski_78557` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SierpinskiCovering.two_pow_periodic` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.Sieve.H3` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.H3_det` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.H3_ground` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |

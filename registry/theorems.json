@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 4540,
-    "DEFINITION": 397,
-    "CONJECTURE": 3,
+    "PROVED": 4544,
+    "DEFINITION": 398,
+    "CONJECTURE": 4,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -64412,6 +64412,192 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.SierpinskiCovering.IsSierpinski",
+      "kind": "def",
+      "module": "Brockian.SierpinskiCovering",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SierpinskiCovering.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY concrete result: 78557 is a Sierpinski number (open-territory loop, AXLE @4.32, axiom-clean). sierpinski_78557 : IsSierpinski 78557 -- for every n>=1, 78557*2^n+1 is composite -- proved via the covering set {3,5,7,13,19,37,73}: two_pow_periodic (2^n = 2^(n%36) mod p since 2^36=1 mod each p), covering_table (all 36 residues covered, by decide), composite_of (transfer + primality exclusion). The OPEN Sierpinski problem (is 78557 the SMALLEST such k?) is recorded as an unproven def SierpinskiProblem; nothing in the file bears on it. A concrete verified membership in an open problem's exceptional set, not a resolution of the problem."
+    },
+    {
+      "name": "Brockian.SierpinskiCovering.SierpinskiProblem",
+      "kind": "conjecture",
+      "module": "Brockian.SierpinskiCovering",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SierpinskiCovering.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY concrete result: 78557 is a Sierpinski number (open-territory loop, AXLE @4.32, axiom-clean). sierpinski_78557 : IsSierpinski 78557 -- for every n>=1, 78557*2^n+1 is composite -- proved via the covering set {3,5,7,13,19,37,73}: two_pow_periodic (2^n = 2^(n%36) mod p since 2^36=1 mod each p), covering_table (all 36 residues covered, by decide), composite_of (transfer + primality exclusion). The OPEN Sierpinski problem (is 78557 the SMALLEST such k?) is recorded as an unproven def SierpinskiProblem; nothing in the file bears on it. A concrete verified membership in an open problem's exceptional set, not a resolution of the problem."
+    },
+    {
+      "name": "Brockian.SierpinskiCovering.composite_of",
+      "kind": "theorem",
+      "module": "Brockian.SierpinskiCovering",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SierpinskiCovering.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY concrete result: 78557 is a Sierpinski number (open-territory loop, AXLE @4.32, axiom-clean). sierpinski_78557 : IsSierpinski 78557 -- for every n>=1, 78557*2^n+1 is composite -- proved via the covering set {3,5,7,13,19,37,73}: two_pow_periodic (2^n = 2^(n%36) mod p since 2^36=1 mod each p), covering_table (all 36 residues covered, by decide), composite_of (transfer + primality exclusion). The OPEN Sierpinski problem (is 78557 the SMALLEST such k?) is recorded as an unproven def SierpinskiProblem; nothing in the file bears on it. A concrete verified membership in an open problem's exceptional set, not a resolution of the problem."
+    },
+    {
+      "name": "Brockian.SierpinskiCovering.covering_table",
+      "kind": "theorem",
+      "module": "Brockian.SierpinskiCovering",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SierpinskiCovering.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY concrete result: 78557 is a Sierpinski number (open-territory loop, AXLE @4.32, axiom-clean). sierpinski_78557 : IsSierpinski 78557 -- for every n>=1, 78557*2^n+1 is composite -- proved via the covering set {3,5,7,13,19,37,73}: two_pow_periodic (2^n = 2^(n%36) mod p since 2^36=1 mod each p), covering_table (all 36 residues covered, by decide), composite_of (transfer + primality exclusion). The OPEN Sierpinski problem (is 78557 the SMALLEST such k?) is recorded as an unproven def SierpinskiProblem; nothing in the file bears on it. A concrete verified membership in an open problem's exceptional set, not a resolution of the problem."
+    },
+    {
+      "name": "Brockian.SierpinskiCovering.sierpinski_78557",
+      "kind": "theorem",
+      "module": "Brockian.SierpinskiCovering",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SierpinskiCovering.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY concrete result: 78557 is a Sierpinski number (open-territory loop, AXLE @4.32, axiom-clean). sierpinski_78557 : IsSierpinski 78557 -- for every n>=1, 78557*2^n+1 is composite -- proved via the covering set {3,5,7,13,19,37,73}: two_pow_periodic (2^n = 2^(n%36) mod p since 2^36=1 mod each p), covering_table (all 36 residues covered, by decide), composite_of (transfer + primality exclusion). The OPEN Sierpinski problem (is 78557 the SMALLEST such k?) is recorded as an unproven def SierpinskiProblem; nothing in the file bears on it. A concrete verified membership in an open problem's exceptional set, not a resolution of the problem."
+    },
+    {
+      "name": "Brockian.SierpinskiCovering.two_pow_periodic",
+      "kind": "theorem",
+      "module": "Brockian.SierpinskiCovering",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SierpinskiCovering.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY concrete result: 78557 is a Sierpinski number (open-territory loop, AXLE @4.32, axiom-clean). sierpinski_78557 : IsSierpinski 78557 -- for every n>=1, 78557*2^n+1 is composite -- proved via the covering set {3,5,7,13,19,37,73}: two_pow_periodic (2^n = 2^(n%36) mod p since 2^36=1 mod each p), covering_table (all 36 residues covered, by decide), composite_of (transfer + primality exclusion). The OPEN Sierpinski problem (is 78557 the SMALLEST such k?) is recorded as an unproven def SierpinskiProblem; nothing in the file bears on it. A concrete verified membership in an open problem's exceptional set, not a resolution of the problem."
     },
     {
       "name": "Brockian.Sieve.H3",
