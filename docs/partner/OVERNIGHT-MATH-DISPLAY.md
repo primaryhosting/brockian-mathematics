@@ -21,7 +21,7 @@
 | Overnight w4 | `7d2b2a3` | 2590 | Gaps202–250 · Cos83–97 · K2×61/67/71 |
 | K2×29 fill | `8050917` | 2596 | missing wheel between 23–31 |
 | Overnight w5 | `5551d58` | 2794 | Gaps252–300 · Cos101–109 · K2×73/79/83 |
-| **Overnight w6** | `70e3250` | **2985** | Gaps302–350 · Cos113/127/131/137 · K2×89/97/101 |
+| **Overnight w6** | `aa26aea` | **2985** | Gaps302–350 · Cos113/127/131/137 · K2×89/97/101 |
 | Wave 7+ | *15m scheduler* | … | Gaps352–400 · Cos139+ · K2×103+ |
 
 ## Display headlines for morning
