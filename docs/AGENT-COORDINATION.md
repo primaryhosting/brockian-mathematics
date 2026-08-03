@@ -18,6 +18,9 @@ accounting and mathematical frontier.
 
 - Final Grok wave root-wired: even gaps through 2200, real-cyclotomic prime
   instances through 1093, and `K2 * Kp` wheels through `p = 797`.
+- Final open-frontier handoff root-wired: `UnitaryPerfect` proves the cases
+  `6`, `60`, and `90`, excludes `28`, and keeps existence of a sixth example
+  explicitly registered as a conjecture.
 - Do not restart automatic range expansion without a new general theorem to
   exercise; raw instance count is no longer a strategic objective.
 - Codex next: finish `Brockian/WeylHarmonicOscillator.lean`, then isolate the

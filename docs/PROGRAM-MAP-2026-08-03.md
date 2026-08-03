@@ -13,17 +13,18 @@ The program made two different kinds of progress in the last overnight cycle:
    theorems, but they are specializations rather than thousands of independent
    mathematical discoveries.
 
-After integrating Grok's final canonical wave, the root registry is:
+After integrating Grok's final canonical wave and its final unitary-perfect
+module, the root registry is:
 
 | Register | Count |
 |---|---:|
-| PROVED | 10,348 |
-| DEFINITION | 530 |
-| CONJECTURE | 33 |
+| PROVED | 10,353 |
+| DEFINITION | 532 |
+| CONJECTURE | 34 |
 | CONDITIONAL | 21 |
 | DISCHARGED | 6 |
 
-No famous open conjecture was solved. The 33 conjectures are nullary `Prop`
+No famous open conjecture was solved. The 34 conjectures are nullary `Prop`
 containers marking open boundaries, not theorems.
 
 ## Depth-Adjusted Delta
@@ -32,18 +33,18 @@ Baseline: commit `a5ff22d`, where the bounded-continuous-potential Gate 1 chain
 closed at `2,002 PROVED / 351 DEFINITION / 1 CONJECTURE / 21 CONDITIONAL /
 6 DISCHARGED`.
 
-The post-Gate-1 delta is `8,346 PROVED / 179 DEFINITION / 32 CONJECTURE` across
-543 new root modules. Its composition is:
+The post-Gate-1 delta is `8,351 PROVED / 181 DEFINITION / 33 CONJECTURE` across
+544 new root modules. Its composition is:
 
 | Lane | PROVED | DEF | CONJECTURE | Meaning |
 |---|---:|---:|---:|---|
 | Even-gap singular-series instances | 6,090 | 0 | 0 | Generated applications of the general admissibility/local-factor theorems |
 | Real-cyclotomic prime instances | 1,190 | 0 | 0 | Generated degree and integrality applications of the general real-subfield theorem |
 | Goldbach `K2 * Kp` wheel instances | 774 | 129 | 0 | Generated exact finite local-factor identities; not Goldbach |
-| Open-problem finite/structural modules | 277 | 49 | 32 | Concrete cases and necessary conditions with explicit open boundaries |
+| Open-problem finite/structural modules | 282 | 51 | 33 | Concrete cases and necessary conditions with explicit open boundaries |
 | Pentagon representation bridge | 15 | 1 | 0 | New conceptual symmetry and character-multiplicity results |
 
-Thus 8,054 of 8,346 new PROVED entries are generated specializations of three
+Thus 8,054 of 8,351 new PROVED entries are generated specializations of three
 general theorem families. They are valid certificates, but the general theorem
 is the mathematical payload. Future reports must show both raw and
 depth-adjusted counts.
@@ -75,10 +76,11 @@ representation. The current file states this limitation explicitly.
 
 ### 3. Open-frontier certificates
 
-Thirty-two open-problem modules now contribute 277 proved finite or structural
+Thirty-three open-problem modules now contribute 282 proved finite or structural
 facts. Strong examples include the Sierpinski and Riesel covering certificates,
 Erdos-Straus residue reductions, Lehmer necessary conditions, concrete
-Carmichael/Brown/amicable instances, and elementary Collatz descent families.
+Carmichael/Brown/amicable instances, elementary Collatz descent families, and
+the verified unitary-perfect cases `6`, `60`, and `90` (with `28` excluded).
 
 These modules improve the formal map around open problems. Their conjecture
 containers remain open by construction.
@@ -97,9 +99,10 @@ asymptotics, twin-prime infinitude, or Goldbach.
 
 ## Integrity State
 
-- All 12 modules in the final Grok wave have `module_verified: true` AXLE 4.32
-  attestations, allowed axioms only, and zero no-theater lint findings.
-- Registry freshness passes at 10,938 total entries.
+- All 12 modules in the final range wave and the final `UnitaryPerfect` module
+  have `module_verified: true` AXLE 4.32 attestations and allowed axioms only;
+  the range wave has zero no-theater lint findings.
+- Registry freshness passes at 10,946 total entries.
 - Registry open-entry consistency has zero errors after fixing source paths to
   derive from canonical attestation stems rather than namespace tails.
 - One noncanonical untracked `BrocardGap.json` duplicates the canonical
@@ -120,7 +123,7 @@ asymptotics, twin-prime infinitude, or Goldbach.
    known or formalized; this remains RH-strength.
 4. **Goldbach/HL:** local factors and admissibility are proved, but global prime
    asymptotics remain conditional/open.
-5. **Open-frontier conjectures:** all 33 conjecture containers remain open.
+5. **Open-frontier conjectures:** all 34 conjecture containers remain open.
 
 ## Next Ownership Split
 
