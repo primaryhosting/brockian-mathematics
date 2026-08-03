@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10444,
+    "PROVED": 10446,
     "DEFINITION": 554,
     "CONJECTURE": 40,
     "CONDITIONAL": 21,
@@ -107310,6 +107310,39 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY necessary conditions on a counterexample to Lehmer's totient problem (open since 1932: does phi(n)|n-1 imply n prime?). Open-territory loop, AXLE @4.32, axiom-clean. A Lehmer number = composite n with phi(n)|(n-1). PROVED: any such n is ODD (lehmer_odd; phi even vs n-1 odd), SQUAREFREE (lehmer_squarefree, flagship; p^2|n => p|phi(n)|n-1 while p|n), and has >=3 distinct prime factors (lehmer_three_primes; the p*q case reduces to ab|(a+b) with a,b>=2 a!=b, impossible). Existence is NEVER asserted or denied."
+    },
+    {
+      "name": "Brockian.LucasTheorem.lucas",
+      "kind": "theorem",
+      "module": "Brockian.LucasTheorem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LucasTheorem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle cf31a33b; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED (Aristotle cf31a33b), independently AXLE-verified @4.32, axiom-clean. lucas: the recursive form of Lucas' theorem -- for a prime p, C(m,n) = C(m/p, n/p) * C(m%p, n%p) (mod p). Main Mathlib only."
     },
     {
       "name": "Brockian.MagmaLawRefutations.countermodel_assoc",
@@ -339949,6 +339982,39 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
+    },
+    {
+      "name": "Brockian.TwoSquares.sum_two_squares_iff",
+      "kind": "theorem",
+      "module": "Brockian.TwoSquares",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwoSquares.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle cd725c65; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED (Aristotle cd725c65), independently AXLE-verified @4.32, axiom-clean. sum_two_squares_iff: a positive natural n is a sum of two squares IFF every prime p = 3 (mod 4) divides n to an even power (n.factorization p is Even). The full sum-of-two-squares theorem (Fermat/Euler), both directions; main Mathlib only."
     },
     {
       "name": "Brockian.UnitaryPerfect.SixthUnitaryPerfectExists",

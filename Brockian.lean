@@ -722,3 +722,5 @@ import Brockian.ZumkellerNumbers
 import Brockian.EvenPerfectTriangular
 import Brockian.FrobeniusAbove
 import Brockian.ErdosGinzburgZiv
+import Brockian.TwoSquares
+import Brockian.LucasTheorem

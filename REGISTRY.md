@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 554
 - **DISCHARGED**: 6
-- **PROVED**: 10444
+- **PROVED**: 10446
 
 ## Theorems
 
@@ -3331,6 +3331,7 @@
 | PROVED | `Brockian.LehmerTotient.lehmer_odd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LehmerTotient.lehmer_squarefree` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LehmerTotient.lehmer_three_primes` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LucasTheorem.lucas` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle cf31a33b; AXLE @4.32 |
 | PROVED | `Brockian.MagmaLawRefutations.countermodel_assoc` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
 | PROVED | `Brockian.MagmaLawRefutations.countermodel_comm` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
 | PROVED | `Brockian.MagmaLawRefutations.countermodel_idem` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
@@ -10396,6 +10397,7 @@
 | PROVED | `Brockian.TwinPrimes.twin_71` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.TwinPrimes.twin_form_6k` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.TwinPrimes.twin_middle_div_six` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.TwoSquares.sum_two_squares_iff` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle cd725c65; AXLE @4.32 |
 | CONJECTURE | `Brockian.UnitaryPerfect.SixthUnitaryPerfectExists` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.UnitaryPerfect.UnitaryPerfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.UnitaryPerfect.not_unitaryPerfect_28` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
