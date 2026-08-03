@@ -153,3 +153,5 @@ import Brockian.D5CharacterComplete
 import Brockian.KatoBounded
 import Brockian.GoldenDivisibility
 import Brockian.PentagonGrandEquivalence
+import Brockian.GoldenSpectralCharacterization
+import Brockian.MagmaLawRefutations

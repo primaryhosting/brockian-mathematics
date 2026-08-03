@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 337
+- **DEFINITION**: 341
 - **DISCHARGED**: 6
-- **PROVED**: 1955
+- **PROVED**: 1967
 
 ## Theorems
 
@@ -1001,6 +1001,10 @@
 | PROVED | `Brockian.GoldbachSelectionRule.units_card` | ✓ | verified | lean-4.32.0 | harvest (Chris's Affine Selection Rules paper) — unified dihedral selection rule; AXLE @4.32 |
 | PROVED | `Brockian.GoldenDivisibility.golden_in_cycleSpectrum_iff_five_dvd` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
 | PROVED | `Brockian.GoldenDivisibility.golden_unique_to_five_recovered` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
+| PROVED | `Brockian.GoldenSpectralCharacterization.golden_quadratic_roots` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| PROVED | `Brockian.GoldenSpectralCharacterization.golden_ratio_spectral_characterization` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| PROVED | `Brockian.GoldenSpectralCharacterization.golden_roots_mem_pentagon_spectrum` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| PROVED | `Brockian.GoldenSpectralCharacterization.golden_roots_sign_split` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
 | PROVED | `Brockian.GoldenUniqueness.C5_membership_layer` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.algebraic_connectivity_C5_eq` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.algebraic_connectivity_C5_props` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
@@ -1021,6 +1025,18 @@
 | PROVED | `Brockian.GoldenUniqueness.prime_rigidity_layer` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.two_cos_four_pi_div_five_eq_neg_golden` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.two_cos_fundamental_mode_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.MagmaLawRefutations.countermodel_assoc` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| PROVED | `Brockian.MagmaLawRefutations.countermodel_comm` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| PROVED | `Brockian.MagmaLawRefutations.countermodel_idem` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| PROVED | `Brockian.MagmaLawRefutations.countermodel_mid` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| PROVED | `Brockian.MagmaLawRefutations.not_entails_assoc` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| PROVED | `Brockian.MagmaLawRefutations.not_entails_comm` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| PROVED | `Brockian.MagmaLawRefutations.not_entails_idem` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| PROVED | `Brockian.MagmaLawRefutations.not_entails_mid` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| DEFINITION | `Brockian.MagmaLawRefutations.op_assoc` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| DEFINITION | `Brockian.MagmaLawRefutations.op_comm` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| DEFINITION | `Brockian.MagmaLawRefutations.op_idem` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| DEFINITION | `Brockian.MagmaLawRefutations.op_mid` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
 | PROVED | `Brockian.MetallicFamily.H3_ground_metallic` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.MetallicFamily.inv_metallicMean_eq_sub` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.MetallicFamily.metallicConj_sq` | ✓ | verified | lean-4.32.0 |  |

@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1955,
-    "DEFINITION": 337,
+    "PROVED": 1967,
+    "DEFINITION": 341,
     "CONDITIONAL": 21,
     "DISCHARGED": 6,
     "CONJECTURE": 1
@@ -31904,6 +31904,138 @@
       "provenance_note": "The Golden Divisibility Law: for every n>=1, phi-1 is an adjacency eigenvalue of the cycle C_n IFF 5 divides n (full iff, both directions). Generalizes the prime uniqueness theorem golden_unique_to_five (5|p forces p=5) to ALL cycles: the pentagon n=5 is the smallest, every fifth cycle inherits the golden mode. Forward reuses the cos_eq_cos_iff -> 5k=n(5m+-1) -> 5|n chain (no primality); backward uses the k=j witness at n=5j. Corollary golden_unique_to_five_recovered specializes back to the prime case. AXLE @4.32, axiom-clean."
     },
     {
+      "name": "Brockian.GoldenSpectralCharacterization.golden_quadratic_roots",
+      "kind": "theorem",
+      "module": "Brockian.GoldenSpectralCharacterization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldenSpectralCharacterization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Spectral fingerprint of the golden ratio (swarm-built, AXLE @4.32, axiom-clean): the root set of the golden quadratic X^2+X-1 equals exactly {phi-1, -phi}, and both are adjacency eigenvalues of the 5-cycle -- so the pentagon's two non-Perron eigenvalues ARE the golden quadratic's roots. golden_quadratic_roots (root characterization), golden_roots_mem_pentagon_spectrum (both in spec C5), golden_ratio_spectral_characterization (capstone set-equality), golden_roots_sign_split (phi>1 pins the pair by sign)."
+    },
+    {
+      "name": "Brockian.GoldenSpectralCharacterization.golden_ratio_spectral_characterization",
+      "kind": "theorem",
+      "module": "Brockian.GoldenSpectralCharacterization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldenSpectralCharacterization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Spectral fingerprint of the golden ratio (swarm-built, AXLE @4.32, axiom-clean): the root set of the golden quadratic X^2+X-1 equals exactly {phi-1, -phi}, and both are adjacency eigenvalues of the 5-cycle -- so the pentagon's two non-Perron eigenvalues ARE the golden quadratic's roots. golden_quadratic_roots (root characterization), golden_roots_mem_pentagon_spectrum (both in spec C5), golden_ratio_spectral_characterization (capstone set-equality), golden_roots_sign_split (phi>1 pins the pair by sign)."
+    },
+    {
+      "name": "Brockian.GoldenSpectralCharacterization.golden_roots_mem_pentagon_spectrum",
+      "kind": "theorem",
+      "module": "Brockian.GoldenSpectralCharacterization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldenSpectralCharacterization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Spectral fingerprint of the golden ratio (swarm-built, AXLE @4.32, axiom-clean): the root set of the golden quadratic X^2+X-1 equals exactly {phi-1, -phi}, and both are adjacency eigenvalues of the 5-cycle -- so the pentagon's two non-Perron eigenvalues ARE the golden quadratic's roots. golden_quadratic_roots (root characterization), golden_roots_mem_pentagon_spectrum (both in spec C5), golden_ratio_spectral_characterization (capstone set-equality), golden_roots_sign_split (phi>1 pins the pair by sign)."
+    },
+    {
+      "name": "Brockian.GoldenSpectralCharacterization.golden_roots_sign_split",
+      "kind": "theorem",
+      "module": "Brockian.GoldenSpectralCharacterization",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GoldenSpectralCharacterization.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Spectral fingerprint of the golden ratio (swarm-built, AXLE @4.32, axiom-clean): the root set of the golden quadratic X^2+X-1 equals exactly {phi-1, -phi}, and both are adjacency eigenvalues of the 5-cycle -- so the pentagon's two non-Perron eigenvalues ARE the golden quadratic's roots. golden_quadratic_roots (root characterization), golden_roots_mem_pentagon_spectrum (both in spec C5), golden_ratio_spectral_characterization (capstone set-equality), golden_roots_sign_split (phi>1 pins the pair by sign)."
+    },
+    {
       "name": "Brockian.GoldenUniqueness.C5_membership_layer",
       "kind": "theorem",
       "module": "Brockian.GoldenUniqueness",
@@ -32562,6 +32694,378 @@
       "quarantine": true,
       "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence",
       "provenance_note": "golden-uniqueness reusable schema (roadmap #11). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; verdict re-checked by Claude's gate before integration."
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.countermodel_assoc",
+      "kind": "theorem",
+      "module": "Brockian.MagmaLawRefutations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MagmaLawRefutations.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Finite-countermodel refutation certificates (Aristotle/Harmonic closes, refute-harness outputs, AXLE @4.32, axiom-clean via decide): four order-2 magmas proving law A does NOT entail law B -- assoc-not-comm, comm-not-assoc, idemp-not-comm, mid-not-left. Honest NON-implication certificates (the complement of the certificate factory's proving lane). Consolidated from 5 Aristotle targets with the idemp/x-x-x duplicate dropped."
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.countermodel_comm",
+      "kind": "theorem",
+      "module": "Brockian.MagmaLawRefutations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MagmaLawRefutations.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Finite-countermodel refutation certificates (Aristotle/Harmonic closes, refute-harness outputs, AXLE @4.32, axiom-clean via decide): four order-2 magmas proving law A does NOT entail law B -- assoc-not-comm, comm-not-assoc, idemp-not-comm, mid-not-left. Honest NON-implication certificates (the complement of the certificate factory's proving lane). Consolidated from 5 Aristotle targets with the idemp/x-x-x duplicate dropped."
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.countermodel_idem",
+      "kind": "theorem",
+      "module": "Brockian.MagmaLawRefutations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MagmaLawRefutations.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Finite-countermodel refutation certificates (Aristotle/Harmonic closes, refute-harness outputs, AXLE @4.32, axiom-clean via decide): four order-2 magmas proving law A does NOT entail law B -- assoc-not-comm, comm-not-assoc, idemp-not-comm, mid-not-left. Honest NON-implication certificates (the complement of the certificate factory's proving lane). Consolidated from 5 Aristotle targets with the idemp/x-x-x duplicate dropped."
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.countermodel_mid",
+      "kind": "theorem",
+      "module": "Brockian.MagmaLawRefutations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MagmaLawRefutations.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Finite-countermodel refutation certificates (Aristotle/Harmonic closes, refute-harness outputs, AXLE @4.32, axiom-clean via decide): four order-2 magmas proving law A does NOT entail law B -- assoc-not-comm, comm-not-assoc, idemp-not-comm, mid-not-left. Honest NON-implication certificates (the complement of the certificate factory's proving lane). Consolidated from 5 Aristotle targets with the idemp/x-x-x duplicate dropped."
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.not_entails_assoc",
+      "kind": "theorem",
+      "module": "Brockian.MagmaLawRefutations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MagmaLawRefutations.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Finite-countermodel refutation certificates (Aristotle/Harmonic closes, refute-harness outputs, AXLE @4.32, axiom-clean via decide): four order-2 magmas proving law A does NOT entail law B -- assoc-not-comm, comm-not-assoc, idemp-not-comm, mid-not-left. Honest NON-implication certificates (the complement of the certificate factory's proving lane). Consolidated from 5 Aristotle targets with the idemp/x-x-x duplicate dropped."
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.not_entails_comm",
+      "kind": "theorem",
+      "module": "Brockian.MagmaLawRefutations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MagmaLawRefutations.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Finite-countermodel refutation certificates (Aristotle/Harmonic closes, refute-harness outputs, AXLE @4.32, axiom-clean via decide): four order-2 magmas proving law A does NOT entail law B -- assoc-not-comm, comm-not-assoc, idemp-not-comm, mid-not-left. Honest NON-implication certificates (the complement of the certificate factory's proving lane). Consolidated from 5 Aristotle targets with the idemp/x-x-x duplicate dropped."
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.not_entails_idem",
+      "kind": "theorem",
+      "module": "Brockian.MagmaLawRefutations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MagmaLawRefutations.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Finite-countermodel refutation certificates (Aristotle/Harmonic closes, refute-harness outputs, AXLE @4.32, axiom-clean via decide): four order-2 magmas proving law A does NOT entail law B -- assoc-not-comm, comm-not-assoc, idemp-not-comm, mid-not-left. Honest NON-implication certificates (the complement of the certificate factory's proving lane). Consolidated from 5 Aristotle targets with the idemp/x-x-x duplicate dropped."
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.not_entails_mid",
+      "kind": "theorem",
+      "module": "Brockian.MagmaLawRefutations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MagmaLawRefutations.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Finite-countermodel refutation certificates (Aristotle/Harmonic closes, refute-harness outputs, AXLE @4.32, axiom-clean via decide): four order-2 magmas proving law A does NOT entail law B -- assoc-not-comm, comm-not-assoc, idemp-not-comm, mid-not-left. Honest NON-implication certificates (the complement of the certificate factory's proving lane). Consolidated from 5 Aristotle targets with the idemp/x-x-x duplicate dropped."
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.op_assoc",
+      "kind": "def",
+      "module": "Brockian.MagmaLawRefutations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MagmaLawRefutations.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Finite-countermodel refutation certificates (Aristotle/Harmonic closes, refute-harness outputs, AXLE @4.32, axiom-clean via decide): four order-2 magmas proving law A does NOT entail law B -- assoc-not-comm, comm-not-assoc, idemp-not-comm, mid-not-left. Honest NON-implication certificates (the complement of the certificate factory's proving lane). Consolidated from 5 Aristotle targets with the idemp/x-x-x duplicate dropped."
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.op_comm",
+      "kind": "def",
+      "module": "Brockian.MagmaLawRefutations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MagmaLawRefutations.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Finite-countermodel refutation certificates (Aristotle/Harmonic closes, refute-harness outputs, AXLE @4.32, axiom-clean via decide): four order-2 magmas proving law A does NOT entail law B -- assoc-not-comm, comm-not-assoc, idemp-not-comm, mid-not-left. Honest NON-implication certificates (the complement of the certificate factory's proving lane). Consolidated from 5 Aristotle targets with the idemp/x-x-x duplicate dropped."
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.op_idem",
+      "kind": "def",
+      "module": "Brockian.MagmaLawRefutations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MagmaLawRefutations.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Finite-countermodel refutation certificates (Aristotle/Harmonic closes, refute-harness outputs, AXLE @4.32, axiom-clean via decide): four order-2 magmas proving law A does NOT entail law B -- assoc-not-comm, comm-not-assoc, idemp-not-comm, mid-not-left. Honest NON-implication certificates (the complement of the certificate factory's proving lane). Consolidated from 5 Aristotle targets with the idemp/x-x-x duplicate dropped."
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.op_mid",
+      "kind": "def",
+      "module": "Brockian.MagmaLawRefutations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MagmaLawRefutations.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm/Harmonic; AXLE @4.32",
+      "provenance_note": "Finite-countermodel refutation certificates (Aristotle/Harmonic closes, refute-harness outputs, AXLE @4.32, axiom-clean via decide): four order-2 magmas proving law A does NOT entail law B -- assoc-not-comm, comm-not-assoc, idemp-not-comm, mid-not-left. Honest NON-implication certificates (the complement of the certificate factory's proving lane). Consolidated from 5 Aristotle targets with the idemp/x-x-x duplicate dropped."
     },
     {
       "name": "Brockian.MetallicFamily.H3_ground_metallic",
