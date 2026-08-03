@@ -873,6 +873,13 @@ runs:
     ledger_run: "open-territory loop; AXLE @4.32"
     provenance_note: "OPEN-TERRITORY Ore harmonic divisor numbers (open-territory loop, AXLE @4.32, axiom-clean). Harmonic n := sigma(n) | n*tau(n) (harmonic mean of divisors is integer). CONCRETE: harmonic_{6,28,140,270,496}; non-example not_harmonic_4. Every perfect number is harmonic; Ore's conjecture (no odd harmonic number > 1) would IMPLY no odd perfect number -- the OPEN question OddHarmonicExists (does an odd harmonic divisor number > 1 exist?) is an unproven def, never asserted or denied. Connects to the odd-perfect cluster."
 
+  "odd-perfect-euler":
+    module: Brockian.OddPerfectEuler
+    verdict: admit
+    quarantine: true
+    ledger_run: "Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32"
+    provenance_note: "HARMONIC-PROVED hard theorem: Euler's form for odd perfect numbers (Aristotle/Harmonic proof run 0f4ddfbb, independently AXLE-verified @lean-4.32.0, axiom-clean). oddPerfect_euler_form: if n is odd and perfect then n = p^k * m^2 with p prime, p=1 mod 4, k=1 mod 4, and p not dividing m -- Euler's classical theorem on the structure of any (hypothetical) odd perfect number. Proof via the divisor-sum factorization mod 4 (unique exceptional prime/exponent, all other exponents even, reconstruct the square factor). This is the genuinely HARD partial result my decide-swarm dropped twice, landed by Harmonic's stronger compute and verified on our own toolchain. Odd perfect existence itself remains OPEN."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────
   "weyl-gate1-bounded":

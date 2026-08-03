@@ -10,7 +10,7 @@
 - **CONJECTURE**: 38
 - **DEFINITION**: 552
 - **DISCHARGED**: 6
-- **PROVED**: 10405
+- **PROVED**: 10412
 
 ## Theorems
 
@@ -3430,6 +3430,13 @@
 | PROVED | `Brockian.OddPerfectConstraints.oddPerfect_one_lt` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.OddPerfectConstraints.oddPerfect_pos` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.OddPerfectConstraints.odd_of_prime_dvd_odd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectEuler.exceptional_prime_data` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectEuler.exists_factor_mod_four_eq_two` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectEuler.geom_sum_mod_four` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectEuler.geom_sum_parity` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectEuler.oddPerfect_euler_form` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectEuler.other_factor_odd` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectEuler.reconstruct_euler_factorization` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32 |
 | CONJECTURE | `Brockian.OppermannConjecture.OppermannConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.OppermannConjecture.OppermannLower` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.OppermannConjecture.OppermannUpper` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |

@@ -711,3 +711,4 @@ import Brockian.WeylWeightedRellich
 import Brockian.WeylOscillatorDiscrete
 import Brockian.WeylUpstream
 import Brockian.PentagonTraceBridge
+import Brockian.OddPerfectEuler

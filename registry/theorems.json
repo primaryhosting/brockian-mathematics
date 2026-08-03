@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10405,
+    "PROVED": 10412,
     "DEFINITION": 552,
     "CONJECTURE": 38,
     "CONDITIONAL": 21,
@@ -110527,6 +110527,236 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY necessary conditions for odd perfect numbers (open ~2000 years; existence unknown). Open-territory loop, AXLE @4.32, axiom-clean. FLAGSHIP oddPerfect_not_square: an odd perfect number cannot be a perfect square (sigma of an odd square is odd, but Perfect means sigma n = 2n even -> contradiction). Plus oddPerfect_not_prime_pow (not a prime power) and sanity conditions (positive, odd, >1). All theorems are IF-an-odd-perfect-number-exists-THEN necessary conditions; existence is NEVER asserted or denied. Euler's form p^k*m^2 was the stretch and honestly dropped (not proved)."
+    },
+    {
+      "name": "Brockian.OddPerfectEuler.exceptional_prime_data",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectEuler",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectEuler.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED hard theorem: Euler's form for odd perfect numbers (Aristotle/Harmonic proof run 0f4ddfbb, independently AXLE-verified @lean-4.32.0, axiom-clean). oddPerfect_euler_form: if n is odd and perfect then n = p^k * m^2 with p prime, p=1 mod 4, k=1 mod 4, and p not dividing m -- Euler's classical theorem on the structure of any (hypothetical) odd perfect number. Proof via the divisor-sum factorization mod 4 (unique exceptional prime/exponent, all other exponents even, reconstruct the square factor). This is the genuinely HARD partial result my decide-swarm dropped twice, landed by Harmonic's stronger compute and verified on our own toolchain. Odd perfect existence itself remains OPEN."
+    },
+    {
+      "name": "Brockian.OddPerfectEuler.exists_factor_mod_four_eq_two",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectEuler",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectEuler.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED hard theorem: Euler's form for odd perfect numbers (Aristotle/Harmonic proof run 0f4ddfbb, independently AXLE-verified @lean-4.32.0, axiom-clean). oddPerfect_euler_form: if n is odd and perfect then n = p^k * m^2 with p prime, p=1 mod 4, k=1 mod 4, and p not dividing m -- Euler's classical theorem on the structure of any (hypothetical) odd perfect number. Proof via the divisor-sum factorization mod 4 (unique exceptional prime/exponent, all other exponents even, reconstruct the square factor). This is the genuinely HARD partial result my decide-swarm dropped twice, landed by Harmonic's stronger compute and verified on our own toolchain. Odd perfect existence itself remains OPEN."
+    },
+    {
+      "name": "Brockian.OddPerfectEuler.geom_sum_mod_four",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectEuler",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectEuler.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED hard theorem: Euler's form for odd perfect numbers (Aristotle/Harmonic proof run 0f4ddfbb, independently AXLE-verified @lean-4.32.0, axiom-clean). oddPerfect_euler_form: if n is odd and perfect then n = p^k * m^2 with p prime, p=1 mod 4, k=1 mod 4, and p not dividing m -- Euler's classical theorem on the structure of any (hypothetical) odd perfect number. Proof via the divisor-sum factorization mod 4 (unique exceptional prime/exponent, all other exponents even, reconstruct the square factor). This is the genuinely HARD partial result my decide-swarm dropped twice, landed by Harmonic's stronger compute and verified on our own toolchain. Odd perfect existence itself remains OPEN."
+    },
+    {
+      "name": "Brockian.OddPerfectEuler.geom_sum_parity",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectEuler",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectEuler.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED hard theorem: Euler's form for odd perfect numbers (Aristotle/Harmonic proof run 0f4ddfbb, independently AXLE-verified @lean-4.32.0, axiom-clean). oddPerfect_euler_form: if n is odd and perfect then n = p^k * m^2 with p prime, p=1 mod 4, k=1 mod 4, and p not dividing m -- Euler's classical theorem on the structure of any (hypothetical) odd perfect number. Proof via the divisor-sum factorization mod 4 (unique exceptional prime/exponent, all other exponents even, reconstruct the square factor). This is the genuinely HARD partial result my decide-swarm dropped twice, landed by Harmonic's stronger compute and verified on our own toolchain. Odd perfect existence itself remains OPEN."
+    },
+    {
+      "name": "Brockian.OddPerfectEuler.oddPerfect_euler_form",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectEuler",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectEuler.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED hard theorem: Euler's form for odd perfect numbers (Aristotle/Harmonic proof run 0f4ddfbb, independently AXLE-verified @lean-4.32.0, axiom-clean). oddPerfect_euler_form: if n is odd and perfect then n = p^k * m^2 with p prime, p=1 mod 4, k=1 mod 4, and p not dividing m -- Euler's classical theorem on the structure of any (hypothetical) odd perfect number. Proof via the divisor-sum factorization mod 4 (unique exceptional prime/exponent, all other exponents even, reconstruct the square factor). This is the genuinely HARD partial result my decide-swarm dropped twice, landed by Harmonic's stronger compute and verified on our own toolchain. Odd perfect existence itself remains OPEN."
+    },
+    {
+      "name": "Brockian.OddPerfectEuler.other_factor_odd",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectEuler",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectEuler.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED hard theorem: Euler's form for odd perfect numbers (Aristotle/Harmonic proof run 0f4ddfbb, independently AXLE-verified @lean-4.32.0, axiom-clean). oddPerfect_euler_form: if n is odd and perfect then n = p^k * m^2 with p prime, p=1 mod 4, k=1 mod 4, and p not dividing m -- Euler's classical theorem on the structure of any (hypothetical) odd perfect number. Proof via the divisor-sum factorization mod 4 (unique exceptional prime/exponent, all other exponents even, reconstruct the square factor). This is the genuinely HARD partial result my decide-swarm dropped twice, landed by Harmonic's stronger compute and verified on our own toolchain. Odd perfect existence itself remains OPEN."
+    },
+    {
+      "name": "Brockian.OddPerfectEuler.reconstruct_euler_factorization",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectEuler",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectEuler.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED hard theorem: Euler's form for odd perfect numbers (Aristotle/Harmonic proof run 0f4ddfbb, independently AXLE-verified @lean-4.32.0, axiom-clean). oddPerfect_euler_form: if n is odd and perfect then n = p^k * m^2 with p prime, p=1 mod 4, k=1 mod 4, and p not dividing m -- Euler's classical theorem on the structure of any (hypothetical) odd perfect number. Proof via the divisor-sum factorization mod 4 (unique exceptional prime/exponent, all other exponents even, reconstruct the square factor). This is the genuinely HARD partial result my decide-swarm dropped twice, landed by Harmonic's stronger compute and verified on our own toolchain. Odd perfect existence itself remains OPEN."
     },
     {
       "name": "Brockian.OppermannConjecture.OppermannConjecture",
