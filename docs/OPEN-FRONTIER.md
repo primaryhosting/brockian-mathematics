@@ -461,6 +461,22 @@ Module: `Brockian.WilsonPrimes`. `WilsonPrimeInfinitude` is an unproven `def`.
 
 ---
 
+## Quasiperfect numbers — does one exist? (open)
+
+**Claim.** Does a quasiperfect number (σ(n) = 2n+1) exist? None is known — open (if one exists it is
+an odd square > 10³⁵). Module: `Brockian.QuasiperfectNumbers`. `QuasiperfectExists` is an unproven `def`.
+
+**PROVED (the three regimes, both known sides):**
+- **Every power of 2 is almost-perfect** (`almostPerfect_pow_two`, general theorem): σ(2ᵏ) = 2·2ᵏ − 1.
+  Concrete: 1, 2, 16 almost-perfect; 6, 28 perfect (σ = 2n).
+- **The three regimes are mutually exclusive** (`not_quasiperfect_of_almostPerfect`,
+  `not_quasiperfect_of_perfectσ`) — σ = 2n−1, 2n, 2n+1 are distinct.
+
+**OPEN.** Whether any quasiperfect number (the σ = 2n+1 case) exists — the unknown middle sitting
+between the well-understood almost-perfect (−1) and perfect (0) regimes.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

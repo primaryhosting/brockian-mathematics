@@ -687,3 +687,4 @@ import Brockian.GilbreathConjecture
 import Brockian.WeirdNumbers
 import Brockian.PerfectTotient
 import Brockian.WilsonPrimes
+import Brockian.QuasiperfectNumbers

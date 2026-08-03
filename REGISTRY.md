@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 29
-- **DEFINITION**: 519
+- **CONJECTURE**: 30
+- **DEFINITION**: 523
 - **DISCHARGED**: 6
-- **PROVED**: 10133
+- **PROVED**: 10142
 
 ## Theorems
 
@@ -3589,6 +3589,20 @@
 | PROVED | `Brockian.PolignacPrimes.sexy_5` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PolignacPrimes.sexy_7` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PolignacPrimes.sexy_same_mod_six` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.QuasiperfectNumbers.AlmostPerfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.QuasiperfectNumbers.Perfectσ` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.QuasiperfectNumbers.Quasiperfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.QuasiperfectNumbers.QuasiperfectExists` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.QuasiperfectNumbers.almostPerfect_1` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.QuasiperfectNumbers.almostPerfect_16` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.QuasiperfectNumbers.almostPerfect_2` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.QuasiperfectNumbers.almostPerfect_pow_two` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.QuasiperfectNumbers.not_quasiperfect_of_almostPerfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.QuasiperfectNumbers.not_quasiperfect_of_perfectσ` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.QuasiperfectNumbers.perfectσ_28` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.QuasiperfectNumbers.perfectσ_6` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.QuasiperfectNumbers.sigma1` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.QuasiperfectNumbers.sigma_two_pow` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.RamanujanCongruence.coeff_partitionGF` | ✓ | verified | lean-4.32.0 | roadmap #3 — genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32 |
 | PROVED | `Brockian.RamanujanCongruence.coeff_partitionGF_zero` | ✓ | verified | lean-4.32.0 | roadmap #3 — genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32 |
 | PROVED | `Brockian.RamanujanCongruence.five_dvd_of_dissection` | ✓ | verified | lean-4.32.0 | roadmap #3 — genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32 |

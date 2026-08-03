@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10133,
-    "DEFINITION": 519,
-    "CONJECTURE": 29,
+    "PROVED": 10142,
+    "DEFINITION": 523,
+    "CONJECTURE": 30,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -115644,6 +115644,448 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.QuasiperfectNumbers.AlmostPerfect",
+      "kind": "def",
+      "module": "Brockian.QuasiperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QuasiperfectNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY quasiperfect numbers -- the sigma=2n+-1/2n three-regime picture (open-territory loop, AXLE @4.32, axiom-clean). AlmostPerfect (sigma=2n-1), Perfectsigma (sigma=2n), Quasiperfect (sigma=2n+1). FLAGSHIP almostPerfect_pow_two: EVERY power of 2 is almost-perfect (sigma(2^k)=2^(k+1)-1=2*2^k-1, general theorem via geom sum). CONCRETE: almostPerfect_{1,2,16}, perfectsigma_{6,28}. Regimes mutually exclusive (not_quasiperfect_of_almostPerfect/perfectsigma). Quasiperfect (sigma=2n+1) has NO known instance -- existence is OPEN (if one exists it is an odd square >10^35); QuasiperfectExists is an unproven def, never asserted or denied."
+    },
+    {
+      "name": "Brockian.QuasiperfectNumbers.Perfect\u03c3",
+      "kind": "def",
+      "module": "Brockian.QuasiperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QuasiperfectNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY quasiperfect numbers -- the sigma=2n+-1/2n three-regime picture (open-territory loop, AXLE @4.32, axiom-clean). AlmostPerfect (sigma=2n-1), Perfectsigma (sigma=2n), Quasiperfect (sigma=2n+1). FLAGSHIP almostPerfect_pow_two: EVERY power of 2 is almost-perfect (sigma(2^k)=2^(k+1)-1=2*2^k-1, general theorem via geom sum). CONCRETE: almostPerfect_{1,2,16}, perfectsigma_{6,28}. Regimes mutually exclusive (not_quasiperfect_of_almostPerfect/perfectsigma). Quasiperfect (sigma=2n+1) has NO known instance -- existence is OPEN (if one exists it is an odd square >10^35); QuasiperfectExists is an unproven def, never asserted or denied."
+    },
+    {
+      "name": "Brockian.QuasiperfectNumbers.Quasiperfect",
+      "kind": "def",
+      "module": "Brockian.QuasiperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QuasiperfectNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY quasiperfect numbers -- the sigma=2n+-1/2n three-regime picture (open-territory loop, AXLE @4.32, axiom-clean). AlmostPerfect (sigma=2n-1), Perfectsigma (sigma=2n), Quasiperfect (sigma=2n+1). FLAGSHIP almostPerfect_pow_two: EVERY power of 2 is almost-perfect (sigma(2^k)=2^(k+1)-1=2*2^k-1, general theorem via geom sum). CONCRETE: almostPerfect_{1,2,16}, perfectsigma_{6,28}. Regimes mutually exclusive (not_quasiperfect_of_almostPerfect/perfectsigma). Quasiperfect (sigma=2n+1) has NO known instance -- existence is OPEN (if one exists it is an odd square >10^35); QuasiperfectExists is an unproven def, never asserted or denied."
+    },
+    {
+      "name": "Brockian.QuasiperfectNumbers.QuasiperfectExists",
+      "kind": "conjecture",
+      "module": "Brockian.QuasiperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QuasiperfectNumbers.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY quasiperfect numbers -- the sigma=2n+-1/2n three-regime picture (open-territory loop, AXLE @4.32, axiom-clean). AlmostPerfect (sigma=2n-1), Perfectsigma (sigma=2n), Quasiperfect (sigma=2n+1). FLAGSHIP almostPerfect_pow_two: EVERY power of 2 is almost-perfect (sigma(2^k)=2^(k+1)-1=2*2^k-1, general theorem via geom sum). CONCRETE: almostPerfect_{1,2,16}, perfectsigma_{6,28}. Regimes mutually exclusive (not_quasiperfect_of_almostPerfect/perfectsigma). Quasiperfect (sigma=2n+1) has NO known instance -- existence is OPEN (if one exists it is an odd square >10^35); QuasiperfectExists is an unproven def, never asserted or denied."
+    },
+    {
+      "name": "Brockian.QuasiperfectNumbers.almostPerfect_1",
+      "kind": "theorem",
+      "module": "Brockian.QuasiperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QuasiperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY quasiperfect numbers -- the sigma=2n+-1/2n three-regime picture (open-territory loop, AXLE @4.32, axiom-clean). AlmostPerfect (sigma=2n-1), Perfectsigma (sigma=2n), Quasiperfect (sigma=2n+1). FLAGSHIP almostPerfect_pow_two: EVERY power of 2 is almost-perfect (sigma(2^k)=2^(k+1)-1=2*2^k-1, general theorem via geom sum). CONCRETE: almostPerfect_{1,2,16}, perfectsigma_{6,28}. Regimes mutually exclusive (not_quasiperfect_of_almostPerfect/perfectsigma). Quasiperfect (sigma=2n+1) has NO known instance -- existence is OPEN (if one exists it is an odd square >10^35); QuasiperfectExists is an unproven def, never asserted or denied."
+    },
+    {
+      "name": "Brockian.QuasiperfectNumbers.almostPerfect_16",
+      "kind": "theorem",
+      "module": "Brockian.QuasiperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QuasiperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY quasiperfect numbers -- the sigma=2n+-1/2n three-regime picture (open-territory loop, AXLE @4.32, axiom-clean). AlmostPerfect (sigma=2n-1), Perfectsigma (sigma=2n), Quasiperfect (sigma=2n+1). FLAGSHIP almostPerfect_pow_two: EVERY power of 2 is almost-perfect (sigma(2^k)=2^(k+1)-1=2*2^k-1, general theorem via geom sum). CONCRETE: almostPerfect_{1,2,16}, perfectsigma_{6,28}. Regimes mutually exclusive (not_quasiperfect_of_almostPerfect/perfectsigma). Quasiperfect (sigma=2n+1) has NO known instance -- existence is OPEN (if one exists it is an odd square >10^35); QuasiperfectExists is an unproven def, never asserted or denied."
+    },
+    {
+      "name": "Brockian.QuasiperfectNumbers.almostPerfect_2",
+      "kind": "theorem",
+      "module": "Brockian.QuasiperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QuasiperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY quasiperfect numbers -- the sigma=2n+-1/2n three-regime picture (open-territory loop, AXLE @4.32, axiom-clean). AlmostPerfect (sigma=2n-1), Perfectsigma (sigma=2n), Quasiperfect (sigma=2n+1). FLAGSHIP almostPerfect_pow_two: EVERY power of 2 is almost-perfect (sigma(2^k)=2^(k+1)-1=2*2^k-1, general theorem via geom sum). CONCRETE: almostPerfect_{1,2,16}, perfectsigma_{6,28}. Regimes mutually exclusive (not_quasiperfect_of_almostPerfect/perfectsigma). Quasiperfect (sigma=2n+1) has NO known instance -- existence is OPEN (if one exists it is an odd square >10^35); QuasiperfectExists is an unproven def, never asserted or denied."
+    },
+    {
+      "name": "Brockian.QuasiperfectNumbers.almostPerfect_pow_two",
+      "kind": "theorem",
+      "module": "Brockian.QuasiperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QuasiperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY quasiperfect numbers -- the sigma=2n+-1/2n three-regime picture (open-territory loop, AXLE @4.32, axiom-clean). AlmostPerfect (sigma=2n-1), Perfectsigma (sigma=2n), Quasiperfect (sigma=2n+1). FLAGSHIP almostPerfect_pow_two: EVERY power of 2 is almost-perfect (sigma(2^k)=2^(k+1)-1=2*2^k-1, general theorem via geom sum). CONCRETE: almostPerfect_{1,2,16}, perfectsigma_{6,28}. Regimes mutually exclusive (not_quasiperfect_of_almostPerfect/perfectsigma). Quasiperfect (sigma=2n+1) has NO known instance -- existence is OPEN (if one exists it is an odd square >10^35); QuasiperfectExists is an unproven def, never asserted or denied."
+    },
+    {
+      "name": "Brockian.QuasiperfectNumbers.not_quasiperfect_of_almostPerfect",
+      "kind": "theorem",
+      "module": "Brockian.QuasiperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QuasiperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY quasiperfect numbers -- the sigma=2n+-1/2n three-regime picture (open-territory loop, AXLE @4.32, axiom-clean). AlmostPerfect (sigma=2n-1), Perfectsigma (sigma=2n), Quasiperfect (sigma=2n+1). FLAGSHIP almostPerfect_pow_two: EVERY power of 2 is almost-perfect (sigma(2^k)=2^(k+1)-1=2*2^k-1, general theorem via geom sum). CONCRETE: almostPerfect_{1,2,16}, perfectsigma_{6,28}. Regimes mutually exclusive (not_quasiperfect_of_almostPerfect/perfectsigma). Quasiperfect (sigma=2n+1) has NO known instance -- existence is OPEN (if one exists it is an odd square >10^35); QuasiperfectExists is an unproven def, never asserted or denied."
+    },
+    {
+      "name": "Brockian.QuasiperfectNumbers.not_quasiperfect_of_perfect\u03c3",
+      "kind": "theorem",
+      "module": "Brockian.QuasiperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QuasiperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY quasiperfect numbers -- the sigma=2n+-1/2n three-regime picture (open-territory loop, AXLE @4.32, axiom-clean). AlmostPerfect (sigma=2n-1), Perfectsigma (sigma=2n), Quasiperfect (sigma=2n+1). FLAGSHIP almostPerfect_pow_two: EVERY power of 2 is almost-perfect (sigma(2^k)=2^(k+1)-1=2*2^k-1, general theorem via geom sum). CONCRETE: almostPerfect_{1,2,16}, perfectsigma_{6,28}. Regimes mutually exclusive (not_quasiperfect_of_almostPerfect/perfectsigma). Quasiperfect (sigma=2n+1) has NO known instance -- existence is OPEN (if one exists it is an odd square >10^35); QuasiperfectExists is an unproven def, never asserted or denied."
+    },
+    {
+      "name": "Brockian.QuasiperfectNumbers.perfect\u03c3_28",
+      "kind": "theorem",
+      "module": "Brockian.QuasiperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QuasiperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY quasiperfect numbers -- the sigma=2n+-1/2n three-regime picture (open-territory loop, AXLE @4.32, axiom-clean). AlmostPerfect (sigma=2n-1), Perfectsigma (sigma=2n), Quasiperfect (sigma=2n+1). FLAGSHIP almostPerfect_pow_two: EVERY power of 2 is almost-perfect (sigma(2^k)=2^(k+1)-1=2*2^k-1, general theorem via geom sum). CONCRETE: almostPerfect_{1,2,16}, perfectsigma_{6,28}. Regimes mutually exclusive (not_quasiperfect_of_almostPerfect/perfectsigma). Quasiperfect (sigma=2n+1) has NO known instance -- existence is OPEN (if one exists it is an odd square >10^35); QuasiperfectExists is an unproven def, never asserted or denied."
+    },
+    {
+      "name": "Brockian.QuasiperfectNumbers.perfect\u03c3_6",
+      "kind": "theorem",
+      "module": "Brockian.QuasiperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QuasiperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY quasiperfect numbers -- the sigma=2n+-1/2n three-regime picture (open-territory loop, AXLE @4.32, axiom-clean). AlmostPerfect (sigma=2n-1), Perfectsigma (sigma=2n), Quasiperfect (sigma=2n+1). FLAGSHIP almostPerfect_pow_two: EVERY power of 2 is almost-perfect (sigma(2^k)=2^(k+1)-1=2*2^k-1, general theorem via geom sum). CONCRETE: almostPerfect_{1,2,16}, perfectsigma_{6,28}. Regimes mutually exclusive (not_quasiperfect_of_almostPerfect/perfectsigma). Quasiperfect (sigma=2n+1) has NO known instance -- existence is OPEN (if one exists it is an odd square >10^35); QuasiperfectExists is an unproven def, never asserted or denied."
+    },
+    {
+      "name": "Brockian.QuasiperfectNumbers.sigma1",
+      "kind": "def",
+      "module": "Brockian.QuasiperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QuasiperfectNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY quasiperfect numbers -- the sigma=2n+-1/2n three-regime picture (open-territory loop, AXLE @4.32, axiom-clean). AlmostPerfect (sigma=2n-1), Perfectsigma (sigma=2n), Quasiperfect (sigma=2n+1). FLAGSHIP almostPerfect_pow_two: EVERY power of 2 is almost-perfect (sigma(2^k)=2^(k+1)-1=2*2^k-1, general theorem via geom sum). CONCRETE: almostPerfect_{1,2,16}, perfectsigma_{6,28}. Regimes mutually exclusive (not_quasiperfect_of_almostPerfect/perfectsigma). Quasiperfect (sigma=2n+1) has NO known instance -- existence is OPEN (if one exists it is an odd square >10^35); QuasiperfectExists is an unproven def, never asserted or denied."
+    },
+    {
+      "name": "Brockian.QuasiperfectNumbers.sigma_two_pow",
+      "kind": "theorem",
+      "module": "Brockian.QuasiperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QuasiperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY quasiperfect numbers -- the sigma=2n+-1/2n three-regime picture (open-territory loop, AXLE @4.32, axiom-clean). AlmostPerfect (sigma=2n-1), Perfectsigma (sigma=2n), Quasiperfect (sigma=2n+1). FLAGSHIP almostPerfect_pow_two: EVERY power of 2 is almost-perfect (sigma(2^k)=2^(k+1)-1=2*2^k-1, general theorem via geom sum). CONCRETE: almostPerfect_{1,2,16}, perfectsigma_{6,28}. Regimes mutually exclusive (not_quasiperfect_of_almostPerfect/perfectsigma). Quasiperfect (sigma=2n+1) has NO known instance -- existence is OPEN (if one exists it is an odd square >10^35); QuasiperfectExists is an unproven def, never asserted or denied."
     },
     {
       "name": "Brockian.RamanujanCongruence.coeff_partitionGF",
