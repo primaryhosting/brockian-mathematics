@@ -1,13 +1,178 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10527,
+    "PROVED": 10532,
     "DEFINITION": 572,
     "CONJECTURE": 40,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
   "theorems": [
+    {
+      "name": "Brockian.AbundantClosure.abundant_of_perfect_dvd",
+      "kind": "theorem",
+      "module": "Brockian.AbundantClosure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AbundantClosure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general abundant/deficient closure theorems (AXLE @4.32, axiom-clean). abundant_of_perfect_dvd (flagship): a PROPER multiple of a perfect number is abundant -- the strict version, needing a genuine new argument (the extra divisor 1 gives sum >= 2n+1) beyond Mathlib's non-strict abundancyIndex_le_of_dvd. deficient_of_dvd_deficient: every positive divisor of a deficient number is deficient (proved TRUE via trichotomy, not dropped). prime_deficient; exists_prime_factor_of_abundant; abundant_of_six_dvd (proper multiples of 6 are abundant). Reusable structural closure facts on the perfect/abundant/deficient frontier."
+    },
+    {
+      "name": "Brockian.AbundantClosure.abundant_of_six_dvd",
+      "kind": "theorem",
+      "module": "Brockian.AbundantClosure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AbundantClosure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general abundant/deficient closure theorems (AXLE @4.32, axiom-clean). abundant_of_perfect_dvd (flagship): a PROPER multiple of a perfect number is abundant -- the strict version, needing a genuine new argument (the extra divisor 1 gives sum >= 2n+1) beyond Mathlib's non-strict abundancyIndex_le_of_dvd. deficient_of_dvd_deficient: every positive divisor of a deficient number is deficient (proved TRUE via trichotomy, not dropped). prime_deficient; exists_prime_factor_of_abundant; abundant_of_six_dvd (proper multiples of 6 are abundant). Reusable structural closure facts on the perfect/abundant/deficient frontier."
+    },
+    {
+      "name": "Brockian.AbundantClosure.deficient_of_dvd_deficient",
+      "kind": "theorem",
+      "module": "Brockian.AbundantClosure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AbundantClosure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general abundant/deficient closure theorems (AXLE @4.32, axiom-clean). abundant_of_perfect_dvd (flagship): a PROPER multiple of a perfect number is abundant -- the strict version, needing a genuine new argument (the extra divisor 1 gives sum >= 2n+1) beyond Mathlib's non-strict abundancyIndex_le_of_dvd. deficient_of_dvd_deficient: every positive divisor of a deficient number is deficient (proved TRUE via trichotomy, not dropped). prime_deficient; exists_prime_factor_of_abundant; abundant_of_six_dvd (proper multiples of 6 are abundant). Reusable structural closure facts on the perfect/abundant/deficient frontier."
+    },
+    {
+      "name": "Brockian.AbundantClosure.exists_prime_factor_of_abundant",
+      "kind": "theorem",
+      "module": "Brockian.AbundantClosure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AbundantClosure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general abundant/deficient closure theorems (AXLE @4.32, axiom-clean). abundant_of_perfect_dvd (flagship): a PROPER multiple of a perfect number is abundant -- the strict version, needing a genuine new argument (the extra divisor 1 gives sum >= 2n+1) beyond Mathlib's non-strict abundancyIndex_le_of_dvd. deficient_of_dvd_deficient: every positive divisor of a deficient number is deficient (proved TRUE via trichotomy, not dropped). prime_deficient; exists_prime_factor_of_abundant; abundant_of_six_dvd (proper multiples of 6 are abundant). Reusable structural closure facts on the perfect/abundant/deficient frontier."
+    },
+    {
+      "name": "Brockian.AbundantClosure.prime_deficient",
+      "kind": "theorem",
+      "module": "Brockian.AbundantClosure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AbundantClosure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general abundant/deficient closure theorems (AXLE @4.32, axiom-clean). abundant_of_perfect_dvd (flagship): a PROPER multiple of a perfect number is abundant -- the strict version, needing a genuine new argument (the extra divisor 1 gives sum >= 2n+1) beyond Mathlib's non-strict abundancyIndex_le_of_dvd. deficient_of_dvd_deficient: every positive divisor of a deficient number is deficient (proved TRUE via trichotomy, not dropped). prime_deficient; exists_prime_factor_of_abundant; abundant_of_six_dvd (proper multiples of 6 are abundant). Reusable structural closure facts on the perfect/abundant/deficient frontier."
+    },
     {
       "name": "Brockian.Admissibility.admissibility_count_five",
       "kind": "theorem",

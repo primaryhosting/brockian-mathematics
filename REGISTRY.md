@@ -10,12 +10,17 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 572
 - **DISCHARGED**: 6
-- **PROVED**: 10527
+- **PROVED**: 10532
 
 ## Theorems
 
 | Register | Name | Axioms clean | AXLE | Env | Ledger |
 |---|---|---|---|---|---|
+| PROVED | `Brockian.AbundantClosure.abundant_of_perfect_dvd` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.AbundantClosure.abundant_of_six_dvd` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.AbundantClosure.deficient_of_dvd_deficient` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.AbundantClosure.exists_prime_factor_of_abundant` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.AbundantClosure.prime_deficient` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.Admissibility.admissibility_count_five` | ✓ | verified | lean-4.32.0 | 74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2 |
 | PROVED | `Brockian.Admissibility.admissibility_count_three` | ✓ | verified | lean-4.32.0 | 74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2 |
 | DEFINITION | `Brockian.Admissibility.admissibleResidues` | ✓ | verified | lean-4.32.0 | 74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2 |
