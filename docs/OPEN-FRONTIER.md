@@ -430,6 +430,21 @@ None is known — open, parallel to odd perfect / odd Giuga. Module: `Brockian.W
 
 ---
 
+## Perfect totient numbers (infinitude open)
+
+**Claim.** Are there infinitely many perfect totient numbers (n = φ(n) + φ(φ(n)) + … + 1)? Open.
+Module: `Brockian.PerfectTotient`. `PerfectTotientInfinitude` is an unproven `def`.
+
+**PROVED (concrete):**
+- **Nine perfect totient numbers** (`pt_3`, `pt_9`, `pt_15`, `pt_27`, `pt_39`, `pt_81`, `pt_111`,
+  `pt_183`, `pt_243`) — including the full powers-of-3 chain 3, 9, 27, 81, 243 = 3¹…3⁵, each verified
+  by computing the iterated-totient sum.
+- A non-example (`not_pt_4`).
+
+**OPEN.** Whether infinitely many perfect totient numbers exist.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

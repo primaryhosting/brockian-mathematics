@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10119,
-    "DEFINITION": 515,
-    "CONJECTURE": 27,
+    "PROVED": 10129,
+    "DEFINITION": 518,
+    "CONJECTURE": 28,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -114513,6 +114513,452 @@
       "quarantine": true,
       "ledger_run": "roadmap harvest \u2014 Euler PST reduced to Franklin involution; AXLE @4.32",
       "provenance_note": "Fully proves the Euler-product side: genFun_pstChar_eq_prod = prod(1-X^n) in Z[[X]], coeff_genFun_pstChar (coefficient = signed distinct-partition count via Mathlib Partition.GenFun), pstChar character product, pentagonal bridge to PentagonalPartition.pent. The full pentagonal number theorem is CONDITIONAL on the single named hypothesis hFranklin (Franklin sign-reversing involution \u2014 true, classical, Mathlib-absent), theorems honestly suffixed _of_franklin. NOT ex-falso: hFranklin is satisfiable/true."
+    },
+    {
+      "name": "Brockian.PerfectTotient.PerfectTotient",
+      "kind": "def",
+      "module": "Brockian.PerfectTotient",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PerfectTotient.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PerfectTotient.PerfectTotientInfinitude",
+      "kind": "conjecture",
+      "module": "Brockian.PerfectTotient",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PerfectTotient.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PerfectTotient.iteratedTotientSum",
+      "kind": "def",
+      "module": "Brockian.PerfectTotient",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PerfectTotient.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PerfectTotient.not_pt_4",
+      "kind": "theorem",
+      "module": "Brockian.PerfectTotient",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PerfectTotient.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PerfectTotient.pt_111",
+      "kind": "theorem",
+      "module": "Brockian.PerfectTotient",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PerfectTotient.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PerfectTotient.pt_15",
+      "kind": "theorem",
+      "module": "Brockian.PerfectTotient",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PerfectTotient.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PerfectTotient.pt_183",
+      "kind": "theorem",
+      "module": "Brockian.PerfectTotient",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PerfectTotient.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PerfectTotient.pt_243",
+      "kind": "theorem",
+      "module": "Brockian.PerfectTotient",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PerfectTotient.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PerfectTotient.pt_27",
+      "kind": "theorem",
+      "module": "Brockian.PerfectTotient",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PerfectTotient.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PerfectTotient.pt_3",
+      "kind": "theorem",
+      "module": "Brockian.PerfectTotient",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PerfectTotient.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PerfectTotient.pt_39",
+      "kind": "theorem",
+      "module": "Brockian.PerfectTotient",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PerfectTotient.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PerfectTotient.pt_81",
+      "kind": "theorem",
+      "module": "Brockian.PerfectTotient",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PerfectTotient.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PerfectTotient.pt_9",
+      "kind": "theorem",
+      "module": "Brockian.PerfectTotient",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PerfectTotient.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PerfectTotient.totientSumAux",
+      "kind": "def",
+      "module": "Brockian.PerfectTotient",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PerfectTotient.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
     },
     {
       "name": "Brockian.PolignacPrimes.PolignacConjecture",
