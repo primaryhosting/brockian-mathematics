@@ -8,16 +8,19 @@ generated from AXLE attestations); nothing is hand-asserted. Regenerate with
 
 | Metric | Value |
 |---|---|
-| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,483** |
+| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,532** |
 | Open problems mapped on the frontier | **34** |
 | **CONDITIONAL** reductions (honest, named-hypothesis) | 21 |
 | **DISCHARGED** (conditional → unconditional) | 6 |
-| Open-conjecture markers (unproven `def`s) | 39 |
+| Open-conjecture markers (unproven `def`s) | 40 |
 | Commits in the last 6 hours | 34 |
 
-Verifier: **AXLE (Axiom)** at `lean-4.32.0` + Mathlib. Every theorem is independently kernel-checked,
-axiom-clean (⊆ `{propext, Classical.choice, Quot.sound}`), and CI-gated (`lake build` + AXLE +
-overclaim-firewall + no-theater lint) on every commit.
+Verifier: **AXLE (Axiom)** at `lean-4.32.0` + Mathlib. Entries marked `PROVED` carry independent
+kernel-check attestations and acceptable axiom sets (normally a subset of
+`{propext, Classical.choice, Quot.sound}`). Harvest candidates additionally pass statement-fidelity,
+no-theater, registry-consistency, and manifest checks before integration. Full local `lake build`
+remains a CI/local verification layer when compute is available; the 2026-08-03 harvest used AXLE
+instead of the compute-constrained workstation.
 
 ## What's been built — four pillars
 
@@ -38,8 +41,10 @@ overclaim-firewall + no-theater lint) on every commit.
 4. **Unbounded operator theory (depth).** The concrete harmonic-oscillator Schwartz core is dense and
    symmetric; deficiency-trivial ESA is equivalent to a self-adjoint graph closure; weighted-Rellich
    factorizations imply compact unit resolvents; and those compact resolvents have nonzero point
-   spectrum of finite multiplicity. The actual oscillator ESA and weighted compact embedding remain
-   explicit analytic blockers, not hidden assumptions.
+   spectrum of finite multiplicity. Maximal quadratic multiplication now has explicit non-real
+   resolvents and is essentially self-adjoint, and unitary transfer gives a Fourier-defined free
+   Laplacian with ESA. Identifying it with the Schwartz-core operator, oscillator ESA, and the
+   concrete weighted compact embedding remain explicit analytic blockers.
 
 ## Strategy — three parallel lanes, one firewall
 
@@ -55,7 +60,10 @@ overclaim-firewall + no-theater lint) on every commit.
   Archive (4.28 surface) and one relied on numerals reducing definitionally (`1 % 9` ≠ `1` at 4.32);
   all were re-queued with corrective instructions (no-Archive / explicit `omega` mod-closes). A returned
   tarball once carried the wrong label — the namespace guard caught it and it integrated under its true
-  name. Independent verification, not the upstream claim, is authoritative.
+  name. A 19-archive audit on 2026-08-03 additionally integrated five cleaned modules, recognized four
+  peer-landed results, rejected one vacuous RH sketch, and classified nine duplicates. Four exact
+  operator targets are now running on Harmonic. Independent verification, not the upstream claim, is
+  authoritative. See `docs/ARISTOTLE-HARVEST-2026-08-03.md`.
 - **Depth lane** (primary) — oscillator ESA, the concrete weighted Rellich embedding, unbounded
   spectral mapping, and Mathlib extraction of the general Weyl/Cayley results.
 
@@ -83,8 +91,10 @@ superperfect, odd harmonic (Ore). Five ancient existence questions sharing one s
 
 ## Next steps
 
-- Harvest the re-queued **even-perfect trio** (mod 9 / triangular / last-digit) once Archive-free proofs
-  return, plus odd-perfect-three-primes and any further hard targets.
+- Poll and audit the four exact Harmonic operator targets; port every return to Lean 4.32 before AXLE
+  integration.
+- Prove the Schwartz/Fourier intertwining theorem, then use it to transfer the spectral free-Laplacian
+  ESA result to the intended differential operator.
 - Prove **oscillator ESA** and instantiate the concrete **weighted Rellich** compact embedding.
 - Add unbounded spectral mapping and eigenvalue isolation after compact resolvent is instantiated.
 - Prepare `WeylUpstream` and the compact-eigenspace theorem as Mathlib-quality submissions.
