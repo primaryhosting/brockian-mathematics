@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 9220,
-    "DEFINITION": 480,
+    "PROVED": 9411,
+    "DEFINITION": 483,
     "CONJECTURE": 14,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
@@ -21066,6 +21066,233 @@
       "provenance_note": null
     },
     {
+      "name": "Brockian.CosTraceNormNineHundredEightyThree.degree_nineHundredEightyThree",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredEightyThree",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredEightyThree.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredEightyThree.isIntegral_and_degree_nineHundredEightyThree",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredEightyThree",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredEightyThree.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredEightyThree.isIntegral_spectralGen_nineHundredEightyThree",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredEightyThree",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredEightyThree.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredEightyThree.isIntegral_spectralGen_nineHundredEightyThree_Q",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredEightyThree",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredEightyThree.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredEightyThree.nineHundredEightyThree_ne_two",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredEightyThree",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredEightyThree.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredEightyThree.nineHundredEightyThree_pack",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredEightyThree",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredEightyThree.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredEightyThree.prime_nineHundredEightyThree",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredEightyThree",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredEightyThree.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.CosTraceNormNineHundredEleven.degree_nineHundredEleven",
       "kind": "theorem",
       "module": "Brockian.CosTraceNormNineHundredEleven",
@@ -22401,6 +22628,687 @@
       "statement": "",
       "source": {
         "file": "Brockian/CosTraceNormNineHundredSeven.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSeventyOne.degree_nineHundredSeventyOne",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSeventyOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSeventyOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSeventyOne.isIntegral_and_degree_nineHundredSeventyOne",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSeventyOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSeventyOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSeventyOne.isIntegral_spectralGen_nineHundredSeventyOne",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSeventyOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSeventyOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSeventyOne.isIntegral_spectralGen_nineHundredSeventyOne_Q",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSeventyOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSeventyOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSeventyOne.nineHundredSeventyOne_ne_two",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSeventyOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSeventyOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSeventyOne.nineHundredSeventyOne_pack",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSeventyOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSeventyOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSeventyOne.prime_nineHundredSeventyOne",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSeventyOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSeventyOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSeventySeven.degree_nineHundredSeventySeven",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSeventySeven",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSeventySeven.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSeventySeven.isIntegral_and_degree_nineHundredSeventySeven",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSeventySeven",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSeventySeven.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSeventySeven.isIntegral_spectralGen_nineHundredSeventySeven",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSeventySeven",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSeventySeven.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSeventySeven.isIntegral_spectralGen_nineHundredSeventySeven_Q",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSeventySeven",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSeventySeven.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSeventySeven.nineHundredSeventySeven_ne_two",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSeventySeven",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSeventySeven.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSeventySeven.nineHundredSeventySeven_pack",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSeventySeven",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSeventySeven.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSeventySeven.prime_nineHundredSeventySeven",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSeventySeven",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSeventySeven.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSixtySeven.degree_nineHundredSixtySeven",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSixtySeven",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSixtySeven.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSixtySeven.isIntegral_and_degree_nineHundredSixtySeven",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSixtySeven",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSixtySeven.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSixtySeven.isIntegral_spectralGen_nineHundredSixtySeven",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSixtySeven",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSixtySeven.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSixtySeven.isIntegral_spectralGen_nineHundredSixtySeven_Q",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSixtySeven",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSixtySeven.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSixtySeven.nineHundredSixtySeven_ne_two",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSixtySeven",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSixtySeven.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSixtySeven.nineHundredSixtySeven_pack",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSixtySeven",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSixtySeven.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CosTraceNormNineHundredSixtySeven.prime_nineHundredSixtySeven",
+      "kind": "theorem",
+      "module": "Brockian.CosTraceNormNineHundredSixtySeven",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CosTraceNormNineHundredSixtySeven.lean"
       },
       "register": "PROVED",
       "axioms": [
@@ -90221,6 +91129,687 @@
       "statement": "",
       "source": {
         "file": "Brockian/WheelK2_677.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_683.K2_683",
+      "kind": "def",
+      "module": "Brockian.Goldbach.WheelK2_683",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_683.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_683.K2_683_eq",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_683",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_683.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_683.K2_683_of_not_two_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_683",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_683.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_683.K2_683_of_two_and_sixHundredEightyThree_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_683",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_683.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_683.Kp_sixHundredEightyThree",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_683",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_683.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_683.Kp_sixHundredEightyThree_of_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_683",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_683.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_683.Kp_sixHundredEightyThree_of_not_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_683",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_683.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_691.K2_691",
+      "kind": "def",
+      "module": "Brockian.Goldbach.WheelK2_691",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_691.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_691.K2_691_eq",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_691",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_691.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_691.K2_691_of_not_two_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_691",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_691.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_691.K2_691_of_two_and_sixHundredNinetyOne_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_691",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_691.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_691.Kp_sixHundredNinetyOne",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_691",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_691.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_691.Kp_sixHundredNinetyOne_of_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_691",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_691.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_691.Kp_sixHundredNinetyOne_of_not_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_691",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_691.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_701.K2_701",
+      "kind": "def",
+      "module": "Brockian.Goldbach.WheelK2_701",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_701.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_701.K2_701_eq",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_701",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_701.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_701.K2_701_of_not_two_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_701",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_701.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_701.K2_701_of_two_and_sevenHundredOne_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_701",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_701.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_701.Kp_sevenHundredOne",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_701",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_701.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_701.Kp_sevenHundredOne_of_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_701",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_701.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_701.Kp_sevenHundredOne_of_not_dvd",
+      "kind": "theorem",
+      "module": "Brockian.Goldbach.WheelK2_701",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WheelK2_701.lean"
       },
       "register": "PROVED",
       "axioms": [
@@ -209613,6 +211202,4791 @@
       "statement": "",
       "source": {
         "file": "Brockian/Gaps19421950.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.evenPair_card_oneThousandNineHundredFiftyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.evenPair_card_oneThousandNineHundredFiftyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.evenPair_card_oneThousandNineHundredFiftySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.evenPair_card_oneThousandNineHundredFiftyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.evenPair_card_oneThousandNineHundredSixty",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.isAdmissible_evenPair_oneThousandNineHundredFiftyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.isAdmissible_evenPair_oneThousandNineHundredFiftyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.isAdmissible_evenPair_oneThousandNineHundredFiftySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.isAdmissible_evenPair_oneThousandNineHundredFiftyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.isAdmissible_evenPair_oneThousandNineHundredSixty",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.localFactor_oneThousandNineHundredFiftyTwo_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.localFactor_oneThousandNineHundredSixty_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.nu_p_oneThousandNineHundredFiftyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.nu_p_oneThousandNineHundredFiftyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.nu_p_oneThousandNineHundredFiftySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.nu_p_oneThousandNineHundredFiftyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.nu_p_oneThousandNineHundredFiftyTwo_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.nu_p_oneThousandNineHundredSixty",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.nu_p_oneThousandNineHundredSixty_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.singular_series_finite_pos_evenPair_oneThousandNineHundredFiftyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.singular_series_finite_pos_evenPair_oneThousandNineHundredFiftyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.singular_series_finite_pos_evenPair_oneThousandNineHundredFiftySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.singular_series_finite_pos_evenPair_oneThousandNineHundredFiftyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.singular_series_finite_pos_evenPair_oneThousandNineHundredSixty",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.singular_series_pos_evenPair_oneThousandNineHundredFiftyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.singular_series_pos_evenPair_oneThousandNineHundredFiftyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.singular_series_pos_evenPair_oneThousandNineHundredFiftySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.singular_series_pos_evenPair_oneThousandNineHundredFiftyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19521960.singular_series_pos_evenPair_oneThousandNineHundredSixty",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19521960",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19521960.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.evenPair_card_oneThousandNineHundredSeventy",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.evenPair_card_oneThousandNineHundredSixtyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.evenPair_card_oneThousandNineHundredSixtyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.evenPair_card_oneThousandNineHundredSixtySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.evenPair_card_oneThousandNineHundredSixtyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.isAdmissible_evenPair_oneThousandNineHundredSeventy",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.isAdmissible_evenPair_oneThousandNineHundredSixtyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.isAdmissible_evenPair_oneThousandNineHundredSixtyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.isAdmissible_evenPair_oneThousandNineHundredSixtySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.isAdmissible_evenPair_oneThousandNineHundredSixtyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.localFactor_oneThousandNineHundredSeventy_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.localFactor_oneThousandNineHundredSixtyTwo_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.nu_p_oneThousandNineHundredSeventy",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.nu_p_oneThousandNineHundredSeventy_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.nu_p_oneThousandNineHundredSixtyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.nu_p_oneThousandNineHundredSixtyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.nu_p_oneThousandNineHundredSixtySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.nu_p_oneThousandNineHundredSixtyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.nu_p_oneThousandNineHundredSixtyTwo_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.singular_series_finite_pos_evenPair_oneThousandNineHundredSeventy",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.singular_series_finite_pos_evenPair_oneThousandNineHundredSixtyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.singular_series_finite_pos_evenPair_oneThousandNineHundredSixtyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.singular_series_finite_pos_evenPair_oneThousandNineHundredSixtySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.singular_series_finite_pos_evenPair_oneThousandNineHundredSixtyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.singular_series_pos_evenPair_oneThousandNineHundredSeventy",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.singular_series_pos_evenPair_oneThousandNineHundredSixtyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.singular_series_pos_evenPair_oneThousandNineHundredSixtyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.singular_series_pos_evenPair_oneThousandNineHundredSixtySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19621970.singular_series_pos_evenPair_oneThousandNineHundredSixtyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19621970",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19621970.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.evenPair_card_oneThousandNineHundredEighty",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.evenPair_card_oneThousandNineHundredSeventyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.evenPair_card_oneThousandNineHundredSeventyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.evenPair_card_oneThousandNineHundredSeventySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.evenPair_card_oneThousandNineHundredSeventyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.isAdmissible_evenPair_oneThousandNineHundredEighty",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.isAdmissible_evenPair_oneThousandNineHundredSeventyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.isAdmissible_evenPair_oneThousandNineHundredSeventyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.isAdmissible_evenPair_oneThousandNineHundredSeventySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.isAdmissible_evenPair_oneThousandNineHundredSeventyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.localFactor_oneThousandNineHundredEighty_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.localFactor_oneThousandNineHundredSeventyTwo_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.nu_p_oneThousandNineHundredEighty",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.nu_p_oneThousandNineHundredEighty_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.nu_p_oneThousandNineHundredSeventyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.nu_p_oneThousandNineHundredSeventyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.nu_p_oneThousandNineHundredSeventySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.nu_p_oneThousandNineHundredSeventyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.nu_p_oneThousandNineHundredSeventyTwo_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.singular_series_finite_pos_evenPair_oneThousandNineHundredEighty",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.singular_series_finite_pos_evenPair_oneThousandNineHundredSeventyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.singular_series_finite_pos_evenPair_oneThousandNineHundredSeventyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.singular_series_finite_pos_evenPair_oneThousandNineHundredSeventySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.singular_series_finite_pos_evenPair_oneThousandNineHundredSeventyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.singular_series_pos_evenPair_oneThousandNineHundredEighty",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.singular_series_pos_evenPair_oneThousandNineHundredSeventyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.singular_series_pos_evenPair_oneThousandNineHundredSeventyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.singular_series_pos_evenPair_oneThousandNineHundredSeventySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19721980.singular_series_pos_evenPair_oneThousandNineHundredSeventyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19721980",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19721980.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.evenPair_card_oneThousandNineHundredEightyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.evenPair_card_oneThousandNineHundredEightyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.evenPair_card_oneThousandNineHundredEightySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.evenPair_card_oneThousandNineHundredEightyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.evenPair_card_oneThousandNineHundredNinety",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.isAdmissible_evenPair_oneThousandNineHundredEightyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.isAdmissible_evenPair_oneThousandNineHundredEightyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.isAdmissible_evenPair_oneThousandNineHundredEightySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.isAdmissible_evenPair_oneThousandNineHundredEightyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.isAdmissible_evenPair_oneThousandNineHundredNinety",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.localFactor_oneThousandNineHundredEightyTwo_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.localFactor_oneThousandNineHundredNinety_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.nu_p_oneThousandNineHundredEightyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.nu_p_oneThousandNineHundredEightyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.nu_p_oneThousandNineHundredEightySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.nu_p_oneThousandNineHundredEightyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.nu_p_oneThousandNineHundredEightyTwo_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.nu_p_oneThousandNineHundredNinety",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.nu_p_oneThousandNineHundredNinety_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.singular_series_finite_pos_evenPair_oneThousandNineHundredEightyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.singular_series_finite_pos_evenPair_oneThousandNineHundredEightyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.singular_series_finite_pos_evenPair_oneThousandNineHundredEightySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.singular_series_finite_pos_evenPair_oneThousandNineHundredEightyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.singular_series_finite_pos_evenPair_oneThousandNineHundredNinety",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.singular_series_pos_evenPair_oneThousandNineHundredEightyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.singular_series_pos_evenPair_oneThousandNineHundredEightyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.singular_series_pos_evenPair_oneThousandNineHundredEightySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.singular_series_pos_evenPair_oneThousandNineHundredEightyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19821990.singular_series_pos_evenPair_oneThousandNineHundredNinety",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19821990",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19821990.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.evenPair_card_oneThousandNineHundredNinetyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.evenPair_card_oneThousandNineHundredNinetyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.evenPair_card_oneThousandNineHundredNinetySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.evenPair_card_oneThousandNineHundredNinetyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.evenPair_card_twoThousand",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.isAdmissible_evenPair_oneThousandNineHundredNinetyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.isAdmissible_evenPair_oneThousandNineHundredNinetyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.isAdmissible_evenPair_oneThousandNineHundredNinetySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.isAdmissible_evenPair_oneThousandNineHundredNinetyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.isAdmissible_evenPair_twoThousand",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.localFactor_oneThousandNineHundredNinetyTwo_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.localFactor_twoThousand_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.nu_p_oneThousandNineHundredNinetyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.nu_p_oneThousandNineHundredNinetyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.nu_p_oneThousandNineHundredNinetySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.nu_p_oneThousandNineHundredNinetyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.nu_p_oneThousandNineHundredNinetyTwo_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.nu_p_twoThousand",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.nu_p_twoThousand_two",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.singular_series_finite_pos_evenPair_oneThousandNineHundredNinetyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.singular_series_finite_pos_evenPair_oneThousandNineHundredNinetyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.singular_series_finite_pos_evenPair_oneThousandNineHundredNinetySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.singular_series_finite_pos_evenPair_oneThousandNineHundredNinetyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.singular_series_finite_pos_evenPair_twoThousand",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.singular_series_pos_evenPair_oneThousandNineHundredNinetyEight",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.singular_series_pos_evenPair_oneThousandNineHundredNinetyFour",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.singular_series_pos_evenPair_oneThousandNineHundredNinetySix",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.singular_series_pos_evenPair_oneThousandNineHundredNinetyTwo",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeries.Gaps19922000.singular_series_pos_evenPair_twoThousand",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeries.Gaps19922000",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Gaps19922000.lean"
       },
       "register": "PROVED",
       "axioms": [
