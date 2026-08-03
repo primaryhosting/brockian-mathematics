@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10113,
-    "DEFINITION": 511,
-    "CONJECTURE": 26,
+    "PROVED": 10119,
+    "DEFINITION": 515,
+    "CONJECTURE": 27,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -329633,6 +329633,349 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
+    },
+    {
+      "name": "Brockian.WeirdNumbers.Abundant",
+      "kind": "def",
+      "module": "Brockian.WeirdNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeirdNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY weird numbers (open-territory loop, AXLE @4.32, axiom-clean). Weird n := Abundant n (aliquot n > n) and NOT Semiperfect n (no subset of proper divisors sums to n). CONCRETE: weird_70 (128-subset decide) and weird_836 (2048-subset decide). CONTRAST: twelve/twenty_not_weird -- 12,20 are abundant AND semiperfect (weird is strictly stronger than abundant). The genuinely OPEN question -- does an ODD weird number exist? (none known, parallel to odd perfect / odd Giuga) -- is an unproven def OddWeirdExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.WeirdNumbers.OddWeirdExists",
+      "kind": "conjecture",
+      "module": "Brockian.WeirdNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeirdNumbers.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY weird numbers (open-territory loop, AXLE @4.32, axiom-clean). Weird n := Abundant n (aliquot n > n) and NOT Semiperfect n (no subset of proper divisors sums to n). CONCRETE: weird_70 (128-subset decide) and weird_836 (2048-subset decide). CONTRAST: twelve/twenty_not_weird -- 12,20 are abundant AND semiperfect (weird is strictly stronger than abundant). The genuinely OPEN question -- does an ODD weird number exist? (none known, parallel to odd perfect / odd Giuga) -- is an unproven def OddWeirdExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.WeirdNumbers.Semiperfect",
+      "kind": "def",
+      "module": "Brockian.WeirdNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeirdNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY weird numbers (open-territory loop, AXLE @4.32, axiom-clean). Weird n := Abundant n (aliquot n > n) and NOT Semiperfect n (no subset of proper divisors sums to n). CONCRETE: weird_70 (128-subset decide) and weird_836 (2048-subset decide). CONTRAST: twelve/twenty_not_weird -- 12,20 are abundant AND semiperfect (weird is strictly stronger than abundant). The genuinely OPEN question -- does an ODD weird number exist? (none known, parallel to odd perfect / odd Giuga) -- is an unproven def OddWeirdExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.WeirdNumbers.Weird",
+      "kind": "def",
+      "module": "Brockian.WeirdNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeirdNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY weird numbers (open-territory loop, AXLE @4.32, axiom-clean). Weird n := Abundant n (aliquot n > n) and NOT Semiperfect n (no subset of proper divisors sums to n). CONCRETE: weird_70 (128-subset decide) and weird_836 (2048-subset decide). CONTRAST: twelve/twenty_not_weird -- 12,20 are abundant AND semiperfect (weird is strictly stronger than abundant). The genuinely OPEN question -- does an ODD weird number exist? (none known, parallel to odd perfect / odd Giuga) -- is an unproven def OddWeirdExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.WeirdNumbers.aliquot",
+      "kind": "def",
+      "module": "Brockian.WeirdNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeirdNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY weird numbers (open-territory loop, AXLE @4.32, axiom-clean). Weird n := Abundant n (aliquot n > n) and NOT Semiperfect n (no subset of proper divisors sums to n). CONCRETE: weird_70 (128-subset decide) and weird_836 (2048-subset decide). CONTRAST: twelve/twenty_not_weird -- 12,20 are abundant AND semiperfect (weird is strictly stronger than abundant). The genuinely OPEN question -- does an ODD weird number exist? (none known, parallel to odd perfect / odd Giuga) -- is an unproven def OddWeirdExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.WeirdNumbers.twelve_abundant",
+      "kind": "theorem",
+      "module": "Brockian.WeirdNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeirdNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY weird numbers (open-territory loop, AXLE @4.32, axiom-clean). Weird n := Abundant n (aliquot n > n) and NOT Semiperfect n (no subset of proper divisors sums to n). CONCRETE: weird_70 (128-subset decide) and weird_836 (2048-subset decide). CONTRAST: twelve/twenty_not_weird -- 12,20 are abundant AND semiperfect (weird is strictly stronger than abundant). The genuinely OPEN question -- does an ODD weird number exist? (none known, parallel to odd perfect / odd Giuga) -- is an unproven def OddWeirdExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.WeirdNumbers.twelve_not_weird",
+      "kind": "theorem",
+      "module": "Brockian.WeirdNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeirdNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY weird numbers (open-territory loop, AXLE @4.32, axiom-clean). Weird n := Abundant n (aliquot n > n) and NOT Semiperfect n (no subset of proper divisors sums to n). CONCRETE: weird_70 (128-subset decide) and weird_836 (2048-subset decide). CONTRAST: twelve/twenty_not_weird -- 12,20 are abundant AND semiperfect (weird is strictly stronger than abundant). The genuinely OPEN question -- does an ODD weird number exist? (none known, parallel to odd perfect / odd Giuga) -- is an unproven def OddWeirdExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.WeirdNumbers.twelve_semiperfect",
+      "kind": "theorem",
+      "module": "Brockian.WeirdNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeirdNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY weird numbers (open-territory loop, AXLE @4.32, axiom-clean). Weird n := Abundant n (aliquot n > n) and NOT Semiperfect n (no subset of proper divisors sums to n). CONCRETE: weird_70 (128-subset decide) and weird_836 (2048-subset decide). CONTRAST: twelve/twenty_not_weird -- 12,20 are abundant AND semiperfect (weird is strictly stronger than abundant). The genuinely OPEN question -- does an ODD weird number exist? (none known, parallel to odd perfect / odd Giuga) -- is an unproven def OddWeirdExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.WeirdNumbers.twenty_not_weird",
+      "kind": "theorem",
+      "module": "Brockian.WeirdNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeirdNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY weird numbers (open-territory loop, AXLE @4.32, axiom-clean). Weird n := Abundant n (aliquot n > n) and NOT Semiperfect n (no subset of proper divisors sums to n). CONCRETE: weird_70 (128-subset decide) and weird_836 (2048-subset decide). CONTRAST: twelve/twenty_not_weird -- 12,20 are abundant AND semiperfect (weird is strictly stronger than abundant). The genuinely OPEN question -- does an ODD weird number exist? (none known, parallel to odd perfect / odd Giuga) -- is an unproven def OddWeirdExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.WeirdNumbers.weird_70",
+      "kind": "theorem",
+      "module": "Brockian.WeirdNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeirdNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY weird numbers (open-territory loop, AXLE @4.32, axiom-clean). Weird n := Abundant n (aliquot n > n) and NOT Semiperfect n (no subset of proper divisors sums to n). CONCRETE: weird_70 (128-subset decide) and weird_836 (2048-subset decide). CONTRAST: twelve/twenty_not_weird -- 12,20 are abundant AND semiperfect (weird is strictly stronger than abundant). The genuinely OPEN question -- does an ODD weird number exist? (none known, parallel to odd perfect / odd Giuga) -- is an unproven def OddWeirdExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.WeirdNumbers.weird_836",
+      "kind": "theorem",
+      "module": "Brockian.WeirdNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeirdNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY weird numbers (open-territory loop, AXLE @4.32, axiom-clean). Weird n := Abundant n (aliquot n > n) and NOT Semiperfect n (no subset of proper divisors sums to n). CONCRETE: weird_70 (128-subset decide) and weird_836 (2048-subset decide). CONTRAST: twelve/twenty_not_weird -- 12,20 are abundant AND semiperfect (weird is strictly stronger than abundant). The genuinely OPEN question -- does an ODD weird number exist? (none known, parallel to odd perfect / odd Giuga) -- is an unproven def OddWeirdExists, never asserted or denied."
     },
     {
       "name": "Brockian.Weyl.green_identity_integral",

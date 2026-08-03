@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 26
-- **DEFINITION**: 511
+- **CONJECTURE**: 27
+- **DEFINITION**: 515
 - **DISCHARGED**: 6
-- **PROVED**: 10113
+- **PROVED**: 10119
 
 ## Theorems
 
@@ -10079,6 +10079,17 @@
 | PROVED | `Brockian.TwinPrimes.twin_71` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.TwinPrimes.twin_form_6k` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.TwinPrimes.twin_middle_div_six` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.WeirdNumbers.Abundant` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.WeirdNumbers.OddWeirdExists` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.WeirdNumbers.Semiperfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.WeirdNumbers.Weird` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.WeirdNumbers.aliquot` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.WeirdNumbers.twelve_abundant` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.WeirdNumbers.twelve_not_weird` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.WeirdNumbers.twelve_semiperfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.WeirdNumbers.twenty_not_weird` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.WeirdNumbers.weird_70` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.WeirdNumbers.weird_836` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.green_identity_integral` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
 | PROVED | `Brockian.Weyl.lagrange_identity` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
 | DEFINITION | `Brockian.Weyl.sturmL` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |

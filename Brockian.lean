@@ -684,3 +684,4 @@ import Brockian.PalindromicPrimes
 import Brockian.FortunateNumbers
 import Brockian.BrocardGapConjecture
 import Brockian.GilbreathConjecture
+import Brockian.WeirdNumbers

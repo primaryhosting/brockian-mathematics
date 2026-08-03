@@ -414,6 +414,22 @@ start with 1? Open. Module: `Brockian.GilbreathConjecture`. `GilbreathConjecture
 
 ---
 
+## Weird numbers — does an odd one exist? (open)
+
+**Claim.** Is there an *odd* weird number? (Weird = abundant but not semiperfect; smallest is 70.)
+None is known — open, parallel to odd perfect / odd Giuga. Module: `Brockian.WeirdNumbers`.
+`OddWeirdExists` is an unproven `def`.
+
+**PROVED (concrete + contrast):**
+- **70 and 836 are weird** (`weird_70`, `weird_836`): abundant, and no subset of proper divisors
+  sums to n (128- and 2048-subset kernel checks).
+- **12 and 20 are abundant *and* semiperfect** (`twelve_not_weird`, `twenty_not_weird`) — showing
+  weird is strictly stronger than abundant.
+
+**OPEN.** Whether any odd weird number exists.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:
