@@ -10,7 +10,7 @@
 - **CONJECTURE**: 39
 - **DEFINITION**: 553
 - **DISCHARGED**: 6
-- **PROVED**: 10424
+- **PROVED**: 10429
 
 ## Theorems
 
@@ -1871,6 +1871,11 @@
 | DEFINITION | `Brockian.EquidistributionUniformityClosure.forbiddenImageFive` | ✓ | verified | lean-4.32.0 | roadmap B1 closure — q=5 affine endpoint-stabilizer obstruction; AXLE @4.32 |
 | DEFINITION | `Brockian.Erdos236.f` | ✓ | verified | lean-4.32.0 | Erdős #236 harvest — ONLY the verified unconditional trivial bound; AXLE @4.32 |
 | PROVED | `Brockian.Erdos236.f_le_log` | ✓ | verified | lean-4.32.0 | Erdős #236 harvest — ONLY the verified unconditional trivial bound; AXLE @4.32 |
+| PROVED | `Brockian.Erdos320.log_ratio_bounds` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Erdos320.neg_log_one_sub_le_div` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Erdos320.neg_log_one_sub_le_two_mul` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Erdos320.neg_log_one_sub_nonneg` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Erdos320.step_loss_bounds` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.ErdosPinned.entropy_le_log_card` | ✓ | verified | lean-4.32.0 | Erdős #604 harvest — verified unconditional entropy inequalities (one omitted in the paper); AXLE @4.32 |
 | PROVED | `Brockian.ErdosPinned.exp_neg_entropy_le_sum_sq` | ✓ | verified | lean-4.32.0 | Erdős #604 harvest — verified unconditional entropy inequalities (one omitted in the paper); AXLE @4.32 |
 | DEFINITION | `Brockian.ErdosStraus.ErdosStraus` | ✓ | verified | lean-4.32.0 | open-territory swarm; AXLE @4.32 |

@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10424,
+    "PROVED": 10429,
     "DEFINITION": 553,
     "CONJECTURE": 39,
     "CONDITIONAL": 21,
@@ -60033,6 +60033,171 @@
       "quarantine": true,
       "ledger_run": "Erd\u0151s #236 harvest \u2014 ONLY the verified unconditional trivial bound; AXLE @4.32",
       "provenance_note": "Erd\u0151s #236 f(n)=#{k: 2^k<=n, n-2^k prime}: the UNCONDITIONAL trivial upper bound f(n)<=log_2 n + 1, formalized on the paper's own definition of f, AXLE-verified (via Nat.le_log_of_pow_le; the paper's cited lemma name did not exist). The conditional main bound (on PDCH/BPRH) is NOT harvested: referee found the paper's own Lean has an elided load-bearing core lemma, an assumed (not derived) Fourier identity with a wrap-around gap, and a written step broken/false at j=0. Only the clean unconditional lemma enters."
+    },
+    {
+      "name": "Brockian.Erdos320.log_ratio_bounds",
+      "kind": "theorem",
+      "module": "Brockian.Erdos320",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Erdos320Lemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Erdos320.neg_log_one_sub_le_div",
+      "kind": "theorem",
+      "module": "Brockian.Erdos320",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Erdos320Lemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Erdos320.neg_log_one_sub_le_two_mul",
+      "kind": "theorem",
+      "module": "Brockian.Erdos320",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Erdos320Lemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Erdos320.neg_log_one_sub_nonneg",
+      "kind": "theorem",
+      "module": "Brockian.Erdos320",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Erdos320Lemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Erdos320.step_loss_bounds",
+      "kind": "theorem",
+      "module": "Brockian.Erdos320",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Erdos320Lemmas.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.ErdosPinned.entropy_le_log_card",
