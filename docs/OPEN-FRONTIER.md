@@ -571,6 +571,22 @@ hold with no hypotheses — everything else in the paper is explicitly condition
 
 ---
 
+## Zumkeller numbers — is the odd-Zumkeller structure forced? (open)
+
+**Claim.** A number is Zumkeller if its divisors split into two sets of equal sum. Structure of odd
+Zumkeller numbers, and their density/infinitude, is open. Module: `Brockian.ZumkellerNumbers`.
+`OddZumkellerFrom3Structure` is an unproven `def`.
+
+**PROVED (general structural theorems).**
+- **Every Zumkeller number has even divisor-sum** (`zumkeller_sigma_even`).
+- **Every positive Zumkeller number is perfect-or-abundant**, `2n ≤ σ(n)` (`zumkeller_two_mul_le_sigma`) —
+  the flagship; and **no prime is Zumkeller** (`not_zumkeller_prime`, via deficiency).
+- Concrete witnesses 6, 12, 20, 24, 28, 30 with explicit equal-sum half-sets.
+
+**OPEN.** The odd-Zumkeller structure (smallest odd Zumkeller is 945) and the density question.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

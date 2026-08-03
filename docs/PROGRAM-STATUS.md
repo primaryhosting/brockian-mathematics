@@ -8,7 +8,7 @@ generated from AXLE attestations); nothing is hand-asserted. Regenerate with
 
 | Metric | Value |
 |---|---|
-| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,429** |
+| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,444** |
 | Open problems mapped on the frontier | **34** |
 | **CONDITIONAL** reductions (honest, named-hypothesis) | 21 |
 | **DISCHARGED** (conditional → unconditional) | 6 |
@@ -45,13 +45,17 @@ overclaim-firewall + no-theater lint) on every commit.
 
 - **Frontier lane** (curated) — accept a new finite module only when it tests a new general theorem or
   adds a materially useful structural reduction. Automatic range/count expansion is paused.
-- **Hard-proof lane** (Harmonic / Aristotle) — heavy theorems offloaded to stronger compute. **Five hard
+- **Hard-proof lane** (Harmonic / Aristotle) — heavy theorems offloaded to stronger compute. **Eight hard
   theorems harvested and integrated so far**, each independently AXLE-verified @4.32 and axiom-clean:
   Euler's form for odd perfect numbers, Mersenne-exponent-prime, Korselt⇒Carmichael (Fermat little
-  theorem for all bases), the full Wilson iff, and odd-perfect ≡ 1 mod 4. The discipline that emerged:
-  *Harmonic proposes, our AXLE @4.32 disposes* — two returned proofs (even-perfect mod 9 / triangular)
-  were **rejected** because they built against the Mathlib Archive (4.28 surface) rather than our
-  toolchain; they were re-queued with no-Archive instructions.
+  theorem for all bases), the full Wilson iff, odd-perfect ≡ 1 mod 4, every even perfect number is
+  triangular, the two-coin Frobenius representability bound, and the **Erdős–Ginzburg–Ziv** zero-sum
+  theorem (a cornerstone of additive combinatorics). The discipline that emerged: *Harmonic proposes,
+  our AXLE @4.32 disposes* — three returns were **rejected** at the gate: two built against the Mathlib
+  Archive (4.28 surface) and one relied on numerals reducing definitionally (`1 % 9` ≠ `1` at 4.32);
+  all were re-queued with corrective instructions (no-Archive / explicit `omega` mod-closes). A returned
+  tarball once carried the wrong label — the namespace guard caught it and it integrated under its true
+  name. Independent verification, not the upstream claim, is authoritative.
 - **Depth lane** (primary) — oscillator ESA, the concrete weighted Rellich embedding, unbounded
   spectral mapping, and Mathlib extraction of the general Weyl/Cayley results.
 
