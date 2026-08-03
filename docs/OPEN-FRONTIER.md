@@ -149,6 +149,22 @@ Module: `Brockian.GiugaNumbers`. `OddGiugaExists` is an unproven `def`.
 
 ---
 
+## Carmichael numbers / Korselt's criterion (three-prime infinitude open)
+
+**Claim.** Are there infinitely many Carmichael numbers with *exactly three* prime factors?
+(*General* Carmichael infinitude is a **theorem** — Alford–Granville–Pomerance 1994 — not open.)
+Module: `Brockian.CarmichaelKorselt`. `ThreePrimeCarmichaelInfinitude` is an unproven `def`.
+
+**PROVED (concrete + structural):**
+- **561, 1105, 1729 are Carmichael numbers** (`korselt_561`, `korselt_1105`, `korselt_1729`) via
+  Korselt's criterion (squarefree + (p−1)∣(n−1) for all p∣n). 1729 is the Hardy–Ramanujan taxicab.
+- **Every Carmichael number is odd** (`korselt_odd`).
+
+**OPEN.** Whether infinitely many Carmichael numbers have exactly three prime factors (a genuine
+refinement of a solved problem — the frontier marks only what is actually open).
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

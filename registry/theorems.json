@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 6658,
-    "DEFINITION": 435,
-    "CONJECTURE": 7,
+    "PROVED": 6663,
+    "DEFINITION": 436,
+    "CONJECTURE": 8,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -4594,6 +4594,229 @@
       "quarantine": true,
       "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence",
       "provenance_note": "C5 adjacency eigenvalue multiplicities. AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; verdict re-checked by Claude's gate before integration."
+    },
+    {
+      "name": "Brockian.CarmichaelKorselt.Korselt",
+      "kind": "def",
+      "module": "Brockian.CarmichaelKorselt",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CarmichaelKorselt.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Carmichael numbers via Korselt's criterion (open-territory loop, AXLE @4.32, axiom-clean). Korselt n = composite squarefree n with (p-1)|(n-1) for every prime p|n (equivalent to being a Carmichael number). CONCRETE verified: korselt_561 (3*11*17, flagship), korselt_1105 (5*13*17), korselt_1729 (7*13*19, the taxicab number). Structural: korselt_odd (every Carmichael number is odd). HONESTY: general Carmichael infinitude is a THEOREM (Alford-Granville-Pomerance 1994), NOT recorded as open; only the genuinely-open THREE-prime-factor refinement is an unproven def ThreePrimeCarmichaelInfinitude. Mathlib has no Korselt/Carmichael-number predicate (its ArithmeticFunction.carmichael is the reduced-totient function), so Korselt is developed from scratch."
+    },
+    {
+      "name": "Brockian.CarmichaelKorselt.ThreePrimeCarmichaelInfinitude",
+      "kind": "conjecture",
+      "module": "Brockian.CarmichaelKorselt",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CarmichaelKorselt.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Carmichael numbers via Korselt's criterion (open-territory loop, AXLE @4.32, axiom-clean). Korselt n = composite squarefree n with (p-1)|(n-1) for every prime p|n (equivalent to being a Carmichael number). CONCRETE verified: korselt_561 (3*11*17, flagship), korselt_1105 (5*13*17), korselt_1729 (7*13*19, the taxicab number). Structural: korselt_odd (every Carmichael number is odd). HONESTY: general Carmichael infinitude is a THEOREM (Alford-Granville-Pomerance 1994), NOT recorded as open; only the genuinely-open THREE-prime-factor refinement is an unproven def ThreePrimeCarmichaelInfinitude. Mathlib has no Korselt/Carmichael-number predicate (its ArithmeticFunction.carmichael is the reduced-totient function), so Korselt is developed from scratch."
+    },
+    {
+      "name": "Brockian.CarmichaelKorselt.korselt_1105",
+      "kind": "theorem",
+      "module": "Brockian.CarmichaelKorselt",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CarmichaelKorselt.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Carmichael numbers via Korselt's criterion (open-territory loop, AXLE @4.32, axiom-clean). Korselt n = composite squarefree n with (p-1)|(n-1) for every prime p|n (equivalent to being a Carmichael number). CONCRETE verified: korselt_561 (3*11*17, flagship), korselt_1105 (5*13*17), korselt_1729 (7*13*19, the taxicab number). Structural: korselt_odd (every Carmichael number is odd). HONESTY: general Carmichael infinitude is a THEOREM (Alford-Granville-Pomerance 1994), NOT recorded as open; only the genuinely-open THREE-prime-factor refinement is an unproven def ThreePrimeCarmichaelInfinitude. Mathlib has no Korselt/Carmichael-number predicate (its ArithmeticFunction.carmichael is the reduced-totient function), so Korselt is developed from scratch."
+    },
+    {
+      "name": "Brockian.CarmichaelKorselt.korselt_1729",
+      "kind": "theorem",
+      "module": "Brockian.CarmichaelKorselt",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CarmichaelKorselt.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Carmichael numbers via Korselt's criterion (open-territory loop, AXLE @4.32, axiom-clean). Korselt n = composite squarefree n with (p-1)|(n-1) for every prime p|n (equivalent to being a Carmichael number). CONCRETE verified: korselt_561 (3*11*17, flagship), korselt_1105 (5*13*17), korselt_1729 (7*13*19, the taxicab number). Structural: korselt_odd (every Carmichael number is odd). HONESTY: general Carmichael infinitude is a THEOREM (Alford-Granville-Pomerance 1994), NOT recorded as open; only the genuinely-open THREE-prime-factor refinement is an unproven def ThreePrimeCarmichaelInfinitude. Mathlib has no Korselt/Carmichael-number predicate (its ArithmeticFunction.carmichael is the reduced-totient function), so Korselt is developed from scratch."
+    },
+    {
+      "name": "Brockian.CarmichaelKorselt.korselt_561",
+      "kind": "theorem",
+      "module": "Brockian.CarmichaelKorselt",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CarmichaelKorselt.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Carmichael numbers via Korselt's criterion (open-territory loop, AXLE @4.32, axiom-clean). Korselt n = composite squarefree n with (p-1)|(n-1) for every prime p|n (equivalent to being a Carmichael number). CONCRETE verified: korselt_561 (3*11*17, flagship), korselt_1105 (5*13*17), korselt_1729 (7*13*19, the taxicab number). Structural: korselt_odd (every Carmichael number is odd). HONESTY: general Carmichael infinitude is a THEOREM (Alford-Granville-Pomerance 1994), NOT recorded as open; only the genuinely-open THREE-prime-factor refinement is an unproven def ThreePrimeCarmichaelInfinitude. Mathlib has no Korselt/Carmichael-number predicate (its ArithmeticFunction.carmichael is the reduced-totient function), so Korselt is developed from scratch."
+    },
+    {
+      "name": "Brockian.CarmichaelKorselt.korselt_odd",
+      "kind": "theorem",
+      "module": "Brockian.CarmichaelKorselt",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CarmichaelKorselt.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Carmichael numbers via Korselt's criterion (open-territory loop, AXLE @4.32, axiom-clean). Korselt n = composite squarefree n with (p-1)|(n-1) for every prime p|n (equivalent to being a Carmichael number). CONCRETE verified: korselt_561 (3*11*17, flagship), korselt_1105 (5*13*17), korselt_1729 (7*13*19, the taxicab number). Structural: korselt_odd (every Carmichael number is odd). HONESTY: general Carmichael infinitude is a THEOREM (Alford-Granville-Pomerance 1994), NOT recorded as open; only the genuinely-open THREE-prime-factor refinement is an unproven def ThreePrimeCarmichaelInfinitude. Mathlib has no Korselt/Carmichael-number predicate (its ArithmeticFunction.carmichael is the reduced-totient function), so Korselt is developed from scratch."
+    },
+    {
+      "name": "Brockian.CarmichaelKorselt.sqfree_prod3",
+      "kind": "theorem",
+      "module": "Brockian.CarmichaelKorselt",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CarmichaelKorselt.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Carmichael numbers via Korselt's criterion (open-territory loop, AXLE @4.32, axiom-clean). Korselt n = composite squarefree n with (p-1)|(n-1) for every prime p|n (equivalent to being a Carmichael number). CONCRETE verified: korselt_561 (3*11*17, flagship), korselt_1105 (5*13*17), korselt_1729 (7*13*19, the taxicab number). Structural: korselt_odd (every Carmichael number is odd). HONESTY: general Carmichael infinitude is a THEOREM (Alford-Granville-Pomerance 1994), NOT recorded as open; only the genuinely-open THREE-prime-factor refinement is an unproven def ThreePrimeCarmichaelInfinitude. Mathlib has no Korselt/Carmichael-number predicate (its ArithmeticFunction.carmichael is the reduced-totient function), so Korselt is developed from scratch."
     },
     {
       "name": "Brockian.CollatzPartial.CollatzConjecture",

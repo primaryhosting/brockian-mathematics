@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 7
-- **DEFINITION**: 435
+- **CONJECTURE**: 8
+- **DEFINITION**: 436
 - **DISCHARGED**: 6
-- **PROVED**: 6658
+- **PROVED**: 6663
 
 ## Theorems
 
@@ -159,6 +159,13 @@
 | PROVED | `Brockian.C5SpectralMultiplicities.multiplicity_two` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.C5SpectralMultiplicities.neg_golden_mem_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.C5SpectralMultiplicities.two_mem_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| DEFINITION | `Brockian.CarmichaelKorselt.Korselt` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.CarmichaelKorselt.ThreePrimeCarmichaelInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CarmichaelKorselt.korselt_1105` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CarmichaelKorselt.korselt_1729` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CarmichaelKorselt.korselt_561` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CarmichaelKorselt.korselt_odd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CarmichaelKorselt.sqfree_prod3` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.CollatzPartial.CollatzConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.CollatzPartial.Reaches1` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.CollatzPartial.collatz` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
