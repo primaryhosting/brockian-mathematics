@@ -103,6 +103,20 @@ This is a concrete verified membership in an open problem's exceptional set — 
 
 ---
 
+## Riesel numbers (problem open since 1956)
+
+**Claim.** Is 509203 the *smallest* Riesel number (odd k with k·2ⁿ−1 composite for all n ≥ 1)?
+Module: `Brockian.RieselCovering`. `RieselProblem` is an unproven `def`.
+
+**PROVED (concrete verified membership):**
+- **509203 IS a Riesel number** (`riesel_509203`): for every n ≥ 1, 509203·2ⁿ−1 is composite —
+  via the covering set {3,5,7,13,17,241} (modulus 24). Mirror of the Sierpiński proof applied to
+  the −1 family: `two_pow_periodic`, `covering_table`, `composite_of`.
+
+**OPEN.** Whether 509203 is the *smallest* such k. A concrete verified membership, not a resolution.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 5499,
-    "DEFINITION": 413,
-    "CONJECTURE": 4,
+    "PROVED": 5503,
+    "DEFINITION": 414,
+    "CONJECTURE": 5,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -72328,6 +72328,192 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.RieselCovering.IsRiesel",
+      "kind": "def",
+      "module": "Brockian.RieselCovering",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RieselCovering.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY concrete result: 509203 is a Riesel number (open-territory loop, AXLE @4.32, axiom-clean). riesel_509203 : IsRiesel 509203 -- for every n>=1, 509203*2^n-1 is composite -- via the covering set {3,5,7,13,17,241} (modulus 24): two_pow_periodic (2^n = 2^(n%24) mod p since 2^24=1 mod each p), covering_table (all 24 residues covered, decide), composite_of (transfer + primality exclusion). Mirror of the Sierpinski proof (k*2^n+1) applied to k*2^n-1. The OPEN Riesel problem (is 509203 the SMALLEST such k?) is recorded as an unproven def RieselProblem. Concrete verified membership, not a resolution."
+    },
+    {
+      "name": "Brockian.RieselCovering.RieselProblem",
+      "kind": "conjecture",
+      "module": "Brockian.RieselCovering",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RieselCovering.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY concrete result: 509203 is a Riesel number (open-territory loop, AXLE @4.32, axiom-clean). riesel_509203 : IsRiesel 509203 -- for every n>=1, 509203*2^n-1 is composite -- via the covering set {3,5,7,13,17,241} (modulus 24): two_pow_periodic (2^n = 2^(n%24) mod p since 2^24=1 mod each p), covering_table (all 24 residues covered, decide), composite_of (transfer + primality exclusion). Mirror of the Sierpinski proof (k*2^n+1) applied to k*2^n-1. The OPEN Riesel problem (is 509203 the SMALLEST such k?) is recorded as an unproven def RieselProblem. Concrete verified membership, not a resolution."
+    },
+    {
+      "name": "Brockian.RieselCovering.composite_of",
+      "kind": "theorem",
+      "module": "Brockian.RieselCovering",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RieselCovering.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY concrete result: 509203 is a Riesel number (open-territory loop, AXLE @4.32, axiom-clean). riesel_509203 : IsRiesel 509203 -- for every n>=1, 509203*2^n-1 is composite -- via the covering set {3,5,7,13,17,241} (modulus 24): two_pow_periodic (2^n = 2^(n%24) mod p since 2^24=1 mod each p), covering_table (all 24 residues covered, decide), composite_of (transfer + primality exclusion). Mirror of the Sierpinski proof (k*2^n+1) applied to k*2^n-1. The OPEN Riesel problem (is 509203 the SMALLEST such k?) is recorded as an unproven def RieselProblem. Concrete verified membership, not a resolution."
+    },
+    {
+      "name": "Brockian.RieselCovering.covering_table",
+      "kind": "theorem",
+      "module": "Brockian.RieselCovering",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RieselCovering.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY concrete result: 509203 is a Riesel number (open-territory loop, AXLE @4.32, axiom-clean). riesel_509203 : IsRiesel 509203 -- for every n>=1, 509203*2^n-1 is composite -- via the covering set {3,5,7,13,17,241} (modulus 24): two_pow_periodic (2^n = 2^(n%24) mod p since 2^24=1 mod each p), covering_table (all 24 residues covered, decide), composite_of (transfer + primality exclusion). Mirror of the Sierpinski proof (k*2^n+1) applied to k*2^n-1. The OPEN Riesel problem (is 509203 the SMALLEST such k?) is recorded as an unproven def RieselProblem. Concrete verified membership, not a resolution."
+    },
+    {
+      "name": "Brockian.RieselCovering.riesel_509203",
+      "kind": "theorem",
+      "module": "Brockian.RieselCovering",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RieselCovering.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY concrete result: 509203 is a Riesel number (open-territory loop, AXLE @4.32, axiom-clean). riesel_509203 : IsRiesel 509203 -- for every n>=1, 509203*2^n-1 is composite -- via the covering set {3,5,7,13,17,241} (modulus 24): two_pow_periodic (2^n = 2^(n%24) mod p since 2^24=1 mod each p), covering_table (all 24 residues covered, decide), composite_of (transfer + primality exclusion). Mirror of the Sierpinski proof (k*2^n+1) applied to k*2^n-1. The OPEN Riesel problem (is 509203 the SMALLEST such k?) is recorded as an unproven def RieselProblem. Concrete verified membership, not a resolution."
+    },
+    {
+      "name": "Brockian.RieselCovering.two_pow_periodic",
+      "kind": "theorem",
+      "module": "Brockian.RieselCovering",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RieselCovering.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY concrete result: 509203 is a Riesel number (open-territory loop, AXLE @4.32, axiom-clean). riesel_509203 : IsRiesel 509203 -- for every n>=1, 509203*2^n-1 is composite -- via the covering set {3,5,7,13,17,241} (modulus 24): two_pow_periodic (2^n = 2^(n%24) mod p since 2^24=1 mod each p), covering_table (all 24 residues covered, decide), composite_of (transfer + primality exclusion). Mirror of the Sierpinski proof (k*2^n+1) applied to k*2^n-1. The OPEN Riesel problem (is 509203 the SMALLEST such k?) is recorded as an unproven def RieselProblem. Concrete verified membership, not a resolution."
     },
     {
       "name": "Brockian.Sanity.brockian_sanity",

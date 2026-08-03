@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 4
-- **DEFINITION**: 413
+- **CONJECTURE**: 5
+- **DEFINITION**: 414
 - **DISCHARGED**: 6
-- **PROVED**: 5499
+- **PROVED**: 5503
 
 ## Theorems
 
@@ -2249,6 +2249,12 @@
 | PROVED | `Brockian.RiemannXiSymmetry.riemannXi_zeroSet_preimage_reflect` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_reflect_zero` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_zero` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.RieselCovering.IsRiesel` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.RieselCovering.RieselProblem` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RieselCovering.composite_of` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RieselCovering.covering_table` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RieselCovering.riesel_509203` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RieselCovering.two_pow_periodic` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.Sanity.brockian_sanity` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.SierpinskiCovering.IsSierpinski` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.SierpinskiCovering.SierpinskiProblem` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
