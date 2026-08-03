@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10070,
-    "DEFINITION": 503,
-    "CONJECTURE": 22,
+    "PROVED": 10087,
+    "DEFINITION": 505,
+    "CONJECTURE": 23,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -107590,6 +107590,648 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY Oppermann's conjecture (open-territory loop, AXLE @4.32, axiom-clean; STRENGTHENS Legendre). OppermannLower n (prime in (n^2-n, n^2)) and OppermannUpper n (prime in (n^2, n^2+n)). CONCRETE: nine instances oppermann_2..oppermann_10, each with two-sided prime witnesses. BONUS oppermannUpper_imp_legendre: an Oppermann-upper prime is a Legendre prime (n(n+1) <= (n+1)^2), cross-linking to Brockian.LegendreConjecture -- records the logical relation Oppermann => Legendre. OppermannConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.IsPalindrome",
+      "kind": "def",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.PalindromicPrime",
+      "kind": "def",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.PalindromicPrimeInfinitude",
+      "kind": "conjecture",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.eleven_dvd_one_add_odd_pow",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.eleven_unique_even_palindromic_prime",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.even_digit_palindrome_dvd_11",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.even_len_palindrome_dvd_11_examples",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.even_palindrome_dvd_11",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.not_palindromic_13",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.palindromic_101",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.palindromic_11",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.palindromic_131",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.palindromic_151",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.palindromic_2",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.palindromic_313",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.palindromic_353",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.palindromic_727",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.palindromic_757",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.palindromic_919",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PalindromicPrimes.two_digit_palindrome_dvd_11",
+      "kind": "theorem",
+      "module": "Brockian.PalindromicPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PalindromicPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY palindromic primes (open-territory loop, AXLE @4.32, axiom-clean). IsPalindrome via Nat.digits 10 = reverse. CONCRETE: ten palindromic primes palindromic_{2,11,101,131,151,313,353,727,757,919}. STRUCTURAL (full general theorem PROVED, not just examples): even_palindrome_dvd_11 -- any base-10 palindrome with an even number of digits is divisible by 11 (induction on List.Palindrome + the modular lemma 11 | 1+10^(2k+1)); CAPSTONE eleven_unique_even_palindromic_prime -- 11 is the ONLY even-length palindromic prime. PalindromicPrimeInfinitude (infinitely many palindromic primes) is an unproven def -- OPEN, never asserted."
     },
     {
       "name": "Brockian.PartitionRecurrence.factor_eq_geo",

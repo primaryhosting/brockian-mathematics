@@ -354,6 +354,21 @@ Legendre). Module: `Brockian.OppermannConjecture`. `OppermannConjecture` is an u
 
 ---
 
+## Palindromic primes (infinitude open)
+
+**Claim.** Are there infinitely many base-10 palindromic primes? Open.
+Module: `Brockian.PalindromicPrimes`. `PalindromicPrimeInfinitude` is an unproven `def`.
+
+**PROVED (concrete + a full structural theorem):**
+- **Ten palindromic primes** (`palindromic_2`, `palindromic_11`, …, `palindromic_919`).
+- **Every even-length base-10 palindrome is divisible by 11** (`even_palindrome_dvd_11`) — proved in
+  general (induction on `List.Palindrome` + `11 ∣ 1+10^(2k+1)`), not just by example.
+- **Capstone: 11 is the only even-length palindromic prime** (`eleven_unique_even_palindromic_prime`).
+
+**OPEN.** Whether infinitely many palindromic primes exist (all but 11 must have odd length).
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

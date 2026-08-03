@@ -680,3 +680,4 @@ import Brockian.RepunitPrimes
 import Brockian.LegendreConjecture
 import Brockian.AndricaConjecture
 import Brockian.OppermannConjecture
+import Brockian.PalindromicPrimes

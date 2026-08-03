@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 22
-- **DEFINITION**: 503
+- **CONJECTURE**: 23
+- **DEFINITION**: 505
 - **DISCHARGED**: 6
-- **PROVED**: 10070
+- **PROVED**: 10087
 
 ## Theorems
 
@@ -3337,6 +3337,26 @@
 | PROVED | `Brockian.OppermannConjecture.oppermann_7` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.OppermannConjecture.oppermann_8` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.OppermannConjecture.oppermann_9` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.PalindromicPrimes.IsPalindrome` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.PalindromicPrimes.PalindromicPrime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.PalindromicPrimes.PalindromicPrimeInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.eleven_dvd_one_add_odd_pow` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.eleven_unique_even_palindromic_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.even_digit_palindrome_dvd_11` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.even_len_palindrome_dvd_11_examples` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.even_palindrome_dvd_11` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.not_palindromic_13` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.palindromic_101` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.palindromic_11` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.palindromic_131` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.palindromic_151` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.palindromic_2` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.palindromic_313` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.palindromic_353` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.palindromic_727` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.palindromic_757` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.palindromic_919` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PalindromicPrimes.two_digit_palindrome_dvd_11` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PartitionRecurrence.factor_eq_geo` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
 | DEFINITION | `Brockian.PartitionRecurrence.geo` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
 | PROVED | `Brockian.PartitionRecurrence.geo_mul` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
