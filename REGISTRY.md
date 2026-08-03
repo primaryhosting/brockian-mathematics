@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 351
+- **DEFINITION**: 352
 - **DISCHARGED**: 6
-- **PROVED**: 2002
+- **PROVED**: 2017
 
 ## Theorems
 
@@ -1199,6 +1199,22 @@
 | DEFINITION | `Brockian.Penrose.zeta5` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
 | PROVED | `Brockian.Penrose.zeta5_norm` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
 | PROVED | `Brockian.Penrose.zeta5_pow_five` | ✓ | verified | lean-4.32.0 | run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32 |
+| PROVED | `Brockian.PentagonCharacterMultiplicity.chiConjugate_one` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
+| PROVED | `Brockian.PentagonCharacterMultiplicity.chiGolden_one` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
+| PROVED | `Brockian.PentagonCharacterMultiplicity.golden_isotypic_multiplicity` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
+| PROVED | `Brockian.PentagonCharacterMultiplicity.golden_multiplicity_eq_irrep_dim` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
+| PROVED | `Brockian.PentagonCharacterMultiplicity.golden_self_inner` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
+| PROVED | `Brockian.PentagonCharacterMultiplicity.multiplicity_table` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
+| PROVED | `Brockian.PentagonCharacterMultiplicity.neg_golden_multiplicity_eq_irrep_dim` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
+| DEFINITION | `Brockian.PentagonCharacterMultiplicity.permCharacter` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
+| PROVED | `Brockian.PentagonCharacterMultiplicity.permInner_golden` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
+| PROVED | `Brockian.PentagonEquivariance.adjacency_comm_d5` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
+| PROVED | `Brockian.PentagonEquivariance.adjacency_comm_rot` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
+| PROVED | `Brockian.PentagonEquivariance.d5Pull_sr_apply` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
+| PROVED | `Brockian.PentagonEquivariance.golden_eigenspace_invariant_d5` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
+| PROVED | `Brockian.PentagonEquivariance.golden_eigenspace_invariant_rot` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
+| PROVED | `Brockian.PentagonEquivariance.golden_eigenspace_is_subrep` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
+| PROVED | `Brockian.PentagonEquivariance.golden_eigenspace_is_subrep_d5` | ✓ | verified | lean-4.32.0 | rep-theory swarm; AXLE @4.32 |
 | PROVED | `Brockian.PentagonGrandEquivalence.pentagon_grand_equivalence` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
 | DEFINITION | `Brockian.PentagonIsotypic.adjEigenvalue` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |
 | PROVED | `Brockian.PentagonIsotypic.adjEigenvalue_eq_two_cos` | ✓ | verified | lean-4.32.0 | roadmap #9-12 — D5/C5 isotypic decomposition; AXLE @4.32 |

@@ -159,3 +159,5 @@ import Brockian.PentagonGrandEquivalence
 import Brockian.GoldenSpectralCharacterization
 import Brockian.MagmaLawRefutations
 import Brockian.GaloisNgonClassification
+import Brockian.PentagonCharacterMultiplicity
+import Brockian.PentagonEquivariance

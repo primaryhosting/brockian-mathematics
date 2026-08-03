@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 2002,
-    "DEFINITION": 351,
+    "PROVED": 2017,
+    "DEFINITION": 352,
     "CONDITIONAL": 21,
     "DISCHARGED": 6,
     "CONJECTURE": 1
@@ -38295,6 +38295,530 @@
       "quarantine": true,
       "ledger_run": "run 13 lineage / old PenroseTiling.lean ported to v4.32; AXLE @4.32",
       "provenance_note": "D5 cut-and-project + L\u00b2 operator theory: degree_bound\u226410, A_raw_bound (\u2016Af\u2016\u2082\u226410\u2016f\u2016\u2082), Delta_bounded (\u2016\u0394f\u2016\u226420\u2016f\u2016), \u03c6/\u03b65 algebra. Dropped the WithLp-refactored EuclideanSpace geometry layer (honest, non-mechanical drift), no sorry faked."
+    },
+    {
+      "name": "Brockian.PentagonCharacterMultiplicity.chiConjugate_one",
+      "kind": "theorem",
+      "module": "Brockian.PentagonCharacterMultiplicity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonCharacterMultiplicity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "Cayley-spectrum-from-character-theory for the pentagon (rep-theoretic face, swarm-built, AXLE @4.32, axiom-clean): the geometric multiplicity of the golden eigenvalue phi-1 equals the golden character at the identity = dim of the golden irrep = 2 (golden_multiplicity_eq_irrep_dim), with the -phi/conjugate companion and the full multiplicity table {1,2,2}={dim chiTrivial, dim chiGolden, dim chiConjugate}. Stretch reached: charInner permCharacter chiGolden = 1 (golden irrep occurs once in the vertex permutation rep) and the factorization 2 = dim(chiGolden)*<chi_perm,chiGolden>. HONEST CAVEAT: permCharacter is DEFINED by fixed-point counts (which are the permutation-character values), not re-derived as traces of the concrete d5Pull matrices; that trace=fixed-points step is left as an elementary geometric fact. Everything computed FROM permCharacter is proved."
+    },
+    {
+      "name": "Brockian.PentagonCharacterMultiplicity.chiGolden_one",
+      "kind": "theorem",
+      "module": "Brockian.PentagonCharacterMultiplicity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonCharacterMultiplicity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "Cayley-spectrum-from-character-theory for the pentagon (rep-theoretic face, swarm-built, AXLE @4.32, axiom-clean): the geometric multiplicity of the golden eigenvalue phi-1 equals the golden character at the identity = dim of the golden irrep = 2 (golden_multiplicity_eq_irrep_dim), with the -phi/conjugate companion and the full multiplicity table {1,2,2}={dim chiTrivial, dim chiGolden, dim chiConjugate}. Stretch reached: charInner permCharacter chiGolden = 1 (golden irrep occurs once in the vertex permutation rep) and the factorization 2 = dim(chiGolden)*<chi_perm,chiGolden>. HONEST CAVEAT: permCharacter is DEFINED by fixed-point counts (which are the permutation-character values), not re-derived as traces of the concrete d5Pull matrices; that trace=fixed-points step is left as an elementary geometric fact. Everything computed FROM permCharacter is proved."
+    },
+    {
+      "name": "Brockian.PentagonCharacterMultiplicity.golden_isotypic_multiplicity",
+      "kind": "theorem",
+      "module": "Brockian.PentagonCharacterMultiplicity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonCharacterMultiplicity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "Cayley-spectrum-from-character-theory for the pentagon (rep-theoretic face, swarm-built, AXLE @4.32, axiom-clean): the geometric multiplicity of the golden eigenvalue phi-1 equals the golden character at the identity = dim of the golden irrep = 2 (golden_multiplicity_eq_irrep_dim), with the -phi/conjugate companion and the full multiplicity table {1,2,2}={dim chiTrivial, dim chiGolden, dim chiConjugate}. Stretch reached: charInner permCharacter chiGolden = 1 (golden irrep occurs once in the vertex permutation rep) and the factorization 2 = dim(chiGolden)*<chi_perm,chiGolden>. HONEST CAVEAT: permCharacter is DEFINED by fixed-point counts (which are the permutation-character values), not re-derived as traces of the concrete d5Pull matrices; that trace=fixed-points step is left as an elementary geometric fact. Everything computed FROM permCharacter is proved."
+    },
+    {
+      "name": "Brockian.PentagonCharacterMultiplicity.golden_multiplicity_eq_irrep_dim",
+      "kind": "theorem",
+      "module": "Brockian.PentagonCharacterMultiplicity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonCharacterMultiplicity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "Cayley-spectrum-from-character-theory for the pentagon (rep-theoretic face, swarm-built, AXLE @4.32, axiom-clean): the geometric multiplicity of the golden eigenvalue phi-1 equals the golden character at the identity = dim of the golden irrep = 2 (golden_multiplicity_eq_irrep_dim), with the -phi/conjugate companion and the full multiplicity table {1,2,2}={dim chiTrivial, dim chiGolden, dim chiConjugate}. Stretch reached: charInner permCharacter chiGolden = 1 (golden irrep occurs once in the vertex permutation rep) and the factorization 2 = dim(chiGolden)*<chi_perm,chiGolden>. HONEST CAVEAT: permCharacter is DEFINED by fixed-point counts (which are the permutation-character values), not re-derived as traces of the concrete d5Pull matrices; that trace=fixed-points step is left as an elementary geometric fact. Everything computed FROM permCharacter is proved."
+    },
+    {
+      "name": "Brockian.PentagonCharacterMultiplicity.golden_self_inner",
+      "kind": "theorem",
+      "module": "Brockian.PentagonCharacterMultiplicity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonCharacterMultiplicity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "Cayley-spectrum-from-character-theory for the pentagon (rep-theoretic face, swarm-built, AXLE @4.32, axiom-clean): the geometric multiplicity of the golden eigenvalue phi-1 equals the golden character at the identity = dim of the golden irrep = 2 (golden_multiplicity_eq_irrep_dim), with the -phi/conjugate companion and the full multiplicity table {1,2,2}={dim chiTrivial, dim chiGolden, dim chiConjugate}. Stretch reached: charInner permCharacter chiGolden = 1 (golden irrep occurs once in the vertex permutation rep) and the factorization 2 = dim(chiGolden)*<chi_perm,chiGolden>. HONEST CAVEAT: permCharacter is DEFINED by fixed-point counts (which are the permutation-character values), not re-derived as traces of the concrete d5Pull matrices; that trace=fixed-points step is left as an elementary geometric fact. Everything computed FROM permCharacter is proved."
+    },
+    {
+      "name": "Brockian.PentagonCharacterMultiplicity.multiplicity_table",
+      "kind": "theorem",
+      "module": "Brockian.PentagonCharacterMultiplicity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonCharacterMultiplicity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "Cayley-spectrum-from-character-theory for the pentagon (rep-theoretic face, swarm-built, AXLE @4.32, axiom-clean): the geometric multiplicity of the golden eigenvalue phi-1 equals the golden character at the identity = dim of the golden irrep = 2 (golden_multiplicity_eq_irrep_dim), with the -phi/conjugate companion and the full multiplicity table {1,2,2}={dim chiTrivial, dim chiGolden, dim chiConjugate}. Stretch reached: charInner permCharacter chiGolden = 1 (golden irrep occurs once in the vertex permutation rep) and the factorization 2 = dim(chiGolden)*<chi_perm,chiGolden>. HONEST CAVEAT: permCharacter is DEFINED by fixed-point counts (which are the permutation-character values), not re-derived as traces of the concrete d5Pull matrices; that trace=fixed-points step is left as an elementary geometric fact. Everything computed FROM permCharacter is proved."
+    },
+    {
+      "name": "Brockian.PentagonCharacterMultiplicity.neg_golden_multiplicity_eq_irrep_dim",
+      "kind": "theorem",
+      "module": "Brockian.PentagonCharacterMultiplicity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonCharacterMultiplicity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "Cayley-spectrum-from-character-theory for the pentagon (rep-theoretic face, swarm-built, AXLE @4.32, axiom-clean): the geometric multiplicity of the golden eigenvalue phi-1 equals the golden character at the identity = dim of the golden irrep = 2 (golden_multiplicity_eq_irrep_dim), with the -phi/conjugate companion and the full multiplicity table {1,2,2}={dim chiTrivial, dim chiGolden, dim chiConjugate}. Stretch reached: charInner permCharacter chiGolden = 1 (golden irrep occurs once in the vertex permutation rep) and the factorization 2 = dim(chiGolden)*<chi_perm,chiGolden>. HONEST CAVEAT: permCharacter is DEFINED by fixed-point counts (which are the permutation-character values), not re-derived as traces of the concrete d5Pull matrices; that trace=fixed-points step is left as an elementary geometric fact. Everything computed FROM permCharacter is proved."
+    },
+    {
+      "name": "Brockian.PentagonCharacterMultiplicity.permCharacter",
+      "kind": "def",
+      "module": "Brockian.PentagonCharacterMultiplicity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonCharacterMultiplicity.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "Cayley-spectrum-from-character-theory for the pentagon (rep-theoretic face, swarm-built, AXLE @4.32, axiom-clean): the geometric multiplicity of the golden eigenvalue phi-1 equals the golden character at the identity = dim of the golden irrep = 2 (golden_multiplicity_eq_irrep_dim), with the -phi/conjugate companion and the full multiplicity table {1,2,2}={dim chiTrivial, dim chiGolden, dim chiConjugate}. Stretch reached: charInner permCharacter chiGolden = 1 (golden irrep occurs once in the vertex permutation rep) and the factorization 2 = dim(chiGolden)*<chi_perm,chiGolden>. HONEST CAVEAT: permCharacter is DEFINED by fixed-point counts (which are the permutation-character values), not re-derived as traces of the concrete d5Pull matrices; that trace=fixed-points step is left as an elementary geometric fact. Everything computed FROM permCharacter is proved."
+    },
+    {
+      "name": "Brockian.PentagonCharacterMultiplicity.permInner_golden",
+      "kind": "theorem",
+      "module": "Brockian.PentagonCharacterMultiplicity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonCharacterMultiplicity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "Cayley-spectrum-from-character-theory for the pentagon (rep-theoretic face, swarm-built, AXLE @4.32, axiom-clean): the geometric multiplicity of the golden eigenvalue phi-1 equals the golden character at the identity = dim of the golden irrep = 2 (golden_multiplicity_eq_irrep_dim), with the -phi/conjugate companion and the full multiplicity table {1,2,2}={dim chiTrivial, dim chiGolden, dim chiConjugate}. Stretch reached: charInner permCharacter chiGolden = 1 (golden irrep occurs once in the vertex permutation rep) and the factorization 2 = dim(chiGolden)*<chi_perm,chiGolden>. HONEST CAVEAT: permCharacter is DEFINED by fixed-point counts (which are the permutation-character values), not re-derived as traces of the concrete d5Pull matrices; that trace=fixed-points step is left as an elementary geometric fact. Everything computed FROM permCharacter is proved."
+    },
+    {
+      "name": "Brockian.PentagonEquivariance.adjacency_comm_d5",
+      "kind": "theorem",
+      "module": "Brockian.PentagonEquivariance",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonEquivariance.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "The golden spectrum is representation-theoretically FORCED (rep-theoretic mechanism, swarm-built, AXLE @4.32, axiom-clean): the C5 adjacency operator is FULL-D5-equivariant including reflections (adjacency_comm_d5; a reflection swaps rho and rho^-1, fixing A=rho+rho^-1), so every eigenspace is a D5-invariant subspace. The golden eigenspace is a 2-dimensional D5-subrepresentation -- the chi_golden isotypic block on which A acts as the scalar phi-1 (Schur) -- golden_eigenspace_is_subrep_d5. The pentagon's golden spectrum is not a coincidence but the shadow of a 2-dim irreducible symmetry."
+    },
+    {
+      "name": "Brockian.PentagonEquivariance.adjacency_comm_rot",
+      "kind": "theorem",
+      "module": "Brockian.PentagonEquivariance",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonEquivariance.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "The golden spectrum is representation-theoretically FORCED (rep-theoretic mechanism, swarm-built, AXLE @4.32, axiom-clean): the C5 adjacency operator is FULL-D5-equivariant including reflections (adjacency_comm_d5; a reflection swaps rho and rho^-1, fixing A=rho+rho^-1), so every eigenspace is a D5-invariant subspace. The golden eigenspace is a 2-dimensional D5-subrepresentation -- the chi_golden isotypic block on which A acts as the scalar phi-1 (Schur) -- golden_eigenspace_is_subrep_d5. The pentagon's golden spectrum is not a coincidence but the shadow of a 2-dim irreducible symmetry."
+    },
+    {
+      "name": "Brockian.PentagonEquivariance.d5Pull_sr_apply",
+      "kind": "theorem",
+      "module": "Brockian.PentagonEquivariance",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonEquivariance.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "The golden spectrum is representation-theoretically FORCED (rep-theoretic mechanism, swarm-built, AXLE @4.32, axiom-clean): the C5 adjacency operator is FULL-D5-equivariant including reflections (adjacency_comm_d5; a reflection swaps rho and rho^-1, fixing A=rho+rho^-1), so every eigenspace is a D5-invariant subspace. The golden eigenspace is a 2-dimensional D5-subrepresentation -- the chi_golden isotypic block on which A acts as the scalar phi-1 (Schur) -- golden_eigenspace_is_subrep_d5. The pentagon's golden spectrum is not a coincidence but the shadow of a 2-dim irreducible symmetry."
+    },
+    {
+      "name": "Brockian.PentagonEquivariance.golden_eigenspace_invariant_d5",
+      "kind": "theorem",
+      "module": "Brockian.PentagonEquivariance",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonEquivariance.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "The golden spectrum is representation-theoretically FORCED (rep-theoretic mechanism, swarm-built, AXLE @4.32, axiom-clean): the C5 adjacency operator is FULL-D5-equivariant including reflections (adjacency_comm_d5; a reflection swaps rho and rho^-1, fixing A=rho+rho^-1), so every eigenspace is a D5-invariant subspace. The golden eigenspace is a 2-dimensional D5-subrepresentation -- the chi_golden isotypic block on which A acts as the scalar phi-1 (Schur) -- golden_eigenspace_is_subrep_d5. The pentagon's golden spectrum is not a coincidence but the shadow of a 2-dim irreducible symmetry."
+    },
+    {
+      "name": "Brockian.PentagonEquivariance.golden_eigenspace_invariant_rot",
+      "kind": "theorem",
+      "module": "Brockian.PentagonEquivariance",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonEquivariance.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "The golden spectrum is representation-theoretically FORCED (rep-theoretic mechanism, swarm-built, AXLE @4.32, axiom-clean): the C5 adjacency operator is FULL-D5-equivariant including reflections (adjacency_comm_d5; a reflection swaps rho and rho^-1, fixing A=rho+rho^-1), so every eigenspace is a D5-invariant subspace. The golden eigenspace is a 2-dimensional D5-subrepresentation -- the chi_golden isotypic block on which A acts as the scalar phi-1 (Schur) -- golden_eigenspace_is_subrep_d5. The pentagon's golden spectrum is not a coincidence but the shadow of a 2-dim irreducible symmetry."
+    },
+    {
+      "name": "Brockian.PentagonEquivariance.golden_eigenspace_is_subrep",
+      "kind": "theorem",
+      "module": "Brockian.PentagonEquivariance",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonEquivariance.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "The golden spectrum is representation-theoretically FORCED (rep-theoretic mechanism, swarm-built, AXLE @4.32, axiom-clean): the C5 adjacency operator is FULL-D5-equivariant including reflections (adjacency_comm_d5; a reflection swaps rho and rho^-1, fixing A=rho+rho^-1), so every eigenspace is a D5-invariant subspace. The golden eigenspace is a 2-dimensional D5-subrepresentation -- the chi_golden isotypic block on which A acts as the scalar phi-1 (Schur) -- golden_eigenspace_is_subrep_d5. The pentagon's golden spectrum is not a coincidence but the shadow of a 2-dim irreducible symmetry."
+    },
+    {
+      "name": "Brockian.PentagonEquivariance.golden_eigenspace_is_subrep_d5",
+      "kind": "theorem",
+      "module": "Brockian.PentagonEquivariance",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonEquivariance.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "rep-theory swarm; AXLE @4.32",
+      "provenance_note": "The golden spectrum is representation-theoretically FORCED (rep-theoretic mechanism, swarm-built, AXLE @4.32, axiom-clean): the C5 adjacency operator is FULL-D5-equivariant including reflections (adjacency_comm_d5; a reflection swaps rho and rho^-1, fixing A=rho+rho^-1), so every eigenspace is a D5-invariant subspace. The golden eigenspace is a 2-dimensional D5-subrepresentation -- the chi_golden isotypic block on which A acts as the scalar phi-1 (Schur) -- golden_eigenspace_is_subrep_d5. The pentagon's golden spectrum is not a coincidence but the shadow of a 2-dim irreducible symmetry."
     },
     {
       "name": "Brockian.PentagonGrandEquivalence.pentagon_grand_equivalence",
