@@ -78,6 +78,11 @@ import Brockian.SingularSeriesGaps92100
 import Brockian.SingularSeriesGaps102110
 import Brockian.SingularSeriesGaps112120
 import Brockian.SingularSeriesGaps122130
+import Brockian.SingularSeriesGaps18921900
+import Brockian.SingularSeriesGaps18821890
+import Brockian.SingularSeriesGaps18721880
+import Brockian.SingularSeriesGaps18621870
+import Brockian.SingularSeriesGaps18521860
 import Brockian.SingularSeriesGaps18421850
 import Brockian.SingularSeriesGaps18321840
 import Brockian.SingularSeriesGaps18221830
@@ -412,6 +417,10 @@ import Brockian.CosTraceNormEightHundredSixtyThree
 import Brockian.CosTraceNormEightHundredSeventySeven
 import Brockian.CosTraceNormEightHundredEightyOne
 import Brockian.CosTraceNormEightHundredEightyThree
+import Brockian.CosTraceNormEightHundredEightySeven
+import Brockian.CosTraceNormNineHundredSeven
+import Brockian.CosTraceNormNineHundredEleven
+import Brockian.CosTraceNormNineHundredNineteen
 import Brockian.WeylFourierMultiplier
 import Brockian.WeylWeakRegularityScaffold
 import Brockian.WeylWeakRegularityCore
@@ -541,6 +550,9 @@ import Brockian.GoldbachWheelK2_617
 import Brockian.GoldbachWheelK2_619
 import Brockian.GoldbachWheelK2_631
 import Brockian.GoldbachWheelK2_641
+import Brockian.GoldbachWheelK2_643
+import Brockian.GoldbachWheelK2_647
+import Brockian.GoldbachWheelK2_653
 import Brockian.AdmissibilityCRTGeneral
 import Brockian.PentagonalTheoremFranklin
 import Brockian.OddDistinctPartition
