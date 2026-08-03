@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 342
+- **DEFINITION**: 351
 - **DISCHARGED**: 6
-- **PROVED**: 1979
+- **PROVED**: 2002
 
 ## Theorems
 
@@ -2215,6 +2215,12 @@
 | PROVED | `Brockian.Weyl.SchrodingerESA.free_plus_primeGaussian_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
 | DEFINITION | `Brockian.Weyl.SchrodingerESA.gate1_chain_status` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
 | PROVED | `Brockian.Weyl.SchrodingerESA.primeGaussian_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | 2026-08-01 — Gate-1 end-to-end assembly under ODE identification |
+| DEFINITION | `Brockian.Weyl.SchrodingerGate1Closed.L2R` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.SchrodingerGate1Closed.schrodinger_closureResolventAtI` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SchrodingerGate1Closed.schrodinger_closure_eq_adjoint` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SchrodingerGate1Closed.schrodinger_closure_isSelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SchrodingerGate1Closed.schrodinger_closure_shifted_ranges_eq_univ` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.SchrodingerGate1Closed.schrodinger_core_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.SchrodingerGate1Final.L2R` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.SchrodingerGate1Final.freeCoreMap` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.SchrodingerGate1Final.freeCoreMap_apply` | ✓ | verified | lean-4.32.0 |  |
@@ -2297,6 +2303,18 @@
 | DEFINITION | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.toFourierMultiplierInput` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.WeylPlancherelScaffold.essentiallySelfAdjoint_of_plancherel_multiplier_dense_ranges` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.WeylPlancherelScaffold.isPlancherelUnitary` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakEnergy.L2R` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakEnergy.conjugateLp_eq_star` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakEnergy.conjugateRHSLp_eq_potential_sub` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakEnergy.continuous_laplacianSymbol` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakEnergy.fourier_laplacian_ae` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakEnergy.im_inner_conjugateRHSLp` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakEnergy.im_inner_laplacian_eq_zero` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakEnergy.laplacianSymbol` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakEnergy.laplacianSymbol_mul_locallyIntegrable` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakEnergy.potentialMulCLM_coeFn` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakEnergy.schrodinger_essentiallySelfAdjoint_of_continuous_bounded` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakEnergy.weakSolutionVanishing_of_continuous_bounded` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakPrimitiveClassical.DistributionalPrimitiveData` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakPrimitiveClassical.DistributionalPrimitiveIdentity` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakPrimitiveClassical.WeakPrimitiveClassicalStatus` | ✓ | verified | lean-4.32.0 |  |
@@ -2318,6 +2336,20 @@
 | PROVED | `Brockian.WeylWeakPrimitiveLocal.schrodinger_essentiallySelfAdjoint_of_distributional_primitives` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.WeylWeakPrimitiveLocal.weakToIntegralRegularity_of_distributional_primitives` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.WeylWeakPrimitiveLocal.weakToPrimitiveRegularity_of_distributional_primitives` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityClosed.L2R` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityClosed.conjugateLp` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityClosed.conjugateLp_coeFn` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityClosed.conjugateLp_toTemperedDistribution_apply` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityClosed.conjugateRHS` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityClosed.conjugateRHSLp` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityClosed.conjugateRHSLp_coeFn` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityClosed.conjugateRHSLp_toTemperedDistribution_apply` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityClosed.conjugateRHS_memLp` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylWeakRegularityClosed.conjugateRepresentative` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityClosed.conjugateRepresentative_memLp` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityClosed.laplacian_eq_secondDeriv` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityClosed.lineDeriv_one_eq_deriv` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WeylWeakRegularityClosed.secondDeriv_conjugateLp_eq_conjugateRHSLp` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityCore.IntegralSchrodingerModel` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityCore.WeakRegularityCoreStatus` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.WeylWeakRegularityCore.WeakToIntegralRegularity` | ✓ | verified | lean-4.32.0 |  |

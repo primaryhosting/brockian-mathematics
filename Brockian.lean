@@ -143,6 +143,9 @@ import Brockian.EquidistributionUniformityClosure
 import Brockian.WeylClosedRangeClosure
 import Brockian.WeylClosedShiftedRanges
 import Brockian.WeylSchrodingerGate1Final
+import Brockian.WeylWeakRegularityClosed
+import Brockian.WeylWeakEnergy
+import Brockian.WeylSchrodingerGate1Closed
 import Brockian.GoldbachSelectionRule
 import Brockian.PentagonMultiplicities
 import Brockian.CyclotomicGaloisGroup

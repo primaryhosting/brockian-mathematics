@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-03T02:56:09Z",
+  "generated_at": "2026-08-03T03:18:06Z",
   "generated_from": {
     "registry": "registry/theorems.json",
     "claim_map": "observatory/claim_map.yaml",
     "registry_summary": {
-      "PROVED": 1955,
-      "DEFINITION": 337,
+      "PROVED": 2002,
+      "DEFINITION": 351,
       "CONDITIONAL": 21,
       "DISCHARGED": 6,
       "CONJECTURE": 1
@@ -26,8 +26,8 @@
       "definition": 1
     },
     "registry": {
-      "PROVED": 1955,
-      "DEFINITION": 337,
+      "PROVED": 2002,
+      "DEFINITION": 351,
       "CONDITIONAL": 21,
       "DISCHARGED": 6,
       "CONJECTURE": 1
@@ -12771,6 +12771,149 @@
       }
     },
     {
+      "name": "Brockian.GaloisNgonClassification.aeval_spectralGen_eight",
+      "module": "Brockian.GaloisNgonClassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisNgonClassification.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.aeval_spectralGen_ten",
+      "module": "Brockian.GaloisNgonClassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisNgonClassification.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.aeval_spectralGen_twelve",
+      "module": "Brockian.GaloisNgonClassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisNgonClassification.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.disc_eight",
+      "module": "Brockian.GaloisNgonClassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisNgonClassification.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.disc_five",
+      "module": "Brockian.GaloisNgonClassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisNgonClassification.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.disc_ten",
+      "module": "Brockian.GaloisNgonClassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisNgonClassification.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.disc_twelve",
+      "module": "Brockian.GaloisNgonClassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisNgonClassification.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.golden_ngons_are_five_and_ten",
+      "module": "Brockian.GaloisNgonClassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisNgonClassification.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.ngonDisc",
+      "module": "Brockian.GaloisNgonClassification",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/GaloisNgonClassification.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.quadratic_ngon_tfae",
+      "module": "Brockian.GaloisNgonClassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisNgonClassification.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.spectralGen_eight",
+      "module": "Brockian.GaloisNgonClassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisNgonClassification.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.spectralGen_ten",
+      "module": "Brockian.GaloisNgonClassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisNgonClassification.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.spectralGen_twelve",
+      "module": "Brockian.GaloisNgonClassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GaloisNgonClassification.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.GaloisWhyFive.P7",
       "module": "Brockian.GaloisWhyFive",
       "register": "DEFINITION",
@@ -15642,6 +15785,50 @@
       }
     },
     {
+      "name": "Brockian.GoldenSpectralCharacterization.golden_quadratic_roots",
+      "module": "Brockian.GoldenSpectralCharacterization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GoldenSpectralCharacterization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GoldenSpectralCharacterization.golden_ratio_spectral_characterization",
+      "module": "Brockian.GoldenSpectralCharacterization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GoldenSpectralCharacterization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GoldenSpectralCharacterization.golden_roots_mem_pentagon_spectrum",
+      "module": "Brockian.GoldenSpectralCharacterization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GoldenSpectralCharacterization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.GoldenSpectralCharacterization.golden_roots_sign_split",
+      "module": "Brockian.GoldenSpectralCharacterization",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/GoldenSpectralCharacterization.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.GoldenUniqueness.C5_membership_layer",
       "module": "Brockian.GoldenUniqueness",
       "register": "PROVED",
@@ -15856,6 +16043,138 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/GoldenUniqueness.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.countermodel_assoc",
+      "module": "Brockian.MagmaLawRefutations",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MagmaLawRefutations.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.countermodel_comm",
+      "module": "Brockian.MagmaLawRefutations",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MagmaLawRefutations.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.countermodel_idem",
+      "module": "Brockian.MagmaLawRefutations",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MagmaLawRefutations.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.countermodel_mid",
+      "module": "Brockian.MagmaLawRefutations",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MagmaLawRefutations.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.not_entails_assoc",
+      "module": "Brockian.MagmaLawRefutations",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MagmaLawRefutations.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.not_entails_comm",
+      "module": "Brockian.MagmaLawRefutations",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MagmaLawRefutations.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.not_entails_idem",
+      "module": "Brockian.MagmaLawRefutations",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MagmaLawRefutations.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.not_entails_mid",
+      "module": "Brockian.MagmaLawRefutations",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/MagmaLawRefutations.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.op_assoc",
+      "module": "Brockian.MagmaLawRefutations",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/MagmaLawRefutations.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.op_comm",
+      "module": "Brockian.MagmaLawRefutations",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/MagmaLawRefutations.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.op_idem",
+      "module": "Brockian.MagmaLawRefutations",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/MagmaLawRefutations.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.MagmaLawRefutations.op_mid",
+      "module": "Brockian.MagmaLawRefutations",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/MagmaLawRefutations.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
@@ -28677,6 +28996,72 @@
       }
     },
     {
+      "name": "Brockian.Weyl.SchrodingerGate1Closed.L2R",
+      "module": "Brockian.Weyl.SchrodingerGate1Closed",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/SchrodingerGate1Closed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerGate1Closed.schrodinger_closureResolventAtI",
+      "module": "Brockian.Weyl.SchrodingerGate1Closed",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/SchrodingerGate1Closed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerGate1Closed.schrodinger_closure_eq_adjoint",
+      "module": "Brockian.Weyl.SchrodingerGate1Closed",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerGate1Closed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerGate1Closed.schrodinger_closure_isSelfAdjoint",
+      "module": "Brockian.Weyl.SchrodingerGate1Closed",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerGate1Closed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerGate1Closed.schrodinger_closure_shifted_ranges_eq_univ",
+      "module": "Brockian.Weyl.SchrodingerGate1Closed",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerGate1Closed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.Weyl.SchrodingerGate1Closed.schrodinger_core_essentiallySelfAdjoint",
+      "module": "Brockian.Weyl.SchrodingerGate1Closed",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/SchrodingerGate1Closed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.Weyl.SchrodingerGate1Final.L2R",
       "module": "Brockian.Weyl.SchrodingerGate1Final",
       "register": "DEFINITION",
@@ -29579,6 +29964,138 @@
       }
     },
     {
+      "name": "Brockian.WeylWeakEnergy.L2R",
+      "module": "Brockian.WeylWeakEnergy",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/WeylWeakEnergy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakEnergy.conjugateLp_eq_star",
+      "module": "Brockian.WeylWeakEnergy",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakEnergy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakEnergy.conjugateRHSLp_eq_potential_sub",
+      "module": "Brockian.WeylWeakEnergy",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakEnergy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakEnergy.continuous_laplacianSymbol",
+      "module": "Brockian.WeylWeakEnergy",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakEnergy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakEnergy.fourier_laplacian_ae",
+      "module": "Brockian.WeylWeakEnergy",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakEnergy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakEnergy.im_inner_conjugateRHSLp",
+      "module": "Brockian.WeylWeakEnergy",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakEnergy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakEnergy.im_inner_laplacian_eq_zero",
+      "module": "Brockian.WeylWeakEnergy",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakEnergy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakEnergy.laplacianSymbol",
+      "module": "Brockian.WeylWeakEnergy",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/WeylWeakEnergy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakEnergy.laplacianSymbol_mul_locallyIntegrable",
+      "module": "Brockian.WeylWeakEnergy",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakEnergy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakEnergy.potentialMulCLM_coeFn",
+      "module": "Brockian.WeylWeakEnergy",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakEnergy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakEnergy.schrodinger_essentiallySelfAdjoint_of_continuous_bounded",
+      "module": "Brockian.WeylWeakEnergy",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakEnergy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakEnergy.weakSolutionVanishing_of_continuous_bounded",
+      "module": "Brockian.WeylWeakEnergy",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakEnergy.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
       "name": "Brockian.WeylWeakPrimitiveClassical.DistributionalPrimitiveData",
       "module": "Brockian.WeylWeakPrimitiveClassical",
       "register": "DEFINITION",
@@ -29804,6 +30321,160 @@
       "register": "PROVED",
       "kind": "theorem",
       "source": "Brockian/WeylWeakPrimitiveLocal.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityClosed.L2R",
+      "module": "Brockian.WeylWeakRegularityClosed",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/WeylWeakRegularityClosed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityClosed.conjugateLp",
+      "module": "Brockian.WeylWeakRegularityClosed",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/WeylWeakRegularityClosed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityClosed.conjugateLp_coeFn",
+      "module": "Brockian.WeylWeakRegularityClosed",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityClosed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityClosed.conjugateLp_toTemperedDistribution_apply",
+      "module": "Brockian.WeylWeakRegularityClosed",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityClosed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityClosed.conjugateRHS",
+      "module": "Brockian.WeylWeakRegularityClosed",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/WeylWeakRegularityClosed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityClosed.conjugateRHSLp",
+      "module": "Brockian.WeylWeakRegularityClosed",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/WeylWeakRegularityClosed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityClosed.conjugateRHSLp_coeFn",
+      "module": "Brockian.WeylWeakRegularityClosed",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityClosed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityClosed.conjugateRHSLp_toTemperedDistribution_apply",
+      "module": "Brockian.WeylWeakRegularityClosed",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityClosed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityClosed.conjugateRHS_memLp",
+      "module": "Brockian.WeylWeakRegularityClosed",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityClosed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityClosed.conjugateRepresentative",
+      "module": "Brockian.WeylWeakRegularityClosed",
+      "register": "DEFINITION",
+      "kind": "def",
+      "source": "Brockian/WeylWeakRegularityClosed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityClosed.conjugateRepresentative_memLp",
+      "module": "Brockian.WeylWeakRegularityClosed",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityClosed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityClosed.laplacian_eq_secondDeriv",
+      "module": "Brockian.WeylWeakRegularityClosed",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityClosed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityClosed.lineDeriv_one_eq_deriv",
+      "module": "Brockian.WeylWeakRegularityClosed",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityClosed.lean",
+      "axle": {
+        "verdict": "verified",
+        "environment": "lean-4.32.0"
+      }
+    },
+    {
+      "name": "Brockian.WeylWeakRegularityClosed.secondDeriv_conjugateLp_eq_conjugateRHSLp",
+      "module": "Brockian.WeylWeakRegularityClosed",
+      "register": "PROVED",
+      "kind": "theorem",
+      "source": "Brockian/WeylWeakRegularityClosed.lean",
       "axle": {
         "verdict": "verified",
         "environment": "lean-4.32.0"
