@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 554
 - **DISCHARGED**: 6
-- **PROVED**: 10442
+- **PROVED**: 10443
 
 ## Theorems
 
@@ -2037,6 +2037,7 @@
 | PROVED | `Brockian.FreeLaplacianPlancherel.fourierL2_inner_map` | ✓ | verified | lean-4.32.0 | roadmap A3 — free-Laplacian ESA: unitary half discharged via genuine Mathlib Plancherel; AXLE @4.32 |
 | PROVED | `Brockian.FreeLaplacianPlancherel.fourierL2_norm_map` | ✓ | verified | lean-4.32.0 | roadmap A3 — free-Laplacian ESA: unitary half discharged via genuine Mathlib Plancherel; AXLE @4.32 |
 | CONDITIONAL | `Brockian.FreeLaplacianPlancherel.freeLaplacian_essentiallySelfAdjoint_via_plancherel` | ✓ | verified | lean-4.32.0 | roadmap A3 — free-Laplacian ESA: unitary half discharged via genuine Mathlib Plancherel; AXLE @4.32 |
+| PROVED | `Brockian.FrobeniusAbove.frobenius_above` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle ab22201e; AXLE @4.32 |
 | DEFINITION | `Brockian.GaloisCyclicGroup.alphaSub` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
 | PROVED | `Brockian.GaloisCyclicGroup.cycExt` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
 | PROVED | `Brockian.GaloisCyclicGroup.primRoot` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |

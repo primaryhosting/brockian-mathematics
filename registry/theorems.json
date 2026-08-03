@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10442,
+    "PROVED": 10443,
     "DEFINITION": 554,
     "CONJECTURE": 40,
     "CONDITIONAL": 21,
@@ -65391,6 +65391,39 @@
       "quarantine": true,
       "ledger_run": "roadmap A3 \u2014 free-Laplacian ESA: unitary half discharged via genuine Mathlib Plancherel; AXLE @4.32",
       "provenance_note": "Replaces the abstract unitary hypothesis of freeLaplacian_essentiallySelfAdjoint_of_fourier with Mathlib's REAL L2 Fourier-Plancherel isometry Lp.fourierTransformL2 (fourierL2): fourierL2_norm_map/inner_map (Plancherel) PROVED unconditionally; essentiallySelfAdjoint_fourierConj = the Plancherel transfer. freeLaplacian_essentiallySelfAdjoint_via_plancherel remains CONDITIONAL/open on 2 named Mathlib-scale pieces: unbounded xi^2-multiplication ESA (bounded-multiplier resolvent plumbing) + the LinearPMap Fourier-derivative identity F(-d2/dx2)=(xi^2)F. Unitary half fully discharged."
+    },
+    {
+      "name": "Brockian.FrobeniusAbove.frobenius_above",
+      "kind": "theorem",
+      "module": "Brockian.FrobeniusAbove",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FrobeniusAbove.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle ab22201e; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED (Aristotle ab22201e, batch-of-8 classical target), independently AXLE-verified @4.32, axiom-clean. frobenius_above: for coprime a,b>1, every integer m > ab-a-b (the Frobenius number) is a nonnegative integer combination a*x + b*y. This is the 'above the Frobenius number everything is representable' half of the two-coin Chicken McNugget / Frobenius theorem. Uses only main Mathlib (the (a-1)(b-1) bound + coprime representability). The complementary non-representability of the Frobenius number itself (frobenius-mcnugget) is a separate queued job."
     },
     {
       "name": "Brockian.GaloisCyclicGroup.alphaSub",
