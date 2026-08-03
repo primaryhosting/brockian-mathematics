@@ -21,6 +21,10 @@ Current checkpoint: 2026-08-02 — **LIVE multi-agent collab (Claude × Codex ×
   remains explicitly conditional.
 - Existing untracked `aristotle/` peer work and the duplicate
   `registry/attestations/BrocardGap.json` remain untouched.
+- The external 64-file corpus review is advisory, not a registry audit. Its
+  target-by-target reconciliation is in
+  `docs/RIEMANN-LABS-CORPUS-AUDIT-RECONCILIATION-2026-08-03.md`; Claude and
+  Codex should use that disposition before claiming or duplicating a target.
 
 ## Codex operator execution - 2026-08-03
 
