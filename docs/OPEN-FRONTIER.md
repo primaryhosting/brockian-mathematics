@@ -180,6 +180,24 @@ refinement of a solved problem — the frontier marks only what is actually open
 
 ---
 
+## Mersenne primes / even perfect numbers (infinitude open)
+
+**Claim.** Are there infinitely many Mersenne primes (equivalently, infinitely many even perfect
+numbers)? Open — one of the oldest problems in mathematics. Module: `Brockian.MersennePerfect`.
+`MersennePrimeInfinitude` and `EvenPerfectInfinitude` are unproven `def`s.
+
+**PROVED:**
+- **6, 28, 496, 8128 are perfect numbers** (`perfect_6/28/496/8128`) and **3, 7, 31, 127 are Mersenne
+  primes** (`mersenne_{2,3,5,7}_prime`).
+- The Euclid–Euler correspondence, **re-proved from main-library API** (the Mathlib lemmas live only
+  in the Archive), both directions.
+- **The two open statements are equivalent** (`infinitude_equiv`): infinitely many Mersenne primes ⟺
+  infinitely many even perfect numbers.
+
+**OPEN.** Either infinitude (they stand or fall together, but neither is proved).
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:
