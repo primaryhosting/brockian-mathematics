@@ -1,10 +1,10 @@
 # Brockian Verified Core — Program Report
 
-**Audience:** technical partners, advisors, scientific collaborators  
-**Classification:** Partner-facing (non-confidential). Counts pinned to the live registry.  
-**Report generated:** 2026-08-02  
-**Tip commit:** `d20fd0947a58080b2e7ee4f87764c60742ea3059` (`d20fd09`) — *feat(weyl): add weak primitive and Kato resolvent reductions* (2026-08-02 12:55:45 -0400)  
-**Registry source:** `registry/theorems.json`  
+**Audience:** technical partners, advisors, scientific collaborators
+**Classification:** Partner-facing (non-confidential). Counts pinned to the live registry.
+**Report generated:** 2026-08-03
+**Tip commit:** `7adb1506cb848dcc1169e30b4fa386fa0c7a544e` (`7adb150`) — *chore(torus): curated open-frontier certificates export for Lovable labs (32 problems, 277 proved, secret-clean)* (2026-08-03 07:53:59 -0400)
+**Registry source:** `registry/theorems.json`
 **Generated from:** AXLE attestations
 
 > **Brand sentence:** *We ship what is proven and mark what is not.*
@@ -15,7 +15,7 @@ Regenerate this document anytime:
 python3 scripts/gen_program_report.py
 ```
 
-Partner strategy context (do not confuse with this ledger snapshot):  
+Partner strategy context (do not confuse with this ledger snapshot):
 [`docs/partner/2026-08-02-verified-intelligence-strategy-brief.md`](partner/2026-08-02-verified-intelligence-strategy-brief.md)
 
 ---
@@ -30,18 +30,18 @@ verdict at a pinned environment. Registers are **derived** by
 
 | Snapshot | Value |
 |----------|------:|
-| **PROVED** | **1487** |
-| **DEFINITION** | **309** |
+| **PROVED** | **10348** |
+| **DEFINITION** | **530** |
 | **CONDITIONAL** | **21** |
 | **DISCHARGED** | **6** |
-| **CONJECTURE** | **1** |
-| Declarations in registry | 1824 |
-| Modules with entries | 120 |
-| Module attestation files | 120 |
+| **CONJECTURE** | **33** |
+| Declarations in registry | 10938 |
+| Modules with entries | 704 |
+| Module attestation files | 705 |
 | Certificate factory units | 3 (`CosTraceNorm`, `FranklinFixedPoint`, `target`) |
 | AXLE environment | `lean-4.32.0` |
-| AXLE verdict = verified | 1824 / 1824 |
-| Local `lake_build` field | **1824 pending** (see §6 caveats) |
+| AXLE verdict = verified | 10938 / 10938 |
+| Local `lake_build` field | **10938 pending** (see §6 caveats) |
 
 **What closed (reference process wins):** Euler’s pentagonal number theorem
 unconditionally in-core; Galois / “why five” degree rigidity; the q−ν
@@ -61,11 +61,11 @@ Registers are derived from axioms + AXLE verdict + provenance rung
 
 | Register | Count |
 |----------|------:|
-| **PROVED** | 1487 |
-| **DEFINITION** | 309 |
+| **PROVED** | 10348 |
+| **DEFINITION** | 530 |
 | **CONDITIONAL** | 21 |
 | **DISCHARGED** | 6 |
-| **CONJECTURE** | 1 |
+| **CONJECTURE** | 33 |
 
 | Meaning | Gate |
 |---------|------|
@@ -81,14 +81,14 @@ Full enumeration: [`REGISTRY.md`](../REGISTRY.md) · machine JSON: [`registry/th
 
 | Theme cluster | Entries |
 |---------------|--------:|
-| Weyl / spectral / operator | 544 |
-| Goldbach / singular series | 325 |
-| D₅ / C₅ spectral & symmetry | 263 |
-| Pentagonal / Franklin / partition | 142 |
-| Galois / cyclotomic / cos-trace | 114 |
-| Admissibility / sieve | 108 |
-| Other | 92 |
-| Core / metallic / golden | 76 |
+| Goldbach / singular series | 7609 |
+| Galois / cyclotomic / cos-trace | 1381 |
+| Weyl / spectral / operator | 608 |
+| Other | 454 |
+| D₅ / C₅ spectral & symmetry | 377 |
+| Pentagonal / Franklin / partition | 151 |
+| Admissibility / sieve | 120 |
+| Core / metallic / golden | 78 |
 | Equidistribution | 64 |
 | Penrose | 64 |
 | Riemann / ξ scaffold | 32 |
@@ -182,11 +182,43 @@ closes. Status is taken from the registry when the name is present.
 | `Brockian.PentagonalTheoremFranklin.pentagonalNumberTheorem_of_franklin` | `Brockian.PentagonalTheoremFranklin` |
 | `Brockian.PentagonalTheoremFranklin.pentagonalProduct_coeff_of_franklin` | `Brockian.PentagonalTheoremFranklin` |
 
-### All CONJECTURE entries (1)
+### All CONJECTURE entries (33)
 
 | Name | Module |
 |------|--------|
+| `Brockian.AmicableNumbers.AmicableInfinitude` | `Brockian.AmicableNumbers` |
+| `Brockian.AndricaConjecture.AndricaConjecture` | `Brockian.AndricaConjecture` |
+| `Brockian.BrocardGap.BrocardGapConjecture` | `Brockian.BrocardGap` |
+| `Brockian.BrocardProblem.BrocardConjecture` | `Brockian.BrocardProblem` |
+| `Brockian.CarmichaelKorselt.ThreePrimeCarmichaelInfinitude` | `Brockian.CarmichaelKorselt` |
+| `Brockian.CollatzPartial.CollatzConjecture` | `Brockian.CollatzPartial` |
+| `Brockian.CullenWoodall.CullenPrimeInfinitude` | `Brockian.CullenWoodall` |
+| `Brockian.CullenWoodall.WoodallPrimeInfinitude` | `Brockian.CullenWoodall` |
+| `Brockian.ErdosStraus.ErdosStrausConjecture` | `Brockian.ErdosStraus` |
+| `Brockian.FermatNumbers.FermatPrimeBeyondFour` | `Brockian.FermatNumbers` |
+| `Brockian.FortunateNumbers.FortuneConjecture` | `Brockian.FortunateNumbers` |
+| `Brockian.GilbreathConjecture.GilbreathConjecture` | `Brockian.GilbreathConjecture` |
+| `Brockian.GiugaNumbers.OddGiugaExists` | `Brockian.GiugaNumbers` |
 | `Brockian.GoldbachComb.GoldbachCovarianceTransfer` | `Brockian.GoldbachComb` |
+| `Brockian.HyperperfectNumbers.HyperperfectAllK` | `Brockian.HyperperfectNumbers` |
+| `Brockian.HyperperfectNumbers.HyperperfectInfinitude` | `Brockian.HyperperfectNumbers` |
+| `Brockian.LandauNSquaredPlusOne.LandauFourthConjecture` | `Brockian.LandauNSquaredPlusOne` |
+| `Brockian.LegendreConjecture.LegendreConjecture` | `Brockian.LegendreConjecture` |
+| `Brockian.MersennePerfect.EvenPerfectInfinitude` | `Brockian.MersennePerfect` |
+| `Brockian.MersennePerfect.MersennePrimeInfinitude` | `Brockian.MersennePerfect` |
+| `Brockian.OppermannConjecture.OppermannConjecture` | `Brockian.OppermannConjecture` |
+| `Brockian.PalindromicPrimes.PalindromicPrimeInfinitude` | `Brockian.PalindromicPrimes` |
+| `Brockian.PerfectTotient.PerfectTotientInfinitude` | `Brockian.PerfectTotient` |
+| `Brockian.PolignacPrimes.PolignacConjecture` | `Brockian.PolignacPrimes` |
+| `Brockian.QuasiperfectNumbers.QuasiperfectExists` | `Brockian.QuasiperfectNumbers` |
+| `Brockian.RepunitPrimes.RepunitPrimeInfinitude` | `Brockian.RepunitPrimes` |
+| `Brockian.RieselCovering.RieselProblem` | `Brockian.RieselCovering` |
+| `Brockian.SierpinskiCovering.SierpinskiProblem` | `Brockian.SierpinskiCovering` |
+| `Brockian.SophieGermain.SophieGermainInfinitude` | `Brockian.SophieGermain` |
+| `Brockian.SuperperfectNumbers.OddSuperperfectExists` | `Brockian.SuperperfectNumbers` |
+| `Brockian.TwinPrimes.TwinPrimeConjecture` | `Brockian.TwinPrimes` |
+| `Brockian.WeirdNumbers.OddWeirdExists` | `Brockian.WeirdNumbers` |
+| `Brockian.WilsonPrimes.WilsonPrimeInfinitude` | `Brockian.WilsonPrimes` |
 
 ---
 
@@ -203,9 +235,9 @@ Heterogeneous engines write candidates; **one registry** decides the badge.
 
 **Triple verification ideal for PROVED:**
 
-1. Local `lake build` on pinned toolchain  
-2. Local `#print axioms` ⊆ standard three  
-3. AXLE `verified` at named environment  
+1. Local `lake build` on pinned toolchain
+2. Local `#print axioms` ⊆ standard three
+3. AXLE `verified` at named environment
 
 **Today’s registry field reality:** AXLE + axiom gate are populated for all
 listed entries; the `lake_build` stamp is still largely `pending` (see below).
@@ -219,9 +251,9 @@ That is an operational caveat, not a license to inflate PROVED.
 
 | Leg | Status in this export |
 |-----|------------------------|
-| AXLE independent check | **1824/1824** verdict `verified` @ `lean-4.32.0` |
-| Axioms clean flag | **1824/1824** `axioms_ok: true` |
-| Local `lake_build` stamp | **1824/1824** marked `pending` |
+| AXLE independent check | **10938/10938** verdict `verified` @ `lean-4.32.0` |
+| Axioms clean flag | **10938/10938** `axioms_ok: true` |
+| Local `lake_build` stamp | **10938/10938** marked `pending` |
 
 **Implication:** Partner-grade “verification company” narrative requires a
 reproducible local/CI `lake build` leg alongside AXLE. Treat current PROVED as
@@ -237,9 +269,9 @@ on the tip commit above.
 
 ### 6.2 Counting discipline
 
-- **Registry PROVED** (1487) is the only number safe for partner headlines.  
-- Campaign / historical “theorems attempted” totals are **not** interchangeable with PROVED.  
-- DEFINITION (309) supports the API surface; do not add it to PROVED.  
+- **Registry PROVED** (10348) is the only number safe for partner headlines.
+- Campaign / historical “theorems attempted” totals are **not** interchangeable with PROVED.
+- DEFINITION (530) supports the API surface; do not add it to PROVED.
 - DISCHARGED (6) is a success story (conditionals closed) — **not** extra PROVED.
 
 ### 6.3 No theater
@@ -288,7 +320,7 @@ python3 scripts/gen_paper_theorem_table.py
 
 **Pin phrase for external one-pagers:**
 
-> As of commit `d20fd09` (2026-08-02): **1487 PROVED**, **309 DEFINITION**, **21 CONDITIONAL**, **6 DISCHARGED**, **1 CONJECTURE** — from `registry/theorems.json`.
+> As of commit `7adb150` (2026-08-03): **10348 PROVED**, **530 DEFINITION**, **21 CONDITIONAL**, **6 DISCHARGED**, **33 CONJECTURE** — from `registry/theorems.json`.
 
 ---
 

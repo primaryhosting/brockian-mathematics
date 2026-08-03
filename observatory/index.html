@@ -107,9 +107,9 @@
   <h1>Observatory</h1>
   <p class="sub">Brockian Mathematics / Riemann Labs — public claim surface. Badges are derived from the
   machine-verified Lean registry; they are never hand-painted.</p>
-  <div class="pills"><span class='pill reg'>CONDITIONAL: <b>21</b></span> <span class='pill reg'>CONJECTURE: <b>1</b></span> <span class='pill reg'>DEFINITION: <b>351</b></span> <span class='pill reg'>DISCHARGED: <b>6</b></span> <span class='pill reg'>PROVED: <b>2002</b></span></div>
+  <div class="pills"><span class='pill reg'>CONDITIONAL: <b>21</b></span> <span class='pill reg'>CONJECTURE: <b>33</b></span> <span class='pill reg'>DEFINITION: <b>530</b></span> <span class='pill reg'>DISCHARGED: <b>6</b></span> <span class='pill reg'>PROVED: <b>10348</b></span></div>
   <div class="pills"><span class='pill'>proved: <b>66</b></span> <span class='pill'>conditional: <b>4</b></span> <span class='pill'>not_claimed: <b>4</b></span> <span class='pill'>open: <b>1</b></span> <span class='pill'>conjecture: <b>1</b></span> <span class='pill'>aristotle: <b>1</b></span> <span class='pill'>definition: <b>1</b></span></div>
-  <p class="meta">Generated 2026-08-03T03:18:06Z · from <code>registry/theorems.json</code> +
+  <p class="meta">Generated 2026-08-03T12:00:49Z · from <code>registry/theorems.json</code> +
   <code>observatory/claim_map.yaml</code></p>
 </header>
 <main>
@@ -296,7 +296,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Bounded prime-Gaussian multiplication operator (Gate 1 piece)</h3>
       <p class="book">Lean SpectralGate1; Gate 1 partial</p>
       <p class='notes'>Potential term bounded + ESA + dense range of non-real shifts PROVED. Full −Δ+V still needs Laplacian + continuous-V bridge.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>abs_primeGaussian_le_two</code></td><td>PROVED</td><td><code>Brockian/SpectralGate1.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>isSelfAdjoint_primeGaussianMulCLM</code></td><td>PROVED</td><td><code>Brockian/SpectralGate1.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>primeGaussianMul_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/Gate1Bounded.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>primeGaussianMul_dense_range_sub</code></td><td>PROVED</td><td><code>Brockian/Gate1Bounded.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>abs_primeGaussian_le_two</code></td><td>PROVED</td><td><code>Brockian/SpectralGate1.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>isSelfAdjoint_primeGaussianMulCLM</code></td><td>PROVED</td><td><code>Brockian/SpectralGate1.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>primeGaussianMul_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/WeylGate1Bounded.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>primeGaussianMul_dense_range_sub</code></td><td>PROVED</td><td><code>Brockian/WeylGate1Bounded.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -308,7 +308,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Bounded Kato–Rellich (self-adjoint sum + dense range of shifts)</h3>
       <p class="book">Lean Weyl.Kato (Aristotle c595862c)</p>
       <p class='notes'>Bounded free + bounded SA potential. Unbounded free still open.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>isSelfAdjoint_add</code></td><td>PROVED</td><td><code>Brockian/Kato.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>dense_range_add_sub_of_selfAdjoint</code></td><td>PROVED</td><td><code>Brockian/Kato.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>add_primeGaussian_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/Gate1Bounded.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>isSelfAdjoint_add</code></td><td>PROVED</td><td><code>Brockian/WeylKato.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>dense_range_add_sub_of_selfAdjoint</code></td><td>PROVED</td><td><code>Brockian/WeylKato.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>add_primeGaussian_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/WeylGate1Bounded.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -320,7 +320,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Corrected b→∞ radius dichotomy (mass positive somewhere)</h3>
       <p class="book">Lean Weyl.RadiusDichotomy (Aristotle 50ca67ca)</p>
       <p class='notes'>Includes counterexample to naive iff (1/0=0). Complements Weyl.Dichotomy.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>radius_tendsto_zero_iff_of_pos</code></td><td>PROVED</td><td><code>Brockian/RadiusDichotomy.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>radius_to_zero_of_mass_infinite</code></td><td>PROVED</td><td><code>Brockian/RadiusDichotomy.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>radius_pos_limit_of_mass_finite</code></td><td>PROVED</td><td><code>Brockian/RadiusDichotomy.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>radius_tendsto_zero_iff_counterexample</code></td><td>PROVED</td><td><code>Brockian/RadiusDichotomy.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>radius_tendsto_zero_iff_of_pos</code></td><td>PROVED</td><td><code>Brockian/WeylRadiusDichotomy.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>radius_to_zero_of_mass_infinite</code></td><td>PROVED</td><td><code>Brockian/WeylRadiusDichotomy.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>radius_pos_limit_of_mass_finite</code></td><td>PROVED</td><td><code>Brockian/WeylRadiusDichotomy.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>radius_tendsto_zero_iff_counterexample</code></td><td>PROVED</td><td><code>Brockian/WeylRadiusDichotomy.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -332,7 +332,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Wronskian constancy + integrated Green identity</h3>
       <p class="book">Lean Weyl / Gate 1 ODE base</p>
       
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>wronskian_isConst</code></td><td>PROVED</td><td><code>Brockian/Weyl.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>green_identity_integral</code></td><td>PROVED</td><td><code>Brockian/Weyl.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>lagrange_identity</code></td><td>PROVED</td><td><code>Brockian/Weyl.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>wronskian_isConst</code></td><td>PROVED</td><td><code>Brockian/WeylLimitPoint.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>green_identity_integral</code></td><td>PROVED</td><td><code>Brockian/WeylLimitPoint.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>lagrange_identity</code></td><td>PROVED</td><td><code>Brockian/WeylLimitPoint.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -344,7 +344,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Finite-b nested-circle geometry (exact radius, nesting)</h3>
       <p class="book">Lean Weyl.Disk</p>
       <p class='notes'>Finite-b complete; b→∞ dichotomy on radii in WEYL-DICHOTOMY.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>weyl_disk_circle</code></td><td>PROVED</td><td><code>Brockian/Disk.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>radius_formula</code></td><td>PROVED</td><td><code>Brockian/Disk.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>weyl_radius_antitone</code></td><td>PROVED</td><td><code>Brockian/Disk.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>weyl_nested_circle</code></td><td>PROVED</td><td><code>Brockian/Disk.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>weyl_disk_circle</code></td><td>PROVED</td><td><code>Brockian/WeylDisk.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>radius_formula</code></td><td>PROVED</td><td><code>Brockian/WeylDisk.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>weyl_radius_antitone</code></td><td>PROVED</td><td><code>Brockian/WeylDisk.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>weyl_nested_circle</code></td><td>PROVED</td><td><code>Brockian/WeylDisk.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -356,7 +356,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Symmetric LinearPMap framework + key inequality</h3>
       <p class="book">Lean Weyl.Operator</p>
       <p class='notes'>Predicate + inequality; ESA inhabited elsewhere.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>norm_sub_smul_ge</code></td><td>PROVED</td><td><code>Brockian/Operator.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>eq_zero_of_apply_eq_smul</code></td><td>PROVED</td><td><code>Brockian/Operator.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>EssentiallySelfAdjoint</code></td><td>DEFINITION</td><td><code>Brockian/Operator.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>norm_sub_smul_ge</code></td><td>PROVED</td><td><code>Brockian/WeylOperator.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>eq_zero_of_apply_eq_smul</code></td><td>PROVED</td><td><code>Brockian/WeylOperator.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>EssentiallySelfAdjoint</code></td><td>DEFINITION</td><td><code>Brockian/WeylOperator.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -368,7 +368,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>EssentiallySelfAdjoint inhabited (bounded self-adjoint CLMs)</h3>
       <p class="book">Lean Weyl.ESA</p>
       <p class='notes'>Closes Operator open blocker for bounded case.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>clm_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/ESA.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>id_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/ESA.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>clm_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/WeylEssSelfAdjoint.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>id_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/WeylEssSelfAdjoint.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -380,7 +380,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Von Neumann criterion — ESA ↔ dense ran(T±i)</h3>
       <p class="book">Lean Weyl.Cayley</p>
       <p class='notes'>Abstract criterion; applying to −Δ+V still open.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>essentiallySelfAdjoint_iff</code></td><td>PROVED</td><td><code>Brockian/Cayley.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>mem_orthogonal_rangeSMulSub_iff</code></td><td>PROVED</td><td><code>Brockian/Cayley.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>norm_add_I_smul_eq</code></td><td>PROVED</td><td><code>Brockian/Cayley.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>essentiallySelfAdjoint_iff</code></td><td>PROVED</td><td><code>Brockian/WeylCayley.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>mem_orthogonal_rangeSMulSub_iff</code></td><td>PROVED</td><td><code>Brockian/WeylCayley.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>norm_add_I_smul_eq</code></td><td>PROVED</td><td><code>Brockian/WeylCayley.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -392,7 +392,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Dense ranges ⇒ EssentiallySelfAdjoint</h3>
       <p class="book">Lean Weyl.Chain</p>
       <p class='notes'>Glue; open link is producing density for the Schrödinger operator.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>essSelfAdjoint_of_dense_ranges</code></td><td>PROVED</td><td><code>Brockian/Chain.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>essSelfAdjoint_of_dense_ranges</code></td><td>PROVED</td><td><code>Brockian/WeylChain.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -404,7 +404,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>b→∞ radius dichotomy (r→0 ↔ I→∞)</h3>
       <p class="book">Lean Weyl.Dichotomy (+ DiskBridge, ConstMass)</p>
       <p class='notes'>Radius side PROVED. Aristotle 50ca67ca largely redundant; de-dupe on return.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>radius_tendsto_zero_iff</code></td><td>PROVED</td><td><code>Brockian/Dichotomy.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>limitPoint_or_limitCircle_radius</code></td><td>PROVED</td><td><code>Brockian/Dichotomy.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>limitPointRadius_radius_tendsto_zero</code></td><td>PROVED</td><td><code>Brockian/Dichotomy.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>diskRadius_eq_weylRadius</code></td><td>PROVED</td><td><code>Brockian/DiskBridge.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>growing_exp_radius_tendsto_zero</code></td><td>PROVED</td><td><code>Brockian/ConstMass.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>exists_growing_mode_limitPointRadius</code></td><td>PROVED</td><td><code>Brockian/ConstMass.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>radius_tendsto_zero_iff</code></td><td>PROVED</td><td><code>Brockian/WeylDichotomy.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>limitPoint_or_limitCircle_radius</code></td><td>PROVED</td><td><code>Brockian/WeylDichotomy.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>limitPointRadius_radius_tendsto_zero</code></td><td>PROVED</td><td><code>Brockian/WeylDichotomy.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>diskRadius_eq_weylRadius</code></td><td>PROVED</td><td><code>Brockian/WeylDiskBridge.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>growing_exp_radius_tendsto_zero</code></td><td>PROVED</td><td><code>Brockian/WeylConstMass.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>exists_growing_mode_limitPointRadius</code></td><td>PROVED</td><td><code>Brockian/WeylConstMass.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -416,7 +416,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Constant potential is limit-point at ∞</h3>
       <p class="book">Lean Weyl.LP</p>
       <p class='notes'>Real instance; general bounded-V is Aristotle 17ad1895.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>const_potential_isLimitPoint</code></td><td>PROVED</td><td><code>Brockian/LP.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>const_potential_isLimitPoint</code></td><td>PROVED</td><td><code>Brockian/WeylLimitPointBounded.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -428,7 +428,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Closure chain T ⊆ T̄ ⊆ T*, deficiency closed</h3>
       <p class="book">Lean Weyl.Closure</p>
       
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>symmetric_le_adjoint</code></td><td>PROVED</td><td><code>Brockian/Closure.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>symmetric_closure_le_adjoint</code></td><td>PROVED</td><td><code>Brockian/Closure.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>isClosed_deficiencySet</code></td><td>PROVED</td><td><code>Brockian/Closure.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>symmetric_le_adjoint</code></td><td>PROVED</td><td><code>Brockian/WeylClosure.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>symmetric_closure_le_adjoint</code></td><td>PROVED</td><td><code>Brockian/WeylClosure.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>isClosed_deficiencySet</code></td><td>PROVED</td><td><code>Brockian/WeylClosure.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -452,7 +452,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>No nonzero global-L² solution at non-real λ (deficiency bridge)</h3>
       <p class="book">Lean Weyl.Bridge (Codex plan; energy/Wronskian identity)</p>
       <p class='notes'>PROVED: W&#x27; = −2i (Im λ)|y|², limits of W at ±∞ vanish, mass zero. Aristotle target 403cd5ed can be closed/superseded.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>no_nonzero_L2_solution</code></td><td>PROVED</td><td><code>Brockian/Bridge.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>hasDerivAt_wronskianConj</code></td><td>PROVED</td><td><code>Brockian/Bridge.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>global_boundary_identity</code></td><td>PROVED</td><td><code>Brockian/Bridge.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>no_nonzero_L2_solution</code></td><td>PROVED</td><td><code>Brockian/WeylBridge.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>hasDerivAt_wronskianConj</code></td><td>PROVED</td><td><code>Brockian/WeylBridge.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>global_boundary_identity</code></td><td>PROVED</td><td><code>Brockian/WeylBridge.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -464,7 +464,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Deficiency bridge (superseded by WEYL-BRIDGE if integrated)</h3>
       <p class="book">aristotle/bridge-deficiency · project 403cd5ed</p>
       <p class='notes'>Core statement now in Brockian.Weyl.Bridge.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>no_nonzero_L2_solution</code></td><td>PROVED</td><td><code>Brockian/Bridge.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>no_nonzero_L2_solution</code></td><td>PROVED</td><td><code>Brockian/WeylBridge.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -476,7 +476,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Kato bounded perturbation (INTEGRATED)</h3>
       <p class="book">Brockian.Weyl.Kato — was aristotle/kato-bounded c595862c</p>
       <p class='notes'>Integrated and AXLE-verified; see WEYL-KATO.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>dense_range_add_sub_of_selfAdjoint</code></td><td>PROVED</td><td><code>Brockian/Kato.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>dense_range_add_sub_of_selfAdjoint</code></td><td>PROVED</td><td><code>Brockian/WeylKato.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -488,7 +488,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>End-to-end Gate-1 assembly (ODE bridge ⇒ ESA under identification)</h3>
       <p class="book">Lean Weyl.SchrodingerESA</p>
       <p class='notes'>Full ESA of -Δ+V requires constructing T and DeficiencyRepresentsODE. Potential term and abstract chain closed.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>essentiallySelfAdjoint_of_ode_bridge</code></td><td>PROVED</td><td><code>Brockian/SchrodingerESA.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>deficiencySpace_eq_bot_of_ode_bridge</code></td><td>PROVED</td><td><code>Brockian/SchrodingerESA.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>primeGaussian_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/SchrodingerESA.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>free_plus_primeGaussian_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/SchrodingerESA.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>essentiallySelfAdjoint_of_ode_bridge</code></td><td>PROVED</td><td><code>Brockian/WeylSchrodingerESA.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>deficiencySpace_eq_bot_of_ode_bridge</code></td><td>PROVED</td><td><code>Brockian/WeylSchrodingerESA.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>primeGaussian_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/WeylSchrodingerESA.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>free_plus_primeGaussian_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/WeylSchrodingerESA.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -500,7 +500,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Free Laplacian model — unitary ESA transfer + Kato symmetry half</h3>
       <p class="book">Lean Weyl.FreeLaplacian (Grok 2026-08-01)</p>
       <p class='notes'>Bounded-cutoff Fourier model only. Unbounded −Δ and range-density Kato open.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>isSelfAdjoint_conjCLM</code></td><td>PROVED</td><td><code>Brockian/FreeLaplacian.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>essentiallySelfAdjoint_conjCLM</code></td><td>PROVED</td><td><code>Brockian/FreeLaplacian.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>isSymmetric_vadd_clm</code></td><td>PROVED</td><td><code>Brockian/FreeLaplacian.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>id_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/FreeLaplacian.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>isSelfAdjoint_conjCLM</code></td><td>PROVED</td><td><code>Brockian/WeylFreeLaplacian.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>essentiallySelfAdjoint_conjCLM</code></td><td>PROVED</td><td><code>Brockian/WeylFreeLaplacian.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>isSymmetric_vadd_clm</code></td><td>PROVED</td><td><code>Brockian/WeylFreeLaplacian.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>id_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/WeylFreeLaplacian.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -512,7 +512,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Singular-series infinite product converges (unconditional positivity)</h3>
       <p class="book">Lean SingularSeries.Convergence (Claude 2026-08-01)</p>
       <p class='notes'>Discharges h_conv of singular_series_pos; the old singular_series_converges PORT-QUEUE axiom is now a genuine proof (∑|localFactor−1| via 1/p² comparison).</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>singular_series_pos&#x27;</code></td><td>PROVED</td><td><code>Brockian/Convergence.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>singularSeriesFinite_tendsto_pos</code></td><td>PROVED</td><td><code>Brockian/Convergence.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>summable_localFactorAt_sub_one</code></td><td>PROVED</td><td><code>Brockian/Convergence.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>localFactor_sub_one_bound</code></td><td>PROVED</td><td><code>Brockian/Convergence.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>singular_series_pos&#x27;</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesConvergence.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>singularSeriesFinite_tendsto_pos</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesConvergence.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>summable_localFactorAt_sub_one</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesConvergence.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>localFactor_sub_one_bound</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesConvergence.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -524,7 +524,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Bounded decaying potential is not a Hilbert–Pólya spectral candidate</h3>
       <p class="book">Lean Weyl.OperatorChoice (Grok 2026-08-01)</p>
       <p class='notes'>Conditional on a zero outside ball of radius 2. Not RH; shape obstruction.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>norm_eigenvalue_le_of_bound</code></td><td>PROVED</td><td><code>Brockian/OperatorChoice.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>primeGaussian_not_realize_large_zero</code></td><td>PROVED</td><td><code>Brockian/OperatorChoice.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>rh_operator_needs_unbounded_spectrum</code></td><td>PROVED</td><td><code>Brockian/OperatorChoice.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>primeGaussianMulCLM_opNorm_le_two</code></td><td>PROVED</td><td><code>Brockian/OperatorChoice.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>norm_eigenvalue_le_of_bound</code></td><td>PROVED</td><td><code>Brockian/WeylOperatorChoice.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>primeGaussian_not_realize_large_zero</code></td><td>PROVED</td><td><code>Brockian/WeylOperatorChoice.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>rh_operator_needs_unbounded_spectrum</code></td><td>PROVED</td><td><code>Brockian/WeylOperatorChoice.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>primeGaussianMulCLM_opNorm_le_two</code></td><td>PROVED</td><td><code>Brockian/WeylOperatorChoice.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -536,7 +536,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Real L∞ multiplication is essentially self-adjoint on L²</h3>
       <p class="book">Lean Weyl.MulReal (Grok swarm 2026-08-01)</p>
       <p class='notes'>Bounded free/potential model rung. Unbounded mult by x² open.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>mulLpCLM_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/MulReal.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>constMul_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/MulReal.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>add_mulLpCLM_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/MulReal.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>mulLpCLM_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/WeylMulReal.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>constMul_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/WeylMulReal.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>add_mulLpCLM_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/WeylMulReal.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -548,7 +548,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Confining vs decaying potential dichotomy (RH operator shape)</h3>
       <p class="book">Lean Weyl.Confining (Grok swarm 2026-08-01)</p>
       <p class='notes'>Not RH. Machine-checks that Gate-1 prime-Gaussian is not confining; quadratic is.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>quadratic_isConfining</code></td><td>PROVED</td><td><code>Brockian/Confining.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>not_isConfining_of_abs_le</code></td><td>PROVED</td><td><code>Brockian/Confining.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>primeGaussian_not_isConfining</code></td><td>PROVED</td><td><code>Brockian/Confining.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>gate1_vs_confining_shape</code></td><td>PROVED</td><td><code>Brockian/Confining.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>quadratic_isConfining</code></td><td>PROVED</td><td><code>Brockian/WeylConfining.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>not_isConfining_of_abs_le</code></td><td>PROVED</td><td><code>Brockian/WeylConfining.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>primeGaussian_not_isConfining</code></td><td>PROVED</td><td><code>Brockian/WeylConfining.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>gate1_vs_confining_shape</code></td><td>PROVED</td><td><code>Brockian/WeylConfining.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -584,7 +584,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Elementary Goldbach parity rung (not global Goldbach)</h3>
       <p class="book">Lean Goldbach.Parity</p>
       <p class='notes'>Local p=2 and odd-representation facts only.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>gCount_two</code></td><td>PROVED</td><td><code>Brockian/Parity.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>hasGoldbachRep_odd_iff</code></td><td>PROVED</td><td><code>Brockian/Parity.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>gCount_five</code></td><td>PROVED</td><td><code>Brockian/Parity.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>gCount_two</code></td><td>PROVED</td><td><code>Brockian/GoldbachParity.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>hasGoldbachRep_odd_iff</code></td><td>PROVED</td><td><code>Brockian/GoldbachParity.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>gCount_five</code></td><td>PROVED</td><td><code>Brockian/GoldbachParity.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -620,7 +620,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Unconditional singular-series positivity API for downstream</h3>
       <p class="book">Lean SingularSeries.Wire (swarm #3)</p>
       <p class='notes'>Re-export of Convergence.singular_series_pos&#x27;; drop-in without h_conv.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>singular_series_pos_unconditional</code></td><td>PROVED</td><td><code>Brockian/Wire.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>singular_series_pos_of_admissible</code></td><td>PROVED</td><td><code>Brockian/Wire.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>singular_series_pos_supersedes_conditional</code></td><td>PROVED</td><td><code>Brockian/Wire.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>singular_series_pos_unconditional</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesWire.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>singular_series_pos_of_admissible</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesWire.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>singular_series_pos_supersedes_conditional</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesWire.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -632,7 +632,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Confining spectral shape packages (not RH)</h3>
       <p class="book">Lean Weyl.ConfiningShape (swarm #3)</p>
       <p class='notes'>Prop bundles for discrete/compact-resolvent shape; counting schemas open.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>not_discreteSpectrumCandidate_of_bound</code></td><td>PROVED</td><td><code>Brockian/ConfiningShape.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>quadratic_compactResolventShape</code></td><td>PROVED</td><td><code>Brockian/ConfiningShape.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>primeGaussian_not_compactResolventShape</code></td><td>PROVED</td><td><code>Brockian/ConfiningShape.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>not_discreteSpectrumCandidate_of_bound</code></td><td>PROVED</td><td><code>Brockian/ConfiningSpectralShape.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>quadratic_compactResolventShape</code></td><td>PROVED</td><td><code>Brockian/ConfiningSpectralShape.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>primeGaussian_not_compactResolventShape</code></td><td>PROVED</td><td><code>Brockian/ConfiningSpectralShape.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -644,7 +644,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Golden uniqueness as layered algebraic/rigidity schema</h3>
       <p class="book">Lean GoldenUniqueness (swarm #3)</p>
       <p class='notes'>Restates golden_unique_to_five; no numerology.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>golden_unique_to_five</code></td><td>PROVED</td><td><code>Brockian/GoldenUniqueness.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>golden_sub_one_eq_two_cos</code></td><td>PROVED</td><td><code>Brockian/GoldenUniqueness.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>golden_not_in_prime_cycle_ne_five</code></td><td>PROVED</td><td><code>Brockian/GoldenUniqueness.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>golden_unique_to_five</code></td><td>PROVED</td><td><code>Brockian/GoldenUniquenessSchema.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>golden_sub_one_eq_two_cos</code></td><td>PROVED</td><td><code>Brockian/GoldenUniquenessSchema.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>golden_not_in_prime_cycle_ne_five</code></td><td>PROVED</td><td><code>Brockian/GoldenUniquenessSchema.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -716,7 +716,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Concrete admissible constellations with positive singular series</h3>
       <p class="book">Lean SingularSeries.Examples · twin gap / even pairs</p>
       <p class='notes'>Instances of Wire/Convergence API on {0,2} and even pairs. Not twin-prime density or HL conjecture. SingularSeriesMoreExamples absent.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>isAdmissible_twinGap</code></td><td>PROVED</td><td><code>Brockian/Examples.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>singular_series_pos_twinGap</code></td><td>PROVED</td><td><code>Brockian/Examples.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>isAdmissible_evenPair</code></td><td>PROVED</td><td><code>Brockian/Examples.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>singular_series_pos_evenPair</code></td><td>PROVED</td><td><code>Brockian/Examples.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>isAdmissible_twinGap</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesExamples.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>singular_series_pos_twinGap</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesExamples.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>isAdmissible_evenPair</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesExamples.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>singular_series_pos_evenPair</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesExamples.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -728,7 +728,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Finite local Goldbach wheel (g_p and K_p at small primes)</h3>
       <p class="book">Lean Goldbach.LocalWheel · mod-2/3 finite predictor</p>
       <p class='notes'>Exact local counts/covariances only. Not global Goldbach. GoldbachWheelExtended not in registry.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>gCount_three</code></td><td>PROVED</td><td><code>Brockian/LocalWheel.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>Kp_five</code></td><td>PROVED</td><td><code>Brockian/LocalWheel.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>K23_eq</code></td><td>PROVED</td><td><code>Brockian/LocalWheel.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>K23_eq_nine_quarters_iff</code></td><td>PROVED</td><td><code>Brockian/LocalWheel.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>gCount_three</code></td><td>PROVED</td><td><code>Brockian/GoldbachLocalWheel.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>Kp_five</code></td><td>PROVED</td><td><code>Brockian/GoldbachLocalWheel.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>K23_eq</code></td><td>PROVED</td><td><code>Brockian/GoldbachLocalWheel.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>K23_eq_nine_quarters_iff</code></td><td>PROVED</td><td><code>Brockian/GoldbachLocalWheel.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -752,7 +752,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Symmetric-operator real-spectrum package (New Era gallery)</h3>
       <p class="book">Lean Weyl.SymmetryPackage · re-export of Operator rung</p>
       <p class='notes'>Gallery re-exports from Weyl.Operator. Not ESA, not T̄=T*, not RH.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>quadratic_form_im_zero</code></td><td>PROVED</td><td><code>Brockian/SymmetryPackage.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>eigenvalue_im_zero</code></td><td>PROVED</td><td><code>Brockian/SymmetryPackage.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>not_eigenvalue_of_im_ne_zero</code></td><td>PROVED</td><td><code>Brockian/SymmetryPackage.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>injective_of_im_ne_zero</code></td><td>PROVED</td><td><code>Brockian/SymmetryPackage.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>quadratic_form_im_zero</code></td><td>PROVED</td><td><code>Brockian/WeylSymmetryPackage.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>eigenvalue_im_zero</code></td><td>PROVED</td><td><code>Brockian/WeylSymmetryPackage.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>not_eigenvalue_of_im_ne_zero</code></td><td>PROVED</td><td><code>Brockian/WeylSymmetryPackage.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>injective_of_im_ne_zero</code></td><td>PROVED</td><td><code>Brockian/WeylSymmetryPackage.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -836,7 +836,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Singular series positivity for even pairs {0,4},{0,6},{0,8},{0,10}</h3>
       <p class="book">Tier-1 SingularSeriesMoreExamples</p>
       <p class='notes'>Local factors + positivity; not twin-prime asymptotic.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>singular_series_pos_evenPair_four</code></td><td>PROVED</td><td><code>Brockian/MoreExamples.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>localFactor_four_two</code></td><td>PROVED</td><td><code>Brockian/MoreExamples.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>localFactor_six_three</code></td><td>PROVED</td><td><code>Brockian/MoreExamples.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>singular_series_pos_evenPair_four</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesMoreExamples.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>localFactor_four_two</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesMoreExamples.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>localFactor_six_three</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesMoreExamples.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -848,7 +848,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Goldbach local wheels K11, K13 and K235 product</h3>
       <p class="book">Tier-1 GoldbachWheelExtended</p>
       <p class='notes'>Finite local arithmetic only; not Goldbach.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>Kp_eleven</code></td><td>PROVED</td><td><code>Brockian/WheelExtended.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>Kp_thirteen</code></td><td>PROVED</td><td><code>Brockian/WheelExtended.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>K235_cases</code></td><td>PROVED</td><td><code>Brockian/WheelExtended.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>Kp_eleven</code></td><td>PROVED</td><td><code>Brockian/GoldbachWheelExtended.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>Kp_thirteen</code></td><td>PROVED</td><td><code>Brockian/GoldbachWheelExtended.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>K235_cases</code></td><td>PROVED</td><td><code>Brockian/GoldbachWheelExtended.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -872,7 +872,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Singular series for even pairs n=12..20</h3>
       <p class="book">Option 2 · SingularSeriesEvenMore</p>
       <p class='notes'>Positivity + local factors; not twin infinitude.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>singular_series_pos_evenPair_twelve</code></td><td>PROVED</td><td><code>Brockian/EvenMore.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>localFactor_twelve_two</code></td><td>PROVED</td><td><code>Brockian/EvenMore.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>singular_series_pos_evenPair_twelve</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesEvenMore.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>localFactor_twelve_two</code></td><td>PROVED</td><td><code>Brockian/SingularSeriesEvenMore.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -884,7 +884,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Goldbach local wheel K2 K3 K5 K7 product</h3>
       <p class="book">Option 2 · GoldbachWheelK2357</p>
       <p class='notes'>Finite local wheel only.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>K2357</code></td><td>DEFINITION</td><td><code>Brockian/WheelK2357.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>K2357_le_aligned</code></td><td>PROVED</td><td><code>Brockian/WheelK2357.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>K2357</code></td><td>DEFINITION</td><td><code>Brockian/GoldbachWheelK2357.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>K2357_le_aligned</code></td><td>PROVED</td><td><code>Brockian/GoldbachWheelK2357.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -896,7 +896,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Continuous bounded V limit-point (constants full; general reduced)</h3>
       <p class="book">Option 3 · WeylLimitPointContinuous</p>
       <p class='notes'>Requires Continuous V (not bare-bounded). Full general LP needs FS existence.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>const_continuous_isLimitPoint</code></td><td>PROVED</td><td><code>Brockian/LimitPointContinuous.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>no_nonzero_global_L2_of_contBounded</code></td><td>PROVED</td><td><code>Brockian/LimitPointContinuous.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>contBounded_isLimitPoint_of_FS_obligation</code></td><td>PROVED</td><td><code>Brockian/LimitPointContinuous.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>const_continuous_isLimitPoint</code></td><td>PROVED</td><td><code>Brockian/WeylLimitPointContinuous.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>no_nonzero_global_L2_of_contBounded</code></td><td>PROVED</td><td><code>Brockian/WeylLimitPointContinuous.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>contBounded_isLimitPoint_of_FS_obligation</code></td><td>PROVED</td><td><code>Brockian/WeylLimitPointContinuous.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -943,7 +943,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Unbounded LinearPMap ESA transfer + discrete ξ² free model</h3>
       <p class="book">Lean Weyl.FreeLaplacian2 (Claude swarm 2026-08-01)</p>
       <p class='notes'>Reusable deficiency-space transfer across unitaries for possibly unbounded LinearPMaps; discrete mult-by-ξ² ESA proved. freeLaplacian_essentiallySelfAdjoint_of_fourier is a proved implication packaging the Fourier route — Mathlib Plancherel L² unitary + unbounded mult ESA on R remain open hypotheses, not faked.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>essentiallySelfAdjoint_transfer</code></td><td>PROVED</td><td><code>Brockian/FreeLaplacian2.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>dense_map_iff</code></td><td>PROVED</td><td><code>Brockian/FreeLaplacian2.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>sqMult_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/FreeLaplacian2.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>freeLaplacian_essentiallySelfAdjoint_of_fourier</code></td><td>CONDITIONAL</td><td><code>Brockian/FreeLaplacian2.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>essentiallySelfAdjoint_transfer</code></td><td>PROVED</td><td><code>Brockian/WeylFreeLaplacian2.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>dense_map_iff</code></td><td>PROVED</td><td><code>Brockian/WeylFreeLaplacian2.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>sqMult_essentiallySelfAdjoint</code></td><td>PROVED</td><td><code>Brockian/WeylFreeLaplacian2.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>freeLaplacian_essentiallySelfAdjoint_of_fourier</code></td><td>CONDITIONAL</td><td><code>Brockian/WeylFreeLaplacian2.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     
 
@@ -955,7 +955,7 @@ Open problems (twins infinitude, Goldbach global, RH) stay not_claimed.</div>
       <h3>Concrete minimal Schrödinger operator T = −d²/dx² + V on Schwartz core</h3>
       <p class="book">Lean Weyl.SchrodingerMinimal (Claude 2026-08-01)</p>
       <p class='notes'>Concrete schrodingerPMap constructed and proved dense+symmetric. schrodinger_essentiallySelfAdjoint_of_ode is CONDITIONAL (open) on DeficiencyRepresentsODE — elliptic regularity / Mathlib gap. Does not claim unconditional ESA of −Δ+V.</p>
-      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>schrodingerPMap_isSymmetric</code></td><td>PROVED</td><td><code>Brockian/SchrodingerMinimal.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>schrodingerPMap_dense</code></td><td>PROVED</td><td><code>Brockian/SchrodingerMinimal.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>schwartz_ibp2</code></td><td>PROVED</td><td><code>Brockian/SchrodingerMinimal.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>schrodinger_essentiallySelfAdjoint_of_ode</code></td><td>CONDITIONAL</td><td><code>Brockian/SchrodingerMinimal.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
+      <table class='decls'><thead><tr><th>Declaration</th><th>Register</th><th>Source</th><th>AXLE</th></tr></thead><tbody><tr><td><code>schrodingerPMap_isSymmetric</code></td><td>PROVED</td><td><code>Brockian/WeylSchrodingerMinimal.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>schrodingerPMap_dense</code></td><td>PROVED</td><td><code>Brockian/WeylSchrodingerMinimal.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>schwartz_ibp2</code></td><td>PROVED</td><td><code>Brockian/WeylSchrodingerMinimal.lean</code></td><td>verified lean-4.32.0</td></tr><tr><td><code>schrodinger_essentiallySelfAdjoint_of_ode</code></td><td>CONDITIONAL</td><td><code>Brockian/WeylSchrodingerMinimal.lean</code></td><td>verified lean-4.32.0</td></tr></tbody></table>
     </article>
     </div></section><section class='group'><h2>Named conjectures <span class='count'>1</span></h2><div class='grid'>
     <article class="claim" id="GC-TRANSFER">

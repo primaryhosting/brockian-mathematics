@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 
@@ -74,3 +75,27 @@ def test_build_entry_records_verification_block():
     assert e["register"] == "PROVED"
     assert e["verification"]["axle"] == {"verdict": "verified", "environment": "lean-4.32.0"}
     assert e["quarantine"] is True
+
+
+def test_generate_uses_attestation_stem_for_source_path(tmp_path, monkeypatch):
+    (tmp_path / "Brockian.lean").write_text("import Brockian.BrocardGapConjecture\n")
+    attestations = tmp_path / "registry" / "attestations"
+    attestations.mkdir(parents=True)
+    (attestations / "BrocardGapConjecture.json").write_text(json.dumps({
+        "module": "Brockian.BrocardGap",
+        "environment": "lean-4.32.0",
+        "module_verified": True,
+        "declarations": [{
+            "name": "Brockian.BrocardGap.brocard_3_5",
+            "kind": "theorem",
+            "axle_verdict": "verified",
+            "axioms": CLEAN,
+        }],
+    }))
+    monkeypatch.chdir(tmp_path)
+
+    registry = g.generate(str(attestations), str(tmp_path / "missing-verdicts.yaml"))
+
+    assert registry["theorems"][0]["source"] == {
+        "file": "Brockian/BrocardGapConjecture.lean"
+    }

@@ -9,6 +9,25 @@
 
 Current checkpoint: 2026-08-02 — **LIVE multi-agent collab (Claude × Codex × Grok)**.
 
+## Integrator takeover - 2026-08-03
+
+Grok's overnight corpus lane is paused after its final canonical wave. Codex owns
+integration and the operator-theory continuation. See
+[`PROGRAM-MAP-2026-08-03.md`](PROGRAM-MAP-2026-08-03.md) for the depth-adjusted
+accounting and mathematical frontier.
+
+- Final Grok wave root-wired: even gaps through 2200, real-cyclotomic prime
+  instances through 1093, and `K2 * Kp` wheels through `p = 797`.
+- Do not restart automatic range expansion without a new general theorem to
+  exercise; raw instance count is no longer a strategic objective.
+- Codex next: finish `Brockian/WeylHarmonicOscillator.lean`, then isolate the
+  weighted Rellich/compact-resolvent infrastructure.
+- Claude next: concrete trace/fixed-point realization of `permCharacter`, or
+  Mathlib extraction of the general Weyl/Cayley results.
+- The untracked short attestation `registry/attestations/BrocardGap.json` is a
+  noncanonical duplicate; do not commit it. The canonical file is
+  `BrocardGapConjecture.json`.
+
 **Full protocol:** [`docs/MULTI-AGENT-COLLAB.md`](MULTI-AGENT-COLLAB.md)  
 **Status board:** `python3 scripts/agent_board.py`
 

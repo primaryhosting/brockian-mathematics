@@ -342,11 +342,11 @@ def render_report(
 
     body = f"""# Brockian Verified Core — Program Report
 
-**Audience:** technical partners, advisors, scientific collaborators  
-**Classification:** Partner-facing (non-confidential). Counts pinned to the live registry.  
-**Report generated:** {report_date}  
-**Tip commit:** `{tip['full']}` (`{tip['short']}`) — *{tip['subject']}* ({tip['date']})  
-**Registry source:** `{registry_path.as_posix() if registry_path.is_absolute() else registry_path}`  
+**Audience:** technical partners, advisors, scientific collaborators
+**Classification:** Partner-facing (non-confidential). Counts pinned to the live registry.
+**Report generated:** {report_date}
+**Tip commit:** `{tip['full']}` (`{tip['short']}`) — *{tip['subject']}* ({tip['date']})
+**Registry source:** `{registry_path.as_posix() if registry_path.is_absolute() else registry_path}`
 **Generated from:** {gen_from}
 
 > **Brand sentence:** *We ship what is proven and mark what is not.*
@@ -357,7 +357,7 @@ Regenerate this document anytime:
 python3 scripts/gen_program_report.py
 ```
 
-Partner strategy context (do not confuse with this ledger snapshot):  
+Partner strategy context (do not confuse with this ledger snapshot):
 [`docs/partner/2026-08-02-verified-intelligence-strategy-brief.md`](partner/2026-08-02-verified-intelligence-strategy-brief.md)
 
 ---
@@ -479,9 +479,9 @@ Heterogeneous engines write candidates; **one registry** decides the badge.
 
 **Triple verification ideal for PROVED:**
 
-1. Local `lake build` on pinned toolchain  
-2. Local `#print axioms` ⊆ standard three  
-3. AXLE `verified` at named environment  
+1. Local `lake build` on pinned toolchain
+2. Local `#print axioms` ⊆ standard three
+3. AXLE `verified` at named environment
 
 **Today’s registry field reality:** AXLE + axiom gate are populated for all
 listed entries; the `lake_build` stamp is still largely `pending` (see below).
@@ -513,9 +513,9 @@ on the tip commit above.
 
 ### 6.2 Counting discipline
 
-- **Registry PROVED** ({proved}) is the only number safe for partner headlines.  
-- Campaign / historical “theorems attempted” totals are **not** interchangeable with PROVED.  
-- DEFINITION ({definition}) supports the API surface; do not add it to PROVED.  
+- **Registry PROVED** ({proved}) is the only number safe for partner headlines.
+- Campaign / historical “theorems attempted” totals are **not** interchangeable with PROVED.
+- DEFINITION ({definition}) supports the API surface; do not add it to PROVED.
 - DISCHARGED ({discharged}) is a success story (conditionals closed) — **not** extra PROVED.
 
 ### 6.3 No theater

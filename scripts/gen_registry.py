@@ -173,7 +173,11 @@ def generate(attest_dir: str, verdicts_path: str) -> dict[str, Any]:
             facts.conditional_rung = prov.get("conditional_rung")
             entries.append(build_entry(
                 facts, prov,
-                source={"file": f"Brockian/{module.split('.')[-1]}.lean"},
+                # The attestation stem is tied to the root import and therefore
+                # identifies the actual source file.  Namespace tails do not:
+                # e.g. `Brockian.BrocardGap` lives in
+                # `Brockian/BrocardGapConjecture.lean`.
+                source={"file": f"Brockian/{stem}.lean"},
                 statement=d.get("statement", ""), axle_env=env))
     entries.sort(key=lambda e: (e["module"], e["name"]))
     # DISCHARGED post-pass: a CONDITIONAL whose `discharged_by` names a PROVED theorem in-core
