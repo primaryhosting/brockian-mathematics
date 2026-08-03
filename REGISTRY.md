@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 40
-- **DEFINITION**: 572
+- **DEFINITION**: 574
 - **DISCHARGED**: 6
-- **PROVED**: 10538
+- **PROVED**: 10542
 
 ## Theorems
 
@@ -3450,6 +3450,12 @@
 | PROVED | `Brockian.MetallicRealization.metallicPoly_natDegree` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
 | PROVED | `Brockian.MetallicRealization.trace_eq_sum_roots` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
 | PROVED | `Brockian.MetallicRealization.two_lt_metallicMean` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| DEFINITION | `Brockian.MultiperfectStructure.Multiperfect` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| DEFINITION | `Brockian.MultiperfectStructure.MultiperfectInfinitude` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.MultiperfectStructure.multiperfect_ge_two_not_deficient` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.MultiperfectStructure.multiperfect_one_iff` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.MultiperfectStructure.multiperfect_two_iff_perfect` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.MultiperfectStructure.not_multiperfect_prime_ge_two` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | DEFINITION | `Brockian.NewEra.ReadingPath` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.NewEra.brockian_admissible_count` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.NewEra.decaying_potential_cannot_realize_large_zeros` | ✓ | verified | lean-4.32.0 |  |
