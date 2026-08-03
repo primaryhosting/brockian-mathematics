@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 31
-- **DEFINITION**: 525
+- **CONJECTURE**: 33
+- **DEFINITION**: 527
 - **DISCHARGED**: 6
-- **PROVED**: 10150
+- **PROVED**: 10157
 
 ## Theorems
 
@@ -3213,6 +3213,17 @@
 | PROVED | `Brockian.GoldenUniqueness.prime_rigidity_layer` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.two_cos_four_pi_div_five_eq_neg_golden` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.two_cos_fundamental_mode_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| DEFINITION | `Brockian.HyperperfectNumbers.Hyperperfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.HyperperfectNumbers.HyperperfectAllK` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.HyperperfectNumbers.HyperperfectInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.HyperperfectNumbers.hyperperfect_1_28` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.HyperperfectNumbers.hyperperfect_1_6` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.HyperperfectNumbers.hyperperfect_2_21` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.HyperperfectNumbers.hyperperfect_2_2133` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.HyperperfectNumbers.hyperperfect_6_301` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.HyperperfectNumbers.hyperperfect_one_iff_sigma_two_mul` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.HyperperfectNumbers.not_hyperperfect_2_6` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.HyperperfectNumbers.sigma1` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.LandauNSquaredPlusOne.LandauFourthConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.LandauNSquaredPlusOne.NSqPlusOnePrime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LandauNSquaredPlusOne.nsq_1` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |

@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10150,
-    "DEFINITION": 525,
-    "CONJECTURE": 31,
+    "PROVED": 10157,
+    "DEFINITION": 527,
+    "CONJECTURE": 33,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -103496,6 +103496,353 @@
       "quarantine": true,
       "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence",
       "provenance_note": "golden-uniqueness reusable schema (roadmap #11). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; verdict re-checked by Claude's gate before integration."
+    },
+    {
+      "name": "Brockian.HyperperfectNumbers.Hyperperfect",
+      "kind": "def",
+      "module": "Brockian.HyperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HyperperfectNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY hyperperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Hyperperfect k n := k*sigma(n) = (k+1)*n + (k-1); k=1 recovers perfect numbers. CONCRETE: hyperperfect_1_{6,28} (perfect), hyperperfect_2_{21,2133}, hyperperfect_6_301. FLAGSHIP hyperperfect_one_iff_sigma_two_mul: 1-hyperperfect <=> sigma(n)=2n (perfect) -- hyperperfect generalizes perfect. Non-example not_hyperperfect_2_6. HyperperfectAllK (k-hyperperfect exists for every k) and HyperperfectInfinitude are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.HyperperfectNumbers.HyperperfectAllK",
+      "kind": "conjecture",
+      "module": "Brockian.HyperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HyperperfectNumbers.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY hyperperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Hyperperfect k n := k*sigma(n) = (k+1)*n + (k-1); k=1 recovers perfect numbers. CONCRETE: hyperperfect_1_{6,28} (perfect), hyperperfect_2_{21,2133}, hyperperfect_6_301. FLAGSHIP hyperperfect_one_iff_sigma_two_mul: 1-hyperperfect <=> sigma(n)=2n (perfect) -- hyperperfect generalizes perfect. Non-example not_hyperperfect_2_6. HyperperfectAllK (k-hyperperfect exists for every k) and HyperperfectInfinitude are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.HyperperfectNumbers.HyperperfectInfinitude",
+      "kind": "conjecture",
+      "module": "Brockian.HyperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HyperperfectNumbers.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY hyperperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Hyperperfect k n := k*sigma(n) = (k+1)*n + (k-1); k=1 recovers perfect numbers. CONCRETE: hyperperfect_1_{6,28} (perfect), hyperperfect_2_{21,2133}, hyperperfect_6_301. FLAGSHIP hyperperfect_one_iff_sigma_two_mul: 1-hyperperfect <=> sigma(n)=2n (perfect) -- hyperperfect generalizes perfect. Non-example not_hyperperfect_2_6. HyperperfectAllK (k-hyperperfect exists for every k) and HyperperfectInfinitude are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.HyperperfectNumbers.hyperperfect_1_28",
+      "kind": "theorem",
+      "module": "Brockian.HyperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HyperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY hyperperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Hyperperfect k n := k*sigma(n) = (k+1)*n + (k-1); k=1 recovers perfect numbers. CONCRETE: hyperperfect_1_{6,28} (perfect), hyperperfect_2_{21,2133}, hyperperfect_6_301. FLAGSHIP hyperperfect_one_iff_sigma_two_mul: 1-hyperperfect <=> sigma(n)=2n (perfect) -- hyperperfect generalizes perfect. Non-example not_hyperperfect_2_6. HyperperfectAllK (k-hyperperfect exists for every k) and HyperperfectInfinitude are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.HyperperfectNumbers.hyperperfect_1_6",
+      "kind": "theorem",
+      "module": "Brockian.HyperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HyperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY hyperperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Hyperperfect k n := k*sigma(n) = (k+1)*n + (k-1); k=1 recovers perfect numbers. CONCRETE: hyperperfect_1_{6,28} (perfect), hyperperfect_2_{21,2133}, hyperperfect_6_301. FLAGSHIP hyperperfect_one_iff_sigma_two_mul: 1-hyperperfect <=> sigma(n)=2n (perfect) -- hyperperfect generalizes perfect. Non-example not_hyperperfect_2_6. HyperperfectAllK (k-hyperperfect exists for every k) and HyperperfectInfinitude are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.HyperperfectNumbers.hyperperfect_2_21",
+      "kind": "theorem",
+      "module": "Brockian.HyperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HyperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY hyperperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Hyperperfect k n := k*sigma(n) = (k+1)*n + (k-1); k=1 recovers perfect numbers. CONCRETE: hyperperfect_1_{6,28} (perfect), hyperperfect_2_{21,2133}, hyperperfect_6_301. FLAGSHIP hyperperfect_one_iff_sigma_two_mul: 1-hyperperfect <=> sigma(n)=2n (perfect) -- hyperperfect generalizes perfect. Non-example not_hyperperfect_2_6. HyperperfectAllK (k-hyperperfect exists for every k) and HyperperfectInfinitude are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.HyperperfectNumbers.hyperperfect_2_2133",
+      "kind": "theorem",
+      "module": "Brockian.HyperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HyperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY hyperperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Hyperperfect k n := k*sigma(n) = (k+1)*n + (k-1); k=1 recovers perfect numbers. CONCRETE: hyperperfect_1_{6,28} (perfect), hyperperfect_2_{21,2133}, hyperperfect_6_301. FLAGSHIP hyperperfect_one_iff_sigma_two_mul: 1-hyperperfect <=> sigma(n)=2n (perfect) -- hyperperfect generalizes perfect. Non-example not_hyperperfect_2_6. HyperperfectAllK (k-hyperperfect exists for every k) and HyperperfectInfinitude are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.HyperperfectNumbers.hyperperfect_6_301",
+      "kind": "theorem",
+      "module": "Brockian.HyperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HyperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY hyperperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Hyperperfect k n := k*sigma(n) = (k+1)*n + (k-1); k=1 recovers perfect numbers. CONCRETE: hyperperfect_1_{6,28} (perfect), hyperperfect_2_{21,2133}, hyperperfect_6_301. FLAGSHIP hyperperfect_one_iff_sigma_two_mul: 1-hyperperfect <=> sigma(n)=2n (perfect) -- hyperperfect generalizes perfect. Non-example not_hyperperfect_2_6. HyperperfectAllK (k-hyperperfect exists for every k) and HyperperfectInfinitude are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.HyperperfectNumbers.hyperperfect_one_iff_sigma_two_mul",
+      "kind": "theorem",
+      "module": "Brockian.HyperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HyperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY hyperperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Hyperperfect k n := k*sigma(n) = (k+1)*n + (k-1); k=1 recovers perfect numbers. CONCRETE: hyperperfect_1_{6,28} (perfect), hyperperfect_2_{21,2133}, hyperperfect_6_301. FLAGSHIP hyperperfect_one_iff_sigma_two_mul: 1-hyperperfect <=> sigma(n)=2n (perfect) -- hyperperfect generalizes perfect. Non-example not_hyperperfect_2_6. HyperperfectAllK (k-hyperperfect exists for every k) and HyperperfectInfinitude are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.HyperperfectNumbers.not_hyperperfect_2_6",
+      "kind": "theorem",
+      "module": "Brockian.HyperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HyperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY hyperperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Hyperperfect k n := k*sigma(n) = (k+1)*n + (k-1); k=1 recovers perfect numbers. CONCRETE: hyperperfect_1_{6,28} (perfect), hyperperfect_2_{21,2133}, hyperperfect_6_301. FLAGSHIP hyperperfect_one_iff_sigma_two_mul: 1-hyperperfect <=> sigma(n)=2n (perfect) -- hyperperfect generalizes perfect. Non-example not_hyperperfect_2_6. HyperperfectAllK (k-hyperperfect exists for every k) and HyperperfectInfinitude are unproven defs -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.HyperperfectNumbers.sigma1",
+      "kind": "def",
+      "module": "Brockian.HyperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HyperperfectNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY hyperperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Hyperperfect k n := k*sigma(n) = (k+1)*n + (k-1); k=1 recovers perfect numbers. CONCRETE: hyperperfect_1_{6,28} (perfect), hyperperfect_2_{21,2133}, hyperperfect_6_301. FLAGSHIP hyperperfect_one_iff_sigma_two_mul: 1-hyperperfect <=> sigma(n)=2n (perfect) -- hyperperfect generalizes perfect. Non-example not_hyperperfect_2_6. HyperperfectAllK (k-hyperperfect exists for every k) and HyperperfectInfinitude are unproven defs -- OPEN, never asserted."
     },
     {
       "name": "Brockian.LandauNSquaredPlusOne.LandauFourthConjecture",
