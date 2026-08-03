@@ -165,6 +165,21 @@ refinement of a solved problem — the frontier marks only what is actually open
 
 ---
 
+## Brocard's problem / Brown numbers (open)
+
+**Claim.** For which n is n! + 1 a perfect square? Only three solutions are known: (4,5), (5,11),
+(7,71); whether others exist is open. Module: `Brockian.BrocardProblem`. `BrocardConjecture`
+(only n ∈ {4,5,7}) is an unproven `def`.
+
+**PROVED (concrete + structural + search-narrowing):**
+- **The three known Brown pairs** (`brown_4_5`, `brown_5_11`, `brown_7_71`).
+- Structural: in any Brown pair m is odd (`brown_m_odd`) and n! = (m−1)(m+1) (`brown_factorization`).
+- **No solutions for n = 8, 9, 10** (`no_brown_8_9_10`) — via consecutive-square gaps.
+
+**OPEN.** Whether any Brown pair exists beyond the three known.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

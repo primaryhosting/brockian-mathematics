@@ -484,3 +484,4 @@ import Brockian.RieselCovering
 import Brockian.AmicableNumbers
 import Brockian.GiugaNumbers
 import Brockian.CarmichaelKorselt
+import Brockian.BrocardProblem

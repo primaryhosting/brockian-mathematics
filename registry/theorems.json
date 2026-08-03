@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 7045,
-    "DEFINITION": 442,
-    "CONJECTURE": 8,
+    "PROVED": 7052,
+    "DEFINITION": 443,
+    "CONJECTURE": 9,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -3162,6 +3162,287 @@
       "quarantine": true,
       "ledger_run": "run 54 completed 2026-08-01 \u2014 |Aut(C5)|<=10 reverse bound + full iso",
       "provenance_note": "card_aut_le_ten, aut_card_eq_ten (=10), dihedralHom_surjective (pinning), autEquivDihedral : DihedralGroup 5 \u2243* (C5 \u2243g C5) \u2014 the FULL Aut(C5)\u2245D5 iso. Upgrades run-54 partial to complete. Axiom-clean."
+    },
+    {
+      "name": "Brockian.BrocardProblem.BrocardConjecture",
+      "kind": "conjecture",
+      "module": "Brockian.BrocardProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardProblem.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's problem / Brown numbers (open-territory loop, AXLE @4.32, axiom-clean). BrownPair n m := n!+1=m^2. CONCRETE: the three known Brown pairs brown_4_5, brown_5_11, brown_7_71 (only three known in centuries). Structural: brown_m_odd (m odd for n>=2), brown_factorization (n! = (m-1)(m+1)). Search-narrowing: no_brown_8_9_10 (no solutions for n=8,9,10, via consecutive-square gaps). Brocard's conjecture (only n in {4,5,7}) is an unproven def BrocardConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardProblem.BrownPair",
+      "kind": "def",
+      "module": "Brockian.BrocardProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardProblem.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's problem / Brown numbers (open-territory loop, AXLE @4.32, axiom-clean). BrownPair n m := n!+1=m^2. CONCRETE: the three known Brown pairs brown_4_5, brown_5_11, brown_7_71 (only three known in centuries). Structural: brown_m_odd (m odd for n>=2), brown_factorization (n! = (m-1)(m+1)). Search-narrowing: no_brown_8_9_10 (no solutions for n=8,9,10, via consecutive-square gaps). Brocard's conjecture (only n in {4,5,7}) is an unproven def BrocardConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardProblem.brown_4_5",
+      "kind": "theorem",
+      "module": "Brockian.BrocardProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's problem / Brown numbers (open-territory loop, AXLE @4.32, axiom-clean). BrownPair n m := n!+1=m^2. CONCRETE: the three known Brown pairs brown_4_5, brown_5_11, brown_7_71 (only three known in centuries). Structural: brown_m_odd (m odd for n>=2), brown_factorization (n! = (m-1)(m+1)). Search-narrowing: no_brown_8_9_10 (no solutions for n=8,9,10, via consecutive-square gaps). Brocard's conjecture (only n in {4,5,7}) is an unproven def BrocardConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardProblem.brown_5_11",
+      "kind": "theorem",
+      "module": "Brockian.BrocardProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's problem / Brown numbers (open-territory loop, AXLE @4.32, axiom-clean). BrownPair n m := n!+1=m^2. CONCRETE: the three known Brown pairs brown_4_5, brown_5_11, brown_7_71 (only three known in centuries). Structural: brown_m_odd (m odd for n>=2), brown_factorization (n! = (m-1)(m+1)). Search-narrowing: no_brown_8_9_10 (no solutions for n=8,9,10, via consecutive-square gaps). Brocard's conjecture (only n in {4,5,7}) is an unproven def BrocardConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardProblem.brown_7_71",
+      "kind": "theorem",
+      "module": "Brockian.BrocardProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's problem / Brown numbers (open-territory loop, AXLE @4.32, axiom-clean). BrownPair n m := n!+1=m^2. CONCRETE: the three known Brown pairs brown_4_5, brown_5_11, brown_7_71 (only three known in centuries). Structural: brown_m_odd (m odd for n>=2), brown_factorization (n! = (m-1)(m+1)). Search-narrowing: no_brown_8_9_10 (no solutions for n=8,9,10, via consecutive-square gaps). Brocard's conjecture (only n in {4,5,7}) is an unproven def BrocardConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardProblem.brown_factorization",
+      "kind": "theorem",
+      "module": "Brockian.BrocardProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's problem / Brown numbers (open-territory loop, AXLE @4.32, axiom-clean). BrownPair n m := n!+1=m^2. CONCRETE: the three known Brown pairs brown_4_5, brown_5_11, brown_7_71 (only three known in centuries). Structural: brown_m_odd (m odd for n>=2), brown_factorization (n! = (m-1)(m+1)). Search-narrowing: no_brown_8_9_10 (no solutions for n=8,9,10, via consecutive-square gaps). Brocard's conjecture (only n in {4,5,7}) is an unproven def BrocardConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardProblem.brown_m_odd",
+      "kind": "theorem",
+      "module": "Brockian.BrocardProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's problem / Brown numbers (open-territory loop, AXLE @4.32, axiom-clean). BrownPair n m := n!+1=m^2. CONCRETE: the three known Brown pairs brown_4_5, brown_5_11, brown_7_71 (only three known in centuries). Structural: brown_m_odd (m odd for n>=2), brown_factorization (n! = (m-1)(m+1)). Search-narrowing: no_brown_8_9_10 (no solutions for n=8,9,10, via consecutive-square gaps). Brocard's conjecture (only n in {4,5,7}) is an unproven def BrocardConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardProblem.no_brown_8_9_10",
+      "kind": "theorem",
+      "module": "Brockian.BrocardProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's problem / Brown numbers (open-territory loop, AXLE @4.32, axiom-clean). BrownPair n m := n!+1=m^2. CONCRETE: the three known Brown pairs brown_4_5, brown_5_11, brown_7_71 (only three known in centuries). Structural: brown_m_odd (m odd for n>=2), brown_factorization (n! = (m-1)(m+1)). Search-narrowing: no_brown_8_9_10 (no solutions for n=8,9,10, via consecutive-square gaps). Brocard's conjecture (only n in {4,5,7}) is an unproven def BrocardConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardProblem.not_square_between",
+      "kind": "theorem",
+      "module": "Brockian.BrocardProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's problem / Brown numbers (open-territory loop, AXLE @4.32, axiom-clean). BrownPair n m := n!+1=m^2. CONCRETE: the three known Brown pairs brown_4_5, brown_5_11, brown_7_71 (only three known in centuries). Structural: brown_m_odd (m odd for n>=2), brown_factorization (n! = (m-1)(m+1)). Search-narrowing: no_brown_8_9_10 (no solutions for n=8,9,10, via consecutive-square gaps). Brocard's conjecture (only n in {4,5,7}) is an unproven def BrocardConjecture -- OPEN, never asserted."
     },
     {
       "name": "Brockian.C5SpectralMultiplicities.c5DistinctEigs",
