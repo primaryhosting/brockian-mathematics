@@ -8,7 +8,7 @@ generated from AXLE attestations); nothing is hand-asserted. Regenerate with
 
 | Metric | Value |
 |---|---|
-| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,444** |
+| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,447** |
 | Open problems mapped on the frontier | **34** |
 | **CONDITIONAL** reductions (honest, named-hypothesis) | 21 |
 | **DISCHARGED** (conditional → unconditional) | 6 |
@@ -45,7 +45,7 @@ overclaim-firewall + no-theater lint) on every commit.
 
 - **Frontier lane** (curated) — accept a new finite module only when it tests a new general theorem or
   adds a materially useful structural reduction. Automatic range/count expansion is paused.
-- **Hard-proof lane** (Harmonic / Aristotle) — heavy theorems offloaded to stronger compute. **Eight hard
+- **Hard-proof lane** (Harmonic / Aristotle) — heavy theorems offloaded to stronger compute. **Eleven hard
   theorems harvested and integrated so far**, each independently AXLE-verified @4.32 and axiom-clean:
   Euler's form for odd perfect numbers, Mersenne-exponent-prime, Korselt⇒Carmichael (Fermat little
   theorem for all bases), the full Wilson iff, odd-perfect ≡ 1 mod 4, every even perfect number is
