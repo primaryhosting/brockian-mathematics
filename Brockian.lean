@@ -728,3 +728,4 @@ import Brockian.FrobeniusMcNugget
 import Brockian.DivisorSumStructure
 import Brockian.PerfectReciprocalSum
 import Brockian.WeylMaximalMultiplication
+import Brockian.EgyptianFraction

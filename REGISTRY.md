@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 558
 - **DISCHARGED**: 6
-- **PROVED**: 10482
+- **PROVED**: 10483
 
 ## Theorems
 
@@ -1810,6 +1810,7 @@
 | PROVED | `Brockian.DivisorSumStructure.prime_pow_not_perfect` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.DivisorSumStructure.sigma_eq_succ_iff_prime` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.DivisorSumStructure.sigma_ge_succ` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.EgyptianFraction.egyptian_fraction` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle 9281de25; AXLE @4.32 |
 | DEFINITION | `Brockian.Equidistribution.AsymptoticExists` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | DEFINITION | `Brockian.Equidistribution.PrimePairAsymptotic` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | PROVED | `Brockian.Equidistribution.asymptotic_shape_consistent` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |

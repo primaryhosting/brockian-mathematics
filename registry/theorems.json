@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10482,
+    "PROVED": 10483,
     "DEFINITION": 558,
     "CONJECTURE": 40,
     "CONDITIONAL": 21,
@@ -58094,6 +58094,39 @@
       "quarantine": true,
       "ledger_run": "frontier swarm; AXLE @4.32",
       "provenance_note": "SWARM-PROVED general divisor-sum (sigma) structure theorems (AXLE @4.32, axiom-clean). Uses ArithmeticFunction.sigma (Nat.sigma does not exist in this Mathlib). GENERAL theorems constraining the perfect/abundant/deficient frontier: sigma_ge_succ (sigma(n) >= n+1 for n>1); sigma_eq_succ_iff_prime (sigma(n)=n+1 IFF n prime -- a clean characterization of primality by the divisor sum); prime_pow_deficient (prime powers are deficient, sigma(p^k) < 2 p^k); perfect_not_prime (a perfect number is not prime); prime_pow_not_perfect (no prime power is perfect). Reusable structural facts, not concrete instances."
+    },
+    {
+      "name": "Brockian.EgyptianFraction.egyptian_fraction",
+      "kind": "theorem",
+      "module": "Brockian.EgyptianFraction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EgyptianFraction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle 9281de25; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED (Aristotle 9281de25), independently AXLE-verified @4.32, axiom-clean. egyptian_fraction: every rational a/b with 0<a<b is a finite sum of DISTINCT unit fractions (the Finset of denominators makes them distinct) -- the Fibonacci-Sylvester existence theorem, the constructive backbone beneath the Erdos-Straus frontier node (which itself stays OPEN). Main Mathlib only."
     },
     {
       "name": "Brockian.Equidistribution.AsymptoticExists",
