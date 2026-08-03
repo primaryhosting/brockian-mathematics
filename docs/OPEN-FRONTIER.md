@@ -445,6 +445,22 @@ Module: `Brockian.PerfectTotient`. `PerfectTotientInfinitude` is an unproven `de
 
 ---
 
+## Wilson primes (infinitude open)
+
+**Claim.** Are there infinitely many Wilson primes (p² ∣ (p−1)!+1)? Only 5, 13, 563 are known. Open.
+Module: `Brockian.WilsonPrimes`. `WilsonPrimeInfinitude` is an unproven `def`.
+
+**PROVED:**
+- **5 and 13 are Wilson primes** (`wilson_5`, `wilson_13`; 169 ∣ 12!+1 = 479001601). 563 is beyond
+  kernel reach (562! is astronomical), so honestly scoped to the two small ones.
+- **Wilson's theorem** (`prime_dvd_factorial_add_one`, via Mathlib's `ZMod.wilsons_lemma`):
+  p ∣ (p−1)!+1 for *every* prime — the fact Wilson primes strengthen from p to p².
+- A non-example (`seven_not_wilson`: 49 ∤ 6!+1 = 721).
+
+**OPEN.** Whether infinitely many Wilson primes exist.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10129,
-    "DEFINITION": 518,
-    "CONJECTURE": 28,
+    "PROVED": 10133,
+    "DEFINITION": 519,
+    "CONJECTURE": 29,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -349938,6 +349938,194 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.WilsonPrimes.WilsonPrime",
+      "kind": "def",
+      "module": "Brockian.WilsonPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WilsonPrimes.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Wilson primes (open-territory loop, AXLE @4.32, axiom-clean). WilsonPrime p := p.Prime and p^2 | ((p-1)!+1). CONCRETE: wilson_5 (25|4!+1) and wilson_13 (169|12!+1=479001601); only 3 known (5,13,563) and 563 is out of computational reach ((562)! astronomical) so honestly scoped to the two small ones. GROUNDING prime_dvd_factorial_add_one: Wilson's theorem (p | (p-1)!+1 for all primes, via Mathlib ZMod.wilsons_lemma) -- Wilson primes strengthen p to p^2. Non-example seven_not_wilson (49 does NOT divide 6!+1=721). WilsonPrimeInfinitude (infinitely many Wilson primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.WilsonPrimes.WilsonPrimeInfinitude",
+      "kind": "conjecture",
+      "module": "Brockian.WilsonPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WilsonPrimes.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Wilson primes (open-territory loop, AXLE @4.32, axiom-clean). WilsonPrime p := p.Prime and p^2 | ((p-1)!+1). CONCRETE: wilson_5 (25|4!+1) and wilson_13 (169|12!+1=479001601); only 3 known (5,13,563) and 563 is out of computational reach ((562)! astronomical) so honestly scoped to the two small ones. GROUNDING prime_dvd_factorial_add_one: Wilson's theorem (p | (p-1)!+1 for all primes, via Mathlib ZMod.wilsons_lemma) -- Wilson primes strengthen p to p^2. Non-example seven_not_wilson (49 does NOT divide 6!+1=721). WilsonPrimeInfinitude (infinitely many Wilson primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.WilsonPrimes.prime_dvd_factorial_add_one",
+      "kind": "theorem",
+      "module": "Brockian.WilsonPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WilsonPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Wilson primes (open-territory loop, AXLE @4.32, axiom-clean). WilsonPrime p := p.Prime and p^2 | ((p-1)!+1). CONCRETE: wilson_5 (25|4!+1) and wilson_13 (169|12!+1=479001601); only 3 known (5,13,563) and 563 is out of computational reach ((562)! astronomical) so honestly scoped to the two small ones. GROUNDING prime_dvd_factorial_add_one: Wilson's theorem (p | (p-1)!+1 for all primes, via Mathlib ZMod.wilsons_lemma) -- Wilson primes strengthen p to p^2. Non-example seven_not_wilson (49 does NOT divide 6!+1=721). WilsonPrimeInfinitude (infinitely many Wilson primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.WilsonPrimes.seven_not_wilson",
+      "kind": "theorem",
+      "module": "Brockian.WilsonPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WilsonPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Wilson primes (open-territory loop, AXLE @4.32, axiom-clean). WilsonPrime p := p.Prime and p^2 | ((p-1)!+1). CONCRETE: wilson_5 (25|4!+1) and wilson_13 (169|12!+1=479001601); only 3 known (5,13,563) and 563 is out of computational reach ((562)! astronomical) so honestly scoped to the two small ones. GROUNDING prime_dvd_factorial_add_one: Wilson's theorem (p | (p-1)!+1 for all primes, via Mathlib ZMod.wilsons_lemma) -- Wilson primes strengthen p to p^2. Non-example seven_not_wilson (49 does NOT divide 6!+1=721). WilsonPrimeInfinitude (infinitely many Wilson primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.WilsonPrimes.wilson_13",
+      "kind": "theorem",
+      "module": "Brockian.WilsonPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WilsonPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Wilson primes (open-territory loop, AXLE @4.32, axiom-clean). WilsonPrime p := p.Prime and p^2 | ((p-1)!+1). CONCRETE: wilson_5 (25|4!+1) and wilson_13 (169|12!+1=479001601); only 3 known (5,13,563) and 563 is out of computational reach ((562)! astronomical) so honestly scoped to the two small ones. GROUNDING prime_dvd_factorial_add_one: Wilson's theorem (p | (p-1)!+1 for all primes, via Mathlib ZMod.wilsons_lemma) -- Wilson primes strengthen p to p^2. Non-example seven_not_wilson (49 does NOT divide 6!+1=721). WilsonPrimeInfinitude (infinitely many Wilson primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.WilsonPrimes.wilson_5",
+      "kind": "theorem",
+      "module": "Brockian.WilsonPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WilsonPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Wilson primes (open-territory loop, AXLE @4.32, axiom-clean). WilsonPrime p := p.Prime and p^2 | ((p-1)!+1). CONCRETE: wilson_5 (25|4!+1) and wilson_13 (169|12!+1=479001601); only 3 known (5,13,563) and 563 is out of computational reach ((562)! astronomical) so honestly scoped to the two small ones. GROUNDING prime_dvd_factorial_add_one: Wilson's theorem (p | (p-1)!+1 for all primes, via Mathlib ZMod.wilsons_lemma) -- Wilson primes strengthen p to p^2. Non-example seven_not_wilson (49 does NOT divide 6!+1=721). WilsonPrimeInfinitude (infinitely many Wilson primes) is an unproven def -- OPEN, never asserted."
     },
     {
       "name": "Brockian.XiFunctionalEquation.completedRiemannZeta_functional_equation",

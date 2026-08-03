@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 28
-- **DEFINITION**: 518
+- **CONJECTURE**: 29
+- **DEFINITION**: 519
 - **DISCHARGED**: 6
-- **PROVED**: 10129
+- **PROVED**: 10133
 
 ## Theorems
 
@@ -10712,6 +10712,12 @@
 | DEFINITION | `Brockian.WeylWeakRegularityScaffold.weakRegularityPipelineStatus` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.WeylWeakRegularityScaffold.weakToClassicalRegularity_iff_existing` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.WeylWeakRegularityScaffold.weakToClassicalRegularity_of_existing` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WilsonPrimes.WilsonPrime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.WilsonPrimes.WilsonPrimeInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.WilsonPrimes.prime_dvd_factorial_add_one` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.WilsonPrimes.seven_not_wilson` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.WilsonPrimes.wilson_13` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.WilsonPrimes.wilson_5` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.XiFunctionalEquation.completedRiemannZeta_functional_equation` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
 | PROVED | `Brockian.XiFunctionalEquation.riemannXi_apply` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
 | PROVED | `Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_zeta_zero_of_mem_critical_strip` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
