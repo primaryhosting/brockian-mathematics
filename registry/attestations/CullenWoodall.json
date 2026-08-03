@@ -1,0 +1,148 @@
+{
+  "module": "Brockian.CullenWoodall",
+  "environment": "lean-4.32.0",
+  "module_verified": true,
+  "declarations": [
+    {
+      "name": "Brockian.CullenWoodall.CullenPrimeInfinitude",
+      "kind": "conjecture",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CullenWoodall.WoodallPrimeInfinitude",
+      "kind": "conjecture",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CullenWoodall.cullen",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CullenWoodall.cullen_1_prime",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CullenWoodall.cullen_2_not_prime",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CullenWoodall.cullen_3_not_prime",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CullenWoodall.cullen_odd",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CullenWoodall.cullen_sub_woodall",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CullenWoodall.woodall",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CullenWoodall.woodall_2_prime",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CullenWoodall.woodall_3_prime",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CullenWoodall.woodall_4_not_prime",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CullenWoodall.woodall_5_not_prime",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CullenWoodall.woodall_6_prime",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CullenWoodall.woodall_odd",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    }
+  ]
+}

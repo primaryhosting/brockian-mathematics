@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 16
-- **DEFINITION**: 495
+- **CONJECTURE**: 18
+- **DEFINITION**: 497
 - **DISCHARGED**: 6
-- **PROVED**: 10020
+- **PROVED**: 10031
 
 ## Theorems
 
@@ -1514,6 +1514,21 @@
 | PROVED | `Brockian.CosTraceNormTwoHundredTwentyThree.prime_twoHundredTwentyThree` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormTwoHundredTwentyThree.twoHundredTwentyThree_ne_two` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormTwoHundredTwentyThree.twoHundredTwentyThree_pack` | ✓ | verified | lean-4.32.0 |  |
+| CONJECTURE | `Brockian.CullenWoodall.CullenPrimeInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.CullenWoodall.WoodallPrimeInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.CullenWoodall.cullen` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CullenWoodall.cullen_1_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CullenWoodall.cullen_2_not_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CullenWoodall.cullen_3_not_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CullenWoodall.cullen_odd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CullenWoodall.cullen_sub_woodall` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.CullenWoodall.woodall` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CullenWoodall.woodall_2_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CullenWoodall.woodall_3_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CullenWoodall.woodall_4_not_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CullenWoodall.woodall_5_not_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CullenWoodall.woodall_6_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.CullenWoodall.woodall_odd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_five` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_five_props` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |
 | PROVED | `Brockian.CycleSpectrumFamily.algebraic_connectivity_le_four` | ✓ | verified | lean-4.32.0 | Spectral generalization — cycle spectrum for general C_n; AXLE @4.32 |

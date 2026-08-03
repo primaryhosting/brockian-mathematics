@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10020,
-    "DEFINITION": 495,
-    "CONJECTURE": 16,
+    "PROVED": 10031,
+    "DEFINITION": 497,
+    "CONJECTURE": 18,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -48531,6 +48531,477 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.CullenWoodall.CullenPrimeInfinitude",
+      "kind": "conjecture",
+      "module": "Brockian.CullenWoodall",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CullenWoodall.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Cullen & Woodall numbers (open-territory loop, AXLE @4.32, axiom-clean). cullen n = n*2^n+1, woodall n = n*2^n-1. CONCRETE PRIMES cullen_1_prime (3), woodall_{2,3,6}_prime (7,23,383). CONCRETE COMPOSITES cullen_{2,3}_not_prime (9,25), woodall_{4,5}_not_prime (63,159). STRUCTURAL cullen_sub_woodall (C_n = W_n+2), cullen_odd, woodall_odd (both odd for n>=1). CullenPrimeInfinitude and WoodallPrimeInfinitude are unproven defs -- OPEN (infinitely many Cullen/Woodall primes), never asserted."
+    },
+    {
+      "name": "Brockian.CullenWoodall.WoodallPrimeInfinitude",
+      "kind": "conjecture",
+      "module": "Brockian.CullenWoodall",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CullenWoodall.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Cullen & Woodall numbers (open-territory loop, AXLE @4.32, axiom-clean). cullen n = n*2^n+1, woodall n = n*2^n-1. CONCRETE PRIMES cullen_1_prime (3), woodall_{2,3,6}_prime (7,23,383). CONCRETE COMPOSITES cullen_{2,3}_not_prime (9,25), woodall_{4,5}_not_prime (63,159). STRUCTURAL cullen_sub_woodall (C_n = W_n+2), cullen_odd, woodall_odd (both odd for n>=1). CullenPrimeInfinitude and WoodallPrimeInfinitude are unproven defs -- OPEN (infinitely many Cullen/Woodall primes), never asserted."
+    },
+    {
+      "name": "Brockian.CullenWoodall.cullen",
+      "kind": "def",
+      "module": "Brockian.CullenWoodall",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CullenWoodall.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Cullen & Woodall numbers (open-territory loop, AXLE @4.32, axiom-clean). cullen n = n*2^n+1, woodall n = n*2^n-1. CONCRETE PRIMES cullen_1_prime (3), woodall_{2,3,6}_prime (7,23,383). CONCRETE COMPOSITES cullen_{2,3}_not_prime (9,25), woodall_{4,5}_not_prime (63,159). STRUCTURAL cullen_sub_woodall (C_n = W_n+2), cullen_odd, woodall_odd (both odd for n>=1). CullenPrimeInfinitude and WoodallPrimeInfinitude are unproven defs -- OPEN (infinitely many Cullen/Woodall primes), never asserted."
+    },
+    {
+      "name": "Brockian.CullenWoodall.cullen_1_prime",
+      "kind": "theorem",
+      "module": "Brockian.CullenWoodall",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CullenWoodall.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Cullen & Woodall numbers (open-territory loop, AXLE @4.32, axiom-clean). cullen n = n*2^n+1, woodall n = n*2^n-1. CONCRETE PRIMES cullen_1_prime (3), woodall_{2,3,6}_prime (7,23,383). CONCRETE COMPOSITES cullen_{2,3}_not_prime (9,25), woodall_{4,5}_not_prime (63,159). STRUCTURAL cullen_sub_woodall (C_n = W_n+2), cullen_odd, woodall_odd (both odd for n>=1). CullenPrimeInfinitude and WoodallPrimeInfinitude are unproven defs -- OPEN (infinitely many Cullen/Woodall primes), never asserted."
+    },
+    {
+      "name": "Brockian.CullenWoodall.cullen_2_not_prime",
+      "kind": "theorem",
+      "module": "Brockian.CullenWoodall",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CullenWoodall.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Cullen & Woodall numbers (open-territory loop, AXLE @4.32, axiom-clean). cullen n = n*2^n+1, woodall n = n*2^n-1. CONCRETE PRIMES cullen_1_prime (3), woodall_{2,3,6}_prime (7,23,383). CONCRETE COMPOSITES cullen_{2,3}_not_prime (9,25), woodall_{4,5}_not_prime (63,159). STRUCTURAL cullen_sub_woodall (C_n = W_n+2), cullen_odd, woodall_odd (both odd for n>=1). CullenPrimeInfinitude and WoodallPrimeInfinitude are unproven defs -- OPEN (infinitely many Cullen/Woodall primes), never asserted."
+    },
+    {
+      "name": "Brockian.CullenWoodall.cullen_3_not_prime",
+      "kind": "theorem",
+      "module": "Brockian.CullenWoodall",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CullenWoodall.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Cullen & Woodall numbers (open-territory loop, AXLE @4.32, axiom-clean). cullen n = n*2^n+1, woodall n = n*2^n-1. CONCRETE PRIMES cullen_1_prime (3), woodall_{2,3,6}_prime (7,23,383). CONCRETE COMPOSITES cullen_{2,3}_not_prime (9,25), woodall_{4,5}_not_prime (63,159). STRUCTURAL cullen_sub_woodall (C_n = W_n+2), cullen_odd, woodall_odd (both odd for n>=1). CullenPrimeInfinitude and WoodallPrimeInfinitude are unproven defs -- OPEN (infinitely many Cullen/Woodall primes), never asserted."
+    },
+    {
+      "name": "Brockian.CullenWoodall.cullen_odd",
+      "kind": "theorem",
+      "module": "Brockian.CullenWoodall",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CullenWoodall.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Cullen & Woodall numbers (open-territory loop, AXLE @4.32, axiom-clean). cullen n = n*2^n+1, woodall n = n*2^n-1. CONCRETE PRIMES cullen_1_prime (3), woodall_{2,3,6}_prime (7,23,383). CONCRETE COMPOSITES cullen_{2,3}_not_prime (9,25), woodall_{4,5}_not_prime (63,159). STRUCTURAL cullen_sub_woodall (C_n = W_n+2), cullen_odd, woodall_odd (both odd for n>=1). CullenPrimeInfinitude and WoodallPrimeInfinitude are unproven defs -- OPEN (infinitely many Cullen/Woodall primes), never asserted."
+    },
+    {
+      "name": "Brockian.CullenWoodall.cullen_sub_woodall",
+      "kind": "theorem",
+      "module": "Brockian.CullenWoodall",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CullenWoodall.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Cullen & Woodall numbers (open-territory loop, AXLE @4.32, axiom-clean). cullen n = n*2^n+1, woodall n = n*2^n-1. CONCRETE PRIMES cullen_1_prime (3), woodall_{2,3,6}_prime (7,23,383). CONCRETE COMPOSITES cullen_{2,3}_not_prime (9,25), woodall_{4,5}_not_prime (63,159). STRUCTURAL cullen_sub_woodall (C_n = W_n+2), cullen_odd, woodall_odd (both odd for n>=1). CullenPrimeInfinitude and WoodallPrimeInfinitude are unproven defs -- OPEN (infinitely many Cullen/Woodall primes), never asserted."
+    },
+    {
+      "name": "Brockian.CullenWoodall.woodall",
+      "kind": "def",
+      "module": "Brockian.CullenWoodall",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CullenWoodall.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Cullen & Woodall numbers (open-territory loop, AXLE @4.32, axiom-clean). cullen n = n*2^n+1, woodall n = n*2^n-1. CONCRETE PRIMES cullen_1_prime (3), woodall_{2,3,6}_prime (7,23,383). CONCRETE COMPOSITES cullen_{2,3}_not_prime (9,25), woodall_{4,5}_not_prime (63,159). STRUCTURAL cullen_sub_woodall (C_n = W_n+2), cullen_odd, woodall_odd (both odd for n>=1). CullenPrimeInfinitude and WoodallPrimeInfinitude are unproven defs -- OPEN (infinitely many Cullen/Woodall primes), never asserted."
+    },
+    {
+      "name": "Brockian.CullenWoodall.woodall_2_prime",
+      "kind": "theorem",
+      "module": "Brockian.CullenWoodall",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CullenWoodall.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Cullen & Woodall numbers (open-territory loop, AXLE @4.32, axiom-clean). cullen n = n*2^n+1, woodall n = n*2^n-1. CONCRETE PRIMES cullen_1_prime (3), woodall_{2,3,6}_prime (7,23,383). CONCRETE COMPOSITES cullen_{2,3}_not_prime (9,25), woodall_{4,5}_not_prime (63,159). STRUCTURAL cullen_sub_woodall (C_n = W_n+2), cullen_odd, woodall_odd (both odd for n>=1). CullenPrimeInfinitude and WoodallPrimeInfinitude are unproven defs -- OPEN (infinitely many Cullen/Woodall primes), never asserted."
+    },
+    {
+      "name": "Brockian.CullenWoodall.woodall_3_prime",
+      "kind": "theorem",
+      "module": "Brockian.CullenWoodall",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CullenWoodall.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Cullen & Woodall numbers (open-territory loop, AXLE @4.32, axiom-clean). cullen n = n*2^n+1, woodall n = n*2^n-1. CONCRETE PRIMES cullen_1_prime (3), woodall_{2,3,6}_prime (7,23,383). CONCRETE COMPOSITES cullen_{2,3}_not_prime (9,25), woodall_{4,5}_not_prime (63,159). STRUCTURAL cullen_sub_woodall (C_n = W_n+2), cullen_odd, woodall_odd (both odd for n>=1). CullenPrimeInfinitude and WoodallPrimeInfinitude are unproven defs -- OPEN (infinitely many Cullen/Woodall primes), never asserted."
+    },
+    {
+      "name": "Brockian.CullenWoodall.woodall_4_not_prime",
+      "kind": "theorem",
+      "module": "Brockian.CullenWoodall",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CullenWoodall.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Cullen & Woodall numbers (open-territory loop, AXLE @4.32, axiom-clean). cullen n = n*2^n+1, woodall n = n*2^n-1. CONCRETE PRIMES cullen_1_prime (3), woodall_{2,3,6}_prime (7,23,383). CONCRETE COMPOSITES cullen_{2,3}_not_prime (9,25), woodall_{4,5}_not_prime (63,159). STRUCTURAL cullen_sub_woodall (C_n = W_n+2), cullen_odd, woodall_odd (both odd for n>=1). CullenPrimeInfinitude and WoodallPrimeInfinitude are unproven defs -- OPEN (infinitely many Cullen/Woodall primes), never asserted."
+    },
+    {
+      "name": "Brockian.CullenWoodall.woodall_5_not_prime",
+      "kind": "theorem",
+      "module": "Brockian.CullenWoodall",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CullenWoodall.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Cullen & Woodall numbers (open-territory loop, AXLE @4.32, axiom-clean). cullen n = n*2^n+1, woodall n = n*2^n-1. CONCRETE PRIMES cullen_1_prime (3), woodall_{2,3,6}_prime (7,23,383). CONCRETE COMPOSITES cullen_{2,3}_not_prime (9,25), woodall_{4,5}_not_prime (63,159). STRUCTURAL cullen_sub_woodall (C_n = W_n+2), cullen_odd, woodall_odd (both odd for n>=1). CullenPrimeInfinitude and WoodallPrimeInfinitude are unproven defs -- OPEN (infinitely many Cullen/Woodall primes), never asserted."
+    },
+    {
+      "name": "Brockian.CullenWoodall.woodall_6_prime",
+      "kind": "theorem",
+      "module": "Brockian.CullenWoodall",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CullenWoodall.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Cullen & Woodall numbers (open-territory loop, AXLE @4.32, axiom-clean). cullen n = n*2^n+1, woodall n = n*2^n-1. CONCRETE PRIMES cullen_1_prime (3), woodall_{2,3,6}_prime (7,23,383). CONCRETE COMPOSITES cullen_{2,3}_not_prime (9,25), woodall_{4,5}_not_prime (63,159). STRUCTURAL cullen_sub_woodall (C_n = W_n+2), cullen_odd, woodall_odd (both odd for n>=1). CullenPrimeInfinitude and WoodallPrimeInfinitude are unproven defs -- OPEN (infinitely many Cullen/Woodall primes), never asserted."
+    },
+    {
+      "name": "Brockian.CullenWoodall.woodall_odd",
+      "kind": "theorem",
+      "module": "Brockian.CullenWoodall",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CullenWoodall.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Cullen & Woodall numbers (open-territory loop, AXLE @4.32, axiom-clean). cullen n = n*2^n+1, woodall n = n*2^n-1. CONCRETE PRIMES cullen_1_prime (3), woodall_{2,3,6}_prime (7,23,383). CONCRETE COMPOSITES cullen_{2,3}_not_prime (9,25), woodall_{4,5}_not_prime (63,159). STRUCTURAL cullen_sub_woodall (C_n = W_n+2), cullen_odd, woodall_odd (both odd for n>=1). CullenPrimeInfinitude and WoodallPrimeInfinitude are unproven defs -- OPEN (infinitely many Cullen/Woodall primes), never asserted."
     },
     {
       "name": "Brockian.CycleSpectrumFamily.algebraic_connectivity_five",

@@ -277,6 +277,21 @@ problems Landau called "unattackable"). Module: `Brockian.LandauNSquaredPlusOne`
 
 ---
 
+## Cullen & Woodall numbers (prime infinitude open)
+
+**Claim.** Are there infinitely many Cullen primes (C_n = n·2ⁿ+1)? Woodall primes (W_n = n·2ⁿ−1)?
+Both open. Module: `Brockian.CullenWoodall`. `CullenPrimeInfinitude` / `WoodallPrimeInfinitude`
+are unproven `def`s.
+
+**PROVED (concrete + structural):**
+- **Primes:** C₁ = 3 (`cullen_1_prime`); W₂ = 7, W₃ = 23, W₆ = 383 (`woodall_2/3/6_prime`).
+- **Composites:** C₂ = 9, C₃ = 25, W₄ = 63, W₅ = 159 (`cullen_2/3_not_prime`, `woodall_4/5_not_prime`).
+- Structural: C_n = W_n + 2 (`cullen_sub_woodall`); both are odd for n ≥ 1 (`cullen_odd`, `woodall_odd`).
+
+**OPEN.** Whether infinitely many Cullen (resp. Woodall) primes exist.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:
