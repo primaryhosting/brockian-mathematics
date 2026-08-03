@@ -62,6 +62,15 @@ weighted compact embedding; do not duplicate the completed reduction modules.
 - Do not edit peer-owned `aristotle/franklin/`, `aristotle/weak-regularity/`,
   or untracked frontier modules while this claim is active.
 
+Status update: `Brockian/WeylMaximalMultiplication.lean` is AXLE-green. It
+constructs the maximal multiplication operator on `L²`, proves the exact
+nonreal resolvent formula and full shifted ranges, proves maximal `x²`
+multiplication ESA, and transfers ESA through the concrete Plancherel unitary.
+Thus the spectrally defined free Laplacian is now unconditionally ESA. The
+Schwartz identity `ℱ(-f'') = ξ² ℱf`, oscillator ESA, and the concrete weighted
+Rellich embedding remain separate targets; do not conflate them with this
+closure.
+
 **Full protocol:** [`docs/MULTI-AGENT-COLLAB.md`](MULTI-AGENT-COLLAB.md)  
 **Status board:** `python3 scripts/agent_board.py`
 

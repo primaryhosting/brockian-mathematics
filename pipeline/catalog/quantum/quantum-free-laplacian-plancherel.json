@@ -3,7 +3,7 @@
   "domain": "quantum",
   "title": "Free Laplacian Plancherel / Fourier multiplier scaffold",
   "statement": "Formal and analytic control of free −Δ on L²(ℝⁿ) via Fourier multipliers / Plancherel. Supports quantum kinetic energy term in Gate-1 style models.",
-  "status": "scaffolded",
+  "status": "proved_spectral_definition",
   "source": {
     "citation": "Brockian FreeLaplacianPlancherel / WeylFreeLaplacian",
     "external_status": "partial"
@@ -19,6 +19,11 @@
       "kind": "lean_theorem",
       "name": "Brockian.FreeLaplacian*",
       "path": "Brockian/FreeLaplacianPlancherel.lean"
+    },
+    {
+      "kind": "lean_theorem",
+      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.fourierDefinedFreeLaplacian_essentiallySelfAdjoint",
+      "path": "Brockian/WeylMaximalMultiplication.lean"
     }
   ],
   "attack_modes": [
@@ -34,8 +39,22 @@
     ]
   },
   "risk_tier": 1,
-  "notes": "",
-  "attempts": [],
-  "ledger_refs": [],
+  "notes": "The Fourier-defined free Laplacian is unconditionally ESA. Identification with the pre-existing Schwartz-core -D2 operator is still open and is not claimed.",
+  "attempts": [
+    {
+      "ts": "2026-08-03T00:00:00Z",
+      "mode": "formalize",
+      "result": "proved_spectral_definition",
+      "note": "Constructed maximal multiplication by xi^2 with explicit nonreal resolvents, proved ESA, and transferred it through Mathlib Plancherel. AXLE 4.32 and axiom probes clean.",
+      "agent": "codex",
+      "artifacts": [
+        "Brockian/WeylMaximalMultiplication.lean"
+      ]
+    }
+  ],
+  "ledger_refs": [
+    "Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_essentiallySelfAdjoint",
+    "Brockian.Weyl.MaximalMultiplication.Plancherel.fourierDefinedFreeLaplacian_essentiallySelfAdjoint"
+  ],
   "priority": 72
 }

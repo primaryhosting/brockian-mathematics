@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 40
-- **DEFINITION**: 554
+- **DEFINITION**: 558
 - **DISCHARGED**: 6
-- **PROVED**: 10453
+- **PROVED**: 10482
 
 ## Theorems
 
@@ -10787,6 +10787,39 @@
 | PROVED | `Brockian.Weyl.LimitPointContinuous.wronskian_const_of_solutions` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.LimitPointContinuous.wronskian_hasDerivAt` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.LimitPointContinuous.wronskian_isConst` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.conjugateDomainEmbedding` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.conjugateDomainEmbedding_injective` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.conjugateDomainEquiv` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap_apply` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap_domain` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.fourierDefinedFreeLaplacian` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.fourierDefinedFreeLaplacian_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.L2R` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.continuous_quadraticResolventMultiplier` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.norm_quadraticResolventMultiplier_le` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadratic` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_dense` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_isSymmetric` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_rangeSMulSub_eq_top` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticResolventMultiplier` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticResolventMultiplier_memLp_top` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadratic_resolvent_inverse` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadratic_sub_ne_zero` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.schwartzToL2_mem_maximalMulDomain` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.coeFn_maximalMul` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.coeFn_maximalMulValue` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.coeFn_shiftPreimage` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.exists_maximalMul_shift_preimage` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| DEFINITION | `Brockian.Weyl.MaximalMultiplication.maximalMul` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| DEFINITION | `Brockian.Weyl.MaximalMultiplication.maximalMulDomain` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| DEFINITION | `Brockian.Weyl.MaximalMultiplication.maximalMulValue` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.maximalMul_domain` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.rangeSMulSub_maximalMul_eq_top` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| DEFINITION | `Brockian.Weyl.MaximalMultiplication.shiftPreimage` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.shiftPreimage_mem_domain` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
 | PROVED | `Brockian.Weyl.MulReal.FreeMulModel` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.MulReal.FreeMulModel.essentiallySelfAdjoint_mulOp` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.MulReal.FreeMulModel.isSelfAdjoint_mulOp` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |

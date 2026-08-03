@@ -727,3 +727,4 @@ import Brockian.LucasTheorem
 import Brockian.FrobeniusMcNugget
 import Brockian.DivisorSumStructure
 import Brockian.PerfectReciprocalSum
+import Brockian.WeylMaximalMultiplication

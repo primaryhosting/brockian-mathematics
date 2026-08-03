@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10453,
-    "DEFINITION": 554,
+    "PROVED": 10482,
+    "DEFINITION": 558,
     "CONJECTURE": 40,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
@@ -352572,6 +352572,1079 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.conjugateDomainEmbedding",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.conjugateDomainEmbedding_injective",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.conjugateDomainEquiv",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap_apply",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.fourierDefinedFreeLaplacian",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.fourierDefinedFreeLaplacian_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.L2R",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.continuous_quadraticResolventMultiplier",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.norm_quadraticResolventMultiplier_le",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadratic",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_dense",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_isSymmetric",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_rangeSMulSub_eq_top",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticResolventMultiplier",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticResolventMultiplier_memLp_top",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadratic_resolvent_inverse",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadratic_sub_ne_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.schwartzToL2_mem_maximalMulDomain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.coeFn_maximalMul",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.coeFn_maximalMulValue",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.coeFn_shiftPreimage",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.exists_maximalMul_shift_preimage",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.maximalMul",
+      "kind": "def",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.maximalMulDomain",
+      "kind": "def",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.maximalMulValue",
+      "kind": "def",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.maximalMul_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.rangeSMulSub_maximalMul_eq_top",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.shiftPreimage",
+      "kind": "def",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.shiftPreimage_mem_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
     },
     {
       "name": "Brockian.Weyl.MulReal.FreeMulModel",
