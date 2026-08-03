@@ -724,3 +724,4 @@ import Brockian.FrobeniusAbove
 import Brockian.ErdosGinzburgZiv
 import Brockian.TwoSquares
 import Brockian.LucasTheorem
+import Brockian.FrobeniusMcNugget

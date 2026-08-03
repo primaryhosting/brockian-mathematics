@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10446,
+    "PROVED": 10447,
     "DEFINITION": 554,
     "CONJECTURE": 40,
     "CONDITIONAL": 21,
@@ -65457,6 +65457,39 @@
       "quarantine": true,
       "ledger_run": "Harmonic/Aristotle ab22201e; AXLE @4.32",
       "provenance_note": "HARMONIC-PROVED (Aristotle ab22201e, batch-of-8 classical target), independently AXLE-verified @4.32, axiom-clean. frobenius_above: for coprime a,b>1, every integer m > ab-a-b (the Frobenius number) is a nonnegative integer combination a*x + b*y. This is the 'above the Frobenius number everything is representable' half of the two-coin Chicken McNugget / Frobenius theorem. Uses only main Mathlib (the (a-1)(b-1) bound + coprime representability). The complementary non-representability of the Frobenius number itself (frobenius-mcnugget) is a separate queued job."
+    },
+    {
+      "name": "Brockian.FrobeniusMcNugget.frobenius_not_representable",
+      "kind": "theorem",
+      "module": "Brockian.FrobeniusMcNugget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FrobeniusMcNugget.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle 11b14535; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED (Aristotle 11b14535), independently AXLE-verified @4.32, axiom-clean. frobenius_not_representable: for coprime a,b>1, the Frobenius number ab-a-b is NOT a nonnegative combination a*x+b*y. Together with Brockian.FrobeniusAbove (everything above ab-a-b IS representable) this completes the two-coin Frobenius / Chicken McNugget theorem: ab-a-b is exactly the largest non-representable value. Main Mathlib only."
     },
     {
       "name": "Brockian.GaloisCyclicGroup.alphaSub",
