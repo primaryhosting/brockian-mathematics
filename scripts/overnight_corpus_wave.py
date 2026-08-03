@@ -156,6 +156,9 @@ import Brockian.CosAlgebraicInteger
 import Brockian.GaloisGeneralDegree
 import Brockian.GaloisWhyFive
 
+-- decide Nat.Prime p needs higher rec depth for p ≳ 163 under AXLE
+set_option maxRecDepth 10000
+
 namespace Brockian.CosTraceNorm{name}
 
 open Polynomial IntermediateField Algebra
