@@ -1,10 +1,10 @@
-generated_at: '2026-08-02T18:23:57Z'
+generated_at: '2026-08-03T02:56:09Z'
 generated_from:
   registry: registry/theorems.json
   claim_map: observatory/claim_map.yaml
   registry_summary: &id001
-    PROVED: 1751
-    DEFINITION: 324
+    PROVED: 1955
+    DEFINITION: 337
     CONDITIONAL: 21
     DISCHARGED: 6
     CONJECTURE: 1
@@ -6159,6 +6159,62 @@ all_declarations:
   kind: theorem
   source: Brockian/CosTraceNormEleven.lean
   axle: *id036
+- name: Brockian.CosTraceNormFortyOne.degree_fortyOne
+  module: Brockian.CosTraceNormFortyOne
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormFortyOne.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormFortyOne.fortyOne_ne_two
+  module: Brockian.CosTraceNormFortyOne
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormFortyOne.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormFortyOne.fortyOne_pack
+  module: Brockian.CosTraceNormFortyOne
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormFortyOne.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormFortyOne.isIntegral_and_degree_fortyOne
+  module: Brockian.CosTraceNormFortyOne
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormFortyOne.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormFortyOne.isIntegral_spectralGen_fortyOne
+  module: Brockian.CosTraceNormFortyOne
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormFortyOne.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormFortyOne.isIntegral_spectralGen_fortyOne_Q
+  module: Brockian.CosTraceNormFortyOne
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormFortyOne.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormFortyOne.prime_fortyOne
+  module: Brockian.CosTraceNormFortyOne
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormFortyOne.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
 - name: Brockian.CosTraceNormNineteen.degree_nineteen
   module: Brockian.CosTraceNormNineteen
   register: PROVED
@@ -6324,6 +6380,118 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/CosTraceNormThirteen.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormThirtyOne.degree_thirtyOne
+  module: Brockian.CosTraceNormThirtyOne
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormThirtyOne.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormThirtyOne.isIntegral_and_degree_thirtyOne
+  module: Brockian.CosTraceNormThirtyOne
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormThirtyOne.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormThirtyOne.isIntegral_spectralGen_thirtyOne
+  module: Brockian.CosTraceNormThirtyOne
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormThirtyOne.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormThirtyOne.isIntegral_spectralGen_thirtyOne_Q
+  module: Brockian.CosTraceNormThirtyOne
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormThirtyOne.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormThirtyOne.prime_thirtyOne
+  module: Brockian.CosTraceNormThirtyOne
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormThirtyOne.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormThirtyOne.thirtyOne_ne_two
+  module: Brockian.CosTraceNormThirtyOne
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormThirtyOne.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormThirtyOne.thirtyOne_pack
+  module: Brockian.CosTraceNormThirtyOne
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormThirtyOne.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormThirtySeven.degree_thirtySeven
+  module: Brockian.CosTraceNormThirtySeven
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormThirtySeven.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormThirtySeven.isIntegral_and_degree_thirtySeven
+  module: Brockian.CosTraceNormThirtySeven
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormThirtySeven.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormThirtySeven.isIntegral_spectralGen_thirtySeven
+  module: Brockian.CosTraceNormThirtySeven
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormThirtySeven.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormThirtySeven.isIntegral_spectralGen_thirtySeven_Q
+  module: Brockian.CosTraceNormThirtySeven
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormThirtySeven.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormThirtySeven.prime_thirtySeven
+  module: Brockian.CosTraceNormThirtySeven
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormThirtySeven.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormThirtySeven.thirtySeven_ne_two
+  module: Brockian.CosTraceNormThirtySeven
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormThirtySeven.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CosTraceNormThirtySeven.thirtySeven_pack
+  module: Brockian.CosTraceNormThirtySeven
+  register: PROVED
+  kind: theorem
+  source: Brockian/CosTraceNormThirtySeven.lean
   axle:
     verdict: verified
     environment: lean-4.32.0
@@ -6737,6 +6905,70 @@ all_declarations:
   axle:
     verdict: verified
     environment: lean-4.32.0
+- name: Brockian.CyclotomicGaloisGroup.realSubfield_facts_general
+  module: Brockian.CyclotomicGaloisGroup
+  register: PROVED
+  kind: theorem
+  source: Brockian/CyclotomicGaloisGroup.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CyclotomicGaloisGroup.realSubfield_gal_card
+  module: Brockian.CyclotomicGaloisGroup
+  register: PROVED
+  kind: theorem
+  source: Brockian/CyclotomicGaloisGroup.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CyclotomicGaloisGroup.realSubfield_gal_equivUnitsQuotient
+  module: Brockian.CyclotomicGaloisGroup
+  register: PROVED
+  kind: theorem
+  source: Brockian/CyclotomicGaloisGroup.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CyclotomicGaloisGroup.realSubfield_gal_isCyclic_of_prime
+  module: Brockian.CyclotomicGaloisGroup
+  register: PROVED
+  kind: theorem
+  source: Brockian/CyclotomicGaloisGroup.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CyclotomicGaloisGroup.realSubfield_gal_isQuotientOfUnits
+  module: Brockian.CyclotomicGaloisGroup
+  register: PROVED
+  kind: theorem
+  source: Brockian/CyclotomicGaloisGroup.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CyclotomicGaloisGroup.realSubfield_gal_units_presentation
+  module: Brockian.CyclotomicGaloisGroup
+  register: PROVED
+  kind: theorem
+  source: Brockian/CyclotomicGaloisGroup.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CyclotomicGaloisGroup.realSubfield_isAbelianGalois
+  module: Brockian.CyclotomicGaloisGroup
+  register: PROVED
+  kind: theorem
+  source: Brockian/CyclotomicGaloisGroup.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.CyclotomicGaloisGroup.realSubfield_isGalois
+  module: Brockian.CyclotomicGaloisGroup
+  register: PROVED
+  kind: theorem
+  source: Brockian/CyclotomicGaloisGroup.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
 - name: Brockian.CyclotomicRealDegree.pentagon_quadratic
   module: Brockian.CyclotomicRealDegree
   register: PROVED
@@ -6782,6 +7014,558 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/CyclotomicRealDegree.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.charInner
+  module: Brockian.D5CharacterComplete
+  register: DEFINITION
+  kind: def
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.charInner_eq_pairSum
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.chiConjugate
+  module: Brockian.D5CharacterComplete
+  register: DEFINITION
+  kind: def
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.chiConjugate_one
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.chiConjugate_real
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.chiGolden
+  module: Brockian.D5CharacterComplete
+  register: DEFINITION
+  kind: def
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.chiGolden_one
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.chiGolden_real
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.chiSign
+  module: Brockian.D5CharacterComplete
+  register: DEFINITION
+  kind: def
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.chiSign_one
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.chiSign_real
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.chiTrivial
+  module: Brockian.D5CharacterComplete
+  register: DEFINITION
+  kind: def
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.chiTrivial_one
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.chiTrivial_real
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.colInner
+  module: Brockian.D5CharacterComplete
+  register: DEFINITION
+  kind: def
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.colInner_one_one
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.colInner_one_r1
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.colInner_one_r2
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.colInner_one_sr0
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.colInner_r1_r1
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.colInner_r1_r2
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.colInner_r1_sr0
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.colInner_r2_r2
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.colInner_r2_sr0
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.colInner_sr0_sr0
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.col_orthogonal
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.conjRot
+  module: Brockian.D5CharacterComplete
+  register: DEFINITION
+  kind: def
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.conjRot_col
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.conjRot_one
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.conjRot_real
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.conjRot_two
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.conjRot_zero
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.dimension_identity
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.dimension_identity_card
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.goldenRatio_sq_complex
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.goldenRot
+  module: Brockian.D5CharacterComplete
+  register: DEFINITION
+  kind: def
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.goldenRot_col
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.goldenRot_eq_adjEigenvalue
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.goldenRot_one
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.goldenRot_real
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.goldenRot_two
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.goldenRot_zero
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.golden_char_eq_two_cos
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.golden_char_rotation_class
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.omegaPow_col_mul
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.one_eq_r0
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.pairSum
+  module: Brockian.D5CharacterComplete
+  register: DEFINITION
+  kind: def
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.pairSum_split
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.rot_CC
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.rot_C_sum
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.rot_GC
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.rot_GG
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.rot_G_sum
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.row_CC
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.row_GC
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.row_GG
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.row_SC
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.row_SG
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.row_SS
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.row_TC
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.row_TG
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.row_TS
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.row_TT
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.row_orthonormal
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.star_omega
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.star_omegaPow
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.sum_dihedral5
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.sum_omega_binom
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.D5CharacterComplete.sum_omega_binom_prod
+  module: Brockian.D5CharacterComplete
+  register: PROVED
+  kind: theorem
+  source: Brockian/D5CharacterComplete.lean
   axle:
     verdict: verified
     environment: lean-4.32.0
@@ -8064,6 +8848,38 @@ all_declarations:
   register: DEFINITION
   kind: def
   source: Brockian/EquidistributionUniformityClosure.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Erdos236.f
+  module: Brockian.Erdos236
+  register: DEFINITION
+  kind: def
+  source: Brockian/Erdos236.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Erdos236.f_le_log
+  module: Brockian.Erdos236
+  register: PROVED
+  kind: theorem
+  source: Brockian/Erdos236.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.ErdosPinned.entropy_le_log_card
+  module: Brockian.ErdosPinned
+  register: PROVED
+  kind: theorem
+  source: Brockian/ErdosPinned.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.ErdosPinned.exp_neg_entropy_le_sum_sq
+  module: Brockian.ErdosPinned
+  register: PROVED
+  kind: theorem
+  source: Brockian/ErdosPinned.lean
   axle:
     verdict: verified
     environment: lean-4.32.0
@@ -10589,6 +11405,118 @@ all_declarations:
   axle:
     verdict: verified
     environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2_23.K2_23
+  module: Brockian.Goldbach.WheelK2_23
+  register: DEFINITION
+  kind: def
+  source: Brockian/WheelK2_23.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2_23.K2_23_eq
+  module: Brockian.Goldbach.WheelK2_23
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2_23.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2_23.K2_23_of_not_two_dvd
+  module: Brockian.Goldbach.WheelK2_23
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2_23.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2_23.K2_23_of_two_and_twentyThree_dvd
+  module: Brockian.Goldbach.WheelK2_23
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2_23.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2_23.Kp_twentyThree
+  module: Brockian.Goldbach.WheelK2_23
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2_23.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2_23.Kp_twentyThree_of_dvd
+  module: Brockian.Goldbach.WheelK2_23
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2_23.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2_23.Kp_twentyThree_of_not_dvd
+  module: Brockian.Goldbach.WheelK2_23
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2_23.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2_31.K2_31
+  module: Brockian.Goldbach.WheelK2_31
+  register: DEFINITION
+  kind: def
+  source: Brockian/WheelK2_31.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2_31.K2_31_eq
+  module: Brockian.Goldbach.WheelK2_31
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2_31.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2_31.K2_31_of_not_two_dvd
+  module: Brockian.Goldbach.WheelK2_31
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2_31.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2_31.K2_31_of_two_and_thirtyOne_dvd
+  module: Brockian.Goldbach.WheelK2_31
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2_31.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2_31.Kp_thirtyOne
+  module: Brockian.Goldbach.WheelK2_31
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2_31.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2_31.Kp_thirtyOne_of_dvd
+  module: Brockian.Goldbach.WheelK2_31
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2_31.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Goldbach.WheelK2_31.Kp_thirtyOne_of_not_dvd
+  module: Brockian.Goldbach.WheelK2_31
+  register: PROVED
+  kind: theorem
+  source: Brockian/WheelK2_31.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
 - name: Brockian.GoldbachComb.GoldbachCovarianceTransfer
   module: Brockian.GoldbachComb
   register: CONJECTURE
@@ -11066,6 +11994,22 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/GoldbachSelectionRule.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.GoldenDivisibility.golden_in_cycleSpectrum_iff_five_dvd
+  module: Brockian.GoldenDivisibility
+  register: PROVED
+  kind: theorem
+  source: Brockian/GoldenDivisibility.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.GoldenDivisibility.golden_unique_to_five_recovered
+  module: Brockian.GoldenDivisibility
+  register: PROVED
+  kind: theorem
+  source: Brockian/GoldenDivisibility.lean
   axle:
     verdict: verified
     environment: lean-4.32.0
@@ -11809,6 +12753,78 @@ all_declarations:
   axle:
     verdict: verified
     environment: lean-4.32.0
+- name: Brockian.PartitionRecurrence.factor_eq_geo
+  module: Brockian.PartitionRecurrence
+  register: PROVED
+  kind: theorem
+  source: Brockian/PartitionRecurrence.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.PartitionRecurrence.geo
+  module: Brockian.PartitionRecurrence
+  register: DEFINITION
+  kind: def
+  source: Brockian/PartitionRecurrence.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.PartitionRecurrence.geo_mul
+  module: Brockian.PartitionRecurrence
+  register: PROVED
+  kind: theorem
+  source: Brockian/PartitionRecurrence.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.PartitionRecurrence.partitionGF_eq_tprod_geo
+  module: Brockian.PartitionRecurrence
+  register: PROVED
+  kind: theorem
+  source: Brockian/PartitionRecurrence.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.PartitionRecurrence.partitionGF_mul_pentagonalProduct
+  module: Brockian.PartitionRecurrence
+  register: PROVED
+  kind: theorem
+  source: Brockian/PartitionRecurrence.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.PartitionRecurrence.partition_pentagonal_convolution
+  module: Brockian.PartitionRecurrence
+  register: PROVED
+  kind: theorem
+  source: Brockian/PartitionRecurrence.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.PartitionRecurrence.partition_pentagonal_convolution_range
+  module: Brockian.PartitionRecurrence
+  register: PROVED
+  kind: theorem
+  source: Brockian/PartitionRecurrence.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.PartitionRecurrence.partition_recurrence
+  module: Brockian.PartitionRecurrence
+  register: PROVED
+  kind: theorem
+  source: Brockian/PartitionRecurrence.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.PartitionRecurrence.pentCoeff_zero
+  module: Brockian.PartitionRecurrence
+  register: PROVED
+  kind: theorem
+  source: Brockian/PartitionRecurrence.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
 - name: Brockian.Penrose.A
   module: Brockian.Penrose
   register: DEFINITION
@@ -12318,6 +13334,14 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Penrose.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.PentagonGrandEquivalence.pentagon_grand_equivalence
+  module: Brockian.PentagonGrandEquivalence
+  register: PROVED
+  kind: theorem
+  source: Brockian/PentagonGrandEquivalence.lean
   axle:
     verdict: verified
     environment: lean-4.32.0
@@ -15154,6 +16178,702 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/Gaps6270.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.evenPair_card_eighty
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.evenPair_card_seventyEight
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.evenPair_card_seventyFour
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.evenPair_card_seventySix
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.evenPair_card_seventyTwo
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.isAdmissible_evenPair_eighty
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.isAdmissible_evenPair_seventyEight
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.isAdmissible_evenPair_seventyFour
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.isAdmissible_evenPair_seventySix
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.isAdmissible_evenPair_seventyTwo
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.localFactor_eighty_two
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.localFactor_seventyTwo_two
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.nu_p_eighty
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.nu_p_eighty_two
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.nu_p_seventyEight
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.nu_p_seventyFour
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.nu_p_seventySix
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.nu_p_seventyTwo
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.nu_p_seventyTwo_two
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.singular_series_finite_pos_evenPair_eighty
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.singular_series_finite_pos_evenPair_seventyEight
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.singular_series_finite_pos_evenPair_seventyFour
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.singular_series_finite_pos_evenPair_seventySix
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.singular_series_finite_pos_evenPair_seventyTwo
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.singular_series_pos_evenPair_eighty
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.singular_series_pos_evenPair_seventyEight
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.singular_series_pos_evenPair_seventyFour
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.singular_series_pos_evenPair_seventySix
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps7280.singular_series_pos_evenPair_seventyTwo
+  module: Brockian.SingularSeries.Gaps7280
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps7280.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.evenPair_card_eightyEight
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.evenPair_card_eightyFour
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.evenPair_card_eightySix
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.evenPair_card_eightyTwo
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.evenPair_card_ninety
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.isAdmissible_evenPair_eightyEight
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.isAdmissible_evenPair_eightyFour
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.isAdmissible_evenPair_eightySix
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.isAdmissible_evenPair_eightyTwo
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.isAdmissible_evenPair_ninety
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.localFactor_eightyTwo_two
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.localFactor_ninety_two
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.nu_p_eightyEight
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.nu_p_eightyFour
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.nu_p_eightySix
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.nu_p_eightyTwo
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.nu_p_eightyTwo_two
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.nu_p_ninety
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.nu_p_ninety_two
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.singular_series_finite_pos_evenPair_eightyEight
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.singular_series_finite_pos_evenPair_eightyFour
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.singular_series_finite_pos_evenPair_eightySix
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.singular_series_finite_pos_evenPair_eightyTwo
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.singular_series_finite_pos_evenPair_ninety
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.singular_series_pos_evenPair_eightyEight
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.singular_series_pos_evenPair_eightyFour
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.singular_series_pos_evenPair_eightySix
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.singular_series_pos_evenPair_eightyTwo
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps8290.singular_series_pos_evenPair_ninety
+  module: Brockian.SingularSeries.Gaps8290
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps8290.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.evenPair_card_ninetyEight
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.evenPair_card_ninetyFour
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.evenPair_card_ninetySix
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.evenPair_card_ninetyTwo
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.evenPair_card_oneHundred
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.isAdmissible_evenPair_ninetyEight
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.isAdmissible_evenPair_ninetyFour
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.isAdmissible_evenPair_ninetySix
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.isAdmissible_evenPair_ninetyTwo
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.isAdmissible_evenPair_oneHundred
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.localFactor_ninetyTwo_two
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.localFactor_oneHundred_two
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.nu_p_ninetyEight
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.nu_p_ninetyFour
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.nu_p_ninetySix
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.nu_p_ninetyTwo
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.nu_p_ninetyTwo_two
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.nu_p_oneHundred
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.nu_p_oneHundred_two
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.singular_series_finite_pos_evenPair_ninetyEight
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.singular_series_finite_pos_evenPair_ninetyFour
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.singular_series_finite_pos_evenPair_ninetySix
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.singular_series_finite_pos_evenPair_ninetyTwo
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.singular_series_finite_pos_evenPair_oneHundred
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.singular_series_pos_evenPair_ninetyEight
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.singular_series_pos_evenPair_ninetyFour
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.singular_series_pos_evenPair_ninetySix
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.singular_series_pos_evenPair_ninetyTwo
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.SingularSeries.Gaps92100.singular_series_pos_evenPair_oneHundred
+  module: Brockian.SingularSeries.Gaps92100
+  register: PROVED
+  kind: theorem
+  source: Brockian/Gaps92100.lean
   axle:
     verdict: verified
     environment: lean-4.32.0
@@ -18480,6 +20200,22 @@ all_declarations:
   register: PROVED
   kind: theorem
   source: Brockian/KatoResolventPackage.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoTarget.dense_range_add_sub_of_selfAdjoint
+  module: Brockian.Weyl.KatoTarget
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoTarget.lean
+  axle:
+    verdict: verified
+    environment: lean-4.32.0
+- name: Brockian.Weyl.KatoTarget.isSelfAdjoint_add
+  module: Brockian.Weyl.KatoTarget
+  register: PROVED
+  kind: theorem
+  source: Brockian/KatoTarget.lean
   axle:
     verdict: verified
     environment: lean-4.32.0

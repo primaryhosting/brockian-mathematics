@@ -47,6 +47,14 @@ Next non-colliding split: **Codex/Claude** → Gate1Final / ClosedShiftedRanges 
   `docs/partner/claude-issue-closed-range-closure.md` (`module_verified:false`, **sorryAx**  
   on closed-range thm; bad `hz` simp on unit-shift wrapper).
 
+### Grok claim (append 2026-08-02 — EPIC STRIKE)
+
+- **Century corpus:** Gaps **72–100** (`7280`/`8290`/`92100`), Cos **p=31/37/41**,  
+  K₂×K₂₃ + K₂×K₃₁ — **all AXLE green @4.32**. Registry **PROVED 1835 → 1955** (+120).  
+  Public export **2320** records; honesty check passed.  
+  Docs: `docs/partner/EPIC-STRIKE-2026-08-02.md`. Torus LOVABLE demo adds Grand Pentagon badge.  
+- Still **not** RH/Goldbach/unbounded Gate-1. Left Claude red weak-reg/energy alone.
+
 ### Grok claim (append 2026-08-02 — do 1+2+3)
 
 - **(1) Torus honesty:** `export_public_registry.py` → HONESTY CHECK PASSED;  

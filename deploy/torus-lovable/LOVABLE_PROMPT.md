@@ -45,12 +45,16 @@ export function VerificationHonestyDemo() {
         theorem="Brockian.Admissibility.admissibility_count_five"
       />
       <VerifiedClaim
+        claim="For prime p: p=5 ⇔ φ−1 ∈ spec(C_p) ⇔ [ℚ(2cos 2π/p):ℚ]=2 ⇔ 2cos(2π/p)=φ−1"
+        theorem="Brockian.PentagonGrandEquivalence.pentagon_grand_equivalence"
+      />
+      <VerifiedClaim
         claim="The Riemann Hypothesis is true"
         theorem="Brockian.Nonexistent.rh_is_true"
       />
       <p className="text-sm opacity-70">
-        First badge must resolve from /verified-registry.json. Second must show ⊘ UNVERIFIED.
-        Never call open problems “verified.”
+        First two badges must resolve from /verified-registry.json (green Verified).
+        RH badge must show ⊘ UNVERIFIED. Never call open problems “verified.”
       </p>
     </div>
   );
@@ -58,6 +62,12 @@ export function VerificationHonestyDemo() {
 ```
 
 Wire this component into an existing route (About, Observatory, or Settings). Do **not** put it only in dead code.
+
+### Epic optional: Why Five panel
+
+If the site has an Observatory / Labs route, also mount claims from
+`torus/labs/why-five-grand.manifest.json` (each `theorem` field → `VerifiedClaim`).
+Do **not** invent extra PROVED rows.
 
 ### 4. Copy / counter hygiene (P0 honesty)
 
