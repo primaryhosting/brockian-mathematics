@@ -1,0 +1,94 @@
+{
+  "module": "Brockian.AmicableNumbers",
+  "environment": "lean-4.32.0",
+  "module_verified": true,
+  "declarations": [
+    {
+      "name": "Brockian.AmicableNumbers.Amicable",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AmicableNumbers.AmicableInfinitude",
+      "kind": "conjecture",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AmicableNumbers.aliquot",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AmicableNumbers.amicable_1184_1210",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AmicableNumbers.amicable_220_284",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AmicableNumbers.amicable_2620_2924",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AmicableNumbers.amicable_not_perfect",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AmicableNumbers.amicable_symm",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AmicableNumbers.perfect_iff_aliquot_fixed",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    }
+  ]
+}

@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 5
-- **DEFINITION**: 420
+- **CONJECTURE**: 6
+- **DEFINITION**: 422
 - **DISCHARGED**: 6
-- **PROVED**: 5885
+- **PROVED**: 5891
 
 ## Theorems
 
@@ -85,6 +85,15 @@
 | PROVED | `Brockian.AffineSymmetry.dihedralToPerm_range_le_affineGroup` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
 | PROVED | `Brockian.AffineSymmetry.symmetry_separation` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
 | PROVED | `Brockian.AffineSymmetry.units_isCyclic` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
+| DEFINITION | `Brockian.AmicableNumbers.Amicable` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.AmicableNumbers.AmicableInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.AmicableNumbers.aliquot` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.AmicableNumbers.amicable_1184_1210` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.AmicableNumbers.amicable_220_284` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.AmicableNumbers.amicable_2620_2924` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.AmicableNumbers.amicable_not_perfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.AmicableNumbers.amicable_symm` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.AmicableNumbers.perfect_iff_aliquot_fixed` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.Automorphism.C5` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
 | DEFINITION | `Brockian.Automorphism.act` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |
 | DEFINITION | `Brockian.Automorphism.dihedralHom` | ✓ | verified | lean-4.32.0 | run 54 (bce0…) — re-proved fresh @ v4.32; faithful D₅ action (full iso open) |

@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 5885,
-    "DEFINITION": 420,
-    "CONJECTURE": 5,
+    "PROVED": 5891,
+    "DEFINITION": 422,
+    "CONJECTURE": 6,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -2220,6 +2220,291 @@
       "quarantine": true,
       "ledger_run": "paper-audit target \u2014 separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32",
       "provenance_note": "additiveAut(ZMod p)=(ZMod p)\u02e3\u2245C_{p-1} (order p-1, NOT D_p); graph Aut(C_p)\u2245D_p (order 2p); {i\u21a6\u00b1i+c} = dihedral subgroup order 2p of Aff(1,F_p). symmetry_separation (orders 4/10/10) proves additive-aut\u2260D\u2085 \u2014 retires the Papers 2&4 error with correct theorems."
+    },
+    {
+      "name": "Brockian.AmicableNumbers.Amicable",
+      "kind": "def",
+      "module": "Brockian.AmicableNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AmicableNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY amicable numbers + aliquot dynamics (open-territory loop, AXLE @4.32, axiom-clean). aliquot(n)=sum of proper divisors; Amicable m n = 2-cycle of the aliquot map. CONCRETE verified pairs: amicable_220_284 (flagship, Thabit ibn Qurra), amicable_1184_1210 (Paganini 1866), amicable_2620_2924 (Euler) -- all by kernel decide (maxRecDepth raised for the two larger). Framing: perfect_iff_aliquot_fixed (perfect = fixed point of aliquot), amicable_symm, amicable_not_perfect (a 2-cycle is not a fixed point). The OPEN infinitude conjecture (infinitely many amicable pairs) is an unproven def AmicableInfinitude. Concrete verified instances, infinitude never asserted."
+    },
+    {
+      "name": "Brockian.AmicableNumbers.AmicableInfinitude",
+      "kind": "conjecture",
+      "module": "Brockian.AmicableNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AmicableNumbers.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY amicable numbers + aliquot dynamics (open-territory loop, AXLE @4.32, axiom-clean). aliquot(n)=sum of proper divisors; Amicable m n = 2-cycle of the aliquot map. CONCRETE verified pairs: amicable_220_284 (flagship, Thabit ibn Qurra), amicable_1184_1210 (Paganini 1866), amicable_2620_2924 (Euler) -- all by kernel decide (maxRecDepth raised for the two larger). Framing: perfect_iff_aliquot_fixed (perfect = fixed point of aliquot), amicable_symm, amicable_not_perfect (a 2-cycle is not a fixed point). The OPEN infinitude conjecture (infinitely many amicable pairs) is an unproven def AmicableInfinitude. Concrete verified instances, infinitude never asserted."
+    },
+    {
+      "name": "Brockian.AmicableNumbers.aliquot",
+      "kind": "def",
+      "module": "Brockian.AmicableNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AmicableNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY amicable numbers + aliquot dynamics (open-territory loop, AXLE @4.32, axiom-clean). aliquot(n)=sum of proper divisors; Amicable m n = 2-cycle of the aliquot map. CONCRETE verified pairs: amicable_220_284 (flagship, Thabit ibn Qurra), amicable_1184_1210 (Paganini 1866), amicable_2620_2924 (Euler) -- all by kernel decide (maxRecDepth raised for the two larger). Framing: perfect_iff_aliquot_fixed (perfect = fixed point of aliquot), amicable_symm, amicable_not_perfect (a 2-cycle is not a fixed point). The OPEN infinitude conjecture (infinitely many amicable pairs) is an unproven def AmicableInfinitude. Concrete verified instances, infinitude never asserted."
+    },
+    {
+      "name": "Brockian.AmicableNumbers.amicable_1184_1210",
+      "kind": "theorem",
+      "module": "Brockian.AmicableNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AmicableNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY amicable numbers + aliquot dynamics (open-territory loop, AXLE @4.32, axiom-clean). aliquot(n)=sum of proper divisors; Amicable m n = 2-cycle of the aliquot map. CONCRETE verified pairs: amicable_220_284 (flagship, Thabit ibn Qurra), amicable_1184_1210 (Paganini 1866), amicable_2620_2924 (Euler) -- all by kernel decide (maxRecDepth raised for the two larger). Framing: perfect_iff_aliquot_fixed (perfect = fixed point of aliquot), amicable_symm, amicable_not_perfect (a 2-cycle is not a fixed point). The OPEN infinitude conjecture (infinitely many amicable pairs) is an unproven def AmicableInfinitude. Concrete verified instances, infinitude never asserted."
+    },
+    {
+      "name": "Brockian.AmicableNumbers.amicable_220_284",
+      "kind": "theorem",
+      "module": "Brockian.AmicableNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AmicableNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY amicable numbers + aliquot dynamics (open-territory loop, AXLE @4.32, axiom-clean). aliquot(n)=sum of proper divisors; Amicable m n = 2-cycle of the aliquot map. CONCRETE verified pairs: amicable_220_284 (flagship, Thabit ibn Qurra), amicable_1184_1210 (Paganini 1866), amicable_2620_2924 (Euler) -- all by kernel decide (maxRecDepth raised for the two larger). Framing: perfect_iff_aliquot_fixed (perfect = fixed point of aliquot), amicable_symm, amicable_not_perfect (a 2-cycle is not a fixed point). The OPEN infinitude conjecture (infinitely many amicable pairs) is an unproven def AmicableInfinitude. Concrete verified instances, infinitude never asserted."
+    },
+    {
+      "name": "Brockian.AmicableNumbers.amicable_2620_2924",
+      "kind": "theorem",
+      "module": "Brockian.AmicableNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AmicableNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY amicable numbers + aliquot dynamics (open-territory loop, AXLE @4.32, axiom-clean). aliquot(n)=sum of proper divisors; Amicable m n = 2-cycle of the aliquot map. CONCRETE verified pairs: amicable_220_284 (flagship, Thabit ibn Qurra), amicable_1184_1210 (Paganini 1866), amicable_2620_2924 (Euler) -- all by kernel decide (maxRecDepth raised for the two larger). Framing: perfect_iff_aliquot_fixed (perfect = fixed point of aliquot), amicable_symm, amicable_not_perfect (a 2-cycle is not a fixed point). The OPEN infinitude conjecture (infinitely many amicable pairs) is an unproven def AmicableInfinitude. Concrete verified instances, infinitude never asserted."
+    },
+    {
+      "name": "Brockian.AmicableNumbers.amicable_not_perfect",
+      "kind": "theorem",
+      "module": "Brockian.AmicableNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AmicableNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY amicable numbers + aliquot dynamics (open-territory loop, AXLE @4.32, axiom-clean). aliquot(n)=sum of proper divisors; Amicable m n = 2-cycle of the aliquot map. CONCRETE verified pairs: amicable_220_284 (flagship, Thabit ibn Qurra), amicable_1184_1210 (Paganini 1866), amicable_2620_2924 (Euler) -- all by kernel decide (maxRecDepth raised for the two larger). Framing: perfect_iff_aliquot_fixed (perfect = fixed point of aliquot), amicable_symm, amicable_not_perfect (a 2-cycle is not a fixed point). The OPEN infinitude conjecture (infinitely many amicable pairs) is an unproven def AmicableInfinitude. Concrete verified instances, infinitude never asserted."
+    },
+    {
+      "name": "Brockian.AmicableNumbers.amicable_symm",
+      "kind": "theorem",
+      "module": "Brockian.AmicableNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AmicableNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY amicable numbers + aliquot dynamics (open-territory loop, AXLE @4.32, axiom-clean). aliquot(n)=sum of proper divisors; Amicable m n = 2-cycle of the aliquot map. CONCRETE verified pairs: amicable_220_284 (flagship, Thabit ibn Qurra), amicable_1184_1210 (Paganini 1866), amicable_2620_2924 (Euler) -- all by kernel decide (maxRecDepth raised for the two larger). Framing: perfect_iff_aliquot_fixed (perfect = fixed point of aliquot), amicable_symm, amicable_not_perfect (a 2-cycle is not a fixed point). The OPEN infinitude conjecture (infinitely many amicable pairs) is an unproven def AmicableInfinitude. Concrete verified instances, infinitude never asserted."
+    },
+    {
+      "name": "Brockian.AmicableNumbers.perfect_iff_aliquot_fixed",
+      "kind": "theorem",
+      "module": "Brockian.AmicableNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AmicableNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY amicable numbers + aliquot dynamics (open-territory loop, AXLE @4.32, axiom-clean). aliquot(n)=sum of proper divisors; Amicable m n = 2-cycle of the aliquot map. CONCRETE verified pairs: amicable_220_284 (flagship, Thabit ibn Qurra), amicable_1184_1210 (Paganini 1866), amicable_2620_2924 (Euler) -- all by kernel decide (maxRecDepth raised for the two larger). Framing: perfect_iff_aliquot_fixed (perfect = fixed point of aliquot), amicable_symm, amicable_not_perfect (a 2-cycle is not a fixed point). The OPEN infinitude conjecture (infinitely many amicable pairs) is an unproven def AmicableInfinitude. Concrete verified instances, infinitude never asserted."
     },
     {
       "name": "Brockian.Automorphism.C5",

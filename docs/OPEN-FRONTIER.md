@@ -117,6 +117,23 @@ Module: `Brockian.RieselCovering`. `RieselProblem` is an unproven `def`.
 
 ---
 
+## Amicable numbers (infinitude open)
+
+**Claim.** Are there infinitely many amicable pairs (m ≠ n with s(m)=n, s(n)=m, where s is the
+aliquot sum)? Module: `Brockian.AmicableNumbers`. `AmicableInfinitude` is an unproven `def`.
+
+**PROVED (concrete verified instances + aliquot dynamics):**
+- **(220, 284)** (`amicable_220_284`, Thābit ibn Qurra), **(1184, 1210)** (`amicable_1184_1210`,
+  Paganini 1866), **(2620, 2924)** (`amicable_2620_2924`, Euler) — each verified by kernel
+  computation of the aliquot sums.
+- Aliquot dynamics: a perfect number is a fixed point of the aliquot map
+  (`perfect_iff_aliquot_fixed`); amicability is symmetric (`amicable_symm`); an amicable number is
+  not perfect (`amicable_not_perfect`) — a genuine 2-cycle is not a fixed point.
+
+**OPEN.** Whether infinitely many amicable pairs exist.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:
