@@ -52,6 +52,12 @@ def number_word(n: int) -> str:
         if rest == 0:
             return base
         return base + number_word(rest)[0].upper() + number_word(rest)[1:]
+    if n < 1_000_000:
+        th, rest = divmod(n, 1000)
+        base = number_word(th) + "Thousand"
+        if rest == 0:
+            return base
+        return base + number_word(rest)[0].upper() + number_word(rest)[1:]
     raise ValueError(f"no word for {n}")
 
 
