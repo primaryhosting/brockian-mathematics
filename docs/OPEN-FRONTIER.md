@@ -307,6 +307,21 @@ Open. Module: `Brockian.RepunitPrimes`. `RepunitPrimeInfinitude` is an unproven 
 
 ---
 
+## Legendre's conjecture — Landau's third problem (open)
+
+**Claim.** Is there always a prime between consecutive squares, n² < p < (n+1)²? Open.
+Module: `Brockian.LegendreConjecture`. `LegendreConjecture` is an unproven `def`.
+
+**PROVED:**
+- **Twelve concrete witnesses** (`legendre_1`…`legendre_12`): a prime between n² and (n+1)² for
+  n = 1…12 (e.g. 144 < 149 < 169).
+- **Bertrand's postulate** (`bertrand_holds`, reused from Mathlib): a prime in (n, 2n] — the *proven*
+  weaker window that Legendre would strengthen to (n², (n+1)²).
+
+**OPEN.** Whether a prime lies between every pair of consecutive squares.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

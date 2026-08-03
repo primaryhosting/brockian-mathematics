@@ -677,3 +677,4 @@ import Brockian.FermatNumbers
 import Brockian.LandauNSquaredPlusOne
 import Brockian.CullenWoodall
 import Brockian.RepunitPrimes
+import Brockian.LegendreConjecture
