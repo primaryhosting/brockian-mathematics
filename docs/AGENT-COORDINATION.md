@@ -85,9 +85,10 @@ closure.
   `AffineSelection`'s two sorries and placeholder asymptotic, and the three
   vacuous PhaseDepth scaffolds using `True`/`False`.
 - Operator hard targets are staged under `aristotle/{oscillator-esa,
-  oscillator-compact-resolvent,free-laplacian-schwartz-intertwining}`. They
-  elaborate with only their intended proof holes; Harmonic submission was
-  attempted through the CLI but its API returned HTTP 502.
+  oscillator-compact-resolvent,free-laplacian-schwartz-intertwining,
+  kato-bounded-unbounded-transfer}`. They elaborate with only their intended
+  proof holes. After one transient HTTP 502, all four were accepted by
+  Harmonic; project IDs are recorded in `aristotle/OPERATOR-HARD-TARGETS.md`.
 
 **Full protocol:** [`docs/MULTI-AGENT-COLLAB.md`](MULTI-AGENT-COLLAB.md)  
 **Status board:** `python3 scripts/agent_board.py`
