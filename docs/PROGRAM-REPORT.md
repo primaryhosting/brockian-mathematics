@@ -3,7 +3,7 @@
 **Audience:** technical partners, advisors, scientific collaborators
 **Classification:** Partner-facing (non-confidential). Counts pinned to the live registry.
 **Report generated:** 2026-08-03
-**Tip commit:** `296dfb95b34487dc78e6c5111871b3823af2dce7` (`296dfb9`) — *feat(number-theory): prove Wolstenholme theorem* (2026-08-03 12:22:30 -0400)
+**Tip commit:** `35323eb5dd60811fabceb6a27a58a3cdc6ce5d62` (`35323eb`) — *feat(weyl): close bounded Kato-Rellich and normalize free Laplacian* (2026-08-03 13:15:30 -0400)
 **Registry source:** `registry/theorems.json`
 **Generated from:** AXLE attestations
 
@@ -328,7 +328,7 @@ python3 scripts/gen_paper_theorem_table.py
 
 **Pin phrase for external one-pagers:**
 
-> As of commit `296dfb9` (2026-08-03): **10568 PROVED**, **581 DEFINITION**, **20 CONDITIONAL**, **7 DISCHARGED**, **40 CONJECTURE** — from `registry/theorems.json`.
+> As of commit `35323eb` (2026-08-03): **10568 PROVED**, **581 DEFINITION**, **20 CONDITIONAL**, **7 DISCHARGED**, **40 CONJECTURE** — from `registry/theorems.json`.
 
 ---
 
