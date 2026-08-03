@@ -18,7 +18,8 @@
 | Tip before overnight | ~2010 | collab + pentagon etc. |
 | **Overnight wave 1** `456ce7a` | **2137** | Gaps102–130 · Cos43/47/53 · K2×37/41 |
 | **Overnight wave 2** | **2257** | Gaps132–160 · Cos59/61/67 · K2×43/47 |
-| Wave 3+ | *in progress* | Gaps162+ · Cos71+ · K2×53+ |
+| **Overnight wave 3** | **2406** | Gaps162–200 · Cos71/73/79 · K2×53/59 |
+| Wave 4+ | *in progress* | Gaps162+ · Cos71+ · K2×53+ |
 
 ## Display headlines for morning
 
