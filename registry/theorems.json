@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10418,
+    "PROVED": 10419,
     "DEFINITION": 553,
     "CONJECTURE": 39,
     "CONDITIONAL": 21,
@@ -107220,6 +107220,39 @@
       "quarantine": true,
       "ledger_run": "swarm/Harmonic; AXLE @4.32",
       "provenance_note": "Finite-countermodel refutation certificates (Aristotle/Harmonic closes, refute-harness outputs, AXLE @4.32, axiom-clean via decide): four order-2 magmas proving law A does NOT entail law B -- assoc-not-comm, comm-not-assoc, idemp-not-comm, mid-not-left. Honest NON-implication certificates (the complement of the certificate factory's proving lane). Consolidated from 5 Aristotle targets with the idemp/x-x-x duplicate dropped."
+    },
+    {
+      "name": "Brockian.MersenneExponentPrime.mersenne_exponent_prime",
+      "kind": "theorem",
+      "module": "Brockian.MersenneExponentPrime",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersenneExponentPrime.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle proof 9e257cf6; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED general theorem: Mersenne exponent primality (Aristotle/Harmonic proof run 9e257cf6, independently AXLE-verified @lean-4.32.0, axiom-clean). mersenne_exponent_prime: if 2^n - 1 is prime then n is prime -- the classical exponent constraint on Mersenne primes (rules out n=1, then a^n-1 factorization). Complements the Brockian.MersennePerfect concrete module with the general structural direction."
     },
     {
       "name": "Brockian.MersennePerfect.EvenPerfectInfinitude",

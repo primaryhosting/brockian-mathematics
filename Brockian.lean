@@ -713,3 +713,4 @@ import Brockian.WeylUpstream
 import Brockian.PentagonTraceBridge
 import Brockian.OddPerfectEuler
 import Brockian.PracticalNumbers
+import Brockian.MersenneExponentPrime

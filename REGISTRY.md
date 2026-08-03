@@ -10,7 +10,7 @@
 - **CONJECTURE**: 39
 - **DEFINITION**: 553
 - **DISCHARGED**: 6
-- **PROVED**: 10418
+- **PROVED**: 10419
 
 ## Theorems
 
@@ -3329,6 +3329,7 @@
 | DEFINITION | `Brockian.MagmaLawRefutations.op_comm` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
 | DEFINITION | `Brockian.MagmaLawRefutations.op_idem` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
 | DEFINITION | `Brockian.MagmaLawRefutations.op_mid` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| PROVED | `Brockian.MersenneExponentPrime.mersenne_exponent_prime` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle proof 9e257cf6; AXLE @4.32 |
 | CONJECTURE | `Brockian.MersennePerfect.EvenPerfectInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.MersennePerfect.MersennePrimeInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.MersennePerfect.eq_two_pow_mul_odd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
