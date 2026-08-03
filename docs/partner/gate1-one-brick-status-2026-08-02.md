@@ -1,5 +1,7 @@
 # Gate-1 one-brick status (2026-08-02 — Grok)
 
+> **Superseded / resolved:** the red weak-regularity, energy, and concrete closure files listed below were repaired, independently AXLE-verified, root-imported, and shipped in `a5ff22d`. The current concrete result is ESA plus a self-adjoint closure and unit resolvents for the one-dimensional Schwartz-core operator with continuous bounded real potential. This historical note remains as an audit trail.
+
 ## Shipped brick (green)
 
 **KatoBounded** @ `b90530b` — bounded Kato–Rellich range-density.

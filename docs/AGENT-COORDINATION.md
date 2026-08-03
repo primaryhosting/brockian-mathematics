@@ -11,9 +11,9 @@ Current checkpoint: 2026-08-02 — **LIVE multi-agent collab (Claude × Codex ×
 
 | Agent | Owns right now | Do not touch |
 |-------|----------------|--------------|
-| **Claude** | **ClosedRangeClosure P0 RESOLVED** @ `e2e9058` / board `1976df6` (4 PROVED, AXLE green). Harvest+viz + first lab + CI firewalls shipped. Next: Gate1Final / weak-reg **only after own AXLE green** | Grok deploy/partner files mid-edit |
-| **Grok** | Torus honesty loop + harvest Mini path; public export **PROVED=1832**. **Do not** integrate red WeakRegularityClosed | Claude untracked WeakEnergy/Gate1Closed/WeakRegularityClosed until AXLE green |
-| **Codex** | Consume **verified** closed-range base for resolvent / Gate1 assembly; weak-reg A1 | Grok pipeline; Claude untracked until green |
+| **Claude** | Free-Laplacian/Plancherel and Mathlib-upstream follow-ons; harvest+viz + first lab + CI firewalls shipped | Codex Gate-1 files now shipped at `a5ff22d`; Grok deploy/partner files mid-edit |
+| **Grok** | Torus honesty loop + harvest Mini path; refresh public export from the root registry | Gate-1 proof files are closed and registry-backed; do not reopen historical red copies |
+| **Codex** | **Gate 1 CLOSED for the concrete 1D Schwartz-core operator with continuous bounded real `V`** at `a5ff22d`; next lane is confining potentials / compact resolvent | Grok pipeline and unrelated Aristotle scratch |
 | **Aristotle** | Race targets under `aristotle/` | Brockian root without AXLE |
 
 ### Shipped together (collab recognition)
@@ -22,8 +22,19 @@ Current checkpoint: 2026-08-02 — **LIVE multi-agent collab (Claude × Codex ×
 2. Claude/Codex `d20fd09` — Gate-1 weak primitive + Kato resolvent reductions  
 3. Claude `e2e9058` / `1976df6` — **ClosedRangeClosure P0 green** (+4 PROVED → **1491**)  
 4. Claude harvest+viz + torus lab + CI firewalls (`e455a31`…`866dd71`)  
+5. Codex `80d2bd3` / `a5ff22d` — closed shifted ranges, `T̄ = T*`, self-adjoint closure, unit resolvents, weak Fourier-energy uniqueness, and concrete bounded-continuous-potential Gate 1; all AXLE green.
 
-Next non-colliding split: **Codex/Claude** → Gate1Final / ClosedShiftedRanges on top of closed-range base (AXLE each); **Grok** → Lovable publish of `deploy/torus-lovable` when CDP up + off-Mini harvest NDJSON + SAIR refute.
+Next non-colliding split: **Codex** → confining-potential form and compact-resolvent reduction; **Claude** → free-Δ/Plancherel or Mathlib upstream extraction; **Grok** → Lovable publish, off-Mini harvest NDJSON, and SAIR refute.
+
+### Codex completion (append 2026-08-02 — Gate 1)
+
+- `Brockian/WeylWeakRegularityClosed.lean`: exact weak equation as an `L²` tempered-distribution identity.
+- `Brockian/WeylWeakEnergy.lean`: non-real weak solutions vanish; concrete `schrodingerPMap` is essentially self-adjoint for continuous bounded real `V`.
+- `Brockian/WeylClosedShiftedRanges.lean`: `T̄ = T*`, self-adjoint closure, surjective unit shifts, bounded unit resolvents.
+- `Brockian/WeylSchrodingerGate1Closed.lean`: end-to-end concrete application of all previous layers.
+- Verification: flattened AXLE 4.32, axiom probes, no-theater lint, root build, zero attestation smells, both registry firewalls clean.
+- Registry at integration: **2002 PROVED / 351 DEFINITION / 21 CONDITIONAL / 6 DISCHARGED / 1 CONJECTURE**.
+- Scope: this closes self-adjointness for the stated operator class. It does **not** construct an RH spectral correspondence or make a bounded decaying potential have discrete spectrum.
 
 ### Grok claim (append 2026-08-02 collab)
 

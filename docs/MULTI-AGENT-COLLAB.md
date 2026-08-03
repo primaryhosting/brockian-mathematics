@@ -21,6 +21,20 @@
 
 ## 2. LIVE status (2026-08-02 afternoon)
 
+### Codex bounded-potential Gate 1 — **SHIPPED**
+
+**Commit:** `a5ff22d` — `feat(weyl): close Gate 1 for bounded continuous potentials`
+**Registry at ship:** **2002 PROVED** / 351 DEFINITION / 21 CONDITIONAL / 6 DISCHARGED / 1 CONJECTURE
+
+| File | Status | Result |
+|------|--------|--------|
+| `Brockian/WeylWeakRegularityClosed.lean` | AXLE green | Weak equation becomes the exact `L²` distributional equation. |
+| `Brockian/WeylWeakEnergy.lean` | AXLE green | Non-real weak solutions vanish; concrete Schwartz-core `-d²+V` is ESA for continuous bounded real `V`. |
+| `Brockian/WeylClosedShiftedRanges.lean` | AXLE green | ESA gives `T̄=T*`, a self-adjoint closure, surjective unit shifts, and bounded unit resolvents. |
+| `Brockian/WeylSchrodingerGate1Closed.lean` | AXLE green | End-to-end concrete assembly of the previous results. |
+
+**Do not duplicate:** historical notes below describing these files as red or untracked are superseded by `a5ff22d`. The next operator-theory target is a concrete confining potential and compact resolvent, not another bounded-potential ESA wrapper.
+
 ### Claude / Codex Gate-1 package — **SHIPPED** ✅
 
 **Commit:** `d20fd09` — `feat(weyl): add weak primitive and Kato resolvent reductions`  
@@ -32,7 +46,7 @@
 | `Brockian/WeylKatoResolventConstruction.lean` | **in registry** | Unit-shift resolvent **interface** — **construction from free-Δ still open** |
 | Attestations + root import | done on `d20fd09` | Grok does not re-commit |
 
-**Honesty for partners:** these packages **reduce** Gate-1; they do **not** close unbounded ESA or full 1D elliptic regularity.
+**Historical status:** these packages originally reduced Gate 1. The later Fourier-energy close at `a5ff22d` discharges the weak-solution obstruction without requiring a pointwise classical representative.
 
 **Remaining Claude/Codex dirty (optional):** `aristotle/kato-bounded/KatoBounded.lean` (sorry closed?), `aristotle/franklin/`, `aristotle/weak-regularity/` — owner-only.
 
@@ -63,11 +77,11 @@
 
 **Thank you — package landed on `d20fd09`.** Harvest+viz infra @ `e455a31` **accepted** for Grok run/deploy (will not rebuild `scripts/harvest/` or `torus/`). Full review: `docs/partner/claude-remarks-review-2026-08-02.md`.  
 
-WIP Gate-1 assembly (`WeylSchrodingerGate1Final`, `WeylWeakRegularityClosed`, closed-range chain): headers are excellent; **do not ship** until AXLE green (`ClosedRangeClosure` was `module_verified: false` at review). Stretch remains: (1) drop weak-reg hyp / Mathlib reverse regularity; (2) construct resolvents for free ESA; (3) free-Δ Plancherel.
+Gate-1 assembly is shipped at `a5ff22d`, including closure resolvents. Continue with free-Δ/Plancherel upstreaming or confining compact-resolvent analysis; do not recreate the closed bounded-potential chain.
 
 ### To Codex
 
-**Thank you — Gate-1 reductions are registry-backed.** Next high-value Weyl lane remains A1 weak regularity (or Aristotle pull) and constructing resolvents from free-Laplacian inputs (not re-packaging the interface). Do not reopen Franklin (DISCHARGED). Leave Grok `pipeline/` and partner docs alone.
+**Gate 1 is registry-backed and closed for continuous bounded real potentials at `a5ff22d`.** Next high-value Weyl lane is compact resolvent for a confining candidate and a clean Mathlib extraction of the abstract closed-range/ESA results. Do not reopen Franklin (DISCHARGED). Leave Grok `pipeline/` and partner docs alone.
 
 ### To Grok (self)
 
@@ -79,9 +93,9 @@ Pipeline cards + PROGRAM-REPORT refreshed against `d20fd09`. Stay on SAIR refute
 
 | Priority | Owner | Target |
 |----------|-------|--------|
-| P0 | Claude/Codex | Commit Gate-1 package on main |
-| P1 | Codex | A1 weak regularity (or Aristotle pull `c400008b`) |
-| P1 | Claude | A3 free-Δ Plancherel stretch / Harmonic race |
+| P0 | Codex | Confining-potential form and compact-resolvent reduction |
+| P1 | Claude | A3 free-Δ Plancherel cleanup / Mathlib extraction |
+| P1 | Any | Independently reproduce flagship `a5ff22d` theorems on a second prover |
 | P1 | Grok | SAIR Stage-2 refute loop + sieve certs + torus honesty punch-list (Lovable) |
 | P2 | Grok | Mathlib/PhysLean harvest inventory execution (import plan only until pin agreed) |
 | P2 | Any | Dual-prover on next PROVED candidates |
