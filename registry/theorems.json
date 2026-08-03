@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10101,
-    "DEFINITION": 508,
-    "CONJECTURE": 25,
+    "PROVED": 10113,
+    "DEFINITION": 511,
+    "CONJECTURE": 26,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -65807,6 +65807,470 @@
       "quarantine": true,
       "ledger_run": "runs 16 / 54 / 70 / 73 \u2014 pentagon golden diagonal, two-distance, C\u2085 spectrum",
       "provenance_note": "golden diagonal=\u03c6\u00b7side, two-distance, \u2212\u03c6\u2208spec(C\u2085); golden_unique_to_five NOT ported (see PORT-QUEUE)"
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.GilbreathConjecture",
+      "kind": "conjecture",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.adjDiff",
+      "kind": "def",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.gilbreathRow",
+      "kind": "def",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.gilbreath_row10_head",
+      "kind": "theorem",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.gilbreath_row1_eq",
+      "kind": "theorem",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.gilbreath_row1_head",
+      "kind": "theorem",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.gilbreath_row1_head?",
+      "kind": "theorem",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.gilbreath_row2_head",
+      "kind": "theorem",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.gilbreath_row3_head",
+      "kind": "theorem",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.gilbreath_row4_head",
+      "kind": "theorem",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.gilbreath_row5_head",
+      "kind": "theorem",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.gilbreath_row6_head",
+      "kind": "theorem",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.gilbreath_row7_head",
+      "kind": "theorem",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.gilbreath_row8_head",
+      "kind": "theorem",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.gilbreath_row9_head",
+      "kind": "theorem",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjecture.primes25",
+      "kind": "def",
+      "module": "Brockian.GilbreathConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjecture.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
     },
     {
       "name": "Brockian.GiugaNumbers.GiugaNumber",

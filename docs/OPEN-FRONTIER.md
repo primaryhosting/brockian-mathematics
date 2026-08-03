@@ -399,6 +399,21 @@ Module: `Brockian.BrocardGap`. `BrocardGapConjecture` is an unproven `def`.
 
 ---
 
+## Gilbreath's conjecture — prime difference triangle (open)
+
+**Claim.** Iterating adjacent absolute differences on the prime sequence, does every row (k ≥ 1)
+start with 1? Open. Module: `Brockian.GilbreathConjecture`. `GilbreathConjecture` is an unproven `def`.
+
+**PROVED (concrete):**
+- **Rows 1–10 start with 1** (`gilbreath_row1_head` … `gilbreath_row10_head`) over the first 25
+  primes — the leading entry of each iterated difference row equals 1, by pure kernel computation
+  (empty axiom set).
+- The exact first difference row is recorded (`gilbreath_row1_eq`).
+
+**OPEN.** Whether every row of the prime difference triangle starts with 1.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:
