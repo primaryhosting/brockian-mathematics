@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 2
-- **DEFINITION**: 379
+- **DEFINITION**: 380
 - **DISCHARGED**: 6
-- **PROVED**: 3572
+- **PROVED**: 3575
 
 ## Theorems
 
@@ -1453,6 +1453,10 @@
 | PROVED | `Brockian.GoldenUniqueness.prime_rigidity_layer` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.two_cos_four_pi_div_five_eq_neg_golden` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.two_cos_fundamental_mode_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| DEFINITION | `Brockian.LehmerTotient.Lehmer` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LehmerTotient.lehmer_odd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LehmerTotient.lehmer_squarefree` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LehmerTotient.lehmer_three_primes` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.MagmaLawRefutations.countermodel_assoc` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
 | PROVED | `Brockian.MagmaLawRefutations.countermodel_comm` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
 | PROVED | `Brockian.MagmaLawRefutations.countermodel_idem` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |

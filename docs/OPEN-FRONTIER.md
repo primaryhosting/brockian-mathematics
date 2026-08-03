@@ -57,10 +57,17 @@ proved — a genuine formalization target for a later cycle).
 
 ## Lehmer's totient problem (open since 1932)
 
-**Claim.** `φ(n) ∣ (n − 1)` implies n prime. Module: `Brockian.LehmerTotient` *(in progress)*.
+**Claim.** `φ(n) ∣ (n − 1)` implies n prime. Module: `Brockian.LehmerTotient`.
+A "Lehmer number" is a composite n with φ(n) ∣ (n − 1); none are known.
 
-**Targeted (necessary conditions on a composite counterexample):** odd; squarefree; ≥ 3 distinct
-prime factors. Results will be listed here once verified and integrated.
+**PROVED (necessary conditions on a hypothetical counterexample):**
+- A Lehmer number is **odd** (`lehmer_odd`): φ(n) is even but n − 1 would be odd.
+- A Lehmer number is **squarefree** (`lehmer_squarefree`, flagship): p² ∣ n gives p ∣ φ(n) ∣ (n−1)
+  while p ∣ n, forcing p ∣ 1.
+- A Lehmer number has **≥ 3 distinct prime factors** (`lehmer_three_primes`): the p·q case reduces to
+  `ab ∣ (a+b)` with a, b ≥ 2, a ≠ b — impossible.
+
+**OPEN.** Existence of any Lehmer number (equivalently, whether the implication holds).
 
 ---
 
