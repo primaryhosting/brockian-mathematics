@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 15
-- **DEFINITION**: 493
+- **DEFINITION**: 494
 - **DISCHARGED**: 6
-- **PROVED**: 9995
+- **PROVED**: 10008
 
 ## Theorems
 
@@ -961,6 +961,13 @@
 | PROVED | `Brockian.CosTraceNormOneThousandSixtyOne.oneThousandSixtyOne_ne_two` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormOneThousandSixtyOne.oneThousandSixtyOne_pack` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormOneThousandSixtyOne.prime_oneThousandSixtyOne` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormOneThousandSixtyThree.degree_oneThousandSixtyThree` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormOneThousandSixtyThree.isIntegral_and_degree_oneThousandSixtyThree` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormOneThousandSixtyThree.isIntegral_spectralGen_oneThousandSixtyThree` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormOneThousandSixtyThree.isIntegral_spectralGen_oneThousandSixtyThree_Q` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormOneThousandSixtyThree.oneThousandSixtyThree_ne_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormOneThousandSixtyThree.oneThousandSixtyThree_pack` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormOneThousandSixtyThree.prime_oneThousandSixtyThree` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormOneThousandThirteen.degree_oneThousandThirteen` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormOneThousandThirteen.isIntegral_and_degree_oneThousandThirteen` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormOneThousandThirteen.isIntegral_spectralGen_oneThousandThirteen` | ✓ | verified | lean-4.32.0 |  |
@@ -3024,6 +3031,13 @@
 | PROVED | `Brockian.Goldbach.WheelK2_761.Kp_sevenHundredSixtyOne` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.WheelK2_761.Kp_sevenHundredSixtyOne_of_dvd` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.WheelK2_761.Kp_sevenHundredSixtyOne_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Goldbach.WheelK2_769.K2_769` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_769.K2_769_eq` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_769.K2_769_of_not_two_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_769.K2_769_of_two_and_sevenHundredSixtyNine_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_769.Kp_sevenHundredSixtyNine` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_769.Kp_sevenHundredSixtyNine_of_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_769.Kp_sevenHundredSixtyNine_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Goldbach.WheelK2_79.K2_79` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.WheelK2_79.K2_79_eq` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.WheelK2_79.K2_79_of_not_two_dvd` | ✓ | verified | lean-4.32.0 |  |

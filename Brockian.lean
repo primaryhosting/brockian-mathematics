@@ -467,6 +467,7 @@ import Brockian.CosTraceNormOneThousandThirtyNine
 import Brockian.CosTraceNormOneThousandFortyNine
 import Brockian.CosTraceNormOneThousandFiftyOne
 import Brockian.CosTraceNormOneThousandSixtyOne
+import Brockian.CosTraceNormOneThousandSixtyThree
 import Brockian.WeylFourierMultiplier
 import Brockian.WeylWeakRegularityScaffold
 import Brockian.WeylWeakRegularityCore
@@ -615,6 +616,7 @@ import Brockian.GoldbachWheelK2_743
 import Brockian.GoldbachWheelK2_751
 import Brockian.GoldbachWheelK2_757
 import Brockian.GoldbachWheelK2_761
+import Brockian.GoldbachWheelK2_769
 import Brockian.AdmissibilityCRTGeneral
 import Brockian.PentagonalTheoremFranklin
 import Brockian.OddDistinctPartition

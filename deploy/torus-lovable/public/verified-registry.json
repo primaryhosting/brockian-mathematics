@@ -19,25 +19,25 @@
     "verified_by"
   ],
   "summary": {
-    "total": 10530,
+    "total": 10544,
     "by_source": {
       "brockian": {
-        "total": 10530,
+        "total": 10544,
         "by_register": {
           "CONDITIONAL": 21,
           "CONJECTURE": 15,
-          "DEFINITION": 493,
+          "DEFINITION": 494,
           "DISCHARGED": 6,
-          "PROVED": 9995
+          "PROVED": 10008
         }
       }
     },
     "by_register": {
       "CONDITIONAL": 21,
       "CONJECTURE": 15,
-      "DEFINITION": 493,
+      "DEFINITION": 494,
       "DISCHARGED": 6,
-      "PROVED": 9995
+      "PROVED": 10008
     }
   },
   "theorems": [
@@ -18330,6 +18330,142 @@
     {
       "name": "Brockian.CosTraceNormOneThousandSixtyOne.prime_oneThousandSixtyOne",
       "module": "Brockian.CosTraceNormOneThousandSixtyOne",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.CosTraceNormOneThousandSixtyThree.degree_oneThousandSixtyThree",
+      "module": "Brockian.CosTraceNormOneThousandSixtyThree",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.CosTraceNormOneThousandSixtyThree.isIntegral_and_degree_oneThousandSixtyThree",
+      "module": "Brockian.CosTraceNormOneThousandSixtyThree",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.CosTraceNormOneThousandSixtyThree.isIntegral_spectralGen_oneThousandSixtyThree",
+      "module": "Brockian.CosTraceNormOneThousandSixtyThree",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.CosTraceNormOneThousandSixtyThree.isIntegral_spectralGen_oneThousandSixtyThree_Q",
+      "module": "Brockian.CosTraceNormOneThousandSixtyThree",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.CosTraceNormOneThousandSixtyThree.oneThousandSixtyThree_ne_two",
+      "module": "Brockian.CosTraceNormOneThousandSixtyThree",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.CosTraceNormOneThousandSixtyThree.oneThousandSixtyThree_pack",
+      "module": "Brockian.CosTraceNormOneThousandSixtyThree",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.CosTraceNormOneThousandSixtyThree.prime_oneThousandSixtyThree",
+      "module": "Brockian.CosTraceNormOneThousandSixtyThree",
       "register": "PROVED",
       "kind": "theorem",
       "statement": "",
@@ -58380,6 +58516,142 @@
     {
       "name": "Brockian.Goldbach.WheelK2_761.Kp_sevenHundredSixtyOne_of_not_dvd",
       "module": "Brockian.Goldbach.WheelK2_761",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_769.K2_769",
+      "module": "Brockian.Goldbach.WheelK2_769",
+      "register": "DEFINITION",
+      "kind": "def",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_769.K2_769_eq",
+      "module": "Brockian.Goldbach.WheelK2_769",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_769.K2_769_of_not_two_dvd",
+      "module": "Brockian.Goldbach.WheelK2_769",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_769.K2_769_of_two_and_sevenHundredSixtyNine_dvd",
+      "module": "Brockian.Goldbach.WheelK2_769",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_769.Kp_sevenHundredSixtyNine",
+      "module": "Brockian.Goldbach.WheelK2_769",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_769.Kp_sevenHundredSixtyNine_of_dvd",
+      "module": "Brockian.Goldbach.WheelK2_769",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.0",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.Goldbach.WheelK2_769.Kp_sevenHundredSixtyNine_of_not_dvd",
+      "module": "Brockian.Goldbach.WheelK2_769",
       "register": "PROVED",
       "kind": "theorem",
       "statement": "",
