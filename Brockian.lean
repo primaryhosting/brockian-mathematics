@@ -78,6 +78,11 @@ import Brockian.SingularSeriesGaps92100
 import Brockian.SingularSeriesGaps102110
 import Brockian.SingularSeriesGaps112120
 import Brockian.SingularSeriesGaps122130
+import Brockian.SingularSeriesGaps292300
+import Brockian.SingularSeriesGaps282290
+import Brockian.SingularSeriesGaps272280
+import Brockian.SingularSeriesGaps262270
+import Brockian.SingularSeriesGaps252260
 import Brockian.SingularSeriesGaps242250
 import Brockian.SingularSeriesGaps232240
 import Brockian.SingularSeriesGaps222230
@@ -124,6 +129,10 @@ import Brockian.CosTraceNormSeventyNine
 import Brockian.CosTraceNormEightyThree
 import Brockian.CosTraceNormEightyNine
 import Brockian.CosTraceNormNinetySeven
+import Brockian.CosTraceNormOneHundredOne
+import Brockian.CosTraceNormOneHundredThree
+import Brockian.CosTraceNormOneHundredSeven
+import Brockian.CosTraceNormOneHundredNine
 import Brockian.WeylFourierMultiplier
 import Brockian.WeylWeakRegularityScaffold
 import Brockian.WeylWeakRegularityCore
@@ -157,6 +166,9 @@ import Brockian.GoldbachWheelK2_59
 import Brockian.GoldbachWheelK2_61
 import Brockian.GoldbachWheelK2_67
 import Brockian.GoldbachWheelK2_71
+import Brockian.GoldbachWheelK2_73
+import Brockian.GoldbachWheelK2_79
+import Brockian.GoldbachWheelK2_83
 import Brockian.AdmissibilityCRTGeneral
 import Brockian.PentagonalTheoremFranklin
 import Brockian.OddDistinctPartition
@@ -198,3 +210,4 @@ import Brockian.MagmaLawRefutations
 import Brockian.GaloisNgonClassification
 import Brockian.PentagonCharacterMultiplicity
 import Brockian.PentagonEquivariance
+import Brockian.ErdosStraus
