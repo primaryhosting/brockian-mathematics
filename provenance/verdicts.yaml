@@ -916,7 +916,7 @@ runs:
     provenance_note: "HARMONIC-PROVED: an odd perfect number is 1 mod 4 (Aristotle/Harmonic, AXLE-verified @4.32, axiom-clean). oddPerfect_mod4: Odd n and Perfect n imply n%4=1 -- a necessary condition on any hypothetical odd perfect number (a corollary-strength consequence of Euler's form). Odd perfect existence remains OPEN."
 
   "erdos-320-lemmas":
-    module: Brockian.Erdos320Lemmas
+    module: Brockian.Erdos320
     verdict: admit
     quarantine: true
     ledger_run: "frontier swarm; AXLE @4.32"
