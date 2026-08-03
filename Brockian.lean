@@ -155,3 +155,4 @@ import Brockian.GoldenDivisibility
 import Brockian.PentagonGrandEquivalence
 import Brockian.GoldenSpectralCharacterization
 import Brockian.MagmaLawRefutations
+import Brockian.GaloisNgonClassification

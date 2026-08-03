@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 341
+- **DEFINITION**: 342
 - **DISCHARGED**: 6
-- **PROVED**: 1967
+- **PROVED**: 1979
 
 ## Theorems
 
@@ -740,6 +740,19 @@
 | PROVED | `Brockian.GaloisMinPolyFamily.minpoly_five` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |
 | PROVED | `Brockian.GaloisMinPolyFamily.minpoly_seven` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |
 | PROVED | `Brockian.GaloisMinPolyFamily.psiAux` | ✓ | verified | lean-4.32.0 | roadmap #5 — explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32 |
+| PROVED | `Brockian.GaloisNgonClassification.aeval_spectralGen_eight` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
+| PROVED | `Brockian.GaloisNgonClassification.aeval_spectralGen_ten` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
+| PROVED | `Brockian.GaloisNgonClassification.aeval_spectralGen_twelve` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
+| PROVED | `Brockian.GaloisNgonClassification.disc_eight` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
+| PROVED | `Brockian.GaloisNgonClassification.disc_five` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
+| PROVED | `Brockian.GaloisNgonClassification.disc_ten` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
+| PROVED | `Brockian.GaloisNgonClassification.disc_twelve` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
+| PROVED | `Brockian.GaloisNgonClassification.golden_ngons_are_five_and_ten` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
+| DEFINITION | `Brockian.GaloisNgonClassification.ngonDisc` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
+| PROVED | `Brockian.GaloisNgonClassification.quadratic_ngon_tfae` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
+| PROVED | `Brockian.GaloisNgonClassification.spectralGen_eight` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
+| PROVED | `Brockian.GaloisNgonClassification.spectralGen_ten` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
+| PROVED | `Brockian.GaloisNgonClassification.spectralGen_twelve` | ✓ | verified | lean-4.32.0 | swarm capstone; AXLE @4.32 |
 | DEFINITION | `Brockian.GaloisWhyFive.P7` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
 | PROVED | `Brockian.GaloisWhyFive.P7_irreducible` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
 | PROVED | `Brockian.GaloisWhyFive.P7_monic` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |

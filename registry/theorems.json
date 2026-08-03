@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 1967,
-    "DEFINITION": 341,
+    "PROVED": 1979,
+    "DEFINITION": 342,
     "CONDITIONAL": 21,
     "DISCHARGED": 6,
     "CONJECTURE": 1
@@ -23419,6 +23419,426 @@
       "quarantine": true,
       "ledger_run": "roadmap #5 \u2014 explicit minimal polynomial family of 2cos(2pi/p); AXLE @4.32",
       "provenance_note": "Psi_p = 1 + sum_{k=1}^{(p-1)/2} C_k (monic rescaled Chebyshev) proved monic of degree (p-1)/2, annihilates 2cos(2pi/p), and EQUALS minpoly Q (2cos 2pi/p) for all odd primes (Level 3). Includes a monicity/degree engine for Chebyshev.C (Mathlib-absent). Sanity: Psi_5=X^2+X-1, Psi_7=X^3+X^2-2X-1. p=2 excluded (degenerate)."
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.aeval_spectralGen_eight",
+      "kind": "theorem",
+      "module": "Brockian.GaloisNgonClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisNgonClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "Unified Galois n-gon classification (swarm capstone, AXLE @4.32, axiom-clean): TFAE for n>=3 that the real cyclotomic field Q(2cos 2pi/n) is quadratic <=> n in {5,8,10,12} <=> Euler totient phi(n)=4 (routes through quadratic_iff_totient_four + totient_eq_four_iff). Four concrete minimal-polynomial witnesses identify WHICH quadratic: n=5 -> X^2+X-1 (phi-1), n=10 -> X^2-X-1 (phi), n=8 -> X^2-2 (sqrt2), n=12 -> X^2-3 (sqrt3). The Golden Galois Dichotomy: among the four, discriminant=5 (the golden field) exactly for n in {5,10}, separating golden from silver(8)/bronze(12). Field-equality not attempted (documented)."
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.aeval_spectralGen_ten",
+      "kind": "theorem",
+      "module": "Brockian.GaloisNgonClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisNgonClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "Unified Galois n-gon classification (swarm capstone, AXLE @4.32, axiom-clean): TFAE for n>=3 that the real cyclotomic field Q(2cos 2pi/n) is quadratic <=> n in {5,8,10,12} <=> Euler totient phi(n)=4 (routes through quadratic_iff_totient_four + totient_eq_four_iff). Four concrete minimal-polynomial witnesses identify WHICH quadratic: n=5 -> X^2+X-1 (phi-1), n=10 -> X^2-X-1 (phi), n=8 -> X^2-2 (sqrt2), n=12 -> X^2-3 (sqrt3). The Golden Galois Dichotomy: among the four, discriminant=5 (the golden field) exactly for n in {5,10}, separating golden from silver(8)/bronze(12). Field-equality not attempted (documented)."
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.aeval_spectralGen_twelve",
+      "kind": "theorem",
+      "module": "Brockian.GaloisNgonClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisNgonClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "Unified Galois n-gon classification (swarm capstone, AXLE @4.32, axiom-clean): TFAE for n>=3 that the real cyclotomic field Q(2cos 2pi/n) is quadratic <=> n in {5,8,10,12} <=> Euler totient phi(n)=4 (routes through quadratic_iff_totient_four + totient_eq_four_iff). Four concrete minimal-polynomial witnesses identify WHICH quadratic: n=5 -> X^2+X-1 (phi-1), n=10 -> X^2-X-1 (phi), n=8 -> X^2-2 (sqrt2), n=12 -> X^2-3 (sqrt3). The Golden Galois Dichotomy: among the four, discriminant=5 (the golden field) exactly for n in {5,10}, separating golden from silver(8)/bronze(12). Field-equality not attempted (documented)."
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.disc_eight",
+      "kind": "theorem",
+      "module": "Brockian.GaloisNgonClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisNgonClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "Unified Galois n-gon classification (swarm capstone, AXLE @4.32, axiom-clean): TFAE for n>=3 that the real cyclotomic field Q(2cos 2pi/n) is quadratic <=> n in {5,8,10,12} <=> Euler totient phi(n)=4 (routes through quadratic_iff_totient_four + totient_eq_four_iff). Four concrete minimal-polynomial witnesses identify WHICH quadratic: n=5 -> X^2+X-1 (phi-1), n=10 -> X^2-X-1 (phi), n=8 -> X^2-2 (sqrt2), n=12 -> X^2-3 (sqrt3). The Golden Galois Dichotomy: among the four, discriminant=5 (the golden field) exactly for n in {5,10}, separating golden from silver(8)/bronze(12). Field-equality not attempted (documented)."
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.disc_five",
+      "kind": "theorem",
+      "module": "Brockian.GaloisNgonClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisNgonClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "Unified Galois n-gon classification (swarm capstone, AXLE @4.32, axiom-clean): TFAE for n>=3 that the real cyclotomic field Q(2cos 2pi/n) is quadratic <=> n in {5,8,10,12} <=> Euler totient phi(n)=4 (routes through quadratic_iff_totient_four + totient_eq_four_iff). Four concrete minimal-polynomial witnesses identify WHICH quadratic: n=5 -> X^2+X-1 (phi-1), n=10 -> X^2-X-1 (phi), n=8 -> X^2-2 (sqrt2), n=12 -> X^2-3 (sqrt3). The Golden Galois Dichotomy: among the four, discriminant=5 (the golden field) exactly for n in {5,10}, separating golden from silver(8)/bronze(12). Field-equality not attempted (documented)."
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.disc_ten",
+      "kind": "theorem",
+      "module": "Brockian.GaloisNgonClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisNgonClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "Unified Galois n-gon classification (swarm capstone, AXLE @4.32, axiom-clean): TFAE for n>=3 that the real cyclotomic field Q(2cos 2pi/n) is quadratic <=> n in {5,8,10,12} <=> Euler totient phi(n)=4 (routes through quadratic_iff_totient_four + totient_eq_four_iff). Four concrete minimal-polynomial witnesses identify WHICH quadratic: n=5 -> X^2+X-1 (phi-1), n=10 -> X^2-X-1 (phi), n=8 -> X^2-2 (sqrt2), n=12 -> X^2-3 (sqrt3). The Golden Galois Dichotomy: among the four, discriminant=5 (the golden field) exactly for n in {5,10}, separating golden from silver(8)/bronze(12). Field-equality not attempted (documented)."
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.disc_twelve",
+      "kind": "theorem",
+      "module": "Brockian.GaloisNgonClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisNgonClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "Unified Galois n-gon classification (swarm capstone, AXLE @4.32, axiom-clean): TFAE for n>=3 that the real cyclotomic field Q(2cos 2pi/n) is quadratic <=> n in {5,8,10,12} <=> Euler totient phi(n)=4 (routes through quadratic_iff_totient_four + totient_eq_four_iff). Four concrete minimal-polynomial witnesses identify WHICH quadratic: n=5 -> X^2+X-1 (phi-1), n=10 -> X^2-X-1 (phi), n=8 -> X^2-2 (sqrt2), n=12 -> X^2-3 (sqrt3). The Golden Galois Dichotomy: among the four, discriminant=5 (the golden field) exactly for n in {5,10}, separating golden from silver(8)/bronze(12). Field-equality not attempted (documented)."
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.golden_ngons_are_five_and_ten",
+      "kind": "theorem",
+      "module": "Brockian.GaloisNgonClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisNgonClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "Unified Galois n-gon classification (swarm capstone, AXLE @4.32, axiom-clean): TFAE for n>=3 that the real cyclotomic field Q(2cos 2pi/n) is quadratic <=> n in {5,8,10,12} <=> Euler totient phi(n)=4 (routes through quadratic_iff_totient_four + totient_eq_four_iff). Four concrete minimal-polynomial witnesses identify WHICH quadratic: n=5 -> X^2+X-1 (phi-1), n=10 -> X^2-X-1 (phi), n=8 -> X^2-2 (sqrt2), n=12 -> X^2-3 (sqrt3). The Golden Galois Dichotomy: among the four, discriminant=5 (the golden field) exactly for n in {5,10}, separating golden from silver(8)/bronze(12). Field-equality not attempted (documented)."
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.ngonDisc",
+      "kind": "def",
+      "module": "Brockian.GaloisNgonClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisNgonClassification.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "Unified Galois n-gon classification (swarm capstone, AXLE @4.32, axiom-clean): TFAE for n>=3 that the real cyclotomic field Q(2cos 2pi/n) is quadratic <=> n in {5,8,10,12} <=> Euler totient phi(n)=4 (routes through quadratic_iff_totient_four + totient_eq_four_iff). Four concrete minimal-polynomial witnesses identify WHICH quadratic: n=5 -> X^2+X-1 (phi-1), n=10 -> X^2-X-1 (phi), n=8 -> X^2-2 (sqrt2), n=12 -> X^2-3 (sqrt3). The Golden Galois Dichotomy: among the four, discriminant=5 (the golden field) exactly for n in {5,10}, separating golden from silver(8)/bronze(12). Field-equality not attempted (documented)."
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.quadratic_ngon_tfae",
+      "kind": "theorem",
+      "module": "Brockian.GaloisNgonClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisNgonClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "Unified Galois n-gon classification (swarm capstone, AXLE @4.32, axiom-clean): TFAE for n>=3 that the real cyclotomic field Q(2cos 2pi/n) is quadratic <=> n in {5,8,10,12} <=> Euler totient phi(n)=4 (routes through quadratic_iff_totient_four + totient_eq_four_iff). Four concrete minimal-polynomial witnesses identify WHICH quadratic: n=5 -> X^2+X-1 (phi-1), n=10 -> X^2-X-1 (phi), n=8 -> X^2-2 (sqrt2), n=12 -> X^2-3 (sqrt3). The Golden Galois Dichotomy: among the four, discriminant=5 (the golden field) exactly for n in {5,10}, separating golden from silver(8)/bronze(12). Field-equality not attempted (documented)."
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.spectralGen_eight",
+      "kind": "theorem",
+      "module": "Brockian.GaloisNgonClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisNgonClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "Unified Galois n-gon classification (swarm capstone, AXLE @4.32, axiom-clean): TFAE for n>=3 that the real cyclotomic field Q(2cos 2pi/n) is quadratic <=> n in {5,8,10,12} <=> Euler totient phi(n)=4 (routes through quadratic_iff_totient_four + totient_eq_four_iff). Four concrete minimal-polynomial witnesses identify WHICH quadratic: n=5 -> X^2+X-1 (phi-1), n=10 -> X^2-X-1 (phi), n=8 -> X^2-2 (sqrt2), n=12 -> X^2-3 (sqrt3). The Golden Galois Dichotomy: among the four, discriminant=5 (the golden field) exactly for n in {5,10}, separating golden from silver(8)/bronze(12). Field-equality not attempted (documented)."
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.spectralGen_ten",
+      "kind": "theorem",
+      "module": "Brockian.GaloisNgonClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisNgonClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "Unified Galois n-gon classification (swarm capstone, AXLE @4.32, axiom-clean): TFAE for n>=3 that the real cyclotomic field Q(2cos 2pi/n) is quadratic <=> n in {5,8,10,12} <=> Euler totient phi(n)=4 (routes through quadratic_iff_totient_four + totient_eq_four_iff). Four concrete minimal-polynomial witnesses identify WHICH quadratic: n=5 -> X^2+X-1 (phi-1), n=10 -> X^2-X-1 (phi), n=8 -> X^2-2 (sqrt2), n=12 -> X^2-3 (sqrt3). The Golden Galois Dichotomy: among the four, discriminant=5 (the golden field) exactly for n in {5,10}, separating golden from silver(8)/bronze(12). Field-equality not attempted (documented)."
+    },
+    {
+      "name": "Brockian.GaloisNgonClassification.spectralGen_twelve",
+      "kind": "theorem",
+      "module": "Brockian.GaloisNgonClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GaloisNgonClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "swarm capstone; AXLE @4.32",
+      "provenance_note": "Unified Galois n-gon classification (swarm capstone, AXLE @4.32, axiom-clean): TFAE for n>=3 that the real cyclotomic field Q(2cos 2pi/n) is quadratic <=> n in {5,8,10,12} <=> Euler totient phi(n)=4 (routes through quadratic_iff_totient_four + totient_eq_four_iff). Four concrete minimal-polynomial witnesses identify WHICH quadratic: n=5 -> X^2+X-1 (phi-1), n=10 -> X^2-X-1 (phi), n=8 -> X^2-2 (sqrt2), n=12 -> X^2-3 (sqrt3). The Golden Galois Dichotomy: among the four, discriminant=5 (the golden field) exactly for n in {5,10}, separating golden from silver(8)/bronze(12). Field-equality not attempted (documented)."
     },
     {
       "name": "Brockian.GaloisWhyFive.P7",
