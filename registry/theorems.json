@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10532,
+    "PROVED": 10538,
     "DEFINITION": 572,
     "CONJECTURE": 40,
     "CONDITIONAL": 21,
@@ -58383,6 +58383,204 @@
       "quarantine": true,
       "ledger_run": "2026-08-01 \u2014 finite D5 permutation representation foothold",
       "provenance_note": "VertexSpace = Fin 5 -> C; pullback action of Aut(C5)/D5 on vertex functions; constants fixed; coordinate sum invariant; zero-sum hyperplane invariant; constant vector is zero-sum iff c=0. First rung for character/isotypic-projector work, downstream of Aut(C5) ~= D5."
+    },
+    {
+      "name": "Brockian.DivisorCountStructure.isSquare_iff_even_factorization",
+      "kind": "theorem",
+      "module": "Brockian.DivisorCountStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DivisorCountStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general divisor-count (tau) structure theorems (AXLE @4.32, axiom-clean). tau(n) = n.divisors.card. FLAGSHIP tau_odd_iff_isSquare: tau(n) is ODD iff n is a perfect square (NEWLY PROVED -- no single named Mathlib lemma; via tau(n) = prod (v_p(n)+1) odd iff every exponent even iff n square, with a supporting isSquare_iff_even_factorization bridge lemma). Plus tau_eq_two_iff_prime (tau=2 iff prime), tau_eq_one_iff (tau=1 iff n=1), tau_pos_iff (tau>0 iff n>0), tau_prime_pow (tau(p^k)=k+1). Reusable structural facts about the divisor-count function."
+    },
+    {
+      "name": "Brockian.DivisorCountStructure.tau_eq_one_iff",
+      "kind": "theorem",
+      "module": "Brockian.DivisorCountStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DivisorCountStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general divisor-count (tau) structure theorems (AXLE @4.32, axiom-clean). tau(n) = n.divisors.card. FLAGSHIP tau_odd_iff_isSquare: tau(n) is ODD iff n is a perfect square (NEWLY PROVED -- no single named Mathlib lemma; via tau(n) = prod (v_p(n)+1) odd iff every exponent even iff n square, with a supporting isSquare_iff_even_factorization bridge lemma). Plus tau_eq_two_iff_prime (tau=2 iff prime), tau_eq_one_iff (tau=1 iff n=1), tau_pos_iff (tau>0 iff n>0), tau_prime_pow (tau(p^k)=k+1). Reusable structural facts about the divisor-count function."
+    },
+    {
+      "name": "Brockian.DivisorCountStructure.tau_eq_two_iff_prime",
+      "kind": "theorem",
+      "module": "Brockian.DivisorCountStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DivisorCountStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general divisor-count (tau) structure theorems (AXLE @4.32, axiom-clean). tau(n) = n.divisors.card. FLAGSHIP tau_odd_iff_isSquare: tau(n) is ODD iff n is a perfect square (NEWLY PROVED -- no single named Mathlib lemma; via tau(n) = prod (v_p(n)+1) odd iff every exponent even iff n square, with a supporting isSquare_iff_even_factorization bridge lemma). Plus tau_eq_two_iff_prime (tau=2 iff prime), tau_eq_one_iff (tau=1 iff n=1), tau_pos_iff (tau>0 iff n>0), tau_prime_pow (tau(p^k)=k+1). Reusable structural facts about the divisor-count function."
+    },
+    {
+      "name": "Brockian.DivisorCountStructure.tau_odd_iff_isSquare",
+      "kind": "theorem",
+      "module": "Brockian.DivisorCountStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DivisorCountStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general divisor-count (tau) structure theorems (AXLE @4.32, axiom-clean). tau(n) = n.divisors.card. FLAGSHIP tau_odd_iff_isSquare: tau(n) is ODD iff n is a perfect square (NEWLY PROVED -- no single named Mathlib lemma; via tau(n) = prod (v_p(n)+1) odd iff every exponent even iff n square, with a supporting isSquare_iff_even_factorization bridge lemma). Plus tau_eq_two_iff_prime (tau=2 iff prime), tau_eq_one_iff (tau=1 iff n=1), tau_pos_iff (tau>0 iff n>0), tau_prime_pow (tau(p^k)=k+1). Reusable structural facts about the divisor-count function."
+    },
+    {
+      "name": "Brockian.DivisorCountStructure.tau_pos_iff",
+      "kind": "theorem",
+      "module": "Brockian.DivisorCountStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DivisorCountStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general divisor-count (tau) structure theorems (AXLE @4.32, axiom-clean). tau(n) = n.divisors.card. FLAGSHIP tau_odd_iff_isSquare: tau(n) is ODD iff n is a perfect square (NEWLY PROVED -- no single named Mathlib lemma; via tau(n) = prod (v_p(n)+1) odd iff every exponent even iff n square, with a supporting isSquare_iff_even_factorization bridge lemma). Plus tau_eq_two_iff_prime (tau=2 iff prime), tau_eq_one_iff (tau=1 iff n=1), tau_pos_iff (tau>0 iff n>0), tau_prime_pow (tau(p^k)=k+1). Reusable structural facts about the divisor-count function."
+    },
+    {
+      "name": "Brockian.DivisorCountStructure.tau_prime_pow",
+      "kind": "theorem",
+      "module": "Brockian.DivisorCountStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DivisorCountStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED general divisor-count (tau) structure theorems (AXLE @4.32, axiom-clean). tau(n) = n.divisors.card. FLAGSHIP tau_odd_iff_isSquare: tau(n) is ODD iff n is a perfect square (NEWLY PROVED -- no single named Mathlib lemma; via tau(n) = prod (v_p(n)+1) odd iff every exponent even iff n square, with a supporting isSquare_iff_even_factorization bridge lemma). Plus tau_eq_two_iff_prime (tau=2 iff prime), tau_eq_one_iff (tau=1 iff n=1), tau_pos_iff (tau>0 iff n>0), tau_prime_pow (tau(p^k)=k+1). Reusable structural facts about the divisor-count function."
     },
     {
       "name": "Brockian.DivisorSumStructure.perfect_not_prime",

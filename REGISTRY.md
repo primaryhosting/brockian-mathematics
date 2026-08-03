@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 572
 - **DISCHARGED**: 6
-- **PROVED**: 10532
+- **PROVED**: 10538
 
 ## Theorems
 
@@ -1819,6 +1819,12 @@
 | PROVED | `Brockian.D5Representation.d5Pull_mem_constantLine` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
 | PROVED | `Brockian.D5Representation.d5Pull_mem_zeroSumSubmodule` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
 | DEFINITION | `Brockian.D5Representation.zeroSumSubmodule` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| PROVED | `Brockian.DivisorCountStructure.isSquare_iff_even_factorization` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.DivisorCountStructure.tau_eq_one_iff` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.DivisorCountStructure.tau_eq_two_iff_prime` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.DivisorCountStructure.tau_odd_iff_isSquare` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.DivisorCountStructure.tau_pos_iff` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.DivisorCountStructure.tau_prime_pow` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.DivisorSumStructure.perfect_not_prime` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.DivisorSumStructure.prime_pow_deficient` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.DivisorSumStructure.prime_pow_not_perfect` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
