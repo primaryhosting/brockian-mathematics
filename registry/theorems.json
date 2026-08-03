@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10054,
-    "DEFINITION": 499,
-    "CONJECTURE": 20,
+    "PROVED": 10060,
+    "DEFINITION": 501,
+    "CONJECTURE": 21,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -2505,6 +2505,291 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY amicable numbers + aliquot dynamics (open-territory loop, AXLE @4.32, axiom-clean). aliquot(n)=sum of proper divisors; Amicable m n = 2-cycle of the aliquot map. CONCRETE verified pairs: amicable_220_284 (flagship, Thabit ibn Qurra), amicable_1184_1210 (Paganini 1866), amicable_2620_2924 (Euler) -- all by kernel decide (maxRecDepth raised for the two larger). Framing: perfect_iff_aliquot_fixed (perfect = fixed point of aliquot), amicable_symm, amicable_not_perfect (a 2-cycle is not a fixed point). The OPEN infinitude conjecture (infinitely many amicable pairs) is an unproven def AmicableInfinitude. Concrete verified instances, infinitude never asserted."
+    },
+    {
+      "name": "Brockian.AndricaConjecture.AndricaConjecture",
+      "kind": "conjecture",
+      "module": "Brockian.AndricaConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AndricaConjecture.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Andrica's conjecture on prime gaps (open-territory loop, AXLE @4.32, axiom-clean). ConsecutivePrimes p q (p,q prime, p<q, none between); AndricaInt p q := (q-p-1)^2 < 4p, the integer form of sqrt(q)-sqrt(p)<1. CONCRETE: five consecutive-prime instances andrica_{2_3,7_11,23_29,89_97,113_127} (incl. the wide gap-14 case). BONUS andricaInt_iff_sqrt: the proven integer<->Real.sqrt equivalence bridging to the classical statement. AndricaConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.AndricaConjecture.AndricaInt",
+      "kind": "def",
+      "module": "Brockian.AndricaConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AndricaConjecture.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Andrica's conjecture on prime gaps (open-territory loop, AXLE @4.32, axiom-clean). ConsecutivePrimes p q (p,q prime, p<q, none between); AndricaInt p q := (q-p-1)^2 < 4p, the integer form of sqrt(q)-sqrt(p)<1. CONCRETE: five consecutive-prime instances andrica_{2_3,7_11,23_29,89_97,113_127} (incl. the wide gap-14 case). BONUS andricaInt_iff_sqrt: the proven integer<->Real.sqrt equivalence bridging to the classical statement. AndricaConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.AndricaConjecture.ConsecutivePrimes",
+      "kind": "def",
+      "module": "Brockian.AndricaConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AndricaConjecture.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Andrica's conjecture on prime gaps (open-territory loop, AXLE @4.32, axiom-clean). ConsecutivePrimes p q (p,q prime, p<q, none between); AndricaInt p q := (q-p-1)^2 < 4p, the integer form of sqrt(q)-sqrt(p)<1. CONCRETE: five consecutive-prime instances andrica_{2_3,7_11,23_29,89_97,113_127} (incl. the wide gap-14 case). BONUS andricaInt_iff_sqrt: the proven integer<->Real.sqrt equivalence bridging to the classical statement. AndricaConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.AndricaConjecture.andricaInt_iff_sqrt",
+      "kind": "theorem",
+      "module": "Brockian.AndricaConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AndricaConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Andrica's conjecture on prime gaps (open-territory loop, AXLE @4.32, axiom-clean). ConsecutivePrimes p q (p,q prime, p<q, none between); AndricaInt p q := (q-p-1)^2 < 4p, the integer form of sqrt(q)-sqrt(p)<1. CONCRETE: five consecutive-prime instances andrica_{2_3,7_11,23_29,89_97,113_127} (incl. the wide gap-14 case). BONUS andricaInt_iff_sqrt: the proven integer<->Real.sqrt equivalence bridging to the classical statement. AndricaConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.AndricaConjecture.andrica_113_127",
+      "kind": "theorem",
+      "module": "Brockian.AndricaConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AndricaConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Andrica's conjecture on prime gaps (open-territory loop, AXLE @4.32, axiom-clean). ConsecutivePrimes p q (p,q prime, p<q, none between); AndricaInt p q := (q-p-1)^2 < 4p, the integer form of sqrt(q)-sqrt(p)<1. CONCRETE: five consecutive-prime instances andrica_{2_3,7_11,23_29,89_97,113_127} (incl. the wide gap-14 case). BONUS andricaInt_iff_sqrt: the proven integer<->Real.sqrt equivalence bridging to the classical statement. AndricaConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.AndricaConjecture.andrica_23_29",
+      "kind": "theorem",
+      "module": "Brockian.AndricaConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AndricaConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Andrica's conjecture on prime gaps (open-territory loop, AXLE @4.32, axiom-clean). ConsecutivePrimes p q (p,q prime, p<q, none between); AndricaInt p q := (q-p-1)^2 < 4p, the integer form of sqrt(q)-sqrt(p)<1. CONCRETE: five consecutive-prime instances andrica_{2_3,7_11,23_29,89_97,113_127} (incl. the wide gap-14 case). BONUS andricaInt_iff_sqrt: the proven integer<->Real.sqrt equivalence bridging to the classical statement. AndricaConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.AndricaConjecture.andrica_2_3",
+      "kind": "theorem",
+      "module": "Brockian.AndricaConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AndricaConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Andrica's conjecture on prime gaps (open-territory loop, AXLE @4.32, axiom-clean). ConsecutivePrimes p q (p,q prime, p<q, none between); AndricaInt p q := (q-p-1)^2 < 4p, the integer form of sqrt(q)-sqrt(p)<1. CONCRETE: five consecutive-prime instances andrica_{2_3,7_11,23_29,89_97,113_127} (incl. the wide gap-14 case). BONUS andricaInt_iff_sqrt: the proven integer<->Real.sqrt equivalence bridging to the classical statement. AndricaConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.AndricaConjecture.andrica_7_11",
+      "kind": "theorem",
+      "module": "Brockian.AndricaConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AndricaConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Andrica's conjecture on prime gaps (open-territory loop, AXLE @4.32, axiom-clean). ConsecutivePrimes p q (p,q prime, p<q, none between); AndricaInt p q := (q-p-1)^2 < 4p, the integer form of sqrt(q)-sqrt(p)<1. CONCRETE: five consecutive-prime instances andrica_{2_3,7_11,23_29,89_97,113_127} (incl. the wide gap-14 case). BONUS andricaInt_iff_sqrt: the proven integer<->Real.sqrt equivalence bridging to the classical statement. AndricaConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.AndricaConjecture.andrica_89_97",
+      "kind": "theorem",
+      "module": "Brockian.AndricaConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AndricaConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Andrica's conjecture on prime gaps (open-territory loop, AXLE @4.32, axiom-clean). ConsecutivePrimes p q (p,q prime, p<q, none between); AndricaInt p q := (q-p-1)^2 < 4p, the integer form of sqrt(q)-sqrt(p)<1. CONCRETE: five consecutive-prime instances andrica_{2_3,7_11,23_29,89_97,113_127} (incl. the wide gap-14 case). BONUS andricaInt_iff_sqrt: the proven integer<->Real.sqrt equivalence bridging to the classical statement. AndricaConjecture is an unproven def -- OPEN, never asserted."
     },
     {
       "name": "Brockian.Automorphism.C5",

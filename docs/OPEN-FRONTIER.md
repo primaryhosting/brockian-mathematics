@@ -322,6 +322,22 @@ Module: `Brockian.LegendreConjecture`. `LegendreConjecture` is an unproven `def`
 
 ---
 
+## Andrica's conjecture — prime gaps (open)
+
+**Claim.** For consecutive primes, √pₙ₊₁ − √pₙ < 1? Open. Module: `Brockian.AndricaConjecture`.
+`AndricaConjecture` is an unproven `def`.
+
+**PROVED (concrete + bridge):**
+- **Five consecutive-prime instances** (`andrica_2_3`, `andrica_7_11`, `andrica_23_29`,
+  `andrica_89_97`, `andrica_113_127` — including the wide gap-14 case), each proving both
+  consecutivity and the integer form (gap−1)² < 4pₙ.
+- **The integer ↔ √ equivalence** (`andricaInt_iff_sqrt`): (q−p−1)² < 4p ⟺ √q − √p < 1 — bridging
+  the decide-checkable form to the classical statement.
+
+**OPEN.** Whether Andrica's inequality holds for all consecutive primes.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:
