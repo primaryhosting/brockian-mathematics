@@ -20,16 +20,17 @@
 | Overnight w3 | `ebdf30f` | 2406 | Gaps162–200 · Cos71–79 · K2×53/59 |
 | Overnight w4 | `7d2b2a3` | 2590 | Gaps202–250 · Cos83–97 · K2×61/67/71 |
 | K2×29 fill | `8050917` | 2596 | missing wheel between 23–31 |
-| **Overnight w5** | `5551d58` | **2794** | Gaps252–300 · Cos101–109 · K2×73/79/83 |
-| Wave 6+ | *15m scheduler* | … | Gaps302–350 · Cos113+ · K2×89+ |
+| Overnight w5 | `5551d58` | 2794 | Gaps252–300 · Cos101–109 · K2×73/79/83 |
+| **Overnight w6** | `70e3250` | **2985** | Gaps302–350 · Cos113/127/131/137 · K2×89/97/101 |
+| Wave 7+ | *15m scheduler* | … | Gaps352–400 · Cos139+ · K2×103+ |
 
 ## Display headlines for morning
 
 1. **Grand Pentagon Equivalence** — 4-way TFAE (machine-checked)  
-2. **Even-gap singular series continuum 22 → 300** (local S(H) only)  
-3. **Spectral degree packs** for primes through **p = 109**  
-4. **Local K₂×K_p wheels** through **p = 83** (plus K2×29 fill)  
-5. Public registry honesty firewall · **PROVED 2794+** and climbing  
+2. **Even-gap singular series continuum 22 → 350** (local S(H) only)  
+3. **Spectral degree packs** for primes through **p = 137**  
+4. **Local K₂×K_p wheels** through **p = 101** (plus K2×29 fill)  
+5. Public registry honesty firewall · **PROVED 2985** and climbing  
 
 ## Morning checklist
 
