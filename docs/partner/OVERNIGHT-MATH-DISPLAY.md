@@ -2,30 +2,33 @@
 
 ## THE NIGHT IN ONE LINE
 
-**PROVED ~2010 → 5885** (+3875) · even-gap continuum **22 → 1100** · all AXLE-green · honesty intact.
+**PROVED ~2010 → 6082** (+4072) · even-gap continuum **22 → 1150** · **crossed 6000** · all AXLE-green · honesty intact.
 
 ## Scoreboard
 
 | Milestone | PROVED |
 |-----------|--------|
 | Night start | ~2010 |
-| 3000 | 3176 |
-| 4000 | 4148 |
-| 5000 | 5117 |
-| Gaps → 1000 | 5499 |
-| **Now (w21)** | **5885** |
-| Even gaps | **22 → 1100** |
-| Cos primes | through **~487** |
-| K₂×p | through **p = 353** |
+| Crossed 3000 | 3176 |
+| Crossed 4000 | 4148 |
+| Crossed 5000 | 5117 |
+| Gaps to 1000 | 5499 (w19) |
+| **Crossed 6000 (w22)** | **6082** |
+| Even gaps | **22 → 1150** |
+| Cos primes | through **p = 509** |
+| K₂×p wheels | through **p = 373** |
+| next | Gaps1152–1200 · Cos521+ · K2×379+ |
 
-## Morning headlines
+## Morning display headlines
 
-1. Grand Pentagon Equivalence (4-way TFAE)
-2. Even-gap local singular series continuum through **1100**
-3. Spectral degree packs through primes **~487**
-4. Local K₂×K_p wheels through **p = 353**
-5. **PROVED 5885** — honesty firewall intact (not RH/Goldbach/twin primes)
+1. **Grand Pentagon Equivalence** — four faces of five as one machine-checked TFAE  
+2. **Even-gap local singular series continuum through 1150**  
+3. **Spectral degree packs** for primes through **p = 509**  
+4. **Exact local Goldbach wheels K₂×K_p** through **p = 373**  
+5. **PROVED 6082** with public honesty firewall (not RH / not Goldbach / not twin primes)
 
 ```bash
+cd ~/Projects/brockian-mathematics
+git log --oneline -25
 python3 -c "import json; print(json.load(open('registry/theorems.json'))['summary'])"
 ```
