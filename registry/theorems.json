@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 8022,
-    "DEFINITION": 458,
-    "CONJECTURE": 11,
+    "PROVED": 8032,
+    "DEFINITION": 459,
+    "CONJECTURE": 12,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -258898,6 +258898,394 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimes.TwinPrime",
+      "kind": "def",
+      "module": "Brockian.TwinPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimes.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
+    },
+    {
+      "name": "Brockian.TwinPrimes.TwinPrimeConjecture",
+      "kind": "conjecture",
+      "module": "Brockian.TwinPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimes.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
+    },
+    {
+      "name": "Brockian.TwinPrimes.twin_11",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
+    },
+    {
+      "name": "Brockian.TwinPrimes.twin_17",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
+    },
+    {
+      "name": "Brockian.TwinPrimes.twin_29",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
+    },
+    {
+      "name": "Brockian.TwinPrimes.twin_3",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
+    },
+    {
+      "name": "Brockian.TwinPrimes.twin_41",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
+    },
+    {
+      "name": "Brockian.TwinPrimes.twin_5",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
+    },
+    {
+      "name": "Brockian.TwinPrimes.twin_59",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
+    },
+    {
+      "name": "Brockian.TwinPrimes.twin_71",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
+    },
+    {
+      "name": "Brockian.TwinPrimes.twin_form_6k",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
+    },
+    {
+      "name": "Brockian.TwinPrimes.twin_middle_div_six",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
     },
     {
       "name": "Brockian.Weyl.green_identity_integral",

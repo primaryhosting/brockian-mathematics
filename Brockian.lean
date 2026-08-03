@@ -546,3 +546,4 @@ import Brockian.GiugaNumbers
 import Brockian.CarmichaelKorselt
 import Brockian.BrocardProblem
 import Brockian.MersennePerfect
+import Brockian.TwinPrimes

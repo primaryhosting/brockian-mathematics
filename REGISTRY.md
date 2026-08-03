@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 11
-- **DEFINITION**: 458
+- **CONJECTURE**: 12
+- **DEFINITION**: 459
 - **DISCHARGED**: 6
-- **PROVED**: 8022
+- **PROVED**: 8032
 
 ## Theorems
 
@@ -7920,6 +7920,18 @@
 | DEFINITION | `Brockian.TwinPrimeConstant.twinPrimeConstantFinite` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.TwinPrimeConstant.twinPrimeConstantFinite_pos` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.TwinPrimeConstant.twinPrimeConstant_pos` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.TwinPrimes.TwinPrime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.TwinPrimes.TwinPrimeConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.TwinPrimes.twin_11` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.TwinPrimes.twin_17` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.TwinPrimes.twin_29` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.TwinPrimes.twin_3` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.TwinPrimes.twin_41` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.TwinPrimes.twin_5` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.TwinPrimes.twin_59` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.TwinPrimes.twin_71` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.TwinPrimes.twin_form_6k` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.TwinPrimes.twin_middle_div_six` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.green_identity_integral` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
 | PROVED | `Brockian.Weyl.lagrange_identity` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |
 | DEFINITION | `Brockian.Weyl.sturmL` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — Weyl/Green functional-analytic core (base rung) |

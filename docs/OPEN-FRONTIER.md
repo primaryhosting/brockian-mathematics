@@ -198,6 +198,22 @@ numbers)? Open — one of the oldest problems in mathematics. Module: `Brockian.
 
 ---
 
+## Twin primes (conjecture open)
+
+**Claim.** Are there infinitely many primes p with p+2 also prime? Open — one of the most famous
+problems in mathematics. Module: `Brockian.TwinPrimes`. `TwinPrimeConjecture` is an unproven `def`.
+
+**PROVED (concrete + structural):**
+- **Eight twin pairs** (`twin_3`, `twin_5`, `twin_11`, `twin_17`, `twin_29`, `twin_41`, `twin_59`,
+  `twin_71`) — (3,5) through (71,73).
+- **The middle of any twin pair p ≥ 5 is divisible by 6** (`twin_middle_div_six`): p is odd so
+  2 ∣ p+1, and among p, p+1, p+2 exactly one is a multiple of 3 — not the two primes — so 3 ∣ p+1.
+- Corollary: every twin pair (p ≥ 5) has the form (6k−1, 6k+1) (`twin_form_6k`).
+
+**OPEN.** Whether infinitely many twin primes exist.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:
