@@ -4,17 +4,6 @@
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.EvenPerfectTriangular.sigma_two_pow_eq_mersenne_succ",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
       "name": "Brockian.EvenPerfectTriangular.eq_two_pow_mul_not_even",
       "kind": "theorem",
       "axle_verdict": "verified",
@@ -38,6 +27,17 @@
     },
     {
       "name": "Brockian.EvenPerfectTriangular.even_perfect_triangular",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.EvenPerfectTriangular.sigma_two_pow_eq_mersenne_succ",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
