@@ -31,6 +31,26 @@ accounting and mathematical frontier.
   noncanonical duplicate; do not commit it. The canonical file is
   `BrocardGapConjecture.json`.
 
+### Codex active claim - 2026-08-03
+
+- `Brockian/WeylHarmonicOscillator.lean`: finish and attest the concrete dense
+  symmetric oscillator core.
+- `Brockian/WeylWeightedRellich.lean`: own the weighted compact-embedding
+  interface and every theorem proved from it.
+- `Brockian/WeylOscillatorDiscrete.lean`: own the compact-resolvent to discrete-
+  spectrum reduction; no unconditional claim until the compactness input exists.
+- `Brockian/PentagonTraceBridge.lean`: identify the concrete permutation-matrix
+  trace with `permCharacter`.
+- `Brockian/WeylUpstream.lean`: expose general, Brockian-independent Weyl/Cayley
+  lemmas suitable for later Mathlib extraction.
+- Do not edit `Brockian/Erdos320Lemmas.lean` or any `aristotle/` target.
+
+Status: all five claimed files are AXLE-green and root-wired. The concrete
+oscillator core, compact-factorization routing, finite-multiplicity Fredholm
+consequences, closure/ESA equivalence, and `D5` trace bridge are complete. The
+next shared blockers are only the actual oscillator ESA theorem and the actual
+weighted compact embedding; do not duplicate the completed reduction modules.
+
 **Full protocol:** [`docs/MULTI-AGENT-COLLAB.md`](MULTI-AGENT-COLLAB.md)  
 **Status board:** `python3 scripts/agent_board.py`
 

@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10381,
-    "DEFINITION": 539,
+    "PROVED": 10405,
+    "DEFINITION": 552,
     "CONJECTURE": 38,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
@@ -116466,6 +116466,105 @@
       "quarantine": true,
       "ledger_run": "roadmap #12 \u2014 C5 eigenspace/finrank geometric multiplicities; AXLE @4.32",
       "provenance_note": "Closes the eigenspace/finrank gap PentagonIsotypic left open. Module.End.eigenspace adjL mu = span of grouped eigenmodes (exact, all 3 eigenvalues); geometric multiplicities as EXACT finrank {2:1, phi-1:2, -phi:2}; sum = finrank VertexSpace = 5; genuine HasEigenvalue facts; eigenspaces span top (diagonalizability). DirectSum.IsInternal left as a packaging choice (its two factors \u2014 span_top + finrank sum \u2014 are both proved)."
+    },
+    {
+      "name": "Brockian.PentagonTraceBridge.concrete_permInner_golden",
+      "kind": "theorem",
+      "module": "Brockian.PentagonTraceBridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonTraceBridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete D5 character bridge",
+      "provenance_note": "The fixed-point permCharacter is exactly the trace of the concrete d5PermutationMatrix implementing d5Pull; golden multiplicity is restated through the actual trace character."
+    },
+    {
+      "name": "Brockian.PentagonTraceBridge.d5Character_eq_permCharacter",
+      "kind": "theorem",
+      "module": "Brockian.PentagonTraceBridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonTraceBridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete D5 character bridge",
+      "provenance_note": "The fixed-point permCharacter is exactly the trace of the concrete d5PermutationMatrix implementing d5Pull; golden multiplicity is restated through the actual trace character."
+    },
+    {
+      "name": "Brockian.PentagonTraceBridge.permCharacter_eq_trace_d5PermutationMatrix",
+      "kind": "theorem",
+      "module": "Brockian.PentagonTraceBridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PentagonTraceBridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete D5 character bridge",
+      "provenance_note": "The fixed-point permCharacter is exactly the trace of the concrete d5PermutationMatrix implementing d5Pull; golden multiplicity is restated through the actual trace character."
     },
     {
       "name": "Brockian.PentagonalPartition.partition_zero_card",
@@ -347102,6 +347201,448 @@
       "provenance_note": "primeGaussianMul_essentiallySelfAdjoint; dense_range of non-real shifts; add_primeGaussian_* for any bounded SA free part. NOT full -Delta+V."
     },
     {
+      "name": "Brockian.Weyl.HarmonicOscillator.L2R",
+      "kind": "def",
+      "module": "Brockian.Weyl.HarmonicOscillator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylHarmonicOscillator.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete harmonic-oscillator core",
+      "provenance_note": "Concrete Schwartz-core -d\u00b2+x\u00b2 LinearPMap, exact action, dense domain, symmetry, and confining shape. Does not claim oscillator ESA or compact resolvent."
+    },
+    {
+      "name": "Brockian.Weyl.HarmonicOscillator.harmonicOscillatorPMap",
+      "kind": "def",
+      "module": "Brockian.Weyl.HarmonicOscillator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylHarmonicOscillator.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete harmonic-oscillator core",
+      "provenance_note": "Concrete Schwartz-core -d\u00b2+x\u00b2 LinearPMap, exact action, dense domain, symmetry, and confining shape. Does not claim oscillator ESA or compact resolvent."
+    },
+    {
+      "name": "Brockian.Weyl.HarmonicOscillator.harmonicOscillatorPMap_dense",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.HarmonicOscillator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylHarmonicOscillator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete harmonic-oscillator core",
+      "provenance_note": "Concrete Schwartz-core -d\u00b2+x\u00b2 LinearPMap, exact action, dense domain, symmetry, and confining shape. Does not claim oscillator ESA or compact resolvent."
+    },
+    {
+      "name": "Brockian.Weyl.HarmonicOscillator.harmonicOscillatorPMap_isSymmetric",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.HarmonicOscillator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylHarmonicOscillator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete harmonic-oscillator core",
+      "provenance_note": "Concrete Schwartz-core -d\u00b2+x\u00b2 LinearPMap, exact action, dense domain, symmetry, and confining shape. Does not claim oscillator ESA or compact resolvent."
+    },
+    {
+      "name": "Brockian.Weyl.HarmonicOscillator.harmonicOscillatorPMap_toFun_ofInjective",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.HarmonicOscillator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylHarmonicOscillator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete harmonic-oscillator core",
+      "provenance_note": "Concrete Schwartz-core -d\u00b2+x\u00b2 LinearPMap, exact action, dense domain, symmetry, and confining shape. Does not claim oscillator ESA or compact resolvent."
+    },
+    {
+      "name": "Brockian.Weyl.HarmonicOscillator.harmonicOscillator_confining_shape",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.HarmonicOscillator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylHarmonicOscillator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete harmonic-oscillator core",
+      "provenance_note": "Concrete Schwartz-core -d\u00b2+x\u00b2 LinearPMap, exact action, dense domain, symmetry, and confining shape. Does not claim oscillator ESA or compact resolvent."
+    },
+    {
+      "name": "Brockian.Weyl.HarmonicOscillator.harmonicOscillator_core_package",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.HarmonicOscillator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylHarmonicOscillator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete harmonic-oscillator core",
+      "provenance_note": "Concrete Schwartz-core -d\u00b2+x\u00b2 LinearPMap, exact action, dense domain, symmetry, and confining shape. Does not claim oscillator ESA or compact resolvent."
+    },
+    {
+      "name": "Brockian.Weyl.HarmonicOscillator.oscillatorCoreMap",
+      "kind": "def",
+      "module": "Brockian.Weyl.HarmonicOscillator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylHarmonicOscillator.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete harmonic-oscillator core",
+      "provenance_note": "Concrete Schwartz-core -d\u00b2+x\u00b2 LinearPMap, exact action, dense domain, symmetry, and confining shape. Does not claim oscillator ESA or compact resolvent."
+    },
+    {
+      "name": "Brockian.Weyl.HarmonicOscillator.oscillatorCoreMap_expanded",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.HarmonicOscillator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylHarmonicOscillator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete harmonic-oscillator core",
+      "provenance_note": "Concrete Schwartz-core -d\u00b2+x\u00b2 LinearPMap, exact action, dense domain, symmetry, and confining shape. Does not claim oscillator ESA or compact resolvent."
+    },
+    {
+      "name": "Brockian.Weyl.HarmonicOscillator.oscillatorCoreMap_symm",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.HarmonicOscillator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylHarmonicOscillator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete harmonic-oscillator core",
+      "provenance_note": "Concrete Schwartz-core -d\u00b2+x\u00b2 LinearPMap, exact action, dense domain, symmetry, and confining shape. Does not claim oscillator ESA or compact resolvent."
+    },
+    {
+      "name": "Brockian.Weyl.HarmonicOscillator.oscillatorSchwartz",
+      "kind": "def",
+      "module": "Brockian.Weyl.HarmonicOscillator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylHarmonicOscillator.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete harmonic-oscillator core",
+      "provenance_note": "Concrete Schwartz-core -d\u00b2+x\u00b2 LinearPMap, exact action, dense domain, symmetry, and confining shape. Does not claim oscillator ESA or compact resolvent."
+    },
+    {
+      "name": "Brockian.Weyl.HarmonicOscillator.quadraticMulSchwartz",
+      "kind": "def",
+      "module": "Brockian.Weyl.HarmonicOscillator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylHarmonicOscillator.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete harmonic-oscillator core",
+      "provenance_note": "Concrete Schwartz-core -d\u00b2+x\u00b2 LinearPMap, exact action, dense domain, symmetry, and confining shape. Does not claim oscillator ESA or compact resolvent."
+    },
+    {
+      "name": "Brockian.Weyl.HarmonicOscillator.quadraticMul_symm",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.HarmonicOscillator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylHarmonicOscillator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete harmonic-oscillator core",
+      "provenance_note": "Concrete Schwartz-core -d\u00b2+x\u00b2 LinearPMap, exact action, dense domain, symmetry, and confining shape. Does not claim oscillator ESA or compact resolvent."
+    },
+    {
+      "name": "Brockian.Weyl.HarmonicOscillator.quadratic_hasTemperateGrowth",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.HarmonicOscillator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylHarmonicOscillator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 concrete harmonic-oscillator core",
+      "provenance_note": "Concrete Schwartz-core -d\u00b2+x\u00b2 LinearPMap, exact action, dense domain, symmetry, and confining shape. Does not claim oscillator ESA or compact resolvent."
+    },
+    {
       "name": "Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint",
       "kind": "theorem",
       "module": "Brockian.Weyl.Kato",
@@ -352349,6 +352890,411 @@
       "provenance_note": null
     },
     {
+      "name": "Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI",
+      "kind": "def",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
+      "name": "Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI.finiteMultiplicity_nonzero_spectrum",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
+      "name": "Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI.nonzero_spectrum_is_point_spectrum",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
+      "name": "Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI.ofFactorizations",
+      "kind": "def",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
+      "name": "Brockian.Weyl.OscillatorDiscrete.FiniteMultiplicityNonzeroSpectrum",
+      "kind": "def",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
+      "name": "Brockian.Weyl.OscillatorDiscrete.NonzeroSpectrumIsPointSpectrum",
+      "kind": "def",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
+      "name": "Brockian.Weyl.OscillatorDiscrete.finiteDimensional_eigenspace_of_isCompact",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
+      "name": "Brockian.Weyl.OscillatorDiscrete.finiteMultiplicityNonzeroSpectrum_of_isCompact",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
+      "name": "Brockian.Weyl.OscillatorDiscrete.harmonicOscillatorClosureResolventAtI",
+      "kind": "def",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
+      "name": "Brockian.Weyl.OscillatorDiscrete.harmonicOscillatorCompactResolventAtI_of_weightedRellich",
+      "kind": "def",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
+      "name": "Brockian.Weyl.OscillatorDiscrete.harmonicOscillator_resolvent_finiteMultiplicity_of_weightedRellich",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
+      "name": "Brockian.Weyl.OscillatorDiscrete.harmonicOscillator_resolvent_nonzero_spectrum_of_weightedRellich",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
+      "name": "Brockian.Weyl.OscillatorDiscrete.nonzeroSpectrumIsPointSpectrum_of_isCompact",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
       "name": "Brockian.Weyl.RadiusDichotomy.radius_pos_limit_of_mass_finite",
       "kind": "theorem",
       "module": "Brockian.Weyl.RadiusDichotomy",
@@ -355180,6 +356126,229 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.Upstream.deficiencySpace_eq_bot_of_closure_isSelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Upstream",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylUpstream.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 Mathlib extraction candidate",
+      "provenance_note": "General theorem: for densely-defined symmetric T, deficiency-trivial ESA iff the graph closure is self-adjoint; also every nonreal deficiency space vanishes from a self-adjoint closure."
+    },
+    {
+      "name": "Brockian.Weyl.Upstream.essentiallySelfAdjoint_iff_closure_isSelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Upstream",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylUpstream.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 Mathlib extraction candidate",
+      "provenance_note": "General theorem: for densely-defined symmetric T, deficiency-trivial ESA iff the graph closure is self-adjoint; also every nonreal deficiency space vanishes from a self-adjoint closure."
+    },
+    {
+      "name": "Brockian.Weyl.WeightedRellich.Factorization",
+      "kind": "def",
+      "module": "Brockian.Weyl.WeightedRellich",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeightedRellich.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 weighted Rellich factorization",
+      "provenance_note": "A resolvent factoring through a compactly embedded weighted space is compact; compact closed-ball images and both unit resolvents follow. The actual oscillator weighted embedding remains an explicit input because Mathlib 4.32 lacks Rellich-Kondrachov."
+    },
+    {
+      "name": "Brockian.Weyl.WeightedRellich.Factorization.isCompactOperator",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeightedRellich",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeightedRellich.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 weighted Rellich factorization",
+      "provenance_note": "A resolvent factoring through a compactly embedded weighted space is compact; compact closed-ball images and both unit resolvents follow. The actual oscillator weighted embedding remains an explicit input because Mathlib 4.32 lacks Rellich-Kondrachov."
+    },
+    {
+      "name": "Brockian.Weyl.WeightedRellich.Factorization.isCompact_closure_image_closedBall",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeightedRellich",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeightedRellich.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 weighted Rellich factorization",
+      "provenance_note": "A resolvent factoring through a compactly embedded weighted space is compact; compact closed-ball images and both unit resolvents follow. The actual oscillator weighted embedding remains an explicit input because Mathlib 4.32 lacks Rellich-Kondrachov."
+    },
+    {
+      "name": "Brockian.Weyl.WeightedRellich.Factorization.ofCompact",
+      "kind": "def",
+      "module": "Brockian.Weyl.WeightedRellich",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeightedRellich.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 weighted Rellich factorization",
+      "provenance_note": "A resolvent factoring through a compactly embedded weighted space is compact; compact closed-ball images and both unit resolvents follow. The actual oscillator weighted embedding remains an explicit input because Mathlib 4.32 lacks Rellich-Kondrachov."
+    },
+    {
+      "name": "Brockian.Weyl.WeightedRellich.compact_resolvents_of_factorizations",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeightedRellich",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeightedRellich.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 weighted Rellich factorization",
+      "provenance_note": "A resolvent factoring through a compactly embedded weighted space is compact; compact closed-ball images and both unit resolvents follow. The actual oscillator weighted embedding remains an explicit input because Mathlib 4.32 lacks Rellich-Kondrachov."
     },
     {
       "name": "Brockian.Weyl.WeylLawTarget.MatchesRiemannVonMangoldt",

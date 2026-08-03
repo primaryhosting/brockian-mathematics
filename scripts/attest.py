@@ -22,13 +22,22 @@ import axle_client  # noqa: E402
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 
 
+def _attestation_stem(lean_path: str) -> str:
+    """Use the source module stem, not the namespace tail, as the canonical key."""
+    return os.path.splitext(os.path.basename(lean_path))[0]
+
+
 def _kind_of(src: str, name: str) -> str:
     """Detect a declaration's kind from the source (theorem/lemma vs def/abbrev)."""
-    if re.search(rf"^\s*(?:@\[[^\]]*\]\s*)*(?:noncomputable\s+)?(?:theorem|lemma)\s+{re.escape(name)}\b",
+    # A word boundary is insufficient here: `Factorization` has a word boundary
+    # before the dot in `Factorization.isCompactOperator`. Require the complete
+    # declaration identifier so a nested theorem cannot shadow its parent structure.
+    ident = re.escape(name) + r"(?![\w.'])"
+    if re.search(rf"^\s*(?:@\[[^\]]*\]\s*)*(?:noncomputable\s+)?(?:theorem|lemma)\s+{ident}",
                  src, re.MULTILINE):
         return "theorem"
     m = re.search(
-        rf"^\s*(?:@\[[^\]]*\]\s*)*(?:noncomputable\s+)?(?:def|abbrev)\s+{re.escape(name)}\b(.*?):=",
+        rf"^\s*(?:@\[[^\]]*\]\s*)*(?:noncomputable\s+)?(?:def|abbrev)\s+{ident}(.*?):=",
         src, re.MULTILINE | re.DOTALL)
     if m:
         sig = m.group(1)
@@ -38,7 +47,7 @@ def _kind_of(src: str, name: str) -> str:
             return "conjecture"
         return "def"
     # structures/classes/inductives are definitions, not theorems
-    if re.search(rf"^\s*(?:@\[[^\]]*\]\s*)*(?:structure|class|inductive)\s+{re.escape(name)}\b",
+    if re.search(rf"^\s*(?:@\[[^\]]*\]\s*)*(?:structure|class|inductive)\s+{ident}",
                  src, re.MULTILINE):
         return "def"
     return "theorem"
@@ -129,7 +138,7 @@ def main() -> int:
     ap.add_argument("--env", default="lean-4.32.0")
     args = ap.parse_args()
     att = attest(args.lean_path, args.namespace, args.names, args.env)
-    out = os.path.join("registry", "attestations", args.namespace.split(".")[-1] + ".json")
+    out = os.path.join("registry", "attestations", _attestation_stem(args.lean_path) + ".json")
     os.makedirs(os.path.dirname(out), exist_ok=True)
     json.dump(att, open(out, "w"), indent=2)
     print(json.dumps(att, indent=2))

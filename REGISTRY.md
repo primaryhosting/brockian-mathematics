@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 38
-- **DEFINITION**: 539
+- **DEFINITION**: 552
 - **DISCHARGED**: 6
-- **PROVED**: 10381
+- **PROVED**: 10405
 
 ## Theorems
 
@@ -3615,6 +3615,9 @@
 | PROVED | `Brockian.PentagonMultiplicities.multiplicities_sum_eq_finrank` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
 | PROVED | `Brockian.PentagonMultiplicities.range_matrix_two` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
 | PROVED | `Brockian.PentagonMultiplicities.repr_eq_zero_of_ne` | ✓ | verified | lean-4.32.0 | roadmap #12 — C5 eigenspace/finrank geometric multiplicities; AXLE @4.32 |
+| PROVED | `Brockian.PentagonTraceBridge.concrete_permInner_golden` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete D5 character bridge |
+| PROVED | `Brockian.PentagonTraceBridge.d5Character_eq_permCharacter` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete D5 character bridge |
+| PROVED | `Brockian.PentagonTraceBridge.permCharacter_eq_trace_d5PermutationMatrix` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete D5 character bridge |
 | PROVED | `Brockian.PentagonalPartition.partition_zero_card` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
 | DEFINITION | `Brockian.PentagonalPartition.pent` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
 | PROVED | `Brockian.PentagonalPartition.pent_injective` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler pentagonal numbers + partition contact; AXLE @4.32 |
@@ -10618,6 +10621,20 @@
 | PROVED | `Brockian.Weyl.Gate1Bounded.add_primeGaussian_isSelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2 |
 | PROVED | `Brockian.Weyl.Gate1Bounded.primeGaussianMul_dense_range_sub` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2 |
 | PROVED | `Brockian.Weyl.Gate1Bounded.primeGaussianMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2 |
+| DEFINITION | `Brockian.Weyl.HarmonicOscillator.L2R` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete harmonic-oscillator core |
+| DEFINITION | `Brockian.Weyl.HarmonicOscillator.harmonicOscillatorPMap` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete harmonic-oscillator core |
+| PROVED | `Brockian.Weyl.HarmonicOscillator.harmonicOscillatorPMap_dense` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete harmonic-oscillator core |
+| PROVED | `Brockian.Weyl.HarmonicOscillator.harmonicOscillatorPMap_isSymmetric` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete harmonic-oscillator core |
+| PROVED | `Brockian.Weyl.HarmonicOscillator.harmonicOscillatorPMap_toFun_ofInjective` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete harmonic-oscillator core |
+| PROVED | `Brockian.Weyl.HarmonicOscillator.harmonicOscillator_confining_shape` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete harmonic-oscillator core |
+| PROVED | `Brockian.Weyl.HarmonicOscillator.harmonicOscillator_core_package` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete harmonic-oscillator core |
+| DEFINITION | `Brockian.Weyl.HarmonicOscillator.oscillatorCoreMap` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete harmonic-oscillator core |
+| PROVED | `Brockian.Weyl.HarmonicOscillator.oscillatorCoreMap_expanded` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete harmonic-oscillator core |
+| PROVED | `Brockian.Weyl.HarmonicOscillator.oscillatorCoreMap_symm` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete harmonic-oscillator core |
+| DEFINITION | `Brockian.Weyl.HarmonicOscillator.oscillatorSchwartz` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete harmonic-oscillator core |
+| DEFINITION | `Brockian.Weyl.HarmonicOscillator.quadraticMulSchwartz` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete harmonic-oscillator core |
+| PROVED | `Brockian.Weyl.HarmonicOscillator.quadraticMul_symm` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete harmonic-oscillator core |
+| PROVED | `Brockian.Weyl.HarmonicOscillator.quadratic_hasTemperateGrowth` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete harmonic-oscillator core |
 | PROVED | `Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint` | ✓ | verified | lean-4.32.0 | Aristotle proj c595862c — bounded Kato-Rellich; independently AXLE-verified @ 4.32 |
 | PROVED | `Brockian.Weyl.Kato.isSelfAdjoint_add` | ✓ | verified | lean-4.32.0 | Aristotle proj c595862c — bounded Kato-Rellich; independently AXLE-verified @ 4.32 |
 | PROVED | `Brockian.Weyl.KatoNeumann.boundedPerturbationTransfer_of_resolvent_norm_lt_one` | ✓ | verified | lean-4.32.0 | parallel-tool; AXLE @4.32; committed by Claude for coherence |
@@ -10781,6 +10798,19 @@
 | DEFINITION | `Brockian.Weyl.OperatorChoice.primeGaussian_decaying` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.OperatorChoice.primeGaussian_not_realize_large_zero` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.OperatorChoice.rh_operator_needs_unbounded_spectrum` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| PROVED | `Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI.finiteMultiplicity_nonzero_spectrum` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| PROVED | `Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI.nonzero_spectrum_is_point_spectrum` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI.ofFactorizations` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.FiniteMultiplicityNonzeroSpectrum` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.NonzeroSpectrumIsPointSpectrum` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| PROVED | `Brockian.Weyl.OscillatorDiscrete.finiteDimensional_eigenspace_of_isCompact` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| PROVED | `Brockian.Weyl.OscillatorDiscrete.finiteMultiplicityNonzeroSpectrum_of_isCompact` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.harmonicOscillatorClosureResolventAtI` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.harmonicOscillatorCompactResolventAtI_of_weightedRellich` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| PROVED | `Brockian.Weyl.OscillatorDiscrete.harmonicOscillator_resolvent_finiteMultiplicity_of_weightedRellich` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| PROVED | `Brockian.Weyl.OscillatorDiscrete.harmonicOscillator_resolvent_nonzero_spectrum_of_weightedRellich` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| PROVED | `Brockian.Weyl.OscillatorDiscrete.nonzeroSpectrumIsPointSpectrum_of_isCompact` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_pos_limit_of_mass_finite` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_counterexample` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_of_pos` | ✓ | verified | lean-4.32.0 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
@@ -10870,6 +10900,13 @@
 | PROVED | `Brockian.Weyl.SymmetryPackage.smulPMap_not_eigenvalue_of_im_ne_zero` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.SymmetryPackage.smulPMap_quadratic_form_im_zero` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.SymmetryPackage.symmetricRealSpectrum` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.Upstream.deficiencySpace_eq_bot_of_closure_isSelfAdjoint` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — Mathlib extraction candidate |
+| PROVED | `Brockian.Weyl.Upstream.essentiallySelfAdjoint_iff_closure_isSelfAdjoint` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — Mathlib extraction candidate |
+| DEFINITION | `Brockian.Weyl.WeightedRellich.Factorization` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — weighted Rellich factorization |
+| PROVED | `Brockian.Weyl.WeightedRellich.Factorization.isCompactOperator` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — weighted Rellich factorization |
+| PROVED | `Brockian.Weyl.WeightedRellich.Factorization.isCompact_closure_image_closedBall` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — weighted Rellich factorization |
+| DEFINITION | `Brockian.Weyl.WeightedRellich.Factorization.ofCompact` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — weighted Rellich factorization |
+| PROVED | `Brockian.Weyl.WeightedRellich.compact_resolvents_of_factorizations` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — weighted Rellich factorization |
 | DEFINITION | `Brockian.Weyl.WeylLawTarget.MatchesRiemannVonMangoldt` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
 | DEFINITION | `Brockian.Weyl.WeylLawTarget.N_model` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
 | DEFINITION | `Brockian.Weyl.WeylLawTarget.N_op` | ✓ | verified | lean-4.32.0 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |

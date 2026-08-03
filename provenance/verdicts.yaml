@@ -1130,3 +1130,39 @@ runs:
       - name: WeylLawMatch_of_diff
         verdict: admit
         provenance_note: "Difference match + model→∞ ⇒ ratio match (reuses ConfiningShape packaging). Not a Weyl law."
+
+  # ── Confining oscillator / compact-resolvent reductions (Aug 3) ────────────
+  "weyl-harmonic-oscillator":
+    module: Brockian.Weyl.HarmonicOscillator
+    verdict: admit
+    quarantine: true
+    ledger_run: "Codex 2026-08-03 — concrete harmonic-oscillator core"
+    provenance_note: "Concrete Schwartz-core -d²+x² LinearPMap, exact action, dense domain, symmetry, and confining shape. Does not claim oscillator ESA or compact resolvent."
+
+  "weyl-weighted-rellich":
+    module: Brockian.Weyl.WeightedRellich
+    verdict: admit
+    quarantine: true
+    ledger_run: "Codex 2026-08-03 — weighted Rellich factorization"
+    provenance_note: "A resolvent factoring through a compactly embedded weighted space is compact; compact closed-ball images and both unit resolvents follow. The actual oscillator weighted embedding remains an explicit input because Mathlib 4.32 lacks Rellich-Kondrachov."
+
+  "weyl-oscillator-discrete":
+    module: Brockian.Weyl.OscillatorDiscrete
+    verdict: admit
+    quarantine: true
+    ledger_run: "Codex 2026-08-03 — compact-resolvent Fredholm consequences"
+    provenance_note: "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+
+  "weyl-upstream":
+    module: Brockian.Weyl.Upstream
+    verdict: admit
+    quarantine: true
+    ledger_run: "Codex 2026-08-03 — Mathlib extraction candidate"
+    provenance_note: "General theorem: for densely-defined symmetric T, deficiency-trivial ESA iff the graph closure is self-adjoint; also every nonreal deficiency space vanishes from a self-adjoint closure."
+
+  "pentagon-trace-bridge":
+    module: Brockian.PentagonTraceBridge
+    verdict: admit
+    quarantine: true
+    ledger_run: "Codex 2026-08-03 — concrete D5 character bridge"
+    provenance_note: "The fixed-point permCharacter is exactly the trace of the concrete d5PermutationMatrix implementing d5Pull; golden multiplicity is restated through the actual trace character."

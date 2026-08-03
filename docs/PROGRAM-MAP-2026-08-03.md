@@ -18,13 +18,13 @@ module, the root registry is:
 
 | Register | Count |
 |---|---:|
-| PROVED | 10,353 |
-| DEFINITION | 532 |
-| CONJECTURE | 34 |
+| PROVED | 10,405 |
+| DEFINITION | 552 |
+| CONJECTURE | 38 |
 | CONDITIONAL | 21 |
 | DISCHARGED | 6 |
 
-No famous open conjecture was solved. The 34 conjectures are nullary `Prop`
+No famous open conjecture was solved. The 38 conjectures are nullary `Prop`
 containers marking open boundaries, not theorems.
 
 ## Depth-Adjusted Delta
@@ -33,8 +33,8 @@ Baseline: commit `a5ff22d`, where the bounded-continuous-potential Gate 1 chain
 closed at `2,002 PROVED / 351 DEFINITION / 1 CONJECTURE / 21 CONDITIONAL /
 6 DISCHARGED`.
 
-The post-Gate-1 delta is `8,351 PROVED / 181 DEFINITION / 33 CONJECTURE` across
-544 new root modules. Its composition is:
+At checkpoint `100f976`, the post-Gate-1 delta was `8,351 PROVED / 181
+DEFINITION / 33 CONJECTURE` across 544 new root modules. Its composition was:
 
 | Lane | PROVED | DEF | CONJECTURE | Meaning |
 |---|---:|---:|---:|---|
@@ -48,6 +48,12 @@ Thus 8,054 of 8,351 new PROVED entries are generated specializations of three
 general theorem families. They are valid certificates, but the general theorem
 is the mathematical payload. Future reports must show both raw and
 depth-adjusted counts.
+
+Since that checkpoint, eight additional root modules added `52 PROVED / 20
+DEFINITION / 4 CONJECTURE`. The operator/representation campaign in this report
+accounts for `24 PROVED / 13 DEFINITION / 0 CONJECTURE`; the remaining `28 / 7 /
+4` are concurrent finite open-frontier additions. This split prevents those two
+kinds of progress from being conflated.
 
 ## What Closed
 
@@ -70,13 +76,13 @@ subspace. `PentagonCharacterMultiplicity` matches its dimension with the golden
 character value and proves multiplicity one in the packaged permutation
 character.
 
-One elementary bridge remains: identify the packaged fixed-point-count function
-`permCharacter` with the trace of the concrete `d5Pull` permutation
-representation. The current file states this limitation explicitly.
+`PentagonTraceBridge` now closes the remaining elementary bridge: the packaged
+fixed-point-count function `permCharacter` is the trace of the concrete
+permutation matrix implementing `d5Pull`.
 
 ### 3. Open-frontier certificates
 
-Thirty-three open-problem modules now contribute 282 proved finite or structural
+Thirty-six open-problem modules now contribute 310 proved finite or structural
 facts. Strong examples include the Sierpinski and Riesel covering certificates,
 Erdos-Straus residue reductions, Lehmer necessary conditions, concrete
 Carmichael/Brown/amicable instances, elementary Collatz descent families, and
@@ -97,12 +103,32 @@ The final verified wave extends:
 These are local/finite statements. They do not prove Hardy-Littlewood
 asymptotics, twin-prime infinitude, or Goldbach.
 
+### 5. Confining-operator campaign
+
+Five AXLE-green modules now add the next general operator layer:
+
+- `WeylHarmonicOscillator`: the concrete Schwartz-core `-d^2+x^2` `LinearPMap`,
+  with exact action, dense domain, symmetry, and confining shape;
+- `WeylWeightedRellich`: compact-embedding factorization implies compact
+  resolvent, including compact closure of closed-ball images;
+- `WeylOscillatorDiscrete`: the Fredholm consequence that every nonzero
+  compact-resolvent spectral value is an eigenvalue with finite-dimensional
+  eigenspace;
+- `WeylUpstream`: deficiency-trivial essential self-adjointness is equivalent
+  to self-adjointness of the graph closure for a dense symmetric core;
+- `PentagonTraceBridge`: `permCharacter` is exactly the trace of the concrete
+  `d5PermutationMatrix`, closing the fixed-point/trace bridge.
+
+The oscillator specialization still assumes oscillator ESA and the actual
+weighted Rellich compact embedding. Those two analytic inputs are not disguised
+as proved results.
+
 ## Integrity State
 
 - All 12 modules in the final range wave and the final `UnitaryPerfect` module
   have `module_verified: true` AXLE 4.32 attestations and allowed axioms only;
   the range wave has zero no-theater lint findings.
-- Registry freshness passes at 10,946 total entries.
+- Registry freshness passes at 11,022 total entries.
 - Registry open-entry consistency has zero errors after fixing source paths to
   derive from canonical attestation stems rather than namespace tails.
 - One noncanonical untracked `BrocardGap.json` duplicates the canonical
@@ -115,25 +141,28 @@ asymptotics, twin-prime infinitude, or Goldbach.
 
 ## What Remains Open
 
-1. **Confining operator:** construct and analyze `-d^2/dx^2 + x^2` as the next
-   concrete unbounded candidate.
-2. **Compact resolvent:** formalize the weighted Rellich compact embedding and
-   derive discrete spectrum for the harmonic oscillator closure.
-3. **RH correspondence:** no operator-spectrum to zeta-zero correspondence is
+1. **Oscillator ESA:** prove essential self-adjointness of the concrete
+   Schwartz-core `-d^2/dx^2 + x^2` operator.
+2. **Weighted Rellich:** construct the oscillator energy/graph space and prove
+   its concrete inclusion into `L2(R)` is compact; all downstream compactness
+   and finite-multiplicity consequences are now proved.
+3. **Unbounded spectral mapping:** relate the closure spectrum to either compact
+   unit resolvent and add eigenvalue isolation/zero-only accumulation.
+4. **RH correspondence:** no operator-spectrum to zeta-zero correspondence is
    known or formalized; this remains RH-strength.
-4. **Goldbach/HL:** local factors and admissibility are proved, but global prime
+5. **Goldbach/HL:** local factors and admissibility are proved, but global prime
    asymptotics remain conditional/open.
-5. **Open-frontier conjectures:** all 34 conjecture containers remain open.
+6. **Open-frontier conjectures:** all 38 conjecture containers remain open.
 
 ## Next Ownership Split
 
 | Priority | Owner | Target |
 |---|---|---|
-| P0 | Codex | Finish and attest `WeylHarmonicOscillator`: concrete core, density, symmetry, confining package |
-| P1 | Codex + Claude | Define the oscillator graph/form norm and isolate the weighted Rellich compact-embedding theorem |
-| P2 | Claude | Prove `permCharacter` equals the trace/fixed-point character of concrete `d5Pull` |
+| P0 | Codex + Claude | Prove oscillator ESA, preferably through Hermite/Fourier energy or a semibounded-core theorem |
+| P1 | Codex + Claude | Construct the oscillator graph/form space and prove the actual weighted Rellich compact embedding |
+| P2 | Codex | Add unbounded spectral mapping and isolation once compact resolvent is instantiated |
 | P3 | Integrator | Stop automatic range expansion; accept new generated corpus only when it tests a new general theorem |
-| P4 | Integrator | Prepare Mathlib-quality extractions of the abstract Weyl/Cayley and Schwartz-core lemmas |
+| P4 | Integrator | Turn `WeylUpstream` into a minimal-import Mathlib PR and upstream the compact-eigenspace lemma |
 
 The program should now optimize for new general lemmas and closed conceptual
 bridges, not raw registry growth.

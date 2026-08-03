@@ -706,3 +706,8 @@ import Brockian.UnitaryPerfect
 import Brockian.BetrothedNumbers
 import Brockian.RuthAaronPairs
 import Brockian.OreHarmonicNumbers
+import Brockian.WeylHarmonicOscillator
+import Brockian.WeylWeightedRellich
+import Brockian.WeylOscillatorDiscrete
+import Brockian.WeylUpstream
+import Brockian.PentagonTraceBridge

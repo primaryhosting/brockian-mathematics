@@ -8,7 +8,7 @@ generated from AXLE attestations); nothing is hand-asserted. Regenerate with
 
 | Metric | Value |
 |---|---|
-| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,381** |
+| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,405** |
 | Open problems mapped on the frontier | **34** |
 | **CONDITIONAL** reductions (honest, named-hypothesis) | 21 |
 | **DISCHARGED** (conditional → unconditional) | 6 |
@@ -19,7 +19,7 @@ Verifier: **AXLE (Axiom)** at `lean-4.32.0` + Mathlib. Every theorem is independ
 axiom-clean (⊆ `{propext, Classical.choice, Quot.sound}`), and CI-gated (`lake build` + AXLE +
 overclaim-firewall + no-theater lint) on every commit.
 
-## What's been built — three pillars
+## What's been built — four pillars
 
 1. **Why Five (unification).** The pentagon, the golden ratio, and the number five proved to be *one
    phenomenon* across four independent lenses — spectral (φ−1 ∈ spec C₅), Galois (quadratic real
@@ -35,17 +35,21 @@ overclaim-firewall + no-theater lint) on every commit.
 3. **The honesty firewall (trust).** A three-layer overclaim firewall that *rejected* dishonest inputs
    (an RH-cluster proof with 4 exact gaps; a false Erdős paper) and refuses to mark any conjecture
    "solved." Every "OPEN" is genuinely open — the refusal is the moat.
+4. **Unbounded operator theory (depth).** The concrete harmonic-oscillator Schwartz core is dense and
+   symmetric; deficiency-trivial ESA is equivalent to a self-adjoint graph closure; weighted-Rellich
+   factorizations imply compact unit resolvents; and those compact resolvents have nonzero point
+   spectrum of finite multiplicity. The actual oscillator ESA and weighted compact embedding remain
+   explicit analytic blockers, not hidden assumptions.
 
 ## Strategy — three parallel lanes, one firewall
 
-- **Frontier lane** (agent fleet, every 15 min) — decide-checkable partial results, one new
-  open-problem module per cycle: concrete verified instances + structural theorems + an honestly
-  stated open conjecture. Reliable breadth engine.
+- **Frontier lane** (curated) — accept a new finite module only when it tests a new general theorem or
+  adds a materially useful structural reduction. Automatic range/count expansion is paused.
 - **Hard-proof lane** (Harmonic / Aristotle) — heavy theorems offloaded to stronger compute (Euler's
   form for odd perfect numbers, Mersenne-exponent-prime, Korselt⇒Carmichael, Wilson). Solutions return,
   get AXLE-verified, and become new PROVED entries. Currently 4 jobs confirmed queued.
-- **Depth lane** (corpus loop, parallel) — sustained expansion of the verified core; shares the same
-  registry + firewall; coherence-gated so nothing lands unbacked.
+- **Depth lane** (primary) — oscillator ESA, the concrete weighted Rellich embedding, unbounded
+  spectral mapping, and Mathlib extraction of the general Weyl/Cayley results.
 
 ## The frontier (34 problems, by family)
 
@@ -63,7 +67,7 @@ superperfect, odd harmonic (Ore). Five ancient existence questions sharing one s
 
 ## Goals
 
-- **Widen the atlas** — keep adding open problems with verified proved-regions.
+- **Deepen the general core** — prioritize reusable analytic and algebraic theorems over raw counts.
 - **Discharge conditionals** — convert CONDITIONAL reductions to unconditional PROVED where the named
   hypothesis is a classical theorem (free-Laplacian / Kato essential self-adjointness).
 - **Deepen** — land genuine hard theorems via Harmonic's compute.
@@ -73,7 +77,9 @@ superperfect, odd harmonic (Ore). Five ancient existence questions sharing one s
 
 - Harvest returning **Harmonic proofs** (Euler form, Mersenne-exponent, Korselt⇒Carmichael, Wilson)
   and integrate the AXLE-verified ones.
-- Continue the **15-minute frontier rotation** (Firoozbakht, Erdős–Graham, practical numbers, …).
+- Prove **oscillator ESA** and instantiate the concrete **weighted Rellich** compact embedding.
+- Add unbounded spectral mapping and eigenvalue isolation after compact resolvent is instantiated.
+- Prepare `WeylUpstream` and the compact-eigenspace theorem as Mathlib-quality submissions.
 - Refresh the **Lovable labs** (`/frontier` + `/why-five` on Prime Explorer 3D, project `dd8308ac`) as
   the frontier grows; publish to prod.
 - Submit **more hard targets** to Harmonic in parallel.
