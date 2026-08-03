@@ -71,6 +71,22 @@ A "Lehmer number" is a composite n with φ(n) ∣ (n − 1); none are known.
 
 ---
 
+## Collatz (3n+1) conjecture (open)
+
+**Claim.** Every positive integer reaches 1 under n ↦ (n/2 if even, else 3n+1).
+Module: `Brockian.CollatzPartial`. `CollatzConjecture` is an unproven `def` (CONJECTURE register).
+
+**PROVED (unconditional partial results):**
+- The trivial cycle 1 → 4 → 2 → 1 (`trivial_cycle`).
+- **Powers of two reach 1** (`reaches1_pow_two`), via `collatz(2n) = n` (`collatz_two_mul`).
+- Descent by halving: `Reaches1 n → Reaches1 (2^k · n)` (`reaches1_two_mul`, `reaches1_mul_pow_two`).
+- **Terras-style descent** (`descent_mod4_one`): every n ≡ 1 (mod 4) with n > 1 reaches a value
+  strictly below n in 3 steps (12m+4 → 6m+2 → 3m+1 < 4m+1).
+
+**OPEN.** The conjecture itself; the absence of any nontrivial cycle; convergence of a general n.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

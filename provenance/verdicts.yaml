@@ -649,6 +649,13 @@ runs:
     ledger_run: "open-territory loop; AXLE @4.32"
     provenance_note: "OPEN-TERRITORY necessary conditions on a counterexample to Lehmer's totient problem (open since 1932: does phi(n)|n-1 imply n prime?). Open-territory loop, AXLE @4.32, axiom-clean. A Lehmer number = composite n with phi(n)|(n-1). PROVED: any such n is ODD (lehmer_odd; phi even vs n-1 odd), SQUAREFREE (lehmer_squarefree, flagship; p^2|n => p|phi(n)|n-1 while p|n), and has >=3 distinct prime factors (lehmer_three_primes; the p*q case reduces to ab|(a+b) with a,b>=2 a!=b, impossible). Existence is NEVER asserted or denied."
 
+  "collatz-partial":
+    module: Brockian.CollatzPartial
+    verdict: admit
+    quarantine: true
+    ledger_run: "open-territory loop; AXLE @4.32"
+    provenance_note: "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────
   "weyl-gate1-bounded":

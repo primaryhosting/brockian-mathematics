@@ -1,10 +1,10 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 4339,
-    "DEFINITION": 392,
+    "PROVED": 4349,
+    "DEFINITION": 394,
+    "CONJECTURE": 3,
     "CONDITIONAL": 21,
-    "CONJECTURE": 2,
     "DISCHARGED": 6
   },
   "theorems": [
@@ -4309,6 +4309,400 @@
       "quarantine": true,
       "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence",
       "provenance_note": "C5 adjacency eigenvalue multiplicities. AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; verdict re-checked by Claude's gate before integration."
+    },
+    {
+      "name": "Brockian.CollatzPartial.CollatzConjecture",
+      "kind": "conjecture",
+      "module": "Brockian.CollatzPartial",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CollatzPartial.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted."
+    },
+    {
+      "name": "Brockian.CollatzPartial.Reaches1",
+      "kind": "def",
+      "module": "Brockian.CollatzPartial",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CollatzPartial.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted."
+    },
+    {
+      "name": "Brockian.CollatzPartial.collatz",
+      "kind": "def",
+      "module": "Brockian.CollatzPartial",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CollatzPartial.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted."
+    },
+    {
+      "name": "Brockian.CollatzPartial.collatz_four",
+      "kind": "theorem",
+      "module": "Brockian.CollatzPartial",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CollatzPartial.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted."
+    },
+    {
+      "name": "Brockian.CollatzPartial.collatz_one",
+      "kind": "theorem",
+      "module": "Brockian.CollatzPartial",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CollatzPartial.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted."
+    },
+    {
+      "name": "Brockian.CollatzPartial.collatz_two",
+      "kind": "theorem",
+      "module": "Brockian.CollatzPartial",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CollatzPartial.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted."
+    },
+    {
+      "name": "Brockian.CollatzPartial.collatz_two_mul",
+      "kind": "theorem",
+      "module": "Brockian.CollatzPartial",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CollatzPartial.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted."
+    },
+    {
+      "name": "Brockian.CollatzPartial.descent_mod4_one",
+      "kind": "theorem",
+      "module": "Brockian.CollatzPartial",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CollatzPartial.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted."
+    },
+    {
+      "name": "Brockian.CollatzPartial.reaches1_mul_pow_two",
+      "kind": "theorem",
+      "module": "Brockian.CollatzPartial",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CollatzPartial.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted."
+    },
+    {
+      "name": "Brockian.CollatzPartial.reaches1_one",
+      "kind": "theorem",
+      "module": "Brockian.CollatzPartial",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CollatzPartial.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted."
+    },
+    {
+      "name": "Brockian.CollatzPartial.reaches1_pow_two",
+      "kind": "theorem",
+      "module": "Brockian.CollatzPartial",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CollatzPartial.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted."
+    },
+    {
+      "name": "Brockian.CollatzPartial.reaches1_two_mul",
+      "kind": "theorem",
+      "module": "Brockian.CollatzPartial",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CollatzPartial.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted."
+    },
+    {
+      "name": "Brockian.CollatzPartial.trivial_cycle",
+      "kind": "theorem",
+      "module": "Brockian.CollatzPartial",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CollatzPartial.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted."
     },
     {
       "name": "Brockian.Connectivity.cos_2pi_5",
