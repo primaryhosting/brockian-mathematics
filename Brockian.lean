@@ -714,3 +714,6 @@ import Brockian.PentagonTraceBridge
 import Brockian.OddPerfectEuler
 import Brockian.PracticalNumbers
 import Brockian.MersenneExponentPrime
+import Brockian.WilsonGeneral
+import Brockian.KorseltCarmichael
+import Brockian.OddPerfectMod4

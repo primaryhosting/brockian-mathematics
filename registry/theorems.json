@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10419,
+    "PROVED": 10424,
     "DEFINITION": 553,
     "CONJECTURE": 39,
     "CONDITIONAL": 21,
@@ -105781,6 +105781,105 @@
       "provenance_note": "OPEN-TERRITORY hyperperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Hyperperfect k n := k*sigma(n) = (k+1)*n + (k-1); k=1 recovers perfect numbers. CONCRETE: hyperperfect_1_{6,28} (perfect), hyperperfect_2_{21,2133}, hyperperfect_6_301. FLAGSHIP hyperperfect_one_iff_sigma_two_mul: 1-hyperperfect <=> sigma(n)=2n (perfect) -- hyperperfect generalizes perfect. Non-example not_hyperperfect_2_6. HyperperfectAllK (k-hyperperfect exists for every k) and HyperperfectInfinitude are unproven defs -- OPEN, never asserted."
     },
     {
+      "name": "Brockian.KorseltCarmichael.korselt_carmichael",
+      "kind": "theorem",
+      "module": "Brockian.KorseltCarmichael",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KorseltCarmichael.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle 1772947a; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED hard theorem: Korselt's criterion (hard direction), independently AXLE-verified @4.32, axiom-clean. korselt_carmichael: a squarefree composite n with (p-1)|(n-1) for every prime p|n is a Fermat pseudoprime to every base coprime to n (a^n = a mod n) -- i.e. a Carmichael number. Needs Fermat's little theorem for all bases; a genuine analysis-grade result the decide-swarm could not do. Complements the concrete Brockian.CarmichaelKorselt module with the general Korselt=>Carmichael direction."
+    },
+    {
+      "name": "Brockian.KorseltCarmichael.pow_modEq_self_of_prime_sub_one_dvd",
+      "kind": "theorem",
+      "module": "Brockian.KorseltCarmichael",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KorseltCarmichael.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle 1772947a; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED hard theorem: Korselt's criterion (hard direction), independently AXLE-verified @4.32, axiom-clean. korselt_carmichael: a squarefree composite n with (p-1)|(n-1) for every prime p|n is a Fermat pseudoprime to every base coprime to n (a^n = a mod n) -- i.e. a Carmichael number. Needs Fermat's little theorem for all bases; a genuine analysis-grade result the decide-swarm could not do. Complements the concrete Brockian.CarmichaelKorselt module with the general Korselt=>Carmichael direction."
+    },
+    {
+      "name": "Brockian.KorseltCarmichael.squarefree_dvd_of_prime_dvd",
+      "kind": "theorem",
+      "module": "Brockian.KorseltCarmichael",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KorseltCarmichael.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle 1772947a; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED hard theorem: Korselt's criterion (hard direction), independently AXLE-verified @4.32, axiom-clean. korselt_carmichael: a squarefree composite n with (p-1)|(n-1) for every prime p|n is a Fermat pseudoprime to every base coprime to n (a^n = a mod n) -- i.e. a Carmichael number. Needs Fermat's little theorem for all bases; a genuine analysis-grade result the decide-swarm could not do. Complements the concrete Brockian.CarmichaelKorselt module with the general Korselt=>Carmichael direction."
+    },
+    {
       "name": "Brockian.LandauNSquaredPlusOne.LandauFourthConjecture",
       "kind": "conjecture",
       "module": "Brockian.LandauNSquaredPlusOne",
@@ -110790,6 +110889,39 @@
       "quarantine": true,
       "ledger_run": "Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32",
       "provenance_note": "HARMONIC-PROVED hard theorem: Euler's form for odd perfect numbers (Aristotle/Harmonic proof run 0f4ddfbb, independently AXLE-verified @lean-4.32.0, axiom-clean). oddPerfect_euler_form: if n is odd and perfect then n = p^k * m^2 with p prime, p=1 mod 4, k=1 mod 4, and p not dividing m -- Euler's classical theorem on the structure of any (hypothetical) odd perfect number. Proof via the divisor-sum factorization mod 4 (unique exceptional prime/exponent, all other exponents even, reconstruct the square factor). This is the genuinely HARD partial result my decide-swarm dropped twice, landed by Harmonic's stronger compute and verified on our own toolchain. Odd perfect existence itself remains OPEN."
+    },
+    {
+      "name": "Brockian.OddPerfectMod4.oddPerfect_mod4",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectMod4",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectMod4.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle 73e0a459; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED: an odd perfect number is 1 mod 4 (Aristotle/Harmonic, AXLE-verified @4.32, axiom-clean). oddPerfect_mod4: Odd n and Perfect n imply n%4=1 -- a necessary condition on any hypothetical odd perfect number (a corollary-strength consequence of Euler's form). Odd perfect existence remains OPEN."
     },
     {
       "name": "Brockian.OppermannConjecture.OppermannConjecture",
@@ -360635,6 +360767,39 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.WilsonGeneral.prime_iff_dvd_factorial_succ",
+      "kind": "theorem",
+      "module": "Brockian.WilsonGeneral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WilsonGeneral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle a301024c; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED Wilson's theorem as a full iff (Aristotle/Harmonic, AXLE-verified @4.32, axiom-clean). prime_iff_dvd_factorial_succ: for n>=2, n is prime IFF n | (n-1)!+1. The complete Wilson characterization at the Nat level."
     },
     {
       "name": "Brockian.WilsonPrimes.WilsonPrime",

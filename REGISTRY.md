@@ -10,7 +10,7 @@
 - **CONJECTURE**: 39
 - **DEFINITION**: 553
 - **DISCHARGED**: 6
-- **PROVED**: 10419
+- **PROVED**: 10424
 
 ## Theorems
 
@@ -3284,6 +3284,9 @@
 | PROVED | `Brockian.HyperperfectNumbers.hyperperfect_one_iff_sigma_two_mul` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.HyperperfectNumbers.not_hyperperfect_2_6` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.HyperperfectNumbers.sigma1` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.KorseltCarmichael.korselt_carmichael` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle 1772947a; AXLE @4.32 |
+| PROVED | `Brockian.KorseltCarmichael.pow_modEq_self_of_prime_sub_one_dvd` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle 1772947a; AXLE @4.32 |
+| PROVED | `Brockian.KorseltCarmichael.squarefree_dvd_of_prime_dvd` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle 1772947a; AXLE @4.32 |
 | CONJECTURE | `Brockian.LandauNSquaredPlusOne.LandauFourthConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.LandauNSquaredPlusOne.NSqPlusOnePrime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LandauNSquaredPlusOne.nsq_1` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
@@ -3438,6 +3441,7 @@
 | PROVED | `Brockian.OddPerfectEuler.oddPerfect_euler_form` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32 |
 | PROVED | `Brockian.OddPerfectEuler.other_factor_odd` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32 |
 | PROVED | `Brockian.OddPerfectEuler.reconstruct_euler_factorization` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectMod4.oddPerfect_mod4` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle 73e0a459; AXLE @4.32 |
 | CONJECTURE | `Brockian.OppermannConjecture.OppermannConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.OppermannConjecture.OppermannLower` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.OppermannConjecture.OppermannUpper` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
@@ -11042,6 +11046,7 @@
 | DEFINITION | `Brockian.WeylWeakRegularityScaffold.weakRegularityPipelineStatus` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.WeylWeakRegularityScaffold.weakToClassicalRegularity_iff_existing` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.WeylWeakRegularityScaffold.weakToClassicalRegularity_of_existing` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.WilsonGeneral.prime_iff_dvd_factorial_succ` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle a301024c; AXLE @4.32 |
 | DEFINITION | `Brockian.WilsonPrimes.WilsonPrime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.WilsonPrimes.WilsonPrimeInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.WilsonPrimes.prime_dvd_factorial_add_one` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
