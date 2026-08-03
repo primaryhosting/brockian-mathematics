@@ -18,14 +18,20 @@ module, the root registry is:
 
 | Register | Count |
 |---|---:|
-| PROVED | 10,405 |
-| DEFINITION | 552 |
-| CONJECTURE | 38 |
-| CONDITIONAL | 21 |
-| DISCHARGED | 6 |
+| PROVED | 10,568 |
+| DEFINITION | 581 |
+| CONJECTURE | 40 |
+| CONDITIONAL | 20 |
+| DISCHARGED | 7 |
 
-No famous open conjecture was solved. The 38 conjectures are nullary `Prop`
+No famous open conjecture was solved. The 40 conjectures are nullary `Prop`
 containers marking open boundaries, not theorems.
+
+The current continuation added the unconditional bounded Kato-Rellich theorem,
+its concrete `-d^2+V` application, a correctly normalized spectral free
+Laplacian, a reusable maximal-multiplication criterion, Kummer's theorem, and
+Wolstenholme's theorem. It also discharged the historical Kato transfer
+conditional, hence `CONDITIONAL 21 -> 20` and `DISCHARGED 6 -> 7`.
 
 ## Depth-Adjusted Delta
 
@@ -123,6 +129,20 @@ The oscillator specialization still assumes oscillator ESA and the actual
 weighted Rellich compact embedding. Those two analytic inputs are not disguised
 as proved results.
 
+### 6. Bounded Kato-Rellich and normalized free Laplacian
+
+`WeylKatoRellich` now proves that a bounded self-adjoint perturbation preserves
+essential self-adjointness of a densely defined symmetric core. Its proof uses
+the graph homeomorphism `(x,y) |-> (x,Bx+y)`, closure compatibility, and a direct
+adjoint-domain computation. `WeylKatoConcreteApplication` applies it to the
+exact Schwartz-core identity for `-d^2+V`.
+
+`WeylFreeLaplacianCorrected` fixes a normalization error caught during the
+Harmonic audit: Mathlib's Fourier transform sends `-f''` to
+`4*pi^2*xi^2 * Fourier(f)`. The corresponding maximal multiplier and its
+Fourier conjugate are ESA. The final Schwartz-core restriction theorem remains
+in progress and is not claimed.
+
 ## Integrity State
 
 - All 12 modules in the final range wave and the final `UnitaryPerfect` module
@@ -152,7 +172,7 @@ as proved results.
    known or formalized; this remains RH-strength.
 5. **Goldbach/HL:** local factors and admissibility are proved, but global prime
    asymptotics remain conditional/open.
-6. **Open-frontier conjectures:** all 38 conjecture containers remain open.
+6. **Open-frontier conjectures:** all 40 conjecture containers remain open.
 
 ## Next Ownership Split
 

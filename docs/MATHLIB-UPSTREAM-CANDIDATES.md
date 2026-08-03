@@ -258,6 +258,69 @@ Cleanup before PR:
 - Upstream after `rangeSMulSub` and `essentiallySelfAdjoint_iff`, because it
   depends naturally on those APIs.
 
+### 10a. ESA is equivalent to self-adjoint graph closure
+
+Local module: `Brockian.WeylUpstream`
+
+Local declarations:
+
+- `Brockian.Weyl.Upstream.deficiencySpace_eq_bot_of_closure_isSelfAdjoint`
+- `Brockian.Weyl.Upstream.essentiallySelfAdjoint_iff_closure_isSelfAdjoint`
+
+Why generally useful: this is the standard closure formulation of von
+Neumann's criterion for a densely defined symmetric `LinearPMap`. It is the
+bridge between the deficiency-space API and Mathlib's graph-closure API.
+
+Cleanup before PR:
+
+- Land only after the symmetric, deficiency-space, and closure APIs above.
+- Move to the final `LinearPMap` namespace and reduce imports.
+- Keep the dense-domain and symmetry hypotheses explicit.
+
+### 10b. Maximal multiplication ESA from bounded unit resolvents
+
+Local modules: `Brockian.WeylMaximalMultiplication`,
+`Brockian.WeylMultiplicationUpstream`
+
+Local declarations:
+
+- `Brockian.Weyl.MaximalMultiplication.rangeSMulSub_maximalMul_eq_top`
+- `Brockian.Weyl.MultiplicationUpstream.maximalMul_essentiallySelfAdjoint_of_unit_resolvents`
+
+Why generally useful: explicit bounded pointwise inverses of the two unit
+shifts give surjective shifted ranges and hence ESA of a densely defined maximal
+multiplication operator. This is reusable for spectral multiplication models,
+not specific to the free Laplacian.
+
+Cleanup before PR:
+
+- Separate construction of `maximalMul` from the ESA corollary.
+- Generalize the measure-space assumptions only where Mathlib's `Lp` API allows.
+- Replace project range names after the shifted-range API lands.
+
+### 10c. Bounded Kato-Rellich for `LinearPMap`
+
+Local module: `Brockian.WeylKatoRellich`
+
+Local declarations:
+
+- `Brockian.Weyl.KatoRellich.graphShear`
+- `Brockian.Weyl.KatoRellich.graph_perturb_eq_shear_image`
+- `Brockian.Weyl.KatoRellich.closure_perturb_eq_perturb_closure`
+- `Brockian.Weyl.KatoRellich.isSelfAdjoint_perturb`
+- `Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation`
+
+Why generally useful: this closes a genuine Mathlib infrastructure gap. The
+proof uses a graph homeomorphism to commute closure with a bounded perturbation,
+then computes the adjoint domain directly to preserve self-adjointness.
+
+Cleanup before PR:
+
+- Split graph closure compatibility from the Kato theorem if maintainers prefer
+  smaller review units.
+- Rename local `perturb` to the final `LinearPMap` bounded-addition API.
+- Depend on the upstream closure/ESA equivalence instead of project namespaces.
+
 ### 11. Residue count saturation for large primes
 
 Local module: `Brockian.SingularSeriesConvergence`

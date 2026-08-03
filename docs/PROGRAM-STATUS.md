@@ -8,10 +8,10 @@ generated from AXLE attestations); nothing is hand-asserted. Regenerate with
 
 | Metric | Value |
 |---|---|
-| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,538** |
+| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,568** |
 | Open problems mapped on the frontier | **34** |
-| **CONDITIONAL** reductions (honest, named-hypothesis) | 21 |
-| **DISCHARGED** (conditional → unconditional) | 6 |
+| **CONDITIONAL** reductions (honest, named-hypothesis) | 20 |
+| **DISCHARGED** (conditional → unconditional) | 7 |
 | Open-conjecture markers (unproven `def`s) | 40 |
 | Commits in the last 6 hours | 34 |
 
@@ -43,14 +43,16 @@ instead of the compute-constrained workstation.
    factorizations imply compact unit resolvents; and those compact resolvents have nonzero point
    spectrum of finite multiplicity. Maximal quadratic multiplication now has explicit non-real
    resolvents and is essentially self-adjoint, and unitary transfer gives a Fourier-defined free
-   Laplacian with ESA. Identifying it with the Schwartz-core operator, oscillator ESA, and the
-   concrete weighted compact embedding remain explicit analytic blockers.
+   Laplacian with ESA. The physically normalized multiplier is now correctly `4*pi^2*xi^2`, and
+   the full bounded Kato-Rellich theorem is unconditional and applied to the concrete `-d^2+V`
+   operator. Identifying the normalized spectral operator with the Schwartz differential core,
+   oscillator ESA, and the concrete weighted compact embedding remain explicit analytic blockers.
 
 ## Strategy — three parallel lanes, one firewall
 
 - **Frontier lane** (curated) — accept a new finite module only when it tests a new general theorem or
   adds a materially useful structural reduction. Automatic range/count expansion is paused.
-- **Hard-proof lane** (Harmonic / Aristotle) — heavy theorems offloaded to stronger compute. **Thirteen hard
+- **Hard-proof lane** (Harmonic / Aristotle) — heavy theorems offloaded to stronger compute. **Sixteen hard
   theorems harvested and integrated so far**, each independently AXLE-verified @4.32 and axiom-clean:
   Euler's form for odd perfect numbers, Mersenne-exponent-prime, Korselt⇒Carmichael (Fermat little
   theorem for all bases), the full Wilson iff, odd-perfect ≡ 1 mod 4, every even perfect number is
@@ -60,9 +62,11 @@ instead of the compute-constrained workstation.
   Archive (4.28 surface) and one relied on numerals reducing definitionally (`1 % 9` ≠ `1` at 4.32);
   all were re-queued with corrective instructions (no-Archive / explicit `omega` mod-closes). A returned
   tarball once carried the wrong label — the namespace guard caught it and it integrated under its true
-  name. A 19-archive audit on 2026-08-03 additionally integrated five cleaned modules, recognized four
-  peer-landed results, rejected one vacuous RH sketch, and classified nine duplicates. Four exact
-  operator targets are now running on Harmonic. Independent verification, not the upstream claim, is
+  name. A 24-archive audit on 2026-08-03 additionally integrated Wolstenholme and Kummer, quarantined
+  a Lean-4.28-only Sylvester-Schur return, and rejected duplicate attestations. Of the operator jobs,
+  bounded Kato-Rellich is integrated, the unscaled Fourier target was correctly refuted, oscillator ESA
+  returned without a proof, and compact resolvent plus the corrected Fourier target remain active.
+  Independent verification, not the upstream claim, is
   authoritative. See `docs/ARISTOTLE-HARVEST-2026-08-03.md`.
 - **Depth lane** (primary) — oscillator ESA, the concrete weighted Rellich embedding, unbounded
   spectral mapping, and Mathlib extraction of the general Weyl/Cayley results.
@@ -91,13 +95,14 @@ superperfect, odd harmonic (Ore). Five ancient existence questions sharing one s
 
 ## Next steps
 
-- Poll and audit the four exact Harmonic operator targets; port every return to Lean 4.32 before AXLE
+- Poll and audit the two remaining Harmonic operator targets; port every return to Lean 4.32 before AXLE
   integration.
 - Prove the Schwartz/Fourier intertwining theorem, then use it to transfer the spectral free-Laplacian
   ESA result to the intended differential operator.
 - Prove **oscillator ESA** and instantiate the concrete **weighted Rellich** compact embedding.
 - Add unbounded spectral mapping and eigenvalue isolation after compact resolvent is instantiated.
-- Prepare `WeylUpstream` and the compact-eigenspace theorem as Mathlib-quality submissions.
+- Prepare `WeylUpstream`, `WeylMultiplicationUpstream`, `WeylKatoRellich`, and the
+  compact-eigenspace theorem as Mathlib-quality submissions.
 - Refresh the **Lovable labs** (`/frontier` + `/why-five` on Prime Explorer 3D, project `dd8308ac`) as
   the frontier grows; publish to prod.
 - Submit **more hard targets** to Harmonic in parallel.

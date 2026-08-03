@@ -9,6 +9,32 @@
 
 Current checkpoint: 2026-08-02 — **LIVE multi-agent collab (Claude × Codex × Grok)**.
 
+## Codex operator execution - 2026-08-03
+
+- Owns the five-step operator continuation requested by the user: Harmonic
+  return audit, corrected Schwartz/Fourier identification, concrete Kato
+  application, oscillator/compact-resolvent closure, and upstream extraction.
+- The submitted target `0998b403-...` is **invalid and must not be integrated**:
+  Mathlib's Fourier convention sends `-d^2/dx^2` to multiplication by
+  `4*pi^2*xi^2`, not `xi^2`.
+- Corrected target lives at
+  `aristotle/free-laplacian-schwartz-corrected/target.lean`. Do not edit it while
+  Harmonic is working.
+- The returned Sylvester-Schur archive is clean at Lean 4.28 but fails AXLE
+  4.32 in derivative and natural-number reassociation proofs; it is quarantined,
+  not integrated.
+- Harmonic `7bfd75f8-...` returned the full bounded Kato-Rellich theorem. Its
+  exact target and the shorter canonical extraction both pass AXLE 4.32; use
+  `Brockian.WeylKatoRellich`, not the old transfer hypothesis, for new work.
+- `Brockian.WeylFreeLaplacianCorrected` is the normalized spectral operator and
+  is AXLE-green. The remaining Schwartz intertwining is owned by corrected
+  Harmonic project `87ef7b72-...`.
+- Oscillator ESA project `ed7ece6e-...` finished without a proof. Compact
+  resolvent project `6fc04ed4-...` is still running and must not be treated as
+  unconditional.
+- Canonical operator edits for this round will use fresh files. Existing
+  peer-owned `aristotle/weak-regularity/` and `aristotle/franklin/` remain untouched.
+
 ## Integrator takeover - 2026-08-03
 
 Grok's overnight corpus lane is paused after its final canonical wave. Codex owns

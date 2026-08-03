@@ -738,3 +738,8 @@ import Brockian.AbundantClosure
 import Brockian.DivisorCountStructure
 import Brockian.MultiperfectStructure
 import Brockian.Wolstenholme
+import Brockian.WeylKatoConcreteApplication
+import Brockian.KummerTheorem
+import Brockian.WeylFreeLaplacianCorrected
+import Brockian.WeylMultiplicationUpstream
+import Brockian.WeylKatoRellich

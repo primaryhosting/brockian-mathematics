@@ -3,7 +3,7 @@
 **Audience:** technical partners, advisors, scientific collaborators
 **Classification:** Partner-facing (non-confidential). Counts pinned to the live registry.
 **Report generated:** 2026-08-03
-**Tip commit:** `52323d739fc67c41f2233a64deefebd3fa9666e1` (`52323d7`) — *feat(weyl): add oscillator compact-resolvent reductions* (2026-08-03 08:58:03 -0400)
+**Tip commit:** `296dfb95b34487dc78e6c5111871b3823af2dce7` (`296dfb9`) — *feat(number-theory): prove Wolstenholme theorem* (2026-08-03 12:22:30 -0400)
 **Registry source:** `registry/theorems.json`
 **Generated from:** AXLE attestations
 
@@ -30,27 +30,28 @@ verdict at a pinned environment. Registers are **derived** by
 
 | Snapshot | Value |
 |----------|------:|
-| **PROVED** | **10405** |
-| **DEFINITION** | **552** |
-| **CONDITIONAL** | **21** |
-| **DISCHARGED** | **6** |
-| **CONJECTURE** | **38** |
-| Declarations in registry | 11022 |
-| Modules with entries | 713 |
-| Module attestation files | 714 |
+| **PROVED** | **10568** |
+| **DEFINITION** | **581** |
+| **CONDITIONAL** | **20** |
+| **DISCHARGED** | **7** |
+| **CONJECTURE** | **40** |
+| Declarations in registry | 11216 |
+| Modules with entries | 745 |
+| Module attestation files | 746 |
 | Certificate factory units | 3 (`CosTraceNorm`, `FranklinFixedPoint`, `target`) |
 | AXLE environment | `lean-4.32.0` |
-| AXLE verdict = verified | 11022 / 11022 |
-| Local `lake_build` field | **11022 pending** (see §6 caveats) |
+| AXLE verdict = verified | 11216 / 11216 |
+| Local `lake_build` field | **11216 pending** (see §6 caveats) |
 
 **What closed (reference process wins):** Euler’s pentagonal number theorem
 unconditionally in-core; Galois / “why five” degree rigidity; the q−ν
 admissibility law; D₅ / C₅ spectral structure; large local Goldbach and
-singular-series kernels.
+singular-series kernels; and bounded Kato-Rellich for unbounded ESA cores.
 
 **What stays open (explicit non-claims):** Riemann Hypothesis, global Goldbach
-transfer, full unbounded essentially-self-adjoint packages — scaffolded or
-conditional, **not** counted as PROVED.
+transfer, the normalized Schwartz/Fourier intertwining, oscillator ESA, and the
+concrete weighted Rellich compact embedding — scaffolded or conditional,
+**not** counted as PROVED.
 
 ---
 
@@ -61,11 +62,11 @@ Registers are derived from axioms + AXLE verdict + provenance rung
 
 | Register | Count |
 |----------|------:|
-| **PROVED** | 10405 |
-| **DEFINITION** | 552 |
-| **CONDITIONAL** | 21 |
-| **DISCHARGED** | 6 |
-| **CONJECTURE** | 38 |
+| **PROVED** | 10568 |
+| **DEFINITION** | 581 |
+| **CONDITIONAL** | 20 |
+| **DISCHARGED** | 7 |
+| **CONJECTURE** | 40 |
 
 | Meaning | Gate |
 |---------|------|
@@ -83,11 +84,11 @@ Full enumeration: [`REGISTRY.md`](../REGISTRY.md) · machine JSON: [`registry/th
 |---------------|--------:|
 | Goldbach / singular series | 7609 |
 | Galois / cyclotomic / cos-trace | 1381 |
-| Weyl / spectral / operator | 642 |
-| Other | 501 |
-| D₅ / C₅ spectral & symmetry | 380 |
+| Weyl / spectral / operator | 706 |
+| Other | 618 |
+| D₅ / C₅ spectral & symmetry | 389 |
 | Pentagonal / Franklin / partition | 151 |
-| Admissibility / sieve | 120 |
+| Admissibility / sieve | 124 |
 | Core / metallic / golden | 78 |
 | Equidistribution | 64 |
 | Penrose | 64 |
@@ -141,11 +142,11 @@ closes. Status is taken from the registry when the name is present.
 |-------|---------------|----------|------|
 | **Riemann Hypothesis** | `Brockian.RiemannScaffold.RH_of_BrockianSystem` | **CONDITIONAL** | Scaffolded as CONDITIONAL on a named BrockianSystem hypothesis; not shut. |
 | **Global Goldbach transfer** | `Brockian.GoldbachComb.GoldbachCovarianceTransfer` | **CONJECTURE** | Named CONJECTURE (Prop container); local covariance is PROVED separately. |
-| **Unbounded Kato / full Schrödinger ESA** | `Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb` | **CONDITIONAL** | Bounded / free-model packages PROVED; full unbounded ESA remains CONDITIONAL. |
+| **Historical Kato transfer rung** | `Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb` | **DISCHARGED** | DISCHARGED by the unconditional graph-closure theorem in WeylKatoRellich. |
 | **Free Laplacian ESA via Plancherel (full link)** | `Brockian.FreeLaplacianPlancherel.freeLaplacian_essentiallySelfAdjoint_via_plancherel` | **CONDITIONAL** | Plancherel infrastructure partially closed; full free −Δ ESA via Fourier still CONDITIONAL. |
 | **Global equidistribution / BV transfer** | `Brockian.EquidistributionBVReduction.configCount_density_of_BV` | **CONDITIONAL** | Reduction lemmas present; density/BV uniformity steps stay CONDITIONAL. |
 
-### All CONDITIONAL entries (21)
+### All CONDITIONAL entries (20)
 
 | Name | Module |
 |------|--------|
@@ -164,14 +165,13 @@ closes. Status is taken from the registry when the name is present.
 | `Brockian.Weyl.DeficiencyODE.deficiencyRepresentsODE_of_weakRegularity` | `Brockian.Weyl.DeficiencyODE` |
 | `Brockian.Weyl.DeficiencyODE.schrodinger_essentiallySelfAdjoint_of_weakRegularity` | `Brockian.Weyl.DeficiencyODE` |
 | `Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fourier` | `Brockian.Weyl.FreeLaplacian2` |
-| `Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb` | `Brockian.Weyl.KatoUnbounded` |
 | `Brockian.Weyl.SchrodingerMinimal.schrodinger_essentiallySelfAdjoint_of_ode` | `Brockian.Weyl.SchrodingerMinimal` |
 | `Brockian.Weyl.WeylLawTarget.counting_diverges_of_candidate` | `Brockian.Weyl.WeylLawTarget` |
 | `Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_WeylLawMatch` | `Brockian.Weyl.WeylLawTarget` |
 | `Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_rvm` | `Brockian.Weyl.WeylLawTarget` |
 | `Brockian.Weyl.WeylLawTarget.counting_diverges_of_exists` | `Brockian.Weyl.WeylLawTarget` |
 
-### All DISCHARGED entries (6)
+### All DISCHARGED entries (7)
 
 | Name | Module |
 |------|--------|
@@ -181,8 +181,9 @@ closes. Status is taken from the registry when the name is present.
 | `Brockian.FranklinInvolutionProof.pentagonalNumberTheorem_of_franklinMap` | `Brockian.FranklinInvolutionProof` |
 | `Brockian.PentagonalTheoremFranklin.pentagonalNumberTheorem_of_franklin` | `Brockian.PentagonalTheoremFranklin` |
 | `Brockian.PentagonalTheoremFranklin.pentagonalProduct_coeff_of_franklin` | `Brockian.PentagonalTheoremFranklin` |
+| `Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb` | `Brockian.Weyl.KatoUnbounded` |
 
-### All CONJECTURE entries (38)
+### All CONJECTURE entries (40)
 
 | Name | Module |
 |------|--------|
@@ -213,6 +214,7 @@ closes. Status is taken from the registry when the name is present.
 | `Brockian.PalindromicPrimes.PalindromicPrimeInfinitude` | `Brockian.PalindromicPrimes` |
 | `Brockian.PerfectTotient.PerfectTotientInfinitude` | `Brockian.PerfectTotient` |
 | `Brockian.PolignacPrimes.PolignacConjecture` | `Brockian.PolignacPrimes` |
+| `Brockian.PracticalNumbers.PracticalTwinInfinitude` | `Brockian.PracticalNumbers` |
 | `Brockian.QuasiperfectNumbers.QuasiperfectExists` | `Brockian.QuasiperfectNumbers` |
 | `Brockian.RepunitPrimes.RepunitPrimeInfinitude` | `Brockian.RepunitPrimes` |
 | `Brockian.RieselCovering.RieselProblem` | `Brockian.RieselCovering` |
@@ -224,6 +226,7 @@ closes. Status is taken from the registry when the name is present.
 | `Brockian.UnitaryPerfect.SixthUnitaryPerfectExists` | `Brockian.UnitaryPerfect` |
 | `Brockian.WeirdNumbers.OddWeirdExists` | `Brockian.WeirdNumbers` |
 | `Brockian.WilsonPrimes.WilsonPrimeInfinitude` | `Brockian.WilsonPrimes` |
+| `Brockian.ZumkellerNumbers.OddZumkellerFrom3Structure` | `Brockian.ZumkellerNumbers` |
 
 ---
 
@@ -256,9 +259,9 @@ That is an operational caveat, not a license to inflate PROVED.
 
 | Leg | Status in this export |
 |-----|------------------------|
-| AXLE independent check | **11022/11022** verdict `verified` @ `lean-4.32.0` |
-| Axioms clean flag | **11022/11022** `axioms_ok: true` |
-| Local `lake_build` stamp | **11022/11022** marked `pending` |
+| AXLE independent check | **11216/11216** verdict `verified` @ `lean-4.32.0` |
+| Axioms clean flag | **11216/11216** `axioms_ok: true` |
+| Local `lake_build` stamp | **11216/11216** marked `pending` |
 
 **Implication:** Partner-grade “verification company” narrative requires a
 reproducible local/CI `lake build` leg alongside AXLE. Treat current PROVED as
@@ -274,10 +277,10 @@ on the tip commit above.
 
 ### 6.2 Counting discipline
 
-- **Registry PROVED** (10405) is the only number safe for partner headlines.
+- **Registry PROVED** (10568) is the only number safe for partner headlines.
 - Campaign / historical “theorems attempted” totals are **not** interchangeable with PROVED.
-- DEFINITION (552) supports the API surface; do not add it to PROVED.
-- DISCHARGED (6) is a success story (conditionals closed) — **not** extra PROVED.
+- DEFINITION (581) supports the API surface; do not add it to PROVED.
+- DISCHARGED (7) is a success story (conditionals closed) — **not** extra PROVED.
 
 ### 6.3 No theater
 
@@ -325,7 +328,7 @@ python3 scripts/gen_paper_theorem_table.py
 
 **Pin phrase for external one-pagers:**
 
-> As of commit `52323d7` (2026-08-03): **10405 PROVED**, **552 DEFINITION**, **21 CONDITIONAL**, **6 DISCHARGED**, **38 CONJECTURE** — from `registry/theorems.json`.
+> As of commit `296dfb9` (2026-08-03): **10568 PROVED**, **581 DEFINITION**, **20 CONDITIONAL**, **7 DISCHARGED**, **40 CONJECTURE** — from `registry/theorems.json`.
 
 ---
 

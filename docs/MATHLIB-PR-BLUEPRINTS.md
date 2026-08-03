@@ -39,6 +39,9 @@ headers observed in the repo:
 | `Brockian/WeylClosure.lean` | `Mathlib`, `Brockian.WeylOperator` | Depends on PR 1; add `LinearPMap.closure`, closed graph, topology imports |
 | `Brockian/WeylEssSelfAdjoint.lean` | `Brockian.WeylOperator` | Depends on PRs 1 and 3/4; add `ContinuousLinearMap` self-adjoint imports |
 | `Brockian/WeylFreeLaplacian2.lean` | `Mathlib`, `Brockian.WeylCayley`, `Brockian.WeylEssSelfAdjoint`, `Brockian.WeylFreeLaplacian` | Only extract unitary-transfer and finite multiplication fragments after PRs 2-5 |
+| `Brockian/WeylUpstream.lean` | local closure and self-adjoint-extension modules | Extract the closure/ESA equivalence after PRs 4-6 |
+| `Brockian/WeylMultiplicationUpstream.lean` | `Brockian.WeylMaximalMultiplication` | Extract maximal multiplication and unit-resolvent ESA after PRs 3-5 |
+| `Brockian/WeylKatoRellich.lean` | `Brockian.WeylKatoUnbounded`, `Brockian.WeylUpstream` | Extract graph shear first; bounded perturbation theorem depends on PRs 1 and 6-7 |
 | `Brockian/Admissibility.lean` | `Mathlib` | Focus `ZMod`, `Finset.card`, complements |
 | `Brockian/AdmissibilityCRT.lean` | `Mathlib`, `Brockian.Admissibility` | Depends on PR 9; focus `ZMod.chineseRemainder`, product finsets |
 | `Brockian/Sieve.lean` | `Mathlib` | Only extract `TwinAdmissibleAt` cardinality-style finite facts |
@@ -305,6 +308,41 @@ Project-specific cleanup:
 
 - Do not upstream `freeLaplacian_essentiallySelfAdjoint_of_fourier` here.
 - Separate the finite multiplication example from the unitary-transfer theorem.
+
+## PR 8A: ESA and Self-Adjoint Graph Closure
+
+Local payload:
+
+- `Brockian.Weyl.Upstream.deficiencySpace_eq_bot_of_closure_isSelfAdjoint`
+- `Brockian.Weyl.Upstream.essentiallySelfAdjoint_iff_closure_isSelfAdjoint`
+
+Depends on PRs 4-6. Move the statements to `LinearPMap`, preserve explicit
+dense-domain and symmetry hypotheses, and use focused graph-closure imports.
+
+## PR 8B: Maximal Multiplication Unit Resolvents
+
+Local payload:
+
+- `Brockian.Weyl.MaximalMultiplication.rangeSMulSub_maximalMul_eq_top`
+- `Brockian.Weyl.MultiplicationUpstream.maximalMul_essentiallySelfAdjoint_of_unit_resolvents`
+
+Depends on PRs 3 and 5. First expose maximal multiplication on `Lp`; then show
+that bounded pointwise inverses of both unit shifts make the shifted ranges
+surjective and the operator essentially self-adjoint.
+
+## PR 8C: Bounded Kato-Rellich
+
+Local payload:
+
+- `Brockian.Weyl.KatoRellich.graphShear`
+- `Brockian.Weyl.KatoRellich.graph_perturb_eq_shear_image`
+- `Brockian.Weyl.KatoRellich.closure_perturb_eq_perturb_closure`
+- `Brockian.Weyl.KatoRellich.isSelfAdjoint_perturb`
+- `Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation`
+
+Depends on PRs 1 and 6-8A. Split the graph-shear closure identity into its own
+commit, then add self-adjointness and ESA preservation. Remove every Brockian
+namespace and use Mathlib's final bounded-addition name for `LinearPMap`.
 
 ## PR 9: Finite `ZMod` Exclusion Counts
 

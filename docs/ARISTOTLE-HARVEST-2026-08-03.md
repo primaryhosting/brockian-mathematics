@@ -38,6 +38,18 @@ and pass the no-theater lint.
 The five-module harvest added 44 `PROVED` declarations and 14 definitions, with no new
 conditionals or conjecture markers. The canonical integration is commit `ac48a46`.
 
+## Continuation archives
+
+Five later returns were audited under the same contract:
+
+| Archive prefix | Mathematical content | Disposition |
+|---|---|---|
+| `5f29194e` | Sylvester-Schur | Quarantined: exact statement, but the Lean 4.28 proof fails AXLE 4.32 in derivative elaboration and natural-number reassociation; the headline consequently retains `sorryAx` |
+| `a056fe3c` | Wolstenholme | Integrated unchanged after AXLE 4.32 and axiom audit as `Brockian.Wolstenholme` |
+| `26159bf2` | Kummer digit-sum theorem | Integrated after exact-statement AXLE 4.32 and axiom audit as `Brockian.KummerTheorem` |
+| `5df7a570` | Reciprocal sum for perfect numbers | Duplicate of `Brockian.PerfectReciprocalSum`; no second registration |
+| `fafdfd65` | Even perfect numbers modulo 9 | Duplicate of `Brockian.EvenPerfectMod9`; no second registration |
+
 ## Operator work shipped in the same cycle
 
 `Brockian.WeylMaximalMultiplication` proves essential self-adjointness for the maximal
@@ -50,10 +62,21 @@ Four exact targets were submitted to Harmonic/Aristotle and are recorded in
 `aristotle/OPERATOR-HARD-TARGETS.md`: oscillator ESA, oscillator compact resolvent,
 Schwartz/Fourier free-Laplacian intertwining, and the bounded unbounded-operator Kato transfer.
 
+The first free-Laplacian target was refuted because Mathlib's Fourier convention gives the
+symbol `4*pi^2*xi^2`, not `xi^2`. The returned diagnostic identity confirms the mismatch;
+the false target is permanently excluded. A corrected target is running as project
+`87ef7b72-ec83-4b0e-8455-f85daa6e3029`.
+
+Harmonic project `7bfd75f8-4755-4eed-85ee-20b2391e8a94` closed the full bounded
+Kato-Rellich theorem. Every returned declaration passed AXLE 4.32 before a shorter canonical
+extraction was integrated as `Brockian.Weyl.KatoRellich`. The concrete `-d^2+V` application
+is separately checked in `Brockian.Weyl.KatoConcreteApplication`. Oscillator ESA returned
+without a proof; compact resolvent remains in progress.
+
 ## Verification record
 
-All five canonical harvest modules and `Brockian.WeylMaximalMultiplication` passed AXLE with
-the Lean 4.32 environment, axiom probing, and `scripts/no_theater_lint.py`. The registry and
-manifest consistency checks passed. A full local `lake build` was intentionally not used for
-this harvest because local compute is constrained; AXLE supplied the independent Lean kernel
+All canonical harvest and operator modules listed here passed AXLE with the Lean 4.32
+environment, axiom probing, and `scripts/no_theater_lint.py`. The registry and manifest
+consistency checks passed. A full local `lake build` was intentionally not used for this
+harvest because local compute is constrained; AXLE supplied the independent Lean kernel
 checks.

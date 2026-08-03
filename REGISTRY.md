@@ -6,11 +6,11 @@
 
 ## Summary
 
-- **CONDITIONAL**: 21
+- **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 574
-- **DISCHARGED**: 6
-- **PROVED**: 10543
+- **DEFINITION**: 581
+- **DISCHARGED**: 7
+- **PROVED**: 10568
 
 ## Theorems
 
@@ -3345,6 +3345,7 @@
 | PROVED | `Brockian.KorseltCarmichael.korselt_carmichael` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle 1772947a; AXLE @4.32 |
 | PROVED | `Brockian.KorseltCarmichael.pow_modEq_self_of_prime_sub_one_dvd` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle 1772947a; AXLE @4.32 |
 | PROVED | `Brockian.KorseltCarmichael.squarefree_dvd_of_prime_dvd` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle 1772947a; AXLE @4.32 |
+| PROVED | `Brockian.KummerTheorem.kummer` | ✓ | verified | lean-4.32.0 | Aristotle 26159bf2; Codex AXLE audit @ lean-4.32.0 |
 | CONJECTURE | `Brockian.LandauNSquaredPlusOne.LandauFourthConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.LandauNSquaredPlusOne.NSqPlusOnePrime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LandauNSquaredPlusOne.nsq_1` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
@@ -10732,6 +10733,23 @@
 | DEFINITION | `Brockian.Weyl.FreeLaplacian2.sqMultCLM` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.FreeLaplacian2.sqMult_conj_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.FreeLaplacian2.sqMult_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | roadmap #1 — ESA transfer across unitary + ξ² mult model; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.FreeLaplacianCorrected.continuous_freeSymbolResolventMultiplier` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| DEFINITION | `Brockian.Weyl.FreeLaplacianCorrected.freeSymbol` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| DEFINITION | `Brockian.Weyl.FreeLaplacianCorrected.freeSymbolMaximal` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| PROVED | `Brockian.Weyl.FreeLaplacianCorrected.freeSymbolMaximal_dense` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| PROVED | `Brockian.Weyl.FreeLaplacianCorrected.freeSymbolMaximal_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| PROVED | `Brockian.Weyl.FreeLaplacianCorrected.freeSymbolMaximal_isSymmetric` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| PROVED | `Brockian.Weyl.FreeLaplacianCorrected.freeSymbolMaximal_rangeSMulSub_eq_top` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| DEFINITION | `Brockian.Weyl.FreeLaplacianCorrected.freeSymbolMulSchwartz` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| PROVED | `Brockian.Weyl.FreeLaplacianCorrected.freeSymbolMulSchwartz_apply` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| DEFINITION | `Brockian.Weyl.FreeLaplacianCorrected.freeSymbolResolventMultiplier` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| PROVED | `Brockian.Weyl.FreeLaplacianCorrected.freeSymbolResolventMultiplier_memLp_top` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| PROVED | `Brockian.Weyl.FreeLaplacianCorrected.freeSymbol_resolvent_inverse` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| PROVED | `Brockian.Weyl.FreeLaplacianCorrected.freeSymbol_sub_ne_zero` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| PROVED | `Brockian.Weyl.FreeLaplacianCorrected.norm_freeSymbolResolventMultiplier_le` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| PROVED | `Brockian.Weyl.FreeLaplacianCorrected.schwartzToL2_mem_freeSymbolMaximal_domain` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| DEFINITION | `Brockian.Weyl.FreeLaplacianCorrected.spectralFreeLaplacian` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
+| PROVED | `Brockian.Weyl.FreeLaplacianCorrected.spectralFreeLaplacian_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - Fourier-normalized free Laplacian |
 | PROVED | `Brockian.Weyl.Gate1Bounded.add_primeGaussian_dense_range_sub` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2 |
 | PROVED | `Brockian.Weyl.Gate1Bounded.add_primeGaussian_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2 |
 | PROVED | `Brockian.Weyl.Gate1Bounded.add_primeGaussian_isSelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — Gate 1 potential ESA + Kato dense range on L2 |
@@ -10753,6 +10771,14 @@
 | PROVED | `Brockian.Weyl.HarmonicOscillator.quadratic_hasTemperateGrowth` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — concrete harmonic-oscillator core |
 | PROVED | `Brockian.Weyl.Kato.dense_range_add_sub_of_selfAdjoint` | ✓ | verified | lean-4.32.0 | Aristotle proj c595862c — bounded Kato-Rellich; independently AXLE-verified @ 4.32 |
 | PROVED | `Brockian.Weyl.Kato.isSelfAdjoint_add` | ✓ | verified | lean-4.32.0 | Aristotle proj c595862c — bounded Kato-Rellich; independently AXLE-verified @ 4.32 |
+| PROVED | `Brockian.Weyl.KatoConcreteApplication.continuous_zeroPotential` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - concrete Kato application |
+| PROVED | `Brockian.Weyl.KatoConcreteApplication.freeSchrodingerPMap_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - concrete Kato application |
+| PROVED | `Brockian.Weyl.KatoConcreteApplication.potentialMulCLM_zero` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - concrete Kato application |
+| PROVED | `Brockian.Weyl.KatoConcreteApplication.schrodinger_boundedPerturbationTransfer` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - concrete Kato application |
+| PROVED | `Brockian.Weyl.KatoConcreteApplication.schrodinger_essentiallySelfAdjoint_via_kato_application` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - concrete Kato application |
+| PROVED | `Brockian.Weyl.KatoConcreteApplication.schrodinger_essentiallySelfAdjoint_via_kato_rellich` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - concrete Kato application |
+| DEFINITION | `Brockian.Weyl.KatoConcreteApplication.zeroPotential` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - concrete Kato application |
+| PROVED | `Brockian.Weyl.KatoConcreteApplication.zeroPotential_bound` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - concrete Kato application |
 | PROVED | `Brockian.Weyl.KatoNeumann.boundedPerturbationTransfer_of_resolvent_norm_lt_one` | ✓ | verified | lean-4.32.0 | parallel-tool; AXLE @4.32; committed by Claude for coherence |
 | DEFINITION | `Brockian.Weyl.KatoNeumann.katoFactorInverseOfNormLtOne` | ✓ | verified | lean-4.32.0 | parallel-tool; AXLE @4.32; committed by Claude for coherence |
 | PROVED | `Brockian.Weyl.KatoNeumann.katoFactor_rightInverse_of_norm_lt_one` | ✓ | verified | lean-4.32.0 | parallel-tool; AXLE @4.32; committed by Claude for coherence |
@@ -10777,6 +10803,11 @@
 | PROVED | `Brockian.Weyl.KatoRangeDensity.perturbed_ranges_eq_univ_of_transfer_of_isClosed` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.KatoRangeDensity.rangeAddI_perturb_eq_univ_of_transfer_of_isClosed` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.KatoRangeDensity.rangeSubI_perturb_eq_univ_of_transfer_of_isClosed` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Weyl.KatoRellich.closure_perturb_eq_perturb_closure` | ✓ | verified | lean-4.32.0 | Harmonic 7bfd75f8; Codex canonical extraction and AXLE 4.32 audit |
+| PROVED | `Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation` | ✓ | verified | lean-4.32.0 | Harmonic 7bfd75f8; Codex canonical extraction and AXLE 4.32 audit |
+| DEFINITION | `Brockian.Weyl.KatoRellich.graphShear` | ✓ | verified | lean-4.32.0 | Harmonic 7bfd75f8; Codex canonical extraction and AXLE 4.32 audit |
+| PROVED | `Brockian.Weyl.KatoRellich.graph_perturb_eq_shear_image` | ✓ | verified | lean-4.32.0 | Harmonic 7bfd75f8; Codex canonical extraction and AXLE 4.32 audit |
+| PROVED | `Brockian.Weyl.KatoRellich.isSelfAdjoint_perturb` | ✓ | verified | lean-4.32.0 | Harmonic 7bfd75f8; Codex canonical extraction and AXLE 4.32 audit |
 | DEFINITION | `Brockian.Weyl.KatoRellichScaffold.CLMRightInverse` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.Weyl.KatoRellichScaffold.RightResolvent` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Weyl.KatoRellichScaffold.boundedPerturbationTransfer_of_resolvent_factors` | ✓ | verified | lean-4.32.0 |  |
@@ -10814,7 +10845,7 @@
 | PROVED | `Brockian.Weyl.KatoTarget.isSelfAdjoint_add` | ✓ | verified | lean-4.32.0 | Aristotle/Harmonic close; AXLE @4.32 |
 | DEFINITION | `Brockian.Weyl.KatoUnbounded.BoundedPerturbationTransfer` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
 | PROVED | `Brockian.Weyl.KatoUnbounded.boundedPerturbationTransfer_clm` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
-| CONDITIONAL | `Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
+| DISCHARGED | `Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
 | PROVED | `Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb_iff` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
 | DEFINITION | `Brockian.Weyl.KatoUnbounded.perturb` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
 | PROVED | `Brockian.Weyl.KatoUnbounded.perturb_apply` | ✓ | verified | lean-4.32.0 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
@@ -10922,6 +10953,7 @@
 | DEFINITION | `Brockian.Weyl.MulReal.primeGaussianFreeMulModel` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.MulReal.primeGaussianFreeMulModel_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.MulReal.primeGaussianMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MultiplicationUpstream.maximalMul_essentiallySelfAdjoint_of_unit_resolvents` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - maximal multiplication extraction |
 | DEFINITION | `Brockian.Weyl.Operator.EssentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
 | PROVED | `Brockian.Weyl.Operator.IsSymmetric` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
 | PROVED | `Brockian.Weyl.Operator.IsSymmetric.eq_zero_of_apply_eq_smul` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |

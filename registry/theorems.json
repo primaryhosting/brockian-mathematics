@@ -1,11 +1,11 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10543,
-    "DEFINITION": 574,
+    "PROVED": 10568,
+    "DEFINITION": 581,
     "CONJECTURE": 40,
-    "CONDITIONAL": 21,
-    "DISCHARGED": 6
+    "CONDITIONAL": 20,
+    "DISCHARGED": 7
   },
   "theorems": [
     {
@@ -107773,6 +107773,39 @@
       "quarantine": true,
       "ledger_run": "Harmonic/Aristotle 1772947a; AXLE @4.32",
       "provenance_note": "HARMONIC-PROVED hard theorem: Korselt's criterion (hard direction), independently AXLE-verified @4.32, axiom-clean. korselt_carmichael: a squarefree composite n with (p-1)|(n-1) for every prime p|n is a Fermat pseudoprime to every base coprime to n (a^n = a mod n) -- i.e. a Carmichael number. Needs Fermat's little theorem for all bases; a genuine analysis-grade result the decide-swarm could not do. Complements the concrete Brockian.CarmichaelKorselt module with the general Korselt=>Carmichael direction."
+    },
+    {
+      "name": "Brockian.KummerTheorem.kummer",
+      "kind": "theorem",
+      "module": "Brockian.KummerTheorem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/KummerTheorem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 26159bf2; Codex AXLE audit @ lean-4.32.0",
+      "provenance_note": "Exact digit-sum form of Kummer's theorem, proved from the factorial/binomial identity and Mathlib's Legendre digit-sum formula. The returned proof targeted Lean 4.32 and passed independent AXLE verification; standard axioms only."
     },
     {
       "name": "Brockian.LandauNSquaredPlusOne.LandauFourthConjecture",
@@ -350775,6 +350808,547 @@
       "provenance_note": "essentiallySelfAdjoint_transfer (reusable von-Neumann transfer), multCLM/sqMultCLM (\u03be\u00b2) ESA, conjugation witnesses \u2014 all PROVED. Fully unconditional -\u0394 on L\u00b2(\u211d) conditional on Plancherel-Fourier unitary + unbounded \u03be\u00b2 ESA (both Mathlib-scale, named)."
     },
     {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.continuous_freeSymbolResolventMultiplier",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.freeSymbol",
+      "kind": "def",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.freeSymbolMaximal",
+      "kind": "def",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.freeSymbolMaximal_dense",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.freeSymbolMaximal_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.freeSymbolMaximal_isSymmetric",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.freeSymbolMaximal_rangeSMulSub_eq_top",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.freeSymbolMulSchwartz",
+      "kind": "def",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.freeSymbolMulSchwartz_apply",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.freeSymbolResolventMultiplier",
+      "kind": "def",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.freeSymbolResolventMultiplier_memLp_top",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.freeSymbol_resolvent_inverse",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.freeSymbol_sub_ne_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.norm_freeSymbolResolventMultiplier_le",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.schwartzToL2_mem_freeSymbolMaximal_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.spectralFreeLaplacian",
+      "kind": "def",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.FreeLaplacianCorrected.spectralFreeLaplacian_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FreeLaplacianCorrected",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFreeLaplacianCorrected.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - Fourier-normalized free Laplacian",
+      "provenance_note": "The physical Fourier symbol for -d^2/dx^2 under Mathlib's exp(-2*pi*i*x*xi) convention is 4*pi^2*xi^2. The corresponding maximal multiplier has full nonreal shifted ranges, dense domain, symmetry, and is essentially self-adjoint; unitary Fourier conjugation preserves ESA. The Schwartz-core intertwining remains the separate Harmonic target 87ef7b72. AXLE 4.32 verified; standard axioms only."
+    },
+    {
       "name": "Brockian.Weyl.Gate1Bounded.add_primeGaussian_dense_range_sub",
       "kind": "theorem",
       "module": "Brockian.Weyl.Gate1Bounded",
@@ -351446,6 +352020,266 @@
       "quarantine": true,
       "ledger_run": "Aristotle proj c595862c \u2014 bounded Kato-Rellich; independently AXLE-verified @ 4.32",
       "provenance_note": "isSelfAdjoint_add; dense_range_add_sub_of_selfAdjoint (ran((T+B)-z) dense for non-real z, T,B bounded self-adjoint, via resolvent). Statement fidelity diff-checked vs target (unchanged). Feeds the -Delta+V perturbation route."
+    },
+    {
+      "name": "Brockian.Weyl.KatoConcreteApplication.continuous_zeroPotential",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoConcreteApplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoConcreteApplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - concrete Kato application",
+      "provenance_note": "Two concrete routes for continuous bounded real V: the independently proved weak-energy ESA theorem discharges BoundedPerturbationTransfer, and the unconditional general Kato-Rellich theorem is applied directly after deriving free-core ESA from the zero-potential specialization. Both use the exact identity schrodingerPMap = perturb freeSchrodingerPMap potentialMulCLM. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.KatoConcreteApplication.freeSchrodingerPMap_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoConcreteApplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoConcreteApplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - concrete Kato application",
+      "provenance_note": "Two concrete routes for continuous bounded real V: the independently proved weak-energy ESA theorem discharges BoundedPerturbationTransfer, and the unconditional general Kato-Rellich theorem is applied directly after deriving free-core ESA from the zero-potential specialization. Both use the exact identity schrodingerPMap = perturb freeSchrodingerPMap potentialMulCLM. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.KatoConcreteApplication.potentialMulCLM_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoConcreteApplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoConcreteApplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - concrete Kato application",
+      "provenance_note": "Two concrete routes for continuous bounded real V: the independently proved weak-energy ESA theorem discharges BoundedPerturbationTransfer, and the unconditional general Kato-Rellich theorem is applied directly after deriving free-core ESA from the zero-potential specialization. Both use the exact identity schrodingerPMap = perturb freeSchrodingerPMap potentialMulCLM. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.KatoConcreteApplication.schrodinger_boundedPerturbationTransfer",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoConcreteApplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoConcreteApplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - concrete Kato application",
+      "provenance_note": "Two concrete routes for continuous bounded real V: the independently proved weak-energy ESA theorem discharges BoundedPerturbationTransfer, and the unconditional general Kato-Rellich theorem is applied directly after deriving free-core ESA from the zero-potential specialization. Both use the exact identity schrodingerPMap = perturb freeSchrodingerPMap potentialMulCLM. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.KatoConcreteApplication.schrodinger_essentiallySelfAdjoint_via_kato_application",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoConcreteApplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoConcreteApplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - concrete Kato application",
+      "provenance_note": "Two concrete routes for continuous bounded real V: the independently proved weak-energy ESA theorem discharges BoundedPerturbationTransfer, and the unconditional general Kato-Rellich theorem is applied directly after deriving free-core ESA from the zero-potential specialization. Both use the exact identity schrodingerPMap = perturb freeSchrodingerPMap potentialMulCLM. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.KatoConcreteApplication.schrodinger_essentiallySelfAdjoint_via_kato_rellich",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoConcreteApplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoConcreteApplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - concrete Kato application",
+      "provenance_note": "Two concrete routes for continuous bounded real V: the independently proved weak-energy ESA theorem discharges BoundedPerturbationTransfer, and the unconditional general Kato-Rellich theorem is applied directly after deriving free-core ESA from the zero-potential specialization. Both use the exact identity schrodingerPMap = perturb freeSchrodingerPMap potentialMulCLM. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.KatoConcreteApplication.zeroPotential",
+      "kind": "def",
+      "module": "Brockian.Weyl.KatoConcreteApplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoConcreteApplication.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - concrete Kato application",
+      "provenance_note": "Two concrete routes for continuous bounded real V: the independently proved weak-energy ESA theorem discharges BoundedPerturbationTransfer, and the unconditional general Kato-Rellich theorem is applied directly after deriving free-core ESA from the zero-potential specialization. Both use the exact identity schrodingerPMap = perturb freeSchrodingerPMap potentialMulCLM. AXLE 4.32 verified; standard axioms only."
+    },
+    {
+      "name": "Brockian.Weyl.KatoConcreteApplication.zeroPotential_bound",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoConcreteApplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoConcreteApplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - concrete Kato application",
+      "provenance_note": "Two concrete routes for continuous bounded real V: the independently proved weak-energy ESA theorem discharges BoundedPerturbationTransfer, and the unconditional general Kato-Rellich theorem is applied directly after deriving free-core ESA from the zero-potential specialization. Both use the exact identity schrodingerPMap = perturb freeSchrodingerPMap potentialMulCLM. AXLE 4.32 verified; standard axioms only."
     },
     {
       "name": "Brockian.Weyl.KatoNeumann.boundedPerturbationTransfer_of_resolvent_norm_lt_one",
@@ -352234,6 +353068,167 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellich.closure_perturb_eq_perturb_closure",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRellich",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoRellich.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic 7bfd75f8; Codex canonical extraction and AXLE 4.32 audit",
+      "provenance_note": "Unconditional bounded Kato-Rellich theorem for LinearPMap: a bounded self-adjoint perturbation preserves essential self-adjointness of a densely defined symmetric core. Includes the graph-shear closure identity and self-adjointness of the perturbed closed operator. Exact Harmonic target first passed AXLE declaration-by-declaration; the canonical proof reuses the separately verified closure-ESA equivalence."
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRellich",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoRellich.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic 7bfd75f8; Codex canonical extraction and AXLE 4.32 audit",
+      "provenance_note": "Unconditional bounded Kato-Rellich theorem for LinearPMap: a bounded self-adjoint perturbation preserves essential self-adjointness of a densely defined symmetric core. Includes the graph-shear closure identity and self-adjointness of the perturbed closed operator. Exact Harmonic target first passed AXLE declaration-by-declaration; the canonical proof reuses the separately verified closure-ESA equivalence."
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellich.graphShear",
+      "kind": "def",
+      "module": "Brockian.Weyl.KatoRellich",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoRellich.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic 7bfd75f8; Codex canonical extraction and AXLE 4.32 audit",
+      "provenance_note": "Unconditional bounded Kato-Rellich theorem for LinearPMap: a bounded self-adjoint perturbation preserves essential self-adjointness of a densely defined symmetric core. Includes the graph-shear closure identity and self-adjointness of the perturbed closed operator. Exact Harmonic target first passed AXLE declaration-by-declaration; the canonical proof reuses the separately verified closure-ESA equivalence."
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellich.graph_perturb_eq_shear_image",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRellich",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoRellich.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic 7bfd75f8; Codex canonical extraction and AXLE 4.32 audit",
+      "provenance_note": "Unconditional bounded Kato-Rellich theorem for LinearPMap: a bounded self-adjoint perturbation preserves essential self-adjointness of a densely defined symmetric core. Includes the graph-shear closure identity and self-adjointness of the perturbed closed operator. Exact Harmonic target first passed AXLE declaration-by-declaration; the canonical proof reuses the separately verified closure-ESA equivalence."
+    },
+    {
+      "name": "Brockian.Weyl.KatoRellich.isSelfAdjoint_perturb",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoRellich",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoRellich.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic 7bfd75f8; Codex canonical extraction and AXLE 4.32 audit",
+      "provenance_note": "Unconditional bounded Kato-Rellich theorem for LinearPMap: a bounded self-adjoint perturbation preserves essential self-adjointness of a densely defined symmetric core. Includes the graph-shear closure identity and self-adjointness of the perturbed closed operator. Exact Harmonic target first passed AXLE declaration-by-declaration; the canonical proof reuses the separately verified closure-ESA equivalence."
     },
     {
       "name": "Brockian.Weyl.KatoRellichScaffold.CLMRightInverse",
@@ -353397,7 +354392,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
-      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+      "provenance_note": "unconditional infrastructure: perturb symmetry, norm inequality, Cayley isometry, injectivity, and criterion specialization. The former BoundedPerturbationTransfer frontier was later discharged by Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation."
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.boundedPerturbationTransfer_clm",
@@ -353430,7 +354425,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
-      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+      "provenance_note": "unconditional infrastructure: perturb symmetry, norm inequality, Cayley isometry, injectivity, and criterion specialization. The former BoundedPerturbationTransfer frontier was later discharged by Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation."
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb",
@@ -353440,7 +354435,7 @@
       "source": {
         "file": "Brockian/WeylKatoUnbounded.lean"
       },
-      "register": "CONDITIONAL",
+      "register": "DISCHARGED",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -353460,10 +354455,10 @@
         }
       },
       "conditional_rung": "open",
-      "discharged_by": null,
+      "discharged_by": "essentiallySelfAdjoint_bounded_perturbation",
       "quarantine": true,
       "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
-      "provenance_note": "T+B ESA GIVEN BoundedPerturbationTransfer (the ran((T+B)\u00b1i)-density transfer) \u2014 open-strength for unbounded T; the implication carries real work, not modus-ponens."
+      "provenance_note": "Historical conditional route: T+B ESA GIVEN BoundedPerturbationTransfer. The hypothesis is now unnecessary because the unconditional graph-closure theorem Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation proves the stronger result."
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.essentiallySelfAdjoint_perturb_iff",
@@ -353496,7 +354491,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
-      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+      "provenance_note": "unconditional infrastructure: perturb symmetry, norm inequality, Cayley isometry, injectivity, and criterion specialization. The former BoundedPerturbationTransfer frontier was later discharged by Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation."
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.perturb",
@@ -353525,7 +354520,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
-      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+      "provenance_note": "unconditional infrastructure: perturb symmetry, norm inequality, Cayley isometry, injectivity, and criterion specialization. The former BoundedPerturbationTransfer frontier was later discharged by Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation."
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.perturb_apply",
@@ -353558,7 +354553,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
-      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+      "provenance_note": "unconditional infrastructure: perturb symmetry, norm inequality, Cayley isometry, injectivity, and criterion specialization. The former BoundedPerturbationTransfer frontier was later discharged by Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation."
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.perturb_apply_ne_I_smul",
@@ -353591,7 +354586,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
-      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+      "provenance_note": "unconditional infrastructure: perturb symmetry, norm inequality, Cayley isometry, injectivity, and criterion specialization. The former BoundedPerturbationTransfer frontier was later discharged by Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation."
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.perturb_apply_ne_neg_I_smul",
@@ -353624,7 +354619,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
-      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+      "provenance_note": "unconditional infrastructure: perturb symmetry, norm inequality, Cayley isometry, injectivity, and criterion specialization. The former BoundedPerturbationTransfer frontier was later discharged by Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation."
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.perturb_clm_eq",
@@ -353657,7 +354652,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
-      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+      "provenance_note": "unconditional infrastructure: perturb symmetry, norm inequality, Cayley isometry, injectivity, and criterion specialization. The former BoundedPerturbationTransfer frontier was later discharged by Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation."
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.perturb_clm_essentiallySelfAdjoint",
@@ -353690,7 +354685,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
-      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+      "provenance_note": "unconditional infrastructure: perturb symmetry, norm inequality, Cayley isometry, injectivity, and criterion specialization. The former BoundedPerturbationTransfer frontier was later discharged by Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation."
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.perturb_dense_domain",
@@ -353723,7 +354718,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
-      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+      "provenance_note": "unconditional infrastructure: perturb symmetry, norm inequality, Cayley isometry, injectivity, and criterion specialization. The former BoundedPerturbationTransfer frontier was later discharged by Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation."
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.perturb_domain",
@@ -353756,7 +354751,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
-      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+      "provenance_note": "unconditional infrastructure: perturb symmetry, norm inequality, Cayley isometry, injectivity, and criterion specialization. The former BoundedPerturbationTransfer frontier was later discharged by Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation."
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.perturb_isSymmetric",
@@ -353789,7 +354784,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
-      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+      "provenance_note": "unconditional infrastructure: perturb symmetry, norm inequality, Cayley isometry, injectivity, and criterion specialization. The former BoundedPerturbationTransfer frontier was later discharged by Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation."
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.perturb_norm_add_I_smul_eq",
@@ -353822,7 +354817,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
-      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+      "provenance_note": "unconditional infrastructure: perturb symmetry, norm inequality, Cayley isometry, injectivity, and criterion specialization. The former BoundedPerturbationTransfer frontier was later discharged by Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation."
     },
     {
       "name": "Brockian.Weyl.KatoUnbounded.perturb_norm_sub_smul_ge",
@@ -353855,7 +354850,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #2 \u2014 bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32",
-      "provenance_note": "unconditional: perturb symmetric, norm_sub_smul_ge, Cayley isometry, injectivity, criterion specialization; bounded-case witness (perturb_clm_essentiallySelfAdjoint) discharges the transfer end-to-end. Unbounded transfer pinned to BoundedPerturbationTransfer (needs von Neumann closure T\u0304=T**, Mathlib-absent)."
+      "provenance_note": "unconditional infrastructure: perturb symmetry, norm inequality, Cayley isometry, injectivity, and criterion specialization. The former BoundedPerturbationTransfer frontier was later discharged by Brockian.Weyl.KatoRellich.essentiallySelfAdjoint_bounded_perturbation."
     },
     {
       "name": "Brockian.Weyl.LP.IsLimitPointAtInfty",
@@ -356899,6 +357894,39 @@
       "quarantine": true,
       "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
       "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MultiplicationUpstream.maximalMul_essentiallySelfAdjoint_of_unit_resolvents",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MultiplicationUpstream",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMultiplicationUpstream.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - maximal multiplication extraction",
+      "provenance_note": "General Mathlib-oriented theorem: a densely defined maximal multiplication operator with bounded pointwise inverses for both unit shifts is essentially self-adjoint. It packages explicit shifted-range surjectivity with the abstract von Neumann criterion and contains no project-specific potential."
     },
     {
       "name": "Brockian.Weyl.Operator.EssentiallySelfAdjoint",

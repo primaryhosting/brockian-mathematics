@@ -90,9 +90,9 @@ NON_CLAIMS = [
         "Named CONJECTURE (Prop container); local covariance is PROVED separately.",
     ),
     (
-        "Unbounded Kato / full Schrödinger ESA",
+        "Historical Kato transfer rung",
         "KatoUnbounded.essentiallySelfAdjoint_perturb",
-        "Bounded / free-model packages PROVED; full unbounded ESA remains CONDITIONAL.",
+        "DISCHARGED by the unconditional graph-closure theorem in WeylKatoRellich.",
     ),
     (
         "Free Laplacian ESA via Plancherel (full link)",
@@ -388,11 +388,12 @@ verdict at a pinned environment. Registers are **derived** by
 **What closed (reference process wins):** Euler’s pentagonal number theorem
 unconditionally in-core; Galois / “why five” degree rigidity; the q−ν
 admissibility law; D₅ / C₅ spectral structure; large local Goldbach and
-singular-series kernels.
+singular-series kernels; and bounded Kato-Rellich for unbounded ESA cores.
 
 **What stays open (explicit non-claims):** Riemann Hypothesis, global Goldbach
-transfer, full unbounded essentially-self-adjoint packages — scaffolded or
-conditional, **not** counted as PROVED.
+transfer, the normalized Schwartz/Fourier intertwining, oscillator ESA, and the
+concrete weighted Rellich compact embedding — scaffolded or conditional,
+**not** counted as PROVED.
 
 ---
 
