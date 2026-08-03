@@ -1,24 +1,32 @@
 # Overnight Math Display — morning brief
 
+## THE NIGHT IN ONE LINE
+
+**PROVED ~2010 → 5117** (+3107) · even-gap continuum **22 → 900** · all AXLE-green · honesty intact.
+
 ## Scoreboard
 
-| Wave | PROVED | Milestone |
-|------|--------|-----------|
-| start | ~2010 | tip |
-| w7 | 3176 | crossed **3000** |
-| w12 | 4148 | crossed **4000** |
-| w15 | 4735 | Gaps→800 |
-| **w16** | **4926** | Gaps→850 · Cos→367 · K2→263 |
-| next | *scheduler* | Gaps852–900 → push **5000** |
+| Milestone | PROVED |
+|-----------|--------|
+| Night start | ~2010 |
+| Crossed 3000 | 3176 (w7) |
+| Crossed 4000 | 4148 (w12) |
+| **Crossed 5000** | **5117 (w17)** |
+| Even gaps | **22 → 900** |
+| Cos primes | through **~389** |
+| K₂×p wheels | through **p = 277** |
 
-## Morning headlines
+## Morning display headlines
 
-1. **Grand Pentagon Equivalence** — 4-way TFAE  
-2. **Even-gap continuum 22 → 850** (local S(H) only)  
-3. **Spectral packs** through primes **~367**  
-4. **K₂×K_p wheels** through **p = 263**  
-5. **PROVED 4926** — honesty firewall intact  
+1. **Grand Pentagon Equivalence** — four faces of five as one machine-checked TFAE  
+2. **Even-gap local singular series continuum through 900**  
+3. **Spectral degree packs** for primes through **~389**  
+4. **Exact local Goldbach wheels K₂×K_p** through **p = 277**  
+5. **PROVED 5117** with public honesty firewall (not RH / not Goldbach / not twin primes)
 
 ```bash
+cd ~/Projects/brockian-mathematics
+git log --oneline -20
 python3 -c "import json; print(json.load(open('registry/theorems.json'))['summary'])"
+# Torus: paste deploy/torus-lovable/LOVABLE_PROMPT.md when CDP up
 ```
