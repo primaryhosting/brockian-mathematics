@@ -851,3 +851,5 @@ keep boundedv-continuous.)
 - 2026-08-03 (overnight Grok w35) — **ALL_GREEN Gaps1752–1800 + Cos839/853/857/859 + K2×607/613/617**. PROVED 8414→8615 (+201; 194 AXLE decls). Continuum even-gap S(H) 22→1800; cos through 859; K2 through 617. Disk ~6.2Gi free @97%. Next: Gaps1802–1850 · Cos863+ · K2×619+.
 
 - 2026-08-03 (overnight Grok w39) — **ALL_GREEN Gaps1912–1950 + Cos937/941/947/953 + K2×661/673/677**. PROVED 9039→9220 (+181; 165 AXLE decls, 4 gap packs). Continuum even-gap S(H) 22→1950; cos through 953; K2 through 677. Disk ~3.8Gi free @99% — CRITICAL. Next: Gaps1952–2000 · Cos967+ · K2×683+.
+
+- 2026-08-03 (overnight Grok w41) — **ALL_GREEN Gaps2002–2050 + Cos991/997/1009/1013 + K2×709/719/727**. PROVED 9411→9602 (+191; 194 AXLE decls). Continuum even-gap S(H) 22→2050; cos through 1013; K2 through 727. Disk ~6.4Gi free @97%. Next: Gaps2052–2100 · Cos1019+ · K2×733+.
