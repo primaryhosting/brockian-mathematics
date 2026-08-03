@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 1
-- **DEFINITION**: 354
+- **DEFINITION**: 356
 - **DISCHARGED**: 6
-- **PROVED**: 2137
+- **PROVED**: 2257
 
 ## Theorems
 
@@ -258,6 +258,13 @@
 | PROVED | `Brockian.CosTraceNormEleven.trace_adjoin_gen_eq_neg_nextCoeff` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormEleven.trace_norm_eleven_pack` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormEleven.trace_spectralGen_eleven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormFiftyNine.degree_fiftyNine` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormFiftyNine.fiftyNine_ne_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormFiftyNine.fiftyNine_pack` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormFiftyNine.isIntegral_and_degree_fiftyNine` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormFiftyNine.isIntegral_spectralGen_fiftyNine` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormFiftyNine.isIntegral_spectralGen_fiftyNine_Q` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormFiftyNine.prime_fiftyNine` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormFiftyThree.degree_fiftyThree` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormFiftyThree.fiftyThree_ne_two` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormFiftyThree.fiftyThree_pack` | ✓ | verified | lean-4.32.0 |  |
@@ -300,6 +307,20 @@
 | PROVED | `Brockian.CosTraceNormSeventeen.prime_seventeen` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormSeventeen.seventeen_ne_two` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormSeventeen.seventeen_pack` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSixtyOne.degree_sixtyOne` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSixtyOne.isIntegral_and_degree_sixtyOne` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSixtyOne.isIntegral_spectralGen_sixtyOne` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSixtyOne.isIntegral_spectralGen_sixtyOne_Q` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSixtyOne.prime_sixtyOne` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSixtyOne.sixtyOne_ne_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSixtyOne.sixtyOne_pack` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSixtySeven.degree_sixtySeven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSixtySeven.isIntegral_and_degree_sixtySeven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSixtySeven.isIntegral_spectralGen_sixtySeven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSixtySeven.isIntegral_spectralGen_sixtySeven_Q` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSixtySeven.prime_sixtySeven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSixtySeven.sixtySeven_ne_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.CosTraceNormSixtySeven.sixtySeven_pack` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormThirteen.degree_thirteen` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormThirteen.isIntegral_and_degree_thirteen` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.CosTraceNormThirteen.isIntegral_spectralGen_thirteen` | ✓ | verified | lean-4.32.0 |  |
@@ -985,6 +1006,20 @@
 | PROVED | `Brockian.Goldbach.WheelK2_41.Kp_fortyOne` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.WheelK2_41.Kp_fortyOne_of_dvd` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.WheelK2_41.Kp_fortyOne_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Goldbach.WheelK2_43.K2_43` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_43.K2_43_eq` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_43.K2_43_of_not_two_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_43.K2_43_of_two_and_fortyThree_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_43.Kp_fortyThree` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_43.Kp_fortyThree_of_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_43.Kp_fortyThree_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Goldbach.WheelK2_47.K2_47` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_47.K2_47_eq` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_47.K2_47_of_not_two_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_47.K2_47_of_two_and_fortySeven_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_47.Kp_fortySeven` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_47.Kp_fortySeven_of_dvd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Goldbach.WheelK2_47.Kp_fortySeven_of_not_dvd` | ✓ | verified | lean-4.32.0 |  |
 | CONJECTURE | `Brockian.GoldbachComb.GoldbachCovarianceTransfer` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
 | DEFINITION | `Brockian.GoldbachComb.Kp` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
 | DEFINITION | `Brockian.GoldbachComb.gCount` | ✓ | verified | lean-4.32.0 | intake 18 (cabbba6e) — GC-1/2/3 KEEPER, exemplary |
@@ -1553,6 +1588,93 @@
 | PROVED | `Brockian.SingularSeries.Gaps122130.singular_series_pos_evenPair_oneHundredTwentyFour` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.SingularSeries.Gaps122130.singular_series_pos_evenPair_oneHundredTwentySix` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.SingularSeries.Gaps122130.singular_series_pos_evenPair_oneHundredTwentyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.evenPair_card_oneHundredForty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.evenPair_card_oneHundredThirtyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.evenPair_card_oneHundredThirtyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.evenPair_card_oneHundredThirtySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.evenPair_card_oneHundredThirtyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.isAdmissible_evenPair_oneHundredForty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.isAdmissible_evenPair_oneHundredThirtyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.isAdmissible_evenPair_oneHundredThirtyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.isAdmissible_evenPair_oneHundredThirtySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.isAdmissible_evenPair_oneHundredThirtyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.localFactor_oneHundredForty_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.localFactor_oneHundredThirtyTwo_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.nu_p_oneHundredForty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.nu_p_oneHundredForty_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.nu_p_oneHundredThirtyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.nu_p_oneHundredThirtyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.nu_p_oneHundredThirtySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.nu_p_oneHundredThirtyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.nu_p_oneHundredThirtyTwo_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.singular_series_finite_pos_evenPair_oneHundredForty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.singular_series_finite_pos_evenPair_oneHundredThirtyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.singular_series_finite_pos_evenPair_oneHundredThirtyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.singular_series_finite_pos_evenPair_oneHundredThirtySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.singular_series_finite_pos_evenPair_oneHundredThirtyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.singular_series_pos_evenPair_oneHundredForty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.singular_series_pos_evenPair_oneHundredThirtyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.singular_series_pos_evenPair_oneHundredThirtyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.singular_series_pos_evenPair_oneHundredThirtySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps132140.singular_series_pos_evenPair_oneHundredThirtyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.evenPair_card_oneHundredFifty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.evenPair_card_oneHundredFortyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.evenPair_card_oneHundredFortyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.evenPair_card_oneHundredFortySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.evenPair_card_oneHundredFortyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.isAdmissible_evenPair_oneHundredFifty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.isAdmissible_evenPair_oneHundredFortyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.isAdmissible_evenPair_oneHundredFortyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.isAdmissible_evenPair_oneHundredFortySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.isAdmissible_evenPair_oneHundredFortyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.localFactor_oneHundredFifty_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.localFactor_oneHundredFortyTwo_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.nu_p_oneHundredFifty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.nu_p_oneHundredFifty_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.nu_p_oneHundredFortyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.nu_p_oneHundredFortyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.nu_p_oneHundredFortySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.nu_p_oneHundredFortyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.nu_p_oneHundredFortyTwo_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.singular_series_finite_pos_evenPair_oneHundredFifty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.singular_series_finite_pos_evenPair_oneHundredFortyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.singular_series_finite_pos_evenPair_oneHundredFortyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.singular_series_finite_pos_evenPair_oneHundredFortySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.singular_series_finite_pos_evenPair_oneHundredFortyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.singular_series_pos_evenPair_oneHundredFifty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.singular_series_pos_evenPair_oneHundredFortyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.singular_series_pos_evenPair_oneHundredFortyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.singular_series_pos_evenPair_oneHundredFortySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps142150.singular_series_pos_evenPair_oneHundredFortyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.evenPair_card_oneHundredFiftyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.evenPair_card_oneHundredFiftyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.evenPair_card_oneHundredFiftySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.evenPair_card_oneHundredFiftyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.evenPair_card_oneHundredSixty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.isAdmissible_evenPair_oneHundredFiftyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.isAdmissible_evenPair_oneHundredFiftyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.isAdmissible_evenPair_oneHundredFiftySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.isAdmissible_evenPair_oneHundredFiftyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.isAdmissible_evenPair_oneHundredSixty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.localFactor_oneHundredFiftyTwo_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.localFactor_oneHundredSixty_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.nu_p_oneHundredFiftyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.nu_p_oneHundredFiftyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.nu_p_oneHundredFiftySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.nu_p_oneHundredFiftyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.nu_p_oneHundredFiftyTwo_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.nu_p_oneHundredSixty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.nu_p_oneHundredSixty_two` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.singular_series_finite_pos_evenPair_oneHundredFiftyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.singular_series_finite_pos_evenPair_oneHundredFiftyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.singular_series_finite_pos_evenPair_oneHundredFiftySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.singular_series_finite_pos_evenPair_oneHundredFiftyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.singular_series_finite_pos_evenPair_oneHundredSixty` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.singular_series_pos_evenPair_oneHundredFiftyEight` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.singular_series_pos_evenPair_oneHundredFiftyFour` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.singular_series_pos_evenPair_oneHundredFiftySix` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.singular_series_pos_evenPair_oneHundredFiftyTwo` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeries.Gaps152160.singular_series_pos_evenPair_oneHundredSixty` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.SingularSeries.Gaps2230.evenPair_card_thirty` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.SingularSeries.Gaps2230.evenPair_card_twentyEight` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.SingularSeries.Gaps2230.evenPair_card_twentyFour` | ✓ | verified | lean-4.32.0 |  |

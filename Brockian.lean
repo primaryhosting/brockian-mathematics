@@ -78,6 +78,9 @@ import Brockian.SingularSeriesGaps92100
 import Brockian.SingularSeriesGaps102110
 import Brockian.SingularSeriesGaps112120
 import Brockian.SingularSeriesGaps122130
+import Brockian.SingularSeriesGaps152160
+import Brockian.SingularSeriesGaps142150
+import Brockian.SingularSeriesGaps132140
 import Brockian.TwinPrimeConstant
 import Brockian.WeylFreeLaplacian2
 import Brockian.WeylConfining
@@ -103,6 +106,9 @@ import Brockian.CosTraceNormFortyOne
 import Brockian.CosTraceNormFortyThree
 import Brockian.CosTraceNormFortySeven
 import Brockian.CosTraceNormFiftyThree
+import Brockian.CosTraceNormFiftyNine
+import Brockian.CosTraceNormSixtyOne
+import Brockian.CosTraceNormSixtySeven
 import Brockian.WeylFourierMultiplier
 import Brockian.WeylWeakRegularityScaffold
 import Brockian.WeylWeakRegularityCore
@@ -128,6 +134,8 @@ import Brockian.GoldbachWheelK2_23
 import Brockian.GoldbachWheelK2_31
 import Brockian.GoldbachWheelK2_37
 import Brockian.GoldbachWheelK2_41
+import Brockian.GoldbachWheelK2_43
+import Brockian.GoldbachWheelK2_47
 import Brockian.AdmissibilityCRTGeneral
 import Brockian.PentagonalTheoremFranklin
 import Brockian.OddDistinctPartition
