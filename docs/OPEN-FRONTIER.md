@@ -261,6 +261,22 @@ conjectured none beyond. Module: `Brockian.FermatNumbers`. `FermatPrimeBeyondFou
 
 ---
 
+## Landau's fourth problem — primes of the form n²+1 (open)
+
+**Claim.** Are there infinitely many primes of the form n²+1? Open since 1912 (one of the four
+problems Landau called "unattackable"). Module: `Brockian.LandauNSquaredPlusOne`.
+`LandauFourthConjecture` is an unproven `def`.
+
+**PROVED (concrete + structural):**
+- **Ten n²+1 primes** (`nsq_1`, `nsq_2`, `nsq_4`, …, `nsq_26`): witnesses 2, 5, 17, 37, 101, 197,
+  257, 401, 577, 677.
+- **For n > 1, if n²+1 is prime then n is even** (`nsq_even_of_prime`): n odd ⇒ n²+1 even and > 2 ⇒
+  not prime. Corollary `nsq_mod_two_of_prime`.
+
+**OPEN.** Whether infinitely many primes of the form n²+1 exist.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

@@ -733,6 +733,13 @@ runs:
     ledger_run: "open-territory loop; AXLE @4.32"
     provenance_note: "OPEN-TERRITORY Fermat numbers F_n = 2^(2^n)+1 (open-territory loop, AXLE @4.32, axiom-clean). CONCRETE PRIMES: the five known Fermat primes fermat_{0..4}_prime (3,5,17,257,65537). CONCRETE COMPOSITES: fermat_5_eq/not_prime (Euler's 641*6700417) and fermat_6_eq/not_prime (274177*67280421310721). STRUCTURAL THEOREM fermat_coprime: Fermat numbers are pairwise coprime (Goldbach; derived from Mathlib's Nat.coprime_fermatNumber_fermatNumber), which yields infinitude of primes. Reuses Mathlib's Nat.fermatNumber API (fermat_eq_fermatNumber by rfl). The OPEN question -- is any F_n prime for n>=5? -- is an unproven def FermatPrimeBeyondFour; conjectured none, never asserted or refuted."
 
+  "landau-nsq-plus-one":
+    module: Brockian.LandauNSquaredPlusOne
+    verdict: admit
+    quarantine: true
+    ledger_run: "open-territory loop; AXLE @4.32"
+    provenance_note: "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────
   "weyl-gate1-bounded":
