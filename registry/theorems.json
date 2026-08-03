@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10060,
-    "DEFINITION": 501,
-    "CONJECTURE": 21,
+    "PROVED": 10070,
+    "DEFINITION": 503,
+    "CONJECTURE": 22,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -107173,6 +107173,423 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY necessary conditions for odd perfect numbers (open ~2000 years; existence unknown). Open-territory loop, AXLE @4.32, axiom-clean. FLAGSHIP oddPerfect_not_square: an odd perfect number cannot be a perfect square (sigma of an odd square is odd, but Perfect means sigma n = 2n even -> contradiction). Plus oddPerfect_not_prime_pow (not a prime power) and sanity conditions (positive, odd, >1). All theorems are IF-an-odd-perfect-number-exists-THEN necessary conditions; existence is NEVER asserted or denied. Euler's form p^k*m^2 was the stretch and honestly dropped (not proved)."
+    },
+    {
+      "name": "Brockian.OppermannConjecture.OppermannConjecture",
+      "kind": "conjecture",
+      "module": "Brockian.OppermannConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OppermannConjecture.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Oppermann's conjecture (open-territory loop, AXLE @4.32, axiom-clean; STRENGTHENS Legendre). OppermannLower n (prime in (n^2-n, n^2)) and OppermannUpper n (prime in (n^2, n^2+n)). CONCRETE: nine instances oppermann_2..oppermann_10, each with two-sided prime witnesses. BONUS oppermannUpper_imp_legendre: an Oppermann-upper prime is a Legendre prime (n(n+1) <= (n+1)^2), cross-linking to Brockian.LegendreConjecture -- records the logical relation Oppermann => Legendre. OppermannConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.OppermannConjecture.OppermannLower",
+      "kind": "def",
+      "module": "Brockian.OppermannConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OppermannConjecture.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Oppermann's conjecture (open-territory loop, AXLE @4.32, axiom-clean; STRENGTHENS Legendre). OppermannLower n (prime in (n^2-n, n^2)) and OppermannUpper n (prime in (n^2, n^2+n)). CONCRETE: nine instances oppermann_2..oppermann_10, each with two-sided prime witnesses. BONUS oppermannUpper_imp_legendre: an Oppermann-upper prime is a Legendre prime (n(n+1) <= (n+1)^2), cross-linking to Brockian.LegendreConjecture -- records the logical relation Oppermann => Legendre. OppermannConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.OppermannConjecture.OppermannUpper",
+      "kind": "def",
+      "module": "Brockian.OppermannConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OppermannConjecture.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Oppermann's conjecture (open-territory loop, AXLE @4.32, axiom-clean; STRENGTHENS Legendre). OppermannLower n (prime in (n^2-n, n^2)) and OppermannUpper n (prime in (n^2, n^2+n)). CONCRETE: nine instances oppermann_2..oppermann_10, each with two-sided prime witnesses. BONUS oppermannUpper_imp_legendre: an Oppermann-upper prime is a Legendre prime (n(n+1) <= (n+1)^2), cross-linking to Brockian.LegendreConjecture -- records the logical relation Oppermann => Legendre. OppermannConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.OppermannConjecture.oppermannUpper_imp_legendre",
+      "kind": "theorem",
+      "module": "Brockian.OppermannConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OppermannConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Oppermann's conjecture (open-territory loop, AXLE @4.32, axiom-clean; STRENGTHENS Legendre). OppermannLower n (prime in (n^2-n, n^2)) and OppermannUpper n (prime in (n^2, n^2+n)). CONCRETE: nine instances oppermann_2..oppermann_10, each with two-sided prime witnesses. BONUS oppermannUpper_imp_legendre: an Oppermann-upper prime is a Legendre prime (n(n+1) <= (n+1)^2), cross-linking to Brockian.LegendreConjecture -- records the logical relation Oppermann => Legendre. OppermannConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.OppermannConjecture.oppermann_10",
+      "kind": "theorem",
+      "module": "Brockian.OppermannConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OppermannConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Oppermann's conjecture (open-territory loop, AXLE @4.32, axiom-clean; STRENGTHENS Legendre). OppermannLower n (prime in (n^2-n, n^2)) and OppermannUpper n (prime in (n^2, n^2+n)). CONCRETE: nine instances oppermann_2..oppermann_10, each with two-sided prime witnesses. BONUS oppermannUpper_imp_legendre: an Oppermann-upper prime is a Legendre prime (n(n+1) <= (n+1)^2), cross-linking to Brockian.LegendreConjecture -- records the logical relation Oppermann => Legendre. OppermannConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.OppermannConjecture.oppermann_2",
+      "kind": "theorem",
+      "module": "Brockian.OppermannConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OppermannConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Oppermann's conjecture (open-territory loop, AXLE @4.32, axiom-clean; STRENGTHENS Legendre). OppermannLower n (prime in (n^2-n, n^2)) and OppermannUpper n (prime in (n^2, n^2+n)). CONCRETE: nine instances oppermann_2..oppermann_10, each with two-sided prime witnesses. BONUS oppermannUpper_imp_legendre: an Oppermann-upper prime is a Legendre prime (n(n+1) <= (n+1)^2), cross-linking to Brockian.LegendreConjecture -- records the logical relation Oppermann => Legendre. OppermannConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.OppermannConjecture.oppermann_3",
+      "kind": "theorem",
+      "module": "Brockian.OppermannConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OppermannConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Oppermann's conjecture (open-territory loop, AXLE @4.32, axiom-clean; STRENGTHENS Legendre). OppermannLower n (prime in (n^2-n, n^2)) and OppermannUpper n (prime in (n^2, n^2+n)). CONCRETE: nine instances oppermann_2..oppermann_10, each with two-sided prime witnesses. BONUS oppermannUpper_imp_legendre: an Oppermann-upper prime is a Legendre prime (n(n+1) <= (n+1)^2), cross-linking to Brockian.LegendreConjecture -- records the logical relation Oppermann => Legendre. OppermannConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.OppermannConjecture.oppermann_4",
+      "kind": "theorem",
+      "module": "Brockian.OppermannConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OppermannConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Oppermann's conjecture (open-territory loop, AXLE @4.32, axiom-clean; STRENGTHENS Legendre). OppermannLower n (prime in (n^2-n, n^2)) and OppermannUpper n (prime in (n^2, n^2+n)). CONCRETE: nine instances oppermann_2..oppermann_10, each with two-sided prime witnesses. BONUS oppermannUpper_imp_legendre: an Oppermann-upper prime is a Legendre prime (n(n+1) <= (n+1)^2), cross-linking to Brockian.LegendreConjecture -- records the logical relation Oppermann => Legendre. OppermannConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.OppermannConjecture.oppermann_5",
+      "kind": "theorem",
+      "module": "Brockian.OppermannConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OppermannConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Oppermann's conjecture (open-territory loop, AXLE @4.32, axiom-clean; STRENGTHENS Legendre). OppermannLower n (prime in (n^2-n, n^2)) and OppermannUpper n (prime in (n^2, n^2+n)). CONCRETE: nine instances oppermann_2..oppermann_10, each with two-sided prime witnesses. BONUS oppermannUpper_imp_legendre: an Oppermann-upper prime is a Legendre prime (n(n+1) <= (n+1)^2), cross-linking to Brockian.LegendreConjecture -- records the logical relation Oppermann => Legendre. OppermannConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.OppermannConjecture.oppermann_6",
+      "kind": "theorem",
+      "module": "Brockian.OppermannConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OppermannConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Oppermann's conjecture (open-territory loop, AXLE @4.32, axiom-clean; STRENGTHENS Legendre). OppermannLower n (prime in (n^2-n, n^2)) and OppermannUpper n (prime in (n^2, n^2+n)). CONCRETE: nine instances oppermann_2..oppermann_10, each with two-sided prime witnesses. BONUS oppermannUpper_imp_legendre: an Oppermann-upper prime is a Legendre prime (n(n+1) <= (n+1)^2), cross-linking to Brockian.LegendreConjecture -- records the logical relation Oppermann => Legendre. OppermannConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.OppermannConjecture.oppermann_7",
+      "kind": "theorem",
+      "module": "Brockian.OppermannConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OppermannConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Oppermann's conjecture (open-territory loop, AXLE @4.32, axiom-clean; STRENGTHENS Legendre). OppermannLower n (prime in (n^2-n, n^2)) and OppermannUpper n (prime in (n^2, n^2+n)). CONCRETE: nine instances oppermann_2..oppermann_10, each with two-sided prime witnesses. BONUS oppermannUpper_imp_legendre: an Oppermann-upper prime is a Legendre prime (n(n+1) <= (n+1)^2), cross-linking to Brockian.LegendreConjecture -- records the logical relation Oppermann => Legendre. OppermannConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.OppermannConjecture.oppermann_8",
+      "kind": "theorem",
+      "module": "Brockian.OppermannConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OppermannConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Oppermann's conjecture (open-territory loop, AXLE @4.32, axiom-clean; STRENGTHENS Legendre). OppermannLower n (prime in (n^2-n, n^2)) and OppermannUpper n (prime in (n^2, n^2+n)). CONCRETE: nine instances oppermann_2..oppermann_10, each with two-sided prime witnesses. BONUS oppermannUpper_imp_legendre: an Oppermann-upper prime is a Legendre prime (n(n+1) <= (n+1)^2), cross-linking to Brockian.LegendreConjecture -- records the logical relation Oppermann => Legendre. OppermannConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.OppermannConjecture.oppermann_9",
+      "kind": "theorem",
+      "module": "Brockian.OppermannConjecture",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OppermannConjecture.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Oppermann's conjecture (open-territory loop, AXLE @4.32, axiom-clean; STRENGTHENS Legendre). OppermannLower n (prime in (n^2-n, n^2)) and OppermannUpper n (prime in (n^2, n^2+n)). CONCRETE: nine instances oppermann_2..oppermann_10, each with two-sided prime witnesses. BONUS oppermannUpper_imp_legendre: an Oppermann-upper prime is a Legendre prime (n(n+1) <= (n+1)^2), cross-linking to Brockian.LegendreConjecture -- records the logical relation Oppermann => Legendre. OppermannConjecture is an unproven def -- OPEN, never asserted."
     },
     {
       "name": "Brockian.PartitionRecurrence.factor_eq_geo",

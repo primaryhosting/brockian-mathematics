@@ -338,6 +338,22 @@ Module: `Brockian.LegendreConjecture`. `LegendreConjecture` is an unproven `def`
 
 ---
 
+## Oppermann's conjecture (open — strengthens Legendre)
+
+**Claim.** For n > 1, is there a prime in both (n²−n, n²) and (n², n²+n)? Open (stronger than
+Legendre). Module: `Brockian.OppermannConjecture`. `OppermannConjecture` is an unproven `def`.
+
+**PROVED (concrete + relation):**
+- **Nine instances** (`oppermann_2`…`oppermann_10`): a prime in each of the two intervals for
+  n = 2…10, with explicit two-sided witnesses.
+- **Oppermann ⇒ Legendre** (`oppermannUpper_imp_legendre`): the upper interval (n², n²+n) ⊆
+  (n², (n+1)²), so an Oppermann-upper prime is a Legendre prime — a verified *logical relation*
+  between two open problems.
+
+**OPEN.** Whether both intervals always contain a prime.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

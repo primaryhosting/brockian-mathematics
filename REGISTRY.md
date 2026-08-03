@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 21
-- **DEFINITION**: 501
+- **CONJECTURE**: 22
+- **DEFINITION**: 503
 - **DISCHARGED**: 6
-- **PROVED**: 10060
+- **PROVED**: 10070
 
 ## Theorems
 
@@ -3324,6 +3324,19 @@
 | PROVED | `Brockian.OddPerfectConstraints.oddPerfect_one_lt` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.OddPerfectConstraints.oddPerfect_pos` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.OddPerfectConstraints.odd_of_prime_dvd_odd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.OppermannConjecture.OppermannConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.OppermannConjecture.OppermannLower` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.OppermannConjecture.OppermannUpper` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OppermannConjecture.oppermannUpper_imp_legendre` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OppermannConjecture.oppermann_10` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OppermannConjecture.oppermann_2` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OppermannConjecture.oppermann_3` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OppermannConjecture.oppermann_4` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OppermannConjecture.oppermann_5` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OppermannConjecture.oppermann_6` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OppermannConjecture.oppermann_7` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OppermannConjecture.oppermann_8` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OppermannConjecture.oppermann_9` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PartitionRecurrence.factor_eq_geo` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
 | DEFINITION | `Brockian.PartitionRecurrence.geo` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
 | PROVED | `Brockian.PartitionRecurrence.geo_mul` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
