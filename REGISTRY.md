@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 554
 - **DISCHARGED**: 6
-- **PROVED**: 10443
+- **PROVED**: 10444
 
 ## Theorems
 
@@ -1876,6 +1876,7 @@
 | PROVED | `Brockian.Erdos320.neg_log_one_sub_le_two_mul` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.Erdos320.neg_log_one_sub_nonneg` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.Erdos320.step_loss_bounds` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ErdosGinzburgZiv.erdos_ginzburg_ziv` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle 4c48bb51; AXLE @4.32 |
 | PROVED | `Brockian.ErdosPinned.entropy_le_log_card` | ✓ | verified | lean-4.32.0 | Erdős #604 harvest — verified unconditional entropy inequalities (one omitted in the paper); AXLE @4.32 |
 | PROVED | `Brockian.ErdosPinned.exp_neg_entropy_le_sum_sq` | ✓ | verified | lean-4.32.0 | Erdős #604 harvest — verified unconditional entropy inequalities (one omitted in the paper); AXLE @4.32 |
 | DEFINITION | `Brockian.ErdosStraus.ErdosStraus` | ✓ | verified | lean-4.32.0 | open-territory swarm; AXLE @4.32 |

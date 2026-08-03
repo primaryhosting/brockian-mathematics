@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10443,
+    "PROVED": 10444,
     "DEFINITION": 554,
     "CONJECTURE": 40,
     "CONDITIONAL": 21,
@@ -60198,6 +60198,39 @@
       "quarantine": true,
       "ledger_run": "frontier swarm; AXLE @4.32",
       "provenance_note": "SWARM-PROVED: the one unconditional analytic step of Erdos Problem #320 ('A Spectral Completion', C. Brock). For 0<=t<=1/2, 0 <= -log(1-t) <= t/(1-t) <= 2t -- the load-bearing inequality chain that turns per-step deficits into the loss exponent L(N) with 0<=L(N)<=2E(N). Everything downstream in the paper is CONDITIONAL on named conjectures; this chain is the piece that must hold unconditionally, so it is exactly what is verified. Erdos #320 itself remains OPEN."
+    },
+    {
+      "name": "Brockian.ErdosGinzburgZiv.erdos_ginzburg_ziv",
+      "kind": "theorem",
+      "module": "Brockian.ErdosGinzburgZiv",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ErdosGinzburgZiv.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle 4c48bb51; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED trophy theorem (Aristotle 4c48bb51), independently AXLE-verified @4.32, axiom-clean. erdos_ginzburg_ziv: among any 2n-1 elements of the cyclic group Z/n, some n of them sum to zero. A cornerstone of additive combinatorics (Erdos-Ginzburg-Ziv, 1961); the Davenport-constant / zero-sum family. Uses only main Mathlib. A genuinely hard theorem the decide-swarm could not touch."
     },
     {
       "name": "Brockian.ErdosPinned.entropy_le_log_card",
