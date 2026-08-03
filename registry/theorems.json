@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10142,
-    "DEFINITION": 523,
-    "CONJECTURE": 30,
+    "PROVED": 10150,
+    "DEFINITION": 525,
+    "CONJECTURE": 31,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -328640,6 +328640,357 @@
       "quarantine": true,
       "ledger_run": "swarm 2026-08-01 \u2014 bounded-potential multiplication operator (honest Gate-1 piece)",
       "provenance_note": "prime-Gaussian potential bounded/summable/continuous; bounded self-adjoint mult op on L\u00b2 (action pinned, not the zero-operator degenerate witness). Unbounded \u2212\u0394+V ess. self-adjointness OPEN (waits on Weyl)."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.OddSuperperfectExists",
+      "kind": "conjecture",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.Superperfect",
+      "kind": "def",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.sigma1",
+      "kind": "def",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.sigma1_prime",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.sigma_two_pow",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.six_not_superperfect",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.superperfect_16",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.superperfect_2",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.superperfect_4",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.superperfect_64",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.superperfect_two_pow_of_mersenne_prime",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
     },
     {
       "name": "Brockian.TransitionKernel.admissibleStarts",

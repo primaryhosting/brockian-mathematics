@@ -477,6 +477,22 @@ between the well-understood almost-perfect (−1) and perfect (0) regimes.
 
 ---
 
+## Superperfect numbers — does an odd one exist? (open)
+
+**Claim.** Is there an *odd* superperfect number (σ(σ(n)) = 2n)? None is known — open, parallel to
+odd perfect. Module: `Brockian.SuperperfectNumbers`. `OddSuperperfectExists` is an unproven `def`.
+
+**PROVED (concrete + Mersenne connection):**
+- **2, 4, 16, 64 are superperfect** (`superperfect_2/4/16/64`).
+- **2^(p−1) is superperfect when 2^p−1 is a Mersenne prime**
+  (`superperfect_two_pow_of_mersenne_prime`): σ(2^(p−1)) = mersenne p, then σ(mersenne p) = 2^p =
+  2·2^(p−1) — tying superperfect numbers to Mersenne primes (as with even perfect numbers).
+- A non-example (`six_not_superperfect`).
+
+**OPEN.** Whether any odd superperfect number exists.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:
