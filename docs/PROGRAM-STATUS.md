@@ -8,7 +8,7 @@ generated from AXLE attestations); nothing is hand-asserted. Regenerate with
 
 | Metric | Value |
 |---|---|
-| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,405** |
+| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,424** |
 | Open problems mapped on the frontier | **34** |
 | **CONDITIONAL** reductions (honest, named-hypothesis) | 21 |
 | **DISCHARGED** (conditional → unconditional) | 6 |
@@ -45,9 +45,13 @@ overclaim-firewall + no-theater lint) on every commit.
 
 - **Frontier lane** (curated) — accept a new finite module only when it tests a new general theorem or
   adds a materially useful structural reduction. Automatic range/count expansion is paused.
-- **Hard-proof lane** (Harmonic / Aristotle) — heavy theorems offloaded to stronger compute (Euler's
-  form for odd perfect numbers, Mersenne-exponent-prime, Korselt⇒Carmichael, Wilson). Solutions return,
-  get AXLE-verified, and become new PROVED entries. Currently 4 jobs confirmed queued.
+- **Hard-proof lane** (Harmonic / Aristotle) — heavy theorems offloaded to stronger compute. **Five hard
+  theorems harvested and integrated so far**, each independently AXLE-verified @4.32 and axiom-clean:
+  Euler's form for odd perfect numbers, Mersenne-exponent-prime, Korselt⇒Carmichael (Fermat little
+  theorem for all bases), the full Wilson iff, and odd-perfect ≡ 1 mod 4. The discipline that emerged:
+  *Harmonic proposes, our AXLE @4.32 disposes* — two returned proofs (even-perfect mod 9 / triangular)
+  were **rejected** because they built against the Mathlib Archive (4.28 surface) rather than our
+  toolchain; they were re-queued with no-Archive instructions.
 - **Depth lane** (primary) — oscillator ESA, the concrete weighted Rellich embedding, unbounded
   spectral mapping, and Mathlib extraction of the general Weyl/Cayley results.
 
@@ -75,8 +79,8 @@ superperfect, odd harmonic (Ore). Five ancient existence questions sharing one s
 
 ## Next steps
 
-- Harvest returning **Harmonic proofs** (Euler form, Mersenne-exponent, Korselt⇒Carmichael, Wilson)
-  and integrate the AXLE-verified ones.
+- Harvest the re-queued **even-perfect trio** (mod 9 / triangular / last-digit) once Archive-free proofs
+  return, plus odd-perfect-three-primes and any further hard targets.
 - Prove **oscillator ESA** and instantiate the concrete **weighted Rellich** compact embedding.
 - Add unbounded spectral mapping and eigenvalue isolation after compact resolvent is instantiated.
 - Prepare `WeylUpstream` and the compact-eigenspace theorem as Mathlib-quality submissions.
