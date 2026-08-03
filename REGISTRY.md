@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 2
-- **DEFINITION**: 372
+- **DEFINITION**: 373
 - **DISCHARGED**: 6
-- **PROVED**: 3183
+- **PROVED**: 3190
 
 ## Theorems
 
@@ -1443,6 +1443,14 @@
 | PROVED | `Brockian.OddDistinctPartition.parts_subset_Icc` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.OddDistinctPartition.powerSeries_odds_eq_distincts` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.OddDistinctPartition.toFinset_inj_on_distincts` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.OddPerfectConstraints.OddPerfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectConstraints.even_factorization_of_isSquare` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectConstraints.oddPerfect_not_prime_pow` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectConstraints.oddPerfect_not_square` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectConstraints.oddPerfect_not_two_dvd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectConstraints.oddPerfect_one_lt` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectConstraints.oddPerfect_pos` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectConstraints.odd_of_prime_dvd_odd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PartitionRecurrence.factor_eq_geo` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
 | DEFINITION | `Brockian.PartitionRecurrence.geo` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |
 | PROVED | `Brockian.PartitionRecurrence.geo_mul` | ✓ | verified | lean-4.32.0 | batch — Euler partition recurrence UNCONDITIONAL from the proved PST; AXLE @4.32 |

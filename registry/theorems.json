@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 3183,
-    "DEFINITION": 372,
+    "PROVED": 3190,
+    "DEFINITION": 373,
     "CONDITIONAL": 21,
     "CONJECTURE": 2,
     "DISCHARGED": 6
@@ -46263,6 +46263,266 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.OddPerfectConstraints.OddPerfect",
+      "kind": "def",
+      "module": "Brockian.OddPerfectConstraints",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectConstraints.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY necessary conditions for odd perfect numbers (open ~2000 years; existence unknown). Open-territory loop, AXLE @4.32, axiom-clean. FLAGSHIP oddPerfect_not_square: an odd perfect number cannot be a perfect square (sigma of an odd square is odd, but Perfect means sigma n = 2n even -> contradiction). Plus oddPerfect_not_prime_pow (not a prime power) and sanity conditions (positive, odd, >1). All theorems are IF-an-odd-perfect-number-exists-THEN necessary conditions; existence is NEVER asserted or denied. Euler's form p^k*m^2 was the stretch and honestly dropped (not proved)."
+    },
+    {
+      "name": "Brockian.OddPerfectConstraints.even_factorization_of_isSquare",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectConstraints",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectConstraints.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY necessary conditions for odd perfect numbers (open ~2000 years; existence unknown). Open-territory loop, AXLE @4.32, axiom-clean. FLAGSHIP oddPerfect_not_square: an odd perfect number cannot be a perfect square (sigma of an odd square is odd, but Perfect means sigma n = 2n even -> contradiction). Plus oddPerfect_not_prime_pow (not a prime power) and sanity conditions (positive, odd, >1). All theorems are IF-an-odd-perfect-number-exists-THEN necessary conditions; existence is NEVER asserted or denied. Euler's form p^k*m^2 was the stretch and honestly dropped (not proved)."
+    },
+    {
+      "name": "Brockian.OddPerfectConstraints.oddPerfect_not_prime_pow",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectConstraints",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectConstraints.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY necessary conditions for odd perfect numbers (open ~2000 years; existence unknown). Open-territory loop, AXLE @4.32, axiom-clean. FLAGSHIP oddPerfect_not_square: an odd perfect number cannot be a perfect square (sigma of an odd square is odd, but Perfect means sigma n = 2n even -> contradiction). Plus oddPerfect_not_prime_pow (not a prime power) and sanity conditions (positive, odd, >1). All theorems are IF-an-odd-perfect-number-exists-THEN necessary conditions; existence is NEVER asserted or denied. Euler's form p^k*m^2 was the stretch and honestly dropped (not proved)."
+    },
+    {
+      "name": "Brockian.OddPerfectConstraints.oddPerfect_not_square",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectConstraints",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectConstraints.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY necessary conditions for odd perfect numbers (open ~2000 years; existence unknown). Open-territory loop, AXLE @4.32, axiom-clean. FLAGSHIP oddPerfect_not_square: an odd perfect number cannot be a perfect square (sigma of an odd square is odd, but Perfect means sigma n = 2n even -> contradiction). Plus oddPerfect_not_prime_pow (not a prime power) and sanity conditions (positive, odd, >1). All theorems are IF-an-odd-perfect-number-exists-THEN necessary conditions; existence is NEVER asserted or denied. Euler's form p^k*m^2 was the stretch and honestly dropped (not proved)."
+    },
+    {
+      "name": "Brockian.OddPerfectConstraints.oddPerfect_not_two_dvd",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectConstraints",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectConstraints.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY necessary conditions for odd perfect numbers (open ~2000 years; existence unknown). Open-territory loop, AXLE @4.32, axiom-clean. FLAGSHIP oddPerfect_not_square: an odd perfect number cannot be a perfect square (sigma of an odd square is odd, but Perfect means sigma n = 2n even -> contradiction). Plus oddPerfect_not_prime_pow (not a prime power) and sanity conditions (positive, odd, >1). All theorems are IF-an-odd-perfect-number-exists-THEN necessary conditions; existence is NEVER asserted or denied. Euler's form p^k*m^2 was the stretch and honestly dropped (not proved)."
+    },
+    {
+      "name": "Brockian.OddPerfectConstraints.oddPerfect_one_lt",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectConstraints",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectConstraints.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY necessary conditions for odd perfect numbers (open ~2000 years; existence unknown). Open-territory loop, AXLE @4.32, axiom-clean. FLAGSHIP oddPerfect_not_square: an odd perfect number cannot be a perfect square (sigma of an odd square is odd, but Perfect means sigma n = 2n even -> contradiction). Plus oddPerfect_not_prime_pow (not a prime power) and sanity conditions (positive, odd, >1). All theorems are IF-an-odd-perfect-number-exists-THEN necessary conditions; existence is NEVER asserted or denied. Euler's form p^k*m^2 was the stretch and honestly dropped (not proved)."
+    },
+    {
+      "name": "Brockian.OddPerfectConstraints.oddPerfect_pos",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectConstraints",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectConstraints.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY necessary conditions for odd perfect numbers (open ~2000 years; existence unknown). Open-territory loop, AXLE @4.32, axiom-clean. FLAGSHIP oddPerfect_not_square: an odd perfect number cannot be a perfect square (sigma of an odd square is odd, but Perfect means sigma n = 2n even -> contradiction). Plus oddPerfect_not_prime_pow (not a prime power) and sanity conditions (positive, odd, >1). All theorems are IF-an-odd-perfect-number-exists-THEN necessary conditions; existence is NEVER asserted or denied. Euler's form p^k*m^2 was the stretch and honestly dropped (not proved)."
+    },
+    {
+      "name": "Brockian.OddPerfectConstraints.odd_of_prime_dvd_odd",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectConstraints",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectConstraints.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY necessary conditions for odd perfect numbers (open ~2000 years; existence unknown). Open-territory loop, AXLE @4.32, axiom-clean. FLAGSHIP oddPerfect_not_square: an odd perfect number cannot be a perfect square (sigma of an odd square is odd, but Perfect means sigma n = 2n even -> contradiction). Plus oddPerfect_not_prime_pow (not a prime power) and sanity conditions (positive, odd, >1). All theorems are IF-an-odd-perfect-number-exists-THEN necessary conditions; existence is NEVER asserted or denied. Euler's form p^k*m^2 was the stretch and honestly dropped (not proved)."
     },
     {
       "name": "Brockian.PartitionRecurrence.factor_eq_geo",

@@ -236,3 +236,4 @@ import Brockian.PentagonCharacterMultiplicity
 import Brockian.PentagonEquivariance
 import Brockian.ErdosStraus
 import Brockian.ErdosStrausResidues
+import Brockian.OddPerfectConstraints
