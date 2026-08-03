@@ -134,6 +134,21 @@ aliquot sum)? Module: `Brockian.AmicableNumbers`. `AmicableInfinitude` is an unp
 
 ---
 
+## Giuga numbers (odd-Giuga existence open)
+
+**Claim.** Does an *odd* Giuga number exist? (A Giuga number is a composite n > 1 with p ∣ (n/p − 1)
+for every prime p ∣ n.) Open — exactly parallel to the odd perfect number problem.
+Module: `Brockian.GiugaNumbers`. `OddGiugaExists` is an unproven `def`.
+
+**PROVED:**
+- **30 and 858 are Giuga numbers** (`giuga_30`, `giuga_858`) — concrete verified instances.
+- **Every Giuga number is squarefree** (`giugaNumber_squarefree`): if p² ∣ n then p ∣ (n/p) and
+  p ∣ (n/p − 1), forcing p ∣ 1.
+
+**OPEN.** Whether any odd Giuga number exists.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

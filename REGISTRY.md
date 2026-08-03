@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 6
-- **DEFINITION**: 428
+- **CONJECTURE**: 7
+- **DEFINITION**: 429
 - **DISCHARGED**: 6
-- **PROVED**: 6273
+- **PROVED**: 6276
 
 ## Theorems
 
@@ -1432,6 +1432,11 @@
 | PROVED | `Brockian.Geometry.golden_ratio_in_C5_spectrum` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.pentagon_golden_diagonal` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.pentagon_two_distances` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
+| DEFINITION | `Brockian.GiugaNumbers.GiugaNumber` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.GiugaNumbers.OddGiugaExists` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.GiugaNumbers.giugaNumber_squarefree` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.GiugaNumbers.giuga_30` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.GiugaNumbers.giuga_858` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.Goldbach.CovarianceScaffold.K23` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.CovarianceScaffold.K23_above_even_nonthree_baseline_iff` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Goldbach.CovarianceScaffold.K23_of_not_two_dvd` | ✓ | verified | lean-4.32.0 |  |

@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 6273,
-    "DEFINITION": 428,
-    "CONJECTURE": 6,
+    "PROVED": 6276,
+    "DEFINITION": 429,
+    "CONJECTURE": 7,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -45823,6 +45823,163 @@
       "quarantine": true,
       "ledger_run": "runs 16 / 54 / 70 / 73 \u2014 pentagon golden diagonal, two-distance, C\u2085 spectrum",
       "provenance_note": "golden diagonal=\u03c6\u00b7side, two-distance, \u2212\u03c6\u2208spec(C\u2085); golden_unique_to_five NOT ported (see PORT-QUEUE)"
+    },
+    {
+      "name": "Brockian.GiugaNumbers.GiugaNumber",
+      "kind": "def",
+      "module": "Brockian.GiugaNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GiugaNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Giuga numbers (open-territory loop, AXLE @4.32, axiom-clean). GiugaNumber n = composite n>1 with p|(n/p-1) for every prime p|n. CONCRETE verified: giuga_30 (30=2*3*5, flagship) and giuga_858 (858=2*3*11*13, bonus). FLAGSHIP structural necessary condition giugaNumber_squarefree: every Giuga number is squarefree (p^2|n => p|(n/p) and p|(n/p-1) => p|1). The genuinely OPEN question -- does an ODD Giuga number exist? (parallel to odd perfect numbers) -- is recorded as an unproven def OddGiugaExists; nothing asserts or denies it."
+    },
+    {
+      "name": "Brockian.GiugaNumbers.OddGiugaExists",
+      "kind": "conjecture",
+      "module": "Brockian.GiugaNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GiugaNumbers.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Giuga numbers (open-territory loop, AXLE @4.32, axiom-clean). GiugaNumber n = composite n>1 with p|(n/p-1) for every prime p|n. CONCRETE verified: giuga_30 (30=2*3*5, flagship) and giuga_858 (858=2*3*11*13, bonus). FLAGSHIP structural necessary condition giugaNumber_squarefree: every Giuga number is squarefree (p^2|n => p|(n/p) and p|(n/p-1) => p|1). The genuinely OPEN question -- does an ODD Giuga number exist? (parallel to odd perfect numbers) -- is recorded as an unproven def OddGiugaExists; nothing asserts or denies it."
+    },
+    {
+      "name": "Brockian.GiugaNumbers.giugaNumber_squarefree",
+      "kind": "theorem",
+      "module": "Brockian.GiugaNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GiugaNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Giuga numbers (open-territory loop, AXLE @4.32, axiom-clean). GiugaNumber n = composite n>1 with p|(n/p-1) for every prime p|n. CONCRETE verified: giuga_30 (30=2*3*5, flagship) and giuga_858 (858=2*3*11*13, bonus). FLAGSHIP structural necessary condition giugaNumber_squarefree: every Giuga number is squarefree (p^2|n => p|(n/p) and p|(n/p-1) => p|1). The genuinely OPEN question -- does an ODD Giuga number exist? (parallel to odd perfect numbers) -- is recorded as an unproven def OddGiugaExists; nothing asserts or denies it."
+    },
+    {
+      "name": "Brockian.GiugaNumbers.giuga_30",
+      "kind": "theorem",
+      "module": "Brockian.GiugaNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GiugaNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Giuga numbers (open-territory loop, AXLE @4.32, axiom-clean). GiugaNumber n = composite n>1 with p|(n/p-1) for every prime p|n. CONCRETE verified: giuga_30 (30=2*3*5, flagship) and giuga_858 (858=2*3*11*13, bonus). FLAGSHIP structural necessary condition giugaNumber_squarefree: every Giuga number is squarefree (p^2|n => p|(n/p) and p|(n/p-1) => p|1). The genuinely OPEN question -- does an ODD Giuga number exist? (parallel to odd perfect numbers) -- is recorded as an unproven def OddGiugaExists; nothing asserts or denies it."
+    },
+    {
+      "name": "Brockian.GiugaNumbers.giuga_858",
+      "kind": "theorem",
+      "module": "Brockian.GiugaNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GiugaNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Giuga numbers (open-territory loop, AXLE @4.32, axiom-clean). GiugaNumber n = composite n>1 with p|(n/p-1) for every prime p|n. CONCRETE verified: giuga_30 (30=2*3*5, flagship) and giuga_858 (858=2*3*11*13, bonus). FLAGSHIP structural necessary condition giugaNumber_squarefree: every Giuga number is squarefree (p^2|n => p|(n/p) and p|(n/p-1) => p|1). The genuinely OPEN question -- does an ODD Giuga number exist? (parallel to odd perfect numbers) -- is recorded as an unproven def OddGiugaExists; nothing asserts or denies it."
     },
     {
       "name": "Brockian.Goldbach.CovarianceScaffold.K23",
