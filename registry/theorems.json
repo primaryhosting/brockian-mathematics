@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 8414,
-    "DEFINITION": 465,
-    "CONJECTURE": 12,
+    "PROVED": 8424,
+    "DEFINITION": 466,
+    "CONJECTURE": 13,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -269195,6 +269195,394 @@
       "quarantine": true,
       "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence",
       "provenance_note": "wires singular_series_pos' into downstream (roadmap #15). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; verdict re-checked by Claude's gate before integration."
+    },
+    {
+      "name": "Brockian.SophieGermain.SophieGermain",
+      "kind": "def",
+      "module": "Brockian.SophieGermain",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SophieGermain.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Sophie Germain primes (open-territory loop, AXLE @4.32, axiom-clean). SophieGermain p := p.Prime and (2p+1).Prime. CONCRETE: eight instances sg_{2,3,5,11,23,29,41,53}. FLAGSHIP STRUCTURAL sg_mod_six: a Sophie Germain prime p>3 satisfies p = 5 mod 6 (if p=1 mod 6 then 3|2p+1, forcing 2p+1=3, impossible). Corollary sg_safe_mod: the safe prime 2p+1 is 11 mod 12. The infinitude (SophieGermainInfinitude) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.SophieGermain.SophieGermainInfinitude",
+      "kind": "conjecture",
+      "module": "Brockian.SophieGermain",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SophieGermain.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Sophie Germain primes (open-territory loop, AXLE @4.32, axiom-clean). SophieGermain p := p.Prime and (2p+1).Prime. CONCRETE: eight instances sg_{2,3,5,11,23,29,41,53}. FLAGSHIP STRUCTURAL sg_mod_six: a Sophie Germain prime p>3 satisfies p = 5 mod 6 (if p=1 mod 6 then 3|2p+1, forcing 2p+1=3, impossible). Corollary sg_safe_mod: the safe prime 2p+1 is 11 mod 12. The infinitude (SophieGermainInfinitude) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.SophieGermain.sg_11",
+      "kind": "theorem",
+      "module": "Brockian.SophieGermain",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SophieGermain.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Sophie Germain primes (open-territory loop, AXLE @4.32, axiom-clean). SophieGermain p := p.Prime and (2p+1).Prime. CONCRETE: eight instances sg_{2,3,5,11,23,29,41,53}. FLAGSHIP STRUCTURAL sg_mod_six: a Sophie Germain prime p>3 satisfies p = 5 mod 6 (if p=1 mod 6 then 3|2p+1, forcing 2p+1=3, impossible). Corollary sg_safe_mod: the safe prime 2p+1 is 11 mod 12. The infinitude (SophieGermainInfinitude) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.SophieGermain.sg_2",
+      "kind": "theorem",
+      "module": "Brockian.SophieGermain",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SophieGermain.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Sophie Germain primes (open-territory loop, AXLE @4.32, axiom-clean). SophieGermain p := p.Prime and (2p+1).Prime. CONCRETE: eight instances sg_{2,3,5,11,23,29,41,53}. FLAGSHIP STRUCTURAL sg_mod_six: a Sophie Germain prime p>3 satisfies p = 5 mod 6 (if p=1 mod 6 then 3|2p+1, forcing 2p+1=3, impossible). Corollary sg_safe_mod: the safe prime 2p+1 is 11 mod 12. The infinitude (SophieGermainInfinitude) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.SophieGermain.sg_23",
+      "kind": "theorem",
+      "module": "Brockian.SophieGermain",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SophieGermain.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Sophie Germain primes (open-territory loop, AXLE @4.32, axiom-clean). SophieGermain p := p.Prime and (2p+1).Prime. CONCRETE: eight instances sg_{2,3,5,11,23,29,41,53}. FLAGSHIP STRUCTURAL sg_mod_six: a Sophie Germain prime p>3 satisfies p = 5 mod 6 (if p=1 mod 6 then 3|2p+1, forcing 2p+1=3, impossible). Corollary sg_safe_mod: the safe prime 2p+1 is 11 mod 12. The infinitude (SophieGermainInfinitude) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.SophieGermain.sg_29",
+      "kind": "theorem",
+      "module": "Brockian.SophieGermain",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SophieGermain.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Sophie Germain primes (open-territory loop, AXLE @4.32, axiom-clean). SophieGermain p := p.Prime and (2p+1).Prime. CONCRETE: eight instances sg_{2,3,5,11,23,29,41,53}. FLAGSHIP STRUCTURAL sg_mod_six: a Sophie Germain prime p>3 satisfies p = 5 mod 6 (if p=1 mod 6 then 3|2p+1, forcing 2p+1=3, impossible). Corollary sg_safe_mod: the safe prime 2p+1 is 11 mod 12. The infinitude (SophieGermainInfinitude) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.SophieGermain.sg_3",
+      "kind": "theorem",
+      "module": "Brockian.SophieGermain",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SophieGermain.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Sophie Germain primes (open-territory loop, AXLE @4.32, axiom-clean). SophieGermain p := p.Prime and (2p+1).Prime. CONCRETE: eight instances sg_{2,3,5,11,23,29,41,53}. FLAGSHIP STRUCTURAL sg_mod_six: a Sophie Germain prime p>3 satisfies p = 5 mod 6 (if p=1 mod 6 then 3|2p+1, forcing 2p+1=3, impossible). Corollary sg_safe_mod: the safe prime 2p+1 is 11 mod 12. The infinitude (SophieGermainInfinitude) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.SophieGermain.sg_41",
+      "kind": "theorem",
+      "module": "Brockian.SophieGermain",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SophieGermain.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Sophie Germain primes (open-territory loop, AXLE @4.32, axiom-clean). SophieGermain p := p.Prime and (2p+1).Prime. CONCRETE: eight instances sg_{2,3,5,11,23,29,41,53}. FLAGSHIP STRUCTURAL sg_mod_six: a Sophie Germain prime p>3 satisfies p = 5 mod 6 (if p=1 mod 6 then 3|2p+1, forcing 2p+1=3, impossible). Corollary sg_safe_mod: the safe prime 2p+1 is 11 mod 12. The infinitude (SophieGermainInfinitude) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.SophieGermain.sg_5",
+      "kind": "theorem",
+      "module": "Brockian.SophieGermain",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SophieGermain.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Sophie Germain primes (open-territory loop, AXLE @4.32, axiom-clean). SophieGermain p := p.Prime and (2p+1).Prime. CONCRETE: eight instances sg_{2,3,5,11,23,29,41,53}. FLAGSHIP STRUCTURAL sg_mod_six: a Sophie Germain prime p>3 satisfies p = 5 mod 6 (if p=1 mod 6 then 3|2p+1, forcing 2p+1=3, impossible). Corollary sg_safe_mod: the safe prime 2p+1 is 11 mod 12. The infinitude (SophieGermainInfinitude) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.SophieGermain.sg_53",
+      "kind": "theorem",
+      "module": "Brockian.SophieGermain",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SophieGermain.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Sophie Germain primes (open-territory loop, AXLE @4.32, axiom-clean). SophieGermain p := p.Prime and (2p+1).Prime. CONCRETE: eight instances sg_{2,3,5,11,23,29,41,53}. FLAGSHIP STRUCTURAL sg_mod_six: a Sophie Germain prime p>3 satisfies p = 5 mod 6 (if p=1 mod 6 then 3|2p+1, forcing 2p+1=3, impossible). Corollary sg_safe_mod: the safe prime 2p+1 is 11 mod 12. The infinitude (SophieGermainInfinitude) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.SophieGermain.sg_mod_six",
+      "kind": "theorem",
+      "module": "Brockian.SophieGermain",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SophieGermain.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Sophie Germain primes (open-territory loop, AXLE @4.32, axiom-clean). SophieGermain p := p.Prime and (2p+1).Prime. CONCRETE: eight instances sg_{2,3,5,11,23,29,41,53}. FLAGSHIP STRUCTURAL sg_mod_six: a Sophie Germain prime p>3 satisfies p = 5 mod 6 (if p=1 mod 6 then 3|2p+1, forcing 2p+1=3, impossible). Corollary sg_safe_mod: the safe prime 2p+1 is 11 mod 12. The infinitude (SophieGermainInfinitude) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.SophieGermain.sg_safe_mod",
+      "kind": "theorem",
+      "module": "Brockian.SophieGermain",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SophieGermain.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Sophie Germain primes (open-territory loop, AXLE @4.32, axiom-clean). SophieGermain p := p.Prime and (2p+1).Prime. CONCRETE: eight instances sg_{2,3,5,11,23,29,41,53}. FLAGSHIP STRUCTURAL sg_mod_six: a Sophie Germain prime p>3 satisfies p = 5 mod 6 (if p=1 mod 6 then 3|2p+1, forcing 2p+1=3, impossible). Corollary sg_safe_mod: the safe prime 2p+1 is 11 mod 12. The infinitude (SophieGermainInfinitude) is an unproven def -- OPEN, never asserted."
     },
     {
       "name": "Brockian.Spectral.cos_two_pi_div_five",

@@ -214,6 +214,21 @@ problems in mathematics. Module: `Brockian.TwinPrimes`. `TwinPrimeConjecture` is
 
 ---
 
+## Sophie Germain primes (infinitude open)
+
+**Claim.** Are there infinitely many primes p with 2p+1 also prime? Open.
+Module: `Brockian.SophieGermain`. `SophieGermainInfinitude` is an unproven `def`.
+
+**PROVED (concrete + structural):**
+- **Eight Sophie Germain primes** (`sg_2`, `sg_3`, `sg_5`, `sg_11`, `sg_23`, `sg_29`, `sg_41`, `sg_53`).
+- **A Sophie Germain prime p > 3 satisfies p ≡ 5 (mod 6)** (`sg_mod_six`): if p ≡ 1 (mod 6) then
+  3 ∣ (2p+1), forcing the prime 2p+1 = 3, impossible.
+- Corollary: the safe prime 2p+1 ≡ 11 (mod 12) (`sg_safe_mod`).
+
+**OPEN.** Whether infinitely many Sophie Germain primes exist.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:
