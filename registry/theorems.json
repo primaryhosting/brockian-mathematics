@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10348,
-    "DEFINITION": 530,
-    "CONJECTURE": 33,
+    "PROVED": 10353,
+    "DEFINITION": 532,
+    "CONJECTURE": 34,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -337593,6 +337593,258 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.SixthUnitaryPerfectExists",
+      "kind": "conjecture",
+      "module": "Brockian.UnitaryPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/UnitaryPerfect.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY unitary perfect numbers (open-territory loop, AXLE @4.32, axiom-clean). unitaryDivisorSum = sum of unitary divisors (d|n with gcd(d,n/d)=1); UnitaryPerfect n := sigma*(n)=2n. CONCRETE: unitaryPerfect_{6,60,90} (three of the five known). Non-example not_unitaryPerfect_28 (perfect but not unitary-perfect: sigma*(28)=40 != 56); contrast unitaryDivisorSum_eq_sigma_6 (sigma*=sigma for squarefree 6). Only FIVE unitary perfect numbers are known; SixthUnitaryPerfectExists (does a 6th exist beyond 87360?) is an unproven def -- OPEN, never asserted or denied."
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.UnitaryPerfect",
+      "kind": "def",
+      "module": "Brockian.UnitaryPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/UnitaryPerfect.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY unitary perfect numbers (open-territory loop, AXLE @4.32, axiom-clean). unitaryDivisorSum = sum of unitary divisors (d|n with gcd(d,n/d)=1); UnitaryPerfect n := sigma*(n)=2n. CONCRETE: unitaryPerfect_{6,60,90} (three of the five known). Non-example not_unitaryPerfect_28 (perfect but not unitary-perfect: sigma*(28)=40 != 56); contrast unitaryDivisorSum_eq_sigma_6 (sigma*=sigma for squarefree 6). Only FIVE unitary perfect numbers are known; SixthUnitaryPerfectExists (does a 6th exist beyond 87360?) is an unproven def -- OPEN, never asserted or denied."
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.not_unitaryPerfect_28",
+      "kind": "theorem",
+      "module": "Brockian.UnitaryPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/UnitaryPerfect.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY unitary perfect numbers (open-territory loop, AXLE @4.32, axiom-clean). unitaryDivisorSum = sum of unitary divisors (d|n with gcd(d,n/d)=1); UnitaryPerfect n := sigma*(n)=2n. CONCRETE: unitaryPerfect_{6,60,90} (three of the five known). Non-example not_unitaryPerfect_28 (perfect but not unitary-perfect: sigma*(28)=40 != 56); contrast unitaryDivisorSum_eq_sigma_6 (sigma*=sigma for squarefree 6). Only FIVE unitary perfect numbers are known; SixthUnitaryPerfectExists (does a 6th exist beyond 87360?) is an unproven def -- OPEN, never asserted or denied."
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.unitaryDivisorSum",
+      "kind": "def",
+      "module": "Brockian.UnitaryPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/UnitaryPerfect.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY unitary perfect numbers (open-territory loop, AXLE @4.32, axiom-clean). unitaryDivisorSum = sum of unitary divisors (d|n with gcd(d,n/d)=1); UnitaryPerfect n := sigma*(n)=2n. CONCRETE: unitaryPerfect_{6,60,90} (three of the five known). Non-example not_unitaryPerfect_28 (perfect but not unitary-perfect: sigma*(28)=40 != 56); contrast unitaryDivisorSum_eq_sigma_6 (sigma*=sigma for squarefree 6). Only FIVE unitary perfect numbers are known; SixthUnitaryPerfectExists (does a 6th exist beyond 87360?) is an unproven def -- OPEN, never asserted or denied."
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.unitaryDivisorSum_eq_sigma_6",
+      "kind": "theorem",
+      "module": "Brockian.UnitaryPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/UnitaryPerfect.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY unitary perfect numbers (open-territory loop, AXLE @4.32, axiom-clean). unitaryDivisorSum = sum of unitary divisors (d|n with gcd(d,n/d)=1); UnitaryPerfect n := sigma*(n)=2n. CONCRETE: unitaryPerfect_{6,60,90} (three of the five known). Non-example not_unitaryPerfect_28 (perfect but not unitary-perfect: sigma*(28)=40 != 56); contrast unitaryDivisorSum_eq_sigma_6 (sigma*=sigma for squarefree 6). Only FIVE unitary perfect numbers are known; SixthUnitaryPerfectExists (does a 6th exist beyond 87360?) is an unproven def -- OPEN, never asserted or denied."
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.unitaryPerfect_6",
+      "kind": "theorem",
+      "module": "Brockian.UnitaryPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/UnitaryPerfect.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY unitary perfect numbers (open-territory loop, AXLE @4.32, axiom-clean). unitaryDivisorSum = sum of unitary divisors (d|n with gcd(d,n/d)=1); UnitaryPerfect n := sigma*(n)=2n. CONCRETE: unitaryPerfect_{6,60,90} (three of the five known). Non-example not_unitaryPerfect_28 (perfect but not unitary-perfect: sigma*(28)=40 != 56); contrast unitaryDivisorSum_eq_sigma_6 (sigma*=sigma for squarefree 6). Only FIVE unitary perfect numbers are known; SixthUnitaryPerfectExists (does a 6th exist beyond 87360?) is an unproven def -- OPEN, never asserted or denied."
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.unitaryPerfect_60",
+      "kind": "theorem",
+      "module": "Brockian.UnitaryPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/UnitaryPerfect.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY unitary perfect numbers (open-territory loop, AXLE @4.32, axiom-clean). unitaryDivisorSum = sum of unitary divisors (d|n with gcd(d,n/d)=1); UnitaryPerfect n := sigma*(n)=2n. CONCRETE: unitaryPerfect_{6,60,90} (three of the five known). Non-example not_unitaryPerfect_28 (perfect but not unitary-perfect: sigma*(28)=40 != 56); contrast unitaryDivisorSum_eq_sigma_6 (sigma*=sigma for squarefree 6). Only FIVE unitary perfect numbers are known; SixthUnitaryPerfectExists (does a 6th exist beyond 87360?) is an unproven def -- OPEN, never asserted or denied."
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.unitaryPerfect_90",
+      "kind": "theorem",
+      "module": "Brockian.UnitaryPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/UnitaryPerfect.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY unitary perfect numbers (open-territory loop, AXLE @4.32, axiom-clean). unitaryDivisorSum = sum of unitary divisors (d|n with gcd(d,n/d)=1); UnitaryPerfect n := sigma*(n)=2n. CONCRETE: unitaryPerfect_{6,60,90} (three of the five known). Non-example not_unitaryPerfect_28 (perfect but not unitary-perfect: sigma*(28)=40 != 56); contrast unitaryDivisorSum_eq_sigma_6 (sigma*=sigma for squarefree 6). Only FIVE unitary perfect numbers are known; SixthUnitaryPerfectExists (does a 6th exist beyond 87360?) is an unproven def -- OPEN, never asserted or denied."
     },
     {
       "name": "Brockian.WeirdNumbers.Abundant",

@@ -1,0 +1,83 @@
+{
+  "module": "Brockian.UnitaryPerfect",
+  "environment": "lean-4.32.0",
+  "module_verified": true,
+  "declarations": [
+    {
+      "name": "Brockian.UnitaryPerfect.SixthUnitaryPerfectExists",
+      "kind": "conjecture",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.UnitaryPerfect",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.not_unitaryPerfect_28",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.unitaryDivisorSum",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.unitaryDivisorSum_eq_sigma_6",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.unitaryPerfect_6",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.unitaryPerfect_60",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.UnitaryPerfect.unitaryPerfect_90",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    }
+  ]
+}

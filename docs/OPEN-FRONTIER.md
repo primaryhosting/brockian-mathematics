@@ -493,6 +493,21 @@ odd perfect. Module: `Brockian.SuperperfectNumbers`. `OddSuperperfectExists` is 
 
 ---
 
+## Unitary perfect numbers — is there a sixth? (open)
+
+**Claim.** Does a sixth unitary perfect number (σ*(n) = 2n over unitary divisors) exist? Only five are
+known: 6, 60, 90, 87360, and a 24-digit number. Open. Module: `Brockian.UnitaryPerfect`.
+`SixthUnitaryPerfectExists` is an unproven `def`.
+
+**PROVED (concrete):**
+- **6, 60, 90 are unitary perfect** (`unitaryPerfect_6/60/90`) — three of the five known.
+- Non-example (`not_unitaryPerfect_28`: perfect but not unitary-perfect, σ* = 40 ≠ 56) and the
+  squarefree contrast (`unitaryDivisorSum_eq_sigma_6`: σ* = σ for squarefree n).
+
+**OPEN.** Whether any unitary perfect number exists beyond the five known.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

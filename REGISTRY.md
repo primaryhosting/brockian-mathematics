@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 33
-- **DEFINITION**: 530
+- **CONJECTURE**: 34
+- **DEFINITION**: 532
 - **DISCHARGED**: 6
-- **PROVED**: 10348
+- **PROVED**: 10353
 
 ## Theorems
 
@@ -10323,6 +10323,14 @@
 | PROVED | `Brockian.TwinPrimes.twin_71` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.TwinPrimes.twin_form_6k` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.TwinPrimes.twin_middle_div_six` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.UnitaryPerfect.SixthUnitaryPerfectExists` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.UnitaryPerfect.UnitaryPerfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.UnitaryPerfect.not_unitaryPerfect_28` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.UnitaryPerfect.unitaryDivisorSum` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.UnitaryPerfect.unitaryDivisorSum_eq_sigma_6` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.UnitaryPerfect.unitaryPerfect_6` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.UnitaryPerfect.unitaryPerfect_60` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.UnitaryPerfect.unitaryPerfect_90` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.WeirdNumbers.Abundant` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.WeirdNumbers.OddWeirdExists` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.WeirdNumbers.Semiperfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |

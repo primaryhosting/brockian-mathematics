@@ -702,3 +702,4 @@ import Brockian.WilsonPrimes
 import Brockian.QuasiperfectNumbers
 import Brockian.SuperperfectNumbers
 import Brockian.HyperperfectNumbers
+import Brockian.UnitaryPerfect
