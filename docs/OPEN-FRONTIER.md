@@ -541,6 +541,20 @@ unproven `def`.
 
 ---
 
+## Ore harmonic divisor numbers — is there an odd one? (open)
+
+**Claim.** Does an odd harmonic divisor number > 1 exist? (Harmonic = the harmonic mean of its
+divisors is an integer, σ(n) ∣ n·τ(n).) Ore conjectured none exist — which would *imply* no odd
+perfect number. Open. Module: `Brockian.OreHarmonicNumbers`. `OddHarmonicExists` is an unproven `def`.
+
+**PROVED (concrete):**
+- **6, 28, 140, 270, 496 are harmonic divisor numbers** (`harmonic_6/28/140/270/496`); non-example
+  (`not_harmonic_4`).
+
+**OPEN.** Whether any odd harmonic divisor number > 1 exists (Ore's conjecture; would settle odd perfect).
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

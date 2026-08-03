@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 37
-- **DEFINITION**: 536
+- **CONJECTURE**: 38
+- **DEFINITION**: 539
 - **DISCHARGED**: 6
-- **PROVED**: 10375
+- **PROVED**: 10381
 
 ## Theorems
 
@@ -3443,6 +3443,16 @@
 | PROVED | `Brockian.OppermannConjecture.oppermann_7` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.OppermannConjecture.oppermann_8` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.OppermannConjecture.oppermann_9` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.OreHarmonicNumbers.Harmonic` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.OreHarmonicNumbers.OddHarmonicExists` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OreHarmonicNumbers.harmonic_140` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OreHarmonicNumbers.harmonic_270` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OreHarmonicNumbers.harmonic_28` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OreHarmonicNumbers.harmonic_496` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OreHarmonicNumbers.harmonic_6` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.OreHarmonicNumbers.not_harmonic_4` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.OreHarmonicNumbers.sigma1` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.OreHarmonicNumbers.tau` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.PalindromicPrimes.IsPalindrome` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.PalindromicPrimes.PalindromicPrime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.PalindromicPrimes.PalindromicPrimeInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |

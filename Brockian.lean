@@ -705,3 +705,4 @@ import Brockian.HyperperfectNumbers
 import Brockian.UnitaryPerfect
 import Brockian.BetrothedNumbers
 import Brockian.RuthAaronPairs
+import Brockian.OreHarmonicNumbers

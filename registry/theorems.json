@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10375,
-    "DEFINITION": 536,
-    "CONJECTURE": 37,
+    "PROVED": 10381,
+    "DEFINITION": 539,
+    "CONJECTURE": 38,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -110944,6 +110944,320 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY Oppermann's conjecture (open-territory loop, AXLE @4.32, axiom-clean; STRENGTHENS Legendre). OppermannLower n (prime in (n^2-n, n^2)) and OppermannUpper n (prime in (n^2, n^2+n)). CONCRETE: nine instances oppermann_2..oppermann_10, each with two-sided prime witnesses. BONUS oppermannUpper_imp_legendre: an Oppermann-upper prime is a Legendre prime (n(n+1) <= (n+1)^2), cross-linking to Brockian.LegendreConjecture -- records the logical relation Oppermann => Legendre. OppermannConjecture is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.OreHarmonicNumbers.Harmonic",
+      "kind": "def",
+      "module": "Brockian.OreHarmonicNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OreHarmonicNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ore harmonic divisor numbers (open-territory loop, AXLE @4.32, axiom-clean). Harmonic n := sigma(n) | n*tau(n) (harmonic mean of divisors is integer). CONCRETE: harmonic_{6,28,140,270,496}; non-example not_harmonic_4. Every perfect number is harmonic; Ore's conjecture (no odd harmonic number > 1) would IMPLY no odd perfect number -- the OPEN question OddHarmonicExists (does an odd harmonic divisor number > 1 exist?) is an unproven def, never asserted or denied. Connects to the odd-perfect cluster."
+    },
+    {
+      "name": "Brockian.OreHarmonicNumbers.OddHarmonicExists",
+      "kind": "conjecture",
+      "module": "Brockian.OreHarmonicNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OreHarmonicNumbers.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ore harmonic divisor numbers (open-territory loop, AXLE @4.32, axiom-clean). Harmonic n := sigma(n) | n*tau(n) (harmonic mean of divisors is integer). CONCRETE: harmonic_{6,28,140,270,496}; non-example not_harmonic_4. Every perfect number is harmonic; Ore's conjecture (no odd harmonic number > 1) would IMPLY no odd perfect number -- the OPEN question OddHarmonicExists (does an odd harmonic divisor number > 1 exist?) is an unproven def, never asserted or denied. Connects to the odd-perfect cluster."
+    },
+    {
+      "name": "Brockian.OreHarmonicNumbers.harmonic_140",
+      "kind": "theorem",
+      "module": "Brockian.OreHarmonicNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OreHarmonicNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ore harmonic divisor numbers (open-territory loop, AXLE @4.32, axiom-clean). Harmonic n := sigma(n) | n*tau(n) (harmonic mean of divisors is integer). CONCRETE: harmonic_{6,28,140,270,496}; non-example not_harmonic_4. Every perfect number is harmonic; Ore's conjecture (no odd harmonic number > 1) would IMPLY no odd perfect number -- the OPEN question OddHarmonicExists (does an odd harmonic divisor number > 1 exist?) is an unproven def, never asserted or denied. Connects to the odd-perfect cluster."
+    },
+    {
+      "name": "Brockian.OreHarmonicNumbers.harmonic_270",
+      "kind": "theorem",
+      "module": "Brockian.OreHarmonicNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OreHarmonicNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ore harmonic divisor numbers (open-territory loop, AXLE @4.32, axiom-clean). Harmonic n := sigma(n) | n*tau(n) (harmonic mean of divisors is integer). CONCRETE: harmonic_{6,28,140,270,496}; non-example not_harmonic_4. Every perfect number is harmonic; Ore's conjecture (no odd harmonic number > 1) would IMPLY no odd perfect number -- the OPEN question OddHarmonicExists (does an odd harmonic divisor number > 1 exist?) is an unproven def, never asserted or denied. Connects to the odd-perfect cluster."
+    },
+    {
+      "name": "Brockian.OreHarmonicNumbers.harmonic_28",
+      "kind": "theorem",
+      "module": "Brockian.OreHarmonicNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OreHarmonicNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ore harmonic divisor numbers (open-territory loop, AXLE @4.32, axiom-clean). Harmonic n := sigma(n) | n*tau(n) (harmonic mean of divisors is integer). CONCRETE: harmonic_{6,28,140,270,496}; non-example not_harmonic_4. Every perfect number is harmonic; Ore's conjecture (no odd harmonic number > 1) would IMPLY no odd perfect number -- the OPEN question OddHarmonicExists (does an odd harmonic divisor number > 1 exist?) is an unproven def, never asserted or denied. Connects to the odd-perfect cluster."
+    },
+    {
+      "name": "Brockian.OreHarmonicNumbers.harmonic_496",
+      "kind": "theorem",
+      "module": "Brockian.OreHarmonicNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OreHarmonicNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ore harmonic divisor numbers (open-territory loop, AXLE @4.32, axiom-clean). Harmonic n := sigma(n) | n*tau(n) (harmonic mean of divisors is integer). CONCRETE: harmonic_{6,28,140,270,496}; non-example not_harmonic_4. Every perfect number is harmonic; Ore's conjecture (no odd harmonic number > 1) would IMPLY no odd perfect number -- the OPEN question OddHarmonicExists (does an odd harmonic divisor number > 1 exist?) is an unproven def, never asserted or denied. Connects to the odd-perfect cluster."
+    },
+    {
+      "name": "Brockian.OreHarmonicNumbers.harmonic_6",
+      "kind": "theorem",
+      "module": "Brockian.OreHarmonicNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OreHarmonicNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ore harmonic divisor numbers (open-territory loop, AXLE @4.32, axiom-clean). Harmonic n := sigma(n) | n*tau(n) (harmonic mean of divisors is integer). CONCRETE: harmonic_{6,28,140,270,496}; non-example not_harmonic_4. Every perfect number is harmonic; Ore's conjecture (no odd harmonic number > 1) would IMPLY no odd perfect number -- the OPEN question OddHarmonicExists (does an odd harmonic divisor number > 1 exist?) is an unproven def, never asserted or denied. Connects to the odd-perfect cluster."
+    },
+    {
+      "name": "Brockian.OreHarmonicNumbers.not_harmonic_4",
+      "kind": "theorem",
+      "module": "Brockian.OreHarmonicNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OreHarmonicNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ore harmonic divisor numbers (open-territory loop, AXLE @4.32, axiom-clean). Harmonic n := sigma(n) | n*tau(n) (harmonic mean of divisors is integer). CONCRETE: harmonic_{6,28,140,270,496}; non-example not_harmonic_4. Every perfect number is harmonic; Ore's conjecture (no odd harmonic number > 1) would IMPLY no odd perfect number -- the OPEN question OddHarmonicExists (does an odd harmonic divisor number > 1 exist?) is an unproven def, never asserted or denied. Connects to the odd-perfect cluster."
+    },
+    {
+      "name": "Brockian.OreHarmonicNumbers.sigma1",
+      "kind": "def",
+      "module": "Brockian.OreHarmonicNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OreHarmonicNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ore harmonic divisor numbers (open-territory loop, AXLE @4.32, axiom-clean). Harmonic n := sigma(n) | n*tau(n) (harmonic mean of divisors is integer). CONCRETE: harmonic_{6,28,140,270,496}; non-example not_harmonic_4. Every perfect number is harmonic; Ore's conjecture (no odd harmonic number > 1) would IMPLY no odd perfect number -- the OPEN question OddHarmonicExists (does an odd harmonic divisor number > 1 exist?) is an unproven def, never asserted or denied. Connects to the odd-perfect cluster."
+    },
+    {
+      "name": "Brockian.OreHarmonicNumbers.tau",
+      "kind": "def",
+      "module": "Brockian.OreHarmonicNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OreHarmonicNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ore harmonic divisor numbers (open-territory loop, AXLE @4.32, axiom-clean). Harmonic n := sigma(n) | n*tau(n) (harmonic mean of divisors is integer). CONCRETE: harmonic_{6,28,140,270,496}; non-example not_harmonic_4. Every perfect number is harmonic; Ore's conjecture (no odd harmonic number > 1) would IMPLY no odd perfect number -- the OPEN question OddHarmonicExists (does an odd harmonic divisor number > 1 exist?) is an unproven def, never asserted or denied. Connects to the odd-perfect cluster."
     },
     {
       "name": "Brockian.PalindromicPrimes.IsPalindrome",
