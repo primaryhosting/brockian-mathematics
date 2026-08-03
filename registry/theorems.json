@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10452,
+    "PROVED": 10453,
     "DEFINITION": 554,
     "CONJECTURE": 40,
     "CONDITIONAL": 21,
@@ -118198,6 +118198,39 @@
       "quarantine": true,
       "ledger_run": "roadmap harvest \u2014 Euler PST reduced to Franklin involution; AXLE @4.32",
       "provenance_note": "Fully proves the Euler-product side: genFun_pstChar_eq_prod = prod(1-X^n) in Z[[X]], coeff_genFun_pstChar (coefficient = signed distinct-partition count via Mathlib Partition.GenFun), pstChar character product, pentagonal bridge to PentagonalPartition.pent. The full pentagonal number theorem is CONDITIONAL on the single named hypothesis hFranklin (Franklin sign-reversing involution \u2014 true, classical, Mathlib-absent), theorems honestly suffixed _of_franklin. NOT ex-falso: hFranklin is satisfiable/true."
+    },
+    {
+      "name": "Brockian.PerfectReciprocalSum.perfect_reciprocal_sum",
+      "kind": "theorem",
+      "module": "Brockian.PerfectReciprocalSum",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PerfectReciprocalSum.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle 5df7a570; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED (Aristotle 5df7a570), independently AXLE-verified @4.32, axiom-clean. perfect_reciprocal_sum: the sum of the reciprocals of the divisors of a perfect number equals 2 (since sigma(n)=2n, sum_{d|n} 1/d = sigma(n)/n = 2). A clean characterization-strength fact about perfect numbers; main Mathlib only."
     },
     {
       "name": "Brockian.PerfectTotient.PerfectTotient",

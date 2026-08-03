@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 554
 - **DISCHARGED**: 6
-- **PROVED**: 10452
+- **PROVED**: 10453
 
 ## Theorems
 
@@ -3668,6 +3668,7 @@
 | DISCHARGED | `Brockian.PentagonalTheoremFranklin.pentagonalProduct_coeff_of_franklin` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
 | PROVED | `Brockian.PentagonalTheoremFranklin.prod_pstChar_eq` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
 | DEFINITION | `Brockian.PentagonalTheoremFranklin.pstChar` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
+| PROVED | `Brockian.PerfectReciprocalSum.perfect_reciprocal_sum` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle 5df7a570; AXLE @4.32 |
 | DEFINITION | `Brockian.PerfectTotient.PerfectTotient` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.PerfectTotient.PerfectTotientInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.PerfectTotient.iteratedTotientSum` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |

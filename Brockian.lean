@@ -726,3 +726,4 @@ import Brockian.TwoSquares
 import Brockian.LucasTheorem
 import Brockian.FrobeniusMcNugget
 import Brockian.DivisorSumStructure
+import Brockian.PerfectReciprocalSum
