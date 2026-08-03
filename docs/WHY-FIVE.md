@@ -65,6 +65,50 @@ prime, 5 ∣ p happens only at p = 5. A theorem that turns its famous special ca
 a corollary has usually found the real reason, and this one has: the reason is
 **divisibility by five**, not primality.
 
+### The Golden Galois Dichotomy — golden, silver, bronze
+
+The Galois face generalizes cleanly to all n. The real cyclotomic field ℚ(2cos 2π/n)
+is *quadratic* for exactly four values of n, and there is one arithmetic reason:
+
+> For n ≥ 3, **the following are equivalent**: ℚ(2cos 2π/n) is quadratic;
+> **n ∈ {5, 8, 10, 12}**; **Euler's totient φ(n) = 4.**
+> `Brockian.GaloisNgonClassification.quadratic_ngon_tfae`
+
+Those four n-gons are not interchangeable — each carries a *different* quadratic
+irrational, pinned by an explicit minimal polynomial:
+
+| n | 2cos(2π/n) | minimal polynomial | field |
+|---|---|---|---|
+| 5 | φ − 1 | X² + X − 1 | ℚ(√5) — **golden** |
+| 10 | φ | X² − X − 1 | ℚ(√5) — **golden** |
+| 8 | √2 | X² − 2 | ℚ(√2) — silver |
+| 12 | √3 | X² − 3 | ℚ(√3) — bronze |
+
+(`aeval_spectralGen_eight`, `_ten`, `_twelve`, and the n=5 witness from
+`CosAlgebraicInteger`.) The golden field is singled out by discriminant:
+
+> Among the four quadratic n-gons, the field is the golden field ℚ(√5) — i.e. the
+> minimal polynomial has **discriminant 5** — **exactly for n ∈ {5, 10}.**
+> `Brockian.GaloisNgonClassification.golden_ngons_are_five_and_ten`
+
+So even inside the quadratic family, five (with its double, ten) is the golden one.
+The pentagon and decagon share ℚ(√5); the octagon and dodecagon do not.
+
+### A spectral fingerprint of the golden ratio
+
+Finally, φ can be characterized with no reference to pentagons-as-shapes at all — purely
+by the pentagon's *spectrum*. The 5-cycle's two non-trivial adjacency eigenvalues are
+φ − 1 and −φ, and these are **precisely the two roots of the golden quadratic**:
+
+> **{ x : x² + x − 1 = 0 } = { φ − 1, −φ }**, and both lie in spec(C₅).
+> `Brockian.GoldenSpectralCharacterization.golden_ratio_spectral_characterization`
+
+The root set of X² + X − 1 *is* the pentagon's non-Perron spectrum. Since φ − 1 > 0 and
+−φ < 0 (`golden_roots_sign_split`), the golden ratio is the one pinned by positivity:
+**φ is the number whose two shifted forms {φ−1, −φ} are the eigenvalues of the 5-cycle
+other than the trivial 2.** That is a definition of φ written entirely in the language of
+graph spectra.
+
 ## What this is and is not
 
 - It **is** a complete, independently machine-verified unification of the spectral,

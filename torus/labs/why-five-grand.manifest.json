@@ -33,6 +33,21 @@
       "claim": "Every circulant mode 2·cos(2πk/n) is an adjacency eigenvalue of Cₙ.",
       "theorem": "Brockian.CycleSpectrumFamily.mem_cycleSpectrum",
       "visualRef": "spectrum-modes"
+    },
+    {
+      "claim": "ℚ(2cos 2π/n) is quadratic ⟺ n ∈ {5,8,10,12} ⟺ Euler's totient φ(n)=4.",
+      "theorem": "Brockian.GaloisNgonClassification.quadratic_ngon_tfae",
+      "visualRef": "totient-classification"
+    },
+    {
+      "claim": "Among the four quadratic n-gons, the field is golden ℚ(√5) exactly for n ∈ {5,10}.",
+      "theorem": "Brockian.GaloisNgonClassification.golden_ngons_are_five_and_ten",
+      "visualRef": "golden-silver-bronze"
+    },
+    {
+      "claim": "The golden quadratic's roots {x : x²+x−1=0} are exactly the pentagon's two non-Perron eigenvalues {φ−1, −φ}.",
+      "theorem": "Brockian.GoldenSpectralCharacterization.golden_ratio_spectral_characterization",
+      "visualRef": "golden-fingerprint"
     }
   ]
 }
