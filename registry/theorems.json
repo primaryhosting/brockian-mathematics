@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10087,
-    "DEFINITION": 505,
-    "CONJECTURE": 23,
+    "PROVED": 10096,
+    "DEFINITION": 506,
+    "CONJECTURE": 24,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -60047,6 +60047,361 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.FortunateNumbers.FortunateFor",
+      "kind": "def",
+      "module": "Brockian.FortunateNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbers.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.FortunateNumbers.FortuneConjecture",
+      "kind": "conjecture",
+      "module": "Brockian.FortunateNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbers.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.FortunateNumbers.fortunate_2",
+      "kind": "theorem",
+      "module": "Brockian.FortunateNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.FortunateNumbers.fortunate_210",
+      "kind": "theorem",
+      "module": "Brockian.FortunateNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.FortunateNumbers.fortunate_30",
+      "kind": "theorem",
+      "module": "Brockian.FortunateNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.FortunateNumbers.fortunate_6",
+      "kind": "theorem",
+      "module": "Brockian.FortunateNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.FortunateNumbers.fortunate_values_prime",
+      "kind": "theorem",
+      "module": "Brockian.FortunateNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.FortunateNumbers.primorial_2",
+      "kind": "theorem",
+      "module": "Brockian.FortunateNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.FortunateNumbers.primorial_3",
+      "kind": "theorem",
+      "module": "Brockian.FortunateNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.FortunateNumbers.primorial_5",
+      "kind": "theorem",
+      "module": "Brockian.FortunateNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.FortunateNumbers.primorial_7",
+      "kind": "theorem",
+      "module": "Brockian.FortunateNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
     },
     {
       "name": "Brockian.FranklinFixedPoint.downMs_upPart",

@@ -369,6 +369,21 @@ Module: `Brockian.PalindromicPrimes`. `PalindromicPrimeInfinitude` is an unprove
 
 ---
 
+## Fortunate numbers — Fortune's conjecture (open)
+
+**Claim.** Is every Fortunate number prime? (The Fortunate number for a primorial P is the smallest
+m > 1 with P+m prime.) Open. Module: `Brockian.FortunateNumbers`. `FortuneConjecture` is an unproven `def`.
+
+**PROVED (concrete):**
+- **Four Fortunate numbers** (`fortunate_2`, `fortunate_6`, `fortunate_30`, `fortunate_210`): bases
+  2, 6, 30, 210 give Fortunate numbers 3, 5, 7, 13 — each verified as the *smallest* qualifying m.
+- Those values are prime (`fortunate_values_prime`), illustrating Fortune's conjecture.
+- The bases are the primorials (`primorial_2/3/5/7`, via Mathlib's root-namespace `primorial`).
+
+**OPEN.** Whether every Fortunate number is prime.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

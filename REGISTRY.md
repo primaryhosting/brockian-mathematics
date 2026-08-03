@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 23
-- **DEFINITION**: 505
+- **CONJECTURE**: 24
+- **DEFINITION**: 506
 - **DISCHARGED**: 6
-- **PROVED**: 10087
+- **PROVED**: 10096
 
 ## Theorems
 
@@ -1871,6 +1871,17 @@
 | PROVED | `Brockian.Fin5InnerProduct.hermInner_smul_left` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.hermInner_smul_right` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.norm_omega` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.FortunateNumbers.FortunateFor` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.FortunateNumbers.FortuneConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.FortunateNumbers.fortunate_2` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.FortunateNumbers.fortunate_210` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.FortunateNumbers.fortunate_30` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.FortunateNumbers.fortunate_6` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.FortunateNumbers.fortunate_values_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.FortunateNumbers.primorial_2` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.FortunateNumbers.primorial_3` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.FortunateNumbers.primorial_5` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.FortunateNumbers.primorial_7` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.FranklinFixedPoint.downMs_upPart` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
 | PROVED | `Brockian.FranklinFixedPoint.downOverlap_stair` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
 | PROVED | `Brockian.FranklinFixedPoint.downPart_largest` | ✓ | verified | lean-4.32.0 | roadmap #1 CLOSED — Euler pentagonal number theorem proved UNCONDITIONALLY; AXLE @4.32 |
