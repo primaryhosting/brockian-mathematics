@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 554
 - **DISCHARGED**: 6
-- **PROVED**: 10438
+- **PROVED**: 10442
 
 ## Theorems
 
@@ -1894,6 +1894,10 @@
 | PROVED | `Brockian.ErdosStrausResidues.erdosStraus_open_frontier_mod24` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.ErdosStrausResidues.erdosStraus_open_reduces` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.ErdosStrausResidues.erdosStraus_open_reduces_mod12` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.EvenPerfectTriangular.eq_two_pow_mul_not_even` | ✓ | verified | lean-4.32.0 | Aristotle 56bc9245; Codex AXLE audit @ lean-4.32.0 |
+| PROVED | `Brockian.EvenPerfectTriangular.eq_two_pow_mul_prime_mersenne_of_even_perfect` | ✓ | verified | lean-4.32.0 | Aristotle 56bc9245; Codex AXLE audit @ lean-4.32.0 |
+| PROVED | `Brockian.EvenPerfectTriangular.even_perfect_triangular` | ✓ | verified | lean-4.32.0 | Aristotle 56bc9245; Codex AXLE audit @ lean-4.32.0 |
+| PROVED | `Brockian.EvenPerfectTriangular.sigma_two_pow_eq_mersenne_succ` | ✓ | verified | lean-4.32.0 | Aristotle 56bc9245; Codex AXLE audit @ lean-4.32.0 |
 | CONJECTURE | `Brockian.FermatNumbers.FermatPrimeBeyondFour` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.FermatNumbers.fermat` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.FermatNumbers.fermat_0_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |

@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10438,
+    "PROVED": 10442,
     "DEFINITION": 554,
     "CONJECTURE": 40,
     "CONDITIONAL": 21,
@@ -60784,6 +60784,138 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "Extended Erdos-Straus coverage + sharpened open frontier (open-territory loop, AXLE @4.32, axiom-clean). Adds verified divisibility identities 5|n (witnesses 2m,4m,20m) and 7|n (2m,15m,210m); erdosStraus_covered (n even/div3/=3mod4/=2mod3 all decomposable) and its contrapositive erdosStraus_open_reduces (any counterexample is odd, coprime to 3, =1 mod 4). SHARPENED: erdosStraus_open_reduces_mod12 (counterexample => n=1 mod 12) and erdosStraus_open_frontier_mod24 (n%24 in {1,13}). HONEST finding: a computational search over many moduli found NO linear parametric family closing the frontier subclasses n=1,13 mod 24 -- matching the known theory that these feed the genuinely-open hard primes p=1,121,169,289,361,529 mod 840. The boundary is drawn, not crossed."
+    },
+    {
+      "name": "Brockian.EvenPerfectTriangular.eq_two_pow_mul_not_even",
+      "kind": "theorem",
+      "module": "Brockian.EvenPerfectTriangular",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EvenPerfectTriangular.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 56bc9245; Codex AXLE audit @ lean-4.32.0",
+      "provenance_note": "Archive-free Euclid-Euler classification for even perfect numbers and the unconditional corollary that every even perfect number is triangular. Exact target statement; all four declarations AXLE-verified and axiom-clean."
+    },
+    {
+      "name": "Brockian.EvenPerfectTriangular.eq_two_pow_mul_prime_mersenne_of_even_perfect",
+      "kind": "theorem",
+      "module": "Brockian.EvenPerfectTriangular",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EvenPerfectTriangular.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 56bc9245; Codex AXLE audit @ lean-4.32.0",
+      "provenance_note": "Archive-free Euclid-Euler classification for even perfect numbers and the unconditional corollary that every even perfect number is triangular. Exact target statement; all four declarations AXLE-verified and axiom-clean."
+    },
+    {
+      "name": "Brockian.EvenPerfectTriangular.even_perfect_triangular",
+      "kind": "theorem",
+      "module": "Brockian.EvenPerfectTriangular",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EvenPerfectTriangular.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 56bc9245; Codex AXLE audit @ lean-4.32.0",
+      "provenance_note": "Archive-free Euclid-Euler classification for even perfect numbers and the unconditional corollary that every even perfect number is triangular. Exact target statement; all four declarations AXLE-verified and axiom-clean."
+    },
+    {
+      "name": "Brockian.EvenPerfectTriangular.sigma_two_pow_eq_mersenne_succ",
+      "kind": "theorem",
+      "module": "Brockian.EvenPerfectTriangular",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EvenPerfectTriangular.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 56bc9245; Codex AXLE audit @ lean-4.32.0",
+      "provenance_note": "Archive-free Euclid-Euler classification for even perfect numbers and the unconditional corollary that every even perfect number is triangular. Exact target statement; all four declarations AXLE-verified and axiom-clean."
     },
     {
       "name": "Brockian.FermatNumbers.FermatPrimeBeyondFour",

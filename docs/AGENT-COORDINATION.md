@@ -51,6 +51,17 @@ consequences, closure/ESA equivalence, and `D5` trace bridge are complete. The
 next shared blockers are only the actual oscillator ESA theorem and the actual
 weighted compact embedding; do not duplicate the completed reduction modules.
 
+### Codex active claim - 2026-08-03 (operator continuation)
+
+- Integrating the Archive-free Aristotle proof that every even perfect number
+  is triangular; the other three supplied archives replicate already-shipped
+  Wilson, Korselt, and odd-perfect-mod-4 theorems.
+- Owns the maximal real multiplication operator, free-Laplacian transfer,
+  oscillator ESA, concrete weighted Rellich instantiation, bounded Kato
+  transfer, and Mathlib extraction lane for this round.
+- Do not edit peer-owned `aristotle/franklin/`, `aristotle/weak-regularity/`,
+  or untracked frontier modules while this claim is active.
+
 **Full protocol:** [`docs/MULTI-AGENT-COLLAB.md`](MULTI-AGENT-COLLAB.md)  
 **Status board:** `python3 scripts/agent_board.py`
 
