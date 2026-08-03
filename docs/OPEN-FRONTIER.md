@@ -245,6 +245,22 @@ Module: `Brockian.SophieGermain`. `SophieGermainInfinitude` is an unproven `def`
 
 ---
 
+## Fermat numbers (more Fermat primes? open)
+
+**Claim.** Is any Fermat number F_n = 2^(2ⁿ)+1 prime for n ≥ 5? Only F₀…F₄ are known prime;
+conjectured none beyond. Module: `Brockian.FermatNumbers`. `FermatPrimeBeyondFour` is an unproven `def`.
+
+**PROVED:**
+- **The five known Fermat primes** (`fermat_0_prime`…`fermat_4_prime`): 3, 5, 17, 257, 65537.
+- **F₅ and F₆ composite** via explicit factorization (`fermat_5_eq`/`_not_prime` = 641·6700417, Euler
+  1732; `fermat_6_eq`/`_not_prime` = 274177·67280421310721).
+- **Fermat numbers are pairwise coprime** (`fermat_coprime`, Goldbach's theorem — reused from
+  Mathlib's `Nat.fermatNumber` API) — which itself yields the infinitude of primes.
+
+**OPEN.** Whether any Fermat number beyond F₄ is prime.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:
