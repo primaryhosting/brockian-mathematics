@@ -12,7 +12,7 @@ generated from AXLE attestations); nothing is hand-asserted. Regenerate with
 | Open problems mapped on the frontier | **34** |
 | **CONDITIONAL** reductions (honest, named-hypothesis) | 21 |
 | **DISCHARGED** (conditional → unconditional) | 6 |
-| Open-conjecture markers (unproven `def`s) | 38 |
+| Open-conjecture markers (unproven `def`s) | 39 |
 | Commits in the last 6 hours | 34 |
 
 Verifier: **AXLE (Axiom)** at `lean-4.32.0` + Mathlib. Every theorem is independently kernel-checked,
