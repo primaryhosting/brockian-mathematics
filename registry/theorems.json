@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10096,
-    "DEFINITION": 506,
-    "CONJECTURE": 24,
+    "PROVED": 10101,
+    "DEFINITION": 508,
+    "CONJECTURE": 25,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -3447,6 +3447,258 @@
       "quarantine": true,
       "ledger_run": "run 54 completed 2026-08-01 \u2014 |Aut(C5)|<=10 reverse bound + full iso",
       "provenance_note": "card_aut_le_ten, aut_card_eq_ten (=10), dihedralHom_surjective (pinning), autEquivDihedral : DihedralGroup 5 \u2243* (C5 \u2243g C5) \u2014 the FULL Aut(C5)\u2245D5 iso. Upgrades run-54 partial to complete. Axiom-clean."
+    },
+    {
+      "name": "Brockian.BrocardGap.BrocardGapConjecture",
+      "kind": "conjecture",
+      "module": "Brockian.BrocardGap",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardGap.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's CONJECTURE -- >=4 primes between consecutive prime squares (open-territory loop, AXLE @4.32, axiom-clean). DISTINCT from Brocard's PROBLEM n!+1=m^2 (separate module BrocardProblem). FourPrimesBetweenSquares p q exhibits 4 increasing primes in (p^2, q^2). CONCRETE: brocard_{3_5,5_7,7_11,11_13,13_17}, e.g. between 9 and 25: 11,13,17,19. BrocardGapConjecture (>=4 primes between consecutive prime squares, p>=3) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardGap.ConsecutivePrimes",
+      "kind": "def",
+      "module": "Brockian.BrocardGap",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardGap.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's CONJECTURE -- >=4 primes between consecutive prime squares (open-territory loop, AXLE @4.32, axiom-clean). DISTINCT from Brocard's PROBLEM n!+1=m^2 (separate module BrocardProblem). FourPrimesBetweenSquares p q exhibits 4 increasing primes in (p^2, q^2). CONCRETE: brocard_{3_5,5_7,7_11,11_13,13_17}, e.g. between 9 and 25: 11,13,17,19. BrocardGapConjecture (>=4 primes between consecutive prime squares, p>=3) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardGap.FourPrimesBetweenSquares",
+      "kind": "def",
+      "module": "Brockian.BrocardGap",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardGap.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's CONJECTURE -- >=4 primes between consecutive prime squares (open-territory loop, AXLE @4.32, axiom-clean). DISTINCT from Brocard's PROBLEM n!+1=m^2 (separate module BrocardProblem). FourPrimesBetweenSquares p q exhibits 4 increasing primes in (p^2, q^2). CONCRETE: brocard_{3_5,5_7,7_11,11_13,13_17}, e.g. between 9 and 25: 11,13,17,19. BrocardGapConjecture (>=4 primes between consecutive prime squares, p>=3) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardGap.brocard_11_13",
+      "kind": "theorem",
+      "module": "Brockian.BrocardGap",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardGap.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's CONJECTURE -- >=4 primes between consecutive prime squares (open-territory loop, AXLE @4.32, axiom-clean). DISTINCT from Brocard's PROBLEM n!+1=m^2 (separate module BrocardProblem). FourPrimesBetweenSquares p q exhibits 4 increasing primes in (p^2, q^2). CONCRETE: brocard_{3_5,5_7,7_11,11_13,13_17}, e.g. between 9 and 25: 11,13,17,19. BrocardGapConjecture (>=4 primes between consecutive prime squares, p>=3) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardGap.brocard_13_17",
+      "kind": "theorem",
+      "module": "Brockian.BrocardGap",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardGap.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's CONJECTURE -- >=4 primes between consecutive prime squares (open-territory loop, AXLE @4.32, axiom-clean). DISTINCT from Brocard's PROBLEM n!+1=m^2 (separate module BrocardProblem). FourPrimesBetweenSquares p q exhibits 4 increasing primes in (p^2, q^2). CONCRETE: brocard_{3_5,5_7,7_11,11_13,13_17}, e.g. between 9 and 25: 11,13,17,19. BrocardGapConjecture (>=4 primes between consecutive prime squares, p>=3) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardGap.brocard_3_5",
+      "kind": "theorem",
+      "module": "Brockian.BrocardGap",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardGap.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's CONJECTURE -- >=4 primes between consecutive prime squares (open-territory loop, AXLE @4.32, axiom-clean). DISTINCT from Brocard's PROBLEM n!+1=m^2 (separate module BrocardProblem). FourPrimesBetweenSquares p q exhibits 4 increasing primes in (p^2, q^2). CONCRETE: brocard_{3_5,5_7,7_11,11_13,13_17}, e.g. between 9 and 25: 11,13,17,19. BrocardGapConjecture (>=4 primes between consecutive prime squares, p>=3) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardGap.brocard_5_7",
+      "kind": "theorem",
+      "module": "Brockian.BrocardGap",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardGap.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's CONJECTURE -- >=4 primes between consecutive prime squares (open-territory loop, AXLE @4.32, axiom-clean). DISTINCT from Brocard's PROBLEM n!+1=m^2 (separate module BrocardProblem). FourPrimesBetweenSquares p q exhibits 4 increasing primes in (p^2, q^2). CONCRETE: brocard_{3_5,5_7,7_11,11_13,13_17}, e.g. between 9 and 25: 11,13,17,19. BrocardGapConjecture (>=4 primes between consecutive prime squares, p>=3) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardGap.brocard_7_11",
+      "kind": "theorem",
+      "module": "Brockian.BrocardGap",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardGap.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Brocard's CONJECTURE -- >=4 primes between consecutive prime squares (open-territory loop, AXLE @4.32, axiom-clean). DISTINCT from Brocard's PROBLEM n!+1=m^2 (separate module BrocardProblem). FourPrimesBetweenSquares p q exhibits 4 increasing primes in (p^2, q^2). CONCRETE: brocard_{3_5,5_7,7_11,11_13,13_17}, e.g. between 9 and 25: 11,13,17,19. BrocardGapConjecture (>=4 primes between consecutive prime squares, p>=3) is an unproven def -- OPEN, never asserted."
     },
     {
       "name": "Brockian.BrocardProblem.BrocardConjecture",

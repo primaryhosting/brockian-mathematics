@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 24
-- **DEFINITION**: 506
+- **CONJECTURE**: 25
+- **DEFINITION**: 508
 - **DISCHARGED**: 6
-- **PROVED**: 10096
+- **PROVED**: 10101
 
 ## Theorems
 
@@ -124,6 +124,14 @@
 | PROVED | `Brockian.Automorphism.Full.card_aut_le_ten` | ✓ | verified | lean-4.32.0 | run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso |
 | PROVED | `Brockian.Automorphism.Full.dihedralHom_bijective` | ✓ | verified | lean-4.32.0 | run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso |
 | PROVED | `Brockian.Automorphism.Full.dihedralHom_surjective` | ✓ | verified | lean-4.32.0 | run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso |
+| CONJECTURE | `Brockian.BrocardGap.BrocardGapConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.BrocardGap.ConsecutivePrimes` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.BrocardGap.FourPrimesBetweenSquares` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BrocardGap.brocard_11_13` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BrocardGap.brocard_13_17` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BrocardGap.brocard_3_5` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BrocardGap.brocard_5_7` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.BrocardGap.brocard_7_11` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.BrocardProblem.BrocardConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.BrocardProblem.BrownPair` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.BrocardProblem.brown_4_5` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |

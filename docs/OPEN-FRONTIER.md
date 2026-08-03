@@ -384,6 +384,21 @@ m > 1 with P+m prime.) Open. Module: `Brockian.FortunateNumbers`. `FortuneConjec
 
 ---
 
+## Brocard's conjecture — primes between prime squares (open)
+
+**Claim.** Are there always ≥ 4 primes between consecutive prime squares pₙ² and pₙ₊₁² (for pₙ ≥ 3)?
+Open. (*Distinct* from Brocard's *problem* n!+1=m², a separate module.)
+Module: `Brockian.BrocardGap`. `BrocardGapConjecture` is an unproven `def`.
+
+**PROVED (concrete):**
+- **Five instances** (`brocard_3_5`, `brocard_5_7`, `brocard_7_11`, `brocard_11_13`, `brocard_13_17`),
+  each exhibiting four increasing primes between the consecutive prime squares (e.g. between 9 and 25:
+  11, 13, 17, 19), with consecutivity verified.
+
+**OPEN.** Whether ≥ 4 primes always lie between consecutive prime squares.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

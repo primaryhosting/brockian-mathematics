@@ -789,6 +789,13 @@ runs:
     ledger_run: "open-territory loop; AXLE @4.32"
     provenance_note: "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
 
+  "brocard-gap-conjecture":
+    module: Brockian.BrocardGap
+    verdict: admit
+    quarantine: true
+    ledger_run: "open-territory loop; AXLE @4.32"
+    provenance_note: "OPEN-TERRITORY Brocard's CONJECTURE -- >=4 primes between consecutive prime squares (open-territory loop, AXLE @4.32, axiom-clean). DISTINCT from Brocard's PROBLEM n!+1=m^2 (separate module BrocardProblem). FourPrimesBetweenSquares p q exhibits 4 increasing primes in (p^2, q^2). CONCRETE: brocard_{3_5,5_7,7_11,11_13,13_17}, e.g. between 9 and 25: 11,13,17,19. BrocardGapConjecture (>=4 primes between consecutive prime squares, p>=3) is an unproven def -- OPEN, never asserted."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────
   "weyl-gate1-bounded":
