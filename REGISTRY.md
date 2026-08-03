@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 15
-- **DEFINITION**: 494
+- **CONJECTURE**: 16
+- **DEFINITION**: 495
 - **DISCHARGED**: 6
-- **PROVED**: 10008
+- **PROVED**: 10020
 
 ## Theorems
 
@@ -3154,6 +3154,20 @@
 | PROVED | `Brockian.GoldenUniqueness.prime_rigidity_layer` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.two_cos_four_pi_div_five_eq_neg_golden` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.two_cos_fundamental_mode_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| CONJECTURE | `Brockian.LandauNSquaredPlusOne.LandauFourthConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.LandauNSquaredPlusOne.NSqPlusOnePrime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LandauNSquaredPlusOne.nsq_1` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LandauNSquaredPlusOne.nsq_10` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LandauNSquaredPlusOne.nsq_14` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LandauNSquaredPlusOne.nsq_16` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LandauNSquaredPlusOne.nsq_2` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LandauNSquaredPlusOne.nsq_20` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LandauNSquaredPlusOne.nsq_24` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LandauNSquaredPlusOne.nsq_26` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LandauNSquaredPlusOne.nsq_4` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LandauNSquaredPlusOne.nsq_6` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LandauNSquaredPlusOne.nsq_even_of_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LandauNSquaredPlusOne.nsq_mod_two_of_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.LehmerTotient.Lehmer` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LehmerTotient.lehmer_odd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LehmerTotient.lehmer_squarefree` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |

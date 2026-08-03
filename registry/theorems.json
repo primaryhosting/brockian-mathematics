@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10008,
-    "DEFINITION": 494,
-    "CONJECTURE": 15,
+    "PROVED": 10020,
+    "DEFINITION": 495,
+    "CONJECTURE": 16,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -101669,6 +101669,460 @@
       "quarantine": true,
       "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence",
       "provenance_note": "golden-uniqueness reusable schema (roadmap #11). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; verdict re-checked by Claude's gate before integration."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOne.LandauFourthConjecture",
+      "kind": "conjecture",
+      "module": "Brockian.LandauNSquaredPlusOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOne.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOne.NSqPlusOnePrime",
+      "kind": "def",
+      "module": "Brockian.LandauNSquaredPlusOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOne.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOne.nsq_1",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOne.nsq_10",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOne.nsq_14",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOne.nsq_16",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOne.nsq_2",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOne.nsq_20",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOne.nsq_24",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOne.nsq_26",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOne.nsq_4",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOne.nsq_6",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOne.nsq_even_of_prime",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOne.nsq_mod_two_of_prime",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOne",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOne.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
     },
     {
       "name": "Brockian.LehmerTotient.Lehmer",
