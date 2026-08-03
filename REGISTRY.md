@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 36
-- **DEFINITION**: 534
+- **CONJECTURE**: 37
+- **DEFINITION**: 536
 - **DISCHARGED**: 6
-- **PROVED**: 10360
+- **PROVED**: 10375
 
 ## Theorems
 
@@ -3723,6 +3723,24 @@
 | PROVED | `Brockian.RieselCovering.covering_table` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.RieselCovering.riesel_509203` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.RieselCovering.two_pow_periodic` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.RuthAaronPairs.RuthAaron` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.RuthAaronPairs.RuthAaronInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RuthAaronPairs.not_ruthAaron_6` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RuthAaronPairs.ruthAaron_125` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RuthAaronPairs.ruthAaron_5` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RuthAaronPairs.ruthAaron_714` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RuthAaronPairs.ruthAaron_77` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.RuthAaronPairs.sopfr` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RuthAaronPairs.sopfr_125` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RuthAaronPairs.sopfr_126` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RuthAaronPairs.sopfr_5` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RuthAaronPairs.sopfr_6` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RuthAaronPairs.sopfr_7` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RuthAaronPairs.sopfr_714` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RuthAaronPairs.sopfr_715` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RuthAaronPairs.sopfr_77` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RuthAaronPairs.sopfr_78` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RuthAaronPairs.sopfr_eq` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.Sanity.brockian_sanity` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.SierpinskiCovering.IsSierpinski` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.SierpinskiCovering.SierpinskiProblem` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |

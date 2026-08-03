@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10360,
-    "DEFINITION": 534,
-    "CONJECTURE": 36,
+    "PROVED": 10375,
+    "DEFINITION": 536,
+    "CONJECTURE": 37,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -119948,6 +119948,588 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY concrete result: 509203 is a Riesel number (open-territory loop, AXLE @4.32, axiom-clean). riesel_509203 : IsRiesel 509203 -- for every n>=1, 509203*2^n-1 is composite -- via the covering set {3,5,7,13,17,241} (modulus 24): two_pow_periodic (2^n = 2^(n%24) mod p since 2^24=1 mod each p), covering_table (all 24 residues covered, decide), composite_of (transfer + primality exclusion). Mirror of the Sierpinski proof (k*2^n+1) applied to k*2^n-1. The OPEN Riesel problem (is 509203 the SMALLEST such k?) is recorded as an unproven def RieselProblem. Concrete verified membership, not a resolution."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.RuthAaron",
+      "kind": "def",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.RuthAaronInfinitude",
+      "kind": "conjecture",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.not_ruthAaron_6",
+      "kind": "theorem",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.ruthAaron_125",
+      "kind": "theorem",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.ruthAaron_5",
+      "kind": "theorem",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.ruthAaron_714",
+      "kind": "theorem",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.ruthAaron_77",
+      "kind": "theorem",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.sopfr",
+      "kind": "def",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.sopfr_125",
+      "kind": "theorem",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.sopfr_126",
+      "kind": "theorem",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.sopfr_5",
+      "kind": "theorem",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.sopfr_6",
+      "kind": "theorem",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.sopfr_7",
+      "kind": "theorem",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.sopfr_714",
+      "kind": "theorem",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.sopfr_715",
+      "kind": "theorem",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.sopfr_77",
+      "kind": "theorem",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.sopfr_78",
+      "kind": "theorem",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RuthAaronPairs.sopfr_eq",
+      "kind": "theorem",
+      "module": "Brockian.RuthAaronPairs",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RuthAaronPairs.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
     },
     {
       "name": "Brockian.Sanity.brockian_sanity",

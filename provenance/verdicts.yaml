@@ -859,6 +859,13 @@ runs:
     ledger_run: "open-territory loop; AXLE @4.32"
     provenance_note: "OPEN-TERRITORY betrothed (quasi-amicable) numbers (open-territory loop, AXLE @4.32, axiom-clean). Betrothed m n := s(m)=n+1 and s(n)=m+1 (s = aliquot sum), the off-by-one cousin of amicable pairs. CONCRETE: betrothed_{48_75,140_195,1050_1925}; structural betrothed_symm/betrothed_ne; opposite-parity illustrations. BetrothedInfinitude (infinitely many pairs) and SameParityBetrothedExists (does a same-parity pair exist? all known are opposite-parity) are unproven defs -- OPEN, never asserted."
 
+  "ruth-aaron-pairs":
+    module: Brockian.RuthAaronPairs
+    verdict: admit
+    quarantine: true
+    ledger_run: "open-territory loop; AXLE @4.32"
+    provenance_note: "OPEN-TERRITORY Ruth-Aaron pairs (open-territory loop, AXLE @4.32, axiom-clean). sopfr = sum of prime factors with multiplicity (Nat.primeFactorsList.sum); RuthAaron n := sopfr n = sopfr (n+1). CONCRETE: ruthAaron_{5,77,125,714} incl the namesake 714/715 (both sopfr=29, Babe Ruth / Hank Aaron). Since Nat.primeFactorsList is well-founded (does NOT reduce under decide), values proved via factorization uniqueness (helper sopfr_eq + Nat.primeFactorsList_unique + List.Perm.sum_eq) -- NOT native_decide. Non-example not_ruthAaron_6. RuthAaronInfinitude (infinitely many pairs) is an unproven def -- OPEN, never asserted."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────
   "weyl-gate1-bounded":

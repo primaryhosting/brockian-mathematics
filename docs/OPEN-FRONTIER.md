@@ -525,6 +525,22 @@ opposite-parity). Module: `Brockian.BetrothedNumbers`. `BetrothedInfinitude`,
 
 ---
 
+## Ruth–Aaron pairs (infinitude open)
+
+**Claim.** Are there infinitely many Ruth–Aaron pairs — consecutive n, n+1 with equal sum of prime
+factors (with multiplicity)? Open. Module: `Brockian.RuthAaronPairs`. `RuthAaronInfinitude` is an
+unproven `def`.
+
+**PROVED (concrete):**
+- **Four Ruth–Aaron pairs** (`ruthAaron_5`, `ruthAaron_77`, `ruthAaron_125`, `ruthAaron_714`) —
+  including the namesake (714 = 2·3·7·17 and 715 = 5·11·13 both sum to 29: Babe Ruth's 714 home runs,
+  Hank Aaron's 715). Proved via factorization uniqueness (`Nat.primeFactorsList` is well-founded and
+  does not reduce under `decide`), a non-example (`not_ruthAaron_6`).
+
+**OPEN.** Whether infinitely many Ruth–Aaron pairs exist.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:
