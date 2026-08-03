@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10483,
-    "DEFINITION": 558,
+    "PROVED": 10527,
+    "DEFINITION": 572,
     "CONJECTURE": 40,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
@@ -1844,6 +1844,295 @@
       "quarantine": true,
       "ledger_run": "roadmap #14 \u2014 general admissible k-tuple configuration count; AXLE @4.32",
       "provenance_note": "General k-tuple admissible count over ZMod q: |A_q(H)| = q - |H| for arbitrary finite offset set H (LINEAR in q; definitively refutes the paper's superseded (q-1)^{k-1} guess). k=2 recovers q-2 via universal_admissibility_count; k=3 gives q-3; composite-modulus CRT lift (q1-|H1|)(q2-|H2|). NOT proved (explicit): HL admissibility criterion, iterated multi-factor CRT, singular-series/density/asymptotics."
+    },
+    {
+      "name": "Brockian.AffineSelection.affine",
+      "kind": "def",
+      "module": "Brockian.AffineSelection",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSelection.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit",
+      "provenance_note": "General odd-prime affine selection count for epsilon = +/-1, gap and Goldbach specializations, p=5 4-versus-3 finite law, quadratic-character inverse/Jacobi identities, and the exact mod-5 twin-road sector split. Returned dihedral-isomorphism and general quadratic-correlation sorries plus the placeholder asymptotic were excluded."
+    },
+    {
+      "name": "Brockian.AffineSelection.affine_selection_card",
+      "kind": "theorem",
+      "module": "Brockian.AffineSelection",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSelection.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit",
+      "provenance_note": "General odd-prime affine selection count for epsilon = +/-1, gap and Goldbach specializations, p=5 4-versus-3 finite law, quadratic-character inverse/Jacobi identities, and the exact mod-5 twin-road sector split. Returned dihedral-isomorphism and general quadratic-correlation sorries plus the placeholder asymptotic were excluded."
+    },
+    {
+      "name": "Brockian.AffineSelection.gap_selection",
+      "kind": "theorem",
+      "module": "Brockian.AffineSelection",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSelection.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit",
+      "provenance_note": "General odd-prime affine selection count for epsilon = +/-1, gap and Goldbach specializations, p=5 4-versus-3 finite law, quadratic-character inverse/Jacobi identities, and the exact mod-5 twin-road sector split. Returned dihedral-isomorphism and general quadratic-correlation sorries plus the placeholder asymptotic were excluded."
+    },
+    {
+      "name": "Brockian.AffineSelection.goldbach_selection",
+      "kind": "theorem",
+      "module": "Brockian.AffineSelection",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSelection.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit",
+      "provenance_note": "General odd-prime affine selection count for epsilon = +/-1, gap and Goldbach specializations, p=5 4-versus-3 finite law, quadratic-character inverse/Jacobi identities, and the exact mod-5 twin-road sector split. Returned dihedral-isomorphism and general quadratic-correlation sorries plus the placeholder asymptotic were excluded."
+    },
+    {
+      "name": "Brockian.AffineSelection.pentagonal_goldbach",
+      "kind": "theorem",
+      "module": "Brockian.AffineSelection",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSelection.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit",
+      "provenance_note": "General odd-prime affine selection count for epsilon = +/-1, gap and Goldbach specializations, p=5 4-versus-3 finite law, quadratic-character inverse/Jacobi identities, and the exact mod-5 twin-road sector split. Returned dihedral-isomorphism and general quadratic-correlation sorries plus the placeholder asymptotic were excluded."
+    },
+    {
+      "name": "Brockian.AffineSelection.quadraticChar_inv_self",
+      "kind": "theorem",
+      "module": "Brockian.AffineSelection",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSelection.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit",
+      "provenance_note": "General odd-prime affine selection count for epsilon = +/-1, gap and Goldbach specializations, p=5 4-versus-3 finite law, quadratic-character inverse/Jacobi identities, and the exact mod-5 twin-road sector split. Returned dihedral-isomorphism and general quadratic-correlation sorries plus the placeholder asymptotic were excluded."
+    },
+    {
+      "name": "Brockian.AffineSelection.quadraticChar_jacobi_self",
+      "kind": "theorem",
+      "module": "Brockian.AffineSelection",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSelection.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit",
+      "provenance_note": "General odd-prime affine selection count for epsilon = +/-1, gap and Goldbach specializations, p=5 4-versus-3 finite law, quadratic-character inverse/Jacobi identities, and the exact mod-5 twin-road sector split. Returned dihedral-isomorphism and general quadratic-correlation sorries plus the placeholder asymptotic were excluded."
+    },
+    {
+      "name": "Brockian.AffineSelection.selSet",
+      "kind": "def",
+      "module": "Brockian.AffineSelection",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSelection.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit",
+      "provenance_note": "General odd-prime affine selection count for epsilon = +/-1, gap and Goldbach specializations, p=5 4-versus-3 finite law, quadratic-character inverse/Jacobi identities, and the exact mod-5 twin-road sector split. Returned dihedral-isomorphism and general quadratic-correlation sorries plus the placeholder asymptotic were excluded."
+    },
+    {
+      "name": "Brockian.AffineSelection.twin_roads_sector_split",
+      "kind": "theorem",
+      "module": "Brockian.AffineSelection",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AffineSelection.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit",
+      "provenance_note": "General odd-prime affine selection count for epsilon = +/-1, gap and Goldbach specializations, p=5 4-versus-3 finite law, quadratic-character inverse/Jacobi identities, and the exact mod-5 twin-road sector split. Returned dihedral-isomorphism and general quadratic-correlation sorries plus the placeholder asymptotic were excluded."
     },
     {
       "name": "Brockian.AffineSymmetry.additiveAutEquivUnits",
@@ -58129,6 +58418,457 @@
       "provenance_note": "HARMONIC-PROVED (Aristotle 9281de25), independently AXLE-verified @4.32, axiom-clean. egyptian_fraction: every rational a/b with 0<a<b is a finite sum of DISTINCT unit fractions (the Finset of denominators makes them distinct) -- the Fibonacci-Sylvester existence theorem, the constructive backbone beneath the Erdos-Straus frontier node (which itself stays OPEN). Main Mathlib only."
     },
     {
+      "name": "Brockian.ElementaryPlates.counting_pattern_dichotomy",
+      "kind": "theorem",
+      "module": "Brockian.ElementaryPlates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ElementaryPlates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit",
+      "provenance_note": "Mod-5 square/mirror classification, affine counting-pattern dichotomy, unique prime on the zero ray, 5|fib(n) iff 5|n, period-20 Fibonacci identity, and Lucas mod-5 exclusion. Replaced native_decide with kernel-safe decide; corrected prose to claim 20 is a period, not minimality."
+    },
+    {
+      "name": "Brockian.ElementaryPlates.fib_five",
+      "kind": "theorem",
+      "module": "Brockian.ElementaryPlates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ElementaryPlates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit",
+      "provenance_note": "Mod-5 square/mirror classification, affine counting-pattern dichotomy, unique prime on the zero ray, 5|fib(n) iff 5|n, period-20 Fibonacci identity, and Lucas mod-5 exclusion. Replaced native_decide with kernel-safe decide; corrected prose to claim 20 is a period, not minimality."
+    },
+    {
+      "name": "Brockian.ElementaryPlates.fib_window_turn",
+      "kind": "theorem",
+      "module": "Brockian.ElementaryPlates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ElementaryPlates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit",
+      "provenance_note": "Mod-5 square/mirror classification, affine counting-pattern dichotomy, unique prime on the zero ray, 5|fib(n) iff 5|n, period-20 Fibonacci identity, and Lucas mod-5 exclusion. Replaced native_decide with kernel-safe decide; corrected prose to claim 20 is a period, not minimality."
+    },
+    {
+      "name": "Brockian.ElementaryPlates.five_dvd_fib_iff",
+      "kind": "theorem",
+      "module": "Brockian.ElementaryPlates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ElementaryPlates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit",
+      "provenance_note": "Mod-5 square/mirror classification, affine counting-pattern dichotomy, unique prime on the zero ray, 5|fib(n) iff 5|n, period-20 Fibonacci identity, and Lucas mod-5 exclusion. Replaced native_decide with kernel-safe decide; corrected prose to claim 20 is a period, not minimality."
+    },
+    {
+      "name": "Brockian.ElementaryPlates.lucas",
+      "kind": "def",
+      "module": "Brockian.ElementaryPlates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ElementaryPlates.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit",
+      "provenance_note": "Mod-5 square/mirror classification, affine counting-pattern dichotomy, unique prime on the zero ray, 5|fib(n) iff 5|n, period-20 Fibonacci identity, and Lucas mod-5 exclusion. Replaced native_decide with kernel-safe decide; corrected prose to claim 20 is a period, not minimality."
+    },
+    {
+      "name": "Brockian.ElementaryPlates.lucas_mod_five_cycle",
+      "kind": "theorem",
+      "module": "Brockian.ElementaryPlates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ElementaryPlates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit",
+      "provenance_note": "Mod-5 square/mirror classification, affine counting-pattern dichotomy, unique prime on the zero ray, 5|fib(n) iff 5|n, period-20 Fibonacci identity, and Lucas mod-5 exclusion. Replaced native_decide with kernel-safe decide; corrected prose to claim 20 is a period, not minimality."
+    },
+    {
+      "name": "Brockian.ElementaryPlates.lucas_never_home",
+      "kind": "theorem",
+      "module": "Brockian.ElementaryPlates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ElementaryPlates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit",
+      "provenance_note": "Mod-5 square/mirror classification, affine counting-pattern dichotomy, unique prime on the zero ray, 5|fib(n) iff 5|n, period-20 Fibonacci identity, and Lucas mod-5 exclusion. Replaced native_decide with kernel-safe decide; corrected prose to claim 20 is a period, not minimality."
+    },
+    {
+      "name": "Brockian.ElementaryPlates.mirror_pairing",
+      "kind": "theorem",
+      "module": "Brockian.ElementaryPlates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ElementaryPlates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit",
+      "provenance_note": "Mod-5 square/mirror classification, affine counting-pattern dichotomy, unique prime on the zero ray, 5|fib(n) iff 5|n, period-20 Fibonacci identity, and Lucas mod-5 exclusion. Replaced native_decide with kernel-safe decide; corrected prose to claim 20 is a period, not minimality."
+    },
+    {
+      "name": "Brockian.ElementaryPlates.mirror_patterns_are_negatives",
+      "kind": "theorem",
+      "module": "Brockian.ElementaryPlates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ElementaryPlates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit",
+      "provenance_note": "Mod-5 square/mirror classification, affine counting-pattern dichotomy, unique prime on the zero ray, 5|fib(n) iff 5|n, period-20 Fibonacci identity, and Lucas mod-5 exclusion. Replaced native_decide with kernel-safe decide; corrected prose to claim 20 is a period, not minimality."
+    },
+    {
+      "name": "Brockian.ElementaryPlates.pisano_five",
+      "kind": "theorem",
+      "module": "Brockian.ElementaryPlates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ElementaryPlates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit",
+      "provenance_note": "Mod-5 square/mirror classification, affine counting-pattern dichotomy, unique prime on the zero ray, 5|fib(n) iff 5|n, period-20 Fibonacci identity, and Lucas mod-5 exclusion. Replaced native_decide with kernel-safe decide; corrected prose to claim 20 is a period, not minimality."
+    },
+    {
+      "name": "Brockian.ElementaryPlates.radial_ray_one_prime",
+      "kind": "theorem",
+      "module": "Brockian.ElementaryPlates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ElementaryPlates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit",
+      "provenance_note": "Mod-5 square/mirror classification, affine counting-pattern dichotomy, unique prime on the zero ray, 5|fib(n) iff 5|n, period-20 Fibonacci identity, and Lucas mod-5 exclusion. Replaced native_decide with kernel-safe decide; corrected prose to claim 20 is a period, not minimality."
+    },
+    {
+      "name": "Brockian.ElementaryPlates.radial_ray_one_prime_window",
+      "kind": "theorem",
+      "module": "Brockian.ElementaryPlates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ElementaryPlates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit",
+      "provenance_note": "Mod-5 square/mirror classification, affine counting-pattern dichotomy, unique prime on the zero ray, 5|fib(n) iff 5|n, period-20 Fibonacci identity, and Lucas mod-5 exclusion. Replaced native_decide with kernel-safe decide; corrected prose to claim 20 is a period, not minimality."
+    },
+    {
+      "name": "Brockian.ElementaryPlates.square_mirror_blind",
+      "kind": "theorem",
+      "module": "Brockian.ElementaryPlates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ElementaryPlates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit",
+      "provenance_note": "Mod-5 square/mirror classification, affine counting-pattern dichotomy, unique prime on the zero ray, 5|fib(n) iff 5|n, period-20 Fibonacci identity, and Lucas mod-5 exclusion. Replaced native_decide with kernel-safe decide; corrected prose to claim 20 is a period, not minimality."
+    },
+    {
+      "name": "Brockian.ElementaryPlates.squares_mod_five",
+      "kind": "theorem",
+      "module": "Brockian.ElementaryPlates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ElementaryPlates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit",
+      "provenance_note": "Mod-5 square/mirror classification, affine counting-pattern dichotomy, unique prime on the zero ray, 5|fib(n) iff 5|n, period-20 Fibonacci identity, and Lucas mod-5 exclusion. Replaced native_decide with kernel-safe decide; corrected prose to claim 20 is a period, not minimality."
+    },
+    {
       "name": "Brockian.Equidistribution.AsymptoticExists",
       "kind": "def",
       "module": "Brockian.Equidistribution",
@@ -61015,6 +61755,204 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "Extended Erdos-Straus coverage + sharpened open frontier (open-territory loop, AXLE @4.32, axiom-clean). Adds verified divisibility identities 5|n (witnesses 2m,4m,20m) and 7|n (2m,15m,210m); erdosStraus_covered (n even/div3/=3mod4/=2mod3 all decomposable) and its contrapositive erdosStraus_open_reduces (any counterexample is odd, coprime to 3, =1 mod 4). SHARPENED: erdosStraus_open_reduces_mod12 (counterexample => n=1 mod 12) and erdosStraus_open_frontier_mod24 (n%24 in {1,13}). HONEST finding: a computational search over many moduli found NO linear parametric family closing the frontier subclasses n=1,13 mod 24 -- matching the known theory that these feed the genuinely-open hard primes p=1,121,169,289,361,529 mod 840. The boundary is drawn, not crossed."
+    },
+    {
+      "name": "Brockian.EvenPerfectMod9.eq_two_pow_mul_odd_main",
+      "kind": "theorem",
+      "module": "Brockian.EvenPerfectMod9",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EvenPerfectMod9.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit",
+      "provenance_note": "Archive-free Euclid-Euler reconstruction plus the unconditional theorem that every even perfect n > 6 satisfies n mod 9 = 1. The returned proof needed only an explicit Nat.ModEq conversion at Lean 4.32; statement unchanged."
+    },
+    {
+      "name": "Brockian.EvenPerfectMod9.eq_two_pow_mul_prime_mersenne_of_even_perfect_main",
+      "kind": "theorem",
+      "module": "Brockian.EvenPerfectMod9",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EvenPerfectMod9.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit",
+      "provenance_note": "Archive-free Euclid-Euler reconstruction plus the unconditional theorem that every even perfect n > 6 satisfies n mod 9 = 1. The returned proof needed only an explicit Nat.ModEq conversion at Lean 4.32; statement unchanged."
+    },
+    {
+      "name": "Brockian.EvenPerfectMod9.even_euclid_euler_mod9",
+      "kind": "theorem",
+      "module": "Brockian.EvenPerfectMod9",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EvenPerfectMod9.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit",
+      "provenance_note": "Archive-free Euclid-Euler reconstruction plus the unconditional theorem that every even perfect n > 6 satisfies n mod 9 = 1. The returned proof needed only an explicit Nat.ModEq conversion at Lean 4.32; statement unchanged."
+    },
+    {
+      "name": "Brockian.EvenPerfectMod9.even_index_of_prime_mersenne",
+      "kind": "theorem",
+      "module": "Brockian.EvenPerfectMod9",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EvenPerfectMod9.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit",
+      "provenance_note": "Archive-free Euclid-Euler reconstruction plus the unconditional theorem that every even perfect n > 6 satisfies n mod 9 = 1. The returned proof needed only an explicit Nat.ModEq conversion at Lean 4.32; statement unchanged."
+    },
+    {
+      "name": "Brockian.EvenPerfectMod9.even_perfect_mod9",
+      "kind": "theorem",
+      "module": "Brockian.EvenPerfectMod9",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EvenPerfectMod9.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit",
+      "provenance_note": "Archive-free Euclid-Euler reconstruction plus the unconditional theorem that every even perfect n > 6 satisfies n mod 9 = 1. The returned proof needed only an explicit Nat.ModEq conversion at Lean 4.32; statement unchanged."
+    },
+    {
+      "name": "Brockian.EvenPerfectMod9.sigma_two_pow_eq_mersenne_succ_main",
+      "kind": "theorem",
+      "module": "Brockian.EvenPerfectMod9",
+      "statement": "",
+      "source": {
+        "file": "Brockian/EvenPerfectMod9.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit",
+      "provenance_note": "Archive-free Euclid-Euler reconstruction plus the unconditional theorem that every even perfect n > 6 satisfies n mod 9 = 1. The returned proof needed only an explicit Nat.ModEq conversion at Lean 4.32; statement unchanged."
     },
     {
       "name": "Brockian.EvenPerfectTriangular.eq_two_pow_mul_not_even",
@@ -118710,6 +119648,786 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.PhaseDepth",
+      "kind": "def",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.TwinAdmissibleAt",
+      "kind": "def",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.compatible_closure",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.cone",
+      "kind": "def",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.coneAngle",
+      "kind": "def",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.cone_nappe_sign",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.cone_radial_fidelity",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.phi",
+      "kind": "def",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.phi_eq_rho_sub_one",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.return_in_kind",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.rho",
+      "kind": "def",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.rho_period",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.state_never_returns",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.step",
+      "kind": "def",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.step_iterate",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.tau",
+      "kind": "def",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.tau_injective_on_period",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.tau_minimal_period",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.tau_period",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.twinAdmissible",
+      "kind": "def",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.twin_admissible_card",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.twin_roads",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.twin_start_admissible",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.twin_survivors",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTorus.winding_coprime",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTorus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTorus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
+      "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
     },
     {
       "name": "Brockian.PolignacPrimes.PolignacConjecture",
@@ -338885,6 +340603,130 @@
       "quarantine": true,
       "ledger_run": "runs 7 / 31 / 117 \u2014 kernel double-count, constellation classification, twin exclusion",
       "provenance_note": "totalSum_eq double-count, twin/cousin/sexy/quadruplet tables via kernel decide"
+    },
+    {
+      "name": "Brockian.TripleAdmissibility.TripleAdmissible",
+      "kind": "def",
+      "module": "Brockian.TripleAdmissibility",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TripleAdmissibility.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit",
+      "provenance_note": "Triple admissibility is componentwise under ZMod Chinese remainder and its finite count is multiplicative for coprime moduli. Later returned prime/squarefree product statements contained sorry and were excluded."
+    },
+    {
+      "name": "Brockian.TripleAdmissibility.tripleAdmissibleCount",
+      "kind": "def",
+      "module": "Brockian.TripleAdmissibility",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TripleAdmissibility.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit",
+      "provenance_note": "Triple admissibility is componentwise under ZMod Chinese remainder and its finite count is multiplicative for coprime moduli. Later returned prime/squarefree product statements contained sorry and were excluded."
+    },
+    {
+      "name": "Brockian.TripleAdmissibility.tripleAdmissibleCount_mul_of_coprime",
+      "kind": "theorem",
+      "module": "Brockian.TripleAdmissibility",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TripleAdmissibility.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit",
+      "provenance_note": "Triple admissibility is componentwise under ZMod Chinese remainder and its finite count is multiplicative for coprime moduli. Later returned prime/squarefree product statements contained sorry and were excluded."
+    },
+    {
+      "name": "Brockian.TripleAdmissibility.tripleAdmissible_chineseRemainder_iff",
+      "kind": "theorem",
+      "module": "Brockian.TripleAdmissibility",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TripleAdmissibility.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit",
+      "provenance_note": "Triple admissibility is componentwise under ZMod Chinese remainder and its finite count is multiplicative for coprime moduli. Later returned prime/squarefree product statements contained sorry and were excluded."
     },
     {
       "name": "Brockian.TwinPrimeConstant.isAdmissible_twinOffsets",

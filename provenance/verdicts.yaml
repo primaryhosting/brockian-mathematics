@@ -1292,3 +1292,38 @@ runs:
     quarantine: true
     ledger_run: "Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian"
     provenance_note: "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+
+  "even-perfect-mod9":
+    module: Brockian.EvenPerfectMod9
+    verdict: admit
+    quarantine: true
+    ledger_run: "Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit"
+    provenance_note: "Archive-free Euclid-Euler reconstruction plus the unconditional theorem that every even perfect n > 6 satisfies n mod 9 = 1. The returned proof needed only an explicit Nat.ModEq conversion at Lean 4.32; statement unchanged."
+
+  "elementary-plates":
+    module: Brockian.ElementaryPlates
+    verdict: admit
+    quarantine: true
+    ledger_run: "Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit"
+    provenance_note: "Mod-5 square/mirror classification, affine counting-pattern dichotomy, unique prime on the zero ray, 5|fib(n) iff 5|n, period-20 Fibonacci identity, and Lucas mod-5 exclusion. Replaced native_decide with kernel-safe decide; corrected prose to claim 20 is a period, not minimality."
+
+  "phase-depth-torus":
+    module: Brockian.PhaseDepthTorus
+    verdict: admit
+    quarantine: true
+    ledger_run: "Aristotle 9f4eecfe; Codex statement-fidelity harvest"
+    provenance_note: "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+
+  "triple-admissibility":
+    module: Brockian.TripleAdmissibility
+    verdict: admit
+    quarantine: true
+    ledger_run: "Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit"
+    provenance_note: "Triple admissibility is componentwise under ZMod Chinese remainder and its finite count is multiplicative for coprime moduli. Later returned prime/squarefree product statements contained sorry and were excluded."
+
+  "affine-selection":
+    module: Brockian.AffineSelection
+    verdict: admit
+    quarantine: true
+    ledger_run: "Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit"
+    provenance_note: "General odd-prime affine selection count for epsilon = +/-1, gap and Goldbach specializations, p=5 4-versus-3 finite law, quadratic-character inverse/Jacobi identities, and the exact mod-5 twin-road sector split. Returned dihedral-isomorphism and general quadratic-correlation sorries plus the placeholder asymptotic were excluded."

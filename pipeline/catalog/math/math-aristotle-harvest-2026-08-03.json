@@ -1,0 +1,56 @@
+{
+  "id": "math-aristotle-harvest-2026-08-03",
+  "domain": "math",
+  "title": "Aristotle return harvest: structural number theory and finite selection",
+  "statement": "Audit a multi-project Aristotle return batch, integrate only statement-faithful axiom-clean results, and reject sorry-bearing or vacuous scaffolds.",
+  "status": "proved",
+  "source": {
+    "citation": "Aristotle/Harmonic return batch supplied 2026-08-03",
+    "external_status": "verified"
+  },
+  "difficulty": 3,
+  "tags": [
+    "number-theory",
+    "sieve",
+    "formal-verification",
+    "dual-prover"
+  ],
+  "formal_targets": [
+    {"kind": "lean_theorem", "name": "Brockian.EvenPerfectMod9.*", "path": "Brockian/EvenPerfectMod9.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.ElementaryPlates.*", "path": "Brockian/ElementaryPlates.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.PhaseDepthTorus.*", "path": "Brockian/PhaseDepthTorus.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.TripleAdmissibility.*", "path": "Brockian/TripleAdmissibility.lean"},
+    {"kind": "lean_theorem", "name": "Brockian.AffineSelection.*", "path": "Brockian/AffineSelection.lean"}
+  ],
+  "attack_modes": ["harvest", "repair", "dual_prover"],
+  "verification": {
+    "backend": "lean_axle",
+    "criteria": ["Lean 4.32", "axioms clean", "no theater", "statement fidelity"]
+  },
+  "risk_tier": 1,
+  "notes": "Vacuous True/False scaffolds, placeholder RH code, and every sorry-bearing suffix were excluded before root integration.",
+  "attempts": [
+    {
+      "ts": "2026-08-03T00:00:00Z",
+      "mode": "harvest",
+      "result": "proved",
+      "note": "Five cleaned modules AXLE-verified. Native-decision axioms were replaced by kernel-safe decide where needed.",
+      "agent": "codex",
+      "artifacts": [
+        "Brockian/EvenPerfectMod9.lean",
+        "Brockian/ElementaryPlates.lean",
+        "Brockian/PhaseDepthTorus.lean",
+        "Brockian/TripleAdmissibility.lean",
+        "Brockian/AffineSelection.lean"
+      ]
+    }
+  ],
+  "ledger_refs": [
+    "Brockian.EvenPerfectMod9.even_perfect_mod9",
+    "Brockian.ElementaryPlates.five_dvd_fib_iff",
+    "Brockian.PhaseDepthTorus.tau_minimal_period",
+    "Brockian.TripleAdmissibility.tripleAdmissibleCount_mul_of_coprime",
+    "Brockian.AffineSelection.affine_selection_card"
+  ],
+  "priority": 82
+}

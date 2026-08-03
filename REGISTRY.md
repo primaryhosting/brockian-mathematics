@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 21
 - **CONJECTURE**: 40
-- **DEFINITION**: 558
+- **DEFINITION**: 572
 - **DISCHARGED**: 6
-- **PROVED**: 10483
+- **PROVED**: 10527
 
 ## Theorems
 
@@ -73,6 +73,15 @@
 | PROVED | `Brockian.AdmissibilityKTuple.admissible_ktuple_count_three` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityKTuple.crt_filter_card` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityKTuple.mem_admissibleTupleResidues` | ✓ | verified | lean-4.32.0 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
+| DEFINITION | `Brockian.AffineSelection.affine` | ✓ | verified | lean-4.32.0 | Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit |
+| PROVED | `Brockian.AffineSelection.affine_selection_card` | ✓ | verified | lean-4.32.0 | Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit |
+| PROVED | `Brockian.AffineSelection.gap_selection` | ✓ | verified | lean-4.32.0 | Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit |
+| PROVED | `Brockian.AffineSelection.goldbach_selection` | ✓ | verified | lean-4.32.0 | Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit |
+| PROVED | `Brockian.AffineSelection.pentagonal_goldbach` | ✓ | verified | lean-4.32.0 | Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit |
+| PROVED | `Brockian.AffineSelection.quadraticChar_inv_self` | ✓ | verified | lean-4.32.0 | Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit |
+| PROVED | `Brockian.AffineSelection.quadraticChar_jacobi_self` | ✓ | verified | lean-4.32.0 | Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit |
+| DEFINITION | `Brockian.AffineSelection.selSet` | ✓ | verified | lean-4.32.0 | Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit |
+| PROVED | `Brockian.AffineSelection.twin_roads_sector_split` | ✓ | verified | lean-4.32.0 | Aristotle b245c702 clean-subtheorem harvest; Codex AXLE audit |
 | DEFINITION | `Brockian.AffineSymmetry.additiveAutEquivUnits` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
 | PROVED | `Brockian.AffineSymmetry.additiveAut_card` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
 | PROVED | `Brockian.AffineSymmetry.additiveAut_card_five` | ✓ | verified | lean-4.32.0 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
@@ -1811,6 +1820,20 @@
 | PROVED | `Brockian.DivisorSumStructure.sigma_eq_succ_iff_prime` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.DivisorSumStructure.sigma_ge_succ` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.EgyptianFraction.egyptian_fraction` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle 9281de25; AXLE @4.32 |
+| PROVED | `Brockian.ElementaryPlates.counting_pattern_dichotomy` | ✓ | verified | lean-4.32.0 | Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit |
+| PROVED | `Brockian.ElementaryPlates.fib_five` | ✓ | verified | lean-4.32.0 | Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit |
+| PROVED | `Brockian.ElementaryPlates.fib_window_turn` | ✓ | verified | lean-4.32.0 | Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit |
+| PROVED | `Brockian.ElementaryPlates.five_dvd_fib_iff` | ✓ | verified | lean-4.32.0 | Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit |
+| DEFINITION | `Brockian.ElementaryPlates.lucas` | ✓ | verified | lean-4.32.0 | Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit |
+| PROVED | `Brockian.ElementaryPlates.lucas_mod_five_cycle` | ✓ | verified | lean-4.32.0 | Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit |
+| PROVED | `Brockian.ElementaryPlates.lucas_never_home` | ✓ | verified | lean-4.32.0 | Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit |
+| PROVED | `Brockian.ElementaryPlates.mirror_pairing` | ✓ | verified | lean-4.32.0 | Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit |
+| PROVED | `Brockian.ElementaryPlates.mirror_patterns_are_negatives` | ✓ | verified | lean-4.32.0 | Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit |
+| PROVED | `Brockian.ElementaryPlates.pisano_five` | ✓ | verified | lean-4.32.0 | Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit |
+| PROVED | `Brockian.ElementaryPlates.radial_ray_one_prime` | ✓ | verified | lean-4.32.0 | Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit |
+| PROVED | `Brockian.ElementaryPlates.radial_ray_one_prime_window` | ✓ | verified | lean-4.32.0 | Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit |
+| PROVED | `Brockian.ElementaryPlates.square_mirror_blind` | ✓ | verified | lean-4.32.0 | Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit |
+| PROVED | `Brockian.ElementaryPlates.squares_mod_five` | ✓ | verified | lean-4.32.0 | Aristotle 95d97500; Codex kernel-safe computation conversion and AXLE audit |
 | DEFINITION | `Brockian.Equidistribution.AsymptoticExists` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | DEFINITION | `Brockian.Equidistribution.PrimePairAsymptotic` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
 | PROVED | `Brockian.Equidistribution.asymptotic_shape_consistent` | ✓ | verified | lean-4.32.0 | paper-audit target #1 2026-08-01 — HL/BV asymptotic ⇒ 1/(q−2) density (schema) |
@@ -1901,6 +1924,12 @@
 | PROVED | `Brockian.ErdosStrausResidues.erdosStraus_open_frontier_mod24` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.ErdosStrausResidues.erdosStraus_open_reduces` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.ErdosStrausResidues.erdosStraus_open_reduces_mod12` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.EvenPerfectMod9.eq_two_pow_mul_odd_main` | ✓ | verified | lean-4.32.0 | Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit |
+| PROVED | `Brockian.EvenPerfectMod9.eq_two_pow_mul_prime_mersenne_of_even_perfect_main` | ✓ | verified | lean-4.32.0 | Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit |
+| PROVED | `Brockian.EvenPerfectMod9.even_euclid_euler_mod9` | ✓ | verified | lean-4.32.0 | Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit |
+| PROVED | `Brockian.EvenPerfectMod9.even_index_of_prime_mersenne` | ✓ | verified | lean-4.32.0 | Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit |
+| PROVED | `Brockian.EvenPerfectMod9.even_perfect_mod9` | ✓ | verified | lean-4.32.0 | Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit |
+| PROVED | `Brockian.EvenPerfectMod9.sigma_two_pow_eq_mersenne_succ_main` | ✓ | verified | lean-4.32.0 | Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit |
 | PROVED | `Brockian.EvenPerfectTriangular.eq_two_pow_mul_not_even` | ✓ | verified | lean-4.32.0 | Aristotle 56bc9245; Codex AXLE audit @ lean-4.32.0 |
 | PROVED | `Brockian.EvenPerfectTriangular.eq_two_pow_mul_prime_mersenne_of_even_perfect` | ✓ | verified | lean-4.32.0 | Aristotle 56bc9245; Codex AXLE audit @ lean-4.32.0 |
 | PROVED | `Brockian.EvenPerfectTriangular.even_perfect_triangular` | ✓ | verified | lean-4.32.0 | Aristotle 56bc9245; Codex AXLE audit @ lean-4.32.0 |
@@ -3684,6 +3713,31 @@
 | PROVED | `Brockian.PerfectTotient.pt_81` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PerfectTotient.pt_9` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.PerfectTotient.totientSumAux` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.PhaseDepthTorus.PhaseDepth` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| DEFINITION | `Brockian.PhaseDepthTorus.TwinAdmissibleAt` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.compatible_closure` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| DEFINITION | `Brockian.PhaseDepthTorus.cone` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| DEFINITION | `Brockian.PhaseDepthTorus.coneAngle` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.cone_nappe_sign` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.cone_radial_fidelity` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| DEFINITION | `Brockian.PhaseDepthTorus.phi` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.phi_eq_rho_sub_one` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.return_in_kind` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| DEFINITION | `Brockian.PhaseDepthTorus.rho` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.rho_period` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.state_never_returns` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| DEFINITION | `Brockian.PhaseDepthTorus.step` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.step_iterate` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| DEFINITION | `Brockian.PhaseDepthTorus.tau` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.tau_injective_on_period` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.tau_minimal_period` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.tau_period` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| DEFINITION | `Brockian.PhaseDepthTorus.twinAdmissible` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.twin_admissible_card` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.twin_roads` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.twin_start_admissible` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.twin_survivors` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTorus.winding_coprime` | ✓ | verified | lean-4.32.0 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
 | CONJECTURE | `Brockian.PolignacPrimes.PolignacConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.PolignacPrimes.PrimeGapPair` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PolignacPrimes.cousin_13` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
@@ -10363,6 +10417,10 @@
 | PROVED | `Brockian.TransitionKernel.twin_admissible_singleton` | ✓ | verified | lean-4.32.0 | runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion |
 | PROVED | `Brockian.TransitionKernel.twin_pins_mod_three` | ✓ | verified | lean-4.32.0 | runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion |
 | PROVED | `Brockian.TransitionKernel.twin_table_card` | ✓ | verified | lean-4.32.0 | runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion |
+| DEFINITION | `Brockian.TripleAdmissibility.TripleAdmissible` | ✓ | verified | lean-4.32.0 | Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit |
+| DEFINITION | `Brockian.TripleAdmissibility.tripleAdmissibleCount` | ✓ | verified | lean-4.32.0 | Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit |
+| PROVED | `Brockian.TripleAdmissibility.tripleAdmissibleCount_mul_of_coprime` | ✓ | verified | lean-4.32.0 | Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit |
+| PROVED | `Brockian.TripleAdmissibility.tripleAdmissible_chineseRemainder_iff` | ✓ | verified | lean-4.32.0 | Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit |
 | PROVED | `Brockian.TwinPrimeConstant.isAdmissible_twinOffsets` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.TwinPrimeConstant.localFactorAt_twin` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.TwinPrimeConstant.localFactorAt_twin_eq_tFactor` | ✓ | verified | lean-4.32.0 |  |

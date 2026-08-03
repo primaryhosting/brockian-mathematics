@@ -71,6 +71,24 @@ Schwartz identity `ℱ(-f'') = ξ² ℱf`, oscillator ESA, and the concrete weig
 Rellich embedding remain separate targets; do not conflate them with this
 closure.
 
+### Codex Aristotle harvest - 2026-08-03
+
+- Integrated after AXLE 4.32 repair/audit: `EvenPerfectMod9`,
+  `ElementaryPlates`, `PhaseDepthTorus`, `TripleAdmissibility`, and
+  `AffineSelection`.
+- Existing peer integrations cover the duplicate returns for EGZ, Frobenius
+  above/nonrepresentability, two-squares, Lucas, Wilson, Korselt, odd-perfect
+  mod 4/Euler form, Mersenne exponent, GoldbachComb, and even-perfect
+  triangular.
+- Rejected from the root: `output.lean` (placeholder xi/spectral sums and
+  implication-to-RH packaging), `SieveHamiltonian`'s three later sorries,
+  `AffineSelection`'s two sorries and placeholder asymptotic, and the three
+  vacuous PhaseDepth scaffolds using `True`/`False`.
+- Operator hard targets are staged under `aristotle/{oscillator-esa,
+  oscillator-compact-resolvent,free-laplacian-schwartz-intertwining}`. They
+  elaborate with only their intended proof holes; Harmonic submission was
+  attempted through the CLI but its API returned HTTP 502.
+
 **Full protocol:** [`docs/MULTI-AGENT-COLLAB.md`](MULTI-AGENT-COLLAB.md)  
 **Status board:** `python3 scripts/agent_board.py`
 

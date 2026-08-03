@@ -728,4 +728,9 @@ import Brockian.FrobeniusMcNugget
 import Brockian.DivisorSumStructure
 import Brockian.PerfectReciprocalSum
 import Brockian.WeylMaximalMultiplication
+import Brockian.EvenPerfectMod9
+import Brockian.ElementaryPlates
+import Brockian.PhaseDepthTorus
+import Brockian.TripleAdmissibility
+import Brockian.AffineSelection
 import Brockian.EgyptianFraction
