@@ -235,3 +235,4 @@ import Brockian.GaloisNgonClassification
 import Brockian.PentagonCharacterMultiplicity
 import Brockian.PentagonEquivariance
 import Brockian.ErdosStraus
+import Brockian.ErdosStrausResidues

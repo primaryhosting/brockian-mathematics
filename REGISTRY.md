@@ -10,7 +10,7 @@
 - **CONJECTURE**: 2
 - **DEFINITION**: 372
 - **DISCHARGED**: 6
-- **PROVED**: 3176
+- **PROVED**: 3183
 
 ## Theorems
 
@@ -779,6 +779,13 @@
 | PROVED | `Brockian.ErdosStraus.erdosStraus_of_covered` | ✓ | verified | lean-4.32.0 | open-territory swarm; AXLE @4.32 |
 | PROVED | `Brockian.ErdosStraus.erdosStraus_of_dvd` | ✓ | verified | lean-4.32.0 | open-territory swarm; AXLE @4.32 |
 | PROVED | `Brockian.ErdosStraus.erdosStraus_of_prime_case` | ✓ | verified | lean-4.32.0 | open-territory swarm; AXLE @4.32 |
+| PROVED | `Brockian.ErdosStrausResidues.erdosStraus_covered` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.ErdosStrausResidues.erdosStraus_covered_ext` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.ErdosStrausResidues.erdosStraus_dvd_five` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.ErdosStrausResidues.erdosStraus_dvd_seven` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.ErdosStrausResidues.erdosStraus_open_frontier_mod24` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.ErdosStrausResidues.erdosStraus_open_reduces` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.ErdosStrausResidues.erdosStraus_open_reduces_mod12` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omega` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omegaPow` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omega_pow` | ✓ | verified | lean-4.32.0 |  |
