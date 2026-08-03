@@ -8,7 +8,7 @@ generated from AXLE attestations); nothing is hand-asserted. Regenerate with
 
 | Metric | Value |
 |---|---|
-| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,532** |
+| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,538** |
 | Open problems mapped on the frontier | **34** |
 | **CONDITIONAL** reductions (honest, named-hypothesis) | 21 |
 | **DISCHARGED** (conditional → unconditional) | 6 |
