@@ -611,3 +611,4 @@ import Brockian.BrocardProblem
 import Brockian.MersennePerfect
 import Brockian.TwinPrimes
 import Brockian.SophieGermain
+import Brockian.PolignacPrimes

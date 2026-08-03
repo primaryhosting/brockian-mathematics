@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 9039,
-    "DEFINITION": 476,
-    "CONJECTURE": 13,
+    "PROVED": 9058,
+    "DEFINITION": 477,
+    "CONJECTURE": 14,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -101876,6 +101876,691 @@
       "quarantine": true,
       "ledger_run": "roadmap harvest \u2014 Euler PST reduced to Franklin involution; AXLE @4.32",
       "provenance_note": "Fully proves the Euler-product side: genFun_pstChar_eq_prod = prod(1-X^n) in Z[[X]], coeff_genFun_pstChar (coefficient = signed distinct-partition count via Mathlib Partition.GenFun), pstChar character product, pentagonal bridge to PentagonalPartition.pent. The full pentagonal number theorem is CONDITIONAL on the single named hypothesis hFranklin (Franklin sign-reversing involution \u2014 true, classical, Mathlib-absent), theorems honestly suffixed _of_franklin. NOT ex-falso: hFranklin is satisfiable/true."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.PolignacConjecture",
+      "kind": "conjecture",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.PrimeGapPair",
+      "kind": "def",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.cousin_13",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.cousin_19",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.cousin_3",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.cousin_37",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.cousin_43",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.cousin_67",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.cousin_7",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.cousin_79",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.cousin_form_6k",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.cousin_mod_six",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.sexy_11",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.sexy_13",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.sexy_17",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.sexy_23",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.sexy_31",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.sexy_47",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.sexy_5",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.sexy_7",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimes.sexy_same_mod_six",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
     },
     {
       "name": "Brockian.RamanujanCongruence.coeff_partitionGF",

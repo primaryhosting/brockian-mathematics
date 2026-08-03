@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 13
-- **DEFINITION**: 476
+- **CONJECTURE**: 14
+- **DEFINITION**: 477
 - **DISCHARGED**: 6
-- **PROVED**: 9039
+- **PROVED**: 9058
 
 ## Theorems
 
@@ -3161,6 +3161,27 @@
 | DISCHARGED | `Brockian.PentagonalTheoremFranklin.pentagonalProduct_coeff_of_franklin` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
 | PROVED | `Brockian.PentagonalTheoremFranklin.prod_pstChar_eq` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
 | DEFINITION | `Brockian.PentagonalTheoremFranklin.pstChar` | ✓ | verified | lean-4.32.0 | roadmap harvest — Euler PST reduced to Franklin involution; AXLE @4.32 |
+| CONJECTURE | `Brockian.PolignacPrimes.PolignacConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.PolignacPrimes.PrimeGapPair` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.cousin_13` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.cousin_19` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.cousin_3` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.cousin_37` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.cousin_43` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.cousin_67` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.cousin_7` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.cousin_79` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.cousin_form_6k` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.cousin_mod_six` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.sexy_11` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.sexy_13` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.sexy_17` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.sexy_23` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.sexy_31` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.sexy_47` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.sexy_5` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.sexy_7` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PolignacPrimes.sexy_same_mod_six` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.RamanujanCongruence.coeff_partitionGF` | ✓ | verified | lean-4.32.0 | roadmap #3 — genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32 |
 | PROVED | `Brockian.RamanujanCongruence.coeff_partitionGF_zero` | ✓ | verified | lean-4.32.0 | roadmap #3 — genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32 |
 | PROVED | `Brockian.RamanujanCongruence.five_dvd_of_dissection` | ✓ | verified | lean-4.32.0 | roadmap #3 — genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32 |

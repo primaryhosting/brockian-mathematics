@@ -229,6 +229,22 @@ Module: `Brockian.SophieGermain`. `SophieGermainInfinitude` is an unproven `def`
 
 ---
 
+## Polignac's conjecture — cousin & sexy primes (open)
+
+**Claim.** For every even gap k > 0, are there infinitely many prime pairs (p, p+k)?
+(Twin = gap 2, cousin = gap 4, sexy = gap 6.) Open. Module: `Brockian.PolignacPrimes`.
+`PolignacConjecture` is an unproven `def`.
+
+**PROVED (concrete + structural):**
+- **Eight cousin pairs** (gap 4): `cousin_3` … `cousin_79`. **Eight sexy pairs** (gap 6):
+  `sexy_5` … `sexy_47`.
+- **A cousin prime p > 3 satisfies p ≡ 1 (mod 6)** (`cousin_mod_six`; corollary `cousin_form_6k`:
+  the pair is (6k+1, 6k+5)). Sexy primes share a residue mod 6 (`sexy_same_mod_six`).
+
+**OPEN.** Whether any fixed even gap occurs infinitely often (de Polignac).
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:
