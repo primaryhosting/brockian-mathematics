@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 38
-- **DEFINITION**: 552
+- **CONJECTURE**: 39
+- **DEFINITION**: 553
 - **DISCHARGED**: 6
-- **PROVED**: 10412
+- **PROVED**: 10418
 
 ## Theorems
 
@@ -3680,6 +3680,14 @@
 | PROVED | `Brockian.PolignacPrimes.sexy_5` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PolignacPrimes.sexy_7` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PolignacPrimes.sexy_same_mod_six` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.PracticalNumbers.Practical` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| CONJECTURE | `Brockian.PracticalNumbers.PracticalTwinInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PracticalNumbers.not_practical_10` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PracticalNumbers.practical_12` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PracticalNumbers.practical_20` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PracticalNumbers.practical_28` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PracticalNumbers.practical_6` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PracticalNumbers.practical_pow_two` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.QuasiperfectNumbers.AlmostPerfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.QuasiperfectNumbers.Perfectσ` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.QuasiperfectNumbers.Quasiperfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
