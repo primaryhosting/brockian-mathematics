@@ -3,7 +3,7 @@
 **Audience:** technical partners, advisors, scientific collaborators
 **Classification:** Partner-facing (non-confidential). Counts pinned to the live registry.
 **Report generated:** 2026-08-03
-**Tip commit:** `100f9762446e73780cedc3dc3e1d5a2052788a71` (`100f976`) — *feat(UnitaryPerfect): 6/60/90 unitary perfect; is there a sixth? (open)* (2026-08-03 08:04:07 -0400)
+**Tip commit:** `52323d739fc67c41f2233a64deefebd3fa9666e1` (`52323d7`) — *feat(weyl): add oscillator compact-resolvent reductions* (2026-08-03 08:58:03 -0400)
 **Registry source:** `registry/theorems.json`
 **Generated from:** AXLE attestations
 
@@ -30,18 +30,18 @@ verdict at a pinned environment. Registers are **derived** by
 
 | Snapshot | Value |
 |----------|------:|
-| **PROVED** | **10353** |
-| **DEFINITION** | **532** |
+| **PROVED** | **10405** |
+| **DEFINITION** | **552** |
 | **CONDITIONAL** | **21** |
 | **DISCHARGED** | **6** |
-| **CONJECTURE** | **34** |
-| Declarations in registry | 10946 |
-| Modules with entries | 705 |
-| Module attestation files | 706 |
+| **CONJECTURE** | **38** |
+| Declarations in registry | 11022 |
+| Modules with entries | 713 |
+| Module attestation files | 714 |
 | Certificate factory units | 3 (`CosTraceNorm`, `FranklinFixedPoint`, `target`) |
 | AXLE environment | `lean-4.32.0` |
-| AXLE verdict = verified | 10946 / 10946 |
-| Local `lake_build` field | **10946 pending** (see §6 caveats) |
+| AXLE verdict = verified | 11022 / 11022 |
+| Local `lake_build` field | **11022 pending** (see §6 caveats) |
 
 **What closed (reference process wins):** Euler’s pentagonal number theorem
 unconditionally in-core; Galois / “why five” degree rigidity; the q−ν
@@ -61,11 +61,11 @@ Registers are derived from axioms + AXLE verdict + provenance rung
 
 | Register | Count |
 |----------|------:|
-| **PROVED** | 10353 |
-| **DEFINITION** | 532 |
+| **PROVED** | 10405 |
+| **DEFINITION** | 552 |
 | **CONDITIONAL** | 21 |
 | **DISCHARGED** | 6 |
-| **CONJECTURE** | 34 |
+| **CONJECTURE** | 38 |
 
 | Meaning | Gate |
 |---------|------|
@@ -83,9 +83,9 @@ Full enumeration: [`REGISTRY.md`](../REGISTRY.md) · machine JSON: [`registry/th
 |---------------|--------:|
 | Goldbach / singular series | 7609 |
 | Galois / cyclotomic / cos-trace | 1381 |
-| Weyl / spectral / operator | 608 |
-| Other | 462 |
-| D₅ / C₅ spectral & symmetry | 377 |
+| Weyl / spectral / operator | 642 |
+| Other | 501 |
+| D₅ / C₅ spectral & symmetry | 380 |
 | Pentagonal / Franklin / partition | 151 |
 | Admissibility / sieve | 120 |
 | Core / metallic / golden | 78 |
@@ -182,12 +182,14 @@ closes. Status is taken from the registry when the name is present.
 | `Brockian.PentagonalTheoremFranklin.pentagonalNumberTheorem_of_franklin` | `Brockian.PentagonalTheoremFranklin` |
 | `Brockian.PentagonalTheoremFranklin.pentagonalProduct_coeff_of_franklin` | `Brockian.PentagonalTheoremFranklin` |
 
-### All CONJECTURE entries (34)
+### All CONJECTURE entries (38)
 
 | Name | Module |
 |------|--------|
 | `Brockian.AmicableNumbers.AmicableInfinitude` | `Brockian.AmicableNumbers` |
 | `Brockian.AndricaConjecture.AndricaConjecture` | `Brockian.AndricaConjecture` |
+| `Brockian.BetrothedNumbers.BetrothedInfinitude` | `Brockian.BetrothedNumbers` |
+| `Brockian.BetrothedNumbers.SameParityBetrothedExists` | `Brockian.BetrothedNumbers` |
 | `Brockian.BrocardGap.BrocardGapConjecture` | `Brockian.BrocardGap` |
 | `Brockian.BrocardProblem.BrocardConjecture` | `Brockian.BrocardProblem` |
 | `Brockian.CarmichaelKorselt.ThreePrimeCarmichaelInfinitude` | `Brockian.CarmichaelKorselt` |
@@ -207,12 +209,14 @@ closes. Status is taken from the registry when the name is present.
 | `Brockian.MersennePerfect.EvenPerfectInfinitude` | `Brockian.MersennePerfect` |
 | `Brockian.MersennePerfect.MersennePrimeInfinitude` | `Brockian.MersennePerfect` |
 | `Brockian.OppermannConjecture.OppermannConjecture` | `Brockian.OppermannConjecture` |
+| `Brockian.OreHarmonicNumbers.OddHarmonicExists` | `Brockian.OreHarmonicNumbers` |
 | `Brockian.PalindromicPrimes.PalindromicPrimeInfinitude` | `Brockian.PalindromicPrimes` |
 | `Brockian.PerfectTotient.PerfectTotientInfinitude` | `Brockian.PerfectTotient` |
 | `Brockian.PolignacPrimes.PolignacConjecture` | `Brockian.PolignacPrimes` |
 | `Brockian.QuasiperfectNumbers.QuasiperfectExists` | `Brockian.QuasiperfectNumbers` |
 | `Brockian.RepunitPrimes.RepunitPrimeInfinitude` | `Brockian.RepunitPrimes` |
 | `Brockian.RieselCovering.RieselProblem` | `Brockian.RieselCovering` |
+| `Brockian.RuthAaronPairs.RuthAaronInfinitude` | `Brockian.RuthAaronPairs` |
 | `Brockian.SierpinskiCovering.SierpinskiProblem` | `Brockian.SierpinskiCovering` |
 | `Brockian.SophieGermain.SophieGermainInfinitude` | `Brockian.SophieGermain` |
 | `Brockian.SuperperfectNumbers.OddSuperperfectExists` | `Brockian.SuperperfectNumbers` |
@@ -252,9 +256,9 @@ That is an operational caveat, not a license to inflate PROVED.
 
 | Leg | Status in this export |
 |-----|------------------------|
-| AXLE independent check | **10946/10946** verdict `verified` @ `lean-4.32.0` |
-| Axioms clean flag | **10946/10946** `axioms_ok: true` |
-| Local `lake_build` stamp | **10946/10946** marked `pending` |
+| AXLE independent check | **11022/11022** verdict `verified` @ `lean-4.32.0` |
+| Axioms clean flag | **11022/11022** `axioms_ok: true` |
+| Local `lake_build` stamp | **11022/11022** marked `pending` |
 
 **Implication:** Partner-grade “verification company” narrative requires a
 reproducible local/CI `lake build` leg alongside AXLE. Treat current PROVED as
@@ -270,9 +274,9 @@ on the tip commit above.
 
 ### 6.2 Counting discipline
 
-- **Registry PROVED** (10353) is the only number safe for partner headlines.
+- **Registry PROVED** (10405) is the only number safe for partner headlines.
 - Campaign / historical “theorems attempted” totals are **not** interchangeable with PROVED.
-- DEFINITION (532) supports the API surface; do not add it to PROVED.
+- DEFINITION (552) supports the API surface; do not add it to PROVED.
 - DISCHARGED (6) is a success story (conditionals closed) — **not** extra PROVED.
 
 ### 6.3 No theater
@@ -321,7 +325,7 @@ python3 scripts/gen_paper_theorem_table.py
 
 **Pin phrase for external one-pagers:**
 
-> As of commit `100f976` (2026-08-03): **10353 PROVED**, **532 DEFINITION**, **21 CONDITIONAL**, **6 DISCHARGED**, **34 CONJECTURE** — from `registry/theorems.json`.
+> As of commit `52323d7` (2026-08-03): **10405 PROVED**, **552 DEFINITION**, **21 CONDITIONAL**, **6 DISCHARGED**, **38 CONJECTURE** — from `registry/theorems.json`.
 
 ---
 
