@@ -1,9 +1,9 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10031,
-    "DEFINITION": 497,
-    "CONJECTURE": 18,
+    "PROVED": 10041,
+    "DEFINITION": 498,
+    "CONJECTURE": 19,
     "CONDITIONAL": 21,
     "DISCHARGED": 6
   },
@@ -112451,6 +112451,394 @@
       "quarantine": true,
       "ledger_run": "roadmap #3 \u2014 genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32",
       "provenance_note": "Genuine unconditional content only: coeff_partitionGF proves Mathlib's genFun at the all-ones character equals sum p(n)X^n (partition-count bridge), p(0)=1, a reusable divisibility lemma. The Ramanujan congruence p(5n+4)=0 mod 5 is documented OPEN (NO theorem, NO fronting hypothesis) \u2014 Mathlib lacks Frobenius congruence, Jacobi \u220f(1-X^n)^3, the 5-dissection, and reciprocal-series-mod-5. The self-equivalent conditional was removed as modus-ponens theater."
+    },
+    {
+      "name": "Brockian.RepunitPrimes.RepunitPrimeInfinitude",
+      "kind": "conjecture",
+      "module": "Brockian.RepunitPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RepunitPrimes.lean"
+      },
+      "register": "CONJECTURE",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY repunit primes (open-territory loop, AXLE @4.32, axiom-clean). repunit n = sum_{i<n} 10^i = 11..1 (n ones). CONCRETE: repunit_2_prime (11); composites repunit_{1,3,4,5,6}_not_prime. FLAGSHIP STRUCTURAL prime_of_repunit_prime: R_n prime => n prime (the base-10 analog of the Mersenne exponent constraint), via repunit_dvd_of_dvd (d|n => R_d | R_n) + repunit_strictMono. Helper repunit_mul_nine_add_one (R_m*9+1 = 10^m). RepunitPrimeInfinitude (infinitely many repunit primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RepunitPrimes.prime_of_repunit_prime",
+      "kind": "theorem",
+      "module": "Brockian.RepunitPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RepunitPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY repunit primes (open-territory loop, AXLE @4.32, axiom-clean). repunit n = sum_{i<n} 10^i = 11..1 (n ones). CONCRETE: repunit_2_prime (11); composites repunit_{1,3,4,5,6}_not_prime. FLAGSHIP STRUCTURAL prime_of_repunit_prime: R_n prime => n prime (the base-10 analog of the Mersenne exponent constraint), via repunit_dvd_of_dvd (d|n => R_d | R_n) + repunit_strictMono. Helper repunit_mul_nine_add_one (R_m*9+1 = 10^m). RepunitPrimeInfinitude (infinitely many repunit primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RepunitPrimes.repunit",
+      "kind": "def",
+      "module": "Brockian.RepunitPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RepunitPrimes.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY repunit primes (open-territory loop, AXLE @4.32, axiom-clean). repunit n = sum_{i<n} 10^i = 11..1 (n ones). CONCRETE: repunit_2_prime (11); composites repunit_{1,3,4,5,6}_not_prime. FLAGSHIP STRUCTURAL prime_of_repunit_prime: R_n prime => n prime (the base-10 analog of the Mersenne exponent constraint), via repunit_dvd_of_dvd (d|n => R_d | R_n) + repunit_strictMono. Helper repunit_mul_nine_add_one (R_m*9+1 = 10^m). RepunitPrimeInfinitude (infinitely many repunit primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RepunitPrimes.repunit_1_not_prime",
+      "kind": "theorem",
+      "module": "Brockian.RepunitPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RepunitPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY repunit primes (open-territory loop, AXLE @4.32, axiom-clean). repunit n = sum_{i<n} 10^i = 11..1 (n ones). CONCRETE: repunit_2_prime (11); composites repunit_{1,3,4,5,6}_not_prime. FLAGSHIP STRUCTURAL prime_of_repunit_prime: R_n prime => n prime (the base-10 analog of the Mersenne exponent constraint), via repunit_dvd_of_dvd (d|n => R_d | R_n) + repunit_strictMono. Helper repunit_mul_nine_add_one (R_m*9+1 = 10^m). RepunitPrimeInfinitude (infinitely many repunit primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RepunitPrimes.repunit_2_prime",
+      "kind": "theorem",
+      "module": "Brockian.RepunitPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RepunitPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY repunit primes (open-territory loop, AXLE @4.32, axiom-clean). repunit n = sum_{i<n} 10^i = 11..1 (n ones). CONCRETE: repunit_2_prime (11); composites repunit_{1,3,4,5,6}_not_prime. FLAGSHIP STRUCTURAL prime_of_repunit_prime: R_n prime => n prime (the base-10 analog of the Mersenne exponent constraint), via repunit_dvd_of_dvd (d|n => R_d | R_n) + repunit_strictMono. Helper repunit_mul_nine_add_one (R_m*9+1 = 10^m). RepunitPrimeInfinitude (infinitely many repunit primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RepunitPrimes.repunit_3_not_prime",
+      "kind": "theorem",
+      "module": "Brockian.RepunitPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RepunitPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY repunit primes (open-territory loop, AXLE @4.32, axiom-clean). repunit n = sum_{i<n} 10^i = 11..1 (n ones). CONCRETE: repunit_2_prime (11); composites repunit_{1,3,4,5,6}_not_prime. FLAGSHIP STRUCTURAL prime_of_repunit_prime: R_n prime => n prime (the base-10 analog of the Mersenne exponent constraint), via repunit_dvd_of_dvd (d|n => R_d | R_n) + repunit_strictMono. Helper repunit_mul_nine_add_one (R_m*9+1 = 10^m). RepunitPrimeInfinitude (infinitely many repunit primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RepunitPrimes.repunit_4_not_prime",
+      "kind": "theorem",
+      "module": "Brockian.RepunitPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RepunitPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY repunit primes (open-territory loop, AXLE @4.32, axiom-clean). repunit n = sum_{i<n} 10^i = 11..1 (n ones). CONCRETE: repunit_2_prime (11); composites repunit_{1,3,4,5,6}_not_prime. FLAGSHIP STRUCTURAL prime_of_repunit_prime: R_n prime => n prime (the base-10 analog of the Mersenne exponent constraint), via repunit_dvd_of_dvd (d|n => R_d | R_n) + repunit_strictMono. Helper repunit_mul_nine_add_one (R_m*9+1 = 10^m). RepunitPrimeInfinitude (infinitely many repunit primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RepunitPrimes.repunit_5_not_prime",
+      "kind": "theorem",
+      "module": "Brockian.RepunitPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RepunitPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY repunit primes (open-territory loop, AXLE @4.32, axiom-clean). repunit n = sum_{i<n} 10^i = 11..1 (n ones). CONCRETE: repunit_2_prime (11); composites repunit_{1,3,4,5,6}_not_prime. FLAGSHIP STRUCTURAL prime_of_repunit_prime: R_n prime => n prime (the base-10 analog of the Mersenne exponent constraint), via repunit_dvd_of_dvd (d|n => R_d | R_n) + repunit_strictMono. Helper repunit_mul_nine_add_one (R_m*9+1 = 10^m). RepunitPrimeInfinitude (infinitely many repunit primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RepunitPrimes.repunit_6_not_prime",
+      "kind": "theorem",
+      "module": "Brockian.RepunitPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RepunitPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY repunit primes (open-territory loop, AXLE @4.32, axiom-clean). repunit n = sum_{i<n} 10^i = 11..1 (n ones). CONCRETE: repunit_2_prime (11); composites repunit_{1,3,4,5,6}_not_prime. FLAGSHIP STRUCTURAL prime_of_repunit_prime: R_n prime => n prime (the base-10 analog of the Mersenne exponent constraint), via repunit_dvd_of_dvd (d|n => R_d | R_n) + repunit_strictMono. Helper repunit_mul_nine_add_one (R_m*9+1 = 10^m). RepunitPrimeInfinitude (infinitely many repunit primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RepunitPrimes.repunit_dvd_of_dvd",
+      "kind": "theorem",
+      "module": "Brockian.RepunitPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RepunitPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY repunit primes (open-territory loop, AXLE @4.32, axiom-clean). repunit n = sum_{i<n} 10^i = 11..1 (n ones). CONCRETE: repunit_2_prime (11); composites repunit_{1,3,4,5,6}_not_prime. FLAGSHIP STRUCTURAL prime_of_repunit_prime: R_n prime => n prime (the base-10 analog of the Mersenne exponent constraint), via repunit_dvd_of_dvd (d|n => R_d | R_n) + repunit_strictMono. Helper repunit_mul_nine_add_one (R_m*9+1 = 10^m). RepunitPrimeInfinitude (infinitely many repunit primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RepunitPrimes.repunit_mul_nine_add_one",
+      "kind": "theorem",
+      "module": "Brockian.RepunitPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RepunitPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY repunit primes (open-territory loop, AXLE @4.32, axiom-clean). repunit n = sum_{i<n} 10^i = 11..1 (n ones). CONCRETE: repunit_2_prime (11); composites repunit_{1,3,4,5,6}_not_prime. FLAGSHIP STRUCTURAL prime_of_repunit_prime: R_n prime => n prime (the base-10 analog of the Mersenne exponent constraint), via repunit_dvd_of_dvd (d|n => R_d | R_n) + repunit_strictMono. Helper repunit_mul_nine_add_one (R_m*9+1 = 10^m). RepunitPrimeInfinitude (infinitely many repunit primes) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.RepunitPrimes.repunit_strictMono",
+      "kind": "theorem",
+      "module": "Brockian.RepunitPrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RepunitPrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY repunit primes (open-territory loop, AXLE @4.32, axiom-clean). repunit n = sum_{i<n} 10^i = 11..1 (n ones). CONCRETE: repunit_2_prime (11); composites repunit_{1,3,4,5,6}_not_prime. FLAGSHIP STRUCTURAL prime_of_repunit_prime: R_n prime => n prime (the base-10 analog of the Mersenne exponent constraint), via repunit_dvd_of_dvd (d|n => R_d | R_n) + repunit_strictMono. Helper repunit_mul_nine_add_one (R_m*9+1 = 10^m). RepunitPrimeInfinitude (infinitely many repunit primes) is an unproven def -- OPEN, never asserted."
     },
     {
       "name": "Brockian.RiemannScaffold.BrockianSystem",

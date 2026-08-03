@@ -676,3 +676,4 @@ import Brockian.PolignacPrimes
 import Brockian.FermatNumbers
 import Brockian.LandauNSquaredPlusOne
 import Brockian.CullenWoodall
+import Brockian.RepunitPrimes

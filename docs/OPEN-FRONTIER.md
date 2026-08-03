@@ -292,6 +292,21 @@ are unproven `def`s.
 
 ---
 
+## Repunit primes (infinitude open)
+
+**Claim.** Are there infinitely many repunit primes R_n = (10ⁿ−1)/9 = 11…1?
+Open. Module: `Brockian.RepunitPrimes`. `RepunitPrimeInfinitude` is an unproven `def`.
+
+**PROVED (concrete + structural):**
+- **R₂ = 11 is prime** (`repunit_2_prime`); R₁, R₃, R₄, R₅, R₆ composite.
+- **d ∣ n ⇒ R_d ∣ R_n** (`repunit_dvd_of_dvd`), and hence **R_n prime ⇒ n prime**
+  (`prime_of_repunit_prime`) — the base-10 analog of the Mersenne exponent constraint.
+- Repunits are strictly increasing (`repunit_strictMono`).
+
+**OPEN.** Whether infinitely many repunit primes exist.
+
+---
+
 ## The discipline
 
 The frontier lane never emits a solved famous conjecture. It emits four honest kinds of output:

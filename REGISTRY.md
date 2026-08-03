@@ -7,10 +7,10 @@
 ## Summary
 
 - **CONDITIONAL**: 21
-- **CONJECTURE**: 18
-- **DEFINITION**: 497
+- **CONJECTURE**: 19
+- **DEFINITION**: 498
 - **DISCHARGED**: 6
-- **PROVED**: 10031
+- **PROVED**: 10041
 
 ## Theorems
 
@@ -3488,6 +3488,18 @@
 | PROVED | `Brockian.RamanujanCongruence.five_dvd_of_dissection` | ✓ | verified | lean-4.32.0 | roadmap #3 — genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32 |
 | DEFINITION | `Brockian.RamanujanCongruence.p` | ✓ | verified | lean-4.32.0 | roadmap #3 — genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32 |
 | DEFINITION | `Brockian.RamanujanCongruence.partitionGF` | ✓ | verified | lean-4.32.0 | roadmap #3 — genFin<->partition-count bridge; Ramanujan congruence documented OPEN; AXLE @4.32 |
+| CONJECTURE | `Brockian.RepunitPrimes.RepunitPrimeInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RepunitPrimes.prime_of_repunit_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.RepunitPrimes.repunit` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RepunitPrimes.repunit_1_not_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RepunitPrimes.repunit_2_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RepunitPrimes.repunit_3_not_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RepunitPrimes.repunit_4_not_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RepunitPrimes.repunit_5_not_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RepunitPrimes.repunit_6_not_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RepunitPrimes.repunit_dvd_of_dvd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RepunitPrimes.repunit_mul_nine_add_one` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.RepunitPrimes.repunit_strictMono` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.RiemannScaffold.BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | PROVED | `Brockian.RiemannScaffold.Gammaℝ_ne_zero_of_nontrivial` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
 | CONDITIONAL | `Brockian.RiemannScaffold.RH_of_BrockianSystem` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — ξ-bridge (unconditional) + Hilbert-Pólya conditional (OPEN) |
