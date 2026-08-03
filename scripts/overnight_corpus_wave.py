@@ -209,6 +209,8 @@ import Brockian.GoldbachComb
 import Brockian.GoldbachParity
 
 set_option autoImplicit false
+-- decide Nat.Prime p needs higher rec depth for p ≳ 163 under AXLE
+set_option maxRecDepth 10000
 
 namespace Brockian.Goldbach.WheelK2_{p}
 
