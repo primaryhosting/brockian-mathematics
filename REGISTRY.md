@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 624
+- **DEFINITION**: 625
 - **DISCHARGED**: 7
-- **PROVED**: 10963
+- **PROVED**: 10968
 
 ## Theorems
 
@@ -365,6 +365,12 @@
 | DEFINITION | `Brockian.ConstellationMultiplicative.admissibleU` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 2; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationMultiplicative.admissibleU_mul` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 2; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationMultiplicative.admissibleU_prime` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 2; AXLE @4.32 |
+| DEFINITION | `Brockian.ConstellationPaths.G` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 2b; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationPaths.G_adj` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 2b; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationPaths.forest_of_paths` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 2b; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationPaths.induced_degree_le_two` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 2b; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationPaths.no_four_admissible_run` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 2b; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationPaths.no_four_vertex_plus_three_chain` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 2b; AXLE @4.32 |
 | DEFINITION | `Brockian.ConstellationSpectrum.H1` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationSpectrum.H1_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationSpectrum.H1_eigenvalue` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |

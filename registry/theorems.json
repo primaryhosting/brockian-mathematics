@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10963,
-    "DEFINITION": 624,
+    "PROVED": 10968,
+    "DEFINITION": 625,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
     "DISCHARGED": 7
@@ -11201,6 +11201,199 @@
       "quarantine": true,
       "ledger_run": "Brockian constellation-sieve brick 2; AXLE @4.32",
       "provenance_note": "SWARM-PROVED Constellation Sieve Spectrum BRICK 2 (AXLE @4.32, axiom-clean): wheel admissibility is MULTIPLICATIVE. admissibleU n H = residues where every shifted point a+h is a unit mod n (the genuine sieve/coprimality condition). admissibleU_prime bridges to Brick 1 (in a field IsUnit = nonzero, so the prime count is p - nu_p). admissibleU_mul: for coprime m,n, admissibleU(m*n).card = admissibleU(m).card * admissibleU(n).card, proved via the Chinese Remainder ring iso ZMod(mn) = ZMod m x ZMod n and unit-in-product-ring. This is local-to-global: the wheel count factors over prime components."
+    },
+    {
+      "name": "Brockian.ConstellationPaths.G",
+      "kind": "def",
+      "module": "Brockian.ConstellationPaths",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationPaths.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 2b; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 2b (AXLE @4.32, axiom-clean): the twin-admissible +3 graph is a FOREST OF PATHS capped at 3 vertices. induced_degree_le_two: every vertex has degree <= 2. forest_of_paths: G.IsAcyclic AND every degree <= 2 (the complete 'disjoint union of paths' characterization, from the acyclicity + degree bound). no_four_vertex_plus_three_chain / no_four_admissible_run: no 4 vertices in a +3 progression (5|M), i.e. components have <= 3 vertices (the P1/P2/P3 cap, run-cap in graph form). The graph is thus structurally a disjoint union of P1,P2,P3. Remaining: explicit pathGraph identification + the matrix spectral assembly."
+    },
+    {
+      "name": "Brockian.ConstellationPaths.G_adj",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationPaths",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationPaths.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 2b; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 2b (AXLE @4.32, axiom-clean): the twin-admissible +3 graph is a FOREST OF PATHS capped at 3 vertices. induced_degree_le_two: every vertex has degree <= 2. forest_of_paths: G.IsAcyclic AND every degree <= 2 (the complete 'disjoint union of paths' characterization, from the acyclicity + degree bound). no_four_vertex_plus_three_chain / no_four_admissible_run: no 4 vertices in a +3 progression (5|M), i.e. components have <= 3 vertices (the P1/P2/P3 cap, run-cap in graph form). The graph is thus structurally a disjoint union of P1,P2,P3. Remaining: explicit pathGraph identification + the matrix spectral assembly."
+    },
+    {
+      "name": "Brockian.ConstellationPaths.forest_of_paths",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationPaths",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationPaths.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 2b; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 2b (AXLE @4.32, axiom-clean): the twin-admissible +3 graph is a FOREST OF PATHS capped at 3 vertices. induced_degree_le_two: every vertex has degree <= 2. forest_of_paths: G.IsAcyclic AND every degree <= 2 (the complete 'disjoint union of paths' characterization, from the acyclicity + degree bound). no_four_vertex_plus_three_chain / no_four_admissible_run: no 4 vertices in a +3 progression (5|M), i.e. components have <= 3 vertices (the P1/P2/P3 cap, run-cap in graph form). The graph is thus structurally a disjoint union of P1,P2,P3. Remaining: explicit pathGraph identification + the matrix spectral assembly."
+    },
+    {
+      "name": "Brockian.ConstellationPaths.induced_degree_le_two",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationPaths",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationPaths.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 2b; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 2b (AXLE @4.32, axiom-clean): the twin-admissible +3 graph is a FOREST OF PATHS capped at 3 vertices. induced_degree_le_two: every vertex has degree <= 2. forest_of_paths: G.IsAcyclic AND every degree <= 2 (the complete 'disjoint union of paths' characterization, from the acyclicity + degree bound). no_four_vertex_plus_three_chain / no_four_admissible_run: no 4 vertices in a +3 progression (5|M), i.e. components have <= 3 vertices (the P1/P2/P3 cap, run-cap in graph form). The graph is thus structurally a disjoint union of P1,P2,P3. Remaining: explicit pathGraph identification + the matrix spectral assembly."
+    },
+    {
+      "name": "Brockian.ConstellationPaths.no_four_admissible_run",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationPaths",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationPaths.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 2b; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 2b (AXLE @4.32, axiom-clean): the twin-admissible +3 graph is a FOREST OF PATHS capped at 3 vertices. induced_degree_le_two: every vertex has degree <= 2. forest_of_paths: G.IsAcyclic AND every degree <= 2 (the complete 'disjoint union of paths' characterization, from the acyclicity + degree bound). no_four_vertex_plus_three_chain / no_four_admissible_run: no 4 vertices in a +3 progression (5|M), i.e. components have <= 3 vertices (the P1/P2/P3 cap, run-cap in graph form). The graph is thus structurally a disjoint union of P1,P2,P3. Remaining: explicit pathGraph identification + the matrix spectral assembly."
+    },
+    {
+      "name": "Brockian.ConstellationPaths.no_four_vertex_plus_three_chain",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationPaths",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationPaths.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 2b; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 2b (AXLE @4.32, axiom-clean): the twin-admissible +3 graph is a FOREST OF PATHS capped at 3 vertices. induced_degree_le_two: every vertex has degree <= 2. forest_of_paths: G.IsAcyclic AND every degree <= 2 (the complete 'disjoint union of paths' characterization, from the acyclicity + degree bound). no_four_vertex_plus_three_chain / no_four_admissible_run: no 4 vertices in a +3 progression (5|M), i.e. components have <= 3 vertices (the P1/P2/P3 cap, run-cap in graph form). The graph is thus structurally a disjoint union of P1,P2,P3. Remaining: explicit pathGraph identification + the matrix spectral assembly."
     },
     {
       "name": "Brockian.ConstellationSpectrum.H1",
