@@ -8,7 +8,7 @@ generated from AXLE attestations); nothing is hand-asserted. Regenerate with
 
 | Metric | Value |
 |---|---|
-| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,596** |
+| Theorems **PROVED** (AXLE-verified, axiom-clean) | **10,911** |
 | Open problems mapped on the frontier | **34** |
 | **CONDITIONAL** reductions (honest, named-hypothesis) | 20 |
 | **DISCHARGED** (conditional → unconditional) | 7 |
@@ -52,8 +52,16 @@ instead of the compute-constrained workstation.
 
 - **Frontier lane** (curated) — accept a new finite module only when it tests a new general theorem or
   adds a materially useful structural reduction. Automatic range/count expansion is paused.
-- **Hard-proof lane** (Harmonic / Aristotle) — heavy theorems offloaded to stronger compute. **Sixteen hard
-  theorems harvested and integrated so far**, each independently AXLE-verified @4.32 and axiom-clean:
+- **Hard-proof lane** (Harmonic / Aristotle) — heavy theorems offloaded to stronger compute. A large
+  **moonshot corpus** was harvested this session: ~60 famous classical theorems proved by Aristotle,
+  each **independently AXLE-verified @lean-4.32.0** and axiom-clean before integration — Zsygmondy,
+  Turán, Schur, Erdős–Szekeres, Dilworth, Mirsky, Cayley's formula, Van der Waerden, Sperner, LYM,
+  Perron–Frobenius, Birkhoff–von Neumann, Pell, Thue, Proth, Pépin, quadratic Gauss sum, Cauchy–Davenport,
+  Mason–Stothers, Machin, Binet, Zeckendorf, derangements, e² irrational, Menelaus, Ceva, Heron, Ptolemy,
+  Napoleon, Viète, British-flag, Hermite–Hadamard, and more. The gate rejected every return that failed
+  our 4.32 kernel, carried a `sorry`, cited a phantom (non-core) lemma, or failed the axiom-footprint
+  probe — those were re-queued via `aristotle continue`, not force-fit. Earlier hard theorems also
+  harvested and integrated, each AXLE-verified @4.32 and axiom-clean:
   Euler's form for odd perfect numbers, Mersenne-exponent-prime, Korselt⇒Carmichael (Fermat little
   theorem for all bases), the full Wilson iff, odd-perfect ≡ 1 mod 4, every even perfect number is
   triangular, the two-coin Frobenius representability bound, and the **Erdős–Ginzburg–Ziv** zero-sum
