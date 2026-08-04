@@ -1,0 +1,73 @@
+{
+  "module": "Brockian.ConstellationGraph",
+  "environment": "lean-4.32.0",
+  "module_verified": true,
+  "declarations": [
+    {
+      "name": "Brockian.ConstellationGraph.plusThreeGraph",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.ConstellationGraph.plusThreeGraph_neighbour",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.ConstellationGraph.plus_three_neighbourhood",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.ConstellationGraph.twinAdm",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.ConstellationGraph.twinAdm_map",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.ConstellationGraph.twin_no_four_run",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.ConstellationGraph.twin_run_cap_mod5",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    }
+  ]
+}

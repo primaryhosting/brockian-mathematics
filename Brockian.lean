@@ -806,3 +806,4 @@ import Brockian.MsCeva
 import Brockian.ConstellationLocalCount
 import Brockian.ConstellationMultiplicative
 import Brockian.ConstellationWheel
+import Brockian.ConstellationGraph

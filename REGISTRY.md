@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 614
+- **DEFINITION**: 616
 - **DISCHARGED**: 7
-- **PROVED**: 10918
+- **PROVED**: 10923
 
 ## Theorems
 
@@ -315,6 +315,13 @@
 | PROVED | `Brockian.ConnectivityGoldenBridge.neg_phi_mem_adjacency_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.ConnectivityGoldenBridge.two_cos_four_pi_div_five_eq_neg_phi` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.ConnectivityGoldenBridge.two_cos_four_pi_div_five_geometry` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| DEFINITION | `Brockian.ConstellationGraph.plusThreeGraph` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGraph.plusThreeGraph_neighbour` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGraph.plus_three_neighbourhood` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
+| DEFINITION | `Brockian.ConstellationGraph.twinAdm` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGraph.twinAdm_map` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGraph.twin_no_four_run` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGraph.twin_run_cap_mod5` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationLocalCount.local_admissible_count` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 1; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationLocalCount.local_admissible_count_prime` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 1; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationLocalCount.twin_local_count` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 1; AXLE @4.32 |
