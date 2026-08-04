@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 587
 - **DISCHARGED**: 7
-- **PROVED**: 10596
+- **PROVED**: 10602
 
 ## Theorems
 
@@ -10453,6 +10453,12 @@
 | PROVED | `Brockian.SuperperfectNumbers.superperfect_4` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SuperperfectNumbers.superperfect_64` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SuperperfectNumbers.superperfect_two_pow_of_mersenne_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.TotientStructure.gauss_sum_totient` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.TotientStructure.totient_eq_sub_one_iff_prime` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.TotientStructure.totient_even_of_three_le` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.TotientStructure.totient_lt_self_of_two_le` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.TotientStructure.totient_prime_pow_formula` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.TotientStructure.totient_prime_sub_one` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | DEFINITION | `Brockian.TransitionKernel.admissibleStarts` | ✓ | verified | lean-4.32.0 | runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion |
 | PROVED | `Brockian.TransitionKernel.brockian_table_card` | ✓ | verified | lean-4.32.0 | runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion |
 | PROVED | `Brockian.TransitionKernel.cousin_pins_mod_three` | ✓ | verified | lean-4.32.0 | runs 7 / 31 / 117 — kernel double-count, constellation classification, twin exclusion |

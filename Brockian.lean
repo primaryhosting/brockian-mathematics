@@ -734,6 +734,7 @@ import Brockian.PhaseDepthTorus
 import Brockian.TripleAdmissibility
 import Brockian.AffineSelection
 import Brockian.SieveSpectrumCounts
+import Brockian.SieveSpectrumBlocks
 import Brockian.EgyptianFraction
 import Brockian.AbundantClosure
 import Brockian.DivisorCountStructure
@@ -744,3 +745,4 @@ import Brockian.KummerTheorem
 import Brockian.WeylFreeLaplacianCorrected
 import Brockian.WeylMultiplicationUpstream
 import Brockian.WeylKatoRellich
+import Brockian.TotientStructure

@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10596,
+    "PROVED": 10602,
     "DEFINITION": 587,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -341757,6 +341757,204 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.TotientStructure.gauss_sum_totient",
+      "kind": "theorem",
+      "module": "Brockian.TotientStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TotientStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Euler-totient (phi) structure layer (AXLE @4.32, axiom-clean), core Mathlib only -- complements the sigma/tau structural layer. totient_prime_pow_formula is the substantive proof (phi(p^k)=p^k-p^(k-1), rewriting Mathlib's product form into the subtractive closed form). The rest are curated interface theorems over core Mathlib: gauss_sum_totient (sum_{d|n} phi(d)=n), totient_prime_sub_one (phi(p)=p-1), totient_eq_sub_one_iff_prime (phi(n)=n-1 iff prime), totient_even_of_three_le (phi even for n>=3), totient_lt_self_of_two_le (phi(n)<n for n>=2). A clean phi interface for the divisor-function frontier."
+    },
+    {
+      "name": "Brockian.TotientStructure.totient_eq_sub_one_iff_prime",
+      "kind": "theorem",
+      "module": "Brockian.TotientStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TotientStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Euler-totient (phi) structure layer (AXLE @4.32, axiom-clean), core Mathlib only -- complements the sigma/tau structural layer. totient_prime_pow_formula is the substantive proof (phi(p^k)=p^k-p^(k-1), rewriting Mathlib's product form into the subtractive closed form). The rest are curated interface theorems over core Mathlib: gauss_sum_totient (sum_{d|n} phi(d)=n), totient_prime_sub_one (phi(p)=p-1), totient_eq_sub_one_iff_prime (phi(n)=n-1 iff prime), totient_even_of_three_le (phi even for n>=3), totient_lt_self_of_two_le (phi(n)<n for n>=2). A clean phi interface for the divisor-function frontier."
+    },
+    {
+      "name": "Brockian.TotientStructure.totient_even_of_three_le",
+      "kind": "theorem",
+      "module": "Brockian.TotientStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TotientStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Euler-totient (phi) structure layer (AXLE @4.32, axiom-clean), core Mathlib only -- complements the sigma/tau structural layer. totient_prime_pow_formula is the substantive proof (phi(p^k)=p^k-p^(k-1), rewriting Mathlib's product form into the subtractive closed form). The rest are curated interface theorems over core Mathlib: gauss_sum_totient (sum_{d|n} phi(d)=n), totient_prime_sub_one (phi(p)=p-1), totient_eq_sub_one_iff_prime (phi(n)=n-1 iff prime), totient_even_of_three_le (phi even for n>=3), totient_lt_self_of_two_le (phi(n)<n for n>=2). A clean phi interface for the divisor-function frontier."
+    },
+    {
+      "name": "Brockian.TotientStructure.totient_lt_self_of_two_le",
+      "kind": "theorem",
+      "module": "Brockian.TotientStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TotientStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Euler-totient (phi) structure layer (AXLE @4.32, axiom-clean), core Mathlib only -- complements the sigma/tau structural layer. totient_prime_pow_formula is the substantive proof (phi(p^k)=p^k-p^(k-1), rewriting Mathlib's product form into the subtractive closed form). The rest are curated interface theorems over core Mathlib: gauss_sum_totient (sum_{d|n} phi(d)=n), totient_prime_sub_one (phi(p)=p-1), totient_eq_sub_one_iff_prime (phi(n)=n-1 iff prime), totient_even_of_three_le (phi even for n>=3), totient_lt_self_of_two_le (phi(n)<n for n>=2). A clean phi interface for the divisor-function frontier."
+    },
+    {
+      "name": "Brockian.TotientStructure.totient_prime_pow_formula",
+      "kind": "theorem",
+      "module": "Brockian.TotientStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TotientStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Euler-totient (phi) structure layer (AXLE @4.32, axiom-clean), core Mathlib only -- complements the sigma/tau structural layer. totient_prime_pow_formula is the substantive proof (phi(p^k)=p^k-p^(k-1), rewriting Mathlib's product form into the subtractive closed form). The rest are curated interface theorems over core Mathlib: gauss_sum_totient (sum_{d|n} phi(d)=n), totient_prime_sub_one (phi(p)=p-1), totient_eq_sub_one_iff_prime (phi(n)=n-1 iff prime), totient_even_of_three_le (phi even for n>=3), totient_lt_self_of_two_le (phi(n)<n for n>=2). A clean phi interface for the divisor-function frontier."
+    },
+    {
+      "name": "Brockian.TotientStructure.totient_prime_sub_one",
+      "kind": "theorem",
+      "module": "Brockian.TotientStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TotientStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Euler-totient (phi) structure layer (AXLE @4.32, axiom-clean), core Mathlib only -- complements the sigma/tau structural layer. totient_prime_pow_formula is the substantive proof (phi(p^k)=p^k-p^(k-1), rewriting Mathlib's product form into the subtractive closed form). The rest are curated interface theorems over core Mathlib: gauss_sum_totient (sum_{d|n} phi(d)=n), totient_prime_sub_one (phi(p)=p-1), totient_eq_sub_one_iff_prime (phi(n)=n-1 iff prime), totient_even_of_three_le (phi even for n>=3), totient_lt_self_of_two_le (phi(n)<n for n>=2). A clean phi interface for the divisor-function frontier."
     },
     {
       "name": "Brockian.TransitionKernel.admissibleStarts",
