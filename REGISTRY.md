@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 598
+- **DEFINITION**: 605
 - **DISCHARGED**: 7
-- **PROVED**: 10621
+- **PROVED**: 10814
 
 ## Theorems
 
@@ -217,6 +217,7 @@
 | PROVED | `Brockian.CarmichaelKorselt.korselt_561` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.CarmichaelKorselt.korselt_odd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.CarmichaelKorselt.sqfree_prod3` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.Cassini.cassini` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | CONJECTURE | `Brockian.CollatzPartial.CollatzConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.CollatzPartial.Reaches1` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.CollatzPartial.collatz` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
@@ -1819,6 +1820,27 @@
 | PROVED | `Brockian.D5Representation.d5Pull_mem_constantLine` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
 | PROVED | `Brockian.D5Representation.d5Pull_mem_zeroSumSubmodule` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
 | DEFINITION | `Brockian.D5Representation.zeroSumSubmodule` | ✓ | verified | lean-4.32.0 | 2026-08-01 — finite D5 permutation representation foothold |
+| DEFINITION | `Brockian.Dilworth.ChainColoring` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.ChainColoring.exists_of_lt` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.ChainColoring.injOn_antichain` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.ChainColoring.mono` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.ChainColoring.subset` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.card_le_card_of_cover` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.cross_comparable` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.dilworth` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.dilworth_cover` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.exact_cover_counterexample` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.exists_chainColoring` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.exists_chainColoring_aux` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.exists_max_min` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.glue` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.glue_mixed` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.glue_of_matching` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.glue_upper` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.mem_up_or_down` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.step` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.step_case_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.step_case_two` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.DivisorCountStructure.isSquare_iff_even_factorization` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.DivisorCountStructure.tau_eq_one_iff` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.DivisorCountStructure.tau_eq_two_iff_prime` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
@@ -1935,6 +1957,24 @@
 | PROVED | `Brockian.ErdosStrausResidues.erdosStraus_open_frontier_mod24` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.ErdosStrausResidues.erdosStraus_open_reduces` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.ErdosStrausResidues.erdosStraus_open_reduces_mod12` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.decSequencesTo` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.decSequencesTo_nonempty` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.erdos_szekeres` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.erdos_szekeres_aux` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.incSequencesTo` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.incSequencesTo_nonempty` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.maxDecSequencesTo` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.maxDecSequencesTo_gt` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.maxDecSequencesTo_mem` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.maxIncSequencesTo` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.maxIncSequencesTo_lt` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.maxIncSequencesTo_mem` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.one_le_maxDecSequencesTo` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.one_le_maxIncSequencesTo` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.one_mem_decSequencesTo` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.one_mem_incSequencesTo` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.paired` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.ErdosSzekeres.paired_injective` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.EvenPerfectMod9.eq_two_pow_mul_odd_main` | ✓ | verified | lean-4.32.0 | Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit |
 | PROVED | `Brockian.EvenPerfectMod9.eq_two_pow_mul_prime_mersenne_of_even_perfect_main` | ✓ | verified | lean-4.32.0 | Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit |
 | PROVED | `Brockian.EvenPerfectMod9.even_euclid_euler_mod9` | ✓ | verified | lean-4.32.0 | Aristotle 40f28fb5; Codex 4.32 compatibility repair and AXLE audit |
@@ -2143,6 +2183,7 @@
 | PROVED | `Brockian.GaloisWhyFive.spectralGen_seven` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
 | PROVED | `Brockian.GaloisWhyFive.spectralGen_three` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
 | PROVED | `Brockian.GaloisWhyFive.why_five` | ✓ | verified | lean-4.32.0 | roadmap #13 — Galois-degree why-five rigidity; AXLE @4.32 |
+| PROVED | `Brockian.GaussWilson.prod_units_sq_eq_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.Geometry.d5_card` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.golden_ratio_in_C5_spectrum` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
 | PROVED | `Brockian.Geometry.pentagon_golden_diagonal` | ✓ | verified | lean-4.32.0 | runs 16 / 54 / 70 / 73 — pentagon golden diagonal, two-distance, C₅ spectrum |
@@ -3379,6 +3420,10 @@
 | PROVED | `Brockian.LehmerTotient.lehmer_odd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LehmerTotient.lehmer_squarefree` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LehmerTotient.lehmer_three_primes` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LteTwo.emult_two_pow_sub_pow` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.LteTwo.factorization_two` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.LteTwo.lte_two` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.LteTwo.padicValNat_two_pow_sub_pow` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.LucasTheorem.lucas` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle cf31a33b; AXLE @4.32 |
 | PROVED | `Brockian.MagmaLawRefutations.countermodel_assoc` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
 | PROVED | `Brockian.MagmaLawRefutations.countermodel_comm` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
@@ -3392,6 +3437,8 @@
 | DEFINITION | `Brockian.MagmaLawRefutations.op_comm` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
 | DEFINITION | `Brockian.MagmaLawRefutations.op_idem` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
 | DEFINITION | `Brockian.MagmaLawRefutations.op_mid` | ✓ | verified | lean-4.32.0 | swarm/Harmonic; AXLE @4.32 |
+| PROVED | `Brockian.MasonStothers.mason_stothers` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MasonStothers.natDegree_radical_le_card_roots` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MersenneExponentPrime.mersenne_exponent_prime` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle proof 9e257cf6; AXLE @4.32 |
 | CONJECTURE | `Brockian.MersennePerfect.EvenPerfectInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.MersennePerfect.MersennePrimeInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
@@ -3451,6 +3498,96 @@
 | PROVED | `Brockian.MetallicRealization.metallicPoly_natDegree` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
 | PROVED | `Brockian.MetallicRealization.trace_eq_sum_roots` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
 | PROVED | `Brockian.MetallicRealization.two_lt_metallicMean` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MsBinet.binet` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsBinet.binet_aux` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsBinet.phi_sq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsBinet.psi_sq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsBinet.sq_sqrt5` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsBinet.sqrt5_pos` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsBirkhoff.birkhoff_von_neumann` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsBritishFlag.british_flag` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsCatalanSquareSum.sum_choose_sq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsCauchyDavenport.cauchy_davenport` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsChebyshevSum.chebyshev_sum` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsChebyshevTheta.chebyshev_theta` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsDerangement.derangement_closed` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsGaussSum.conj_stdAddChar` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsGaussSum.exp_eq_stdAddChar` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsGaussSum.gauss_sum_abs_sq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsGaussSum.gauss_sum_mul_conj` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsGaussSum.sum_mul_conj_sum` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsGaussSum.sum_shift` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsGaussSum.two_mul_eq_zero_iff` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsHeron.heron` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsLYM.lym` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsLagrangeIdentity.lagrange_identity` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsLagrangeIdentity.sum_sum_sq_expand` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsLagrangeIdentity.sum_symm_eq_two_mul_sum_lt` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsMachin.machin` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsMirsky.exists_chain_height` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| DEFINITION | `Brockian.MsMirsky.height` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsMirsky.height_filter_nonempty` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsMirsky.height_le_of_chain_le` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsMirsky.height_lt_height` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsMirsky.isAntichain_height_level` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsMirsky.mirsky` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsMirsky.one_le_height` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| DEFINITION | `Brockian.MsNapoleon.apex` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsNapoleon.exists_primitive_cube_root` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsNapoleon.napoleon` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsNapoleon.napoleon_original_false` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPell.pell_solvable` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPepin.fermat_mod_four` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPepin.fermat_mod_three` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPepin.legendreSym_three_two` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPepin.legendre_three` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPepin.neg_one_ne_one_fermat` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPepin.pepin` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPepin.pepin_mp` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPepin.pepin_mpr` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPepin.pow_fermat_sub_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPepin.pow_prime_div_ne_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| DEFINITION | `Brockian.MsPerronFrobenius.Cset` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| DEFINITION | `Brockian.MsPerronFrobenius.Kset` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPerronFrobenius.Kset_le_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPerronFrobenius.Kset_ne_zero` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPerronFrobenius.Kset_nonneg` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPerronFrobenius.exists_delta` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPerronFrobenius.exists_eps_gap` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPerronFrobenius.exists_improve` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPerronFrobenius.exists_pos_ratio` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPerronFrobenius.isCompact_Cset` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPerronFrobenius.isCompact_Kset` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPerronFrobenius.mulVec_pos` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPerronFrobenius.perron` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPocklington.pocklington` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPocklington.pow_ne_one_mod_prime` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPocklington.prime_dvd_of_dvd_mul_not_dvd` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPocklington.q_dvd_prime_sub_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPocklington.q_lt_prime_divisor` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsPrimitiveRootCount.primitive_root_count` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsProth.dvd_half_of_not_two_pow_dvd` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsProth.proth` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsProth.two_pow_dvd_prime_sub_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsQrTwo.two_is_qr_iff` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsSchurInequality.schur_inequality` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsSchurInequality.schur_sorted` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsThue.thue_lemma` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsThue.thue_pigeonhole` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsVanDerWaerden.lineConst` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsVanDerWaerden.line_sum_eq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsVanDerWaerden.movingSet` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsVanDerWaerden.sum_coords_le` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsVanDerWaerden.van_der_waerden` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsViete.viete_product` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsViviani.norm_inversion_sub_inversion` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsViviani.ptolemy_inequality` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsViviani.ptolemy_vector` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsViviani.ptolemy_vector_ne_zero` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsWilsonPrimePower.prime_pow_dvd_of_dvd_pred_mul_succ` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsWilsonPrimePower.prod_units_eq_neg_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsWilsonPrimePower.units_sq_eq_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsWilsonPrimePower.wilson_prime_power` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | DEFINITION | `Brockian.MultiperfectStructure.Multiperfect` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | DEFINITION | `Brockian.MultiperfectStructure.MultiperfectInfinitude` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.MultiperfectStructure.multiperfect_ge_two_not_deficient` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
@@ -3468,6 +3605,7 @@
 | DEFINITION | `Brockian.NewEra.readingPath` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.NewEra.twin_admissible_count` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.NewEra.why_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Niven.niven_cos` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.OddDistinctPartition.card_distincts_le_partition` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.OddDistinctPartition.card_distincts_le_powerset` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.OddDistinctPartition.card_oddDistincts_le_distincts` | ✓ | verified | lean-4.32.0 |  |
@@ -3794,6 +3932,24 @@
 | PROVED | `Brockian.PracticalNumbers.practical_28` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PracticalNumbers.practical_6` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PracticalNumbers.practical_pow_two` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.A` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.B` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.N` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.N_eq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.N_not_prime` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.N_odd` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.four_pow_modEq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.infinite_pseudoprimes_base_two` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.lt_N` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.one_lt_A` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.one_lt_B` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.one_lt_N` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.p_dvd_N_sub_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.pow_N_modEq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.three_mul_B` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.three_mul_N` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.two_p_dvd_N_sub_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.PseudoprimesBaseTwo.two_pow_two_mul_modEq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | DEFINITION | `Brockian.QuasiperfectNumbers.AlmostPerfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.QuasiperfectNumbers.Perfectσ` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.QuasiperfectNumbers.Quasiperfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
@@ -3876,6 +4032,10 @@
 | PROVED | `Brockian.RuthAaronPairs.sopfr_78` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.RuthAaronPairs.sopfr_eq` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.Sanity.brockian_sanity` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Schur.fR` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Schur.fR_pos` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Schur.key` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Schur.schur` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | DEFINITION | `Brockian.SierpinskiCovering.IsSierpinski` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.SierpinskiCovering.SierpinskiProblem` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SierpinskiCovering.composite_of` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
@@ -10472,6 +10632,13 @@
 | PROVED | `Brockian.SpectralGate1.primeGaussianℂ_memLp_top` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — bounded-potential multiplication operator (honest Gate-1 piece) |
 | PROVED | `Brockian.SpectralGate1.primeGaussianℂ_norm_le` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — bounded-potential multiplication operator (honest Gate-1 piece) |
 | PROVED | `Brockian.SpectralGate1.summable_primeBump` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — bounded-potential multiplication operator (honest Gate-1 piece) |
+| PROVED | `Brockian.Sperner.sperner_card_le` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.StarOfDavid.choose_add_mul_factorial` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.StarOfDavid.choose_mul_fact` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.StarOfDavid.choose_prod_identity` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.StarOfDavid.star_abstract` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.StarOfDavid.star_key` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.StarOfDavid.star_of_david` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | CONJECTURE | `Brockian.SuperperfectNumbers.OddSuperperfectExists` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.SuperperfectNumbers.Superperfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.SuperperfectNumbers.sigma1` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
@@ -10509,6 +10676,7 @@
 | DEFINITION | `Brockian.TripleAdmissibility.tripleAdmissibleCount` | ✓ | verified | lean-4.32.0 | Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit |
 | PROVED | `Brockian.TripleAdmissibility.tripleAdmissibleCount_mul_of_coprime` | ✓ | verified | lean-4.32.0 | Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit |
 | PROVED | `Brockian.TripleAdmissibility.tripleAdmissible_chineseRemainder_iff` | ✓ | verified | lean-4.32.0 | Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit |
+| PROVED | `Brockian.Turan.turan` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.TwinPrimeConstant.isAdmissible_twinOffsets` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.TwinPrimeConstant.localFactorAt_twin` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.TwinPrimeConstant.localFactorAt_twin_eq_tFactor` | ✓ | verified | lean-4.32.0 |  |
@@ -10552,6 +10720,15 @@
 | PROVED | `Brockian.TwinPrimes.twin_form_6k` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.TwinPrimes.twin_middle_div_six` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.TwoSquares.sum_two_squares_iff` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle cd725c65; AXLE @4.32 |
+| PROVED | `Brockian.TwoSquaresUnique.brahmagupta_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.TwoSquaresUnique.brahmagupta_two` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.TwoSquaresUnique.coprime_of_prime_sq_add_sq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.TwoSquaresUnique.dvd_mul_cross` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.TwoSquaresUnique.eq_of_mul_eq_mul_coprime` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.TwoSquaresUnique.int_sq_split` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.TwoSquaresUnique.mul_eq_mul_of_two_reps` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.TwoSquaresUnique.pos_of_prime_sq_add_sq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.TwoSquaresUnique.two_squares_unique` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | CONJECTURE | `Brockian.UnitaryPerfect.SixthUnitaryPerfectExists` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.UnitaryPerfect.UnitaryPerfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.UnitaryPerfect.not_unitaryPerfect_28` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
@@ -11291,6 +11468,29 @@
 | PROVED | `Brockian.XiFunctionalEquation.riemannXi_functional_equation` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
 | PROVED | `Brockian.XiFunctionalEquation.zeta_zero_of_riemannXi_zero` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
 | PROVED | `Brockian.XiFunctionalEquation.zeta_zero_one_sub_of_mem_critical_strip` | ✓ | verified | lean-4.32.0 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| DEFINITION | `Brockian.Zsygmondy.Phi` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.Phi_dvd` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.Phi_pos` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.Phi_pow_reduction` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.cyclotomic_two_pow_eval` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.dvd_pow_div_sub_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.isRoot_zmod_of_dvd_Phi` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.lt_Phi` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.lt_cyclotomic_mul_prime_eval` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.lt_cyclotomic_mul_prime_eval_of_five` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.lt_cyclotomic_prime_eval` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.not_dvd_of_orderOf_eq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.not_four_dvd_sq_add_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.not_sq_dvd_Phi` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.not_sq_dvd_Phi_of_odd` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.one_lt_Phi` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.ordCompl_dvd_pred` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.orderOf_eq_of_dvd` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.orderOf_eq_of_not_dvd` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.prime_le_of_dvd_Phi` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.real_base_bound` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.real_lower_bound` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Zsygmondy.zsygmondy_primitive_prime` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | CONJECTURE | `Brockian.ZumkellerNumbers.OddZumkellerFrom3Structure` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | DEFINITION | `Brockian.ZumkellerNumbers.Zumkeller` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.not_zumkeller_prime` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
