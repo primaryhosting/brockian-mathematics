@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 620
 - **DISCHARGED**: 7
-- **PROVED**: 10934
+- **PROVED**: 10940
 
 ## Theorems
 
@@ -319,6 +319,12 @@
 | PROVED | `Brockian.ConstellationBlockSum.H23_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationBlockSum.H2_twice_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationBlockSum.charpoly_fromBlocks_zero` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationExamples.cousin_local` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve generalization; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationExamples.cousin_wheel` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve generalization; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationExamples.sexy_local` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve generalization; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationExamples.sexy_wheel` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve generalization; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationExamples.triple_local` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve generalization; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationExamples.triple_wheel` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve generalization; AXLE @4.32 |
 | DEFINITION | `Brockian.ConstellationGraph.plusThreeGraph` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationGraph.plusThreeGraph_neighbour` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationGraph.plus_three_neighbourhood` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
