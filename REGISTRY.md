@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 620
+- **DEFINITION**: 623
 - **DISCHARGED**: 7
-- **PROVED**: 10946
+- **PROVED**: 10958
 
 ## Theorems
 
@@ -325,6 +325,21 @@
 | PROVED | `Brockian.ConstellationBlockSum.H23_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationBlockSum.H2_twice_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationBlockSum.charpoly_fromBlocks_zero` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationCounts.E_local` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 3; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationCounts.E_wheel` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 3; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationCounts.T_local` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 3; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationCounts.T_wheel` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 3; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationCounts.castNe` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 3; AXLE @4.32 |
+| DEFINITION | `Brockian.ConstellationCounts.n1` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 3; AXLE @4.32 |
+| DEFINITION | `Brockian.ConstellationCounts.n2` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 3; AXLE @4.32 |
+| DEFINITION | `Brockian.ConstellationCounts.n3` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 3; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationCounts.not_dvd_8` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 3; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationCounts.not_dvd_le6` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 3; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationCounts.nu_E` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 3; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationCounts.nu_T` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 3; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationCounts.recon_E` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 3; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationCounts.recon_T` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 3; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationCounts.recon_V` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 3; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationExamples.cousin_local` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve generalization; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationExamples.cousin_wheel` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve generalization; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationExamples.sexy_local` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve generalization; AXLE @4.32 |

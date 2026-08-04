@@ -811,3 +811,4 @@ import Brockian.ConstellationSpectrum
 import Brockian.ConstellationBlockSum
 import Brockian.ConstellationExamples
 import Brockian.ConstellationAcyclic
+import Brockian.ConstellationCounts

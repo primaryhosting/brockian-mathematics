@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10946,
-    "DEFINITION": 620,
+    "PROVED": 10958,
+    "DEFINITION": 623,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
     "DISCHARGED": 7
@@ -9925,6 +9925,481 @@
       "quarantine": true,
       "ledger_run": "Brockian constellation-sieve brick 6; AXLE @4.32",
       "provenance_note": "SWARM-PROVED Constellation Sieve Spectrum BRICK 6 (AXLE @4.32, axiom-clean): the direct-sum / block-diagonal charpoly law and the assembled path-block spectrum. charpoly_fromBlocks_zero: for A,B square, (fromBlocks A 0 0 B).charpoly = A.charpoly * B.charpoly (citing Mathlib's charpoly_fromBlocks_zero\u2082\u2081). H123_charpoly: the assembled H1(+)H2(+)H3 operator has charpoly (X-2)((X-1)(X-3))((X-2)(X^2-4X+2)) -- the five-point alphabet with block multiplicities. H23_charpoly, H2_twice_charpoly: further block-product / multiplicity instances. This gives the spectrum of the assembled block operator as the product of block spectra; the graph->block-diagonal PERMUTATION SIMILARITY remains a separate, UNCLAIMED gate."
+    },
+    {
+      "name": "Brockian.ConstellationCounts.E_local",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 3 (AXLE @4.32, axiom-clean): the edge/run Euler-product counts. E_local/E_wheel: the +3-edge count (both endpoints twin-admissible = offset set {0,2,3,5}) is p-4 locally and prod(p-4) on the wheel (factors >=7). T_local/T_wheel: the P3-run count (offset set {0,2,3,5,6,8}) is p-6 locally and prod(p-6). recon_V/recon_E/recon_T: the path-multiplicity reconstruction identities V=n1+2n2+3n3, E=n2+2n3, T=n3 (pure algebra; a P3 has 3 vertices -- corrected from a mis-stated spec). V/E/T are exact Euler products; identifying n1,n2,n3 with the actual P1/P2/P3 graph-component counts still requires the open graph-decomposition."
+    },
+    {
+      "name": "Brockian.ConstellationCounts.E_wheel",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 3 (AXLE @4.32, axiom-clean): the edge/run Euler-product counts. E_local/E_wheel: the +3-edge count (both endpoints twin-admissible = offset set {0,2,3,5}) is p-4 locally and prod(p-4) on the wheel (factors >=7). T_local/T_wheel: the P3-run count (offset set {0,2,3,5,6,8}) is p-6 locally and prod(p-6). recon_V/recon_E/recon_T: the path-multiplicity reconstruction identities V=n1+2n2+3n3, E=n2+2n3, T=n3 (pure algebra; a P3 has 3 vertices -- corrected from a mis-stated spec). V/E/T are exact Euler products; identifying n1,n2,n3 with the actual P1/P2/P3 graph-component counts still requires the open graph-decomposition."
+    },
+    {
+      "name": "Brockian.ConstellationCounts.T_local",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 3 (AXLE @4.32, axiom-clean): the edge/run Euler-product counts. E_local/E_wheel: the +3-edge count (both endpoints twin-admissible = offset set {0,2,3,5}) is p-4 locally and prod(p-4) on the wheel (factors >=7). T_local/T_wheel: the P3-run count (offset set {0,2,3,5,6,8}) is p-6 locally and prod(p-6). recon_V/recon_E/recon_T: the path-multiplicity reconstruction identities V=n1+2n2+3n3, E=n2+2n3, T=n3 (pure algebra; a P3 has 3 vertices -- corrected from a mis-stated spec). V/E/T are exact Euler products; identifying n1,n2,n3 with the actual P1/P2/P3 graph-component counts still requires the open graph-decomposition."
+    },
+    {
+      "name": "Brockian.ConstellationCounts.T_wheel",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 3 (AXLE @4.32, axiom-clean): the edge/run Euler-product counts. E_local/E_wheel: the +3-edge count (both endpoints twin-admissible = offset set {0,2,3,5}) is p-4 locally and prod(p-4) on the wheel (factors >=7). T_local/T_wheel: the P3-run count (offset set {0,2,3,5,6,8}) is p-6 locally and prod(p-6). recon_V/recon_E/recon_T: the path-multiplicity reconstruction identities V=n1+2n2+3n3, E=n2+2n3, T=n3 (pure algebra; a P3 has 3 vertices -- corrected from a mis-stated spec). V/E/T are exact Euler products; identifying n1,n2,n3 with the actual P1/P2/P3 graph-component counts still requires the open graph-decomposition."
+    },
+    {
+      "name": "Brockian.ConstellationCounts.castNe",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 3 (AXLE @4.32, axiom-clean): the edge/run Euler-product counts. E_local/E_wheel: the +3-edge count (both endpoints twin-admissible = offset set {0,2,3,5}) is p-4 locally and prod(p-4) on the wheel (factors >=7). T_local/T_wheel: the P3-run count (offset set {0,2,3,5,6,8}) is p-6 locally and prod(p-6). recon_V/recon_E/recon_T: the path-multiplicity reconstruction identities V=n1+2n2+3n3, E=n2+2n3, T=n3 (pure algebra; a P3 has 3 vertices -- corrected from a mis-stated spec). V/E/T are exact Euler products; identifying n1,n2,n3 with the actual P1/P2/P3 graph-component counts still requires the open graph-decomposition."
+    },
+    {
+      "name": "Brockian.ConstellationCounts.n1",
+      "kind": "def",
+      "module": "Brockian.ConstellationCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationCounts.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 3 (AXLE @4.32, axiom-clean): the edge/run Euler-product counts. E_local/E_wheel: the +3-edge count (both endpoints twin-admissible = offset set {0,2,3,5}) is p-4 locally and prod(p-4) on the wheel (factors >=7). T_local/T_wheel: the P3-run count (offset set {0,2,3,5,6,8}) is p-6 locally and prod(p-6). recon_V/recon_E/recon_T: the path-multiplicity reconstruction identities V=n1+2n2+3n3, E=n2+2n3, T=n3 (pure algebra; a P3 has 3 vertices -- corrected from a mis-stated spec). V/E/T are exact Euler products; identifying n1,n2,n3 with the actual P1/P2/P3 graph-component counts still requires the open graph-decomposition."
+    },
+    {
+      "name": "Brockian.ConstellationCounts.n2",
+      "kind": "def",
+      "module": "Brockian.ConstellationCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationCounts.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 3 (AXLE @4.32, axiom-clean): the edge/run Euler-product counts. E_local/E_wheel: the +3-edge count (both endpoints twin-admissible = offset set {0,2,3,5}) is p-4 locally and prod(p-4) on the wheel (factors >=7). T_local/T_wheel: the P3-run count (offset set {0,2,3,5,6,8}) is p-6 locally and prod(p-6). recon_V/recon_E/recon_T: the path-multiplicity reconstruction identities V=n1+2n2+3n3, E=n2+2n3, T=n3 (pure algebra; a P3 has 3 vertices -- corrected from a mis-stated spec). V/E/T are exact Euler products; identifying n1,n2,n3 with the actual P1/P2/P3 graph-component counts still requires the open graph-decomposition."
+    },
+    {
+      "name": "Brockian.ConstellationCounts.n3",
+      "kind": "def",
+      "module": "Brockian.ConstellationCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationCounts.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 3 (AXLE @4.32, axiom-clean): the edge/run Euler-product counts. E_local/E_wheel: the +3-edge count (both endpoints twin-admissible = offset set {0,2,3,5}) is p-4 locally and prod(p-4) on the wheel (factors >=7). T_local/T_wheel: the P3-run count (offset set {0,2,3,5,6,8}) is p-6 locally and prod(p-6). recon_V/recon_E/recon_T: the path-multiplicity reconstruction identities V=n1+2n2+3n3, E=n2+2n3, T=n3 (pure algebra; a P3 has 3 vertices -- corrected from a mis-stated spec). V/E/T are exact Euler products; identifying n1,n2,n3 with the actual P1/P2/P3 graph-component counts still requires the open graph-decomposition."
+    },
+    {
+      "name": "Brockian.ConstellationCounts.not_dvd_8",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 3 (AXLE @4.32, axiom-clean): the edge/run Euler-product counts. E_local/E_wheel: the +3-edge count (both endpoints twin-admissible = offset set {0,2,3,5}) is p-4 locally and prod(p-4) on the wheel (factors >=7). T_local/T_wheel: the P3-run count (offset set {0,2,3,5,6,8}) is p-6 locally and prod(p-6). recon_V/recon_E/recon_T: the path-multiplicity reconstruction identities V=n1+2n2+3n3, E=n2+2n3, T=n3 (pure algebra; a P3 has 3 vertices -- corrected from a mis-stated spec). V/E/T are exact Euler products; identifying n1,n2,n3 with the actual P1/P2/P3 graph-component counts still requires the open graph-decomposition."
+    },
+    {
+      "name": "Brockian.ConstellationCounts.not_dvd_le6",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 3 (AXLE @4.32, axiom-clean): the edge/run Euler-product counts. E_local/E_wheel: the +3-edge count (both endpoints twin-admissible = offset set {0,2,3,5}) is p-4 locally and prod(p-4) on the wheel (factors >=7). T_local/T_wheel: the P3-run count (offset set {0,2,3,5,6,8}) is p-6 locally and prod(p-6). recon_V/recon_E/recon_T: the path-multiplicity reconstruction identities V=n1+2n2+3n3, E=n2+2n3, T=n3 (pure algebra; a P3 has 3 vertices -- corrected from a mis-stated spec). V/E/T are exact Euler products; identifying n1,n2,n3 with the actual P1/P2/P3 graph-component counts still requires the open graph-decomposition."
+    },
+    {
+      "name": "Brockian.ConstellationCounts.nu_E",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 3 (AXLE @4.32, axiom-clean): the edge/run Euler-product counts. E_local/E_wheel: the +3-edge count (both endpoints twin-admissible = offset set {0,2,3,5}) is p-4 locally and prod(p-4) on the wheel (factors >=7). T_local/T_wheel: the P3-run count (offset set {0,2,3,5,6,8}) is p-6 locally and prod(p-6). recon_V/recon_E/recon_T: the path-multiplicity reconstruction identities V=n1+2n2+3n3, E=n2+2n3, T=n3 (pure algebra; a P3 has 3 vertices -- corrected from a mis-stated spec). V/E/T are exact Euler products; identifying n1,n2,n3 with the actual P1/P2/P3 graph-component counts still requires the open graph-decomposition."
+    },
+    {
+      "name": "Brockian.ConstellationCounts.nu_T",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 3 (AXLE @4.32, axiom-clean): the edge/run Euler-product counts. E_local/E_wheel: the +3-edge count (both endpoints twin-admissible = offset set {0,2,3,5}) is p-4 locally and prod(p-4) on the wheel (factors >=7). T_local/T_wheel: the P3-run count (offset set {0,2,3,5,6,8}) is p-6 locally and prod(p-6). recon_V/recon_E/recon_T: the path-multiplicity reconstruction identities V=n1+2n2+3n3, E=n2+2n3, T=n3 (pure algebra; a P3 has 3 vertices -- corrected from a mis-stated spec). V/E/T are exact Euler products; identifying n1,n2,n3 with the actual P1/P2/P3 graph-component counts still requires the open graph-decomposition."
+    },
+    {
+      "name": "Brockian.ConstellationCounts.recon_E",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 3 (AXLE @4.32, axiom-clean): the edge/run Euler-product counts. E_local/E_wheel: the +3-edge count (both endpoints twin-admissible = offset set {0,2,3,5}) is p-4 locally and prod(p-4) on the wheel (factors >=7). T_local/T_wheel: the P3-run count (offset set {0,2,3,5,6,8}) is p-6 locally and prod(p-6). recon_V/recon_E/recon_T: the path-multiplicity reconstruction identities V=n1+2n2+3n3, E=n2+2n3, T=n3 (pure algebra; a P3 has 3 vertices -- corrected from a mis-stated spec). V/E/T are exact Euler products; identifying n1,n2,n3 with the actual P1/P2/P3 graph-component counts still requires the open graph-decomposition."
+    },
+    {
+      "name": "Brockian.ConstellationCounts.recon_T",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 3 (AXLE @4.32, axiom-clean): the edge/run Euler-product counts. E_local/E_wheel: the +3-edge count (both endpoints twin-admissible = offset set {0,2,3,5}) is p-4 locally and prod(p-4) on the wheel (factors >=7). T_local/T_wheel: the P3-run count (offset set {0,2,3,5,6,8}) is p-6 locally and prod(p-6). recon_V/recon_E/recon_T: the path-multiplicity reconstruction identities V=n1+2n2+3n3, E=n2+2n3, T=n3 (pure algebra; a P3 has 3 vertices -- corrected from a mis-stated spec). V/E/T are exact Euler products; identifying n1,n2,n3 with the actual P1/P2/P3 graph-component counts still requires the open graph-decomposition."
+    },
+    {
+      "name": "Brockian.ConstellationCounts.recon_V",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate sub-brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 3 (AXLE @4.32, axiom-clean): the edge/run Euler-product counts. E_local/E_wheel: the +3-edge count (both endpoints twin-admissible = offset set {0,2,3,5}) is p-4 locally and prod(p-4) on the wheel (factors >=7). T_local/T_wheel: the P3-run count (offset set {0,2,3,5,6,8}) is p-6 locally and prod(p-6). recon_V/recon_E/recon_T: the path-multiplicity reconstruction identities V=n1+2n2+3n3, E=n2+2n3, T=n3 (pure algebra; a P3 has 3 vertices -- corrected from a mis-stated spec). V/E/T are exact Euler products; identifying n1,n2,n3 with the actual P1/P2/P3 graph-component counts still requires the open graph-decomposition."
     },
     {
       "name": "Brockian.ConstellationExamples.cousin_local",
