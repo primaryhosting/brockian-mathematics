@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 620
 - **DISCHARGED**: 7
-- **PROVED**: 10940
+- **PROVED**: 10946
 
 ## Theorems
 
@@ -315,6 +315,12 @@
 | PROVED | `Brockian.ConnectivityGoldenBridge.neg_phi_mem_adjacency_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.ConnectivityGoldenBridge.two_cos_four_pi_div_five_eq_neg_phi` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.ConnectivityGoldenBridge.two_cos_four_pi_div_five_geometry` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConstellationAcyclic.exists_inadmissible` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 1; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationAcyclic.isUnit_three_of_coprime` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 1; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationAcyclic.plusThree_bijective` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 1; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationAcyclic.plusThree_no_short_cycle` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 1; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationAcyclic.plusThree_reaches` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 1; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationAcyclic.zero_not_twinAdm` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 1; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationBlockSum.H123_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationBlockSum.H23_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationBlockSum.H2_twice_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |
