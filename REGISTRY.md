@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 605
+- **DEFINITION**: 613
 - **DISCHARGED**: 7
-- **PROVED**: 10820
+- **PROVED**: 10875
 
 ## Theorems
 
@@ -219,6 +219,60 @@
 | PROVED | `Brockian.CarmichaelKorselt.sqfree_prod3` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.Cassini.cassini` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.CatalanClosed.succ_mul_catalan_eq_choose` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| DEFINITION | `Brockian.Cayley.IsForest` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.card_fiber_eq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.card_forestFinset` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.card_forestFinset_aux` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.card_forestFinset_split` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.card_forest_subtype` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.card_tree_eq_card_forest` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.cayley_formula` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| DEFINITION | `Brockian.Cayley.children` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.children_subset` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.children_uncut` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| DEFINITION | `Brockian.Cayley.cut` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.cut_uncut` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.edgeSet_eq_of_isTree` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.edgeSet_graphOf` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.exists_iterate_mem_of_cut` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.exists_iterate_mem_of_cut'` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| DEFINITION | `Brockian.Cayley.forestFinset` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.forestFinset_empty_roots` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.forestFinset_self` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| DEFINITION | `Brockian.Cayley.graphOf` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.graphOf_adj` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.graphOf_adj_parent` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.graphOf_connected` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.graphOf_injOn` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.graphOf_injOn_aux` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.graphOf_isTree` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.graphOf_reachable_zero` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.graphOf_reachable_zero'` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.injOn_edge_of_isForest` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.isForest_cut` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.isForest_parent` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.isForest_uncut` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.iterate_eq_of_two_cycle` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.length_treePath_parent` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.ncard_edges_image` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.not_two_cycle` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| DEFINITION | `Brockian.Cayley.parent` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.parent_adj` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.parent_ne_self` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.parent_reaches` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.parent_reaches_aux` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.parent_zero` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.sum_aux` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.sum_binom_aux` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.sum_choose_mul_pow` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.sum_choose_pow` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| DEFINITION | `Brockian.Cayley.treePath` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.treePath_isPath` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.treePath_length_pos` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.treePath_unique` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.tree_parent_injective` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| DEFINITION | `Brockian.Cayley.uncut` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.Cayley.uncut_cut` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
 | CONJECTURE | `Brockian.CollatzPartial.CollatzConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.CollatzPartial.Reaches1` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.CollatzPartial.collatz` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
@@ -3502,6 +3556,9 @@
 | PROVED | `Brockian.MetallicRealization.metallicPoly_natDegree` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
 | PROVED | `Brockian.MetallicRealization.trace_eq_sum_roots` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
 | PROVED | `Brockian.MetallicRealization.two_lt_metallicMean` | ✓ | verified | lean-4.32.0 | roadmap #9 — metallic-mean spectral realization; AXLE @4.32 |
+| PROVED | `Brockian.MsBeatty.beatty` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsBeatty.holderConj_of` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsBeatty.mem_beatty_iff` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.MsBinet.binet` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsBinet.binet_aux` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsBinet.phi_sq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
@@ -3592,6 +3649,12 @@
 | PROVED | `Brockian.MsWilsonPrimePower.prod_units_eq_neg_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsWilsonPrimePower.units_sq_eq_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsWilsonPrimePower.wilson_prime_power` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsZeckendorf.no_consecutive_of_isZeckendorfRep` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsZeckendorf.nodup_of_isZeckendorfRep` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsZeckendorf.not_mem_succ_of_pairwise` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsZeckendorf.pairwise_of_isZeckendorfRep` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsZeckendorf.two_le_of_mem_zeckendorf` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsZeckendorf.zeckendorf_exists` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
 | DEFINITION | `Brockian.MultiperfectStructure.Multiperfect` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | DEFINITION | `Brockian.MultiperfectStructure.MultiperfectInfinitude` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.MultiperfectStructure.multiperfect_ge_two_not_deficient` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |

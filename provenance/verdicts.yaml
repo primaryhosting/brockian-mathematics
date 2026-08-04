@@ -1350,6 +1350,27 @@ runs:
     ledger_run: "Harmonic/Aristotle; AXLE @4.32"
     provenance_note: "HARMONIC-PROVED (Aristotle, project catalan-closed), independently AXLE-verified @lean-4.32.0, axiom-clean. Classical identity, namespace Brockian.CatalanClosed."
 
+  "cayley":
+    module: Brockian.Cayley
+    verdict: admit
+    quarantine: true
+    ledger_run: "Harmonic/Aristotle; AXLE @4.32"
+    provenance_note: "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+
+  "zeckendorf":
+    module: Brockian.MsZeckendorf
+    verdict: admit
+    quarantine: true
+    ledger_run: "Harmonic/Aristotle; AXLE @4.32"
+    provenance_note: "HARMONIC-PROVED moonshot (Aristotle zeckendorf, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsZeckendorf."
+
+  "beatty":
+    module: Brockian.MsBeatty
+    verdict: admit
+    quarantine: true
+    ledger_run: "Harmonic/Aristotle; AXLE @4.32"
+    provenance_note: "HARMONIC-PROVED moonshot (Aristotle beatty, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsBeatty."
+
   # ── intake 18 run cabbba6e: the Goldbach comb ───────────────────────────────
   # ── Gate 1 bounded potential glue (Aug 1, Grok) ────────────────────────────
   "weyl-gate1-bounded":

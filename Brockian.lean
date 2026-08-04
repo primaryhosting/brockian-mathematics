@@ -795,3 +795,6 @@ import Brockian.Vandermonde
 import Brockian.FreshmanDream
 import Brockian.Nicomachus
 import Brockian.CatalanClosed
+import Brockian.Cayley
+import Brockian.MsZeckendorf
+import Brockian.MsBeatty

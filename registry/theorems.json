@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10820,
-    "DEFINITION": 605,
+    "PROVED": 10875,
+    "DEFINITION": 613,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
     "DISCHARGED": 7
@@ -6502,6 +6502,1755 @@
       "quarantine": true,
       "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
       "provenance_note": "HARMONIC-PROVED (Aristotle, project catalan-closed), independently AXLE-verified @lean-4.32.0, axiom-clean. Classical identity, namespace Brockian.CatalanClosed."
+    },
+    {
+      "name": "Brockian.Cayley.IsForest",
+      "kind": "def",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.card_fiber_eq",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.card_forestFinset",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.card_forestFinset_aux",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.card_forestFinset_split",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.card_forest_subtype",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.card_tree_eq_card_forest",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.cayley_formula",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.children",
+      "kind": "def",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.children_subset",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.children_uncut",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.cut",
+      "kind": "def",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.cut_uncut",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.edgeSet_eq_of_isTree",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.edgeSet_graphOf",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.exists_iterate_mem_of_cut",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.exists_iterate_mem_of_cut'",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.forestFinset",
+      "kind": "def",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.forestFinset_empty_roots",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.forestFinset_self",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.graphOf",
+      "kind": "def",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.graphOf_adj",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.graphOf_adj_parent",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.graphOf_connected",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.graphOf_injOn",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.graphOf_injOn_aux",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.graphOf_isTree",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.graphOf_reachable_zero",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.graphOf_reachable_zero'",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.injOn_edge_of_isForest",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.isForest_cut",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.isForest_parent",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.isForest_uncut",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.iterate_eq_of_two_cycle",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.length_treePath_parent",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.ncard_edges_image",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.not_two_cycle",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.parent",
+      "kind": "def",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.parent_adj",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.parent_ne_self",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.parent_reaches",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.parent_reaches_aux",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.parent_zero",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.sum_aux",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.sum_binom_aux",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.sum_choose_mul_pow",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.sum_choose_pow",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.treePath",
+      "kind": "def",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.treePath_isPath",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.treePath_length_pos",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.treePath_unique",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.tree_parent_injective",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.uncut",
+      "kind": "def",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
+    },
+    {
+      "name": "Brockian.Cayley.uncut_cut",
+      "kind": "theorem",
+      "module": "Brockian.Cayley",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cayley.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
     },
     {
       "name": "Brockian.CollatzPartial.CollatzConjecture",
@@ -112890,6 +114639,105 @@
       "provenance_note": "The k-metallic mean M_a=(a+sqrt(a^2+4))/2 realized as an eigenvalue of the concrete 2x2 symmetric matrix [[a,1],[1,0]] (Fibonacci Q at a=1): charpoly = x^2-ax-1, spectrum exactly {M_a,m_a} with explicit eigenvectors, degree-2 (bounded via root+irrationality), golden a=1 consistency. Honest NEGATIVE result: for a>=2 M_a is NOT a cycle-adjacency eigenvalue (spectrum in [-2,2]) \u2014 no spurious pentagon link. Scoped out: minpoly.degree=2 as a formal object (bounded instead)."
     },
     {
+      "name": "Brockian.MsBeatty.beatty",
+      "kind": "theorem",
+      "module": "Brockian.MsBeatty",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsBeatty.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle beatty, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsBeatty."
+    },
+    {
+      "name": "Brockian.MsBeatty.holderConj_of",
+      "kind": "theorem",
+      "module": "Brockian.MsBeatty",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsBeatty.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle beatty, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsBeatty."
+    },
+    {
+      "name": "Brockian.MsBeatty.mem_beatty_iff",
+      "kind": "theorem",
+      "module": "Brockian.MsBeatty",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsBeatty.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle beatty, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsBeatty."
+    },
+    {
       "name": "Brockian.MsBinet.binet",
       "kind": "theorem",
       "module": "Brockian.MsBinet",
@@ -115838,6 +117686,203 @@
       "quarantine": true,
       "ledger_run": "Harmonic/Aristotle moonshot; AXLE @4.32",
       "provenance_note": "HARMONIC-PROVED moonshot (Aristotle, project ms-wilson-prime-power), independently AXLE-verified @lean-4.32.0, axiom-clean. A classical theorem formalized from core Mathlib. Namespace Brockian.MsWilsonPrimePower."
+    },
+    {
+      "name": "Brockian.MsZeckendorf.no_consecutive_of_isZeckendorfRep",
+      "kind": "theorem",
+      "module": "Brockian.MsZeckendorf",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsZeckendorf.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle zeckendorf, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsZeckendorf."
+    },
+    {
+      "name": "Brockian.MsZeckendorf.nodup_of_isZeckendorfRep",
+      "kind": "theorem",
+      "module": "Brockian.MsZeckendorf",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsZeckendorf.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle zeckendorf, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsZeckendorf."
+    },
+    {
+      "name": "Brockian.MsZeckendorf.not_mem_succ_of_pairwise",
+      "kind": "theorem",
+      "module": "Brockian.MsZeckendorf",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsZeckendorf.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle zeckendorf, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsZeckendorf."
+    },
+    {
+      "name": "Brockian.MsZeckendorf.pairwise_of_isZeckendorfRep",
+      "kind": "theorem",
+      "module": "Brockian.MsZeckendorf",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsZeckendorf.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle zeckendorf, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsZeckendorf."
+    },
+    {
+      "name": "Brockian.MsZeckendorf.two_le_of_mem_zeckendorf",
+      "kind": "theorem",
+      "module": "Brockian.MsZeckendorf",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsZeckendorf.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle zeckendorf, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsZeckendorf."
+    },
+    {
+      "name": "Brockian.MsZeckendorf.zeckendorf_exists",
+      "kind": "theorem",
+      "module": "Brockian.MsZeckendorf",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsZeckendorf.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle zeckendorf, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsZeckendorf."
     },
     {
       "name": "Brockian.MultiperfectStructure.Multiperfect",
