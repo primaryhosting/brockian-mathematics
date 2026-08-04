@@ -808,3 +808,4 @@ import Brockian.ConstellationMultiplicative
 import Brockian.ConstellationWheel
 import Brockian.ConstellationGraph
 import Brockian.ConstellationSpectrum
+import Brockian.ConstellationBlockSum

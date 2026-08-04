@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10930,
+    "PROVED": 10934,
     "DEFINITION": 620,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -9598,6 +9598,138 @@
       "quarantine": true,
       "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence",
       "provenance_note": "Bridges algebraic connectivity lambda2(C5) to the golden ratio. AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing files committed to keep the registry tip coherent."
+    },
+    {
+      "name": "Brockian.ConstellationBlockSum.H123_charpoly",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationBlockSum",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationBlockSum.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian constellation-sieve brick 6; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Constellation Sieve Spectrum BRICK 6 (AXLE @4.32, axiom-clean): the direct-sum / block-diagonal charpoly law and the assembled path-block spectrum. charpoly_fromBlocks_zero: for A,B square, (fromBlocks A 0 0 B).charpoly = A.charpoly * B.charpoly (citing Mathlib's charpoly_fromBlocks_zero\u2082\u2081). H123_charpoly: the assembled H1(+)H2(+)H3 operator has charpoly (X-2)((X-1)(X-3))((X-2)(X^2-4X+2)) -- the five-point alphabet with block multiplicities. H23_charpoly, H2_twice_charpoly: further block-product / multiplicity instances. This gives the spectrum of the assembled block operator as the product of block spectra; the graph->block-diagonal PERMUTATION SIMILARITY remains a separate, UNCLAIMED gate."
+    },
+    {
+      "name": "Brockian.ConstellationBlockSum.H23_charpoly",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationBlockSum",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationBlockSum.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian constellation-sieve brick 6; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Constellation Sieve Spectrum BRICK 6 (AXLE @4.32, axiom-clean): the direct-sum / block-diagonal charpoly law and the assembled path-block spectrum. charpoly_fromBlocks_zero: for A,B square, (fromBlocks A 0 0 B).charpoly = A.charpoly * B.charpoly (citing Mathlib's charpoly_fromBlocks_zero\u2082\u2081). H123_charpoly: the assembled H1(+)H2(+)H3 operator has charpoly (X-2)((X-1)(X-3))((X-2)(X^2-4X+2)) -- the five-point alphabet with block multiplicities. H23_charpoly, H2_twice_charpoly: further block-product / multiplicity instances. This gives the spectrum of the assembled block operator as the product of block spectra; the graph->block-diagonal PERMUTATION SIMILARITY remains a separate, UNCLAIMED gate."
+    },
+    {
+      "name": "Brockian.ConstellationBlockSum.H2_twice_charpoly",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationBlockSum",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationBlockSum.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian constellation-sieve brick 6; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Constellation Sieve Spectrum BRICK 6 (AXLE @4.32, axiom-clean): the direct-sum / block-diagonal charpoly law and the assembled path-block spectrum. charpoly_fromBlocks_zero: for A,B square, (fromBlocks A 0 0 B).charpoly = A.charpoly * B.charpoly (citing Mathlib's charpoly_fromBlocks_zero\u2082\u2081). H123_charpoly: the assembled H1(+)H2(+)H3 operator has charpoly (X-2)((X-1)(X-3))((X-2)(X^2-4X+2)) -- the five-point alphabet with block multiplicities. H23_charpoly, H2_twice_charpoly: further block-product / multiplicity instances. This gives the spectrum of the assembled block operator as the product of block spectra; the graph->block-diagonal PERMUTATION SIMILARITY remains a separate, UNCLAIMED gate."
+    },
+    {
+      "name": "Brockian.ConstellationBlockSum.charpoly_fromBlocks_zero",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationBlockSum",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationBlockSum.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian constellation-sieve brick 6; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Constellation Sieve Spectrum BRICK 6 (AXLE @4.32, axiom-clean): the direct-sum / block-diagonal charpoly law and the assembled path-block spectrum. charpoly_fromBlocks_zero: for A,B square, (fromBlocks A 0 0 B).charpoly = A.charpoly * B.charpoly (citing Mathlib's charpoly_fromBlocks_zero\u2082\u2081). H123_charpoly: the assembled H1(+)H2(+)H3 operator has charpoly (X-2)((X-1)(X-3))((X-2)(X^2-4X+2)) -- the five-point alphabet with block multiplicities. H23_charpoly, H2_twice_charpoly: further block-product / multiplicity instances. This gives the spectrum of the assembled block operator as the product of block spectra; the graph->block-diagonal PERMUTATION SIMILARITY remains a separate, UNCLAIMED gate."
     },
     {
       "name": "Brockian.ConstellationGraph.plusThreeGraph",

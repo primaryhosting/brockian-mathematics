@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 620
 - **DISCHARGED**: 7
-- **PROVED**: 10930
+- **PROVED**: 10934
 
 ## Theorems
 
@@ -315,6 +315,10 @@
 | PROVED | `Brockian.ConnectivityGoldenBridge.neg_phi_mem_adjacency_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.ConnectivityGoldenBridge.two_cos_four_pi_div_five_eq_neg_phi` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.ConnectivityGoldenBridge.two_cos_four_pi_div_five_geometry` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConstellationBlockSum.H123_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationBlockSum.H23_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationBlockSum.H2_twice_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationBlockSum.charpoly_fromBlocks_zero` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |
 | DEFINITION | `Brockian.ConstellationGraph.plusThreeGraph` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationGraph.plusThreeGraph_neighbour` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationGraph.plus_three_neighbourhood` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
