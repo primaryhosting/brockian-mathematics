@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10568,
-    "DEFINITION": 581,
+    "PROVED": 10596,
+    "DEFINITION": 587,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
     "DISCHARGED": 7
@@ -125441,6 +125441,1094 @@
       "quarantine": true,
       "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
       "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.boundary_wheel_Q1",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.boundary_wheel_Q11",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.boundary_wheel_Q7",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.boundary_wheel_Q77",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.boundary_wheel_Q91",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.component_count_relations",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.edgeOffsets",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.edgeOffsets_card",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.edge_count_prime",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.edge_count_prime_family",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.fullWheelPrime",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.fullWheelPrime_injective",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.fullWheelPrime_prime",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.fullWheel_edge_count",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.fullWheel_edge_factor",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.fullWheel_triple_run_count",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.fullWheel_triple_run_factor",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.fullWheel_vertex_count",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.fullWheel_vertex_factor",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.nat_subtraction_boundary_counterexample",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.predictedComponentCounts",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.tripleRunOffsets",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.tripleRunOffsets_card",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.triple_run_count_prime",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.triple_run_count_prime_family",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.vertexOffsets",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.vertexOffsets_card",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.vertex_count_prime",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.vertex_count_prime_family",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.wheelFactors",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.wheel_component_count_int_form",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.wheel_component_count_nat_form",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.wheel_component_count_relations",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+    },
+    {
+      "name": "Brockian.SieveSpectrumCounts.wheel_spectral_multiplicity_relations",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumCounts",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumCounts.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
     },
     {
       "name": "Brockian.SingularSeries.compute_local_factor",

@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 581
+- **DEFINITION**: 587
 - **DISCHARGED**: 7
-- **PROVED**: 10568
+- **PROVED**: 10596
 
 ## Theorems
 
@@ -3894,6 +3894,40 @@
 | PROVED | `Brockian.Sieve.tau_period` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.twin_admissible_card` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.twin_pins_mod_three` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
+| PROVED | `Brockian.SieveSpectrumCounts.boundary_wheel_Q1` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.boundary_wheel_Q11` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.boundary_wheel_Q7` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.boundary_wheel_Q77` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.boundary_wheel_Q91` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.component_count_relations` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| DEFINITION | `Brockian.SieveSpectrumCounts.edgeOffsets` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.edgeOffsets_card` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.edge_count_prime` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.edge_count_prime_family` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| DEFINITION | `Brockian.SieveSpectrumCounts.fullWheelPrime` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.fullWheelPrime_injective` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.fullWheelPrime_prime` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.fullWheel_edge_count` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.fullWheel_edge_factor` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.fullWheel_triple_run_count` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.fullWheel_triple_run_factor` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.fullWheel_vertex_count` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.fullWheel_vertex_factor` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.nat_subtraction_boundary_counterexample` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| DEFINITION | `Brockian.SieveSpectrumCounts.predictedComponentCounts` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| DEFINITION | `Brockian.SieveSpectrumCounts.tripleRunOffsets` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.tripleRunOffsets_card` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.triple_run_count_prime` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.triple_run_count_prime_family` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| DEFINITION | `Brockian.SieveSpectrumCounts.vertexOffsets` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.vertexOffsets_card` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.vertex_count_prime` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.vertex_count_prime_family` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| DEFINITION | `Brockian.SieveSpectrumCounts.wheelFactors` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.wheel_component_count_int_form` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.wheel_component_count_nat_form` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.wheel_component_count_relations` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
+| PROVED | `Brockian.SieveSpectrumCounts.wheel_spectral_multiplicity_relations` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
 | DEFINITION | `Brockian.SingularSeries.compute_local_factor` | ✓ | verified | lean-4.32.0 | intake run 63 (a0ce…) — largest clean analytic run; singular series |
 | DEFINITION | `Brockian.SingularSeries.compute_nu_p` | ✓ | verified | lean-4.32.0 | intake run 63 (a0ce…) — largest clean analytic run; singular series |
 | DEFINITION | `Brockian.SingularSeries.compute_singular_series_finite` | ✓ | verified | lean-4.32.0 | intake run 63 (a0ce…) — largest clean analytic run; singular series |

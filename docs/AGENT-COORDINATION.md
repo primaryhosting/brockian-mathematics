@@ -9,6 +9,24 @@
 
 Current checkpoint: 2026-08-02 — **LIVE multi-agent collab (Claude × Codex × Grok)**.
 
+## Codex twin-sieve spectrum lane - 2026-08-03
+
+- Owns fresh module `Brockian/SieveSpectrumCounts.lean` and the exact
+  squarefree twin-sieve component/spectral count campaign.
+- First milestone is statement repair: over naturals use
+  `n1 + 4 * B = 3 * A + C`, not the truncation-unsafe
+  `n1 = 3 * A - 4 * B + C`.
+- Reuses `AdmissibilityKTuple` and `AdmissibilityCRTGeneral`; do not duplicate
+  their forbidden-image or iterated CRT proofs.
+- Does not edit `Brockian/Sieve.lean`, `Brockian/TripleAdmissibility.lean`, or
+  any peer-owned `aristotle/` directory.
+- Status: arithmetic milestone AXLE-green at Lean 4.32. Exact subtraction-safe
+  component relations, local `p-2`/`p-4`/`p-6` factors, iterated CRT products,
+  full `{3,5}` wheel factors, and boundary wheels are complete.
+- Next Codex claim: fresh `Brockian/SieveSpectrumBlocks.lean` for the canonical
+  three-lane block equivalence and graph-component decomposition. The assembled
+  Hamiltonian/direct-sum theorem remains a later module and is not yet claimed.
+
 ## Riemann Labs handoff - 2026-08-03
 
 - Codex owns the Torus/Lovable refresh under `torus/` and
