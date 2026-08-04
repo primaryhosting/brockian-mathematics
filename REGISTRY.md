@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 626
 - **DISCHARGED**: 7
-- **PROVED**: 10978
+- **PROVED**: 10992
 
 ## Theorems
 
@@ -348,6 +348,9 @@
 | PROVED | `Brockian.ConstellationExamples.sexy_wheel` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve generalization; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationExamples.triple_local` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve generalization; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationExamples.triple_wheel` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve generalization; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGateClose.graph_adjacency_reindex_components` | ✓ | verified | lean-4.32.0 | Codex 2026-08-04 - constellation adjacency component factorization; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGateClose.graph_hamiltonian_charpoly_components` | ✓ | verified | lean-4.32.0 | Codex 2026-08-04 - constellation adjacency component factorization; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGateClose.graph_hamiltonian_reindex_components` | ✓ | verified | lean-4.32.0 | Codex 2026-08-04 - constellation adjacency component factorization; AXLE @4.32 |
 | DEFINITION | `Brockian.ConstellationGlobalSpectrum.H123` | ✓ | verified | lean-4.32.0 | Brockian gate — exact five-point spectrum; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationGlobalSpectrum.H123_irrational_eigenvalues` | ✓ | verified | lean-4.32.0 | Brockian gate — exact five-point spectrum; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationGlobalSpectrum.H123_spectrum` | ✓ | verified | lean-4.32.0 | Brockian gate — exact five-point spectrum; AXLE @4.32 |
@@ -3509,6 +3512,17 @@
 | PROVED | `Brockian.GoldenUniqueness.prime_rigidity_layer` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.two_cos_four_pi_div_five_eq_neg_golden` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.two_cos_fundamental_mode_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.GraphComponentMatrix.adjMatrix_charpoly_components` | ✓ | verified | lean-4.32.0 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
+| PROVED | `Brockian.GraphComponentMatrix.adjMatrix_eq_zero_of_components_ne` | ✓ | verified | lean-4.32.0 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
+| PROVED | `Brockian.GraphComponentMatrix.adjMatrix_reindex_components` | ✓ | verified | lean-4.32.0 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
+| PROVED | `Brockian.GraphComponentMatrix.charpoly_eq_prod_componentBlocks` | ✓ | verified | lean-4.32.0 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
+| PROVED | `Brockian.GraphComponentMatrix.componentBlock_adjMatrix` | ✓ | verified | lean-4.32.0 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
+| PROVED | `Brockian.GraphComponentMatrix.componentBlock_shiftedAdjacency` | ✓ | verified | lean-4.32.0 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
+| PROVED | `Brockian.GraphComponentMatrix.componentEquiv_apply` | ✓ | verified | lean-4.32.0 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
+| PROVED | `Brockian.GraphComponentMatrix.reindex_componentEquiv_eq_blockDiagonal'` | ✓ | verified | lean-4.32.0 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
+| PROVED | `Brockian.GraphComponentMatrix.shiftedAdjacency_charpoly_components` | ✓ | verified | lean-4.32.0 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
+| PROVED | `Brockian.GraphComponentMatrix.shiftedAdjacency_eq_zero_of_components_ne` | ✓ | verified | lean-4.32.0 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
+| PROVED | `Brockian.GraphComponentMatrix.shiftedAdjacency_reindex_components` | ✓ | verified | lean-4.32.0 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
 | PROVED | `Brockian.HockeyStick.hockey_stick` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
 | DEFINITION | `Brockian.HyperperfectNumbers.Hyperperfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.HyperperfectNumbers.HyperperfectAllK` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |

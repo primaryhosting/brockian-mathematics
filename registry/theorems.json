@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10978,
+    "PROVED": 10992,
     "DEFINITION": 626,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -9825,7 +9825,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "Brockian gate \u2014 component-interval embedding; AXLE @4.32",
-      "provenance_note": "SWARM-PROVED constellation-sieve gate \u2014 the COMPONENT-INTERVAL bridge (AXLE @4.32, axiom-clean). G_embeds_intLine: the position map pos a = (3^-1 a).val is a full SimpleGraph.Embedding (INDUCED, both directions) of the twin-admissible +3 graph G into the integer line graph intLine -- so each connected component of G is a CONTIGUOUS INTEGER INTERVAL (a genuine structural path), strictly upgrading the earlier Hom-only acyclicity. G_isAcyclic_of_embedding re-derives acyclicity through the embedding. This is the structural bridge the matrix reindexing would consume. OPEN (honest): the pure adjMatrix -> block-diagonal reindexing over connected components (Mathlib lacks a ConnectedComponent->Matrix.reindex block decomposition; charpoly over R undecidable) -- the narrow final matrix-formalization step."
+      "provenance_note": "SWARM-PROVED constellation-sieve component-interval substrate (AXLE @4.32, axiom-clean). G_embeds_intLine is a full induced graph embedding and G_isAcyclic_of_embedding re-derives acyclicity. The later GraphComponentMatrix module closes the generic adjacency block reindexing. Remaining use of this embedding: construct explicit P1/P2/P3 equivalences for each actual component."
     },
     {
       "name": "Brockian.ConstellationAdjBridge.G_isAcyclic_of_embedding",
@@ -9858,7 +9858,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "Brockian gate \u2014 component-interval embedding; AXLE @4.32",
-      "provenance_note": "SWARM-PROVED constellation-sieve gate \u2014 the COMPONENT-INTERVAL bridge (AXLE @4.32, axiom-clean). G_embeds_intLine: the position map pos a = (3^-1 a).val is a full SimpleGraph.Embedding (INDUCED, both directions) of the twin-admissible +3 graph G into the integer line graph intLine -- so each connected component of G is a CONTIGUOUS INTEGER INTERVAL (a genuine structural path), strictly upgrading the earlier Hom-only acyclicity. G_isAcyclic_of_embedding re-derives acyclicity through the embedding. This is the structural bridge the matrix reindexing would consume. OPEN (honest): the pure adjMatrix -> block-diagonal reindexing over connected components (Mathlib lacks a ConnectedComponent->Matrix.reindex block decomposition; charpoly over R undecidable) -- the narrow final matrix-formalization step."
+      "provenance_note": "SWARM-PROVED constellation-sieve component-interval substrate (AXLE @4.32, axiom-clean). G_embeds_intLine is a full induced graph embedding and G_isAcyclic_of_embedding re-derives acyclicity. The later GraphComponentMatrix module closes the generic adjacency block reindexing. Remaining use of this embedding: construct explicit P1/P2/P3 equivalences for each actual component."
     },
     {
       "name": "Brockian.ConstellationBlockSum.H123_charpoly",
@@ -10666,6 +10666,105 @@
       "provenance_note": "SWARM-PROVED constellation-sieve GENERALIZATION (AXLE @4.32, axiom-clean): the confinement machinery applied to named prime constellations beyond twins, on the general Brick-1/Brick-3 theorems. Cousin primes {0,4}: local count p-2 (p>=3), wheel prod(p-2). Sexy primes {0,6}: local p-2 (p>=5), wheel prod(p-2). Prime triple {0,2,6}: local p-3 (p>=7), wheel prod(p-3). Each: nu_p computed exactly then Brick 1/3 instantiated. Demonstrates a GENERAL constellation-sieve theory. NOT a proof of infinitude of any constellation (open)."
     },
     {
+      "name": "Brockian.ConstellationGateClose.graph_adjacency_reindex_components",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationGateClose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationGateClose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-04 - constellation adjacency component factorization; AXLE @4.32",
+      "provenance_note": "Specializes GraphComponentMatrix to the actual twin-admissible plus-three graph. The adjacency matrix and graph Hamiltonian 2I-A reindex exactly to dependent component blocks, and graph_hamiltonian_charpoly_components is the exact product over component Hamiltonian charpolys. Remaining open: explicit component equivalences to P1/P2/P3 and grouping by arithmetic multiplicities; no five-point equality is claimed here."
+    },
+    {
+      "name": "Brockian.ConstellationGateClose.graph_hamiltonian_charpoly_components",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationGateClose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationGateClose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-04 - constellation adjacency component factorization; AXLE @4.32",
+      "provenance_note": "Specializes GraphComponentMatrix to the actual twin-admissible plus-three graph. The adjacency matrix and graph Hamiltonian 2I-A reindex exactly to dependent component blocks, and graph_hamiltonian_charpoly_components is the exact product over component Hamiltonian charpolys. Remaining open: explicit component equivalences to P1/P2/P3 and grouping by arithmetic multiplicities; no five-point equality is claimed here."
+    },
+    {
+      "name": "Brockian.ConstellationGateClose.graph_hamiltonian_reindex_components",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationGateClose",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationGateClose.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-04 - constellation adjacency component factorization; AXLE @4.32",
+      "provenance_note": "Specializes GraphComponentMatrix to the actual twin-admissible plus-three graph. The adjacency matrix and graph Hamiltonian 2I-A reindex exactly to dependent component blocks, and graph_hamiltonian_charpoly_components is the exact product over component Hamiltonian charpolys. Remaining open: explicit component equivalences to P1/P2/P3 and grouping by arithmetic multiplicities; no five-point equality is claimed here."
+    },
+    {
       "name": "Brockian.ConstellationGlobalSpectrum.H123",
       "kind": "def",
       "module": "Brockian.ConstellationGlobalSpectrum",
@@ -10692,7 +10791,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "Brockian gate \u2014 exact five-point spectrum; AXLE @4.32",
-      "provenance_note": "SWARM-PROVED constellation-sieve FINAL spectral piece (AXLE @4.32, axiom-clean): the EXACT five-point spectrum. H123_spectrum: the assembled path-block operator H1(+)H2(+)H3 has charpoly.eval x = 0 IFF x in {2-sqrt2,1,2,3,2+sqrt2} -- the spectrum is exactly the five-point alphabet, with 2+/-sqrt2 as genuine roots via (sqrt2)^2=2. H123_spectrum_setEq (Set equality), H123_irrational_eigenvalues. Multiplicity forms: H2_pow_charpoly (three copies -> cube), H33_mixed_charpoly (distinct blocks contribute independent multiplicities). REMAINING OPEN: the graph-adjMatrix -> block-diagonal reindexing (SimpleGraph.adjMatrix of G is permutation-similar to the direct sum of P1/P2/P3 blocks over connected components) -- the one narrow final gate step, not faked."
+      "provenance_note": "SWARM-PROVED constellation-sieve spectral piece (AXLE @4.32, axiom-clean): H123_spectrum gives the exact five-point spectrum of the assembled H1+H2+H3 operator, with multiplicity examples. The later GraphComponentMatrix/ConstellationGateClose modules close adjacency reindexing and the actual component-charpoly product. Remaining open: identify every actual component with P1/P2/P3 and group factors by arithmetic multiplicities."
     },
     {
       "name": "Brockian.ConstellationGlobalSpectrum.H123_irrational_eigenvalues",
@@ -10725,7 +10824,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "Brockian gate \u2014 exact five-point spectrum; AXLE @4.32",
-      "provenance_note": "SWARM-PROVED constellation-sieve FINAL spectral piece (AXLE @4.32, axiom-clean): the EXACT five-point spectrum. H123_spectrum: the assembled path-block operator H1(+)H2(+)H3 has charpoly.eval x = 0 IFF x in {2-sqrt2,1,2,3,2+sqrt2} -- the spectrum is exactly the five-point alphabet, with 2+/-sqrt2 as genuine roots via (sqrt2)^2=2. H123_spectrum_setEq (Set equality), H123_irrational_eigenvalues. Multiplicity forms: H2_pow_charpoly (three copies -> cube), H33_mixed_charpoly (distinct blocks contribute independent multiplicities). REMAINING OPEN: the graph-adjMatrix -> block-diagonal reindexing (SimpleGraph.adjMatrix of G is permutation-similar to the direct sum of P1/P2/P3 blocks over connected components) -- the one narrow final gate step, not faked."
+      "provenance_note": "SWARM-PROVED constellation-sieve spectral piece (AXLE @4.32, axiom-clean): H123_spectrum gives the exact five-point spectrum of the assembled H1+H2+H3 operator, with multiplicity examples. The later GraphComponentMatrix/ConstellationGateClose modules close adjacency reindexing and the actual component-charpoly product. Remaining open: identify every actual component with P1/P2/P3 and group factors by arithmetic multiplicities."
     },
     {
       "name": "Brockian.ConstellationGlobalSpectrum.H123_spectrum",
@@ -10758,7 +10857,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "Brockian gate \u2014 exact five-point spectrum; AXLE @4.32",
-      "provenance_note": "SWARM-PROVED constellation-sieve FINAL spectral piece (AXLE @4.32, axiom-clean): the EXACT five-point spectrum. H123_spectrum: the assembled path-block operator H1(+)H2(+)H3 has charpoly.eval x = 0 IFF x in {2-sqrt2,1,2,3,2+sqrt2} -- the spectrum is exactly the five-point alphabet, with 2+/-sqrt2 as genuine roots via (sqrt2)^2=2. H123_spectrum_setEq (Set equality), H123_irrational_eigenvalues. Multiplicity forms: H2_pow_charpoly (three copies -> cube), H33_mixed_charpoly (distinct blocks contribute independent multiplicities). REMAINING OPEN: the graph-adjMatrix -> block-diagonal reindexing (SimpleGraph.adjMatrix of G is permutation-similar to the direct sum of P1/P2/P3 blocks over connected components) -- the one narrow final gate step, not faked."
+      "provenance_note": "SWARM-PROVED constellation-sieve spectral piece (AXLE @4.32, axiom-clean): H123_spectrum gives the exact five-point spectrum of the assembled H1+H2+H3 operator, with multiplicity examples. The later GraphComponentMatrix/ConstellationGateClose modules close adjacency reindexing and the actual component-charpoly product. Remaining open: identify every actual component with P1/P2/P3 and group factors by arithmetic multiplicities."
     },
     {
       "name": "Brockian.ConstellationGlobalSpectrum.H123_spectrum_setEq",
@@ -10791,7 +10890,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "Brockian gate \u2014 exact five-point spectrum; AXLE @4.32",
-      "provenance_note": "SWARM-PROVED constellation-sieve FINAL spectral piece (AXLE @4.32, axiom-clean): the EXACT five-point spectrum. H123_spectrum: the assembled path-block operator H1(+)H2(+)H3 has charpoly.eval x = 0 IFF x in {2-sqrt2,1,2,3,2+sqrt2} -- the spectrum is exactly the five-point alphabet, with 2+/-sqrt2 as genuine roots via (sqrt2)^2=2. H123_spectrum_setEq (Set equality), H123_irrational_eigenvalues. Multiplicity forms: H2_pow_charpoly (three copies -> cube), H33_mixed_charpoly (distinct blocks contribute independent multiplicities). REMAINING OPEN: the graph-adjMatrix -> block-diagonal reindexing (SimpleGraph.adjMatrix of G is permutation-similar to the direct sum of P1/P2/P3 blocks over connected components) -- the one narrow final gate step, not faked."
+      "provenance_note": "SWARM-PROVED constellation-sieve spectral piece (AXLE @4.32, axiom-clean): H123_spectrum gives the exact five-point spectrum of the assembled H1+H2+H3 operator, with multiplicity examples. The later GraphComponentMatrix/ConstellationGateClose modules close adjacency reindexing and the actual component-charpoly product. Remaining open: identify every actual component with P1/P2/P3 and group factors by arithmetic multiplicities."
     },
     {
       "name": "Brockian.ConstellationGlobalSpectrum.H2_pow_charpoly",
@@ -10824,7 +10923,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "Brockian gate \u2014 exact five-point spectrum; AXLE @4.32",
-      "provenance_note": "SWARM-PROVED constellation-sieve FINAL spectral piece (AXLE @4.32, axiom-clean): the EXACT five-point spectrum. H123_spectrum: the assembled path-block operator H1(+)H2(+)H3 has charpoly.eval x = 0 IFF x in {2-sqrt2,1,2,3,2+sqrt2} -- the spectrum is exactly the five-point alphabet, with 2+/-sqrt2 as genuine roots via (sqrt2)^2=2. H123_spectrum_setEq (Set equality), H123_irrational_eigenvalues. Multiplicity forms: H2_pow_charpoly (three copies -> cube), H33_mixed_charpoly (distinct blocks contribute independent multiplicities). REMAINING OPEN: the graph-adjMatrix -> block-diagonal reindexing (SimpleGraph.adjMatrix of G is permutation-similar to the direct sum of P1/P2/P3 blocks over connected components) -- the one narrow final gate step, not faked."
+      "provenance_note": "SWARM-PROVED constellation-sieve spectral piece (AXLE @4.32, axiom-clean): H123_spectrum gives the exact five-point spectrum of the assembled H1+H2+H3 operator, with multiplicity examples. The later GraphComponentMatrix/ConstellationGateClose modules close adjacency reindexing and the actual component-charpoly product. Remaining open: identify every actual component with P1/P2/P3 and group factors by arithmetic multiplicities."
     },
     {
       "name": "Brockian.ConstellationGlobalSpectrum.H33_mixed_charpoly",
@@ -10857,7 +10956,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "Brockian gate \u2014 exact five-point spectrum; AXLE @4.32",
-      "provenance_note": "SWARM-PROVED constellation-sieve FINAL spectral piece (AXLE @4.32, axiom-clean): the EXACT five-point spectrum. H123_spectrum: the assembled path-block operator H1(+)H2(+)H3 has charpoly.eval x = 0 IFF x in {2-sqrt2,1,2,3,2+sqrt2} -- the spectrum is exactly the five-point alphabet, with 2+/-sqrt2 as genuine roots via (sqrt2)^2=2. H123_spectrum_setEq (Set equality), H123_irrational_eigenvalues. Multiplicity forms: H2_pow_charpoly (three copies -> cube), H33_mixed_charpoly (distinct blocks contribute independent multiplicities). REMAINING OPEN: the graph-adjMatrix -> block-diagonal reindexing (SimpleGraph.adjMatrix of G is permutation-similar to the direct sum of P1/P2/P3 blocks over connected components) -- the one narrow final gate step, not faked."
+      "provenance_note": "SWARM-PROVED constellation-sieve spectral piece (AXLE @4.32, axiom-clean): H123_spectrum gives the exact five-point spectrum of the assembled H1+H2+H3 operator, with multiplicity examples. The later GraphComponentMatrix/ConstellationGateClose modules close adjacency reindexing and the actual component-charpoly product. Remaining open: identify every actual component with P1/P2/P3 and group factors by arithmetic multiplicities."
     },
     {
       "name": "Brockian.ConstellationGraph.plusThreeGraph",
@@ -12033,7 +12132,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "Codex 2026-08-03 - graph-spectrum statement repair; AXLE @4.32",
-      "provenance_note": "AXLE 4.32 verified with standard axioms only. Any P1/P2/P3 block-product charpoly has roots contained in the five-point spectral envelope. Equality with all five points is proved under the necessary occurrence assumptions n2>0 and n3>0. H3_only_not_root_one is the boundary witness preventing unconditional equality over zero block multiplicities. This does not prove the still-open graph adjMatrix reindexing or component-count identification."
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Any P1/P2/P3 block-product charpoly has roots contained in the five-point spectral envelope. Equality with all five points is proved under the necessary occurrence assumptions n2>0 and n3>0. H3_only_not_root_one prevents unconditional equality over zero block multiplicities. Graph adjMatrix reindexing is now closed separately; component path identification and counts remain open."
     },
     {
       "name": "Brockian.ConstellationSpectrumEnvelope.pathBlockCharpoly_root_iff",
@@ -12066,7 +12165,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "Codex 2026-08-03 - graph-spectrum statement repair; AXLE @4.32",
-      "provenance_note": "AXLE 4.32 verified with standard axioms only. Any P1/P2/P3 block-product charpoly has roots contained in the five-point spectral envelope. Equality with all five points is proved under the necessary occurrence assumptions n2>0 and n3>0. H3_only_not_root_one is the boundary witness preventing unconditional equality over zero block multiplicities. This does not prove the still-open graph adjMatrix reindexing or component-count identification."
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Any P1/P2/P3 block-product charpoly has roots contained in the five-point spectral envelope. Equality with all five points is proved under the necessary occurrence assumptions n2>0 and n3>0. H3_only_not_root_one prevents unconditional equality over zero block multiplicities. Graph adjMatrix reindexing is now closed separately; component path identification and counts remain open."
     },
     {
       "name": "Brockian.ConstellationSpectrumEnvelope.pathBlockCharpoly_root_mem",
@@ -12099,7 +12198,7 @@
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "Codex 2026-08-03 - graph-spectrum statement repair; AXLE @4.32",
-      "provenance_note": "AXLE 4.32 verified with standard axioms only. Any P1/P2/P3 block-product charpoly has roots contained in the five-point spectral envelope. Equality with all five points is proved under the necessary occurrence assumptions n2>0 and n3>0. H3_only_not_root_one is the boundary witness preventing unconditional equality over zero block multiplicities. This does not prove the still-open graph adjMatrix reindexing or component-count identification."
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Any P1/P2/P3 block-product charpoly has roots contained in the five-point spectral envelope. Equality with all five points is proved under the necessary occurrence assumptions n2>0 and n3>0. H3_only_not_root_one prevents unconditional equality over zero block multiplicities. Graph adjMatrix reindexing is now closed separately; component path identification and counts remain open."
     },
     {
       "name": "Brockian.ConstellationWheel.admissibleU_squarefree",
@@ -113088,6 +113187,364 @@
       "quarantine": true,
       "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence",
       "provenance_note": "golden-uniqueness reusable schema (roadmap #11). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; verdict re-checked by Claude's gate before integration."
+    },
+    {
+      "name": "Brockian.GraphComponentMatrix.adjMatrix_charpoly_components",
+      "kind": "theorem",
+      "module": "Brockian.GraphComponentMatrix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GraphComponentMatrix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32",
+      "provenance_note": "Reusable finite-graph theorem, AXLE 4.32 verified with standard axioms only. Vertices are canonically equivalent to the sigma of connected-component fibers; every cross-component-zero matrix reindexes to a dependent blockDiagonal'; adjacency matrices and shifted adjacencies specialize exactly; charpolys factor over actual components via Matrix.BlockTriangular.charpoly."
+    },
+    {
+      "name": "Brockian.GraphComponentMatrix.adjMatrix_eq_zero_of_components_ne",
+      "kind": "theorem",
+      "module": "Brockian.GraphComponentMatrix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GraphComponentMatrix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32",
+      "provenance_note": "Reusable finite-graph theorem, AXLE 4.32 verified with standard axioms only. Vertices are canonically equivalent to the sigma of connected-component fibers; every cross-component-zero matrix reindexes to a dependent blockDiagonal'; adjacency matrices and shifted adjacencies specialize exactly; charpolys factor over actual components via Matrix.BlockTriangular.charpoly."
+    },
+    {
+      "name": "Brockian.GraphComponentMatrix.adjMatrix_reindex_components",
+      "kind": "theorem",
+      "module": "Brockian.GraphComponentMatrix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GraphComponentMatrix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32",
+      "provenance_note": "Reusable finite-graph theorem, AXLE 4.32 verified with standard axioms only. Vertices are canonically equivalent to the sigma of connected-component fibers; every cross-component-zero matrix reindexes to a dependent blockDiagonal'; adjacency matrices and shifted adjacencies specialize exactly; charpolys factor over actual components via Matrix.BlockTriangular.charpoly."
+    },
+    {
+      "name": "Brockian.GraphComponentMatrix.charpoly_eq_prod_componentBlocks",
+      "kind": "theorem",
+      "module": "Brockian.GraphComponentMatrix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GraphComponentMatrix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32",
+      "provenance_note": "Reusable finite-graph theorem, AXLE 4.32 verified with standard axioms only. Vertices are canonically equivalent to the sigma of connected-component fibers; every cross-component-zero matrix reindexes to a dependent blockDiagonal'; adjacency matrices and shifted adjacencies specialize exactly; charpolys factor over actual components via Matrix.BlockTriangular.charpoly."
+    },
+    {
+      "name": "Brockian.GraphComponentMatrix.componentBlock_adjMatrix",
+      "kind": "theorem",
+      "module": "Brockian.GraphComponentMatrix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GraphComponentMatrix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32",
+      "provenance_note": "Reusable finite-graph theorem, AXLE 4.32 verified with standard axioms only. Vertices are canonically equivalent to the sigma of connected-component fibers; every cross-component-zero matrix reindexes to a dependent blockDiagonal'; adjacency matrices and shifted adjacencies specialize exactly; charpolys factor over actual components via Matrix.BlockTriangular.charpoly."
+    },
+    {
+      "name": "Brockian.GraphComponentMatrix.componentBlock_shiftedAdjacency",
+      "kind": "theorem",
+      "module": "Brockian.GraphComponentMatrix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GraphComponentMatrix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32",
+      "provenance_note": "Reusable finite-graph theorem, AXLE 4.32 verified with standard axioms only. Vertices are canonically equivalent to the sigma of connected-component fibers; every cross-component-zero matrix reindexes to a dependent blockDiagonal'; adjacency matrices and shifted adjacencies specialize exactly; charpolys factor over actual components via Matrix.BlockTriangular.charpoly."
+    },
+    {
+      "name": "Brockian.GraphComponentMatrix.componentEquiv_apply",
+      "kind": "theorem",
+      "module": "Brockian.GraphComponentMatrix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GraphComponentMatrix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32",
+      "provenance_note": "Reusable finite-graph theorem, AXLE 4.32 verified with standard axioms only. Vertices are canonically equivalent to the sigma of connected-component fibers; every cross-component-zero matrix reindexes to a dependent blockDiagonal'; adjacency matrices and shifted adjacencies specialize exactly; charpolys factor over actual components via Matrix.BlockTriangular.charpoly."
+    },
+    {
+      "name": "Brockian.GraphComponentMatrix.reindex_componentEquiv_eq_blockDiagonal'",
+      "kind": "theorem",
+      "module": "Brockian.GraphComponentMatrix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GraphComponentMatrix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32",
+      "provenance_note": "Reusable finite-graph theorem, AXLE 4.32 verified with standard axioms only. Vertices are canonically equivalent to the sigma of connected-component fibers; every cross-component-zero matrix reindexes to a dependent blockDiagonal'; adjacency matrices and shifted adjacencies specialize exactly; charpolys factor over actual components via Matrix.BlockTriangular.charpoly."
+    },
+    {
+      "name": "Brockian.GraphComponentMatrix.shiftedAdjacency_charpoly_components",
+      "kind": "theorem",
+      "module": "Brockian.GraphComponentMatrix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GraphComponentMatrix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32",
+      "provenance_note": "Reusable finite-graph theorem, AXLE 4.32 verified with standard axioms only. Vertices are canonically equivalent to the sigma of connected-component fibers; every cross-component-zero matrix reindexes to a dependent blockDiagonal'; adjacency matrices and shifted adjacencies specialize exactly; charpolys factor over actual components via Matrix.BlockTriangular.charpoly."
+    },
+    {
+      "name": "Brockian.GraphComponentMatrix.shiftedAdjacency_eq_zero_of_components_ne",
+      "kind": "theorem",
+      "module": "Brockian.GraphComponentMatrix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GraphComponentMatrix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32",
+      "provenance_note": "Reusable finite-graph theorem, AXLE 4.32 verified with standard axioms only. Vertices are canonically equivalent to the sigma of connected-component fibers; every cross-component-zero matrix reindexes to a dependent blockDiagonal'; adjacency matrices and shifted adjacencies specialize exactly; charpolys factor over actual components via Matrix.BlockTriangular.charpoly."
+    },
+    {
+      "name": "Brockian.GraphComponentMatrix.shiftedAdjacency_reindex_components",
+      "kind": "theorem",
+      "module": "Brockian.GraphComponentMatrix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GraphComponentMatrix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32",
+      "provenance_note": "Reusable finite-graph theorem, AXLE 4.32 verified with standard axioms only. Vertices are canonically equivalent to the sigma of connected-component fibers; every cross-component-zero matrix reindexes to a dependent blockDiagonal'; adjacency matrices and shifted adjacencies specialize exactly; charpolys factor over actual components via Matrix.BlockTriangular.charpoly."
     },
     {
       "name": "Brockian.HockeyStick.hockey_stick",

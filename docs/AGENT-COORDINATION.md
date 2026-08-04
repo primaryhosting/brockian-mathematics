@@ -9,6 +9,15 @@
 
 Current checkpoint: 2026-08-02 — **LIVE multi-agent collab (Claude × Codex × Grok)**.
 
+## Codex graph-component matrix lane - 2026-08-04
+
+- `Brockian/GraphComponentMatrix.lean` is AXLE-green at Lean 4.32: canonical component sigma
+  equivalence, generic block-diagonal reindexing, and generic component charpoly product.
+- `Brockian/ConstellationGateClose.lean` is AXLE-green: actual twin-graph adjacency and `2I-A`
+  reindexing plus `graph_hamiltonian_charpoly_components`.
+- Remaining non-collision target: explicit equivalences from each actual component to `P1/P2/P3`
+  and grouping factors by arithmetic component counts. The matrix infrastructure is no longer open.
+
 ## Codex twin-sieve spectrum lane - 2026-08-03
 
 - Owns fresh module `Brockian/SieveSpectrumCounts.lean` and the exact

@@ -120,27 +120,28 @@ The central object is `G := SimpleGraph.induce {a | twinAdm a} (plusThreeGraph M
 - **Exact operator spectrum** (`ConstellationGlobalSpectrum`) — **`H123_spectrum`**: the assembled
   `H₁ ⊕ H₂ ⊕ H₃` operator has spectrum *exactly* `{2−√2, 1, 2, 3, 2+√2}`, with `2 ± √2` genuine roots;
   plus multiplicity forms showing block spectra multiply.
+- **Component matrix decomposition** (`GraphComponentMatrix`, `ConstellationGateClose`) — the vertex
+  type is canonically equivalent to the sigma of its connected-component fibers; under this
+  equivalence the actual graph adjacency matrix and `2I−A` reindex exactly to dependent block
+  diagonals. In particular, `graph_hamiltonian_charpoly_components` factors the actual graph
+  Hamiltonian charpoly as the product of its component Hamiltonian charpolys.
 
-## 9. The single open step
+## 9. The remaining path-block identification
 
-One narrow, purely-technical step remains: identifying the graph's **adjacency matrix**
-`SimpleGraph.adjMatrix ℝ G` with the block-diagonal form `⨁ Pₖ` via a connected-component reindexing,
-which would upgrade `H123_spectrum` from the *assembled* block operator to the graph Hamiltonian itself.
-We proved the structural prerequisite (each component is an integer-interval path, `G_embeds_intLine`),
-but the pure matrix step — a `ConnectedComponent → Matrix.reindex` block decomposition of an adjacency
-matrix — is not available in the current Mathlib, and `charpoly` over `ℝ` is not decidable, so a
-concrete-modulus factorization route is also impractical. Two independent automated attempts delivered
-structural fragments but did not close this matrix-reindexing step; it is stated here as the honest
-frontier, not claimed. It is a *formalization* gap, not a mathematical one: on paper the block form is
-immediate from "each component is an interval path." The step is written up as a self-contained,
-attack-ready problem statement — precise target theorem, proved prerequisites, the exact Mathlib gap,
-and three suggested routes — in `docs/OPEN-adjmatrix-block-reindex.md`.
+The matrix-infrastructure step is closed. What remains is combinatorial packaging: for every actual
+connected component, construct an explicit graph equivalence to `P₁`, `P₂`, or `P₃`, use it to identify
+the corresponding factor with `H₁`, `H₂`, or `H₃`, and group equal factors by the arithmetic component
+counts. The existing acyclicity, degree bound, run cap, and integer-line embedding are the inputs, but
+the source does not yet contain the component-wise equivalences or their count identification. Until
+that bridge is formalized, `H123_spectrum` remains a theorem about the assembled block operator and the
+actual graph theorem is the exact product over component Hamiltonians, not yet the closed five-factor
+multiplicity formula. The updated handoff is in `docs/OPEN-adjmatrix-block-reindex.md`.
 
 ## 10. Reproducibility
 
 Every theorem above is re-checkable at `leanprover/lean4:v4.32.0` + Mathlib. The constellation-sieve
-program comprises 13 modules (`Brockian/Constellation*.lean`) with their attestations in
-`registry/attestations/`; the full verified corpus stands at **10,975 PROVED** theorems (registry-
+program is root-integrated with its attestations in `registry/attestations/`; the full verified corpus
+stands at **10,992 PROVED** theorems (registry-
 derived), of which the constellation program is the modules listed in §§1–9. Each module carries a
 provenance entry in `provenance/verdicts.yaml` recording its AXLE run and axiom footprint.
 
@@ -149,8 +150,8 @@ provenance entry in `provenance/verdicts.yaml` recording its AXLE run and axiom 
 - Nothing here bears on the *infinitude* of twin primes, cousin primes, or admissible triples. Those
   conjectures are open; the confinement counts and spectra are unconditional finite facts about a fixed
   wheel `ℤ/n`.
-- The five-point spectrum is proved for the assembled path-block operator; its transport to the graph
-  Hamiltonian awaits the one matrix-reindexing step of §9.
+- The graph Hamiltonian now has an exact connected-component charpoly product. Reducing those component
+  factors to the five-point path alphabet still awaits the explicit `P₁/P₂/P₃` identifications of §9.
 - **Repository caution.** This document is a standalone artifact. The source repository's history
   contains committed secrets (service keys) that must be rotated and purged by a human before the
   repository itself is made public; drafting or sharing this paper does not entail publishing the repo.

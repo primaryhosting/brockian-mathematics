@@ -1,8 +1,8 @@
-# Open problem: the `adjMatrix` → block-diagonal reindexing step
+# Matrix reindexing closed; open path-block identification
 
-*The single remaining step to fully close the constellation-sieve spectral gate. This is a
-**formalization** problem, not a mathematical one — the mathematics is immediate; the Mathlib
-`SimpleGraph.adjMatrix` ⇄ `Matrix` block machinery is what's missing.*
+The `SimpleGraph.adjMatrix` to connected-component block-diagonal step is now AXLE-verified in
+`Brockian.GraphComponentMatrix` and specialized to the twin graph in
+`Brockian.ConstellationGateClose`. This document now records the smaller remaining step.
 
 ## Goal
 
@@ -32,7 +32,24 @@ theorem graph_hamiltonian_charpoly :
       = (X - C 2) ^ n₁ * ((X - C 1) * (X - C 3)) ^ n₂ * ((X - C 2) * (X ^ 2 - C 4 * X + C 2)) ^ n₃
 ```
 
-## What is already proved (the prerequisites — all AXLE-verified @lean-4.32.0, axiom-clean)
+## Matrix bridge now proved
+
+The following statements are AXLE-verified at Lean 4.32:
+
+- `GraphComponentMatrix.componentEquiv`: vertices are equivalent to the sigma of the fibers of
+  `G.connectedComponentMk`.
+- `GraphComponentMatrix.reindex_componentEquiv_eq_blockDiagonal'`: every matrix with zero
+  cross-component entries reindexes to `Matrix.blockDiagonal'`.
+- `GraphComponentMatrix.adjMatrix_reindex_components`: the graph adjacency matrix reindexes to the
+  dependent block diagonal of the actual induced component adjacency matrices.
+- `GraphComponentMatrix.charpoly_eq_prod_componentBlocks`: any such matrix has charpoly equal to the
+  product of its component-block charpolys, using Mathlib's existing
+  `Matrix.BlockTriangular.charpoly` theorem.
+- `ConstellationGateClose.graph_hamiltonian_reindex_components` and
+  `graph_hamiltonian_charpoly_components`: the requested identities for the actual twin graph
+  Hamiltonian `2I-A`.
+
+## Other proved prerequisites
 
 - `ConstellationGraphAcyclic.twin_admissible_induced_acyclic` — `G.IsAcyclic`.
 - `ConstellationPaths.induced_degree_le_two` — every vertex has degree ≤ 2.
@@ -49,54 +66,26 @@ theorem graph_hamiltonian_charpoly :
   `charpoly_fromBlocks_zero`, and `H123_spectrum` (the assembled block operator's spectrum is exactly
   the five-point alphabet).
 
-So: the graph **is** a disjoint union of path components, each an integer interval; the spectrum of a
-disjoint union of paths **is** the union of the path spectra; and those are `{2−√2,1,2,3,2+√2}`. All
-that remains is to say this at the level of `Matrix.charpoly`.
+The matrix factorization is therefore no longer the blocker.
 
-## The precise gap
+## The precise remaining gap
 
-Mathlib (as of this toolchain) has no lemma giving a **block-diagonal decomposition of an adjacency
-matrix by connected components**. Needed, roughly:
+For each `c : G.ConnectedComponent`:
 
-1. A `Fintype`-reindexing `e : (admissible vertices) ≃ Σ (c : G.ConnectedComponent), (c's vertices)`
-   grouping each component's vertices contiguously — the `pos`-order from `G_embeds_intLine` supplies the
-   ordering; what's missing is packaging it as an equivalence that Mathlib's `Matrix.reindex` accepts.
-2. `SimpleGraph.adjMatrix` reindexed by `e` is **block-diagonal**: no edge crosses components (true by
-   definition of connected component). A lemma of the form
-   `(adjMatrix R G).reindex e e = Matrix.blockDiagonal (fun c => adjMatrix R (G.induce c))` or the
-   `Σ`-typed analogue.
-3. `Matrix.charpoly_reindex` (charpoly invariant under simultaneous row/col reindex — similarity) and a
-   `charpoly` of a `Σ`-indexed block-diagonal = `∏` of block charpolys (Mathlib has
-   `Matrix.charpoly_fromBlocks_zero₂₁` for the binary case; the `Σ`/`blockDiagonal` version over a
-   variable index set is what's needed, or fold the binary case over the finite component set).
-4. Each block is the adjacency matrix of a `P_k` (`k ≤ 3`), whose Hamiltonian charpoly is one of the
-   three factors from `ConstellationSpectrum` (identify `adjMatrix (pathGraph k)` with `Hₖ` up to the
-   `2•I − ·` shift and a permutation within the block).
+1. Prove `Fintype.card (ComponentFiber G c) ∈ {1,2,3}` from acyclicity, degree at most two, the
+   no-four-run theorem, and `G_embeds_intLine`.
+2. Construct a graph equivalence from `componentGraph G c` to the matching path graph.
+3. Transport its shifted adjacency matrix to `H₁`, `H₂`, or `H₃` and identify its charpoly factor.
+4. Prove that the numbers of components of each size are the arithmetic `n₁,n₂,n₃`, then regroup
+   `graph_hamiltonian_charpoly_components` into `pathBlockCharpoly n₁ n₂ n₃`.
 
-## Suggested attack (for a future session)
-
-- **Route A (blockDiagonal over `Σ`).** Prove step 2 as `adjMatrix.reindex = blockDiagonal (component
-  blocks)` using `SimpleGraph.ConnectedComponent` and that adjacency respects components; then a
-  `charpoly (blockDiagonal M) = ∏ i, (M i).charpoly` lemma (prove it if absent, by induction on the
-  index Fintype via `charpoly_fromBlocks_zero₂₁`). This is the cleanest if the reindexing equivalence
-  can be built.
-- **Route B (transport via the embedding).** Use `G_embeds_intLine` to identify `G` with an induced
-  subgraph of `intLine` on a finite set of integers that is a disjoint union of intervals; compute the
-  adjacency/Hamiltonian charpoly of a "union of integer intervals" subgraph directly (a tridiagonal /
-  path-block matrix), leveraging that `pos` already orders the vertices. This sidesteps
-  `ConnectedComponent` in favour of the concrete interval structure already proved.
-- **Route C (eigenvalue containment, weaker but sufficient for the alphabet).** Skip the exact charpoly;
-  prove only that every eigenvalue of `2•I − adjMatrix G` lies in the five-point set, by showing an
-  eigenvector restricted to any component is an eigenvector of that component's path Hamiltonian. This
-  closes the *spectral alphabet* claim (spectrum ⊆ `{2−√2,1,2,3,2+√2}`) without the full multiplicities.
-
-Route C is the smallest honest close of "the graph operator's spectrum is contained in the
-five-point alphabet". Equality follows only when the relevant component multiplicities are
-positive. Route A/B additionally recover the exact multiplicities `n₁,n₂,n₃`.
+The shortest route is through the integer-line embedding: attach to each component the minimum and
+maximum image positions, prove every intermediate integer position belongs to the image, and use the
+run cap to bound the interval cardinality by three. This produces the explicit path ordering needed
+for the graph equivalence and avoids a second matrix decomposition.
 
 ## Definition of done
 
-`graph_hamiltonian_spectrum_subset` (Route C minimum) or `graph_hamiltonian_charpoly` (Route A/B, full) proved,
-AXLE-verified @lean-4.32.0, axiom-clean, integrated as `Brockian/ConstellationGateClose.lean` — at which
-point the constellation-sieve spectral gate is **fully closed** and the paper's §9 open note is removed.
+`graph_hamiltonian_spectrum_subset` or the full multiplicity-aware `graph_hamiltonian_charpoly`
+proved from `graph_hamiltonian_charpoly_components`, AXLE-verified at Lean 4.32, and root-integrated.
 Reminder: this remains a structural/finite result; it is **not** a proof of twin-prime infinitude.
