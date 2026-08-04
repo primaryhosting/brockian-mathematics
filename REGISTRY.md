@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 613
 - **DISCHARGED**: 7
-- **PROVED**: 10875
+- **PROVED**: 10895
 
 ## Theorems
 
@@ -3572,6 +3572,26 @@
 | PROVED | `Brockian.MsChebyshevSum.chebyshev_sum` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsChebyshevTheta.chebyshev_theta` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsDerangement.derangement_closed` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.exists_int_e` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.exists_int_einv` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.exists_int_sum` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.exp_err` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.exp_two_irrational` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.fact_div_cast` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.fact_ratio_err` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.fact_ratio_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.fact_ratio_two` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.num_bound_le` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.num_bound_lt` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.partial_sum_mul` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.sum_split3` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.tail_exp_neg_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.tail_exp_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsE2Irrational.tail_key` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsFrobeniusGeneral.exists_mod_solution` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsFrobeniusGeneral.exists_small_mul_add` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsFrobeniusGeneral.frobenius_three` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsFrobeniusGeneral.two_gen_rep` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.MsGaussSum.conj_stdAddChar` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsGaussSum.exp_eq_stdAddChar` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsGaussSum.gauss_sum_abs_sq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
