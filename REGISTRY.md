@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 626
 - **DISCHARGED**: 7
-- **PROVED**: 10975
+- **PROVED**: 10978
 
 ## Theorems
 
@@ -390,6 +390,9 @@
 | PROVED | `Brockian.ConstellationSpectrum.H3_eigenvalues` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationSpectrum.eigenvalues_in_alphabet` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
 | DEFINITION | `Brockian.ConstellationSpectrum.spectralAlphabet` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationSpectrumEnvelope.H3_only_not_root_one` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - graph-spectrum statement repair; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationSpectrumEnvelope.pathBlockCharpoly_root_iff` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - graph-spectrum statement repair; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationSpectrumEnvelope.pathBlockCharpoly_root_mem` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - graph-spectrum statement repair; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationWheel.admissibleU_squarefree` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 3; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationWheel.twin_wheel_count` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 3; AXLE @4.32 |
 | DEFINITION | `Brockian.Core.Ray` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |

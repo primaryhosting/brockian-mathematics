@@ -816,3 +816,4 @@ import Brockian.ConstellationGraphAcyclic
 import Brockian.ConstellationPaths
 import Brockian.ConstellationGlobalSpectrum
 import Brockian.ConstellationAdjBridge
+import Brockian.ConstellationSpectrumEnvelope

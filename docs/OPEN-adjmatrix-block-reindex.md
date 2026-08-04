@@ -12,10 +12,16 @@ with `M` squarefree, `Nat.Coprime 3 M`, `5 ∣ M`, `1 < M`:
 
 ```lean
 -- The graph Hamiltonian: H_G := 2 • 1 − adjMatrix ℝ G, over the admissible-vertex Fintype.
-theorem graph_hamiltonian_spectrum (x : ℝ) :
-    (2 • (1 : Matrix _ _ ℝ) - SimpleGraph.adjMatrix ℝ G).charpoly.eval x = 0 ↔
+theorem graph_hamiltonian_spectrum_subset (x : ℝ) :
+    (2 • (1 : Matrix _ _ ℝ) - SimpleGraph.adjMatrix ℝ G).charpoly.eval x = 0 →
       x ∈ ({2 - Real.sqrt 2, 1, 2, 3, 2 + Real.sqrt 2} : Set ℝ)
 ```
+
+The implication is the correct unconditional Route C target. An `↔` requires occurrence
+hypotheses: a `P₂` component must occur for `1,3`, and a `P₃` component must occur for
+`2 ± sqrt 2`. The boundary case `M = 5` satisfies the displayed modulus hypotheses but its
+twin-admissible graph is just `P₃`, so `1` and `3` are not eigenvalues. The exact charpoly theorem
+below records zero multiplicities correctly and is therefore the preferred full statement.
 
 and, with the component counts `n₁, n₂, n₃` (from `ConstellationCounts`: `n₃ = T`, `n₂ = E − 2T`,
 `n₁ = V − 2E + T`, where `V = ∏(p−2)`, `E = ∏(p−4)`, `T = ∏(p−6)`), the multiplicity form:
@@ -30,12 +36,14 @@ theorem graph_hamiltonian_charpoly :
 
 - `ConstellationGraphAcyclic.twin_admissible_induced_acyclic` — `G.IsAcyclic`.
 - `ConstellationPaths.induced_degree_le_two` — every vertex has degree ≤ 2.
-- `ConstellationPaths.forest_of_paths` — `G.IsAcyclic ∧ ∀ v, G.degree v ≤ 2` (disjoint union of paths).
+- `ConstellationPaths.forest_of_paths` — the formal statement
+  `G.IsAcyclic ∧ ∀ v, G.degree v ≤ 2`; identifying each component with a concrete `pathGraph` is
+  part of the remaining bridge.
 - `ConstellationPaths.no_four_admissible_run` — no 4 vertices in a `+3` progression (components ≤ 3
   vertices), so every component is `P₁`, `P₂`, or `P₃`.
 - `ConstellationAdjBridge.G_embeds_intLine` — the map `pos a = (3⁻¹·a).val : ℤ` is a full
-  `SimpleGraph.Embedding` (induced, both directions) of `G` into the integer line graph; hence **each
-  connected component is a contiguous integer interval** (a genuine path of ≤ 3 vertices).
+  `SimpleGraph.Embedding` (induced, both directions) of `G` into the integer line graph. Packaging
+  the resulting component intervals as explicit equivalences is part of the remaining bridge.
 - `ConstellationSpectrum` / `ConstellationBlockSum` / `ConstellationGlobalSpectrum` — the path
   Hamiltonians `H₁,H₂,H₃`, their exact charpolys, the direct-sum charpoly law
   `charpoly_fromBlocks_zero`, and `H123_spectrum` (the assembled block operator's spectrum is exactly
@@ -82,12 +90,13 @@ matrix by connected components**. Needed, roughly:
   eigenvector restricted to any component is an eigenvector of that component's path Hamiltonian. This
   closes the *spectral alphabet* claim (spectrum ⊆ `{2−√2,1,2,3,2+√2}`) without the full multiplicities.
 
-Route C is the smallest honest close of "the graph operator's spectrum is the five-point alphabet";
-Route A/B additionally recover the exact multiplicities `n₁,n₂,n₃`.
+Route C is the smallest honest close of "the graph operator's spectrum is contained in the
+five-point alphabet". Equality follows only when the relevant component multiplicities are
+positive. Route A/B additionally recover the exact multiplicities `n₁,n₂,n₃`.
 
 ## Definition of done
 
-`graph_hamiltonian_spectrum` (Route C minimum) or `graph_hamiltonian_charpoly` (Route A/B, full) proved,
+`graph_hamiltonian_spectrum_subset` (Route C minimum) or `graph_hamiltonian_charpoly` (Route A/B, full) proved,
 AXLE-verified @lean-4.32.0, axiom-clean, integrated as `Brockian/ConstellationGateClose.lean` — at which
 point the constellation-sieve spectral gate is **fully closed** and the paper's §9 open note is removed.
 Reminder: this remains a structural/finite result; it is **not** a proof of twin-prime infinitude.

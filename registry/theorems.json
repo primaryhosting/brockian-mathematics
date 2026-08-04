@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10975,
+    "PROVED": 10978,
     "DEFINITION": 626,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -12001,6 +12001,105 @@
       "quarantine": true,
       "ledger_run": "Brockian constellation-sieve brick 5; AXLE @4.32",
       "provenance_note": "SWARM-PROVED Constellation Sieve Spectrum BRICK 5 (AXLE @4.32, axiom-clean): the path-Hamiltonian operators and their EXACT spectra -- the operator theorem the earlier twin-sieve package lacked. H1,H2,H3 are genuine Matrix (Fin n) \u211d operators (diagonal 2, -1 across path edges). H{1,2,3}_charpoly: exact characteristic polynomials (X-2), (X-1)(X-3), (X-2)(X^2-4X+2). H3_eigenvalues: the roots are exactly 2, 2-sqrt2, 2+sqrt2 (irrational eigenvalues via (sqrt2)^2=2). Giving the five-point spectral alphabet {2-sqrt2,1,2,3,2+sqrt2} (spectralAlphabet + eigenvalues_in_alphabet). Proves the BLOCK spectra; the full wheel-operator block-diagonal assembly (permutation similarity) is a separate UNCLAIMED gate."
+    },
+    {
+      "name": "Brockian.ConstellationSpectrumEnvelope.H3_only_not_root_one",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationSpectrumEnvelope",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationSpectrumEnvelope.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - graph-spectrum statement repair; AXLE @4.32",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Any P1/P2/P3 block-product charpoly has roots contained in the five-point spectral envelope. Equality with all five points is proved under the necessary occurrence assumptions n2>0 and n3>0. H3_only_not_root_one is the boundary witness preventing unconditional equality over zero block multiplicities. This does not prove the still-open graph adjMatrix reindexing or component-count identification."
+    },
+    {
+      "name": "Brockian.ConstellationSpectrumEnvelope.pathBlockCharpoly_root_iff",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationSpectrumEnvelope",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationSpectrumEnvelope.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - graph-spectrum statement repair; AXLE @4.32",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Any P1/P2/P3 block-product charpoly has roots contained in the five-point spectral envelope. Equality with all five points is proved under the necessary occurrence assumptions n2>0 and n3>0. H3_only_not_root_one is the boundary witness preventing unconditional equality over zero block multiplicities. This does not prove the still-open graph adjMatrix reindexing or component-count identification."
+    },
+    {
+      "name": "Brockian.ConstellationSpectrumEnvelope.pathBlockCharpoly_root_mem",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationSpectrumEnvelope",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationSpectrumEnvelope.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - graph-spectrum statement repair; AXLE @4.32",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. Any P1/P2/P3 block-product charpoly has roots contained in the five-point spectral envelope. Equality with all five points is proved under the necessary occurrence assumptions n2>0 and n3>0. H3_only_not_root_one is the boundary witness preventing unconditional equality over zero block multiplicities. This does not prove the still-open graph adjMatrix reindexing or component-count identification."
     },
     {
       "name": "Brockian.ConstellationWheel.admissibleU_squarefree",
