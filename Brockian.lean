@@ -803,3 +803,4 @@ import Brockian.MsE2Irrational
 import Brockian.MsMenelaus
 import Brockian.MsHermiteHadamard
 import Brockian.MsCeva
+import Brockian.ConstellationLocalCount

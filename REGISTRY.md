@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 613
 - **DISCHARGED**: 7
-- **PROVED**: 10911
+- **PROVED**: 10914
 
 ## Theorems
 
@@ -315,6 +315,9 @@
 | PROVED | `Brockian.ConnectivityGoldenBridge.neg_phi_mem_adjacency_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.ConnectivityGoldenBridge.two_cos_four_pi_div_five_eq_neg_phi` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.ConnectivityGoldenBridge.two_cos_four_pi_div_five_geometry` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence |
+| PROVED | `Brockian.ConstellationLocalCount.local_admissible_count` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 1; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationLocalCount.local_admissible_count_prime` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 1; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationLocalCount.twin_local_count` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 1; AXLE @4.32 |
 | DEFINITION | `Brockian.Core.Ray` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.binet_formula` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.cos_2pi_5` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |

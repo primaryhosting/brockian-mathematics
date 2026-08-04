@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10911,
+    "PROVED": 10914,
     "DEFINITION": 613,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -9598,6 +9598,105 @@
       "quarantine": true,
       "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; committed by Claude for tip coherence",
       "provenance_note": "Bridges algebraic connectivity lambda2(C5) to the golden ratio. AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing files committed to keep the registry tip coherent."
+    },
+    {
+      "name": "Brockian.ConstellationLocalCount.local_admissible_count",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationLocalCount",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationLocalCount.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian constellation-sieve brick 1; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Constellation Sieve Spectrum BRICK 1 (AXLE @4.32, axiom-clean): the exact local admissibility count. local_admissible_count: for modulus n, #{a in ZMod n : a+h != 0 for all h in H} = |ZMod n| - nu, where nu = #{h mod n : h in H} (distinct residues). local_admissible_count_prime: at a prime p this is p - nu_p(H). twin_local_count: the geometric CONFINEMENT result -- for a prime p>=3 the twin constellation {0,2} admits EXACTLY p-2 residues. This is the load-bearing atom of the constellation-sieve program: where prime constellations are locally forbidden on the wheel ZMod n, proved and counted."
+    },
+    {
+      "name": "Brockian.ConstellationLocalCount.local_admissible_count_prime",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationLocalCount",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationLocalCount.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian constellation-sieve brick 1; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Constellation Sieve Spectrum BRICK 1 (AXLE @4.32, axiom-clean): the exact local admissibility count. local_admissible_count: for modulus n, #{a in ZMod n : a+h != 0 for all h in H} = |ZMod n| - nu, where nu = #{h mod n : h in H} (distinct residues). local_admissible_count_prime: at a prime p this is p - nu_p(H). twin_local_count: the geometric CONFINEMENT result -- for a prime p>=3 the twin constellation {0,2} admits EXACTLY p-2 residues. This is the load-bearing atom of the constellation-sieve program: where prime constellations are locally forbidden on the wheel ZMod n, proved and counted."
+    },
+    {
+      "name": "Brockian.ConstellationLocalCount.twin_local_count",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationLocalCount",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationLocalCount.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian constellation-sieve brick 1; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Constellation Sieve Spectrum BRICK 1 (AXLE @4.32, axiom-clean): the exact local admissibility count. local_admissible_count: for modulus n, #{a in ZMod n : a+h != 0 for all h in H} = |ZMod n| - nu, where nu = #{h mod n : h in H} (distinct residues). local_admissible_count_prime: at a prime p this is p - nu_p(H). twin_local_count: the geometric CONFINEMENT result -- for a prime p>=3 the twin constellation {0,2} admits EXACTLY p-2 residues. This is the load-bearing atom of the constellation-sieve program: where prime constellations are locally forbidden on the wheel ZMod n, proved and counted."
     },
     {
       "name": "Brockian.Core.Ray",
