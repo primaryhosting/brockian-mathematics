@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 614
 - **DISCHARGED**: 7
-- **PROVED**: 10916
+- **PROVED**: 10918
 
 ## Theorems
 
@@ -321,6 +321,8 @@
 | DEFINITION | `Brockian.ConstellationMultiplicative.admissibleU` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 2; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationMultiplicative.admissibleU_mul` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 2; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationMultiplicative.admissibleU_prime` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 2; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationWheel.admissibleU_squarefree` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 3; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationWheel.twin_wheel_count` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 3; AXLE @4.32 |
 | DEFINITION | `Brockian.Core.Ray` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.binet_formula` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.cos_2pi_5` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |

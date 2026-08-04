@@ -805,3 +805,4 @@ import Brockian.MsHermiteHadamard
 import Brockian.MsCeva
 import Brockian.ConstellationLocalCount
 import Brockian.ConstellationMultiplicative
+import Brockian.ConstellationWheel

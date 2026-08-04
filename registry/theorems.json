@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10916,
+    "PROVED": 10918,
     "DEFINITION": 614,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -9792,6 +9792,72 @@
       "quarantine": true,
       "ledger_run": "Brockian constellation-sieve brick 2; AXLE @4.32",
       "provenance_note": "SWARM-PROVED Constellation Sieve Spectrum BRICK 2 (AXLE @4.32, axiom-clean): wheel admissibility is MULTIPLICATIVE. admissibleU n H = residues where every shifted point a+h is a unit mod n (the genuine sieve/coprimality condition). admissibleU_prime bridges to Brick 1 (in a field IsUnit = nonzero, so the prime count is p - nu_p). admissibleU_mul: for coprime m,n, admissibleU(m*n).card = admissibleU(m).card * admissibleU(n).card, proved via the Chinese Remainder ring iso ZMod(mn) = ZMod m x ZMod n and unit-in-product-ring. This is local-to-global: the wheel count factors over prime components."
+    },
+    {
+      "name": "Brockian.ConstellationWheel.admissibleU_squarefree",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationWheel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationWheel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian constellation-sieve brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Constellation Sieve Spectrum BRICK 3 (AXLE @4.32, axiom-clean): the WHEEL PRODUCT. admissibleU_squarefree: for squarefree Q, (admissibleU Q H).card = prod over p|Q of (p - nu_p(H)) -- the exact Euler product of local confinement counts, proved by strong induction peeling one prime factor (Brick 2 multiplicativity splits, Brick 1 evaluates each prime). twin_wheel_count: for squarefree Q with all prime factors >=3, the twin count = prod (p-2). This makes the sieve constants A=prod(p-2) PROVED, not assumed: the local prime confinements wrap into the wheel's global count as a verified Euler product."
+    },
+    {
+      "name": "Brockian.ConstellationWheel.twin_wheel_count",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationWheel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationWheel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian constellation-sieve brick 3; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Constellation Sieve Spectrum BRICK 3 (AXLE @4.32, axiom-clean): the WHEEL PRODUCT. admissibleU_squarefree: for squarefree Q, (admissibleU Q H).card = prod over p|Q of (p - nu_p(H)) -- the exact Euler product of local confinement counts, proved by strong induction peeling one prime factor (Brick 2 multiplicativity splits, Brick 1 evaluates each prime). twin_wheel_count: for squarefree Q with all prime factors >=3, the twin count = prod (p-2). This makes the sieve constants A=prod(p-2) PROVED, not assumed: the local prime confinements wrap into the wheel's global count as a verified Euler product."
     },
     {
       "name": "Brockian.Core.Ray",
