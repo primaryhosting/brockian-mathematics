@@ -50,6 +50,21 @@ are exactly `2`, `1`, `3`, and the irrationals `2 ± √2` (the last via `(√2)
 polynomial law: the spectrum of a block-diagonal assembly of the path Hamiltonians is the product of
 their spectra, giving the global multiplicities.
 
+## It is a general constellation theory (`ConstellationExamples`)
+
+Bricks 1 and 3 are stated for an arbitrary offset set `H`, so the confinement applies to *any* prime
+constellation. Verified instances beyond twins:
+
+| Constellation | `H` | local count | wheel product |
+|---|---|---|---|
+| Cousin primes | `{0,4}` | `p − 2` (`p ≥ 3`) | `∏_{p∣Q}(p − 2)` |
+| Sexy primes | `{0,6}` | `p − 2` (`p ≥ 5`) | `∏_{p∣Q}(p − 2)` |
+| Prime triple | `{0,2,6}` | `p − 3` (`p ≥ 7`) | `∏_{p∣Q}(p − 3)` |
+
+Each is proved by computing `ν_p(H)` exactly (the offsets are pairwise distinct mod `p` above the stated
+bound) and instantiating the general Brick-1 (local) and Brick-3 (wheel) theorems. The infinitude of
+cousin primes, sexy primes, or admissible triples remains **open** — unaffected by these finite counts.
+
 ## The one honest remaining gate
 
 Proving that the actual wheel operator is **permutation-similar to the block-diagonal sum** of its path
