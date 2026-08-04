@@ -1406,6 +1406,13 @@ runs:
     ledger_run: "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts"
     provenance_note: "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
 
+  "sieve-spectrum-blocks":
+    module: Brockian.SieveSpectrumBlocks
+    verdict: admit
+    quarantine: true
+    ledger_run: "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates"
+    provenance_note: "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+
   "odd-perfect-three-primes":
     module: Brockian.OddPerfectThreePrimes
     verdict: admit

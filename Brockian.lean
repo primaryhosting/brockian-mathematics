@@ -734,6 +734,7 @@ import Brockian.PhaseDepthTorus
 import Brockian.TripleAdmissibility
 import Brockian.AffineSelection
 import Brockian.SieveSpectrumCounts
+import Brockian.SieveSpectrumBlocks
 import Brockian.EgyptianFraction
 import Brockian.OddPerfectThreePrimes
 import Brockian.AbundantClosure

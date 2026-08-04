@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10611,
-    "DEFINITION": 587,
+    "PROVED": 10621,
+    "DEFINITION": 598,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
     "DISCHARGED": 7
@@ -125738,6 +125738,655 @@
       "quarantine": true,
       "ledger_run": "intake 18 (dd6a6bd3 / bdfa6014) \u2014 silver eigensystem, no-go, run-cap, torus",
       "provenance_note": "H3 silver eigensystem (2\u00b1\u221a2,2), twin_pins_mod_three, \u2113\u22122 grammar, \u03c4 period=25; 4 thms kernel-decide (finite checks)"
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.BlockAdj",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.IsLaneSite",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.LaneSite",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.Path3Adj",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.WheelAdj",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.blockAdj_implies_wheelAdj",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.blockCoordEquiv",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.blockCoordMap",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.blockCoordMap_bijective",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.blockVertex",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.blockVertex_injective",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.blockVertex_step01",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.blockVertex_step12",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.crt15Q",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.existsUnique_blockVertex_of_lane",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.forward_step_classification",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.lane15",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.lane15_forward_iff",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.lane15_injective",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.laneShift",
+      "kind": "def",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
+    },
+    {
+      "name": "Brockian.SieveSpectrumBlocks.wheelAdj_iff_blockAdj",
+      "kind": "theorem",
+      "module": "Brockian.SieveSpectrumBlocks",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SieveSpectrumBlocks.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 - canonical twin-sieve CRT block coordinates",
+      "provenance_note": "AXLE 4.32 verified with standard axioms only. For Nat.Coprime 15 Q, residues on the modulo-15 lanes 11,14,2 are equivalent to ZMod Q x Fin 3; translation by plus or minus 3 corresponds exactly to adjacency inside one three-site path and cannot cross block indices. This module does not yet identify actual twin-unit survivors, connected components, or a Hamiltonian."
     },
     {
       "name": "Brockian.SieveSpectrumCounts.boundary_wheel_Q1",

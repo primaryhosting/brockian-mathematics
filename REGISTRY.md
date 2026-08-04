@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 587
+- **DEFINITION**: 598
 - **DISCHARGED**: 7
-- **PROVED**: 10611
+- **PROVED**: 10621
 
 ## Theorems
 
@@ -3903,6 +3903,27 @@
 | PROVED | `Brockian.Sieve.tau_period` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.twin_admissible_card` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
 | PROVED | `Brockian.Sieve.twin_pins_mod_three` | ✓ | verified | lean-4.32.0 | intake 18 (dd6a6bd3 / bdfa6014) — silver eigensystem, no-go, run-cap, torus |
+| DEFINITION | `Brockian.SieveSpectrumBlocks.BlockAdj` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| DEFINITION | `Brockian.SieveSpectrumBlocks.IsLaneSite` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| DEFINITION | `Brockian.SieveSpectrumBlocks.LaneSite` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| DEFINITION | `Brockian.SieveSpectrumBlocks.Path3Adj` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| DEFINITION | `Brockian.SieveSpectrumBlocks.WheelAdj` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| PROVED | `Brockian.SieveSpectrumBlocks.blockAdj_implies_wheelAdj` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| DEFINITION | `Brockian.SieveSpectrumBlocks.blockCoordEquiv` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| DEFINITION | `Brockian.SieveSpectrumBlocks.blockCoordMap` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| PROVED | `Brockian.SieveSpectrumBlocks.blockCoordMap_bijective` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| DEFINITION | `Brockian.SieveSpectrumBlocks.blockVertex` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| PROVED | `Brockian.SieveSpectrumBlocks.blockVertex_injective` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| PROVED | `Brockian.SieveSpectrumBlocks.blockVertex_step01` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| PROVED | `Brockian.SieveSpectrumBlocks.blockVertex_step12` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| DEFINITION | `Brockian.SieveSpectrumBlocks.crt15Q` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| PROVED | `Brockian.SieveSpectrumBlocks.existsUnique_blockVertex_of_lane` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| PROVED | `Brockian.SieveSpectrumBlocks.forward_step_classification` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| DEFINITION | `Brockian.SieveSpectrumBlocks.lane15` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| PROVED | `Brockian.SieveSpectrumBlocks.lane15_forward_iff` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| PROVED | `Brockian.SieveSpectrumBlocks.lane15_injective` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| DEFINITION | `Brockian.SieveSpectrumBlocks.laneShift` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
+| PROVED | `Brockian.SieveSpectrumBlocks.wheelAdj_iff_blockAdj` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - canonical twin-sieve CRT block coordinates |
 | PROVED | `Brockian.SieveSpectrumCounts.boundary_wheel_Q1` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
 | PROVED | `Brockian.SieveSpectrumCounts.boundary_wheel_Q11` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |
 | PROVED | `Brockian.SieveSpectrumCounts.boundary_wheel_Q7` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts |

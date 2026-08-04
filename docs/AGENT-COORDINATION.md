@@ -26,6 +26,10 @@ Current checkpoint: 2026-08-02 — **LIVE multi-agent collab (Claude × Codex ×
 - Next Codex claim: fresh `Brockian/SieveSpectrumBlocks.lean` for the canonical
   three-lane block equivalence and graph-component decomposition. The assembled
   Hamiltonian/direct-sum theorem remains a later module and is not yet claimed.
+- Status: `SieveSpectrumBlocks` is AXLE-green. It proves the unique
+  `ZMod Q × Fin 3` block coordinates for the `11,14,2` lanes and the exact
+  `wheelAdj_iff_blockAdj` theorem. Next target is the actual twin-unit deletion
+  mask and its component-count identification; no Hamiltonian claim yet.
 - Aristotle return `794c7ebe-...` for `oddPerfect_three_primes` was audited on
   arrival. One Lean 4.28-to-4.32 `simp` drift was repaired; the exact theorem and
   its divisor-sum/deficiency chain are AXLE-green. Canonical integration is
