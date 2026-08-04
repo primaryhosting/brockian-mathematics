@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 616
+- **DEFINITION**: 620
 - **DISCHARGED**: 7
-- **PROVED**: 10923
+- **PROVED**: 10930
 
 ## Theorems
 
@@ -328,6 +328,17 @@
 | DEFINITION | `Brockian.ConstellationMultiplicative.admissibleU` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 2; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationMultiplicative.admissibleU_mul` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 2; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationMultiplicative.admissibleU_prime` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 2; AXLE @4.32 |
+| DEFINITION | `Brockian.ConstellationSpectrum.H1` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationSpectrum.H1_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationSpectrum.H1_eigenvalue` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
+| DEFINITION | `Brockian.ConstellationSpectrum.H2` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationSpectrum.H2_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationSpectrum.H2_eigenvalues` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
+| DEFINITION | `Brockian.ConstellationSpectrum.H3` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationSpectrum.H3_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationSpectrum.H3_eigenvalues` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationSpectrum.eigenvalues_in_alphabet` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
+| DEFINITION | `Brockian.ConstellationSpectrum.spectralAlphabet` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 5; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationWheel.admissibleU_squarefree` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 3; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationWheel.twin_wheel_count` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 3; AXLE @4.32 |
 | DEFINITION | `Brockian.Core.Ray` | ✓ | verified | lean-4.32.0 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
