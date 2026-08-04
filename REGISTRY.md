@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 623
+- **DEFINITION**: 624
 - **DISCHARGED**: 7
-- **PROVED**: 10958
+- **PROVED**: 10963
 
 ## Theorems
 
@@ -353,6 +353,12 @@
 | PROVED | `Brockian.ConstellationGraph.twinAdm_map` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationGraph.twin_no_four_run` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationGraph.twin_run_cap_mod5` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
+| DEFINITION | `Brockian.ConstellationGraphAcyclic.intLine` | ✓ | verified | lean-4.32.0 | Brockian gate — SimpleGraph acyclicity; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGraphAcyclic.intLine_adj` | ✓ | verified | lean-4.32.0 | Brockian gate — SimpleGraph acyclicity; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGraphAcyclic.intLine_isAcyclic` | ✓ | verified | lean-4.32.0 | Brockian gate — SimpleGraph acyclicity; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGraphAcyclic.intLine_isBridge` | ✓ | verified | lean-4.32.0 | Brockian gate — SimpleGraph acyclicity; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGraphAcyclic.twin_admissible_induced_acyclic` | ✓ | verified | lean-4.32.0 | Brockian gate — SimpleGraph acyclicity; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGraphAcyclic.walk_pred` | ✓ | verified | lean-4.32.0 | Brockian gate — SimpleGraph acyclicity; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationLocalCount.local_admissible_count` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 1; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationLocalCount.local_admissible_count_prime` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 1; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationLocalCount.twin_local_count` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 1; AXLE @4.32 |

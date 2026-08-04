@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10958,
-    "DEFINITION": 623,
+    "PROVED": 10963,
+    "DEFINITION": 624,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
     "DISCHARGED": 7
@@ -10818,6 +10818,195 @@
       "quarantine": true,
       "ledger_run": "Brockian constellation-sieve brick 4; AXLE @4.32",
       "provenance_note": "SWARM-PROVED Constellation Sieve Spectrum BRICK 4 (AXLE @4.32, axiom-clean): the +3-flow RUN CAP and degree bound. twin_run_cap_mod5: no 4-term +3 run a,a+3,a+6,a+9 is fully twin-admissible mod 5 (a finite decidable pigeonhole: the four residues occupy distinct classes but twin-admissibility forbids two of five). twin_no_four_run: lifts to any M with 5|M via the reduction ring hom (units map to units). plus_three_neighbourhood: +/-3 adjacency forces b in {a+3,a-3} (degree <= 2). plusThreeGraph: the actual SimpleGraph on ZMod n. Together: the structural reason the twin wheel graph is a union of paths P1,P2,P3 -- components cannot exceed 3 vertices. Proved, not asserted."
+    },
+    {
+      "name": "Brockian.ConstellationGraphAcyclic.intLine",
+      "kind": "def",
+      "module": "Brockian.ConstellationGraphAcyclic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationGraphAcyclic.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate \u2014 SimpleGraph acyclicity; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE \u2014 SimpleGraph ACYCLICITY CLOSED (AXLE @4.32, axiom-clean). twin_admissible_induced_acyclic: for M coprime to 3 (M>1), the induced subgraph of the +3 flow plusThreeGraph M on the twin-admissible residues is IsAcyclic. Proof: the position map pos a = (3^{-1} a).val is an injective graph hom into the integer line graph intLine (adjacency |a-b|=1, proved acyclic via every edge a bridge); +3 steps become +1 steps and the single val wrap-around lands on the inadmissible residue 0 (zero_not_twinAdm), so on admissible vertices adjacent pos-values differ by exactly +/-1; IsAcyclic.comap transports acyclicity back. Closes the graph-theoretic piece the arithmetic substrate (ConstellationAcyclic) had left open -- unlocking components-are-paths -> similarity -> global spectrum."
+    },
+    {
+      "name": "Brockian.ConstellationGraphAcyclic.intLine_adj",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationGraphAcyclic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationGraphAcyclic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate \u2014 SimpleGraph acyclicity; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE \u2014 SimpleGraph ACYCLICITY CLOSED (AXLE @4.32, axiom-clean). twin_admissible_induced_acyclic: for M coprime to 3 (M>1), the induced subgraph of the +3 flow plusThreeGraph M on the twin-admissible residues is IsAcyclic. Proof: the position map pos a = (3^{-1} a).val is an injective graph hom into the integer line graph intLine (adjacency |a-b|=1, proved acyclic via every edge a bridge); +3 steps become +1 steps and the single val wrap-around lands on the inadmissible residue 0 (zero_not_twinAdm), so on admissible vertices adjacent pos-values differ by exactly +/-1; IsAcyclic.comap transports acyclicity back. Closes the graph-theoretic piece the arithmetic substrate (ConstellationAcyclic) had left open -- unlocking components-are-paths -> similarity -> global spectrum."
+    },
+    {
+      "name": "Brockian.ConstellationGraphAcyclic.intLine_isAcyclic",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationGraphAcyclic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationGraphAcyclic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate \u2014 SimpleGraph acyclicity; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE \u2014 SimpleGraph ACYCLICITY CLOSED (AXLE @4.32, axiom-clean). twin_admissible_induced_acyclic: for M coprime to 3 (M>1), the induced subgraph of the +3 flow plusThreeGraph M on the twin-admissible residues is IsAcyclic. Proof: the position map pos a = (3^{-1} a).val is an injective graph hom into the integer line graph intLine (adjacency |a-b|=1, proved acyclic via every edge a bridge); +3 steps become +1 steps and the single val wrap-around lands on the inadmissible residue 0 (zero_not_twinAdm), so on admissible vertices adjacent pos-values differ by exactly +/-1; IsAcyclic.comap transports acyclicity back. Closes the graph-theoretic piece the arithmetic substrate (ConstellationAcyclic) had left open -- unlocking components-are-paths -> similarity -> global spectrum."
+    },
+    {
+      "name": "Brockian.ConstellationGraphAcyclic.intLine_isBridge",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationGraphAcyclic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationGraphAcyclic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate \u2014 SimpleGraph acyclicity; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE \u2014 SimpleGraph ACYCLICITY CLOSED (AXLE @4.32, axiom-clean). twin_admissible_induced_acyclic: for M coprime to 3 (M>1), the induced subgraph of the +3 flow plusThreeGraph M on the twin-admissible residues is IsAcyclic. Proof: the position map pos a = (3^{-1} a).val is an injective graph hom into the integer line graph intLine (adjacency |a-b|=1, proved acyclic via every edge a bridge); +3 steps become +1 steps and the single val wrap-around lands on the inadmissible residue 0 (zero_not_twinAdm), so on admissible vertices adjacent pos-values differ by exactly +/-1; IsAcyclic.comap transports acyclicity back. Closes the graph-theoretic piece the arithmetic substrate (ConstellationAcyclic) had left open -- unlocking components-are-paths -> similarity -> global spectrum."
+    },
+    {
+      "name": "Brockian.ConstellationGraphAcyclic.twin_admissible_induced_acyclic",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationGraphAcyclic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationGraphAcyclic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate \u2014 SimpleGraph acyclicity; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE \u2014 SimpleGraph ACYCLICITY CLOSED (AXLE @4.32, axiom-clean). twin_admissible_induced_acyclic: for M coprime to 3 (M>1), the induced subgraph of the +3 flow plusThreeGraph M on the twin-admissible residues is IsAcyclic. Proof: the position map pos a = (3^{-1} a).val is an injective graph hom into the integer line graph intLine (adjacency |a-b|=1, proved acyclic via every edge a bridge); +3 steps become +1 steps and the single val wrap-around lands on the inadmissible residue 0 (zero_not_twinAdm), so on admissible vertices adjacent pos-values differ by exactly +/-1; IsAcyclic.comap transports acyclicity back. Closes the graph-theoretic piece the arithmetic substrate (ConstellationAcyclic) had left open -- unlocking components-are-paths -> similarity -> global spectrum."
+    },
+    {
+      "name": "Brockian.ConstellationGraphAcyclic.walk_pred",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationGraphAcyclic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationGraphAcyclic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate \u2014 SimpleGraph acyclicity; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve GATE \u2014 SimpleGraph ACYCLICITY CLOSED (AXLE @4.32, axiom-clean). twin_admissible_induced_acyclic: for M coprime to 3 (M>1), the induced subgraph of the +3 flow plusThreeGraph M on the twin-admissible residues is IsAcyclic. Proof: the position map pos a = (3^{-1} a).val is an injective graph hom into the integer line graph intLine (adjacency |a-b|=1, proved acyclic via every edge a bridge); +3 steps become +1 steps and the single val wrap-around lands on the inadmissible residue 0 (zero_not_twinAdm), so on admissible vertices adjacent pos-values differ by exactly +/-1; IsAcyclic.comap transports acyclicity back. Closes the graph-theoretic piece the arithmetic substrate (ConstellationAcyclic) had left open -- unlocking components-are-paths -> similarity -> global spectrum."
     },
     {
       "name": "Brockian.ConstellationLocalCount.local_admissible_count",
