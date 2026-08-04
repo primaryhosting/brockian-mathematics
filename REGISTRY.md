@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 587
 - **DISCHARGED**: 7
-- **PROVED**: 10602
+- **PROVED**: 10611
 
 ## Theorems
 
@@ -3508,6 +3508,15 @@
 | PROVED | `Brockian.OddPerfectEuler.other_factor_odd` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32 |
 | PROVED | `Brockian.OddPerfectEuler.reconstruct_euler_factorization` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle proof 0f4ddfbb; AXLE @4.32 |
 | PROVED | `Brockian.OddPerfectMod4.oddPerfect_mod4` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle 73e0a459; AXLE @4.32 |
+| PROVED | `Brockian.OddPerfectThreePrimes.deficient_of_sum_divisors_lt` | ✓ | verified | lean-4.32.0 | Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit |
+| PROVED | `Brockian.OddPerfectThreePrimes.eq_pow_mul_pow_of_primeFactors_eq_pair` | ✓ | verified | lean-4.32.0 | Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit |
+| PROVED | `Brockian.OddPerfectThreePrimes.geomSum_mul_pred` | ✓ | verified | lean-4.32.0 | Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit |
+| PROVED | `Brockian.OddPerfectThreePrimes.oddPerfect_three_primes` | ✓ | verified | lean-4.32.0 | Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit |
+| PROVED | `Brockian.OddPerfectThreePrimes.odd_deficient_of_primeFactors_card_le_two` | ✓ | verified | lean-4.32.0 | Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit |
+| PROVED | `Brockian.OddPerfectThreePrimes.odd_deficient_of_primeFactors_eq_pair` | ✓ | verified | lean-4.32.0 | Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit |
+| PROVED | `Brockian.OddPerfectThreePrimes.prime_pair_bound` | ✓ | verified | lean-4.32.0 | Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit |
+| PROVED | `Brockian.OddPerfectThreePrimes.sum_divisors_lt_two_mul_of_two_primes` | ✓ | verified | lean-4.32.0 | Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit |
+| PROVED | `Brockian.OddPerfectThreePrimes.three_le_of_mem_primeFactors` | ✓ | verified | lean-4.32.0 | Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit |
 | CONJECTURE | `Brockian.OppermannConjecture.OppermannConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.OppermannConjecture.OppermannLower` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.OppermannConjecture.OppermannUpper` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |

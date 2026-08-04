@@ -1405,3 +1405,10 @@ runs:
     quarantine: true
     ledger_run: "Codex 2026-08-03 - twin-sieve statement repair and exact CRT counts"
     provenance_note: "AXLE 4.32 verified with standard axioms only. Subtraction-safe component identities; exact prime-local p-2, p-4, p-6 survivor factors for primes p >= 7; iterated CRT products over Q and the full 15Q prime family; boundary checks Q=1,7,11,77,91. Does not claim graph decomposition, Hamiltonian block equivalence, or exact spectral multiplicities beyond the algebraic relation conditional on component counts."
+
+  "odd-perfect-three-primes":
+    module: Brockian.OddPerfectThreePrimes
+    verdict: admit
+    quarantine: true
+    ledger_run: "Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit"
+    provenance_note: "Every odd perfect number has at least three distinct prime factors. The proof shows every odd number with at most two prime factors is deficient, using exact divisor-sum bounds for products of two odd prime powers. AXLE 4.32 verified after removing one obsolete simp call; standard axioms only."

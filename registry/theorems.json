@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10602,
+    "PROVED": 10611,
     "DEFINITION": 587,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -113073,6 +113073,303 @@
       "quarantine": true,
       "ledger_run": "Harmonic/Aristotle 73e0a459; AXLE @4.32",
       "provenance_note": "HARMONIC-PROVED: an odd perfect number is 1 mod 4 (Aristotle/Harmonic, AXLE-verified @4.32, axiom-clean). oddPerfect_mod4: Odd n and Perfect n imply n%4=1 -- a necessary condition on any hypothetical odd perfect number (a corollary-strength consequence of Euler's form). Odd perfect existence remains OPEN."
+    },
+    {
+      "name": "Brockian.OddPerfectThreePrimes.deficient_of_sum_divisors_lt",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectThreePrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectThreePrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit",
+      "provenance_note": "Every odd perfect number has at least three distinct prime factors. The proof shows every odd number with at most two prime factors is deficient, using exact divisor-sum bounds for products of two odd prime powers. AXLE 4.32 verified after removing one obsolete simp call; standard axioms only."
+    },
+    {
+      "name": "Brockian.OddPerfectThreePrimes.eq_pow_mul_pow_of_primeFactors_eq_pair",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectThreePrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectThreePrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit",
+      "provenance_note": "Every odd perfect number has at least three distinct prime factors. The proof shows every odd number with at most two prime factors is deficient, using exact divisor-sum bounds for products of two odd prime powers. AXLE 4.32 verified after removing one obsolete simp call; standard axioms only."
+    },
+    {
+      "name": "Brockian.OddPerfectThreePrimes.geomSum_mul_pred",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectThreePrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectThreePrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit",
+      "provenance_note": "Every odd perfect number has at least three distinct prime factors. The proof shows every odd number with at most two prime factors is deficient, using exact divisor-sum bounds for products of two odd prime powers. AXLE 4.32 verified after removing one obsolete simp call; standard axioms only."
+    },
+    {
+      "name": "Brockian.OddPerfectThreePrimes.oddPerfect_three_primes",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectThreePrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectThreePrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit",
+      "provenance_note": "Every odd perfect number has at least three distinct prime factors. The proof shows every odd number with at most two prime factors is deficient, using exact divisor-sum bounds for products of two odd prime powers. AXLE 4.32 verified after removing one obsolete simp call; standard axioms only."
+    },
+    {
+      "name": "Brockian.OddPerfectThreePrimes.odd_deficient_of_primeFactors_card_le_two",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectThreePrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectThreePrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit",
+      "provenance_note": "Every odd perfect number has at least three distinct prime factors. The proof shows every odd number with at most two prime factors is deficient, using exact divisor-sum bounds for products of two odd prime powers. AXLE 4.32 verified after removing one obsolete simp call; standard axioms only."
+    },
+    {
+      "name": "Brockian.OddPerfectThreePrimes.odd_deficient_of_primeFactors_eq_pair",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectThreePrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectThreePrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit",
+      "provenance_note": "Every odd perfect number has at least three distinct prime factors. The proof shows every odd number with at most two prime factors is deficient, using exact divisor-sum bounds for products of two odd prime powers. AXLE 4.32 verified after removing one obsolete simp call; standard axioms only."
+    },
+    {
+      "name": "Brockian.OddPerfectThreePrimes.prime_pair_bound",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectThreePrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectThreePrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit",
+      "provenance_note": "Every odd perfect number has at least three distinct prime factors. The proof shows every odd number with at most two prime factors is deficient, using exact divisor-sum bounds for products of two odd prime powers. AXLE 4.32 verified after removing one obsolete simp call; standard axioms only."
+    },
+    {
+      "name": "Brockian.OddPerfectThreePrimes.sum_divisors_lt_two_mul_of_two_primes",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectThreePrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectThreePrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit",
+      "provenance_note": "Every odd perfect number has at least three distinct prime factors. The proof shows every odd number with at most two prime factors is deficient, using exact divisor-sum bounds for products of two odd prime powers. AXLE 4.32 verified after removing one obsolete simp call; standard axioms only."
+    },
+    {
+      "name": "Brockian.OddPerfectThreePrimes.three_le_of_mem_primeFactors",
+      "kind": "theorem",
+      "module": "Brockian.OddPerfectThreePrimes",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddPerfectThreePrimes.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit",
+      "provenance_note": "Every odd perfect number has at least three distinct prime factors. The proof shows every odd number with at most two prime factors is deficient, using exact divisor-sum bounds for products of two odd prime powers. AXLE 4.32 verified after removing one obsolete simp call; standard axioms only."
     },
     {
       "name": "Brockian.OppermannConjecture.OppermannConjecture",
