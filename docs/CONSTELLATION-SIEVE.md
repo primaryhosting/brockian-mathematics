@@ -65,11 +65,25 @@ Each is proved by computing `ν_p(H)` exactly (the offsets are pairwise distinct
 bound) and instantiating the general Brick-1 (local) and Brick-3 (wheel) theorems. The infinitude of
 cousin primes, sexy primes, or admissible triples remains **open** — unaffected by these finite counts.
 
-## The one honest remaining gate
+## Closing the gate — mostly done (see the paper)
 
-Proving that the actual wheel operator is **permutation-similar to the block-diagonal sum** of its path
-components — the graph→blocks assembly — is a **separate, harder gate that is not claimed**. Bricks 1–6
-establish: the local confinement counts, their multiplicativity, the exact wheel Euler product, the
-run-cap that forces short paths, the exact block spectra, and the direct-sum spectral law. What remains
-to reach the *fully global* exact spectrum with multiplicities is that similarity. When and if it is
-proved, it will be a theorem here; until then it is recorded as open, honestly.
+The graph→operator gate has been driven nearly to a full close (all AXLE-verified @4.32, axiom-clean):
+- **Arithmetic acyclicity** (`ConstellationAcyclic`), **edge/run Euler products** `∏(p−4)`, `∏(p−6)` +
+  reconstruction `V=n₁+2n₂+3n₃` (`ConstellationCounts`).
+- **Full SimpleGraph acyclicity** (`ConstellationGraphAcyclic.twin_admissible_induced_acyclic`) — the
+  induced twin-admissible `+3` graph is `IsAcyclic`, via a `pos`-map embedding into the integer line
+  graph. This is the piece the earlier twin-sieve campaign never formalized.
+- **Forest of paths** (`ConstellationPaths`) — degree ≤ 2, `IsAcyclic ∧ Δ≤2`, no 4-vertex run: the graph
+  is a disjoint union of `P₁, P₂, P₃`.
+- **Component-interval embedding** (`ConstellationAdjBridge.G_embeds_intLine`) — each component is a
+  contiguous integer interval (a genuine path).
+- **Exact operator spectrum** (`ConstellationGlobalSpectrum.H123_spectrum`) — the assembled block
+  operator's spectrum is *exactly* `{2−√2, 1, 2, 3, 2+√2}`.
+
+**The one remaining open step:** the pure `adjMatrix`→block-diagonal reindexing (identifying
+`SimpleGraph.adjMatrix ℝ G` with `⨁ Pₖ` via a connected-component `Matrix.reindex`), which would transport
+`H123_spectrum` from the assembled block operator to the graph Hamiltonian itself. Mathlib lacks the
+`ConnectedComponent → Matrix.reindex` block decomposition and `charpoly` over `ℝ` is undecidable; two
+independent automated attempts delivered structural fragments but did not close this matrix step. It is
+recorded as open, honestly — a *formalization* gap, not a mathematical one. Full write-up:
+`docs/CONSTELLATION-SIEVE-PAPER.md`.
