@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 605
 - **DISCHARGED**: 7
-- **PROVED**: 10814
+- **PROVED**: 10820
 
 ## Theorems
 
@@ -218,6 +218,7 @@
 | PROVED | `Brockian.CarmichaelKorselt.korselt_odd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.CarmichaelKorselt.sqfree_prod3` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.Cassini.cassini` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.CatalanClosed.succ_mul_catalan_eq_choose` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
 | CONJECTURE | `Brockian.CollatzPartial.CollatzConjecture` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.CollatzPartial.Reaches1` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.CollatzPartial.collatz` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
@@ -1998,6 +1999,7 @@
 | PROVED | `Brockian.FermatNumbers.fermat_6_not_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.FermatNumbers.fermat_coprime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.FermatNumbers.fermat_eq_fermatNumber` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.FibGcd.fib_gcd` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omega` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omegaPow` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.Fin5InnerProduct.conj_omega_pow` | ✓ | verified | lean-4.32.0 |  |
@@ -2124,6 +2126,7 @@
 | PROVED | `Brockian.FreeLaplacianPlancherel.fourierL2_inner_map` | ✓ | verified | lean-4.32.0 | roadmap A3 — free-Laplacian ESA: unitary half discharged via genuine Mathlib Plancherel; AXLE @4.32 |
 | PROVED | `Brockian.FreeLaplacianPlancherel.fourierL2_norm_map` | ✓ | verified | lean-4.32.0 | roadmap A3 — free-Laplacian ESA: unitary half discharged via genuine Mathlib Plancherel; AXLE @4.32 |
 | CONDITIONAL | `Brockian.FreeLaplacianPlancherel.freeLaplacian_essentiallySelfAdjoint_via_plancherel` | ✓ | verified | lean-4.32.0 | roadmap A3 — free-Laplacian ESA: unitary half discharged via genuine Mathlib Plancherel; AXLE @4.32 |
+| PROVED | `Brockian.FreshmanDream.freshman_dream` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.FrobeniusAbove.frobenius_above` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle ab22201e; AXLE @4.32 |
 | PROVED | `Brockian.FrobeniusMcNugget.frobenius_not_representable` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle 11b14535; AXLE @4.32 |
 | DEFINITION | `Brockian.GaloisCyclicGroup.alphaSub` | ✓ | verified | lean-4.32.0 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
@@ -3372,6 +3375,7 @@
 | PROVED | `Brockian.GoldenUniqueness.prime_rigidity_layer` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.two_cos_four_pi_div_five_eq_neg_golden` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.GoldenUniqueness.two_cos_fundamental_mode_C5` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.HockeyStick.hockey_stick` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
 | DEFINITION | `Brockian.HyperperfectNumbers.Hyperperfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.HyperperfectNumbers.HyperperfectAllK` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.HyperperfectNumbers.HyperperfectInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
@@ -3605,6 +3609,7 @@
 | DEFINITION | `Brockian.NewEra.readingPath` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.NewEra.twin_admissible_count` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.NewEra.why_five` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.Nicomachus.sq_sum_eq_sum_cubes` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.Niven.niven_cos` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.OddDistinctPartition.card_distincts_le_partition` | ✓ | verified | lean-4.32.0 |  |
 | PROVED | `Brockian.OddDistinctPartition.card_distincts_le_powerset` | ✓ | verified | lean-4.32.0 |  |
@@ -10737,6 +10742,7 @@
 | PROVED | `Brockian.UnitaryPerfect.unitaryPerfect_6` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.UnitaryPerfect.unitaryPerfect_60` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.UnitaryPerfect.unitaryPerfect_90` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.Vandermonde.vandermonde` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
 | DEFINITION | `Brockian.WeirdNumbers.Abundant` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.WeirdNumbers.OddWeirdExists` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.WeirdNumbers.Semiperfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |

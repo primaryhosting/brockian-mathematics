@@ -789,3 +789,9 @@ import Brockian.MsDerangement
 import Brockian.MsSchurInequality
 import Brockian.MsViete
 import Brockian.MsHeron
+import Brockian.FibGcd
+import Brockian.HockeyStick
+import Brockian.Vandermonde
+import Brockian.FreshmanDream
+import Brockian.Nicomachus
+import Brockian.CatalanClosed

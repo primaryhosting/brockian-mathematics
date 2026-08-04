@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10814,
+    "PROVED": 10820,
     "DEFINITION": 605,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -6469,6 +6469,39 @@
       "quarantine": true,
       "ledger_run": "Harmonic/Aristotle moonshot; AXLE @4.32",
       "provenance_note": "HARMONIC-PROVED moonshot (Aristotle, project cassini), independently AXLE-verified @lean-4.32.0, axiom-clean. A classical theorem formalized from core Mathlib. Namespace Brockian.Cassini."
+    },
+    {
+      "name": "Brockian.CatalanClosed.succ_mul_catalan_eq_choose",
+      "kind": "theorem",
+      "module": "Brockian.CatalanClosed",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CatalanClosed.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED (Aristotle, project catalan-closed), independently AXLE-verified @lean-4.32.0, axiom-clean. Classical identity, namespace Brockian.CatalanClosed."
     },
     {
       "name": "Brockian.CollatzPartial.CollatzConjecture",
@@ -64174,6 +64207,38 @@
       "provenance_note": "OPEN-TERRITORY Fermat numbers F_n = 2^(2^n)+1 (open-territory loop, AXLE @4.32, axiom-clean). CONCRETE PRIMES: the five known Fermat primes fermat_{0..4}_prime (3,5,17,257,65537). CONCRETE COMPOSITES: fermat_5_eq/not_prime (Euler's 641*6700417) and fermat_6_eq/not_prime (274177*67280421310721). STRUCTURAL THEOREM fermat_coprime: Fermat numbers are pairwise coprime (Goldbach; derived from Mathlib's Nat.coprime_fermatNumber_fermatNumber), which yields infinitude of primes. Reuses Mathlib's Nat.fermatNumber API (fermat_eq_fermatNumber by rfl). The OPEN question -- is any F_n prime for n>=5? -- is an unproven def FermatPrimeBeyondFour; conjectured none, never asserted or refuted."
     },
     {
+      "name": "Brockian.FibGcd.fib_gcd",
+      "kind": "theorem",
+      "module": "Brockian.FibGcd",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FibGcd.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED (Aristotle, project fib-gcd), independently AXLE-verified @lean-4.32.0, axiom-clean. Classical identity, namespace Brockian.FibGcd."
+    },
+    {
       "name": "Brockian.Fin5InnerProduct.conj_omega",
       "kind": "theorem",
       "module": "Brockian.Fin5InnerProduct",
@@ -68236,6 +68301,39 @@
       "quarantine": true,
       "ledger_run": "roadmap A3 \u2014 free-Laplacian ESA: unitary half discharged via genuine Mathlib Plancherel; AXLE @4.32",
       "provenance_note": "Replaces the abstract unitary hypothesis of freeLaplacian_essentiallySelfAdjoint_of_fourier with Mathlib's REAL L2 Fourier-Plancherel isometry Lp.fourierTransformL2 (fourierL2): fourierL2_norm_map/inner_map (Plancherel) PROVED unconditionally; essentiallySelfAdjoint_fourierConj = the Plancherel transfer. freeLaplacian_essentiallySelfAdjoint_via_plancherel remains CONDITIONAL/open on 2 named Mathlib-scale pieces: unbounded xi^2-multiplication ESA (bounded-multiplier resolvent plumbing) + the LinearPMap Fourier-derivative identity F(-d2/dx2)=(xi^2)F. Unitary half fully discharged."
+    },
+    {
+      "name": "Brockian.FreshmanDream.freshman_dream",
+      "kind": "theorem",
+      "module": "Brockian.FreshmanDream",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FreshmanDream.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED (Aristotle, project freshman-dream), independently AXLE-verified @lean-4.32.0, axiom-clean. Classical identity, namespace Brockian.FreshmanDream."
     },
     {
       "name": "Brockian.FrobeniusAbove.frobenius_above",
@@ -108675,6 +108773,39 @@
       "provenance_note": "golden-uniqueness reusable schema (roadmap #11). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; verdict re-checked by Claude's gate before integration."
     },
     {
+      "name": "Brockian.HockeyStick.hockey_stick",
+      "kind": "theorem",
+      "module": "Brockian.HockeyStick",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HockeyStick.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED (Aristotle, project hockey-stick), independently AXLE-verified @lean-4.32.0, axiom-clean. Classical identity, namespace Brockian.HockeyStick."
+    },
+    {
       "name": "Brockian.HyperperfectNumbers.Hyperperfect",
       "kind": "def",
       "module": "Brockian.HyperperfectNumbers",
@@ -116252,6 +116383,39 @@
       "quarantine": false,
       "ledger_run": null,
       "provenance_note": null
+    },
+    {
+      "name": "Brockian.Nicomachus.sq_sum_eq_sum_cubes",
+      "kind": "theorem",
+      "module": "Brockian.Nicomachus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Nicomachus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED (Aristotle, project nicomachus), independently AXLE-verified @lean-4.32.0, axiom-clean. Classical identity, namespace Brockian.Nicomachus."
     },
     {
       "name": "Brockian.Niven.niven_cos",
@@ -350990,6 +351154,39 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY unitary perfect numbers (open-territory loop, AXLE @4.32, axiom-clean). unitaryDivisorSum = sum of unitary divisors (d|n with gcd(d,n/d)=1); UnitaryPerfect n := sigma*(n)=2n. CONCRETE: unitaryPerfect_{6,60,90} (three of the five known). Non-example not_unitaryPerfect_28 (perfect but not unitary-perfect: sigma*(28)=40 != 56); contrast unitaryDivisorSum_eq_sigma_6 (sigma*=sigma for squarefree 6). Only FIVE unitary perfect numbers are known; SixthUnitaryPerfectExists (does a 6th exist beyond 87360?) is an unproven def -- OPEN, never asserted or denied."
+    },
+    {
+      "name": "Brockian.Vandermonde.vandermonde",
+      "kind": "theorem",
+      "module": "Brockian.Vandermonde",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Vandermonde.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED (Aristotle, project vandermonde), independently AXLE-verified @lean-4.32.0, axiom-clean. Classical identity, namespace Brockian.Vandermonde."
     },
     {
       "name": "Brockian.WeirdNumbers.Abundant",
