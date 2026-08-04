@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 613
 - **DISCHARGED**: 7
-- **PROVED**: 10895
+- **PROVED**: 10911
 
 ## Theorems
 
@@ -3569,6 +3569,11 @@
 | PROVED | `Brockian.MsBritishFlag.british_flag` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsCatalanSquareSum.sum_choose_sq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsCauchyDavenport.cauchy_davenport` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsCeva.ceva` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsCeva.ceva_alg_forward` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsCeva.ceva_pt_BE` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsCeva.ceva_pt_CF` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsCeva.indep_of_not_collinear` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.MsChebyshevSum.chebyshev_sum` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsChebyshevTheta.chebyshev_theta` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsDerangement.derangement_closed` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
@@ -3599,12 +3604,23 @@
 | PROVED | `Brockian.MsGaussSum.sum_mul_conj_sum` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsGaussSum.sum_shift` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsGaussSum.two_mul_eq_zero_iff` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsHermiteHadamard.hermite_hadamard` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsHermiteHadamard.hh_ge_min` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsHermiteHadamard.hh_integrable` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsHermiteHadamard.hh_le_chord` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsHermiteHadamard.hh_le_max` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsHermiteHadamard.hh_left` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsHermiteHadamard.hh_midpoint` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsHermiteHadamard.hh_right` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.MsHeron.heron` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsLYM.lym` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsLagrangeIdentity.lagrange_identity` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsLagrangeIdentity.sum_sum_sq_expand` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsLagrangeIdentity.sum_symm_eq_two_mul_sum_lt` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsMachin.machin` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.MsMenelaus.collinear_triple_iff` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsMenelaus.indep_of_not_collinear` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.MsMenelaus.menelaus` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.MsMirsky.exists_chain_height` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | DEFINITION | `Brockian.MsMirsky.height` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.MsMirsky.height_filter_nonempty` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |

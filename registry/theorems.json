@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10895,
+    "PROVED": 10911,
     "DEFINITION": 613,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -115068,6 +115068,171 @@
       "provenance_note": "HARMONIC-PROVED moonshot (Aristotle, project ms-cauchy-davenport), independently AXLE-verified @lean-4.32.0, axiom-clean. A classical theorem formalized from core Mathlib. Namespace Brockian.MsCauchyDavenport."
     },
     {
+      "name": "Brockian.MsCeva.ceva",
+      "kind": "theorem",
+      "module": "Brockian.MsCeva",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsCeva.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle ceva), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsCeva."
+    },
+    {
+      "name": "Brockian.MsCeva.ceva_alg_forward",
+      "kind": "theorem",
+      "module": "Brockian.MsCeva",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsCeva.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle ceva), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsCeva."
+    },
+    {
+      "name": "Brockian.MsCeva.ceva_pt_BE",
+      "kind": "theorem",
+      "module": "Brockian.MsCeva",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsCeva.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle ceva), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsCeva."
+    },
+    {
+      "name": "Brockian.MsCeva.ceva_pt_CF",
+      "kind": "theorem",
+      "module": "Brockian.MsCeva",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsCeva.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle ceva), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsCeva."
+    },
+    {
+      "name": "Brockian.MsCeva.indep_of_not_collinear",
+      "kind": "theorem",
+      "module": "Brockian.MsCeva",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsCeva.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle ceva), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsCeva."
+    },
+    {
       "name": "Brockian.MsChebyshevSum.chebyshev_sum",
       "kind": "theorem",
       "module": "Brockian.MsChebyshevSum",
@@ -116058,6 +116223,270 @@
       "provenance_note": "HARMONIC-PROVED moonshot (Aristotle, project ms-gauss-sum), independently AXLE-verified @lean-4.32.0, axiom-clean. A classical theorem formalized from core Mathlib. Namespace Brockian.MsGaussSum."
     },
     {
+      "name": "Brockian.MsHermiteHadamard.hermite_hadamard",
+      "kind": "theorem",
+      "module": "Brockian.MsHermiteHadamard",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsHermiteHadamard.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle hermite-hadamard), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsHermiteHadamard."
+    },
+    {
+      "name": "Brockian.MsHermiteHadamard.hh_ge_min",
+      "kind": "theorem",
+      "module": "Brockian.MsHermiteHadamard",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsHermiteHadamard.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle hermite-hadamard), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsHermiteHadamard."
+    },
+    {
+      "name": "Brockian.MsHermiteHadamard.hh_integrable",
+      "kind": "theorem",
+      "module": "Brockian.MsHermiteHadamard",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsHermiteHadamard.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle hermite-hadamard), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsHermiteHadamard."
+    },
+    {
+      "name": "Brockian.MsHermiteHadamard.hh_le_chord",
+      "kind": "theorem",
+      "module": "Brockian.MsHermiteHadamard",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsHermiteHadamard.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle hermite-hadamard), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsHermiteHadamard."
+    },
+    {
+      "name": "Brockian.MsHermiteHadamard.hh_le_max",
+      "kind": "theorem",
+      "module": "Brockian.MsHermiteHadamard",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsHermiteHadamard.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle hermite-hadamard), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsHermiteHadamard."
+    },
+    {
+      "name": "Brockian.MsHermiteHadamard.hh_left",
+      "kind": "theorem",
+      "module": "Brockian.MsHermiteHadamard",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsHermiteHadamard.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle hermite-hadamard), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsHermiteHadamard."
+    },
+    {
+      "name": "Brockian.MsHermiteHadamard.hh_midpoint",
+      "kind": "theorem",
+      "module": "Brockian.MsHermiteHadamard",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsHermiteHadamard.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle hermite-hadamard), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsHermiteHadamard."
+    },
+    {
+      "name": "Brockian.MsHermiteHadamard.hh_right",
+      "kind": "theorem",
+      "module": "Brockian.MsHermiteHadamard",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsHermiteHadamard.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle hermite-hadamard), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsHermiteHadamard."
+    },
+    {
       "name": "Brockian.MsHeron.heron",
       "kind": "theorem",
       "module": "Brockian.MsHeron",
@@ -116254,6 +116683,105 @@
       "quarantine": true,
       "ledger_run": "Harmonic/Aristotle moonshot; AXLE @4.32",
       "provenance_note": "HARMONIC-PROVED moonshot (Aristotle, project ms-machin), independently AXLE-verified @lean-4.32.0, axiom-clean. A classical theorem formalized from core Mathlib. Namespace Brockian.MsMachin."
+    },
+    {
+      "name": "Brockian.MsMenelaus.collinear_triple_iff",
+      "kind": "theorem",
+      "module": "Brockian.MsMenelaus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsMenelaus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle menelaus), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsMenelaus."
+    },
+    {
+      "name": "Brockian.MsMenelaus.indep_of_not_collinear",
+      "kind": "theorem",
+      "module": "Brockian.MsMenelaus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsMenelaus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle menelaus), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsMenelaus."
+    },
+    {
+      "name": "Brockian.MsMenelaus.menelaus",
+      "kind": "theorem",
+      "module": "Brockian.MsMenelaus",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MsMenelaus.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle menelaus), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.MsMenelaus."
     },
     {
       "name": "Brockian.MsMirsky.exists_chain_height",

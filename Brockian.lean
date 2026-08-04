@@ -800,3 +800,6 @@ import Brockian.MsZeckendorf
 import Brockian.MsBeatty
 import Brockian.MsFrobeniusGeneral
 import Brockian.MsE2Irrational
+import Brockian.MsMenelaus
+import Brockian.MsHermiteHadamard
+import Brockian.MsCeva
