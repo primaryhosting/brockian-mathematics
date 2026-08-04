@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 626
 - **DISCHARGED**: 7
-- **PROVED**: 10973
+- **PROVED**: 10975
 
 ## Theorems
 
@@ -321,6 +321,8 @@
 | PROVED | `Brockian.ConstellationAcyclic.plusThree_no_short_cycle` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 1; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationAcyclic.plusThree_reaches` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 1; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationAcyclic.zero_not_twinAdm` | ✓ | verified | lean-4.32.0 | Brockian gate sub-brick 1; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationAdjBridge.G_embeds_intLine` | ✓ | verified | lean-4.32.0 | Brockian gate — component-interval embedding; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationAdjBridge.G_isAcyclic_of_embedding` | ✓ | verified | lean-4.32.0 | Brockian gate — component-interval embedding; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationBlockSum.H123_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationBlockSum.H23_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationBlockSum.H2_twice_charpoly` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 6; AXLE @4.32 |

@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10973,
+    "PROVED": 10975,
     "DEFINITION": 626,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -9793,6 +9793,72 @@
       "quarantine": true,
       "ledger_run": "Brockian gate sub-brick 1; AXLE @4.32",
       "provenance_note": "SWARM-PROVED constellation-sieve GATE sub-brick 1 (AXLE @4.32, axiom-clean): the ARITHMETIC acyclicity substrate of the +3 flow. plusThree_reaches: +3 orbit is transitive on ZMod M when Coprime 3 M (3 a unit). plusThree_bijective. plusThree_no_short_cycle: a+3k != a for 0<k<M (no short return -- the acyclicity core). zero_not_twinAdm + exists_inadmissible: 0 is not twin-admissible for M>1, so the admissible set is a PROPER subset -- the properness that cuts the +3 cycle into paths. The SimpleGraph-level acyclicity (Walk/IsCycle translation) and the full graph->block permutation-similarity GATE remain OPEN."
+    },
+    {
+      "name": "Brockian.ConstellationAdjBridge.G_embeds_intLine",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationAdjBridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationAdjBridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate \u2014 component-interval embedding; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve gate \u2014 the COMPONENT-INTERVAL bridge (AXLE @4.32, axiom-clean). G_embeds_intLine: the position map pos a = (3^-1 a).val is a full SimpleGraph.Embedding (INDUCED, both directions) of the twin-admissible +3 graph G into the integer line graph intLine -- so each connected component of G is a CONTIGUOUS INTEGER INTERVAL (a genuine structural path), strictly upgrading the earlier Hom-only acyclicity. G_isAcyclic_of_embedding re-derives acyclicity through the embedding. This is the structural bridge the matrix reindexing would consume. OPEN (honest): the pure adjMatrix -> block-diagonal reindexing over connected components (Mathlib lacks a ConnectedComponent->Matrix.reindex block decomposition; charpoly over R undecidable) -- the narrow final matrix-formalization step."
+    },
+    {
+      "name": "Brockian.ConstellationAdjBridge.G_isAcyclic_of_embedding",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationAdjBridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationAdjBridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate \u2014 component-interval embedding; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve gate \u2014 the COMPONENT-INTERVAL bridge (AXLE @4.32, axiom-clean). G_embeds_intLine: the position map pos a = (3^-1 a).val is a full SimpleGraph.Embedding (INDUCED, both directions) of the twin-admissible +3 graph G into the integer line graph intLine -- so each connected component of G is a CONTIGUOUS INTEGER INTERVAL (a genuine structural path), strictly upgrading the earlier Hom-only acyclicity. G_isAcyclic_of_embedding re-derives acyclicity through the embedding. This is the structural bridge the matrix reindexing would consume. OPEN (honest): the pure adjMatrix -> block-diagonal reindexing over connected components (Mathlib lacks a ConnectedComponent->Matrix.reindex block decomposition; charpoly over R undecidable) -- the narrow final matrix-formalization step."
     },
     {
       "name": "Brockian.ConstellationBlockSum.H123_charpoly",
