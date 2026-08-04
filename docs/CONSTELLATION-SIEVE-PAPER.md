@@ -132,7 +132,9 @@ matrix — is not available in the current Mathlib, and `charpoly` over `ℝ` is
 concrete-modulus factorization route is also impractical. Two independent automated attempts delivered
 structural fragments but did not close this matrix-reindexing step; it is stated here as the honest
 frontier, not claimed. It is a *formalization* gap, not a mathematical one: on paper the block form is
-immediate from "each component is an interval path."
+immediate from "each component is an interval path." The step is written up as a self-contained,
+attack-ready problem statement — precise target theorem, proved prerequisites, the exact Mathlib gap,
+and three suggested routes — in `docs/OPEN-adjmatrix-block-reindex.md`.
 
 ## 10. Reproducibility
 

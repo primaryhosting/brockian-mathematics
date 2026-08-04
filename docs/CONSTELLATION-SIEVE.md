@@ -86,4 +86,5 @@ The graph→operator gate has been driven nearly to a full close (all AXLE-verif
 `ConnectedComponent → Matrix.reindex` block decomposition and `charpoly` over `ℝ` is undecidable; two
 independent automated attempts delivered structural fragments but did not close this matrix step. It is
 recorded as open, honestly — a *formalization* gap, not a mathematical one. Full write-up:
-`docs/CONSTELLATION-SIEVE-PAPER.md`.
+`docs/CONSTELLATION-SIEVE-PAPER.md`; the open step is stated as an attack-ready problem in
+`docs/OPEN-adjmatrix-block-reindex.md`.
