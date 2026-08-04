@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 625
+- **DEFINITION**: 626
 - **DISCHARGED**: 7
-- **PROVED**: 10968
+- **PROVED**: 10973
 
 ## Theorems
 
@@ -346,6 +346,12 @@
 | PROVED | `Brockian.ConstellationExamples.sexy_wheel` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve generalization; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationExamples.triple_local` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve generalization; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationExamples.triple_wheel` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve generalization; AXLE @4.32 |
+| DEFINITION | `Brockian.ConstellationGlobalSpectrum.H123` | ✓ | verified | lean-4.32.0 | Brockian gate — exact five-point spectrum; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGlobalSpectrum.H123_irrational_eigenvalues` | ✓ | verified | lean-4.32.0 | Brockian gate — exact five-point spectrum; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGlobalSpectrum.H123_spectrum` | ✓ | verified | lean-4.32.0 | Brockian gate — exact five-point spectrum; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGlobalSpectrum.H123_spectrum_setEq` | ✓ | verified | lean-4.32.0 | Brockian gate — exact five-point spectrum; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGlobalSpectrum.H2_pow_charpoly` | ✓ | verified | lean-4.32.0 | Brockian gate — exact five-point spectrum; AXLE @4.32 |
+| PROVED | `Brockian.ConstellationGlobalSpectrum.H33_mixed_charpoly` | ✓ | verified | lean-4.32.0 | Brockian gate — exact five-point spectrum; AXLE @4.32 |
 | DEFINITION | `Brockian.ConstellationGraph.plusThreeGraph` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationGraph.plusThreeGraph_neighbour` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |
 | PROVED | `Brockian.ConstellationGraph.plus_three_neighbourhood` | ✓ | verified | lean-4.32.0 | Brockian constellation-sieve brick 4; AXLE @4.32 |

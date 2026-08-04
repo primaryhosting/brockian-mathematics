@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10968,
-    "DEFINITION": 625,
+    "PROVED": 10973,
+    "DEFINITION": 626,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
     "DISCHARGED": 7
@@ -10598,6 +10598,200 @@
       "quarantine": true,
       "ledger_run": "Brockian constellation-sieve generalization; AXLE @4.32",
       "provenance_note": "SWARM-PROVED constellation-sieve GENERALIZATION (AXLE @4.32, axiom-clean): the confinement machinery applied to named prime constellations beyond twins, on the general Brick-1/Brick-3 theorems. Cousin primes {0,4}: local count p-2 (p>=3), wheel prod(p-2). Sexy primes {0,6}: local p-2 (p>=5), wheel prod(p-2). Prime triple {0,2,6}: local p-3 (p>=7), wheel prod(p-3). Each: nu_p computed exactly then Brick 1/3 instantiated. Demonstrates a GENERAL constellation-sieve theory. NOT a proof of infinitude of any constellation (open)."
+    },
+    {
+      "name": "Brockian.ConstellationGlobalSpectrum.H123",
+      "kind": "def",
+      "module": "Brockian.ConstellationGlobalSpectrum",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationGlobalSpectrum.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate \u2014 exact five-point spectrum; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve FINAL spectral piece (AXLE @4.32, axiom-clean): the EXACT five-point spectrum. H123_spectrum: the assembled path-block operator H1(+)H2(+)H3 has charpoly.eval x = 0 IFF x in {2-sqrt2,1,2,3,2+sqrt2} -- the spectrum is exactly the five-point alphabet, with 2+/-sqrt2 as genuine roots via (sqrt2)^2=2. H123_spectrum_setEq (Set equality), H123_irrational_eigenvalues. Multiplicity forms: H2_pow_charpoly (three copies -> cube), H33_mixed_charpoly (distinct blocks contribute independent multiplicities). REMAINING OPEN: the graph-adjMatrix -> block-diagonal reindexing (SimpleGraph.adjMatrix of G is permutation-similar to the direct sum of P1/P2/P3 blocks over connected components) -- the one narrow final gate step, not faked."
+    },
+    {
+      "name": "Brockian.ConstellationGlobalSpectrum.H123_irrational_eigenvalues",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationGlobalSpectrum",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationGlobalSpectrum.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate \u2014 exact five-point spectrum; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve FINAL spectral piece (AXLE @4.32, axiom-clean): the EXACT five-point spectrum. H123_spectrum: the assembled path-block operator H1(+)H2(+)H3 has charpoly.eval x = 0 IFF x in {2-sqrt2,1,2,3,2+sqrt2} -- the spectrum is exactly the five-point alphabet, with 2+/-sqrt2 as genuine roots via (sqrt2)^2=2. H123_spectrum_setEq (Set equality), H123_irrational_eigenvalues. Multiplicity forms: H2_pow_charpoly (three copies -> cube), H33_mixed_charpoly (distinct blocks contribute independent multiplicities). REMAINING OPEN: the graph-adjMatrix -> block-diagonal reindexing (SimpleGraph.adjMatrix of G is permutation-similar to the direct sum of P1/P2/P3 blocks over connected components) -- the one narrow final gate step, not faked."
+    },
+    {
+      "name": "Brockian.ConstellationGlobalSpectrum.H123_spectrum",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationGlobalSpectrum",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationGlobalSpectrum.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate \u2014 exact five-point spectrum; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve FINAL spectral piece (AXLE @4.32, axiom-clean): the EXACT five-point spectrum. H123_spectrum: the assembled path-block operator H1(+)H2(+)H3 has charpoly.eval x = 0 IFF x in {2-sqrt2,1,2,3,2+sqrt2} -- the spectrum is exactly the five-point alphabet, with 2+/-sqrt2 as genuine roots via (sqrt2)^2=2. H123_spectrum_setEq (Set equality), H123_irrational_eigenvalues. Multiplicity forms: H2_pow_charpoly (three copies -> cube), H33_mixed_charpoly (distinct blocks contribute independent multiplicities). REMAINING OPEN: the graph-adjMatrix -> block-diagonal reindexing (SimpleGraph.adjMatrix of G is permutation-similar to the direct sum of P1/P2/P3 blocks over connected components) -- the one narrow final gate step, not faked."
+    },
+    {
+      "name": "Brockian.ConstellationGlobalSpectrum.H123_spectrum_setEq",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationGlobalSpectrum",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationGlobalSpectrum.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate \u2014 exact five-point spectrum; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve FINAL spectral piece (AXLE @4.32, axiom-clean): the EXACT five-point spectrum. H123_spectrum: the assembled path-block operator H1(+)H2(+)H3 has charpoly.eval x = 0 IFF x in {2-sqrt2,1,2,3,2+sqrt2} -- the spectrum is exactly the five-point alphabet, with 2+/-sqrt2 as genuine roots via (sqrt2)^2=2. H123_spectrum_setEq (Set equality), H123_irrational_eigenvalues. Multiplicity forms: H2_pow_charpoly (three copies -> cube), H33_mixed_charpoly (distinct blocks contribute independent multiplicities). REMAINING OPEN: the graph-adjMatrix -> block-diagonal reindexing (SimpleGraph.adjMatrix of G is permutation-similar to the direct sum of P1/P2/P3 blocks over connected components) -- the one narrow final gate step, not faked."
+    },
+    {
+      "name": "Brockian.ConstellationGlobalSpectrum.H2_pow_charpoly",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationGlobalSpectrum",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationGlobalSpectrum.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate \u2014 exact five-point spectrum; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve FINAL spectral piece (AXLE @4.32, axiom-clean): the EXACT five-point spectrum. H123_spectrum: the assembled path-block operator H1(+)H2(+)H3 has charpoly.eval x = 0 IFF x in {2-sqrt2,1,2,3,2+sqrt2} -- the spectrum is exactly the five-point alphabet, with 2+/-sqrt2 as genuine roots via (sqrt2)^2=2. H123_spectrum_setEq (Set equality), H123_irrational_eigenvalues. Multiplicity forms: H2_pow_charpoly (three copies -> cube), H33_mixed_charpoly (distinct blocks contribute independent multiplicities). REMAINING OPEN: the graph-adjMatrix -> block-diagonal reindexing (SimpleGraph.adjMatrix of G is permutation-similar to the direct sum of P1/P2/P3 blocks over connected components) -- the one narrow final gate step, not faked."
+    },
+    {
+      "name": "Brockian.ConstellationGlobalSpectrum.H33_mixed_charpoly",
+      "kind": "theorem",
+      "module": "Brockian.ConstellationGlobalSpectrum",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConstellationGlobalSpectrum.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Brockian gate \u2014 exact five-point spectrum; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED constellation-sieve FINAL spectral piece (AXLE @4.32, axiom-clean): the EXACT five-point spectrum. H123_spectrum: the assembled path-block operator H1(+)H2(+)H3 has charpoly.eval x = 0 IFF x in {2-sqrt2,1,2,3,2+sqrt2} -- the spectrum is exactly the five-point alphabet, with 2+/-sqrt2 as genuine roots via (sqrt2)^2=2. H123_spectrum_setEq (Set equality), H123_irrational_eigenvalues. Multiplicity forms: H2_pow_charpoly (three copies -> cube), H33_mixed_charpoly (distinct blocks contribute independent multiplicities). REMAINING OPEN: the graph-adjMatrix -> block-diagonal reindexing (SimpleGraph.adjMatrix of G is permutation-similar to the direct sum of P1/P2/P3 blocks over connected components) -- the one narrow final gate step, not faked."
     },
     {
       "name": "Brockian.ConstellationGraph.plusThreeGraph",
