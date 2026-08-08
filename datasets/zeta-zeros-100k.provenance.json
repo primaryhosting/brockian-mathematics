@@ -1,0 +1,24 @@
+{
+  "dataset": "zeta-zeros-100k.f64",
+  "content": "imaginary parts of the first 100000 nontrivial zeta zeros",
+  "format": "float64 little-endian, strictly increasing",
+  "count": 100000,
+  "sha256": "a11cf3fe517e3a2d0aae1f82f100efe7a51081b0f35ac2f57024a51ffda76875",
+  "source_url": "https://www-users.cse.umn.edu/~odlyzko/zeta_tables/zeros1",
+  "source_accuracy": "~3e-9 (per Odlyzko's table notes)",
+  "retrieved_utc": "2026-08-08T22:50:08.931453+00:00",
+  "cross_checks": [
+    {
+      "method": "published literature/LMFDB values, first 10 zeros",
+      "tolerance": 1e-08,
+      "worst_diff": 3.277023097325582e-10
+    },
+    {
+      "method": "mpmath zetazero(1..100) at dps=20",
+      "tolerance": 1e-08,
+      "worst_diff": 4.991704827261856e-10
+    }
+  ],
+  "tolerance_note": "spec asked 1e-9; source accuracy is ~3e-9, so 1e-8 is the honest achievable bound",
+  "generator": "scripts/fetch_zeta_zeros.py@fe4d625"
+}
