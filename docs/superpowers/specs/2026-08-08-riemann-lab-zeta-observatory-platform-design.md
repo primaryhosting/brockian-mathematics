@@ -82,7 +82,7 @@ Modules (each independently unit-testable, pure functions, no DOM):
 - `spectra.ts` — circulant/path-graph eigenvalues (closed forms, exact where representable), Wigner-surmise/GUE gap sampling.
 - `worker.ts` + `client.ts` — the protocol: `kernel.run(task, params, { onProgress, signal }) → Promise<KernelResult>`. `KernelResult = { data, provenance: { method, params, precision, elapsedMs, register: 'COMPUTATION' } }`. Cancellation via AbortSignal; default per-task timeout 10 s, surfaced in-UI as "computation budget reached — narrow the range or raise the budget," returning partial results where the task supports it (zero scan does; eigensolve doesn't).
 
-The kernel is lazy-loaded (dynamic import on first mount of Explore **or** Surface Ch. 3, whichever comes first); nothing kernel-related in the initial route chunk.
+The kernel is lazy-loaded (dynamic import on first mount of Explore **or** a kernel-using Surface chapter — Ch. 1's |ζ| mesh, Ch. 3's frames — whichever comes first); nothing kernel-related in the initial route chunk.
 
 ### 4.3 Datasets (`public/datasets/`)
 

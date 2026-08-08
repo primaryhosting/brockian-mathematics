@@ -311,7 +311,7 @@ Expected: exactly the pinned sha256. Also `curl -s .../datasets/manifest.json` a
 >
 > `types.ts`: `type Register = 'COMPUTATION'`; `interface KernelProvenance { method: string; params: Record<string, unknown>; precision: string; elapsedMs: number; register: Register }`; `interface KernelResult<T> { data: T; provenance: KernelProvenance }`; task name union `KernelTask = 'zeros.scan' | 'zeta.Z' | 'zeta.gridAbs' | 'explicit.psi' | 'sieve.primes' | 'spectra.fivePoint' | 'spectra.gueSample' | 'explicit.frames'`.
 >
-> `zeta.ts`: Riemann–Siegel Z(t) with two branches. (a) For 10 ≤ t ≤ 200 compute ζ(1/2+it) by Euler–Maclaurin with ADAPTIVE truncation N = max(60, ⌈t⌉) terms and Bernoulli corrections through B8 (N must grow with t — a fixed N=60 collapses to ~1e-4 error near t=200; adaptive N holds ~1e-9 across the branch) and return Z(t) = Re(e^{iθ(t)}·ζ(1/2+it)) — this branch is the high-accuracy one used for the first zeros. Also `gridAbs(reMin, reMax, imMin, imMax, nx, ny)` — coarse |ζ(s)| magnitude grid via the same Euler–Maclaurin core at general complex s (accuracy ~1e-6 is ample; this exists for Surface Ch. 1 visualization, exposed as task 'zeta.gridAbs'). (b) For t > 200 use the Riemann–Siegel main sum Z(t) = 2·Σ_{n≤⌊√(t/2π)⌋} cos(θ(t) − t·ln n)/√n + remainder with Gabcke correction terms C0–C3. θ(t) via the asymptotic series θ(t) = t/2·ln(t/2π) − t/2 − π/8 + 1/(48t) + 7/(5760t³) + 31/(80640t⁵) (document: valid t ≥ 10; zero-finding domain is t ∈ [10, 10⁷]). `findZeros(tMin, tMax, opts)`: sign-change scan on Z with adaptive step (≤ half the local average zero spacing 2π/ln(t/2π)), then bisection to |Δt| < 1e-10; supports progress callback + early abort; returns partial results on abort/timeout.
+> `zeta.ts`: Riemann–Siegel Z(t) with two branches. (a) For 10 ≤ t ≤ 200 compute ζ(1/2+it) by Euler–Maclaurin with ADAPTIVE truncation N = max(60, ⌈2t⌉) terms and Bernoulli corrections through B8 (N must grow with t — a fixed N=60 collapses to ~1e-4 error near t=200; N = 2t drives the first omitted term to ~1e-11, making the ≲1e-9 precision claim comfortably true) and return Z(t) = Re(e^{iθ(t)}·ζ(1/2+it)) — this branch is the high-accuracy one used for the first zeros. Also `gridAbs(reMin, reMax, imMin, imMax, nx, ny)` — coarse |ζ(s)| magnitude grid for Surface Ch. 1 (task 'zeta.gridAbs'): for Re(s) ≥ 1/2 use the Euler–Maclaurin core directly; for Re(s) < 1/2 compute via the functional equation ζ(s) = χ(s)ζ(1−s) with χ(s) = 2^s π^{s−1} sin(πs/2) Γ(1−s) (use a Lanczos Γ implementation) so ~1e-6 accuracy holds everywhere off the pole; GUARD the s=1 pole — skip/offset any grid point within 1e-6 of s=1 and clamp |ζ| to a max terrain height so the pole renders as a finite spike, never NaN/Infinity. (b) For t > 200 use the Riemann–Siegel main sum Z(t) = 2·Σ_{n≤⌊√(t/2π)⌋} cos(θ(t) − t·ln n)/√n + remainder with Gabcke correction terms C0–C3. θ(t) via the asymptotic series θ(t) = t/2·ln(t/2π) − t/2 − π/8 + 1/(48t) + 7/(5760t³) + 31/(80640t⁵) (document: valid t ≥ 10; zero-finding domain is t ∈ [10, 10⁷]). `findZeros(tMin, tMax, opts)`: sign-change scan on Z with adaptive step (≤ half the local average zero spacing 2π/ln(t/2π)), then bisection to |Δt| < 1e-10; supports progress callback + early abort; returns partial results on abort/timeout.
 >
 > `sieve.ts`: wheel or plain Eratosthenes sieve up to 10⁷: `primesUpTo(n)`, `piTable(n)`, `psi(x)` (Chebyshev ψ via sum of ln p over prime powers ≤ x, x ≤ 10⁶).
 >
@@ -321,7 +321,7 @@ Expected: exactly the pinned sha256. Also `curl -s .../datasets/manifest.json` a
 >
 > `worker.ts` + `client.ts`: Worker protocol `kernel.run(task, params, { onProgress, signal }): Promise<KernelResult>` — message-id correlated request/response, AbortSignal cancels (worker checks a cancellation flag between batches), 10s default timeout returning partial results where supported (`zeros.scan`, `explicit.frames`) and a `KernelTimeoutError` otherwise. On worker hard-crash (error event): reject ALL pending promises with `KernelCrashError`, respawn the worker once, surface the error to callers thereafter. Every result carries provenance with register 'COMPUTATION' and honest `precision` strings (e.g. "|Z| abs err ≲ 1e-9 (EM branch, t≤200); ≲ 1e-6 (RS branch)").
 >
-> Vitest golden tests in `src/kernel/__tests__/kernel.golden.test.ts` (test the math modules directly, not through the worker): (1) first 10 zeros found in [10, 51] match [14.134725141734693, 21.022039638771554, 25.010857580145688, 30.424876125859513, 32.935061587739189, 37.586178158825671, 40.918719012147495, 43.327073280914999, 48.005150881167159, 49.773832477672302] to 1e-8; (2) `piTable` gives π(10⁴)=1229, π(10⁵)=9592, π(10⁶)=78498; (3) `psi(10)` equals the definitional sum over prime powers {2,3,4,5,7,8,9} → 3ln2+2ln3+ln5+ln7, to 1e-12; plus a labeled SANITY (not golden) bound |psi(10⁶) − 10⁶| < 2000 (PNT-scale check catching prime-power enumeration bugs at scale); (4) `psiApprox(1000, zeros, N)` error vs `psi(1000)` shrinks by at least 2× at each step N = 10 → 100 → 1000 — load the zeros in the test from the local dataset file via node `fs`, resolving the path from `public/datasets/manifest.json`; if the local .f64 is absent (Storage fallback in effect, Task 4), skip this test with a loud console warning naming the reason; (5) `fivePointSpectrum()` numeric eigenvalues match the closed forms to 1e-12; (6) mean of 10⁵ Wigner-surmise samples ∈ [0.98, 1.02] with a FIXED seed. Run `npx vitest run src/kernel` and report the full output in your reply. If the 1e-8 zero tolerance fails, report the achieved accuracy honestly — do not loosen the test without saying so.
+> Vitest golden tests in `src/kernel/__tests__/kernel.golden.test.ts` (test the math modules directly, not through the worker): (1) first 10 zeros found in [10, 51] match [14.134725141734693, 21.022039638771554, 25.010857580145688, 30.424876125859513, 32.935061587739189, 37.586178158825671, 40.918719012147495, 43.327073280914999, 48.005150881167159, 49.773832477672302] to 1e-8; (2) `piTable` gives π(10⁴)=1229, π(10⁵)=9592, π(10⁶)=78498; (3) `psi(10)` equals the definitional sum over prime powers {2,3,4,5,7,8,9} → 3ln2+2ln3+ln5+ln7, to 1e-12; plus a labeled SANITY (not golden) bound |psi(10⁶) − 10⁶| < 2000 (PNT-scale check catching prime-power enumeration bugs at scale); (4) `psiApprox(1000, zeros, N)` error vs `psi(1000)` shrinks by at least 2× at each step N = 10 → 100 → 1000 — load the zeros in the test from the local dataset file via node `fs`, resolving the path from `public/datasets/manifest.json`; if the local .f64 is absent (Storage fallback in effect, Task 4), skip this test with a loud console warning naming the reason; (5) `fivePointSpectrum()` numeric eigenvalues match the closed forms to 1e-12; (6) mean of 10⁵ Wigner-surmise samples ∈ [0.98, 1.02] with a FIXED seed; (7) `gridAbs` goldens: |ζ(2)| = π²/6 to 1e-9 (EM side) and |ζ(−1)| = 1/12 to 1e-9 (functional-equation side). Run `npx vitest run src/kernel` and report the full output in your reply. If the 1e-8 zero tolerance fails, report the achieved accuracy honestly — do not loosen the test without saying so.
 
 - [ ] **Step 3: Poll to completion; read the reported Vitest output.** Expected: all tests pass. If the agent reports failures, iterate with focused follow-up messages until green (surface to user after 3 failed iterations).
 - [ ] **Step 4:** `read_file` on `src/kernel/client.ts` and `zeta.ts` — verify the protocol shape matches the spec (§4.2) and precision strings are honest.
@@ -420,11 +420,11 @@ alter table public.solver_fleet_snapshot enable row level security;
 drop policy if exists "public read fleet snapshot" on public.solver_fleet_snapshot;
 create policy "public read fleet snapshot" on public.solver_fleet_snapshot
   for select to anon, authenticated using (true);
+-- Supabase default privileges grant ALL (incl. TRUNCATE/REFERENCES/TRIGGER) on new
+-- public tables to anon/authenticated. Revoke everything FIRST, then grant back
+-- SELECT only — this order matters (a later revoke-all would wipe the grant).
+revoke all on public.solver_fleet_snapshot from anon, authenticated;
 grant select on public.solver_fleet_snapshot to anon, authenticated;
--- Supabase default privileges grant ALL on new public tables to anon/authenticated;
--- revoke the write verbs explicitly so the grant surface matches intent (RLS blocks
--- writes anyway, but belt + suspenders and it makes the verification below meaningful).
-revoke insert, update, delete on public.solver_fleet_snapshot from anon, authenticated;
 ```
 
 - [ ] **Step 2:** Verify: `query_database` → `select * from public.solver_fleet_snapshot;` returns 0 rows, no error; then `select grantee, privilege_type from information_schema.role_table_grants where table_name='solver_fleet_snapshot' and grantee in ('anon','authenticated');` — SELECT only for both (the explicit revoke above is what makes this expectation hold on Supabase).
@@ -438,7 +438,7 @@ revoke insert, update, delete on public.solver_fleet_snapshot from anon, authent
 
 - [ ] **Step 1: Write the failing tests**
 
-**Data-contract note (verified against the real files):** `solver_manifest.json` records carry exactly `{id, account, name, status, verdict, created}` — there is NO `domain` field and NO `finished_at` field, and `created` is a fuzzy string ("2 days ago"), not sortable. So: (a) `domain` is DERIVED deterministically from the job-name prefix by `classify_domain()` below (transparent derivation, documented in code and labeled as derived in the panel — never presented as recorded metadata); (b) `finished_at` is stamped by `solver_watch.py` at the RUNNING→IDLE transition from Task 15 onward (records finished before that wiring simply lack it and sort last); (c) verdict values include `BASELINE` (finished before the watch existed) — `recent_verdicts` must include ONLY `PROVED`/`STOPPED`. Before writing the tests, still open the real `aristotle/solver_manifest.json` once to confirm the top-level shape matches the fixture; mirror reality, never invent fields.
+**Data-contract note (verified against the real files):** `solver_manifest.json`'s top level is `{"generated", "count", "solvers": [...]}` — the record list key is **`solvers`**, not `jobs` — and each record carries exactly `{id, account, name, status, verdict, created}` — there is NO `domain` field and NO `finished_at` field, and `created` is a fuzzy string ("2 days ago"), not sortable. So: (a) `domain` is DERIVED deterministically from the job-name prefix by `classify_domain()` below (transparent derivation, documented in code and labeled as derived in the panel — never presented as recorded metadata); (b) `finished_at` is stamped by `solver_watch.py` at the RUNNING→IDLE transition from Task 15 onward (records finished before that wiring simply lack it and sort last); (c) verdict values include `BASELINE` (finished before the watch existed) — `recent_verdicts` must include ONLY `PROVED`/`STOPPED`. Before writing the tests, still open the real `aristotle/solver_manifest.json` once to confirm the top-level shape matches the fixture; mirror reality, never invent fields.
 
 ```python
 # tests/test_push_fleet_snapshot.py
@@ -446,7 +446,7 @@ import json
 from aristotle.push_fleet_snapshot import build_snapshot, classify_domain
 
 MANIFEST = {
-    "jobs": [
+    "solvers": [
         {"id": "j1", "name": "Algebra012", "status": "RUNNING",
          "account": "admin", "created": "2 days ago"},
         {"id": "j2", "name": "NTGaps2", "status": "IDLE", "account": "chris",
@@ -484,15 +484,20 @@ def test_recent_verdicts_capped_at_20():
              "created": "1 day ago", "verdict": "PROVED",
              "finished_at": f"2026-08-0{1 + i % 7}T00:00:0{i % 10}Z"}
             for i in range(30)]
-    snap = build_snapshot({"jobs": jobs}, now_iso="2026-08-08T12:00:00Z")
+    snap = build_snapshot({"solvers": jobs}, now_iso="2026-08-08T12:00:00Z")
     assert len(snap["recent_verdicts"]) == 20
 
-def test_snapshot_size_under_50kb():
-    snap = build_snapshot(MANIFEST, now_iso="2026-08-08T12:00:00Z")
+def test_snapshot_size_under_50kb_at_fleet_scale():
+    # real fleet is ~191 solvers; exercise the budget at 250
+    jobs = [{"id": f"j{i}", "name": f"NumberTheory{i:03d}", "status": "IDLE",
+             "account": "admin", "created": "1 day ago",
+             "verdict": "PROVED" if i % 3 == 0 else "BASELINE",
+             "finished_at": "2026-08-08T00:00:00Z"} for i in range(250)]
+    snap = build_snapshot({"solvers": jobs}, now_iso="2026-08-08T12:00:00Z")
     assert len(json.dumps(snap)) < 50_000
 
 def test_build_snapshot_empty_manifest():
-    snap = build_snapshot({"jobs": []}, now_iso="2026-08-08T12:00:00Z")
+    snap = build_snapshot({"solvers": []}, now_iso="2026-08-08T12:00:00Z")
     assert snap["running"] == [] and snap["recent_verdicts"] == []
 ```
 
@@ -540,7 +545,7 @@ def classify_domain(name: str) -> str:
 
 
 def build_snapshot(manifest: dict, now_iso: str) -> dict:
-    jobs = manifest.get("jobs", [])
+    jobs = manifest.get("solvers", [])
     running = [{"name": j["name"], "account": j.get("account", ""),
                 "domain": classify_domain(j["name"])}
                for j in jobs if j.get("status") == "RUNNING"]
@@ -602,7 +607,7 @@ if __name__ == "__main__":
 
 ### Task 15: Wire the push into the watcher + live verification
 
-- [ ] **Step 1:** Read `aristotle/solver_watch.py` and make TWO changes. (a) At the RUNNING→IDLE transition point (where the verdict is determined), stamp the job's manifest record with `finished_at` = ISO-8601 UTC now — this becomes the sort key for the fleet panel's recent verdicts (records finished before this change simply lack the field and sort last). (b) At the single end-of-cycle point after `solver_manifest.json` is written, add a guarded call:
+- [ ] **Step 1:** Read `aristotle/solver_watch.py` and make TWO changes. (a) Add `finished_at` stamping — **three touch points are required, because the loop rebuilds each entry from scratch every cycle and projects a fixed key tuple into the manifest** (a single stamp would self-erase after one cycle): (a1) in the `just_finished and not first_run` branch (where the verdict is determined), set `entry["finished_at"]` = ISO-8601 UTC now — it persists into `solver_state.json` via `state[pid] = entry`; (a2) in the per-cycle `entry = {...}` rebuild, carry it over from prior state exactly like `verdict`: `"finished_at": prev.get("finished_at")`; (a3) include it in the manifest projection (add `"finished_at"` to the projected key tuple, tolerating None/absent). Records finished before this change simply lack the field and sort last. (b) At the single end-of-cycle point after `solver_manifest.json` is written, add a guarded call:
 
 ```python
 def _push_fleet_snapshot() -> None:
@@ -617,7 +622,7 @@ def _push_fleet_snapshot() -> None:
 (`solver_watch.py` already imports `os`, `subprocess`, and `sys` — do NOT add a pathlib import; adapt `log` to the module's actual logging helper; call `_push_fleet_snapshot()` at the single point where the cycle completes.) The subprocess-with-`check=False` + broad except guarantees the watcher never dies from the push.
 
 - [ ] **Step 2:** Verify vault vars exist WITHOUT printing values: `grep -c "RIEMANN_SUPABASE" ~/.openclaw/vault-bridges.env` → ≥ 2. If the values are placeholders/empty, STOP: ask the user to fill them from the Supabase dashboard (Claude is barred from credential values).
-- [ ] **Step 3:** Live push test: `set -a; source ~/.openclaw/vault-bridges.env; set +a; python3 aristotle/push_fleet_snapshot.py` → `pushed at <ts>`. Then verify via anon read (`query_database`: `select generated_at, jsonb_array_length(running) from solver_fleet_snapshot;`) → 1 row, fresh timestamp.
+- [ ] **Step 3:** Live push test: `set -a; source ~/.openclaw/vault-bridges.env; set +a; python3 aristotle/push_fleet_snapshot.py` → `pushed at <ts>`. Then verify via anon read (`query_database`): `select generated_at, jsonb_array_length(running) as running, jsonb_array_length(recent_verdicts) as verdicts, domain_counts != '{}'::jsonb as has_domains from solver_fleet_snapshot;` → 1 row, fresh timestamp, and `has_domains` MUST be true (the fleet has ~190 solvers, so empty domain_counts means the snapshot builder read nothing — the empty-payload regression signal; `running`/`verdicts` may legitimately be 0).
 - [ ] **Step 4:** Restart the watcher so the wiring goes live: `launchctl kickstart -k gui/$UID/ai.brockian.solver-watch`; after ≤10 min, re-run the Step 3 select → `generated_at` advanced.
 - [ ] **Step 5: Commit** — `git add aristotle/solver_watch.py` + commit.
 
