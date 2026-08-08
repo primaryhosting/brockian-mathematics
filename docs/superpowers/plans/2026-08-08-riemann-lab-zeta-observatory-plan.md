@@ -457,6 +457,10 @@ MANIFEST = {
          "finished_at": "2026-08-07T09:00:00Z"},
         {"id": "j4", "name": "ms-cayley", "status": "IDLE", "account": "admin",
          "created": "9 days ago", "verdict": "BASELINE"},
+        # pre-wiring PROVED record: finished_at present but null (the manifest
+        # projects it exactly like verdict) -- must sort LAST, never crash
+        {"id": "j5", "name": "Spectral7", "status": "IDLE", "account": "chris",
+         "created": "20 days ago", "verdict": "PROVED", "finished_at": None},
     ]
 }
 
@@ -465,8 +469,9 @@ def test_build_snapshot_shape():
     assert snap["id"] == 1
     assert snap["generated_at"] == "2026-08-08T12:00:00Z"
     assert [j["name"] for j in snap["running"]] == ["Algebra012"]
-    # newest first; BASELINE excluded
-    assert [v["name"] for v in snap["recent_verdicts"]] == ["NTGaps2", "Crypto2"]
+    # newest first; BASELINE excluded; null-timestamped record last with "" sentinel
+    assert [v["name"] for v in snap["recent_verdicts"]] == ["NTGaps2", "Crypto2", "Spectral7"]
+    assert snap["recent_verdicts"][-1]["finished_at"] == ""
     assert snap["domain_counts"]["Algebra"] == 1
 
 def test_baseline_verdicts_excluded():
@@ -553,10 +558,11 @@ def build_snapshot(manifest: dict, now_iso: str) -> dict:
     # existed and must not flood the recent list.
     finished = [j for j in jobs if j.get("verdict") in ("PROVED", "STOPPED")]
     # finished_at is stamped by solver_watch at the RUNNING->IDLE transition;
-    # older records lack it and sort last ("" < any ISO timestamp, reverse=True).
-    finished.sort(key=lambda j: j.get("finished_at", ""), reverse=True)
+    # pre-wiring records carry it as ABSENT or null -- `or ""` tolerates both
+    # (None would raise TypeError under sort) and sorts them last.
+    finished.sort(key=lambda j: j.get("finished_at") or "", reverse=True)
     verdicts = [{"name": j["name"], "verdict": j["verdict"],
-                 "finished_at": j.get("finished_at", ""),
+                 "finished_at": j.get("finished_at") or "",
                  "domain": classify_domain(j["name"])}
                 for j in finished[:MAX_VERDICTS]]
     counts: dict[str, int] = {}
