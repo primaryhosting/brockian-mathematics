@@ -1,0 +1,707 @@
+{
+ "generated_for": "aristotle",
+ "source": "registry/theorems.json + PCA",
+ "count": 100,
+ "queue": [
+  {
+   "target": "Brockian.EquidistributionBVReduction.configCount_density_of_BV",
+   "tier": "A1-discharge-literature",
+   "goal": "discharge named hypothesis (port known result)",
+   "difficulty": "achievable",
+   "roi": "high \u2014 conditional\u2192unconditional"
+  },
+  {
+   "target": "Brockian.EquidistributionBVReduction.configCount_over_main_tendsto",
+   "tier": "A1-discharge-literature",
+   "goal": "discharge named hypothesis (port known result)",
+   "difficulty": "achievable",
+   "roi": "high \u2014 conditional\u2192unconditional"
+  },
+  {
+   "target": "Brockian.EquidistributionBVReduction.equidistribution_of_BV_uniform",
+   "tier": "A1-discharge-literature",
+   "goal": "discharge named hypothesis (port known result)",
+   "difficulty": "achievable",
+   "roi": "high \u2014 conditional\u2192unconditional"
+  },
+  {
+   "target": "Brockian.EquidistributionBVReduction.total_over_main_tendsto",
+   "tier": "A1-discharge-literature",
+   "goal": "discharge named hypothesis (port known result)",
+   "difficulty": "achievable",
+   "roi": "high \u2014 conditional\u2192unconditional"
+  },
+  {
+   "target": "Brockian.EquidistributionUniformity.equidistribution_of_transitive_symmetry",
+   "tier": "A1-discharge-literature",
+   "goal": "discharge named hypothesis (port known result)",
+   "difficulty": "achievable",
+   "roi": "high \u2014 conditional\u2192unconditional"
+  },
+  {
+   "target": "Brockian.EquidistributionUniformity.sing_uniform_of_transitive",
+   "tier": "A1-discharge-literature",
+   "goal": "discharge named hypothesis (port known result)",
+   "difficulty": "achievable",
+   "roi": "high \u2014 conditional\u2192unconditional"
+  },
+  {
+   "target": "Brockian.Weyl.DeficiencyODE.deficiencyRepresentsODE_of_weakRegularity",
+   "tier": "A1-discharge-literature",
+   "goal": "discharge named hypothesis (port known result)",
+   "difficulty": "achievable",
+   "roi": "high \u2014 conditional\u2192unconditional"
+  },
+  {
+   "target": "Brockian.Weyl.DeficiencyODE.schrodinger_essentiallySelfAdjoint_of_weakRegularity",
+   "tier": "A1-discharge-literature",
+   "goal": "discharge named hypothesis (port known result)",
+   "difficulty": "achievable",
+   "roi": "high \u2014 conditional\u2192unconditional"
+  },
+  {
+   "target": "Brockian.Equidistribution.equidistribution_of_asymptotic",
+   "tier": "A2-discharge-open",
+   "goal": "discharge named hypothesis (genuinely open sub-lemma)",
+   "difficulty": "hard",
+   "roi": "high \u2014 unblocks RH/Weyl/equidistribution spine"
+  },
+  {
+   "target": "Brockian.Equidistribution.equidistribution_of_asymptotic_exists",
+   "tier": "A2-discharge-open",
+   "goal": "discharge named hypothesis (genuinely open sub-lemma)",
+   "difficulty": "hard",
+   "roi": "high \u2014 unblocks RH/Weyl/equidistribution spine"
+  },
+  {
+   "target": "Brockian.FreeLaplacianPlancherel.freeLaplacian_essentiallySelfAdjoint_via_plancherel",
+   "tier": "A2-discharge-open",
+   "goal": "discharge named hypothesis (genuinely open sub-lemma)",
+   "difficulty": "hard",
+   "roi": "high \u2014 unblocks RH/Weyl/equidistribution spine"
+  },
+  {
+   "target": "Brockian.GoldbachSchema.goldbach_beyond_of_model",
+   "tier": "A2-discharge-open",
+   "goal": "discharge named hypothesis (genuinely open sub-lemma)",
+   "difficulty": "hard",
+   "roi": "high \u2014 unblocks RH/Weyl/equidistribution spine"
+  },
+  {
+   "target": "Brockian.GoldbachSchema.goldbach_from_spectral_model",
+   "tier": "A2-discharge-open",
+   "goal": "discharge named hypothesis (genuinely open sub-lemma)",
+   "difficulty": "hard",
+   "roi": "high \u2014 unblocks RH/Weyl/equidistribution spine"
+  },
+  {
+   "target": "Brockian.RiemannScaffold.RH_of_BrockianSystem",
+   "tier": "A2-discharge-open",
+   "goal": "discharge named hypothesis (genuinely open sub-lemma)",
+   "difficulty": "hard",
+   "roi": "high \u2014 unblocks RH/Weyl/equidistribution spine"
+  },
+  {
+   "target": "Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fourier",
+   "tier": "A2-discharge-open",
+   "goal": "discharge named hypothesis (genuinely open sub-lemma)",
+   "difficulty": "hard",
+   "roi": "high \u2014 unblocks RH/Weyl/equidistribution spine"
+  },
+  {
+   "target": "Brockian.Weyl.SchrodingerMinimal.schrodinger_essentiallySelfAdjoint_of_ode",
+   "tier": "A2-discharge-open",
+   "goal": "discharge named hypothesis (genuinely open sub-lemma)",
+   "difficulty": "hard",
+   "roi": "high \u2014 unblocks RH/Weyl/equidistribution spine"
+  },
+  {
+   "target": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_candidate",
+   "tier": "A2-discharge-open",
+   "goal": "discharge named hypothesis (genuinely open sub-lemma)",
+   "difficulty": "hard",
+   "roi": "high \u2014 unblocks RH/Weyl/equidistribution spine"
+  },
+  {
+   "target": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_WeylLawMatch",
+   "tier": "A2-discharge-open",
+   "goal": "discharge named hypothesis (genuinely open sub-lemma)",
+   "difficulty": "hard",
+   "roi": "high \u2014 unblocks RH/Weyl/equidistribution spine"
+  },
+  {
+   "target": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_rvm",
+   "tier": "A2-discharge-open",
+   "goal": "discharge named hypothesis (genuinely open sub-lemma)",
+   "difficulty": "hard",
+   "roi": "high \u2014 unblocks RH/Weyl/equidistribution spine"
+  },
+  {
+   "target": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_exists",
+   "tier": "A2-discharge-open",
+   "goal": "discharge named hypothesis (genuinely open sub-lemma)",
+   "difficulty": "hard",
+   "roi": "high \u2014 unblocks RH/Weyl/equidistribution spine"
+  },
+  {
+   "target": "Brockian.AmicableNumbers.AmicableInfinitude",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.AndricaConjecture.AndricaConjecture",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.BetrothedNumbers.BetrothedInfinitude",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.BetrothedNumbers.SameParityBetrothedExists",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.BrocardGap.BrocardGapConjecture",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.BrocardProblem.BrocardConjecture",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.CarmichaelKorselt.ThreePrimeCarmichaelInfinitude",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.CollatzPartial.CollatzConjecture",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.CullenWoodall.CullenPrimeInfinitude",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.CullenWoodall.WoodallPrimeInfinitude",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.ErdosStraus.ErdosStrausConjecture",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.FermatNumbers.FermatPrimeBeyondFour",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.FortunateNumbers.FortuneConjecture",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.GilbreathConjecture.GilbreathConjecture",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.GiugaNumbers.OddGiugaExists",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.GoldbachComb.GoldbachCovarianceTransfer",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.HyperperfectNumbers.HyperperfectAllK",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.HyperperfectNumbers.HyperperfectInfinitude",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.LandauNSquaredPlusOne.LandauFourthConjecture",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.LegendreConjecture.LegendreConjecture",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.MersennePerfect.EvenPerfectInfinitude",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.MersennePerfect.MersennePrimeInfinitude",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.OppermannConjecture.OppermannConjecture",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.OreHarmonicNumbers.OddHarmonicExists",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.PalindromicPrimes.PalindromicPrimeInfinitude",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.PerfectTotient.PerfectTotientInfinitude",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.PolignacPrimes.PolignacConjecture",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.PracticalNumbers.PracticalTwinInfinitude",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.QuasiperfectNumbers.QuasiperfectExists",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.RepunitPrimes.RepunitPrimeInfinitude",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.RieselCovering.RieselProblem",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.RuthAaronPairs.RuthAaronInfinitude",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.SierpinskiCovering.SierpinskiProblem",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.SophieGermain.SophieGermainInfinitude",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.SuperperfectNumbers.OddSuperperfectExists",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.TwinPrimes.TwinPrimeConjecture",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.UnitaryPerfect.SixthUnitaryPerfectExists",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.WeirdNumbers.OddWeirdExists",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.WilsonPrimes.WilsonPrimeInfinitude",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.ZumkellerNumbers.OddZumkellerFrom3Structure",
+   "tier": "B-conjecture",
+   "goal": "prove, or produce a Lean-checked conditional reduction / partial",
+   "difficulty": "famous-open",
+   "roi": "reduction/partial is the realistic win"
+  },
+  {
+   "target": "Brockian.SingularSeriesGaps7280",
+   "tier": "C-corpus-extension",
+   "goal": "new admissible gap ranges (extend SingularSeriesGaps family)",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.SingularSeriesGaps9098",
+   "tier": "C-corpus-extension",
+   "goal": "new admissible gap ranges (extend SingularSeriesGaps family)",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.SingularSeriesGaps12401250",
+   "tier": "C-corpus-extension",
+   "goal": "new admissible gap ranges (extend SingularSeriesGaps family)",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.SingularSeriesGaps13501360",
+   "tier": "C-corpus-extension",
+   "goal": "new admissible gap ranges (extend SingularSeriesGaps family)",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.GoldbachWheelK2_631",
+   "tier": "C-corpus-extension",
+   "goal": "new wheel moduli (extend GoldbachWheelK2 family)",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.GoldbachWheelK2_727",
+   "tier": "C-corpus-extension",
+   "goal": "new wheel moduli (extend GoldbachWheelK2 family)",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.GoldbachWheelK2_947",
+   "tier": "C-corpus-extension",
+   "goal": "new wheel moduli (extend GoldbachWheelK2 family)",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.GoldbachWheelK2_1051",
+   "tier": "C-corpus-extension",
+   "goal": "new wheel moduli (extend GoldbachWheelK2 family)",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.CosTraceNorm1279",
+   "tier": "C-corpus-extension",
+   "goal": "new trace-norm bounds (extend CosTraceNorm family)",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.CosTraceNorm1597",
+   "tier": "C-corpus-extension",
+   "goal": "new trace-norm bounds (extend CosTraceNorm family)",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.CosTraceNorm2003",
+   "tier": "C-corpus-extension",
+   "goal": "new trace-norm bounds (extend CosTraceNorm family)",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.CosTraceNorm2707",
+   "tier": "C-corpus-extension",
+   "goal": "new trace-norm bounds (extend CosTraceNorm family)",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.CosTraceNorm3001",
+   "tier": "C-corpus-extension",
+   "goal": "new trace-norm bounds (extend CosTraceNorm family)",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.PentagonPentagonCharacterMultiplicityExt",
+   "tier": "C-corpus-extension",
+   "goal": "generalize D5 pentagon representation results to higher n-gons",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.PentagonPentagonIsotypicHigherN",
+   "tier": "C-corpus-extension",
+   "goal": "generalize D5 pentagon representation results to higher n-gons",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.PentagonPentagonEquivarianceGeneral",
+   "tier": "C-corpus-extension",
+   "goal": "generalize D5 pentagon representation results to higher n-gons",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "PCA.Isolation.in_scope_encoding_sound",
+   "tier": "D-pca-meta",
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "difficulty": "achievable",
+   "roi": "novel \u2014 verifies the security product itself"
+  },
+  {
+   "target": "PCA.Isolation.in_scope_encoding_complete",
+   "tier": "D-pca-meta",
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "difficulty": "achievable",
+   "roi": "novel \u2014 verifies the security product itself"
+  },
+  {
+   "target": "PCA.Isolation.null_escape_iff_unowned_reachable",
+   "tier": "D-pca-meta",
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "difficulty": "achievable",
+   "roi": "novel \u2014 verifies the security product itself"
+  },
+  {
+   "target": "PCA.Isolation.priv_escape_monotone",
+   "tier": "D-pca-meta",
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "difficulty": "achievable",
+   "roi": "novel \u2014 verifies the security product itself"
+  },
+  {
+   "target": "PCA.Isolation.no_clean_proved_with_escape",
+   "tier": "D-pca-meta",
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "difficulty": "achievable",
+   "roi": "novel \u2014 verifies the security product itself"
+  },
+  {
+   "target": "PCA.Isolation.disjunction_split_preserves_semantics",
+   "tier": "D-pca-meta",
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "difficulty": "achievable",
+   "roi": "novel \u2014 verifies the security product itself"
+  },
+  {
+   "target": "PCA.Isolation.tightened_predicate_refines_original",
+   "tier": "D-pca-meta",
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "difficulty": "achievable",
+   "roi": "novel \u2014 verifies the security product itself"
+  },
+  {
+   "target": "PCA.WriteIntegrity.with_check_true_admits_forge",
+   "tier": "D-pca-meta",
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "difficulty": "achievable",
+   "roi": "novel \u2014 verifies the security product itself"
+  },
+  {
+   "target": "PCA.WriteIntegrity.member_check_prevents_cross_tenant_write",
+   "tier": "D-pca-meta",
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "difficulty": "achievable",
+   "roi": "novel \u2014 verifies the security product itself"
+  },
+  {
+   "target": "PCA.Coverage.bail_on_unrecognized_is_sound",
+   "tier": "D-pca-meta",
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "difficulty": "achievable",
+   "roi": "novel \u2014 verifies the security product itself"
+  },
+  {
+   "target": "PCA.Cert.reprove_matches_iff_untampered",
+   "tier": "D-pca-meta",
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "difficulty": "achievable",
+   "roi": "novel \u2014 verifies the security product itself"
+  },
+  {
+   "target": "PCA.Cert.ed25519_verify_sound",
+   "tier": "D-pca-meta",
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "difficulty": "achievable",
+   "roi": "novel \u2014 verifies the security product itself"
+  },
+  {
+   "target": "PCA.Invariant.default_deny_excludes_only_allowlist",
+   "tier": "D-pca-meta",
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "difficulty": "achievable",
+   "roi": "novel \u2014 verifies the security product itself"
+  },
+  {
+   "target": "PCA.Invariant.rls_off_implies_no_row_protection",
+   "tier": "D-pca-meta",
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "difficulty": "achievable",
+   "roi": "novel \u2014 verifies the security product itself"
+  },
+  {
+   "target": "PCA.Fix.alter_policy_preserves_roles_and_cmd",
+   "tier": "D-pca-meta",
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "difficulty": "achievable",
+   "roi": "novel \u2014 verifies the security product itself"
+  },
+  {
+   "target": "Brockian.SingularSeriesGaps14501460",
+   "tier": "C-corpus-extension",
+   "goal": "new admissible gap range",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.SingularSeriesGaps16021610",
+   "tier": "C-corpus-extension",
+   "goal": "new admissible gap range",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.GoldbachWheelK2_1153",
+   "tier": "C-corpus-extension",
+   "goal": "new wheel modulus",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.GoldbachWheelK2_1327",
+   "tier": "C-corpus-extension",
+   "goal": "new wheel modulus",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.CosTraceNorm3499",
+   "tier": "C-corpus-extension",
+   "goal": "new trace-norm bound",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.CosTraceNorm4001",
+   "tier": "C-corpus-extension",
+   "goal": "new trace-norm bound",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.ConstellationLocalCountK3",
+   "tier": "C-corpus-extension",
+   "goal": "extend local constellation count to k=3 tuples",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.AdmissibilityKTupleK4",
+   "tier": "C-corpus-extension",
+   "goal": "admissibility for 4-tuples",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  },
+  {
+   "target": "Brockian.SingularSeriesConvergenceRate",
+   "tier": "C-corpus-extension",
+   "goal": "effective convergence-rate bound for the singular series",
+   "difficulty": "mechanical",
+   "roi": "breadth \u2014 matches existing verified pattern"
+  }
+ ]
+}
