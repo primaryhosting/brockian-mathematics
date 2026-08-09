@@ -88,10 +88,12 @@ def main():
         # main hint from target name (best_proofs are named by sanitized target)
         hint = p.stem.split("_")[-1]
         mini, nblocks, nkept = minimize(text, hint)
+        # only emit a minimized copy when it actually removes declarations; else keep original verbatim
+        final = mini if nkept < nblocks else text
         of = OUT / p.name
-        of.write_text(mini)
+        of.write_text(final)
         stats[p.name] = {"decls": nblocks, "kept": nkept, "dropped": nblocks - nkept,
-                         "orig_lines": len(text.splitlines()), "min_lines": len(mini.splitlines())}
+                         "orig_lines": len(text.splitlines()), "min_lines": len(final.splitlines())}
         if VERIFY and verified_count < VMAX and nblocks != nkept:
             ok = lake_ok(of)
             stats[p.name]["min_compiles"] = ok
@@ -100,8 +102,10 @@ def main():
     tot_o = sum(s["orig_lines"] for s in stats.values())
     tot_m = sum(s["min_lines"] for s in stats.values())
     dropped = sum(s["dropped"] for s in stats.values())
+    pct = 100 * (tot_o - tot_m) // max(tot_o, 1)
     print(f"minimized {len(stats)} proofs: dropped {dropped} dead decls; "
-          f"lines {tot_o}->{tot_m} ({100*(tot_o-tot_m)//max(tot_o,1)}% smaller)")
+          f"lines {tot_o}->{tot_m} ({pct}% smaller)" if dropped else
+          f"minimized {len(stats)} proofs: 0 dead decls to drop (all lemmas load-bearing); files unchanged")
 
 
 if __name__ == "__main__":
