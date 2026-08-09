@@ -20,7 +20,11 @@ import os
 import pathlib
 import re
 import subprocess
+import sys
 import time
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import strategy  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
@@ -58,7 +62,7 @@ def reg_index():
     return {t["name"]: t for t in items if isinstance(t, dict) and "name" in t}
 
 
-def prompt_for(item, reg):
+def prompt_for(item, reg, attempt=0):
     r = reg.get(item["target"], {})
     stmt = item.get("statement") or r.get("statement")
     parts = ["Prove in Lean 4 (Mathlib), axiom-clean (no sorry/admit/native_decide):",
@@ -70,6 +74,9 @@ def prompt_for(item, reg):
     parts.append("Goal: " + item["goal"])
     if item["tier"].startswith("A"):
         parts.append("Discharge the named hypothesis to make it unconditional.")
+    hint = strategy.pick(attempt)   # diversify approach on re-attempts
+    if hint:
+        parts.append("Approach: " + hint)
     return "\n".join(parts)
 
 
@@ -110,7 +117,7 @@ def main():
 
     sent = fails = 0
     for item in picks:
-        pr = prompt_for(item, reg)
+        pr = prompt_for(item, reg, attempts(item))
         for acct, envname in ACCOUNTS:
             key = os.environ.get(envname)
             if not key:
