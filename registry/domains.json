@@ -1,1 +1,274 @@
-{}
+{
+ "QC.no_cloning": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "There is no unitary U on H\u2297H with U(|\u03c8\u27e9\u2297|0\u27e9)=|\u03c8\u27e9\u2297|\u03c8\u27e9 for all states |\u03c8\u27e9 (no-cloning).",
+  "proof_file": "aristotle/harvest_100/admin_345a4bdf.lean",
+  "provenance": "Harmonic/Aristotle 345a4bdf-ce1b-4a43-9c16-ef3b461a4f60 (admin)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.pauli_anticommute": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The Pauli matrices X,Y,Z pairwise anticommute and each squares to I.",
+  "proof_file": "aristotle/harvest_100/chris_79488b81.lean",
+  "provenance": "Harmonic/Aristotle 79488b81-c294-47a5-a582-14b866d13115 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.pauli_basis": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "{I,X,Y,Z} is a basis of the \u2102-vector space of 2\u00d72 complex matrices.",
+  "proof_file": "aristotle/harvest_100/chris_f3bac8dd.lean",
+  "provenance": "Harmonic/Aristotle f3bac8dd-4bee-46fe-ac3f-ac2b17d0d81e (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.hadamard_involutive": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The Hadamard matrix H satisfies H\u2020=H and H\u00b2=I.",
+  "proof_file": "aristotle/harvest_100/chris_51a96f77.lean",
+  "provenance": "Harmonic/Aristotle 51a96f77-3e58-4568-8b47-7aed27cb756c (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.hadamard_XZ": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "H = (X+Z)/\u221a2, and H X H = Z.",
+  "proof_file": "aristotle/harvest_100/chris_532de47a.lean",
+  "provenance": "Harmonic/Aristotle 532de47a-8582-4904-8899-fb1055a948b7 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.cnot_unitary_involutive": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "CNOT is unitary and CNOT\u00b2=I.",
+  "proof_file": "aristotle/harvest_100/chris_d28c402e.lean",
+  "provenance": "Harmonic/Aristotle d28c402e-bddf-41ac-bc1b-687989b3cf3d (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.bell_orthonormal": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The four Bell states form an orthonormal basis of \u2102\u00b2\u2297\u2102\u00b2.",
+  "proof_file": "aristotle/harvest_100/chris_ef0b4a6c.lean",
+  "provenance": "Harmonic/Aristotle ef0b4a6c-9918-4273-a608-5c1a86601c41 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.chsh_tsirelson": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The quantum CHSH operator has operator norm \u2264 2\u221a2 (Tsirelson's bound).",
+  "proof_file": "aristotle/harvest_100/chris_13a182f8.lean",
+  "provenance": "Harmonic/Aristotle 13a182f8-571b-4b38-b872-3e8a092571dc (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.teleportation_identity": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The teleportation protocol's post-correction state equals the input state.",
+  "proof_file": "aristotle/harvest_100/chris_feb5367a.lean",
+  "provenance": "Harmonic/Aristotle feb5367a-c502-477f-9d92-c8c1722b81e4 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.deutsch_correct": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "Deutsch's algorithm decides constant-vs-balanced of f:{0,1}\u2192{0,1} with one oracle query.",
+  "proof_file": "aristotle/harvest_100/chris_7936fefd.lean",
+  "provenance": "Harmonic/Aristotle 7936fefd-5cd8-40bc-a71d-ca41fca96331 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.density_matrix_unitary_invariant": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "If \u03c1\u2ab00 and Tr \u03c1=1 then U\u03c1U\u2020 \u2ab00 and Tr(U\u03c1U\u2020)=1 for unitary U.",
+  "proof_file": "aristotle/harvest_100/chris_d4ad4d64.lean",
+  "provenance": "Harmonic/Aristotle d4ad4d64-d280-4b46-862c-3d9bb574efd3 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.pure_state_zero_entropy": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The von Neumann entropy S(\u03c1)= -Tr(\u03c1 log \u03c1) of a pure state is 0.",
+  "proof_file": "aristotle/harvest_100/chris_e5f55f71.lean",
+  "provenance": "Harmonic/Aristotle e5f55f71-b3ad-4a42-bf8e-b5d4f555d528 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.qft_unitary": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The n-qubit quantum Fourier transform matrix is unitary.",
+  "proof_file": "aristotle/harvest_100/chris_1d1205f9.lean",
+  "provenance": "Harmonic/Aristotle 1d1205f9-6bfd-4357-83cd-c23d0c1e1662 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.superdense_two_bits": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "Superdense coding transmits 2 classical bits via 1 qubit + prior entanglement (encoding is injective on the 4 messages).",
+  "proof_file": "aristotle/harvest_100/admin_dba203c2.lean",
+  "provenance": "Harmonic/Aristotle dba203c2-3130-4760-ac9d-9a3a2f6fbba7 (admin)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.toffoli_unitary": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The Toffoli (CCNOT) matrix is a permutation matrix hence unitary and its own inverse.",
+  "proof_file": "aristotle/harvest_100/chris_f5eced2f.lean",
+  "provenance": "Harmonic/Aristotle f5eced2f-459a-4e3e-b4ad-86b4be32c8f7 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.robertson_uncertainty": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "For observables A,B and state \u03c8: \u0394A\u00b7\u0394B \u2265 \u00bd|\u27e8[A,B]\u27e9| (Robertson relation).",
+  "proof_file": "aristotle/harvest_100/chris_b864199b.lean",
+  "provenance": "Harmonic/Aristotle b864199b-449e-4b16-a4c1-169b892d876d (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.ghz3_normalized": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The 3-qubit GHZ state (|0\u20260\u27e9+|1\u20261\u27e9)/\u221a2 is a unit vector.",
+  "proof_file": "aristotle/harvest_100/admin_84ed124a.lean",
+  "provenance": "Harmonic/Aristotle 84ed124a-a0a2-4135-b54d-3d1e144479d3 (admin)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.bloch_sphere_bijection": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "Pure qubit states modulo global phase biject with points of the 2-sphere S\u00b2.",
+  "proof_file": "aristotle/harvest_100/admin_03c777bb.lean",
+  "provenance": "Harmonic/Aristotle 03c777bb-471b-4dbd-a0a8-f80a7e3b8bd7 (admin)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.kraus_trace_preserving": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "A CPTP map \u03a3_k E_k \u03c1 E_k\u2020 with \u03a3_k E_k\u2020E_k = I preserves trace.",
+  "proof_file": "aristotle/harvest_100/chris_bc2eae17.lean",
+  "provenance": "Harmonic/Aristotle bc2eae17-b7cf-4aa4-9c8f-4a928c99f88f (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.ghz_nonlocal": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The 3-qubit GHZ state yields a deterministic Mermin paradox contradiction with local hidden variables.",
+  "proof_file": "aristotle/harvest_100/chris_fcbb46e1.lean",
+  "provenance": "Harmonic/Aristotle fcbb46e1-888b-4e33-8a3e-2e04142027db (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.swap_test_overlap": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The SWAP test accepts two states with probability (1+|\u27e8\u03c8|\u03c6\u27e9|\u00b2)/2.",
+  "proof_file": "aristotle/harvest_100/chris_5194e4b5.lean",
+  "provenance": "Harmonic/Aristotle 5194e4b5-8a98-4963-a36d-dcb7151140d8 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.qft_unitary_2": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The 2-qubit QFT matrix is unitary.",
+  "proof_file": "aristotle/harvest_100/chris_89dee083.lean",
+  "provenance": "Harmonic/Aristotle 89dee083-7104-4c3f-a858-4169540e36fe (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.ghz2_normalized": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The 2-qubit GHZ state (|0\u20260\u27e9+|1\u20261\u27e9)/\u221a2 is a unit vector.",
+  "proof_file": "aristotle/harvest_100/chris_1b413325.lean",
+  "provenance": "Harmonic/Aristotle 1b413325-9f88-4e50-99c8-c87e81ed1254 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.qft_unitary_3": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The 3-qubit QFT matrix is unitary.",
+  "proof_file": "aristotle/harvest_100/chris_17606f7f.lean",
+  "provenance": "Harmonic/Aristotle 17606f7f-c2ef-4748-91c1-bd7c9656a277 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.qft_unitary_4": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The 4-qubit QFT matrix is unitary.",
+  "proof_file": "aristotle/harvest_100/chris_49a3c422.lean",
+  "provenance": "Harmonic/Aristotle 49a3c422-37f1-4779-b7d2-1ed54cbc98fd (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.ghz4_normalized": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The 4-qubit GHZ state (|0\u20260\u27e9+|1\u20261\u27e9)/\u221a2 is a unit vector.",
+  "proof_file": "aristotle/harvest_100/chris_df509185.lean",
+  "provenance": "Harmonic/Aristotle df509185-b28e-404f-980b-be8b48eba79c (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.qft_unitary_5": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The 5-qubit QFT matrix is unitary.",
+  "proof_file": "aristotle/harvest_100/chris_8b03862b.lean",
+  "provenance": "Harmonic/Aristotle 8b03862b-1d46-4347-9ac6-7970d6e58009 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.ghz5_normalized": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The 5-qubit GHZ state (|0\u20260\u27e9+|1\u20261\u27e9)/\u221a2 is a unit vector.",
+  "proof_file": "aristotle/harvest_100/chris_5e6dd4ad.lean",
+  "provenance": "Harmonic/Aristotle 5e6dd4ad-68af-4eb3-a020-cf333183b218 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.qft_unitary_6": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The 6-qubit QFT matrix is unitary.",
+  "proof_file": "aristotle/harvest_100/chris_34f510c7.lean",
+  "provenance": "Harmonic/Aristotle 34f510c7-c2ef-45b6-86aa-5473392307d2 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.ghz6_normalized": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The 6-qubit GHZ state (|0\u20260\u27e9+|1\u20261\u27e9)/\u221a2 is a unit vector.",
+  "proof_file": "aristotle/harvest_100/chris_41f079cc.lean",
+  "provenance": "Harmonic/Aristotle 41f079cc-54b8-468a-a895-103a96e6f6ab (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.qft_unitary_7": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The 7-qubit QFT matrix is unitary.",
+  "proof_file": "aristotle/harvest_100/chris_c709e477.lean",
+  "provenance": "Harmonic/Aristotle c709e477-5997-48d3-8d5b-777b449d9c3c (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.ghz7_normalized": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The 7-qubit GHZ state (|0\u20260\u27e9+|1\u20261\u27e9)/\u221a2 is a unit vector.",
+  "proof_file": "aristotle/harvest_100/chris_8b075d9d.lean",
+  "provenance": "Harmonic/Aristotle 8b075d9d-8954-453e-ba30-dee708e710bf (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.qft_unitary_8": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The 8-qubit QFT matrix is unitary.",
+  "proof_file": "aristotle/harvest_100/chris_f0620a1f.lean",
+  "provenance": "Harmonic/Aristotle f0620a1f-1268-46b4-84c6-4079e5ece473 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ },
+ "QC.ghz8_normalized": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qc",
+  "statement": "The 8-qubit GHZ state (|0\u20260\u27e9+|1\u20261\u27e9)/\u221a2 is a unit vector.",
+  "proof_file": "aristotle/harvest_100/chris_cbff232a.lean",
+  "provenance": "Harmonic/Aristotle cbff232a-d9b6-41fe-ad7a-3e6c6d378f47 (chris)",
+  "verification": "axiom-clean by inspection; lake pending"
+ }
+}
