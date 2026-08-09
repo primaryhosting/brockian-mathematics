@@ -16,6 +16,6 @@ AXLE_MAX=60 /opt/homebrew/bin/python3 aristotle/axle_verify.py
 /opt/homebrew/bin/python3 aristotle/reduction_tracker.py
 CROSS_MAX=6 /opt/homebrew/bin/python3 aristotle/cross_check.py
 /opt/homebrew/bin/python3 aristotle/minimize_proofs.py
-/opt/homebrew/bin/python3 aristotle/auto_pr.py
+AUTO_PR_LIVE=1 /opt/homebrew/bin/python3 aristotle/auto_pr.py
 /opt/homebrew/bin/python3 aristotle/observatory.py
 

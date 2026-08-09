@@ -26,6 +26,7 @@ DOMAINS = REPO / "registry" / "domains.json"
 MIN = ROOT / "minimized"
 BEST = ROOT / "best_proofs"
 PLAN = ROOT / "pr_plan.json"
+PR_LEDGER = ROOT / "pr_submitted.json"
 LIVE = os.environ.get("AUTO_PR_LIVE") == "1"
 PR_DIR = os.environ.get("PR_DIR", "contrib/aristotle-domains")
 
@@ -57,20 +58,23 @@ def run(cmd, cwd):
 def main():
     elig = eligible()
     PLAN.write_text(json.dumps({"eligible": elig, "count": len(elig), "live": LIVE}, indent=1))
-    print(f"{len(elig)} kernel-trusted new-domain proofs eligible for PR "
-          f"({'LIVE' if LIVE else 'DRY-RUN'})")
-    for e in elig[:12]:
+    # idempotent: only PR targets not already PR'd (safe for permanent every-2h operation)
+    ledger = json.loads(PR_LEDGER.read_text()) if PR_LEDGER.exists() else {"targets": [], "runs": []}
+    done = set(ledger.get("targets", []))
+    new = [e for e in elig if e["target"] not in done]
+    print(f"{len(elig)} AXLE-verified eligible, {len(new)} NEW ({'LIVE' if LIVE else 'DRY-RUN'})")
+    for e in new[:12]:
         print(f"  - {e['target']} ({e['domain']})")
-    if not elig:
-        print("nothing eligible yet (need cross_check trusted + catalogued). No PR.")
-        return
+    if not new:
+        print("nothing new to PR."); return
     if not LIVE:
-        print(f"\nDRY-RUN: plan written to {PLAN}. Set AUTO_PR_LIVE=1 to push + open the PR.")
+        print(f"\nDRY-RUN: {len(new)} new proofs would be PR'd. Set AUTO_PR_LIVE=1 to push + open.")
         return
 
     date = datetime.date.today().isoformat()
-    branch = f"aristotle-domain-proofs-{date}"
-    wt = pathlib.Path(f"/tmp/pr-wt-{date}")
+    seq = len(ledger.get("runs", [])) + 1
+    branch = f"aristotle-domains-{date}-{seq}"
+    wt = pathlib.Path(f"/tmp/pr-wt-{date}-{seq}")
     if wt.exists():
         run(["git", "worktree", "remove", "--force", str(wt)], REPO)
     run(["git", "fetch", "origin"], REPO)
@@ -80,23 +84,27 @@ def main():
     try:
         d = wt / PR_DIR
         d.mkdir(parents=True, exist_ok=True)
-        man = ["# Aristotle-generated, kernel-trusted proofs", "",
-               "Axiom-clean (only propext/Classical.choice/Quot.sound), lake-verified, cross-checked.", ""]
-        for e in elig:
+        man = ["# Aristotle-generated, AXLE-verified proofs", "",
+               "Kernel-checked cloud Lean 4.32.0 (AXLE); axiom-clean.", ""]
+        for e in new:
             safe = e["target"].replace(".", "_") + ".lean"
             shutil.copy(e["src"], d / safe)
             man.append(f"- `{e['target']}` ({e['domain']}) — {safe}")
         (d / "MANIFEST.md").write_text("\n".join(man))
         run(["git", "add", PR_DIR], wt)
-        run(["git", "commit", "-m", f"Add {len(elig)} kernel-trusted Aristotle domain proofs ({date})"], wt)
+        run(["git", "commit", "-m", f"Add {len(new)} AXLE-verified Aristotle domain proofs ({date} #{seq})"], wt)
         pr = run(["git", "push", "-u", "origin", branch], wt)
         if pr.returncode != 0:
             print("push failed:", pr.stderr[:300]); return
-        body = "\n".join(man) + "\n\n🤖 Generated with Aristotle proof fleet; verified axiom-clean."
+        body = "\n".join(man) + "\n\n🤖 Aristotle proof fleet; AXLE-verified axiom-clean."
         gh = run(["gh", "pr", "create", "--title",
-                  f"Aristotle domain proofs ({len(elig)}) — {date}", "--body", body,
+                  f"Aristotle domain proofs ({len(new)}) — {date} #{seq}", "--body", body,
                   "--head", branch], wt)
-        print(gh.stdout or gh.stderr)
+        url = (gh.stdout or gh.stderr).strip()
+        print(url)
+        ledger["targets"] = sorted(done | {e["target"] for e in new})
+        ledger.setdefault("runs", []).append({"branch": branch, "count": len(new), "url": url[:200]})
+        PR_LEDGER.write_text(json.dumps(ledger, indent=1))
     finally:
         run(["git", "worktree", "remove", "--force", str(wt)], REPO)
 
