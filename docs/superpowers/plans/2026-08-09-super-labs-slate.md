@@ -40,4 +40,4 @@ Registry-citation rule everywhere: resolve exact names from `/public/verified-re
 
 **Execution:** one Lovable build message per lab (Lab 1 gets an extra verification pass), sequential; verify (kernel tests + typecheck + 0 console errors) each before the next; publish gates remain eyes-on-only. Prereq: Observatory Rigor layer (ClaimRef/ProofChip primitives) — in flight.
 
-**Status:** Rigor primitives ⏳ · Labs shipped: 0/50
+**Status (2026-08-09):** Rigor primitives ✅ (generalized, CLASSICAL register + ClaimSetContext) · Observatory 3-depth COMPLETE (unpublished, eyes-on pending) · Fleet pipeline wired, awaiting RIEMANN_SUPABASE_SERVICE_KEY in vault · **Labs shipped: 5/50 (Batch A ✅)** — 1 pi-li-race (68f275f5) · 2 prime-gaps (5458f5e9) · 3 andrica (0fb544d6) · 4 constellations (508fea1a) · 5 goldbach (a2b78f5c). Registry-verbatim PROVED rows so far: 6 Andrica + 12 Admissibility + 13 Goldbach-local. Real bugs caught by self-verification: RS remainder scaling, H–L singular series q=2, Goldbach parity fold, Cramér-ratio overclaim, Andrica tail attribution.
