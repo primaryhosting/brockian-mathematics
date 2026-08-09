@@ -28,6 +28,7 @@ def gather():
     reductions = load("reductions.json", {})
     lemmas = load("mined_lemmas/manifest.json", {})
     cross = load("cross_check.json", {})
+    axle = load("axle_verify.json", {})
     pr = load("pr_plan.json", {})
 
     sub_by_acct, sub_by_dom = collections.Counter(), collections.Counter()
@@ -42,6 +43,7 @@ def gather():
         "submitted": submits, "targets": len(night),
         "by_account": dict(sub_by_acct), "by_domain": dict(sub_by_dom),
         "harvested": len(harvest), "proved": proved, "stopped": stopped,
+        "axle_verified": sum(1 for s in axle.values() if s.get("verified") is True),
         "lake_verified": sum(1 for s in vstate.values() if s.get("compiles") is True),
         "kernel_trusted": sum(1 for s in cross.values() if s.get("trusted") is True),
         "best_proofs": len(best), "domains": len(domains),
@@ -64,14 +66,13 @@ def _bars(d, accent):
 
 
 TILES = [("submitted", "submitted", "acc"), ("proved", "proved", "good"),
-         ("lake_verified", "lake-verified", "good"), ("kernel_trusted", "kernel-trusted", "good"),
-         ("best_proofs", "best (deduped)", "acc"), ("domains", "domain results", "acc"),
-         ("reductions", "reductions", "warn"), ("mined_lemmas", "salvaged lemmas", "acc"),
-         ("stopped", "stopped", "bad"), ("pr_eligible", "PR-ready", "good")]
+         ("axle_verified", "AXLE-verified", "good"), ("best_proofs", "best (deduped)", "acc"),
+         ("domains", "domain results", "acc"), ("mined_lemmas", "salvaged lemmas", "acc"),
+         ("reductions", "reductions", "warn"), ("stopped", "stopped", "bad"),
+         ("pr_eligible", "PR-ready", "good"), ("targets", "unique targets", "acc")]
 
 STAGES = [("generate", "targets"), ("submit", "submitted"), ("harvest", "harvested"),
-          ("verify", "lake_verified"), ("trust", "kernel_trusted"),
-          ("catalogue", "domains"), ("publish", "pr_eligible")]
+          ("verify", "axle_verified"), ("catalogue", "domains"), ("publish", "pr_eligible")]
 
 
 def render_html(s):
@@ -129,7 +130,7 @@ h2{{font-size:12px;font-family:var(--mono);letter-spacing:.1em;text-transform:up
   <div><h2>Submissions by domain</h2><div class="card">{_bars(s['by_domain'],'var(--good)')}</div></div>
  </div>
  <div class="foot">targets attempted {s['targets']} · harvested {s['harvested']} · proved {s['proved']} · stopped {s['stopped']}
-  · verification trails proving (import-Mathlib tax). Read-only snapshot.</div>
+  · verified independently by AXLE (cloud Lean 4.32.0) — Aristotle's self-report is never trusted blindly. Read-only snapshot.</div>
 </div>"""
 
 

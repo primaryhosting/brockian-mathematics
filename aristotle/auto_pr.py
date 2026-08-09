@@ -31,23 +31,22 @@ PR_DIR = os.environ.get("PR_DIR", "contrib/aristotle-domains")
 
 
 def eligible():
-    cross = json.loads(CROSS.read_text()) if CROSS.exists() else {}
-    ledger = json.loads(LEDGER.read_text()) if LEDGER.exists() else {}
+    """Kernel-trusted (AXLE cloud lean-4.32.0) proofs that are catalogued new-domain
+    results. best_proofs/<sanitized target>.lean is exactly what AXLE verified."""
+    import re
+    axle = json.loads((ROOT / "axle_verify.json").read_text()) if (ROOT / "axle_verify.json").exists() else {}
     domains = json.loads(DOMAINS.read_text()) if DOMAINS.exists() else {}
-    by_file = {f"{m['account']}_{pid[:8]}.lean": m for pid, m in ledger.items()}
     out = []
-    for fname, res in cross.items():
-        if res.get("trusted") is not True:
+    for target, dmeta in domains.items():
+        san = re.sub(r"[^A-Za-z0-9]+", "_", target) + ".lean"
+        if axle.get(san, {}).get("verified") is not True:
             continue
-        meta = by_file.get(fname, {})
-        target = meta.get("target")
-        if not target or target not in domains:
-            continue  # only catalogued new-domain results
-        src = (MIN / fname) if (MIN / fname).exists() else (BEST / fname)
-        if src.exists():
-            out.append({"target": target, "domain": domains[target].get("domain"),
-                        "src": str(src), "project_id": meta.get("project_id", ""),
-                        "axioms": res.get("axioms", [])})
+        src = BEST / san
+        if not src.exists():
+            continue
+        out.append({"target": target, "domain": dmeta.get("domain"),
+                    "src": str(src), "verification": "AXLE cloud lean-4.32.0",
+                    "environment": axle[san].get("environment", "lean-4.32.0")})
     return out
 
 

@@ -8,6 +8,7 @@ Never touches the Brockian registry. Domain proofs are a distinct catalogue.
 """
 import json
 import pathlib
+import re
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
@@ -29,6 +30,14 @@ def main():
     # which harvested files compiled (verify_state keyed by filename)
     vstate = json.loads(VSTATE.read_text()) if VSTATE.exists() else {}
     file_compiles = {b: s.get("compiles") for b, s in vstate.items()}
+    # AXLE cloud verification (keyed by best_proofs sanitized-target filename)
+    axle = {}
+    axp = ROOT / "axle_verify.json"
+    if axp.exists():
+        axle = json.loads(axp.read_text())
+
+    def axle_ok(target):
+        return axle.get(re.sub(r"[^A-Za-z0-9]+", "_", target) + ".lean", {}).get("verified") is True
 
     cat = json.loads(OUT.read_text()) if OUT.exists() else {}
     added = 0
@@ -38,7 +47,8 @@ def main():
             continue
         fname = f"{meta['account']}_{pid[:8]}.lean"
         entry = cat.get(t, {})
-        verified = file_compiles.get(fname) is True or (best.get(t, {}).get("compiles") is True)
+        axle_verified = axle_ok(t)
+        verified = axle_verified or file_compiles.get(fname) is True or (best.get(t, {}).get("compiles") is True)
         # keep the strongest status seen
         register = "PROVED" if verified else "PROVED_UNVERIFIED"
         if entry.get("register") == "PROVED":
@@ -46,7 +56,9 @@ def main():
         cat[t] = {"register": register, "domain": stmt[t]["domain"], "statement": stmt[t]["statement"],
                   "proof_file": f"aristotle/harvest_100/{fname}",
                   "provenance": f"Harmonic/Aristotle {pid} ({meta['account']})",
-                  "verification": "lake env lean OK" if verified else "axiom-clean by inspection; lake pending"}
+                  "verification": ("AXLE cloud lean-4.32.0 OK" if axle_verified
+                                   else "lake env lean OK" if verified
+                                   else "axiom-clean by inspection; verification pending")}
         added += 1
     OUT.write_text(json.dumps(cat, indent=1))
     import collections
