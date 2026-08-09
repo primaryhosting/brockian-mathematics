@@ -24,7 +24,7 @@ import time
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
-QUEUES = os.environ.get("QUEUES", "next_100.json,domains_queue.json").split(",")
+QUEUES = os.environ.get("QUEUES", "next_100.json,domains_queue.json,mined_queue.json").split(",")
 REG = REPO / "registry" / "theorems.json"
 LEDGER = ROOT / "submitted_night.json"
 LOG = ROOT / "night_submit.log"
