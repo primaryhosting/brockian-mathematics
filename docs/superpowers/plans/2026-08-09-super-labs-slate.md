@@ -1,53 +1,43 @@
-# Super Labs Slate — 25 Best-in-Class Labs (Phase 2)
+# Super Labs Program — 50 Labs, Progressive Quality Ratchet
 
-**Directive (Chris, 2026-08-09):** "build 25 more super labs, best in class."
+**Directive (Chris, 2026-08-09):** 50 new labs, each progressively better, the first as good as the best we currently have (the Zeta Observatory pattern).
 
-**Definition of a super lab** (the Zeta Observatory pattern, non-negotiable):
-- `DepthShell` three-depth page: Surface (short cinematic/story), Explore (live in-browser compute via the kernel worker), Rigor (claims with register badges; PROVED claims resolve to `/verified-registry.json` by VERBATIM theorem name — omit rather than guess).
-- All compute off the main thread (kernel worker tasks, new tasks get golden Vitest tests).
-- ProvenanceStrip on every computed output; COMPUTATION never styled as PROVED; RH/open questions stated OPEN.
-- Registered in `src/config/site-registry.ts`; routes follow the existing pattern; first-class empty/error states.
-- Eyes-on verification before any publish (per standing rule).
+## The quality bar
 
-**Execution:** batches of 2–3 labs per Lovable build message, verify each batch (kernel tests + typecheck + 0 console errors) before the next. Order below. Build 3 (Rigor layer, Task 12) ships FIRST because its ClaimRef/ProofChip primitives are reused by every lab's Rigor layer.
+**Base bar — EVERY lab, starting with Lab 1** (this IS the Observatory pattern):
+- `DepthShell` three depths: Surface (one polished cinematic scene w/ stills fallback + `?forceStills=1`), Explore (live kernel-worker compute), Rigor (claims with register badges).
+- New kernel tasks get golden Vitest tests; all compute off the main thread; ProvenanceStrip on every output.
+- Claims in a per-lab `claims.ts`; PROVED only with a theoremName verified VERBATIM in `/public/verified-registry.json` (omit/downgrade, never invent); integrity test covers it; RH/open questions marked OPEN.
+- Registered in `src/config/site-registry.ts`; 0 console errors; first-class empty/error states; honest copy.
+- Scope note: the Observatory's Surface is a 4-chapter journey; lab Surfaces are ONE chapter-quality scene. Everything else matches.
 
-## Batch A — Primes & Distribution (sieve kernel)
-1. **π(x) vs Li(x) Race** — prime counting vs logarithmic integral, error term live; PNT framing (PROVED in the literature ≠ in our registry — label registers honestly).
-2. **Prime Gaps Explorer** — gap records, Cramér heuristic (COMPUTATION/CONJECTURE).
-3. **Andrica Lab** — √p̅ₙ₊₁−√pₙ live scan; registry `Brockian.AndricaConjecture.*` PROVED pieces vs the OPEN conjecture.
-4. **Twin Primes & Constellations** — twin/cousin/sexy counts vs Hardy–Littlewood (COMPUTATION; OPEN).
-5. **Goldbach Comb** — partition counts g(2n) (COMPUTATION; OPEN).
+**The ratchet — each block of 5 labs adds one capability, kept by all later labs:**
+- R1 (labs 1–5): base bar.
+- R2 (6–10): + shareable state — all Explore params serialize to the URL (permalink any configuration).
+- R3 (11–15): + guided tour — a "walk me through it" stepper on the Explore layer.
+- R4 (16–20): + data export — computed series downloadable as CSV/JSON with an embedded provenance header.
+- R5 (21–25): + comparative overlays — every plot can overlay a second configuration for A/B.
+- R6 (26–30): + sonification where meaningful (Web Audio, muted by default) or an equivalent second modality.
+- R7 (31–35): + challenge mode — one verifiable "find/predict X" interaction per lab.
+- R8 (36–40): + a11y pass — keyboard-complete, aria labels on all viz, contrast-checked.
+- R9 (41–45): + perf instrumentation — visible frame/compute budget readout; degrades gracefully.
+- R10 (46–50): + cross-lab links — related-lab rail resolved from the site registry; Lab 50 is the capstone Atlas aggregating all of it.
 
-## Batch B — Zeta Analytics (zeta kernel)
-6. **Critical Line Walker** — long Z(t) walks, sign changes, Gram points.
-7. **Zeta Landscape Explorer** — interactive pan/zoom gridAbs of the complex plane.
-8. **Explicit Formula Orchestra** — per-zero contribution visual/audio, extends `explicit.ts`.
-9. **Montgomery Pair Correlation** — pair correlation vs GUE prediction (COMPUTATION).
-10. **Riemann–Siegel Anatomy** — main sum vs Gabcke remainder terms, live decomposition.
+## The 50
 
-## Batch C — Brockian Program (spectra kernel + registry)
-11. **Five-Point Alphabet Deep Lab** — charpoly walkthroughs H₁/H₂/H₃ (`Brockian.ConstellationSpectrum.*` PROVED; assembly OPEN).
-12. **Metallic Means Spectra** — `Brockian.MetallicRealization.*` (PROVED) eigenvalue realizations.
-13. **Pentagon Isotypic Lab** — `Brockian.PentagonIsotypic.*` adjacency eigenvalues 2cos(kπ/5), golden ratio (PROVED).
-14. **Euler Pentagonal Lab** — pentagonal number theorem + partition recurrence live (`Brockian.AffineSelection.pentagonal_goldbach` and ms-euler-pentagonal if present — verify names).
-15. **Weyl Scaffold Lab** — `Brockian.Weyl.*` eigenvalue-reality theorems visualized (PROVED pieces vs OPEN bridge).
+**A — Primes & Distribution:** 1. π(x) vs Li(x) Race · 2. Prime Gaps Explorer · 3. Andrica Lab · 4. Twin Primes & Constellations · 5. Goldbach Comb
+**B — Zeta Analytics:** 6. Critical Line Walker · 7. Zeta Landscape Explorer (pan/zoom gridAbs) · 8. Explicit Formula Orchestra · 9. Montgomery Pair Correlation · 10. Riemann–Siegel Anatomy
+**C — Brockian Program:** 11. Five-Point Alphabet Deep Lab · 12. Metallic Means Spectra · 13. Pentagon Isotypic Lab · 14. Euler Pentagonal Lab · 15. Weyl Scaffold Lab
+**D — Randomness & Structure:** 16. Gilbreath Triangle · 17. Benford & First Digits · 18. Random Matrix Ensembles (GOE/GUE/GSE) · 19. Continued Fractions & Metallic Numbers · 20. Kadison–Singer / Sensitivity
+**E — Classical Named Theorems (`ms-*` PROVED set):** 21. Mason–Stothers · 22. Zeckendorf · 23. Erdős–Szekeres · 24. Cauchy–Davenport · 25. Machin π
+**F — Analysis & Irrationality:** 26. e² is Irrational · 27. Basel Problem (ζ(2)=π²/6) · 28. Wallis Products · 29. Gamma Function Lab (Lanczos already in kernel) · 30. Stirling Asymptotics
+**G — Combinatorics & Graphs:** 31. Cayley's Formula (n^{n−2}) · 32. Perron–Frobenius · 33. Ramsey Playground · 34. Catalan & Dyck Paths · 35. Partition Function p(n)
+**H — Number Theory Classics:** 36. Gauss–Wilson · 37. Quadratic Reciprocity · 38. Chinese Remainder + Admissibility · 39. Farey & Ford Circles · 40. Collatz Observatory (OPEN, honest)
+**I — Probability & Information:** 41. Central Limit / Galton · 42. Shannon Entropy Lab · 43. Random Walks & Pólya Recurrence · 44. Percolation Threshold · 45. Coupon Collector
+**J — Geometry, Physics & Capstone:** 46. Pentagon Tilings & Golden Spirals · 47. Sphere Packing Story · 48. Quantum Harmonic Oscillator Ladder · 49. Weyl Equidistribution · 50. **The Grand Atlas** — capstone: cross-lab map + registry coverage dashboard.
 
-## Batch D — Randomness & Structure
-16. **Gilbreath Triangle Lab** — iterated prime differences (`Brockian.Gilbreath*` module; conjecture OPEN).
-17. **Benford & First Digits** — leading digits of primes/zeros vs Benford (COMPUTATION).
-18. **Random Matrix Ensembles** — GOE/GUE/GSE spacing side-by-side (extends spectra).
-19. **Continued Fractions & Metallic Numbers** — CF expansions, Gauss–Kuzmin (COMPUTATION).
-20. **Kadison–Singer / Sensitivity Lab** — the registry's `KadisonSinger`/`Sensitivity` PROVED pieces, honest scope.
+Registry-citation rule everywhere: resolve exact names from `/public/verified-registry.json` at build time; absent ⇒ omit or downgrade. Known: the sanitized public registry differs from the local `registry/theorems.json` (e.g. `ConstellationSpectrum` is local-only; `Brockian.Sieve.H3_*` are public) — the PUBLIC file is the only authority for the site.
 
-## Batch E — Classical Named Theorems (registry `ms-*` PROVED set)
-21. **Mason–Stothers Lab** — polynomial abc, interactive examples.
-22. **Zeckendorf Lab** — Fibonacci representation encoder.
-23. **Erdős–Szekeres Lab** — monotone subsequence finder.
-24. **Cauchy–Davenport Lab** — sumsets mod p, interactive.
-25. **Machin π Lab** — Machin-type formulas computing π digits live.
+**Execution:** one Lovable build message per lab (Lab 1 gets an extra verification pass), sequential; verify (kernel tests + typecheck + 0 console errors) each before the next; publish gates remain eyes-on-only. Prereq: Observatory Rigor layer (ClaimRef/ProofChip primitives) — in flight.
 
-For every registry citation above: the build message must instruct the Lovable agent to resolve the exact theorem name from `/public/verified-registry.json` and copy it verbatim; if absent, the claim is omitted or downgraded — never invented.
-
-**Status log**
-- [ ] Task 12 (Rigor primitives) — prerequisite
-- [ ] Batch A · [ ] Batch B · [ ] Batch C · [ ] Batch D · [ ] Batch E
+**Status:** Rigor primitives ⏳ · Labs shipped: 0/50
