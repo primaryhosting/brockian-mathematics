@@ -24,7 +24,7 @@ import time
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
-QUEUE = ROOT / "next_100.json"
+QUEUES = os.environ.get("QUEUES", "next_100.json,domains_queue.json").split(",")
 REG = REPO / "registry" / "theorems.json"
 LEDGER = ROOT / "submitted_night.json"
 LOG = ROOT / "night_submit.log"
@@ -60,10 +60,11 @@ def reg_index():
 
 def prompt_for(item, reg):
     r = reg.get(item["target"], {})
+    stmt = item.get("statement") or r.get("statement")
     parts = ["Prove in Lean 4 (Mathlib), axiom-clean (no sorry/admit/native_decide):",
              f"Target: {item['target']}"]
-    if r.get("statement"):
-        parts.append("Statement:\n" + r["statement"])
+    if stmt:
+        parts.append("Statement:\n" + stmt)
     if r.get("module"):
         parts.append("Module: " + r["module"])
     parts.append("Goal: " + item["goal"])
@@ -91,7 +92,12 @@ def main():
         log(f"outside night window [{NIGHT_START}:00-{NIGHT_END}:00]; skip")
         return
     reg = reg_index()
-    queue = json.loads(QUEUE.read_text())["queue"]
+    queue = []
+    for qf in QUEUES:
+        p = ROOT / qf.strip()
+        if p.exists():
+            d = json.loads(p.read_text())
+            queue += d["queue"] if isinstance(d, dict) else d
     ledger = json.loads(LEDGER.read_text()) if LEDGER.exists() else {}
     total_ids = sum(len(v.get("ids", [])) for v in ledger.values())
     if total_ids >= NIGHT_CAP:
@@ -99,7 +105,7 @@ def main():
 
     def attempts(t):
         return len(ledger.get(t["target"], {}).get("ids", []))
-    order = sorted(queue, key=lambda t: (attempts(t), TIER_RANK.get(t["tier"], 9)))
+    order = sorted(queue, key=lambda t: (attempts(t), t.get("rank", TIER_RANK.get(t["tier"], 9))))
     picks = order[:BATCH]
 
     sent = fails = 0

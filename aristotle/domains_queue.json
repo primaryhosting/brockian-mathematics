@@ -1,0 +1,663 @@
+{
+ "count": 94,
+ "queue": [
+  {
+   "target": "QC.no_cloning",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "There is no unitary U on H\u2297H with U(|\u03c8\u27e9\u2297|0\u27e9)=|\u03c8\u27e9\u2297|\u03c8\u27e9 for all states |\u03c8\u27e9 (no-cloning).",
+   "rank": 0
+  },
+  {
+   "target": "QC.pauli_anticommute",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The Pauli matrices X,Y,Z pairwise anticommute and each squares to I.",
+   "rank": 0
+  },
+  {
+   "target": "QC.pauli_basis",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "{I,X,Y,Z} is a basis of the \u2102-vector space of 2\u00d72 complex matrices.",
+   "rank": 0
+  },
+  {
+   "target": "QC.hadamard_involutive",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The Hadamard matrix H satisfies H\u2020=H and H\u00b2=I.",
+   "rank": 0
+  },
+  {
+   "target": "QC.hadamard_XZ",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "H = (X+Z)/\u221a2, and H X H = Z.",
+   "rank": 0
+  },
+  {
+   "target": "QC.cnot_unitary_involutive",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "CNOT is unitary and CNOT\u00b2=I.",
+   "rank": 0
+  },
+  {
+   "target": "QC.bell_orthonormal",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The four Bell states form an orthonormal basis of \u2102\u00b2\u2297\u2102\u00b2.",
+   "rank": 0
+  },
+  {
+   "target": "QC.chsh_tsirelson",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The quantum CHSH operator has operator norm \u2264 2\u221a2 (Tsirelson's bound).",
+   "rank": 0
+  },
+  {
+   "target": "QC.teleportation_identity",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The teleportation protocol's post-correction state equals the input state.",
+   "rank": 0
+  },
+  {
+   "target": "QC.deutsch_correct",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Deutsch's algorithm decides constant-vs-balanced of f:{0,1}\u2192{0,1} with one oracle query.",
+   "rank": 0
+  },
+  {
+   "target": "QC.density_matrix_unitary_invariant",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "If \u03c1\u2ab00 and Tr \u03c1=1 then U\u03c1U\u2020 \u2ab00 and Tr(U\u03c1U\u2020)=1 for unitary U.",
+   "rank": 0
+  },
+  {
+   "target": "QC.pure_state_zero_entropy",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The von Neumann entropy S(\u03c1)= -Tr(\u03c1 log \u03c1) of a pure state is 0.",
+   "rank": 0
+  },
+  {
+   "target": "QC.qft_unitary",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The n-qubit quantum Fourier transform matrix is unitary.",
+   "rank": 0
+  },
+  {
+   "target": "QC.superdense_two_bits",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Superdense coding transmits 2 classical bits via 1 qubit + prior entanglement (encoding is injective on the 4 messages).",
+   "rank": 0
+  },
+  {
+   "target": "QC.toffoli_unitary",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The Toffoli (CCNOT) matrix is a permutation matrix hence unitary and its own inverse.",
+   "rank": 0
+  },
+  {
+   "target": "QC.robertson_uncertainty",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "For observables A,B and state \u03c8: \u0394A\u00b7\u0394B \u2265 \u00bd|\u27e8[A,B]\u27e9| (Robertson relation).",
+   "rank": 0
+  },
+  {
+   "target": "QC.bloch_sphere_bijection",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Pure qubit states modulo global phase biject with points of the 2-sphere S\u00b2.",
+   "rank": 0
+  },
+  {
+   "target": "QC.kraus_trace_preserving",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A CPTP map \u03a3_k E_k \u03c1 E_k\u2020 with \u03a3_k E_k\u2020E_k = I preserves trace.",
+   "rank": 0
+  },
+  {
+   "target": "QC.ghz_nonlocal",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The 3-qubit GHZ state yields a deterministic Mermin paradox contradiction with local hidden variables.",
+   "rank": 0
+  },
+  {
+   "target": "QC.swap_test_overlap",
+   "tier": "DOMAIN-qc",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The SWAP test accepts two states with probability (1+|\u27e8\u03c8|\u03c6\u27e9|\u00b2)/2.",
+   "rank": 0
+  },
+  {
+   "target": "QPhys.canonical_commutator",
+   "tier": "DOMAIN-qphys",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "On Schwartz space, [x,p]=i\u210f with p=-i\u210f d/dx.",
+   "rank": 2
+  },
+  {
+   "target": "QPhys.hermitian_real_spectrum",
+   "tier": "DOMAIN-qphys",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Every eigenvalue of a Hermitian operator is real.",
+   "rank": 2
+  },
+  {
+   "target": "QPhys.unitary_time_evolution",
+   "tier": "DOMAIN-qphys",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "For self-adjoint H, U(t)=exp(-iHt/\u210f) is unitary for all real t.",
+   "rank": 2
+  },
+  {
+   "target": "QPhys.oscillator_spectrum",
+   "tier": "DOMAIN-qphys",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The quantum harmonic oscillator has spectrum {\u210f\u03c9(n+\u00bd) : n\u2208\u2115} via ladder operators.",
+   "rank": 2
+  },
+  {
+   "target": "QPhys.particle_in_box",
+   "tier": "DOMAIN-qphys",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The infinite square well of width L has energies E_n = n\u00b2\u03c0\u00b2\u210f\u00b2/(2mL\u00b2), n\u22651.",
+   "rank": 2
+  },
+  {
+   "target": "QPhys.heisenberg_uncertainty",
+   "tier": "DOMAIN-qphys",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "\u0394x\u00b7\u0394p \u2265 \u210f/2 for any normalized state (from the canonical commutator + Cauchy\u2013Schwarz).",
+   "rank": 2
+  },
+  {
+   "target": "QPhys.ehrenfest",
+   "tier": "DOMAIN-qphys",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "d\u27e8A\u27e9/dt = (i/\u210f)\u27e8[H,A]\u27e9 + \u27e8\u2202A/\u2202t\u27e9 (Ehrenfest theorem).",
+   "rank": 2
+  },
+  {
+   "target": "QPhys.stone_generator",
+   "tier": "DOMAIN-qphys",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A strongly continuous one-parameter unitary group has a self-adjoint generator (Stone).",
+   "rank": 2
+  },
+  {
+   "target": "QPhys.spectral_theorem_finite",
+   "tier": "DOMAIN-qphys",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Every Hermitian matrix is unitarily diagonalizable with real eigenvalues.",
+   "rank": 2
+  },
+  {
+   "target": "QPhys.bcH_special",
+   "tier": "DOMAIN-qphys",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "For [A,B] central, e^A e^B = e^{A+B+\u00bd[A,B]} (BCH special case).",
+   "rank": 2
+  },
+  {
+   "target": "QPhys.variational_bound",
+   "tier": "DOMAIN-qphys",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "For Hamiltonian H, \u27e8\u03c8|H|\u03c8\u27e9/\u27e8\u03c8|\u03c8\u27e9 \u2265 E_0 (ground-state variational bound).",
+   "rank": 2
+  },
+  {
+   "target": "QPhys.parseval_fourier",
+   "tier": "DOMAIN-qphys",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The Fourier transform is an L\u00b2 isometry (Plancherel/Parseval).",
+   "rank": 2
+  },
+  {
+   "target": "QPhys.noether_translation",
+   "tier": "DOMAIN-qphys",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Translation invariance of the Lagrangian implies conservation of momentum (1D).",
+   "rank": 2
+  },
+  {
+   "target": "QPhys.pauli_exclusion_antisym",
+   "tier": "DOMAIN-qphys",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A two-fermion antisymmetric state with equal single-particle states is zero.",
+   "rank": 2
+  },
+  {
+   "target": "QPhys.commuting_simultaneous",
+   "tier": "DOMAIN-qphys",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Two commuting Hermitian operators are simultaneously diagonalizable.",
+   "rank": 2
+  },
+  {
+   "target": "Chem.huckel_cycle_spectrum",
+   "tier": "DOMAIN-chem",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The adjacency eigenvalues of the cycle graph C_n are 2cos(2\u03c0k/n), k=0..n-1 (H\u00fcckel \u03c0-energies).",
+   "rank": 2
+  },
+  {
+   "target": "Chem.euler_polyhedron",
+   "tier": "DOMAIN-chem",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "For a convex polyhedron (e.g. fullerene cage) V\u2212E+F=2 (Euler's formula).",
+   "rank": 2
+  },
+  {
+   "target": "Chem.fullerene_pentagons",
+   "tier": "DOMAIN-chem",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A trivalent polyhedron with only pentagon/hexagon faces has exactly 12 pentagons.",
+   "rank": 2
+  },
+  {
+   "target": "Chem.balance_nullspace",
+   "tier": "DOMAIN-chem",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A chemical reaction balances iff the stoichiometric matrix has a positive integer null vector.",
+   "rank": 2
+  },
+  {
+   "target": "Chem.gibbs_phase_rule",
+   "tier": "DOMAIN-chem",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Degrees of freedom F = C \u2212 P + 2 as an affine-dimension count.",
+   "rank": 2
+  },
+  {
+   "target": "Chem.alkane_tree",
+   "tier": "DOMAIN-chem",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The carbon skeleton of an acyclic alkane C_nH_{2n+2} is a tree with n\u22121 C\u2013C bonds.",
+   "rank": 2
+  },
+  {
+   "target": "Chem.polya_isomer_count",
+   "tier": "DOMAIN-chem",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Counting substitution isomers on a symmetric skeleton equals the Burnside/P\u00f3lya cycle-index average.",
+   "rank": 2
+  },
+  {
+   "target": "Chem.point_group_finite_O3",
+   "tier": "DOMAIN-chem",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Every molecular point group is a finite subgroup of O(3).",
+   "rank": 2
+  },
+  {
+   "target": "Chem.benzene_D6h_irreps",
+   "tier": "DOMAIN-chem",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The character table of D\u2086\u2095 has the correct number of irreducible representations (=conjugacy classes).",
+   "rank": 2
+  },
+  {
+   "target": "Chem.wiener_path_formula",
+   "tier": "DOMAIN-chem",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The Wiener index of the path graph P_n equals C(n+1,3).",
+   "rank": 2
+  },
+  {
+   "target": "Chem.handshake_valence",
+   "tier": "DOMAIN-chem",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Sum of atomic valences (vertex degrees) equals twice the number of bonds.",
+   "rank": 2
+  },
+  {
+   "target": "Chem.entropy_concave",
+   "tier": "DOMAIN-chem",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The Gibbs entropy \u2212\u03a3 p_i log p_i is concave in the probability vector.",
+   "rank": 2
+  },
+  {
+   "target": "Chem.arrhenius_monotone",
+   "tier": "DOMAIN-chem",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The Arrhenius rate k=A e^{\u2212Ea/RT} is strictly increasing in T for Ea>0.",
+   "rank": 2
+  },
+  {
+   "target": "Chem.leChatelier_sign",
+   "tier": "DOMAIN-chem",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "For an exothermic reaction, the equilibrium constant K(T) is strictly decreasing in T (van 't Hoff).",
+   "rank": 2
+  },
+  {
+   "target": "Chem.molecular_orbital_count",
+   "tier": "DOMAIN-chem",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "LCAO of n atomic orbitals yields exactly n molecular orbitals (dimension preservation).",
+   "rank": 2
+  },
+  {
+   "target": "CS.insertion_sort_correct",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "insertionSort returns a sorted permutation of its input.",
+   "rank": 1
+  },
+  {
+   "target": "CS.mergesort_correct",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "mergeSort returns a sorted permutation of its input.",
+   "rank": 1
+  },
+  {
+   "target": "CS.halting_undecidable",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "There is no total computable H deciding whether program p halts on input x (diagonalization).",
+   "rank": 1
+  },
+  {
+   "target": "CS.pumping_regular",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Every regular language satisfies the pumping lemma.",
+   "rank": 1
+  },
+  {
+   "target": "CS.euclid_gcd_correct",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Euclid's algorithm returns gcd(a,b) and terminates.",
+   "rank": 1
+  },
+  {
+   "target": "CS.binary_search_correct",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Binary search on a sorted array returns an index iff the key is present.",
+   "rank": 1
+  },
+  {
+   "target": "CS.pigeonhole_hash",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Any hash from an (n+1)-set to an n-set has a collision.",
+   "rank": 1
+  },
+  {
+   "target": "CS.kleene_regex_dfa",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A language is regular iff it is accepted by a DFA (Kleene, finite direction).",
+   "rank": 1
+  },
+  {
+   "target": "CS.knaster_tarski",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A monotone map on a complete lattice has a least fixed point.",
+   "rank": 1
+  },
+  {
+   "target": "CS.cantor_powerset",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "There is no surjection A \u2192 \ud835\udcab(A) (Cantor).",
+   "rank": 1
+  },
+  {
+   "target": "CS.huffman_optimal",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Huffman coding minimizes expected codeword length among prefix codes.",
+   "rank": 1
+  },
+  {
+   "target": "CS.master_theorem_case1",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "T(n)=aT(n/b)+f(n) with f(n)=O(n^{log_b a \u2212 \u03b5}) gives T(n)=\u0398(n^{log_b a}).",
+   "rank": 1
+  },
+  {
+   "target": "CS.ackermann_total",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The Ackermann function is total (well-founded on lexicographic \u2115\u00b2).",
+   "rank": 1
+  },
+  {
+   "target": "CS.dfa_complement_regular",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Regular languages are closed under complement.",
+   "rank": 1
+  },
+  {
+   "target": "CS.dijkstra_correct",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Dijkstra's algorithm computes shortest-path distances on nonnegative-weight graphs.",
+   "rank": 1
+  },
+  {
+   "target": "CS.church_rosser_beta_diamond",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "One-step parallel \u03b2-reduction in the \u03bb-calculus has the diamond property.",
+   "rank": 1
+  },
+  {
+   "target": "CS.pcp_pigeon_bound",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Any prefix-free binary code satisfies Kraft's inequality \u03a3 2^{-\u2113_i} \u2264 1.",
+   "rank": 1
+  },
+  {
+   "target": "CS.rice_nontrivial",
+   "tier": "DOMAIN-cs",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Every nontrivial semantic property of programs is undecidable (Rice).",
+   "rank": 1
+  },
+  {
+   "target": "Math.quadratic_reciprocity",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "For odd primes p\u2260q: (p/q)(q/p) = (\u22121)^{((p\u22121)/2)((q\u22121)/2)}.",
+   "rank": 1
+  },
+  {
+   "target": "Math.sum_two_squares",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A prime p is a sum of two squares iff p=2 or p\u22611 (mod 4).",
+   "rank": 1
+  },
+  {
+   "target": "Math.lagrange_four_squares",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Every natural number is a sum of four squares.",
+   "rank": 1
+  },
+  {
+   "target": "Math.bertrand_postulate",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "For every n\u22651 there is a prime p with n<p\u22642n.",
+   "rank": 1
+  },
+  {
+   "target": "Math.wilson_theorem",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "n>1 is prime iff (n\u22121)! \u2261 \u22121 (mod n).",
+   "rank": 1
+  },
+  {
+   "target": "Math.cauchy_group",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "If a prime p divides |G| then G has an element of order p (Cauchy).",
+   "rank": 1
+  },
+  {
+   "target": "Math.lagrange_subgroup",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The order of a subgroup divides the order of a finite group.",
+   "rank": 1
+  },
+  {
+   "target": "Math.fta_algebra",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Every nonconstant complex polynomial has a root (fundamental theorem of algebra).",
+   "rank": 1
+  },
+  {
+   "target": "Math.ivt",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A continuous function on [a,b] attains every value between f(a) and f(b).",
+   "rank": 1
+  },
+  {
+   "target": "Math.bolzano_weierstrass",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Every bounded sequence in \u211d^n has a convergent subsequence.",
+   "rank": 1
+  },
+  {
+   "target": "Math.heine_borel",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A subset of \u211d^n is compact iff it is closed and bounded.",
+   "rank": 1
+  },
+  {
+   "target": "Math.mean_value",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A differentiable f on [a,b] has c with f'(c)=(f(b)\u2212f(a))/(b\u2212a).",
+   "rank": 1
+  },
+  {
+   "target": "Math.weierstrass_approx",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Polynomials are dense in C([a,b]) under the sup norm.",
+   "rank": 1
+  },
+  {
+   "target": "Math.ramsey_3_3",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "R(3,3)=6: any 2-coloring of K\u2086's edges has a monochromatic triangle, and K\u2085 has a coloring without one.",
+   "rank": 1
+  },
+  {
+   "target": "Math.halls_marriage",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A bipartite graph has a perfect matching iff Hall's condition holds.",
+   "rank": 1
+  },
+  {
+   "target": "Math.inclusion_exclusion",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "|\u22c3A_i| = \u03a3(\u22121)^{|S|+1}|\u22c2_{i\u2208S}A_i| (inclusion\u2013exclusion).",
+   "rank": 1
+  },
+  {
+   "target": "Math.catalan_closed",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The nth Catalan number equals C(2n,n)/(n+1).",
+   "rank": 1
+  },
+  {
+   "target": "Math.euler_pentagonal",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Euler's pentagonal number theorem for the partition generating function.",
+   "rank": 1
+  },
+  {
+   "target": "Math.brouwer_2d",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Every continuous self-map of the closed 2-disk has a fixed point.",
+   "rank": 1
+  },
+  {
+   "target": "Math.baire_category",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A complete metric space is not a countable union of nowhere-dense sets.",
+   "rank": 1
+  },
+  {
+   "target": "Math.dilworth",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "In a finite poset, the minimum antichain cover equals the longest chain length.",
+   "rank": 1
+  },
+  {
+   "target": "Math.sperner_lemma",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Every Sperner coloring of a triangulated simplex has an odd number of rainbow cells.",
+   "rank": 1
+  },
+  {
+   "target": "Math.chinese_remainder",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "For pairwise-coprime moduli, \u2124/(\u220fn\u1d62) \u2245 \u220f \u2124/n\u1d62.",
+   "rank": 1
+  },
+  {
+   "target": "Math.fermat_little",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "For prime p and a not divisible by p, a^{p\u22121} \u2261 1 (mod p).",
+   "rank": 1
+  },
+  {
+   "target": "Math.abel_ruffini_deg5",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The general quintic is not solvable by radicals (Galois-theoretic).",
+   "rank": 1
+  },
+  {
+   "target": "Math.gauss_bonnet_polygon",
+   "tier": "DOMAIN-math",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The angle sum of a geodesic triangle on the unit sphere exceeds \u03c0 by its area.",
+   "rank": 1
+  }
+ ]
+}
