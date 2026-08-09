@@ -21,7 +21,9 @@ def t(name, cluster, tier, statement):
     goal = {"STATEMENT": "Formalize the precise statement (with all definitions) in Lean 4.",
             "SPECIAL": "Prove the stated special/base case in Lean 4, axiom-clean.",
             "MOONSHOT": "Formalize the statement; prove the base case or a Lean-checked reduction."}[tier]
-    return {"target": name, "tier": f"FRONTIER-{cluster}", "rank": 5,
+    # tractable-first: SPECIAL/STATEMENT jump ahead of the corpus tail; MOONSHOT trails
+    rank = {"SPECIAL": 2, "STATEMENT": 2, "MOONSHOT": 6}[tier]
+    return {"target": name, "tier": f"FRONTIER-{cluster}", "rank": rank,
             "difficulty": tier, "goal": goal, "statement": statement}
 
 

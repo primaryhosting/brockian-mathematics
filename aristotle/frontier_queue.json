@@ -4,7 +4,7 @@
   {
    "target": "Frontier.Goodstein_terminates",
    "tier": "FRONTIER-set",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Every Goodstein sequence reaches 0 (uses \u03b5\u2080 well-foundedness; independent of PA)."
@@ -12,7 +12,7 @@
   {
    "target": "Frontier.Hydra_Kirby_Paris",
    "tier": "FRONTIER-set",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Every hydra game terminates for any strategy (Kirby\u2013Paris; PA-independent)."
@@ -20,7 +20,7 @@
   {
    "target": "Frontier.Borel_determinacy",
    "tier": "FRONTIER-set",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Every Borel game is determined (Martin's theorem)."
@@ -28,7 +28,7 @@
   {
    "target": "Frontier.Gale_Stewart_open",
    "tier": "FRONTIER-set",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "Every open game is determined (Gale\u2013Stewart)."
@@ -36,7 +36,7 @@
   {
    "target": "Frontier.Banach_Tarski",
    "tier": "FRONTIER-set",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The unit ball in \u211d\u00b3 admits a paradoxical decomposition (Banach\u2013Tarski)."
@@ -44,7 +44,7 @@
   {
    "target": "Frontier.Paris_Harrington",
    "tier": "FRONTIER-set",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The strengthened finite Ramsey theorem is true but unprovable in PA."
@@ -52,7 +52,7 @@
   {
    "target": "Frontier.Goedel_second_incompleteness",
    "tier": "FRONTIER-set",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "No consistent recursively-axiomatized theory extending PA proves its own consistency."
@@ -60,7 +60,7 @@
   {
    "target": "Frontier.Tarski_undefinability",
    "tier": "FRONTIER-set",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "STATEMENT",
    "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
    "statement": "Arithmetical truth is not arithmetically definable (Tarski)."
@@ -68,7 +68,7 @@
   {
    "target": "Frontier.Aronszajn_tree_exists",
    "tier": "FRONTIER-set",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "There exists an Aronszajn tree (a tree of height \u03c9\u2081 with no uncountable branch/level)."
@@ -76,7 +76,7 @@
   {
    "target": "Frontier.CH_independent_statement",
    "tier": "FRONTIER-set",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The Continuum Hypothesis is independent of ZFC (G\u00f6del + Cohen forcing)."
@@ -84,7 +84,7 @@
   {
    "target": "Frontier.inaccessible_implies_ConZFC",
    "tier": "FRONTIER-set",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "An inaccessible cardinal yields a model of ZFC, so Con(ZFC+inaccessible)\u2192Con(ZFC)."
@@ -92,7 +92,7 @@
   {
    "target": "Frontier.infinite_ramsey",
    "tier": "FRONTIER-set",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "Every 2-colouring of [\u2115]\u00b2 has an infinite monochromatic set (infinite Ramsey)."
@@ -100,7 +100,7 @@
   {
    "target": "Frontier.Suslin_line",
    "tier": "FRONTIER-set",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "A Suslin line exists iff \u25ca-type hypotheses fail; state Suslin's problem precisely."
@@ -108,7 +108,7 @@
   {
    "target": "Frontier.Loeb_theorem",
    "tier": "FRONTIER-set",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "STATEMENT",
    "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
    "statement": "L\u00f6b's theorem: if PA \u22a2 (\u25a1\u03c6 \u2192 \u03c6) then PA \u22a2 \u03c6."
@@ -116,7 +116,7 @@
   {
    "target": "Frontier.Green_Tao",
    "tier": "FRONTIER-primes",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The primes contain arbitrarily long arithmetic progressions."
@@ -124,7 +124,7 @@
   {
    "target": "Frontier.bounded_prime_gaps",
    "tier": "FRONTIER-primes",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "liminf (p_{n+1}\u2212p_n) is finite (Zhang/Maynard)."
@@ -132,7 +132,7 @@
   {
    "target": "Frontier.Chen_theorem",
    "tier": "FRONTIER-primes",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Every sufficiently large even number is p + q with q having \u2264 2 prime factors."
@@ -140,7 +140,7 @@
   {
    "target": "Frontier.Vinogradov_three_primes",
    "tier": "FRONTIER-primes",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Every sufficiently large odd number is a sum of three primes."
@@ -148,7 +148,7 @@
   {
    "target": "Frontier.Brun_twin_reciprocal",
    "tier": "FRONTIER-primes",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "The sum of reciprocals of twin primes converges (Brun's constant)."
@@ -156,7 +156,7 @@
   {
    "target": "Frontier.Mordell_finite_generation",
    "tier": "FRONTIER-primes",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The group of rational points of an elliptic curve over \u211a is finitely generated (Mordell)."
@@ -164,7 +164,7 @@
   {
    "target": "Frontier.Catalan_Mihailescu",
    "tier": "FRONTIER-primes",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "8 and 9 are the only consecutive perfect powers (x^p \u2212 y^q = 1 \u21d2 3\u00b2\u22122\u00b3)."
@@ -172,7 +172,7 @@
   {
    "target": "Frontier.abc_statement",
    "tier": "FRONTIER-primes",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "State the abc conjecture: for \u03b5>0, finitely many coprime a+b=c with c > rad(abc)^{1+\u03b5}."
@@ -180,7 +180,7 @@
   {
    "target": "Frontier.FLT_statement",
    "tier": "FRONTIER-primes",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Fermat's Last Theorem: x\u207f+y\u207f=z\u207f has no positive-integer solution for n>2."
@@ -188,7 +188,7 @@
   {
    "target": "Frontier.sum_three_cubes_42",
    "tier": "FRONTIER-primes",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "42 = (\u221280538738812075974)\u00b3 + 80435758145817515\u00b3 + 12602123297335631\u00b3."
@@ -196,7 +196,7 @@
   {
    "target": "Frontier.erdos_discrepancy",
    "tier": "FRONTIER-primes",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Every \u00b11 sequence has unbounded discrepancy on homogeneous APs (Tao)."
@@ -204,7 +204,7 @@
   {
    "target": "Frontier.artin_primitive_root",
    "tier": "FRONTIER-primes",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "State Artin's conjecture on primitive roots."
@@ -212,7 +212,7 @@
   {
    "target": "Frontier.RH_statement",
    "tier": "FRONTIER-moonshot",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "All nontrivial zeros of \u03b6(s) have real part 1/2."
@@ -220,7 +220,7 @@
   {
    "target": "Frontier.RH_Li_criterion",
    "tier": "FRONTIER-moonshot",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "RH \u21d4 Li's coefficients \u03bb_n \u2265 0 for all n\u22651 (state and prove the equivalence)."
@@ -228,7 +228,7 @@
   {
    "target": "Frontier.P_vs_NP_statement",
    "tier": "FRONTIER-moonshot",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "STATEMENT",
    "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
    "statement": "State P \u2260 NP via time-bounded Turing machines and polynomial reducibility."
@@ -236,7 +236,7 @@
   {
    "target": "Frontier.cook_levin",
    "tier": "FRONTIER-moonshot",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "SAT is NP-complete (Cook\u2013Levin)."
@@ -244,7 +244,7 @@
   {
    "target": "Frontier.navier_stokes_regularity",
    "tier": "FRONTIER-moonshot",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "State global smoothness/existence for 3D incompressible Navier\u2013Stokes."
@@ -252,7 +252,7 @@
   {
    "target": "Frontier.yang_mills_mass_gap",
    "tier": "FRONTIER-moonshot",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "State existence of quantum Yang\u2013Mills on \u211d\u2074 with a positive mass gap."
@@ -260,7 +260,7 @@
   {
    "target": "Frontier.hodge_statement",
    "tier": "FRONTIER-moonshot",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "State the Hodge conjecture on algebraicity of Hodge classes."
@@ -268,7 +268,7 @@
   {
    "target": "Frontier.BSD_statement",
    "tier": "FRONTIER-moonshot",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "State Birch\u2013Swinnerton-Dyer: ord_{s=1}L(E,s) = rank E(\u211a)."
@@ -276,7 +276,7 @@
   {
    "target": "Frontier.poincare_3sphere",
    "tier": "FRONTIER-moonshot",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Every simply-connected closed 3-manifold is homeomorphic to S\u00b3 (Perelman)."
@@ -284,7 +284,7 @@
   {
    "target": "Frontier.hadwiger_nelson_5",
    "tier": "FRONTIER-moonshot",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "The chromatic number of the plane is \u2265 5 (de Grey's unit-distance graph)."
@@ -292,7 +292,7 @@
   {
    "target": "Frontier.atiyah_singer_index",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The analytic index of an elliptic operator equals its topological index."
@@ -300,7 +300,7 @@
   {
    "target": "Frontier.deligne_weil_RH",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The Riemann hypothesis for varieties over finite fields (Weil conjectures; Deligne)."
@@ -308,7 +308,7 @@
   {
    "target": "Frontier.faltings_mordell",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "A curve of genus \u2265 2 over \u211a has finitely many rational points (Faltings)."
@@ -316,7 +316,7 @@
   {
    "target": "Frontier.thurston_geometrization",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "State the geometrization of closed 3-manifolds into eight geometries."
@@ -324,7 +324,7 @@
   {
    "target": "Frontier.exotic_R4",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "There exists a smooth manifold homeomorphic but not diffeomorphic to \u211d\u2074 (Donaldson/Freedman)."
@@ -332,7 +332,7 @@
   {
    "target": "Frontier.jones_polynomial_invariant",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "The Jones polynomial is a link invariant (well-defined under Reidemeister moves)."
@@ -340,7 +340,7 @@
   {
    "target": "Frontier.zelmanov_restricted_burnside",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The restricted Burnside problem has a positive solution (Zelmanov)."
@@ -348,7 +348,7 @@
   {
    "target": "Frontier.ngo_fundamental_lemma",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "State the Langlands\u2013Shelstad fundamental lemma (Ng\u00f4)."
@@ -356,7 +356,7 @@
   {
    "target": "Frontier.smirnov_percolation",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Crossing probabilities of critical triangular-lattice percolation are conformally invariant (Cardy\u2013Smirnov)."
@@ -364,7 +364,7 @@
   {
    "target": "Frontier.bhargava_cube_law",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "Bhargava's cube gives a composition law on pairs of binary quadratic forms recovering Gauss composition."
@@ -372,7 +372,7 @@
   {
    "target": "Frontier.hairer_KPZ",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The KPZ equation is well-posed via regularity structures (Hairer)."
@@ -380,7 +380,7 @@
   {
    "target": "Frontier.mirzakhani_WP_volume",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Weil\u2013Petersson volumes of moduli of bordered surfaces satisfy Mirzakhani's recursion."
@@ -388,7 +388,7 @@
   {
    "target": "Frontier.avila_ten_martini",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The almost Mathieu operator has Cantor spectrum for all irrational flux (Ten Martini)."
@@ -396,7 +396,7 @@
   {
    "target": "Frontier.scholze_perfectoid_tilt",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "State the tilting equivalence of perfectoid fields (Scholze)."
@@ -404,7 +404,7 @@
   {
    "target": "Frontier.figalli_OT_regularity",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Regularity of optimal transport maps under the MTW condition (Figalli)."
@@ -412,7 +412,7 @@
   {
    "target": "Frontier.duminil_ising_sharp",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Sharpness of the phase transition for the Ising model (Duminil-Copin)."
@@ -420,7 +420,7 @@
   {
    "target": "Frontier.huh_matroid_log_concave",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "The coefficients of the characteristic polynomial of a matroid are log-concave (Adiprasito\u2013Huh\u2013Katz)."
@@ -428,7 +428,7 @@
   {
    "target": "Frontier.voevodsky_milnor",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The Milnor conjecture: mod-2 Galois cohomology \u2245 Milnor K-theory / 2 (Voevodsky)."
@@ -436,7 +436,7 @@
   {
    "target": "Frontier.lindenstrauss_QUE",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Arithmetic quantum unique ergodicity on congruence surfaces (Lindenstrauss)."
@@ -444,7 +444,7 @@
   {
    "target": "Frontier.mcmullen_renormalization",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "State the renormalization/rigidity results for quadratic-like maps (McMullen)."
@@ -452,7 +452,7 @@
   {
    "target": "Frontier.feit_thompson_odd_order",
    "tier": "FRONTIER-abel",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Every finite group of odd order is solvable (Feit\u2013Thompson; Thompson/Tits Abel)."
@@ -460,7 +460,7 @@
   {
    "target": "Frontier.milnor_exotic_7sphere",
    "tier": "FRONTIER-abel",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "There exist smooth manifolds homeomorphic but not diffeomorphic to S\u2077 (Milnor)."
@@ -468,7 +468,7 @@
   {
    "target": "Frontier.furstenberg_szemeredi",
    "tier": "FRONTIER-abel",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Positive-density subsets of \u2115 contain arbitrarily long APs, via multiple recurrence (Furstenberg)."
@@ -476,7 +476,7 @@
   {
    "target": "Frontier.margulis_superrigidity",
    "tier": "FRONTIER-abel",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "State Margulis superrigidity for higher-rank lattices."
@@ -484,7 +484,7 @@
   {
    "target": "Frontier.lovasz_kneser",
    "tier": "FRONTIER-abel",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "The chromatic number of the Kneser graph KG_{n,k} is n \u2212 2k + 2 (Lov\u00e1sz, via Borsuk\u2013Ulam)."
@@ -492,7 +492,7 @@
   {
    "target": "Frontier.uhlenbeck_bubbling",
    "tier": "FRONTIER-abel",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Uhlenbeck compactness / removable singularities for Yang\u2013Mills connections."
@@ -500,7 +500,7 @@
   {
    "target": "Frontier.langlands_reciprocity",
    "tier": "FRONTIER-abel",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "State the Langlands reciprocity conjecture linking Galois and automorphic representations."
@@ -508,7 +508,7 @@
   {
    "target": "Frontier.nirenberg_gagliardo",
    "tier": "FRONTIER-abel",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "The Gagliardo\u2013Nirenberg interpolation inequality."
@@ -516,7 +516,7 @@
   {
    "target": "Frontier.szemeredi_regularity",
    "tier": "FRONTIER-abel",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "State and prove Szemer\u00e9di's regularity lemma for graphs."
@@ -524,7 +524,7 @@
   {
    "target": "Frontier.wigderson_expander_mixing",
    "tier": "FRONTIER-abel",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "The expander mixing lemma bounds edge discrepancy by the second eigenvalue."
@@ -532,7 +532,7 @@
   {
    "target": "Frontier.bell_theorem",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "No local hidden-variable model reproduces all quantum correlations (Bell); CHSH \u2264 2 classically."
@@ -540,7 +540,7 @@
   {
    "target": "Frontier.kochen_specker",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "No noncontextual hidden-variable assignment exists for QM in dimension \u2265 3 (Kochen\u2013Specker)."
@@ -548,7 +548,7 @@
   {
    "target": "Frontier.gleason_theorem",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Every quantum measure on a Hilbert space of dim \u2265 3 comes from a density operator (Gleason)."
@@ -556,7 +556,7 @@
   {
    "target": "Frontier.no_communication",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "Local operations on one half of an entangled pair cannot transmit information."
@@ -564,7 +564,7 @@
   {
    "target": "Frontier.tknn_chern_hall",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "The integer-quantum-Hall conductance equals a Chern number times e\u00b2/h (TKNN)."
@@ -572,7 +572,7 @@
   {
    "target": "Frontier.ssh_winding_invariant",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "The SSH model's topological phase is classified by a \u2124 winding number."
@@ -580,7 +580,7 @@
   {
    "target": "Frontier.berry_phase_quantized",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "The Berry phase around a closed loop is the integral of the Berry curvature."
@@ -588,7 +588,7 @@
   {
    "target": "Frontier.landau_levels",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "A charged particle in a uniform magnetic field has spectrum \u210f\u03c9_c(n+\u00bd)."
@@ -596,7 +596,7 @@
   {
    "target": "Frontier.bcs_gap_binding",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "The BCS gap equation has a nonzero solution for any attractive coupling (Cooper pairing)."
@@ -604,7 +604,7 @@
   {
    "target": "Frontier.higgs_mass_toy",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "In an abelian Higgs toy model, spontaneous symmetry breaking gives the gauge boson a mass."
@@ -612,7 +612,7 @@
   {
    "target": "Frontier.asymptotic_freedom_sign",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "The one-loop SU(N) beta function is negative (asymptotic freedom)."
@@ -620,7 +620,7 @@
   {
    "target": "Frontier.penrose_singularity",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "A spacetime with a trapped surface and the null energy condition is geodesically incomplete (Penrose)."
@@ -628,7 +628,7 @@
   {
    "target": "Frontier.onsager_2d_ising",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The exact free energy of the 2D square-lattice Ising model (Onsager)."
@@ -636,7 +636,7 @@
   {
    "target": "Frontier.kam_theorem",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Invariant tori persist under small perturbation of an integrable system (KAM)."
@@ -644,7 +644,7 @@
   {
    "target": "Frontier.lieb_robinson",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "Lieb\u2013Robinson bound: an effective light cone for local spin dynamics."
@@ -652,7 +652,7 @@
   {
    "target": "Frontier.noether_conservation",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "Each smooth symmetry of an action yields a conserved current (Noether, 1D case)."
@@ -660,7 +660,7 @@
   {
    "target": "Frontier.spin_statistics",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "State the spin\u2013statistics connection for relativistic quantum fields."
@@ -668,7 +668,7 @@
   {
    "target": "Frontier.lieb_thirring_stability",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The Lieb\u2013Thirring inequality and stability of matter."
@@ -676,7 +676,7 @@
   {
    "target": "Frontier.aumann_agreement",
    "tier": "FRONTIER-mind",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "Agents with common priors and common knowledge of posteriors cannot agree to disagree (Aumann)."
@@ -684,7 +684,7 @@
   {
    "target": "Frontier.good_regulator",
    "tier": "FRONTIER-mind",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "Every good regulator of a system is (contains) a model of that system (Conant\u2013Ashby)."
@@ -692,7 +692,7 @@
   {
    "target": "Frontier.self_nonprediction",
    "tier": "FRONTIER-mind",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "No machine can always correctly predict its own next output before producing it (diagonal self-reference)."
@@ -700,7 +700,7 @@
   {
    "target": "Frontier.iit_phi_partition",
    "tier": "FRONTIER-mind",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "STATEMENT",
    "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
    "statement": "Formalize integrated information \u03a6 as minimized effective-information over bipartitions; prove \u03a6=0 for a disconnected system."
@@ -708,7 +708,7 @@
   {
    "target": "Frontier.global_workspace_fixpoint",
    "tier": "FRONTIER-mind",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "STATEMENT",
    "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
    "statement": "A monotone broadcast (global-workspace) operator on a finite state lattice reaches a least fixed point (Knaster\u2013Tarski)."
@@ -716,7 +716,7 @@
   {
    "target": "Frontier.loeb_no_self_trust",
    "tier": "FRONTIER-mind",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "STATEMENT",
    "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
    "statement": "A consistent theory cannot prove its own reflection schema for an unprovable sentence (L\u00f6b-based)."
@@ -724,7 +724,7 @@
   {
    "target": "Frontier.arrow_impossibility",
    "tier": "FRONTIER-mind",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "No ranked voting rule for \u22653 alternatives satisfies unanimity, IIA, and non-dictatorship (Arrow; Nobel)."
@@ -732,7 +732,7 @@
   {
    "target": "Frontier.nash_equilibrium_exists",
    "tier": "FRONTIER-mind",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Every finite game has a mixed-strategy Nash equilibrium (Nash; via Brouwer/Kakutani)."
@@ -740,7 +740,7 @@
   {
    "target": "Frontier.friendship_theorem",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "If every two people have exactly one common friend, someone is everyone's friend (Erd\u0151s\u2013Ko\u2013R\u00e9nyi)."
@@ -748,7 +748,7 @@
   {
    "target": "Frontier.five_color_theorem",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "Every planar graph is 5-colourable."
@@ -756,7 +756,7 @@
   {
    "target": "Frontier.four_color_statement",
    "tier": "FRONTIER-moonshot",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "Every planar graph is 4-colourable (Appel\u2013Haken)."
@@ -764,7 +764,7 @@
   {
    "target": "Frontier.huang_sensitivity",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "Boolean sensitivity and degree are polynomially related (Huang's sensitivity theorem, 2019)."
@@ -772,7 +772,7 @@
   {
    "target": "Frontier.kadison_singer",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The Kadison\u2013Singer problem holds (Marcus\u2013Spielman\u2013Srivastava; interlacing families)."
@@ -780,7 +780,7 @@
   {
    "target": "Frontier.ham_sandwich",
    "tier": "FRONTIER-physics",
-   "rank": 5,
+   "rank": 2,
    "difficulty": "SPECIAL",
    "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
    "statement": "Any n finite measures in \u211d\u207f can be simultaneously bisected by one hyperplane (Ham\u2013Sandwich)."
@@ -788,7 +788,7 @@
   {
    "target": "Frontier.gaussian_correlation",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The Gaussian correlation inequality for symmetric convex sets (Royen)."
@@ -796,7 +796,7 @@
   {
    "target": "Frontier.willmore_conjecture",
    "tier": "FRONTIER-fields",
-   "rank": 5,
+   "rank": 6,
    "difficulty": "MOONSHOT",
    "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
    "statement": "The Clifford torus minimizes Willmore energy among genus-1 surfaces (Marques\u2013Neves)."
