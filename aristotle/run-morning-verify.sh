@@ -14,5 +14,7 @@ if pgrep -f verify_stage.py >/dev/null; then echo "verify_stage already running;
 /opt/homebrew/bin/python3 aristotle/lemma_mine.py
 /opt/homebrew/bin/python3 aristotle/reduction_tracker.py
 CROSS_MAX=6 /opt/homebrew/bin/python3 aristotle/cross_check.py
+/opt/homebrew/bin/python3 aristotle/minimize_proofs.py
+/opt/homebrew/bin/python3 aristotle/auto_pr.py
 /opt/homebrew/bin/python3 aristotle/observatory.py
 
