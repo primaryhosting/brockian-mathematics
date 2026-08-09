@@ -1,0 +1,75 @@
+{
+ "count": 10,
+ "queue": [
+  {
+   "target": "PCA.no_escape_no_leak",
+   "tier": "PCA-lean",
+   "rank": 1,
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean. Provide the model definitions inline.",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: With no privileged and no unowned escape, any granted access is in-scope: \u2200 inScope c r, (\u2200 c, \u00acisPriv c) \u2192 (\u2200 r, \u00acisUnowned r) \u2192 canAccess inScope isPriv isUnowned c r \u2192 inScope c r."
+  },
+  {
+   "target": "PCA.priv_is_escape",
+   "tier": "PCA-lean",
+   "rank": 1,
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean. Provide the model definitions inline.",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: A privileged caller always has access (models the admin bypass): isPriv c \u2192 canAccess inScope isPriv isUnowned c r."
+  },
+  {
+   "target": "PCA.unowned_is_hole",
+   "tier": "PCA-lean",
+   "rank": 1,
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean. Provide the model definitions inline.",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: Any caller can reach an unowned row (models the `IS NULL` hole): isUnowned r \u2192 canAccess inScope isPriv isUnowned c r."
+  },
+  {
+   "target": "PCA.escape_monotone",
+   "tier": "PCA-lean",
+   "rank": 1,
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean. Provide the model definitions inline.",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: Adding escapes only enlarges access: if inScope c r then canAccess inScope isPriv isUnowned c r."
+  },
+  {
+   "target": "PCA.default_deny",
+   "tier": "PCA-lean",
+   "rank": 1,
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean. Provide the model definitions inline.",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: With empty scope and no escapes, nothing is accessible: (\u2200 c r, \u00acinScope c r) \u2192 (\u2200 c, \u00acisPriv c) \u2192 (\u2200 r, \u00acisUnowned r) \u2192 \u00ac canAccess inScope isPriv isUnowned c r."
+  },
+  {
+   "target": "PCA.leak_iff_escape_when_out_of_scope",
+   "tier": "PCA-lean",
+   "rank": 1,
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean. Provide the model definitions inline.",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: Out of scope, access holds iff some escape fires: \u00acinScope c r \u2192 (canAccess inScope isPriv isUnowned c r \u2194 (isPriv c \u2228 isUnowned r))."
+  },
+  {
+   "target": "PCA.owner_only_isolated",
+   "tier": "PCA-lean",
+   "rank": 1,
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean. Provide the model definitions inline.",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: Owner-equality scope with no escapes is isolated: let inScope c r := ownerOf r = c; then canAccess (fun c r => ownerOf r = c) (fun _ => False) (fun _ => False) c r \u2192 ownerOf r = c."
+  },
+  {
+   "target": "PCA.tightening_refines",
+   "tier": "PCA-lean",
+   "rank": 1,
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean. Provide the model definitions inline.",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: Removing the unowned disjunct refines access (subset): canAccess inScope isPriv (fun _ => False) c r \u2192 canAccess inScope isPriv isUnowned c r."
+  },
+  {
+   "target": "PCA.no_clean_proved_with_escape",
+   "tier": "PCA-lean",
+   "rank": 1,
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean. Provide the model definitions inline.",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: If a clean-isolation proof exists (no cross-scope access) yet an escape can fire out of scope, contradiction \u2014 formalizes the soundness-fuzz invariant: (\u2200 c r, canAccess inScope isPriv isUnowned c r \u2192 inScope c r) \u2192 (\u2203 c r, \u00acinScope c r \u2227 (isPriv c \u2228 isUnowned r)) \u2192 False."
+  },
+  {
+   "target": "PCA.with_check_true_admits_forge",
+   "tier": "PCA-lean",
+   "rank": 1,
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean. Provide the model definitions inline.",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: A `WITH CHECK true` write policy admits any row (models forge-any): let canWrite := fun (_ : P) (_ : R) => True; \u2200 c r, canWrite c r."
+  }
+ ]
+}
