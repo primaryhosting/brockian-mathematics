@@ -19,4 +19,10 @@
 
 **Execution:** one Lovable build message per phase-step, sequential, verify (full vitest + typecheck + 0 console errors + browser eyes) before the next; publish only on explicit go. Same controller-polling pattern as the 50-lab program.
 
-**Status:** Phase 1 building (2026-08-10).
+**Design correction (Chris, 2026-08-10):** "Keep the image design of the pixar galaxy of thinkers, those are great — make this amazing and epic." → The Pixar-style stylized character art is the Athenaeum's canonical visual identity; the geometric motifs demote to secondary emblems/fallback. The pre-existing 3D force-directed galaxy (`/thinkers/athenaeum`, Supabase `thinkers` table: 66 rows / 31 bios / 7 attributed historical portraits) becomes the epic front door at `/athenaeum`, re-pointed at the derived roster. Taste/honesty guard: Pixar-style depictions for historical figures only — never cartoonify living people (de Moura, Viazovska, Huang, Odlyzko, Montgomery, Hales keep motifs).
+
+**Pre-existing surfaces found (reconnaissance):** `/labs/ask` = corpus-grounded persona chat (4 stylistic lenses, `ai-lab-chat` edge function via Lovable AI Gateway, RAG over arXiv abstracts + Riemann 1859, live citation-check flagging unverified backticked names) — Phase 3 builds ON this, the hard part already exists. `/thinkers/athenaeum` = 3D galaxy. Old `/athenaeum` route pointed at DiscoveryHubPage (collision to reconcile).
+
+**Status (2026-08-10):**
+- Phase 1 COMPLETE — commit a15977af, 15.5 credits. 78 thinkers derived by scanning all 50 labs' claim ledgers + surface narrations; hall + `/athenaeum/:slug` pages; integrity test (appearances→SITE_REGISTRY, corpus modules→verbatim registry); top-level nav entry.
+- Phase 1.5 (epic galaxy pass) BUILDING — msg umsg_01kznzygm4f8trgyrv67wqck84: Pixar portrait system (flagship ~16 first, portraits.ts manifest), galaxy front door unified onto the derived roster, three-surface reconciliation, DB bio harvest.
