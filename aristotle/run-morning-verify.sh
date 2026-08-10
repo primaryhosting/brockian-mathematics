@@ -8,9 +8,12 @@ cd "$HOME/Projects/brockian-mathematics" || exit 1
 # don't stack: skip if a verify is already grinding
 if pgrep -f verify_stage.py >/dev/null; then echo "verify_stage already running; harvest only"; /opt/homebrew/bin/python3 aristotle/harvest_proofs.py; exit 0; fi
 /opt/homebrew/bin/python3 aristotle/harvest_proofs.py
+# also pull directly-submitted (non-pipeline) jobs — e.g. the Brockian program — that
+# aren't in submitted_night.json; capped so each 2h cycle chips at the backlog.
+HARVEST_ALL_MAX=80 /opt/homebrew/bin/python3 aristotle/harvest_all.py
 /opt/homebrew/bin/python3 aristotle/verify_stage.py
 /opt/homebrew/bin/python3 aristotle/select_best.py
-AXLE_MAX=60 /opt/homebrew/bin/python3 aristotle/axle_verify.py
+AXLE_MAX=120 /opt/homebrew/bin/python3 aristotle/axle_verify.py
 /opt/homebrew/bin/python3 aristotle/catalogue_domains.py
 /opt/homebrew/bin/python3 aristotle/lemma_mine.py
 /opt/homebrew/bin/python3 aristotle/reduction_tracker.py

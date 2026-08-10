@@ -1,0 +1,46 @@
+{
+ "note": "Spectral-gap / parity-barrier frontier. Honest register tags: SPECIAL = finite/attackable self-contained Mathlib fact; NEGATIVE = obstruction result; CONDITIONAL = implication skeleton (open hypotheses stated as hypotheses); CONJECTURE = NOT submitted as provable (the unconditional parity break). AXLE is the gate; only kernel-verified, non-vacuous results get registered, and the parity break is never auto-promoted.",
+ "count": 5,
+ "queue": [
+  {
+   "target": "Frontier.Spectral.cycle_laplacian_spectrum",
+   "tier": "FRONTIER-spectral",
+   "rank": 0,
+   "register": "SPECIAL",
+   "statement": "For n ≥ 3, the eigenvalues of the graph Laplacian L(C_n) of the cycle graph on n vertices are exactly { 2 - 2*Real.cos (2*Real.pi*k/n) : k ∈ Finset.range n }. Work self-contained over Mathlib: model C_n's Laplacian as the n×n circulant with diagonal 2 and -1 on the two cyclic off-diagonals, and exhibit the discrete-Fourier eigenvectors v_k(j) = Complex.exp (2*π*I*k*j/n).",
+   "goal": "Prove the full Laplacian spectrum of the cycle family in Lean 4 (Mathlib), axiom-clean."
+  },
+  {
+   "target": "Frontier.Spectral.cycle_fiedler_value",
+   "tier": "FRONTIER-spectral",
+   "rank": 0,
+   "register": "SPECIAL",
+   "statement": "For n ≥ 3, the algebraic connectivity (second-smallest Laplacian eigenvalue, the Fiedler value) of the cycle graph C_n equals 2 - 2*Real.cos (2*Real.pi/n). This generalizes the proven pentagon case Brockian.Connectivity.lambda2_eq to the whole cycle family.",
+   "goal": "Prove the Fiedler value of C_n in Lean 4 (Mathlib), axiom-clean, self-contained."
+  },
+  {
+   "target": "Frontier.Spectral.cycle_gap_vanishes",
+   "tier": "FRONTIER-spectral",
+   "rank": 1,
+   "register": "NEGATIVE",
+   "statement": "Let g n := 2 - 2*Real.cos (2*Real.pi/n). Prove Filter.Tendsto g Filter.atTop (nhds 0). This is the Fiedler value of the cycle C_n; it vanishes as n grows, so the plain cycle family has no uniform spectral gap (the obstruction).",
+   "goal": "Prove the cycle-family spectral gap vanishes, Lean 4 (Mathlib), axiom-clean."
+  },
+  {
+   "target": "Frontier.Spectral.expander_uniform_gap_witness",
+   "tier": "FRONTIER-spectral",
+   "rank": 2,
+   "register": "SPECIAL",
+   "statement": "Prove: the hypercube graph Q_k on 2^k vertices has smallest nonzero Laplacian eigenvalue equal to 2 for every k ≥ 1. Hence the family (Q_k) has a uniform spectral gap (≥ 2) independent of k. This shows uniform-gap graph families EXIST — the property a parity-breaking constellation family would need.",
+   "goal": "Prove the hypercube family has a uniform spectral gap, Lean 4 (Mathlib), axiom-clean."
+  },
+  {
+   "target": "Frontier.Spectral.gap_to_cancellation_conditional",
+   "tier": "FRONTIER-spectral",
+   "rank": 3,
+   "register": "CONDITIONAL",
+   "statement": "Conditional bridge — prove the IMPLICATION only, keeping both hypotheses open. Setting (abstract): a real inner-product space V, a self-adjoint projection P (the gap projection), a unit vector u, and a real S (the Liouville partial sum). Hypotheses: (H1) gap delta>0 with the identity S = inner u (P u); (H2) contraction bound: norm (P u) <= (1-delta). Conclusion: |S| <= (1-delta). Prove |S| <= (1-delta) from H1 and H2. Do NOT discharge H1 or H2; reject vacuous proofs.",
+   "goal": "Prove the conditional cancellation implication in Lean 4 (Mathlib), axiom-clean."
+  }
+ ]
+}

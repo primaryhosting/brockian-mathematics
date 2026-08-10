@@ -29,7 +29,7 @@ import titles  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
-QUEUES = os.environ.get("QUEUES", "next_100.json,domains_queue.json,mined_queue.json,pca_lean_queue.json,frontier_queue.json,frontier2.json,reattack_queue.json").split(",")
+QUEUES = os.environ.get("QUEUES", "next_100.json,domains_queue.json,mined_queue.json,pca_lean_queue.json,frontier_queue.json,frontier2.json,reattack_queue.json,frontier_spectral.json").split(",")
 REG = REPO / "registry" / "theorems.json"
 LEDGER = ROOT / "submitted_night.json"
 LOG = ROOT / "night_submit.log"
@@ -68,7 +68,11 @@ def prompt_for(item, reg, attempt=0):
     stmt = item.get("statement") or r.get("statement")
     tier = item.get("tier", "")
     human = titles.title(item["target"], tier)   # e.g. "Pure Mathematics — Abel Ruffini Deg 5"
-    hdr = titles.header(item["target"], tier, stmt, verified=False)
+    # short header (NO statement) — the Aristotle CLI stat()s the prompt as a path and
+    # dies if any slash-free segment exceeds the 255-BYTE filename limit; the full
+    # statement appears once below, and annotate_headers adds the rich header to the
+    # shipped file. Keep the embedded header minimal so long statements can't overflow.
+    hdr = titles.header(item["target"], tier, None, verified=False)
     # First line is the human-readable title (drives the Aristotle dashboard name so a
     # person can read the PROBLEM, not an opaque id); then instruct the prover to begin
     # the .lean file with that exact naming header so harvested proofs are self-labelling.
@@ -90,13 +94,36 @@ def prompt_for(item, reg, attempt=0):
     return "\n".join(parts)
 
 
+def _stat_safe(prompt):
+    """The aristotle CLI stat()s the positional prompt as a path; macOS raises
+    ENAMETOOLONG if the whole path exceeds ~1024 bytes or any slash-free segment
+    exceeds 255 bytes. Long math prompts trip this."""
+    b = prompt.encode()
+    return len(b) < 1000 and all(len(s.encode()) < 250 for s in prompt.split("/"))
+
+
 def submit(prompt, key):
     env = dict(os.environ, ARISTOTLE_API_KEY=key)
+    tmp = None
+    if _stat_safe(prompt):
+        args = ["uvx", "--from", "aristotlelib@latest", "aristotle", "submit", prompt]
+    else:
+        # stash the full instructions in a project dir and pass a short positional
+        # prompt, so the CLI's path-stat never sees the long text.
+        import tempfile
+        tmp = tempfile.mkdtemp(prefix="arsub_")
+        pathlib.Path(tmp, "INSTRUCTIONS.md").write_text(prompt)
+        short = "Read INSTRUCTIONS.md and prove the stated target. Output axiom-clean Lean 4 (Mathlib), no sorry/admit/native_decide."
+        args = ["uvx", "--from", "aristotlelib@latest", "aristotle", "submit", short,
+                "--project-dir", tmp]
     try:
-        p = subprocess.run(["uvx", "--from", "aristotlelib@latest", "aristotle", "submit", prompt],
-                           capture_output=True, text=True, env=env, timeout=300)
+        p = subprocess.run(args, capture_output=True, text=True, env=env, timeout=300)
     except Exception as e:  # noqa: BLE001
         return None, f"exec:{e}"
+    finally:
+        if tmp:
+            import shutil
+            shutil.rmtree(tmp, ignore_errors=True)
     out = (p.stdout or "") + (p.stderr or "")
     if RATE.search(out):
         return None, "RATE"

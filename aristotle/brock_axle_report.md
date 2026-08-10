@@ -1,0 +1,1116 @@
+# AXLE verification report — full corpus (both accounts)
+
+- best proofs: 647
+- AXLE-verified (Lean 4.32.0, axiom-clean): **495**
+- failed kernel check: 151
+
+## Verified by curriculum / namespace prefix (verified / failed)
+
+- `PCA.Isolation` — 7 verified, 1 failed
+- `Brockian.EquidistributionBVReduction` — 4 verified, 1 failed
+- `Brockian.EquidistributionUniformity` — 4 verified
+- `Brockian.Weyl` — 4 verified, 7 failed
+- `Brockian.Equidistribution` — 3 verified, 1 failed
+- `PCA.WriteIntegrity` — 2 verified
+- `PCA.Cert` — 2 verified
+- `PCA.Invariant` — 2 verified
+- `Brockian.MsSchurInequality` — 2 verified
+- `QC.no_cloning` — 1 verified
+- `QC.pauli_anticommute` — 1 verified
+- `QC.pauli_basis` — 1 verified
+- `QC.hadamard_involutive` — 1 verified
+- `QC.hadamard_XZ` — 1 verified
+- `QC.cnot_unitary_involutive` — 1 verified
+- `QC.bell_orthonormal` — 1 verified
+- `QC.chsh_tsirelson` — 1 verified
+- `QC.teleportation_identity` — 1 verified
+- `QC.deutsch_correct` — 1 verified
+- `QC.density_matrix_unitary_invariant` — 1 verified
+- `QC.pure_state_zero_entropy` — 1 verified
+- `QC.qft_unitary` — 1 verified
+- `QC.superdense_two_bits` — 1 verified
+- `QC.toffoli_unitary` — 1 verified
+- `QC.robertson_uncertainty` — 1 verified
+- `QC.ghz3_normalized` — 1 verified
+- `QC.bloch_sphere_bijection` — 1 verified
+- `QC.kraus_trace_preserving` — 1 verified
+- `QC.ghz_nonlocal` — 1 verified
+- `QC.swap_test_overlap` — 1 verified
+- `QC.qft_unitary_2` — 1 verified
+- `QC.ghz2_normalized` — 1 verified
+- `QC.qft_unitary_3` — 1 verified
+- `QC.qft_unitary_4` — 1 verified
+- `QC.ghz4_normalized` — 1 verified
+- `QC.qft_unitary_5` — 1 verified
+- `QC.ghz5_normalized` — 1 verified
+- `QC.qft_unitary_6` — 1 verified
+- `QC.ghz6_normalized` — 1 verified
+- `QC.qft_unitary_7` — 1 verified
+- `QC.ghz7_normalized` — 1 verified
+- `QC.qft_unitary_8` — 1 verified
+- `QC.ghz8_normalized` — 1 verified
+- `PCA.Coverage` — 1 verified
+- `PCA.Fix` — 1 verified
+- `CS.insertion_sort_correct` — 1 verified
+- `CS.mergesort_correct` — 1 verified
+- `CS.halting_undecidable` — 1 verified
+- `CS.euclid_gcd_correct` — 1 verified
+- `CS.binary_search_correct` — 1 verified
+- `CS.pigeonhole_hash` — 1 verified
+- `CS.knaster_tarski` — 1 verified
+- `CS.cantor_powerset` — 1 verified
+- `CS.master_theorem_case1` — 1 verified
+- `CS.ackermann_total` — 1 verified
+- `CS.dfa_complement_regular` — 1 verified
+- `CS.pcp_pigeon_bound` — 1 verified
+- `CS.rice_nontrivial` — 1 verified
+- `Math.quadratic_reciprocity` — 1 verified
+- `Math.sum_two_squares` — 1 verified
+- `Math.lagrange_four_squares` — 1 verified
+- `Math.bertrand_postulate` — 1 verified
+- `Math.wilson_theorem` — 1 verified
+- `Math.cauchy_group` — 1 verified
+- `Math.lagrange_subgroup` — 1 verified
+- `Math.fta_algebra` — 1 verified
+- `Math.ivt` — 1 verified
+- `Math.bolzano_weierstrass` — 1 verified
+- `Math.heine_borel` — 1 verified
+- `Math.mean_value` — 1 verified
+- `Math.weierstrass_approx` — 1 verified
+- `Math.ramsey_3_3` — 1 verified
+- `Math.inclusion_exclusion` — 1 verified
+- `Math.catalan_closed` — 1 verified
+- `Frontier.Tarski_undefinability` — 1 verified
+- `Frontier.infinite_ramsey` — 1 verified
+- `Frontier.sum_three_cubes_42` — 1 verified
+- `Frontier.RH_Li_criterion` — 1 verified
+- `Frontier.P_vs_NP_statement` — 1 verified
+- `Math.baire_category` — 1 verified
+- `Math.dilworth` — 1 verified
+- `Math.chinese_remainder` — 1 verified
+- `Math.fermat_little` — 1 verified
+- `Math.two_squares_5` — 1 verified
+- `Math.two_squares_13` — 1 verified
+- `Math.two_squares_17` — 1 verified
+- `Math.two_squares_29` — 1 verified
+- `Math.two_squares_37` — 1 verified
+- `Frontier.Gale_Stewart_open` — 1 verified
+- `Math.two_squares_41` — 1 verified
+- `Math.two_squares_53` — 1 verified
+- `Math.two_squares_61` — 1 verified
+- `Math.two_squares_73` — 1 verified
+- `Math.two_squares_89` — 1 verified
+- `Math.two_squares_97` — 1 verified
+- `Math.two_squares_101` — 1 verified
+- `Math.two_squares_109` — 1 verified
+- `Math.two_squares_113` — 1 verified
+- `Math.cassini_2` — 1 verified
+- `Math.cassini_3` — 1 verified
+- `Math.cassini_4` — 1 verified
+- `Math.cassini_5` — 1 verified
+- `Math.cassini_6` — 1 verified
+- `Math.cassini_7` — 1 verified
+- `Math.cassini_8` — 1 verified
+- `Math.cassini_13` — 1 verified
+- `Math.cassini_14` — 1 verified
+- `Math.cassini_15` — 1 verified
+- `Math.cassini_9` — 1 verified
+- `Math.cassini_10` — 1 verified
+- `Math.cassini_11` — 1 verified
+- `Math.cassini_12` — 1 verified
+- `CS.sorting_lb_3` — 1 verified
+- `CS.sorting_lb_5` — 1 verified
+- `PCA.no_escape_no_leak` — 1 verified
+- `PCA.priv_is_escape` — 1 verified
+- `PCA.unowned_is_hole` — 1 verified
+- `PCA.escape_monotone` — 1 verified
+- `PCA.default_deny` — 1 verified
+- `PCA.leak_iff_escape_when_out_of_scope` — 1 verified
+- `PCA.owner_only_isolated` — 1 verified
+- `PCA.tightening_refines` — 1 verified
+- `PCA.no_clean_proved_with_escape` — 1 verified
+- `PCA.with_check_true_admits_forge` — 1 verified
+- `Brockian.SingularSeriesGaps7280` — 1 verified
+- `Brockian.SingularSeriesGaps9098` — 1 verified
+- `Brockian.SingularSeriesGaps12401250` — 1 verified
+- `Brockian.SingularSeriesGaps13501360` — 1 verified
+- `Brockian.GoldbachWheelK2_631` — 1 verified
+- `Brockian.GoldbachWheelK2_727` — 1 verified
+- `Brockian.GoldbachWheelK2_947` — 1 verified
+- `Brockian.GoldbachWheelK2_1051` — 1 verified
+- `Brockian.CosTraceNorm1279` — 1 verified
+- `Brockian.CosTraceNorm1597` — 1 verified
+- `Brockian.CosTraceNorm2003` — 1 verified
+- `Brockian.CosTraceNorm2707` — 1 verified
+- `Brockian.CosTraceNorm3001` — 1 verified
+- `Brockian.PentagonPentagonCharacterMultiplicityExt` — 1 verified
+- `Brockian.PentagonPentagonIsotypicHigherN` — 1 verified
+- `Brockian.PentagonPentagonEquivarianceGeneral` — 1 verified
+- `Brockian.SingularSeriesGaps14501460` — 1 verified
+- `Brockian.SingularSeriesGaps16021610` — 1 verified
+- `Brockian.GoldbachWheelK2_1153` — 1 verified
+- `Brockian.GoldbachWheelK2_1327` — 1 verified
+- `Brockian.CosTraceNorm3499` — 1 verified
+- `Brockian.CosTraceNorm4001` — 1 verified
+- `Brockian.ConstellationLocalCountK3` — 1 verified
+- `Brockian.AdmissibilityKTupleK4` — 1 verified
+- `Brockian.SingularSeriesConvergenceRate` — 1 verified
+- `QPhys.hermitian_real_spectrum` — 1 verified
+- `QPhys.unitary_time_evolution` — 1 verified
+- `QPhys.heisenberg_uncertainty` — 1 verified
+- `QPhys.variational_bound` — 1 verified
+- `QPhys.parseval_fourier` — 1 verified
+- `QPhys.noether_translation` — 1 verified
+- `QPhys.pauli_exclusion_antisym` — 1 verified
+- `Chem.euler_polyhedron` — 1 verified
+- `Chem.point_group_finite_O3` — 1 verified
+- `Chem.benzene_D6h_irreps` — 1 verified
+- `Chem.wiener_path_formula` — 1 verified
+- `Chem.handshake_valence` — 1 verified
+- `Chem.entropy_concave` — 1 verified
+- `Chem.arrhenius_monotone` — 1 verified
+- `Chem.huckel_C3` — 1 verified
+- `Chem.huckel_C4` — 1 verified
+- `Chem.huckel_C5` — 1 verified
+- `Chem.huckel_C6` — 1 verified
+- `Chem.huckel_C7` — 1 verified
+- `Chem.huckel_C10` — 1 verified
+- `Chem.huckel_C12` — 1 verified
+- `Chem.fullerene_pentagons` — 1 verified
+- `Chem.balance_nullspace` — 1 verified
+- `Chem.gibbs_phase_rule` — 1 verified
+- `Chem.leChatelier_sign` — 1 verified
+- `Chem.molecular_orbital_count` — 1 verified
+- `Chem.huckel_C17` — 1 verified
+- `Chem.huckel_C18` — 1 verified
+- `Math.pell_2` — 1 verified
+- `Math.pell_3` — 1 verified
+- `QI.no_deleting` — 1 verified
+- `Frontier.five_color_theorem` — 1 verified
+- `Frontier.arrow_impossibility` — 1 verified
+- `Frontier.loeb_no_self_trust` — 1 verified
+- `Frontier.global_workspace_fixpoint` — 1 verified
+- `Frontier.iit_phi_partition` — 1 verified
+- `Frontier.self_nonprediction` — 1 verified
+- `Frontier.good_regulator` — 1 verified
+- `Frontier.noether_conservation` — 1 verified
+- `Frontier.asymptotic_freedom_sign` — 1 verified
+- `Frontier.higgs_mass_toy` — 1 verified
+- `Frontier.ssh_winding_invariant` — 1 verified
+- `Frontier.tknn_chern_hall` — 1 verified
+- `Frontier.no_communication` — 1 verified
+- `Frontier.kochen_specker` — 1 verified
+- `Frontier.wigderson_expander_mixing` — 1 verified
+- `Frontier.huh_matroid_log_concave` — 1 verified
+- `Frontier.bhargava_cube_law` — 1 verified
+- `QPhys.box_level_7` — 1 verified
+- `QPhys.box_level_6` — 1 verified
+- `QPhys.box_level_5` — 1 verified
+- `QPhys.box_level_4` — 1 verified
+- `QPhys.box_level_3` — 1 verified
+- `QPhys.box_level_2` — 1 verified
+- `QPhys.box_level_1` — 1 verified
+- `Math.mobius_root_sum_12` — 1 verified
+- `Math.mobius_root_sum_11` — 1 verified
+- `Math.mobius_root_sum_10` — 1 verified
+- `Math.mobius_root_sum_9` — 1 verified
+- `Math.mobius_root_sum_8` — 1 verified
+- `Math.mobius_root_sum_7` — 1 verified
+- `Math.mobius_root_sum_6` — 1 verified
+- `Math.mobius_root_sum_5` — 1 verified
+- `Math.mobius_root_sum_4` — 1 verified
+- `Math.mobius_root_sum_3` — 1 verified
+- `Math.mobius_root_sum_2` — 1 verified
+- `Math.mobius_root_sum_1` — 1 verified
+- `Math.pell_13` — 1 verified
+- `Math.pell_11` — 1 verified
+- `Math.pell_10` — 1 verified
+- `Math.pell_8` — 1 verified
+- `Math.pell_7` — 1 verified
+- `Math.pell_6` — 1 verified
+- `Math.pell_5` — 1 verified
+- `QI.ptrace_pureProj` — 1 verified
+- `QI.ten3_ofLp` — 1 verified
+- `Frontier.bell_theorem` — 1 verified
+- `QI.ptraceSnd_outer` — 1 verified
+- `QI.inner_toVec` — 1 verified
+- `QI.deutsch_jozsa` — 1 verified
+- `QI.apply_entry_eq_sum` — 1 verified
+- `QI.inner_tens_tens` — 1 verified
+- `QC.exists_norm_eq_one` — 1 verified
+- `Brockian.spectralParameter_isReal_iff` — 1 verified
+- `Brockian.const_of_transitive_invariant` — 1 verified
+- `C4.ST2` — 1 verified
+- `C5.QI7` — 1 verified
+- `C6.QC7` — 1 verified
+- `C6.P5` — 1 verified
+- `C5.Ph6` — 1 verified
+- `C5.NT7` — 1 verified
+- `C6.Geo4` — 1 verified
+- `C5.C6` — 1 verified
+- `C6.BS7` — 1 verified
+- `C6.An8` — 1 verified
+- `C5.BS6` — 1 verified
+- `C5.Alg6` — 1 verified
+- `C4.Phys5` — 1 verified
+- `C4.NT6` — 1 verified
+- `C4.IT4` — 1 verified
+- `C4.Geo3` — 1 verified
+- `C4.BSp5` — 1 verified
+- `C4.BM3` — 1 verified
+- `C3.RA6` — 1 verified
+- `C3.QC5` — 1 verified
+- `C3.Phys4` — 1 verified
+- `C3.Meas` — 1 verified
+- `C3.Graph3` — 1 verified
+- `C3.BSpec4` — 1 verified
+- `C3.BD5` — 1 verified
+- `C3.An5` — 1 verified
+- `C2.Topo2` — 1 verified
+- `C2.SetT` — 1 verified
+- `C2.QI4` — 1 verified
+- `C2.Prob2b` — 1 verified
+- `C2.Phys3` — 1 verified
+- `C2.NT4` — 1 verified
+- `C2.IT3` — 1 verified
+- `C2.Graph2` — 1 verified
+- `C2.Geo2` — 1 verified
+- `C2.Crypto2` — 1 verified
+- `MS.Brockian` — 1 verified
+- `MS.LogicQuantum` — 1 verified
+- `MS.Algebra` — 1 verified
+- `MS.Combinatorics` — 1 verified
+- `BrockianQuantum.E0_idem` — 1 verified
+- `BrockianQuantum.Rz_zero` — 1 verified
+- `BrockianQuantum.Tof_sq` — 1 verified
+- `BrockianQuantum.S_Z_commute` — 1 verified
+- `BrockianQuantum.golden_eq` — 1 verified
+- `BrockianQuantum.F_symmetric` — 1 verified
+- `BrockianQuantum.P0_idem` — 1 verified
+- `BrockianQuantum.clock_pow_card` — 1 verified
+- `BrockianQuantum.W2_unitary` — 1 verified
+- `BrockianQuantum.om_pow_five` — 1 verified
+- `BrockianQuantum.normSq_c` — 1 verified
+- `BrockianQuantum.phiP_XX_eigen` — 1 verified
+- `BrockianQuantum.CNOT_sq` — 1 verified
+- `BrockianQuantum.S_sq_eq_Z` — 1 verified
+- `BrockianQuantum.H_sq` — 1 verified
+- `BrockianQuantum.PX_sq` — 1 verified
+- `BrockianQuantum.shift_unitary` — 1 verified
+- `BrockianQuantum.braid_relation_conj` — 1 verified
+- `BrockianQuantum.qft_mul_conjTranspose` — 1 verified
+- `BrockianQuantum.shift_pow_card` — 1 verified
+- `BrockianQuantum.fib_fusion_gold_eigenvalue` — 1 verified
+- `BrockianSieve.totient_eq_sum_moebius` — 1 verified
+- `BrockianSieve.legendre_count` — 1 verified
+- `BrockianSieve.squarefree_count` — 1 verified
+- `BrockianSieve.legendre_sieve` — 1 verified
+- `problem_normal_0765` — 1 verified
+- `problem_normal_0355` — 1 verified
+- `problem_normal_0166` — 1 verified
+- `left_proj_imp_idem` — 1 verified
+- `idemp_implies_double_idemp` — 1 verified
+- `imp_A1` — 1 verified
+- `QI.purification_exists` — 1 verified
+- `QI.choi_jamiolkowski` — 1 verified
+- `QI.schmidt_decomposition` — 1 verified
+- `QI.rho_apply` — 1 verified
+- `QI.inner_kron` — 1 verified
+- `QPhys.dLdq_eq_zero_of_translationInvariant` — 1 verified
+- `QC.tens_add_left` — 1 verified
+- `Brockian.GoldbachSchema` — 1 verified
+- `Brockian.weight_const_of_transitive` — 1 verified
+- `Brockian.volume_circ_univ` — 1 verified
+- `C6.T4` — 1 verified
+- `C4.RA7` — 1 verified
+- `C4.QC6` — 1 verified
+- `C4.Prob4` — 1 verified
+- `C6.NT8` — 1 verified
+- `C6.IT5` — 1 verified
+- `C6.C7` — 1 verified
+- `C6.BSp7` — 1 verified
+- `C6.BD6` — 1 verified
+- `C6.Alg7` — 1 verified
+- `C4.LA2` — 1 verified
+- `C5.BSp6` — 1 verified
+- `C5.An7` — 1 verified
+- `C4.G4` — 1 verified
+- `C4.Comb5` — 1 verified
+- `C4.BS5` — 1 verified
+- `C4.BChar` — 1 verified
+- `C4.Alg5` — 1 verified
+- `C3.Topo3` — 1 verified
+- `C3.QI5` — 1 verified
+- `C3.Prob3` — 1 verified
+- `C3.NT5` — 1 verified
+- `C3.LinAlg` — 1 verified
+- `C3.Comb4` — 1 verified
+- `C3.BSieve4` — 1 verified
+- `C3.BCon` — 1 verified
+- `C3.Alg4` — 1 verified
+- `C2.Comb3` — 1 verified
+- `C2.CS2` — 1 verified
+- `C2.BSpec3` — 1 verified
+- `C2.An4` — 1 verified
+- `C2.Alg3` — 1 verified
+- `MS2.QI3` — 1 verified
+- `MS2.Probability` — 1 verified
+- `MS2.Prob2` — 1 verified
+- `MS2.NT2` — 1 verified
+- `MS2.IT2` — 1 verified
+- `MS2.Geometry` — 1 verified
+- `MS2.FibLucas` — 1 verified
+- `MS2.CSLogic` — 1 verified
+- `MS2.BSpec2` — 1 verified
+- `MS2.Analysis2` — 1 verified
+- `MS2.Algebra2` — 1 verified
+- `MS.Analysis` — 1 verified
+- `MS.Foundations` — 1 verified
+- `Frontier.BrockianNextLevel` — 1 verified
+- `Frontier.AlgebraLogic` — 1 verified
+- `Frontier.CombinatoricsGraph` — 1 verified
+- `Frontier.PhysicsQM` — 1 verified
+- `Frontier.AnalysisCalculus` — 1 verified
+- `Frontier.BrockianSieveDeep` — 1 verified
+- `Frontier.InformationTheory` — 1 verified
+- `Frontier.CryptoComplexity` — 1 verified
+- `QuantumInfoII.clifford_HXH` — 1 verified
+- `BrockianFrontier.PentagonSpectrum` — 1 verified
+- `BrockianFrontier.SieveK5` — 1 verified
+- `Frontier.Sensitivity` — 1 verified
+- `BrockianFrontier.SingularSeries` — 1 verified
+- `BrockianFrontier.PathSpectrum` — 1 verified
+- `BrockianFrontier.Gilbreath` — 1 verified
+- `Brockian.MsFrobeniusGeneral` — 1 verified
+- `Brockian.MsMenelaus` — 1 verified
+- `Brockian.MsBeatty` — 1 verified
+- `Brockian.MsCeva` — 1 verified
+- `Brockian.MsHeron` — 1 verified
+- `Brockian.MsViete` — 1 verified
+- `Brockian.MsStewart` — 1 verified
+- `Brockian.MsHermiteHadamard` — 1 verified
+- `Brockian.MsE2Irrational` — 1 verified
+- `Brockian.MsDerangement` — 1 verified
+- `Brockian.MsCatalanSquareSum` — 1 verified
+- `Brockian.MsBinet` — 1 verified
+- `Brockian.MsLagrangeIdentity` — 1 verified
+- `Brockian.MsMachin` — 1 verified
+- `Brockian.MsEulerPentagonal` — 1 verified
+- `Brockian.MsPerronFrobenius` — 1 verified
+- `Brockian.MsPocklington` — 1 verified
+- `Brockian.MsBirkhoff` — 1 verified
+- `Brockian.MsGaussLucas` — 1 verified
+- `Brockian.MsChebyshevSum` — 1 verified
+- `Brockian.MsMirsky` — 1 verified
+- `Brockian.MsErdosAnning` — 1 verified
+- `Brockian.MsNapoleon` — 1 verified
+- `Brockian.MsViviani` — 1 verified
+- `Brockian.MsBritishFlag` — 1 verified
+- `Brockian.MsChebyshevTheta` — 1 verified
+- `Brockian.MsPrimitiveRootCount` — 1 verified
+- `Brockian.MsQrTwo` — 1 verified
+- `Brockian.MsCauchyDavenport` — 1 verified
+- `Brockian.MsGaussSum` — 1 verified
+- `Brockian.MsLYM` — 1 verified
+- `Brockian.MsPepin` — 1 verified
+- `Brockian.MsProth` — 1 verified
+- `Brockian.MsThue` — 1 verified
+- `Brockian.MsFrobeniusGroup` — 1 verified
+- `Brockian.MsWilsonPrimePower` — 1 verified
+- `Brockian.MsPell` — 1 verified
+- `Brockian.MsVanDerWaerden` — 1 verified
+- `Brockian.MsZeckendorf` — 1 verified
+- `Brockian.Cayley` — 1 verified
+- `Brockian.GaussWilson` — 1 verified
+- `Brockian.LteTwo` — 1 verified
+- `Brockian.Dilworth` — 1 verified
+- `Brockian.ErdosSzekeres` — 1 verified
+- `Brockian.Schur` — 1 verified
+- `Brockian.MasonStothers` — 1 verified
+- `Brockian.Turan` — 1 verified
+- `Brockian.PseudoprimesBaseTwo` — 1 verified
+- `Brockian.FreshmanDream` — 1 verified
+- `Brockian.Vandermonde` — 1 verified
+- `Brockian.HockeyStick` — 1 verified
+- `Brockian.Zsygmondy` — 1 verified
+- `Brockian.StarOfDavid` — 1 verified
+- `Brockian.Niven` — 1 verified
+- `Brockian.Sperner` — 1 verified
+- `Brockian.TwoSquaresUnique` — 1 verified
+- `Brockian.Cassini` — 1 verified
+- `Brockian.CatalanClosed` — 1 verified
+- `Brockian.FibGcd` — 1 verified
+- `Brockian.Nicomachus` — 1 verified
+- `Brockian.SophieGermain` — 1 verified
+- `Brockian.OddPerfectThreePrimes` — 1 verified, 1 failed
+- `Brockian.SylvesterSchur` — 1 verified, 1 failed
+- `Brockian.KummerTheorem` — 1 verified
+- `Brockian.EvenSuperperfect` — 1 verified
+- `Brockian.TwoSquares` — 1 verified
+- `Brockian.EgyptianFraction` — 1 verified
+- `Brockian.PerfectReciprocalSum` — 1 verified
+- `Brockian.LucasTheorem` — 1 verified
+- `Brockian.FrobeniusMcNugget` — 1 verified
+- `Brockian.ErdosGinzburgZiv` — 1 verified
+- `Brockian.FrobeniusAbove` — 1 verified
+- `Brockian.Wolstenholme` — 1 verified
+- `Brockian.EvenPerfectTriangular` — 1 verified, 1 failed
+- `Brockian.EvenPerfectLastDigit` — 1 verified
+- `Brockian.OddPerfectEuler` — 1 verified
+- `Brockian.GoldbachComb` — 1 verified
+- `Brockian.PhaseDepthTorus` — 1 verified
+- `LinearRecurrence.casoratian_step` — 1 verified
+- `bridge` — 1 verified
+- `D5_card_verified` — 1 verified
+- `spiral_continuous` — 1 verified
+- `BSCS.UnitaryRep` — 1 verified
+- `Brockian.brockian_multiplicity_one` — 1 verified
+- `Brockian.D5` — 1 verified
+- `universal_count_theorem` — 1 verified
+- `pairs_always_q_minus_2` — 1 verified
+- `pattern_reflection_invariance` — 1 verified
+- `PrimeAdmissibility.universal_admissibility_count` — 1 verified
+- `Aristotle.Prove_that_the_Brockian_Rot` — 1 verified
+- `GoldbachSpectral.reps_positive_implies_goldbach` — 1 verified
+- `BrockianMagnumOpus.φ_pos` — 1 verified
+- `goldbachReps_nonneg` — 1 verified
+- `phi_pos` — 1 verified
+- `Brockian.phi_squared` — 1 verified
+- `Mod5Ray.card` — 1 verified
+- `Aristotle.Prove_10_conjectures_relati` — 1 verified
+- `square_free_and_ne_one_implies_not_square` — 1 verified
+- `Aristotle.Summarize_the_content_of_pr` — 1 verified
+- `CS.pumping_regular` — 0 verified, 1 failed
+- `CS.kleene_regex_dfa` — 0 verified, 1 failed
+- `CS.huffman_optimal` — 0 verified, 1 failed
+- `CS.dijkstra_correct` — 0 verified, 1 failed
+- `CS.church_rosser_beta_diamond` — 0 verified, 1 failed
+- `Math.halls_marriage` — 0 verified, 1 failed
+- `Frontier.Aronszajn_tree_exists` — 0 verified, 1 failed
+- `Frontier.Loeb_theorem` — 0 verified, 1 failed
+- `Frontier.Brun_twin_reciprocal` — 0 verified, 1 failed
+- `Frontier.cook_levin` — 0 verified, 1 failed
+- `Frontier.jones_polynomial_invariant` — 0 verified, 1 failed
+- `Math.euler_pentagonal` — 0 verified, 1 failed
+- `Math.brouwer_2d` — 0 verified, 1 failed
+- `Math.sperner_lemma` — 0 verified, 1 failed
+- `Math.abel_ruffini_deg5` — 0 verified, 1 failed
+- `Math.gauss_bonnet_polygon` — 0 verified, 1 failed
+- `Math.ramsey_3_4` — 0 verified, 1 failed
+- `Math.ramsey_4_4` — 0 verified, 1 failed
+- `Math.ramsey_3_5` — 0 verified, 1 failed
+- `CS.sorting_lb_4` — 0 verified, 1 failed
+- `QPhys.canonical_commutator` — 0 verified, 1 failed
+- `QPhys.oscillator_spectrum` — 0 verified, 1 failed
+- `QPhys.particle_in_box` — 0 verified, 1 failed
+- `QPhys.ehrenfest` — 0 verified, 1 failed
+- `QPhys.stone_generator` — 0 verified, 1 failed
+- `QPhys.spectral_theorem_finite` — 0 verified, 1 failed
+- `QPhys.bcH_special` — 0 verified, 1 failed
+- `QPhys.commuting_simultaneous` — 0 verified, 1 failed
+- `Chem.huckel_cycle_spectrum` — 0 verified, 1 failed
+- `Chem.polya_isomer_count` — 0 verified, 1 failed
+- `Chem.huckel_C8` — 0 verified, 1 failed
+- `Chem.huckel_C9` — 0 verified, 1 failed
+- `Chem.huckel_C11` — 0 verified, 1 failed
+- `Chem.huckel_C13` — 0 verified, 1 failed
+- `Chem.huckel_C14` — 0 verified, 1 failed
+- `Chem.alkane_tree` — 0 verified, 1 failed
+- `Chem.huckel_C15` — 0 verified, 1 failed
+- `Chem.huckel_C16` — 0 verified, 1 failed
+- `Chem.huckel_C19` — 0 verified, 1 failed
+- `Chem.huckel_C20` — 0 verified, 1 failed
+- `Frontier.ham_sandwich` — 0 verified, 1 failed
+- `Frontier.friendship_theorem` — 0 verified, 1 failed
+- `Frontier.aumann_agreement` — 0 verified, 1 failed
+- `Frontier.lieb_robinson` — 0 verified, 1 failed
+- `Frontier.bcs_gap_binding` — 0 verified, 1 failed
+- `Frontier.landau_levels` — 0 verified, 1 failed
+- `Frontier.berry_phase_quantized` — 0 verified, 1 failed
+- `Frontier.chsh_pointwise_le_two` — 0 verified, 1 failed
+- `Frontier.nirenberg_gagliardo` — 0 verified, 1 failed
+- `Frontier.lovasz_kneser` — 0 verified, 1 failed
+- `QI.simon_algorithm` — 0 verified, 1 failed
+- `QI.isContraction_iff` — 0 verified, 1 failed
+- `Frontier.huang_sensitivity` — 0 verified, 1 failed
+- `QI.classical_query_lower_bound_rpow` — 0 verified, 1 failed
+- `QI.hardy_paradox` — 0 verified, 1 failed
+- `QI.holevo_bound` — 0 verified, 1 failed
+- `QI.hasDerivAt_logAnti` — 0 verified, 1 failed
+- `QI.bellState_normalized` — 0 verified, 1 failed
+- `QI.jointlyDiagonalizable_of_commute` — 0 verified, 1 failed
+- `Brockian.adjoint_le_adjoint_of_le` — 0 verified, 1 failed
+- `Brockian.eVariationOn_sub_le` — 0 verified, 1 failed
+- `Brockian.integrable_continuousMap` — 0 verified, 1 failed
+- `Brockian.haar_eq_volume` — 0 verified, 1 failed
+- `C4.An6` — 0 verified, 1 failed
+- `MS.Topology` — 0 verified, 1 failed
+- `ArithmeticFunction.liouville_apply` — 0 verified, 1 failed
+- `test` — 0 verified, 1 failed
+- `submission` — 0 verified, 1 failed
+- `QI.steane_code` — 0 verified, 1 failed
+- `QI.shor_code_corrects` — 0 verified, 1 failed
+- `QI.apply_eq_sum_choi` — 0 verified, 1 failed
+- `QI.isSelfAdjoint_conj` — 0 verified, 1 failed
+- `QI.hasDerivAt_neg_inv` — 0 verified, 1 failed
+- `Brockian.fourier_lineDerivOp_sq` — 0 verified, 1 failed
+- `Brockian.countMultiples_eq_div` — 0 verified, 1 failed
+- `Brockian.upperFn_nonneg` — 0 verified, 1 failed
+- `Brockian.sqrt_block` — 0 verified, 1 failed
+- `C2.BSieve3` — 0 verified, 1 failed
+- `MS2.NTG2` — 0 verified, 1 failed
+- `MS2.Combinatorics2` — 0 verified, 1 failed
+- `MS.Inequalities` — 0 verified, 1 failed
+- `Frontier.NTClassics` — 0 verified, 1 failed
+- `Brockian.GraphAcyclic` — 0 verified, 1 failed
+- `Brockian.Ramanujan7` — 0 verified, 1 failed
+- `Brockian.LegendreThreeSquare` — 0 verified, 2 failed
+- `Brockian.EvenPerfectMod9` — 0 verified, 2 failed
+- `Brockian.SieveHamiltonian` — 0 verified, 1 failed
+- `Aristotle.Formalize_the_Brockian_appr` — 0 verified, 1 failed
+- `UnitaryRep.preserves_inner` — 0 verified, 1 failed
+- `D5_card` — 0 verified, 1 failed
+- `Aristotle.Summarizes_Brockian_prime_d` — 0 verified, 1 failed
+- `F₂_zero_at_prime` — 0 verified, 1 failed
+- `norm_mul_le_bound` — 0 verified, 1 failed
+- `L2Layer.MulOpData` — 0 verified, 1 failed
+- `brockianSpiral_continuous` — 0 verified, 1 failed
+- `D5.card` — 0 verified, 1 failed
+- `BZFC.BrockRay` — 0 verified, 1 failed
+- `residue_injective` — 0 verified, 1 failed
+- `principal_pair_count` — 0 verified, 1 failed
+- `golden_fundamental` — 0 verified, 1 failed
+- `Ray.toNat_E` — 0 verified, 1 failed
+- `nu_p_eq_image_card` — 0 verified, 1 failed
+- `allowed_classes_zmod_card` — 0 verified, 1 failed
+- `unique_membership` — 0 verified, 1 failed
+- `mem_ray_iff` — 0 verified, 1 failed
+- `ray_cover` — 0 verified, 1 failed
+- `card_admissibleLabels` — 0 verified, 1 failed
+- `universal_admissibility_count` — 0 verified, 1 failed
+- `H_op_is_self_adjoint` — 0 verified, 1 failed
+- `twin_prime_case` — 0 verified, 1 failed
+- `phi_minimal_polynomial` — 0 verified, 1 failed
+- `pentagon_chord_formula` — 0 verified, 1 failed
+- `spiralPrime_norm` — 0 verified, 1 failed
+- `spiral_phase_security` — 0 verified, 1 failed
+- `Brockian.phi_pos` — 0 verified, 1 failed
+- `BrockianFoundations.phi_pos` — 0 verified, 1 failed
+- `goldbach_from_count` — 0 verified, 1 failed
+- `gamma_lt_log_four_pi` — 0 verified, 1 failed
+- `BrockianFramework.golden_ratio_quadratic` — 0 verified, 1 failed
+- `phi_squared` — 0 verified, 1 failed
+- `D5Structure.phi_squared` — 0 verified, 1 failed
+- `Ray.card` — 0 verified, 1 failed
+- `ray_zero_singularity` — 0 verified, 1 failed
+- `sigma_of_prime` — 0 verified, 1 failed
+- `ray_unique_factorization` — 0 verified, 1 failed
+- `rotate_order_4` — 0 verified, 1 failed
+- `HarmonicArch.ray_unique` — 0 verified, 1 failed
+- `HarmonicArch.ray_add` — 0 verified, 1 failed
+- `phi_equation` — 0 verified, 1 failed
+- `Brockian.GoldenRatio` — 0 verified, 1 failed
+- `GoldenRatio.pos` — 0 verified, 1 failed
+- `laplacian_quadratic_form` — 0 verified, 1 failed
+- `laplacian_symmetric` — 0 verified, 1 failed
+- `FirstProofQ6.laplacian_eq_sum_sq` — 0 verified, 1 failed
+- `induced_laplacian_quad_form` — 0 verified, 1 failed
+- `FirstProofQ6.psdLe_refl` — 0 verified, 1 failed
+
+## All AXLE-verified targets
+
+- `Aristotle.Prove_10_conjectures_relati`  (list/chris)
+- `Aristotle.Prove_that_the_Brockian_Rot`  (list/chris)
+- `Aristotle.Summarize_the_content_of_pr`  (list/chris)
+- `BSCS.UnitaryRep.Uop_mul`  (list/chris)
+- `Brockian.AdmissibilityKTupleK4`  (pipeline/admin)
+- `Brockian.Cassini.cassini`  (list/chris)
+- `Brockian.CatalanClosed.succ_mul_catalan_eq_choose`  (list/chris)
+- `Brockian.Cayley.forestFinset_self`  (list/chris)
+- `Brockian.ConstellationLocalCountK3`  (pipeline/admin)
+- `Brockian.CosTraceNorm1279`  (pipeline/admin)
+- `Brockian.CosTraceNorm1597`  (pipeline/admin)
+- `Brockian.CosTraceNorm2003`  (pipeline/admin)
+- `Brockian.CosTraceNorm2707`  (pipeline/admin)
+- `Brockian.CosTraceNorm3001`  (pipeline/chris)
+- `Brockian.CosTraceNorm3499`  (pipeline/admin)
+- `Brockian.CosTraceNorm4001`  (pipeline/admin)
+- `Brockian.D5.allElements_complete`  (list/chris)
+- `Brockian.Dilworth.ChainColoring.mono`  (list/chris)
+- `Brockian.EgyptianFraction.egyptian_fraction`  (list/chris)
+- `Brockian.Equidistribution.integrable_of_continuousMap`  (list/chris)
+- `Brockian.Equidistribution.integral_fourier`  (list/chris)
+- `Brockian.Equidistribution.integral_fourier_ne_zero`  (list/admin)
+- `Brockian.EquidistributionBVReduction.configCount_density_of_BV`  (pipeline/admin)
+- `Brockian.EquidistributionBVReduction.configCount_over_main_tendsto`  (pipeline/chris)
+- `Brockian.EquidistributionBVReduction.geom_avg_tendsto`  (list/admin)
+- `Brockian.EquidistributionBVReduction.total_over_main_tendsto`  (pipeline/admin)
+- `Brockian.EquidistributionUniformity.equidistribution_of_transitive_symmetry`  (pipeline/admin)
+- `Brockian.EquidistributionUniformity.measure_singleton_eq_of_transitive`  (list/admin)
+- `Brockian.EquidistributionUniformity.sing_uniform_of_transitive`  (pipeline/admin)
+- `Brockian.EquidistributionUniformity.singleton_measure_eq_of_transitive`  (list/chris)
+- `Brockian.ErdosGinzburgZiv.erdos_ginzburg_ziv`  (list/chris)
+- `Brockian.ErdosSzekeres.erdos_szekeres`  (list/chris)
+- `Brockian.EvenPerfectLastDigit.perfect_two_pow_mul_odd`  (list/chris)
+- `Brockian.EvenPerfectTriangular.sigma_two_pow_eq_mersenne_succ`  (list/chris)
+- `Brockian.EvenSuperperfect.sigma_two_pow_eq_mersenne_succ`  (list/chris)
+- `Brockian.FibGcd.fib_gcd`  (list/chris)
+- `Brockian.FreshmanDream.freshman_dream`  (list/chris)
+- `Brockian.FrobeniusAbove.frobenius_above`  (list/chris)
+- `Brockian.FrobeniusMcNugget.frobenius_not_representable`  (list/chris)
+- `Brockian.GaussWilson.prod_units_sq_eq_one`  (list/chris)
+- `Brockian.GoldbachComb.gCount_eq`  (list/chris)
+- `Brockian.GoldbachSchema.integral_chr`  (list/chris)
+- `Brockian.GoldbachWheelK2_1051`  (pipeline/admin)
+- `Brockian.GoldbachWheelK2_1153`  (pipeline/admin)
+- `Brockian.GoldbachWheelK2_1327`  (pipeline/admin)
+- `Brockian.GoldbachWheelK2_631`  (pipeline/admin)
+- `Brockian.GoldbachWheelK2_727`  (pipeline/admin)
+- `Brockian.GoldbachWheelK2_947`  (pipeline/admin)
+- `Brockian.HockeyStick.hockey_stick`  (list/chris)
+- `Brockian.KummerTheorem.kummer`  (list/chris)
+- `Brockian.LteTwo.emult_two_pow_sub_pow`  (list/chris)
+- `Brockian.LucasTheorem.lucas`  (list/chris)
+- `Brockian.MasonStothers.natDegree_radical_le_card_roots`  (list/chris)
+- `Brockian.MsBeatty.beatty`  (list/chris)
+- `Brockian.MsBinet.binet`  (list/chris)
+- `Brockian.MsBirkhoff.birkhoff_von_neumann`  (list/chris)
+- `Brockian.MsBritishFlag.british_flag`  (list/chris)
+- `Brockian.MsCatalanSquareSum.sum_choose_sq`  (list/chris)
+- `Brockian.MsCauchyDavenport.cauchy_davenport`  (list/chris)
+- `Brockian.MsCeva.indep_of_not_collinear`  (list/chris)
+- `Brockian.MsChebyshevSum.chebyshev_sum`  (list/chris)
+- `Brockian.MsChebyshevTheta.chebyshev_theta`  (list/chris)
+- `Brockian.MsDerangement.derangement_closed`  (list/chris)
+- `Brockian.MsE2Irrational.exp_two_irrational`  (list/chris)
+- `Brockian.MsErdosAnning.quad_three_roots`  (list/chris)
+- `Brockian.MsEulerPentagonal.restricted_true`  (list/chris)
+- `Brockian.MsFrobeniusGeneral.two_gen_rep`  (list/chris)
+- `Brockian.MsFrobeniusGroup.sol_eq_solEq_one`  (list/chris)
+- `Brockian.MsGaussLucas.gauss_lucas`  (list/chris)
+- `Brockian.MsGaussSum.gauss_sum_abs_sq`  (list/chris)
+- `Brockian.MsHermiteHadamard.hh_le_max`  (list/chris)
+- `Brockian.MsHeron.heron`  (list/chris)
+- `Brockian.MsLYM.lym`  (list/chris)
+- `Brockian.MsLagrangeIdentity.lagrange_identity`  (list/chris)
+- `Brockian.MsMachin.machin`  (list/chris)
+- `Brockian.MsMenelaus.indep_of_not_collinear`  (list/chris)
+- `Brockian.MsMirsky.height_filter_nonempty`  (list/chris)
+- `Brockian.MsNapoleon.napoleon`  (list/chris)
+- `Brockian.MsPell.pell_solvable`  (list/chris)
+- `Brockian.MsPepin.pepin`  (list/chris)
+- `Brockian.MsPerronFrobenius.Kset_nonneg`  (list/chris)
+- `Brockian.MsPocklington.pocklington`  (list/chris)
+- `Brockian.MsPrimitiveRootCount.primitive_root_count`  (list/chris)
+- `Brockian.MsProth.proth`  (list/chris)
+- `Brockian.MsQrTwo.two_is_qr_iff`  (list/chris)
+- `Brockian.MsSchurInequality.schur_inequality`  (list/chris)
+- `Brockian.MsSchurInequality.schur_ordered`  (list/chris)
+- `Brockian.MsStewart.stewart`  (list/chris)
+- `Brockian.MsThue.thue_lemma`  (list/chris)
+- `Brockian.MsVanDerWaerden.van_der_waerden`  (list/chris)
+- `Brockian.MsViete.viete_product`  (list/chris)
+- `Brockian.MsViviani.ptolemy_inequality`  (list/chris)
+- `Brockian.MsWilsonPrimePower.wilson_prime_power`  (list/chris)
+- `Brockian.MsZeckendorf.pairwise_of_isZeckendorfRep`  (list/chris)
+- `Brockian.Nicomachus.sq_sum_eq_sum_cubes`  (list/chris)
+- `Brockian.Niven.niven_cos`  (list/chris)
+- `Brockian.OddPerfectEuler.oddPerfect_euler_form`  (list/chris)
+- `Brockian.OddPerfectThreePrimes.oddPerfect_three_primes`  (list/chris)
+- `Brockian.PentagonPentagonCharacterMultiplicityExt`  (pipeline/admin)
+- `Brockian.PentagonPentagonEquivarianceGeneral`  (pipeline/admin)
+- `Brockian.PentagonPentagonIsotypicHigherN`  (pipeline/admin)
+- `Brockian.PerfectReciprocalSum.perfect_reciprocal_sum`  (list/chris)
+- `Brockian.PhaseDepthTorus.rho_period`  (list/chris)
+- `Brockian.PseudoprimesBaseTwo.infinite_pseudoprimes_base_two`  (list/chris)
+- `Brockian.Schur.fR_pos`  (list/chris)
+- `Brockian.SingularSeriesConvergenceRate`  (pipeline/admin)
+- `Brockian.SingularSeriesGaps12401250`  (pipeline/admin)
+- `Brockian.SingularSeriesGaps13501360`  (pipeline/admin)
+- `Brockian.SingularSeriesGaps14501460`  (pipeline/admin)
+- `Brockian.SingularSeriesGaps16021610`  (pipeline/admin)
+- `Brockian.SingularSeriesGaps7280`  (pipeline/admin)
+- `Brockian.SingularSeriesGaps9098`  (pipeline/admin)
+- `Brockian.SophieGermain.a4_add_4b4_not_prime`  (list/chris)
+- `Brockian.Sperner.sperner_card_le`  (list/chris)
+- `Brockian.StarOfDavid.star_of_david`  (list/chris)
+- `Brockian.SylvesterSchur.piCount_le_self`  (list/chris)
+- `Brockian.Turan.turan`  (list/chris)
+- `Brockian.TwoSquares.sum_two_squares_iff`  (list/chris)
+- `Brockian.TwoSquaresUnique.two_squares_unique`  (list/chris)
+- `Brockian.Vandermonde.vandermonde`  (list/chris)
+- `Brockian.Weyl.BoundedVTarget.dirichletPotential_solution_zero`  (list/chris)
+- `Brockian.Weyl.DeficiencyODE.WeakRegularity.of_continuous`  (list/admin)
+- `Brockian.Weyl.DeficiencyODE.deficiencyRepresentsODE_of_weakRegularity`  (pipeline/admin)
+- `Brockian.Weyl.KatoTarget.isSelfAdjoint_add`  (list/chris)
+- `Brockian.Wolstenholme.wolstenholme`  (list/chris)
+- `Brockian.Zsygmondy.Phi_pos`  (list/chris)
+- `Brockian.brockian_multiplicity_one`  (list/chris)
+- `Brockian.const_of_transitive_invariant`  (list/admin)
+- `Brockian.phi_squared`  (list/chris)
+- `Brockian.spectralParameter_isReal_iff`  (list/admin)
+- `Brockian.volume_circ_univ`  (list/chris)
+- `Brockian.weight_const_of_transitive`  (list/chris)
+- `BrockianFrontier.Gilbreath.gilbreath_rows_9_16`  (list/chris)
+- `BrockianFrontier.PathSpectrum.H4_eigenvalue_golden`  (list/chris)
+- `BrockianFrontier.PentagonSpectrum.C5_golden_eigenvalue`  (list/chris)
+- `BrockianFrontier.SieveK5.nu_le_card`  (list/chris)
+- `BrockianFrontier.SingularSeries.localFactor_pos_of_lt`  (list/chris)
+- `BrockianMagnumOpus.φ_pos`  (list/chris)
+- `BrockianQuantum.CNOT_sq`  (list/admin)
+- `BrockianQuantum.E0_idem`  (list/admin)
+- `BrockianQuantum.F_symmetric`  (list/admin)
+- `BrockianQuantum.H_sq`  (list/admin)
+- `BrockianQuantum.P0_idem`  (list/admin)
+- `BrockianQuantum.PX_sq`  (list/admin)
+- `BrockianQuantum.Rz_zero`  (list/admin)
+- `BrockianQuantum.S_Z_commute`  (list/admin)
+- `BrockianQuantum.S_sq_eq_Z`  (list/admin)
+- `BrockianQuantum.Tof_sq`  (list/admin)
+- `BrockianQuantum.W2_unitary`  (list/admin)
+- `BrockianQuantum.braid_relation_conj`  (list/admin)
+- `BrockianQuantum.clock_pow_card`  (list/admin)
+- `BrockianQuantum.fib_fusion_gold_eigenvalue`  (list/admin)
+- `BrockianQuantum.golden_eq`  (list/admin)
+- `BrockianQuantum.normSq_c`  (list/admin)
+- `BrockianQuantum.om_pow_five`  (list/admin)
+- `BrockianQuantum.phiP_XX_eigen`  (list/admin)
+- `BrockianQuantum.qft_mul_conjTranspose`  (list/admin)
+- `BrockianQuantum.shift_pow_card`  (list/admin)
+- `BrockianQuantum.shift_unitary`  (list/admin)
+- `BrockianSieve.legendre_count`  (list/admin)
+- `BrockianSieve.legendre_sieve`  (list/admin)
+- `BrockianSieve.squarefree_count`  (list/admin)
+- `BrockianSieve.totient_eq_sum_moebius`  (list/admin)
+- `C2.Alg3.cramer_solve`  (list/chris)
+- `C2.An4.ftc`  (list/chris)
+- `C2.BSpec3.P7_eigen_center`  (list/chris)
+- `C2.CS2.no_universal_decider`  (list/chris)
+- `C2.Comb3.sum_range_id`  (list/chris)
+- `C2.Crypto2.otp_bij`  (list/admin)
+- `C2.Geo2.apollonius`  (list/admin)
+- `C2.Graph2.degree_sum_edges`  (list/admin)
+- `C2.IT3.entropy_term_bound`  (list/admin)
+- `C2.NT4.order_dvd_card`  (list/admin)
+- `C2.Phys3.spin_comm_xy`  (list/admin)
+- `C2.Prob2b.markov_ineq`  (list/admin)
+- `C2.QI4.swap_involutive`  (list/admin)
+- `C2.SetT.zorn`  (list/admin)
+- `C2.Topo2.continuous_image_compact`  (list/admin)
+- `C3.Alg4.crt_ring`  (list/chris)
+- `C3.An5.abel_summation`  (list/admin)
+- `C3.BCon.twin_adm_count_bound`  (list/chris)
+- `C3.BD5.dihedral5_card`  (list/admin)
+- `C3.BSieve4.nu_lt_nine`  (list/chris)
+- `C3.BSpec4.P8_eigen_center`  (list/admin)
+- `C3.Comb4.stirling_second_recurrence`  (list/chris)
+- `C3.Graph3.complete_edges`  (list/admin)
+- `C3.LinAlg.gram_schmidt_orthonormal`  (list/chris)
+- `C3.Meas.measure_mono`  (list/admin)
+- `C3.NT5.legendre_euler`  (list/chris)
+- `C3.Phys4.number_op_diag`  (list/admin)
+- `C3.Prob3.chebyshev_ineq`  (list/chris)
+- `C3.QC5.phase_kickback`  (list/admin)
+- `C3.QI5.toffoli_involutive`  (list/chris)
+- `C3.RA6.cont_add`  (list/admin)
+- `C3.Topo3.closed_inter_compact`  (list/chris)
+- `C4.Alg5.cayley_hamilton_field`  (list/chris)
+- `C4.BChar.dihedral_card`  (list/chris)
+- `C4.BM3.pentagonal_pentagon_area`  (list/admin)
+- `C4.BS5.lf_pos_ten`  (list/chris)
+- `C4.BSp5.P9_eigen_center`  (list/admin)
+- `C4.Comb5.inclusion_exclusion_three`  (list/chris)
+- `C4.G4.empty_graph_no_edges`  (list/chris)
+- `C4.Geo3.inner_self_nonneg`  (list/admin)
+- `C4.IT4.log_le_sub`  (list/admin)
+- `C4.LA2.transpose_mul`  (list/chris)
+- `C4.NT6.quadratic_reciprocity`  (list/admin)
+- `C4.Phys5.comm_yz`  (list/admin)
+- `C4.Prob4.am_qm`  (list/chris)
+- `C4.QC6.T_sq_eq_S`  (list/chris)
+- `C4.RA7.abs_triangle`  (list/chris)
+- `C4.ST2.powerset_card`  (list/admin)
+- `C5.Alg6.ker_normal`  (list/admin)
+- `C5.An7.continuous_polynomial`  (list/chris)
+- `C5.BS6.nu_lt_of_prime`  (list/admin)
+- `C5.BSp6.P10_symm`  (list/chris)
+- `C5.C6.sum_range_succ_id`  (list/admin)
+- `C5.NT7.even_perfect_form`  (list/admin)
+- `C5.Ph6.spin_total_sq`  (list/admin)
+- `C5.QI7.ghz_norm`  (list/admin)
+- `C6.Alg7.subgroup_mul_mem`  (list/chris)
+- `C6.An8.deriv_cos`  (list/admin)
+- `C6.BD6.golden_pow4`  (list/chris)
+- `C6.BS7.adm_37`  (list/admin)
+- `C6.BSp7.C8_trace`  (list/chris)
+- `C6.C7.sum_sq_formula`  (list/chris)
+- `C6.Geo4.norm_nonneg_v`  (list/admin)
+- `C6.IT5.log_mul_pos`  (list/chris)
+- `C6.NT8.sum_totient_divisors`  (list/chris)
+- `C6.P5.prob_sum_one`  (list/admin)
+- `C6.QC7.xyz_eq_i`  (list/admin)
+- `C6.T4.union_open`  (list/chris)
+- `CS.ackermann_total`  (pipeline/admin)
+- `CS.binary_search_correct`  (pipeline/admin)
+- `CS.cantor_powerset`  (pipeline/admin)
+- `CS.dfa_complement_regular`  (pipeline/admin)
+- `CS.euclid_gcd_correct`  (pipeline/admin)
+- `CS.halting_undecidable`  (pipeline/admin)
+- `CS.insertion_sort_correct`  (pipeline/admin)
+- `CS.knaster_tarski`  (pipeline/admin)
+- `CS.master_theorem_case1`  (pipeline/admin)
+- `CS.mergesort_correct`  (pipeline/admin)
+- `CS.pcp_pigeon_bound`  (pipeline/admin)
+- `CS.pigeonhole_hash`  (pipeline/admin)
+- `CS.rice_nontrivial`  (pipeline/chris)
+- `CS.sorting_lb_3`  (pipeline/admin)
+- `CS.sorting_lb_5`  (pipeline/admin)
+- `Chem.arrhenius_monotone`  (pipeline/admin)
+- `Chem.balance_nullspace`  (pipeline/admin)
+- `Chem.benzene_D6h_irreps`  (pipeline/admin)
+- `Chem.entropy_concave`  (pipeline/admin)
+- `Chem.euler_polyhedron`  (pipeline/admin)
+- `Chem.fullerene_pentagons`  (pipeline/admin)
+- `Chem.gibbs_phase_rule`  (pipeline/admin)
+- `Chem.handshake_valence`  (pipeline/admin)
+- `Chem.huckel_C10`  (pipeline/admin)
+- `Chem.huckel_C12`  (pipeline/admin)
+- `Chem.huckel_C17`  (pipeline/admin)
+- `Chem.huckel_C18`  (pipeline/admin)
+- `Chem.huckel_C3`  (pipeline/admin)
+- `Chem.huckel_C4`  (pipeline/admin)
+- `Chem.huckel_C5`  (pipeline/admin)
+- `Chem.huckel_C6`  (pipeline/admin)
+- `Chem.huckel_C7`  (pipeline/admin)
+- `Chem.leChatelier_sign`  (pipeline/admin)
+- `Chem.molecular_orbital_count`  (pipeline/admin)
+- `Chem.point_group_finite_O3`  (pipeline/admin)
+- `Chem.wiener_path_formula`  (pipeline/admin)
+- `D5_card_verified`  (list/chris)
+- `Frontier.AlgebraLogic.lagrange`  (list/chris)
+- `Frontier.AnalysisCalculus.am_gm_two`  (list/chris)
+- `Frontier.BrockianNextLevel.excluded_residue_count`  (list/chris)
+- `Frontier.BrockianSieveDeep.nu_le_card`  (list/chris)
+- `Frontier.CombinatoricsGraph.handshake`  (list/chris)
+- `Frontier.CryptoComplexity.otp_bijective`  (list/chris)
+- `Frontier.Gale_Stewart_open`  (pipeline/admin)
+- `Frontier.InformationTheory.entropy_term_nonneg`  (list/chris)
+- `Frontier.P_vs_NP_statement`  (pipeline/chris)
+- `Frontier.PhysicsQM.pauli_sq_X`  (list/chris)
+- `Frontier.RH_Li_criterion`  (pipeline/chris)
+- `Frontier.Sensitivity.flipAt_apply`  (list/chris)
+- `Frontier.Tarski_undefinability`  (pipeline/admin)
+- `Frontier.arrow_impossibility`  (pipeline/admin)
+- `Frontier.asymptotic_freedom_sign`  (pipeline/admin)
+- `Frontier.bell_theorem`  (pipeline/chris)
+- `Frontier.bhargava_cube_law`  (pipeline/admin)
+- `Frontier.five_color_theorem`  (pipeline/admin)
+- `Frontier.global_workspace_fixpoint`  (pipeline/admin)
+- `Frontier.good_regulator`  (pipeline/admin)
+- `Frontier.higgs_mass_toy`  (pipeline/admin)
+- `Frontier.huh_matroid_log_concave`  (pipeline/admin)
+- `Frontier.iit_phi_partition`  (pipeline/admin)
+- `Frontier.infinite_ramsey`  (pipeline/admin)
+- `Frontier.kochen_specker`  (pipeline/admin)
+- `Frontier.loeb_no_self_trust`  (pipeline/admin)
+- `Frontier.no_communication`  (pipeline/admin)
+- `Frontier.noether_conservation`  (pipeline/admin)
+- `Frontier.self_nonprediction`  (pipeline/admin)
+- `Frontier.ssh_winding_invariant`  (pipeline/admin)
+- `Frontier.sum_three_cubes_42`  (pipeline/admin)
+- `Frontier.tknn_chern_hall`  (pipeline/admin)
+- `Frontier.wigderson_expander_mixing`  (pipeline/admin)
+- `GoldbachSpectral.reps_positive_implies_goldbach`  (list/chris)
+- `LinearRecurrence.casoratian_step`  (list/chris)
+- `MS.Algebra.lagrange_subgroup`  (list/admin)
+- `MS.Analysis.intermediate_value`  (list/chris)
+- `MS.Brockian.universal_admissibility_count`  (list/admin)
+- `MS.Combinatorics.ramsey_finite`  (list/admin)
+- `MS.Foundations.fundamental_theorem_of_algebra`  (list/chris)
+- `MS.LogicQuantum.schroeder_bernstein`  (list/admin)
+- `MS2.Algebra2.orbit_stabilizer`  (list/chris)
+- `MS2.Analysis2.squeeze`  (list/chris)
+- `MS2.BSpec2.P6_eigen_center`  (list/chris)
+- `MS2.CSLogic.cantor_diagonal`  (list/chris)
+- `MS2.FibLucas.cassini`  (list/chris)
+- `MS2.Geometry.law_of_cosines`  (list/chris)
+- `MS2.IT2.entropy_nonneg`  (list/chris)
+- `MS2.NT2.chinese_remainder`  (list/chris)
+- `MS2.Prob2.am_gm_three`  (list/chris)
+- `MS2.Probability.markov_finite`  (list/chris)
+- `MS2.QI3.cnot_involutive`  (list/chris)
+- `Math.baire_category`  (pipeline/admin)
+- `Math.bertrand_postulate`  (pipeline/admin)
+- `Math.bolzano_weierstrass`  (pipeline/admin)
+- `Math.cassini_10`  (pipeline/admin)
+- `Math.cassini_11`  (pipeline/admin)
+- `Math.cassini_12`  (pipeline/admin)
+- `Math.cassini_13`  (pipeline/admin)
+- `Math.cassini_14`  (pipeline/admin)
+- `Math.cassini_15`  (pipeline/admin)
+- `Math.cassini_2`  (pipeline/admin)
+- `Math.cassini_3`  (pipeline/admin)
+- `Math.cassini_4`  (pipeline/admin)
+- `Math.cassini_5`  (pipeline/admin)
+- `Math.cassini_6`  (pipeline/admin)
+- `Math.cassini_7`  (pipeline/admin)
+- `Math.cassini_8`  (pipeline/admin)
+- `Math.cassini_9`  (pipeline/admin)
+- `Math.catalan_closed`  (pipeline/admin)
+- `Math.cauchy_group`  (pipeline/chris)
+- `Math.chinese_remainder`  (pipeline/admin)
+- `Math.dilworth`  (pipeline/admin)
+- `Math.fermat_little`  (pipeline/admin)
+- `Math.fta_algebra`  (pipeline/admin)
+- `Math.heine_borel`  (pipeline/admin)
+- `Math.inclusion_exclusion`  (pipeline/admin)
+- `Math.ivt`  (pipeline/admin)
+- `Math.lagrange_four_squares`  (pipeline/admin)
+- `Math.lagrange_subgroup`  (pipeline/admin)
+- `Math.mean_value`  (pipeline/admin)
+- `Math.mobius_root_sum_1`  (pipeline/admin)
+- `Math.mobius_root_sum_10`  (pipeline/admin)
+- `Math.mobius_root_sum_11`  (pipeline/admin)
+- `Math.mobius_root_sum_12`  (pipeline/admin)
+- `Math.mobius_root_sum_2`  (pipeline/admin)
+- `Math.mobius_root_sum_3`  (pipeline/admin)
+- `Math.mobius_root_sum_4`  (pipeline/admin)
+- `Math.mobius_root_sum_5`  (pipeline/admin)
+- `Math.mobius_root_sum_6`  (pipeline/admin)
+- `Math.mobius_root_sum_7`  (pipeline/admin)
+- `Math.mobius_root_sum_8`  (pipeline/admin)
+- `Math.mobius_root_sum_9`  (pipeline/admin)
+- `Math.pell_10`  (pipeline/admin)
+- `Math.pell_11`  (pipeline/admin)
+- `Math.pell_13`  (pipeline/admin)
+- `Math.pell_2`  (pipeline/admin)
+- `Math.pell_3`  (pipeline/admin)
+- `Math.pell_5`  (pipeline/admin)
+- `Math.pell_6`  (pipeline/admin)
+- `Math.pell_7`  (pipeline/admin)
+- `Math.pell_8`  (pipeline/admin)
+- `Math.quadratic_reciprocity`  (pipeline/admin)
+- `Math.ramsey_3_3`  (pipeline/admin)
+- `Math.sum_two_squares`  (pipeline/admin)
+- `Math.two_squares_101`  (pipeline/chris)
+- `Math.two_squares_109`  (pipeline/admin)
+- `Math.two_squares_113`  (pipeline/admin)
+- `Math.two_squares_13`  (pipeline/admin)
+- `Math.two_squares_17`  (pipeline/admin)
+- `Math.two_squares_29`  (pipeline/admin)
+- `Math.two_squares_37`  (pipeline/admin)
+- `Math.two_squares_41`  (pipeline/admin)
+- `Math.two_squares_5`  (pipeline/admin)
+- `Math.two_squares_53`  (pipeline/admin)
+- `Math.two_squares_61`  (pipeline/admin)
+- `Math.two_squares_73`  (pipeline/admin)
+- `Math.two_squares_89`  (pipeline/admin)
+- `Math.two_squares_97`  (pipeline/admin)
+- `Math.weierstrass_approx`  (pipeline/admin)
+- `Math.wilson_theorem`  (pipeline/admin)
+- `Mod5Ray.card`  (list/chris)
+- `PCA.Cert.ed25519_verify_sound`  (pipeline/admin)
+- `PCA.Cert.reprove_matches_iff_untampered`  (pipeline/admin)
+- `PCA.Coverage.bail_on_unrecognized_is_sound`  (pipeline/admin)
+- `PCA.Fix.alter_policy_preserves_roles_and_cmd`  (pipeline/admin)
+- `PCA.Invariant.default_deny_excludes_only_allowlist`  (pipeline/admin)
+- `PCA.Invariant.rls_off_implies_no_row_protection`  (pipeline/chris)
+- `PCA.Isolation.disjunction_split_preserves_semantics`  (pipeline/admin)
+- `PCA.Isolation.evalF_bigOr`  (list/admin)
+- `PCA.Isolation.in_scope_encoding_complete`  (pipeline/chris)
+- `PCA.Isolation.in_scope_encoding_sound`  (pipeline/admin)
+- `PCA.Isolation.no_clean_proved_with_escape`  (pipeline/admin)
+- `PCA.Isolation.null_escape_iff_unowned_reachable`  (pipeline/admin)
+- `PCA.Isolation.tightened_predicate_refines_original`  (pipeline/admin)
+- `PCA.WriteIntegrity.member_check_prevents_cross_tenant_write`  (pipeline/admin)
+- `PCA.WriteIntegrity.with_check_true_admits_forge`  (pipeline/admin)
+- `PCA.default_deny`  (pipeline/admin)
+- `PCA.escape_monotone`  (pipeline/admin)
+- `PCA.leak_iff_escape_when_out_of_scope`  (pipeline/admin)
+- `PCA.no_clean_proved_with_escape`  (pipeline/admin)
+- `PCA.no_escape_no_leak`  (pipeline/admin)
+- `PCA.owner_only_isolated`  (pipeline/admin)
+- `PCA.priv_is_escape`  (pipeline/admin)
+- `PCA.tightening_refines`  (pipeline/admin)
+- `PCA.unowned_is_hole`  (pipeline/admin)
+- `PCA.with_check_true_admits_forge`  (pipeline/admin)
+- `PrimeAdmissibility.universal_admissibility_count`  (list/chris)
+- `QC.bell_orthonormal`  (pipeline/admin)
+- `QC.bloch_sphere_bijection`  (pipeline/admin)
+- `QC.chsh_tsirelson`  (pipeline/admin)
+- `QC.cnot_unitary_involutive`  (pipeline/admin)
+- `QC.density_matrix_unitary_invariant`  (pipeline/admin)
+- `QC.deutsch_correct`  (pipeline/admin)
+- `QC.exists_norm_eq_one`  (list/admin)
+- `QC.ghz2_normalized`  (pipeline/admin)
+- `QC.ghz3_normalized`  (pipeline/chris)
+- `QC.ghz4_normalized`  (pipeline/admin)
+- `QC.ghz5_normalized`  (pipeline/admin)
+- `QC.ghz6_normalized`  (pipeline/admin)
+- `QC.ghz7_normalized`  (pipeline/chris)
+- `QC.ghz8_normalized`  (pipeline/admin)
+- `QC.ghz_nonlocal`  (pipeline/admin)
+- `QC.hadamard_XZ`  (pipeline/admin)
+- `QC.hadamard_involutive`  (pipeline/admin)
+- `QC.kraus_trace_preserving`  (pipeline/admin)
+- `QC.no_cloning`  (pipeline/admin)
+- `QC.pauli_anticommute`  (pipeline/admin)
+- `QC.pauli_basis`  (pipeline/admin)
+- `QC.pure_state_zero_entropy`  (pipeline/admin)
+- `QC.qft_unitary`  (pipeline/admin)
+- `QC.qft_unitary_2`  (pipeline/admin)
+- `QC.qft_unitary_3`  (pipeline/admin)
+- `QC.qft_unitary_4`  (pipeline/admin)
+- `QC.qft_unitary_5`  (pipeline/admin)
+- `QC.qft_unitary_6`  (pipeline/admin)
+- `QC.qft_unitary_7`  (pipeline/admin)
+- `QC.qft_unitary_8`  (pipeline/admin)
+- `QC.robertson_uncertainty`  (pipeline/admin)
+- `QC.superdense_two_bits`  (pipeline/admin)
+- `QC.swap_test_overlap`  (pipeline/admin)
+- `QC.teleportation_identity`  (pipeline/admin)
+- `QC.tens_add_left`  (list/chris)
+- `QC.toffoli_unitary`  (pipeline/admin)
+- `QI.apply_entry_eq_sum`  (list/admin)
+- `QI.choi_jamiolkowski`  (pipeline/chris)
+- `QI.deutsch_jozsa`  (pipeline/admin)
+- `QI.inner_kron`  (list/chris)
+- `QI.inner_tens_tens`  (list/admin)
+- `QI.inner_toVec`  (list/chris)
+- `QI.no_deleting`  (pipeline/admin)
+- `QI.ptraceSnd_outer`  (list/chris)
+- `QI.ptrace_pureProj`  (list/admin)
+- `QI.purification_exists`  (pipeline/chris)
+- `QI.rho_apply`  (list/chris)
+- `QI.schmidt_decomposition`  (pipeline/chris)
+- `QI.ten3_ofLp`  (list/chris)
+- `QPhys.box_level_1`  (pipeline/admin)
+- `QPhys.box_level_2`  (pipeline/admin)
+- `QPhys.box_level_3`  (pipeline/admin)
+- `QPhys.box_level_4`  (pipeline/admin)
+- `QPhys.box_level_5`  (pipeline/admin)
+- `QPhys.box_level_6`  (pipeline/admin)
+- `QPhys.box_level_7`  (pipeline/admin)
+- `QPhys.dLdq_eq_zero_of_translationInvariant`  (list/chris)
+- `QPhys.heisenberg_uncertainty`  (pipeline/admin)
+- `QPhys.hermitian_real_spectrum`  (pipeline/admin)
+- `QPhys.noether_translation`  (pipeline/admin)
+- `QPhys.parseval_fourier`  (pipeline/admin)
+- `QPhys.pauli_exclusion_antisym`  (pipeline/chris)
+- `QPhys.unitary_time_evolution`  (pipeline/admin)
+- `QPhys.variational_bound`  (pipeline/admin)
+- `QuantumInfoII.clifford_HXH`  (list/chris)
+- `bridge`  (list/chris)
+- `goldbachReps_nonneg`  (list/chris)
+- `idemp_implies_double_idemp`  (list/admin)
+- `imp_A1`  (list/admin)
+- `left_proj_imp_idem`  (list/admin)
+- `pairs_always_q_minus_2`  (list/chris)
+- `pattern_reflection_invariance`  (list/chris)
+- `phi_pos`  (list/chris)
+- `problem_normal_0166`  (list/admin)
+- `problem_normal_0355`  (list/admin)
+- `problem_normal_0765`  (list/admin)
+- `spiral_continuous`  (list/chris)
+- `square_free_and_ne_one_implies_not_square`  (list/chris)
+- `universal_count_theorem`  (list/chris)
