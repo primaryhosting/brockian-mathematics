@@ -1,0 +1,202 @@
+{
+  "batch": "flagship-1",
+  "authorship": "Authored from documented history by the site's controller AI; every profile carries sources. Facts only; anecdotes labeled documented/legend/disputed. Dates uncertain in the record are marked approximate.",
+  "profiles": [
+    {
+      "slug": "euler",
+      "name": "Leonhard Euler",
+      "years": "1707–1783",
+      "bio": {
+        "life": "Leonhard Euler was born in Basel on 15 April 1707, the son of a pastor, and studied under Johann Bernoulli, who recognized the boy's gift and gave him a private hour on Saturdays. At twenty he joined the new Academy of Sciences in St. Petersburg; he later spent twenty-five years at Frederick the Great's Berlin Academy before returning to Russia under Catherine the Great. He lost sight in his right eye in the late 1730s and was almost totally blind from 1771 — and produced roughly half of his life's work after that, dictating to assistants who could barely keep up. He and his wife Katharina raised thirteen children, of whom five survived childhood; he was famously able to compute with a child on each knee. He died in St. Petersburg on 18 September 1783, mid-conversation about the newly discovered planet Uranus. Condorcet's eulogy closed with the line that he 'ceased to calculate and to live' — a documented contemporary tribute, not a legend.",
+        "mathematics": "Euler is the most prolific mathematician in history: his collected Opera Omnia run to more than eighty volumes, and much of the language of mathematics — f(x), e, π in its modern role, i, Σ — is his notation. In 1735 he stunned Europe by solving the Basel problem, showing the reciprocals of the squares sum to π²/6. His 1736 resolution of the Königsberg bridges puzzle founded graph theory. He discovered the product formula connecting the zeta function to the primes — the seed Riemann would grow into analytic number theory — and the pentagonal number theorem, which he conjectured around 1741 and finally proved in 1750 after nine years of trying: the expansion of (1−x)(1−x²)(1−x³)⋯ has coefficients that vanish except at generalized pentagonal numbers. Mechanics, hydrodynamics, optics, astronomy, the calculus of variations: there is scarcely a field of eighteenth-century mathematics he did not reshape.",
+        "legacy": "Laplace's advice to young mathematicians — 'Read Euler, read Euler, he is the master of us all' — is reported by tradition and fits the record. The pentagonal number theorem alone threads through partition theory, modular forms, and this site's verified corpus, where Franklin's combinatorial proof of Euler's theorem is formalized machine-checked. The Euler Archive indexes his works by E-number; mathematicians are still mining them."
+      },
+      "legends": [
+        { "claim": "Condorcet's 'he ceased to calculate and to live'", "status": "documented", "note": "From Condorcet's 1783 eulogy for the French Academy." },
+        { "claim": "'Read Euler, read Euler…' (Laplace)", "status": "attributed", "note": "Reported by tradition (via Libri); no primary manuscript source." }
+      ],
+      "works": [
+        { "title": "Mechanica", "year": 1736, "kind": "book", "note": "Newtonian mechanics rebuilt on analysis rather than geometry." },
+        { "title": "Solutio problematis ad geometriam situs pertinentis (Königsberg bridges, E53)", "year": 1736, "kind": "paper", "note": "The birth of graph theory." },
+        { "title": "De summis serierum reciprocarum (E41)", "year": 1740, "kind": "paper", "note": "The Basel problem: ζ(2) = π²/6.", "link": "https://scholarlycommons.pacific.edu/euler-works/41/" },
+        { "title": "Introductio in analysin infinitorum (E101–102)", "year": 1748, "kind": "book", "note": "The 'precalculus of the infinite'; functions become the central object.", "link": "https://scholarlycommons.pacific.edu/euler-works/101/" },
+        { "title": "Institutiones calculi differentialis", "year": 1755, "kind": "book", "note": "The definitive 18th-century differential calculus." },
+        { "title": "Evolutio producti infiniti (1−x)(1−xx)(1−x³)… (E541, pentagonal number theorem)", "year": 1783, "kind": "paper", "note": "The theorem this site's Franklin lab runs live; conjectured c. 1741, proof announced to Goldbach in 1750.", "link": "https://scholarlycommons.pacific.edu/euler-works/541/" },
+        { "title": "Lettres à une princesse d'Allemagne", "year": 1768, "kind": "book", "note": "Science for a general reader; one of history's great popularizations." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Euler/" },
+        { "label": "The Euler Archive (works by E-number)", "url": "https://scholarlycommons.pacific.edu/euler/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Leonhard_Euler" }
+      ]
+    },
+    {
+      "slug": "gauss",
+      "name": "Carl Friedrich Gauss",
+      "years": "1777–1855",
+      "bio": {
+        "life": "Carl Friedrich Gauss was born in Brunswick on 30 April 1777 to a poor family; his talent was so conspicuous that the Duke of Brunswick paid for his education. On 30 March 1796, at eighteen, he proved the regular 17-gon constructible with ruler and compass — the first advance on that question since antiquity — and the discovery decided him for mathematics over philology. From 1807 until his death on 23 February 1855 he was director of the Göttingen observatory, doing first-rank work in astronomy, geodesy, and magnetism alongside the mathematics. He published under the motto pauca sed matura — few, but ripe — and his private notebooks, published long after his death, showed he had anticipated decades of other people's discoveries, including non-Euclidean geometry.",
+        "mathematics": "The Disquisitiones Arithmeticae (1801), finished when he was twenty-one, created modern number theory: congruences, quadratic forms, and the first complete proof of quadratic reciprocity — the 'golden theorem,' which he loved enough to prove at least six more times by different methods. In 1801 he rescued the lost asteroid Ceres by inventing least-squares orbit determination, making him famous across Europe. His 1827 work on curved surfaces proved the Theorema Egregium — curvature is intrinsic — the seed of Riemannian geometry. As a teenager he conjectured, from tables of primes he computed by hand, that the density of primes near x behaves like 1/log x: the Prime Number Theorem, proved only in 1896, and the baseline against which this site's π(x) race lab runs.",
+        "legacy": "He was called princeps mathematicorum — the prince of mathematicians — in his own lifetime. Every part of this site touches him: reciprocity, the prime-counting race, least squares behind every fitted curve, and the Gaussian distribution behind the Galton board. His insistence on rigor and completeness set the standard the nineteenth century built on."
+      },
+      "legends": [
+        { "claim": "The schoolroom story: young Gauss instantly summing 1 to 100", "status": "legend", "note": "First told after his death by Sartorius; charming, existing in many versions, and not documented from Gauss himself." }
+      ],
+      "works": [
+        { "title": "Disquisitiones Arithmeticae", "year": 1801, "kind": "book", "note": "Founded modern number theory; first proof of quadratic reciprocity.", "link": "https://archive.org/details/disquisitionesa00gaus" },
+        { "title": "Theoria motus corporum coelestium", "year": 1809, "kind": "book", "note": "Orbit determination; least squares in action after the Ceres triumph." },
+        { "title": "Disquisitiones generales circa superficies curvas", "year": 1827, "kind": "paper", "note": "The Theorema Egregium; intrinsic curvature." },
+        { "title": "Notebook conjecture on prime density (letter to Encke, 1849, recalling tables from c. 1792–93)", "year": 1849, "kind": "letter", "note": "The Prime Number Theorem as a teenager's empirical discovery." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Gauss/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss" }
+      ]
+    },
+    {
+      "slug": "riemann",
+      "name": "Bernhard Riemann",
+      "years": "1826–1866",
+      "bio": {
+        "life": "Georg Friedrich Bernhard Riemann was born on 17 September 1826 in Breselenz, in the Kingdom of Hanover, a pastor's son — shy, frail, devout, and poor for most of his life. At Göttingen he studied under Gauss, who rarely praised anyone and made an exception for Riemann's 1851 doctoral thesis. For his 1854 habilitation lecture Gauss — bypassing the two topics Riemann preferred — chose the third: the foundations of geometry. The resulting lecture, delivered to a nonmathematical faculty audience, invented Riemannian geometry and, sixty years later, gave Einstein the mathematics of general relativity. Riemann succeeded Dirichlet in Gauss's chair in 1859. Tuberculosis forced him to Italy repeatedly; he died at Selasca on Lago Maggiore on 20 July 1866, aged thirty-nine. Part of his unpublished Nachlass was destroyed after his death — what survived kept mathematicians busy for a century.",
+        "mathematics": "Riemann wrote one paper on number theory: eight pages, 1859, on his election to the Berlin Academy — 'On the Number of Primes Less Than a Given Magnitude.' In it he took Euler's product formula, extended ζ(s) to the complex plane, found the functional equation, connected the zeros to the distribution of primes by an explicit formula, and remarked that it is 'very probable' that all nontrivial zeros lie on the critical line — the Riemann Hypothesis, still open, still the deepest unsolved problem in mathematics, and marked OPEN wherever this site touches it. His earlier work was no smaller: Riemann surfaces made multivalued functions geometric; the Riemann integral made analysis honest; his geometry of curved manifolds runs underneath modern physics.",
+        "legacy": "This entire site is downstream of those eight pages. The Observatory walks his explicit formula; the zero datasets verify his zeros hold to the hundred-thousandth; the labs' OPEN badges are the honest accounting of what he left undone. No mathematician has extracted more from fewer published pages."
+      },
+      "legends": [
+        { "claim": "His housekeeper burned some of his unpublished papers after his death", "status": "documented", "note": "Reported by Dedekind's biographical essay; the full extent of the loss is uncertain." }
+      ],
+      "works": [
+        { "title": "Grundlagen für eine allgemeine Theorie der Functionen (doctoral dissertation)", "year": 1851, "kind": "paper", "note": "Complex function theory; Riemann surfaces." },
+        { "title": "Über die Hypothesen, welche der Geometrie zu Grunde liegen", "year": 1854, "kind": "paper", "note": "Habilitation lecture; published 1868. The birth of Riemannian geometry." },
+        { "title": "Über die Anzahl der Primzahlen unter einer gegebenen Grösse", "year": 1859, "kind": "paper", "note": "The paper. Zeta, the functional equation, the explicit formula, the Hypothesis.", "link": "https://www.claymath.org/collections/riemanns-1859-manuscript/" },
+        { "title": "Über die Darstellbarkeit einer Function durch eine trigonometrische Reihe", "year": 1854, "kind": "paper", "note": "Habilitation thesis; the Riemann integral." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Riemann/" },
+        { "label": "Clay Mathematics Institute — the 1859 manuscript", "url": "https://www.claymath.org/collections/riemanns-1859-manuscript/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Bernhard_Riemann" }
+      ]
+    },
+    {
+      "slug": "galois",
+      "name": "Évariste Galois",
+      "years": "1811–1832",
+      "bio": {
+        "life": "Évariste Galois was born in Bourg-la-Reine, near Paris, on 25 October 1811. He failed the École Polytechnique entrance examination twice — the examiners could not follow him — and was later expelled from the École Normale for a political letter. A fervent republican in the turbulence after the 1830 revolution, he was arrested twice and spent months in prison, where he kept working. His memoir on the solvability of equations was lost once by Cauchy's circle, and returned by Poisson as 'incomprehensible.' On 30 May 1832, aged twenty, he fought a duel — over circumstances that remain murky — and died the next day. His last words to his brother Alfred are reported as: 'Don't cry. I need all my courage to die at twenty.'",
+        "mathematics": "Galois answered a 300-year-old question — which polynomial equations can be solved by radicals — by inventing an entirely new kind of mathematics: attach to each equation its group of symmetries, and read solvability off the structure of that group. The quintic is unsolvable because the alternating group A₅ is simple: the derived series of S₅ sticks at A₅ and never reaches the identity. That single computation, which this site's 'Why Five' lab runs live, is the reason there is no quintic formula — and the word 'group,' in the mathematical sense, is his. The memoir Poisson rejected was published by Liouville in 1846, fourteen years after his death, and turned out to be one of the most original documents in the history of mathematics.",
+        "legacy": "Group theory is now the language of symmetry across all of mathematics and physics — from crystallography to particle physics to the D₅ character tables in this site's corpus. Every register badge on the Galois lab traces to a machine-verified formalization of ideas a twenty-year-old wrote down while the Paris of 1832 came apart around him."
+      },
+      "legends": [
+        { "claim": "He invented group theory in a single night before the duel", "status": "legend", "note": "The famous letter to Auguste Chevalier (29 May 1832) is real and is one of mathematics' most extraordinary documents — but it summarizes and annotates memoirs written over the previous three years. The mathematics was not created in one night." },
+        { "claim": "'I have no time' scrawled in the margin", "status": "documented", "note": "Variants of 'je n'ai pas le temps' appear in the final letter's margins per the published transcriptions." },
+        { "claim": "Last words: 'I need all my courage to die at twenty'", "status": "attributed", "note": "Reported through his brother; consistent across early biographies but not independently verifiable." }
+      ],
+      "works": [
+        { "title": "Mémoire sur les conditions de résolubilité des équations par radicaux", "year": 1831, "kind": "paper", "note": "Rejected by Poisson in 1831; published by Liouville in 1846. The foundation of Galois theory." },
+        { "title": "Lettre à Auguste Chevalier", "year": 1832, "kind": "letter", "note": "Written 29 May 1832, the eve of the duel: a summary of his theory and research program, ending with a request to ask Jacobi or Gauss their opinion 'not of the truth, but of the importance of these theorems.'" }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Galois/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/%C3%89variste_Galois" }
+      ]
+    },
+    {
+      "slug": "erdos",
+      "name": "Paul Erdős",
+      "years": "1913–1996",
+      "bio": {
+        "life": "Paul Erdős was born in Budapest on 26 March 1913 to two mathematics teachers; his two sisters died of scarlet fever days before his birth, and his mother guarded him so closely that he first buttered his own bread at twenty-one. He left Hungary in 1934 and never really lived anywhere again: for six decades he traveled the world with two half-empty suitcases, arriving at colleagues' doors announcing 'my brain is open,' working for days, and moving on. He owned almost nothing, gave away his prize money — often as bounties on problems — and spoke his own dialect (children were 'epsilons,' God was the 'Supreme Fascist' who hides the best proofs). He died on 20 September 1996 in Warsaw, at a conference, which is how he would have chosen it.",
+        "mathematics": "Erdős published around 1,500 papers with more than 500 collaborators — both records — across number theory, combinatorics, set theory, and probability. With Szekeres in 1935 he proved the theorem on monotone subsequences that this site runs live; with Ginzburg and Ziv in 1961, the zero-sum theorem the corpus holds machine-verified. In 1949 he and Atle Selberg found an elementary proof of the Prime Number Theorem — no complex analysis — in an episode that ended in a famous and painful priority dispute. His deepest single contribution may be the probabilistic method: proving that a structure exists by showing a random object has positive probability of being one, an idea that now underpins modern combinatorics and theoretical computer science.",
+        "legacy": "The Erdős number — collaborative distance from the man himself — is mathematics' affectionate self-portrait as a connected graph. He believed the best proofs were kept in 'The Book,' and spent a lifetime finding pages of it. Several of them are formalized in this site's corpus."
+      },
+      "legends": [
+        { "claim": "The amphetamine bet with Ron Graham (he quit for a month, then declared mathematics had been set back)", "status": "documented", "note": "Recounted in Hoffman's biography 'The Man Who Loved Only Numbers' from the participants; anecdotal in origin but well attested." },
+        { "claim": "The Erdős–Selberg priority dispute over the elementary PNT proof", "status": "documented", "note": "Both published in 1949; the falling-out is a documented and much-analyzed episode. Selberg received the 1950 Fields Medal." }
+      ],
+      "works": [
+        { "title": "A combinatorial problem in geometry (with G. Szekeres)", "year": 1935, "kind": "paper", "note": "The Erdős–Szekeres theorem; the 'happy ending problem.'" },
+        { "title": "On a new method in elementary number theory (elementary proof of PNT)", "year": 1949, "kind": "paper", "note": "With Selberg's fundamental inequality; the proof analytic number theorists thought impossible." },
+        { "title": "Theorem in the additive number theory (with A. Ginzburg & A. Ziv)", "year": 1961, "kind": "paper", "note": "Any 2n−1 integers contain n whose sum is divisible by n — machine-verified in this site's corpus." },
+        { "title": "Some remarks on the theory of graphs", "year": 1947, "kind": "paper", "note": "The probabilistic method arrives: lower bounds for Ramsey numbers from random colorings." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Erdos/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Paul_Erd%C5%91s" }
+      ]
+    },
+    {
+      "slug": "shannon",
+      "name": "Claude Shannon",
+      "years": "1916–2001",
+      "bio": {
+        "life": "Claude Elwood Shannon was born in Petoskey, Michigan, on 30 April 1916 and grew up in Gaylord building radio-controlled model boats and a telegraph to a friend's house out of barbed-wire fencing. His 1937 MIT master's thesis showed that Boolean algebra and relay circuits are the same thing — routinely called the most important master's thesis ever written, since every digital circuit since is an application of it. At Bell Labs through the war he worked on cryptography and fire control, met Alan Turing over tea, and in 1948 published the paper that created the information age. At MIT from 1958, he was famous for juggling, unicycling through the corridors, and building machines of no practical use whatsoever — a mechanical mouse that learned mazes, a calculator that computed in Roman numerals, THROBAC. He died on 24 February 2001, after years of Alzheimer's disease — cruelly, just as the world his theory built was arriving.",
+        "mathematics": "'A Mathematical Theory of Communication' (1948) did something almost unprecedented: it opened and essentially closed a field in one paper. Shannon defined the bit, defined entropy H = −Σ p log p as the measure of information, proved the source coding theorem (entropy is the limit of compression) and the noisy channel coding theorem (below capacity, error-free communication is possible — a result engineers simply did not believe until the codes were found decades later). His 1949 secrecy paper proved the one-time pad unbreakable and put cryptography on mathematical footing. His entropy is the same functional this site's entropy lab computes live, and the bridge between information and thermodynamics is still an active frontier.",
+        "legacy": "Every message, file, and stream on Earth is budgeted in his units. Few scientists have created a whole science, named its quantity, and proved its fundamental limits in a single stroke — and then spent the rest of a career cheerfully refusing to be famous about it."
+      },
+      "legends": [
+        { "claim": "Von Neumann told him to call it 'entropy' because 'no one knows what entropy really is, so in a debate you will always have the advantage'", "status": "disputed", "note": "Recounted secondhand (via Tribus, 1961) from a conversation with Shannon; widely repeated, unverifiable, and Shannon himself gave varying accounts." }
+      ],
+      "works": [
+        { "title": "A Symbolic Analysis of Relay and Switching Circuits (master's thesis)", "year": 1937, "kind": "paper", "note": "Boolean algebra = switching circuits. The foundation of digital logic design." },
+        { "title": "A Mathematical Theory of Communication", "year": 1948, "kind": "paper", "note": "Bell System Technical Journal. The bit, entropy, channel capacity — information theory complete at birth.", "link": "https://archive.org/details/bstj27-3-379" },
+        { "title": "Communication Theory of Secrecy Systems", "year": 1949, "kind": "paper", "note": "Perfect secrecy defined; the one-time pad proved optimal." },
+        { "title": "Programming a Computer for Playing Chess", "year": 1950, "kind": "paper", "note": "The founding paper of computer chess and game-tree search." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Shannon/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Claude_Shannon" }
+      ]
+    },
+    {
+      "slug": "weyl",
+      "name": "Hermann Weyl",
+      "years": "1885–1955",
+      "bio": {
+        "life": "Hermann Weyl was born in Elmshorn, near Hamburg, on 9 November 1885 and became Hilbert's greatest student at Göttingen. From 1913 he held the chair at ETH Zürich — where Einstein was a colleague just as general relativity was being born — and in 1930 he accepted the succession to Hilbert's own chair, the most prestigious in mathematics. In 1933, with a Jewish wife and the Nazi purge destroying Göttingen around him, he left for the Institute for Advanced Study in Princeton, where he, Einstein, and von Neumann anchored the refuge that inherited Göttingen's role. He died in Zürich on 8 December 1955. Dyson's obituary recalled Weyl saying, half-jokingly, that in his work he always tried to unite the true with the beautiful — and when he had to choose, he usually chose the beautiful.",
+        "mathematics": "Weyl worked at first rank in more areas than almost anyone of his century. His 1916 equidistribution theorem — the fractional parts of nα for irrational α fill the unit interval uniformly, detected by exponential sums — created a tool that runs through analytic number theory and this site's equidistribution lab. His 1913 book made Riemann surfaces rigorous. His 1918 'gauge' idea — that physical laws should be invariant under local rescaling — failed in its original purpose and then, reborn in 1929 as phase invariance, became the organizing principle of all modern particle physics. His representation theory of compact Lie groups (character formula, unitarian trick) is the backbone of how symmetry is computed, including the spectral scaffolds in this site's corpus; his eigenvalue asymptotics ('Weyl law') let one hear the volume of a drum.",
+        "legacy": "Gauge theory, group representations, equidistribution: three separate revolutions from one hand. The Weyl module family is among the largest verified clusters in this site's corpus — the Schrödinger minimal-coupling scaffolds carry his name for a reason."
+      },
+      "legends": [
+        { "claim": "'My work always tried to unite the true with the beautiful; but when I had to choose one or the other, I usually chose the beautiful'", "status": "attributed", "note": "Reported by Freeman Dyson (Nature obituary, 1956) as something Weyl said to him half-jokingly." }
+      ],
+      "works": [
+        { "title": "Die Idee der Riemannschen Fläche", "year": 1913, "kind": "book", "note": "Riemann surfaces made rigorous; modern complex geometry begins." },
+        { "title": "Über die Gleichverteilung von Zahlen mod. Eins", "year": 1916, "kind": "paper", "note": "Equidistribution via exponential sums — the Weyl criterion this site's lab demonstrates live." },
+        { "title": "Raum, Zeit, Materie", "year": 1918, "kind": "book", "note": "The first textbook of general relativity, with the original gauge idea." },
+        { "title": "Gruppentheorie und Quantenmechanik", "year": 1928, "kind": "book", "note": "Symmetry enters quantum mechanics for good." },
+        { "title": "The Classical Groups", "year": 1939, "kind": "book", "note": "Invariant theory and representations, 'their invariants and representations.'" },
+        { "title": "Symmetry", "year": 1952, "kind": "book", "note": "A short, beautiful meditation from bilateral symmetry to group theory." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Weyl/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Hermann_Weyl" }
+      ]
+    },
+    {
+      "slug": "hardy",
+      "name": "G. H. Hardy",
+      "years": "1877–1947",
+      "bio": {
+        "life": "Godfrey Harold Hardy was born in Cranleigh, Surrey, on 7 February 1877, to schoolteacher parents. At Cambridge he became the leading English mathematician of his generation and the man who dragged British mathematics out of its isolation into contact with the continental rigor of analysis. In January 1913 he received a letter of unproved formulas from a clerk in Madras; recognizing that the results 'must be true, because, if they were not true, no one would have had the imagination to invent them,' he brought Srinivasa Ramanujan to Cambridge — a collaboration he called 'the one romantic incident in my life.' A cricket fanatic, an atheist with a private mythology about God, and a stylist of English prose, he set out his creed in A Mathematician's Apology (1940). He died in Cambridge on 1 December 1947.",
+        "mathematics": "With J. E. Littlewood he formed the most productive partnership in the history of mathematics — thirty-five years, governed by their famous 'axioms' of collaboration (it did not matter if what they wrote to each other was wrong; a letter need not be answered; ...). In 1914 Hardy proved that infinitely many zeros of the zeta function lie exactly on the critical line — the first hard evidence for Riemann's hypothesis, which this site's ledger still marks OPEN. Hardy and Littlewood's circle method, grown from work with Ramanujan on partitions, turned additive problems — Waring's problem, Goldbach — into contour integrals; their 1923 Partitio Numerorum III stated the k-tuple conjecture and the singular-series constants whose thousands of machine-verified values are the largest single cluster in this site's corpus.",
+        "legacy": "The Hardy–Littlewood constants are literally running in these labs: the twin-prime constant lab certifies digits of a number he and Littlewood defined a century ago. The Apology remains the most-read account of what it feels like, from inside, to do pure mathematics — and why one might live for it."
+      },
+      "legends": [
+        { "claim": "The taxi-cab number 1729 ('a rather dull number' — 'No, Hardy, it is a very interesting number…')", "status": "documented", "note": "Hardy told the story himself in his Ramanujan lectures; it happened at Ramanujan's sickbed in Putney." },
+        { "claim": "The collaboration 'axioms' with Littlewood", "status": "attributed", "note": "Recounted by Harald Bohr; universally repeated, consistent with the record of the collaboration." }
+      ],
+      "works": [
+        { "title": "A Course of Pure Mathematics", "year": 1908, "kind": "book", "note": "The book that taught England rigorous analysis." },
+        { "title": "Sur les zéros de la fonction ζ(s) de Riemann", "year": 1914, "kind": "paper", "note": "Infinitely many zeros on the critical line." },
+        { "title": "Asymptotic formulae in combinatory analysis (with S. Ramanujan)", "year": 1918, "kind": "paper", "note": "The partition asymptotic; the circle method is born." },
+        { "title": "Some problems of 'Partitio Numerorum' III (with J. E. Littlewood)", "year": 1923, "kind": "paper", "note": "The k-tuple conjecture and the singular series — the constants this site's corpus verifies by the thousand." },
+        { "title": "An Introduction to the Theory of Numbers (with E. M. Wright)", "year": 1938, "kind": "book", "note": "Still the classic introduction, nearly a century on." },
+        { "title": "A Mathematician's Apology", "year": 1940, "kind": "book", "note": "The testament: mathematics as art, written in wartime melancholy." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Hardy/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/G._H._Hardy" }
+      ]
+    }
+  ]
+}

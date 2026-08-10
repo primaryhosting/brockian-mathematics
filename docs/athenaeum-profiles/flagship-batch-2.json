@@ -1,0 +1,194 @@
+{
+  "batch": "flagship-2",
+  "authorship": "Authored from documented history by the site's controller AI; every profile carries sources. Facts only; anecdotes labeled documented/legend/disputed/attributed. Dates uncertain in the record are marked approximate.",
+  "profiles": [
+    {
+      "slug": "littlewood",
+      "name": "J. E. Littlewood",
+      "years": "1885–1977",
+      "bio": {
+        "life": "John Edensor Littlewood was born in Rochester, Kent, on 9 June 1885 and spent part of his childhood in South Africa before returning to England and Trinity College, Cambridge — where he then remained for over seventy years. Physically vigorous (a climber, swimmer, and skater into old age) and privately troubled (he fought recurring depression for decades, successfully treated only in his seventies), he was the hidden half of the Hardy–Littlewood partnership: so seldom seen at conferences that a European joke held 'Littlewood' to be a fiction Hardy invented to take the blame for errors. Landau, it was said, went to England expressly to verify he existed. He died in Cambridge on 6 September 1977, aged ninety-two.",
+        "mathematics": "Littlewood announced himself in 1914 with one of the most shocking results in number theory: π(x) − Li(x), negative for every x anyone had ever computed, changes sign infinitely often — the first great warning that numerical evidence in the primes can lie, and the direct subject of this site's π(x) race lab (the first crossing lies below the astronomical Skewes bound his student later produced). With Hardy he built the circle method, proved results toward Waring's problem, and in Partitio Numerorum III (1923) stated the k-tuple and even-Goldbach singular-series machinery whose constants this site's corpus now verifies by the thousand. His war work on anti-aircraft ballistics in 1914–18 was quietly celebrated; his Miscellany remains one of the funniest books a great mathematician has written.",
+        "legacy": "Every 'the data says X, the theorem says otherwise' badge on this site is Littlewood's ghost at work: he is the patron saint of not trusting the numbers too soon. The Hardy–Littlewood constants running live in these labs carry his name jointly, exactly as the collaboration axioms would have wanted."
+      },
+      "legends": [
+        { "claim": "Landau traveled to England to verify Littlewood existed", "status": "legend", "note": "A well-worn Cambridge joke reported in several memoirs; told with variants about Norbert Wiener as well. Not a documented event." }
+      ],
+      "works": [
+        { "title": "Sur la distribution des nombres premiers", "year": 1914, "kind": "paper", "note": "π(x) − Li(x) changes sign infinitely often — numerical evidence overthrown by proof." },
+        { "title": "Some problems of 'Partitio Numerorum' III (with G. H. Hardy)", "year": 1923, "kind": "paper", "note": "The k-tuple conjecture and singular series." },
+        { "title": "The Riemann zeta-function and the theory of the distribution of primes (with G. H. Hardy)", "year": 1916, "kind": "paper", "note": "Zero-density and approximation results that shaped the analytic theory." },
+        { "title": "A Mathematician's Miscellany", "year": 1953, "kind": "book", "note": "Wit, anecdote, and the famous essay on the mathematician's art of work." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Littlewood/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/John_Edensor_Littlewood" }
+      ]
+    },
+    {
+      "slug": "fermat",
+      "name": "Pierre de Fermat",
+      "years": "c. 1601–1665",
+      "bio": {
+        "life": "Pierre de Fermat was baptized in Beaumont-de-Lomagne on 20 August 1601 — though some modern scholarship argues for a birth as late as 1607, so the date is best marked approximate. A lawyer by profession, he rose to conseiller at the Parlement of Toulouse and did mathematics entirely as a private passion, in the margins of his reading and in letters to Mersenne, Pascal, and the mathematicians of Europe. He published almost nothing in his lifetime and proved allergic to writing out demonstrations, preferring to issue challenges. He died in Castres on 12 January 1665, two days after conducting a court case. His son Samuel published his annotated copy of Diophantus in 1670 — margins included — and thereby set mathematics its most famous problem.",
+        "mathematics": "Fermat co-founded analytic geometry (independently of Descartes), invented methods of maxima, minima, and tangents that anticipate the calculus, and, in the 1654 correspondence with Pascal about a gambler's stakes, co-founded probability theory — the direct ancestor of this site's Galton board and random-walk labs. But number theory was his kingdom. His 'little theorem' (stated in a 1640 letter to Frénicle, with the demonstration omitted for being 'too long') governs modular exponentiation and, through its converse's failure, the Carmichael/Korselt story in this site's Wilson lab. His two-squares theorem, his method of infinite descent, and his study of what are now called Pell equations set the agenda Euler inherited. And one margin note — that xⁿ + yⁿ = zⁿ has no solutions for n > 2, with its 'truly marvelous proof' the margin was too small to contain — stood open for 358 years until Andrew Wiles closed it in 1995.",
+        "legacy": "Number theory as a modern subject begins with Fermat's letters and margins. That the Last Theorem's eventual proof required twentieth-century machinery he could not have possessed makes the margin note either history's greatest bluff or its most productive error — mathematicians overwhelmingly believe he had at most a proof for n = 4."
+      },
+      "legends": [
+        { "claim": "The margin note ('I have discovered a truly marvelous proof, which this margin is too narrow to contain')", "status": "documented", "note": "Printed in Samuel Fermat's 1670 edition of the annotated Diophantus. The note is real; the claimed general proof almost certainly was not." },
+        { "claim": "Birth year 1601", "status": "disputed", "note": "Baptism 20 August 1601 is recorded; some scholarship (Barner) argues the mathematician was born 1607/8 and the 1601 baptism was an elder half-brother of the same name." }
+      ],
+      "works": [
+        { "title": "Letter to Frénicle stating the 'little theorem'", "year": 1640, "kind": "letter", "note": "18 October 1640: aᵖ⁻¹ ≡ 1 (mod p) for p prime, p ∤ a — 'I would send you the demonstration, did I not fear it being too long.'" },
+        { "title": "Correspondence with Pascal on the problem of points", "year": 1654, "kind": "letter", "note": "The founding documents of probability theory." },
+        { "title": "Methodus ad disquirendam maximam et minimam", "year": 1636, "kind": "paper", "note": "Circulated manuscript; maxima, minima and tangents before the calculus. (Date of circulation approximate.)" },
+        { "title": "Observations on Diophantus (published by Samuel Fermat)", "year": 1670, "kind": "book", "note": "The posthumous edition containing the margin notes, the Last Theorem among them.", "link": "https://archive.org/details/bub_gb_TbE_3aglZl4C" }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Fermat/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Pierre_de_Fermat" }
+      ]
+    },
+    {
+      "slug": "dirichlet",
+      "name": "Peter Gustav Lejeune Dirichlet",
+      "years": "1805–1859",
+      "bio": {
+        "life": "Johann Peter Gustav Lejeune Dirichlet was born in Düren, then under French rule, on 13 February 1805, the son of a postmaster. At sixteen he went to Paris — then the mathematical capital of the world — carrying his most prized possession, a copy of Gauss's Disquisitiones Arithmeticae, which by the accounts of his biographers he kept with him constantly and worked through until he had mastered what most of Europe found impenetrable. He taught at Breslau and then Berlin for nearly three decades, married Rebecka Mendelssohn (sister of the composer), and in 1855 was called to Göttingen as Gauss's successor. He died there on 5 May 1859, months after his wife; the chair passed to his young colleague Riemann.",
+        "mathematics": "In 1837 Dirichlet proved that every arithmetic progression a, a+q, a+2q, … with gcd(a,q)=1 contains infinitely many primes — and to do it he invented characters, L-functions, and the habit of using analysis to answer questions about integers. Analytic number theory begins on that page; the L-functions in every modern formulation of the subject, including the Dirichlet-character machinery in this site's corpus, carry his name. His class number formula tied L-values to the arithmetic of quadratic forms; his unit theorem mapped the units of number fields; his 'pigeonhole principle' (Schubfachprinzip) turned an observation a child could make into a permanent proof technique, and his approximation theorem applied it to irrationals — the germ of the continued-fraction and Farey structure this site's labs explore. In analysis, he gave the first rigorous convergence conditions for Fourier series and the modern concept of a function.",
+        "legacy": "Riemann's 1859 paper is explicitly a continuation of Dirichlet's program — the student applying analysis to π(x) as the teacher had to progressions. The path from Dirichlet's 1837 characters to the machine-verified character tables in this corpus is direct."
+      },
+      "legends": [
+        { "claim": "He slept with the Disquisitiones under his pillow", "status": "legend", "note": "A biographical embellishment of the documented fact that he carried and studied the book devotedly; the pillow detail is unverifiable tradition." }
+      ],
+      "works": [
+        { "title": "Beweis des Satzes, dass jede unbegrenzte arithmetische Progression … unendlich viele Primzahlen enthält", "year": 1837, "kind": "paper", "note": "Primes in arithmetic progressions; characters and L-functions invented for the purpose." },
+        { "title": "Recherches sur diverses applications de l'analyse infinitésimale à la théorie des nombres", "year": 1839, "kind": "paper", "note": "The class number formula program." },
+        { "title": "Sur la convergence des séries trigonométriques", "year": 1829, "kind": "paper", "note": "First rigorous convergence theorem for Fourier series." },
+        { "title": "Vorlesungen über Zahlentheorie (edited by R. Dedekind)", "year": 1863, "kind": "book", "note": "The lectures that taught number theory to two generations, published posthumously by Dedekind.", "link": "https://archive.org/details/vorlesungenberz02dirigoog" }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Dirichlet/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Peter_Gustav_Lejeune_Dirichlet" }
+      ]
+    },
+    {
+      "slug": "hilbert",
+      "name": "David Hilbert",
+      "years": "1862–1943",
+      "bio": {
+        "life": "David Hilbert was born in Königsberg on 23 January 1862 and in 1895 came to Göttingen, which he and Felix Klein built into the center of the mathematical world. At the 1900 International Congress in Paris he set the twentieth century its homework: twenty-three problems, several of which — including the Riemann Hypothesis, his eighth — remain open and are marked OPEN in this site's ledgers. His confidence was a doctrine: 'Wir müssen wissen, wir werden wissen' — we must know, we will know — words delivered in his 1930 Königsberg address and now carved on his tombstone, spoken, with history's sharpest irony, the day after the young Gödel first announced the incompleteness result that shattered Hilbert's formalist program. He watched the Nazi purge of 1933 empty his institute; asked by the minister of education whether mathematics at Göttingen had suffered, he is reported to have replied that there was no mathematics at Göttingen anymore. He died in wartime Göttingen on 14 February 1943, his funeral almost unattended.",
+        "mathematics": "Hilbert worked in nearly sequential five-year obsessions, transforming each field before moving on: invariant theory (killed, said Gordan, by his existence proof — 'this is theology'), algebraic number theory (the 1897 Zahlbericht), geometry (the 1899 Grundlagen, the modern axiomatic method itself), integral equations (Hilbert space, the arena of quantum mechanics and of the spectral operators in this site's corpus), physics, and finally foundations. The Hilbert program — prove mathematics consistent by finitary means — failed in the precise sense Gödel established, and in failing created modern logic and, through it, computer science.",
+        "legacy": "The spectral theory bearing his name is the mathematical home of every eigenvalue computation in these labs, and the axiomatic-formalist tradition he founded is the direct ancestor of the proof assistants — Lean among them — whose verdicts this site treats as ground truth. The corpus's PROVED register is, in a real sense, Hilbert's program running at last, scaled down to what Gödel left possible."
+      },
+      "legends": [
+        { "claim": "'Wir müssen wissen, wir werden wissen'", "status": "documented", "note": "From his 1930 Königsberg radio address; inscribed on his tombstone." },
+        { "claim": "Reply to minister Rust that there was 'no mathematics in Göttingen anymore'", "status": "attributed", "note": "Reported in Constance Reid's biography from oral tradition; wording varies across tellings." },
+        { "claim": "Gordan's 'This is not mathematics, this is theology'", "status": "attributed", "note": "Reported remark about Hilbert's non-constructive basis theorem proof; documented only at second hand." }
+      ],
+      "works": [
+        { "title": "Die Theorie der algebraischen Zahlkörper (Zahlbericht)", "year": 1897, "kind": "book", "note": "The report that organized algebraic number theory for fifty years." },
+        { "title": "Grundlagen der Geometrie", "year": 1899, "kind": "book", "note": "Euclid re-founded; the axiomatic method as modern mathematics practices it.", "link": "https://archive.org/details/grundlagendergeo00hilb" },
+        { "title": "Mathematische Probleme (the 23 problems)", "year": 1900, "kind": "paper", "note": "The Paris address; problem 8 is the Riemann Hypothesis — still OPEN." },
+        { "title": "Grundzüge einer allgemeinen Theorie der linearen Integralgleichungen", "year": 1912, "kind": "book", "note": "Hilbert space and spectral theory." },
+        { "title": "Grundlagen der Mathematik (with P. Bernays)", "year": 1934, "kind": "book", "note": "The formalist program's summa, written as Gödel's theorems redrew its limits." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Hilbert/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/David_Hilbert" }
+      ]
+    },
+    {
+      "slug": "polya",
+      "name": "George Pólya",
+      "years": "1887–1985",
+      "bio": {
+        "life": "George Pólya was born in Budapest on 13 December 1887, tried law, languages, and philosophy before settling on mathematics ('I am too good for philosophy and not good enough for physics'), and spent his central years at ETH Zürich before emigrating in 1940 — via Brown — to Stanford, where he taught until past ninety. He was one of the great problem-solvers and one of the great teachers of problem-solving, and treated the two as the same calling. He died in Palo Alto on 7 September 1985, at ninety-seven.",
+        "mathematics": "Pólya's 1921 random-walk theorem is one of probability's permanent surprises: the simple random walk returns to its origin with probability 1 in one and two dimensions, but in three dimensions escapes forever with positive probability — the exact dichotomy this site's random-walk lab computes live, down to the seven digits of the three-dimensional return probability via Watson's integral. His enumeration theorem (1937) counts objects under symmetry — necklaces, isomers, graphs — by averaging over a group, a direct bridge to the character-table machinery in this site's corpus. With Szegő he wrote the most celebrated problem book in analysis; his Hurwitz-trained taste ran through complex analysis, inequalities, and mathematical physics. And one heuristic remark of his — that the Riemann zeros ought to be eigenvalues of some self-adjoint operator — became, as the Hilbert–Pólya conjecture, the reason random-matrix statistics run through this site's Observatory.",
+        "legacy": "How to Solve It (1945) has sold over a million copies and taught generations — including the founders of artificial intelligence, who cite it — that discovery has a method: understand, plan, execute, look back. Between the random walk, the enumeration theorem, and the Hilbert–Pólya idea, he owns three separate rooms in this Athenaeum's mathematics."
+      },
+      "legends": [
+        { "claim": "'A drunk man will find his way home, but a drunk bird may get lost forever'", "status": "attributed", "note": "The popular summary of Pólya's theorem is due to Shizuo Kakutani (in lectures), not Pólya himself." },
+        { "claim": "The Hilbert–Pólya conjecture attribution", "status": "documented", "note": "Pólya's recollection, in a 1982 letter to Odlyzko, of a c. 1914 conversation with Landau — the source for his half of the conjecture's name." }
+      ],
+      "works": [
+        { "title": "Über eine Aufgabe der Wahrscheinlichkeitsrechnung betreffend die Irrfahrt im Straßennetz", "year": 1921, "kind": "paper", "note": "Recurrence in d ≤ 2, transience in d ≥ 3 — the theorem this site's lab demonstrates." },
+        { "title": "Aufgaben und Lehrsätze aus der Analysis (with G. Szegő)", "year": 1925, "kind": "book", "note": "The problem book that trained a century of analysts." },
+        { "title": "Kombinatorische Anzahlbestimmungen für Gruppen, Graphen und chemische Verbindungen", "year": 1937, "kind": "paper", "note": "The Pólya enumeration theorem." },
+        { "title": "How to Solve It", "year": 1945, "kind": "book", "note": "The four-step heuristic; the most influential book ever written on mathematical discovery." },
+        { "title": "Mathematics and Plausible Reasoning", "year": 1954, "kind": "book", "note": "Induction and analogy in mathematics — how conjectures are actually found." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Polya/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/George_P%C3%B3lya" }
+      ]
+    },
+    {
+      "slug": "franklin",
+      "name": "Fabian Franklin",
+      "years": "1853–1939",
+      "bio": {
+        "life": "Fabian Franklin was born in Eger, Hungary, on 18 January 1853 and brought to America as an infant. He worked as a surveyor before joining the first cohort at the newly founded Johns Hopkins University, where he took his Ph.D. under J. J. Sylvester in 1880 and stayed on as professor of mathematics. In 1882 he married the logician and psychologist Christine Ladd-Franklin — herself a mathematical scientist of note. Around 1895 he left mathematics entirely for journalism, editing the Baltimore News and later co-editing the New York Evening Post, and spent his second career as a public essayist. He died in New York on 9 January 1939. He is the Athenaeum's cleanest example of a mathematician immortal for a single page.",
+        "mathematics": "In 1881, in a three-page note in the Comptes Rendus, Franklin gave a purely combinatorial proof of Euler's pentagonal number theorem — the result Euler himself had needed nine years and heavy analytic machinery to establish. Franklin's device is an involution: a pairing of the partitions of n into distinct parts that flips the parity of the number of parts, cancelling everything in Euler's alternating sum except the fixed points, which occur exactly at generalized pentagonal numbers. It is widely regarded as the first great theorem of bijective combinatorics, was praised by Sylvester's European correspondents as an American arrival on the mathematical scene, and is precisely the object formalized in this site's corpus (the FranklinFixedPoint modules) and animated in the Franklin lab — where the involution's every swap and fixed point can be watched live, and where an exhaustive machine check of thousands of partitions backs the verified proof.",
+        "legacy": "One perfect idea, three pages, immortality: Franklin's involution is a standing exhibit that proof technique itself can be the discovery. The bijective method he inaugurated became a whole branch of combinatorics."
+      },
+      "legends": [],
+      "works": [
+        { "title": "Sur le développement du produit infini (1−x)(1−x²)(1−x³)…", "year": 1881, "kind": "paper", "note": "Comptes Rendus de l'Académie des Sciences, Paris. The involution proof of Euler's pentagonal number theorem — the page this site's Franklin lab runs live." },
+        { "title": "The Life of Daniel Coit Gilman", "year": 1910, "kind": "book", "note": "Biography of Johns Hopkins' founding president — the second career in evidence." },
+        { "title": "People and Problems", "year": 1908, "kind": "book", "note": "Collected journalism; the mathematician as public essayist." }
+      ],
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Fabian_Franklin" },
+        { "label": "Johns Hopkins historical records (via Wikipedia sourcing)", "url": "https://en.wikipedia.org/wiki/Fabian_Franklin#References" }
+      ]
+    },
+    {
+      "slug": "collatz",
+      "name": "Lothar Collatz",
+      "years": "1910–1990",
+      "bio": {
+        "life": "Lothar Collatz was born in Arnsberg, Westphalia, on 6 July 1910 and studied in the great German centers — Greifswald, Munich, Göttingen, Berlin — hearing Schrödinger and Hilbert lecture. From 1952 he built the Institute of Applied Mathematics at Hamburg into a leading center of numerical analysis, the discipline whose modern German school he substantially founded. He remained vigorous and traveling to the end: he died on 26 September 1990 in Varna, Bulgaria, while attending a mathematics conference — a working mathematician's exit at eighty.",
+        "mathematics": "Collatz's professional life's work was the numerical treatment of differential equations and eigenvalue problems: discretization methods, error bounds, the Collatz–Wielandt characterization of the Perron eigenvalue that underlies today's spectral ranking methods. But his name reached the world through a question he circulated informally in the 1930s, by his own later account from 1937: iterate n → n/2 if n is even, n → 3n+1 if odd — does every starting value reach 1? The Collatz conjecture (also carrying the names Syracuse, Kakutani, Ulam from its viral spread through the community) has been verified for astronomically many starting values and proved for none of them in general. Erdős judged that 'mathematics is not yet ripe for such problems.' It remains OPEN — exactly as this site's Collatz Observatory labels it, trajectories computable live, the general question honestly out of reach.",
+        "legacy": "A career of rigorous applied mathematics, and immortality from a puzzle a child can state: Collatz embodies the site's favorite lesson, that the distance between 'easy to ask' and 'possible to answer' can be the width of mathematics itself."
+      },
+      "legends": [
+        { "claim": "He originated the 3n+1 problem in 1937", "status": "documented", "note": "By Collatz's own later account of his notebooks; the problem spread orally and unpublished for decades, hence its many names (Syracuse, Kakutani, Ulam, Hasse)." },
+        { "claim": "Erdős: 'Mathematics is not yet ripe for such problems'", "status": "attributed", "note": "Widely quoted via Lagarias's surveys of the problem." }
+      ],
+      "works": [
+        { "title": "Eigenwertaufgaben mit technischen Anwendungen", "year": 1949, "kind": "book", "note": "Eigenvalue problems with engineering applications — spectral methods for the working scientist." },
+        { "title": "Numerische Behandlung von Differentialgleichungen", "year": 1951, "kind": "book", "note": "The postwar standard on numerical differential equations." },
+        { "title": "Einschließungssatz für die charakteristischen Zahlen von Matrizen", "year": 1942, "kind": "paper", "note": "The Collatz–Wielandt formula for the Perron–Frobenius eigenvalue." },
+        { "title": "Funktionalanalysis und numerische Mathematik", "year": 1964, "kind": "book", "note": "Functional analysis put to work on numerical problems." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Collatz/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Lothar_Collatz" }
+      ]
+    },
+    {
+      "slug": "penrose",
+      "name": "Roger Penrose",
+      "years": "born 1931",
+      "livingPerson": true,
+      "bio": {
+        "life": "Sir Roger Penrose was born in Colchester on 8 August 1931 into a formidably intellectual family — his father a geneticist who drew impossible figures with him, his brother Jonathan a ten-time British chess champion. He took his doctorate in algebraic geometry at Cambridge, but his direction changed decisively toward mathematical physics. As a living person, the Athenaeum represents him with a geometric emblem rather than a stylized portrait, and this profile confines itself to the public record of his work.",
+        "mathematics": "In 1965 Penrose proved the first singularity theorem: gravitational collapse inside a trapped surface produces a singularity as a matter of theorem, not of symmetry assumptions — the work for which he received the 2020 Nobel Prize in Physics. With Stephen Hawking he extended the argument to the beginning of the universe. In 1974 he found something entirely different: two tile shapes — kites and darts, or a pair of rhombs — that tile the plane only nonperiodically. Penrose tilings, with their golden-ratio frequencies, fivefold quasi-symmetry, and de Bruijn pentagrid construction, were a mathematical curiosity until Shechtman's 1982 quasicrystals made them physical reality (Nobel in Chemistry, 2011, for Shechtman). This site's Penrose lab builds the tilings by exact ℚ(√5) arithmetic — every vertex algebraically exact, the machine-verified corpus rows on the tiling's properties linked in the ledger. Twistor theory, spin networks, and the Moore–Penrose pseudoinverse are further rooms in the same mind.",
+        "legacy": "The tilings alone would earn the Athenaeum spot: fivefold symmetry, forbidden to crystals, realized aperiodically — the same golden-ratio geometry that threads through this site's pentagonal program. The singularity theorems reshaped cosmology; the popular books (The Emperor's New Mind, The Road to Reality) set a generation arguing about mathematics, mind, and physics."
+      },
+      "legends": [],
+      "works": [
+        { "title": "Gravitational collapse and space-time singularities", "year": 1965, "kind": "paper", "note": "The first singularity theorem; Nobel Prize in Physics, 2020." },
+        { "title": "The role of aesthetics in pure and applied mathematical research", "year": 1974, "kind": "paper", "note": "Bulletin of the IMA — where the pentagonal tilings were introduced." },
+        { "title": "The Emperor's New Mind", "year": 1989, "kind": "book", "note": "Computation, physics, and consciousness — the argument that started a thousand seminars." },
+        { "title": "The Road to Reality", "year": 2004, "kind": "book", "note": "A complete guide to the laws of the universe, for readers willing to work." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Penrose/" },
+        { "label": "Nobel Prize citation (2020)", "url": "https://www.nobelprize.org/prizes/physics/2020/penrose/facts/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Roger_Penrose" }
+      ]
+    }
+  ]
+}
