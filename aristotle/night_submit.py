@@ -25,10 +25,11 @@ import time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import strategy  # noqa: E402
+import titles  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
-QUEUES = os.environ.get("QUEUES", "next_100.json,domains_queue.json,mined_queue.json,pca_lean_queue.json,frontier_queue.json,frontier2.json").split(",")
+QUEUES = os.environ.get("QUEUES", "next_100.json,domains_queue.json,mined_queue.json,pca_lean_queue.json,frontier_queue.json,frontier2.json,reattack_queue.json").split(",")
 REG = REPO / "registry" / "theorems.json"
 LEDGER = ROOT / "submitted_night.json"
 LOG = ROOT / "night_submit.log"
@@ -65,8 +66,17 @@ def reg_index():
 def prompt_for(item, reg, attempt=0):
     r = reg.get(item["target"], {})
     stmt = item.get("statement") or r.get("statement")
-    parts = ["Prove in Lean 4 (Mathlib), axiom-clean (no sorry/admit/native_decide):",
-             f"Target: {item['target']}"]
+    tier = item.get("tier", "")
+    human = titles.title(item["target"], tier)   # e.g. "Pure Mathematics — Abel Ruffini Deg 5"
+    hdr = titles.header(item["target"], tier, stmt, verified=False)
+    # First line is the human-readable title (drives the Aristotle dashboard name so a
+    # person can read the PROBLEM, not an opaque id); then instruct the prover to begin
+    # the .lean file with that exact naming header so harvested proofs are self-labelling.
+    parts = [human,
+             "Prove in Lean 4 (Mathlib), axiom-clean (no sorry/admit/native_decide):",
+             f"Target: {item['target']}",
+             "BEGIN your Lean file with EXACTLY this header comment (then the proof):",
+             hdr]
     if stmt:
         parts.append("Statement:\n" + stmt)
     if r.get("module"):

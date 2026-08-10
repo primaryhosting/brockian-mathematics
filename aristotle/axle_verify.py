@@ -38,10 +38,23 @@ def normalize(content: str) -> str:
     return "\n".join(imports + [""] + body)
 
 
+def _hash(content: str) -> str:
+    import hashlib
+    return hashlib.sha256(content.encode()).hexdigest()[:16]
+
+
 def main():
     state = json.loads(STATE.read_text()) if STATE.exists() else {}
     files = sorted(glob.glob(str(SRC / "*.lean")))
-    todo = [f for f in files if pathlib.Path(f).name not in state][:MAX]
+    # re-check a file if it is new OR its content changed since last verification
+    # (so re-attacked / improved proofs get re-verified instead of staying cached).
+    def stale(f):
+        b = pathlib.Path(f).name
+        if b not in state:
+            return True
+        prev = state[b].get("hash")
+        return prev is not None and prev != _hash(normalize(open(f, errors="ignore").read()))
+    todo = [f for f in files if stale(f)][:MAX]
     print(f"{len(files)} best proofs; AXLE-verifying {len(todo)} (cloud lean-4.32.0)")
     for f in todo:
         b = pathlib.Path(f).name
@@ -49,7 +62,7 @@ def main():
         try:
             r = ax.check(content)
             state[b] = {"verified": r.verified, "environment": r.environment,
-                        "errors": r.errors[:2]}
+                        "errors": r.errors[:2], "hash": _hash(content)}
         except Exception as e:  # noqa: BLE001
             state[b] = {"verified": None, "error": str(e)[:200]}
         STATE.write_text(json.dumps(state, indent=1))

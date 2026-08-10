@@ -1,0 +1,365 @@
+{
+ "count": 45,
+ "queue": [
+  {
+   "target": "Brockian.CosTraceNorm3001",
+   "tier": "C-corpus-extension",
+   "statement": null,
+   "goal": "new trace-norm bounds (extend CosTraceNorm family)",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Brockian.CosTraceNorm4001",
+   "tier": "C-corpus-extension",
+   "statement": null,
+   "goal": "new trace-norm bound",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Brockian.EquidistributionBVReduction.equidistribution_of_BV_uniform",
+   "tier": "A1-discharge-literature",
+   "statement": null,
+   "goal": "discharge named hypothesis (port known result)",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Brockian.EquidistributionBVReduction.total_over_main_tendsto",
+   "tier": "A1-discharge-literature",
+   "statement": null,
+   "goal": "discharge named hypothesis (port known result)",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Brockian.SingularSeriesConvergenceRate",
+   "tier": "C-corpus-extension",
+   "statement": null,
+   "goal": "effective convergence-rate bound for the singular series",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Brockian.Weyl.DeficiencyODE.deficiencyRepresentsODE_of_weakRegularity",
+   "tier": "A1-discharge-literature",
+   "statement": null,
+   "goal": "discharge named hypothesis (port known result)",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Brockian.Weyl.DeficiencyODE.schrodinger_essentiallySelfAdjoint_of_weakRegularity",
+   "tier": "A1-discharge-literature",
+   "statement": null,
+   "goal": "discharge named hypothesis (port known result)",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "CS.church_rosser_beta_diamond",
+   "tier": "DOMAIN-cs",
+   "statement": "One-step parallel \u03b2-reduction in the \u03bb-calculus has the diamond property.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "CS.dijkstra_correct",
+   "tier": "DOMAIN-cs",
+   "statement": "Dijkstra's algorithm computes shortest-path distances on nonnegative-weight graphs.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "CS.huffman_optimal",
+   "tier": "DOMAIN-cs",
+   "statement": "Huffman coding minimizes expected codeword length among prefix codes.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "CS.kleene_regex_dfa",
+   "tier": "DOMAIN-cs",
+   "statement": "A language is regular iff it is accepted by a DFA (Kleene, finite direction).",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "CS.pumping_regular",
+   "tier": "DOMAIN-cs",
+   "statement": "Every regular language satisfies the pumping lemma.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "CS.sorting_lb_4",
+   "tier": "DOMAIN-cs",
+   "statement": "Any comparison sort of 4 elements needs \u2265 \u2308log\u2082(4!)\u2309 comparisons in the worst case.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Chem.alkane_tree",
+   "tier": "DOMAIN-chem",
+   "statement": "The carbon skeleton of an acyclic alkane C_nH_{2n+2} is a tree with n\u22121 C\u2013C bonds.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Chem.huckel_C11",
+   "tier": "DOMAIN-chem",
+   "statement": "The adjacency eigenvalues of the cycle graph C_11 are 2\u00b7cos(2\u03c0k/11) for k=0..10.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Chem.huckel_C13",
+   "tier": "DOMAIN-chem",
+   "statement": "The adjacency eigenvalues of the cycle graph C_13 are 2\u00b7cos(2\u03c0k/13) for k=0..12.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Chem.huckel_C14",
+   "tier": "DOMAIN-chem",
+   "statement": "The adjacency eigenvalues of the cycle graph C_14 are 2\u00b7cos(2\u03c0k/14) for k=0..13.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Chem.huckel_C16",
+   "tier": "DOMAIN-chem",
+   "statement": "The adjacency eigenvalues of the cycle graph C_16 are 2\u00b7cos(2\u03c0k/16) for k=0..15.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Chem.huckel_C8",
+   "tier": "DOMAIN-chem",
+   "statement": "The adjacency eigenvalues of the cycle graph C_8 are 2\u00b7cos(2\u03c0k/8) for k=0..7.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Chem.huckel_C9",
+   "tier": "DOMAIN-chem",
+   "statement": "The adjacency eigenvalues of the cycle graph C_9 are 2\u00b7cos(2\u03c0k/9) for k=0..8.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Chem.huckel_cycle_spectrum",
+   "tier": "DOMAIN-chem",
+   "statement": "The adjacency eigenvalues of the cycle graph C_n are 2cos(2\u03c0k/n), k=0..n-1 (H\u00fcckel \u03c0-energies).",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Chem.polya_isomer_count",
+   "tier": "DOMAIN-chem",
+   "statement": "Counting substitution isomers on a symmetric skeleton equals the Burnside/P\u00f3lya cycle-index average.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Frontier.Aronszajn_tree_exists",
+   "tier": "FRONTIER-set",
+   "statement": "There exists an Aronszajn tree (a tree of height \u03c9\u2081 with no uncountable branch/level).",
+   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Frontier.Brun_twin_reciprocal",
+   "tier": "FRONTIER-primes",
+   "statement": "The sum of reciprocals of twin primes converges (Brun's constant).",
+   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Frontier.Loeb_theorem",
+   "tier": "FRONTIER-set",
+   "statement": "L\u00f6b's theorem: if PA \u22a2 (\u25a1\u03c6 \u2192 \u03c6) then PA \u22a2 \u03c6.",
+   "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Frontier.cook_levin",
+   "tier": "FRONTIER-moonshot",
+   "statement": "SAT is NP-complete (Cook\u2013Levin).",
+   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Frontier.jones_polynomial_invariant",
+   "tier": "FRONTIER-fields",
+   "statement": "The Jones polynomial is a link invariant (well-defined under Reidemeister moves).",
+   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Math.abel_ruffini_deg5",
+   "tier": "DOMAIN-math",
+   "statement": "The general quintic is not solvable by radicals (Galois-theoretic).",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Math.brouwer_2d",
+   "tier": "DOMAIN-math",
+   "statement": "Every continuous self-map of the closed 2-disk has a fixed point.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Math.euler_pentagonal",
+   "tier": "DOMAIN-math",
+   "statement": "Euler's pentagonal number theorem for the partition generating function.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Math.gauss_bonnet_polygon",
+   "tier": "DOMAIN-math",
+   "statement": "The angle sum of a geodesic triangle on the unit sphere exceeds \u03c0 by its area.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Math.halls_marriage",
+   "tier": "DOMAIN-math",
+   "statement": "A bipartite graph has a perfect matching iff Hall's condition holds.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Math.ramsey_3_4",
+   "tier": "DOMAIN-math",
+   "statement": "R(3,4) = 9: the two-color Ramsey number.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Math.ramsey_3_5",
+   "tier": "DOMAIN-math",
+   "statement": "R(3,5) = 14: the two-color Ramsey number.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Math.ramsey_4_4",
+   "tier": "DOMAIN-math",
+   "statement": "R(4,4) = 18: the two-color Ramsey number.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "Math.sperner_lemma",
+   "tier": "DOMAIN-math",
+   "statement": "Every Sperner coloring of a triangulated simplex has an odd number of rainbow cells.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "PCA.Isolation.priv_escape_monotone",
+   "tier": "D-pca-meta",
+   "statement": null,
+   "goal": "formal soundness/completeness of the isolation engine's model",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "QPhys.bcH_special",
+   "tier": "DOMAIN-qphys",
+   "statement": "For [A,B] central, e^A e^B = e^{A+B+\u00bd[A,B]} (BCH special case).",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "QPhys.canonical_commutator",
+   "tier": "DOMAIN-qphys",
+   "statement": "On Schwartz space, [x,p]=i\u210f with p=-i\u210f d/dx.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "QPhys.commuting_simultaneous",
+   "tier": "DOMAIN-qphys",
+   "statement": "Two commuting Hermitian operators are simultaneously diagonalizable.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "QPhys.ehrenfest",
+   "tier": "DOMAIN-qphys",
+   "statement": "d\u27e8A\u27e9/dt = (i/\u210f)\u27e8[H,A]\u27e9 + \u27e8\u2202A/\u2202t\u27e9 (Ehrenfest theorem).",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "QPhys.oscillator_spectrum",
+   "tier": "DOMAIN-qphys",
+   "statement": "The quantum harmonic oscillator has spectrum {\u210f\u03c9(n+\u00bd) : n\u2208\u2115} via ladder operators.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "QPhys.particle_in_box",
+   "tier": "DOMAIN-qphys",
+   "statement": "The infinite square well of width L has energies E_n = n\u00b2\u03c0\u00b2\u210f\u00b2/(2mL\u00b2), n\u22651.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "QPhys.spectral_theorem_finite",
+   "tier": "DOMAIN-qphys",
+   "statement": "Every Hermitian matrix is unitarily diagonalizable with real eigenvalues.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  },
+  {
+   "target": "QPhys.stone_generator",
+   "tier": "DOMAIN-qphys",
+   "statement": "A strongly continuous one-parameter unitary group has a self-adjoint generator (Stone).",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "rank": 0,
+   "reattack": true
+  }
+ ]
+}

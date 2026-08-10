@@ -25,6 +25,7 @@ LEDGER = ROOT / "harvest_ledger.json"
 DOMAINS = REPO / "registry" / "domains.json"
 MIN = ROOT / "minimized"
 BEST = ROOT / "best_proofs"
+PR_READY = ROOT / "pr_ready"   # annotated (human header) + normalized shippable copies
 PLAN = ROOT / "pr_plan.json"
 PR_LEDGER = ROOT / "pr_submitted.json"
 LIVE = os.environ.get("AUTO_PR_LIVE") == "1"
@@ -42,7 +43,10 @@ def eligible():
         san = re.sub(r"[^A-Za-z0-9]+", "_", target) + ".lean"
         if axle.get(san, {}).get("verified") is not True:
             continue
-        src = BEST / san
+        # prefer the annotated+normalized shippable copy; fall back to raw best_proofs
+        src = PR_READY / san
+        if not src.exists():
+            src = BEST / san
         if not src.exists():
             continue
         out.append({"target": target, "domain": dmeta.get("domain"),

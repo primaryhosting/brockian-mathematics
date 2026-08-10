@@ -12,7 +12,8 @@ import re
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
-QUEUES = [ROOT / "domains_queue.json", ROOT / "mined_queue.json"]
+QUEUES = [ROOT / q for q in ("domains_queue.json", "mined_queue.json", "next_100.json",
+          "pca_lean_queue.json", "frontier_queue.json", "frontier2.json")]
 LEDGER = ROOT / "harvest_ledger.json"
 VSTATE = ROOT / "harvest_100" / "verify_state.json"
 BEST = ROOT / "best_proofs" / "manifest.json"

@@ -1,0 +1,1486 @@
+{
+ "Brockian_EquidistributionBVReduction_configCount_density_of_BV.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "be4cf2cdbd2006f6"
+ },
+ "Brockian_EquidistributionBVReduction_configCount_over_main_tendsto.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "44c0c13307a71258"
+ },
+ "Brockian_EquidistributionBVReduction_equidistribution_of_BV_uniform.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:92:40-92:41: error: Application type mismatch: The argument\n  f\nhas type\n  \u03b1 \u2192 \u211d\nof sort `Type u_1` but is expected to have type\n  Monotone ?m.357\nof sort `Prop` in the application\n  eVariationOn.sum_le f\n",
+   "-:92:72-92:73: error: Application type mismatch: The argument\n  g\nhas type\n  \u03b1 \u2192 \u211d\nof sort `Type u_1` but is expected to have type\n  Monotone ?m.367\nof sort `Prop` in the application\n  eVariationOn.sum_le g\n"
+  ],
+  "hash": "b45eab5ba43654bf"
+ },
+ "Brockian_EquidistributionBVReduction_total_over_main_tendsto.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:102:47-102:88: error(lean.unknownIdentifier): Unknown constant `intervalIntegral.intervalIntegrable_const`\n",
+   "-:119:4-119:45: error(lean.unknownIdentifier): Unknown constant `intervalIntegral.intervalIntegrable_const`\n"
+  ],
+  "hash": "bc593935f4013e01"
+ },
+ "Brockian_EquidistributionUniformity_equidistribution_of_transitive_symmetry.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "dffffac45bc1e480"
+ },
+ "Brockian_EquidistributionUniformity_sing_uniform_of_transitive.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "c77add9d5bfdae8f"
+ },
+ "Brockian_Weyl_DeficiencyODE_deficiencyRepresentsODE_of_weakRegularity.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:57:3-57:5: error: unexpected token '\u03c6'; expected '(', '[', '_', '{', '\u2983' or identifier\n",
+   "-:82:8-82:9: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\nq : \u211d \u2192 \u211d\nz : \u2102\nu v : \u211d \u2192 \u2102\nhae : u =\u1d50[MeasureTheory.MeasureSpace.volume] v\nh : Brockian.Weyl.DeficiencyODE.WeakSolution q z u\n\u22a2 Brockian.Weyl.DeficiencyODE.WeakSolution q z v\n"
+  ],
+  "hash": "72318c3423b2650e"
+ },
+ "Brockian_Weyl_DeficiencyODE_schrodinger_essentiallySelfAdjoint_of_weakRegularity.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:251:52-251:71: error: Type mismatch: After simplification, term\n  key x y\n has type\n  @LE.le \u211d Real.instLE (Dist.dist (\u2191x : H \u00d7 H) (\u2191y : H \u00d7 H))\n    (Dist.dist ((\u2191x : H \u00d7 H).2 + z \u2022 (\u2191x : H \u00d7 H).1) ((\u2191y : H \u00d7 H).2 + z \u2022 (\u2191y : H \u00d7 H).1))\nbut is expected to have type\n  @LE.le \u211d Real.instLE (Dist.dist x y)\n    (Dist.dist ((\u2191x : H \u00d7 H).2 + z \u2022 (\u2191x : H \u00d7 H).1) ((\u2191y : H \u00d7 H).2 + z \u2022 (\u2191y : H \u00d7 H).1))\n",
+   "-:390:4-390:65: error: Type mismatch: After simplification, term\n  Filter.Tendsto.comp (Continuous.tendsto Complex.continuous_conj 0) hT\n has type\n  @Filter.Tendsto \u2124 \u2102 ((\u21d1(starRingEnd \u2102) : \u2102 \u2192 \u2102) \u2218 c) Filter.atTop (\ud835\udcdd 0)\nbut is expected to have type\n  @Filter.Tendsto \u2124 \u2102 (fun (n : \u2124) => (starRingEnd \u2102 : \u2102 \u2192 \u2102) (c n)) Filter.atTop (\ud835\udcdd 0)\n"
+  ],
+  "hash": "7df5fbd1d960a9a4"
+ },
+ "PCA_Cert_reprove_matches_iff_untampered.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "a62955ab380544d6"
+ },
+ "PCA_Coverage_bail_on_unrecognized_is_sound.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "bc392adff8a9e6e6"
+ },
+ "PCA_Isolation_disjunction_split_preserves_semantics.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "66840caa1f5599a5"
+ },
+ "PCA_Isolation_in_scope_encoding_complete.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "af022fb135f07d07"
+ },
+ "PCA_Isolation_in_scope_encoding_sound.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b42688d348939086"
+ },
+ "PCA_Isolation_no_clean_proved_with_escape.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "6253964c8582619f"
+ },
+ "PCA_Isolation_null_escape_iff_unowned_reachable.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "208528aadab691fa"
+ },
+ "PCA_Isolation_priv_escape_monotone.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:192:56-192:58: error: Application type mismatch: The argument\n  hr\nhas type\n  P.Reach s d\nof sort `Prop` but is expected to have type\n  C\nof sort `Type u_1` in the application\n  Relation.ReflTransGen.mono (fun a b hab => h a b hab) hr\n"
+  ],
+  "hash": "71967cdd9a6c3756"
+ },
+ "PCA_Isolation_tightened_predicate_refines_original.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "dabf2be829d9b3cf"
+ },
+ "PCA_WriteIntegrity_member_check_prevents_cross_tenant_write.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "e30ef383ef118089"
+ },
+ "PCA_WriteIntegrity_with_check_true_admits_forge.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "633c3463383c516b"
+ },
+ "QC_bell_orthonormal.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8bea6a6c56a697da"
+ },
+ "QC_bloch_sphere_bijection.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b3a97931bd4c67ca"
+ },
+ "QC_chsh_tsirelson.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "7ec2bd810c298729"
+ },
+ "QC_cnot_unitary_involutive.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "97de5ae71ea79ac9"
+ },
+ "QC_density_matrix_unitary_invariant.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "6f31a666de77b65b"
+ },
+ "QC_deutsch_correct.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "453fc1c83a7427be"
+ },
+ "QC_ghz2_normalized.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "11f7c0017ae5cd22"
+ },
+ "QC_ghz3_normalized.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "9961dcc135346455"
+ },
+ "QC_ghz4_normalized.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "432af6bc06344686"
+ },
+ "QC_ghz5_normalized.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "de8a28c374931945"
+ },
+ "QC_ghz6_normalized.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "ca44676e6e5dd925"
+ },
+ "QC_ghz7_normalized.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "858a3d22211c9dff"
+ },
+ "QC_ghz8_normalized.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "35fbdefe36771196"
+ },
+ "QC_ghz_nonlocal.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "181ac2b542fec7af"
+ },
+ "QC_hadamard_XZ.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "9c1c46256a294d67"
+ },
+ "QC_hadamard_involutive.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "2feabe10bdf44d14"
+ },
+ "QC_kraus_trace_preserving.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d57abce96b02db84"
+ },
+ "QC_no_cloning.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "1dd99dc198e8dcd0"
+ },
+ "QC_pauli_anticommute.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "156e43685efbea3d"
+ },
+ "QC_pauli_basis.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "219ad1153eb47d1d"
+ },
+ "QC_pure_state_zero_entropy.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "fc7eede073165729"
+ },
+ "QC_qft_unitary.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "900f5ec846a1d682"
+ },
+ "QC_qft_unitary_2.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b8868fa83c344e4b"
+ },
+ "QC_qft_unitary_3.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "a5ee18c536c06c0e"
+ },
+ "QC_qft_unitary_4.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8be0569c0b1aa37b"
+ },
+ "QC_qft_unitary_5.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "dc97f35c4d0fcd98"
+ },
+ "QC_qft_unitary_6.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "96e926d170198471"
+ },
+ "QC_qft_unitary_7.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "c397a1f90f3f8c98"
+ },
+ "QC_qft_unitary_8.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "92ee7e14499fea89"
+ },
+ "QC_robertson_uncertainty.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "c28d8fbe21f868dc"
+ },
+ "QC_superdense_two_bits.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "ea0eefa18683ab82"
+ },
+ "QC_swap_test_overlap.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "849378e48fa624d2"
+ },
+ "QC_teleportation_identity.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "bd5e5adcbba1b7bc"
+ },
+ "QC_toffoli_unitary.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d4f595bb24698aaf"
+ },
+ "Brockian_AdmissibilityKTupleK4.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8ed244fbb7f644f1"
+ },
+ "Brockian_ConstellationLocalCountK3.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "4712b77b344fd68e"
+ },
+ "Brockian_CosTraceNorm1279.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "c45b2e9129284f2c"
+ },
+ "Brockian_CosTraceNorm1597.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "a084d40ef5339ee6"
+ },
+ "Brockian_CosTraceNorm2003.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "1b9aed2b8a67b44d"
+ },
+ "Brockian_CosTraceNorm2707.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "2d65031faf9416ce"
+ },
+ "Brockian_CosTraceNorm3001.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:150:2-150:19: error: `simp` made no progress\n"
+  ],
+  "hash": "fd31d40cb0497604"
+ },
+ "Brockian_CosTraceNorm3499.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "98e757240b56af10"
+ },
+ "Brockian_CosTraceNorm4001.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:50:2-50:24: error: Type mismatch: After simplification, term\n  cfc_id \u211d A h\n has type\n  @Eq (Matrix n n \u2102) (cfc id A) A\nbut is expected to have type\n  @Eq (Matrix n n \u2102) (cfc (fun x => x) A) A\n"
+  ],
+  "hash": "7fafd28f6a3d0eef"
+ },
+ "Brockian_GoldbachWheelK2_1051.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "853880f90f73c52d"
+ },
+ "Brockian_GoldbachWheelK2_1153.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "78f6dca4d7ada4ab"
+ },
+ "Brockian_GoldbachWheelK2_1327.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "bb0762f2fe4a5e2a"
+ },
+ "Brockian_GoldbachWheelK2_631.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "7d717bc9b968765a"
+ },
+ "Brockian_GoldbachWheelK2_727.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "bfa35916aa628a64"
+ },
+ "Brockian_GoldbachWheelK2_947.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "c8f6500cb9aebdd5"
+ },
+ "Brockian_PentagonPentagonCharacterMultiplicityExt.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "99de7d645f6a2c79"
+ },
+ "Brockian_PentagonPentagonEquivarianceGeneral.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "49ee05e7576090ed"
+ },
+ "Brockian_PentagonPentagonIsotypicHigherN.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "5cd1fd59551ec2ef"
+ },
+ "Brockian_SingularSeriesConvergenceRate.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:214:2-214:89: error: Type mismatch: After simplification, term\n  Filter.Tendsto.const_mul 2 h\n has type\n  @Filter.Tendsto \u2115 \u211d (fun (x : \u2115) => 2 * Brockian.partialProduct x) Filter.atTop\n    (nhds (2 * \u2a05 (i : \u2115), Brockian.partialProduct i))\nbut is expected to have type\n  @Filter.Tendsto \u2115 \u211d Brockian.truncatedSingularSeries Filter.atTop (nhds (2 * \u2a05 (N : \u2115), Brockian.partialProduct N))\n"
+  ],
+  "hash": "a91f81d88b6fe8a9"
+ },
+ "Brockian_SingularSeriesGaps12401250.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "6cbd565d555fd0a5"
+ },
+ "Brockian_SingularSeriesGaps13501360.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "1201730b26958b3a"
+ },
+ "Brockian_SingularSeriesGaps14501460.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "37c50c840124c7b8"
+ },
+ "Brockian_SingularSeriesGaps16021610.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "c1c8da46b0282274"
+ },
+ "Brockian_SingularSeriesGaps7280.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "4c6289eb4b8082b2"
+ },
+ "Brockian_SingularSeriesGaps9098.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "3defdde08a38aa40"
+ },
+ "CS_ackermann_total.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "5be55da9ff893ad1"
+ },
+ "CS_binary_search_correct.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "5819317f04d2c782"
+ },
+ "CS_cantor_powerset.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "05236d9786b6bf49"
+ },
+ "CS_church_rosser_beta_diamond.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:243:58-243:59: error: Application type mismatch: The argument\n  h\nhas type\n  Betas a a'\nof sort `Prop` but is expected to have type\n  Tm\nof sort `Type` in the application\n  Relation.ReflTransGen.lift Tm.lam (fun x x_1 => Beta.lam) h\n",
+   "-:246:82-246:83: error: Application type mismatch: The argument\n  h\nhas type\n  Betas a a'\nof sort `Prop` but is expected to have type\n  Tm\nof sort `Type` in the application\n  Relation.ReflTransGen.lift (fun x => x.app b) (fun x x_1 hx => Beta.appL b hx) h\n"
+  ],
+  "hash": "eb6cdc6073029def"
+ },
+ "CS_dfa_complement_regular.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "5393eeda2aabde9f"
+ },
+ "CS_dijkstra_correct.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:149:64-149:73: error: Function expected at\n  zero_le\nbut this term has type\n  0 \u2264 ?m.14\n\nNote: Expected a function because this term is being applied to the argument\n  _\n",
+   "-:315:36-315:45: error: Function expected at\n  zero_le\nbut this term has type\n  0 \u2264 ?m.293\n\nNote: Expected a function because this term is being applied to the argument\n  _\n"
+  ],
+  "hash": "14a278be578221bd"
+ },
+ "CS_euclid_gcd_correct.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "5cd1433f771a52d5"
+ },
+ "CS_halting_undecidable.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "a7068a118c89e6a6"
+ },
+ "CS_huffman_optimal.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:77:57-77:67: error: Function expected at\n  huffCost\nbut this term has type\n  ?m.1\n\nNote: Expected a function because this term is being applied to the argument\n  W\n\nHint: The identifier `huffCost` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.\n",
+   "-:86:6-86:50: error: unsolved goals\ncase pos.inl.refine_2\nx\u271d : Sort u_1\nhuffCost : x\u271d\nn : \u2115\nIH :\n  \u2200 m < n,\n    \u2200 (W : Multiset \u211d),\n      W.card = m \u2192 \u2203 S, Multiset.map Prod.fst S = W \u2227 PrefixFreeMultiset (Multiset.map Prod.snd S) \u2227 codeCost S = sorry\nW : Multiset \u211d\nhcard : W.card = n\nhle : W.card \u2264 1\nh : W.card = 0\n\u22a2 0 = sorry ()\n"
+  ],
+  "hash": "1cecba49052fc9e5"
+ },
+ "CS_insertion_sort_correct.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "ac1daf678dc6586f"
+ },
+ "CS_kleene_regex_dfa.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:126:10-126:28: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  @Membership.mem (List ?m.219) (Language ?m.219) Language.instMembershipList ?m.220\u2217 ?m.221\nin the target expression\n  @Membership.mem (List \u03b1) (Set (List \u03b1)) Set.instMembership (pathLang M S s s)\u2217 (w\u2081 ++ u)\n\ncase h.inr\n\u03b1 : Type u\n\u03c3 : Type v\nM : DFA \u03b1 \u03c3\nS : Set \u03c3\ns q : \u03c3\nw\u2081 : List \u03b1\nhw\u2081 : w\u2081 \u2260 []\nhp : PathVia M S s s w\u2081\nu : List \u03b1\nhu : \u2203 L, u = L.flatten \u2227 \u2200 y \u2208 L, y \u2208 pathLang M S s s\nv : List \u03b1\nhv : v \u2208 pathLang M S s q\nh : PathVia M (insert s S) s q (w\u2081 ++ (u ++ v))\nih :\n  \u2200 m < (w\u2081 ++ (u ++ v)).length,\n    \u2200 (w : List \u03b1), w.length = m \u2192 PathVia M (insert s S) s q w \u2192 w \u2208 (pathLang M S s s)\u2217 * pathLang M S s q\nhq : PathVia M (insert s S) s q (u ++ v)\nhlt : (u ++ v).length < (w\u2081 ++ (u ++ v)).length\n\u22a2 w\u2081 ++ u \u2208 (pathLang M S s s)\u2217\n\nNote: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.\nFull error:\n  Application type mismatch: The argument\n    (pathLang M S s s)\u2217\n  has type\n    Language \u03b1\n  but is expected to have type\n    Set (List \u03b1)\n  in the application\n    Membership.mem (pathLang M S s s)\u2217\n",
+   "-:307:9-307:10: error: a universe level named `u` has already been declared\n"
+  ],
+  "hash": "835778d9e622b230"
+ },
+ "CS_knaster_tarski.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "9be952f97cf4bf06"
+ },
+ "CS_master_theorem_case1.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "12a20a335a56a15f"
+ },
+ "CS_mergesort_correct.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "84705364d9e6da56"
+ },
+ "CS_pcp_pigeon_bound.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b6f373d132aa244d"
+ },
+ "CS_pigeonhole_hash.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "439f5007a2116736"
+ },
+ "CS_pumping_regular.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:46:6-46:24: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  @Membership.mem (List ?m.209) (Language ?m.209) Language.instMembershipList (KStar.kstar ?m.210) ?m.211\nin the target expression\n  @Membership.mem (List \u03b1) (Set (List \u03b1)) Set.instMembership (KStar.kstar {b}) (List.replicate n b).flatten\n\n\u03b1 : Type u_1\n\u03c3 : Type\nh\u03c3 : Fintype \u03c3\nM : DFA \u03b1 \u03c3\nx : List \u03b1\nhx : x \u2208 M.accepts\nhlen : Fintype.card \u03c3 + 1 \u2264 x.length\na b c : List \u03b1\nhxabc : x = a ++ b ++ c\nhab : a.length + b.length \u2264 Fintype.card \u03c3\nhbnil : b \u2260 []\nhsub : {a} * KStar.kstar {b} * {c} \u2264 M.accepts\nn : \u2115\n\u22a2 (List.replicate n b).flatten \u2208 KStar.kstar {b}\n\nNote: The target expression is not type-correct under the `instances` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.\nFull error:\n  Application type mismatch: The argument\n    KStar.kstar {b}\n  has type\n    Language \u03b1\n  but is expected to have type\n    Set (List \u03b1)\n  in the application\n    Membership.mem (KStar.kstar {b})\n"
+  ],
+  "hash": "2a3b4d1aafab5eac"
+ },
+ "CS_rice_nontrivial.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "70b0d5d3f3462bb2"
+ },
+ "CS_sorting_lb_3.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "3ae22cb6cd5d5634"
+ },
+ "CS_sorting_lb_4.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:127:4-127:61: error: Type mismatch: After simplification, term\n  hsm\n has type\n  @StrictMono (Fin n) \u2115 Fin.instPartialOrder.toPreorder Nat.instPreorder\n    ((fun (i : Fin n) => (\u2191((\u03c4 : Fin n \u2192 Fin n) i) : \u2115)) \u2218 (\u21d1\u03c3 : Fin n \u2192 Fin n))\nbut is expected to have type\n  @StrictMono (Fin n) \u2115 Fin.instPartialOrder.toPreorder Nat.instPreorder fun (i : Fin n) =>\n    (\u2191((\u03c4 : Fin n \u2192 Fin n) ((\u03c3 : Fin n \u2192 Fin n) i)) : \u2115)\n"
+  ],
+  "hash": "68d1ba311c84398a"
+ },
+ "CS_sorting_lb_5.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "927e6e8db806074d"
+ },
+ "Chem_alkane_tree.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:90:6-90:38: error: Tactic `rewrite` failed: motive is not type correct:\n  fun (_a : Set V) => _a.ncard = G.degree v\nError: Application type mismatch: The argument\n  fun (a : V) => SimpleGraph.neighborSet.memDecidable G v a\nhas type\n  (a : V) \u2192 Decidable ((fun (x : V) => x \u2208 G.neighborSet v) a)\nbut is expected to have type\n  DecidablePred (Membership.mem _a)\nin the application\n  @Subtype.fintype V (Membership.mem _a) fun (a : V) => SimpleGraph.neighborSet.memDecidable G v a\n\nExplanation: The rewrite tactic rewrites an expression 'e' using an equality 'a = b' by the following process. First, it looks for all 'a' in 'e'. Second, it tries to abstract these occurrences of 'a' to create a function 'm := fun _a => ...', called the *motive*, with the property that 'm a' is definitionally equal to 'e'. Third, we observe that 'congrArg' implies that 'm a = m b', which can be used with lemmas such as 'Eq.mpr' to change the goal. However, if 'e' depends on specific properties of 'a', then the motive 'm' might not typecheck.\n\nPossible solutions: use rewrite's 'occs' configuration option to limit which occurrences are rewritten, or use 'simp' or 'conv' mode, which have strategies for certain kinds of dependencies (these tactics can handle proofs and 'Decidable' instances whose types depend on the rewritten term, and 'simp' can apply user-defined '@[congr]' theorems as well).\n\nV : Type u_1\ninst\u271d\u00b9 : Fintype V\nG : SimpleGraph V\ninst\u271d : DecidableRel G.Adj\nv : V\n\u22a2 (G.neighborSet v).ncard = G.degree v\n",
+   "-:133:20-133:21: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\n\u22a2 Std.Symm fun (a b : Fin 5) => a \u2260 b \u2227 (a = 0 \u2228 b = 0)\n"
+  ],
+  "hash": "baceed4d349ba818"
+ },
+ "Chem_arrhenius_monotone.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "37196a856622c651"
+ },
+ "Chem_balance_nullspace.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "864fd0702754d479"
+ },
+ "Chem_benzene_D6h_irreps.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8eebae1a7a5a2cf2"
+ },
+ "Chem_entropy_concave.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8333596244361ca4"
+ },
+ "Chem_euler_polyhedron.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "a3fb3ba84fe410e8"
+ },
+ "Chem_fullerene_pentagons.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "1c716ed1ddb00bf9"
+ },
+ "Chem_gibbs_phase_rule.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "efb88f2ee1c37c8d"
+ },
+ "Chem_handshake_valence.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8bf6e24dc2e2f73b"
+ },
+ "Chem_huckel_C10.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "585c91074fca21a4"
+ },
+ "Chem_huckel_C11.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:121:13-121:39: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ((\u2191?M : Matrix ?m.129 ?m.129 ?m.127) * ?N * (\u2191?M : Matrix ?m.129 ?m.129 ?m.127)\u207b\u00b9).charpoly\nin the target expression\n  ((\u2191U : Matrix (Fin 11) (Fin 11) \u2102) * Matrix.diagonal Chem.c11 * (\u2191U\u207b\u00b9 : Matrix (Fin 11) (Fin 11) \u2102)).charpoly =\n    \u220f k : Fin 11, (Polynomial.X - (Polynomial.C : \u2102 \u2192 \u2102[X]) (\u2191(2 * Real.cos (2 * \u03c0 * (\u2191(\u2191k : \u2115) : \u211d) / 11)) : \u2102))\n\nU : (Matrix (Fin 11) (Fin 11) \u2102)\u02e3\nhU : (\u2191U : Matrix (Fin 11) (Fin 11) \u2102) = Chem.F11\nkey : (\u2191U : Matrix (Fin 11) (Fin 11) \u2102) * Matrix.diagonal Chem.c11 * (\u2191U\u207b\u00b9 : Matrix (Fin 11) (Fin 11) \u2102) = Chem.A11\n\u22a2 ((\u2191U : Matrix (Fin 11) (Fin 11) \u2102) * Matrix.diagonal Chem.c11 * (\u2191U\u207b\u00b9 : Matrix (Fin 11) (Fin 11) \u2102)).charpoly =\n    \u220f k : Fin 11, (Polynomial.X - (Polynomial.C : \u2102 \u2192 \u2102[X]) (\u2191(2 * Real.cos (2 * \u03c0 * (\u2191(\u2191k : \u2115) : \u211d) / 11)) : \u2102))\n"
+  ],
+  "hash": "86d0567de363cc4d"
+ },
+ "Chem_huckel_C12.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "dbaa4893c7449e45"
+ },
+ "Chem_huckel_C13.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:175:10-175:36: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  (\u2191?M * ?N * (\u2191?M)\u207b\u00b9).charpoly\nin the target expression\n  (\u2191u * Matrix.diagonal eval13 * \u2191u\u207b\u00b9).charpoly = \u220f k, (X - C (eval13 k))\n\nu : (Matrix (ZMod 13) (ZMod 13) \u2102)\u02e3\nhu : \u2191u = fmat\nkey : adjC13 * \u2191u = \u2191u * Matrix.diagonal eval13\nhA : adjC13 = \u2191u * Matrix.diagonal eval13 * \u2191u\u207b\u00b9\n\u22a2 (\u2191u * Matrix.diagonal eval13 * \u2191u\u207b\u00b9).charpoly = \u220f k, (X - C (eval13 k))\n"
+  ],
+  "hash": "35745eaa98eadd0a"
+ },
+ "Chem_huckel_C14.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:166:10-166:36: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ((\u2191?M : Matrix ?m.110 ?m.110 ?m.108) * ?N * (\u2191?M : Matrix ?m.110 ?m.110 ?m.108)\u207b\u00b9).charpoly\nin the target expression\n  ((\u2191Chem.Pu : Matrix (Fin 14) (Fin 14) \u2102) * Chem.Dm * (\u2191Chem.Pu\u207b\u00b9 : Matrix (Fin 14) (Fin 14) \u2102)).charpoly =\n    \u220f k \u2208 Finset.range 14, (Polynomial.X - (Polynomial.C : \u2102 \u2192 \u2102[X]) (\u2191(2 * Real.cos (2 * \u03c0 * (\u2191k : \u211d) / 14)) : \u2102))\n\nhA :\n  SimpleGraph.adjMatrix \u2102 (SimpleGraph.cycleGraph 14) =\n    (\u2191Chem.Pu : Matrix (Fin 14) (Fin 14) \u2102) * Chem.Dm * (\u2191Chem.Pu\u207b\u00b9 : Matrix (Fin 14) (Fin 14) \u2102)\n\u22a2 ((\u2191Chem.Pu : Matrix (Fin 14) (Fin 14) \u2102) * Chem.Dm * (\u2191Chem.Pu\u207b\u00b9 : Matrix (Fin 14) (Fin 14) \u2102)).charpoly =\n    \u220f k \u2208 Finset.range 14, (Polynomial.X - (Polynomial.C : \u2102 \u2192 \u2102[X]) (\u2191(2 * Real.cos (2 * \u03c0 * (\u2191k : \u211d) / 14)) : \u2102))\n"
+  ],
+  "hash": "165aba540915bda0"
+ },
+ "Chem_huckel_C15.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d5ca2aa0f9e8afcc"
+ },
+ "Chem_huckel_C16.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:176:13-176:39: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  (\u2191?M * ?N * (\u2191?M)\u207b\u00b9).charpoly\nin the target expression\n  ((\u2191u * Matrix.diagonal fun k => \u2191(huckelEigen k)) * \u2191u\u207b\u00b9).charpoly =\n    \u220f k, (Polynomial.X - Polynomial.C \u2191(2 * Real.cos (2 * \u03c0 * \u2191\u2191k / 16)))\n\nu : (Matrix (Fin 16) (Fin 16) \u2102)\u02e3\nhconj : SimpleGraph.adjMatrix \u2102 (SimpleGraph.cycleGraph 16) = (\u2191u * Matrix.diagonal fun k => \u2191(huckelEigen k)) * \u2191u\u207b\u00b9\n\u22a2 ((\u2191u * Matrix.diagonal fun k => \u2191(huckelEigen k)) * \u2191u\u207b\u00b9).charpoly =\n    \u220f k, (Polynomial.X - Polynomial.C \u2191(2 * Real.cos (2 * \u03c0 * \u2191\u2191k / 16)))\n"
+  ],
+  "hash": "2422ded83c5b26f5"
+ },
+ "Chem_huckel_C17.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d9d51c72fea2002e"
+ },
+ "Chem_huckel_C18.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "ca5b508de69c9676"
+ },
+ "Chem_huckel_C19.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8edd28fbf71fe4c6"
+ },
+ "Chem_huckel_C3.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "f4e96eed5899eac9"
+ },
+ "Chem_huckel_C4.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "6aba308bb94cff16"
+ },
+ "Chem_huckel_C5.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8aa59f8a8eef3887"
+ },
+ "Chem_huckel_C6.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "44fc34c6f27789b2"
+ },
+ "Chem_huckel_C7.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "18631dc625ed8460"
+ },
+ "Chem_huckel_C8.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:192:10-192:36: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  (\u2191?M * ?N * (\u2191?M)\u207b\u00b9).charpoly\nin the target expression\n  (\u2191dftUnit * eigDiag * \u2191dftUnit\u207b\u00b9).charpoly = \u220f k, (X - C \u2191(huckelEigenvalue k))\n\nhA : C8adjC = \u2191dftUnit * eigDiag * \u2191dftUnit\u207b\u00b9\n\u22a2 (\u2191dftUnit * eigDiag * \u2191dftUnit\u207b\u00b9).charpoly = \u220f k, (X - C \u2191(huckelEigenvalue k))\n"
+  ],
+  "hash": "6b9aa25d152f452a"
+ },
+ "Chem_huckel_C9.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:119:13-119:39: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  (\u2191?M * ?N * (\u2191?M)\u207b\u00b9).charpoly\nin the target expression\n  (\u2191U * D * \u2191U\u207b\u00b9).charpoly = \u220f k, (X - C \u2191(C9eigenvalue k))\n\nD : Matrix (Fin 9) (Fin 9) \u2102 := diagonal fun k => \u2191(C9eigenvalue k)\nhD : D = diagonal fun k => \u2191(C9eigenvalue k)\nhdet : IsUnit F9.det\nU : (Matrix (Fin 9) (Fin 9) \u2102)\u02e3 := F9.nonsingInvUnit hdet\nhU : U = F9.nonsingInvUnit hdet\nhUval : \u2191U = F9\nhUinv : \u2191U\u207b\u00b9 = F9\u207b\u00b9\nhconj : C9adj = \u2191U * D * \u2191U\u207b\u00b9\n\u22a2 (\u2191U * D * \u2191U\u207b\u00b9).charpoly = \u220f k, (X - C \u2191(C9eigenvalue k))\n"
+  ],
+  "hash": "115f281e55ef733b"
+ },
+ "Chem_huckel_cycle_spectrum.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:132:10-132:36: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  (\u2191?M * ?N * (\u2191?M)\u207b\u00b9).charpoly\nin the target expression\n  ((\u2191u * diagonal fun k => \u2191(huckelEnergy (m + 3) \u2191k)) * \u2191u\u207b\u00b9).charpoly = \u220f k, (X - C \u2191(huckelEnergy (m + 3) \u2191k))\n\nm : \u2115\nhn : 3 \u2264 m + 3\nu : (Matrix (Fin (m + 3)) (Fin (m + 3)) \u2102)\u02e3\nhu : \u2191u = cycleDFT (m + 3)\nhkey : SimpleGraph.adjMatrix \u2102 (SimpleGraph.cycleGraph (m + 3)) * \u2191u = \u2191u * diagonal fun k => \u2191(huckelEnergy (m + 3) \u2191k)\nhA :\n  SimpleGraph.adjMatrix \u2102 (SimpleGraph.cycleGraph (m + 3)) = (\u2191u * diagonal fun k => \u2191(huckelEnergy (m + 3) \u2191k)) * \u2191u\u207b\u00b9\n\u22a2 ((\u2191u * diagonal fun k => \u2191(huckelEnergy (m + 3) \u2191k)) * \u2191u\u207b\u00b9).charpoly = \u220f k, (X - C \u2191(huckelEnergy (m + 3) \u2191k))\n"
+  ],
+  "hash": "6a85f5d062b0f340"
+ },
+ "Chem_leChatelier_sign.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "33645623c749e2e1"
+ },
+ "Chem_molecular_orbital_count.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "f613f31ccf43e07d"
+ },
+ "Chem_point_group_finite_O3.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "df289c231dfbe455"
+ },
+ "Chem_polya_isomer_count.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:78:4-78:36: error: Type mismatch: After simplification, term\n  this x\n has type\n  @Eq C (F \u27e6g\u207b\u00b9 \u2022 x\u27e7) (F \u27e6x\u27e7)\nbut is expected to have type\n  @Eq C ((g \u2022 fun (x : X) => F \u27e6x\u27e7) x) (F \u27e6x\u27e7)\n"
+  ],
+  "hash": "0c9366fc6d69e95e"
+ },
+ "Chem_wiener_path_formula.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "1aad01b16b6ec650"
+ },
+ "Frontier_Aronszajn_tree_exists.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:54:60-54:74: error: Ambiguous term\n  mk_Iio_ordinal\nPossible interpretations:\n  Cardinal.mk_Iio_ordinal : \u2200 (o : Ordinal.{?u.12}),\n    #(\u2191(Set.Iio o) : Type (?u.12 + 1)) = Cardinal.lift.{?u.12 + 1, ?u.12} o.card\n  \n  Ordinal.mk_Iio_ordinal : \u2200 (o : Ordinal.{?u.11}),\n    #(\u2191(Set.Iio o) : Type (?u.11 + 1)) = Cardinal.lift.{?u.11 + 1, ?u.11} o.card\n",
+   "-:53:80-55:81: error: unsolved goals\n\u03b1 : Ordinal.{0}\n\u22a2 #(\u2191(Set.Iio \u03b1) : Type 1) \u2264 \u2135\u2080 \u2194 \u03b1 < (\u03c9_ : Ordinal.{0} \u2192 Ordinal.{0}) 1\n"
+  ],
+  "hash": "d5afc226142e1d1d"
+ },
+ "Frontier_Brun_twin_reciprocal.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:32:21-32:39: error(lean.unknownIdentifier): Unknown identifier `Brun.twinIndicator`\n",
+   "-:34:4-34:47: error(lean.unknownIdentifier): Unknown identifier `Brun.summable_twinIndicator'.comp_injective`\n"
+  ],
+  "hash": "7c064f3275f3baf3"
+ },
+ "Frontier_Gale_Stewart_open.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "c2fc4afa4563f337"
+ },
+ "Frontier_Loeb_theorem.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:32:4-32:8: error(lean.invalidDottedIdent): Invalid dotted identifier notation: The expected type of `.var`\n  Trm\nis not of the form `C ...` or `... \u2192 C ...` where C is a constant\n",
+   "-:40:4-40:7: error(lean.invalidDottedIdent): Invalid dotted identifier notation: The expected type of `.eq`\n  Fml\nis not of the form `C ...` or `... \u2192 C ...` where C is a constant\n"
+  ],
+  "hash": "57abdccb399045c9"
+ },
+ "Frontier_P_vs_NP_statement.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "32ebed60f5603cec"
+ },
+ "Frontier_RH_Li_criterion.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "eb2711b719eec98a"
+ },
+ "Frontier_Tarski_undefinability.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8fb4fd2f132f721a"
+ },
+ "Frontier_cook_levin.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:39:4-39:9: error: Function expected at\n  SAT\nbut this term has type\n  ?m.2\n\nNote: Expected a function because this term is being applied to the argument\n  F\n\nHint: The identifier `SAT` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.\n",
+   "-:39:40-39:49: error: Function expected at\n  numVars\nbut this term has type\n  ?m.3\n\nNote: Expected a function because this term is being applied to the argument\n  F\n\nHint: The identifier `numVars` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.\n"
+  ],
+  "hash": "1156fd5c9d160ed4"
+ },
+ "Frontier_infinite_ramsey.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "018304d11c863a4c"
+ },
+ "Frontier_jones_polynomial_invariant.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:128:2-128:28: error: Type mismatch: After simplification, term\n  this\n has type\n  @Eq R (K.br (K.plug C (a * K.xp i * b)))\n    ((\u2191K.A : R) * K.br (K.plug C (a * b)) + (\u2191K.A\u207b\u00b9 : R) * K.br (K.plug C (a * K.e i * b)))\nbut is expected to have type\n  @Eq R (K.br (K.plug C (a * K.xp i * b)))\n    ((\u2191K.A : R) * K.br (K.plug C (a * b)) + K.Ai * K.br (K.plug C (a * K.e i * b)))\n",
+   "-:135:2-135:28: error: Type mismatch: After simplification, term\n  this\n has type\n  @Eq R (K.br (K.plug C (a * K.xm i * b)))\n    ((\u2191K.A\u207b\u00b9 : R) * K.br (K.plug C (a * b)) + (\u2191K.A : R) * K.br (K.plug C (a * K.e i * b)))\nbut is expected to have type\n  @Eq R (K.br (K.plug C (a * K.xm i * b)))\n    (K.Ai * K.br (K.plug C (a * b)) + (\u2191K.A : R) * K.br (K.plug C (a * K.e i * b)))\n"
+  ],
+  "hash": "8abb82dee387716d"
+ },
+ "Frontier_sum_three_cubes_42.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "3a997b7b35b33604"
+ },
+ "Math_abel_ruffini_deg5.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:74:66-76:89: error: unsolved goals\ncase e'_4\nR : Type u_1\ninst\u271d\u00b9 : CommRing R\na b : \u2115\ninst\u271d : Nontrivial R\nthis : (Polynomial.X ^ 5 - (Polynomial.C : R \u2192 R[X]) (\u2191a : R) * Polynomial.X).degree = (\u21915 : WithBot \u2115)\n\u22a2 (Polynomial.X ^ 5 - (Polynomial.C : R \u2192 R[X]) (\u2191a : R) * Polynomial.X).degree = (\u21915 : WithBot \u2115)\n",
+   "-:184:46-184:48: error: Application type mismatch: The argument\n  hx\nhas type\n  (Polynomial.aeval x : \u211a[X] \u2192 \u2102) (Math.AbelRuffiniQuintic.Phi \u211a a b) = 0\nbut is expected to have type\n  Irreducible ?m.47\nin the application\n  solvableByRad.isSolvable' ?m.46 hx\n"
+  ],
+  "hash": "d2078a810d809dbd"
+ },
+ "Math_baire_category.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "4592eefe59b5a399"
+ },
+ "Math_bertrand_postulate.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "76bf222bbcb6525e"
+ },
+ "Math_bolzano_weierstrass.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "894067bb0fa0f9b7"
+ },
+ "Math_brouwer_2d.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:88:31-89:71: error(lean.synthInstanceFailed): failed to synthesize instance of type class\n  LocallyPathConnectedSpace \u2191(closedBall 0 1)\n\nHint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.\n",
+   "-:88:9-88:27: error: Tactic `rcases` failed: `x\u271d : ?m.264` is not an inductive datatype\n"
+  ],
+  "hash": "834a292bde447490"
+ },
+ "Math_cassini_10.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8049b8ae3b18535e"
+ },
+ "Math_cassini_11.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d7c6806127398ed5"
+ },
+ "Math_cassini_12.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "eacb154d02bc7e1c"
+ },
+ "Math_cassini_13.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "a31d3878e61b0051"
+ },
+ "Math_cassini_14.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "21b54ab7e5f79660"
+ },
+ "Math_cassini_15.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "5ddecdb7fefe7eb1"
+ },
+ "Math_cassini_2.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "9fd5e560a8db5318"
+ },
+ "Math_cassini_3.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "05cf7dc1794329c6"
+ },
+ "Math_cassini_4.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8577f6af0b7e805c"
+ },
+ "Math_cassini_5.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b6473aedc40dde72"
+ },
+ "Math_cassini_6.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "fec96477afdda0ae"
+ },
+ "Math_cassini_7.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "3f57f1f2a0b38aed"
+ },
+ "Math_cassini_8.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "508d785592ba4329"
+ },
+ "Math_cassini_9.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b5001dc75910df2d"
+ },
+ "Math_catalan_closed.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b94e81dfec404f85"
+ },
+ "Math_cauchy_group.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "aa49ea1f0a249a9c"
+ },
+ "Math_chinese_remainder.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "25c2872190531e32"
+ },
+ "Math_dilworth.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "e9cae54ddbaf00e1"
+ },
+ "Math_euler_pentagonal.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:47:26-47:42: error(lean.unknownIdentifier): Unknown identifier `Franklin.pentExp`\n",
+   "-:50:27-50:44: error(lean.unknownIdentifier): Unknown identifier `Franklin.pentSign`\n"
+  ],
+  "hash": "044730d1dd602ed1"
+ },
+ "Math_fermat_little.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "9d9e003c1778cf53"
+ },
+ "Math_fta_algebra.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d6f47bbac040e695"
+ },
+ "Math_gauss_bonnet_polygon.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:59:8-59:21: error(lean.unknownIdentifier): Unknown identifier `volume_sector`\n"
+  ],
+  "hash": "0d8eeb7aff72a826"
+ },
+ "Math_halls_marriage.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:54:20-54:27: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\nL : Type u_1\nR : Type u_2\ninst\u271d\u00b3 : Fintype L\ninst\u271d\u00b2 : Fintype R\ninst\u271d\u00b9 : DecidableEq R\nr : L \u2192 R \u2192 Prop\ninst\u271d : (a : L) \u2192 DecidablePred (r a)\n\u22a2 Std.Symm fun u v =>\n    match u, v with\n    | Sum.inl a, Sum.inr b => r a b\n    | Sum.inr b, Sum.inl a => r a b\n    | x, x_1 => False\n",
+   "-:75:37-75:50: error: Function expected at\n  M.symm\nbut this term has type\n  Std.Symm M.Adj\n\nNote: Expected a function because this term is being applied to the argument\n  (hf a)\n"
+  ],
+  "hash": "45bd968348c58278"
+ },
+ "Math_heine_borel.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "5871efa2dfbf937b"
+ },
+ "Math_inclusion_exclusion.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "7eb1d983467ae52c"
+ },
+ "Math_ivt.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "f2c201e16e5da12e"
+ },
+ "Math_lagrange_four_squares.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "de092cd3fc078ed3"
+ },
+ "Math_lagrange_subgroup.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8d34f2ba0ce9b425"
+ },
+ "Math_mean_value.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "f86a967c44c78a28"
+ },
+ "Math_quadratic_reciprocity.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "2721b6da290a88b0"
+ },
+ "Math_ramsey_3_3.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "0b31aa4506ddc017"
+ },
+ "Math_ramsey_3_4.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:50:23-50:72: error: Application type mismatch: The argument\n  SimpleGraph.Embedding.comap (Fin.castLEEmb h) G\nhas type\n  SimpleGraph.comap (\u21d1(Fin.castLEEmb h) : Fin m \u2192 Fin n) G \u21aag G\nof sort `Type` but is expected to have type\n  (SimpleGraph.comap (\u21d1(Fin.castLEEmb h) : Fin m \u2192 Fin n) G).IsContained ?m.83\nof sort `Prop` in the application\n  SimpleGraph.CliqueFree.comap (SimpleGraph.Embedding.comap (Fin.castLEEmb h) G)\n",
+   "-:51:32-51:82: error: Application type mismatch: The argument\n  SimpleGraph.Embedding.comap (Fin.castLEEmb h) G\u1d9c\nhas type\n  SimpleGraph.comap (\u21d1(Fin.castLEEmb h) : Fin m \u2192 Fin n) G\u1d9c \u21aag G\u1d9c\nof sort `Type` but is expected to have type\n  (SimpleGraph.comap (\u21d1(Fin.castLEEmb h) : Fin m \u2192 Fin n) G\u1d9c).IsContained ?m.92\nof sort `Prop` in the application\n  SimpleGraph.CliqueFree.comap (SimpleGraph.Embedding.comap (Fin.castLEEmb h) G\u1d9c)\n"
+  ],
+  "hash": "aeba9661369ccd42"
+ },
+ "Math_ramsey_3_5.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:152:29-152:59: error: Invalid `\u27e8...\u27e9` notation: The expected type of this term could not be determined\n",
+   "-:152:14-152:59: error: Type mismatch\n  fun (a : ?m.31) (b : ?m.36 a) (hab : ?m.37 a b) => ?m.35\nhas type\n  (a : ?m.31) \u2192 (b : ?m.36 a) \u2192 (hab : ?m.37 a b) \u2192 ?m.38 a b hab\nbut is expected to have type\n  Std.Symm fun (a b : V) => G.Adj a b \u2227 a \u2208 s \u2227 b \u2208 s\n"
+  ],
+  "hash": "17d3055bf5564ef7"
+ },
+ "Math_ramsey_4_4.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:122:2-122:27: error: Type mismatch: After simplification, term\n  hsplit\n has type\n  @Eq \u2115 (#({y \u2208 S | G.Adj v y}) + (#(Math.blueN G S v) + 1)) #S\nbut is expected to have type\n  @Eq \u2115 (#({y \u2208 S | G.Adj v y}) + #(Math.blueN G S v) + 1) #S\n",
+   "-:359:10-359:11: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\nV : Type u_1\nG : SimpleGraph V\nS S' : Finset V\ns t : \u2115\nv : V\n\u22a2 Std.Symm fun (x y : Fin 17) => Math.paleyAdj x y = Bool.true\n"
+  ],
+  "hash": "0d90525102b6ea8b"
+ },
+ "Math_sperner_lemma.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:395:6-395:45: error: Type mismatch\n  Math.sum_card_filter_comm fun (s t : ?m.1101) => ?m.1107\nhas type\n  \u2211 a \u2208 ?m.1103, #({b \u2208 ?m.1104 | ?m.1107}) = \u2211 b \u2208 ?m.1104, #({a \u2208 ?m.1103 | ?m.1107})\nbut is expected to have type\n  \u2211 s \u2208 T.cells F, #({t \u2208 D | t \u2286 s}) = \u2211 t \u2208 D, #({s \u2208 T.cells F | t \u2286 s})\n"
+  ],
+  "hash": "59ebf36a945c093d"
+ },
+ "Math_sum_two_squares.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "e6522493ae3635b4"
+ },
+ "Math_two_squares_101.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "3c190498ed6afed7"
+ },
+ "Math_two_squares_109.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "bde1be57f83152c4"
+ },
+ "Math_two_squares_113.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "7ffd16d3dec52a12"
+ },
+ "Math_two_squares_13.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "276063bd7f4ad041"
+ },
+ "Math_two_squares_17.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b7ebfa95c76f3b50"
+ },
+ "Math_two_squares_29.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "93630aa7995ad1f8"
+ },
+ "Math_two_squares_37.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "628a8d71f5607ec2"
+ },
+ "Math_two_squares_41.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "1456a0fe621a01bb"
+ },
+ "Math_two_squares_5.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "779705fdf985e56f"
+ },
+ "Math_two_squares_53.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "09ee78019f79bf99"
+ },
+ "Math_two_squares_61.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d283e293dc22f279"
+ },
+ "Math_two_squares_73.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d9147b075b953191"
+ },
+ "Math_two_squares_89.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "21453875e5747468"
+ },
+ "Math_two_squares_97.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "5c98c3b0776a2392"
+ },
+ "Math_weierstrass_approx.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "5d0e018c31ccb65e"
+ },
+ "Math_wilson_theorem.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "06afb7b7430d7619"
+ },
+ "PCA_Cert_ed25519_verify_sound.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "caf0ece41a7efb8b"
+ },
+ "PCA_Fix_alter_policy_preserves_roles_and_cmd.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "944143ee58263919"
+ },
+ "PCA_Invariant_default_deny_excludes_only_allowlist.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "935a162d0002d811"
+ },
+ "PCA_Invariant_rls_off_implies_no_row_protection.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "6b7fc14c7501ec3b"
+ },
+ "PCA_default_deny.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "f59eaadabbb4ddaf"
+ },
+ "PCA_escape_monotone.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "504714607f29640c"
+ },
+ "PCA_leak_iff_escape_when_out_of_scope.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d7edfec0f486f88a"
+ },
+ "PCA_no_clean_proved_with_escape.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "5da1f2207d51a4b7"
+ },
+ "PCA_no_escape_no_leak.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "1823e80fd0c3e702"
+ },
+ "PCA_owner_only_isolated.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "a21e663523cf6992"
+ },
+ "PCA_priv_is_escape.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d34e39b2e6be5e07"
+ },
+ "PCA_tightening_refines.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "7977cd0dd33e11db"
+ },
+ "PCA_unowned_is_hole.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "382c94122396eef3"
+ },
+ "PCA_with_check_true_admits_forge.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "688f3f98ff6c7343"
+ },
+ "QPhys_bcH_special.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:111:6-111:47: error: Type mismatch: After simplification, term\n  HasDerivAt.scomp s h\u2081 h\u2082\n has type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \ud835\udd38 NonUnitalNormedRing.toNormedAddCommGroup.toAddCommGroup\n    (NormedAlgebra.toNormedSpace \ud835\udd38).toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef\n    ((fun (u : \u211d) => NormedSpace.exp (-(u \u2022 C))) \u2218 fun (u : \u211d) => u ^ 2 / 2)\n    (-(s \u2022 (NormedSpace.exp (-((s ^ 2 / 2) \u2022 C)) * C))) s\nbut is expected to have type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \ud835\udd38 inst\u271d\u00b2.toAddCommGroup\n    (NormedAlgebra.toNormedSpace \ud835\udd38).toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef\n    (fun (u : \u211d) => NormedSpace.exp (-((u ^ 2 / 2) \u2022 C))) (-(s \u2022 (NormedSpace.exp (-((s ^ 2 / 2) \u2022 C)) * C))) s\n"
+  ],
+  "hash": "bc9164343dfaf5a9"
+ },
+ "QPhys_canonical_commutator.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:61:4-61:53: error: Type mismatch: After simplification, term\n  ContinuousLinearMap.hasDerivAt Complex.ofRealCLM\n has type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u2102 Complex.instNormedAddCommGroup.toAddCommGroup\n    instInnerProductSpaceRealComplex.toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef\n    (\u21d1Complex.ofRealCLM : \u211d \u2192 \u2102) 1 t\nbut is expected to have type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u2102 Complex.addCommGroup\n    instInnerProductSpaceRealComplex.toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef\n    (fun (s : \u211d) => (\u2191s : \u2102)) 1 t\n",
+   "-:62:2-62:45: error: Type mismatch: After simplification, term\n  HasDerivAt.deriv (HasDerivAt.mul h1 (SchwartzMap.hasDerivAt f t))\n has type\n  @Eq \u2102 (deriv ((fun (s : \u211d) => (\u2191s : \u2102)) * (\u21d1f : \u211d \u2192 \u2102)) t) ((f : \u211d \u2192 \u2102) t + (\u2191t : \u2102) * deriv (\u21d1f : \u211d \u2192 \u2102) t)\nbut is expected to have type\n  @Eq \u2102 (deriv (fun (s : \u211d) => (\u2191s : \u2102) * (f : \u211d \u2192 \u2102) s) t) ((f : \u211d \u2192 \u2102) t + (\u2191t : \u2102) * deriv (\u21d1f : \u211d \u2192 \u2102) t)\n"
+  ],
+  "hash": "beab8f810538557e"
+ },
+ "QPhys_commuting_simultaneous.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:70:4-70:7: error: No goals to be solved\n"
+  ],
+  "hash": "49695fbd4d2212e7"
+ },
+ "QPhys_ehrenfest.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:41:2-41:37: error: Type mismatch: After simplification, term\n  HasFDerivAt.comp_hasDerivAt t hL hA\n has type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField (E \u2192L[\u211d] E)\n    ContinuousLinearMap.toNormedAddCommGroup.toAddCommGroup ContinuousLinearMap.toNormedSpace.toModule\n    PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef\n    ((fun (B : E \u2192L[\u2102] E) => ContinuousLinearMap.restrictScalars \u211d B) \u2218 A) (ContinuousLinearMap.restrictScalars \u211d A') t\nbut is expected to have type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField (E \u2192L[\u211d] E) ContinuousLinearMap.addCommGroup\n    ContinuousLinearMap.module ContinuousLinearMap.topologicalSpace \u22ef\n    (fun (s : \u211d) => ContinuousLinearMap.restrictScalars \u211d (A s)) (ContinuousLinearMap.restrictScalars \u211d A') t\n"
+  ],
+  "hash": "37a5404e701d24d9"
+ },
+ "QPhys_heisenberg_uncertainty.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "328f2130f383d15a"
+ },
+ "QPhys_hermitian_real_spectrum.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "e4e3635028d5b0b8"
+ },
+ "QPhys_noether_translation.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "84c68a34bd14ae09"
+ },
+ "QPhys_oscillator_spectrum.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:176:27-176:48: error: Function expected at\n  LadderSystem\nbut this term has type\n  ?m.1\n\nNote: Expected a function because this term is being applied to the argument\n  (\u2115 \u2192\u2080 \u2102)\n\nHint: The identifier `LadderSystem` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.\n",
+   "-:192:40-192:61: error: Function expected at\n  LadderSystem\nbut this term has type\n  ?m.1\n\nNote: Expected a function because this term is being applied to the argument\n  (\u2115 \u2192\u2080 \u2102)\n\nHint: The identifier `LadderSystem` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.\n"
+  ],
+  "hash": "083778ed264bac62"
+ },
+ "QPhys_parseval_fourier.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8019d680a9511b73"
+ },
+ "QPhys_particle_in_box.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:57:6-57:33: error: Type mismatch: After simplification, term\n  HasDerivAt.pow (hf' t) 2\n has type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u211d Real.normedCommRing.toCommRing.toAddCommGroup\n    (NormedAlgebra.toNormedSpace \u211d).toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef (f' ^ 2)\n    (-(2 * f' t * (c * f t))) t\nbut is expected to have type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u211d Real.instAddCommGroup Semiring.toModule\n    PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef (fun (t : \u211d) => f' t ^ 2) (-(2 * f' t * (c * f t))) t\n",
+   "-:62:4-62:8: error: `ring_nf` made no progress on the goal\n"
+  ],
+  "hash": "451fe26d1aa37c17"
+ },
+ "QPhys_pauli_exclusion_antisym.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "3ae668d019b71a8c"
+ },
+ "QPhys_spectral_theorem_finite.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:63:4-63:37: error: Type mismatch: After simplification, term\n  h\n has type\n  @Eq (Matrix n n \ud835\udd5c) A\n    (((\u2191hA.eigenvectorUnitary : Matrix n n \ud835\udd5c) * Matrix.diagonal fun (x : n) => (\u2191(hA.eigenvalues x) : \ud835\udd5c)) *\n      Star.star (\u2191hA.eigenvectorUnitary : Matrix n n \ud835\udd5c))\nbut is expected to have type\n  @Eq (Matrix n n \ud835\udd5c) A\n    (((\u2191hA.eigenvectorUnitary : Matrix n n \ud835\udd5c) * Matrix.diagonal fun (i : n) => (\u2191(hA.eigenvalues i) : \ud835\udd5c)) *\n      (\u2191hA.eigenvectorUnitary : Matrix n n \ud835\udd5c)\u1d34)\n",
+   "-:66:4-66:37: error: Type mismatch: After simplification, term\n  h\n has type\n  @Eq (Matrix n n \ud835\udd5c) (Star.star (\u2191hA.eigenvectorUnitary : Matrix n n \ud835\udd5c) * A * (\u2191hA.eigenvectorUnitary : Matrix n n \ud835\udd5c))\n    (Matrix.diagonal fun (x : n) => (\u2191(hA.eigenvalues x) : \ud835\udd5c))\nbut is expected to have type\n  @Eq (Matrix n n \ud835\udd5c) ((\u2191hA.eigenvectorUnitary : Matrix n n \ud835\udd5c)\u1d34 * A * (\u2191hA.eigenvectorUnitary : Matrix n n \ud835\udd5c))\n    (Matrix.diagonal fun (i : n) => (\u2191(hA.eigenvalues i) : \ud835\udd5c))\n"
+  ],
+  "hash": "9afd920aaf47e26d"
+ },
+ "QPhys_stone_generator.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:104:10-104:68: error: Type mismatch: After simplification, term\n  HasDerivAt.add (DifferentiableAt.hasDerivAt hx) (DifferentiableAt.hasDerivAt hy)\n has type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField H inst\u271d\u00b9.toAddCommGroup NormedSpace.complexToReal.toModule\n    PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef ((fun t => (U t) \u2191x) + fun t => (U t) \u2191y)\n    (deriv (fun t => (U t) \u2191x) 0 + deriv (fun t => (U t) \u2191y) 0) 0\nbut is expected to have type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField H inst\u271d\u00b9.toAddCommGroup NormedSpace.complexToReal.toModule\n    PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef (fun t => (U t) \u2191x + (U t) \u2191y)\n    (deriv (fun t => (U t) \u2191x) 0 + deriv (fun t => (U t) \u2191y) 0) 0\n",
+   "-:111:10-111:64: error: Type mismatch: After simplification, term\n  HasDerivAt.const_smul c (DifferentiableAt.hasDerivAt hx)\n has type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField H inst\u271d\u00b9.toAddCommGroup NormedSpace.complexToReal.toModule\n    PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef (c \u2022 fun t => (U t) \u2191x) (c \u2022 deriv (fun t => (U t) \u2191x) 0) 0\nbut is expected to have type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField H inst\u271d\u00b9.toAddCommGroup NormedSpace.complexToReal.toModule\n    PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef (fun t => c \u2022 (U t) \u2191x) (c \u2022 deriv (fun t => (U t) \u2191x) 0) 0\n"
+  ],
+  "hash": "c7f9d6f7cafe5db7"
+ },
+ "QPhys_unitary_time_evolution.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "413500a4878fa472"
+ },
+ "QPhys_variational_bound.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "3af6d8be7df33346"
+ }
+}

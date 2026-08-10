@@ -270,5 +270,1557 @@
   "proof_file": "aristotle/harvest_100/admin_930e5c23.lean",
   "provenance": "Harmonic/Aristotle 930e5c23-2f32-4bfb-8236-332ec9f7a6fb (admin)",
   "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.EquidistributionBVReduction.configCount_density_of_BV": {
+  "register": "PROVED",
+  "domain": "A1-discharge-literature",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_e3e2508f.lean",
+  "provenance": "Harmonic/Aristotle e3e2508f-2e68-42fe-b16c-7f1b796e0ddd (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.EquidistributionBVReduction.configCount_over_main_tendsto": {
+  "register": "PROVED",
+  "domain": "A1-discharge-literature",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/chris_e55dc3bc.lean",
+  "provenance": "Harmonic/Aristotle e55dc3bc-0be2-4e07-a68a-316f44f0193e (chris)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.EquidistributionBVReduction.equidistribution_of_BV_uniform": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "A1-discharge-literature",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/chris_60d58d60.lean",
+  "provenance": "Harmonic/Aristotle 60d58d60-d2c7-4876-af61-b794b23d4319 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Brockian.EquidistributionBVReduction.total_over_main_tendsto": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "A1-discharge-literature",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/chris_d761a184.lean",
+  "provenance": "Harmonic/Aristotle d761a184-374a-4b41-acde-8b24f73db2d4 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Brockian.EquidistributionUniformity.equidistribution_of_transitive_symmetry": {
+  "register": "PROVED",
+  "domain": "A1-discharge-literature",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_15ccf4c3.lean",
+  "provenance": "Harmonic/Aristotle 15ccf4c3-77b6-4980-a775-1c1bd7625a9a (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.EquidistributionUniformity.sing_uniform_of_transitive": {
+  "register": "PROVED",
+  "domain": "A1-discharge-literature",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_a4470f94.lean",
+  "provenance": "Harmonic/Aristotle a4470f94-9f5b-4581-ac36-965c62f5ce04 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.Weyl.DeficiencyODE.deficiencyRepresentsODE_of_weakRegularity": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "A1-discharge-literature",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/chris_94837b7e.lean",
+  "provenance": "Harmonic/Aristotle 94837b7e-f095-4586-8158-c30ad75b19c3 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Brockian.Weyl.DeficiencyODE.schrodinger_essentiallySelfAdjoint_of_weakRegularity": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "A1-discharge-literature",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/chris_250c5dc8.lean",
+  "provenance": "Harmonic/Aristotle 250c5dc8-55a5-4a5a-9a98-f05d7522e26e (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "PCA.Isolation.in_scope_encoding_sound": {
+  "register": "PROVED",
+  "domain": "D-pca-meta",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_a5e98b7b.lean",
+  "provenance": "Harmonic/Aristotle a5e98b7b-8dcc-4ebe-bb67-fbe52f8c18b6 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.Isolation.in_scope_encoding_complete": {
+  "register": "PROVED",
+  "domain": "D-pca-meta",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/chris_11124ad9.lean",
+  "provenance": "Harmonic/Aristotle 11124ad9-914a-40ca-81b9-7ff855d68059 (chris)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.Isolation.null_escape_iff_unowned_reachable": {
+  "register": "PROVED",
+  "domain": "D-pca-meta",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_fbfb03e2.lean",
+  "provenance": "Harmonic/Aristotle fbfb03e2-0e0b-42ea-9056-ac30dd492f28 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.Isolation.priv_escape_monotone": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "D-pca-meta",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/chris_b8f7390b.lean",
+  "provenance": "Harmonic/Aristotle b8f7390b-8f8f-4b51-b136-c48c819fbb70 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "PCA.Isolation.no_clean_proved_with_escape": {
+  "register": "PROVED",
+  "domain": "D-pca-meta",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_f74b288b.lean",
+  "provenance": "Harmonic/Aristotle f74b288b-856e-4325-ab67-f5a3adce8630 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.Isolation.disjunction_split_preserves_semantics": {
+  "register": "PROVED",
+  "domain": "D-pca-meta",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_9b8f2134.lean",
+  "provenance": "Harmonic/Aristotle 9b8f2134-b85c-49ad-ba7e-198c8fd116ef (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.Isolation.tightened_predicate_refines_original": {
+  "register": "PROVED",
+  "domain": "D-pca-meta",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_5ebd24a1.lean",
+  "provenance": "Harmonic/Aristotle 5ebd24a1-9599-4f3e-83dd-2545333087e6 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.WriteIntegrity.with_check_true_admits_forge": {
+  "register": "PROVED",
+  "domain": "D-pca-meta",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_de7ba46b.lean",
+  "provenance": "Harmonic/Aristotle de7ba46b-5582-45e0-87e0-84fb5d94a582 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.WriteIntegrity.member_check_prevents_cross_tenant_write": {
+  "register": "PROVED",
+  "domain": "D-pca-meta",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_3e95a471.lean",
+  "provenance": "Harmonic/Aristotle 3e95a471-5829-4c6f-979b-6fa2dcb2fb6e (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.Coverage.bail_on_unrecognized_is_sound": {
+  "register": "PROVED",
+  "domain": "D-pca-meta",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_7f19ea2c.lean",
+  "provenance": "Harmonic/Aristotle 7f19ea2c-7209-4a64-9290-993baeb27e34 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.Cert.reprove_matches_iff_untampered": {
+  "register": "PROVED",
+  "domain": "D-pca-meta",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_f75d2809.lean",
+  "provenance": "Harmonic/Aristotle f75d2809-ab30-42d5-a75a-86a8b8e40efa (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.Cert.ed25519_verify_sound": {
+  "register": "PROVED",
+  "domain": "D-pca-meta",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_a1cb2af2.lean",
+  "provenance": "Harmonic/Aristotle a1cb2af2-ca39-4f14-8c72-0969d1936fd9 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.Invariant.default_deny_excludes_only_allowlist": {
+  "register": "PROVED",
+  "domain": "D-pca-meta",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_c4020e2e.lean",
+  "provenance": "Harmonic/Aristotle c4020e2e-deea-45ee-9580-379eea540d58 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.Invariant.rls_off_implies_no_row_protection": {
+  "register": "PROVED",
+  "domain": "D-pca-meta",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/chris_da05c86b.lean",
+  "provenance": "Harmonic/Aristotle da05c86b-64ae-479a-aac8-7645896cb32f (chris)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.Fix.alter_policy_preserves_roles_and_cmd": {
+  "register": "PROVED",
+  "domain": "D-pca-meta",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_eecd883f.lean",
+  "provenance": "Harmonic/Aristotle eecd883f-6d86-4fa6-b2d7-f966214ab10a (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "CS.insertion_sort_correct": {
+  "register": "PROVED",
+  "domain": "DOMAIN-cs",
+  "statement": "insertionSort returns a sorted permutation of its input.",
+  "proof_file": "aristotle/harvest_100/admin_35f8d170.lean",
+  "provenance": "Harmonic/Aristotle 35f8d170-0ede-4822-81bd-3188fc219b7c (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "CS.mergesort_correct": {
+  "register": "PROVED",
+  "domain": "DOMAIN-cs",
+  "statement": "mergeSort returns a sorted permutation of its input.",
+  "proof_file": "aristotle/harvest_100/admin_3e3c9d41.lean",
+  "provenance": "Harmonic/Aristotle 3e3c9d41-d99e-4a59-b4a0-78029a55869e (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "CS.halting_undecidable": {
+  "register": "PROVED",
+  "domain": "DOMAIN-cs",
+  "statement": "There is no total computable H deciding whether program p halts on input x (diagonalization).",
+  "proof_file": "aristotle/harvest_100/admin_1bbc41e4.lean",
+  "provenance": "Harmonic/Aristotle 1bbc41e4-b381-4483-bc86-d427f672f62b (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "CS.pumping_regular": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-cs",
+  "statement": "Every regular language satisfies the pumping lemma.",
+  "proof_file": "aristotle/harvest_100/chris_6478b48c.lean",
+  "provenance": "Harmonic/Aristotle 6478b48c-16a8-48fd-8428-a50c66328bf7 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "CS.euclid_gcd_correct": {
+  "register": "PROVED",
+  "domain": "DOMAIN-cs",
+  "statement": "Euclid's algorithm returns gcd(a,b) and terminates.",
+  "proof_file": "aristotle/harvest_100/admin_c6ddcd7a.lean",
+  "provenance": "Harmonic/Aristotle c6ddcd7a-abe9-4423-9846-31fb5e09a021 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "CS.binary_search_correct": {
+  "register": "PROVED",
+  "domain": "DOMAIN-cs",
+  "statement": "Binary search on a sorted array returns an index iff the key is present.",
+  "proof_file": "aristotle/harvest_100/admin_a29db1f6.lean",
+  "provenance": "Harmonic/Aristotle a29db1f6-7d19-454a-94f3-fb0751b76763 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "CS.pigeonhole_hash": {
+  "register": "PROVED",
+  "domain": "DOMAIN-cs",
+  "statement": "Any hash from an (n+1)-set to an n-set has a collision.",
+  "proof_file": "aristotle/harvest_100/admin_02d41b62.lean",
+  "provenance": "Harmonic/Aristotle 02d41b62-2786-48ca-886a-01557dadaff6 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "CS.kleene_regex_dfa": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-cs",
+  "statement": "A language is regular iff it is accepted by a DFA (Kleene, finite direction).",
+  "proof_file": "aristotle/harvest_100/chris_2a470654.lean",
+  "provenance": "Harmonic/Aristotle 2a470654-71d3-4747-a36b-96a892d68753 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "CS.knaster_tarski": {
+  "register": "PROVED",
+  "domain": "DOMAIN-cs",
+  "statement": "A monotone map on a complete lattice has a least fixed point.",
+  "proof_file": "aristotle/harvest_100/admin_648c2ff5.lean",
+  "provenance": "Harmonic/Aristotle 648c2ff5-0b5c-436b-ac99-2392dde34064 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "CS.cantor_powerset": {
+  "register": "PROVED",
+  "domain": "DOMAIN-cs",
+  "statement": "There is no surjection A \u2192 \ud835\udcab(A) (Cantor).",
+  "proof_file": "aristotle/harvest_100/admin_c2ba68ec.lean",
+  "provenance": "Harmonic/Aristotle c2ba68ec-d9b9-450f-aee9-42af327875b7 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "CS.huffman_optimal": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-cs",
+  "statement": "Huffman coding minimizes expected codeword length among prefix codes.",
+  "proof_file": "aristotle/harvest_100/chris_1da093d3.lean",
+  "provenance": "Harmonic/Aristotle 1da093d3-17ef-456d-a030-a6ce4448d514 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "CS.master_theorem_case1": {
+  "register": "PROVED",
+  "domain": "DOMAIN-cs",
+  "statement": "T(n)=aT(n/b)+f(n) with f(n)=O(n^{log_b a \u2212 \u03b5}) gives T(n)=\u0398(n^{log_b a}).",
+  "proof_file": "aristotle/harvest_100/admin_9513da66.lean",
+  "provenance": "Harmonic/Aristotle 9513da66-15f5-4508-ace4-78b9145b9408 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "CS.ackermann_total": {
+  "register": "PROVED",
+  "domain": "DOMAIN-cs",
+  "statement": "The Ackermann function is total (well-founded on lexicographic \u2115\u00b2).",
+  "proof_file": "aristotle/harvest_100/admin_83ec4bab.lean",
+  "provenance": "Harmonic/Aristotle 83ec4bab-f29e-4735-9c33-5dd3c48796e2 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "CS.dfa_complement_regular": {
+  "register": "PROVED",
+  "domain": "DOMAIN-cs",
+  "statement": "Regular languages are closed under complement.",
+  "proof_file": "aristotle/harvest_100/admin_b8f4484e.lean",
+  "provenance": "Harmonic/Aristotle b8f4484e-1b70-4496-8298-270f079b43cc (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "CS.dijkstra_correct": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-cs",
+  "statement": "Dijkstra's algorithm computes shortest-path distances on nonnegative-weight graphs.",
+  "proof_file": "aristotle/harvest_100/chris_4ff1a35f.lean",
+  "provenance": "Harmonic/Aristotle 4ff1a35f-467e-457b-bdfe-b605255471d1 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "CS.church_rosser_beta_diamond": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-cs",
+  "statement": "One-step parallel \u03b2-reduction in the \u03bb-calculus has the diamond property.",
+  "proof_file": "aristotle/harvest_100/chris_99225e94.lean",
+  "provenance": "Harmonic/Aristotle 99225e94-976a-490d-bcbc-2bd5af3272bd (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "CS.pcp_pigeon_bound": {
+  "register": "PROVED",
+  "domain": "DOMAIN-cs",
+  "statement": "Any prefix-free binary code satisfies Kraft's inequality \u03a3 2^{-\u2113_i} \u2264 1.",
+  "proof_file": "aristotle/harvest_100/admin_4847c417.lean",
+  "provenance": "Harmonic/Aristotle 4847c417-749f-4e04-a8cc-fec38d503458 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "CS.rice_nontrivial": {
+  "register": "PROVED",
+  "domain": "DOMAIN-cs",
+  "statement": "Every nontrivial semantic property of programs is undecidable (Rice).",
+  "proof_file": "aristotle/harvest_100/chris_c9a70f21.lean",
+  "provenance": "Harmonic/Aristotle c9a70f21-0e18-46ff-a70b-ebc1767fde69 (chris)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.quadratic_reciprocity": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "For odd primes p\u2260q: (p/q)(q/p) = (\u22121)^{((p\u22121)/2)((q\u22121)/2)}.",
+  "proof_file": "aristotle/harvest_100/admin_f0c1f472.lean",
+  "provenance": "Harmonic/Aristotle f0c1f472-4516-4b08-9fd1-fc23be6c58b2 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.sum_two_squares": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "A prime p is a sum of two squares iff p=2 or p\u22611 (mod 4).",
+  "proof_file": "aristotle/harvest_100/admin_6c01e08f.lean",
+  "provenance": "Harmonic/Aristotle 6c01e08f-dd7d-46f3-aa0d-2d175b8ffc2f (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.lagrange_four_squares": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Every natural number is a sum of four squares.",
+  "proof_file": "aristotle/harvest_100/admin_09e38b2c.lean",
+  "provenance": "Harmonic/Aristotle 09e38b2c-49bb-4adb-818a-3bcc9007efaf (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.bertrand_postulate": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "For every n\u22651 there is a prime p with n<p\u22642n.",
+  "proof_file": "aristotle/harvest_100/admin_1dce036e.lean",
+  "provenance": "Harmonic/Aristotle 1dce036e-ee17-4499-af69-4d47f3eac2a8 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.wilson_theorem": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "n>1 is prime iff (n\u22121)! \u2261 \u22121 (mod n).",
+  "proof_file": "aristotle/harvest_100/admin_02421e00.lean",
+  "provenance": "Harmonic/Aristotle 02421e00-cb77-4bd1-a5ff-fbbf1f65f0ba (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.cauchy_group": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "If a prime p divides |G| then G has an element of order p (Cauchy).",
+  "proof_file": "aristotle/harvest_100/chris_f670171e.lean",
+  "provenance": "Harmonic/Aristotle f670171e-edc3-4c9d-86b9-bd22649d23d1 (chris)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.lagrange_subgroup": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The order of a subgroup divides the order of a finite group.",
+  "proof_file": "aristotle/harvest_100/admin_01aafa9d.lean",
+  "provenance": "Harmonic/Aristotle 01aafa9d-d5b4-4ad1-82b3-dec109c7c484 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.fta_algebra": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Every nonconstant complex polynomial has a root (fundamental theorem of algebra).",
+  "proof_file": "aristotle/harvest_100/admin_431d7060.lean",
+  "provenance": "Harmonic/Aristotle 431d7060-a905-4780-8772-6cfc8936b68f (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.ivt": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "A continuous function on [a,b] attains every value between f(a) and f(b).",
+  "proof_file": "aristotle/harvest_100/admin_77e7ce04.lean",
+  "provenance": "Harmonic/Aristotle 77e7ce04-b471-485d-bd9d-2c8ba7888637 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.bolzano_weierstrass": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Every bounded sequence in \u211d^n has a convergent subsequence.",
+  "proof_file": "aristotle/harvest_100/admin_9aabb1e6.lean",
+  "provenance": "Harmonic/Aristotle 9aabb1e6-957d-45ab-a092-7e94ccbf0246 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.heine_borel": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "A subset of \u211d^n is compact iff it is closed and bounded.",
+  "proof_file": "aristotle/harvest_100/admin_9e61f2bf.lean",
+  "provenance": "Harmonic/Aristotle 9e61f2bf-8240-40c8-838c-9577f704a794 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.mean_value": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "A differentiable f on [a,b] has c with f'(c)=(f(b)\u2212f(a))/(b\u2212a).",
+  "proof_file": "aristotle/harvest_100/admin_24ddf6c2.lean",
+  "provenance": "Harmonic/Aristotle 24ddf6c2-6221-4d98-803f-634c55c3df29 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.weierstrass_approx": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Polynomials are dense in C([a,b]) under the sup norm.",
+  "proof_file": "aristotle/harvest_100/admin_7b1d5df1.lean",
+  "provenance": "Harmonic/Aristotle 7b1d5df1-ebba-4a1b-9688-64dfb7b0ef98 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.ramsey_3_3": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "R(3,3) = 6: the two-color Ramsey number.",
+  "proof_file": "aristotle/harvest_100/admin_e3af784f.lean",
+  "provenance": "Harmonic/Aristotle e3af784f-b335-4103-82ac-5a9cf891a7ff (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.halls_marriage": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-math",
+  "statement": "A bipartite graph has a perfect matching iff Hall's condition holds.",
+  "proof_file": "aristotle/harvest_100/chris_65fb15e0.lean",
+  "provenance": "Harmonic/Aristotle 65fb15e0-1d3a-42c5-a8a9-1392859f4f2d (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Math.inclusion_exclusion": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "|\u22c3A_i| = \u03a3(\u22121)^{|S|+1}|\u22c2_{i\u2208S}A_i| (inclusion\u2013exclusion).",
+  "proof_file": "aristotle/harvest_100/admin_3e2fb000.lean",
+  "provenance": "Harmonic/Aristotle 3e2fb000-18ed-44e2-af73-744d01e1b829 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.catalan_closed": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The nth Catalan number equals C(2n,n)/(n+1).",
+  "proof_file": "aristotle/harvest_100/admin_15cf7398.lean",
+  "provenance": "Harmonic/Aristotle 15cf7398-4149-47fb-9d3a-e02a2307ac31 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Frontier.Tarski_undefinability": {
+  "register": "PROVED",
+  "domain": "FRONTIER-set",
+  "statement": "Arithmetical truth is not arithmetically definable (Tarski).",
+  "proof_file": "aristotle/harvest_100/admin_3a725b85.lean",
+  "provenance": "Harmonic/Aristotle 3a725b85-3e25-4691-ab8c-a77dd5d9bcda (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Frontier.Aronszajn_tree_exists": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "FRONTIER-set",
+  "statement": "There exists an Aronszajn tree (a tree of height \u03c9\u2081 with no uncountable branch/level).",
+  "proof_file": "aristotle/harvest_100/chris_96ff196e.lean",
+  "provenance": "Harmonic/Aristotle 96ff196e-e921-4ab5-bb0f-0b4ddd5b5411 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Frontier.infinite_ramsey": {
+  "register": "PROVED",
+  "domain": "FRONTIER-set",
+  "statement": "Every 2-colouring of [\u2115]\u00b2 has an infinite monochromatic set (infinite Ramsey).",
+  "proof_file": "aristotle/harvest_100/admin_2548efbb.lean",
+  "provenance": "Harmonic/Aristotle 2548efbb-ee3a-4bae-bcd3-b3f2c515239e (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Frontier.Loeb_theorem": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "FRONTIER-set",
+  "statement": "L\u00f6b's theorem: if PA \u22a2 (\u25a1\u03c6 \u2192 \u03c6) then PA \u22a2 \u03c6.",
+  "proof_file": "aristotle/harvest_100/chris_5f6898bb.lean",
+  "provenance": "Harmonic/Aristotle 5f6898bb-b1d8-4a94-842d-a54bc73ed79b (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Frontier.Brun_twin_reciprocal": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "FRONTIER-primes",
+  "statement": "The sum of reciprocals of twin primes converges (Brun's constant).",
+  "proof_file": "aristotle/harvest_100/chris_46b229c3.lean",
+  "provenance": "Harmonic/Aristotle 46b229c3-0660-4cec-88cc-7e4a05294812 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Frontier.sum_three_cubes_42": {
+  "register": "PROVED",
+  "domain": "FRONTIER-primes",
+  "statement": "42 = (\u221280538738812075974)\u00b3 + 80435758145817515\u00b3 + 12602123297335631\u00b3.",
+  "proof_file": "aristotle/harvest_100/admin_42e82d04.lean",
+  "provenance": "Harmonic/Aristotle 42e82d04-899d-4dd9-8973-2c9756b49668 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Frontier.RH_Li_criterion": {
+  "register": "PROVED",
+  "domain": "FRONTIER-moonshot",
+  "statement": "RH \u21d4 Li's coefficients \u03bb_n \u2265 0 for all n\u22651 (state and prove the equivalence).",
+  "proof_file": "aristotle/harvest_100/chris_ab687fae.lean",
+  "provenance": "Harmonic/Aristotle ab687fae-1bb6-45d2-aaf7-e9fe02506b7e (chris)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Frontier.P_vs_NP_statement": {
+  "register": "PROVED",
+  "domain": "FRONTIER-moonshot",
+  "statement": "State P \u2260 NP via time-bounded Turing machines and polynomial reducibility.",
+  "proof_file": "aristotle/harvest_100/chris_22decddb.lean",
+  "provenance": "Harmonic/Aristotle 22decddb-e7cb-42a3-9a98-cf93fee458f5 (chris)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Frontier.cook_levin": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "FRONTIER-moonshot",
+  "statement": "SAT is NP-complete (Cook\u2013Levin).",
+  "proof_file": "aristotle/harvest_100/chris_6772e456.lean",
+  "provenance": "Harmonic/Aristotle 6772e456-73b4-4a7f-80bf-2a4360696730 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Frontier.jones_polynomial_invariant": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "FRONTIER-fields",
+  "statement": "The Jones polynomial is a link invariant (well-defined under Reidemeister moves).",
+  "proof_file": "aristotle/harvest_100/chris_c26b1a28.lean",
+  "provenance": "Harmonic/Aristotle c26b1a28-cbeb-4f84-b81c-8fe2e56fc0e9 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Math.euler_pentagonal": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-math",
+  "statement": "Euler's pentagonal number theorem for the partition generating function.",
+  "proof_file": "aristotle/harvest_100/chris_24ccd422.lean",
+  "provenance": "Harmonic/Aristotle 24ccd422-f9d7-4310-a9ac-62390af0df9d (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Math.brouwer_2d": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-math",
+  "statement": "Every continuous self-map of the closed 2-disk has a fixed point.",
+  "proof_file": "aristotle/harvest_100/admin_e78d96f6.lean",
+  "provenance": "Harmonic/Aristotle e78d96f6-e5c5-42d2-aace-3a2f74755332 (admin)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Math.baire_category": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "A complete metric space is not a countable union of nowhere-dense sets.",
+  "proof_file": "aristotle/harvest_100/admin_8e56a9aa.lean",
+  "provenance": "Harmonic/Aristotle 8e56a9aa-9e02-4176-9ca2-331cac9e0a0d (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.dilworth": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "In a finite poset, the minimum antichain cover equals the longest chain length.",
+  "proof_file": "aristotle/harvest_100/admin_c15e2487.lean",
+  "provenance": "Harmonic/Aristotle c15e2487-f55c-478c-967a-c16152b921a6 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.sperner_lemma": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-math",
+  "statement": "Every Sperner coloring of a triangulated simplex has an odd number of rainbow cells.",
+  "proof_file": "aristotle/harvest_100/chris_bfc7514d.lean",
+  "provenance": "Harmonic/Aristotle bfc7514d-f435-44dd-9f6e-4395a157b02d (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Math.chinese_remainder": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "For pairwise-coprime moduli, \u2124/(\u220fn\u1d62) \u2245 \u220f \u2124/n\u1d62.",
+  "proof_file": "aristotle/harvest_100/admin_11f02694.lean",
+  "provenance": "Harmonic/Aristotle 11f02694-37e1-431f-99f0-29cf7015b973 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.fermat_little": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "For prime p and a not divisible by p, a^{p\u22121} \u2261 1 (mod p).",
+  "proof_file": "aristotle/harvest_100/admin_b2ff055f.lean",
+  "provenance": "Harmonic/Aristotle b2ff055f-c195-4335-8e34-6ea7c4d2d216 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.abel_ruffini_deg5": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-math",
+  "statement": "The general quintic is not solvable by radicals (Galois-theoretic).",
+  "proof_file": "aristotle/harvest_100/chris_f14ef56b.lean",
+  "provenance": "Harmonic/Aristotle f14ef56b-5591-4a3c-bd8d-6e04b53eb37a (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Math.gauss_bonnet_polygon": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-math",
+  "statement": "The angle sum of a geodesic triangle on the unit sphere exceeds \u03c0 by its area.",
+  "proof_file": "aristotle/harvest_100/chris_87489f83.lean",
+  "provenance": "Harmonic/Aristotle 87489f83-774e-4e1d-a539-f49e999d96e1 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Math.two_squares_5": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The prime 5 is a sum of two squares.",
+  "proof_file": "aristotle/harvest_100/admin_847ec17a.lean",
+  "provenance": "Harmonic/Aristotle 847ec17a-8c5b-4447-b9c6-5e22e6f0f8f4 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.two_squares_13": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The prime 13 is a sum of two squares.",
+  "proof_file": "aristotle/harvest_100/admin_d253bcac.lean",
+  "provenance": "Harmonic/Aristotle d253bcac-f8be-45a6-b3ed-035d77366ddd (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.two_squares_17": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The prime 17 is a sum of two squares.",
+  "proof_file": "aristotle/harvest_100/admin_d7610ae7.lean",
+  "provenance": "Harmonic/Aristotle d7610ae7-1d81-4865-a82c-16c7ab4659d9 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.two_squares_29": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The prime 29 is a sum of two squares.",
+  "proof_file": "aristotle/harvest_100/admin_eb426d21.lean",
+  "provenance": "Harmonic/Aristotle eb426d21-9f40-4ce3-9dc0-0f4a05884690 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.two_squares_37": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The prime 37 is a sum of two squares.",
+  "proof_file": "aristotle/harvest_100/admin_89353fcb.lean",
+  "provenance": "Harmonic/Aristotle 89353fcb-efdb-4d65-b454-de605cd4c33c (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Frontier.Gale_Stewart_open": {
+  "register": "PROVED",
+  "domain": "FRONTIER-set",
+  "statement": "Every open game is determined (Gale\u2013Stewart).",
+  "proof_file": "aristotle/harvest_100/admin_b2dd95a2.lean",
+  "provenance": "Harmonic/Aristotle b2dd95a2-184e-4a8e-99b9-cedd15ee41a5 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.two_squares_41": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The prime 41 is a sum of two squares.",
+  "proof_file": "aristotle/harvest_100/admin_cb5549fe.lean",
+  "provenance": "Harmonic/Aristotle cb5549fe-4509-4231-97db-786194017054 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.two_squares_53": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The prime 53 is a sum of two squares.",
+  "proof_file": "aristotle/harvest_100/admin_9de27e92.lean",
+  "provenance": "Harmonic/Aristotle 9de27e92-1139-478d-80de-6a5dfb3a249f (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.two_squares_61": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The prime 61 is a sum of two squares.",
+  "proof_file": "aristotle/harvest_100/admin_53813709.lean",
+  "provenance": "Harmonic/Aristotle 53813709-ac04-4a25-a2fb-6001e49ba156 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.two_squares_73": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The prime 73 is a sum of two squares.",
+  "proof_file": "aristotle/harvest_100/admin_14a1c57c.lean",
+  "provenance": "Harmonic/Aristotle 14a1c57c-c25c-48d3-9b51-e669c006acfb (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.two_squares_89": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The prime 89 is a sum of two squares.",
+  "proof_file": "aristotle/harvest_100/admin_7ddc99f3.lean",
+  "provenance": "Harmonic/Aristotle 7ddc99f3-7ccf-45f6-9a97-8885f428fb8e (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.two_squares_97": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The prime 97 is a sum of two squares.",
+  "proof_file": "aristotle/harvest_100/admin_c50193dd.lean",
+  "provenance": "Harmonic/Aristotle c50193dd-f90b-478f-b919-5e68f9ffe43b (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.two_squares_101": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The prime 101 is a sum of two squares.",
+  "proof_file": "aristotle/harvest_100/chris_4e4b05c1.lean",
+  "provenance": "Harmonic/Aristotle 4e4b05c1-257d-44f4-967d-ac69e1abf937 (chris)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.two_squares_109": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The prime 109 is a sum of two squares.",
+  "proof_file": "aristotle/harvest_100/admin_6eeb5830.lean",
+  "provenance": "Harmonic/Aristotle 6eeb5830-bc49-419d-a645-7238cdc08d8a (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.two_squares_113": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "The prime 113 is a sum of two squares.",
+  "proof_file": "aristotle/harvest_100/admin_f50dc07b.lean",
+  "provenance": "Harmonic/Aristotle f50dc07b-1bfb-4f7f-a4df-420b6441f008 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.cassini_2": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Cassini: F(1)\u00b7F(3) \u2212 F(2)\u00b2 = (\u22121)^2.",
+  "proof_file": "aristotle/harvest_100/admin_32342893.lean",
+  "provenance": "Harmonic/Aristotle 32342893-11f6-436b-ba9b-8351df5a02f3 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.cassini_3": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Cassini: F(2)\u00b7F(4) \u2212 F(3)\u00b2 = (\u22121)^3.",
+  "proof_file": "aristotle/harvest_100/admin_78cdf630.lean",
+  "provenance": "Harmonic/Aristotle 78cdf630-5d61-4c6d-9cb0-f5d3aa1c1ce6 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.cassini_4": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Cassini: F(3)\u00b7F(5) \u2212 F(4)\u00b2 = (\u22121)^4.",
+  "proof_file": "aristotle/harvest_100/admin_0e6b4b17.lean",
+  "provenance": "Harmonic/Aristotle 0e6b4b17-7497-47a5-be4f-01359258df4f (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.cassini_5": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Cassini: F(4)\u00b7F(6) \u2212 F(5)\u00b2 = (\u22121)^5.",
+  "proof_file": "aristotle/harvest_100/admin_d07de495.lean",
+  "provenance": "Harmonic/Aristotle d07de495-ff4d-45d5-8aed-4c4c3b00c593 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.cassini_6": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Cassini: F(5)\u00b7F(7) \u2212 F(6)\u00b2 = (\u22121)^6.",
+  "proof_file": "aristotle/harvest_100/admin_4df295b0.lean",
+  "provenance": "Harmonic/Aristotle 4df295b0-242e-4bb5-b39e-500ee38bec98 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.cassini_7": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Cassini: F(6)\u00b7F(8) \u2212 F(7)\u00b2 = (\u22121)^7.",
+  "proof_file": "aristotle/harvest_100/admin_06bfe1d8.lean",
+  "provenance": "Harmonic/Aristotle 06bfe1d8-57fb-4b4b-90e1-3743f52170e4 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.cassini_8": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Cassini: F(7)\u00b7F(9) \u2212 F(8)\u00b2 = (\u22121)^8.",
+  "proof_file": "aristotle/harvest_100/admin_dfd3b5d4.lean",
+  "provenance": "Harmonic/Aristotle dfd3b5d4-af45-4e6a-81d2-1952f6e57440 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.cassini_13": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Cassini: F(12)\u00b7F(14) \u2212 F(13)\u00b2 = (\u22121)^13.",
+  "proof_file": "aristotle/harvest_100/admin_2d68e3fa.lean",
+  "provenance": "Harmonic/Aristotle 2d68e3fa-56be-4195-bf87-cef97de8b8db (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.cassini_14": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Cassini: F(13)\u00b7F(15) \u2212 F(14)\u00b2 = (\u22121)^14.",
+  "proof_file": "aristotle/harvest_100/admin_c61b3292.lean",
+  "provenance": "Harmonic/Aristotle c61b3292-c1dc-4a27-aadc-b2abfdaa5066 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.cassini_15": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Cassini: F(14)\u00b7F(16) \u2212 F(15)\u00b2 = (\u22121)^15.",
+  "proof_file": "aristotle/harvest_100/admin_a326d082.lean",
+  "provenance": "Harmonic/Aristotle a326d082-abbc-468f-a088-2a26a15e605f (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.ramsey_3_4": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-math",
+  "statement": "R(3,4) = 9: the two-color Ramsey number.",
+  "proof_file": "aristotle/harvest_100/chris_f2946efe.lean",
+  "provenance": "Harmonic/Aristotle f2946efe-6fc5-48ea-bf91-b64bb6a156db (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Math.ramsey_4_4": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-math",
+  "statement": "R(4,4) = 18: the two-color Ramsey number.",
+  "proof_file": "aristotle/harvest_100/chris_020aed81.lean",
+  "provenance": "Harmonic/Aristotle 020aed81-c74d-4963-911c-1f4fec710764 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Math.cassini_9": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Cassini: F(8)\u00b7F(10) \u2212 F(9)\u00b2 = (\u22121)^9.",
+  "proof_file": "aristotle/harvest_100/admin_5379e0f6.lean",
+  "provenance": "Harmonic/Aristotle 5379e0f6-acf9-403b-bcd5-794090e586ad (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.cassini_10": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Cassini: F(9)\u00b7F(11) \u2212 F(10)\u00b2 = (\u22121)^10.",
+  "proof_file": "aristotle/harvest_100/admin_f378fd40.lean",
+  "provenance": "Harmonic/Aristotle f378fd40-7996-4796-831a-96c0da48a2e3 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.cassini_11": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Cassini: F(10)\u00b7F(12) \u2212 F(11)\u00b2 = (\u22121)^11.",
+  "proof_file": "aristotle/harvest_100/admin_c4aaa106.lean",
+  "provenance": "Harmonic/Aristotle c4aaa106-e9d5-40a5-a79b-de0035eab009 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.cassini_12": {
+  "register": "PROVED",
+  "domain": "DOMAIN-math",
+  "statement": "Cassini: F(11)\u00b7F(13) \u2212 F(12)\u00b2 = (\u22121)^12.",
+  "proof_file": "aristotle/harvest_100/admin_6bf29b2f.lean",
+  "provenance": "Harmonic/Aristotle 6bf29b2f-22a3-4ba7-ad3f-91d767e6634a (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math.ramsey_3_5": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-math",
+  "statement": "R(3,5) = 14: the two-color Ramsey number.",
+  "proof_file": "aristotle/harvest_100/chris_aa2f3661.lean",
+  "provenance": "Harmonic/Aristotle aa2f3661-8d98-488d-9ef4-4e6dd5faf583 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "CS.sorting_lb_3": {
+  "register": "PROVED",
+  "domain": "DOMAIN-cs",
+  "statement": "Any comparison sort of 3 elements needs \u2265 \u2308log\u2082(3!)\u2309 comparisons in the worst case.",
+  "proof_file": "aristotle/harvest_100/admin_1ffe3918.lean",
+  "provenance": "Harmonic/Aristotle 1ffe3918-f7e9-4418-b81e-633e81de3737 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "CS.sorting_lb_4": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-cs",
+  "statement": "Any comparison sort of 4 elements needs \u2265 \u2308log\u2082(4!)\u2309 comparisons in the worst case.",
+  "proof_file": "aristotle/harvest_100/chris_108afab7.lean",
+  "provenance": "Harmonic/Aristotle 108afab7-6b19-4e83-b21b-18697996ee28 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "CS.sorting_lb_5": {
+  "register": "PROVED",
+  "domain": "DOMAIN-cs",
+  "statement": "Any comparison sort of 5 elements needs \u2265 \u2308log\u2082(5!)\u2309 comparisons in the worst case.",
+  "proof_file": "aristotle/harvest_100/admin_236ad918.lean",
+  "provenance": "Harmonic/Aristotle 236ad918-3ed7-4520-95b6-6b4184001745 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.no_escape_no_leak": {
+  "register": "PROVED",
+  "domain": "PCA-lean",
+  "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: With no privileged and no unowned escape, any granted access is in-scope: \u2200 inScope c r, (\u2200 c, \u00acisPriv c) \u2192 (\u2200 r, \u00acisUnowned r) \u2192 canAccess inScope isPriv isUnowned c r \u2192 inScope c r.",
+  "proof_file": "aristotle/harvest_100/admin_7476a492.lean",
+  "provenance": "Harmonic/Aristotle 7476a492-c882-45ba-b5e5-318de0a02010 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.priv_is_escape": {
+  "register": "PROVED",
+  "domain": "PCA-lean",
+  "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: A privileged caller always has access (models the admin bypass): isPriv c \u2192 canAccess inScope isPriv isUnowned c r.",
+  "proof_file": "aristotle/harvest_100/admin_9df8cc83.lean",
+  "provenance": "Harmonic/Aristotle 9df8cc83-2739-47c8-9f93-96107a242356 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.unowned_is_hole": {
+  "register": "PROVED",
+  "domain": "PCA-lean",
+  "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: Any caller can reach an unowned row (models the `IS NULL` hole): isUnowned r \u2192 canAccess inScope isPriv isUnowned c r.",
+  "proof_file": "aristotle/harvest_100/admin_ebdf1f60.lean",
+  "provenance": "Harmonic/Aristotle ebdf1f60-c0fe-4fdb-8818-97190e2160ba (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.escape_monotone": {
+  "register": "PROVED",
+  "domain": "PCA-lean",
+  "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: Adding escapes only enlarges access: if inScope c r then canAccess inScope isPriv isUnowned c r.",
+  "proof_file": "aristotle/harvest_100/admin_d1f8116b.lean",
+  "provenance": "Harmonic/Aristotle d1f8116b-d795-488f-943f-9497dfcdff3d (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.default_deny": {
+  "register": "PROVED",
+  "domain": "PCA-lean",
+  "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: With empty scope and no escapes, nothing is accessible: (\u2200 c r, \u00acinScope c r) \u2192 (\u2200 c, \u00acisPriv c) \u2192 (\u2200 r, \u00acisUnowned r) \u2192 \u00ac canAccess inScope isPriv isUnowned c r.",
+  "proof_file": "aristotle/harvest_100/admin_8ae6a7cc.lean",
+  "provenance": "Harmonic/Aristotle 8ae6a7cc-a639-449c-81ce-c505a273152b (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.leak_iff_escape_when_out_of_scope": {
+  "register": "PROVED",
+  "domain": "PCA-lean",
+  "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: Out of scope, access holds iff some escape fires: \u00acinScope c r \u2192 (canAccess inScope isPriv isUnowned c r \u2194 (isPriv c \u2228 isUnowned r)).",
+  "proof_file": "aristotle/harvest_100/admin_e37855a5.lean",
+  "provenance": "Harmonic/Aristotle e37855a5-74f4-4684-925f-55f3720d935a (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.owner_only_isolated": {
+  "register": "PROVED",
+  "domain": "PCA-lean",
+  "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: Owner-equality scope with no escapes is isolated: let inScope c r := ownerOf r = c; then canAccess (fun c r => ownerOf r = c) (fun _ => False) (fun _ => False) c r \u2192 ownerOf r = c.",
+  "proof_file": "aristotle/harvest_100/admin_5a5c6cfe.lean",
+  "provenance": "Harmonic/Aristotle 5a5c6cfe-0970-4327-91ea-dfda81bda520 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.tightening_refines": {
+  "register": "PROVED",
+  "domain": "PCA-lean",
+  "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: Removing the unowned disjunct refines access (subset): canAccess inScope isPriv (fun _ => False) c r \u2192 canAccess inScope isPriv isUnowned c r.",
+  "proof_file": "aristotle/harvest_100/admin_53a87a81.lean",
+  "provenance": "Harmonic/Aristotle 53a87a81-ef27-453f-aa00-4f802def07f1 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.no_clean_proved_with_escape": {
+  "register": "PROVED",
+  "domain": "PCA-lean",
+  "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: If a clean-isolation proof exists (no cross-scope access) yet an escape can fire out of scope, contradiction \u2014 formalizes the soundness-fuzz invariant: (\u2200 c r, canAccess inScope isPriv isUnowned c r \u2192 inScope c r) \u2192 (\u2203 c r, \u00acinScope c r \u2227 (isPriv c \u2228 isUnowned r)) \u2192 False.",
+  "proof_file": "aristotle/harvest_100/admin_e74ff88b.lean",
+  "provenance": "Harmonic/Aristotle e74ff88b-b38c-4212-85e8-f801663715fb (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "PCA.with_check_true_admits_forge": {
+  "register": "PROVED",
+  "domain": "PCA-lean",
+  "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P \u2192 R \u2192 Prop) (isPriv : P \u2192 Prop) (isUnowned : R \u2192 Prop)\n    (c : P) (r : R) : Prop := inScope c r \u2228 isPriv c \u2228 isUnowned r\n\nTheorem: A `WITH CHECK true` write policy admits any row (models forge-any): let canWrite := fun (_ : P) (_ : R) => True; \u2200 c r, canWrite c r.",
+  "proof_file": "aristotle/harvest_100/admin_38ec8a50.lean",
+  "provenance": "Harmonic/Aristotle 38ec8a50-be32-4e33-add3-e22c6265e8ca (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.SingularSeriesGaps7280": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_c5342311.lean",
+  "provenance": "Harmonic/Aristotle c5342311-bd2b-4ccd-ac35-7e14f9545e96 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.SingularSeriesGaps9098": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_0d20e35d.lean",
+  "provenance": "Harmonic/Aristotle 0d20e35d-f07c-4ba9-8a37-e12c154f8b24 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.SingularSeriesGaps12401250": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_7e1cdb6a.lean",
+  "provenance": "Harmonic/Aristotle 7e1cdb6a-fd0a-4167-a1c3-d400331c4c8f (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.SingularSeriesGaps13501360": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_f0f93564.lean",
+  "provenance": "Harmonic/Aristotle f0f93564-4c0a-4dbc-9751-dee983dab30d (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.GoldbachWheelK2_631": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_b6b7275d.lean",
+  "provenance": "Harmonic/Aristotle b6b7275d-5803-4e5c-897f-33c3ebdc7e7f (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.GoldbachWheelK2_727": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_10ff0e3d.lean",
+  "provenance": "Harmonic/Aristotle 10ff0e3d-5149-4d99-b894-bfb5c927081e (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.GoldbachWheelK2_947": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_4b4eb99a.lean",
+  "provenance": "Harmonic/Aristotle 4b4eb99a-48d2-41be-8ec0-61e73604b1a1 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.GoldbachWheelK2_1051": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_3be7322d.lean",
+  "provenance": "Harmonic/Aristotle 3be7322d-9838-410f-bc02-fa6ff0387c0b (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.CosTraceNorm1279": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_36cc8826.lean",
+  "provenance": "Harmonic/Aristotle 36cc8826-97a3-45d4-ad82-6514d2b446cc (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.CosTraceNorm1597": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_77154945.lean",
+  "provenance": "Harmonic/Aristotle 77154945-9d41-4c81-b5b3-703e5f2cbb99 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.CosTraceNorm2003": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_7221ed99.lean",
+  "provenance": "Harmonic/Aristotle 7221ed99-1d1c-49ee-94db-3ae13b39a15d (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.CosTraceNorm2707": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_4366f568.lean",
+  "provenance": "Harmonic/Aristotle 4366f568-0b76-40f3-ae2b-789f6ed4d951 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.CosTraceNorm3001": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_13f4939a.lean",
+  "provenance": "Harmonic/Aristotle 13f4939a-c276-44a8-9de6-3406f460369a (admin)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Brockian.PentagonPentagonCharacterMultiplicityExt": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_cfc65da6.lean",
+  "provenance": "Harmonic/Aristotle cfc65da6-87d5-4add-8089-bd09dd821f19 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.PentagonPentagonIsotypicHigherN": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_045a3dde.lean",
+  "provenance": "Harmonic/Aristotle 045a3dde-73ee-4e19-a6e5-2a1767e55a10 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.PentagonPentagonEquivarianceGeneral": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_ad083991.lean",
+  "provenance": "Harmonic/Aristotle ad083991-4363-45f2-a743-87533621fdeb (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.SingularSeriesGaps14501460": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_1be453dd.lean",
+  "provenance": "Harmonic/Aristotle 1be453dd-9f38-4ef9-a377-ff53d1b16a6f (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.SingularSeriesGaps16021610": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_7b9956aa.lean",
+  "provenance": "Harmonic/Aristotle 7b9956aa-38f5-41e8-96fb-d901ef1dd6b1 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.GoldbachWheelK2_1153": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_b39f441c.lean",
+  "provenance": "Harmonic/Aristotle b39f441c-bd64-4c2d-af0f-904990d083a2 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.GoldbachWheelK2_1327": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_2cd6fd68.lean",
+  "provenance": "Harmonic/Aristotle 2cd6fd68-9468-42e1-af9b-ea5dadaf487a (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.CosTraceNorm3499": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_0a9e72d0.lean",
+  "provenance": "Harmonic/Aristotle 0a9e72d0-a31f-4c88-82c5-5449bad08245 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.CosTraceNorm4001": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/chris_db00f873.lean",
+  "provenance": "Harmonic/Aristotle db00f873-92d1-4031-988a-5f55aa1f13fa (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Brockian.ConstellationLocalCountK3": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_07644503.lean",
+  "provenance": "Harmonic/Aristotle 07644503-3daa-4a98-babe-78487a711d8b (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.AdmissibilityKTupleK4": {
+  "register": "PROVED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/admin_4d3eec4a.lean",
+  "provenance": "Harmonic/Aristotle 4d3eec4a-7e18-4e8a-9369-03298a471dad (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Brockian.SingularSeriesConvergenceRate": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "C-corpus-extension",
+  "statement": null,
+  "proof_file": "aristotle/harvest_100/chris_617f0df7.lean",
+  "provenance": "Harmonic/Aristotle 617f0df7-b63d-42ef-85cb-f14f281d6a9a (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "QPhys.canonical_commutator": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qphys",
+  "statement": "On Schwartz space, [x,p]=i\u210f with p=-i\u210f d/dx.",
+  "proof_file": "aristotle/harvest_100/chris_5d376e04.lean",
+  "provenance": "Harmonic/Aristotle 5d376e04-e9b6-43b7-a4ba-2a166a134e54 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "QPhys.hermitian_real_spectrum": {
+  "register": "PROVED",
+  "domain": "DOMAIN-qphys",
+  "statement": "Every eigenvalue of a Hermitian operator is real.",
+  "proof_file": "aristotle/harvest_100/admin_a47fd2c4.lean",
+  "provenance": "Harmonic/Aristotle a47fd2c4-f5ad-4493-a68e-4538dc19c98c (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "QPhys.unitary_time_evolution": {
+  "register": "PROVED",
+  "domain": "DOMAIN-qphys",
+  "statement": "For self-adjoint H, U(t)=exp(-iHt/\u210f) is unitary for all real t.",
+  "proof_file": "aristotle/harvest_100/admin_27994021.lean",
+  "provenance": "Harmonic/Aristotle 27994021-5589-4e7d-b5e3-fc9d304a0933 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "QPhys.oscillator_spectrum": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qphys",
+  "statement": "The quantum harmonic oscillator has spectrum {\u210f\u03c9(n+\u00bd) : n\u2208\u2115} via ladder operators.",
+  "proof_file": "aristotle/harvest_100/chris_a1b27b5b.lean",
+  "provenance": "Harmonic/Aristotle a1b27b5b-3c14-4f1b-be09-ec0d0c985e7b (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "QPhys.particle_in_box": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qphys",
+  "statement": "The infinite square well of width L has energies E_n = n\u00b2\u03c0\u00b2\u210f\u00b2/(2mL\u00b2), n\u22651.",
+  "proof_file": "aristotle/harvest_100/chris_24955e4f.lean",
+  "provenance": "Harmonic/Aristotle 24955e4f-8a6f-43f4-8aac-7512436d8931 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "QPhys.heisenberg_uncertainty": {
+  "register": "PROVED",
+  "domain": "DOMAIN-qphys",
+  "statement": "\u0394x\u00b7\u0394p \u2265 \u210f/2 for any normalized state (from the canonical commutator + Cauchy\u2013Schwarz).",
+  "proof_file": "aristotle/harvest_100/admin_945a7e0e.lean",
+  "provenance": "Harmonic/Aristotle 945a7e0e-ec6b-4604-95bb-6a20e28ebee0 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "QPhys.ehrenfest": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qphys",
+  "statement": "d\u27e8A\u27e9/dt = (i/\u210f)\u27e8[H,A]\u27e9 + \u27e8\u2202A/\u2202t\u27e9 (Ehrenfest theorem).",
+  "proof_file": "aristotle/harvest_100/chris_7d1f2e15.lean",
+  "provenance": "Harmonic/Aristotle 7d1f2e15-fd77-4cca-bd77-b7996d499cfc (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "QPhys.stone_generator": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qphys",
+  "statement": "A strongly continuous one-parameter unitary group has a self-adjoint generator (Stone).",
+  "proof_file": "aristotle/harvest_100/chris_1e730f1a.lean",
+  "provenance": "Harmonic/Aristotle 1e730f1a-12ed-4438-8450-3afd43736ba0 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "QPhys.spectral_theorem_finite": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qphys",
+  "statement": "Every Hermitian matrix is unitarily diagonalizable with real eigenvalues.",
+  "proof_file": "aristotle/harvest_100/chris_5f2d0ffd.lean",
+  "provenance": "Harmonic/Aristotle 5f2d0ffd-252f-4f1f-9b0f-def1ed49d1d8 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "QPhys.bcH_special": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qphys",
+  "statement": "For [A,B] central, e^A e^B = e^{A+B+\u00bd[A,B]} (BCH special case).",
+  "proof_file": "aristotle/harvest_100/chris_14822647.lean",
+  "provenance": "Harmonic/Aristotle 14822647-0fd0-454c-b29a-fefe1e62437b (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "QPhys.variational_bound": {
+  "register": "PROVED",
+  "domain": "DOMAIN-qphys",
+  "statement": "For Hamiltonian H, \u27e8\u03c8|H|\u03c8\u27e9/\u27e8\u03c8|\u03c8\u27e9 \u2265 E_0 (ground-state variational bound).",
+  "proof_file": "aristotle/harvest_100/admin_ccdadd89.lean",
+  "provenance": "Harmonic/Aristotle ccdadd89-087e-4cbb-99d7-146855acb3dd (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "QPhys.commuting_simultaneous": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-qphys",
+  "statement": "Two commuting Hermitian operators are simultaneously diagonalizable.",
+  "proof_file": "aristotle/harvest_100/chris_a0ab5bcc.lean",
+  "provenance": "Harmonic/Aristotle a0ab5bcc-7003-44ab-974c-df46e4ca9209 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Chem.huckel_cycle_spectrum": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_n are 2cos(2\u03c0k/n), k=0..n-1 (H\u00fcckel \u03c0-energies).",
+  "proof_file": "aristotle/harvest_100/chris_6948cec0.lean",
+  "provenance": "Harmonic/Aristotle 6948cec0-5bb0-45cf-b4b4-99e738b08c59 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "QPhys.parseval_fourier": {
+  "register": "PROVED",
+  "domain": "DOMAIN-qphys",
+  "statement": "The Fourier transform is an L\u00b2 isometry (Plancherel/Parseval).",
+  "proof_file": "aristotle/harvest_100/admin_bd353353.lean",
+  "provenance": "Harmonic/Aristotle bd353353-23e7-46b6-aaad-f55357bee566 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "QPhys.noether_translation": {
+  "register": "PROVED",
+  "domain": "DOMAIN-qphys",
+  "statement": "Translation invariance of the Lagrangian implies conservation of momentum (1D).",
+  "proof_file": "aristotle/harvest_100/admin_1433516f.lean",
+  "provenance": "Harmonic/Aristotle 1433516f-602f-4fd6-a276-b24515013402 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "QPhys.pauli_exclusion_antisym": {
+  "register": "PROVED",
+  "domain": "DOMAIN-qphys",
+  "statement": "A two-fermion antisymmetric state with equal single-particle states is zero.",
+  "proof_file": "aristotle/harvest_100/chris_e7536852.lean",
+  "provenance": "Harmonic/Aristotle e7536852-d2c1-4baa-9890-f4ed6180d9bb (chris)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.euler_polyhedron": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "For a convex polyhedron (e.g. fullerene cage) V\u2212E+F=2 (Euler's formula).",
+  "proof_file": "aristotle/harvest_100/admin_eee63931.lean",
+  "provenance": "Harmonic/Aristotle eee63931-d91c-46cb-a608-50421d7fecca (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.polya_isomer_count": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-chem",
+  "statement": "Counting substitution isomers on a symmetric skeleton equals the Burnside/P\u00f3lya cycle-index average.",
+  "proof_file": "aristotle/harvest_100/chris_63036652.lean",
+  "provenance": "Harmonic/Aristotle 63036652-6717-4d64-83a1-0562b6657ccf (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Chem.point_group_finite_O3": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "Every molecular point group is a finite subgroup of O(3).",
+  "proof_file": "aristotle/harvest_100/admin_665b25fc.lean",
+  "provenance": "Harmonic/Aristotle 665b25fc-65a3-408c-a266-1c901be51850 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.benzene_D6h_irreps": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "The character table of D\u2086\u2095 has the correct number of irreducible representations (=conjugacy classes).",
+  "proof_file": "aristotle/harvest_100/admin_46997673.lean",
+  "provenance": "Harmonic/Aristotle 46997673-d713-48dc-bacd-df3b754808fc (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.wiener_path_formula": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "The Wiener index of the path graph P_n equals C(n+1,3).",
+  "proof_file": "aristotle/harvest_100/admin_9b7dffd7.lean",
+  "provenance": "Harmonic/Aristotle 9b7dffd7-1cf7-4ae1-a713-1c498852a439 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.handshake_valence": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "Sum of atomic valences (vertex degrees) equals twice the number of bonds.",
+  "proof_file": "aristotle/harvest_100/admin_214ce504.lean",
+  "provenance": "Harmonic/Aristotle 214ce504-87d0-4a0c-8f09-0795aef0669a (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.entropy_concave": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "The Gibbs entropy \u2212\u03a3 p_i log p_i is concave in the probability vector.",
+  "proof_file": "aristotle/harvest_100/admin_0840f312.lean",
+  "provenance": "Harmonic/Aristotle 0840f312-ab02-4c05-a9d8-c3cca2316e4b (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.arrhenius_monotone": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "The Arrhenius rate k=A e^{\u2212Ea/RT} is strictly increasing in T for Ea>0.",
+  "proof_file": "aristotle/harvest_100/admin_a350fc8b.lean",
+  "provenance": "Harmonic/Aristotle a350fc8b-2547-4780-9476-ab69cc992db0 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.huckel_C3": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_3 are 2\u00b7cos(2\u03c0k/3) for k=0..2.",
+  "proof_file": "aristotle/harvest_100/admin_dbff4b06.lean",
+  "provenance": "Harmonic/Aristotle dbff4b06-693d-40c6-bdde-7f754c1b45e9 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.huckel_C4": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_4 are 2\u00b7cos(2\u03c0k/4) for k=0..3.",
+  "proof_file": "aristotle/harvest_100/admin_242d8f5b.lean",
+  "provenance": "Harmonic/Aristotle 242d8f5b-f13b-4b7a-9204-d957b58454d8 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.huckel_C5": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_5 are 2\u00b7cos(2\u03c0k/5) for k=0..4.",
+  "proof_file": "aristotle/harvest_100/admin_bae733ad.lean",
+  "provenance": "Harmonic/Aristotle bae733ad-5967-44f4-97ce-97a0d2882a4a (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.huckel_C6": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_6 are 2\u00b7cos(2\u03c0k/6) for k=0..5.",
+  "proof_file": "aristotle/harvest_100/admin_99f91f0c.lean",
+  "provenance": "Harmonic/Aristotle 99f91f0c-984b-42f0-a67a-91f733662295 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.huckel_C7": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_7 are 2\u00b7cos(2\u03c0k/7) for k=0..6.",
+  "proof_file": "aristotle/harvest_100/admin_eb954d61.lean",
+  "provenance": "Harmonic/Aristotle eb954d61-b42a-4ad0-a62b-90a26ae40979 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.huckel_C8": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_8 are 2\u00b7cos(2\u03c0k/8) for k=0..7.",
+  "proof_file": "aristotle/harvest_100/chris_af28cf8d.lean",
+  "provenance": "Harmonic/Aristotle af28cf8d-9bf7-497c-883f-d7bd91d5ebb1 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Chem.huckel_C9": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_9 are 2\u00b7cos(2\u03c0k/9) for k=0..8.",
+  "proof_file": "aristotle/harvest_100/chris_c6f59520.lean",
+  "provenance": "Harmonic/Aristotle c6f59520-4e4c-4d48-abc2-6548fe743ab8 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Chem.huckel_C10": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_10 are 2\u00b7cos(2\u03c0k/10) for k=0..9.",
+  "proof_file": "aristotle/harvest_100/admin_f0fd1d1c.lean",
+  "provenance": "Harmonic/Aristotle f0fd1d1c-e407-4984-a8d2-f00959fe3407 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.huckel_C11": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_11 are 2\u00b7cos(2\u03c0k/11) for k=0..10.",
+  "proof_file": "aristotle/harvest_100/chris_4969d527.lean",
+  "provenance": "Harmonic/Aristotle 4969d527-1aba-4b6c-bada-3200420dd629 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Chem.huckel_C12": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_12 are 2\u00b7cos(2\u03c0k/12) for k=0..11.",
+  "proof_file": "aristotle/harvest_100/admin_19a8ffe7.lean",
+  "provenance": "Harmonic/Aristotle 19a8ffe7-620c-49a2-9313-80bfb6af8426 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.huckel_C13": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_13 are 2\u00b7cos(2\u03c0k/13) for k=0..12.",
+  "proof_file": "aristotle/harvest_100/chris_1ba0798e.lean",
+  "provenance": "Harmonic/Aristotle 1ba0798e-7b96-4ca4-9cf0-47289e8a0ad7 (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Chem.huckel_C14": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_14 are 2\u00b7cos(2\u03c0k/14) for k=0..13.",
+  "proof_file": "aristotle/harvest_100/chris_64711b29.lean",
+  "provenance": "Harmonic/Aristotle 64711b29-f130-451b-9ccb-2213ca02360e (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Chem.fullerene_pentagons": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "A trivalent polyhedron with only pentagon/hexagon faces has exactly 12 pentagons.",
+  "proof_file": "aristotle/harvest_100/admin_5ba2f0be.lean",
+  "provenance": "Harmonic/Aristotle 5ba2f0be-8b53-4ab2-a1f7-b62896b85cc4 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.balance_nullspace": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "A chemical reaction balances iff the stoichiometric matrix has a positive integer null vector.",
+  "proof_file": "aristotle/harvest_100/admin_2da05104.lean",
+  "provenance": "Harmonic/Aristotle 2da05104-6515-4d21-a8e2-26577f548811 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.gibbs_phase_rule": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "Degrees of freedom F = C \u2212 P + 2 as an affine-dimension count.",
+  "proof_file": "aristotle/harvest_100/admin_738e9973.lean",
+  "provenance": "Harmonic/Aristotle 738e9973-4bc6-4701-af00-036e83b7382c (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.alkane_tree": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-chem",
+  "statement": "The carbon skeleton of an acyclic alkane C_nH_{2n+2} is a tree with n\u22121 C\u2013C bonds.",
+  "proof_file": "aristotle/harvest_100/chris_4b81911f.lean",
+  "provenance": "Harmonic/Aristotle 4b81911f-a194-461b-a7a2-2f296ac2514c (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Chem.leChatelier_sign": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "For an exothermic reaction, the equilibrium constant K(T) is strictly decreasing in T (van 't Hoff).",
+  "proof_file": "aristotle/harvest_100/admin_44c9d5ee.lean",
+  "provenance": "Harmonic/Aristotle 44c9d5ee-2a86-4061-a7d7-d05f9bde91d5 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.molecular_orbital_count": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "LCAO of n atomic orbitals yields exactly n molecular orbitals (dimension preservation).",
+  "proof_file": "aristotle/harvest_100/admin_6ec8e1a7.lean",
+  "provenance": "Harmonic/Aristotle 6ec8e1a7-f54c-49f1-b933-7e960a37708b (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.huckel_C15": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_15 are 2\u00b7cos(2\u03c0k/15) for k=0..14.",
+  "proof_file": "aristotle/harvest_100/admin_6bb60abf.lean",
+  "provenance": "Harmonic/Aristotle 6bb60abf-006b-4d0c-8e8c-da7125255441 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.huckel_C16": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_16 are 2\u00b7cos(2\u03c0k/16) for k=0..15.",
+  "proof_file": "aristotle/harvest_100/chris_fc3536de.lean",
+  "provenance": "Harmonic/Aristotle fc3536de-9b36-45da-a615-11c62796ebcf (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Chem.huckel_C17": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_17 are 2\u00b7cos(2\u03c0k/17) for k=0..16.",
+  "proof_file": "aristotle/harvest_100/admin_1c8726eb.lean",
+  "provenance": "Harmonic/Aristotle 1c8726eb-9b23-447c-89bc-f63a20834a42 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.huckel_C18": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_18 are 2\u00b7cos(2\u03c0k/18) for k=0..17.",
+  "proof_file": "aristotle/harvest_100/admin_f663d0a3.lean",
+  "provenance": "Harmonic/Aristotle f663d0a3-bd44-4b9c-9631-f518dca0d29f (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Chem.huckel_C19": {
+  "register": "PROVED",
+  "domain": "DOMAIN-chem",
+  "statement": "The adjacency eigenvalues of the cycle graph C_19 are 2\u00b7cos(2\u03c0k/19) for k=0..18.",
+  "proof_file": "aristotle/harvest_100/admin_425f678b.lean",
+  "provenance": "Harmonic/Aristotle 425f678b-2d7c-4357-aebc-1e1404daab3a (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  }
 }
