@@ -1,0 +1,693 @@
+{
+ "count": 86,
+ "queue": [
+  {
+   "target": "QI.no_deleting",
+   "tier": "FRONTIER-qi",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "There is no unitary that deletes an unknown quantum state (no-deleting theorem)."
+  },
+  {
+   "target": "QI.holevo_bound",
+   "tier": "FRONTIER-qi",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Accessible information about a quantum ensemble is at most its Holevo \u03c7 quantity."
+  },
+  {
+   "target": "QI.schmidt_decomposition",
+   "tier": "FRONTIER-qi",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Every bipartite pure state has a Schmidt decomposition with unique Schmidt coefficients."
+  },
+  {
+   "target": "QI.strong_subadditivity",
+   "tier": "FRONTIER-qi",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Von Neumann entropy is strongly subadditive: S(ABC)+S(B) \u2264 S(AB)+S(BC) (Lieb\u2013Ruskai)."
+  },
+  {
+   "target": "QI.data_processing",
+   "tier": "FRONTIER-qi",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Quantum relative entropy is monotone under CPTP maps (data-processing inequality)."
+  },
+  {
+   "target": "QI.monogamy_ckw",
+   "tier": "FRONTIER-qi",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Entanglement is monogamous: the CKW inequality for three qubits."
+  },
+  {
+   "target": "QI.choi_jamiolkowski",
+   "tier": "FRONTIER-qi",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "CP maps correspond to positive Choi matrices (Choi\u2013Jamio\u0142kowski isomorphism)."
+  },
+  {
+   "target": "QI.stinespring",
+   "tier": "FRONTIER-qi",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Every CPTP map dilates to a unitary on a larger space (Stinespring)."
+  },
+  {
+   "target": "QI.uhlmann_fidelity",
+   "tier": "FRONTIER-qi",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Fidelity equals the maximal overlap over purifications (Uhlmann's theorem)."
+  },
+  {
+   "target": "QI.purification_exists",
+   "tier": "FRONTIER-qi",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Every mixed state has a purification, unique up to isometry on the ancilla."
+  },
+  {
+   "target": "QI.grover_optimal",
+   "tier": "FRONTIER-qi",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Unstructured search needs \u03a9(\u221aN) queries; Grover is optimal (BBBV bound)."
+  },
+  {
+   "target": "QI.shor_period",
+   "tier": "FRONTIER-qi",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Shor's algorithm recovers the period of a modular-exponentiation function w.h.p."
+  },
+  {
+   "target": "QI.simon_algorithm",
+   "tier": "FRONTIER-qi",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Simon's problem is solved with O(n) quantum queries but needs \u03a9(2^{n/2}) classically."
+  },
+  {
+   "target": "QI.deutsch_jozsa",
+   "tier": "FRONTIER-qi",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Deutsch\u2013Jozsa decides constant-vs-balanced with one query."
+  },
+  {
+   "target": "QI.pbr_theorem",
+   "tier": "FRONTIER-qi",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The quantum state is ontic under preparation independence (Pusey\u2013Barrett\u2013Rudolph)."
+  },
+  {
+   "target": "QI.hardy_paradox",
+   "tier": "FRONTIER-qi",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Hardy's nonlocality argument: a fraction of runs violate local realism without inequalities."
+  },
+  {
+   "target": "QI.knill_laflamme",
+   "tier": "FRONTIER-qi",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A code corrects an error set iff it satisfies the Knill\u2013Laflamme conditions."
+  },
+  {
+   "target": "QI.shor_code_corrects",
+   "tier": "FRONTIER-qi",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The 9-qubit Shor code corrects an arbitrary single-qubit error."
+  },
+  {
+   "target": "QI.steane_code",
+   "tier": "FRONTIER-qi",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The 7-qubit Steane (CSS) code corrects any single-qubit error."
+  },
+  {
+   "target": "QI.quantum_singleton",
+   "tier": "FRONTIER-qi",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Quantum Singleton bound: an [[n,k,d]] code obeys n\u2212k \u2265 2(d\u22121)."
+  },
+  {
+   "target": "QI.threshold_theorem",
+   "tier": "FRONTIER-qi",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Below a constant error threshold, fault-tolerant quantum computation is possible (statement)."
+  },
+  {
+   "target": "QI.gottesman_knill",
+   "tier": "FRONTIER-qi",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Stabilizer circuits are efficiently classically simulable (Gottesman\u2013Knill)."
+  },
+  {
+   "target": "Phys.adiabatic_theorem",
+   "tier": "FRONTIER-phys",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A slowly varying Hamiltonian keeps a nondegenerate eigenstate in its instantaneous eigenspace."
+  },
+  {
+   "target": "Phys.hellmann_feynman",
+   "tier": "FRONTIER-phys",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "dE_n/d\u03bb = \u27e8\u03c8_n|\u2202H/\u2202\u03bb|\u03c8_n\u27e9 (Hellmann\u2013Feynman)."
+  },
+  {
+   "target": "Phys.virial_theorem",
+   "tier": "FRONTIER-phys",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "For a bound stationary state, 2\u27e8T\u27e9 = \u27e8r\u00b7\u2207V\u27e9 (quantum virial theorem)."
+  },
+  {
+   "target": "Phys.kramers_degeneracy",
+   "tier": "FRONTIER-phys",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A time-reversal-invariant half-integer-spin system has doubly degenerate levels (Kramers)."
+  },
+  {
+   "target": "Phys.bloch_theorem",
+   "tier": "FRONTIER-phys",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Eigenstates of a periodic Hamiltonian are Bloch waves e^{ikx}u_k(x)."
+  },
+  {
+   "target": "Phys.mermin_wagner",
+   "tier": "FRONTIER-phys",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "No spontaneous breaking of a continuous symmetry in dimensions \u2264 2 at T>0 (Mermin\u2013Wagner)."
+  },
+  {
+   "target": "Phys.goldstone",
+   "tier": "FRONTIER-phys",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Spontaneous breaking of a continuous global symmetry yields a massless mode (Goldstone)."
+  },
+  {
+   "target": "Phys.cpt_theorem",
+   "tier": "FRONTIER-phys",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Any Lorentz-invariant local QFT is CPT-invariant (statement)."
+  },
+  {
+   "target": "Phys.area_law_1d",
+   "tier": "FRONTIER-phys",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Gapped 1D ground states obey an entanglement-entropy area law (Hastings)."
+  },
+  {
+   "target": "Phys.lieb_schultz_mattis",
+   "tier": "FRONTIER-phys",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A half-integer-spin translation-invariant chain is gapless or degenerate (LSM)."
+  },
+  {
+   "target": "Phys.jarzynski_equality",
+   "tier": "FRONTIER-phys",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "\u27e8e^{\u2212\u03b2W}\u27e9 = e^{\u2212\u03b2\u0394F} for nonequilibrium work (Jarzynski)."
+  },
+  {
+   "target": "Phys.crooks_theorem",
+   "tier": "FRONTIER-phys",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Crooks fluctuation theorem: P_F(W)/P_R(\u2212W) = e^{\u03b2(W\u2212\u0394F)}."
+  },
+  {
+   "target": "Phys.landauer_principle",
+   "tier": "FRONTIER-phys",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Erasing one bit dissipates at least kT ln 2 of heat (Landauer)."
+  },
+  {
+   "target": "Phys.fluctuation_dissipation",
+   "tier": "FRONTIER-phys",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The FDT relates linear response to equilibrium correlations."
+  },
+  {
+   "target": "Phys.bekenstein_bound",
+   "tier": "FRONTIER-phys",
+   "rank": 2,
+   "difficulty": "STATEMENT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "State the Bekenstein bound S \u2264 2\u03c0kRE/\u210fc."
+  },
+  {
+   "target": "Phys.hawking_temperature",
+   "tier": "FRONTIER-phys",
+   "rank": 2,
+   "difficulty": "STATEMENT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "State the Hawking temperature T = \u210fc\u00b3/(8\u03c0GMk) of a Schwarzschild black hole."
+  },
+  {
+   "target": "Phys.unruh_effect",
+   "tier": "FRONTIER-phys",
+   "rank": 2,
+   "difficulty": "STATEMENT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "State the Unruh temperature T = \u210fa/(2\u03c0ck) seen by a uniformly accelerated observer."
+  },
+  {
+   "target": "Phys.bkt_transition",
+   "tier": "FRONTIER-phys",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "State the Berezinskii\u2013Kosterlitz\u2013Thouless topological phase transition of the 2D XY model."
+  },
+  {
+   "target": "Phys.wigner_eckart",
+   "tier": "FRONTIER-phys",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Matrix elements of tensor operators factor into a Clebsch\u2013Gordan \u00d7 reduced element (Wigner\u2013Eckart)."
+  },
+  {
+   "target": "Phys.kochen_specker_18",
+   "tier": "FRONTIER-phys",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "An explicit 18-vector Kochen\u2013Specker set in \u211d\u2074 has no {0,1} coloring."
+  },
+  {
+   "target": "CS.time_hierarchy",
+   "tier": "FRONTIER-cs",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The time hierarchy theorem: more time gives strictly more languages (diagonalization)."
+  },
+  {
+   "target": "CS.savitch",
+   "tier": "FRONTIER-cs",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "NSPACE(f) \u2286 DSPACE(f\u00b2), so PSPACE = NPSPACE (Savitch)."
+  },
+  {
+   "target": "CS.immerman_szelepcsenyi",
+   "tier": "FRONTIER-cs",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "NL = coNL (nondeterministic space is closed under complement)."
+  },
+  {
+   "target": "CS.ladner",
+   "tier": "FRONTIER-cs",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "If P \u2260 NP then NP-intermediate problems exist (Ladner)."
+  },
+  {
+   "target": "CS.baker_gill_solovay",
+   "tier": "FRONTIER-cs",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "There are oracles A,B with P^A=NP^A and P^B\u2260NP^B (relativization barrier)."
+  },
+  {
+   "target": "CS.pcp_theorem",
+   "tier": "FRONTIER-cs",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "NP = PCP(log n, 1): the PCP theorem (statement)."
+  },
+  {
+   "target": "CS.toda_theorem",
+   "tier": "FRONTIER-cs",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "PH \u2286 P^{#P} (Toda's theorem)."
+  },
+  {
+   "target": "CS.parity_not_ac0",
+   "tier": "FRONTIER-cs",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "PARITY \u2209 AC\u2070 (H\u00e5stad switching lemma)."
+  },
+  {
+   "target": "CS.barrington",
+   "tier": "FRONTIER-cs",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "NC\u00b9 equals width-5 permutation branching programs (Barrington)."
+  },
+  {
+   "target": "CS.valiant_permanent",
+   "tier": "FRONTIER-cs",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The 0/1 permanent is #P-complete (Valiant)."
+  },
+  {
+   "target": "CS.impagliazzo_wigderson",
+   "tier": "FRONTIER-cs",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Strong circuit lower bounds imply P = BPP (Impagliazzo\u2013Wigderson)."
+  },
+  {
+   "target": "CS.nisan_wigderson_prg",
+   "tier": "FRONTIER-cs",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The Nisan\u2013Wigderson generator derandomizes from a hard function."
+  },
+  {
+   "target": "CS.reingold_sl_l",
+   "tier": "FRONTIER-cs",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Undirected s-t connectivity is in L (SL = L; Reingold)."
+  },
+  {
+   "target": "CS.aks_primes_in_p",
+   "tier": "FRONTIER-cs",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "PRIMES \u2208 P (Agrawal\u2013Kayal\u2013Saxena)."
+  },
+  {
+   "target": "CS.recursion_theorem",
+   "tier": "FRONTIER-cs",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Kleene's recursion theorem: every computable transformation of programs has a fixed point."
+  },
+  {
+   "target": "CS.rice_extended",
+   "tier": "FRONTIER-cs",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The set of indices of a nontrivial semantic property is not recursive (Rice)."
+  },
+  {
+   "target": "CS.blum_speedup",
+   "tier": "FRONTIER-cs",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "There exist problems with no fastest algorithm (Blum speedup)."
+  },
+  {
+   "target": "CS.disjointness_lb",
+   "tier": "FRONTIER-cs",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Set-disjointness has \u03a9(n) randomized communication complexity."
+  },
+  {
+   "target": "CS.yao_principle",
+   "tier": "FRONTIER-cs",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Yao's minimax principle relates randomized and distributional complexity."
+  },
+  {
+   "target": "CS.razborov_smolensky",
+   "tier": "FRONTIER-cs",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "MOD_p \u2209 AC\u2070[q] for distinct primes p,q (Razborov\u2013Smolensky)."
+  },
+  {
+   "target": "CS.hilbert10_undecidable",
+   "tier": "FRONTIER-cs",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Hilbert's tenth problem is undecidable: Diophantine solvability (MRDP)."
+  },
+  {
+   "target": "CS.pcp_dinur",
+   "tier": "FRONTIER-cs",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Dinur's gap-amplification proof of the PCP theorem (statement)."
+  },
+  {
+   "target": "Math2.modularity",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Every elliptic curve over \u211a is modular (Taniyama\u2013Shimura\u2013Wiles; statement)."
+  },
+  {
+   "target": "Math2.sato_tate",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "State the Sato\u2013Tate distribution of Frobenius angles for a non-CM elliptic curve."
+  },
+  {
+   "target": "Math2.chebotarev",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Chebotarev density theorem for Frobenius conjugacy classes."
+  },
+  {
+   "target": "Math2.class_number_formula",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The analytic class number formula for a number field's Dedekind zeta residue."
+  },
+  {
+   "target": "Math2.carleson",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Fourier series of an L\u00b2 function converge almost everywhere (Carleson)."
+  },
+  {
+   "target": "Math2.nash_embedding",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Every Riemannian manifold embeds isometrically in some \u211d^N (Nash)."
+  },
+  {
+   "target": "Math2.robertson_seymour",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Graphs are well-quasi-ordered by the minor relation (Robertson\u2013Seymour)."
+  },
+  {
+   "target": "Math2.van_der_waerden",
+   "tier": "FRONTIER-math",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Any finite coloring of \u2115 has arbitrarily long monochromatic APs (van der Waerden)."
+  },
+  {
+   "target": "Math2.hales_jewett",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The Hales\u2013Jewett theorem on combinatorial lines."
+  },
+  {
+   "target": "Math2.erdos_ko_rado",
+   "tier": "FRONTIER-math",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A k-uniform intersecting family on [n] (n\u22652k) has size \u2264 C(n\u22121,k\u22121) (Erd\u0151s\u2013Ko\u2013Rado)."
+  },
+  {
+   "target": "Math2.cap_set",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The cap-set bound: subsets of \ud835\udd3d\u2083\u207f with no 3-term AP have size o(3\u207f) (Croot\u2013Lev\u2013Pach / Ellenberg\u2013Gijswijt)."
+  },
+  {
+   "target": "Math2.kahn_kalai",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Expectation and threshold are within a log factor (Park\u2013Pham proof of Kahn\u2013Kalai)."
+  },
+  {
+   "target": "Math2.sunflower_bound",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The improved sunflower lemma bound (Alweiss\u2013Lovett\u2013Wu\u2013Zhang)."
+  },
+  {
+   "target": "Math2.kruskal_katona",
+   "tier": "FRONTIER-math",
+   "rank": 2,
+   "difficulty": "SPECIAL",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The Kruskal\u2013Katona theorem on shadows of set systems."
+  },
+  {
+   "target": "Math2.chern_gauss_bonnet",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The Chern\u2013Gauss\u2013Bonnet theorem for even-dimensional closed manifolds."
+  },
+  {
+   "target": "Math2.hironaka_resolution",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Resolution of singularities in characteristic 0 (Hironaka; statement)."
+  },
+  {
+   "target": "Math2.riemann_roch_curve",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Riemann\u2013Roch for a smooth projective curve: \u2113(D)\u2212\u2113(K\u2212D)=deg D+1\u2212g."
+  },
+  {
+   "target": "Math2.belyi_theorem",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "A curve is defined over \u211a\u0304 iff it has a Belyi map to \u2119\u00b9 ramified over {0,1,\u221e}."
+  },
+  {
+   "target": "Math2.ratner",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Ratner's orbit-closure/measure-classification theorems for unipotent flows (statement)."
+  },
+  {
+   "target": "Math2.donsker_invariance",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Donsker's invariance principle: rescaled random walk converges to Brownian motion."
+  },
+  {
+   "target": "Math2.gromov_nonsqueezing",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "Gromov's nonsqueezing theorem in symplectic geometry."
+  },
+  {
+   "target": "Math2.kervaire_invariant",
+   "tier": "FRONTIER-math",
+   "rank": 6,
+   "difficulty": "MOONSHOT",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean.",
+   "statement": "The Kervaire invariant is nonzero only in dimensions 2,6,14,30,62,126 (Hill\u2013Hopkins\u2013Ravenel; statement)."
+  }
+ ]
+}

@@ -18,8 +18,8 @@ import urllib.error
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent
-QUEUE = ROOT / "frontier_queue.json"
-OUT = ROOT / "novelty_report.json"
+QUEUE = ROOT / __import__("os").environ.get("NOVELTY_QUEUE", "frontier_queue.json")
+OUT = ROOT / __import__("os").environ.get("NOVELTY_OUT", "novelty_report.json")
 ENDPOINT = "https://leansearch.net/search"
 COMMON = {"theorem", "statement", "problem", "conjecture", "exists", "terminates",
           "sign", "invariant", "phase", "bound", "inequality", "regularity",
