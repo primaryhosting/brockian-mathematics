@@ -27,6 +27,8 @@ CATEGORY = {
     "FRONTIER-primes": "Frontier — Prime Numbers",
     "FRONTIER-moonshot": "Frontier — Moonshot",
     "FRONTIER-fields": "Frontier — Fields Medal Work",
+    "FRONTIER-spectral": "Frontier — Spectral Geometry",
+    "FRONTIER-betrothed": "Frontier — Betrothed Numbers",
 }
 
 

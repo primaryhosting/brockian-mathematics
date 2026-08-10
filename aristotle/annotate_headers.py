@@ -25,7 +25,7 @@ AXLE = ROOT / "axle_verify.json"
 HARV = ROOT / "harvest_ledger.json"
 QUEUE_FILES = ["domains_queue.json", "mined_queue.json", "next_100.json",
                "pca_lean_queue.json", "frontier_queue.json", "frontier2.json",
-               "reattack_queue.json", "frontier_spectral.json"]
+               "reattack_queue.json", "frontier_spectral.json", "frontier_betrothed_queue.json"]
 
 
 def normalize(content: str) -> str:

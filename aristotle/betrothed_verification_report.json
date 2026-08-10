@@ -1,0 +1,66 @@
+{
+ "program": "Brockian Betrothed Frontier \u2014 independent verification",
+ "date": "2026-08-10",
+ "falsifier_reproduced": {
+  "register": "COMPUTATION / reproduced-from-scratch",
+  "tested_parameter_pairs": 996888,
+  "range": "1<=k<=24, odd prime p<=500000",
+  "solutions": [
+   [
+    4,
+    3,
+    75,
+    48,
+    "deficient"
+   ],
+   [
+    4,
+    103,
+    1575,
+    1648,
+    "abundant"
+   ],
+   [
+    4,
+    383,
+    5775,
+    6128,
+    "abundant"
+   ]
+  ],
+  "both_auxiliary_prime_cases": 31955,
+  "both_auxiliary_prime_successes": 0,
+  "bonus_finding": "construction identity B(2^k p)=(2^k-1)(p+2) held for ALL 996888 pairs; betrothed condition is purely B(m)=n",
+  "matches_memo": true
+ },
+ "delivered_file_finding": {
+  "file": "BetrothedDynamics.lean",
+  "issue": "references `IsBetrothedPair`, which is defined NOWHERE in the repo (Brockian/BetrothedNumbers.lean defines `Betrothed`, a 3-field aliquot predicate). As delivered it cannot compile against the current repo.",
+  "verification": "source scan + repo grep"
+ },
+ "faithful_rebuild": {
+  "file": "aristotle/betrothed_faithful.lean",
+  "register": "NEW_FORMALIZATION",
+  "corrected_to": "repo `Betrothed` / `aliquot` definitions",
+  "axle_verified": true,
+  "environment": "lean-4.32.0",
+  "theorems": [
+   "partner_eq_right",
+   "partner_eq_left",
+   "betrothed_iff_twoCycle",
+   "partner_involutive_on_pair",
+   "partner_ne_self_on_pair",
+   "thabit_balance_identity (CONDITIONAL on sigma-criterion)",
+   "thabit_deficient_iff",
+   "thabit_perfect_iff",
+   "thabit_abundant_iff"
+  ]
+ },
+ "still_open": [
+  "no_pair_of_mersenne_and_shifted_prime (rank2 obstruction \u2014 evidence only, not proved)",
+  "coprime_pair_four_primeFactors",
+  "coprime_sameParity_twentyOne_primeFactors",
+  "primePower_member_structure",
+  "density_zero_reduction"
+ ]
+}
