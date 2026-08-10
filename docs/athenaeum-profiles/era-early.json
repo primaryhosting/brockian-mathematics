@@ -1,0 +1,270 @@
+{
+  "batch": "era-early",
+  "profiles": [
+    {
+      "slug": "eratosthenes",
+      "name": "Eratosthenes of Cyrene",
+      "years": "c. 276 BCE – c. 194 BCE",
+      "bio": {
+        "life": "Eratosthenes was born in Cyrene, in present-day Libya, around 276 BCE, studied in Athens, and was called to Alexandria by Ptolemy III to tutor his son and direct the great Library — the closest thing the ancient world had to being chief scientist of civilization. His contemporaries nicknamed him 'Beta': second-best at everything, first at nothing — a jibe that has aged badly, since the breadth was the achievement. Ancient sources report that he went blind in old age and, unable to read, starved himself to death around 194 BCE; the report is ancient tradition rather than verifiable record.",
+        "mathematics": "Two achievements carry his name across twenty-two centuries. The sieve: to find every prime up to a bound, list the numbers and repeatedly strike out the multiples of each surviving prime — the first prime-generating algorithm, transmitted to us not in his own words but through Nicomachus of Gerasa around 100 CE. And the Earth: comparing the noon shadow at Syene, where the midsummer sun stood overhead, with the shadow at Alexandria, he computed the circumference of the planet from a fraction of a circle and the distance between two cities. The answer's accuracy depends on which ancient unit of distance is assumed — the honest statement is that the method was perfectly correct and the input data roughly right.",
+        "legacy": "Every sieve in this site's corpus — and 'sieve' is the working vocabulary of modern prime-gap mathematics — descends from his. He measured a planet with a stick and a well, which remains the standard first lesson in what mathematics can do to the physical world."
+      },
+      "legends": [
+        { "claim": "Died by voluntary starvation after going blind", "status": "attributed", "note": "Reported by the Suda and ancient tradition; not verifiable." },
+        { "claim": "Nicknamed 'Beta'", "status": "attributed", "note": "Ancient report of the nickname; the intended tone (mockery vs. respect) is debated." }
+      ],
+      "works": [
+        { "title": "Geographika", "year": "c. 240 BCE", "kind": "book", "note": "Lost; known through quotations in Strabo. Mapped the known world with a coordinate grid." },
+        { "title": "On the Measurement of the Earth", "year": "c. 240 BCE", "kind": "book", "note": "Lost; the circumference computation survives via Cleomedes' summary." },
+        { "title": "The sieve (as transmitted by Nicomachus)", "year": "c. 100 CE", "kind": "book", "note": "The prime-listing algorithm, preserved by later authors, not in his own hand." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Eratosthenes/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Eratosthenes" }
+      ]
+    },
+    {
+      "slug": "sunzi",
+      "name": "Sunzi (the mathematician)",
+      "years": "active c. 3rd–5th century CE",
+      "bio": {
+        "life": "Of the mathematician Sunzi nothing personal is reliably known — not his dates, not his home, not his occupation. He exists for us as the author of the Sunzi Suanjing, 'Master Sun's Mathematical Classic,' a three-scroll textbook usually dated between the third and fifth centuries CE. He is a different person from Sun Tzu the military writer of the Art of War, who lived perhaps eight centuries earlier; the shared name is coincidence, and the persistent conflation of the two is exactly the kind of error this Athenaeum exists to label.",
+        "mathematics": "The Suanjing teaches rod arithmetic, measurement, and division, but one problem made it immortal: 'There are things of an unknown number. Counted by threes, two remain. Counted by fives, three remain. Counted by sevens, two remain. How many things?' The worked answer — 23 — comes with a genuine method: scale the remainders by numbers engineered to vanish modulo the other divisors, add, and reduce modulo 105. That procedure is the earliest surviving instance of what the world now calls the Chinese Remainder Theorem, in his honor. The general algorithm was completed by Qin Jiushao's da yan method in 1247. The theorem's modern form — residues modulo coprime factors determine a unique residue modulo the product — is load-bearing across number theory, and its machine-verified formalization anchors the admissibility machinery in this site's corpus.",
+        "legacy": "A person about whom we know nothing wrote four sentences that every algebra student on Earth still solves. The CRT runs through cryptography (RSA decryption is done via Sunzi's insight), fast arithmetic, and the wheel and admissibility labs on this site."
+      },
+      "legends": [
+        { "claim": "Identity with Sun Tzu, author of The Art of War", "status": "disputed", "note": "Rejected by scholarship: the military classic is centuries older. The names coincide; the people do not." }
+      ],
+      "works": [
+        { "title": "Sunzi Suanjing (Master Sun's Mathematical Classic)", "year": "c. 3rd–5th c. CE", "kind": "book", "note": "Three scrolls; contains the remainder problem and its constructive solution." }
+      ],
+      "sources": [
+        { "label": "MacTutor (Chinese mathematics overview)", "url": "https://mathshistory.st-andrews.ac.uk/HistTopics/Chinese_overview/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Sunzi_Suanjing" }
+      ]
+    },
+    {
+      "slug": "kepler",
+      "name": "Johannes Kepler",
+      "years": "1571–1630",
+      "bio": {
+        "life": "Johannes Kepler was born in Weil der Stadt, in the Duchy of Württemberg, on 27 December 1571, weak-eyed from childhood smallpox and possessed of a conviction that God had built the world geometrically. In Prague he inherited Tycho Brahe's incomparable observations and the post of Imperial Mathematician. His life was a catalogue of hardship borne with strange cheerfulness: religious exile, the death of children, salary perpetually in arrears, and six years spent defending his mother Katharina in a witchcraft trial — a documented proceeding, not legend, which he won. He died in Regensburg on 15 November 1630, still owed money by three emperors.",
+        "mathematics": "From Tycho's data on Mars he extracted the three laws of planetary motion — ellipses, equal areas, and the harmonic law relating period to distance — replacing two millennia of circles. For this site, his most consequential page is smaller: a 1611 new-year's gift essay on the six-cornered snowflake, in which he asked why snow crystals are sixfold and, considering how spheres pack, asserted that the cannonball arrangement — face-centered cubic, the greengrocer's stack — is the densest possible. That sentence, the Kepler conjecture, resisted proof for 387 years: Hales announced a proof in 1998, referees declared themselves 99% certain, and certainty arrived only in 2014 when the Flyspeck project verified every step by machine. It is the founding story of formal verification — the same technology whose verdicts power this site's PROVED register.",
+        "legacy": "The sphere-packing lab tells his story from conjecture to computer-checked certainty. He is the Athenaeum's best witness that a question asked casually, as a gift, can outlive empires."
+      },
+      "legends": [
+        { "claim": "His mother was tried for witchcraft and he conducted her defense", "status": "documented", "note": "The trial (1615–1621) is fully documented in court records; Katharina was released." }
+      ],
+      "works": [
+        { "title": "Astronomia nova", "year": 1609, "kind": "book", "note": "Elliptical orbits; the first two planetary laws, extracted from Tycho's Mars data." },
+        { "title": "Strena seu de nive sexangula", "year": 1611, "kind": "book", "note": "The snowflake essay; the sphere-packing conjecture stated." },
+        { "title": "Harmonices Mundi", "year": 1619, "kind": "book", "note": "The third law; polyhedra, tilings, and the music of the spheres." },
+        { "title": "Tabulae Rudolphinae", "year": 1627, "kind": "book", "note": "The planetary tables that made Tycho's data usable for a century." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Kepler/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Johannes_Kepler" }
+      ]
+    },
+    {
+      "slug": "mersenne",
+      "name": "Marin Mersenne",
+      "years": "1588–1648",
+      "bio": {
+        "life": "Marin Mersenne was born near Oizé, in Maine, France, on 8 September 1588, and entered the austere Minim order of friars, settling in a Paris convent near the Place Royale. From that cell he ran what historians call the post office of the scientific revolution: a correspondence network binding Descartes, Fermat, Pascal, Galileo, Huygens, and dozens more — men who quarreled, kept secrets, and often communicated with each other only through him. He organized the meetings that became, after his death in Paris on 1 September 1648, the French Academy of Sciences. His own science was substantial: the laws of vibrating strings, measurements of the speed of sound, and the number theory that keeps his name current.",
+        "mathematics": "Mersenne studied the numbers 2^p − 1, prime only when p itself is prime — but not always then. In his Cogitata of 1644 he published a list of the exponents p up to 257 he claimed give primes. The list was wrong in five places — it wrongly included 67 and 257 and omitted 61, 89, and 107 — but being wrong took 303 years to establish completely: checking Mersenne drove computational number theory from Euler to the electromechanical era. (Frank Nelson Cole's 1903 lecture factoring 2^67 − 1, delivered entirely in silence at the blackboard, is the famous set-piece of that story — the silence is anecdotal tradition via E. T. Bell, though the factorization itself is fully documented.) Mersenne primes correspond exactly to even perfect numbers by the Euclid–Euler theorem — machine-verified in this site's corpus — and every record largest-known prime for decades has been a Mersenne number.",
+        "legacy": "The Mersenne lab runs the Lucas–Lehmer test he never lived to see, on the numbers that carry his name. His deeper legacy may be infrastructural: he invented the idea that science runs on a network."
+      },
+      "legends": [
+        { "claim": "Cole's silent 1903 lecture factoring M67", "status": "attributed", "note": "The factorization and AMS talk are documented; the theatrical total silence is tradition via E. T. Bell's retelling." }
+      ],
+      "works": [
+        { "title": "Harmonie universelle", "year": 1636, "kind": "book", "note": "Acoustics and music theory; the vibrating-string laws." },
+        { "title": "Cogitata Physico-Mathematica", "year": 1644, "kind": "book", "note": "The famous (and famously flawed) list of Mersenne prime exponents." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Mersenne/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Marin_Mersenne" }
+      ]
+    },
+    {
+      "slug": "pascal",
+      "name": "Blaise Pascal",
+      "years": "1623–1662",
+      "bio": {
+        "life": "Blaise Pascal was born in Clermont (now Clermont-Ferrand) on 19 June 1623 and educated entirely by his father, who initially forbade mathematics — with the result that the boy worked out Euclid's early propositions on his own at twelve. At sixteen he proved his hexagon theorem on conics; at nineteen he built the Pascaline, a working mechanical calculator, to help his father's tax computations. On the night of 23 November 1654 he underwent an intense religious experience — documented by the Mémorial, a parchment account he sewed into his coat and carried unknown to anyone until found after his death — and turned increasingly from science to theology. Chronically ill for most of his life, he died in Paris on 19 August 1662, aged thirty-nine.",
+        "mathematics": "In 1654, in correspondence with Fermat over how to divide the stakes of an interrupted game, Pascal helped found probability theory — the concept of expected value is the correspondence's lasting invention, and every probability computation in this site's Galton, coupon, and random-walk labs is its descendant. His Traité du triangle arithmétique organized the binomial coefficients into the triangle that (in Europe) bears his name, proved their identities by one of the first explicit uses of mathematical induction, and connected them to combinations, to the binomial theorem, and to the stakes problem. The triangle itself is older — known in China (Yang Hui), India, and Persia centuries earlier — a fact the Athenaeum records rather than obscures.",
+        "legacy": "Probability, the calculator, projective geometry's revival, and induction as a working tool: four beginnings from a man who left mathematics twice. The Pensées' wager argument even applies expected value to theology — the method escaping its birthplace."
+      },
+      "legends": [
+        { "claim": "The Mémorial sewn into his coat, found after his death", "status": "documented", "note": "The parchment survives; the 'night of fire' of 23 November 1654 is dated in his own hand." },
+        { "claim": "European priority for the arithmetical triangle", "status": "documented", "note": "The triangle appears in Yang Hui (13th c., crediting Jia Xian), al-Karaji's tradition, and Pingala's commentators — Pascal systematized; he did not originate." }
+      ],
+      "works": [
+        { "title": "Essay pour les coniques", "year": 1640, "kind": "paper", "note": "The hexagon theorem, proved at sixteen." },
+        { "title": "Correspondence with Fermat on the problem of points", "year": 1654, "kind": "letter", "note": "The founding documents of probability theory." },
+        { "title": "Traité du triangle arithmétique", "year": "written 1654, published 1665", "kind": "book", "note": "The triangle, induction, and expectation." },
+        { "title": "Pensées", "year": "published 1670", "kind": "book", "note": "Posthumous fragments; the wager as expected value applied to belief." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Pascal/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Blaise_Pascal" }
+      ]
+    },
+    {
+      "slug": "goldbach",
+      "name": "Christian Goldbach",
+      "years": "1690–1764",
+      "bio": {
+        "life": "Christian Goldbach was born in Königsberg on 18 March 1690, trained in law, and traveled Europe collecting acquaintances — Leibniz, the Bernoullis, and eventually the young Euler. He became the first secretary of the new St. Petersburg Academy of Sciences in 1725, tutored the boy-tsar Peter II in Moscow, and finished his career in the Russian foreign ministry, where his duties included cryptanalysis — reading other governments' mail. He died in Moscow on 20 November 1764, a well-connected, well-salaried figure whose mathematical immortality rests on a single question asked in a letter to a friend.",
+        "mathematics": "On 7 June 1742 Goldbach wrote to Euler proposing, in marginal notes, that every integer greater than 2 is a sum of three primes (he counted 1 as prime, in the usage of his day). Euler replied that the essential form was one Goldbach had raised with him before: every even number greater than 2 is a sum of two primes — and added that he regarded it 'as a completely certain theorem, although I cannot prove it.' Neither can anyone, 284 years later. The binary Goldbach conjecture has been verified computationally past 4×10^18, the ternary version was fully proved by Helfgott in 2013, and the binary case remains OPEN — precisely the register this site's Goldbach comb and wheel labs display, where the corpus's verified local lemmas sit honestly beside the unproved global question.",
+        "legacy": "One letter created the most famous open problem in additive number theory. Goldbach is the Athenaeum's emblem of the amateur's question that outlives every professional's answer."
+      },
+      "legends": [
+        { "claim": "The conjecture as popularly stated is Euler's sharpening of Goldbach's letter", "status": "documented", "note": "The 1742 letter survives; Goldbach's marginal version is ternary, Euler's reply states the binary form and attributes it to their earlier conversation." }
+      ],
+      "works": [
+        { "title": "Letter to Euler", "year": 1742, "kind": "letter", "note": "7 June 1742: the conjecture, in the original form; Euler's reply supplies the binary statement." },
+        { "title": "Papers in the Petersburg Commentarii", "year": "1720s–1740s", "kind": "paper", "note": "Series, curves, and number theory — respectable, and wholly eclipsed by the letter." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Goldbach/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Christian_Goldbach" }
+      ]
+    },
+    {
+      "slug": "newton",
+      "name": "Isaac Newton",
+      "years": "1642–1727",
+      "bio": {
+        "life": "Isaac Newton was born at Woolsthorpe Manor, Lincolnshire, on Christmas Day 1642 by the calendar England then used (4 January 1643 by the modern one) — premature, fatherless, and, by his own account, small enough to fit in a quart pot. Sent home from Cambridge when plague closed the university in 1665–66, he spent the anni mirabiles inventing calculus, decomposing light, and beginning the theory of gravitation, mostly alone, telling no one for years. Lucasian Professor at twenty-six, he later left mathematics for the Royal Mint, where he pursued counterfeiters with alarming zeal, and presided over the Royal Society for two decades. He died in London on 31 March 1727 and was buried in Westminster Abbey. The falling apple is a story he himself told the antiquarian Stukeley in old age — documented as an anecdote of his own telling, which is not the same as a laboratory record.",
+        "mathematics": "The Principia (1687) derived Kepler's laws from universal gravitation and built mechanics as a deductive science; it is a strong candidate for the most consequential book ever printed. His method of fluxions — the calculus — was developed by 1666 and published decades later, igniting the priority war with Leibniz. For this site's purposes his series work matters most: the generalized binomial theorem for fractional exponents, and the arcsine expansion with which he computed π to fifteen digits, confessing to a correspondent that he was 'ashamed to tell you to how many figures I carried these computations, having no other business at the time.' His root-finding iteration, refined by Raphson, is still the workhorse inside every numerical kernel — including several in this site's labs.",
+        "legacy": "Modern quantitative science is downstream of the Principia; modern computation of π begins with his series and passes through Machin's refinement to the arctangent formulas this site's Machin lab runs. 'If I have seen further it is by standing on the shoulders of giants' — documented, from his 1676 letter to Hooke."
+      },
+      "legends": [
+        { "claim": "The falling apple", "status": "attributed", "note": "Newton told the story himself, late in life, to William Stukeley (whose 1752 memoir records it) — an old man's anecdote about his own youth, faithfully transmitted." },
+        { "claim": "'Ashamed to tell you to how many figures…'", "status": "documented", "note": "From his correspondence about the plague-years series computations." }
+      ],
+      "works": [
+        { "title": "De analysi per aequationes numero terminorum infinitas", "year": "written 1669, published 1711", "kind": "paper", "note": "Infinite series and the beginnings of calculus." },
+        { "title": "Philosophiæ Naturalis Principia Mathematica", "year": 1687, "kind": "book", "note": "The laws of motion and universal gravitation.", "link": "https://archive.org/details/philosophiaenatu00newt_0" },
+        { "title": "Opticks", "year": 1704, "kind": "book", "note": "Light, color, and the experimental method in book form." },
+        { "title": "Arithmetica Universalis", "year": 1707, "kind": "book", "note": "His algebra lectures, published from notes." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Newton/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Isaac_Newton" }
+      ]
+    },
+    {
+      "slug": "machin",
+      "name": "John Machin",
+      "years": "c. 1686–1751",
+      "bio": {
+        "life": "John Machin's origins are obscure — his birth is placed around 1686, the date approximate. He surfaces in the record as a London teacher of mathematics (Brook Taylor was a pupil), became professor of astronomy at Gresham College in 1713, and served nearly thirty years as secretary of the Royal Society, where he sat on the committee that adjudicated — in Newton's favor, being Newton's partisans to a man — the calculus priority dispute with Leibniz. He died in London on 9 June 1751. He published little; his immortality is one identity and one hundred digits.",
+        "mathematics": "In 1706 Machin found that π/4 = 4·arctan(1/5) − arctan(1/239). The genius is in the engineering: arctan(1/5) converges fast and meshes with decimal arithmetic, while the arctan(1/239) correction converges very fast, so the pair beats any single series then known. With it he computed π to 100 decimal places by hand — the first century of digits in history. The result was published in William Jones's Synopsis Palmariorum Matheseos that same year, the very book that first used the symbol π in its modern sense; Machin's computation and the symbol arrived together. Formulas of his shape — 'Machin-like' — carried every π record into the computer age, and this site's Machin lab runs the identity live with error bounds, exactly as the corpus's verified arctangent lemmas back it.",
+        "legacy": "One identity, optimally engineered, that defined how humanity computed its most famous constant for 250 years. Precision computing has a birthday, and it is Machin's 1706."
+      },
+      "legends": [
+        { "claim": "Birth year c. 1686", "status": "disputed", "note": "No reliable birth record; sources place it in the 1680s. Marked approximate." }
+      ],
+      "works": [
+        { "title": "The arctangent formula and 100 digits of π (in Jones's Synopsis Palmariorum Matheseos)", "year": 1706, "kind": "paper", "note": "Published by William Jones — the same book that introduced the symbol π." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Machin/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/John_Machin" }
+      ]
+    },
+    {
+      "slug": "leibniz",
+      "name": "Gottfried Wilhelm Leibniz",
+      "years": "1646–1716",
+      "bio": {
+        "life": "Gottfried Wilhelm Leibniz was born in Leipzig on 1 July 1646, taught himself Latin from his late father's library as a child, and spent his career as court counselor, historian, librarian, and diplomat for the House of Hanover — doing mathematics, philosophy, logic, geology, and jurisprudence in the margins of official duties. He built one of the first machines to multiply (the stepped reckoner), founded the Berlin Academy of Sciences, corresponded with half of learned Europe, and dreamed of a characteristica universalis — a symbolic language in which reasoning itself could be computed. His last years were shadowed by the calculus priority war with Newton's partisans. He died in Hanover on 14 November 1716; tradition reports his funeral attended by his secretary alone, the court he had served for forty years absent.",
+        "mathematics": "Leibniz developed the calculus independently of Newton and — the verdict of history — wrote it better: the notation dx, ∫, d/dx, the product rule, the chain rule as we actually use them are his, published first in 1684 and 1686. The alternating series π/4 = 1 − 1/3 + 1/5 − ⋯ carries his name in Europe, though Madhava of Kerala had it by c. 1400 and Gregory independently — an attribution this Athenaeum states plainly. His 1703 paper laid out binary arithmetic, delighting in 0 and 1 as creation from nothing; every machine verification in this site's corpus is, at the bottom of the stack, running on his arithmetic. And his dream of mechanized reasoning — calculemus, 'let us calculate,' as the resolution of disputes — is the direct philosophical ancestor of the proof assistants whose verdicts this site treats as ground truth.",
+        "legacy": "The notation on every chalkboard, the arithmetic in every processor, and the dream behind every theorem prover: Leibniz's three legacies converge on exactly the kind of site this is. Of the calculus war, the fair summary is: Newton was first, Leibniz was independent, and Leibniz's language won."
+      },
+      "legends": [
+        { "claim": "Funeral attended only by his secretary", "status": "attributed", "note": "Reported by early biographical tradition (Eckhart); emblematic of his court's neglect, not independently documentable in detail." },
+        { "claim": "The 'Leibniz series' priority", "status": "documented", "note": "Madhava's school had the series by c. 1400; Gregory found it in 1671. Leibniz's 1673–74 discovery was independent." }
+      ],
+      "works": [
+        { "title": "Nova methodus pro maximis et minimis", "year": 1684, "kind": "paper", "note": "Acta Eruditorum: the first published differential calculus." },
+        { "title": "De geometria recondita", "year": 1686, "kind": "paper", "note": "The first published integral calculus, with the ∫ sign." },
+        { "title": "Explication de l'arithmétique binaire", "year": 1703, "kind": "paper", "note": "Binary arithmetic — the substrate of every computation on this site." },
+        { "title": "Monadologie", "year": 1714, "kind": "book", "note": "The metaphysics: the universe as simple substances in preestablished harmony." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Leibniz/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz" }
+      ]
+    },
+    {
+      "slug": "bernoulli",
+      "name": "Jacob Bernoulli",
+      "years": "1655–1705",
+      "bio": {
+        "life": "Jacob Bernoulli was born in Basel on 6 January 1655 (Gregorian), the first mathematician of the extraordinary dynasty that would produce eight of them in three generations. Against his father's wish that he stay in theology, he took the Basel mathematics chair in 1687 and mastered Leibniz's new calculus almost as it appeared, teaching it to his younger brother Johann — with whom he then conducted one of history's most productive and most venomous sibling rivalries, fought in public journals. He died in Basel on 16 August 1705. He asked that a logarithmic spiral be carved on his tombstone with the motto Eadem mutata resurgo — 'changed, I rise again the same'; the stonemason, defeating the entire point, carved an Archimedean spiral instead. The error is documented and still visible in the Basel Münster.",
+        "mathematics": "His Ars Conjectandi, published posthumously in 1713, founded mathematical probability: the theory of what are now called Bernoulli trials, the Bernoulli numbers arising from sums of powers, and above all the first limit theorem in probability — the (weak) law of large numbers, which he called his 'golden theorem': observed frequencies converge to true probabilities, provably. Every empirical convergence display in this site's Galton, coupon-collector, and percolation labs is a picture of his theorem working. He also studied compound interest to the limit and found the number e as the limit of (1 + 1/n)^n, analyzed the catenary and the brachistochrone (against his brother), and developed the calculus of variations' earliest problems.",
+        "legacy": "Probability as mathematics — not gambling advice — begins with the Ars Conjectandi. The Bernoulli numbers thread through Euler–Maclaurin summation into this site's zeta kernels: the machinery computing ζ(s) in the Observatory literally runs on coefficients bearing his name."
+      },
+      "legends": [
+        { "claim": "The tombstone spiral is the wrong spiral", "status": "documented", "note": "He requested a logarithmic spiral (Eadem mutata resurgo); the mason carved an Archimedean one. Visible today in the Basel Münster cloister." }
+      ],
+      "works": [
+        { "title": "Ars Conjectandi", "year": "published 1713", "kind": "book", "note": "Posthumous: Bernoulli trials, Bernoulli numbers, and the law of large numbers.", "link": "https://archive.org/details/wahrscheinlichke00bernuoft" },
+        { "title": "Papers in Acta Eruditorum", "year": "1680s–1700s", "kind": "paper", "note": "The catenary, the brachistochrone dispute, the isoperimetric problem, and e as a limit." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Bernoulli_Jacob/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Jacob_Bernoulli" }
+      ]
+    },
+    {
+      "slug": "stirling",
+      "name": "James Stirling",
+      "years": "1692–1770",
+      "bio": {
+        "life": "James Stirling was born at Garden, Stirlingshire, in May 1692, into a family of committed Jacobites — a politics that cost him: at Oxford he lost his scholarship rather than swear the oaths to the new dynasty, and left without a degree. He spent formative years in Venice (earning the nickname 'the Venetian'), corresponded with Newton, who supported his return to Britain, and taught in London — until 1735, when he made one of history's stranger career changes: he became manager of the Scots Mining Company's lead mines at Leadhills, where he proved a superb administrator and did engineering surveys for the Clyde. He died in Edinburgh on 5 December 1770. The story that he had to leave Venice because he had learned the glassmakers' trade secrets and feared assassination is old tradition, not established fact.",
+        "mathematics": "His Methodus Differentialis (1730) is a masterwork on series: acceleration of convergence, interpolation, and the asymptotics of the factorial. The formula that carries his name — n! ~ √(2πn)(n/e)^n — is genuinely intertwined with de Moivre's parallel work: de Moivre had the form, Stirling supplied the constant √(2π), and each acknowledged the other. It is the standard tool for turning exact combinatorial counts into growth rates, and it is doing exactly that inside this site's entropy and Galton labs, where binomial coefficients meet the normal curve. His interpolation methods (the Stirling numbers arise here) fed the numerical analysis of the next two centuries.",
+        "legacy": "The bridge from discrete counting to continuous approximation crosses at Stirling's formula. Every time this site's labs overlay a smooth Gaussian on a discrete histogram, his constant is the reason the areas match."
+      },
+      "legends": [
+        { "claim": "Fled Venice fearing assassination over glassmaking secrets", "status": "legend", "note": "Old biographical tradition; no contemporary documentation." }
+      ],
+      "works": [
+        { "title": "Lineae Tertii Ordinis Neutonianae", "year": 1717, "kind": "book", "note": "Completing Newton's classification of cubic curves." },
+        { "title": "Methodus Differentialis", "year": 1730, "kind": "book", "note": "Series, interpolation, and the factorial asymptotic with the √(2π) constant." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Stirling/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/James_Stirling_(mathematician)" }
+      ]
+    },
+    {
+      "slug": "de-moivre",
+      "name": "Abraham de Moivre",
+      "years": "1667–1754",
+      "bio": {
+        "life": "Abraham de Moivre was born in Vitry-le-François, Champagne, on 26 May 1667, into a Protestant family. After the revocation of the Edict of Nantes he was interned in a French priory, then fled to London around 1688, where he remained the rest of his life — a refugee of the first rank who never obtained the university chair his talent merited, earning his living instead by tutoring and by consulting, famously from a chair at Slaughter's Coffee House, for gamblers and insurance brokers who needed his probabilities. He was elected to the Royal Society in 1697, befriended Newton, and sat on the Society's committee in the calculus dispute. He died in London on 27 November 1754. The story that he predicted the date of his own death by noticing he slept fifteen minutes longer each night and extrapolating to twenty-four hours is legend — beloved, and undocumented.",
+        "mathematics": "De Moivre's formula, (cos θ + i sin θ)^n = cos nθ + i sin nθ, welded complex numbers to trigonometry and prefigured Euler's e^{iθ}. His Doctrine of Chances (1718, expanded 1738, 1756) was the working probability handbook of the eighteenth century; in its 1733 supplement he achieved the book's deepest result: approximating the binomial distribution, for many trials, by the curve e^{−x²} — the first appearance of the normal distribution and the first central limit theorem, half a century before Laplace's generalization. He also pioneered the analytics of annuities, putting life-contingent finance on mathematical footing, and introduced generating-function techniques for recurrences — including the closed form for Fibonacci numbers usually named for Binet, who published it over a century later.",
+        "legacy": "The bell curve enters mathematics in de Moivre's 1733 pamphlet — the same curve this site's Galton board builds bean by bean. That the Binet formula is his, and the normal curve is his, and neither carries his name, makes him the Athenaeum's patron of under-attribution."
+      },
+      "legends": [
+        { "claim": "Predicted his own death by arithmetic progression of sleep", "status": "legend", "note": "A famous story with no contemporary documentation; first appears in later retellings." },
+        { "claim": "The 'Binet' formula for Fibonacci numbers is de Moivre's", "status": "documented", "note": "It appears in his Miscellanea Analytica (1730), a century before Binet's 1843 publication." }
+      ],
+      "works": [
+        { "title": "The Doctrine of Chances", "year": "1718; 2nd ed. 1738; 3rd ed. 1756", "kind": "book", "note": "The century's probability handbook; the 1733/1738 normal approximation to the binomial.", "link": "https://archive.org/details/doctrineofchance00moiv" },
+        { "title": "Miscellanea Analytica", "year": 1730, "kind": "book", "note": "Recurrences and generating functions; the Fibonacci closed form; groundwork for the factorial asymptotic." },
+        { "title": "Annuities upon Lives", "year": 1725, "kind": "book", "note": "The mathematics of life-contingent finance." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/De_Moivre/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Abraham_de_Moivre" }
+      ]
+    }
+  ]
+}

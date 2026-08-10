@@ -1,0 +1,144 @@
+{
+  "batch": "era-enlightenment",
+  "profiles": [
+    {
+      "slug": "lagrange",
+      "name": "Joseph-Louis Lagrange",
+      "years": "1736–1813",
+      "bio": {
+        "life": "Joseph-Louis Lagrange was born in Turin on 25 January 1736 to a family of French descent and diminished fortune — he later said that had there been money, he might never have done mathematics. Self-taught from a memoir of Halley's, he was professor at the Turin artillery school at nineteen. In 1766 he succeeded Euler at Frederick the Great's Berlin Academy — invited on the grounds that 'the greatest king in Europe' ought to have 'the greatest mathematician' — and in 1787 moved to Paris, where he survived the Revolution as the respected elder of French science: president of the commission that created the metric system, first professor of analysis at the new École Polytechnique, senator and count under Napoleon. The Terror horrified him; on Lavoisier's execution he is reported to have said it took only an instant to cut off that head, and a hundred years might not produce another like it. He died in Paris on 10 April 1813.",
+        "mathematics": "Lagrange's Mécanique analytique (1788) rebuilt mechanics as pure analysis — he boasted in the preface, accurately, that the book contained not a single diagram. In number theory he proved in a burst of Berlin-years brilliance: every positive integer is a sum of four squares (1770); Wilson's theorem, first proof (1771); and the theorem that a continued-fraction expansion is eventually periodic exactly when its number is a quadratic irrational — the structure this site's continued-fraction lab displays live, with the metallic means as the all-periodic showcase. His 1770–71 study of how the roots of equations permute under substitution is the recognized ancestor of Galois theory: he found the tool (resolvents, and what is now the index/order relation) without the concept of a group.",
+        "legacy": "Four-squares, Wilson's proof, periodic continued fractions, the calculus of variations, Lagrangian mechanics, Lagrange multipliers: the name is load-bearing across the whole curriculum. In this Athenaeum he stands between Euler, whom he succeeded, and Galois, whom he unknowingly equipped."
+      },
+      "legends": [
+        { "claim": "The remark on Lavoisier's execution", "status": "attributed", "note": "Reported by Delambre's éloge from contemporaries; wording varies across tellings." },
+        { "claim": "'No diagrams' boast in the Mécanique analytique", "status": "documented", "note": "Stated in his own preface: 'On ne trouvera point de figures dans cet ouvrage.'" }
+      ],
+      "works": [
+        { "title": "Réflexions sur la résolution algébrique des équations", "year": "1770–71", "kind": "paper", "note": "Permutations of roots; the direct ancestor of Galois theory." },
+        { "title": "Démonstration d'un théorème d'arithmétique (four squares)", "year": 1770, "kind": "paper", "note": "Every positive integer is a sum of four squares." },
+        { "title": "Démonstration d'un théorème nouveau concernant les nombres premiers (Wilson's theorem)", "year": 1771, "kind": "paper", "note": "First proof, with the converse — the characterization this site's Wilson lab runs." },
+        { "title": "Additions to Euler's Algebra: continued fractions", "year": 1770, "kind": "book", "note": "Periodicity ⟺ quadratic irrationality." },
+        { "title": "Mécanique analytique", "year": 1788, "kind": "book", "note": "Mechanics as analysis, without a single figure." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Lagrange/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Joseph-Louis_Lagrange" }
+      ]
+    },
+    {
+      "slug": "wilson",
+      "name": "John Wilson",
+      "years": "1741–1793",
+      "bio": {
+        "life": "John Wilson was born at Applethwaite, Westmorland, on 6 August 1741, went up to Peterhouse, Cambridge, and emerged Senior Wrangler — first of his year — in 1761, with a reputation formidable enough that Edward Waring, the Lucasian professor, printed his student's observation in a 1770 book. Wilson then did what many excellent Cambridge mathematicians of his century did: he left mathematics entirely. Called to the bar in 1766, he built a distinguished legal career, was knighted in 1788, and sat as a judge of the Court of Common Pleas. He published no mathematics of his own. He died at Kendal on 18 October 1793 — a one-theorem immortal who never proved the theorem.",
+        "mathematics": "The statement Waring published on Wilson's behalf: for every prime p, the number (p−1)! + 1 is divisible by p. Waring printed it without proof, remarking that proofs seemed very difficult for want of a notation for primes — provoking Gauss's later retort that what was wanted was notiones, not notationes: notions, not notations. Lagrange supplied the first proof within a year (1771), adding the converse: the congruence holds only at primes, making Wilson's theorem a complete characterization of primality — elegant, exact, and computationally hopeless, since the factorial outgrows every practical bound. The historical record has a deeper twist the Athenaeum reports plainly: Ibn al-Haytham stated the result around the year 1000, so 'Wilson's theorem' commemorates neither its discoverer nor its prover.",
+        "legacy": "This site's Wilson lab runs the characterization live and uses its very impracticality as the lesson: a perfect primality criterion that is useless in practice, standing beside the fast tests that actually run the modern world. Wilson himself remains the Athenaeum's cleanest case of mathematical immortality by association."
+      },
+      "legends": [
+        { "claim": "Ibn al-Haytham's priority (c. 1000 CE)", "status": "documented", "note": "The statement appears in his work on the remainder problem; the modern name is a historical accident." },
+        { "claim": "Gauss's 'notions, not notations' retort to Waring", "status": "attributed", "note": "Reported in the Disquisitiones tradition; the Latin quip is standard in the literature." }
+      ],
+      "works": [
+        { "title": "Wilson's theorem (published in Waring's Meditationes Algebraicae)", "year": 1770, "kind": "paper", "note": "Stated in print by Waring, attributed to Wilson; proved by Lagrange in 1771." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Wilson_John/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/John_Wilson_(mathematician)" }
+      ]
+    },
+    {
+      "slug": "laplace",
+      "name": "Pierre-Simon Laplace",
+      "years": "1749–1827",
+      "bio": {
+        "life": "Pierre-Simon Laplace was born in Beaumont-en-Auge, Normandy, on 23 March 1749, the son of a cider merchant, and rose — through d'Alembert's patronage and his own unembarrassed ambition — to the summit of French science. He examined the sixteen-year-old Napoleon Bonaparte at the military school; Napoleon later made him Minister of the Interior, and removed him after six weeks with the immortal performance review that he 'carried the spirit of the infinitesimal into administration.' A political survivor of legendary flexibility — republican under the Republic, count under the Empire, marquis under the restored Bourbons — he died in Paris on 5 March 1827. The reply attributed to him when Napoleon asked why God did not appear in the Mécanique céleste — 'Sire, I had no need of that hypothesis' — is secondhand tradition: something of the sort is well attested, the exact words are not.",
+        "mathematics": "Laplace's two great monuments are the Mécanique céleste (1799–1825), five volumes arguing the solar system's stability from gravitation alone, and the Théorie analytique des probabilités (1812), which made probability a mature branch of analysis: generating functions, the transform bearing his name, Bayesian inference in working form, and the central limit theorem — generalizing de Moivre's binomial case to sums of arbitrary errors, which is why the bell curve rules measurement everywhere, including the Galton board in this site's labs. His Essai philosophique (1814) framed the deterministic 'demon' — an intelligence knowing all positions and forces, for whom nothing is uncertain — and then explained why probability is the honest calculus for beings who are not that demon.",
+        "legacy": "Probability as the logic of partial knowledge is Laplace's framing, and it is precisely the stance this site takes toward open conjectures: compute the evidence, state the uncertainty, never confuse the two. The Laplacian operator, meanwhile, sits inside half the site's spectral kernels."
+      },
+      "legends": [
+        { "claim": "'I had no need of that hypothesis'", "status": "attributed", "note": "Reported secondhand (the exchange circulated via Herschel and others); the substance is well attested, the wording unreliable." },
+        { "claim": "Napoleon's 'spirit of the infinitesimal' dismissal", "status": "documented", "note": "Napoleon's own memoirs record the judgment on Laplace's six-week ministry." }
+      ],
+      "works": [
+        { "title": "Mécanique céleste", "year": "1799–1825", "kind": "book", "note": "Five volumes; gravitational astronomy as analysis." },
+        { "title": "Théorie analytique des probabilités", "year": 1812, "kind": "book", "note": "Generating functions, the central limit theorem, Bayesian inference.", "link": "https://archive.org/details/thorieanalytiqu01laplgoog" },
+        { "title": "Essai philosophique sur les probabilités", "year": 1814, "kind": "book", "note": "The demon, determinism, and probability as the measure of ignorance." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Laplace/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Pierre-Simon_Laplace" }
+      ]
+    },
+    {
+      "slug": "legendre",
+      "name": "Adrien-Marie Legendre",
+      "years": "1752–1833",
+      "bio": {
+        "life": "Adrien-Marie Legendre was born in Paris on 18 September 1752 to a wealthy family, lost his fortune in the Revolution, and lived thereafter on academic posts and pensions — the last of which he lost in 1824 for refusing to vote for the government's candidate at the Institut, a point of principle that left him in poverty at seventy-two. He worked in the long shadows of Lagrange and then Gauss, with both of whom he had priority grievances (least squares above all, which he published first in 1805 and Gauss claimed to have used earlier). He died in Paris on 9 January 1833. History has added an indignity: for two centuries books printed a 'portrait of Legendre' that is actually the politician Louis Legendre — the only genuine likeness known, identified in 2005, is a watercolor caricature. This Athenaeum finds that fact irresistible: the man who defined how we measure fit is known to us only through distortion.",
+        "mathematics": "His Essai sur la théorie des nombres (1798) was the first book wholly devoted to number theory. In it he introduced the Legendre symbol (a|p) — the algebraic bit recording whether a is a square modulo p — and stated the law of quadratic reciprocity in essentially modern form, with a proof containing a genuine gap; Gauss, who closed it, was not gracious about the difference between stating and proving. He conjectured the prime-density law π(x) ≈ x/(ln x − 1.08366), whose constant was wrong in a way that later mattered (the honest asymptotic has constant 1), published least squares, created the theory of elliptic integrals that Abel and Jacobi would revolutionize, and gave the polynomials every physics student meets. Legendre's conjecture — a prime between consecutive squares, always — remains OPEN, one of Landau's four unattackable problems, and is labeled exactly so in this site's gap labs.",
+        "legacy": "The reciprocity lab and the prime-race lab both begin where Legendre stood: he asked the right questions, found the right objects, and had the historical misfortune of being followed immediately by Gauss. Least squares alone — the method behind every fitted curve on this site — would justify his hall placement."
+      },
+      "legends": [
+        { "claim": "The misattributed portrait", "status": "documented", "note": "The long-reproduced 'Legendre' engraving depicts politician Louis Legendre; the 1820 caricature by Boilly is the only known true likeness (identified 2005)." },
+        { "claim": "Priority for least squares", "status": "disputed", "note": "Legendre published first (1805); Gauss claimed use since 1795 and produced witnesses. Historians credit publication to Legendre, method-in-practice plausibly to Gauss." }
+      ],
+      "works": [
+        { "title": "Éléments de géométrie", "year": 1794, "kind": "book", "note": "The century's dominant geometry textbook, in dozens of editions." },
+        { "title": "Essai sur la théorie des nombres", "year": 1798, "kind": "book", "note": "The first treatise of number theory: the symbol, reciprocity stated, prime density conjectured.", "link": "https://archive.org/details/essaisurlathor00lege" },
+        { "title": "Nouvelles méthodes pour la détermination des orbites des comètes", "year": 1805, "kind": "book", "note": "First publication of the method of least squares." },
+        { "title": "Traité des fonctions elliptiques", "year": "1825–28", "kind": "book", "note": "Forty years of work on elliptic integrals, completed just as Abel and Jacobi transformed the field." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Legendre/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Adrien-Marie_Legendre" }
+      ]
+    },
+    {
+      "slug": "ruffini",
+      "name": "Paolo Ruffini",
+      "years": "1765–1822",
+      "bio": {
+        "life": "Paolo Ruffini was born in Valentano, in the Papal States, on 22 September 1765, and spent his life in Modena, where he held chairs in mathematics and — simultaneously — practiced and taught medicine, eventually serving as rector of the university. When Napoleon's regime required an oath of allegiance he refused, losing his professorships for years rather than swear. During the typhus epidemic of 1817–18 he continued treating patients, caught the disease, and never fully recovered; he wrote a paper on typhus from his own case. He died in Modena on 10 May 1822 — a man of unusual moral consistency whose greatest mathematics was met, in his lifetime, with almost total silence.",
+        "mathematics": "In 1799 Ruffini published a two-volume argument that the general equation of the fifth degree cannot be solved by radicals — the first serious claim, after nearly three centuries of failed attempts at a quintic formula, that the search was impossible in principle. His proof pioneered permutation-group reasoning (he effectively knew that the relevant subgroups of S₅ obstruct any radical tower) but assumed, without justification, that any radical in a solution formula must be expressible in the equation's roots. The gap is real; the vision was right. The mathematical world ignored him — only Cauchy responded with recognition and encouragement, in a letter Ruffini treasured. Abel closed the gap in 1824, and the result is now the Abel–Ruffini theorem; Galois then explained it structurally. This site's 'Why Five' lab runs that structural explanation — the derived series of S₅ stalling at A₅ — with Ruffini's name restored to the story's opening chapter.",
+        "legacy": "Ruffini's rule for synthetic division keeps his name in every algebra classroom; the Abel–Ruffini theorem keeps it in every algebra course's climax. He is the Athenaeum's standing lesson that being essentially right, first, and ignored is a fate mathematics history can eventually repair."
+      },
+      "legends": [
+        { "claim": "Cauchy alone acknowledged the 1799 proof", "status": "documented", "note": "Cauchy's 1821 letter praising Ruffini's work survives; the broader silence of the community is a matter of record." }
+      ],
+      "works": [
+        { "title": "Teoria generale delle equazioni", "year": 1799, "kind": "book", "note": "The first sustained argument for the unsolvability of the general quintic." },
+        { "title": "Riflessioni intorno alla soluzione delle equazioni algebraiche generali", "year": 1813, "kind": "book", "note": "The refined account, answering what few critics engaged." },
+        { "title": "Memoria sul tifo contagioso", "year": 1820, "kind": "paper", "note": "On typhus, written from clinical experience — his own included." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Ruffini/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Paolo_Ruffini" }
+      ]
+    },
+    {
+      "slug": "cauchy",
+      "name": "Augustin-Louis Cauchy",
+      "years": "1789–1857",
+      "bio": {
+        "life": "Augustin-Louis Cauchy was born in Paris on 21 August 1789, five weeks after the fall of the Bastille; his royalist family fled the Terror to the countryside, where Laplace and Lagrange were family acquaintances and Lagrange reportedly warned his father not to show the boy mathematics too soon. He became the most prolific mathematician of his century after Euler — some 800 papers, collected in 27 volumes — and one of its most difficult men: devoutly Catholic, rigidly legitimist, and famously careless with other people's manuscripts. When the July Revolution of 1830 replaced his king, he refused the loyalty oath, gave up his chairs, and followed Charles X into exile, tutoring the Bourbon heir in Prague before returning in 1838. He died at Sceaux on 23 May 1857.",
+        "mathematics": "Cauchy made analysis rigorous: the Cours d'analyse (1821) defined limits, continuity, and convergence in essentially modern terms, and his lectures defined the derivative and the integral as theorems-about-limits rather than manipulations. He founded complex analysis — the integral theorem, the residue calculus — and, in an 1813 memoir on polygonal numbers, proved the sumset inequality |A+B| ≥ min(p, |A|+|B|−1) modulo a prime, rediscovered by Davenport in 1935 and now the Cauchy–Davenport theorem: the base case of additive combinatorics, machine-verified in this site's corpus and run live in its lab. In group theory he proved that a prime dividing a group's order forces an element of that order (1845), a founding stone of the subject Galois had left. The darker ledger: as Academy referee he mishandled Abel's great Paris memoir and returned Galois's — the two most consequential lost homeworks in mathematical history.",
+        "legacy": "Every ε and δ on this site is Cauchy's grammar; the Cauchy–Davenport lab bears his name on its PROVED badges. That the man who made mathematics careful was so careless with the two manuscripts that mattered most is an irony the Athenaeum declines to soften."
+      },
+      "legends": [
+        { "claim": "Lagrange's warning to his father about early mathematics", "status": "attributed", "note": "Reported in Valson's biography from family tradition." },
+        { "claim": "He lost Abel's and mishandled Galois's memoirs", "status": "documented", "note": "The Academy's records document both episodes; degrees of personal fault are debated by historians." }
+      ],
+      "works": [
+        { "title": "Recherches sur les nombres (polygonal numbers memoir)", "year": 1813, "kind": "paper", "note": "Contains the sumset inequality now called Cauchy–Davenport — verified in this site's corpus." },
+        { "title": "Cours d'analyse de l'École Royale Polytechnique", "year": 1821, "kind": "book", "note": "Rigorous limits, continuity, convergence — modern analysis begins.", "link": "https://archive.org/details/coursdanalysede00caucgoog" },
+        { "title": "Mémoire sur les intégrales définies, prises entre des limites imaginaires", "year": 1825, "kind": "paper", "note": "Contour integration; the residue theorem." },
+        { "title": "Mémoire sur les arrangements … (element of prime order)", "year": 1845, "kind": "paper", "note": "Cauchy's theorem in group theory." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Cauchy/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Augustin-Louis_Cauchy" }
+      ]
+    }
+  ]
+}
