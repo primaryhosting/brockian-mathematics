@@ -1,6 +1,38 @@
 {
- "count": 100,
+ "count": 104,
  "queue": [
+  {
+   "target": "Zeta23Core.vonNeumann_trace_ineq_hermitian",
+   "tier": "C-corpus-extension",
+   "rank": 1,
+   "difficulty": "HARD",
+   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): for Hermitian matrices A B over an RCLike field on a finite type, Re(tr(A*B)) \u2264 \u2211 i, a i * b i where a, b are the eigenvalues of A and B each sorted in decreasing order. Recommended route: Re tr(AB) = \u2211_{jk} a_j b_k |W_{jk}|\u00b2 with W unitary (product of eigenvector unitaries), so the weight matrix (|W_{jk}|\u00b2) is doubly stochastic; conclude by Birkhoff/von Neumann convexity or a direct rearrangement argument over doubly stochastic matrices. Define sorted eigenvalues via Matrix.IsHermitian.eigenvalues composed with a sorting equivalence (Tuple.sort / MonovaryOn), or use Mathlib's eigenvalues\u2080 if available in this toolchain.",
+   "statement": "Von Neumann trace inequality, Hermitian case: Re tr(AB) \u2264 \u2211 a_i\u2193 b_i\u2193 (eigenvalues sorted decreasing)."
+  },
+  {
+   "target": "Zeta23Core.sylvester_finrank_le_posIndex",
+   "tier": "C-corpus-extension",
+   "rank": 1,
+   "difficulty": "MEDIUM",
+   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): let A be a Hermitian matrix over an RCLike field on a finite type n, and define posIndex A := the number of indices i with 0 < A.eigenvalues i (Fintype.card of the filtered subtype). If W is a submodule of (n \u2192 \ud835\udd5c) on which the quadratic form x \u21a6 Re (star x \u2b1d\u1d65 (A *\u1d65 x)) is positive definite (positive on all nonzero x of W), then Module.finrank \ud835\udd5c W \u2264 posIndex A. Route: the positive part A\u208a of the spectral decomposition has rank = posIndex A and the map A\u208a *\u1d65 \u00b7 restricted to W is injective (a kernel vector x would satisfy x\u1d34Ax = \u2212x\u1d34A\u208bx \u2264 0 contradicting positive-definiteness on W), then finrank W \u2264 rank A\u208a.",
+   "statement": "Sylvester's law, hard direction: any subspace on which a Hermitian form is positive definite has dimension \u2264 n\u208a(A), the number of positive eigenvalues."
+  },
+  {
+   "target": "Zeta23Core.posIndex_conj_le",
+   "tier": "C-corpus-extension",
+   "rank": 2,
+   "difficulty": "MEDIUM",
+   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): for a Hermitian matrix Q on a finite type m and any rectangular matrix B : Matrix m d \ud835\udd5c, the compression B\u1d34QB is Hermitian and posIndex (B\u1d34 * Q * B) \u2264 posIndex Q, where posIndex counts positive eigenvalues. Route: a subspace of dimension k on which x\u1d34(B\u1d34QB)x is positive definite pushes forward under B to a k-dimensional subspace (injectivity on that subspace is forced) on which Q is positive definite; then apply the Sylvester hard direction (previous target).",
+   "statement": "Inertia does not increase under compression: n\u208a(B\u1d34QB) \u2264 n\u208a(Q)."
+  },
+  {
+   "target": "Zeta23Core.rank_trace_ineq",
+   "tier": "C-corpus-extension",
+   "rank": 3,
+   "difficulty": "HARD",
+   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): let P Q be n\u00d7n matrices over an RCLike field with P positive semidefinite of rank \u2264 r, Q Hermitian with posIndex Q \u2264 b (posIndex = number of positive eigenvalues), and c a positive real. Then c\u00b7Re(tr P) \u2212 (c\u00b2/4)\u00b7r + 2c\u00b7Re(tr Q) \u2212 c\u00b2\u00b7b \u2264 \u2016P + Q\u2016_F\u00b2, where \u2016M\u2016_F\u00b2 := Re tr(M\u1d34M) is the squared Frobenius norm. This is Lemma 3.2 of the CLAUDE two-thirds preprint, provable from von Neumann's trace inequality applied to the spectral decompositions of P and the positive/negative parts of Q; its scalar shadow at r = b = 1 is the integrality step m\u00b2 \u2265 2m \u2212 1. Prove the two prerequisite targets first if useful.",
+   "statement": "Rank\u2013trace inequality (preprint Lemma 3.2): c\u00b7tr P \u2212 (c\u00b2/4)r + 2c\u00b7tr Q \u2212 c\u00b2 b \u2264 \u2016P+Q\u2016_F\u00b2."
+  },
   {
    "target": "Frontier.Goodstein_terminates",
    "tier": "FRONTIER-set",

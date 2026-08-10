@@ -1,0 +1,38 @@
+{
+  "count": 4,
+  "note": "Independent re-formalization targets: the linear-algebraic core of the CLAUDE two-thirds preprint (10 Aug 2026). Source statements: github.com/anthropics/zeta-23-lean v1.0, Zeta23/LinAlg/. Goal is a FRESH proof at OUR toolchain (Mathlib / lean-4.32.0) — do not port their proofs; prove from Mathlib. These lemmas are self-contained Hermitian-matrix facts; von Neumann and both Sylvester directions are stated by the paper as absent from Mathlib.",
+  "queue": [
+    {
+      "target": "Zeta23Core.vonNeumann_trace_ineq_hermitian",
+      "tier": "C-corpus-extension",
+      "rank": 1,
+      "difficulty": "HARD",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): for Hermitian matrices A B over an RCLike field on a finite type, Re(tr(A*B)) ≤ ∑ i, a i * b i where a, b are the eigenvalues of A and B each sorted in decreasing order. Recommended route: Re tr(AB) = ∑_{jk} a_j b_k |W_{jk}|² with W unitary (product of eigenvector unitaries), so the weight matrix (|W_{jk}|²) is doubly stochastic; conclude by Birkhoff/von Neumann convexity or a direct rearrangement argument over doubly stochastic matrices. Define sorted eigenvalues via Matrix.IsHermitian.eigenvalues composed with a sorting equivalence (Tuple.sort / MonovaryOn), or use Mathlib's eigenvalues₀ if available in this toolchain.",
+      "statement": "Von Neumann trace inequality, Hermitian case: Re tr(AB) ≤ ∑ a_i↓ b_i↓ (eigenvalues sorted decreasing)."
+    },
+    {
+      "target": "Zeta23Core.sylvester_finrank_le_posIndex",
+      "tier": "C-corpus-extension",
+      "rank": 1,
+      "difficulty": "MEDIUM",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): let A be a Hermitian matrix over an RCLike field on a finite type n, and define posIndex A := the number of indices i with 0 < A.eigenvalues i (Fintype.card of the filtered subtype). If W is a submodule of (n → 𝕜) on which the quadratic form x ↦ Re (star x ⬝ᵥ (A *ᵥ x)) is positive definite (positive on all nonzero x of W), then Module.finrank 𝕜 W ≤ posIndex A. Route: the positive part A₊ of the spectral decomposition has rank = posIndex A and the map A₊ *ᵥ · restricted to W is injective (a kernel vector x would satisfy xᴴAx = −xᴴA₋x ≤ 0 contradicting positive-definiteness on W), then finrank W ≤ rank A₊.",
+      "statement": "Sylvester's law, hard direction: any subspace on which a Hermitian form is positive definite has dimension ≤ n₊(A), the number of positive eigenvalues."
+    },
+    {
+      "target": "Zeta23Core.posIndex_conj_le",
+      "tier": "C-corpus-extension",
+      "rank": 2,
+      "difficulty": "MEDIUM",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): for a Hermitian matrix Q on a finite type m and any rectangular matrix B : Matrix m d 𝕜, the compression BᴴQB is Hermitian and posIndex (Bᴴ * Q * B) ≤ posIndex Q, where posIndex counts positive eigenvalues. Route: a subspace of dimension k on which xᴴ(BᴴQB)x is positive definite pushes forward under B to a k-dimensional subspace (injectivity on that subspace is forced) on which Q is positive definite; then apply the Sylvester hard direction (previous target).",
+      "statement": "Inertia does not increase under compression: n₊(BᴴQB) ≤ n₊(Q)."
+    },
+    {
+      "target": "Zeta23Core.rank_trace_ineq",
+      "tier": "C-corpus-extension",
+      "rank": 3,
+      "difficulty": "HARD",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): let P Q be n×n matrices over an RCLike field with P positive semidefinite of rank ≤ r, Q Hermitian with posIndex Q ≤ b (posIndex = number of positive eigenvalues), and c a positive real. Then c·Re(tr P) − (c²/4)·r + 2c·Re(tr Q) − c²·b ≤ ‖P + Q‖_F², where ‖M‖_F² := Re tr(MᴴM) is the squared Frobenius norm. This is Lemma 3.2 of the CLAUDE two-thirds preprint, provable from von Neumann's trace inequality applied to the spectral decompositions of P and the positive/negative parts of Q; its scalar shadow at r = b = 1 is the integrality step m² ≥ 2m − 1. Prove the two prerequisite targets first if useful.",
+      "statement": "Rank–trace inequality (preprint Lemma 3.2): c·tr P − (c²/4)r + 2c·tr Q − c² b ≤ ‖P+Q‖_F²."
+    }
+  ]
+}
