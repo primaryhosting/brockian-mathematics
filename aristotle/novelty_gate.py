@@ -24,7 +24,8 @@ ENDPOINT = "https://leansearch.net/search"
 COMMON = {"theorem", "statement", "problem", "conjecture", "exists", "terminates",
           "sign", "invariant", "phase", "bound", "inequality", "regularity",
           "correlation", "singularity", "reciprocity", "equilibrium", "impossibility",
-          "generation", "independent", "finite", "three", "second", "implies", "prime", "primes"}
+          "generation", "independent", "finite", "three", "second", "implies", "prime", "primes",
+          "color", "gaussian", "partition", "regulator", "penrose", "willmore"}
 PACE = float(os.environ.get("NOVELTY_PACE", "2.5"))   # LeanSearch 403s if hammered
 MAX = int(os.environ.get("NOVELTY_MAX", "120"))
 
