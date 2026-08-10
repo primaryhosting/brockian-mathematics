@@ -1,0 +1,201 @@
+{
+  "batch": "era-nineteenth-a",
+  "profiles": [
+    {
+      "slug": "abel",
+      "name": "Niels Henrik Abel",
+      "years": "1802–1829",
+      "bio": {
+        "life": "Niels Henrik Abel was born on the island of Finnøy, Norway, on 5 August 1802, into a large family made poor by his father's political and personal ruin. His talent was discovered by a schoolteacher, Holmboe, who raised money to keep him studying. He traveled Europe on a small grant — Berlin, where the engineer-publisher Crelle befriended him and filled the first volume of his new journal with Abel's papers, and Paris, where the Academy mislaid his greatest memoir. He returned to Norway without a post, tubercular and in debt, and died at Froland on 6 April 1829, aged twenty-six. Two days later a letter from Crelle arrived: the professorship in Berlin was his. The Abel Prize, mathematics' equivalent of a Nobel, carries his name.",
+        "mathematics": "In 1824, in a six-page pamphlet printed at his own expense (compressed to save money, nearly to the point of unreadability), Abel completed what Ruffini had begun: a full proof that the general quintic equation cannot be solved by radicals — the Abel–Ruffini theorem, the closing of a search begun with the Renaissance solution of the cubic. He then went past impossibility to structure, studying the special equations that are solvable; the commutative groups behind them are called abelian in his honor, lowercase — the quiet supreme compliment of mathematics. In parallel with Jacobi he founded the theory of elliptic functions by the decisive move of inversion, and the Paris memoir — recovered and published in 1841 — established the addition theorem for what are now abelian integrals.",
+        "legacy": "The quintic's impossibility is half of this site's 'Why Five' story — Abel proved the fact; Galois, months younger and equally doomed, explained the reason. Two of the great structures of algebra, abelian groups and abelian varieties, spell his name without capitalization, which is how mathematics says forever."
+      },
+      "legends": [
+        { "claim": "The Berlin professorship letter arrived two days after his death", "status": "documented", "note": "Crelle's letter of 8 April 1829 is preserved; Abel died on 6 April." },
+        { "claim": "Gauss left the 1824 pamphlet unread", "status": "attributed", "note": "Reported in the biographical tradition; Gauss's copy was reportedly found uncut. Not independently verifiable." }
+      ],
+      "works": [
+        { "title": "Mémoire sur les équations algébriques (the quintic pamphlet)", "year": 1824, "kind": "paper", "note": "Self-published, six pages: the general quintic is unsolvable by radicals." },
+        { "title": "Recherches sur les fonctions elliptiques", "year": "1827–28", "kind": "paper", "note": "Crelle's Journal: inversion of elliptic integrals; double periodicity." },
+        { "title": "Mémoire sur une propriété générale d'une classe très étendue de fonctions transcendantes", "year": "written 1826, published 1841", "kind": "memoir", "note": "The mislaid Paris memoir; the addition theorem for abelian integrals." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Abel/" },
+        { "label": "The Abel Prize — biography", "url": "https://abelprize.no/page/niels-henrik-abel" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Niels_Henrik_Abel" }
+      ]
+    },
+    {
+      "slug": "jacobi",
+      "name": "Carl Gustav Jacob Jacobi",
+      "years": "1804–1851",
+      "bio": {
+        "life": "Carl Gustav Jacob Jacobi was born in Potsdam on 10 December 1804 to a prosperous banking family, was ready for university at twelve, and at Königsberg built — with Bessel and Franz Neumann — the first modern research-seminar culture in mathematics: students learning by doing new mathematics rather than reciting old. Legendary as a lecturer and ferocious as a worker (asked whether overwork endangered his health, he is reported to have answered that health was not the point), he lost his fortune in the family bank's failure, weathered political trouble after 1848, and died of smallpox in Berlin on 18 February 1851. His declaration to Legendre in 1830 — that the sole end of science is 'the honor of the human mind' — is documented in their correspondence and remains pure mathematics' best one-line manifesto.",
+        "mathematics": "Jacobi's Fundamenta nova (1829) built, in competition and correspondence with Abel, the theory of elliptic and theta functions — and then used it to do arithmetic: his four-square theorem gives the exact count of representations of any integer as a sum of four squares, r₄(n) = 8σ(n) restricted to divisors not divisible by 4, turning Lagrange's existence theorem into a formula. Determinants of partial derivatives (the Jacobian), the Jacobi symbol generalizing Legendre's, the Jacobi identity of Lie theory, Hamilton–Jacobi mechanics, and the Jacobi eigenvalue sweep still used in numerical spectral work: the breadth is Eulerian. His theta-function arithmetic is the ancestral technique behind the modular machinery of twentieth-century number theory.",
+        "legacy": "Every time this site's kernels diagonalize a small symmetric matrix, Jacobi's 1846 rotation method is a live option; every character-sum manipulation in the corpus walks paths he cut. And the seminar he invented is, at sufficient remove, the ancestor of every research group — including the human-plus-machine one that built this site."
+      },
+      "legends": [
+        { "claim": "'The sole end of science is the honor of the human mind' (letter to Legendre)", "status": "documented", "note": "From the 1830 Jacobi–Legendre correspondence, in reply to Fourier's utilitarianism." },
+        { "claim": "The remark dismissing health as the point of life", "status": "attributed", "note": "Reported in the biographical tradition in several wordings." }
+      ],
+      "works": [
+        { "title": "Fundamenta nova theoriae functionum ellipticarum", "year": 1829, "kind": "book", "note": "Theta functions; the four-square formula; the elliptic-function revolution's textbook." },
+        { "title": "De formatione et proprietatibus Determinantium", "year": 1841, "kind": "paper", "note": "The systematic theory of determinants and the Jacobian." },
+        { "title": "Über ein leichtes Verfahren … (the eigenvalue method)", "year": 1846, "kind": "paper", "note": "The Jacobi rotation method, still in numerical service." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Jacobi/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Carl_Gustav_Jacob_Jacobi" }
+      ]
+    },
+    {
+      "slug": "stern",
+      "name": "Moritz Abraham Stern",
+      "years": "1807–1894",
+      "bio": {
+        "life": "Moritz Abraham Stern was born in Frankfurt am Main on 29 June 1807 and spent virtually his whole career at Göttingen — first as a long-underpaid lecturer, then, in 1859, as full professor: the first Jewish full professor at a German university appointed without converting to Christianity, a distinction that had cost him decades of waiting and is worth recording plainly. He was among the teachers of the young Riemann, examined Eisenstein, and late in life edited portions of Gauss's posthumous papers. He retired to Zürich to be near his son and died there on 30 January 1894.",
+        "mathematics": "Stern's name lives in a structure of great beauty: the array he published in 1858, now called the Stern–Brocot tree. Start with 0/1 and 1/0 and repeatedly insert between neighbors their mediant (a+c)/(b+d); every positive rational number appears exactly once, automatically in lowest terms, ordered by size. The tree organizes the Farey sequences, the continued-fraction convergents, and the best rational approximations — one diagram containing the whole approximation theory of the rationals. The related Stern diatomic sequence counts hyperbinary representations and walks the same tree by rows. This site's Farey lab and continued-fraction lab both live inside Stern's diagram, whether or not his name appears on a given screen.",
+        "legacy": "A schoolroom-simple rule — add numerators, add denominators — generating the complete, duplicate-free catalogue of the rationals: Stern's tree is a standing exhibit of structure hiding in plain sight. That a Paris clockmaker found it independently three years later, for gear trains, completes the lesson: the mathematics was simply there, waiting for anyone honest with a workshop problem or a number-theory question."
+      },
+      "legends": [
+        { "claim": "First unconverted Jewish full professor at a German university", "status": "documented", "note": "The 1859 Göttingen appointment is the standard citation for this milestone." }
+      ],
+      "works": [
+        { "title": "Über eine zahlentheoretische Funktion", "year": 1858, "kind": "paper", "note": "Crelle's Journal 55: the mediant array — the Stern–Brocot tree and diatomic sequence." },
+        { "title": "Lehrbuch der algebraischen Analysis", "year": 1860, "kind": "book", "note": "His analysis textbook, from the Göttingen lectures." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Stern/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Moritz_Abraham_Stern" }
+      ]
+    },
+    {
+      "slug": "brocot",
+      "name": "Achille Brocot",
+      "years": "1817–1878",
+      "bio": {
+        "life": "Achille Brocot was born in Paris in 1817 into a family of clockmakers and became one of the most distinguished horologists of nineteenth-century France: the Brocot suspension (still standard for pendulum adjustment), the Brocot escapement with its jeweled pallets, and prize medals from the great exhibitions all carry the family name. He was a tradesman, not an academic — which is exactly why he sits in this Athenaeum. He died in Paris in 1878.",
+        "mathematics": "Brocot faced a shop-floor problem: a clock train must realize a gear ratio — say, some astronomical constant — but gears can only have whole numbers of teeth, and not too many. Which fraction with small numerator and denominator best approximates the target? His 1861 procedure: keep the best fraction below and the best above, and repeatedly form their mediant, refining whichever side the target falls on. The table of fractions this generates is exactly the tree Moritz Stern had published from pure number theory three years earlier — hence the shared name Stern–Brocot. Brocot's version came with error analysis fit for a workbench: how many seconds per day a given tooth-count approximation would cost. It is continued-fraction approximation, invented independently, with a deadline and a customer.",
+        "legacy": "The Athenaeum keeps Brocot beside Stern deliberately: the same mathematical object discovered once for truth and once for use, in complete ignorance of each other. Every 'best rational approximation' display in this site's Farey and continued-fraction labs is running a computation a Paris clockmaker needed in 1861."
+      },
+      "legends": [
+        { "claim": "Independence from Stern's 1858 paper", "status": "documented", "note": "No evidence connects the clockmaker to Crelle's Journal; the constructions differ in presentation and purpose and the independence is the standard historical reading." }
+      ],
+      "works": [
+        { "title": "Calcul des rouages par approximation, nouvelle méthode", "year": 1862, "kind": "paper", "note": "Revue Chronométrique (presented 1861): mediant search for gear ratios, with practical error bounds." }
+      ],
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Achille_Brocot" },
+        { "label": "Wikipedia — Stern–Brocot tree", "url": "https://en.wikipedia.org/wiki/Stern%E2%80%93Brocot_tree" }
+      ]
+    },
+    {
+      "slug": "bravais",
+      "name": "Auguste & Louis Bravais",
+      "years": "Auguste 1811–1863 · Louis 1801–1843",
+      "bio": {
+        "life": "The brothers Bravais worked the seam between natural history and geometry. Louis, born in 1801, was a physician and botanist; Auguste, born in Annonay on 23 August 1811, was a naval officer, explorer (Lapland, Spitsbergen), and later professor of physics at the École Polytechnique. In the 1830s they jointly measured plants; in the 1840s Auguste alone turned to crystals. Louis died in 1843; Auguste's health broke in the 1850s and he died at Le Chesnay on 30 March 1863.",
+        "mathematics": "Their joint botanical memoirs of 1837 did something quietly radical: they measured phyllotaxis — the angles between successive leaves and florets — across many species, and found the same numbers recurring: divergence fractions 1/2, 1/3, 2/5, 3/8, 5/13 (ratios of Fibonacci numbers) and, in the limit, an angle near 137.5°, the golden angle. They proposed the idealization that a single genetic spiral places organs at a constant irrational divergence — the model that, via Vogel's 1979 formula, draws every sunflower head in this site's phyllotaxis lab. Auguste's 1848–1851 crystallographic memoirs then classified the fourteen three-dimensional lattices — the Bravais lattices — that remain the first chapter of every solid-state physics course: the complete answer to how identical points can fill space with translational symmetry.",
+        "legacy": "Between them the brothers own both halves of this site's geometry-of-growth story: the measured Fibonacci angles of living plants and the lattice taxonomy that quasicrystals — and Penrose's tilings — famously escape. Fivefold symmetry is impossible in a Bravais lattice; that impossibility is exactly what makes the pentagon program's aperiodic geometry remarkable."
+      },
+      "legends": [],
+      "works": [
+        { "title": "Essai sur la disposition des feuilles curvisériées (with L. Bravais)", "year": 1837, "kind": "paper", "note": "Annales des sciences naturelles: measured divergence angles; Fibonacci fractions in leaf arrangement." },
+        { "title": "Mémoire sur les systèmes formés par des points distribués régulièrement", "year": "1848, published 1850", "kind": "memoir", "note": "The fourteen space lattices." },
+        { "title": "Études cristallographiques", "year": "1849–51", "kind": "book", "note": "The crystallographic program completed." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography (Auguste)", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Bravais/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Auguste_Bravais" }
+      ]
+    },
+    {
+      "slug": "chebyshev",
+      "name": "Pafnuty Chebyshev",
+      "years": "1821–1894",
+      "bio": {
+        "life": "Pafnuty Lvovich Chebyshev was born in Okatovo, west of Moscow, on 16 May 1821, with a lame leg that kept him from the army career of his family's tradition and left him, by way of compensation, a lifelong passion for mechanisms. At St. Petersburg he founded the school — Markov and Lyapunov were his students — that made Russia a mathematical power, and he preached with his practice that theory and application feed each other: he studied linkages for steam engines and built a 'plantigrade machine' that walked. He never married, lived frugally, and died at his desk in St. Petersburg on 8 December 1894.",
+        "mathematics": "Chebyshev made the first real progress on the Prime Number Theorem since Gauss and Legendre conjectured it: his 1852 memoir proved that π(x) is trapped between constant multiples of x/ln x — with constants close to 1 — and that if π(x)·ln x/x has a limit at all, the limit must be 1. On the way he proved Bertrand's postulate: between n and 2n there is always a prime. His probability inequality — deviation from the mean is controlled by variance — gave the law of large numbers its modern proof and every statistics course its first bound. The Chebyshev polynomials, born from linkage design, minimize worst-case error and now saturate numerical analysis, including approximation steps inside kernels on this site.",
+        "legacy": "The prime-counting labs on this site work in the corridor Chebyshev built: his bounds were the state of the art for over forty years, until Hadamard and de la Vallée Poussin crossed the finish line in 1896 — two years after his death — with the complex analysis he had deliberately avoided."
+      },
+      "legends": [],
+      "works": [
+        { "title": "Sur la fonction qui détermine la totalité des nombres premiers", "year": 1851, "kind": "paper", "note": "The limit, if it exists, is 1." },
+        { "title": "Mémoire sur les nombres premiers", "year": 1852, "kind": "paper", "note": "The Chebyshev bounds; Bertrand's postulate proved." },
+        { "title": "Des valeurs moyennes", "year": 1867, "kind": "paper", "note": "The Chebyshev inequality; the law of large numbers by variance." },
+        { "title": "Théorie des mécanismes connus sous le nom de parallélogrammes", "year": 1854, "kind": "paper", "note": "Where the Chebyshev polynomials enter — from steam-engine linkages." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Chebyshev/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Pafnuty_Chebyshev" }
+      ]
+    },
+    {
+      "slug": "hermite",
+      "name": "Charles Hermite",
+      "years": "1822–1901",
+      "bio": {
+        "life": "Charles Hermite was born in Dieppe on 24 December 1822 with a congenital deformity of the right foot that required a cane all his life — and cost him, under the physical requirements of the day, his place at the École Polytechnique after one year. He passed his examinations with difficulty (he despised examination mathematics, and it showed) while publishing research that impressed Europe. From the Sorbonne he became the great correspondent-teacher of French mathematics: Poincaré was his student, Stieltjes his epistolary partner in hundreds of letters, and half the Continent his audience. Deeply Catholic and deeply generous, he died in Paris on 14 January 1901.",
+        "mathematics": "In 1873 Hermite proved that e is transcendental — the first naturally occurring constant shown to satisfy no polynomial equation with integer coefficients. The technique (constructing an impossible integer between 0 and 1 from a cleverly designed integral) was adapted almost line-for-line by Lindemann in 1882 to prove π transcendental, killing the circle-squaring problem forever; Hermite had judged that step too hard and said so, making him the rare mathematician whose named limitation was mere modesty. In 1858 he solved the general quintic — not by radicals, which Abel forbade, but by elliptic modular functions: what algebra cannot do, transcendence can. The Hermite polynomials are the eigenfunctions of the quantum harmonic oscillator, which makes him a silent co-author of this site's Schrödinger ladder lab; Hermitian matrices — equal to their conjugate transpose, with real spectrum — carry his name through all of quantum mechanics and the random-matrix ensembles in the Observatory.",
+        "legacy": "Transcendence theory begins with Hermite's e; the spectral vocabulary of physics is written in his adjective. His confessed horror at pathological functions — 'I turn away with fright... from this lamentable plague of functions which do not have derivatives' — is documented in a letter to Stieltjes, and endears him to every applied mathematician since."
+      },
+      "legends": [
+        { "claim": "'I turn away with fright … from functions which have no derivatives'", "status": "documented", "note": "From an 1893 letter to Stieltjes, in the published correspondence." }
+      ],
+      "works": [
+        { "title": "Sur la résolution de l'équation du cinquième degré", "year": 1858, "kind": "paper", "note": "The quintic solved by elliptic modular functions." },
+        { "title": "Sur la fonction exponentielle", "year": 1873, "kind": "paper", "note": "The transcendence of e." },
+        { "title": "Correspondance Hermite–Stieltjes", "year": "1882–1894", "kind": "letter", "note": "Two volumes of the century's best mathematical letters." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Hermite/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Charles_Hermite" }
+      ]
+    },
+    {
+      "slug": "mertens",
+      "name": "Franz Mertens",
+      "years": "1840–1927",
+      "bio": {
+        "life": "Franz Mertens was born in Schroda, in Prussian Posen (now Środa Wielkopolska, Poland), on 20 March 1840, studied in Berlin under Kronecker and Kummer, and held chairs at Kraków, Graz, and finally Vienna, where the young Erwin Schrödinger sat in his lectures. A careful, classical analyst of the old school, he worked into his eighties and died in Vienna on 5 March 1927.",
+        "mathematics": "Mertens' 1874 paper proved the three estimates every sieve argument reaches for first: the sum of ln p/p over primes up to x is ln x + O(1); the sum of 1/p is ln ln x + M + o(1) (defining the Mertens constant M ≈ 0.2615); and the product of (1 − 1/p) decays like e^{−γ}/ln x — with Euler's γ appearing, unexpectedly, as the bridge between the primes and the harmonic series. These 'Mertens theorems' predate the Prime Number Theorem by twenty-two years and are still the standard opening moves in prime-density heuristics — including the singular-series manipulations whose thousands of verified constants fill this site's corpus. His 1897 conjecture — that the cumulative Möbius function never exceeds √x — would have implied the Riemann Hypothesis; Odlyzko and te Riele disproved it in 1985 without exhibiting a single counterexample, showing only that one must exist below e^{3.21×10^64}.",
+        "legacy": "The Mertens story is this site's favorite shape twice over: elementary theorems that still carry modern sieves, and a plausible conjecture — checked numerically to billions — that turned out simply false. The disproof-without-counterexample is the purest specimen in the museum of 'the data was never going to be enough.'"
+      },
+      "legends": [
+        { "claim": "Schrödinger attended his Vienna lectures", "status": "documented", "note": "Schrödinger's Vienna curriculum included Mertens' mathematics courses." }
+      ],
+      "works": [
+        { "title": "Ein Beitrag zur analytischen Zahlentheorie", "year": 1874, "kind": "paper", "note": "Crelle's Journal 78: the three Mertens theorems and the constant M." },
+        { "title": "Über eine zahlentheoretische Funktion", "year": 1897, "kind": "paper", "note": "The Mertens conjecture on M(x) — disproved 1985." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Mertens/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Franz_Mertens" }
+      ]
+    },
+    {
+      "slug": "lucas",
+      "name": "Édouard Lucas",
+      "years": "1842–1891",
+      "bio": {
+        "life": "François Édouard Anatole Lucas was born in Amiens on 4 April 1842, served as an artillery officer in the Franco-Prussian War, and spent his career as a mathematics teacher at the great Paris lycées — a schoolmaster who happened to be the era's leading authority on recreational and computational number theory. His four-volume Récréations mathématiques made serious mathematics playful, and his Tower of Hanoi puzzle (sold from 1883 under the anagram-pseudonym 'M. Claus') smuggled binary recursion into every toy shop. His death was a freak of dining: at a banquet in 1891 a dropped plate sent a shard into his cheek; the wound turned septic (erysipelas), and he died in Paris days later, on 3 October, aged forty-nine.",
+        "mathematics": "Lucas studied the Fibonacci sequence deeply enough to give it its modern name and its companion: the Lucas numbers 2, 1, 3, 4, 7, 11, … — same recurrence, different start, and the trace side of the golden-ratio arithmetic (Lᵤ = φⁿ + ψⁿ) that this site's ℚ(√5) kernels compute exactly. From the divisibility theory of such sequences he built the first practical primality tests that do not factor: in 1876, by hand, over weeks of calculation, he proved 2¹²⁷ − 1 prime — a 39-digit number, and still the largest prime ever certified by unaided human computation. Refined by D. H. Lehmer in 1930, the Lucas–Lehmer test (square, subtract two, reduce; p − 2 rounds) is the exact algorithm this site's Mersenne lab runs and the engine behind every GIMPS record prime.",
+        "legacy": "Every record largest-known prime of the computer era is certified by the test Lucas invented for pencil and paper. The Athenaeum notes with pleasure that its patron of recreational mathematics is also, through Lehmer, the patron of some of the longest-running computations in human history."
+      },
+      "legends": [
+        { "claim": "The banquet accident", "status": "documented", "note": "The plate-shard injury and death from infection days later are recorded in contemporary accounts and obituaries." },
+        { "claim": "The Tower of Hanoi's ancient legend (priests moving 64 golden disks)", "status": "legend", "note": "Invented by Lucas himself as marketing lore for the 1883 puzzle — a legend, by its author's design." }
+      ],
+      "works": [
+        { "title": "Théorie des fonctions numériques simplement périodiques", "year": 1878, "kind": "paper", "note": "American Journal of Mathematics: Lucas sequences and the primality tests built from them." },
+        { "title": "The primality of 2¹²⁷ − 1", "year": 1876, "kind": "paper", "note": "The largest prime ever found by hand; the record stood until 1951." },
+        { "title": "Récréations mathématiques", "year": "1882–94", "kind": "book", "note": "Four volumes; the Tower of Hanoi and a century of puzzle culture." },
+        { "title": "Théorie des nombres", "year": 1891, "kind": "book", "note": "His treatise, published in his final year." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Lucas/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/%C3%89douard_Lucas" }
+      ]
+    }
+  ]
+}

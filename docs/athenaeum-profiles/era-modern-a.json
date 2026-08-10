@@ -1,0 +1,183 @@
+{
+  "batch": "era-modern-a",
+  "profiles": [
+    {
+      "slug": "zeckendorf",
+      "name": "Édouard Zeckendorf",
+      "years": "1901–1983",
+      "bio": {
+        "life": "Édouard Zeckendorf was born in Liège, Belgium, on 2 May 1901, trained as a physician, and served as a medical officer in the Belgian army. Captured in the German invasion of 1940, he spent five years as a prisoner of war, practicing medicine for fellow prisoners — and doing number theory. He remained in Liège after the war, an amateur mathematician in the honorable old sense: unaffiliated, unpaid, and correct. He died in Liège on 16 May 1983.",
+        "mathematics": "Zeckendorf's theorem says every positive integer is the sum of non-consecutive Fibonacci numbers in exactly one way: 100 = 89 + 8 + 3, and no other such expression exists. It is a positional number system with the Fibonacci sequence as its 'powers' — base-φ arithmetic in disguise — and the no-two-consecutive rule is precisely what makes representation unique. He had the result in the 1930s but published only in 1972, twenty years after Lekkerkerker's 1952 proof appeared; the theorem generously carries Zeckendorf's name anyway, sometimes both. The representation is not a curiosity: Fibonacci coding built on it is a real variable-length code (self-delimiting, robust to bit slips) used in data compression, and the greedy algorithm that finds the representation is a standard first exhibit in the theory of numeration systems. This site's Zeckendorf lab runs the representation, the greedy proof, and the golden-ratio arithmetic behind it, with the corpus's verified Fibonacci lemmas on the ledger.",
+        "legacy": "An army doctor, a POW camp, and a theorem now taught in every combinatorics course: Zeckendorf is the Athenaeum's proof that the amateur tradition survived into the twentieth century. The naming — honoring the later publisher who conceived it first — is one of mathematics' kinder accidents."
+      },
+      "legends": [
+        { "claim": "He possessed the theorem decades before publishing", "status": "documented", "note": "Zeckendorf's own account dates the result to the 1930s; Lekkerkerker's independent proof appeared in 1952, Zeckendorf's publication in 1972." }
+      ],
+      "works": [
+        { "title": "Représentation des nombres naturels par une somme de nombres de Fibonacci ou de nombres de Lucas", "year": 1972, "kind": "paper", "note": "Bulletin de la Société Royale des Sciences de Liège: the uniqueness theorem." }
+      ],
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Edouard_Zeckendorf" },
+        { "label": "Wikipedia — Zeckendorf's theorem", "url": "https://en.wikipedia.org/wiki/Zeckendorf%27s_theorem" }
+      ]
+    },
+    {
+      "slug": "wigner",
+      "name": "Eugene Wigner",
+      "years": "1902–1995",
+      "bio": {
+        "life": "Eugene Paul Wigner was born in Budapest on 17 November 1902, one of the 'Martians' — the uncanny cohort of Hungarian-Jewish scientists (von Neumann was a schoolmate and lifelong friend, Szilárd and Teller close colleagues) who reshaped American physics. Trained as a chemical engineer to please his father, he followed symmetry into quantum mechanics instead. At Princeton from 1930, he was central to the Manhattan Project — he was present in the Chicago squash court when Fermi's pile went critical, and had brought a celebratory bottle of Chianti. He received the Nobel Prize in Physics in 1963 for symmetry principles in atomic and nuclear structure, and died in Princeton on 1 January 1995.",
+        "mathematics": "Wigner's 1931 book put group representation theory permanently inside quantum mechanics: selection rules, degeneracies, and conservation laws are representation theory, full stop. Facing heavy nuclei in the 1950s — Hamiltonians hopelessly beyond writing down — he made one of the great methodological leaps in science: model the unknown matrix as random and study what is universal. The result was the semicircle law for eigenvalue densities and the level-repulsion statistics that matched measured nuclear resonances. Two decades later, Montgomery's pair-correlation of Riemann zeros turned out to match Wigner's GUE statistics exactly — the bridge this site's pair-correlation lab and Observatory walk, with Odlyzko's computations as the evidence. His essay 'The Unreasonable Effectiveness of Mathematics in the Natural Sciences' (1960) named the mystery this entire enterprise lives inside.",
+        "legacy": "Random-matrix theory — invented to tame uranium — now describes the zeros of ζ, quantum chaos, wireless channels, and deep-learning spectra. The Athenaeum shelves Wigner beside Montgomery and Dyson: three people who found the primes and the nucleus humming the same tune."
+      },
+      "legends": [
+        { "claim": "The Chianti bottle at the first chain reaction", "status": "documented", "note": "Wigner's gift of Chianti at CP-1's criticality (2 December 1942) is recorded in participants' accounts; the signed bottle label survives." }
+      ],
+      "works": [
+        { "title": "Gruppentheorie und ihre Anwendung auf die Quantenmechanik der Atomspektren", "year": 1931, "kind": "book", "note": "Representation theory installed in quantum mechanics." },
+        { "title": "Characteristic vectors of bordered matrices with infinite dimensions", "year": 1955, "kind": "paper", "note": "Annals of Mathematics: the semicircle law; random-matrix theory begins." },
+        { "title": "The Unreasonable Effectiveness of Mathematics in the Natural Sciences", "year": 1960, "kind": "paper", "note": "The essay that named the mystery." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Wigner/" },
+        { "label": "Nobel Prize (1963)", "url": "https://www.nobelprize.org/prizes/physics/1963/wigner/facts/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Eugene_Wigner" }
+      ]
+    },
+    {
+      "slug": "dirac",
+      "name": "Paul Dirac",
+      "years": "1902–1984",
+      "bio": {
+        "life": "Paul Adrien Maurice Dirac was born in Bristol on 8 August 1902 to a Swiss-French father whose rigid rule that the boy speak to him only in perfect French produced, by Dirac's own account, a lifetime of near-silence. Trained first as an electrical engineer, he moved to Cambridge, held Newton's Lucasian chair for thirty-seven years, shared the 1933 Nobel Prize with Schrödinger at thirty-one, and finished his career at Florida State. His economy of speech was legendary — colleagues joked of the 'dirac,' one word per hour — and his economy of principle absolute: he judged theories by mathematical beauty and said so. He died in Tallahassee on 20 October 1984; his Westminster Abbey memorial carries his equation.",
+        "mathematics": "Dirac unified Heisenberg's matrices and Schrödinger's waves into transformation theory, wrote The Principles of Quantum Mechanics (1930) — still the subject's most elegant book — and gave physics its working grammar: bra–ket vectors, the delta function (scandalous to analysts until Schwartz's distributions vindicated it), and canonical quantization. His 1928 relativistic equation for the electron predicted antimatter before anyone had seen it; the positron arrived in 1932 on schedule. For this site the emblematic Dirac is the ladder: factorize the harmonic-oscillator Hamiltonian into raising and lowering operators a† and a, and the whole spectrum — evenly spaced rungs, ground state included — falls out of the single commutator [a, a†] = 1. The Schrödinger ladder lab plays that algebra against brute-force numerical diagonalization, with the corpus's verified oscillator rows on the ledger; the algebra wins on exactness, and honesty requires showing where the numerics truncate.",
+        "legacy": "Antimatter from aesthetics: Dirac remains the strongest case ever made that beautiful mathematics is predictive. Every ladder operator in the corpus's quantum modules is his handwriting."
+      },
+      "legends": [
+        { "claim": "The 'dirac' unit: one word per hour", "status": "attributed", "note": "A Cambridge joke recorded in colleagues' memoirs; affectionate, and consistent with every account of the man." }
+      ],
+      "works": [
+        { "title": "The quantum theory of the electron", "year": 1928, "kind": "paper", "note": "Proceedings of the Royal Society: the Dirac equation; antimatter predicted." },
+        { "title": "The Principles of Quantum Mechanics", "year": 1930, "kind": "book", "note": "Bra–ket notation, the delta function, the ladder-operator oscillator." },
+        { "title": "The Lagrangian in quantum mechanics", "year": 1933, "kind": "paper", "note": "The seed Feynman grew into the path integral." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Dirac/" },
+        { "label": "Nobel Prize (1933)", "url": "https://www.nobelprize.org/prizes/physics/1933/dirac/facts/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Paul_Dirac" }
+      ]
+    },
+    {
+      "slug": "lehmer",
+      "name": "Derrick Henry Lehmer",
+      "years": "1905–1991",
+      "bio": {
+        "life": "Derrick Henry 'Dick' Lehmer was born in Berkeley on 23 February 1905, son of Derrick Norman Lehmer, himself a number theorist and table-maker — the family business was, literally, the primes. With his wife Emma Trotskaia Lehmer, a formidable number theorist who co-authored much of his work, he formed one of mathematics' great married collaborations. He built factoring machines out of bicycle chains (1926) and photoelectric sensors (the 1932 machine could scan five thousand numbers a second), programmed the ENIAC for number theory on weekends, and professed at Berkeley — with an interruption in 1950–52, when he left for the National Bureau of Standards rather than sign California's loyalty oath, returning after the courts struck it down. He died in Berkeley on 22 May 1991.",
+        "mathematics": "Lehmer turned Lucas's 1876 primality insight into the modern algorithm: the Lucas–Lehmer test (1930) — start with 4, repeatedly square-minus-two modulo 2^p − 1; after p − 2 steps the result is zero exactly when the Mersenne number is prime. It is the algorithm behind every GIMPS record prime and the exact procedure this site's Mersenne lab executes. His sieves mechanized factorization decades before electronic computers; his 'Lehmer conjecture' on the Mahler measure of polynomials and the unsolved 'Lehmer's totient problem' (does φ(n) | n−1 force primality?) still generate papers; and the Lucas–Lehmer–Riesel and Lehmer-mean threads keep the name in half a dozen subfields. He was, with Emma, the founding spirit of computational number theory as an experimental science — computing not to replace proof but to feed it.",
+        "legacy": "Every record prime since 1952 has been certified by his test. The Athenaeum notes the shape of the inheritance: Lucas invented it for pencil, Lehmer rebuilt it for machines, and the machines have never stopped running it."
+      },
+      "legends": [
+        { "claim": "The loyalty-oath departure from Berkeley", "status": "documented", "note": "Lehmer took leave to the NBS during the 1950 oath controversy and returned after Tolman v. Underhill (1952); the episode is on the university's record." }
+      ],
+      "works": [
+        { "title": "An extended theory of Lucas' functions", "year": 1930, "kind": "paper", "note": "Annals of Mathematics: the Lucas–Lehmer test in its modern form." },
+        { "title": "A photo-electric number sieve", "year": 1933, "kind": "paper", "note": "The machine that sieved thousands of candidates per second, decades early." },
+        { "title": "Guide to Tables in the Theory of Numbers", "year": 1941, "kind": "book", "note": "The census of the subject's computational infrastructure." },
+        { "title": "Factorization of certain cyclotomic functions (with Emma Lehmer)", "year": 1932, "kind": "paper", "note": "Representative of the lifelong joint program; the 'Lehmer conjecture' polynomial appears in this era." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Lehmer_Derrick/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/D._H._Lehmer" }
+      ]
+    },
+    {
+      "slug": "davenport",
+      "name": "Harold Davenport",
+      "years": "1907–1969",
+      "bio": {
+        "life": "Harold Davenport was born in Huncoat, Lancashire, on 30 October 1907, studied at Manchester and Cambridge, and became a Fellow of Trinity as Littlewood's student. He held chairs at Bangor, University College London — where he built the strongest number-theory school in Britain — and finally Cambridge, as Rouse Ball Professor. A teacher of enormous influence (his doctoral students include Alan Baker, a Fields Medalist, and John Conway), he was president of the London Mathematical Society and a heavy smoker; lung cancer killed him in Cambridge on 9 June 1969, at sixty-one.",
+        "mathematics": "In 1935 Davenport proved that for sets A, B in the integers modulo a prime p, the sumset A+B has size at least min(p, |A| + |B| − 1) — and then discovered, with the historian's chagrin, that Cauchy had proved exactly this in 1813. He publicized the debt himself, and the Cauchy–Davenport theorem — the founding inequality of additive combinatorics, machine-verified in this site's corpus and run live in its lab — carries both names as a monument to honest attribution. His deeper technical legacy is in the geometry of numbers, exponential sums and the circle method (Waring's problem for fourth powers), and the analytic theory his Multiplicative Number Theory (1967) codified for every graduate student since. The 'Davenport constant' of a finite abelian group, central to zero-sum theory around the Erdős–Ginzburg–Ziv theorem, extends his sumset thread straight into this site's EGZ machinery.",
+        "legacy": "Additive combinatorics' base case bears his name (shared, at his own insistence, with a man 120 years dead) and his textbook still teaches the analytic theory. The Athenaeum also records him as a builder: the British number-theory school that followed was substantially his classroom."
+      },
+      "legends": [
+        { "claim": "The 1935 rediscovery of Cauchy's 1813 theorem", "status": "documented", "note": "Davenport himself published the acknowledgment ('On the addition of residue classes' and its follow-up note) — the naming reflects his own correction." }
+      ],
+      "works": [
+        { "title": "On the addition of residue classes", "year": 1935, "kind": "paper", "note": "Journal of the LMS: the sumset inequality — with Cauchy's 1813 priority acknowledged by Davenport himself." },
+        { "title": "The Higher Arithmetic", "year": 1952, "kind": "book", "note": "The beloved introduction, still in print." },
+        { "title": "Multiplicative Number Theory", "year": 1967, "kind": "book", "note": "The graduate standard on primes in progressions and L-functions." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Davenport/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Harold_Davenport" }
+      ]
+    },
+    {
+      "slug": "kakutani",
+      "name": "Shizuo Kakutani",
+      "years": "1911–2004",
+      "bio": {
+        "life": "Shizuo Kakutani was born in Osaka on 28 August 1911, was steered toward mathematics by an elder brother's textbooks against his lawyer father's wishes, and came to the Institute for Advanced Study in 1940 — where war overtook him; he returned to Japan on the 1942 diplomatic exchange ship, taught through the war years, and came back to America in 1948, spending the rest of his career at Yale. Gentle, precise, and beloved as a teacher, he died in New Haven on 17 August 2004. (His daughter, Michiko Kakutani, became the Pulitzer-winning book critic of the New York Times.)",
+        "mathematics": "Kakutani's 1941 fixed-point theorem extended Brouwer's to set-valued maps: an upper-semicontinuous correspondence with convex values on a convex compact set has a fixed point. Nine years later John Nash ran his one-page equilibrium existence proof through exactly this theorem — making Kakutani the quiet mathematical underwriter of modern game theory and a chunk of mathematical economics. In ergodic theory he built the skyscraper construction and induced transformations; in probability he proved that two-dimensional Brownian motion is neighborhood-recurrent yet hits any given point with probability zero, and forged the bridge between Brownian motion and harmonic functions (the Dirichlet problem solved by averaging over random paths) that this site's random-walk lab gestures toward. And he is the 'Kakutani' of the Collatz problem's aliases: he circulated the 3n+1 question so effectively through 1950s America that he joked it looked like a conspiracy to slow U.S. mathematics — a quip preserved in Lagarias's surveys.",
+        "legacy": "Game theory's fixed point, ergodic theory's skyscrapers, and the best joke in the Collatz literature: Kakutani's fingerprints are on three of this site's rooms. The Athenaeum honors especially the connector — the mathematician whose theorem was waiting exactly where Nash needed it."
+      },
+      "legends": [
+        { "claim": "The Collatz 'conspiracy to slow American mathematics' quip", "status": "attributed", "note": "Kakutani's joke, quoted in Lagarias's surveys of the 3n+1 problem from contemporaries' accounts." },
+        { "claim": "Return to Japan on the 1942 exchange ship", "status": "documented", "note": "The wartime exchange voyage (Gripsholm/Asama Maru arrangement) is part of the documented biographical record." }
+      ],
+      "works": [
+        { "title": "A generalization of Brouwer's fixed point theorem", "year": 1941, "kind": "paper", "note": "Duke Mathematical Journal: the set-valued fixed-point theorem Nash's equilibrium proof runs on." },
+        { "title": "Induced measure preserving transformations", "year": 1943, "kind": "paper", "note": "The skyscraper construction of ergodic theory." },
+        { "title": "Two-dimensional Brownian motion and harmonic functions", "year": 1944, "kind": "paper", "note": "Probabilistic potential theory: the Dirichlet problem by random paths." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Kakutani/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Shizuo_Kakutani" }
+      ]
+    },
+    {
+      "slug": "szekeres",
+      "name": "George Szekeres",
+      "years": "1911–2005",
+      "bio": {
+        "life": "George Szekeres was born in Budapest on 29 May 1911 and trained as a chemical engineer — mathematics was the passion of the circle of young Budapest Jews (Erdős, Turán, and the geometry student Esther Klein among them) who met around city park benches in the early 1930s to trade problems. Fleeing fascism in 1939, he and Esther — by then his wife — spent the war years in Shanghai, then emigrated to Australia in 1948, where he became a founding figure of Australian mathematics at Adelaide and UNSW. He and Esther died in Adelaide within an hour of each other on 28 August 2005, married sixty-eight years — an ending so fitting the newspapers checked it twice; it is documented fact.",
+        "mathematics": "In 1935, answering a question Esther Klein had posed to the group, Szekeres and Erdős proved two permanent theorems in one paper: any (r−1)(s−1)+1 distinct reals contain an increasing run of length r or a decreasing run of length s (the Erdős–Szekeres theorem, tight, and run live in this site's lab), and any sufficiently many points in general position contain a convex polygon — rediscovering Ramsey's theorem to do it. Erdős named it the Happy Ending problem, because George married the asker; the name stuck in the literature. Szekeres's range was enormous for a self-trained mathematician: in general relativity he found (with Kruskal, independently) the maximal extension of the Schwarzschild solution — the coordinates that revealed black holes' full geometry — and he computed fearlessly across combinatorics, cosmology, and numerical analysis into his nineties.",
+        "legacy": "One paper, two immortal theorems, and a marriage in the theorem's name: the Happy Ending story is the Athenaeum's warmest exhibit. That the same man also drew the complete map of the Schwarzschild black hole is the range this hall exists to celebrate."
+      },
+      "legends": [
+        { "claim": "He and Esther died within an hour of each other", "status": "documented", "note": "28 August 2005, Adelaide; reported in the obituaries and confirmed by family — not embellishment." },
+        { "claim": "'Happy Ending problem' named by Erdős", "status": "documented", "note": "Erdős's own coinage for the Klein–Szekeres marriage; used in his papers and talks." }
+      ],
+      "works": [
+        { "title": "A combinatorial problem in geometry (with P. Erdős)", "year": 1935, "kind": "paper", "note": "Compositio Mathematica: monotone subsequences, convex polygons, Ramsey revived." },
+        { "title": "On the singularities of a Riemannian manifold", "year": 1960, "kind": "paper", "note": "The Kruskal–Szekeres extension of Schwarzschild — the black hole's full chart." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Szekeres/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/George_Szekeres" }
+      ]
+    },
+    {
+      "slug": "robinson",
+      "name": "Raphael M. Robinson",
+      "years": "1911–1995",
+      "bio": {
+        "life": "Raphael Mitchel Robinson was born in National City, California, on 2 November 1911, and spent virtually his whole career at Berkeley. In 1939 he wrote, in the margin-space of a recommendation, a letter of mathematical comments to a brilliant student named Julia Bowman; they married in 1941, and Julia Robinson — his student, then his wife, then his colleague — became one of the century's great logicians (Hilbert's tenth problem) and the first woman president of the American Mathematical Society. Quiet and versatile, Raphael worked in logic, number theory, set theory, and tilings, and died in Berkeley on 27 January 1995.",
+        "mathematics": "Robinson owns three separate permanent results. In 1952, using Berkeley's SWAC computer — programming it, he liked to note, without ever having seen it — he ran the Lucas–Lehmer test and found five new Mersenne primes in one year, the first primes ever discovered by an electronic computer (two of them on 30 January, machine-history's first double). In logic he distilled Robinson arithmetic Q — the tiny finitely-axiomatized fragment of arithmetic that is still essentially undecidable: the minimal kernel on which Gödel incompleteness bites, and hence part of the foundational story behind every proof assistant, including the ones whose verdicts fill this site's registry. And in tiling theory his 1971 paper cut Wang's aperiodic tile sets down to six tiles and pioneered the substitution analysis whose 'Robinson triangles' — the golden gnomons — generate the Penrose patterns by deflation, exactly the machinery this site's Penrose lab animates in exact ℚ(√5) arithmetic.",
+        "legacy": "First computer-found primes, the minimal undecidable arithmetic, and the triangles inside every Penrose tiling: Robinson's three legacies each anchor a different room of this site. The Athenaeum shelves him — with Julia beside him in the history of logic — as the quiet man who kept being first."
+      },
+      "legends": [
+        { "claim": "He programmed the SWAC without ever seeing the machine", "status": "documented", "note": "Recorded in the computational-number-theory literature; his code ran correctly on first submission — in 1952." }
+      ],
+      "works": [
+        { "title": "Mersenne and Fermat numbers", "year": 1954, "kind": "paper", "note": "Proceedings of the AMS: the 1952 SWAC campaign — five Mersenne primes, the first by machine." },
+        { "title": "An essentially undecidable axiom system (Robinson arithmetic Q)", "year": 1950, "kind": "paper", "note": "The minimal arithmetic on which incompleteness operates." },
+        { "title": "Undecidability and nonperiodicity for tilings of the plane", "year": 1971, "kind": "paper", "note": "Inventiones: six aperiodic tiles; the substitution method behind the Robinson triangles." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Robinson_Raphael/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Raphael_M._Robinson" }
+      ]
+    }
+  ]
+}

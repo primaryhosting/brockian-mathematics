@@ -1,0 +1,156 @@
+{
+  "batch": "era-modern-b",
+  "profiles": [
+    {
+      "slug": "de-bruijn",
+      "name": "N. G. de Bruijn",
+      "years": "1918–2012",
+      "bio": {
+        "life": "Nicolaas Govert de Bruijn was born in The Hague on 9 July 1918, was appointed full professor at Delft at age twenty-seven, and from 1960 spent his career at Eindhoven. He moved through fields the way other people move through problems — analysis, combinatorics, logic, tilings, and finally, in his eighties, models of the brain — and in each he left something structural. He died in Nuenen on 17 February 2012.",
+        "mathematics": "Three of de Bruijn's structures organize whole subjects. The de Bruijn sequences — cyclic strings containing every possible substring of length n exactly once — are combinatorics' answer to exhaustive search (and, characteristically for this Athenaeum, were later found in Sanskrit prosody's Kashyapa tradition centuries earlier; he acknowledged the priority when it surfaced). His 1981 algebraic theory of Penrose tilings explained the golden-ratio order of aperiodic patterns: every Penrose tiling arises by projecting a slice of the five-dimensional cubic lattice, organized by his pentagrids — the exact construction this site's Penrose lab implements in exact arithmetic, and the reason fivefold symmetry and φ arrive together. Deepest of all: Automath (1967–68), the first language in which mathematics could be written so a machine could verify every inference. It was decades early. Every modern proof assistant — Coq, Isabelle, HOL, and the Lean 4 system whose verdicts fill this site's registry — descends from Automath's idea, and the 'de Bruijn criterion' (a small, checkable proof kernel) plus 'de Bruijn indices' (nameless bound variables) are still the working vocabulary of the field.",
+        "legacy": "The Athenaeum's own ground truth — machine-verified proof — has a founding father, and it is de Bruijn. That the same mind also explained why sunflower-order appears in Penrose's forbidden symmetry makes him this site's most literal patron: both its method and one of its favorite objects are his."
+      },
+      "legends": [
+        { "claim": "De Bruijn sequences appear in ancient Sanskrit prosody", "status": "documented", "note": "The yamātārājabhānasalagām mnemonic encodes a binary de Bruijn cycle; the priority was noted in the modern literature and acknowledged." }
+      ],
+      "works": [
+        { "title": "A combinatorial problem (de Bruijn sequences)", "year": 1946, "kind": "paper", "note": "Every n-window exactly once — with the count 2^(2^(n-1)-n) proved." },
+        { "title": "Asymptotic Methods in Analysis", "year": 1958, "kind": "book", "note": "The standard reference on asymptotics for a generation." },
+        { "title": "The mathematical language AUTOMATH, its usage, and some of its extensions", "year": 1968, "kind": "paper", "note": "The first practical proof-checking language; ancestor of every modern proof assistant." },
+        { "title": "Algebraic theory of Penrose's non-periodic tilings of the plane", "year": 1981, "kind": "paper", "note": "Indagationes: pentagrids and cut-and-project — why φ governs the tilings." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/De_Bruijn/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Nicolaas_Govert_de_Bruijn" }
+      ]
+    },
+    {
+      "slug": "hammersley",
+      "name": "John Hammersley",
+      "years": "1920–2004",
+      "bio": {
+        "life": "John Michael Hammersley was born in Helensburgh, Scotland, on 21 March 1920, served in the Royal Artillery through the war improving anti-aircraft fire control, and settled at Oxford — without ever taking a doctorate, a fact he wore as a badge. He was a champion of hard concrete problems against fashionable abstraction; his 1968 polemic 'On the enfeeblement of mathematical skills by Modern Mathematics' made him the licensed gadfly of British mathematical education. He died in Oxford on 2 May 2004.",
+        "mathematics": "In 1957, with Simon Broadbent, Hammersley founded percolation theory: fluid spreads through a random medium — the motivating picture was carbon granules in gas-mask filters — and the mathematics asks when an infinite connected cluster of open channels exists. They proved the phase transition is real: below a critical probability, never; above it, always. That sharp threshold — the subject of this site's percolation lab, where Kesten's later exact value 1/2 for the square-lattice bond model is the crown — was the founding example of a phase transition proved in a purely probabilistic model. Hammersley also created (with Morton and Handscomb) core Monte Carlo methodology, launched the rigorous study of self-avoiding walks and their connective constant, and with Welsh built first-passage percolation, for which they invented the subadditive ergodic theorem — a tool that escaped its birthplace and now runs through probability everywhere.",
+        "legacy": "Percolation is now a pillar of probability and statistical physics, with two Fields Medals (Werner, Smirnov, and Duminil-Copin's 2022 for related models makes three) awarded downstream of the 1957 paper. Hammersley's insistence that hard, concrete, computable problems are the lifeblood of mathematics is close to this site's founding creed."
+      },
+      "legends": [
+        { "claim": "He never took a doctorate", "status": "documented", "note": "Oxford granted him an MA and later a DSc on published work; the absent PhD was his cheerful trademark." }
+      ],
+      "works": [
+        { "title": "Percolation processes I. Crystals and mazes (with S. R. Broadbent)", "year": 1957, "kind": "paper", "note": "Proceedings of the Cambridge Philosophical Society: the founding paper of percolation theory." },
+        { "title": "Monte Carlo Methods (with D. C. Handscomb)", "year": 1964, "kind": "book", "note": "The standard early text on stochastic simulation." },
+        { "title": "First-passage percolation … (with D. J. A. Welsh)", "year": 1965, "kind": "paper", "note": "The subadditive ergodic theorem, invented for the purpose." },
+        { "title": "On the enfeeblement of mathematical skills by 'Modern Mathematics'…", "year": 1968, "kind": "paper", "note": "The educational polemic; still quoted on both sides." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Hammersley/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/John_Hammersley" }
+      ]
+    },
+    {
+      "slug": "broadbent",
+      "name": "Simon Broadbent",
+      "years": "1928–2002 (identification per the standard account; biographical record thin)",
+      "bio": {
+        "life": "Simon Rowland Broadbent is the least documented immortal in this hall, and the Athenaeum states plainly what is and is not established. Established: in the mid-1950s he was a young statistician at the British Coal Utilisation Research Association, working on how gases penetrate the porous carbon granules of gas-mask filters, and he brought that problem — and the word 'percolation' — to John Hammersley; their 1957 joint paper founded the field. The standard identification, accepted in the percolation literature's historical accounts, is with the Simon Broadbent (1928–2002) who became one of Britain's most influential advertising statisticians — pioneer of econometric measurement of advertising effectiveness, longtime Leo Burnett researcher, and inventor of the 'adstock' model. On that identification, one person co-founded percolation theory and then spent forty years measuring whether advertising works — a career arc this Athenaeum could not invent.",
+        "mathematics": "The 1957 paper posed the question that created a discipline: open each bond of a lattice independently with probability p; for what p does an infinite cluster exist? Broadbent's contribution was the concrete physical framing — the distinction between a fluid spreading deterministically and a random medium that gates it — and the insistence that the filter problem needed exactly this abstraction. The critical-probability question the paper asked was answered for the square lattice only in 1980, by Kesten, with the exact value 1/2 this site's percolation lab tests against simulation.",
+        "legacy": "Every percolation simulation — including this site's — begins from a question a filter engineer asked a statistician. Broadbent is the Athenaeum's monument to the applied question asked precisely enough to become pure mathematics."
+      },
+      "legends": [
+        { "claim": "Identification of the percolation co-founder with the advertising statistician (1928–2002)", "status": "attributed", "note": "Accepted in historical accounts of percolation and in obituary material, but the mathematical literature itself records almost no biographical detail; the Athenaeum flags the thinness of the record." }
+      ],
+      "works": [
+        { "title": "Percolation processes I. Crystals and mazes (with J. M. Hammersley)", "year": 1957, "kind": "paper", "note": "The origin of percolation theory; the term 'percolation' is the paper's coinage." },
+        { "title": "Spending Advertising Money", "year": 1975, "kind": "book", "note": "The advertising-effectiveness classic (per the standard identification)." }
+      ],
+      "sources": [
+        { "label": "Wikipedia — percolation theory (history)", "url": "https://en.wikipedia.org/wiki/Percolation_theory" },
+        { "label": "Wikipedia — Simon Broadbent", "url": "https://en.wikipedia.org/wiki/Simon_Broadbent" }
+      ]
+    },
+    {
+      "slug": "lekkerkerker",
+      "name": "C. G. Lekkerkerker",
+      "years": "1922–1999",
+      "bio": {
+        "life": "Cornelis Gerrit Lekkerkerker was born in Harmelen, the Netherlands, in 1922, and spent his career in Amsterdam — at the Mathematisch Centrum and then as professor at the University of Amsterdam — with his mathematical home in the geometry of numbers, the field Minkowski built where lattices meet convex bodies. A careful, unflashy scholar, he died in 1999. (His personal dates are thinly recorded in the standard biographical literature; the years given follow the usual references.)",
+        "mathematics": "In 1952, twenty years before Zeckendorf published, Lekkerkerker proved that every positive integer is uniquely the sum of non-consecutive Fibonacci numbers — and went further than the uniqueness: he computed the average number of Fibonacci summands needed, an early specimen of the metric theory of exotic numeration systems. The theorem is properly the Zeckendorf–Lekkerkerker theorem, and this site's Zeckendorf lab says so. His 1962 paper with Boland characterized interval graphs — which graphs record the overlaps of intervals on a line — by forbidden structures, a result that later found unexpected employment in genetics (gene mapping) and scheduling. His magnum opus is the encyclopedic Geometry of Numbers (1969; revised with Gruber 1987), for decades the standard reference on lattices, successive minima, and the theorems of Minkowski's tradition — the same lattice mathematics that underlies sphere packing and, in this site's orbit, the E₈ and Leech stories.",
+        "legacy": "Fibonacci numeration's real prover, interval graphs' characterizer, and the geometry of numbers' encyclopedist: Lekkerkerker is the working scholar's immortality — three durable contributions and a reference book a field leaned on for a generation."
+      },
+      "legends": [],
+      "works": [
+        { "title": "Voorstelling van natuurlijke getallen door een som van getallen van Fibonacci", "year": 1952, "kind": "paper", "note": "Simon Stevin: the uniqueness theorem, twenty years before Zeckendorf's publication." },
+        { "title": "Representation of a finite graph by a set of intervals on the real line (with J. C. Boland)", "year": 1962, "kind": "paper", "note": "Fundamenta Mathematicae: the characterization of interval graphs." },
+        { "title": "Geometry of Numbers", "year": "1969; 2nd ed. with P. Gruber, 1987", "kind": "book", "note": "The standard reference on Minkowski's tradition." }
+      ],
+      "sources": [
+        { "label": "Wikipedia — Zeckendorf's theorem (history)", "url": "https://en.wikipedia.org/wiki/Zeckendorf%27s_theorem" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Cornelis_Gerrit_Lekkerkerker" }
+      ]
+    },
+    {
+      "slug": "dyson",
+      "name": "Freeman Dyson",
+      "years": "1923–2020",
+      "bio": {
+        "life": "Freeman John Dyson was born in Crowthorne, Berkshire, on 15 December 1923, son of the composer George Dyson. As a teenager he computed for pleasure; as a twenty-year-old he did operations research for RAF Bomber Command, an experience that marked his lifelong distrust of institutional certainty. After Cambridge and a Cornell year that made his name, he joined the Institute for Advanced Study in 1953 and stayed for sixty-seven years — famously without ever taking a Ph.D., a distinction he relished. Physicist, mathematician, essayist, and professional heretic (nuclear-spaceship designer, climate contrarian, author of a shelf of humane books), he died in Princeton on 28 February 2020.",
+        "mathematics": "At twenty, in Eureka, Dyson introduced the rank of a partition to explain two of Ramanujan's congruences combinatorially, and conjectured a 'crank' to explain the third — found forty-four years later by Andrews and Garvan, one of the longest successful predictions in combinatorics. In 1949 he proved the equivalence of the Feynman, Schwinger, and Tomonaga formulations of quantum electrodynamics — the unification that made QED usable. In 1962 he classified random-matrix ensembles by symmetry into the threefold way (orthogonal, unitary, symplectic) and computed their eigenvalue correlations. Then, in 1972, came the tea-room moment this site's Observatory retells: Hugh Montgomery described his pair-correlation formula for the Riemann zeros, and Dyson recognized it instantly as the GUE correlation from his own ensembles — the chance conversation that fused random-matrix theory to the zeta function and set the agenda the site's spectral labs still follow.",
+        "legacy": "The rank and crank live in partition theory; the threefold way organizes random-matrix theory; and the Montgomery–Dyson recognition is the founding anecdote of arithmetic quantum chaos — documented by both participants, and probably the most consequential cup of tea in number theory."
+      },
+      "legends": [
+        { "claim": "The 1972 tea-room exchange with Montgomery", "status": "documented", "note": "Recounted consistently by both Montgomery and Dyson in interviews and print; the mathematical content (pair correlation = GUE) is beyond dispute." },
+        { "claim": "No Ph.D., ever", "status": "documented", "note": "Cornell professor and IAS permanent member without a doctorate; he considered the system 'an abomination' and said so." }
+      ],
+      "works": [
+        { "title": "Some guesses in the theory of partitions", "year": 1944, "kind": "paper", "note": "Eureka: the rank introduced, the crank predicted (found 1988)." },
+        { "title": "The radiation theories of Tomonaga, Schwinger, and Feynman", "year": 1949, "kind": "paper", "note": "Physical Review: QED unified." },
+        { "title": "Statistical theory of the energy levels of complex systems I–III", "year": 1962, "kind": "paper", "note": "Journal of Mathematical Physics: the threefold way." },
+        { "title": "Disturbing the Universe", "year": 1979, "kind": "book", "note": "The memoir; science written as literature." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Dyson/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Freeman_Dyson" }
+      ]
+    },
+    {
+      "slug": "fiedler",
+      "name": "Miroslav Fiedler",
+      "years": "1926–2015",
+      "bio": {
+        "life": "Miroslav Fiedler was born in Prague on 7 April 1926 and spent his career at the Czechoslovak (later Czech) Academy of Sciences, becoming the country's leading matrix theorist and a central figure of the Prague school of linear algebra through the difficult decades behind the Iron Curtain. Modest, prolific, and beloved in his community, he worked essentially to the end, dying in Prague on 20 November 2015.",
+        "mathematics": "Fiedler's 1973 paper asked a question nobody had thought to ask of the graph Laplacian's spectrum: what does the second-smallest eigenvalue mean? His answer founded spectral graph theory's applied wing: λ₂ is positive exactly when the graph is connected, and its magnitude — he named it the algebraic connectivity — measures how hard the graph is to disconnect. The associated eigenvector, now universally the Fiedler vector, nearly bisects the graph along its natural bottleneck: sort vertices by their Fiedler-vector entries and cut at the sign change. That observation is today the mathematical core of spectral partitioning and clustering — image segmentation, community detection, load balancing, mesh partitioning for scientific computing — one eigenvector doing industrial labor everywhere. His broader work on nonnegative matrices, Hankel and Toeplitz structures, and the geometry of simplexes filled fifty years of journals; the connectivity paper alone would have sufficed.",
+        "legacy": "Whenever this site's spectral kernels read structure out of a graph's eigenvalues — and whenever anyone anywhere clusters data spectrally — Fiedler's 1973 question is being answered again. The Athenaeum honors the mathematician who found a whole applied discipline hiding in the second eigenvalue."
+      },
+      "legends": [],
+      "works": [
+        { "title": "Algebraic connectivity of graphs", "year": 1973, "kind": "paper", "note": "Czechoslovak Mathematical Journal: λ₂, connectivity, and the vector that partitions." },
+        { "title": "A property of eigenvectors of nonnegative symmetric matrices and its application to graph theory", "year": 1975, "kind": "paper", "note": "The Fiedler vector's partitioning property made precise." },
+        { "title": "Special Matrices and Their Applications in Numerical Mathematics", "year": 1986, "kind": "book", "note": "The Prague school's matrix craft, in book form." }
+      ],
+      "sources": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Miroslav_Fiedler" },
+        { "label": "Wikipedia — algebraic connectivity", "url": "https://en.wikipedia.org/wiki/Algebraic_connectivity" }
+      ]
+    },
+    {
+      "slug": "ginzburg",
+      "name": "Abraham Ginzburg",
+      "years": "20th century (biographical record thin)",
+      "bio": {
+        "life": "Abraham Ginzburg is known to world mathematics for one theorem and to Israeli computer science as an institution-builder, and the Athenaeum records honestly that the two reputations have left remarkably little published biography between them. He was associated with the Technion in Haifa, where he worked in algebra and automata theory, wrote an early monograph on the algebraic theory of automata, and served in senior academic leadership (including as Technion vice president and in the founding era of Israel's Open University). Precise dates are not asserted here because the standard mathematical literature does not reliably record them.",
+        "mathematics": "In 1961, with Paul Erdős and Abraham Ziv, Ginzburg proved the theorem that founded zero-sum combinatorics: among any 2n − 1 integers there exist n whose sum is divisible by n. The bound is exact — n−1 copies of 0 alongside n−1 copies of 1 give 2n − 2 integers with no such subset — and the proof for prime n runs through the Cauchy–Davenport inequality, tying this theorem to the other additive cornerstone in this site's corpus, where the EGZ theorem itself is machine-verified (Brockian.ErdosGinzburgZiv) and run live in the Cauchy–Davenport lab. The EGZ theorem seeded the Davenport-constant industry for general abelian groups and remains the standard first exhibit of the zero-sum phenomenon: enough numbers, regardless of what they are, must contain hidden arithmetic order. His Algebraic Theory of Automata (1968) served the first generation of Israeli computer science as a bridge between semigroup algebra and machines.",
+        "legacy": "The middle name of a three-name theorem that every additive combinatorialist learns first: Ginzburg's immortality is secure and strangely anonymous. The Athenaeum lists him as its exhibit on how the literature can preserve a result perfectly while letting its author's life fade — and why sources matter."
+      },
+      "legends": [
+        { "claim": "Biographical dates", "status": "disputed", "note": "The mathematical literature records almost no personal detail; institutional histories (Technion, Open University) attest the career outline. No dates asserted." }
+      ],
+      "works": [
+        { "title": "Theorem in the additive number theory (with P. Erdős and A. Ziv)", "year": 1961, "kind": "paper", "note": "Bulletin of the Research Council of Israel: the EGZ zero-sum theorem — machine-verified in this site's corpus." },
+        { "title": "Algebraic Theory of Automata", "year": 1968, "kind": "book", "note": "Academic Press: semigroups and machines for the first Israeli CS generation." }
+      ],
+      "sources": [
+        { "label": "Wikipedia — Erdős–Ginzburg–Ziv theorem", "url": "https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Ginzburg%E2%80%93Ziv_theorem" }
+      ]
+    }
+  ]
+}

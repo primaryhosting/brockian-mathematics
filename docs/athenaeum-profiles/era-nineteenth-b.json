@@ -1,0 +1,203 @@
+{
+  "batch": "era-nineteenth-b",
+  "profiles": [
+    {
+      "slug": "frobenius",
+      "name": "Ferdinand Georg Frobenius",
+      "years": "1849–1917",
+      "bio": {
+        "life": "Ferdinand Georg Frobenius was born in Berlin-Charlottenburg on 26 October 1849, studied under Weierstrass, spent seventeen productive years at the Zürich Polytechnic, and returned in 1892 to the Berlin chair, where he upheld the capital's austere tradition of pure mathematics with a temperament to match — his opinions of Göttingen's fashionable applied turn were volcanic and are preserved in his letters. His greatest student was Issai Schur, who carried representation theory into the twentieth century. Frobenius died in Berlin on 3 August 1917.",
+        "mathematics": "In 1896, spurred by two letters from Dedekind about a curious determinant, Frobenius created the representation theory of finite groups in a matter of months: group characters, the orthogonality relations, and the machinery for decomposing any finite symmetry into irreducible pieces. The character table — one row per irreducible representation, one column per conjugacy class — is his invention, and it is the exact object this site's D₅ character lab computes and the corpus machine-verifies: the pentagon's five-row table, with its golden-ratio entries, is a page of pure Frobenius. His other permanent monument is the Perron–Frobenius theorem on positive matrices (1912): a unique dominant eigenvalue with positive eigenvector — the mathematical fact under Markov chains, population models, and every eigenvector-centrality ranking on the internet. Frobenius groups, the Frobenius endomorphism, the rational canonical form: the name saturates algebra.",
+        "legacy": "The D₅ table at the center of this site's pentagonal program is computed with tools Frobenius built in 1896. That the sternest of Berlin purists now underwrites search-engine rankings via Perron–Frobenius is an irony the Athenaeum reports with a straight face."
+      },
+      "legends": [
+        { "claim": "The theory was ignited by Dedekind's 1896 letters on the group determinant", "status": "documented", "note": "The Dedekind–Frobenius correspondence survives and is the standard origin story of character theory." }
+      ],
+      "works": [
+        { "title": "Über Gruppencharaktere", "year": 1896, "kind": "paper", "note": "Berlin Sitzungsberichte: characters and the character table." },
+        { "title": "Über die Primfactoren der Gruppendeterminante", "year": 1896, "kind": "paper", "note": "The group determinant factored; representation theory operational." },
+        { "title": "Über Matrizen aus nicht negativen Elementen", "year": 1912, "kind": "paper", "note": "Perron–Frobenius theory." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Frobenius/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Ferdinand_Georg_Frobenius" }
+      ]
+    },
+    {
+      "slug": "von-mangoldt",
+      "name": "Hans von Mangoldt",
+      "years": "1854–1925",
+      "bio": {
+        "life": "Hans Carl Friedrich von Mangoldt was born in Weimar on 18 May 1854, into a family of jurists and academics. He held professorships at the technical universities of Hannover, Aachen — where he served as rector — and Danzig, of which he was the founding rector in 1904: an institution-builder by day whose permanent mathematics was done in two windows of concentrated work on Riemann's legacy. He died in Danzig on 27 October 1925.",
+        "mathematics": "Riemann's 1859 paper asserted more than it proved; making its central claims rigorous took the century's best efforts. Von Mangoldt delivered the decisive piece in 1895: a complete proof of the explicit formula connecting ψ(x) — his weighted prime-power count, built from his function Λ(n) = ln p on prime powers — to a sum over the nontrivial zeros of ζ. The formula ψ(x) = x − Σ_ρ x^ρ/ρ − ln 2π − ½ln(1 − x⁻²) is the literal machine this site's Explicit Formula Orchestra plays: add zeros, watch the prime staircase assemble. He also proved (1905) Riemann's claim for the zero-counting function N(T) — the Riemann–von Mangoldt formula — and the 1897 result that Σ μ(n)/n = 0, equivalent to the Prime Number Theorem. Λ and ψ are now so standard that most students never learn whose initials they honor.",
+        "legacy": "When this site's Observatory reconstructs the primes from the zeros before a visitor's eyes, it is executing von Mangoldt's 1895 theorem. He is the Athenaeum's exemplar of the essential second act: the prover who turns a visionary's sketch into permanent mathematics."
+      },
+      "legends": [],
+      "works": [
+        { "title": "Zu Riemanns Abhandlung 'Ueber die Anzahl der Primzahlen unter einer gegebenen Grösse'", "year": 1895, "kind": "paper", "note": "Crelle's Journal: the explicit formula proved; Λ(n) and ψ(x) introduced." },
+        { "title": "Beweis der Gleichung Σ μ(k)/k = 0", "year": 1897, "kind": "paper", "note": "The Möbius-sum equivalence of the Prime Number Theorem." },
+        { "title": "Zur Verteilung der Nullstellen der Riemannschen Funktion ξ(t)", "year": 1905, "kind": "paper", "note": "The Riemann–von Mangoldt zero-counting formula." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Mangoldt/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Hans_Carl_Friedrich_von_Mangoldt" }
+      ]
+    },
+    {
+      "slug": "hurwitz",
+      "name": "Adolf Hurwitz",
+      "years": "1859–1919",
+      "bio": {
+        "life": "Adolf Hurwitz was born in Hildesheim on 26 March 1859, was taught as a schoolboy by Hermann Schubert (of enumerative-geometry fame), and studied under Klein. At Königsberg, still in his twenties, he became teacher and friend to two students who would remake mathematics: Hilbert and Minkowski — their mathematical walks 'to the apple tree' are part of the subject's folklore, documented in Hilbert's own memorial address. From 1892 he held the chair at ETH Zürich, where the young Einstein attended (and mostly skipped) his lectures, and where Pólya later edited his famously meticulous mathematical diaries. Frail all his life — severe migraines, then kidney disease — he died in Zürich on 18 November 1919.",
+        "mathematics": "Hurwitz's 1891 approximation theorem is the golden ratio's sharpest credential: every irrational α admits infinitely many rationals p/q with |α − p/q| < 1/(√5 q²), and √5 is best possible — because φ and its equivalents defeat any larger constant. The 'noble numbers' whose continued fractions end in all 1s are precisely the hardest numbers in the universe to approximate by fractions, the mathematical fact behind why sunflower spirals and this site's phyllotaxis and metallic-means labs keep meeting φ. His 1898 composition theorem proved that normed division algebras exist only in dimensions 1, 2, 4, 8 — reals, complexes, quaternions, octonions, full stop. He also founded the transfinite study of Riemann surface automorphisms (the 84(g−1) bound) and wrote on everything from continued fractions to Fourier series with a jeweler's finish.",
+        "legacy": "When this site says the golden ratio is 'the most irrational number,' the precise content is Hurwitz 1891 — the √5 constant, machine-verifiable, gloriously tight. His diaries' motto-in-practice — polish until nothing further can be removed — is a house style this Athenaeum aspires to."
+      },
+      "legends": [
+        { "claim": "The Königsberg mathematical walks with Hilbert and Minkowski", "status": "documented", "note": "Described by Hilbert in his memorial address for Hurwitz; a fixture of the subject's lore with a primary source." }
+      ],
+      "works": [
+        { "title": "Ueber die angenäherte Darstellung der Irrationalzahlen durch rationale Brüche", "year": 1891, "kind": "paper", "note": "Mathematische Annalen: the √5 theorem and its sharpness at φ." },
+        { "title": "Über die Composition der quadratischen Formen von beliebig vielen Variabeln", "year": 1898, "kind": "paper", "note": "Division algebras exist only in dimensions 1, 2, 4, 8." },
+        { "title": "Vorlesungen über die Zahlentheorie der Quaternionen", "year": 1919, "kind": "book", "note": "Quaternion arithmetic, published in his final year." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Hurwitz/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Adolf_Hurwitz" }
+      ]
+    },
+    {
+      "slug": "landau",
+      "name": "Edmund Landau",
+      "years": "1877–1938",
+      "bio": {
+        "life": "Edmund Landau was born in Berlin on 14 February 1877, son of a wealthy gynecologist, and married Ehrlich's daughter — money never distracted him, though the Göttingen villa was famous. In 1909 he succeeded Minkowski at Göttingen. His lecturing style matched his prose: definition, theorem, proof, no motivation, no apology — 'like a printed book walking.' In November 1933 the Nazi student boycott, orchestrated by the brilliant young fanatic Teichmüller, barred his own students from his own lecture hall; Landau retired rather than teach to enforcers, and died in Berlin on 19 February 1938. Hardy's obituary of him is one of the genre's masterpieces of controlled anger.",
+        "mathematics": "Landau's Handbuch der Lehre von der Verteilung der Primzahlen (1909) — 'the Handbuch' — collected the whole analytic theory of primes for the first time and trained every number theorist of the next generation; Hardy said it transformed the subject from a collection of scattered results into a systematic science. He simplified the proof of the Prime Number Theorem, developed the theory of Dirichlet series wholesale, and standardized the O, o notation that every science now uses. At the 1912 Cambridge congress he named four problems about primes 'unattackable at the present state of science': Goldbach's conjecture; twin primes; a prime between consecutive squares (Legendre); and infinitely many primes of the form n² + 1. All four remain open in 2026 — and all four appear in this site's labs wearing honest OPEN badges.",
+        "legacy": "Landau's four problems are effectively this site's frontier map: the Goldbach comb, the twin-constant lab, and the gap explorers all live on ground he declared unattackable — now surveyed with verified partial results but still, exactly as he said, unconquered. Every O(·) in every provenance strip is his notation."
+      },
+      "legends": [
+        { "claim": "Asked about Göttingen after the purge, Hilbert's reply concerned Landau's institute", "status": "attributed", "note": "The 'no mathematics in Göttingen anymore' exchange is oral tradition via Reid's biography; the 1933 boycott of Landau's lectures itself is fully documented." },
+        { "claim": "'Like a printed book walking' lecturing style", "status": "attributed", "note": "Contemporary students' description, preserved in memoir literature." }
+      ],
+      "works": [
+        { "title": "Handbuch der Lehre von der Verteilung der Primzahlen", "year": 1909, "kind": "book", "note": "Two volumes; the founding treatise of analytic prime number theory.", "link": "https://archive.org/details/handbuchderlehre01landuoft" },
+        { "title": "Gelöste und ungelöste Probleme aus der Theorie der Primzahlverteilung und der Riemannschen Zetafunktion", "year": 1912, "kind": "paper", "note": "The Cambridge ICM address: Landau's four problems, all still open." },
+        { "title": "Grundlagen der Analysis", "year": 1930, "kind": "book", "note": "Peano to the reals with zero fat — the purest specimen of Landau style." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Landau/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Edmund_Landau" }
+      ]
+    },
+    {
+      "slug": "ford",
+      "name": "Lester R. Ford",
+      "years": "1886–1967",
+      "bio": {
+        "life": "Lester Randolph Ford was born in Missouri on 25 October 1886, studied at Missouri and Harvard, and spent time at Edinburgh — where his lectures on automorphic functions became a standard book. He taught at Rice and the Illinois Institute of Technology, edited the American Mathematical Monthly through the war years (1942–46), and served as president of the Mathematical Association of America, whose award for expository excellence is named for him. His son, Lester Ford Jr., became a noted mathematician too (the Ford–Fulkerson max-flow algorithm). Ford died on 11 November 1967.",
+        "mathematics": "Ford's immortality is a single perfect picture, published in a 1938 Monthly article titled, with maximal modesty, 'Fractions.' Above each reduced fraction p/q on the number line, draw a circle of diameter 1/q² tangent to the line at that point. Then no two circles ever overlap: they are disjoint, or they kiss — and they kiss exactly when the fractions are Farey neighbors, |ps − qr| = 1. Mediants, continued-fraction convergents, and the approximation quality of rationals all become visible geometry; Hurwitz's √5 theorem literally appears as how deep a vertical line can slide between circles. The picture is simultaneously the horocycle geometry of the modular group acting on the hyperbolic plane, which his Edinburgh book had treated professionally years before the Monthly article distilled it into two pages anyone can read.",
+        "legacy": "This site's Farey lab draws Ford's circles live — tens of thousands of exact tangencies verified in rational arithmetic — as the geometric face of everything the continued-fraction machinery computes. One picture, one page, permanence: the Ford circles are the Monthly's best argument that exposition is research."
+      },
+      "legends": [],
+      "works": [
+        { "title": "Automorphic Functions", "year": 1929, "kind": "book", "note": "The standard English treatment of the modular group's geometry for a generation." },
+        { "title": "Fractions", "year": 1938, "kind": "paper", "note": "American Mathematical Monthly 45: the Ford circles, in two luminous pages." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Ford/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Lester_R._Ford" }
+      ]
+    },
+    {
+      "slug": "ramanujan",
+      "name": "Srinivasa Ramanujan",
+      "years": "1887–1920",
+      "bio": {
+        "life": "Srinivasa Ramanujan was born in Erode, Tamil Nadu, on 22 December 1887 and grew up in Kumbakonam in poverty. A borrowed synopsis of results — Carr's book, all statements, no proofs — set the shape of his mind: he filled notebooks with thousands of formulas, derived by methods he could not always articulate, while failing college twice for neglecting every other subject and nearly starving as a clerk in the Madras Port Trust. His January 1913 letter to Hardy — nine pages of results 'which,' Hardy judged, 'must be true, because, if they were not true, no one would have had the imagination to invent them' — brought him to Cambridge in 1914. Five years of collaboration made him an FRS and a Fellow of Trinity, and broke his health: illness (tuberculosis was the diagnosis of the day; hepatic amoebiasis is the modern retrospective conjecture) sent him home in 1919, and he died near Kumbakonam on 26 April 1920, aged thirty-two, working to the end. The 'lost notebook' of that final year, found by George Andrews in a Trinity box in 1976, contains the mock theta functions — mathematics still being unpacked a century later.",
+        "mathematics": "With Hardy he proved the asymptotic formula for the partition function p(n) — the result that created the circle method, the engine of twentieth-century additive number theory and of the Hardy–Littlewood constants verified by the thousand in this site's corpus. Alone he found the partition congruences p(5n+4) ≡ 0 mod 5 (and mod 7, 11 relatives) — five-fold arithmetic structure in pure counting, a cousin of this site's pentagonal obsessions — the rapidly convergent series for 1/π that still power record computations, the Ramanujan tau function whose conjectured properties took Deligne's Fields-Medal machinery to prove, and the taxicab arithmetic of 1729, which Hardy's own telling fixed forever: the smallest number expressible as a sum of two cubes in two different ways.",
+        "legacy": "Ramanujan is mathematics' permanent case that formal training and mathematical depth are different variables. The partition lab's asymptotics, the circle-method constants in the corpus, and the site's whole aesthetic of formula-as-revelation are in his debt."
+      },
+      "legends": [
+        { "claim": "The goddess Namagiri revealed formulas in dreams", "status": "attributed", "note": "Ramanujan's own account, reported by family and contemporaries; a matter of his sincere belief, recorded as such." },
+        { "claim": "1729 at the sickbed", "status": "documented", "note": "Hardy told the story himself in his lectures on Ramanujan; it is as close to primary-source as anecdote gets." }
+      ],
+      "works": [
+        { "title": "Modular equations and approximations to π", "year": 1914, "kind": "paper", "note": "The 1/π series; digits by the billion trace here." },
+        { "title": "Asymptotic formulae in combinatory analysis (with G. H. Hardy)", "year": 1918, "kind": "paper", "note": "p(n) asymptotics; the circle method is born." },
+        { "title": "Congruence properties of partitions", "year": 1919, "kind": "paper", "note": "p(5n+4) ≡ 0 (mod 5) and the family." },
+        { "title": "The notebooks and the lost notebook", "year": "1903–1920", "kind": "memoir", "note": "Thousands of results; the mock theta functions of the last year still under excavation." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Ramanujan/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Srinivasa_Ramanujan" }
+      ]
+    },
+    {
+      "slug": "steinhaus",
+      "name": "Hugo Steinhaus",
+      "years": "1887–1972",
+      "bio": {
+        "life": "Hugo Steinhaus was born in Jasło, Galicia, on 14 January 1887, took his doctorate under Hilbert at Göttingen, and co-founded with Stefan Banach the Lwów school of functional analysis — an entire mathematical culture conducted at the marble tables of the Scottish Café, whose problem book (prizes ranged from small coffees to a live goose) survives as the Scottish Book. He liked to say his greatest mathematical discovery was Banach — whom he found in 1916 by overhearing two young men on a Kraków park bench discussing the Lebesgue integral. A Jew under German occupation, he survived the war in hiding under a false identity, doing mathematics without paper when necessary, and afterward built Wrocław into a mathematical center, pioneering applications from biology to law. He died in Wrocław on 25 February 1972.",
+        "mathematics": "With Banach he proved the uniform boundedness principle (Banach–Steinhaus), one of functional analysis' three pillars. For this site the relevant Steinhaus is the asker of perfect questions: his three-distance conjecture — place the points α, 2α, 3α, …, Nα around a circle; the arcs between neighbors take at most three distinct lengths, the largest the sum of the other two — was proved around 1957–58 by Vera Sós, Świerczkowski, and Surányi independently, and is the exact theorem this site's three-distance visualizations demonstrate, with the golden ratio's arcs the most democratic of all. His popular masterpiece Mathematical Snapshots and his Orzeł czy reszka (heads-or-tails fairness), the Steinhaus–Johnson–Trotter enumeration, fair-division ('cake-cutting') theory which he founded: a career of making deep things visible.",
+        "legacy": "The Athenaeum honors him twice: as a builder of one of mathematics' legendary communities, and as patron of the well-posed elementary question — the three-distance theorem being the purest case on this site of a query a child can draw and a theorem worth proving."
+      },
+      "legends": [
+        { "claim": "Discovering Banach on a park bench", "status": "documented", "note": "Steinhaus's own oft-repeated account, recorded in his memoirs; 'my greatest discovery' is his phrase." },
+        { "claim": "The Scottish Book's live-goose prize", "status": "documented", "note": "Problem 153 (Mazur's basis problem) carried the goose; Per Enflo collected it from Mazur in 1972, photographed for posterity." }
+      ],
+      "works": [
+        { "title": "Sur les opérations dans les ensembles abstraits … (with S. Banach)", "year": 1927, "kind": "paper", "note": "The Banach–Steinhaus uniform boundedness principle." },
+        { "title": "Mathematical Snapshots", "year": 1938, "kind": "book", "note": "Visual mathematics for everyone; still in print." },
+        { "title": "The three-distance conjecture", "year": "c. 1950", "kind": "paper", "note": "Posed by Steinhaus; proved independently by Sós, Świerczkowski, and Surányi in 1957–58." },
+        { "title": "The problem of fair division", "year": 1948, "kind": "paper", "note": "Econometrica: cake-cutting founded as mathematics." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Steinhaus/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Hugo_Steinhaus" }
+      ]
+    },
+    {
+      "slug": "siegel",
+      "name": "Carl Ludwig Siegel",
+      "years": "1896–1981",
+      "bio": {
+        "life": "Carl Ludwig Siegel was born in Berlin on 31 December 1896, a postman's son. Sent to the Western Front in 1917, he broke down and was committed to a psychiatric institution rather than serve — an experience that left him a lifelong hater of militarism; he later gave the year's salary of a prize to charity rather than keep money he associated with a militarized state. A student of Landau at Göttingen, he held the Frankfurt chair through the Nazi years in growing disgust, and in 1940 emigrated through occupied Norway to Princeton, calling himself thereafter an exile by conviction rather than necessity. He returned to Göttingen in 1951 and died there on 4 April 1981. His mathematical standards were archaic in the grand manner: he distrusted abstraction, computed everything, and regarded the primes as worthy opponents.",
+        "mathematics": "Siegel's monuments span Diophantine approximation (the Thue–Siegel–Roth line: algebraic numbers admit only finitely many too-good rational approximations; finiteness of integer points on curves), quadratic forms (the mass formulas), celestial mechanics, and the transcendence theory of E-functions. For this site, the crown is archaeological: working through Riemann's chaotic unpublished Nachlass in Göttingen's library in 1932, he found that Riemann had possessed, and never printed, a formula for computing ζ on the critical line in ~√(t/2π) terms — exponentially better than naive summation. Published by Siegel with full proofs, the Riemann–Siegel formula became the engine of every large-scale zero verification since, from Turing's 1950 machine runs to the datasets whose hundred thousand zeros this site serves with checksums. The 'Siegel zero' — the possible exceptional real zero of an L-function that haunts effective results — also bears his name.",
+        "legacy": "This site's Riemann–Siegel anatomy lab dissects the exact formula Siegel excavated; every zero in the site's dataset was found by machinery descending from that 1932 paper. He is the Athenaeum's great example of scholarship as excavation — the discovery that the master had known more than he told."
+      },
+      "legends": [
+        { "claim": "Wartime breakdown and psychiatric commitment in 1917", "status": "documented", "note": "Recorded in the biographical literature from his own accounts and institutional records." }
+      ],
+      "works": [
+        { "title": "Approximation algebraischer Zahlen", "year": 1921, "kind": "paper", "note": "The thesis line of Thue–Siegel: Diophantine approximation transformed." },
+        { "title": "Über einige Anwendungen diophantischer Approximationen", "year": 1929, "kind": "paper", "note": "Siegel's theorem: finitely many integer points on curves of positive genus." },
+        { "title": "Über Riemanns Nachlaß zur analytischen Zahlentheorie", "year": 1932, "kind": "paper", "note": "The Riemann–Siegel formula, recovered from the Nachlass with proofs." },
+        { "title": "Transcendental Numbers", "year": 1949, "kind": "book", "note": "The E-function method, from the Princeton lectures." }
+      ],
+      "sources": [
+        { "label": "MacTutor biography", "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Siegel/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Carl_Ludwig_Siegel" }
+      ]
+    },
+    {
+      "slug": "skewes",
+      "name": "Stanley Skewes",
+      "years": "1899–1988",
+      "bio": {
+        "life": "Stanley Skewes was born in South Africa in 1899, trained as an engineer at the University of Cape Town, and came to Cambridge, where he took his Ph.D. under Littlewood in 1938 and then returned to Cape Town to teach for the rest of his career. He published little beyond the two papers that made his name a common noun; colleagues remembered a modest, exact man somewhat startled by the fame of his enormous number. He died in 1988. (His personal dates are thinly documented in the standard literature; the years given here follow the usual references.)",
+        "mathematics": "Littlewood had proved in 1914 that π(x) − Li(x) changes sign infinitely often — pure existence, with no idea where. Skewes' task was to make his teacher's theorem effective. In 1933, assuming the Riemann Hypothesis, he proved the first crossing occurs below 10^(10^(10^34)) — the 'Skewes number,' which Hardy famously described as the largest number that had ever served any definite purpose in mathematics. In 1955 he removed the RH assumption at the price of an even larger bound, 10^(10^(10^963)). The numbers have since been beaten down spectacularly — the first crossing is now known to lie near 1.397 × 10^316, still far beyond any direct computation — but the moral is permanent and is stamped on this site's π(x) race lab: every computed value of π(x) − Li(x) in human history has the same sign, and the theorem says that evidence is worthless.",
+        "legacy": "Skewes owns the numerical folklore of the primes' greatest deception. In the Athenaeum he stands for the effective bound — the unglamorous, essential craft of turning 'eventually' into a number, however absurd the number must be."
+      },
+      "legends": [
+        { "claim": "Hardy: 'the largest number which has ever served any definite purpose in mathematics'", "status": "documented", "note": "Hardy's published remark about the 1933 bound; later bounds and computations have long since shrunk the record." }
+      ],
+      "works": [
+        { "title": "On the difference π(x) − li(x)", "year": 1933, "kind": "paper", "note": "Journal of the LMS: the conditional bound — the original Skewes number." },
+        { "title": "On the difference π(x) − li(x) (II)", "year": 1955, "kind": "paper", "note": "Proceedings of the LMS: the unconditional bound." }
+      ],
+      "sources": [
+        { "label": "Wikipedia — Skewes's number", "url": "https://en.wikipedia.org/wiki/Skewes%27s_number" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Stanley_Skewes" }
+      ]
+    }
+  ]
+}
