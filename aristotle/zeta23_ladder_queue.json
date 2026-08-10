@@ -1,0 +1,94 @@
+{
+  "count": 11,
+  "note": "DRAFT queue (T2, uncharted-RH-machinery program, 2026-08-10). Finite, self-contained targets extracted from the conditional ladder of the CLAUDE two-thirds preprint (10 Aug 2026), SS1.3 + SS7.5(d)-(g). Statement scaffolds live in formal/Zeta23Scaffold/ (Constants/Counting/Hypotheses/Ladder). DISCIPLINE: every target here is finite algebra or classical real analysis about CONSTANTS -- none asserts anything about zeta zeros. The analytic implications HL*(4,lambda) -> 13/18 and HL*(all) -> proportion 1 are NOT queue material: they are quarantined as named bridge Props (ChristoffelCountBridge, CeilingBridge) in Ladder.lean and must NOT be attempted. Toolchain: lean-4.32.0 + matching Mathlib, fresh proofs from Mathlib only. All rational values below were verified off-line by exact fraction arithmetic (Hankel det 5/108, Lambda_2(0;1) = 5/36, 2*(31/36)-1 = 13/18, 18*(1-psi(m)) = (m-2)(m-3)(m+3) for m>=2) and the sinc^4 integral numerically (0.66666666...).",
+  "queue": [
+    {
+      "target": "Zeta23Scaffold.assembly_window_constants",
+      "tier": "A-assembly",
+      "rank": 1,
+      "difficulty": "EASY",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): define Hwin (lam : Real) := 2 - 1/lam - lam/3, Hd lam := (1 + Hwin lam)/2, Fwin lam := lam/(1 + lam^2/3). Prove the four exact evaluations: Hwin 1 = 2/3, Hd 1 = 5/6, Fwin 1 = 3/4, and 2 * Fwin 1 - 1 = 1/2. Pure rational evaluation of real-valued expressions; norm_num after unfolding should close each.",
+      "statement": "Window-constant assembly identities of preprint eq. (1.3): H(1)=2/3, H_d(1)=5/6, F(1)=3/4, 2F(1)-1=1/2."
+    },
+    {
+      "target": "Zeta23Scaffold.psiCubic_eq_one_of_small",
+      "tier": "A-assembly",
+      "rank": 1,
+      "difficulty": "EASY",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): define psiCubic (m : Nat) : Rat := (m:Rat)/2 + (2*(m:Rat)^2 - (m:Rat)^3)/18 + (if m = 1 then 4/9 else 0). Prove psiCubic 1 = 1 and psiCubic 2 = 1 and psiCubic 3 = 1. Direct evaluation (decide or norm_num).",
+      "statement": "The cubic weight psi(m) = m/2 + (2m^2 - m^3)/18 + (4/9)*[m=1] of preprint SS7.5(g) attains equality psi(m)=1 at m = 1, 2, 3."
+    },
+    {
+      "target": "Zeta23Scaffold.psiCubic_le_one",
+      "tier": "A-assembly",
+      "rank": 2,
+      "difficulty": "MEDIUM",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): with psiCubic (m : Nat) : Rat := (m:Rat)/2 + (2*(m:Rat)^2 - (m:Rat)^3)/18 + (if m = 1 then 4/9 else 0), prove: forall m : Nat, 1 <= m -> psiCubic m <= 1. KEY IDENTITY (verified off-line): for m >= 2 the indicator vanishes and 18*(1 - psiCubic m) = ((m:Rat)-2)*((m:Rat)-3)*((m:Rat)+3), which is nonneg for every integer m >= 2 since (m-2)*(m-3) >= 0 (interval_cases / rcases m = 2, m = 3, m >= 4) and m+3 > 0. Handle m = 1 by evaluation (psi(1) = 1). nlinarith with the factorization as a provided equality should close the m >= 4 branch.",
+      "statement": "psi(m) <= 1 for all integers m >= 1 -- the finite verification called 'one checks' in preprint SS7.5(g); the certificate admissibility of the cubic weight."
+    },
+    {
+      "target": "Zeta23Scaffold.hankel_christoffel_13_18",
+      "tier": "B-christoffel",
+      "rank": 1,
+      "difficulty": "MEDIUM",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): define the 3x3 rational Hankel matrix M := !![1, 1, 4/3; 1, 4/3, 2; 4/3, 2, 13/4] (Matrix (Fin 3) (Fin 3) Rat) -- the moment matrix (m_{i+j})_{0<=i,j<=2} of the sine-kernel moment sequence m_0..m_4 = 1, 1, 4/3, 2, 13/4 at lambda = 1. Prove: (a) M.det = 5/108 (use Matrix.det_fin_three, then norm_num); (b) with Lambda := M.det / (Matrix.det !![(4:Rat)/3, 2; 2, 13/4]), Lambda = 5/36; (c) 1 - Lambda = 31/36; (d) 2*(1 - Lambda) - 1 = 13/18. This is the exact-arithmetic core of the preprint's conditional 13/18 rung (SS7.5(d),(f)): Lambda is the Christoffel function Lambda_2(0;1) of the moment sequence at 0, computed as a Hankel determinant ratio (equals 1/(e_0^T M^{-1} e_0) by Cramer).",
+      "statement": "Lambda_2(0;1) = 5/36 from the Hankel determinants of the sine-kernel moments at lambda=1, and the ladder assembly 2*(1 - 5/36) - 1 = 13/18 (preprint SS7.5(f))."
+    },
+    {
+      "target": "Zeta23Scaffold.christoffel_inverse_form",
+      "tier": "B-christoffel",
+      "rank": 2,
+      "difficulty": "MEDIUM",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): with M := !![1, 1, 4/3; 1, 4/3, 2; 4/3, 2, 13/4] (Matrix (Fin 3) (Fin 3) Rat), prove that M is invertible (det = 5/108 <> 0) and (M⁻¹ 0 0 : Rat) = 36/5. Route: Matrix.inv_def / adjugate entry formula: M⁻¹ 0 0 = (M.det)⁻¹ * (minor_00 det) = (108/5) * (1/3) = 36/5. This cross-checks the Hankel-ratio definition of Lambda_2(0;1) = 5/36 against the classical Christoffel form 1/(e_0^T M^{-1} e_0), closing the modeling gap noted in formal/Zeta23Scaffold/Constants.lean.",
+      "statement": "Inverse-matrix cross-check: (M^{-1})_{00} = 36/5 for the sine-kernel Hankel matrix, so 1/(e_0^T M^{-1} e_0) = 5/36 agrees with the determinant-ratio Christoffel value."
+    },
+    {
+      "target": "Zeta23Scaffold.Hd_ge_Fwin_iff",
+      "tier": "A-assembly",
+      "rank": 2,
+      "difficulty": "MEDIUM",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): with Hwin (lam : Real) := 2 - 1/lam - lam/3, Hd lam := (1 + Hwin lam)/2, Fwin lam := lam/(1 + lam^2/3), prove: forall lam : Real, 0 < lam -> lam <= 1 -> (Fwin lam <= Hd lam <-> 0 <= Hwin lam). Route: both denominators are positive (lam > 0, 1 + lam^2/3 > 0); field_simp and reduce both sides to the sign of 6*lam - 3 - lam^2; nlinarith/polyrith for the two directions.",
+      "statement": "H_d(lambda) >= F(lambda) iff H(lambda) >= 0 on 0 < lambda <= 1 (preprint eq. (1.3), third line, first equivalence)."
+    },
+    {
+      "target": "Zeta23Scaffold.Hwin_nonneg_iff_threshold",
+      "tier": "A-assembly",
+      "rank": 3,
+      "difficulty": "MEDIUM",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): with Hwin (lam : Real) := 2 - 1/lam - lam/3, prove: forall lam : Real, 0 < lam -> lam <= 1 -> (0 <= Hwin lam <-> 3 - Real.sqrt 6 <= lam). Route: multiplying by 3*lam > 0, 0 <= Hwin lam iff lam^2 - 6*lam + 3 <= 0. The quadratic has roots 3 +/- sqrt 6; since lam <= 1 < 3 + sqrt 6, the condition is lam >= 3 - sqrt 6. Use h6 : (Real.sqrt 6)^2 = 6 (Real.sq_sqrt, 0 <= 6) and 2 < Real.sqrt 6 < 3 (Real.lt_sqrt / Real.sqrt_lt_sqrt via 4 < 6 < 9); then nlinarith closes each direction with h6 as an auxiliary fact.",
+      "statement": "H(lambda) >= 0 iff lambda >= 3 - sqrt 6 = 0.5505... on 0 < lambda <= 1 (preprint eq. (1.3), third line, second equivalence -- the degeneration threshold of the method)."
+    },
+    {
+      "target": "Zeta23Scaffold.rung_glue_constant_upgrade",
+      "tier": "A-assembly",
+      "rank": 3,
+      "difficulty": "EASY",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0), fully abstractly: let n s : Real -> Real with hn : forall T, 0 <= n T. (a) Given H : forall eps > 0, exists T0 : Real, forall T >= T0, (2*(31/36) - 1 - eps) * n T <= s T, prove: forall eps > 0, exists T0 : Real, forall T >= T0, (13/18 - eps) * n T <= s T. (b) Given the (13/18 - eps) conclusion of (a), prove the same with 2/3 in place of 13/18. Pure constant bookkeeping: 2*(31/36) - 1 = 13/18 (norm_num) for (a); for (b) use 2/3 <= 13/18 and monotonicity of (c - eps) * n T in c given n T >= 0. This is the glue shape of Zeta23Scaffold/Ladder.lean (rung1318_of_bridge, rung1318_implies_two_thirds) in sequence form.",
+      "statement": "Abstract rung glue: the (2*(31/36)-1-eps)-bound equals the (13/18-eps)-bound and dominates the (2/3-eps)-bound, for any nonnegative comparison sequence."
+    },
+    {
+      "target": "Zeta23Scaffold.integral_sinc_sq",
+      "tier": "C-integral",
+      "rank": 1,
+      "difficulty": "HARD",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): the Dirichlet-type integral integral over Real of (Real.sin x / x)^2 dx = Real.pi (as a Bochner/improper integral; state with MeasureTheory.integral over volume, integrand extended by 1 at x = 0 or noted a.e.-equal). FIRST search Mathlib for an existing form: candidates named integral_sin_sq_div_sq, Real.integral_sinc_sq, or reachable from integral_sin_div_x (the Dirichlet integral integral sin x / x = pi, which Mathlib has as Real.integral_sin_div_x or similar) by integration by parts: integral (sin x / x)^2 = integral sin(2x)/x (by parts, boundary terms vanish) = pi. If the Dirichlet integral exists at our pin, the by-parts reduction is the whole proof; otherwise this is frontier-difficulty and should be returned as BLOCKED with a note.",
+      "statement": "integral over R of (sin x / x)^2 dx = pi -- normalization integral of the sine kernel; equivalently integral of S(u)^2 = 1 for S(u) = sin(pi u)/(pi u). Input to the m_2(1) = 4/3 cross-check of the sine-kernel moment values (preprint SS7.5(f))."
+    },
+    {
+      "target": "Zeta23Scaffold.integral_sinc_fourth",
+      "tier": "C-integral",
+      "rank": 2,
+      "difficulty": "HARD",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): integral over Real of (Real.sin x / x)^4 dx = 2 * Real.pi / 3. Verified numerically off-line (int (sin(pi u)/(pi u))^4 du = 0.6666666... = 2/3, equivalent by substitution). Suggested routes: (1) Plancherel/Parseval: the Fourier transform of (sin x/x)^2 is an explicit triangle (tent) function pi*(1-|xi|/2)_+ ; then integral (sin x/x)^4 = (1/2pi) * integral of the tent squared = (1/2pi)*pi^2*(4/3) = 2pi/3 -- needs Mathlib's Fourier-Plancherel on L^2(Real), available but assembly-heavy; (2) reduction by repeated integration by parts to the Dirichlet integral; (3) contour/Fejer kernel identities. This is a genuinely substantial classical-analysis target: attempt only after integral_sinc_sq; return BLOCKED with partial lemmas if the Fourier route stalls.",
+      "statement": "integral over R of (sin x / x)^4 dx = 2*pi/3 -- equivalently integral of S(u)^4 = 2/3; the nontrivial input to m_2(1) = 1 + (1 - 2/3) = 4/3 (preprint SS7.5(f) cross-check)."
+    },
+    {
+      "target": "Zeta23Scaffold.m2_at_one_assembly",
+      "tier": "C-integral",
+      "rank": 3,
+      "difficulty": "HARD",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0), conditionally on the two integral targets: with S (u : Real) := Real.sin (Real.pi * u) / (Real.pi * u), given hS2 : integral over Real of (S u)^2 du = 1 and hS4 : integral over Real of (S u)^4 du = 2/3, prove 1 + (integral (S u)^2 du - integral (S u)^4 du) = 4/3. The arithmetic shell is trivial (rewrite and norm_num) -- the point of the target is to fix, in Lean, the exact shape of the second-moment formula m_2(1) = 1 + int S^2 - int S^4 for the sine-kernel Gram matrix over the sine process (pair correlation 1 - S(u)^2; verified off-line numerically), pinning SineMomentsAtOne.m2 = 4/3 of formal/Zeta23Scaffold/Hypotheses.lean to a checkable identity. State the two integrals as HYPOTHESES (explicit arguments), never as axioms; do NOT claim the pair-correlation derivation itself, which is unformalized probability and out of scope.",
+      "statement": "Conditional assembly m_2(1) = 1 + int S^2 - int S^4 = 4/3 given the two sinc integrals -- the honest formal shape of 'one computes m_2(1) = 4/3' (preprint SS7.5(f))."
+    }
+  ]
+}
