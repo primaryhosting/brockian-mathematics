@@ -25,7 +25,7 @@ AXLE = ROOT / "axle_verify.json"
 HARV = ROOT / "harvest_ledger.json"
 QUEUE_FILES = ["domains_queue.json", "mined_queue.json", "next_100.json",
                "pca_lean_queue.json", "frontier_queue.json", "frontier2.json",
-               "reattack_queue.json", "frontier_spectral.json", "frontier_betrothed_queue.json", "frontier_linalg.json", "frontier_riemann.json", "frontier_infinity.json", "frontier_fibonacci.json", "frontier_primes.json", "frontier_rh2.json", "frontier_wave2.json"]
+               "reattack_queue.json", "frontier_spectral.json", "frontier_betrothed_queue.json", "frontier_linalg.json", "frontier_riemann.json", "frontier_infinity.json", "frontier_fibonacci.json", "frontier_primes.json", "frontier_rh2.json", "frontier_wave2.json", "frontier_wave3.json"]
 
 
 def normalize(content: str) -> str:
