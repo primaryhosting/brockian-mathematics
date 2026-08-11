@@ -29,7 +29,7 @@ import titles  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
-QUEUES = os.environ.get("QUEUES", "next_100.json,domains_queue.json,mined_queue.json,pca_lean_queue.json,frontier_queue.json,frontier2.json,reattack_queue.json,frontier_spectral.json,frontier_betrothed_queue.json,frontier_linalg.json,frontier_riemann.json,frontier_rh2.json,frontier_primes.json,frontier_fibonacci.json,frontier_infinity.json,frontier_wave2.json,frontier_wave3.json,frontier_wave4.json").split(",")
+QUEUES = os.environ.get("QUEUES", "next_100.json,domains_queue.json,mined_queue.json,pca_lean_queue.json,frontier_queue.json,frontier2.json,reattack_queue.json,frontier_spectral.json,frontier_betrothed_queue.json,frontier_linalg.json,frontier_riemann.json,frontier_rh2.json,frontier_primes.json,frontier_fibonacci.json,frontier_infinity.json,frontier_wave2.json,frontier_wave3.json,frontier_wave4.json,frontier_wave5.json").split(",")
 REG = REPO / "registry" / "theorems.json"
 LEDGER = ROOT / "submitted_night.json"
 LOG = ROOT / "night_submit.log"
