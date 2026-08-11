@@ -1,6 +1,54 @@
 {
- "count": 115,
+ "count": 121,
  "queue": [
+  {
+   "target": "Zeta23Obstruction.repaired_witness_nonneg",
+   "tier": "C-corpus-extension",
+   "rank": 1,
+   "difficulty": "EASY",
+   "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): for all real x, 0 \u2264 (Real.sin (Real.pi * x) / (Real.pi * x))^2 * (1 - (1/10) * Real.cos (3 * Real.pi * x)). Route: the first factor is a square hence \u2265 0 (this also covers x = 0 where the quotient is junk-valued but still squared); the second factor is \u2265 9/10 > 0 since Real.cos \u2264 1 (neg_one_le_cos / cos_le_one). Multiply nonnegatives. State exactly this global \u2200 x : \u211d \u2014 a finite-range version is worthless.",
+   "statement": "The repaired obstruction witness kernel is nonnegative on ALL of \u211d (product of nonnegatives)."
+  },
+  {
+   "target": "Zeta23Obstruction.repaired_witness_neg_at_deep_point",
+   "tier": "C-corpus-extension",
+   "rank": 1,
+   "difficulty": "MEDIUM",
+   "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): (Real.sinh (2 * Real.pi) / (2 * Real.pi))^2 * (1 - (1/10) * Real.cosh (6 * Real.pi)) < 0. This is the analytic continuation of the witness kernel evaluated at the deep off-line point 2i, where sin(\u03c0\u00b72i)/(\u03c0\u00b72i) becomes sinh(2\u03c0)/(2\u03c0) and cos(3\u03c0\u00b72i) becomes cosh(6\u03c0). Route: the square factor is > 0 (sinh(2\u03c0) > 0 since 2\u03c0 > 0); the bracket is < 0 iff cosh(6\u03c0) > 10; use cosh x \u2265 (exp x)/2 and exp(6\u03c0) \u2265 exp 18 > 20 via exp monotonicity and a crude bound like exp 1 \u2265 2 giving exp 18 \u2265 2^18. Conclude pos * neg < 0.",
+   "statement": "The repaired witness kernel is strictly negative at the deep point 2i: (sinh 2\u03c0/2\u03c0)\u00b2\u00b7(1 \u2212 cosh(6\u03c0)/10) < 0 \u2014 the deep-pair blowup is real."
+  },
+  {
+   "target": "Zeta23Obstruction.tent_combination_neg_on_band",
+   "tier": "C-corpus-extension",
+   "rank": 1,
+   "difficulty": "MEDIUM",
+   "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): define T : \u211d \u2192 \u211d := fun a => max 0 (1 - |a|). Then for all a with 1 < a and a < 5/2, T a - (1/20) * (T (a - 3/2) + T (a + 3/2)) < 0. This is the Fourier-side profile of the repaired witness: the base tent vanishes for a > 1, while the shifted tent T(a \u2212 3/2) is strictly positive for a \u2208 (1, 5/2) (since |a \u2212 3/2| < 1 there). Route: case a \u2265 1 gives T a = 0; a \u2208 (1, 5/2) gives a \u2212 3/2 \u2208 (\u22121/2, 1) so T (a \u2212 3/2) = 1 \u2212 |a \u2212 3/2| > 0; T (a + 3/2) \u2265 0; so the expression is \u2264 \u2212(1/20)\u00b7(positive) < 0. Pure piecewise algebra on max and abs.",
+   "statement": "The witness's Fourier tent combination is strictly negative exactly where claimed: T(\u03b1) \u2212 (1/20)(T(\u03b1\u22123/2)+T(\u03b1+3/2)) < 0 on (1, 5/2)."
+  },
+  {
+   "target": "Zeta23Obstruction.damage_cost_exponent_law",
+   "tier": "C-corpus-extension",
+   "rank": 2,
+   "difficulty": "EASY",
+   "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0) the two facts that make the deep-pair damage/cost ratio fatal: (1) for A > 1, StrictMono (fun y : \u211d => Real.exp (4 * Real.pi * (A - 1) * y)) \u2014 strict monotonicity since the coefficient 4\u03c0(A\u22121) > 0; (2) \u2200 C > 0, \u2203 y > 0, Real.exp (4 * Real.pi * (A - 1) * y) > C \u2014 unboundedness via Real.exp tends to atTop or by y = (Real.log C + 1)/(4\u03c0(A\u22121)). State both in one theorem or two; the quantifiers must be global.",
+   "statement": "The rescaled deep-pair damage/cost ratio e^{4\u03c0(A\u22121)y} is strictly increasing and unbounded for any bandwidth A > 1."
+  },
+  {
+   "target": "Zeta23Obstruction.sq_factor_lower_bound",
+   "tier": "C-corpus-extension",
+   "rank": 2,
+   "difficulty": "EASY",
+   "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): for all x : \u211d, (9:\u211d)/10 \u2264 1 - (1/10) * Real.cos (3 * Real.pi * x). Route: Real.cos_le_one gives cos \u2264 1 hence (1/10)\u00b7cos \u2264 1/10. This is the quantitative floor that makes the witness's nonnegativity robust (the modulation can never eat the Fej\u00e9r factor). Global \u2200 x.",
+   "statement": "The witness's modulation factor is bounded below by 9/10 everywhere \u2014 the repair has margin, not just nonnegativity."
+  },
+  {
+   "target": "Zeta23Obstruction.subclass_obstruction_statement",
+   "tier": "B-conjecture",
+   "rank": 3,
+   "difficulty": "HARD",
+   "goal": "STATEMENT-LEVEL target (CONDITIONAL register; do not attempt the full analytic proof): formalize in Lean 4 (Mathlib, lean-4.32.0) a clean abstract statement of the refereed subclass obstruction: given a 'certificate' consisting of a fixed function R : \u211d \u2192 \u211d with (h_pos : \u2200 x, 0 \u2264 R x) used via pointwise discard and per-species linear charging (model the chain abstractly: a linear functional on configuration data whose validity requires a termwise bound R-at-deep-points \u2265 0), the existence of a point z with R-analytic-continuation z < 0 (as in the repaired witness) yields a configuration on which the chain's termwise bound fails. Prefer an abstract finite-dimensional model (finitely many species, weights, a linear charge map) over genuine zeta analysis \u2014 the content is the quantifier structure: fixed kernel + pointwise discard + one bad deep value \u27f9 invalid. If even the abstract model is out of reach in one shot, return the STATEMENT compiling with sorry and mark BLOCKED.",
+   "statement": "Abstract subclass obstruction: a fixed-kernel pointwise-discard linear certificate with a negative deep value is invalid against deep-pair configurations (the refereed, class-named form of T1's R3)."
+  },
   {
    "target": "Zeta23Scaffold.assembly_window_constants",
    "tier": "A-assembly",
