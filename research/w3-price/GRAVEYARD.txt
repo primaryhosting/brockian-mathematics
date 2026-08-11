@@ -1,0 +1,54 @@
+W3 GRAVEYARD (dead ends + wrongness found, per method law)
+==========================================================
+G1. "I2 (nu-tied-to-psi) closes the ghost" -- DEAD. The density cap
+    1+eta <= DMAX * (sum m psi_m) kills the tall-cell ghost but the
+    correlation mass migrates into the multiplicity diagonal
+    D2 = sum m^2 psi_m, which rides the delta_0 bookkeeping OUTSIDE the
+    cells: ghost-2 (psi_2 = 1/4, p_.1 = 1/4, eta == 0) is exactly feasible
+    at tol=0 for every DMAX >= 2 and every window A (ghosts.py). The
+    task brief's warning that delta_0 bookkeeping is "exactly where subtle
+    wrongness lives" is confirmed in the constructive direction.
+G2. "I4 (Frobenius equality) is an independent priced ingredient" -- DEAD
+    IN-CLASS. With band equality pinning S_total on [0,1] and any window
+    with supp khat in [-1,1], the second-moment equality is a nonnegative
+    (trapezoid) combination of band rows; its price is identically 0 at
+    every level. Its role in the preprint is to EVALUATE the RHS of the
+    4.4(i) charge (I5); it has no standalone constraint content here.
+    (Consistent with refC's phrasing "Frobenius ... implicitly carries
+    pair-pair data": the evaluation is the carrier, not a new row.)
+G3. I3 UNTIED (pair-pair channel without its species tie) -- BROKEN
+    LEVEL, kept only as a demonstration: free mu >= 0 re-opens a ghost
+    door (mu plays "pairs" without any p mass) and control N degrades.
+    An ingredient that adds adversary variables has NEGATIVE price unless
+    it ships with its own coherence tie.
+G4. Continuum floor for C0+I1 at tol = 2e-4 via the eps-Young chain is
+    weak (0.46; Cp = cosh^2(pi) worst-depth constant is crude). Not
+    pursued further: the grid dual certifies the working value, and the
+    tol=0 statement is exact. A sharper tol-degradation constant would
+    need depth-resolved pair bounds -- open, low value.
+G5. First unjustified steps, by level (named, per method law #5):
+    C0:      none new (refereed).
+    C0+I1:   none on I1 itself (X(0) >= 0 is a sum of nonnegative terms
+             for genuine configurations); residual exposure = the class's
+             own delta_0/band bookkeeping (refereed in W2/refC), plus the
+             requirement that alpha = 0 be a constrained grid point.
+    C0+I2:   the constant DMAX (= 2 pi A0): the local-density constant for
+             genuine zero configurations is not pinned in committed code;
+             immaterial here because I2 buys 0 for every DMAX >= 2 anyway.
+    C0+I3:   the single-depth-pair (0.1,0.1) truncation of the pair-pair
+             channel, and the tie constant 2*DMAX*sum p; both flagged --
+             the level's value turns out not to depend on them (price 0
+             with I1 or I5 present; broken without a tie).
+    C0+I4:   quadrature (trapezoid) representation of the second-moment
+             integral on the na-grid -- exact as an implied row, so no
+             exposure.
+    C0+I5:   Prop 4.4(i) + the unconditional prime-side evaluations
+             tr = N, Frobenius = (1/c1*) N -- these are the preprint's
+             refereed theorems (outside the 2-level class by refC's
+             verdict, which is exactly why this rung exists).
+G6. Grid LP duals for the I3-bearing rungs (L3A/L4A) at the full t-grid --
+    KILLED BY HARDWARE BUDGET (dense ~18k x 2400 HiGHS solves > 25 min
+    each on the Mac Mini). Salvaged: a reduced-t-grid {1/2,1,2} dual for
+    L3A (certified 0.356 after leakage -- valid but loose). L4A lower
+    side left OPEN by controller decision. A sparse-matrix rebuild of
+    ladder.build would close both cheaply.

@@ -1,0 +1,67 @@
+W3 PRICE TABLE — certificate machinery of the two-thirds preprint
+=================================================================
+Class C0 (refereed): exact-cone 2-level relaxation — species psi_m, pair
+masses p_y, FREE correlation density eta >= -1 (cells+tails, untied),
+exact CS cone X^2 <= 4 S_O S_P, band equality on [0,1] (delta_0
+bookkeeping), S_total >= 0 on (1,A], count = 1; constant = min psi_1.
+Working basis: XF=80/na=600/A=3/nb=320, tol=2e-4, DMAX=2pi (refinement
+check XF=160/na=1200/A=5/nb=1280). V_A := 2 - 1/c1* = 0.6725007.
+
+Sources: values = log_socp_main/log_socp_singles/log_socp_fine.txt
+(Clarabel, exact cone, witness CS-residual quoted); grid duals =
+log_sideduals.txt / log_orderA.txt (HiGHS marginals, independently
+re-verified, leakage quantified); analytic certs = ghosts.py,
+algebraic_i5.py, i1_floor.py; controls = log_controls.txt.
+
+ORDERING A (structural first)         lower bound        upper bound    marginal   status
+                                      (certified)        (witnessed)    price
+L0   C0                               0 (psi_1>=0)       0 (refereed    --        SETTLED (exact,
+                                                         ghost, tol=0)            refereed)
+L1A  +I1 coherence at 0: X(0)>=0      grid-basis 0.6203  0.6470573      +0.647    SETTLED at basis
+     (genuine: cross terms at alpha=0 (=0.6295-9.2e-3    (CS -8.6e-8)             up to LP-vs-SOCP
+     are sums of nonneg products)     leakage); contin.  fine: 0.6663             gap [0.620,0.647];
+                                      0.4596@tol=2e-4,                            continuum tol=0
+                                      0.6725007@tol=0                             = V_A exactly
+L2A  +I2 nu-tied (1+eta<=DMAX*s)      grid-basis 0.6301  0.6491778      +0.0021   same shape as L1A
+L3A  +I3 pair-pair channel, tied      grid-basis 0.3560  0.6483857      -0.0008   half-OPEN (lower
+     (mu>=0 cells, mu<=2*DMAX*sum p)  (reduced-t-grid    (NEGATIVE:               side weak: only a
+                                      dual 0.3688-1.3e-2 more adversary           loose reduced-cone
+                                      leakage,           freedom)                 dual landed before
+                                      log_l34_duals.txt)                          compute deadline)
+L4A  +I4 Frobenius equality           OPEN -- LP killed  0.6563944      +0.0080   half-OPEN; upper
+     (2nd-moment row)                 at deadline;       (observed;               side observed only;
+                                      no certificate     tol-slack               price PROVED 0 at
+                                      on record          recapture)               tol=0 (implied row)
+L5   +I5 rank/integrality charge      0.6725007 EXACT    0.6725007      +0.0161   SETTLED BOTH SIDES
+     3psi1+4(psi_{>=2}+p)>=4-1/c1*    (algebraic dual,   (CS -7.3e-6)             EXACTLY = V_A
+                                      any grid/tol/      fine: same
+                                      window/channel)    0.6725007
+
+ORDERING B (certificate first)
+L1B  C0+I5                            0.6725007 EXACT    0.6725007      +0.6725007 SETTLED EXACTLY
+L2B  +I4                              0.6725007          0.6725007      0          SETTLED
+L3B  +I3 tied (mu mass 10.5 active!)  0.6725007          0.6725007      0          SETTLED
+L4B  +I2                              0.6725007          0.6725007      0          SETTLED
+L5   +I1                              0.6725007          0.6725007      0          SETTLED
+
+SINGLETON PROBES (isolation prices)
+C0+I2 alone      = 0 EXACTLY (ghost-2: psi_2=1/4, p_.1=1/4, eta==0 —
+                   the multiplicity ghost; closed form, tol=0, every
+                   window, every DMAX>=2; solver confirms also DMAX=1.5)
+C0+I3 tied       = 0 (solver witness, mu mass 16.3)
+C0+I3 UNTIED     = 0 and CONTROL N FAILS (t*=0: pure doubles readmitted)
+                   -> broken level, not a rung; the tie is mandatory
+C0+I4 alone      = 0 (implied row)
+C0+I1+I3untied   = 0.6458 (I1 kills the mu ghost too: S_PP(0)>=0 dies at 0)
+
+CONTROLS (log_controls.txt): GUE all-simple accepted at EVERY rung;
+pure doubles rejected at every rung, quantitatively (phase-1 t* =
+0.5555-0.5581 >> tol) or algebraically (I5 rungs: 2 < 2.6725007).
+
+VERDICT: the 0 -> 0.6725007 jump is NOT additive across ingredients: it is
+first-past-the-post between TWO independently sufficient ingredients —
+I1 (coherence at 0; exact at tol=0, tol-leaky at working tolerance) and
+I5 (Prop 4.4(i) charge + prime-side Frobenius evaluation; exact at every
+tolerance). I2, I3, I4 price at 0 alone (I3 negative unless tied).
+Endpoint = V_A exactly, no shortfall. The next step 0.6725->0.68398 (V_B)
+is bought by out-of-band spectral positivity — not in this ingredient list.
