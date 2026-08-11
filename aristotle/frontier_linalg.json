@@ -37,13 +37,13 @@
   {
    "target": "Zeta23Redux.LinAlg.vonNeumann_trace_ineq",
    "tier": "FRONTIER-linalg", "rank": 4, "register": "MATRIX-HARD",
-   "statement": "Von Neumann's trace inequality for Hermitian matrices. For Hermitian complex matrices A, B of size Fin d, prove Re (trace (A * B)) <= sum over i of (mu_i * nu_i), where mu and nu are the eigenvalues of A and B respectively, both listed in the SAME monotone (decreasing) order. Route: diagonalise; reduce to a bilinear form against a doubly stochastic matrix (the entrywise squared modulus of a unitary), then Birkhoff / rearrangement. This lemma was contributed to Mathlib by the zeta-23 formalisation.",
+   "statement": "Von Neumann's trace inequality for Hermitian matrices. For Hermitian complex matrices A, B of size Fin d, prove Re (trace (A * B)) <= sum over i of (mu_i * nu_i), where mu and nu are the eigenvalues of A and B respectively, both listed in the SAME monotone (decreasing) order. Route: diagonalise; reduce to a bilinear form against a doubly stochastic matrix (the entrywise squared modulus of a unitary), then Birkhoff / rearrangement. In the zeta-23 repo this lives in its own RHLinalg namespace (not verified to be upstreamed to Mathlib).",
    "goal": "Prove in Lean 4 (Mathlib), axiom-clean."
   },
   {
    "target": "Zeta23Redux.LinAlg.sylvester_hermitian_finrank",
    "tier": "FRONTIER-linalg", "rank": 4, "register": "MATRIX-HARD",
-   "statement": "Sylvester's law of inertia (Hermitian, the direction used in the paper). Let A be a Hermitian complex matrix of size Fin d, and let W be a complex subspace of (Fin d -> Complex) on which the Hermitian form x |-> Re (star x dotProduct (A *v x)) is positive definite (strictly positive for all nonzero x in W). Prove that finrank W <= posIndex A, where posIndex A is the number of strictly positive eigenvalues of A. This 'pull-back does not increase the positive index' fact was contributed to Mathlib by the zeta-23 formalisation.",
+   "statement": "Sylvester's law of inertia (Hermitian, the direction used in the paper). Let A be a Hermitian complex matrix of size Fin d, and let W be a complex subspace of (Fin d -> Complex) on which the Hermitian form x |-> Re (star x dotProduct (A *v x)) is positive definite (strictly positive for all nonzero x in W). Prove that finrank W <= posIndex A, where posIndex A is the number of strictly positive eigenvalues of A. In the zeta-23 repo this 'pull-back does not increase the positive index' fact lives in the RHLinalg namespace (not verified to be upstreamed to Mathlib).",
    "goal": "Prove in Lean 4 (Mathlib), axiom-clean."
   },
   {
