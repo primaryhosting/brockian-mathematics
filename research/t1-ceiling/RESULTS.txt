@@ -1,0 +1,43 @@
+T1 ceiling-gap program: consolidated LP results (2026-08-10)
+Units: per N (count with multiplicity); band data F(dalpha) = delta_0 + |alpha| on [-1,1]
+
+CALIBRATION GATE (calibrate.py): PASS
+  c1* = 0.7532961 (paper 0.7532960); 2-1/c1* = 0.6725007; (3-1/c1*)/2 = 0.8362504
+  H(1) = 2/3 (flat M=4/3); Cauchy-Schwarz 1/2; variational optimum = cos(sqrt2 s), M=1.3274992
+  identity M(V) = 1 + int K_V (1-F) verified
+
+VARIANT A: min psi_1, on-line adversary (mean density + ALL bandwidth-1 pair equalities
+           + pair-measure nonnegativity + integer multiplicities)
+  coarse cells (h_far=.25): XF=40:0.68413 80:0.67902 160:0.67664 240:0.67584
+                            320:0.675489(tol 1e-4) 480:0.674978(tol 1e-4)
+  fine (h_far=.1):  160:0.675700 240:0.674795  -> 1/X intercept 0.67299
+  veryfine (h_far=.05): 160:0.675587 240:0.674675 -> 1/X intercept 0.67285
+  tol slope: value(tol) ~ v0 - 1.6 tol  (tol->0: +0.0003 from 2e-4)
+  VERDICT: V_A = 0.6725 .. 0.6732; consistent with EXACT 2 - 1/c1* = 0.6725007
+  optimal structure: simples + doubles only (psi_2 -> 0.1637), m>=3 and pairs unused;
+  saturates paper Prop 4.4(i) with near equality.
+
+VARIANT B: A + out-of-band spectral positivity S(alpha)>=0, alpha in (1,A]
+  A=3 (h_far=.25): 160:0.683983 240:0.683204 -> intercept 0.68164
+  A=5 (h_far=.25): 160:0.685009 240:0.684845 (far-cell position-quantization bias up)
+  bracket [0.6816, 0.6848] contains paper Remark 1.1 ceiling 0.68185
+  IDENTIFICATION: Remark 1.1's "explicit extremal law" = this doubly-positive
+  (one-delta + Bochner) extremal problem; the whole 0.0094 gap = shadow price of
+  out-of-band spectral positivity.
+
+CONTROLS (control_dh.py):
+  paper certificate 4tr - 2N - ||.||_F^2 <= s1: 20,000 random self-conjugate
+  configs (deep pairs included): 0 violations, worst slack +0.000225
+  CE kernel kill, clean admissible witness:
+    R = F_1 + F_{1/sqrt2} + F_{2/pi} - 0.002 * 2 cos(3 pi x) F_{0.25}
+    R > 0 on [0,400] (min +1.1e-8), Rhat < 0 exactly on [1.25,1.75],
+    R(2i*1) = -1.63e5  ->  a single off-line pair at scaled depth 1 with
+    relative mass ~1e-5 N breaks the Montgomery-type chain -> any kernel with
+    negative out-of-band Fourier mass is unconditionally DEAD
+  cone-linked species relaxation: psi_1 -> 0 "solution" VIOLATES Prop 4.4(i)
+  (LHS 2.0000 < RHS 2.6725): pointwise 2-level + CS loses von Neumann/inertia.
+
+DEEP-PAIR OBSTRUCTION (exponent law): pair at scaled depth y costs e^{4 pi y} in
+band data but injects e^{4 pi A y} at alpha=A>1: damage/cost = e^{4 pi (A-1) y}
+-> infinity. No negative out-of-band Fourier mass survives unconditionally;
+supp Rhat must lie in [-1,1]; the certificate family then caps at V_A.
