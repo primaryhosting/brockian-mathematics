@@ -3779,7 +3779,7 @@
   "verified": true,
   "environment": "lean-4.32.0",
   "errors": [],
-  "hash": "41a117fb4893261c"
+  "hash": "7960bca308bb5e86"
  },
  "QI_deutsch_jozsa.lean": {
   "verified": true,
@@ -3868,15 +3868,13 @@
   "verified": true,
   "environment": "lean-4.32.0",
   "errors": [],
-  "hash": "869f3285d4f54f72"
+  "hash": "4c18927e965c101a"
  },
  "QI_shor_code_corrects.lean": {
-  "verified": false,
+  "verified": true,
   "environment": "lean-4.32.0",
-  "errors": [
-   "-:156:84-157:33: error: unsolved goals\na : Bool\nt : Fin 3 \u2192 Bool\n\u22a2 (if a = true then \u220f x, if t x = true then -1 else 1 else 1) =\n    if a = true then \u220f m, if t m = true then -1 else 1 else 1\n"
-  ],
-  "hash": "f06899ced1412ab6"
+  "errors": [],
+  "hash": "43ad187575fb3a85"
  },
  "QI_steane_code.lean": {
   "verified": false,
@@ -4277,5 +4275,1723 @@
   "environment": "lean-4.32.0",
   "errors": [],
   "hash": "92393edd6d4a56ff"
+ },
+ "Brockian_AmicableNumbers_AmicableInfinitude.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "0b071d005d927fde"
+ },
+ "Brockian_AndricaConjecture_AndricaConjecture.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "038dccd42987d739"
+ },
+ "Brockian_BetrothedNumbers_BetrothedInfinitude.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "6e9be2fc82991a80"
+ },
+ "Brockian_BetrothedNumbers_Dynamics_isBetrothedPair_iff_nontrivial_twoCycle.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "74e675464a54df98"
+ },
+ "Brockian_BetrothedNumbers_Dynamics_thabit_balance_identity.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b0f03880852e0f78"
+ },
+ "Brockian_BetrothedNumbers_SameParityBetrothedExists.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "dce016a0924dd97e"
+ },
+ "Brockian_BetrothedNumbers_betrothed_5775_6128.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "32acffb8d39bd52e"
+ },
+ "Brockian_BetrothedNumbers_coprime_pair_four_primeFactors.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "9a74a0fc2bc28b2d"
+ },
+ "Brockian_BetrothedNumbers_coprime_sameParity_twentyOne_primeFactors.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "316b986d08ad3610"
+ },
+ "Brockian_BetrothedNumbers_density_zero_reduction.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8c06b4e841b2e876"
+ },
+ "Brockian_BetrothedNumbers_no_pair_of_mersenne_and_shifted_prime.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "597e123e8b8eadc6"
+ },
+ "Brockian_BetrothedNumbers_primePower_member_structure.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "5e9e3f5905cd7f40"
+ },
+ "Brockian_BrocardGap_BrocardGapConjecture.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "ff7d444522d94ac4"
+ },
+ "Brockian_BrocardProblem_BrocardConjecture.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "cf31adcb6530f6a5"
+ },
+ "Brockian_CarmichaelKorselt_ThreePrimeCarmichaelInfinitude.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "78ac77f6001412df"
+ },
+ "Brockian_CollatzPartial_CollatzConjecture.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "59fc4880fdac3cb7"
+ },
+ "Brockian_CullenWoodall_CullenPrimeInfinitude.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "c246efc2681f9401"
+ },
+ "Brockian_CullenWoodall_WoodallPrimeInfinitude.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "c179c6ca62254ba3"
+ },
+ "Brockian_Equidistribution_equidistribution_of_asymptotic.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:177:11-177:35: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  \u2016-?x + ?y\u2016\nin the target expression\n  \u2016f - g\u2016 < \u03b5 / 3\n\nx : \u2115 \u2192 AddCircle 1\nhx :\n  \u2200 (k : \u2124),\n    k \u2260 0 \u2192 Filter.Tendsto (Brockian.Equidistribution.cesaroAvg x (\u21d1(fourier k) : AddCircle 1 \u2192 \u2102)) Filter.atTop (\ud835\udcdd 0)\nf : C(AddCircle 1, \u2102)\n\u03b5 : \u211d\nh\u03b5 : \u03b5 > 0\ng : C(AddCircle 1, \u2102)\nhgmem : g \u2208 Submodule.span \u2102 (Set.range fourier)\nhgdist : Dist.dist f g < \u03b5 / 3\nhg :\n  \u2200 \u03b5 > 0,\n    \u2203 (N : \u2115),\n      \u2200 n \u2265 N,\n        Dist.dist (Brockian.Equidistribution.cesaroAvg x (\u21d1g : AddCircle 1 \u2192 \u2102) n)\n            (\u222b (t : AddCircle 1), (g : AddCircle 1 \u2192 \u2102) t \u2202AddCircle.haarAddCircle) <\n          \u03b5\nN\u2080 : \u2115\nhN\u2080 :\n  \u2200 n \u2265 N\u2080,\n    Dist.dist (Brockian.Equidistribution.cesaroAvg x (\u21d1g : AddCircle 1 \u2192 \u2102) n)\n        (\u222b (t : AddCircle 1), (g : AddCircle 1 \u2192 \u2102) t \u2202AddCircle.haarAddCircle) <\n      \u03b5 / 3\nN : \u2115\nhN : N \u2265 N\u2080\n\u22a2 \u2016f - g\u2016 < \u03b5 / 3\n",
+   "-:182:38-182:62: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  \u2016-?x + ?y\u2016\nin the target expression\n  \u2016g - f\u2016 < \u03b5 / 3\n\nx : \u2115 \u2192 AddCircle 1\nhx :\n  \u2200 (k : \u2124),\n    k \u2260 0 \u2192 Filter.Tendsto (Brockian.Equidistribution.cesaroAvg x (\u21d1(fourier k) : AddCircle 1 \u2192 \u2102)) Filter.atTop (\ud835\udcdd 0)\nf : C(AddCircle 1, \u2102)\n\u03b5 : \u211d\nh\u03b5 : \u03b5 > 0\ng : C(AddCircle 1, \u2102)\nhgmem : g \u2208 Submodule.span \u2102 (Set.range fourier)\nhgdist : Dist.dist f g < \u03b5 / 3\nhg :\n  \u2200 \u03b5 > 0,\n    \u2203 (N : \u2115),\n      \u2200 n \u2265 N,\n        Dist.dist (Brockian.Equidistribution.cesaroAvg x (\u21d1g : AddCircle 1 \u2192 \u2102) n)\n            (\u222b (t : AddCircle 1), (g : AddCircle 1 \u2192 \u2102) t \u2202AddCircle.haarAddCircle) <\n          \u03b5\nN\u2080 : \u2115\nhN\u2080 :\n  \u2200 n \u2265 N\u2080,\n    Dist.dist (Brockian.Equidistribution.cesaroAvg x (\u21d1g : AddCircle 1 \u2192 \u2102) n)\n        (\u222b (t : AddCircle 1), (g : AddCircle 1 \u2192 \u2102) t \u2202AddCircle.haarAddCircle) <\n      \u03b5 / 3\nN : \u2115\nhN : N \u2265 N\u2080\nh1 :\n  \u2016Brockian.Equidistribution.cesaroAvg x (\u21d1f : AddCircle 1 \u2192 \u2102) N -\n        Brockian.Equidistribution.cesaroAvg x (\u21d1g : AddCircle 1 \u2192 \u2102) N\u2016 <\n    \u03b5 / 3\nh2 :\n  Dist.dist (Brockian.Equidistribution.cesaroAvg x (\u21d1g : AddCircle 1 \u2192 \u2102) N)\n      (\u222b (t : AddCircle 1), (g : AddCircle 1 \u2192 \u2102) t \u2202AddCircle.haarAddCircle) <\n    \u03b5 / 3\n\u22a2 \u2016g - f\u2016 < \u03b5 / 3\n"
+  ],
+  "hash": "e136c183b2ebcf3b"
+ },
+ "Brockian_Equidistribution_equidistribution_of_asymptotic_exists.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "e047e272d9b7ae34"
+ },
+ "Brockian_ErdosStraus_ErdosStrausConjecture.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "ffb6216212b3b5e5"
+ },
+ "Brockian_FermatNumbers_FermatPrimeBeyondFour.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "bd684216cd9ffbdb"
+ },
+ "Brockian_FortunateNumbers_FortuneConjecture.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "99b0f3f916317139"
+ },
+ "Brockian_FreeLaplacianPlancherel_freeLaplacian_essentiallySelfAdjoint_via_plancherel.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:331:14-331:16: error: unexpected token '\u03c6'; expected '(', '[', '_', '{', '\u2983' or identifier\n",
+   "-:331:13-331:14: error: elaboration function for `Lean.\u00abtermSatisfies_binder_pred%__\u00bb` has not been implemented\n  failed to pretty print term (use 'set_option pp.rawOnError true' for raw representation)\n"
+  ],
+  "hash": "8ba174f9959427b2"
+ },
+ "Brockian_GilbreathConjecture_GilbreathConjecture.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "ef412e4a1a448854"
+ },
+ "Brockian_GiugaNumbers_OddGiugaExists.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "809f1392f074f455"
+ },
+ "Brockian_GoldbachComb_GoldbachCovarianceTransfer.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d54d710736e0a9e3"
+ },
+ "Brockian_GoldbachSchema_goldbach_beyond_of_model.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "79fe7e719f823e57"
+ },
+ "Brockian_GoldbachSchema_goldbach_from_spectral_model.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "154d82f6992e52fd"
+ },
+ "Brockian_HyperperfectNumbers_HyperperfectAllK.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b60c4f96d491538b"
+ },
+ "Brockian_HyperperfectNumbers_HyperperfectInfinitude.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "91a2c2273694bed0"
+ },
+ "Brockian_LandauNSquaredPlusOne_LandauFourthConjecture.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:112:37-112:85: error: Type mismatch: After simplification, term\n  Int.prime_iff_natAbs_prime.mp hprime\n has type\n  Nat.Prime ((\u2191m : \u2124) ^ 2 + 1).natAbs\nbut is expected to have type\n  Nat.Prime (m ^ 2 + 1)\n"
+  ],
+  "hash": "c1ccdacc14aff908"
+ },
+ "Brockian_LegendreConjecture_LegendreConjecture.lean": {
+  "verified": null,
+  "error": "The read operation timed out"
+ },
+ "Brockian_MersennePerfect_EvenPerfectInfinitude.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "03abdf6977e29903"
+ },
+ "Brockian_MersennePerfect_MersennePrimeInfinitude.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:64:2-64:38: error(lean.unknownIdentifier): Unknown identifier `Theorems100.Nat.even_and_perfect_iff`\n",
+   "-:123:6-123:91: error: Type mismatch: After simplification, term\n  hp\n has type\n  p \u2208 Brockian.MersennePerfect.mersenneExponents\nbut is expected to have type\n  Brockian.MersennePerfect.MersenneExponent p\n"
+  ],
+  "hash": "fcb9c866bd10b8c5"
+ },
+ "Brockian_OppermannConjecture_OppermannConjecture.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "121807bbb5173a21"
+ },
+ "Brockian_OreHarmonicNumbers_OddHarmonicExists.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "6de050336178a2cf"
+ },
+ "Brockian_PalindromicPrimes_PalindromicPrimeInfinitude.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d234206dc76d6455"
+ },
+ "Brockian_PerfectTotient_PerfectTotientInfinitude.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "49640e4a13b9e5ea"
+ },
+ "Brockian_PolignacPrimes_PolignacConjecture.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8d0d3e26e490e16b"
+ },
+ "Brockian_PracticalNumbers_PracticalTwinInfinitude.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "f8a2271b6c026e25"
+ },
+ "Brockian_QuasiperfectNumbers_QuasiperfectExists.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:105:30-105:56: error: Type mismatch: After simplification, term\n  Dvd.dvd.neg_right hdvd\n has type\n  @Dvd.dvd \u2124 semigroupDvd (\u2191N : \u2124) (-1 + -(\u2191m : \u2124))\nbut is expected to have type\n  @Dvd.dvd \u2124 Int.instDvd (\u2191N : \u2124) (-1 - (\u2191m : \u2124))\n"
+  ],
+  "hash": "75ef88a5407ca676"
+ },
+ "Brockian_RepunitPrimes_RepunitPrimeInfinitude.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "59f9edee38c1531a"
+ },
+ "Brockian_RiemannScaffold_RH_of_BrockianSystem.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "4ff49a2bb977371b"
+ },
+ "Brockian_RieselCovering_RieselProblem.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "0b192e00a1403e11"
+ },
+ "Brockian_RuthAaronPairs_RuthAaronInfinitude.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "78fb2873de8bd2b3"
+ },
+ "Brockian_SierpinskiCovering_SierpinskiProblem.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "59c4d3bd8b3b8d1f"
+ },
+ "Brockian_SophieGermain_SophieGermainInfinitude.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "08b50193098e563e"
+ },
+ "Brockian_SuperperfectNumbers_OddSuperperfectExists.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "aee00e1096c63155"
+ },
+ "Brockian_TwinPrimes_TwinPrimeConjecture.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "f6e684589e1bfd3f"
+ },
+ "Brockian_UnitaryPerfect_SixthUnitaryPerfectExists.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "a35f649fae69a855"
+ },
+ "Brockian_WeirdNumbers_OddWeirdExists.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "ca2be211ce9a387e"
+ },
+ "Brockian_Weyl_FreeLaplacian2_freeLaplacian_essentiallySelfAdjoint_of_fourier.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:221:62-221:68: error: Application type mismatch: The argument\n  hminus\nhas type\n  Dense (\u2191(Brockian.Weyl.defRange T (-Complex.I)) : Set H)\nof sort `Prop` but is expected to have type\n  Type ?u.332\nof sort `Type (?u.332 + 1)` in the application\n  @Dense.eq_zero_of_inner_right ?m.763 hminus\n",
+   "-:331:5-331:7: error: unexpected token '\u03c6'; expected '_' or identifier\n"
+  ],
+  "hash": "f70e3c42a919628f"
+ },
+ "Brockian_Weyl_SchrodingerMinimal_schrodinger_essentiallySelfAdjoint_of_ode.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:94:8-94:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  w\nin the target expression\n  Complex.addCommGroup = Complex.instNormedAddCommGroup.toAddCommGroup\n\ncase e'_4\nc lam : \u2102\nhlam : lam ^ 2 = c\ny : \u211d \u2192 \u2102\nhy : ContDiff \u211d 2 y\nhode : \u2200 (t : \u211d), deriv (deriv y) t = c * y t\nhdy : Differentiable \u211d y\nhdy' : Differentiable \u211d (deriv y)\nw : \u211d \u2192 \u2102 := fun (t : \u211d) => deriv y t + lam * y t\nhw : w = fun (t : \u211d) => deriv y t + lam * y t\nt : \u211d\nh1 : HasDerivAt (deriv y) (deriv (deriv y) t) t\nh2 : HasDerivAt y (deriv y t) t\nh3 : HasDerivAt (deriv y + fun (y_1 : \u211d) => lam * y y_1) (c * y t + lam * deriv y t) t\n\u22a2 Complex.addCommGroup = Complex.instNormedAddCommGroup.toAddCommGroup\n",
+   "-:103:8-103:79: error: Type mismatch: After simplification, term\n  HasDerivAt.neg (HasDerivAt.const_mul lam (ContinuousLinearMap.hasDerivAt Complex.ofRealCLM))\n has type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u2102 Complex.instNormedAddCommGroup.toAddCommGroup\n    instInnerProductSpaceRealComplex.toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef\n    (-fun (y : \u211d) => lam * (\u2191y : \u2102)) (-lam) t\nbut is expected to have type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u2102 Complex.addCommGroup\n    instInnerProductSpaceRealComplex.toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef\n    (fun (t : \u211d) => -(lam * (\u2191t : \u2102))) (-lam) t\n"
+  ],
+  "hash": "982f1843ba4c988d"
+ },
+ "Brockian_Weyl_WeylLawTarget_counting_diverges_of_candidate.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:93:26-93:53: error: Type mismatch: After simplification, term\n  Nat.cast_le.mpr h\n has type\n  @LE.le \u2115 Nat.instPartialOrder.toLE (\u2191x\u271d\u00b9 : \u2115) (\u2191x\u271d : \u2115)\nbut is expected to have type\n  @LE.le \u2115 instLENat x\u271d\u00b9 x\u271d\n"
+  ],
+  "hash": "114628ad60226354"
+ },
+ "Brockian_Weyl_WeylLawTarget_counting_diverges_of_discrete_and_WeylLawMatch.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "4d3ba9d20e0c7cba"
+ },
+ "Brockian_Weyl_WeylLawTarget_counting_diverges_of_discrete_and_rvm.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d1298b2b3436f6ce"
+ },
+ "Brockian_Weyl_WeylLawTarget_counting_diverges_of_exists.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "bb02d0d58f975ad0"
+ },
+ "Brockian_WilsonPrimes_WilsonPrimeInfinitude.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "3d5d15797233f3ff"
+ },
+ "Brockian_ZumkellerNumbers_OddZumkellerFrom3Structure.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "05fcabf5f4dd2763"
+ },
+ "CS_baker_gill_solovay.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:63:11-63:17: error(lean.unknownIdentifier): Unknown identifier `Oracle`\n\nNote: It is not possible to treat `Oracle` as an implicitly bound variable here because the `autoImplicit` option is set to `Bool.false`.\n",
+   "-:63:19-63:25: error(lean.unknownIdentifier): Unknown identifier `PClass`\n\nNote: It is not possible to treat `PClass` as an implicitly bound variable here because the `autoImplicit` option is set to `Bool.false`.\n"
+  ],
+  "hash": "641068b768b8da50"
+ },
+ "CS_disjointness_lb.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "27008beec724a6cd"
+ },
+ "CS_recursion_theorem.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "992b85b6f682ca82"
+ },
+ "CS_rice_extended.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "0de346fe2e44efe8"
+ },
+ "CS_savitch.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:25:4-25:12: error: Function expected at\n  NSPACE\nbut this term has type\n  ?m.1\n\nNote: Expected a function because this term is being applied to the argument\n  f\n\nHint: The identifier `NSPACE` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.\n",
+   "-:25:15-25:42: error: Function expected at\n  DSPACE\nbut this term has type\n  ?m.2\n\nNote: Expected a function because this term is being applied to the argument\n  (fun n => (f n) ^ 2)\n\nHint: The identifier `DSPACE` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.\n"
+  ],
+  "hash": "87ccbe68a6831fb2"
+ },
+ "CS_time_hierarchy.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "5ce4563e6ac080b8"
+ },
+ "CS_yao_principle.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b5af82aa738ec12a"
+ },
+ "Frontier_Banach_Tarski.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:322:27-322:30: error(lean.synthInstanceFailed): failed to synthesize instance of type class\n  Norm E\n\nHint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.\n",
+   "-:325:45-325:46: error(lean.synthInstanceFailed): failed to synthesize instance of type class\n  OfNat E 0\nnumerals are polymorphic in Lean, but the numeral `0` cannot be used in a context where the expected type is\n  E\ndue to the absence of the instance above\n\nHint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.\n"
+  ],
+  "hash": "f9b9fded096291ab"
+ },
+ "Frontier_Borel_determinacy.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "edb6b2fcd636e24a"
+ },
+ "Frontier_CH_independent_statement.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "201832127c4651e4"
+ },
+ "Frontier_Catalan_Mihailescu.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b6e79deae78b04e1"
+ },
+ "Frontier_Chen_theorem.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "2f1e0b094f098e48"
+ },
+ "Frontier_FLT_statement.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "4093fc01187cc2ac"
+ },
+ "Frontier_Goedel_second_incompleteness.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "82e9c744dd2834e3"
+ },
+ "Frontier_Goodstein_terminates.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8dc1f28b5fe58da0"
+ },
+ "Frontier_Green_Tao.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "f9af0ea465291d63"
+ },
+ "Frontier_Hydra_Kirby_Paris.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:230:2-230:22: error: Type mismatch: After simplification, term\n  Or.inr h\n has type\n  (Hydra.node [Hydra.node [Hydra.node []]]).CutTop\n      (Hydra.node [Hydra.node [], Hydra.node [], Hydra.node [], Hydra.node []]) \u2228\n    Hydra.CutDeep 3 (Hydra.node [Hydra.node [Hydra.node []]])\n      (Hydra.node [Hydra.node [], Hydra.node [], Hydra.node [], Hydra.node []])\nbut is expected to have type\n  Hydra.Move 3 (Hydra.node [Hydra.node [Hydra.node []]])\n    (Hydra.node [Hydra.node [], Hydra.node [], Hydra.node [], Hydra.node []])\n"
+  ],
+  "hash": "eddc686c75ae7f61"
+ },
+ "Frontier_Mordell_finite_generation.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "005622ffaf77a7f8"
+ },
+ "Frontier_Paris_Harrington.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:71:49-71:59: error(lean.synthInstanceFailed): failed to synthesize instance of type class\n  UsesSetNotationForOrder { T // T.Infinite }\n\nHint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.\n"
+  ],
+  "hash": "08e37498deca43a0"
+ },
+ "Frontier_Spectral_cycle_fiedler_value.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "97ea25f89bfd5f34"
+ },
+ "Frontier_Spectral_cycle_gap_vanishes.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:49:2-49:27: error: Type mismatch: After simplification, term\n  h2\n has type\n  @Filter.Tendsto \u2115 \u211d (fun (x : \u2115) => 2 - 2 * Real.cos (2 * \u03c0 / (\u2191x : \u211d))) Filter.atTop (nhds 0)\nbut is expected to have type\n  @Filter.Tendsto \u2115 \u211d Frontier.Spectral.cycleGap Filter.atTop (nhds 0)\n"
+  ],
+  "hash": "b2b9cde6be0a7fd7"
+ },
+ "Frontier_Spectral_cycle_laplacian_spectrum.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "31bfdea468d3b864"
+ },
+ "Frontier_Spectral_expander_uniform_gap_witness.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:80:11-80:12: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\nk : \u2115\n\u22a2 Std.Symm fun x y => \u2203 i, y = cflip i x\n"
+  ],
+  "hash": "445bbfea194de2ed"
+ },
+ "Frontier_Spectral_gap_to_cancellation_conditional.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d5cd4add18a1be50"
+ },
+ "Frontier_Suslin_line.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "4a1bbabf0e07a332"
+ },
+ "Frontier_Vinogradov_three_primes.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "e7d50ae89b27513f"
+ },
+ "Frontier_abc_statement.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "eb4e9fc80e805d1c"
+ },
+ "Frontier_bounded_prime_gaps.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "6af14ac924df9f96"
+ },
+ "Frontier_inaccessible_implies_ConZFC.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:506:67-511:82: error: unsolved goals\nM : Type u_1\ninst\u271d : setLang.Structure M\nn : \u2115\n\u03c6 : setLang.BoundedFormula Empty (n + 1)\n\u22a2 (\u2200 (xs : Fin n \u2192 M) (a : M),\n      \u2203 a_1,\n        \u2200 (a_2 : M),\n          Structure.RelMap memSymb ![a_2, a_1] \u2194\n            Structure.RelMap memSymb ![a_2, a] \u2227\n              (BoundedFormula.liftAt 2 n \u03c6).Realize default (Fin.snoc (Fin.snoc (Fin.snoc xs a) a_1) a_2)) \u2194\n    \u2200 (xs : Fin n \u2192 M) (a : M), \u2203 b, \u2200 (x : M), MemR x b \u2194 MemR x a \u2227 \u03c6.Realize default (Fin.snoc xs x)\n",
+   "-:517:58-523:82: error: unsolved goals\nM : Type u_1\ninst\u271d : setLang.Structure M\nn : \u2115\n\u03c6 : setLang.BoundedFormula Empty (n + 2)\n\u22a2 (\u2200 (xs : Fin n \u2192 M) (a : M),\n      (\u2200 (a_1 : M),\n          Structure.RelMap memSymb ![a_1, a] \u2192\n            \u2203 a_3, (BoundedFormula.liftAt 1 n \u03c6).Realize default (Fin.snoc (Fin.snoc (Fin.snoc xs a) a_1) a_3)) \u2192\n        \u2203 a_2,\n          \u2200 (a_3 : M),\n            Structure.RelMap memSymb ![a_3, a] \u2192\n              \u2203 a_5,\n                Structure.RelMap memSymb ![a_5, a_2] \u2227\n                  (BoundedFormula.liftAt 2 n \u03c6).Realize default\n                    (Fin.snoc (Fin.snoc (Fin.snoc (Fin.snoc xs a) a_2) a_3) a_5)) \u2194\n    \u2200 (xs : Fin n \u2192 M) (a : M),\n      (\u2200 (x : M), MemR x a \u2192 \u2203 y, \u03c6.Realize default (Fin.snoc (Fin.snoc xs x) y)) \u2192\n        \u2203 b, \u2200 (x : M), MemR x a \u2192 \u2203 y, MemR y b \u2227 \u03c6.Realize default (Fin.snoc (Fin.snoc xs x) y)\n"
+  ],
+  "hash": "b9a5099a923ee18c"
+ },
+ "Math2_erdos_ko_rado.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "91ecc58c6639b86a"
+ },
+ "Math2_kruskal_katona.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "1ace123608cefe7a"
+ },
+ "Math2_van_der_waerden.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "84a7df67b1b1d859"
+ },
+ "Phys_bekenstein_bound.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "154d941ec7295f40"
+ },
+ "Phys_bloch_theorem.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "ac457098aa0d7162"
+ },
+ "Phys_crooks_theorem.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "4034ffed0e927622"
+ },
+ "Phys_fluctuation_dissipation.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:82:2-82:6: error: `ring_nf` made no progress on the goal\n"
+  ],
+  "hash": "8e14f9e24634c760"
+ },
+ "Phys_hawking_temperature.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "9973baedddbdf069"
+ },
+ "Phys_hellmann_feynman.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:67:4-67:40: error: Type mismatch: After simplification, term\n  this\n has type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u2102 instCommCStarAlgebraComplex.toCStarAlgebra.toAddCommGroup\n    (NormedAlgebra.toNormedSpace \u2102).toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef\n    ((fun y => \u2191(en y)) * fun x => inner \u2102 p (psi x)) (\u2191den * inner \u2102 p (psi lam) + \u2191(en lam) * inner \u2102 p dpsi) lam\nbut is expected to have type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u2102 Complex.addCommGroup\n    instInnerProductSpaceRealComplex.toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef\n    (fun x => \u2191(en x) * inner \u2102 p (psi x)) (\u2191den * inner \u2102 p p + \u2191(en lam) * inner \u2102 p dpsi) lam\n"
+  ],
+  "hash": "eb86d5ffac0d745f"
+ },
+ "Phys_jarzynski_equality.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "02ba8c46702f7d67"
+ },
+ "Phys_kochen_specker_18.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d720a445fd22066c"
+ },
+ "Constellation_admissible_triple.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "a354e885f629d970"
+ },
+ "Constellation_quadruplet_11_13_17_19.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "a0d7c9099bacbfc6"
+ },
+ "Fibonacci_cassini.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "12987c1ffdf5e546"
+ },
+ "Fibonacci_consecutive_coprime.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8a84550ba1416f17"
+ },
+ "Fibonacci_gcd.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "857f771ba5dc0183"
+ },
+ "Fibonacci_sum_first_n.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "05aa23a900b82cde"
+ },
+ "Goldbach_instance_100.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "2d650bae9a27b01a"
+ },
+ "Goldbach_instance_1000.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "85513e5cd58d0820"
+ },
+ "Infinity_cantor_no_injection_from_powerset.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "4a83afeb42a8efe4"
+ },
+ "Infinity_cantor_no_surjection.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b48657174ca186c1"
+ },
+ "Infinity_nat_countable.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "63654bd1592bc6ca"
+ },
+ "Phys_kramers_degeneracy.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "a812150d666bb08d"
+ },
+ "Phys_landauer_principle.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "a1a05ace95533f3a"
+ },
+ "Phys_unruh_effect.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "4ad17ebbc89d4797"
+ },
+ "Phys_virial_theorem.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:89:26-89:27: error(lean.synthInstanceFailed): failed to synthesize instance of type class\n  OfNat (AddCommGroup \u211d) 2\nnumerals are polymorphic in Lean, but the numeral `2` cannot be used in a context where the expected type is\n  AddCommGroup \u211d\ndue to the absence of the instance above\n\nHint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.\n",
+   "-:89:26-89:31: error(lean.synthInstanceFailed): failed to synthesize instance of type class\n  HMul (AddCommGroup \u211d) \u211d ?m.1586\n\nHint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.\n"
+  ],
+  "hash": "7c536e3a5b972d6e"
+ },
+ "Phys_wigner_eckart.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "aaa81c5358d95c9a"
+ },
+ "Primes_bertrand.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "00e65a4c7ab14b70"
+ },
+ "Primes_infinitude.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "1aa17c5e48de597c"
+ },
+ "QI_data_processing.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:148:10-148:29: error(lean.unknownIdentifier): Unknown identifier `trace_mul_re_nonneg`\n",
+   "-:263:5-263:35: error(lean.unknownIdentifier): Unknown identifier `unitary_conjTranspose_mul_self`\n"
+  ],
+  "hash": "f825fb25912ee6f9"
+ },
+ "QI_knill_laflamme.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "70d81ff5f73689ad"
+ },
+ "QI_quantum_singleton.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "ca56a7cd39db65a4"
+ },
+ "QI_uhlmann_fidelity.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "50ca43727129e093"
+ },
+ "Riemann_Chebyshev_psi_shadow.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "06aef012460d83f8"
+ },
+ "Riemann_CompletedZeta_functional_equation.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "2c36f160941ac92e"
+ },
+ "Riemann_Li_lambda1_positive.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "6d43213f3f3393a0"
+ },
+ "Riemann_Mertens_value_at_ten.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d8a1cb2a1bcc540d"
+ },
+ "Riemann_Method_integrality_three_halves.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "83c44269bd8224f2"
+ },
+ "Riemann_Method_simple_zero_shadow.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "e2e1443b15b9f1f0"
+ },
+ "Riemann_Robin_exceeds_bound_at_5040.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "03f64d26da5c9267"
+ },
+ "Riemann_Robin_sigma_5040.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "bfa9d298b1f51ac3"
+ },
+ "Riemann_WeilPositivity_test_pair_nonneg.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "0fababb46f72330f"
+ },
+ "Riemann_Zeta_trivial_zero_neg_two.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b8b6be492050bef3"
+ },
+ "Riemann_Zeta_value_at_two.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "e46c6e59efa46fa3"
+ },
+ "Riemann_Zeta_value_at_zero.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "5bebea815ba0b893"
+ },
+ "Twin_pair_10007_10009.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "7fdb0e7b568f42e3"
+ },
+ "Twin_pair_11_13.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "89ad9be215dbf361"
+ },
+ "Zeta23Core_posIndex_conj_le.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "7fdda1fc33bef775"
+ },
+ "Zeta23Core_rank_trace_ineq.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "58f6eba66414bc93"
+ },
+ "Zeta23Core_sylvester_finrank_le_posIndex.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d00b33bfd20a117c"
+ },
+ "Zeta23Core_vonNeumann_trace_ineq_hermitian.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "36af8c92a6839031"
+ },
+ "Zeta23Redux_LinAlg_eigenvalue_cauchy_schwarz_count.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "e000ee9b5347dedb"
+ },
+ "Zeta23Redux_LinAlg_integrality_shadow.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b2d70f400631de4e"
+ },
+ "Zeta23Redux_LinAlg_sq_ge_linear.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "9462b3dde0bfd7b3"
+ },
+ "Zeta23Redux_LinAlg_sq_ge_linear_two.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "00860ae030b68c65"
+ },
+ "Zeta23Redux_LinAlg_sylvester_hermitian_finrank.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "e2f4280e35b93515"
+ },
+ "Zeta23Redux_LinAlg_vonNeumann_trace_ineq.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "03ace1a50fcfaaac"
+ },
+ "Zeta23Redux_LinAlg_weyl_posIndexAbove.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:172:4-172:90: error: Type mismatch: After simplification, term\n  LinearIndependent.comp this (fun i => \u2191i) Subtype.val_injective\n has type\n  @LinearIndependent \u21a5s \u2102 (EuclideanSpace \u2102 (Fin d)) (\u21d1hM.eigenvectorBasis \u2218 fun i => \u2191i)\n    Field.toSemifield.toDivisionSemiring.toSemiring (PiLp.normedAddCommGroup 2 fun x => \u2102).toAddCommMonoid\n    (PiLp.innerProductSpace fun x => \u2102).toModule\nbut is expected to have type\n  @LinearIndependent \u21a5s \u2102 (EuclideanSpace \u2102 (Fin d)) (fun i => hM.eigenvectorBasis \u2191i) Complex.instSemiring\n    (WithLp.instAddCommGroup 2 ((i : Fin d) \u2192 (fun x => \u2102) i)).toAddCommMonoid\n    (WithLp.instModule 2 \u2102 ((i : Fin d) \u2192 (fun x => \u2102) i))\n"
+  ],
+  "hash": "04344e93b92fdb43"
+ },
+ "Zeta23Scaffold_Hd_ge_Fwin_iff.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d82f734a5c9c2f9d"
+ },
+ "Zeta23Scaffold_Hwin_nonneg_iff_threshold.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "20ecd6fc0f8a3b5f"
+ },
+ "Zeta23Scaffold_assembly_window_constants.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "bd2b4c368dc37777"
+ },
+ "Zeta23Scaffold_christoffel_inverse_form.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "09ceb7f06c301317"
+ },
+ "Zeta23Scaffold_hankel_christoffel_13_18.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "cedeb06725483043"
+ },
+ "Zeta23Scaffold_integral_sinc_fourth.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:34:4-34:14: error: `field_simp` made no progress on the goal\n",
+   "-:225:57-230:12: error: unsolved goals\ncase e'_8\nhsupp : \u2200 t \u2209 Set.Icc (-1) 1, max 0 (1 - |t|) ^ 2 = 0\nh1 : \u222b (t : \u211d) in -1..0, max 0 (1 - |t|) ^ 2 = \u222b (t : \u211d) in -1..0, (1 + t) ^ 2\nh2 : \u222b (t : \u211d) in 0..1, max 0 (1 - |t|) ^ 2 = \u222b (t : \u211d) in 0..1, (1 - t) ^ 2\ne1 : \u222b (t : \u211d) in -1..0, (1 + t) ^ 2 = 1 / 3\nt : \u211d\nx\u271d : t \u2208 Set.uIcc 0 1\nh : HasDerivAt (-fun x => ((fun x => 1 - x) ^ 3) x / 3) (-(\u21913 * (1 - t) ^ (3 - 1) * -1 / 3)) t\n\u22a2 (fun t => -1 / 3 + t - t ^ 2 + t ^ 3 * (1 / 3)) = -fun x => ((fun x => 1 - x) ^ 3) x * (1 / 3)\n\ncase e'_9\nhsupp : \u2200 t \u2209 Set.Icc (-1) 1, max 0 (1 - |t|) ^ 2 = 0\nh1 : \u222b (t : \u211d) in -1..0, max 0 (1 - |t|) ^ 2 = \u222b (t : \u211d) in -1..0, (1 + t) ^ 2\nh2 : \u222b (t : \u211d) in 0..1, max 0 (1 - |t|) ^ 2 = \u222b (t : \u211d) in 0..1, (1 - t) ^ 2\ne1 : \u222b (t : \u211d) in -1..0, (1 + t) ^ 2 = 1 / 3\nt : \u211d\nx\u271d : t \u2208 Set.uIcc 0 1\nh : HasDerivAt (-fun x => ((fun x => 1 - x) ^ 3) x / 3) (-(\u21913 * (1 - t) ^ (3 - 1) * -1 / 3)) t\n\u22a2 (1 - t) ^ 2 = -(\u21913 * (1 - t) ^ (3 - 1) * -1 / 3)\n"
+  ],
+  "hash": "e86cfc18efe27d6e"
+ },
+ "Zeta23Scaffold_integral_sinc_sq.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:39:4-39:51: error: Type mismatch: After simplification, term\n  HasDerivAt.neg (HasDerivAt.mul_const (hasDerivAt_id t) x)\n has type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u211d normedAddCommGroup.toAddCommGroup\n    RCLike.toInnerProductSpaceReal.toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef (-fun y => y * x) (-x)\n    t\nbut is expected to have type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u211d instAddCommGroup Semiring.toModule\n    PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef (fun t => -(t * x)) (-x) t\n",
+   "-:107:4-107:51: error: Type mismatch: After simplification, term\n  HasDerivAt.neg (HasDerivAt.const_mul t (hasDerivAt_id x))\n has type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u211d normedAddCommGroup.toAddCommGroup\n    RCLike.toInnerProductSpaceReal.toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef (-fun y => t * y) (-t)\n    x\nbut is expected to have type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u211d instAddCommGroup Semiring.toModule\n    PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef (fun x => -(t * x)) (-t) x\n"
+  ],
+  "hash": "5aeb1f0cd35e8f91"
+ },
+ "Zeta23Scaffold_m2_at_one_assembly.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "0ade018bee724fe7"
+ },
+ "Zeta23Scaffold_psiCubic_eq_one_of_small.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "71fa4afaafefa23d"
+ },
+ "Zeta23Scaffold_psiCubic_le_one.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "71b702ed91c1432a"
+ },
+ "Zeta23Scaffold_rung_glue_constant_upgrade.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "ae782b548eab4356"
+ },
+ "Fibonacci_catalan.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "6bd4c6bae16fa9d7"
+ },
+ "Fibonacci_dOcagne.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "2069642fe87bea2a"
+ },
+ "Goldbach_ternary_statement.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "f8425159e028644c"
+ },
+ "Infinity_cardinal_lt_power.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "e84245c0057554f0"
+ },
+ "Infinity_rationals_countable.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "00d33e3256849770"
+ },
+ "Riemann_BaezDuarte_distance_nonneg.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "fd528c69c1bdcc07"
+ },
+ "Riemann_HardyZ_gram_positivity_3.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "72c02b4a1420b31f"
+ },
+ "Riemann_Li_lambda2_positive.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "07f3c1088922776f"
+ },
+ "Riemann_Nicolas_primorial_phi_shadow.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "186817df2bad23ce"
+ },
+ "Riemann_functional_completed_symmetry_half.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "c0de49abac129800"
+ },
+ "Riemann_method_rank_trace_c_general.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "2b47d2ce534ad2eb"
+ },
+ "Riemann_zeta_euler_product_term_ne_zero.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "2253580fa330e163"
+ },
+ "Fibonacci_divides.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "346402062416ba32"
+ },
+ "Fibonacci_zeckendorf_small.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "c31694fbf31cf7d6"
+ },
+ "Frontier_isP2_of_prime.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "e1f1f3ea4161c56a"
+ },
+ "Infinity_aleph0_add_aleph0.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "ce453b8318bdd5a2"
+ },
+ "Infinity_countable_nat.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "50f2b2b88801a036"
+ },
+ "Infinity_reals_uncountable.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8e1ca6f09273aea0"
+ },
+ "Infinity_schroeder_bernstein.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "f20b532e064b192b"
+ },
+ "Phenomenology_mereology_partialorder.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "a280c055485fcfa3"
+ },
+ "ProvabilityStructure_imp_self_thm.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "72a8cd741abb5c7c"
+ },
+ "Riemann_Robin_sigma_one_sixteen.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8b0341e26eeca81e"
+ },
+ "Riemann_zeta_ne_zero_re_gt_one.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "2448a1fbc1079198"
+ },
+ "Zeta23Redux_LinAlg_qf_add.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "30f00dfa5fa0a93f"
+ },
+ "Zeta23Redux_LinAlg_quadForm_eq_complex.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "ac0479c81ec3ba26"
+ },
+ "Zeta23Redux_LinAlg_sum_doublyStochastic_mul_le.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "e3ff126481db8aac"
+ },
+ "Brock_GoldenRatio_sqrt5_pos.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "4f68d7d465de2dc0"
+ },
+ "Brock_mem_translate_iff.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "0a71be52ae0bb535"
+ },
+ "PenroseTiling_sqrt5_gt_one.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:42:32-42:36: error: Ambiguous term\n  sqrt\nPossible interpretations:\n  Complex.sqrt 5 : \u2102\n  \n  \u221a5 : \u211d\n",
+   "-:45:36-45:40: error: Ambiguous term\n  sqrt\nPossible interpretations:\n  Complex.sqrt 5 : \u2102\n  \n  \u221a5 : \u211d\n"
+  ],
+  "hash": "3bda3dde6afa20a2"
+ },
+ "edgeMat_psd.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:66:4-66:56: error: `simp` made no progress\n",
+   "-:82:23-82:47: error: Invalid `\u27e8...\u27e9` notation: The expected type of this term could not be determined\n"
+  ],
+  "hash": "7cce2749709f2186"
+ },
+ "epsilonLight_of_sumAv.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:74:4-74:18: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\nV : Type u_1\ninst\u271d\u00b9 : Fintype V\ninst\u271d : DecidableEq V\nG : SimpleGraph V\nS : Finset V\n\u22a2 Std.Symm fun i j => i \u2208 S \u2227 j \u2208 S \u2227 G.Adj i j\n",
+   "-:77:4-77:15: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\nV : Type u_1\ninst\u271d\u00b9 : Fintype V\ninst\u271d : DecidableEq V\nG : SimpleGraph V\nS : Finset V\n\u22a2 Std.Irrefl fun i j => i \u2208 S \u2227 j \u2208 S \u2227 G.Adj i j\n"
+  ],
+  "hash": "2f3cc69d77f3cf04"
+ },
+ "rotation_is_complex_mul.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:271:10-271:16: error: `exact?` could not close the goal. Try `apply?` to see partial suggestions.\n",
+   "-:278:36-278:42: error: found a proof, but the corresponding tactic failed:\n  (expose_names; exact DiscreteMeasurableSpace.forall_measurableSet {a | a.1 \u2208 (PenroseGraph gamma).neighborFinset a.2})\n\nIt may be possible to correct this proof by adding type annotations, explicitly specifying implicit arguments, or eliminating unnecessary function abstractions.\n"
+  ],
+  "hash": "d0074e7d25eb20c0"
+ },
+ "Infinity_konig_lt.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "611769db3e374339"
+ },
+ "Ordinal_omega_add_omega.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "6e93ff58ac26cdda"
+ },
+ "Primes_reciprocal_sum_diverges.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "12181f11bd610ac8"
+ },
+ "Riemann_Method_rank_trace_c3_shadow.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "ef0ea28459715f0a"
+ },
+ "Riemann_Weil_gram5_nonneg.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "e4a49adfc00ce67f"
+ },
+ "Zeta23Redux_LinAlg_rank_trace_ineq.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "99874209dfddde32"
+ },
+ "Cardinal_continuum_eq_two_pow_aleph0.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "0e51f5a3c35c2675"
+ },
+ "Chebyshev_psi_two_le.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "70777a687beffe34"
+ },
+ "Ordinal_omega_le_omega_pow.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "973b22ec02af2aea"
+ },
+ "Riemann_BaezDuarte_gram_nonneg.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "219a3ff06816e37e"
+ },
+ "Riemann_Li_lambda3_positive.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "9da3023e2c6b6928"
+ },
+ "Riemann_Redheffer_det_eq_mertens_3.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "3fbb7b19f4219e89"
+ },
+ "SetTheory_wellordering.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "3831b53eece92449"
+ },
+ "SetTheory_zorn.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b0c3c67812625bd2"
+ },
+ "AdditiveComb_cauchy_davenport_Z5.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "7368324efe2455b7"
+ },
+ "AdditiveComb_schur_five.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "18cdb44e50433d86"
+ },
+ "Frontier_RH_statement.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "cd080a1240440439"
+ },
+ "Frontier_artin_primitive_root.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "1492e48d4cb47380"
+ },
+ "Goldbach_conjecture_statement.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "eff6632fbe3cfe33"
+ },
+ "Riemann_Redheffer_det_eq_mertens_4.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "65f2c3f8e040e656"
+ },
+ "Twin_conjecture_statement.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "62f6422fdc90ef82"
+ },
+ "Frontier_erdos_discrepancy.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "770c33efcc2330de"
+ },
+ "Frontier_navier_stokes_regularity.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:132:4-132:31: error: Type mismatch: After simplification, term\n  hw\n has type\n  SmoothScalarField w\nbut is expected to have type\n  ContDiff \u211d \u221e fun x => w x.1 x.2\n"
+  ],
+  "hash": "b84fe085e0d54271"
+ },
+ "Frontier_yang_mills_mass_gap.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:267:78-268:23: error: unsolved goals\na : \u211d\nv : \u21a5HS\n\u22a2 (a \u2022 ContinuousLinearMap.id \u2102 \u21a5HS) v = a \u2022 v\n"
+  ],
+  "hash": "3c55ead1e798ab0a"
+ },
+ "AdditiveComb_freiman_two_A.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "1745a6a47a7b8e64"
+ },
+ "AdditiveComb_plunnecke_ruzsa_shadow.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b791979db3df921f"
+ },
+ "AdditiveComb_sumset_lower_bound.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "0b6fb55932deb1c4"
+ },
+ "NymanBeurling_finite_distance_nonneg.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "364abb1761842c07"
+ },
+ "Ordinal_epsilon0_fixed_point.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "648e858f0ca85f0a"
+ },
+ "Riemann_Redheffer_det_eq_mertens_5.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "19435ef7f3625731"
+ },
+ "Riemann_Redheffer_det_eq_mertens_6.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b5c497fe19813c53"
+ },
+ "Frontier_figalli_OT_regularity.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:99:8-99:35: error: Type mismatch: After simplification, term\n  this\n has type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u211d Real.normedCommRing.toCommRing.toAddCommGroup\n    (NormedAlgebra.toNormedSpace \u211d).toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef\n    ((fun t => t - y k) ^ 2) ((x k - y k) * 2) (x k)\nbut is expected to have type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u211d Real.instAddCommGroup Semiring.toModule\n    PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef (fun t => (t - y k) ^ 2) ((x k - y k) * 2) (x k)\n"
+  ],
+  "hash": "380c391ee4209fb3"
+ },
+ "Frontier_scholze_perfectoid_tilt.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b5819e2a78b81d34"
+ },
+ "Cardinal_aleph_fixed_point_statement.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "3defec81d045eba5"
+ },
+ "Frontier_BSD_statement.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "ed588c2a76b123ec"
+ },
+ "Frontier_atiyah_singer_index.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "cfe09de54e53371c"
+ },
+ "Frontier_deligne_weil_RH.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "3a3c2fbb7f48fcda"
+ },
+ "Frontier_duminil_ising_sharp.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:117:8-117:55: error: Type mismatch: After simplification, term\n  HasDerivAt.neg (HasDerivAt.const_mul a (hasDerivAt_id x))\n has type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u211d Real.normedAddCommGroup.toAddCommGroup\n    RCLike.toInnerProductSpaceReal.toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef (-fun y => a * y) (-a)\n    x\nbut is expected to have type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u211d Real.instAddCommGroup Semiring.toModule\n    PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef (fun y => -(a * y)) (-a) x\n",
+   "-:275:6-275:63: error: Type mismatch: After simplification, term\n  HasDerivAt.pow h1 2\n has type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u211d Real.normedCommRing.toCommRing.toAddCommGroup\n    (NormedAlgebra.toNormedSpace \u211d).toModule PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef\n    ((fun x => 1 - x) ^ 2) (-((1 - \u03b2) * 2)) \u03b2\nbut is expected to have type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u211d Real.instAddCommGroup Semiring.toModule\n    PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef (fun x => (1 - x) ^ 2) (-((1 - \u03b2) * 2)) \u03b2\n"
+  ],
+  "hash": "e1990eec4fa5717f"
+ },
+ "Frontier_exotic_R4.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:75:12-75:33: error(lean.unknownIdentifier): Unknown identifier `transportChartedSpace`\n",
+   "-:76:6-76:38: error(lean.unknownIdentifier): Unknown identifier `transportChartedSpace_isManifold`\n"
+  ],
+  "hash": "ccdb3846c1d8ba9a"
+ },
+ "Frontier_faltings_mordell.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "3eff515b5d75f756"
+ },
+ "Frontier_feit_thompson_odd_order.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "88772ba40e0dd4f2"
+ },
+ "Frontier_hairer_KPZ.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:170:19-170:27: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  v 0 x\nin the target expression\n  (fun t x => rexp (v t x)) 0 x = rexp (u\u2080 x)\n\nxi : \u211d \u2192 \u211d \u2192 \u211d\nhSHE :\n  \u2200 (Z\u2080 : \u211d \u2192 \u211d),\n    (\u2200 (x : \u211d), 0 < Z\u2080 x) \u2192\n      \u2203! Z, ((\u2200 (t x : \u211d), 0 < Z t x) \u2227 Regular Z) \u2227 (\u2200 (x : \u211d), Z 0 x = Z\u2080 x) \u2227 IsSHESolution xi Z\nu\u2080 : \u211d \u2192 \u211d\nZ : \u211d \u2192 \u211d \u2192 \u211d\nhuniq :\n  \u2200 (y : \u211d \u2192 \u211d \u2192 \u211d),\n    (fun Z => ((\u2200 (t x : \u211d), 0 < Z t x) \u2227 Regular Z) \u2227 (\u2200 (x : \u211d), Z 0 x = rexp (u\u2080 x)) \u2227 IsSHESolution xi Z) y \u2192 y = Z\nhpos : \u2200 (t x : \u211d), 0 < Z t x\nhreg : Regular Z\nhinit : \u2200 (x : \u211d), Z 0 x = rexp (u\u2080 x)\nhZ : IsSHESolution xi Z\nv : \u211d \u2192 \u211d \u2192 \u211d\nhvreg : Regular v\nhvinit : \u2200 (x : \u211d), v 0 x = u\u2080 x\nhv : IsKPZSolution xi v\nx : \u211d\n\u22a2 (fun t x => rexp (v t x)) 0 x = rexp (u\u2080 x)\n"
+  ],
+  "hash": "2e5ec6a80992c08a"
+ },
+ "Frontier_hodge_statement.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:69:4-69:16: error(lean.dependsOnNoncomputable): failed to compile definition, consider marking it as 'noncomputable' because it depends on 'instCommCStarAlgebraComplex', which is 'noncomputable'\n",
+   "-:225:8-225:35: error: trying to realize `_private.Lean.Environment.0.Lean.Environment.RealizeConstKey` value but `enableRealizationsForConst` must be called for 'Frontier.HodgeStructure.hodgeClasses' first\n"
+  ],
+  "hash": "2ef85899d2bbd512"
+ },
+ "Frontier_lindenstrauss_QUE.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "a489e840093dc2b8"
+ },
+ "Frontier_mcmullen_renormalization.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8afadf4a5196580a"
+ },
+ "Frontier_milnor_exotic_7sphere.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "86516364af85afe3"
+ },
+ "Frontier_mirzakhani_WP_volume.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:102:6-102:11: error: Failed to rewrite using equation theorems for `mirzH`\n",
+   "-:138:2-138:47: error: `simp` made no progress\n"
+  ],
+  "hash": "bd98864983500197"
+ },
+ "Frontier_ngo_fundamental_lemma.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:203:8-203:22: error: Type mismatch: After simplification, term\n  h'\n has type\n  @Eq (prodDatum D E).GClass (a, b) gG\nbut is expected to have type\n  @Eq (D.GClass \u00d7 E.GClass) (a, b) gG\n"
+  ],
+  "hash": "32e3a6cf12e1cc09"
+ },
+ "Frontier_poincare_3sphere.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "34a73a9e501e35ab"
+ },
+ "Frontier_smirnov_percolation.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "7ddfae3e7b8b1bcd"
+ },
+ "Frontier_thurston_geometrization.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "6e4da8d9fb6e1d23"
+ },
+ "Frontier_voevodsky_milnor.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:74:4-74:22: error(lean.dependsOnNoncomputable): failed to compile definition, consider marking it as 'noncomputable' because it depends on 'Finsupp.instAddCommMonoid', which is 'noncomputable'\n",
+   "-:91:6-91:24: error: trying to realize `_private.Lean.Environment.0.Lean.Environment.RealizeConstKey` value but `enableRealizationsForConst` must be called for 'Frontier.milnorRelSubmodule' first\n"
+  ],
+  "hash": "9ea156581749f235"
+ },
+ "Frontier_zelmanov_restricted_burnside.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:220:6-220:81: error: Type mismatch: After simplification, term\n  congrArg (\u21d1Additive.ofMul : G \u2192 Additive G) (hexp ((Additive.toMul : Additive G \u2192 G) x))\n has type\n  @Eq G ((Additive.toMul : Additive G \u2192 G) x ^ n) 1\nbut is expected to have type\n  @Eq (Additive G) (n \u2022 x) 0\n"
+  ],
+  "hash": "a610154a7c5a9e77"
+ },
+ "LargeCardinal_inaccessible_statement.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "566437bf3df74676"
+ },
+ "LargeCardinal_measurable_statement.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "d2be20f5c2f828ea"
+ },
+ "Ordinal_natCast_add.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "de5ea9470eb1c28a"
+ },
+ "Combinatorics_pigeonhole.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "158084f12c5b9d47"
+ },
+ "Frontier_gleason_theorem.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "b6c8b531e717df87"
+ },
+ "Frontier_langlands_reciprocity.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:190:11-190:63: error(lean.synthInstanceFailed): failed to synthesize instance of type class\n  IsCyclotomicExtension {m} \u211a (CyclotomicField m \u211a)\n\nHint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.\n",
+   "-:191:13-191:65: error(lean.synthInstanceFailed): failed to synthesize instance of type class\n  IsCyclotomicExtension {m} \u211a (CyclotomicField m \u211a)\n\nHint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.\n"
+  ],
+  "hash": "eef25e6562757b0c"
+ },
+ "Frontier_margulis_superrigidity.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "93878f0e09b56e18"
+ },
+ "Frontier_penrose_singularity.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:86:4-86:50: error: Type mismatch: After simplification, term\n  HasDerivAt.inv (hderiv t ht) h0\n has type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u211d\n    DenselyNormedField.toNontriviallyNormedField.toDivisionRing.toAddCommGroup (NormedAlgebra.toNormedSpace \u211d).toModule\n    PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef \u03b8\u207b\u00b9 (-(d\u03b8 t / \u03b8 t ^ 2)) t\nbut is expected to have type\n  @HasDerivAt \u211d DenselyNormedField.toNontriviallyNormedField \u211d Real.instAddCommGroup Semiring.toModule\n    PseudoMetricSpace.toUniformSpace.toTopologicalSpace \u22ef (fun (t : \u211d) => (\u03b8 t)\u207b\u00b9) (-(d\u03b8 t / \u03b8 t ^ 2)) t\n",
+   "-:257:4-257:14: error: `field_simp` made no progress on the goal\n"
+  ],
+  "hash": "b9b0ff44abd54aeb"
+ },
+ "Frontier_uhlenbeck_bubbling.lean": {
+  "verified": false,
+  "environment": "lean-4.32.0",
+  "errors": [
+   "-:249:5-249:15: error: invalid binder annotation, type is not a class instance\n  MeasureTheory.NoAtoms mu\n\nNote: Use the command `set_option checkBinderAnnotations false` to disable the check\n"
+  ],
+  "hash": "962bb4a077cdf07b"
+ },
+ "GroupTheory_lagrange.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8e7223d3c1b71633"
+ },
+ "NumberTheory_fermat_little.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "13a2d6f81e380920"
+ },
+ "NumberTheory_wilson.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "4fb1bc519b66e7ae"
+ },
+ "Algebra_fundamental_theorem_of_algebra.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "376d9524cd4b7c16"
+ },
+ "Analysis_extreme_value.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "5abe6a44beeaeb16"
+ },
+ "Analysis_intermediate_value.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "f580de50fb5a5ec5"
+ },
+ "Frontier_kam_theorem.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "60a1eb52899fbd08"
+ },
+ "Frontier_onsager_2d_ising.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "838925db8c76e75b"
+ },
+ "GroupTheory_cauchy.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "f560dc1b68fb05bd"
+ },
+ "NumberTheory_euler_totient.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "68ee247fc2ba37fe"
+ },
+ "NumberTheory_infinitude_primes_4k3.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "792515ed578ef28b"
+ },
+ "NumberTheory_quadratic_reciprocity.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "8ab339a208a0f879"
+ },
+ "Topology_heine_borel_interval.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "114fef2f847af9b6"
+ },
+ "Frontier_spin_statistics.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "6a505d1c8c3f7694"
+ },
+ "Zeta23Obstruction_repaired_witness_neg_at_deep_point.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "5ccc5b82deba10c2"
+ },
+ "Zeta23Obstruction_repaired_witness_nonneg.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "82f76df7c8d3cd62"
+ },
+ "Zeta23Obstruction_tent_combination_neg_on_band.lean": {
+  "verified": true,
+  "environment": "lean-4.32.0",
+  "errors": [],
+  "hash": "bc42ba3f8ba5976c"
  }
 }
