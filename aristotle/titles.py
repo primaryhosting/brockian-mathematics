@@ -32,6 +32,7 @@ CATEGORY = {
     "FRONTIER-linalg": "Zeta-23 §3 Linear Algebra (re-derivation)",
     "FRONTIER-riemann": "Riemann Program",
     "FRONTIER-fib": "Fibonacci",
+    "FRONTIER-wave2": "Frontier Wave 2 (deeper machinery)",
 }
 
 
