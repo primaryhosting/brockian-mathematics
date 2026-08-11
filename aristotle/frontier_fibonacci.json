@@ -1,0 +1,31 @@
+{
+ "program": "Fibonacci and golden-ratio identities",
+ "principle": "Classical Fibonacci identities, Mathlib-backed where possible. AXLE gates.",
+ "count": 8,
+ "queue": [
+  {"target":"Fibonacci.cassini","tier":"FRONTIER-fib","rank":1,"register":"IDENTITY",
+   "statement":"Cassini's identity: for every natural n, (Nat.fib (n+2)) * (Nat.fib n) + 1 = (Nat.fib (n+1))^2 when n is even, and (Nat.fib (n+1))^2 + 1 = (Nat.fib (n+2))*(Nat.fib n) when n is odd. State over integers to avoid truncation: for all n : Nat, (Nat.fib (n+2) : Int) * (Nat.fib n) - (Nat.fib (n+1))^2 = (-1)^(n+1). Prove by induction.",
+   "goal":"Prove in Lean 4 (Mathlib), axiom-clean (no sorry/admit/native_decide)."},
+  {"target":"Fibonacci.gcd","tier":"FRONTIER-fib","rank":1,"register":"IDENTITY",
+   "statement":"Fibonacci-gcd: for all naturals m n, Nat.fib (Nat.gcd m n) = Nat.gcd (Nat.fib m) (Nat.fib n). (Use Mathlib's Nat.fib_gcd.)",
+   "goal":"Prove in Lean 4 (Mathlib), axiom-clean."},
+  {"target":"Fibonacci.sum_first_n","tier":"FRONTIER-fib","rank":1,"register":"IDENTITY",
+   "statement":"Sum of the first n Fibonacci numbers: for all n : Nat, (Finset.range n).sum (fun i => Nat.fib i) = Nat.fib (n+1) - 1. Prove by induction (or Mathlib's Nat.fib sum lemma).",
+   "goal":"Prove in Lean 4 (Mathlib), axiom-clean."},
+  {"target":"Fibonacci.consecutive_coprime","tier":"FRONTIER-fib","rank":1,"register":"IDENTITY",
+   "statement":"Consecutive Fibonacci numbers are coprime: for all n : Nat, Nat.Coprime (Nat.fib n) (Nat.fib (n+1)). (Use Mathlib's Nat.fib_coprime_fib_succ if present, else induction.)",
+   "goal":"Prove in Lean 4 (Mathlib), axiom-clean."},
+  {"target":"Fibonacci.dOcagne","tier":"FRONTIER-fib","rank":2,"register":"IDENTITY",
+   "statement":"d'Ocagne's identity: for all m n : Nat, (Nat.fib m : Int) * (Nat.fib (n+1)) - (Nat.fib (m+1)) * (Nat.fib n) = (-1)^n * (Nat.fib (m - n)) for m >= n. State the addition form to avoid subtraction: for all m n : Nat, (Nat.fib (m+n+1) : Int) = Nat.fib (m+1)*Nat.fib (n+1) + Nat.fib m * Nat.fib n.",
+   "goal":"Prove in Lean 4 (Mathlib), axiom-clean."},
+  {"target":"Fibonacci.catalan","tier":"FRONTIER-fib","rank":2,"register":"IDENTITY",
+   "statement":"Catalan's identity (a Cassini generalisation): for all n r : Nat with r <= n, (Nat.fib n : Int)^2 - Nat.fib (n-r) * Nat.fib (n+r) = (-1)^(n-r) * (Nat.fib r)^2. Prefer an addition-form restatement avoiding Nat subtraction.",
+   "goal":"Prove in Lean 4 (Mathlib), axiom-clean."},
+  {"target":"Fibonacci.divides","tier":"FRONTIER-fib","rank":2,"register":"IDENTITY",
+   "statement":"Divisibility: for all m n : Nat, Nat.fib m divides Nat.fib (m * n). (Corollary of fib_gcd; or direct induction.)",
+   "goal":"Prove in Lean 4 (Mathlib), axiom-clean."},
+  {"target":"Fibonacci.zeckendorf_small","tier":"FRONTIER-fib","rank":2,"register":"INSTANCE",
+   "statement":"Zeckendorf representation instance: 100 = 89 + 8 + 3 = Nat.fib 11 + Nat.fib 6 + Nat.fib 4, a sum of non-consecutive Fibonacci numbers (indices 11,6,4 pairwise differ by >= 2). Prove the equality 100 = Nat.fib 11 + Nat.fib 6 + Nat.fib 4.",
+   "goal":"Prove in Lean 4 (Mathlib), axiom-clean."}
+ ]
+}

@@ -29,6 +29,9 @@ CATEGORY = {
     "FRONTIER-fields": "Frontier — Fields Medal Work",
     "FRONTIER-spectral": "Frontier — Spectral Geometry",
     "FRONTIER-betrothed": "Frontier — Betrothed Numbers",
+    "FRONTIER-linalg": "Zeta-23 §3 Linear Algebra (re-derivation)",
+    "FRONTIER-riemann": "Riemann Program",
+    "FRONTIER-fib": "Fibonacci",
 }
 
 

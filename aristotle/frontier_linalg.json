@@ -1,0 +1,56 @@
+{
+ "program": "Zeta-23 §3 linear-algebra core — INDEPENDENT RE-DERIVATION",
+ "provenance": "Statements are the self-contained finite Hermitian-matrix lemmas of anthropics/zeta-23-lean §3 (the '2/3 of zeros on the critical line' paper). This is a RE-DERIVATION target: the result is already Lean-verified there (comparator + nanoda kernel). We independently reprove the self-contained core through Aristotle -> AXLE. NOT a new theorem, and NOT RH.",
+ "register_note": "RE-DERIVATION = independent second proof of a published, already-verified lemma. AXLE is the gate; only kernel-verified reproductions count.",
+ "count": 8,
+ "queue": [
+  {
+   "target": "Zeta23Redux.LinAlg.sq_ge_linear",
+   "tier": "FRONTIER-linalg", "rank": 0, "register": "SCALAR-SHADOW",
+   "statement": "For all real numbers x and c, we have c * x - c^2 / 4 <= x^2. (This is exactly (x - c/2)^2 >= 0; it is the scalar shadow of the rank-trace inequality, Lemma 3.2.)",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean (no sorry/admit/native_decide)."
+  },
+  {
+   "target": "Zeta23Redux.LinAlg.sq_ge_linear_two",
+   "tier": "FRONTIER-linalg", "rank": 0, "register": "SCALAR-SHADOW",
+   "statement": "For all real numbers x and c, we have 2 * c * x - c^2 <= x^2. (This is (x - c)^2 >= 0, the c=2 form used in Lemma 3.2.)",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean."
+  },
+  {
+   "target": "Zeta23Redux.LinAlg.integrality_shadow",
+   "tier": "FRONTIER-linalg", "rank": 0, "register": "SCALAR-SHADOW",
+   "statement": "For every natural number m, 2 * m <= m^2 + 1. Equivalently, for m : Nat, (m:Int)^2 >= 2*m - 1. This is Montgomery's integrality step (m-1)^2 >= 0, whose matrix analogue is Lemma 3.2.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean."
+  },
+  {
+   "target": "Zeta23Redux.LinAlg.eigenvalue_cauchy_schwarz_count",
+   "tier": "FRONTIER-linalg", "rank": 2, "register": "EIGENVALUE",
+   "statement": "Let d : Nat, ev : Fin d -> Real, and theta : Real with 0 <= theta. Let s := Finset.univ.filter (fun i => theta < ev i), let n := s.card, and suppose (theta * d) < (Finset.univ.sum ev). Prove that ((Finset.univ.sum ev) - theta * d)^2 <= (n : Real) * (Finset.univ.sum (fun i => (ev i)^2)). (This is the thresholded Cauchy-Schwarz count, Lemma 3.3, at the eigenvalue level: negative eigenvalues only help, then Cauchy-Schwarz on the eigenvalues above theta.)",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean. Reject vacuous proofs."
+  },
+  {
+   "target": "Zeta23Redux.LinAlg.weyl_posIndexAbove",
+   "tier": "FRONTIER-linalg", "rank": 3, "register": "MATRIX",
+   "statement": "Work with Hermitian matrices over the complex numbers, size Fin d. For a Hermitian matrix A let posIndex A be the number of strictly positive eigenvalues (#{i | 0 < eigenvalue_i A}) and posIndexAbove A theta the number of eigenvalues strictly above theta. Prove Weyl's monotonicity: if A and E are Hermitian and |eigenvalue_i E| <= theta for every i, then posIndexAbove (A + E) theta <= posIndex A. Use Courant-Fischer / eigenvalue interlacing from Mathlib.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean, self-contained (define posIndex/posIndexAbove via Matrix.IsHermitian.eigenvalues)."
+  },
+  {
+   "target": "Zeta23Redux.LinAlg.vonNeumann_trace_ineq",
+   "tier": "FRONTIER-linalg", "rank": 4, "register": "MATRIX-HARD",
+   "statement": "Von Neumann's trace inequality for Hermitian matrices. For Hermitian complex matrices A, B of size Fin d, prove Re (trace (A * B)) <= sum over i of (mu_i * nu_i), where mu and nu are the eigenvalues of A and B respectively, both listed in the SAME monotone (decreasing) order. Route: diagonalise; reduce to a bilinear form against a doubly stochastic matrix (the entrywise squared modulus of a unitary), then Birkhoff / rearrangement. This lemma was contributed to Mathlib by the zeta-23 formalisation.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean."
+  },
+  {
+   "target": "Zeta23Redux.LinAlg.sylvester_hermitian_finrank",
+   "tier": "FRONTIER-linalg", "rank": 4, "register": "MATRIX-HARD",
+   "statement": "Sylvester's law of inertia (Hermitian, the direction used in the paper). Let A be a Hermitian complex matrix of size Fin d, and let W be a complex subspace of (Fin d -> Complex) on which the Hermitian form x |-> Re (star x dotProduct (A *v x)) is positive definite (strictly positive for all nonzero x in W). Prove that finrank W <= posIndex A, where posIndex A is the number of strictly positive eigenvalues of A. This 'pull-back does not increase the positive index' fact was contributed to Mathlib by the zeta-23 formalisation.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean."
+  },
+  {
+   "target": "Zeta23Redux.LinAlg.rank_trace_ineq",
+   "tier": "FRONTIER-linalg", "rank": 4, "register": "MATRIX-HARD",
+   "statement": "The rank-trace inequality (Lemma 3.2, the new ingredient). Let P, Q be Hermitian complex matrices of size Fin d with P positive semidefinite, rank P <= r, and posIndex Q <= b (b strictly positive eigenvalues of Q). Write rtrace X = Re (trace X) and frobSq X = Re (trace (Xᴴ * X)). Prove that for every real c > 0, c * rtrace P - (c^2/4) * r + 2 * c * rtrace Q - c^2 * b <= frobSq (P + Q). In particular at c = 2: 2 * rtrace P + 4 * rtrace Q - 4 * b - frobSq (P + Q) <= r. Proof via von Neumann's trace inequality (the interaction term tr(P Q_-)) plus the scalar bounds sq_ge_linear.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean."
+  }
+ ]
+}

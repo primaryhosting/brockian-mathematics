@@ -1,0 +1,67 @@
+{
+ "program": "Riemann program — closable building blocks, criterion instances, and method extensions",
+ "principle": "None of these prove RH. They are (a) Mathlib-backed zeta facts, (b) extensions of the zeta-two-thirds METHOD to the next proportion level, (c) instances/arithmetic cores of RH-EQUIVALENT criteria (Robin, Li). AXLE is the gate; honest registers throughout.",
+ "count": 10,
+ "queue": [
+  {
+   "target": "Riemann.Zeta.value_at_two",
+   "tier": "FRONTIER-riemann", "rank": 0, "register": "ZETA-FACT",
+   "statement": "riemannZeta 2 = (Real.pi : Complex)^2 / 6. (Euler; use Mathlib's riemannZeta_two.)",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean (no sorry/admit/native_decide)."
+  },
+  {
+   "target": "Riemann.Zeta.value_at_zero",
+   "tier": "FRONTIER-riemann", "rank": 0, "register": "ZETA-FACT",
+   "statement": "riemannZeta 0 = -1 / 2. (Use Mathlib's riemannZeta_zero.)",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean."
+  },
+  {
+   "target": "Riemann.Zeta.trivial_zero_neg_two",
+   "tier": "FRONTIER-riemann", "rank": 1, "register": "ZETA-FACT",
+   "statement": "riemannZeta (-2) = 0 : the first trivial zero of the Riemann zeta function. (Mathlib proves riemannZeta vanishes at negative even integers, e.g. riemannZeta_neg_two_mul_nat_add_one; specialise to n = 0.)",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean."
+  },
+  {
+   "target": "Riemann.CompletedZeta.functional_equation",
+   "tier": "FRONTIER-riemann", "rank": 1, "register": "ZETA-FACT",
+   "statement": "For all s : Complex, completedRiemannZeta (1 - s) = completedRiemannZeta s : the functional equation of the completed zeta function Lambda(s). (Use Mathlib's completedRiemannZeta_one_sub.)",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean."
+  },
+  {
+   "target": "Riemann.Method.integrality_three_halves",
+   "tier": "FRONTIER-riemann", "rank": 0, "register": "METHOD-EXTENSION",
+   "statement": "For every natural number m, 3 * m <= m^2 + 2. Equivalently m^2 >= 3*m - 2, i.e. (m-1)*(m-2) >= 0. This is the integrality step behind Theorem C (the 5/6-distinct route) of the zeta-two-thirds program, the next level above m^2 >= 2m - 1.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean."
+  },
+  {
+   "target": "Riemann.Method.simple_zero_shadow",
+   "tier": "FRONTIER-riemann", "rank": 0, "register": "METHOD-EXTENSION",
+   "statement": "For every natural number m with 1 <= m, 2 * m <= m^2 + 1 (with equality iff m = 1). This is Montgomery's (m-1)^2 >= 0 integrality step that separates SIMPLE zeros in the two-thirds argument.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean."
+  },
+  {
+   "target": "Riemann.WeilPositivity.test_pair_nonneg",
+   "tier": "FRONTIER-riemann", "rank": 1, "register": "POSITIVITY-SHADOW",
+   "statement": "For all real x, y : 0 <= 2*x^2 + 2*x*y + 2*y^2. This is the quadratic form of the 2x2 real symmetric matrix [[2,1],[1,2]] (a positive-semidefinite compression of Weil's Hermitian explicit-formula form on a test pair); equivalently (x+y)^2 + x^2 + y^2 >= 0.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean."
+  },
+  {
+   "target": "Riemann.Robin.sigma_5040",
+   "tier": "FRONTIER-riemann", "rank": 2, "register": "CRITERION-INSTANCE",
+   "statement": "The sum of divisors satisfies ArithmeticFunction.sigma 1 5040 = 19344. (5040 = 2^4 * 3^2 * 5 * 7 is the LARGEST known exception to Robin's inequality sigma(n) < e^gamma * n * log log n, which for n > 5040 is EQUIVALENT to the Riemann hypothesis.)",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean. Use multiplicativity of sigma, not native_decide."
+  },
+  {
+   "target": "Riemann.Robin.exceeds_bound_at_5040",
+   "tier": "FRONTIER-riemann", "rank": 2, "register": "CRITERION-INSTANCE",
+   "statement": "For all real E, LL with 0 <= E, E <= 1.782, 0 <= LL, LL <= 2.143, we have E * 5040 * LL < 19344. Combined with sigma(5040) = 19344, e^gamma <= 1.782 and log(log 5040) <= 2.143, this shows Robin's bound e^gamma * n * (log log n) is EXCEEDED by sigma(n) at n = 5040 (the known RH-consistent exception).",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean."
+  },
+  {
+   "target": "Riemann.Li.lambda1_positive",
+   "tier": "FRONTIER-riemann", "rank": 2, "register": "CRITERION-INSTANCE",
+   "statement": "For all real g, L with 0.577 <= g and L <= 2.532, we have 0 < 1 + g/2 - L/2. This is the positivity of Li's first coefficient lambda_1 = 1 + gamma/2 - (1/2) log(4*pi) (with gamma >= 0.577 the Euler-Mascheroni constant and log(4*pi) <= 2.532); Li's criterion states RH holds iff lambda_n >= 0 for all n >= 1.",
+   "goal": "Prove in Lean 4 (Mathlib), axiom-clean."
+  }
+ ]
+}
