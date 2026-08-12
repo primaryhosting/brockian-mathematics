@@ -1,5 +1,5 @@
 {
-  "count": 124,
+  "count": 128,
   "queue": [
     {
       "target": "Zeta23Obstruction.repaired_witness_nonneg",
@@ -992,6 +992,38 @@
       "difficulty": "MEDIUM",
       "statement": "For S doubly stochastic and antitone weight sequences μ, ν: Σᵢⱼ Sᵢⱼ·μᵢνⱼ ≤ Σᵢ μᵢνᵢ — the rearrangement/Birkhoff step feeding the von Neumann trace inequality.",
       "goal": "(reconciliation entry — proof already harvested from direct submission arsub_c6id053o)"
+    },
+    {
+      "target": "Brockian.DilationGenerator.boundary_term_vanishes",
+      "tier": "gate1-operator",
+      "rank": 1,
+      "difficulty": "EASY",
+      "statement": "For f, g smooth with compact support in (0,∞), the boundary term x·f(x)·conj(g(x)) tends to 0 as x→0⁺ and as x→∞ (immediate from compact support — the honest form of the 'vanishing boundary' crux).",
+      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): for f g : ℝ → ℂ with HasCompactSupport f, HasCompactSupport g, and tsupport f ⊆ Set.Ioi 0 (same for g): Filter.Tendsto (fun x => x * f x * starRingEnd ℂ (g x)) (nhdsWithin 0 (Set.Ioi 0)) (nhds 0) AND Tendsto ... atTop (nhds 0). Route: outside a compact subset of (0,∞) the product is 0; use eventually-eq-zero. State globally, both limits."
+    },
+    {
+      "target": "Brockian.DilationGenerator.symmetric_on_core",
+      "tier": "gate1-operator",
+      "rank": 1,
+      "difficulty": "MEDIUM",
+      "statement": "The Berry–Keating dilation generator A f = i·((1/2)·f + x·f') is symmetric on the C_c^∞(0,∞) core: ∫ (A f)·conj g = ∫ f·conj (A g) (integration by parts; boundary terms vanish by compact support).",
+      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): for f g : ℝ → ℂ ContDiff ℝ ⊤, HasCompactSupport, tsupport ⊆ Set.Ioi 0: ∫ x in Set.Ioi (0:ℝ), (Complex.I*((1/2)*f x + x*deriv f x)) * starRingEnd ℂ (g x) = ∫ x in Set.Ioi (0:ℝ), f x * starRingEnd ℂ (Complex.I*((1/2)*g x + x*deriv g x)). Route: integration by parts (MeasureTheory.integral_deriv_mul_eq / integral_mul_deriv_eq on a compact interval containing both supports), conj(i) = -i, the two (1/2)-terms plus the by-parts cross term cancel. Do NOT claim self-adjointness — symmetry on the core only."
+    },
+    {
+      "target": "Brockian.DilationGenerator.mellin_log_unitary",
+      "tier": "gate1-operator",
+      "rank": 2,
+      "difficulty": "MEDIUM",
+      "statement": "The substitution x = e^t induces a unitary U : L²(0,∞) ≃ L²(ℝ), (U f)(t) = e^{t/2}·f(e^t) — norm-preserving with inverse (U⁻¹ h)(x) = x^{-1/2}·h(log x).",
+      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0) at whatever level of the Lp API is tractable: the map f ↦ (fun t => Real.exp (t/2) • f (Real.exp t)) preserves the L² integral: ∫ x in Set.Ioi (0:ℝ), ‖f x‖^2 = ∫ t : ℝ, ‖Real.exp (t/2) • f (Real.exp t)‖^2, via the change-of-variables x = exp t (integral_comp_exp / MeasureTheory.integral_comp_mul_deriv). If constructing the full LinearIsometryEquiv on Lp is out of reach in one shot, prove the integral identity for continuous compactly-supported f and return that; mark the Lp upgrade BLOCKED."
+    },
+    {
+      "target": "Brockian.DilationGenerator.conjugation_to_momentum",
+      "tier": "gate1-operator",
+      "rank": 2,
+      "difficulty": "HARD",
+      "statement": "Under the log substitution, the dilation generator transports to the momentum operator: for smooth compactly-supported f on (0,∞), U(i((1/2)f + x f')) = i·(U f)' — i.e. A = U⁻¹ ∘ (i·d/dt) ∘ U on the core (the route to essential self-adjointness that mirrors the proven freeLaplacian-via-Plancherel pattern).",
+      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0) the pointwise intertwining identity: for f : ℝ → ℂ smooth with compact support in (0,∞), and t : ℝ: Real.exp (t/2) • (Complex.I * ((1/2) * f (Real.exp t) + Real.exp t * deriv f (Real.exp t))) = Complex.I * deriv (fun s => Real.exp (s/2) • f (Real.exp s)) t. Route: chain rule (deriv_comp, Real.deriv_exp), product rule, collect terms. Pointwise identity only — do NOT claim operator-level essential self-adjointness; that is a follow-up once this and mellin_log_unitary land."
     }
   ]
 }
