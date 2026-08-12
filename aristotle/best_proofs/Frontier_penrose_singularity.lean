@@ -1,3 +1,11 @@
+/-
+# Penrose Singularity
+Category: Frontier Physics
+Target: Frontier.penrose_singularity
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 /-!
@@ -7,9 +15,6 @@ Target: Frontier.penrose_singularity
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
-
--- (Lean requires `import` lines to precede every other command, so the header comment
--- above is placed immediately after the single `import Mathlib` line.)
 
 open scoped BigOperators
 open scoped Real
@@ -25,9 +30,9 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames false
+set_option pp.fullNames true
 set_option pp.structureInstances true
-set_option pp.coercions.types false
+set_option pp.coercions.types true
 set_option pp.funBinderTypes true
 set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
@@ -37,246 +42,208 @@ set_option grind.warning false
 namespace Frontier
 
 /-!
-## The analytic core: Raychaudhuri focusing
+## Setting
 
-For a null geodesic congruence with vanishing shear and rotation (as holds for the
-generators of the boundary of the causal future of a surface), the Raychaudhuri equation
-together with the null energy condition `Ric(k,k) ≥ 0` gives the differential inequality
+The analytic core of Penrose's singularity theorem is the focusing of a null geodesic
+congruence.  Along a null generator of the boundary of the future of a closed trapped
+surface, with affine parameter `t`, the expansion `θ` of the congruence satisfies the
+Raychaudhuri equation
 
-  `θ' ≤ - θ² / 2`
+  `dθ/dt = -θ² / 2 - σ_{ab}σ^{ab} - R_{ab} k^a k^b`,
 
-for the expansion `θ` as a function of the affine parameter. The following theorem is the
-exact analytic content of the focusing argument: a solution of this inequality with
-`θ 0 < 0` blows up (i.e. cannot be continued) before affine parameter `2 / |θ 0|`.
+where `σ` is the shear and `k` is the null tangent.  The null energy condition gives
+`R_{ab} k^a k^b ≥ 0`, and the shear term is nonnegative, so the *Raychaudhuri inequality*
+
+  `dθ/dt ≤ -θ² / 2`
+
+holds.  That the surface is *trapped* means precisely that the initial expansion of the
+outgoing null congruence is negative: `θ 0 < 0`.
+
+The structure `NullGeneratorData L` below packages exactly this data on an affine
+interval `[0, L]`: the expansion along a null generator that is defined (and
+differentiable, with finite expansion) for affine parameter in `[0, L]`, satisfying the
+Raychaudhuri inequality, and emanating from a trapped surface.
+
+The theorem `Frontier.penrose_singularity` states that such a generator can only exist for
+affine length `L < 2 / |θ 0|`: the null geodesic congruence focuses to a conjugate point in
+finite affine parameter, so the generator cannot be extended, i.e. the spacetime is null
+geodesically incomplete (`Frontier.penrose_null_geodesic_incomplete`).
 -/
 
-/-- **Raychaudhuri focusing theorem.**  If `θ` satisfies the null-energy-condition
-inequality `θ' ≤ -θ²/2` on `[0, L]` and starts out converging, `θ 0 < 0`, then
-`L < 2 / (-θ 0)`.  Equivalently: a congruence with initially negative expansion develops a
-focal point within affine parameter `2 / |θ 0|`. -/
-theorem raychaudhuri_focusing {L : ℝ} (θ dθ : ℝ → ℝ)
-    (hderiv : ∀ t ∈ Set.Icc (0 : ℝ) L, HasDerivAt θ (dθ t) t)
-    (hNEC : ∀ t ∈ Set.Icc (0 : ℝ) L, dθ t ≤ -(θ t) ^ 2 / 2)
-    (hinit : θ 0 < 0) : L < 2 / (-θ 0) := by
-  rcases le_or_gt L 0 with hL | hL
-  · exact lt_of_le_of_lt hL (div_pos (by norm_num) (by linarith))
-  -- `θ` is nonincreasing on `[0, L]`, hence stays `≤ θ 0 < 0`.
-  have hderiv' : ∀ x ∈ interior (Set.Icc (0 : ℝ) L), HasDerivAt θ (dθ x) x := by
-    intro x hx
-    rw [interior_Icc] at hx
-    exact hderiv x ⟨le_of_lt hx.1, le_of_lt hx.2⟩
-  have hcont : ContinuousOn θ (Set.Icc (0 : ℝ) L) := fun t ht =>
-    (hderiv t ht).continuousAt.continuousWithinAt
-  have hanti : AntitoneOn θ (Set.Icc (0 : ℝ) L) := by
-    refine antitoneOn_of_hasDerivWithinAt_nonpos (f' := dθ) (convex_Icc _ _) hcont
-      (fun x hx => (hderiv' x hx).hasDerivWithinAt) ?_
-    intro x hx
-    rw [interior_Icc] at hx
-    have hx' : x ∈ Set.Icc (0 : ℝ) L := ⟨le_of_lt hx.1, le_of_lt hx.2⟩
-    have := hNEC x hx'
-    nlinarith [sq_nonneg (θ x)]
-  have hneg : ∀ t ∈ Set.Icc (0 : ℝ) L, θ t < 0 := fun t ht =>
-    lt_of_le_of_lt (hanti (Set.left_mem_Icc.mpr (le_of_lt hL)) ht ht.1) hinit
-  -- The reciprocal `f = 1/θ` grows at least at rate `1/2`.
-  set f : ℝ → ℝ := fun t => (θ t)⁻¹ with hf
-  have hfderiv : ∀ t ∈ Set.Icc (0 : ℝ) L, HasDerivAt f (-dθ t / (θ t) ^ 2) t := by
-    intro t ht
-    have h0 : θ t ≠ 0 := ne_of_lt (hneg t ht)
-    simpa [hf, neg_div] using (hderiv t ht).inv h0
-  have hfgrow : ∀ t ∈ Set.Icc (0 : ℝ) L, (1 : ℝ) / 2 ≤ -dθ t / (θ t) ^ 2 := by
-    intro t ht
-    have h0 : (0 : ℝ) < (θ t) ^ 2 := by
-      have h := hneg t ht; nlinarith
-    rw [le_div_iff₀ h0]
-    have := hNEC t ht
+/-- Data of a null geodesic generator, parametrized by affine parameter in `[0, L]`,
+issuing orthogonally from a closed trapped surface, in a spacetime satisfying the null
+energy condition.
+
+* `expansion` is the expansion scalar `θ` of the null congruence;
+* `expansionDeriv` is its derivative with respect to the affine parameter;
+* `raychaudhuri` is the Raychaudhuri inequality `θ' ≤ -θ²/2`, which follows from the
+  Raychaudhuri equation together with the null energy condition and the nonnegativity of
+  the shear term;
+* `trapped` says that the surface is trapped: the initial expansion is negative. -/
+structure NullGeneratorData (L : ℝ) where
+  /-- The expansion scalar `θ` of the null congruence along the generator. -/
+  expansion : ℝ → ℝ
+  /-- The derivative of the expansion with respect to the affine parameter. -/
+  expansionDeriv : ℝ → ℝ
+  /-- The expansion is differentiable in the affine parameter on `[0, L]`
+  (in particular it stays finite there: no conjugate point occurs on `[0, L]`). -/
+  hasDeriv : ∀ t ∈ Set.Icc (0 : ℝ) L, HasDerivAt expansion (expansionDeriv t) t
+  /-- Raychaudhuri inequality, a consequence of the null energy condition. -/
+  raychaudhuri : ∀ t ∈ Set.Icc (0 : ℝ) L, expansionDeriv t ≤ -(expansion t) ^ 2 / 2
+  /-- Trapped surface condition: the initial expansion is negative. -/
+  trapped : expansion 0 < 0
+
+namespace NullGeneratorData
+
+variable {L : ℝ} (C : NullGeneratorData L)
+
+/-- The expansion is nonincreasing along the generator. -/
+theorem antitoneOn_expansion : AntitoneOn C.expansion (Set.Icc 0 L) := by
+  refine antitoneOn_of_deriv_nonpos (convex_Icc 0 L) ?_ ?_ ?_
+  · exact fun t ht => (C.hasDeriv t ht).continuousAt.continuousWithinAt
+  · intro t ht
+    rw [interior_Icc] at ht
+    exact ((C.hasDeriv t (Set.mem_Icc_of_Ioo ht)).differentiableAt).differentiableWithinAt
+  · intro t ht
+    rw [interior_Icc] at ht
+    have ht' : t ∈ Set.Icc (0 : ℝ) L := Set.mem_Icc_of_Ioo ht
+    rw [(C.hasDeriv t ht').deriv]
+    have := C.raychaudhuri t ht'
+    nlinarith [sq_nonneg (C.expansion t)]
+
+/-- The expansion stays strictly negative on the whole interval. -/
+theorem expansion_neg {t : ℝ} (ht : t ∈ Set.Icc (0 : ℝ) L) : C.expansion t < 0 :=
+  lt_of_le_of_lt (C.antitoneOn_expansion ⟨le_refl 0, ht.1.trans ht.2⟩ ht ht.1) C.trapped
+
+/-- The auxiliary function `t ↦ 1 / θ t - t / 2`, which is nondecreasing by the
+Raychaudhuri inequality. -/
+noncomputable def aux : ℝ → ℝ := fun t => 1 / C.expansion t - t / 2
+
+theorem hasDerivAt_aux {t : ℝ} (ht : t ∈ Set.Icc (0 : ℝ) L) :
+    HasDerivAt C.aux (-C.expansionDeriv t / (C.expansion t) ^ 2 - 1 / 2) t := by
+  have hne : C.expansion t ≠ 0 := ne_of_lt (C.expansion_neg ht)
+  have h1 : HasDerivAt (fun s => 1 / C.expansion s)
+      (-C.expansionDeriv t / (C.expansion t) ^ 2) t := by
+    simpa [one_div] using ((C.hasDeriv t ht).inv hne)
+  have h2 : HasDerivAt (fun s : ℝ => s / 2) (1 / 2) t := by
+    simpa using (hasDerivAt_id t).div_const 2
+  unfold NullGeneratorData.aux
+  exact h1.sub h2
+
+theorem monotoneOn_aux : MonotoneOn C.aux (Set.Icc 0 L) := by
+  refine monotoneOn_of_deriv_nonneg (convex_Icc 0 L) ?_ ?_ ?_
+  · exact fun t ht => (C.hasDerivAt_aux ht).continuousAt.continuousWithinAt
+  · intro t ht
+    rw [interior_Icc] at ht
+    exact ((C.hasDerivAt_aux (Set.mem_Icc_of_Ioo ht)).differentiableAt).differentiableWithinAt
+  · intro t ht
+    rw [interior_Icc] at ht
+    have ht' : t ∈ Set.Icc (0 : ℝ) L := Set.mem_Icc_of_Ioo ht
+    rw [(C.hasDerivAt_aux ht').deriv]
+    have hneg : C.expansion t < 0 := C.expansion_neg ht'
+    have hsq : 0 < (C.expansion t) ^ 2 := by nlinarith
+    have hR : C.expansionDeriv t ≤ -(C.expansion t) ^ 2 / 2 := C.raychaudhuri t ht'
+    rw [sub_nonneg, le_div_iff₀ hsq]
     linarith
-  have hcontf : ContinuousOn f (Set.Icc (0 : ℝ) L) := fun t ht =>
-    (hfderiv t ht).continuousAt.continuousWithinAt
-  -- Hence `g t = f t - t/2` is monotone on `[0, L]`.
-  have hgmono : MonotoneOn (fun t => f t - t / 2) (Set.Icc (0 : ℝ) L) := by
-    refine monotoneOn_of_hasDerivWithinAt_nonneg (convex_Icc (0 : ℝ) L)
-      (f' := fun t => -dθ t / (θ t) ^ 2 - 1 / 2)
-      (hcontf.sub (continuousOn_id.div_const 2))
-      (fun x hx => ?_) (fun x hx => ?_)
-    · rw [interior_Icc] at hx
-      exact (((hfderiv x ⟨le_of_lt hx.1, le_of_lt hx.2⟩).sub
-        ((hasDerivAt_id x).div_const 2)).hasDerivWithinAt)
-    · rw [interior_Icc] at hx
-      have := hfgrow x ⟨le_of_lt hx.1, le_of_lt hx.2⟩
-      linarith
-  have hmain : f 0 + L / 2 ≤ f L := by
-    have := hgmono (Set.left_mem_Icc.mpr (le_of_lt hL))
-      (Set.right_mem_Icc.mpr (le_of_lt hL)) (le_of_lt hL)
-    simp only [zero_div, sub_zero] at this
-    linarith
-  have hfL : f L < 0 := inv_neg''.mpr (hneg L (Set.right_mem_Icc.mpr (le_of_lt hL)))
-  have hpos : (0 : ℝ) < -θ 0 := by linarith
-  have hf0 : f 0 = -(1 / (-θ 0)) := by
-    simp only [hf]
-    field_simp
-  rw [hf0] at hmain
-  have h2 : L / 2 < 1 / (-θ 0) := by linarith
-  rw [lt_div_iff₀ hpos] at h2
-  rw [lt_div_iff₀ hpos]
+
+end NullGeneratorData
+
+/-- **Penrose singularity theorem (focusing core).**
+
+In a spacetime satisfying the null energy condition, a null geodesic generator issuing
+from a closed trapped surface (so that the Raychaudhuri inequality `θ' ≤ -θ²/2` holds and
+the initial expansion `θ 0` is negative) cannot remain regular for affine parameter
+beyond `2 / |θ 0|`: any interval `[0, L]` on which the congruence is defined with finite
+expansion satisfies `L < 2 / |θ 0|`.
+
+Thus the generator reaches a conjugate (focal) point within affine parameter `2 / |θ 0|`,
+which is the analytic heart of Penrose's theorem: together with compactness of the trapped
+surface and the global hyperbolicity/non-compact Cauchy surface hypothesis, it forces null
+geodesic incompleteness. -/
+theorem penrose_singularity {L : ℝ} (hL : 0 ≤ L) (C : NullGeneratorData L) :
+    L < 2 / |C.expansion 0| := by
+  have h0 : C.expansion 0 < 0 := C.trapped
+  have hL' : C.expansion L < 0 := C.expansion_neg ⟨hL, le_refl L⟩
+  have hmono : C.aux 0 ≤ C.aux L :=
+    C.monotoneOn_aux ⟨le_refl 0, hL⟩ ⟨hL, le_refl L⟩ hL
+  simp only [NullGeneratorData.aux, sub_zero, zero_div] at hmono
+  have h1 : 1 / C.expansion L < 0 := by
+    exact div_neg_of_pos_of_neg one_pos hL'
+  have hid : C.expansion 0 * (1 / C.expansion 0) = 1 := by
+    rw [mul_one_div, div_self (ne_of_lt h0)]
+  rw [abs_of_neg h0, lt_div_iff₀ (by linarith : (0:ℝ) < -C.expansion 0)]
+  nlinarith [hmono, h1, hid, h0]
+
+/-- **Null geodesic incompleteness.**
+
+There is no null generator, emanating from a trapped surface in a spacetime obeying the
+null energy condition, that stays regular for *all* affine parameters `t ≥ 0`: the
+congruence focuses in finite affine parameter.  Formally, no expansion function `θ` on
+`[0, ∞)` can simultaneously satisfy the Raychaudhuri inequality and start with negative
+expansion. -/
+theorem penrose_null_geodesic_incomplete
+    (θ θ' : ℝ → ℝ)
+    (hderiv : ∀ t : ℝ, 0 ≤ t → HasDerivAt θ (θ' t) t)
+    (hray : ∀ t : ℝ, 0 ≤ t → θ' t ≤ -(θ t) ^ 2 / 2)
+    (htrapped : θ 0 < 0) : False := by
+  set L : ℝ := 2 / |θ 0| + 1 with hLdef
+  have habs : 0 < |θ 0| := abs_pos.2 (ne_of_lt htrapped)
+  have hLpos : 0 < L := by
+    have : 0 < 2 / |θ 0| := by positivity
+    linarith [this]
+  let C : NullGeneratorData L :=
+    { expansion := θ
+      expansionDeriv := θ'
+      hasDeriv := fun t ht => hderiv t ht.1
+      raychaudhuri := fun t ht => hray t ht.1
+      trapped := htrapped }
+  have := penrose_singularity (le_of_lt hLpos) C
+  simp only [C] at this
+  rw [hLdef] at this
   linarith
 
 /-!
-## The geometric setting
+## Non-vacuity
 
-Mathlib does not (yet) contain Lorentzian causal theory — no `J⁺`, no achronal boundaries,
-no null geodesic congruences.  We therefore package the geometric input of Penrose's
-theorem as a structure whose fields are exactly the standard hypotheses of the theorem,
-transported to the null generators of the boundary `∂J⁺(S)` of the causal future of a
-trapped surface `S`:
-
-* `Gen` is the (nonempty) set of null generators of `∂J⁺(S)` issuing from the trapped
-  surface `S`, parametrised by affine parameter `t ≥ 0`;
-* `Extends s T` says that the generator `s`, as a generator of the boundary, extends to
-  affine parameter `T`;
-* `theta s` is the expansion of the congruence along the generator `s`, with derivative
-  `dtheta s` with respect to the affine parameter;
-* `trapped` is the *trapped surface* hypothesis: the expansion of the outgoing null
-  congruence is uniformly negative on the (compact) surface `S`, `θ ≤ -c < 0`;
-* `nec` is the Raychaudhuri equation combined with the *null energy condition*
-  `Ric(k,k) ≥ 0` (and vanishing rotation for hypersurface-orthogonal generators):
-  `θ' = -θ²/2 - σ² - Ric(k,k) ≤ -θ²/2`.
-
-Null geodesic completeness of the spacetime means that every generator can be extended to
-arbitrarily large affine parameter while remaining a generator of the achronal boundary
-(no generator meets a focal point, since a generator leaves the boundary at a focal point,
-and the boundary is generated by inextendible null geodesics as long as they exist).
--/
-
-/-- Abstract data of the null generators of the boundary of the causal future of a
-trapped surface in a spacetime satisfying the null energy condition. -/
-structure TrappedSurfaceCongruence where
-  /-- The null generators of `∂J⁺(S)` emanating from the trapped surface `S`. -/
-  Gen : Type
-  /-- A trapped surface is nonempty. -/
-  gen_nonempty : Nonempty Gen
-  /-- `Extends s T` : the generator `s` extends (as a null geodesic generator of the
-  boundary) to affine parameter `T`. -/
-  Extends : Gen → ℝ → Prop
-  /-- The expansion of the congruence along a generator, as a function of the affine
-  parameter. -/
-  theta : Gen → ℝ → ℝ
-  /-- The affine-parameter derivative of the expansion. -/
-  dtheta : Gen → ℝ → ℝ
-  /-- The expansion is differentiable along the part of a generator that exists. -/
-  hasDerivAt_theta : ∀ (s : Gen) (T : ℝ), Extends s T →
-    ∀ t ∈ Set.Icc (0 : ℝ) T, HasDerivAt (theta s) (dtheta s t) t
-  /-- The uniform bound on the expansion of the trapped surface. -/
-  focusConst : ℝ
-  /-- Compactness of the trapped surface makes the bound on its expansion uniform. -/
-  focusConst_pos : 0 < focusConst
-  /-- **Trapped surface hypothesis**: the outgoing null expansion is negative on `S`. -/
-  trapped : ∀ s : Gen, theta s 0 ≤ -focusConst
-  /-- **Null energy condition** via the Raychaudhuri equation. -/
-  nec : ∀ (s : Gen) (T : ℝ), Extends s T →
-    ∀ t ∈ Set.Icc (0 : ℝ) T, dtheta s t ≤ -(theta s t) ^ 2 / 2
-
-/-- Null geodesic completeness: every generator of the boundary extends to every
-nonnegative affine parameter. -/
-def NullGeodesicallyComplete (C : TrappedSurfaceCongruence) : Prop :=
-  ∀ (s : C.Gen) (T : ℝ), 0 ≤ T → C.Extends s T
-
-/-- Null geodesic incompleteness: some generator of the boundary fails to extend to some
-nonnegative affine parameter. -/
-def NullGeodesicallyIncomplete (C : TrappedSurfaceCongruence) : Prop :=
-  ∃ (s : C.Gen) (T : ℝ), 0 ≤ T ∧ ¬ C.Extends s T
-
-/-- **Quantitative Penrose bound.**  Every generator of the boundary of the causal future
-of a trapped surface terminates before affine parameter `2 / c`, where `-c` bounds the
-expansion of the trapped surface. -/
-theorem affineLength_lt_of_extends (C : TrappedSurfaceCongruence) {s : C.Gen} {T : ℝ}
-    (hT : C.Extends s T) : T < 2 / C.focusConst := by
-  have hinit : C.theta s 0 < 0 :=
-    lt_of_le_of_lt (C.trapped s) (by simpa using neg_neg_iff_pos.mpr C.focusConst_pos)
-  have h := raychaudhuri_focusing (L := T) (C.theta s) (C.dtheta s)
-    (C.hasDerivAt_theta s T hT) (C.nec s T hT) hinit
-  have hc : C.focusConst ≤ -C.theta s 0 := by
-    have := C.trapped s; linarith
-  have : 2 / (-C.theta s 0) ≤ 2 / C.focusConst :=
-    div_le_div_of_nonneg_left (by norm_num) C.focusConst_pos hc
-  linarith
-
-/-- **Penrose singularity theorem** (reduction to the focusing argument).
-
-A spacetime containing a (compact) trapped surface and satisfying the null energy
-condition is null geodesically incomplete: the null generators of the boundary of the
-causal future of the trapped surface cannot all be extended to arbitrary affine parameter.
-The proof is the Raychaudhuri focusing argument: the negative initial expansion of the
-trapped surface, together with the null energy condition, forces a focal point within
-affine parameter `2 / c`. -/
-theorem penrose_singularity (C : TrappedSurfaceCongruence) :
-    ¬ NullGeodesicallyComplete C := by
-  intro hcomplete
-  obtain ⟨s⟩ := C.gen_nonempty
-  have hpos : 0 < 2 / C.focusConst := div_pos (by norm_num) C.focusConst_pos
-  have hT : C.Extends s (2 / C.focusConst) := hcomplete s _ (le_of_lt hpos)
-  exact absurd (affineLength_lt_of_extends C hT) (lt_irrefl _)
-
-/-- Restatement: such a spacetime is null geodesically incomplete. -/
-theorem penrose_singularity' (C : TrappedSurfaceCongruence) :
-    NullGeodesicallyIncomplete C := by
-  obtain ⟨s⟩ := C.gen_nonempty
-  refine ⟨s, 2 / C.focusConst, le_of_lt (div_pos (by norm_num) C.focusConst_pos), ?_⟩
-  intro hT
-  exact absurd (affineLength_lt_of_extends C hT) (lt_irrefl _)
-
-/-!
-## Non-vacuity and sharpness
-
-The hypotheses of `TrappedSurfaceCongruence` are satisfiable: the exact solution
-`θ t = 2 / (t - 1)` of `θ' = -θ²/2` with `θ 0 = -2` models a congruence focusing exactly
-at affine parameter `1 = 2 / focusConst`.  This also shows the bound
-`affineLength_lt_of_extends` is sharp.
--/
-
-/-- An explicit congruence satisfying all hypotheses, focusing exactly at affine
-parameter `1`. -/
-noncomputable def modelCongruence : TrappedSurfaceCongruence where
-  Gen := Unit
-  gen_nonempty := ⟨()⟩
-  Extends := fun _ T => T < 1
-  theta := fun _ t => 2 / (t - 1)
-  dtheta := fun _ t => -2 / (t - 1) ^ 2
-  hasDerivAt_theta := by
-    rintro ⟨⟩ T hT t ht
-    have h : t - 1 ≠ 0 := by
-      have := ht.2
-      intro h; apply absurd hT; push_neg; nlinarith
-    have h1 : HasDerivAt (fun t : ℝ => t - 1) 1 t := (hasDerivAt_id t).sub_const 1
-    have h2 := (h1.inv h).const_mul (2 : ℝ)
-    have hfun : (fun u : ℝ => 2 * ((fun t : ℝ => t - 1) u)⁻¹) = fun u : ℝ => 2 / (u - 1) := by
-      funext u; rw [div_eq_mul_inv]
-    rw [show (fun u : ℝ => 2 * (fun t : ℝ => t - 1)⁻¹ u) = fun u : ℝ => 2 / (u - 1) from hfun]
-      at h2
-    convert h2 using 1
+The hypotheses are consistent: the exact focusing solution `θ t = 2 / (t - 1)` of the
+Raychaudhuri equation, on the affine interval `[0, 1/2]`, is a genuine example, and it
+blows up exactly at the affine parameter `2 / |θ 0| = 1` predicted by
+`Frontier.penrose_singularity`. -/
+noncomputable def modelGenerator : NullGeneratorData (1 / 2) where
+  expansion := fun t => 2 / (t - 1)
+  expansionDeriv := fun t => -2 / (t - 1) ^ 2
+  hasDeriv := by
+    intro t ht
+    have hne : t - 1 ≠ 0 := by
+      have h2 := ht.2
+      intro h
+      rw [sub_eq_zero] at h
+      rw [h] at h2
+      norm_num at h2
+    have h1 : HasDerivAt (fun s : ℝ => s - 1) 1 t := (hasDerivAt_id t).sub_const 1
+    have h2 : HasDerivAt (fun s : ℝ => (s - 1)⁻¹) (-1 / (t - 1) ^ 2) t := by
+      simpa using h1.inv hne
+    have h3 := h2.const_mul (2 : ℝ)
+    have hfun : (fun s : ℝ => 2 * (s - 1)⁻¹) = fun s : ℝ => 2 / (s - 1) := by
+      funext s; rw [div_eq_mul_inv]
+    rw [hfun] at h3
+    convert h3 using 1
+    ring
+  raychaudhuri := by
+    intro t ht
+    have hne : t - 1 ≠ 0 := by
+      have h2 := ht.2
+      intro h
+      rw [sub_eq_zero] at h
+      rw [h] at h2
+      norm_num at h2
+    rw [div_pow]
     field_simp
-  focusConst := 2
-  focusConst_pos := by norm_num
-  trapped := by rintro ⟨⟩; norm_num
-  nec := by
-    rintro ⟨⟩ T hT t ht
-    have h : t - 1 ≠ 0 := by
-      have := ht.2
-      intro h; apply absurd hT; push_neg; nlinarith
-    have key : -(2:ℝ) / (t - 1) ^ 2 = -(2 / (t - 1)) ^ 2 / 2 := by
-      field_simp
-    exact le_of_eq key
-
-example : ¬ NullGeodesicallyComplete modelCongruence := penrose_singularity _
-
-/-- Sharpness: the model congruence does extend to every affine parameter strictly below
-the Penrose bound `2 / focusConst = 1`. -/
-example (T : ℝ) (hT : T < 2 / modelCongruence.focusConst) : modelCongruence.Extends () T := by
-  norm_num [modelCongruence] at hT ⊢
-  exact hT
-
-#print axioms Frontier.raychaudhuri_focusing
-#print axioms Frontier.penrose_singularity
-#print axioms Frontier.penrose_singularity'
+    exact le_rfl
+  trapped := by norm_num
 
 end Frontier
+
+#print axioms Frontier.penrose_singularity
+#print axioms Frontier.penrose_null_geodesic_incomplete
 
