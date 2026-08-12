@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 626
 - **DISCHARGED**: 7
-- **PROVED**: 10992
+- **PROVED**: 11126
 
 ## Theorems
 
@@ -3568,10 +3568,14 @@
 | PROVED | `Brockian.LegendreConjecture.legendre_7` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LegendreConjecture.legendre_8` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LegendreConjecture.legendre_9` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LegendreError.legendre_sieve_error` | ✓ | verified | lean-4.32.0 | Tao-guided sieve wave 2; Aristotle dbcb784d, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.LegendreSieve.legendre_sieve` | ✓ | verified | lean-4.32.0 | Tao-guided sieve wave; Aristotle 06a22f46, independently AXLE-verified @lean-4.32.0 |
 | DEFINITION | `Brockian.LehmerTotient.Lehmer` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LehmerTotient.lehmer_odd` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LehmerTotient.lehmer_squarefree` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LehmerTotient.lehmer_three_primes` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LiouvilleParity.liouville_divisor_sum` | ✓ | verified | lean-4.32.0 | Tao-guided sieve wave; Aristotle 6047b082, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.LiouvilleParity.squarefree_divisor_count` | ✓ | verified | lean-4.32.0 | Tao-guided sieve wave; Aristotle 6047b082, AXLE-verified @lean-4.32.0 |
 | PROVED | `Brockian.LteTwo.emult_two_pow_sub_pow` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.LteTwo.factorization_two` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.LteTwo.lte_two` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
@@ -4148,6 +4152,130 @@
 | PROVED | `Brockian.PseudoprimesBaseTwo.three_mul_N` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.PseudoprimesBaseTwo.two_p_dvd_N_sub_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.PseudoprimesBaseTwo.two_pow_two_mul_modEq` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.QCBell.phiM_ZZ_eigen` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCBell.phiP_XX_eigen` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCBell.phiP_ZZ_eigen` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCBell.phiP_normalized` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCBell.phiP_psiP_orthogonal` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCBell.psiM_ZZ_eigen` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCBell.psiP_XX_eigen` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCBraidTL.braid_relation_conj` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCBraidTL.temperley_lieb_loop` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCClifford.HS_conj_X` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCClifford.HS_conj_Z` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCClifford.H_conj_Y` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCClifford.S_Z_commute` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCClifford.S_conj_Y` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCClifford.S_conj_Z` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCClifford.S_unitary_left` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCCyclotomic.cyclotomic_five` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCCyclotomic.goldConj_eq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCCyclotomic.golden_add_conj` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCCyclotomic.golden_eq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCCyclotomic.golden_mul_conj` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCCyclotomic.one_lt_golden` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCCyclotomic.sqrt5_sq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCDensity.Dplus_idem` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCDensity.P0_P1_orthogonal` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCDensity.P0_idem` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCDensity.P0_trace_one` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCDensity.PX_PZ_traceless` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCDensity.PX_traceless` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCDensity.completeness` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFibonacci2.F_det` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFibonacci2.F_symmetric` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFibonacci2.F_unitary` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFibonacci2.fusion_det` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFibonacci2.fusion_trace` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFibonacci2.golden_inv` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFibonacci2.golden_sq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFibonacciAnyon.fib_fusion_gold_eigenvalue` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFibonacciAnyon.fibonacci_F_involutory` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFifthRoots.om_conj_eq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFifthRoots.om_geom_sum` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFifthRoots.om_inv_eq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFifthRoots.om_ne_one` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFifthRoots.om_norm_one` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFifthRoots.om_pow_five` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCFifthRoots.om_pow_ten` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCGHZ.GHZ_IZZ_eigen` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCGHZ.GHZ_W_orthogonal` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCGHZ.GHZ_XXX_eigen` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCGHZ.GHZ_ZIZ_eigen` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCGHZ.GHZ_ZZI_eigen` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCGHZ.GHZ_normalized` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCGHZ.W_normalized` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCGHZ.normSq_c` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCGHZ.normSq_dd` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCHadamard.H_X_H` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCHadamard.H_Y_H` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCHadamard.H_Z_H` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCHadamard.H_det` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCHadamard.H_eq_sum` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCHadamard.H_sq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCHadamard.H_unitary` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCPauliAlgebra.PX_PY` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCPauliAlgebra.PX_PY_PZ` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCPauliAlgebra.PX_sq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCPauliAlgebra.PY_PZ` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCPauliAlgebra.PY_sq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCPauliAlgebra.PZ_PX` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCPauliAlgebra.PZ_sq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCPhaseGates.S_conj_X_eq_Y` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCPhaseGates.S_pow_four` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCPhaseGates.S_sq_eq_Z` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCPhaseGates.S_unitary` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCPhaseGates.T_pow_eight` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCPhaseGates.T_sq_eq_S` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCPhaseGates.T_unitary` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCProjectors.E0_E1_orthogonal` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCProjectors.E0_hermitian` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCProjectors.E0_idem` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCProjectors.E1_idem` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCProjectors.Zproj_minus` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCProjectors.Zproj_plus` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCProjectors.qutrit_completeness` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQFT.W2_det` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQFT.W2_sq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQFT.W2_unitary` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQFT.W4_row0` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQFT.W4_sq_reversal` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQFT.W4_symmetric` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQFT.W4_unitary` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQFTUnitary.qft_mul_conjTranspose` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQudit2.clockT_clock` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQudit2.clock_diag_apply` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQudit2.clock_off_diag` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQudit2.clock_pow_card` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQudit2.shiftT_shift` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQudit2.shift_off_diag` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQudit2.weyl_reverse` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQuditWeyl.clock_shift_weyl` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCQuditWeyl.shift_pow_card` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCRotations.Rz_add` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCRotations.Rz_conj` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCRotations.Rz_det` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCRotations.Rz_four_pi` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCRotations.Rz_two_pi` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCRotations.Rz_unitary` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCRotations.Rz_zero` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCStabilizer.clock_unitary` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCStabilizer.pauli_anticommute` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCStabilizer.shift_unitary` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCThreeQubit.CCZ_sq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCThreeQubit.CCZ_symmetric` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCThreeQubit.Fred_sq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCThreeQubit.Fred_symmetric` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCThreeQubit.Tof_sq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCThreeQubit.Tof_symmetric` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCThreeQubit.Tof_unitary` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCTwoQubit.CNOT_sq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCTwoQubit.CNOT_unitary` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCTwoQubit.CZ_sq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCTwoQubit.CZ_symmetric` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCTwoQubit.CZ_unitary` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCTwoQubit.SWAP_sq` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.QCTwoQubit.SWAP_unitary` | ✓ | verified | lean-4.32.0 | QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0 |
 | DEFINITION | `Brockian.QuasiperfectNumbers.AlmostPerfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.QuasiperfectNumbers.Perfectσ` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.QuasiperfectNumbers.Quasiperfect` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
@@ -10788,6 +10916,8 @@
 | PROVED | `Brockian.SingularSeries.Wire.singular_series_pos_of_admissible` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.SingularSeries.Wire.singular_series_pos_supersedes_conditional` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.SingularSeries.Wire.singular_series_pos_unconditional` | ✓ | verified | lean-4.32.0 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| PROVED | `Brockian.SingularSeriesBridge.localFactor_twinGap_odd` | ✓ | verified | lean-4.32.0 |  |
+| PROVED | `Brockian.SingularSeriesBridge.localFactor_twinGap_odd_pos` | ✓ | verified | lean-4.32.0 |  |
 | DEFINITION | `Brockian.SophieGermain.SophieGermain` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.SophieGermain.SophieGermainInfinitude` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SophieGermain.sg_11` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
@@ -10831,6 +10961,9 @@
 | PROVED | `Brockian.SpectralGate1.primeGaussianℂ_norm_le` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — bounded-potential multiplication operator (honest Gate-1 piece) |
 | PROVED | `Brockian.SpectralGate1.summable_primeBump` | ✓ | verified | lean-4.32.0 | swarm 2026-08-01 — bounded-potential multiplication operator (honest Gate-1 piece) |
 | PROVED | `Brockian.Sperner.sperner_card_le` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.SquarefreeCount.squarefree_count` | ✓ | verified | lean-4.32.0 | Tao-guided sieve wave 2; Aristotle 5edf33d8, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.SquarefreeSquareDivisors.liouville_eq_sum_moebius_sq_divisors` | ✓ | verified | lean-4.32.0 | Tao-guided sieve wave; Aristotle 806823f1, AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.SquarefreeSquareDivisors.moebius_sq_eq_sum_sq_divisors` | ✓ | verified | lean-4.32.0 | Tao-guided sieve wave; Aristotle 806823f1, AXLE-verified @lean-4.32.0 |
 | PROVED | `Brockian.StarOfDavid.choose_add_mul_factorial` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.StarOfDavid.choose_mul_fact` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.StarOfDavid.choose_prod_identity` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
@@ -10848,6 +10981,7 @@
 | PROVED | `Brockian.SuperperfectNumbers.superperfect_4` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SuperperfectNumbers.superperfect_64` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SuperperfectNumbers.superperfect_two_pow_of_mersenne_prime` | ✓ | verified | lean-4.32.0 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.TotientMoebius.totient_eq_sum_moebius` | ✓ | verified | lean-4.32.0 | Tao-guided sieve wave 2; Aristotle 85669593, AXLE-verified @lean-4.32.0 |
 | PROVED | `Brockian.TotientStructure.gauss_sum_totient` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.TotientStructure.totient_eq_sub_one_iff_prime` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.TotientStructure.totient_even_of_three_le` | ✓ | verified | lean-4.32.0 | frontier swarm; AXLE @4.32 |

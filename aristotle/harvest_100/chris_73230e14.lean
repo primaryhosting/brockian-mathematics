@@ -1,0 +1,71 @@
+/-
+# Hadamard Involutive
+Category: Quantum Computing
+Target: QC.hadamard_involutive
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Hadamard Involutive
+Category: Quantum Computing
+Target: QC.hadamard_involutive
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace QC
+
+/-- The Hadamard gate `H = (1/√2) • !![1, 1; 1, -1]` as a complex `2 × 2` matrix. -/
+noncomputable def hadamard : Matrix (Fin 2) (Fin 2) ℂ :=
+  (1 / Real.sqrt 2 : ℝ) • !![1, 1; 1, -1]
+
+/-- The Hadamard matrix is self-adjoint (`H† = H`) and squares to the identity (`H² = I`);
+hence it is a unitary involution. -/
+theorem hadamard_involutive :
+    hadamard.conjTranspose = hadamard ∧ hadamard * hadamard = 1 := by
+  have hsq : ((Real.sqrt 2 : ℝ) : ℂ) ^ 2 = 2 := by
+    norm_cast
+    rw [Real.sq_sqrt]
+    norm_num
+  refine ⟨?_, ?_⟩
+  · ext i j
+    fin_cases i <;> fin_cases j <;> simp [hadamard, Matrix.conjTranspose_apply]
+  · ext i j
+    fin_cases i <;> fin_cases j <;>
+      simp [hadamard, Matrix.mul_apply, Fin.sum_univ_succ] <;>
+      ring_nf <;>
+      field_simp [hsq] <;>
+      exact hsq.symm
+
+/-- Consequence: the Hadamard gate is unitary, `H† * H = 1`. -/
+theorem hadamard_unitary : hadamard.conjTranspose * hadamard = 1 := by
+  rw [hadamard_involutive.1]; exact hadamard_involutive.2
+
+end QC
+

@@ -1,973 +1,997 @@
 {
- "count": 121,
- "queue": [
-  {
-   "target": "Zeta23Obstruction.repaired_witness_nonneg",
-   "tier": "C-corpus-extension",
-   "rank": 1,
-   "difficulty": "EASY",
-   "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): for all real x, 0 \u2264 (Real.sin (Real.pi * x) / (Real.pi * x))^2 * (1 - (1/10) * Real.cos (3 * Real.pi * x)). Route: the first factor is a square hence \u2265 0 (this also covers x = 0 where the quotient is junk-valued but still squared); the second factor is \u2265 9/10 > 0 since Real.cos \u2264 1 (neg_one_le_cos / cos_le_one). Multiply nonnegatives. State exactly this global \u2200 x : \u211d \u2014 a finite-range version is worthless.",
-   "statement": "The repaired obstruction witness kernel is nonnegative on ALL of \u211d (product of nonnegatives)."
-  },
-  {
-   "target": "Zeta23Obstruction.repaired_witness_neg_at_deep_point",
-   "tier": "C-corpus-extension",
-   "rank": 1,
-   "difficulty": "MEDIUM",
-   "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): (Real.sinh (2 * Real.pi) / (2 * Real.pi))^2 * (1 - (1/10) * Real.cosh (6 * Real.pi)) < 0. This is the analytic continuation of the witness kernel evaluated at the deep off-line point 2i, where sin(\u03c0\u00b72i)/(\u03c0\u00b72i) becomes sinh(2\u03c0)/(2\u03c0) and cos(3\u03c0\u00b72i) becomes cosh(6\u03c0). Route: the square factor is > 0 (sinh(2\u03c0) > 0 since 2\u03c0 > 0); the bracket is < 0 iff cosh(6\u03c0) > 10; use cosh x \u2265 (exp x)/2 and exp(6\u03c0) \u2265 exp 18 > 20 via exp monotonicity and a crude bound like exp 1 \u2265 2 giving exp 18 \u2265 2^18. Conclude pos * neg < 0.",
-   "statement": "The repaired witness kernel is strictly negative at the deep point 2i: (sinh 2\u03c0/2\u03c0)\u00b2\u00b7(1 \u2212 cosh(6\u03c0)/10) < 0 \u2014 the deep-pair blowup is real."
-  },
-  {
-   "target": "Zeta23Obstruction.tent_combination_neg_on_band",
-   "tier": "C-corpus-extension",
-   "rank": 1,
-   "difficulty": "MEDIUM",
-   "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): define T : \u211d \u2192 \u211d := fun a => max 0 (1 - |a|). Then for all a with 1 < a and a < 5/2, T a - (1/20) * (T (a - 3/2) + T (a + 3/2)) < 0. This is the Fourier-side profile of the repaired witness: the base tent vanishes for a > 1, while the shifted tent T(a \u2212 3/2) is strictly positive for a \u2208 (1, 5/2) (since |a \u2212 3/2| < 1 there). Route: case a \u2265 1 gives T a = 0; a \u2208 (1, 5/2) gives a \u2212 3/2 \u2208 (\u22121/2, 1) so T (a \u2212 3/2) = 1 \u2212 |a \u2212 3/2| > 0; T (a + 3/2) \u2265 0; so the expression is \u2264 \u2212(1/20)\u00b7(positive) < 0. Pure piecewise algebra on max and abs.",
-   "statement": "The witness's Fourier tent combination is strictly negative exactly where claimed: T(\u03b1) \u2212 (1/20)(T(\u03b1\u22123/2)+T(\u03b1+3/2)) < 0 on (1, 5/2)."
-  },
-  {
-   "target": "Zeta23Obstruction.damage_cost_exponent_law",
-   "tier": "C-corpus-extension",
-   "rank": 2,
-   "difficulty": "EASY",
-   "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0) the two facts that make the deep-pair damage/cost ratio fatal: (1) for A > 1, StrictMono (fun y : \u211d => Real.exp (4 * Real.pi * (A - 1) * y)) \u2014 strict monotonicity since the coefficient 4\u03c0(A\u22121) > 0; (2) \u2200 C > 0, \u2203 y > 0, Real.exp (4 * Real.pi * (A - 1) * y) > C \u2014 unboundedness via Real.exp tends to atTop or by y = (Real.log C + 1)/(4\u03c0(A\u22121)). State both in one theorem or two; the quantifiers must be global.",
-   "statement": "The rescaled deep-pair damage/cost ratio e^{4\u03c0(A\u22121)y} is strictly increasing and unbounded for any bandwidth A > 1."
-  },
-  {
-   "target": "Zeta23Obstruction.sq_factor_lower_bound",
-   "tier": "C-corpus-extension",
-   "rank": 2,
-   "difficulty": "EASY",
-   "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): for all x : \u211d, (9:\u211d)/10 \u2264 1 - (1/10) * Real.cos (3 * Real.pi * x). Route: Real.cos_le_one gives cos \u2264 1 hence (1/10)\u00b7cos \u2264 1/10. This is the quantitative floor that makes the witness's nonnegativity robust (the modulation can never eat the Fej\u00e9r factor). Global \u2200 x.",
-   "statement": "The witness's modulation factor is bounded below by 9/10 everywhere \u2014 the repair has margin, not just nonnegativity."
-  },
-  {
-   "target": "Zeta23Obstruction.subclass_obstruction_statement",
-   "tier": "B-conjecture",
-   "rank": 3,
-   "difficulty": "HARD",
-   "goal": "STATEMENT-LEVEL target (CONDITIONAL register; do not attempt the full analytic proof): formalize in Lean 4 (Mathlib, lean-4.32.0) a clean abstract statement of the refereed subclass obstruction: given a 'certificate' consisting of a fixed function R : \u211d \u2192 \u211d with (h_pos : \u2200 x, 0 \u2264 R x) used via pointwise discard and per-species linear charging (model the chain abstractly: a linear functional on configuration data whose validity requires a termwise bound R-at-deep-points \u2265 0), the existence of a point z with R-analytic-continuation z < 0 (as in the repaired witness) yields a configuration on which the chain's termwise bound fails. Prefer an abstract finite-dimensional model (finitely many species, weights, a linear charge map) over genuine zeta analysis \u2014 the content is the quantifier structure: fixed kernel + pointwise discard + one bad deep value \u27f9 invalid. If even the abstract model is out of reach in one shot, return the STATEMENT compiling with sorry and mark BLOCKED.",
-   "statement": "Abstract subclass obstruction: a fixed-kernel pointwise-discard linear certificate with a negative deep value is invalid against deep-pair configurations (the refereed, class-named form of T1's R3)."
-  },
-  {
-   "target": "Zeta23Scaffold.assembly_window_constants",
-   "tier": "A-assembly",
-   "rank": 1,
-   "difficulty": "EASY",
-   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): define Hwin (lam : Real) := 2 - 1/lam - lam/3, Hd lam := (1 + Hwin lam)/2, Fwin lam := lam/(1 + lam^2/3). Prove the four exact evaluations: Hwin 1 = 2/3, Hd 1 = 5/6, Fwin 1 = 3/4, and 2 * Fwin 1 - 1 = 1/2. Pure rational evaluation of real-valued expressions; norm_num after unfolding should close each.",
-   "statement": "Window-constant assembly identities of preprint eq. (1.3): H(1)=2/3, H_d(1)=5/6, F(1)=3/4, 2F(1)-1=1/2."
-  },
-  {
-   "target": "Zeta23Scaffold.psiCubic_eq_one_of_small",
-   "tier": "A-assembly",
-   "rank": 1,
-   "difficulty": "EASY",
-   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): define psiCubic (m : Nat) : Rat := (m:Rat)/2 + (2*(m:Rat)^2 - (m:Rat)^3)/18 + (if m = 1 then 4/9 else 0). Prove psiCubic 1 = 1 and psiCubic 2 = 1 and psiCubic 3 = 1. Direct evaluation (decide or norm_num).",
-   "statement": "The cubic weight psi(m) = m/2 + (2m^2 - m^3)/18 + (4/9)*[m=1] of preprint SS7.5(g) attains equality psi(m)=1 at m = 1, 2, 3."
-  },
-  {
-   "target": "Zeta23Scaffold.psiCubic_le_one",
-   "tier": "A-assembly",
-   "rank": 2,
-   "difficulty": "MEDIUM",
-   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): with psiCubic (m : Nat) : Rat := (m:Rat)/2 + (2*(m:Rat)^2 - (m:Rat)^3)/18 + (if m = 1 then 4/9 else 0), prove: forall m : Nat, 1 <= m -> psiCubic m <= 1. KEY IDENTITY (verified off-line): for m >= 2 the indicator vanishes and 18*(1 - psiCubic m) = ((m:Rat)-2)*((m:Rat)-3)*((m:Rat)+3), which is nonneg for every integer m >= 2 since (m-2)*(m-3) >= 0 (interval_cases / rcases m = 2, m = 3, m >= 4) and m+3 > 0. Handle m = 1 by evaluation (psi(1) = 1). nlinarith with the factorization as a provided equality should close the m >= 4 branch.",
-   "statement": "psi(m) <= 1 for all integers m >= 1 -- the finite verification called 'one checks' in preprint SS7.5(g); the certificate admissibility of the cubic weight."
-  },
-  {
-   "target": "Zeta23Scaffold.hankel_christoffel_13_18",
-   "tier": "B-christoffel",
-   "rank": 1,
-   "difficulty": "MEDIUM",
-   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): define the 3x3 rational Hankel matrix M := !![1, 1, 4/3; 1, 4/3, 2; 4/3, 2, 13/4] (Matrix (Fin 3) (Fin 3) Rat) -- the moment matrix (m_{i+j})_{0<=i,j<=2} of the sine-kernel moment sequence m_0..m_4 = 1, 1, 4/3, 2, 13/4 at lambda = 1. Prove: (a) M.det = 5/108 (use Matrix.det_fin_three, then norm_num); (b) with Lambda := M.det / (Matrix.det !![(4:Rat)/3, 2; 2, 13/4]), Lambda = 5/36; (c) 1 - Lambda = 31/36; (d) 2*(1 - Lambda) - 1 = 13/18. This is the exact-arithmetic core of the preprint's conditional 13/18 rung (SS7.5(d),(f)): Lambda is the Christoffel function Lambda_2(0;1) of the moment sequence at 0, computed as a Hankel determinant ratio (equals 1/(e_0^T M^{-1} e_0) by Cramer).",
-   "statement": "Lambda_2(0;1) = 5/36 from the Hankel determinants of the sine-kernel moments at lambda=1, and the ladder assembly 2*(1 - 5/36) - 1 = 13/18 (preprint SS7.5(f))."
-  },
-  {
-   "target": "Zeta23Scaffold.christoffel_inverse_form",
-   "tier": "B-christoffel",
-   "rank": 2,
-   "difficulty": "MEDIUM",
-   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): with M := !![1, 1, 4/3; 1, 4/3, 2; 4/3, 2, 13/4] (Matrix (Fin 3) (Fin 3) Rat), prove that M is invertible (det = 5/108 <> 0) and (M\u207b\u00b9 0 0 : Rat) = 36/5. Route: Matrix.inv_def / adjugate entry formula: M\u207b\u00b9 0 0 = (M.det)\u207b\u00b9 * (minor_00 det) = (108/5) * (1/3) = 36/5. This cross-checks the Hankel-ratio definition of Lambda_2(0;1) = 5/36 against the classical Christoffel form 1/(e_0^T M^{-1} e_0), closing the modeling gap noted in formal/Zeta23Scaffold/Constants.lean.",
-   "statement": "Inverse-matrix cross-check: (M^{-1})_{00} = 36/5 for the sine-kernel Hankel matrix, so 1/(e_0^T M^{-1} e_0) = 5/36 agrees with the determinant-ratio Christoffel value."
-  },
-  {
-   "target": "Zeta23Scaffold.Hd_ge_Fwin_iff",
-   "tier": "A-assembly",
-   "rank": 2,
-   "difficulty": "MEDIUM",
-   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): with Hwin (lam : Real) := 2 - 1/lam - lam/3, Hd lam := (1 + Hwin lam)/2, Fwin lam := lam/(1 + lam^2/3), prove: forall lam : Real, 0 < lam -> lam <= 1 -> (Fwin lam <= Hd lam <-> 0 <= Hwin lam). Route: both denominators are positive (lam > 0, 1 + lam^2/3 > 0); field_simp and reduce both sides to the sign of 6*lam - 3 - lam^2; nlinarith/polyrith for the two directions.",
-   "statement": "H_d(lambda) >= F(lambda) iff H(lambda) >= 0 on 0 < lambda <= 1 (preprint eq. (1.3), third line, first equivalence)."
-  },
-  {
-   "target": "Zeta23Scaffold.Hwin_nonneg_iff_threshold",
-   "tier": "A-assembly",
-   "rank": 3,
-   "difficulty": "MEDIUM",
-   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): with Hwin (lam : Real) := 2 - 1/lam - lam/3, prove: forall lam : Real, 0 < lam -> lam <= 1 -> (0 <= Hwin lam <-> 3 - Real.sqrt 6 <= lam). Route: multiplying by 3*lam > 0, 0 <= Hwin lam iff lam^2 - 6*lam + 3 <= 0. The quadratic has roots 3 +/- sqrt 6; since lam <= 1 < 3 + sqrt 6, the condition is lam >= 3 - sqrt 6. Use h6 : (Real.sqrt 6)^2 = 6 (Real.sq_sqrt, 0 <= 6) and 2 < Real.sqrt 6 < 3 (Real.lt_sqrt / Real.sqrt_lt_sqrt via 4 < 6 < 9); then nlinarith closes each direction with h6 as an auxiliary fact.",
-   "statement": "H(lambda) >= 0 iff lambda >= 3 - sqrt 6 = 0.5505... on 0 < lambda <= 1 (preprint eq. (1.3), third line, second equivalence -- the degeneration threshold of the method)."
-  },
-  {
-   "target": "Zeta23Scaffold.rung_glue_constant_upgrade",
-   "tier": "A-assembly",
-   "rank": 3,
-   "difficulty": "EASY",
-   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0), fully abstractly: let n s : Real -> Real with hn : forall T, 0 <= n T. (a) Given H : forall eps > 0, exists T0 : Real, forall T >= T0, (2*(31/36) - 1 - eps) * n T <= s T, prove: forall eps > 0, exists T0 : Real, forall T >= T0, (13/18 - eps) * n T <= s T. (b) Given the (13/18 - eps) conclusion of (a), prove the same with 2/3 in place of 13/18. Pure constant bookkeeping: 2*(31/36) - 1 = 13/18 (norm_num) for (a); for (b) use 2/3 <= 13/18 and monotonicity of (c - eps) * n T in c given n T >= 0. This is the glue shape of Zeta23Scaffold/Ladder.lean (rung1318_of_bridge, rung1318_implies_two_thirds) in sequence form.",
-   "statement": "Abstract rung glue: the (2*(31/36)-1-eps)-bound equals the (13/18-eps)-bound and dominates the (2/3-eps)-bound, for any nonnegative comparison sequence."
-  },
-  {
-   "target": "Zeta23Scaffold.integral_sinc_sq",
-   "tier": "C-integral",
-   "rank": 1,
-   "difficulty": "HARD",
-   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): the Dirichlet-type integral integral over Real of (Real.sin x / x)^2 dx = Real.pi (as a Bochner/improper integral; state with MeasureTheory.integral over volume, integrand extended by 1 at x = 0 or noted a.e.-equal). FIRST search Mathlib for an existing form: candidates named integral_sin_sq_div_sq, Real.integral_sinc_sq, or reachable from integral_sin_div_x (the Dirichlet integral integral sin x / x = pi, which Mathlib has as Real.integral_sin_div_x or similar) by integration by parts: integral (sin x / x)^2 = integral sin(2x)/x (by parts, boundary terms vanish) = pi. If the Dirichlet integral exists at our pin, the by-parts reduction is the whole proof; otherwise this is frontier-difficulty and should be returned as BLOCKED with a note.",
-   "statement": "integral over R of (sin x / x)^2 dx = pi -- normalization integral of the sine kernel; equivalently integral of S(u)^2 = 1 for S(u) = sin(pi u)/(pi u). Input to the m_2(1) = 4/3 cross-check of the sine-kernel moment values (preprint SS7.5(f))."
-  },
-  {
-   "target": "Zeta23Scaffold.integral_sinc_fourth",
-   "tier": "C-integral",
-   "rank": 2,
-   "difficulty": "HARD",
-   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): integral over Real of (Real.sin x / x)^4 dx = 2 * Real.pi / 3. Verified numerically off-line (int (sin(pi u)/(pi u))^4 du = 0.6666666... = 2/3, equivalent by substitution). Suggested routes: (1) Plancherel/Parseval: the Fourier transform of (sin x/x)^2 is an explicit triangle (tent) function pi*(1-|xi|/2)_+ ; then integral (sin x/x)^4 = (1/2pi) * integral of the tent squared = (1/2pi)*pi^2*(4/3) = 2pi/3 -- needs Mathlib's Fourier-Plancherel on L^2(Real), available but assembly-heavy; (2) reduction by repeated integration by parts to the Dirichlet integral; (3) contour/Fejer kernel identities. This is a genuinely substantial classical-analysis target: attempt only after integral_sinc_sq; return BLOCKED with partial lemmas if the Fourier route stalls.",
-   "statement": "integral over R of (sin x / x)^4 dx = 2*pi/3 -- equivalently integral of S(u)^4 = 2/3; the nontrivial input to m_2(1) = 1 + (1 - 2/3) = 4/3 (preprint SS7.5(f) cross-check)."
-  },
-  {
-   "target": "Zeta23Scaffold.m2_at_one_assembly",
-   "tier": "C-integral",
-   "rank": 3,
-   "difficulty": "HARD",
-   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0), conditionally on the two integral targets: with S (u : Real) := Real.sin (Real.pi * u) / (Real.pi * u), given hS2 : integral over Real of (S u)^2 du = 1 and hS4 : integral over Real of (S u)^4 du = 2/3, prove 1 + (integral (S u)^2 du - integral (S u)^4 du) = 4/3. The arithmetic shell is trivial (rewrite and norm_num) -- the point of the target is to fix, in Lean, the exact shape of the second-moment formula m_2(1) = 1 + int S^2 - int S^4 for the sine-kernel Gram matrix over the sine process (pair correlation 1 - S(u)^2; verified off-line numerically), pinning SineMomentsAtOne.m2 = 4/3 of formal/Zeta23Scaffold/Hypotheses.lean to a checkable identity. State the two integrals as HYPOTHESES (explicit arguments), never as axioms; do NOT claim the pair-correlation derivation itself, which is unformalized probability and out of scope.",
-   "statement": "Conditional assembly m_2(1) = 1 + int S^2 - int S^4 = 4/3 given the two sinc integrals -- the honest formal shape of 'one computes m_2(1) = 4/3' (preprint SS7.5(f))."
-  },
-  {
-   "target": "Zeta23Core.vonNeumann_trace_ineq_hermitian",
-   "tier": "C-corpus-extension",
-   "rank": 1,
-   "difficulty": "HARD",
-   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): for Hermitian matrices A B over an RCLike field on a finite type, Re(tr(A*B)) \u2264 \u2211 i, a i * b i where a, b are the eigenvalues of A and B each sorted in decreasing order. Recommended route: Re tr(AB) = \u2211_{jk} a_j b_k |W_{jk}|\u00b2 with W unitary (product of eigenvector unitaries), so the weight matrix (|W_{jk}|\u00b2) is doubly stochastic; conclude by Birkhoff/von Neumann convexity or a direct rearrangement argument over doubly stochastic matrices. Define sorted eigenvalues via Matrix.IsHermitian.eigenvalues composed with a sorting equivalence (Tuple.sort / MonovaryOn), or use Mathlib's eigenvalues\u2080 if available in this toolchain.",
-   "statement": "Von Neumann trace inequality, Hermitian case: Re tr(AB) \u2264 \u2211 a_i\u2193 b_i\u2193 (eigenvalues sorted decreasing)."
-  },
-  {
-   "target": "Zeta23Core.sylvester_finrank_le_posIndex",
-   "tier": "C-corpus-extension",
-   "rank": 1,
-   "difficulty": "MEDIUM",
-   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): let A be a Hermitian matrix over an RCLike field on a finite type n, and define posIndex A := the number of indices i with 0 < A.eigenvalues i (Fintype.card of the filtered subtype). If W is a submodule of (n \u2192 \ud835\udd5c) on which the quadratic form x \u21a6 Re (star x \u2b1d\u1d65 (A *\u1d65 x)) is positive definite (positive on all nonzero x of W), then Module.finrank \ud835\udd5c W \u2264 posIndex A. Route: the positive part A\u208a of the spectral decomposition has rank = posIndex A and the map A\u208a *\u1d65 \u00b7 restricted to W is injective (a kernel vector x would satisfy x\u1d34Ax = \u2212x\u1d34A\u208bx \u2264 0 contradicting positive-definiteness on W), then finrank W \u2264 rank A\u208a.",
-   "statement": "Sylvester's law, hard direction: any subspace on which a Hermitian form is positive definite has dimension \u2264 n\u208a(A), the number of positive eigenvalues."
-  },
-  {
-   "target": "Zeta23Core.posIndex_conj_le",
-   "tier": "C-corpus-extension",
-   "rank": 2,
-   "difficulty": "MEDIUM",
-   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): for a Hermitian matrix Q on a finite type m and any rectangular matrix B : Matrix m d \ud835\udd5c, the compression B\u1d34QB is Hermitian and posIndex (B\u1d34 * Q * B) \u2264 posIndex Q, where posIndex counts positive eigenvalues. Route: a subspace of dimension k on which x\u1d34(B\u1d34QB)x is positive definite pushes forward under B to a k-dimensional subspace (injectivity on that subspace is forced) on which Q is positive definite; then apply the Sylvester hard direction (previous target).",
-   "statement": "Inertia does not increase under compression: n\u208a(B\u1d34QB) \u2264 n\u208a(Q)."
-  },
-  {
-   "target": "Zeta23Core.rank_trace_ineq",
-   "tier": "C-corpus-extension",
-   "rank": 3,
-   "difficulty": "HARD",
-   "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): let P Q be n\u00d7n matrices over an RCLike field with P positive semidefinite of rank \u2264 r, Q Hermitian with posIndex Q \u2264 b (posIndex = number of positive eigenvalues), and c a positive real. Then c\u00b7Re(tr P) \u2212 (c\u00b2/4)\u00b7r + 2c\u00b7Re(tr Q) \u2212 c\u00b2\u00b7b \u2264 \u2016P + Q\u2016_F\u00b2, where \u2016M\u2016_F\u00b2 := Re tr(M\u1d34M) is the squared Frobenius norm. This is Lemma 3.2 of the CLAUDE two-thirds preprint, provable from von Neumann's trace inequality applied to the spectral decompositions of P and the positive/negative parts of Q; its scalar shadow at r = b = 1 is the integrality step m\u00b2 \u2265 2m \u2212 1. Prove the two prerequisite targets first if useful.",
-   "statement": "Rank\u2013trace inequality (preprint Lemma 3.2): c\u00b7tr P \u2212 (c\u00b2/4)r + 2c\u00b7tr Q \u2212 c\u00b2 b \u2264 \u2016P+Q\u2016_F\u00b2."
-  },
-  {
-   "target": "Frontier.Goodstein_terminates",
-   "tier": "FRONTIER-set",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Every Goodstein sequence reaches 0 (uses \u03b5\u2080 well-foundedness; independent of PA)."
-  },
-  {
-   "target": "Frontier.Hydra_Kirby_Paris",
-   "tier": "FRONTIER-set",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Every hydra game terminates for any strategy (Kirby\u2013Paris; PA-independent)."
-  },
-  {
-   "target": "Frontier.Borel_determinacy",
-   "tier": "FRONTIER-set",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Every Borel game is determined (Martin's theorem)."
-  },
-  {
-   "target": "Frontier.Gale_Stewart_open",
-   "tier": "FRONTIER-set",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "Every open game is determined (Gale\u2013Stewart)."
-  },
-  {
-   "target": "Frontier.Banach_Tarski",
-   "tier": "FRONTIER-set",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The unit ball in \u211d\u00b3 admits a paradoxical decomposition (Banach\u2013Tarski)."
-  },
-  {
-   "target": "Frontier.Paris_Harrington",
-   "tier": "FRONTIER-set",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The strengthened finite Ramsey theorem is true but unprovable in PA."
-  },
-  {
-   "target": "Frontier.Goedel_second_incompleteness",
-   "tier": "FRONTIER-set",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "No consistent recursively-axiomatized theory extending PA proves its own consistency."
-  },
-  {
-   "target": "Frontier.Tarski_undefinability",
-   "tier": "FRONTIER-set",
-   "rank": 2,
-   "difficulty": "STATEMENT",
-   "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
-   "statement": "Arithmetical truth is not arithmetically definable (Tarski)."
-  },
-  {
-   "target": "Frontier.Aronszajn_tree_exists",
-   "tier": "FRONTIER-set",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "There exists an Aronszajn tree (a tree of height \u03c9\u2081 with no uncountable branch/level)."
-  },
-  {
-   "target": "Frontier.CH_independent_statement",
-   "tier": "FRONTIER-set",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The Continuum Hypothesis is independent of ZFC (G\u00f6del + Cohen forcing)."
-  },
-  {
-   "target": "Frontier.inaccessible_implies_ConZFC",
-   "tier": "FRONTIER-set",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "An inaccessible cardinal yields a model of ZFC, so Con(ZFC+inaccessible)\u2192Con(ZFC)."
-  },
-  {
-   "target": "Frontier.infinite_ramsey",
-   "tier": "FRONTIER-set",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "Every 2-colouring of [\u2115]\u00b2 has an infinite monochromatic set (infinite Ramsey)."
-  },
-  {
-   "target": "Frontier.Suslin_line",
-   "tier": "FRONTIER-set",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "A Suslin line exists iff \u25ca-type hypotheses fail; state Suslin's problem precisely."
-  },
-  {
-   "target": "Frontier.Loeb_theorem",
-   "tier": "FRONTIER-set",
-   "rank": 2,
-   "difficulty": "STATEMENT",
-   "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
-   "statement": "L\u00f6b's theorem: if PA \u22a2 (\u25a1\u03c6 \u2192 \u03c6) then PA \u22a2 \u03c6."
-  },
-  {
-   "target": "Frontier.Green_Tao",
-   "tier": "FRONTIER-primes",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The primes contain arbitrarily long arithmetic progressions."
-  },
-  {
-   "target": "Frontier.bounded_prime_gaps",
-   "tier": "FRONTIER-primes",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "liminf (p_{n+1}\u2212p_n) is finite (Zhang/Maynard)."
-  },
-  {
-   "target": "Frontier.Chen_theorem",
-   "tier": "FRONTIER-primes",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Every sufficiently large even number is p + q with q having \u2264 2 prime factors."
-  },
-  {
-   "target": "Frontier.Vinogradov_three_primes",
-   "tier": "FRONTIER-primes",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Every sufficiently large odd number is a sum of three primes."
-  },
-  {
-   "target": "Frontier.Brun_twin_reciprocal",
-   "tier": "FRONTIER-primes",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "The sum of reciprocals of twin primes converges (Brun's constant)."
-  },
-  {
-   "target": "Frontier.Mordell_finite_generation",
-   "tier": "FRONTIER-primes",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The group of rational points of an elliptic curve over \u211a is finitely generated (Mordell)."
-  },
-  {
-   "target": "Frontier.Catalan_Mihailescu",
-   "tier": "FRONTIER-primes",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "8 and 9 are the only consecutive perfect powers (x^p \u2212 y^q = 1 \u21d2 3\u00b2\u22122\u00b3)."
-  },
-  {
-   "target": "Frontier.abc_statement",
-   "tier": "FRONTIER-primes",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "State the abc conjecture: for \u03b5>0, finitely many coprime a+b=c with c > rad(abc)^{1+\u03b5}."
-  },
-  {
-   "target": "Frontier.FLT_statement",
-   "tier": "FRONTIER-primes",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Fermat's Last Theorem: x\u207f+y\u207f=z\u207f has no positive-integer solution for n>2."
-  },
-  {
-   "target": "Frontier.sum_three_cubes_42",
-   "tier": "FRONTIER-primes",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "42 = (\u221280538738812075974)\u00b3 + 80435758145817515\u00b3 + 12602123297335631\u00b3."
-  },
-  {
-   "target": "Frontier.erdos_discrepancy",
-   "tier": "FRONTIER-primes",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Every \u00b11 sequence has unbounded discrepancy on homogeneous APs (Tao)."
-  },
-  {
-   "target": "Frontier.artin_primitive_root",
-   "tier": "FRONTIER-primes",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "State Artin's conjecture on primitive roots."
-  },
-  {
-   "target": "Frontier.RH_statement",
-   "tier": "FRONTIER-moonshot",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "All nontrivial zeros of \u03b6(s) have real part 1/2."
-  },
-  {
-   "target": "Frontier.RH_Li_criterion",
-   "tier": "FRONTIER-moonshot",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "RH \u21d4 Li's coefficients \u03bb_n \u2265 0 for all n\u22651 (state and prove the equivalence)."
-  },
-  {
-   "target": "Frontier.P_vs_NP_statement",
-   "tier": "FRONTIER-moonshot",
-   "rank": 2,
-   "difficulty": "STATEMENT",
-   "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
-   "statement": "State P \u2260 NP via time-bounded Turing machines and polynomial reducibility."
-  },
-  {
-   "target": "Frontier.cook_levin",
-   "tier": "FRONTIER-moonshot",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "SAT is NP-complete (Cook\u2013Levin)."
-  },
-  {
-   "target": "Frontier.navier_stokes_regularity",
-   "tier": "FRONTIER-moonshot",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "State global smoothness/existence for 3D incompressible Navier\u2013Stokes."
-  },
-  {
-   "target": "Frontier.yang_mills_mass_gap",
-   "tier": "FRONTIER-moonshot",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "State existence of quantum Yang\u2013Mills on \u211d\u2074 with a positive mass gap."
-  },
-  {
-   "target": "Frontier.hodge_statement",
-   "tier": "FRONTIER-moonshot",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "State the Hodge conjecture on algebraicity of Hodge classes."
-  },
-  {
-   "target": "Frontier.BSD_statement",
-   "tier": "FRONTIER-moonshot",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "State Birch\u2013Swinnerton-Dyer: ord_{s=1}L(E,s) = rank E(\u211a)."
-  },
-  {
-   "target": "Frontier.poincare_3sphere",
-   "tier": "FRONTIER-moonshot",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Every simply-connected closed 3-manifold is homeomorphic to S\u00b3 (Perelman)."
-  },
-  {
-   "target": "Frontier.hadwiger_nelson_5",
-   "tier": "FRONTIER-moonshot",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "The chromatic number of the plane is \u2265 5 (de Grey's unit-distance graph)."
-  },
-  {
-   "target": "Frontier.atiyah_singer_index",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The analytic index of an elliptic operator equals its topological index."
-  },
-  {
-   "target": "Frontier.deligne_weil_RH",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The Riemann hypothesis for varieties over finite fields (Weil conjectures; Deligne)."
-  },
-  {
-   "target": "Frontier.faltings_mordell",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "A curve of genus \u2265 2 over \u211a has finitely many rational points (Faltings)."
-  },
-  {
-   "target": "Frontier.thurston_geometrization",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "State the geometrization of closed 3-manifolds into eight geometries."
-  },
-  {
-   "target": "Frontier.exotic_R4",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "There exists a smooth manifold homeomorphic but not diffeomorphic to \u211d\u2074 (Donaldson/Freedman)."
-  },
-  {
-   "target": "Frontier.jones_polynomial_invariant",
-   "tier": "FRONTIER-fields",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "The Jones polynomial is a link invariant (well-defined under Reidemeister moves)."
-  },
-  {
-   "target": "Frontier.zelmanov_restricted_burnside",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The restricted Burnside problem has a positive solution (Zelmanov)."
-  },
-  {
-   "target": "Frontier.ngo_fundamental_lemma",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "State the Langlands\u2013Shelstad fundamental lemma (Ng\u00f4)."
-  },
-  {
-   "target": "Frontier.smirnov_percolation",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Crossing probabilities of critical triangular-lattice percolation are conformally invariant (Cardy\u2013Smirnov)."
-  },
-  {
-   "target": "Frontier.bhargava_cube_law",
-   "tier": "FRONTIER-fields",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "Bhargava's cube gives a composition law on pairs of binary quadratic forms recovering Gauss composition."
-  },
-  {
-   "target": "Frontier.hairer_KPZ",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The KPZ equation is well-posed via regularity structures (Hairer)."
-  },
-  {
-   "target": "Frontier.mirzakhani_WP_volume",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Weil\u2013Petersson volumes of moduli of bordered surfaces satisfy Mirzakhani's recursion."
-  },
-  {
-   "target": "Frontier.avila_ten_martini",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The almost Mathieu operator has Cantor spectrum for all irrational flux (Ten Martini)."
-  },
-  {
-   "target": "Frontier.scholze_perfectoid_tilt",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "State the tilting equivalence of perfectoid fields (Scholze)."
-  },
-  {
-   "target": "Frontier.figalli_OT_regularity",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Regularity of optimal transport maps under the MTW condition (Figalli)."
-  },
-  {
-   "target": "Frontier.duminil_ising_sharp",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Sharpness of the phase transition for the Ising model (Duminil-Copin)."
-  },
-  {
-   "target": "Frontier.huh_matroid_log_concave",
-   "tier": "FRONTIER-fields",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "The coefficients of the characteristic polynomial of a matroid are log-concave (Adiprasito\u2013Huh\u2013Katz)."
-  },
-  {
-   "target": "Frontier.voevodsky_milnor",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The Milnor conjecture: mod-2 Galois cohomology \u2245 Milnor K-theory / 2 (Voevodsky)."
-  },
-  {
-   "target": "Frontier.lindenstrauss_QUE",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Arithmetic quantum unique ergodicity on congruence surfaces (Lindenstrauss)."
-  },
-  {
-   "target": "Frontier.mcmullen_renormalization",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "State the renormalization/rigidity results for quadratic-like maps (McMullen)."
-  },
-  {
-   "target": "Frontier.feit_thompson_odd_order",
-   "tier": "FRONTIER-abel",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Every finite group of odd order is solvable (Feit\u2013Thompson; Thompson/Tits Abel)."
-  },
-  {
-   "target": "Frontier.milnor_exotic_7sphere",
-   "tier": "FRONTIER-abel",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "There exist smooth manifolds homeomorphic but not diffeomorphic to S\u2077 (Milnor)."
-  },
-  {
-   "target": "Frontier.furstenberg_szemeredi",
-   "tier": "FRONTIER-abel",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Positive-density subsets of \u2115 contain arbitrarily long APs, via multiple recurrence (Furstenberg)."
-  },
-  {
-   "target": "Frontier.margulis_superrigidity",
-   "tier": "FRONTIER-abel",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "State Margulis superrigidity for higher-rank lattices."
-  },
-  {
-   "target": "Frontier.lovasz_kneser",
-   "tier": "FRONTIER-abel",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "The chromatic number of the Kneser graph KG_{n,k} is n \u2212 2k + 2 (Lov\u00e1sz, via Borsuk\u2013Ulam)."
-  },
-  {
-   "target": "Frontier.uhlenbeck_bubbling",
-   "tier": "FRONTIER-abel",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Uhlenbeck compactness / removable singularities for Yang\u2013Mills connections."
-  },
-  {
-   "target": "Frontier.langlands_reciprocity",
-   "tier": "FRONTIER-abel",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "State the Langlands reciprocity conjecture linking Galois and automorphic representations."
-  },
-  {
-   "target": "Frontier.nirenberg_gagliardo",
-   "tier": "FRONTIER-abel",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "The Gagliardo\u2013Nirenberg interpolation inequality."
-  },
-  {
-   "target": "Frontier.szemeredi_regularity",
-   "tier": "FRONTIER-abel",
-   "rank": 9,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "State and prove Szemer\u00e9di's regularity lemma for graphs."
-  },
-  {
-   "target": "Frontier.wigderson_expander_mixing",
-   "tier": "FRONTIER-abel",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "The expander mixing lemma bounds edge discrepancy by the second eigenvalue."
-  },
-  {
-   "target": "Frontier.bell_theorem",
-   "tier": "FRONTIER-physics",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "No local hidden-variable model reproduces all quantum correlations (Bell); CHSH \u2264 2 classically."
-  },
-  {
-   "target": "Frontier.kochen_specker",
-   "tier": "FRONTIER-physics",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "No noncontextual hidden-variable assignment exists for QM in dimension \u2265 3 (Kochen\u2013Specker)."
-  },
-  {
-   "target": "Frontier.gleason_theorem",
-   "tier": "FRONTIER-physics",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Every quantum measure on a Hilbert space of dim \u2265 3 comes from a density operator (Gleason)."
-  },
-  {
-   "target": "Frontier.no_communication",
-   "tier": "FRONTIER-physics",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "Local operations on one half of an entangled pair cannot transmit information."
-  },
-  {
-   "target": "Frontier.tknn_chern_hall",
-   "tier": "FRONTIER-physics",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "The integer-quantum-Hall conductance equals a Chern number times e\u00b2/h (TKNN)."
-  },
-  {
-   "target": "Frontier.ssh_winding_invariant",
-   "tier": "FRONTIER-physics",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "The SSH model's topological phase is classified by a \u2124 winding number."
-  },
-  {
-   "target": "Frontier.berry_phase_quantized",
-   "tier": "FRONTIER-physics",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "The Berry phase around a closed loop is the integral of the Berry curvature."
-  },
-  {
-   "target": "Frontier.landau_levels",
-   "tier": "FRONTIER-physics",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "A charged particle in a uniform magnetic field has spectrum \u210f\u03c9_c(n+\u00bd)."
-  },
-  {
-   "target": "Frontier.bcs_gap_binding",
-   "tier": "FRONTIER-physics",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "The BCS gap equation has a nonzero solution for any attractive coupling (Cooper pairing)."
-  },
-  {
-   "target": "Frontier.higgs_mass_toy",
-   "tier": "FRONTIER-physics",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "In an abelian Higgs toy model, spontaneous symmetry breaking gives the gauge boson a mass."
-  },
-  {
-   "target": "Frontier.asymptotic_freedom_sign",
-   "tier": "FRONTIER-physics",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "The one-loop SU(N) beta function is negative (asymptotic freedom)."
-  },
-  {
-   "target": "Frontier.penrose_singularity",
-   "tier": "FRONTIER-physics",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "A spacetime with a trapped surface and the null energy condition is geodesically incomplete (Penrose)."
-  },
-  {
-   "target": "Frontier.onsager_2d_ising",
-   "tier": "FRONTIER-physics",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The exact free energy of the 2D square-lattice Ising model (Onsager)."
-  },
-  {
-   "target": "Frontier.kam_theorem",
-   "tier": "FRONTIER-physics",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Invariant tori persist under small perturbation of an integrable system (KAM)."
-  },
-  {
-   "target": "Frontier.lieb_robinson",
-   "tier": "FRONTIER-physics",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "Lieb\u2013Robinson bound: an effective light cone for local spin dynamics."
-  },
-  {
-   "target": "Frontier.noether_conservation",
-   "tier": "FRONTIER-physics",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "Each smooth symmetry of an action yields a conserved current (Noether, 1D case)."
-  },
-  {
-   "target": "Frontier.spin_statistics",
-   "tier": "FRONTIER-physics",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "State the spin\u2013statistics connection for relativistic quantum fields."
-  },
-  {
-   "target": "Frontier.lieb_thirring_stability",
-   "tier": "FRONTIER-physics",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The Lieb\u2013Thirring inequality and stability of matter."
-  },
-  {
-   "target": "Frontier.aumann_agreement",
-   "tier": "FRONTIER-mind",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "Agents with common priors and common knowledge of posteriors cannot agree to disagree (Aumann)."
-  },
-  {
-   "target": "Frontier.good_regulator",
-   "tier": "FRONTIER-mind",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "Every good regulator of a system is (contains) a model of that system (Conant\u2013Ashby)."
-  },
-  {
-   "target": "Frontier.self_nonprediction",
-   "tier": "FRONTIER-mind",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "No machine can always correctly predict its own next output before producing it (diagonal self-reference)."
-  },
-  {
-   "target": "Frontier.iit_phi_partition",
-   "tier": "FRONTIER-mind",
-   "rank": 2,
-   "difficulty": "STATEMENT",
-   "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
-   "statement": "Formalize integrated information \u03a6 as minimized effective-information over bipartitions; prove \u03a6=0 for a disconnected system."
-  },
-  {
-   "target": "Frontier.global_workspace_fixpoint",
-   "tier": "FRONTIER-mind",
-   "rank": 2,
-   "difficulty": "STATEMENT",
-   "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
-   "statement": "A monotone broadcast (global-workspace) operator on a finite state lattice reaches a least fixed point (Knaster\u2013Tarski)."
-  },
-  {
-   "target": "Frontier.loeb_no_self_trust",
-   "tier": "FRONTIER-mind",
-   "rank": 2,
-   "difficulty": "STATEMENT",
-   "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
-   "statement": "A consistent theory cannot prove its own reflection schema for an unprovable sentence (L\u00f6b-based)."
-  },
-  {
-   "target": "Frontier.arrow_impossibility",
-   "tier": "FRONTIER-mind",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "No ranked voting rule for \u22653 alternatives satisfies unanimity, IIA, and non-dictatorship (Arrow; Nobel)."
-  },
-  {
-   "target": "Frontier.nash_equilibrium_exists",
-   "tier": "FRONTIER-mind",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Every finite game has a mixed-strategy Nash equilibrium (Nash; via Brouwer/Kakutani)."
-  },
-  {
-   "target": "Frontier.friendship_theorem",
-   "tier": "FRONTIER-fields",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "If every two people have exactly one common friend, someone is everyone's friend (Erd\u0151s\u2013Ko\u2013R\u00e9nyi)."
-  },
-  {
-   "target": "Frontier.five_color_theorem",
-   "tier": "FRONTIER-fields",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "Every planar graph is 5-colourable."
-  },
-  {
-   "target": "Frontier.four_color_statement",
-   "tier": "FRONTIER-moonshot",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "Every planar graph is 4-colourable (Appel\u2013Haken)."
-  },
-  {
-   "target": "Frontier.huang_sensitivity",
-   "tier": "FRONTIER-fields",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "Boolean sensitivity and degree are polynomially related (Huang's sensitivity theorem, 2019)."
-  },
-  {
-   "target": "Frontier.kadison_singer",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The Kadison\u2013Singer problem holds (Marcus\u2013Spielman\u2013Srivastava; interlacing families)."
-  },
-  {
-   "target": "Frontier.ham_sandwich",
-   "tier": "FRONTIER-physics",
-   "rank": 2,
-   "difficulty": "SPECIAL",
-   "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
-   "statement": "Any n finite measures in \u211d\u207f can be simultaneously bisected by one hyperplane (Ham\u2013Sandwich)."
-  },
-  {
-   "target": "Frontier.gaussian_correlation",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The Gaussian correlation inequality for symmetric convex sets (Royen)."
-  },
-  {
-   "target": "Frontier.willmore_conjecture",
-   "tier": "FRONTIER-fields",
-   "rank": 6,
-   "difficulty": "MOONSHOT",
-   "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
-   "statement": "The Clifford torus minimizes Willmore energy among genus-1 surfaces (Marques\u2013Neves)."
-  }
- ]
+  "count": 124,
+  "queue": [
+    {
+      "target": "Zeta23Obstruction.repaired_witness_nonneg",
+      "tier": "C-corpus-extension",
+      "rank": 1,
+      "difficulty": "EASY",
+      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): for all real x, 0 ≤ (Real.sin (Real.pi * x) / (Real.pi * x))^2 * (1 - (1/10) * Real.cos (3 * Real.pi * x)). Route: the first factor is a square hence ≥ 0 (this also covers x = 0 where the quotient is junk-valued but still squared); the second factor is ≥ 9/10 > 0 since Real.cos ≤ 1 (neg_one_le_cos / cos_le_one). Multiply nonnegatives. State exactly this global ∀ x : ℝ — a finite-range version is worthless.",
+      "statement": "The repaired obstruction witness kernel is nonnegative on ALL of ℝ (product of nonnegatives)."
+    },
+    {
+      "target": "Zeta23Obstruction.repaired_witness_neg_at_deep_point",
+      "tier": "C-corpus-extension",
+      "rank": 1,
+      "difficulty": "MEDIUM",
+      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): (Real.sinh (2 * Real.pi) / (2 * Real.pi))^2 * (1 - (1/10) * Real.cosh (6 * Real.pi)) < 0. This is the analytic continuation of the witness kernel evaluated at the deep off-line point 2i, where sin(π·2i)/(π·2i) becomes sinh(2π)/(2π) and cos(3π·2i) becomes cosh(6π). Route: the square factor is > 0 (sinh(2π) > 0 since 2π > 0); the bracket is < 0 iff cosh(6π) > 10; use cosh x ≥ (exp x)/2 and exp(6π) ≥ exp 18 > 20 via exp monotonicity and a crude bound like exp 1 ≥ 2 giving exp 18 ≥ 2^18. Conclude pos * neg < 0.",
+      "statement": "The repaired witness kernel is strictly negative at the deep point 2i: (sinh 2π/2π)²·(1 − cosh(6π)/10) < 0 — the deep-pair blowup is real."
+    },
+    {
+      "target": "Zeta23Obstruction.tent_combination_neg_on_band",
+      "tier": "C-corpus-extension",
+      "rank": 1,
+      "difficulty": "MEDIUM",
+      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): define T : ℝ → ℝ := fun a => max 0 (1 - |a|). Then for all a with 1 < a and a < 5/2, T a - (1/20) * (T (a - 3/2) + T (a + 3/2)) < 0. This is the Fourier-side profile of the repaired witness: the base tent vanishes for a > 1, while the shifted tent T(a − 3/2) is strictly positive for a ∈ (1, 5/2) (since |a − 3/2| < 1 there). Route: case a ≥ 1 gives T a = 0; a ∈ (1, 5/2) gives a − 3/2 ∈ (−1/2, 1) so T (a − 3/2) = 1 − |a − 3/2| > 0; T (a + 3/2) ≥ 0; so the expression is ≤ −(1/20)·(positive) < 0. Pure piecewise algebra on max and abs.",
+      "statement": "The witness's Fourier tent combination is strictly negative exactly where claimed: T(α) − (1/20)(T(α−3/2)+T(α+3/2)) < 0 on (1, 5/2)."
+    },
+    {
+      "target": "Zeta23Obstruction.damage_cost_exponent_law",
+      "tier": "C-corpus-extension",
+      "rank": 2,
+      "difficulty": "EASY",
+      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0) the two facts that make the deep-pair damage/cost ratio fatal: (1) for A > 1, StrictMono (fun y : ℝ => Real.exp (4 * Real.pi * (A - 1) * y)) — strict monotonicity since the coefficient 4π(A−1) > 0; (2) ∀ C > 0, ∃ y > 0, Real.exp (4 * Real.pi * (A - 1) * y) > C — unboundedness via Real.exp tends to atTop or by y = (Real.log C + 1)/(4π(A−1)). State both in one theorem or two; the quantifiers must be global.",
+      "statement": "The rescaled deep-pair damage/cost ratio e^{4π(A−1)y} is strictly increasing and unbounded for any bandwidth A > 1."
+    },
+    {
+      "target": "Zeta23Obstruction.sq_factor_lower_bound",
+      "tier": "C-corpus-extension",
+      "rank": 2,
+      "difficulty": "EASY",
+      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): for all x : ℝ, (9:ℝ)/10 ≤ 1 - (1/10) * Real.cos (3 * Real.pi * x). Route: Real.cos_le_one gives cos ≤ 1 hence (1/10)·cos ≤ 1/10. This is the quantitative floor that makes the witness's nonnegativity robust (the modulation can never eat the Fejér factor). Global ∀ x.",
+      "statement": "The witness's modulation factor is bounded below by 9/10 everywhere — the repair has margin, not just nonnegativity."
+    },
+    {
+      "target": "Zeta23Obstruction.subclass_obstruction_statement",
+      "tier": "B-conjecture",
+      "rank": 3,
+      "difficulty": "HARD",
+      "goal": "STATEMENT-LEVEL target (CONDITIONAL register; do not attempt the full analytic proof): formalize in Lean 4 (Mathlib, lean-4.32.0) a clean abstract statement of the refereed subclass obstruction: given a 'certificate' consisting of a fixed function R : ℝ → ℝ with (h_pos : ∀ x, 0 ≤ R x) used via pointwise discard and per-species linear charging (model the chain abstractly: a linear functional on configuration data whose validity requires a termwise bound R-at-deep-points ≥ 0), the existence of a point z with R-analytic-continuation z < 0 (as in the repaired witness) yields a configuration on which the chain's termwise bound fails. Prefer an abstract finite-dimensional model (finitely many species, weights, a linear charge map) over genuine zeta analysis — the content is the quantifier structure: fixed kernel + pointwise discard + one bad deep value ⟹ invalid. If even the abstract model is out of reach in one shot, return the STATEMENT compiling with sorry and mark BLOCKED.",
+      "statement": "Abstract subclass obstruction: a fixed-kernel pointwise-discard linear certificate with a negative deep value is invalid against deep-pair configurations (the refereed, class-named form of T1's R3)."
+    },
+    {
+      "target": "Zeta23Scaffold.assembly_window_constants",
+      "tier": "A-assembly",
+      "rank": 1,
+      "difficulty": "EASY",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): define Hwin (lam : Real) := 2 - 1/lam - lam/3, Hd lam := (1 + Hwin lam)/2, Fwin lam := lam/(1 + lam^2/3). Prove the four exact evaluations: Hwin 1 = 2/3, Hd 1 = 5/6, Fwin 1 = 3/4, and 2 * Fwin 1 - 1 = 1/2. Pure rational evaluation of real-valued expressions; norm_num after unfolding should close each.",
+      "statement": "Window-constant assembly identities of preprint eq. (1.3): H(1)=2/3, H_d(1)=5/6, F(1)=3/4, 2F(1)-1=1/2."
+    },
+    {
+      "target": "Zeta23Scaffold.psiCubic_eq_one_of_small",
+      "tier": "A-assembly",
+      "rank": 1,
+      "difficulty": "EASY",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): define psiCubic (m : Nat) : Rat := (m:Rat)/2 + (2*(m:Rat)^2 - (m:Rat)^3)/18 + (if m = 1 then 4/9 else 0). Prove psiCubic 1 = 1 and psiCubic 2 = 1 and psiCubic 3 = 1. Direct evaluation (decide or norm_num).",
+      "statement": "The cubic weight psi(m) = m/2 + (2m^2 - m^3)/18 + (4/9)*[m=1] of preprint SS7.5(g) attains equality psi(m)=1 at m = 1, 2, 3."
+    },
+    {
+      "target": "Zeta23Scaffold.psiCubic_le_one",
+      "tier": "A-assembly",
+      "rank": 2,
+      "difficulty": "MEDIUM",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): with psiCubic (m : Nat) : Rat := (m:Rat)/2 + (2*(m:Rat)^2 - (m:Rat)^3)/18 + (if m = 1 then 4/9 else 0), prove: forall m : Nat, 1 <= m -> psiCubic m <= 1. KEY IDENTITY (verified off-line): for m >= 2 the indicator vanishes and 18*(1 - psiCubic m) = ((m:Rat)-2)*((m:Rat)-3)*((m:Rat)+3), which is nonneg for every integer m >= 2 since (m-2)*(m-3) >= 0 (interval_cases / rcases m = 2, m = 3, m >= 4) and m+3 > 0. Handle m = 1 by evaluation (psi(1) = 1). nlinarith with the factorization as a provided equality should close the m >= 4 branch.",
+      "statement": "psi(m) <= 1 for all integers m >= 1 -- the finite verification called 'one checks' in preprint SS7.5(g); the certificate admissibility of the cubic weight."
+    },
+    {
+      "target": "Zeta23Scaffold.hankel_christoffel_13_18",
+      "tier": "B-christoffel",
+      "rank": 1,
+      "difficulty": "MEDIUM",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): define the 3x3 rational Hankel matrix M := !![1, 1, 4/3; 1, 4/3, 2; 4/3, 2, 13/4] (Matrix (Fin 3) (Fin 3) Rat) -- the moment matrix (m_{i+j})_{0<=i,j<=2} of the sine-kernel moment sequence m_0..m_4 = 1, 1, 4/3, 2, 13/4 at lambda = 1. Prove: (a) M.det = 5/108 (use Matrix.det_fin_three, then norm_num); (b) with Lambda := M.det / (Matrix.det !![(4:Rat)/3, 2; 2, 13/4]), Lambda = 5/36; (c) 1 - Lambda = 31/36; (d) 2*(1 - Lambda) - 1 = 13/18. This is the exact-arithmetic core of the preprint's conditional 13/18 rung (SS7.5(d),(f)): Lambda is the Christoffel function Lambda_2(0;1) of the moment sequence at 0, computed as a Hankel determinant ratio (equals 1/(e_0^T M^{-1} e_0) by Cramer).",
+      "statement": "Lambda_2(0;1) = 5/36 from the Hankel determinants of the sine-kernel moments at lambda=1, and the ladder assembly 2*(1 - 5/36) - 1 = 13/18 (preprint SS7.5(f))."
+    },
+    {
+      "target": "Zeta23Scaffold.christoffel_inverse_form",
+      "tier": "B-christoffel",
+      "rank": 2,
+      "difficulty": "MEDIUM",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): with M := !![1, 1, 4/3; 1, 4/3, 2; 4/3, 2, 13/4] (Matrix (Fin 3) (Fin 3) Rat), prove that M is invertible (det = 5/108 <> 0) and (M⁻¹ 0 0 : Rat) = 36/5. Route: Matrix.inv_def / adjugate entry formula: M⁻¹ 0 0 = (M.det)⁻¹ * (minor_00 det) = (108/5) * (1/3) = 36/5. This cross-checks the Hankel-ratio definition of Lambda_2(0;1) = 5/36 against the classical Christoffel form 1/(e_0^T M^{-1} e_0), closing the modeling gap noted in formal/Zeta23Scaffold/Constants.lean.",
+      "statement": "Inverse-matrix cross-check: (M^{-1})_{00} = 36/5 for the sine-kernel Hankel matrix, so 1/(e_0^T M^{-1} e_0) = 5/36 agrees with the determinant-ratio Christoffel value."
+    },
+    {
+      "target": "Zeta23Scaffold.Hd_ge_Fwin_iff",
+      "tier": "A-assembly",
+      "rank": 2,
+      "difficulty": "MEDIUM",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): with Hwin (lam : Real) := 2 - 1/lam - lam/3, Hd lam := (1 + Hwin lam)/2, Fwin lam := lam/(1 + lam^2/3), prove: forall lam : Real, 0 < lam -> lam <= 1 -> (Fwin lam <= Hd lam <-> 0 <= Hwin lam). Route: both denominators are positive (lam > 0, 1 + lam^2/3 > 0); field_simp and reduce both sides to the sign of 6*lam - 3 - lam^2; nlinarith/polyrith for the two directions.",
+      "statement": "H_d(lambda) >= F(lambda) iff H(lambda) >= 0 on 0 < lambda <= 1 (preprint eq. (1.3), third line, first equivalence)."
+    },
+    {
+      "target": "Zeta23Scaffold.Hwin_nonneg_iff_threshold",
+      "tier": "A-assembly",
+      "rank": 3,
+      "difficulty": "MEDIUM",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): with Hwin (lam : Real) := 2 - 1/lam - lam/3, prove: forall lam : Real, 0 < lam -> lam <= 1 -> (0 <= Hwin lam <-> 3 - Real.sqrt 6 <= lam). Route: multiplying by 3*lam > 0, 0 <= Hwin lam iff lam^2 - 6*lam + 3 <= 0. The quadratic has roots 3 +/- sqrt 6; since lam <= 1 < 3 + sqrt 6, the condition is lam >= 3 - sqrt 6. Use h6 : (Real.sqrt 6)^2 = 6 (Real.sq_sqrt, 0 <= 6) and 2 < Real.sqrt 6 < 3 (Real.lt_sqrt / Real.sqrt_lt_sqrt via 4 < 6 < 9); then nlinarith closes each direction with h6 as an auxiliary fact.",
+      "statement": "H(lambda) >= 0 iff lambda >= 3 - sqrt 6 = 0.5505... on 0 < lambda <= 1 (preprint eq. (1.3), third line, second equivalence -- the degeneration threshold of the method)."
+    },
+    {
+      "target": "Zeta23Scaffold.rung_glue_constant_upgrade",
+      "tier": "A-assembly",
+      "rank": 3,
+      "difficulty": "EASY",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0), fully abstractly: let n s : Real -> Real with hn : forall T, 0 <= n T. (a) Given H : forall eps > 0, exists T0 : Real, forall T >= T0, (2*(31/36) - 1 - eps) * n T <= s T, prove: forall eps > 0, exists T0 : Real, forall T >= T0, (13/18 - eps) * n T <= s T. (b) Given the (13/18 - eps) conclusion of (a), prove the same with 2/3 in place of 13/18. Pure constant bookkeeping: 2*(31/36) - 1 = 13/18 (norm_num) for (a); for (b) use 2/3 <= 13/18 and monotonicity of (c - eps) * n T in c given n T >= 0. This is the glue shape of Zeta23Scaffold/Ladder.lean (rung1318_of_bridge, rung1318_implies_two_thirds) in sequence form.",
+      "statement": "Abstract rung glue: the (2*(31/36)-1-eps)-bound equals the (13/18-eps)-bound and dominates the (2/3-eps)-bound, for any nonnegative comparison sequence."
+    },
+    {
+      "target": "Zeta23Scaffold.integral_sinc_sq",
+      "tier": "C-integral",
+      "rank": 1,
+      "difficulty": "HARD",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): the Dirichlet-type integral integral over Real of (Real.sin x / x)^2 dx = Real.pi (as a Bochner/improper integral; state with MeasureTheory.integral over volume, integrand extended by 1 at x = 0 or noted a.e.-equal). FIRST search Mathlib for an existing form: candidates named integral_sin_sq_div_sq, Real.integral_sinc_sq, or reachable from integral_sin_div_x (the Dirichlet integral integral sin x / x = pi, which Mathlib has as Real.integral_sin_div_x or similar) by integration by parts: integral (sin x / x)^2 = integral sin(2x)/x (by parts, boundary terms vanish) = pi. If the Dirichlet integral exists at our pin, the by-parts reduction is the whole proof; otherwise this is frontier-difficulty and should be returned as BLOCKED with a note.",
+      "statement": "integral over R of (sin x / x)^2 dx = pi -- normalization integral of the sine kernel; equivalently integral of S(u)^2 = 1 for S(u) = sin(pi u)/(pi u). Input to the m_2(1) = 4/3 cross-check of the sine-kernel moment values (preprint SS7.5(f))."
+    },
+    {
+      "target": "Zeta23Scaffold.integral_sinc_fourth",
+      "tier": "C-integral",
+      "rank": 2,
+      "difficulty": "HARD",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): integral over Real of (Real.sin x / x)^4 dx = 2 * Real.pi / 3. Verified numerically off-line (int (sin(pi u)/(pi u))^4 du = 0.6666666... = 2/3, equivalent by substitution). Suggested routes: (1) Plancherel/Parseval: the Fourier transform of (sin x/x)^2 is an explicit triangle (tent) function pi*(1-|xi|/2)_+ ; then integral (sin x/x)^4 = (1/2pi) * integral of the tent squared = (1/2pi)*pi^2*(4/3) = 2pi/3 -- needs Mathlib's Fourier-Plancherel on L^2(Real), available but assembly-heavy; (2) reduction by repeated integration by parts to the Dirichlet integral; (3) contour/Fejer kernel identities. This is a genuinely substantial classical-analysis target: attempt only after integral_sinc_sq; return BLOCKED with partial lemmas if the Fourier route stalls.",
+      "statement": "integral over R of (sin x / x)^4 dx = 2*pi/3 -- equivalently integral of S(u)^4 = 2/3; the nontrivial input to m_2(1) = 1 + (1 - 2/3) = 4/3 (preprint SS7.5(f) cross-check)."
+    },
+    {
+      "target": "Zeta23Scaffold.m2_at_one_assembly",
+      "tier": "C-integral",
+      "rank": 3,
+      "difficulty": "HARD",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0), conditionally on the two integral targets: with S (u : Real) := Real.sin (Real.pi * u) / (Real.pi * u), given hS2 : integral over Real of (S u)^2 du = 1 and hS4 : integral over Real of (S u)^4 du = 2/3, prove 1 + (integral (S u)^2 du - integral (S u)^4 du) = 4/3. The arithmetic shell is trivial (rewrite and norm_num) -- the point of the target is to fix, in Lean, the exact shape of the second-moment formula m_2(1) = 1 + int S^2 - int S^4 for the sine-kernel Gram matrix over the sine process (pair correlation 1 - S(u)^2; verified off-line numerically), pinning SineMomentsAtOne.m2 = 4/3 of formal/Zeta23Scaffold/Hypotheses.lean to a checkable identity. State the two integrals as HYPOTHESES (explicit arguments), never as axioms; do NOT claim the pair-correlation derivation itself, which is unformalized probability and out of scope.",
+      "statement": "Conditional assembly m_2(1) = 1 + int S^2 - int S^4 = 4/3 given the two sinc integrals -- the honest formal shape of 'one computes m_2(1) = 4/3' (preprint SS7.5(f))."
+    },
+    {
+      "target": "Zeta23Core.vonNeumann_trace_ineq_hermitian",
+      "tier": "C-corpus-extension",
+      "rank": 1,
+      "difficulty": "HARD",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): for Hermitian matrices A B over an RCLike field on a finite type, Re(tr(A*B)) ≤ ∑ i, a i * b i where a, b are the eigenvalues of A and B each sorted in decreasing order. Recommended route: Re tr(AB) = ∑_{jk} a_j b_k |W_{jk}|² with W unitary (product of eigenvector unitaries), so the weight matrix (|W_{jk}|²) is doubly stochastic; conclude by Birkhoff/von Neumann convexity or a direct rearrangement argument over doubly stochastic matrices. Define sorted eigenvalues via Matrix.IsHermitian.eigenvalues composed with a sorting equivalence (Tuple.sort / MonovaryOn), or use Mathlib's eigenvalues₀ if available in this toolchain.",
+      "statement": "Von Neumann trace inequality, Hermitian case: Re tr(AB) ≤ ∑ a_i↓ b_i↓ (eigenvalues sorted decreasing)."
+    },
+    {
+      "target": "Zeta23Core.sylvester_finrank_le_posIndex",
+      "tier": "C-corpus-extension",
+      "rank": 1,
+      "difficulty": "MEDIUM",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): let A be a Hermitian matrix over an RCLike field on a finite type n, and define posIndex A := the number of indices i with 0 < A.eigenvalues i (Fintype.card of the filtered subtype). If W is a submodule of (n → 𝕜) on which the quadratic form x ↦ Re (star x ⬝ᵥ (A *ᵥ x)) is positive definite (positive on all nonzero x of W), then Module.finrank 𝕜 W ≤ posIndex A. Route: the positive part A₊ of the spectral decomposition has rank = posIndex A and the map A₊ *ᵥ · restricted to W is injective (a kernel vector x would satisfy xᴴAx = −xᴴA₋x ≤ 0 contradicting positive-definiteness on W), then finrank W ≤ rank A₊.",
+      "statement": "Sylvester's law, hard direction: any subspace on which a Hermitian form is positive definite has dimension ≤ n₊(A), the number of positive eigenvalues."
+    },
+    {
+      "target": "Zeta23Core.posIndex_conj_le",
+      "tier": "C-corpus-extension",
+      "rank": 2,
+      "difficulty": "MEDIUM",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): for a Hermitian matrix Q on a finite type m and any rectangular matrix B : Matrix m d 𝕜, the compression BᴴQB is Hermitian and posIndex (Bᴴ * Q * B) ≤ posIndex Q, where posIndex counts positive eigenvalues. Route: a subspace of dimension k on which xᴴ(BᴴQB)x is positive definite pushes forward under B to a k-dimensional subspace (injectivity on that subspace is forced) on which Q is positive definite; then apply the Sylvester hard direction (previous target).",
+      "statement": "Inertia does not increase under compression: n₊(BᴴQB) ≤ n₊(Q)."
+    },
+    {
+      "target": "Zeta23Core.rank_trace_ineq",
+      "tier": "C-corpus-extension",
+      "rank": 3,
+      "difficulty": "HARD",
+      "goal": "State and prove in Lean 4 (Mathlib, lean-4.32.0): let P Q be n×n matrices over an RCLike field with P positive semidefinite of rank ≤ r, Q Hermitian with posIndex Q ≤ b (posIndex = number of positive eigenvalues), and c a positive real. Then c·Re(tr P) − (c²/4)·r + 2c·Re(tr Q) − c²·b ≤ ‖P + Q‖_F², where ‖M‖_F² := Re tr(MᴴM) is the squared Frobenius norm. This is Lemma 3.2 of the CLAUDE two-thirds preprint, provable from von Neumann's trace inequality applied to the spectral decompositions of P and the positive/negative parts of Q; its scalar shadow at r = b = 1 is the integrality step m² ≥ 2m − 1. Prove the two prerequisite targets first if useful.",
+      "statement": "Rank–trace inequality (preprint Lemma 3.2): c·tr P − (c²/4)r + 2c·tr Q − c² b ≤ ‖P+Q‖_F²."
+    },
+    {
+      "target": "Frontier.Goodstein_terminates",
+      "tier": "FRONTIER-set",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Every Goodstein sequence reaches 0 (uses ε₀ well-foundedness; independent of PA)."
+    },
+    {
+      "target": "Frontier.Hydra_Kirby_Paris",
+      "tier": "FRONTIER-set",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Every hydra game terminates for any strategy (Kirby–Paris; PA-independent)."
+    },
+    {
+      "target": "Frontier.Borel_determinacy",
+      "tier": "FRONTIER-set",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Every Borel game is determined (Martin's theorem)."
+    },
+    {
+      "target": "Frontier.Gale_Stewart_open",
+      "tier": "FRONTIER-set",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "Every open game is determined (Gale–Stewart)."
+    },
+    {
+      "target": "Frontier.Banach_Tarski",
+      "tier": "FRONTIER-set",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The unit ball in ℝ³ admits a paradoxical decomposition (Banach–Tarski)."
+    },
+    {
+      "target": "Frontier.Paris_Harrington",
+      "tier": "FRONTIER-set",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The strengthened finite Ramsey theorem is true but unprovable in PA."
+    },
+    {
+      "target": "Frontier.Goedel_second_incompleteness",
+      "tier": "FRONTIER-set",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "No consistent recursively-axiomatized theory extending PA proves its own consistency."
+    },
+    {
+      "target": "Frontier.Tarski_undefinability",
+      "tier": "FRONTIER-set",
+      "rank": 2,
+      "difficulty": "STATEMENT",
+      "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
+      "statement": "Arithmetical truth is not arithmetically definable (Tarski)."
+    },
+    {
+      "target": "Frontier.Aronszajn_tree_exists",
+      "tier": "FRONTIER-set",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "There exists an Aronszajn tree (a tree of height ω₁ with no uncountable branch/level)."
+    },
+    {
+      "target": "Frontier.CH_independent_statement",
+      "tier": "FRONTIER-set",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The Continuum Hypothesis is independent of ZFC (Gödel + Cohen forcing)."
+    },
+    {
+      "target": "Frontier.inaccessible_implies_ConZFC",
+      "tier": "FRONTIER-set",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "An inaccessible cardinal yields a model of ZFC, so Con(ZFC+inaccessible)→Con(ZFC)."
+    },
+    {
+      "target": "Frontier.infinite_ramsey",
+      "tier": "FRONTIER-set",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "Every 2-colouring of [ℕ]² has an infinite monochromatic set (infinite Ramsey)."
+    },
+    {
+      "target": "Frontier.Suslin_line",
+      "tier": "FRONTIER-set",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "A Suslin line exists iff ◊-type hypotheses fail; state Suslin's problem precisely."
+    },
+    {
+      "target": "Frontier.Loeb_theorem",
+      "tier": "FRONTIER-set",
+      "rank": 2,
+      "difficulty": "STATEMENT",
+      "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
+      "statement": "Löb's theorem: if PA ⊢ (□φ → φ) then PA ⊢ φ."
+    },
+    {
+      "target": "Frontier.Green_Tao",
+      "tier": "FRONTIER-primes",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The primes contain arbitrarily long arithmetic progressions."
+    },
+    {
+      "target": "Frontier.bounded_prime_gaps",
+      "tier": "FRONTIER-primes",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "liminf (p_{n+1}−p_n) is finite (Zhang/Maynard)."
+    },
+    {
+      "target": "Frontier.Chen_theorem",
+      "tier": "FRONTIER-primes",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Every sufficiently large even number is p + q with q having ≤ 2 prime factors."
+    },
+    {
+      "target": "Frontier.Vinogradov_three_primes",
+      "tier": "FRONTIER-primes",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Every sufficiently large odd number is a sum of three primes."
+    },
+    {
+      "target": "Frontier.Brun_twin_reciprocal",
+      "tier": "FRONTIER-primes",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "The sum of reciprocals of twin primes converges (Brun's constant)."
+    },
+    {
+      "target": "Frontier.Mordell_finite_generation",
+      "tier": "FRONTIER-primes",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The group of rational points of an elliptic curve over ℚ is finitely generated (Mordell)."
+    },
+    {
+      "target": "Frontier.Catalan_Mihailescu",
+      "tier": "FRONTIER-primes",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "8 and 9 are the only consecutive perfect powers (x^p − y^q = 1 ⇒ 3²−2³)."
+    },
+    {
+      "target": "Frontier.abc_statement",
+      "tier": "FRONTIER-primes",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "State the abc conjecture: for ε>0, finitely many coprime a+b=c with c > rad(abc)^{1+ε}."
+    },
+    {
+      "target": "Frontier.FLT_statement",
+      "tier": "FRONTIER-primes",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Fermat's Last Theorem: xⁿ+yⁿ=zⁿ has no positive-integer solution for n>2."
+    },
+    {
+      "target": "Frontier.sum_three_cubes_42",
+      "tier": "FRONTIER-primes",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "42 = (−80538738812075974)³ + 80435758145817515³ + 12602123297335631³."
+    },
+    {
+      "target": "Frontier.erdos_discrepancy",
+      "tier": "FRONTIER-primes",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Every ±1 sequence has unbounded discrepancy on homogeneous APs (Tao)."
+    },
+    {
+      "target": "Frontier.artin_primitive_root",
+      "tier": "FRONTIER-primes",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "State Artin's conjecture on primitive roots."
+    },
+    {
+      "target": "Frontier.RH_statement",
+      "tier": "FRONTIER-moonshot",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "All nontrivial zeros of ζ(s) have real part 1/2."
+    },
+    {
+      "target": "Frontier.RH_Li_criterion",
+      "tier": "FRONTIER-moonshot",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "RH ⇔ Li's coefficients λ_n ≥ 0 for all n≥1 (state and prove the equivalence)."
+    },
+    {
+      "target": "Frontier.P_vs_NP_statement",
+      "tier": "FRONTIER-moonshot",
+      "rank": 2,
+      "difficulty": "STATEMENT",
+      "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
+      "statement": "State P ≠ NP via time-bounded Turing machines and polynomial reducibility."
+    },
+    {
+      "target": "Frontier.cook_levin",
+      "tier": "FRONTIER-moonshot",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "SAT is NP-complete (Cook–Levin)."
+    },
+    {
+      "target": "Frontier.navier_stokes_regularity",
+      "tier": "FRONTIER-moonshot",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "State global smoothness/existence for 3D incompressible Navier–Stokes."
+    },
+    {
+      "target": "Frontier.yang_mills_mass_gap",
+      "tier": "FRONTIER-moonshot",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "State existence of quantum Yang–Mills on ℝ⁴ with a positive mass gap."
+    },
+    {
+      "target": "Frontier.hodge_statement",
+      "tier": "FRONTIER-moonshot",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "State the Hodge conjecture on algebraicity of Hodge classes."
+    },
+    {
+      "target": "Frontier.BSD_statement",
+      "tier": "FRONTIER-moonshot",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "State Birch–Swinnerton-Dyer: ord_{s=1}L(E,s) = rank E(ℚ)."
+    },
+    {
+      "target": "Frontier.poincare_3sphere",
+      "tier": "FRONTIER-moonshot",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Every simply-connected closed 3-manifold is homeomorphic to S³ (Perelman)."
+    },
+    {
+      "target": "Frontier.hadwiger_nelson_5",
+      "tier": "FRONTIER-moonshot",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "The chromatic number of the plane is ≥ 5 (de Grey's unit-distance graph)."
+    },
+    {
+      "target": "Frontier.atiyah_singer_index",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The analytic index of an elliptic operator equals its topological index."
+    },
+    {
+      "target": "Frontier.deligne_weil_RH",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The Riemann hypothesis for varieties over finite fields (Weil conjectures; Deligne)."
+    },
+    {
+      "target": "Frontier.faltings_mordell",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "A curve of genus ≥ 2 over ℚ has finitely many rational points (Faltings)."
+    },
+    {
+      "target": "Frontier.thurston_geometrization",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "State the geometrization of closed 3-manifolds into eight geometries."
+    },
+    {
+      "target": "Frontier.exotic_R4",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "There exists a smooth manifold homeomorphic but not diffeomorphic to ℝ⁴ (Donaldson/Freedman)."
+    },
+    {
+      "target": "Frontier.jones_polynomial_invariant",
+      "tier": "FRONTIER-fields",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "The Jones polynomial is a link invariant (well-defined under Reidemeister moves)."
+    },
+    {
+      "target": "Frontier.zelmanov_restricted_burnside",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The restricted Burnside problem has a positive solution (Zelmanov)."
+    },
+    {
+      "target": "Frontier.ngo_fundamental_lemma",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "State the Langlands–Shelstad fundamental lemma (Ngô)."
+    },
+    {
+      "target": "Frontier.smirnov_percolation",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Crossing probabilities of critical triangular-lattice percolation are conformally invariant (Cardy–Smirnov)."
+    },
+    {
+      "target": "Frontier.bhargava_cube_law",
+      "tier": "FRONTIER-fields",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "Bhargava's cube gives a composition law on pairs of binary quadratic forms recovering Gauss composition."
+    },
+    {
+      "target": "Frontier.hairer_KPZ",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The KPZ equation is well-posed via regularity structures (Hairer)."
+    },
+    {
+      "target": "Frontier.mirzakhani_WP_volume",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Weil–Petersson volumes of moduli of bordered surfaces satisfy Mirzakhani's recursion."
+    },
+    {
+      "target": "Frontier.avila_ten_martini",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The almost Mathieu operator has Cantor spectrum for all irrational flux (Ten Martini)."
+    },
+    {
+      "target": "Frontier.scholze_perfectoid_tilt",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "State the tilting equivalence of perfectoid fields (Scholze)."
+    },
+    {
+      "target": "Frontier.figalli_OT_regularity",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Regularity of optimal transport maps under the MTW condition (Figalli)."
+    },
+    {
+      "target": "Frontier.duminil_ising_sharp",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Sharpness of the phase transition for the Ising model (Duminil-Copin)."
+    },
+    {
+      "target": "Frontier.huh_matroid_log_concave",
+      "tier": "FRONTIER-fields",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "The coefficients of the characteristic polynomial of a matroid are log-concave (Adiprasito–Huh–Katz)."
+    },
+    {
+      "target": "Frontier.voevodsky_milnor",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The Milnor conjecture: mod-2 Galois cohomology ≅ Milnor K-theory / 2 (Voevodsky)."
+    },
+    {
+      "target": "Frontier.lindenstrauss_QUE",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Arithmetic quantum unique ergodicity on congruence surfaces (Lindenstrauss)."
+    },
+    {
+      "target": "Frontier.mcmullen_renormalization",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "State the renormalization/rigidity results for quadratic-like maps (McMullen)."
+    },
+    {
+      "target": "Frontier.feit_thompson_odd_order",
+      "tier": "FRONTIER-abel",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Every finite group of odd order is solvable (Feit–Thompson; Thompson/Tits Abel)."
+    },
+    {
+      "target": "Frontier.milnor_exotic_7sphere",
+      "tier": "FRONTIER-abel",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "There exist smooth manifolds homeomorphic but not diffeomorphic to S⁷ (Milnor)."
+    },
+    {
+      "target": "Frontier.furstenberg_szemeredi",
+      "tier": "FRONTIER-abel",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Positive-density subsets of ℕ contain arbitrarily long APs, via multiple recurrence (Furstenberg)."
+    },
+    {
+      "target": "Frontier.margulis_superrigidity",
+      "tier": "FRONTIER-abel",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "State Margulis superrigidity for higher-rank lattices."
+    },
+    {
+      "target": "Frontier.lovasz_kneser",
+      "tier": "FRONTIER-abel",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "The chromatic number of the Kneser graph KG_{n,k} is n − 2k + 2 (Lovász, via Borsuk–Ulam)."
+    },
+    {
+      "target": "Frontier.uhlenbeck_bubbling",
+      "tier": "FRONTIER-abel",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Uhlenbeck compactness / removable singularities for Yang–Mills connections."
+    },
+    {
+      "target": "Frontier.langlands_reciprocity",
+      "tier": "FRONTIER-abel",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "State the Langlands reciprocity conjecture linking Galois and automorphic representations."
+    },
+    {
+      "target": "Frontier.nirenberg_gagliardo",
+      "tier": "FRONTIER-abel",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "The Gagliardo–Nirenberg interpolation inequality."
+    },
+    {
+      "target": "Frontier.szemeredi_regularity",
+      "tier": "FRONTIER-abel",
+      "rank": 9,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "State and prove Szemerédi's regularity lemma for graphs."
+    },
+    {
+      "target": "Frontier.wigderson_expander_mixing",
+      "tier": "FRONTIER-abel",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "The expander mixing lemma bounds edge discrepancy by the second eigenvalue."
+    },
+    {
+      "target": "Frontier.bell_theorem",
+      "tier": "FRONTIER-physics",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "No local hidden-variable model reproduces all quantum correlations (Bell); CHSH ≤ 2 classically."
+    },
+    {
+      "target": "Frontier.kochen_specker",
+      "tier": "FRONTIER-physics",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "No noncontextual hidden-variable assignment exists for QM in dimension ≥ 3 (Kochen–Specker)."
+    },
+    {
+      "target": "Frontier.gleason_theorem",
+      "tier": "FRONTIER-physics",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Every quantum measure on a Hilbert space of dim ≥ 3 comes from a density operator (Gleason)."
+    },
+    {
+      "target": "Frontier.no_communication",
+      "tier": "FRONTIER-physics",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "Local operations on one half of an entangled pair cannot transmit information."
+    },
+    {
+      "target": "Frontier.tknn_chern_hall",
+      "tier": "FRONTIER-physics",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "The integer-quantum-Hall conductance equals a Chern number times e²/h (TKNN)."
+    },
+    {
+      "target": "Frontier.ssh_winding_invariant",
+      "tier": "FRONTIER-physics",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "The SSH model's topological phase is classified by a ℤ winding number."
+    },
+    {
+      "target": "Frontier.berry_phase_quantized",
+      "tier": "FRONTIER-physics",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "The Berry phase around a closed loop is the integral of the Berry curvature."
+    },
+    {
+      "target": "Frontier.landau_levels",
+      "tier": "FRONTIER-physics",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "A charged particle in a uniform magnetic field has spectrum ℏω_c(n+½)."
+    },
+    {
+      "target": "Frontier.bcs_gap_binding",
+      "tier": "FRONTIER-physics",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "The BCS gap equation has a nonzero solution for any attractive coupling (Cooper pairing)."
+    },
+    {
+      "target": "Frontier.higgs_mass_toy",
+      "tier": "FRONTIER-physics",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "In an abelian Higgs toy model, spontaneous symmetry breaking gives the gauge boson a mass."
+    },
+    {
+      "target": "Frontier.asymptotic_freedom_sign",
+      "tier": "FRONTIER-physics",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "The one-loop SU(N) beta function is negative (asymptotic freedom)."
+    },
+    {
+      "target": "Frontier.penrose_singularity",
+      "tier": "FRONTIER-physics",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "A spacetime with a trapped surface and the null energy condition is geodesically incomplete (Penrose)."
+    },
+    {
+      "target": "Frontier.onsager_2d_ising",
+      "tier": "FRONTIER-physics",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The exact free energy of the 2D square-lattice Ising model (Onsager)."
+    },
+    {
+      "target": "Frontier.kam_theorem",
+      "tier": "FRONTIER-physics",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Invariant tori persist under small perturbation of an integrable system (KAM)."
+    },
+    {
+      "target": "Frontier.lieb_robinson",
+      "tier": "FRONTIER-physics",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "Lieb–Robinson bound: an effective light cone for local spin dynamics."
+    },
+    {
+      "target": "Frontier.noether_conservation",
+      "tier": "FRONTIER-physics",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "Each smooth symmetry of an action yields a conserved current (Noether, 1D case)."
+    },
+    {
+      "target": "Frontier.spin_statistics",
+      "tier": "FRONTIER-physics",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "State the spin–statistics connection for relativistic quantum fields."
+    },
+    {
+      "target": "Frontier.lieb_thirring_stability",
+      "tier": "FRONTIER-physics",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The Lieb–Thirring inequality and stability of matter."
+    },
+    {
+      "target": "Frontier.aumann_agreement",
+      "tier": "FRONTIER-mind",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "Agents with common priors and common knowledge of posteriors cannot agree to disagree (Aumann)."
+    },
+    {
+      "target": "Frontier.good_regulator",
+      "tier": "FRONTIER-mind",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "Every good regulator of a system is (contains) a model of that system (Conant–Ashby)."
+    },
+    {
+      "target": "Frontier.self_nonprediction",
+      "tier": "FRONTIER-mind",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "No machine can always correctly predict its own next output before producing it (diagonal self-reference)."
+    },
+    {
+      "target": "Frontier.iit_phi_partition",
+      "tier": "FRONTIER-mind",
+      "rank": 2,
+      "difficulty": "STATEMENT",
+      "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
+      "statement": "Formalize integrated information Φ as minimized effective-information over bipartitions; prove Φ=0 for a disconnected system."
+    },
+    {
+      "target": "Frontier.global_workspace_fixpoint",
+      "tier": "FRONTIER-mind",
+      "rank": 2,
+      "difficulty": "STATEMENT",
+      "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
+      "statement": "A monotone broadcast (global-workspace) operator on a finite state lattice reaches a least fixed point (Knaster–Tarski)."
+    },
+    {
+      "target": "Frontier.loeb_no_self_trust",
+      "tier": "FRONTIER-mind",
+      "rank": 2,
+      "difficulty": "STATEMENT",
+      "goal": "Formalize the precise statement (with all definitions) in Lean 4.",
+      "statement": "A consistent theory cannot prove its own reflection schema for an unprovable sentence (Löb-based)."
+    },
+    {
+      "target": "Frontier.arrow_impossibility",
+      "tier": "FRONTIER-mind",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "No ranked voting rule for ≥3 alternatives satisfies unanimity, IIA, and non-dictatorship (Arrow; Nobel)."
+    },
+    {
+      "target": "Frontier.nash_equilibrium_exists",
+      "tier": "FRONTIER-mind",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Every finite game has a mixed-strategy Nash equilibrium (Nash; via Brouwer/Kakutani)."
+    },
+    {
+      "target": "Frontier.friendship_theorem",
+      "tier": "FRONTIER-fields",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "If every two people have exactly one common friend, someone is everyone's friend (Erdős–Ko–Rényi)."
+    },
+    {
+      "target": "Frontier.five_color_theorem",
+      "tier": "FRONTIER-fields",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "Every planar graph is 5-colourable."
+    },
+    {
+      "target": "Frontier.four_color_statement",
+      "tier": "FRONTIER-moonshot",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "Every planar graph is 4-colourable (Appel–Haken)."
+    },
+    {
+      "target": "Frontier.huang_sensitivity",
+      "tier": "FRONTIER-fields",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "Boolean sensitivity and degree are polynomially related (Huang's sensitivity theorem, 2019)."
+    },
+    {
+      "target": "Frontier.kadison_singer",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The Kadison–Singer problem holds (Marcus–Spielman–Srivastava; interlacing families)."
+    },
+    {
+      "target": "Frontier.ham_sandwich",
+      "tier": "FRONTIER-physics",
+      "rank": 2,
+      "difficulty": "SPECIAL",
+      "goal": "Prove the stated special/base case in Lean 4, axiom-clean.",
+      "statement": "Any n finite measures in ℝⁿ can be simultaneously bisected by one hyperplane (Ham–Sandwich)."
+    },
+    {
+      "target": "Frontier.gaussian_correlation",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The Gaussian correlation inequality for symmetric convex sets (Royen)."
+    },
+    {
+      "target": "Frontier.willmore_conjecture",
+      "tier": "FRONTIER-fields",
+      "rank": 6,
+      "difficulty": "MOONSHOT",
+      "goal": "Formalize the statement; prove the base case or a Lean-checked reduction.",
+      "statement": "The Clifford torus minimizes Willmore energy among genus-1 surfaces (Marques–Neves)."
+    },
+    {
+      "target": "Zeta23Redux.LinAlg.qf_add",
+      "tier": "linalg",
+      "rank": 1,
+      "difficulty": "EASY",
+      "statement": "Quadratic-form additivity: qf(M+N)(x) = qf(M)(x) + qf(N)(x) for complex matrices M, N and x in Euclidean space — the linearity step of the zeta-23 inertia compression chain.",
+      "goal": "(reconciliation entry — proof already harvested from direct submission arsub_vr58fhdq; statement recorded so the catalogue can file it)"
+    },
+    {
+      "target": "Zeta23Redux.LinAlg.quadForm_eq_complex",
+      "tier": "linalg",
+      "rank": 1,
+      "difficulty": "MEDIUM",
+      "statement": "Hermitian quadratic form in eigencoordinates: star x ⬝ᵥ A *ᵥ x = Σᵢ λᵢ(A)·‖(eigencoord x)ᵢ‖² as a complex number, for A Hermitian — the spectral-decomposition step of the zeta-23 chain.",
+      "goal": "(reconciliation entry — proof already harvested from direct submission arsub_xt4u413k)"
+    },
+    {
+      "target": "Zeta23Redux.LinAlg.sum_doublyStochastic_mul_le",
+      "tier": "linalg",
+      "rank": 1,
+      "difficulty": "MEDIUM",
+      "statement": "For S doubly stochastic and antitone weight sequences μ, ν: Σᵢⱼ Sᵢⱼ·μᵢνⱼ ≤ Σᵢ μᵢνᵢ — the rearrangement/Birkhoff step feeding the von Neumann trace inequality.",
+      "goal": "(reconciliation entry — proof already harvested from direct submission arsub_c6id053o)"
+    }
+  ]
 }

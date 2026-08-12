@@ -360,12 +360,12 @@
   "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "PCA.Isolation.priv_escape_monotone": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "D-pca-meta",
   "statement": null,
-  "proof_file": "aristotle/harvest_100/chris_b8f7390b.lean",
-  "provenance": "Harmonic/Aristotle b8f7390b-8f8f-4b51-b136-c48c819fbb70 (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_1c6c59da.lean",
+  "provenance": "Harmonic/Aristotle 1c6c59da-74d6-47a3-90e5-c38d6ffd6c55 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "PCA.Isolation.no_clean_proved_with_escape": {
   "register": "PROVED",
@@ -3384,12 +3384,12 @@
   "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Zeta23Redux.LinAlg.weyl_posIndexAbove": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-linalg",
   "statement": "Work with Hermitian matrices over the complex numbers, size Fin d. For a Hermitian matrix A let posIndex A be the number of strictly positive eigenvalues (#{i | 0 < eigenvalue_i A}) and posIndexAbove A theta the number of eigenvalues strictly above theta. Prove Weyl's monotonicity: if A and E are Hermitian and |eigenvalue_i E| <= theta for every i, then posIndexAbove (A + E) theta <= posIndex A. Use Courant-Fischer / eigenvalue interlacing from Mathlib.",
-  "proof_file": "aristotle/harvest_100/chris_ea961140.lean",
-  "provenance": "Harmonic/Aristotle ea961140-37cf-49eb-a87c-4df143ef7d37 (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_35b33b42.lean",
+  "provenance": "Harmonic/Aristotle 35b33b42-db34-4ba3-b3c8-27a3aa42e4c4 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Riemann.Zeta.value_at_two": {
   "register": "PROVED",
@@ -4032,12 +4032,12 @@
   "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Frontier.figalli_OT_regularity": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-fields",
   "statement": "Regularity of optimal transport maps under the MTW condition (Figalli).",
   "proof_file": "aristotle/harvest_100/admin_cf89ddb5.lean",
   "provenance": "Harmonic/Aristotle cf89ddb5-74b3-4070-a7f9-cf3887030a46 (admin)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Frontier.hodge_statement": {
   "register": "PROVED_UNVERIFIED",
@@ -4528,20 +4528,20 @@
   "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "QI.pbr_theorem": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-qi",
   "statement": "The quantum state is ontic under preparation independence (Pusey\u2013Barrett\u2013Rudolph).",
-  "proof_file": "aristotle/harvest_100/chris_65c44cae.lean",
-  "provenance": "Harmonic/Aristotle 65c44cae-0928-47f7-962f-4d95cb41127f (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_8228cd00.lean",
+  "provenance": "Harmonic/Aristotle 8228cd00-4545-4cd1-a5c2-e9e0f12147ca (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "QI.threshold_theorem": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-qi",
   "statement": "Below a constant error threshold, fault-tolerant quantum computation is possible (statement).",
-  "proof_file": "aristotle/harvest_100/chris_2818ebb5.lean",
-  "provenance": "Harmonic/Aristotle 2818ebb5-e34a-45fb-9573-4e9b75df2b6b (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_d4fca1f6.lean",
+  "provenance": "Harmonic/Aristotle d4fca1f6-1c5e-40e8-bdd5-289344869ebf (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "QI.gottesman_knill": {
   "register": "PROVED_UNVERIFIED",
@@ -4568,44 +4568,44 @@
   "verification": "axiom-clean by inspection; verification pending"
  },
  "Phys.goldstone": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-phys",
   "statement": "Spontaneous breaking of a continuous global symmetry yields a massless mode (Goldstone).",
-  "proof_file": "aristotle/harvest_100/chris_349f7059.lean",
-  "provenance": "Harmonic/Aristotle 349f7059-7867-4b83-8f61-5061f1c969bd (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_193111b3.lean",
+  "provenance": "Harmonic/Aristotle 193111b3-2ae8-4c7f-9c65-feb1bdae677b (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Phys.cpt_theorem": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-phys",
   "statement": "Any Lorentz-invariant local QFT is CPT-invariant (statement).",
-  "proof_file": "aristotle/harvest_100/chris_2cf33dc4.lean",
-  "provenance": "Harmonic/Aristotle 2cf33dc4-498d-4b60-8c25-7bab0cb5b6ed (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_d47cf144.lean",
+  "provenance": "Harmonic/Aristotle d47cf144-f32f-4da1-9d54-97944ae45e66 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Phys.area_law_1d": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-phys",
   "statement": "Gapped 1D ground states obey an entanglement-entropy area law (Hastings).",
-  "proof_file": "aristotle/harvest_100/chris_5de2bcaa.lean",
-  "provenance": "Harmonic/Aristotle 5de2bcaa-2424-487c-9a9d-fdf7f7d62fc3 (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_ebd59876.lean",
+  "provenance": "Harmonic/Aristotle ebd59876-efd9-4110-94cf-c39f33ed4c95 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Phys.lieb_schultz_mattis": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-phys",
   "statement": "A half-integer-spin translation-invariant chain is gapless or degenerate (LSM).",
-  "proof_file": "aristotle/harvest_100/chris_4ddd3801.lean",
-  "provenance": "Harmonic/Aristotle 4ddd3801-913a-4eb5-9a61-7bf82523f748 (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_6d1a6874.lean",
+  "provenance": "Harmonic/Aristotle 6d1a6874-da96-4bc1-886f-befbc63d99c7 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Phys.bkt_transition": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-phys",
   "statement": "State the Berezinskii\u2013Kosterlitz\u2013Thouless topological phase transition of the 2D XY model.",
-  "proof_file": "aristotle/harvest_100/chris_9240e57d.lean",
-  "provenance": "Harmonic/Aristotle 9240e57d-df31-4db2-bec9-0ce29327550c (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_1fc3ccd9.lean",
+  "provenance": "Harmonic/Aristotle 1fc3ccd9-855d-4dd0-a6c1-af2d2142563c (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "CS.immerman_szelepcsenyi": {
   "register": "PROVED_UNVERIFIED",
@@ -4616,100 +4616,100 @@
   "verification": "axiom-clean by inspection; verification pending"
  },
  "CS.ladner": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-cs",
   "statement": "If P \u2260 NP then NP-intermediate problems exist (Ladner).",
   "proof_file": "aristotle/harvest_100/admin_52483bcd.lean",
   "provenance": "Harmonic/Aristotle 52483bcd-9eea-4370-9985-aca40c789c50 (admin)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "NumberTheory.chinese_remainder": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-wave2",
   "statement": "The Chinese remainder theorem: for coprime m n, ZMod (m*n) is ring-isomorphic to (ZMod m) \u00d7 (ZMod n). State: for m n : Nat with Nat.Coprime m n, there is a ring equivalence ZMod (m*n) \u2243+* (ZMod m \u00d7 ZMod n). (Use Mathlib's ZMod.chineseRemainder.)",
-  "proof_file": "aristotle/harvest_100/chris_cbc67016.lean",
-  "provenance": "Harmonic/Aristotle cbc67016-d740-49a6-a1f2-a0446f228ec2 (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_3a6e8943.lean",
+  "provenance": "Harmonic/Aristotle 3a6e8943-55d4-4618-8774-b3cd22ae1170 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "NumberTheory.bezout": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-wave2",
   "statement": "Bezout's identity: for integers a b, there exist integers x y with a*x + b*y = Int.gcd a b. State: for a b : Int, \u2203 x y : Int, a*x + b*y = (Int.gcd a b : Int). (Use Mathlib's Int.gcd_eq_gcd_ab / Bezout.)",
-  "proof_file": "aristotle/harvest_100/chris_4a3678ed.lean",
-  "provenance": "Harmonic/Aristotle 4a3678ed-b488-43c3-bbec-00b8ed649419 (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_3a0bafb5.lean",
+  "provenance": "Harmonic/Aristotle 3a0bafb5-c80f-4536-8cf6-459711c64e1d (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Analysis.cauchy_schwarz": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-wave2",
   "statement": "The Cauchy-Schwarz inequality in a real inner product space: for vectors x y, |\u27eax, y\u27eb| \u2264 \u2016x\u2016 * \u2016y\u2016. State for [InnerProductSpace Real E] and x y : E: |inner x y| \u2264 \u2016x\u2016 * \u2016y\u2016. (Use Mathlib's abs_inner_le_norm.)",
-  "proof_file": "aristotle/harvest_100/chris_5e14fa23.lean",
-  "provenance": "Harmonic/Aristotle 5e14fa23-6f3d-49ab-a535-a7fa87aa5e3b (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_0203cc0f.lean",
+  "provenance": "Harmonic/Aristotle 0203cc0f-fd2a-4804-b8fb-e8a0258c5dac (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "GroupTheory.sylow_exists": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-wave2",
   "statement": "Sylow's first theorem: for a finite group G and a prime p, a Sylow p-subgroup exists \u2014 i.e. the type Sylow p G is nonempty. State: for [Group G] [Fintype G] and a prime p, Nonempty (Sylow p G). (Use Mathlib's Sylow existence instance / Sylow.nonempty.)",
-  "proof_file": "aristotle/harvest_100/admin_f588661b.lean",
-  "provenance": "Harmonic/Aristotle f588661b-6c0e-45bb-a5c5-12ddf65a4d7d (admin)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_fae70136.lean",
+  "provenance": "Harmonic/Aristotle fae70136-fe03-48f8-85d4-d2bd54ee73c6 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Topology.bolzano_weierstrass": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-wave2",
   "statement": "Bolzano-Weierstrass: a sequence taking values in a compact set has a convergent subsequence. State: for a compact set s in a metric space and a sequence f : Nat -> s-underlying with all f n \u2208 s, there is a subsequence converging to a point of s. (Use Mathlib's IsCompact.tendsto_subseq.)",
-  "proof_file": "aristotle/harvest_100/chris_5569a697.lean",
-  "provenance": "Harmonic/Aristotle 5569a697-4801-4510-8cb0-35865852ba34 (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_004df6e0.lean",
+  "provenance": "Harmonic/Aristotle 004df6e0-9979-46fa-a19a-a067ee705618 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Topology.heine_cantor": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-wave2",
   "statement": "Heine-Cantor: a continuous function on a compact metric (uniform) space is uniformly continuous. State: for a compact space X and continuous f : X -> Y (uniform spaces), UniformContinuous f. (Use Mathlib's CompactSpace.uniformContinuous_of_continuous / IsCompact.uniformContinuousOn.)",
-  "proof_file": "aristotle/harvest_100/chris_0b98d806.lean",
-  "provenance": "Harmonic/Aristotle 0b98d806-93a7-4a81-968c-ebd435d291e0 (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_7e661a2f.lean",
+  "provenance": "Harmonic/Aristotle 7e661a2f-0009-41d8-b65d-6b44c920b3e9 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Analysis.banach_fixed_point": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-wave2",
   "statement": "The Banach fixed-point (contraction mapping) theorem: a contraction on a complete nonempty metric space has a (unique) fixed point. State: for [CompleteSpace X] [Nonempty X] and ContractingWith K f, \u2203 x, f x = x (f (ContractingWith.fixedPoint ...) = it). (Use Mathlib's ContractingWith.fixedPoint / fixedPoint_isFixedPt.)",
-  "proof_file": "aristotle/harvest_100/admin_19b55feb.lean",
-  "provenance": "Harmonic/Aristotle 19b55feb-f43f-4202-a7a6-150228a76e5a (admin)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/chris_8a52455e.lean",
+  "provenance": "Harmonic/Aristotle 8a52455e-62ab-4ecf-a1ac-138308760b67 (chris)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "GroupTheory.cayley": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-wave2",
   "statement": "Cayley's theorem: every group embeds into the symmetric group on its underlying set. State: for [Group G], there is an injective group homomorphism G ->* Equiv.Perm G. (Use Mathlib's MulAction.toPermHom / Equiv.Perm.subgroupOfMulAction, MulAction.toPerm injective.)",
-  "proof_file": "aristotle/harvest_100/chris_7ff9ffef.lean",
-  "provenance": "Harmonic/Aristotle 7ff9ffef-217c-4783-a6f9-dd211fe31750 (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_254e18ea.lean",
+  "provenance": "Harmonic/Aristotle 254e18ea-ad06-47a7-9dbd-fb22c1925524 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Topology.baire_category": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-wave2",
   "statement": "The Baire category theorem: in a complete metric space, a countable intersection of dense open sets is dense. State: for [CompleteSpace X] and a countable family of dense open sets, their intersection is dense. (Use Mathlib's dense_iInter_of_isOpen / BaireSpace instance.)",
-  "proof_file": "aristotle/harvest_100/chris_9fb8c7d6.lean",
-  "provenance": "Harmonic/Aristotle 9fb8c7d6-117f-4597-9b9b-9e04b32b10da (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_beb01094.lean",
+  "provenance": "Harmonic/Aristotle beb01094-02af-40ca-8d86-11e8f23ed52c (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "Analysis.stone_weierstrass": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-wave2",
   "statement": "The Stone-Weierstrass theorem (polynomial form): on a compact interval, polynomial functions are dense in the continuous functions (uniform norm). State: the closure of the subalgebra of polynomial functions on [a,b] is the whole space of continuous functions. (Use Mathlib's polynomialFunctions_closure_eq_top / ContinuousMap.subalgebra... Stone-Weierstrass.)",
-  "proof_file": "aristotle/harvest_100/chris_5007ce41.lean",
-  "provenance": "Harmonic/Aristotle 5007ce41-0919-4445-b62c-393faa8b029b (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_43c4c30c.lean",
+  "provenance": "Harmonic/Aristotle 43c4c30c-7e66-4d83-a16a-4499dbd5a0db (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "CS.pcp_theorem": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-cs",
   "statement": "NP = PCP(log n, 1): the PCP theorem (statement).",
-  "proof_file": "aristotle/harvest_100/chris_37cef9e5.lean",
-  "provenance": "Harmonic/Aristotle 37cef9e5-cd04-4323-8e71-25bcd7f30b03 (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_c5d34b83.lean",
+  "provenance": "Harmonic/Aristotle c5d34b83-b8e5-4ec5-951c-18ed3ea21df3 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "CS.parity_not_ac0": {
   "register": "PROVED_UNVERIFIED",
@@ -4728,28 +4728,28 @@
   "verification": "axiom-clean by inspection; verification pending"
  },
  "CS.valiant_permanent": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-cs",
   "statement": "The 0/1 permanent is #P-complete (Valiant).",
-  "proof_file": "aristotle/harvest_100/chris_61177306.lean",
-  "provenance": "Harmonic/Aristotle 61177306-3b28-4917-b7ab-7c48a5faf2a7 (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_e98415c4.lean",
+  "provenance": "Harmonic/Aristotle e98415c4-fc6d-415a-9f0b-33a3b91fb47b (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "CS.impagliazzo_wigderson": {
   "register": "PROVED_UNVERIFIED",
   "domain": "FRONTIER-cs",
   "statement": "Strong circuit lower bounds imply P = BPP (Impagliazzo\u2013Wigderson).",
-  "proof_file": "aristotle/harvest_100/chris_c4db9e3f.lean",
-  "provenance": "Harmonic/Aristotle c4db9e3f-d4cc-4616-a3c5-a636083f2ee4 (chris)",
+  "proof_file": "aristotle/harvest_100/admin_b20c0a9a.lean",
+  "provenance": "Harmonic/Aristotle b20c0a9a-3546-4bff-ba4f-7b1bd6183767 (admin)",
   "verification": "axiom-clean by inspection; verification pending"
  },
  "CS.nisan_wigderson_prg": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-cs",
   "statement": "The Nisan\u2013Wigderson generator derandomizes from a hard function.",
-  "proof_file": "aristotle/harvest_100/chris_940d1ba2.lean",
-  "provenance": "Harmonic/Aristotle 940d1ba2-e830-4cbf-818e-0e3eb644061a (chris)",
-  "verification": "axiom-clean by inspection; verification pending"
+  "proof_file": "aristotle/harvest_100/admin_615ab4ea.lean",
+  "provenance": "Harmonic/Aristotle 615ab4ea-0c57-4874-b7c2-62c8388e78a8 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  },
  "CS.reingold_sl_l": {
   "register": "PROVED_UNVERIFIED",
@@ -4768,11 +4768,131 @@
   "verification": "axiom-clean by inspection; verification pending"
  },
  "CS.blum_speedup": {
-  "register": "PROVED_UNVERIFIED",
+  "register": "PROVED",
   "domain": "FRONTIER-cs",
   "statement": "There exist problems with no fastest algorithm (Blum speedup).",
   "proof_file": "aristotle/harvest_100/admin_00417c94.lean",
   "provenance": "Harmonic/Aristotle 00417c94-7bba-4403-ad0d-43164fa667b4 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "CS.razborov_smolensky": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "FRONTIER-cs",
+  "statement": "MOD_p \u2209 AC\u2070[q] for distinct primes p,q (Razborov\u2013Smolensky).",
+  "proof_file": "aristotle/harvest_100/chris_d6dcc0b4.lean",
+  "provenance": "Harmonic/Aristotle d6dcc0b4-0a3a-4a37-aec2-bed69dd0116d (chris)",
   "verification": "axiom-clean by inspection; verification pending"
+ },
+ "CS.hilbert10_undecidable": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "FRONTIER-cs",
+  "statement": "Hilbert's tenth problem is undecidable: Diophantine solvability (MRDP).",
+  "proof_file": "aristotle/harvest_100/chris_377f5f60.lean",
+  "provenance": "Harmonic/Aristotle 377f5f60-0849-4399-9c3c-2f9acfd6be8a (chris)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "CS.pcp_dinur": {
+  "register": "PROVED",
+  "domain": "FRONTIER-cs",
+  "statement": "Dinur's gap-amplification proof of the PCP theorem (statement).",
+  "proof_file": "aristotle/harvest_100/admin_e642a7a1.lean",
+  "provenance": "Harmonic/Aristotle e642a7a1-d7bd-4f0b-ae94-ce5e33814f01 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math2.sato_tate": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "FRONTIER-math",
+  "statement": "State the Sato\u2013Tate distribution of Frobenius angles for a non-CM elliptic curve.",
+  "proof_file": "aristotle/harvest_100/admin_1b8d960e.lean",
+  "provenance": "Harmonic/Aristotle 1b8d960e-45af-4e14-abb2-22d273eaa740 (admin)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Math2.gromov_nonsqueezing": {
+  "register": "PROVED",
+  "domain": "FRONTIER-math",
+  "statement": "Gromov's nonsqueezing theorem in symplectic geometry.",
+  "proof_file": "aristotle/harvest_100/admin_98d8754f.lean",
+  "provenance": "Harmonic/Aristotle 98d8754f-e52a-4f6e-b09c-fa1450ec7043 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math2.hironaka_resolution": {
+  "register": "PROVED",
+  "domain": "FRONTIER-math",
+  "statement": "Resolution of singularities in characteristic 0 (Hironaka; statement).",
+  "proof_file": "aristotle/harvest_100/admin_2e4a4d65.lean",
+  "provenance": "Harmonic/Aristotle 2e4a4d65-ed7b-4ad0-ba4e-4c582990aae1 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math2.carleson": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "FRONTIER-math",
+  "statement": "Fourier series of an L\u00b2 function converge almost everywhere (Carleson).",
+  "proof_file": "aristotle/harvest_100/admin_29cb5970.lean",
+  "provenance": "Harmonic/Aristotle 29cb5970-4f7e-45da-9941-98026d9088bd (admin)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Math2.class_number_formula": {
+  "register": "PROVED",
+  "domain": "FRONTIER-math",
+  "statement": "The analytic class number formula for a number field's Dedekind zeta residue.",
+  "proof_file": "aristotle/harvest_100/admin_31f83961.lean",
+  "provenance": "Harmonic/Aristotle 31f83961-c6a9-4d1d-94c2-9621d423e2a1 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math2.kervaire_invariant": {
+  "register": "PROVED",
+  "domain": "FRONTIER-math",
+  "statement": "The Kervaire invariant is nonzero only in dimensions 2,6,14,30,62,126 (Hill\u2013Hopkins\u2013Ravenel; statement).",
+  "proof_file": "aristotle/harvest_100/admin_90ab6cff.lean",
+  "provenance": "Harmonic/Aristotle 90ab6cff-29a1-417d-8568-e9401747b987 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Math2.donsker_invariance": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "FRONTIER-math",
+  "statement": "Donsker's invariance principle: rescaled random walk converges to Brownian motion.",
+  "proof_file": "aristotle/harvest_100/admin_d1a2cfa7.lean",
+  "provenance": "Harmonic/Aristotle d1a2cfa7-9660-4c9c-bed2-05fa2952b8fc (admin)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Math2.ratner": {
+  "register": "PROVED_UNVERIFIED",
+  "domain": "FRONTIER-math",
+  "statement": "Ratner's orbit-closure/measure-classification theorems for unipotent flows (statement).",
+  "proof_file": "aristotle/harvest_100/admin_a4cc6898.lean",
+  "provenance": "Harmonic/Aristotle a4cc6898-e107-4aea-a072-f382670e3039 (admin)",
+  "verification": "axiom-clean by inspection; verification pending"
+ },
+ "Math2.belyi_theorem": {
+  "register": "PROVED",
+  "domain": "FRONTIER-math",
+  "statement": "A curve is defined over \u211a\u0304 iff it has a Belyi map to \u2119\u00b9 ramified over {0,1,\u221e}.",
+  "proof_file": "aristotle/harvest_100/admin_c5d65103.lean",
+  "provenance": "Harmonic/Aristotle c5d65103-7a1c-41af-a56d-af60263536e8 (admin)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Zeta23Redux.LinAlg.quadForm_eq_complex": {
+  "register": "PROVED",
+  "domain": "linalg",
+  "statement": "Hermitian quadratic form in eigencoordinates: star x \u2b1d\u1d65 A *\u1d65 x = \u03a3\u1d62 \u03bb\u1d62(A)\u00b7\u2016(eigencoord x)\u1d62\u2016\u00b2 as a complex number, for A Hermitian \u2014 the spectral-decomposition step of the zeta-23 chain.",
+  "proof_file": "aristotle/harvest_100/chris_bb27a1c2.lean",
+  "provenance": "Harmonic/Aristotle bb27a1c2-8601-42bd-83c4-b634686c10ea (chris)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Zeta23Redux.LinAlg.sum_doublyStochastic_mul_le": {
+  "register": "PROVED",
+  "domain": "linalg",
+  "statement": "For S doubly stochastic and antitone weight sequences \u03bc, \u03bd: \u03a3\u1d62\u2c7c S\u1d62\u2c7c\u00b7\u03bc\u1d62\u03bd\u2c7c \u2264 \u03a3\u1d62 \u03bc\u1d62\u03bd\u1d62 \u2014 the rearrangement/Birkhoff step feeding the von Neumann trace inequality.",
+  "proof_file": "aristotle/harvest_100/chris_2db22dde.lean",
+  "provenance": "Harmonic/Aristotle 2db22dde-e27d-426b-b38d-e73fb7b4423e (chris)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
+ },
+ "Zeta23Redux.LinAlg.qf_add": {
+  "register": "PROVED",
+  "domain": "linalg",
+  "statement": "Quadratic-form additivity: qf(M+N)(x) = qf(M)(x) + qf(N)(x) for complex matrices M, N and x in Euclidean space \u2014 the linearity step of the zeta-23 inertia compression chain.",
+  "proof_file": "aristotle/harvest_100/chris_d01aad2e.lean",
+  "provenance": "Harmonic/Aristotle d01aad2e-7b01-4f4a-a251-586d18945d73 (chris)",
+  "verification": "AXLE cloud lean-4.32.0 OK"
  }
 }

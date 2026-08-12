@@ -1,0 +1,4910 @@
+{
+ "schema": "riemannlab-fleet-domains-v1",
+ "generated_from": "registry/domains.json via scripts/export_public_domains.py (allowlist sanitizer)",
+ "naming_caveat": "Lean identifiers in this catalogue can be aspirational labels: a name like 'TwinPrimeConjecture' may denominate a machine-verified REDUCTION or CONDITIONAL theorem, never a proof of the open problem unless the statement text says so. The binding content of every entry is its statement field. Open problems remain open.",
+ "summary": {
+  "total": 612,
+  "PROVED_attested": 500,
+  "STATEMENT_only": 0,
+  "UNVERIFIED": 112,
+  "excluded_no_statement": 0
+ },
+ "entries": [
+  {
+   "name": "AdditiveComb.cauchy_davenport_Z5",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Cauchy-Davenport, concrete: in ZMod 5, for the subsets A = {0,1} and B = {0,2}, the sumset A+B = {0,1,2,3} has cardinality 4 >= min(5, |A|+|B|-1) = min(5,3) = 3. Prove (A + B).card = 4 (or >= 3).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "AdditiveComb.freiman_two_A",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "For a finite nonempty set A of integers (A : Finset Int), the sumset A + A satisfies 2 * A.card - 1 <= (A + A).card. (The basic doubling lower bound; equality iff A is an arithmetic progression.) Prove 2 * A.card - 1 <= (A + A).card.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "AdditiveComb.plunnecke_ruzsa_shadow",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Ruzsa triangle inequality (the engine of Plunnecke-Ruzsa): for finite nonempty sets A B C of integers, (A - C).card * B.card <= (A - B).card * (B - C).card. Prove the Ruzsa triangle inequality. (Use Mathlib's Finset.card_sub_mul_le_card_sub_mul_card_sub or ruzsa_triangle if present.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "AdditiveComb.schur_five",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Schur instance: for every function f : Fin 5 -> Bool (a 2-colouring of {1,2,3,4,5}), there exist x y z in {1,..,5} with x + y = z and f x = f y = f z (a monochromatic Schur triple). This is the S(2) < 5 case. Prove by finite case analysis / decide.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "AdditiveComb.sumset_lower_bound",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "For finite nonempty sets A B of integers (A B : Finset Int), A.card + B.card - 1 <= (A + B).card. (The Cauchy-Davenport analogue over the integers / Freiman's lemma base case.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Algebra.fundamental_theorem_of_algebra",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "The fundamental theorem of algebra: every non-constant complex polynomial has a root. State: for p : Polynomial Complex with 0 < p.degree, there exists z : Complex with p.eval z = 0. (Use Mathlib's Complex.exists_root.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Analysis.banach_fixed_point",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "The Banach fixed-point (contraction mapping) theorem: a contraction on a complete nonempty metric space has a (unique) fixed point. State: for [CompleteSpace X] [Nonempty X] and ContractingWith K f, ∃ x, f x = x (f (ContractingWith.fixedPoint ...) = it). (Use Mathlib's ContractingWith.fixedPoint / fixedPoint_isFixedPt.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Analysis.cauchy_schwarz",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "The Cauchy-Schwarz inequality in a real inner product space: for vectors x y, |⟪x, y⟫| ≤ ‖x‖ * ‖y‖. State for [InnerProductSpace Real E] and x y : E: |inner x y| ≤ ‖x‖ * ‖y‖. (Use Mathlib's abs_inner_le_norm.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Analysis.extreme_value",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "The extreme value theorem: a continuous real-valued function on a nonempty compact set attains its maximum. State: for a nonempty compact set s and f continuous on s, there exists x in s with forall y in s, f y <= f x. (Use Mathlib's IsCompact.exists_forall_ge / exists_isMaxOn.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Analysis.intermediate_value",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "The intermediate value theorem: a continuous real function on [a,b] takes every value between f(a) and f(b). State: for a <= b and f continuous on Set.Icc a b, Set.Icc (f a) (f b) is a subset of f '' (Set.Icc a b) (when f a <= f b). (Use Mathlib's intermediate_value_Icc.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Analysis.stone_weierstrass",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "The Stone-Weierstrass theorem (polynomial form): on a compact interval, polynomial functions are dense in the continuous functions (uniform norm). State: the closure of the subalgebra of polynomial functions on [a,b] is the whole space of continuous functions. (Use Mathlib's polynomialFunctions_closure_eq_top / ContinuousMap.subalgebra... Stone-Weierstrass.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.AdmissibilityKTupleK4",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem AdmissibilityKTupleK4 (h : Fin 4 → ℤ) : Admissible h ↔ ((∃ r : ZMod 2, ∀ i, (h i : ZMod 2) ≠ r) ∧ (∃ r : ZMod 3, ∀ i, (h i : ZMod 3) ≠ r))",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.AmicableNumbers.AmicableInfinitude",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem AmicableInfinitude (H : {k : ℕ | ThabitExponent k}.Infinite) : {m : ℕ | IsAmicable m}.Infinite",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.AndricaConjecture.AndricaConjecture",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem AndricaConjecture (h : AndricaGapBound) (n : ℕ) : Real.sqrt (nthPrime (n + 1)) - Real.sqrt (nthPrime n) < 1",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.BetrothedNumbers.BetrothedInfinitude",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem BetrothedInfinitude (H : ∀ N : ℕ, ∃ k p : ℕ, 1 ≤ k ∧ p.Prime ∧ p ≠ 2 ∧ N < (2 ^ k - 1) * (p + 2) ∧ σ 1 ((2 ^ k - 1) * (p + 2)) = (2 ^ (k + 1) - 1) * (p + 1)) : betrothedNumbers.Infinite",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.BetrothedNumbers.Dynamics.isBetrothedPair_iff_nontrivial_twoCycle",
+   "domain": "FRONTIER-betrothed",
+   "register": "PROVED",
+   "statement": "Verify the exact characterization of a betrothed pair as a positive nontrivial 2-cycle of partner(n)=sigma(1,n)-n-1. No sorry, admit, axiom, native_decide, or unsafe.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.BetrothedNumbers.Dynamics.thabit_balance_identity",
+   "domain": "FRONTIER-betrothed",
+   "register": "PROVED",
+   "statement": "Verify the subtraction-free balance identity sigma(m)+2^(k+1)=2*m+(p+3) for m=(2^k-1)(p+2) under the delivered sigma criterion, then verify the deficient/perfect/abundant comparison iff theorems. No forbidden proof holes.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.BetrothedNumbers.SameParityBetrothedExists",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem SameParityBetrothedExists : (∃ m n : ℕ, Betrothed m n ∧ m % 2 = n % 2) ↔ (∃ m n : ℕ, Betrothed m n ∧ (IsSquare m ∨ ∃ k, m = 2 * k ^ 2))",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.BetrothedNumbers.betrothed_5775_6128",
+   "domain": "FRONTIER-betrothed",
+   "register": "PROVED",
+   "statement": "Kernel-verify IsBetrothedPair 5775 6128 using decide or norm_num, not native_decide. Also prove it is generated by the k=4,p=383 sigma criterion.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.BetrothedNumbers.coprime_pair_four_primeFactors",
+   "domain": "FRONTIER-betrothed",
+   "register": "PROVED",
+   "statement": "Formalize Hagis-Lord Proposition 2: if m,n are coprime betrothed numbers, then m*n has at least four distinct prime factors. Build the proof from sigma multiplicativity and the abundancy inequality sigma(m*n)/(m*n)>4, with exact rational inequalities. No unproved empirical assumptions.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.BetrothedNumbers.coprime_sameParity_twentyOne_primeFactors",
+   "domain": "FRONTIER-betrothed",
+   "register": "PROVED",
+   "statement": "Formalize the second part of Hagis-Lord Proposition 2: a coprime same-parity betrothed pair is odd and its product has at least twenty-one distinct prime factors. Reuse odd_sigma_one_iff and the rational abundancy bound. Clearly separate the exact theorem from historical computational lower bounds.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.BetrothedNumbers.density_zero_reduction",
+   "domain": "FRONTIER-betrothed",
+   "register": "PROVED",
+   "statement": "Decompose Pollack's theorem that betrothed numbers have asymptotic density zero into Mathlib-sized lemmas. First deliver a dependency graph and the weakest reusable analytic-number-theory lemmas; do not claim the density theorem until all dependencies are proved.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.BetrothedNumbers.no_pair_of_mersenne_and_shifted_prime",
+   "domain": "FRONTIER-betrothed",
+   "register": "PROVED",
+   "statement": "Let k>=2 and p be an odd prime. Prove that if 2^k-1 and p+2 are both prime, then no m forms a betrothed pair with 2^k*p. Use the already proved unique-partner theorem m=(2^k-1)(p+2), split on equality of the two auxiliary primes, compute sigma of a product of distinct primes or a prime square, and derive the arithmetic contradiction. No sorry/admit/axiom/native_decide/unsafe.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.BetrothedNumbers.primePower_member_structure",
+   "domain": "FRONTIER-betrothed",
+   "register": "PROVED",
+   "statement": "Formalize Hagis-Lord Proposition 4: if p^a is a member of a betrothed pair, then p is odd, a is odd and greater than 3, and its partner is even. Derive that both members cannot be prime powers. No finite-search assumptions except separately registered small base cases.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.BrocardGap.BrocardGapConjecture",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem BrocardGapConjecture (hO : Oppermann) (n : ℕ) (hn : 1 ≤ n) : 4 ≤ primeCountIn ((Nat.nth Nat.Prime n) ^ 2) ((Nat.nth Nat.Prime (n + 1)) ^ 2)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.BrocardProblem.BrocardConjecture",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem brown_numbers : 4 ! + 1 = 5 ^ 2 ∧ 5 ! + 1 = 11 ^ 2 ∧ 7 ! + 1 = 71 ^ 2",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.CarmichaelKorselt.ThreePrimeCarmichaelInfinitude",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem ThreePrimeCarmichaelInfinitude (H : {k : ℕ | ChernickTriple k}.Infinite) : {n : ℕ | IsCarmichael n ∧ n.primeFactors.card = 3}.Infinite",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.CollatzPartial.CollatzConjecture",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem CollatzConjecture (hdesc : ∀ n : Nat, 1 < n → (n % 32 = 7 ∨ n % 32 = 15 ∨ n % 32 = 27 ∨ n % 32 = 31) → Descends n) : ∀ n : Nat, 0 < n → ∃ k : Nat, iterate collatz k n = 1",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.ConstellationLocalCountK3",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem ConstellationLocalCountK3 (H : Fin 3 → ℤ) : Admissible H ↔ localCount 2 H < 2 ∧ localCount 3 H < 3",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.CosTraceNorm1279",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem CosTraceNorm1279 {m : ℕ} (c f : Fin m → ℝ) (θ : ι → ℝ) : |(Fintype.card ι : ℝ) * ∑ k, c k| ≤ traceNorm (cosCombo_isHermitian c f θ) ∧ traceNorm (cosCombo_isHermitian c f θ) ≤ (Fintype.card ι : ℝ) * ∑ k, |c k|",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.CosTraceNorm1597",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem CosTraceNorm1597 {A : Matrix n n 𝕜} (hA : A.IsHermitian) : 0 ≤ (Fintype.card n : ℝ) - cosTrace A ∧ (Fintype.card n : ℝ) - cosTrace A ≤ min (traceNorm A) (RCLike.re (Matrix.trace (A * A)) / 2)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.CosTraceNorm2003",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem CosTraceNorm2003 {A B : Matrix n n ℂ} (hA : A.IsHermitian) (hB : B.IsHermitian) (hB2 : B * B = 1) (t : ℝ) : Real.sqrt ((Real.cos t * (A.trace).re) ^ 2 + (Real.sin t * ((A * B).trace).re) ^ 2) ≤ traceNorm hA",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.CosTraceNorm2707",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem CosTraceNorm2707 {A : Matrix (Fin n) (Fin n) ℂ} (hA : A.IsHermitian) : ‖(cosM A).trace‖ ≤ n",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.CosTraceNorm3001",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem CosTraceNorm3001 (θ : Fin n → ℝ) : traceNorm (cosMatrix_isHermitian θ) = (n : ℝ)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.CosTraceNorm3499",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem CosTraceNorm3499 {A : Matrix n n ℂ} (hA : A.IsHermitian) : ‖(cosMat A).trace‖ ≤ (Fintype.card n : ℝ)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.CosTraceNorm4001",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem CosTraceNorm4001 (hA : A.IsHermitian) : ‖(cfc Real.cos A).trace - (Fintype.card n : ℂ)‖ ≤ (∑ i, ∑ j, ‖A i j‖ ^ 2) / 2",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.CullenWoodall.CullenPrimeInfinitude",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem CullenPrimeInfinitude (h : ∀ N : ℕ, ∃ n, N < n ∧ Nat.Prime (cullen n)) : cullenPrimeIndices.Infinite",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.CullenWoodall.WoodallPrimeInfinitude",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem one_le_mul_two_pow {n : ℕ} (hn : 0 < n) : 1 ≤ n * 2 ^ n",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.Equidistribution.equidistribution_of_asymptotic",
+   "domain": "A2-discharge-open",
+   "register": "UNVERIFIED",
+   "statement": "theorem equidistribution_of_asymptotic (x : ℕ → ℝ) (hW : ∀ k : ℤ, k ≠ 0 → Tendsto (fun N : ℕ => (N : ℂ)⁻¹ * ∑ n ∈ Finset.range N, Complex.exp (2 * π * Complex.I * k * x n)) atTop (𝓝 0)) {a b : ℝ} (ha : 0 ≤ a) (hab : a ≤ b) (hb : b ≤ 1) : Tendsto (fun N : ℕ => (((Finset.range N).filter fun n => Int.fract (x n) ∈ Set.Ico a b).card : ℝ) / N) atTop (𝓝 (b - a))",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Equidistribution.equidistribution_of_asymptotic_exists",
+   "domain": "A2-discharge-open",
+   "register": "PROVED",
+   "statement": "theorem equidistribution_of_asymptotic_exists : ∃ u : ℕ → ℝ, (∀ n, u n ∈ Set.Ico (0 : ℝ) 1) ∧ AsymptoticallyEquidistributedMod1 u",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.EquidistributionBVReduction.configCount_density_of_BV",
+   "domain": "A1-discharge-literature",
+   "register": "PROVED",
+   "statement": "theorem configCount_density_of_BV (u : ℕ → ℝ) (hequi : Equidistributed u) {a b : ℝ} (ha : 0 ≤ a) (hab : a ≤ b) (hb : b ≤ 1) : Tendsto (fun N : ℕ => (configCount u (Ico a b) N : ℝ) / N) atTop (𝓝 (b - a))",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.EquidistributionBVReduction.configCount_over_main_tendsto",
+   "domain": "A1-discharge-literature",
+   "register": "PROVED",
+   "statement": "theorem configCount_over_main_tendsto {alpha a b : ℝ} (halpha : Irrational alpha) (ha : 0 ≤ a) (hab : a < b) (hb : b ≤ 1) : Tendsto (fun N : ℕ => (configCount alpha a b N : ℝ) / mainTerm a b N) atTop (𝓝 1)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.EquidistributionBVReduction.equidistribution_of_BV_uniform",
+   "domain": "A1-discharge-literature",
+   "register": "UNVERIFIED",
+   "statement": "theorem equidistribution_of_BV_uniform {u : ℕ → ℝ} (hu : UniformlyDistributedMod1 u) {f : ℝ → ℝ} (hf : BoundedVariationOn f (Set.Icc 0 1)) : Tendsto (avg u f) atTop (𝓝 (∫ x in (0 : ℝ)..1, f x))",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.EquidistributionBVReduction.total_over_main_tendsto",
+   "domain": "A1-discharge-literature",
+   "register": "PROVED",
+   "statement": "theorem total_over_main_tendsto (hf : BoundedVariationOn f (Set.Icc (0:ℝ) 1)) (hx : ∀ n, x n ∈ Set.Ico (0:ℝ) 1) (heq : Equidistributed x) (hI : (∫ t in (0:ℝ)..1, f t) ≠ 0) : Tendsto (fun N : ℕ => (∑ n ∈ Finset.range N, f (x n)) / (N * ∫ t in (0:ℝ)..1, f t)) atTop (𝓝 1)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.EquidistributionUniformity.equidistribution_of_transitive_symmetry",
+   "domain": "A1-discharge-literature",
+   "register": "PROVED",
+   "statement": "theorem equidistribution_of_transitive_symmetry [Nonempty X] [MulAction.IsPretransitive G X] (x : X) (A : Finset X) : (({g : G | g • x ∈ A} : Finset G).card : ℝ) / Fintype.card G = (A.card : ℝ) / Fintype.card X",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.EquidistributionUniformity.sing_uniform_of_transitive",
+   "domain": "A1-discharge-literature",
+   "register": "PROVED",
+   "statement": "theorem sing_uniform_of_transitive (htrans : ∀ x y : X, ∃ g : G, g • x = y) (x y : X) : Fintype.card X * (Finset.univ.filter fun g : G => g • x = y).card = Fintype.card G",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.ErdosStraus.ErdosStrausConjecture",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem ErdosStrausConjecture (h : ∀ p : ℕ, p.Prime → p % 12 = 1 → ErdosStrausRepr p) : ∀ n : ℕ, 2 ≤ n → ErdosStrausRepr n",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.FermatNumbers.FermatPrimeBeyondFour",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem FermatPrimeBeyondFour : (∃ n, 4 < n ∧ Nat.Prime (fermat n)) ↔ (∃ n, 4 < n ∧ PepinResidue n)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.FortunateNumbers.FortuneConjecture",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem FortuneConjecture (h : ∀ n, 2 ≤ n → fortunate n ≤ n ^ 2) (n : ℕ) : Nat.Prime (fortunate n)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.FreeLaplacianPlancherel.freeLaplacian_essentiallySelfAdjoint_via_plancherel",
+   "domain": "A2-discharge-open",
+   "register": "UNVERIFIED",
+   "statement": "theorem freeLaplacian_essentiallySelfAdjoint_via_plancherel : DenseRange (fun f : 𝓢(ℝ, ℂ) => toL2 f) ∧ IsSymmetricGraph freeLaplacianGraph ∧ IsEssentiallySelfAdjointGraph freeLaplacianGraph",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.GilbreathConjecture.GilbreathConjecture",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem GilbreathConjecture (h : GilbreathData) : ∀ k : ℕ, 1 ≤ k → G k 0 = 1",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.GiugaNumbers.OddGiugaExists",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem OddGiugaExists {S : Finset ℕ} (hp : ∀ p ∈ S, p.Prime) (h2 : ∀ p ∈ S, p ≠ 2) (hcard : 2 ≤ S.card) (hdvd : ∀ p ∈ S, p ∣ (∏ q ∈ S.erase p, q) - 1) : ∃ n : ℕ, Odd n ∧ IsGiuga n",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.GoldbachComb.GoldbachCovarianceTransfer",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem GoldbachCovarianceTransfer (n : ℕ) (f g : ℕ → ℝ) : cov (goldbachSet n) (fun p => f (n - p)) (fun p => g (n - p)) = cov (goldbachSet n) f g",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.GoldbachSchema.goldbach_beyond_of_model",
+   "domain": "A2-discharge-open",
+   "register": "PROVED",
+   "statement": "theorem goldbach_beyond_of_model (B : ℕ) (hB : B ≤ 200) (hmodel : ModelBeyond B) : Goldbach",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.GoldbachSchema.goldbach_from_spectral_model",
+   "domain": "A2-discharge-open",
+   "register": "PROVED",
+   "statement": "theorem goldbach_from_spectral_model : (∀ n : ℕ, Even n → 4 ≤ n → SpectralPositivity n) ↔ GoldbachConjecture",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.GoldbachWheelK2_1051",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem GoldbachWheelK2_1051 : GoldbachWheelK2 1051",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.GoldbachWheelK2_1153",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem GoldbachWheelK2_1153 : IsGoldbachWheelModulusK2 1153",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.GoldbachWheelK2_1327",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem GoldbachWheelK2_1327 (r : ZMod 1327) (N : ℕ) : ∃ p q : ℕ, N < p ∧ N < q ∧ Nat.Prime p ∧ Nat.Prime q ∧ (p : ZMod 1327) + (q : ZMod 1327) = r",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.GoldbachWheelK2_631",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem GoldbachWheelK2_631 : GoldbachWheelK2 631",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.GoldbachWheelK2_727",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem GoldbachWheelK2_727 : GoldbachWheelK2 727",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.GoldbachWheelK2_947",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem GoldbachWheelK2_947 : GoldbachWheelK2 947",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.HyperperfectNumbers.HyperperfectAllK",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem HyperperfectAllK (hBrock : BrockianFactorizationHypothesis) : ∀ k : ℕ, 1 ≤ k → ∃ n : ℕ, IsHyperperfect k n",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.HyperperfectNumbers.HyperperfectInfinitude",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem HyperperfectInfinitude (H : ∀ N : ℕ, ∃ k > N, Nat.Prime (k + 1) ∧ Nat.Prime (k ^ 2 + k + 1)) : {n : ℕ | Hyperperfect n}.Infinite",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.LandauNSquaredPlusOne.LandauFourthConjecture",
+   "domain": "B-conjecture",
+   "register": "UNVERIFIED",
+   "statement": "theorem LandauFourthConjecture (H : HardyLittlewoodLowerBound) : {n : ℕ | Nat.Prime (n ^ 2 + 1)}.Infinite",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.LegendreConjecture.LegendreConjecture",
+   "domain": "B-conjecture",
+   "register": "UNVERIFIED",
+   "statement": "theorem LegendreConjecture (hgap : ShortGapHypothesis) : LegendreStatement",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.MersennePerfect.EvenPerfectInfinitude",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem EvenPerfectInfinitude : EvenPerfects.Infinite ↔ MersenneExponents.Infinite",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.MersennePerfect.MersennePrimeInfinitude",
+   "domain": "B-conjecture",
+   "register": "UNVERIFIED",
+   "statement": "theorem MersennePrimeInfinitude : MersenneExponents.Infinite ↔ EvenPerfects.Infinite",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.OppermannConjecture.OppermannConjecture",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem OppermannConjecture (H : SqrtPrimeGapHypothesis) : OppermannStatement",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.OreHarmonicNumbers.OddHarmonicExists",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem OddHarmonicExists : ∃ n : ℕ, Odd n ∧ IsOreHarmonic n",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.PalindromicPrimes.PalindromicPrimeInfinitude",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem PalindromicPrimeInfinitude (H : ∀ n : ℕ, ∃ m ≥ n, ∃ p : ℕ, Nat.Prime p ∧ IsPalindrome p ∧ (Nat.digits 10 p).length = 2 * m + 1) : palindromicPrimes.Infinite",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.PentagonPentagonCharacterMultiplicityExt",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem PentagonPentagonCharacterMultiplicityExt (n : ℕ) [NeZero n] (k : ℤ) : charMult n (dihedralChar n k) = 1",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.PentagonPentagonEquivarianceGeneral",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem PentagonPentagonEquivarianceGeneral (n : ℕ) [NeZero n] (g : DihedralGroup n) (k : ZMod n) : planeMap g (ngonVertex n k) = ngonVertex n (vertexAction g k)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.PentagonPentagonIsotypicHigherN",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem PentagonPentagonIsotypicHigherN (n : ℕ) [NeZero n] : (∀ k : ZMod n, rotOp n (chi n k) = stdAddChar k • chi n k) ∧ (∀ k : ZMod n, reflOp n (chi n k) = chi n (-k)) ∧ (∀ k : ZMod n, (isotypic n k).map (rotOp n) ≤ isotypic n k) ∧ (∀ k : ZMod n, (isotypic n k).map (reflOp n) ≤ isotypic n k) ∧ (∀ k : ZMod n, Module.finrank ℂ (isotypic n k) = if k = -k then 1 else 2) ∧ (⨆ k : ZMod n, isotypic n k) = ⊤",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.PerfectTotient.PerfectTotientInfinitude",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem PerfectTotientInfinitude : ∀ N : ℕ, ∃ n : ℕ, N < n ∧ IsPerfectTotient n",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.PolignacPrimes.PolignacConjecture",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem PolignacConjecture (H : DicksonHypothesis) : PolignacStatement",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.PracticalNumbers.PracticalTwinInfinitude",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem PracticalTwinInfinitude : {n : ℕ | Practical n ∧ Practical (n + 2)}.Infinite",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.QuasiperfectNumbers.QuasiperfectExists",
+   "domain": "B-conjecture",
+   "register": "UNVERIFIED",
+   "statement": "theorem QuasiperfectExists : (∃ n : ℕ, Quasiperfect n) ↔ (∃ n : ℕ, Quasiperfect n ∧ Odd n ∧ IsSquare n)",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.RepunitPrimes.RepunitPrimeInfinitude",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem RepunitPrimeInfinitude : (∀ N : ℕ, ∃ n : ℕ, N < n ∧ Nat.Prime (repunit n)) ↔ RepunitPrimeSet.Infinite",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.RiemannScaffold.RH_of_BrockianSystem",
+   "domain": "A2-discharge-open",
+   "register": "PROVED",
+   "statement": "theorem RH_of_BrockianSystem (B : BrockianSystem) : RiemannHypothesis",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.RieselCovering.RieselProblem",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem RieselProblem (n : ℕ) (hn : 1 ≤ n) : ¬ Nat.Prime (509203 * 2 ^ n - 1)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.RuthAaronPairs.RuthAaronInfinitude",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem RuthAaronInfinitude (H : RuthAaronSeedsUnbounded) : {n : ℕ | IsRuthAaronPair n}.Infinite",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.SierpinskiCovering.SierpinskiProblem",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem SierpinskiProblem : ∀ n : Nat, 1 ≤ n → ¬ IsPrimeNat (78557 * 2 ^ n + 1)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.SingularSeriesConvergenceRate",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem SingularSeriesConvergenceRate (N : ℕ) (hN : 2 ≤ N) : |truncatedSingularSeries N - singularSeries| ≤ 2 / ((N : ℝ) - 1)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.SingularSeriesGaps12401250",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem SingularSeriesGaps12401250 (n : ℕ) (h1 : 1240 ≤ n) (h2 : n ≤ 1250) : Admissible ({0, (n : ℤ)} : Finset ℤ) ↔ Even n",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.SingularSeriesGaps13501360",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem SingularSeriesGaps13501360 : (∀ g : ℕ, 1350 ≤ g → g ≤ 1360 → ((Admissible (gapSet g) ↔ Even g) ∧ (0 < normalizedSingularSeries g ↔ Even g))) ∧ normalizedSingularSeries 1350 = 8 / 3 ∧ normalizedSingularSeries 1352 = 12 / 11 ∧ normalizedSingularSeries 1354 = 676 / 675 ∧ normalizedSingularSeries 1356 = 224 / 111 ∧ normalizedSingularSeries 1358 = 576 / 475 ∧ normalizedSingularSeries 1360 = 64 / 45",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.SingularSeriesGaps14501460",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem SingularSeriesGaps14501460 : ((Finset.Icc 1450 1460).filter (fun d : ℕ => Admissible ({0, (d : ℤ)} : Finset ℤ)) = ({1450, 1452, 1454, 1456, 1458, 1460} : Finset ℕ)) ∧ (∀ d ∈ ({1450, 1452, 1454, 1456, 1458, 1460} : Finset ℕ), ∀ N : ℕ, 0 < singularSeriesPartial ({0, (d : ℤ)} : Finset ℤ) N)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.SingularSeriesGaps16021610",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem SingularSeriesGaps16021610 : (∀ d : ℕ, 1602 ≤ d → d ≤ 1610 → (Admissible {0, (d : ℤ)} ↔ Even d)) ∧ (∀ d : ℕ, 1602 ≤ d → d ≤ 1610 → Even d → 0 < singularSeries d) ∧ (∀ d : ℕ, 1602 ≤ d → d ≤ 1610 → Even d → d ≠ 1608 → singularSeries d < singularSeries 1608) ∧ singularSeries 1608 = 264 / 65",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.SingularSeriesGaps7280",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem SingularSeriesGaps7280 : (∀ (a d : ℤ) (k : ℕ), 2 ≤ k → d * ((k : ℤ) - 1) = 7280 → (Admissible (gapSet a d k) ↔ k = 2)) ∧ (∀ a : ℤ, ∀ p : ℕ, p.Prime → 0 < localFactor (gapSet a 7280 2) p)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.SingularSeriesGaps9098",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "theorem SingularSeriesGaps9098 : (∀ k : ℕ, 90 ≤ k → k ≤ 98 → Admissible (apTuple k (primorialUpTo 98 : ℤ))) ∧ (∀ k : ℕ, ∀ d : ℤ, 90 ≤ k → k ≤ 98 → (Admissible (apTuple k d) ↔ ∀ p : ℕ, p.Prime → p ≤ k → (p : ℤ) ∣ d)) ∧ (∀ k : ℕ, 90 ≤ k → k ≤ 96 → Admissible (apTuple k (primorialUpTo 89 : ℤ))) ∧ (∀ k : ℕ, 97 ≤ k → k ≤ 98 → ¬ Admissible (apTuple k (primorialUpTo 89 : ℤ)))",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.SophieGermain.SophieGermainInfinitude",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem SophieGermainInfinitude (hD : DicksonsConjecture) : {p : ℕ | IsSophieGermain p}.Infinite",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.SuperperfectNumbers.OddSuperperfectExists",
+   "domain": "B-conjecture",
+   "register": "UNVERIFIED",
+   "statement": "theorem OddSuperperfectExists : (∃ n, Odd n ∧ Superperfect n) ↔ ∃ n, Odd n ∧ Superperfect n ∧ 1000 < n ∧ ¬ n.Prime ∧ ∃ a k, Odd k ∧ sig n = 2 ^ a * k ∧ (2 ^ (a + 1) - 1) * sig k = 2 * n",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.TwinPrimes.TwinPrimeConjecture",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem twinPrimeConjecture_iff_infinite : TwinPrimeConjecture ↔ {p : ℕ | IsTwinPrimePair p}.Infinite",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.UnitaryPerfect.SixthUnitaryPerfectExists",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem SixthUnitaryPerfectExists (h : ∃ n, IsUnitaryPerfect n ∧ n ∉ knownFive) : ∃ S : Finset ℕ, S.card = 6 ∧ ∀ m ∈ S, IsUnitaryPerfect m",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.WeirdNumbers.OddWeirdExists",
+   "domain": "B-conjecture",
+   "register": "UNVERIFIED",
+   "statement": "theorem OddWeirdExists {n : ℕ} (hodd : Odd n) (hab : n.Abundant) (hrep : ∀ s ⊆ n.properDivisors, ∑ i ∈ s, i ≠ abundance n) : OddWeirdStatement",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Weyl.DeficiencyODE.deficiencyRepresentsODE_of_weakRegularity",
+   "domain": "A1-discharge-literature",
+   "register": "PROVED",
+   "statement": "theorem deficiencyRepresentsODE_of_weakRegularity {q : ℝ → ℝ} (hq : Continuous q) (z : ℂ) : deficiencySet q z = odeSolutionSet q z",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.Weyl.DeficiencyODE.schrodinger_essentiallySelfAdjoint_of_weakRegularity",
+   "domain": "A1-discharge-literature",
+   "register": "UNVERIFIED",
+   "statement": "theorem schrodinger_essentiallySelfAdjoint_of_weakRegularity (V : ℤ → ℝ) (hV : ∃ C, ∀ n, |V n| ≤ C) : IsSymmetricOn finSupp (schrodingerLM V hV) ∧ EssentiallySelfAdjointOn finSupp (schrodingerLM V hV)",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fourier",
+   "domain": "A2-discharge-open",
+   "register": "UNVERIFIED",
+   "statement": "theorem freeLaplacian_essentiallySelfAdjoint_of_fourier : IsSelfAdjoint (freeLaplacian V).closure",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Weyl.SchrodingerMinimal.schrodinger_essentiallySelfAdjoint_of_ode",
+   "domain": "A2-discharge-open",
+   "register": "UNVERIFIED",
+   "statement": "theorem schrodinger_essentiallySelfAdjoint_of_ode (V₀ : ℝ) : (∀ f g : ℝ → ℂ, IsTestFunction f → IsTestFunction g → ∫ x, (starRingEnd ℂ) (schrodingerExpr V₀ f x) * g x = ∫ x, (starRingEnd ℂ) (f x) * schrodingerExpr V₀ g x) ∧ (∀ z : ℂ, z.im ≠ 0 → ∀ w : ℝ → ℂ, MemLp w 2 volume → ∀ ε : ℝ, 0 < ε → ∃ f : ℝ → ℂ, IsTestFunction f ∧ eLpNorm (fun x => w x - (schrodingerExpr V₀ f x - z * f x)) 2 volume < ENNReal.ofReal ε)",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_candidate",
+   "domain": "A2-discharge-open",
+   "register": "UNVERIFIED",
+   "statement": "theorem counting_diverges_of_candidate (c : Candidate α) (M : Nat) : ∃ T0 : α, ∀ T : α, T0 ≤ T → ∀ k : Nat, IsCount c T k → M ≤ k",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_WeylLawMatch",
+   "domain": "A2-discharge-open",
+   "register": "PROVED",
+   "statement": "theorem counting_diverges_of_discrete_and_WeylLawMatch (S : Set ℝ) (C p : ℝ) (_hdisc : Discrete S) (hW : WeylLawMatch S C p) : Tendsto (fun L : ℝ => (counting S L : ℝ)) atTop atTop",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_discrete_and_rvm",
+   "domain": "A2-discharge-open",
+   "register": "PROVED",
+   "statement": "theorem counting_diverges_of_discrete_and_rvm {S : Set ℝ} (hdisc : SpectrumDiscrete S) (hrvm : RVM S) : Filter.Tendsto (countingFunction S) Filter.atTop Filter.atTop",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_exists",
+   "domain": "A2-discharge-open",
+   "register": "PROVED",
+   "statement": "theorem counting_diverges_of_exists {S : Set ℝ} (hlf : ∀ lam : ℝ, (S ∩ Set.Iic lam).Finite) (hinf : S.Infinite) : Filter.Tendsto (countingFunction S) Filter.atTop Filter.atTop",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.WilsonPrimes.WilsonPrimeInfinitude",
+   "domain": "B-conjecture",
+   "register": "UNVERIFIED",
+   "statement": "theorem WilsonPrimeInfinitude (h : ∀ N : ℕ, ∃ p : ℕ, p.Prime ∧ N < p ∧ p ∣ wilsonQuotient p) : {p : ℕ | WilsonPrime p}.Infinite",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.ZumkellerNumbers.OddZumkellerFrom3Structure",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "theorem OddZumkellerFrom3Structure : (∀ n : ℕ, Odd n → IsZumkeller n → 3 ≤ n.primeFactors.card) ∧ (IsZumkeller 945 ∧ Odd 945 ∧ (945 : ℕ).primeFactors.card = 3) ∧ (∀ m : ℕ, Odd m → Nat.Coprime 945 m → Odd (945 * m) ∧ IsZumkeller (945 * m))",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.ackermann_total",
+   "domain": "DOMAIN-cs",
+   "register": "PROVED",
+   "statement": "The Ackermann function is total (well-founded on lexicographic ℕ²).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.aks_primes_in_p",
+   "domain": "FRONTIER-cs",
+   "register": "UNVERIFIED",
+   "statement": "PRIMES ∈ P (Agrawal–Kayal–Saxena).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.baker_gill_solovay",
+   "domain": "FRONTIER-cs",
+   "register": "UNVERIFIED",
+   "statement": "There are oracles A,B with P^A=NP^A and P^B≠NP^B (relativization barrier).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.barrington",
+   "domain": "FRONTIER-cs",
+   "register": "UNVERIFIED",
+   "statement": "NC¹ equals width-5 permutation branching programs (Barrington).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.binary_search_correct",
+   "domain": "DOMAIN-cs",
+   "register": "PROVED",
+   "statement": "Binary search on a sorted array returns an index iff the key is present.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.blum_speedup",
+   "domain": "FRONTIER-cs",
+   "register": "PROVED",
+   "statement": "There exist problems with no fastest algorithm (Blum speedup).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.cantor_powerset",
+   "domain": "DOMAIN-cs",
+   "register": "PROVED",
+   "statement": "There is no surjection A → 𝒫(A) (Cantor).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.church_rosser_beta_diamond",
+   "domain": "DOMAIN-cs",
+   "register": "UNVERIFIED",
+   "statement": "One-step parallel β-reduction in the λ-calculus has the diamond property.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.dfa_complement_regular",
+   "domain": "DOMAIN-cs",
+   "register": "PROVED",
+   "statement": "Regular languages are closed under complement.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.dijkstra_correct",
+   "domain": "DOMAIN-cs",
+   "register": "UNVERIFIED",
+   "statement": "Dijkstra's algorithm computes shortest-path distances on nonnegative-weight graphs.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.disjointness_lb",
+   "domain": "FRONTIER-cs",
+   "register": "PROVED",
+   "statement": "Set-disjointness has Ω(n) randomized communication complexity.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.euclid_gcd_correct",
+   "domain": "DOMAIN-cs",
+   "register": "PROVED",
+   "statement": "Euclid's algorithm returns gcd(a,b) and terminates.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.halting_undecidable",
+   "domain": "DOMAIN-cs",
+   "register": "PROVED",
+   "statement": "There is no total computable H deciding whether program p halts on input x (diagonalization).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.hilbert10_undecidable",
+   "domain": "FRONTIER-cs",
+   "register": "UNVERIFIED",
+   "statement": "Hilbert's tenth problem is undecidable: Diophantine solvability (MRDP).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.huffman_optimal",
+   "domain": "DOMAIN-cs",
+   "register": "UNVERIFIED",
+   "statement": "Huffman coding minimizes expected codeword length among prefix codes.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.immerman_szelepcsenyi",
+   "domain": "FRONTIER-cs",
+   "register": "UNVERIFIED",
+   "statement": "NL = coNL (nondeterministic space is closed under complement).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.impagliazzo_wigderson",
+   "domain": "FRONTIER-cs",
+   "register": "UNVERIFIED",
+   "statement": "Strong circuit lower bounds imply P = BPP (Impagliazzo–Wigderson).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.insertion_sort_correct",
+   "domain": "DOMAIN-cs",
+   "register": "PROVED",
+   "statement": "insertionSort returns a sorted permutation of its input.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.kleene_regex_dfa",
+   "domain": "DOMAIN-cs",
+   "register": "UNVERIFIED",
+   "statement": "A language is regular iff it is accepted by a DFA (Kleene, finite direction).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.knaster_tarski",
+   "domain": "DOMAIN-cs",
+   "register": "PROVED",
+   "statement": "A monotone map on a complete lattice has a least fixed point.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.ladner",
+   "domain": "FRONTIER-cs",
+   "register": "PROVED",
+   "statement": "If P ≠ NP then NP-intermediate problems exist (Ladner).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.master_theorem_case1",
+   "domain": "DOMAIN-cs",
+   "register": "PROVED",
+   "statement": "T(n)=aT(n/b)+f(n) with f(n)=O(n^{log_b a − ε}) gives T(n)=Θ(n^{log_b a}).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.mergesort_correct",
+   "domain": "DOMAIN-cs",
+   "register": "PROVED",
+   "statement": "mergeSort returns a sorted permutation of its input.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.nisan_wigderson_prg",
+   "domain": "FRONTIER-cs",
+   "register": "PROVED",
+   "statement": "The Nisan–Wigderson generator derandomizes from a hard function.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.parity_not_ac0",
+   "domain": "FRONTIER-cs",
+   "register": "UNVERIFIED",
+   "statement": "PARITY ∉ AC⁰ (Håstad switching lemma).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.pcp_dinur",
+   "domain": "FRONTIER-cs",
+   "register": "PROVED",
+   "statement": "Dinur's gap-amplification proof of the PCP theorem (statement).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.pcp_pigeon_bound",
+   "domain": "DOMAIN-cs",
+   "register": "PROVED",
+   "statement": "Any prefix-free binary code satisfies Kraft's inequality Σ 2^{-ℓ_i} ≤ 1.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.pcp_theorem",
+   "domain": "FRONTIER-cs",
+   "register": "PROVED",
+   "statement": "NP = PCP(log n, 1): the PCP theorem (statement).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.pigeonhole_hash",
+   "domain": "DOMAIN-cs",
+   "register": "PROVED",
+   "statement": "Any hash from an (n+1)-set to an n-set has a collision.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.pumping_regular",
+   "domain": "DOMAIN-cs",
+   "register": "UNVERIFIED",
+   "statement": "Every regular language satisfies the pumping lemma.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.razborov_smolensky",
+   "domain": "FRONTIER-cs",
+   "register": "UNVERIFIED",
+   "statement": "MOD_p ∉ AC⁰[q] for distinct primes p,q (Razborov–Smolensky).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.recursion_theorem",
+   "domain": "FRONTIER-cs",
+   "register": "PROVED",
+   "statement": "Kleene's recursion theorem: every computable transformation of programs has a fixed point.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.reingold_sl_l",
+   "domain": "FRONTIER-cs",
+   "register": "UNVERIFIED",
+   "statement": "Undirected s-t connectivity is in L (SL = L; Reingold).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.rice_extended",
+   "domain": "FRONTIER-cs",
+   "register": "PROVED",
+   "statement": "The set of indices of a nontrivial semantic property is not recursive (Rice).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.rice_nontrivial",
+   "domain": "DOMAIN-cs",
+   "register": "PROVED",
+   "statement": "Every nontrivial semantic property of programs is undecidable (Rice).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.savitch",
+   "domain": "FRONTIER-cs",
+   "register": "UNVERIFIED",
+   "statement": "NSPACE(f) ⊆ DSPACE(f²), so PSPACE = NPSPACE (Savitch).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.sorting_lb_3",
+   "domain": "DOMAIN-cs",
+   "register": "PROVED",
+   "statement": "Any comparison sort of 3 elements needs ≥ ⌈log₂(3!)⌉ comparisons in the worst case.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.sorting_lb_4",
+   "domain": "DOMAIN-cs",
+   "register": "UNVERIFIED",
+   "statement": "Any comparison sort of 4 elements needs ≥ ⌈log₂(4!)⌉ comparisons in the worst case.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "CS.sorting_lb_5",
+   "domain": "DOMAIN-cs",
+   "register": "PROVED",
+   "statement": "Any comparison sort of 5 elements needs ≥ ⌈log₂(5!)⌉ comparisons in the worst case.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.time_hierarchy",
+   "domain": "FRONTIER-cs",
+   "register": "PROVED",
+   "statement": "The time hierarchy theorem: more time gives strictly more languages (diagonalization).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.valiant_permanent",
+   "domain": "FRONTIER-cs",
+   "register": "PROVED",
+   "statement": "The 0/1 permanent is #P-complete (Valiant).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "CS.yao_principle",
+   "domain": "FRONTIER-cs",
+   "register": "PROVED",
+   "statement": "Yao's minimax principle relates randomized and distributional complexity.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Cardinal.aleph_fixed_point_statement",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "There is a fixed point of the aleph function: there exists an ordinal o such that Cardinal.aleph o = Cardinal.aleph0 raised through the normal-function fixed point, i.e. exists o, (Ordinal.toType (Cardinal.aleph o).ord) has the aleph-fixed-point property — state cleanly: the aleph function (as a normal function on ordinals) has a fixed point, exists o, Cardinal.aleph o = o-indexed value. Use Mathlib's Ordinal normal-",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Cardinal.continuum_eq_two_pow_aleph0",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "The cardinality of the continuum equals 2 ^ aleph_0: Cardinal.continuum = 2 ^ Cardinal.aleph0. (Use Mathlib's Cardinal.continuum definition / mk_real.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chebyshev.psi_two_le",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "A concrete Chebyshev psi instance: the second Chebyshev function psi(4) = sum of von Mangoldt Lambda(n) for n <= 4 = log 2 + log 3 + log 2 = log 12. Prove (using Mathlib's ArithmeticFunction.vonMangoldt) that the sum of Lambda(n) over n in {1,2,3,4} equals Real.log 12. (Lambda(1)=0, Lambda(2)=log2, Lambda(3)=log3, Lambda(4)=log2.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.alkane_tree",
+   "domain": "DOMAIN-chem",
+   "register": "UNVERIFIED",
+   "statement": "The carbon skeleton of an acyclic alkane C_nH_{2n+2} is a tree with n−1 C–C bonds.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Chem.arrhenius_monotone",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "The Arrhenius rate k=A e^{−Ea/RT} is strictly increasing in T for Ea>0.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.balance_nullspace",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "A chemical reaction balances iff the stoichiometric matrix has a positive integer null vector.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.benzene_D6h_irreps",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "The character table of D₆ₕ has the correct number of irreducible representations (=conjugacy classes).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.entropy_concave",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "The Gibbs entropy −Σ p_i log p_i is concave in the probability vector.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.euler_polyhedron",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "For a convex polyhedron (e.g. fullerene cage) V−E+F=2 (Euler's formula).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.fullerene_pentagons",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "A trivalent polyhedron with only pentagon/hexagon faces has exactly 12 pentagons.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.gibbs_phase_rule",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "Degrees of freedom F = C − P + 2 as an affine-dimension count.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.handshake_valence",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "Sum of atomic valences (vertex degrees) equals twice the number of bonds.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.huckel_C10",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_10 are 2·cos(2πk/10) for k=0..9.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.huckel_C11",
+   "domain": "DOMAIN-chem",
+   "register": "UNVERIFIED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_11 are 2·cos(2πk/11) for k=0..10.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Chem.huckel_C12",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_12 are 2·cos(2πk/12) for k=0..11.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.huckel_C13",
+   "domain": "DOMAIN-chem",
+   "register": "UNVERIFIED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_13 are 2·cos(2πk/13) for k=0..12.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Chem.huckel_C14",
+   "domain": "DOMAIN-chem",
+   "register": "UNVERIFIED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_14 are 2·cos(2πk/14) for k=0..13.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Chem.huckel_C15",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_15 are 2·cos(2πk/15) for k=0..14.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.huckel_C16",
+   "domain": "DOMAIN-chem",
+   "register": "UNVERIFIED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_16 are 2·cos(2πk/16) for k=0..15.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Chem.huckel_C17",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_17 are 2·cos(2πk/17) for k=0..16.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.huckel_C18",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_18 are 2·cos(2πk/18) for k=0..17.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.huckel_C19",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_19 are 2·cos(2πk/19) for k=0..18.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.huckel_C20",
+   "domain": "DOMAIN-chem",
+   "register": "UNVERIFIED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_20 are 2·cos(2πk/20) for k=0..19.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Chem.huckel_C3",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_3 are 2·cos(2πk/3) for k=0..2.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.huckel_C4",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_4 are 2·cos(2πk/4) for k=0..3.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.huckel_C5",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_5 are 2·cos(2πk/5) for k=0..4.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.huckel_C6",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_6 are 2·cos(2πk/6) for k=0..5.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.huckel_C7",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_7 are 2·cos(2πk/7) for k=0..6.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.huckel_C8",
+   "domain": "DOMAIN-chem",
+   "register": "UNVERIFIED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_8 are 2·cos(2πk/8) for k=0..7.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Chem.huckel_C9",
+   "domain": "DOMAIN-chem",
+   "register": "UNVERIFIED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_9 are 2·cos(2πk/9) for k=0..8.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Chem.huckel_cycle_spectrum",
+   "domain": "DOMAIN-chem",
+   "register": "UNVERIFIED",
+   "statement": "The adjacency eigenvalues of the cycle graph C_n are 2cos(2πk/n), k=0..n-1 (Hückel π-energies).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Chem.leChatelier_sign",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "For an exothermic reaction, the equilibrium constant K(T) is strictly decreasing in T (van 't Hoff).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.molecular_orbital_count",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "LCAO of n atomic orbitals yields exactly n molecular orbitals (dimension preservation).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.point_group_finite_O3",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "Every molecular point group is a finite subgroup of O(3).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Chem.polya_isomer_count",
+   "domain": "DOMAIN-chem",
+   "register": "UNVERIFIED",
+   "statement": "Counting substitution isomers on a symmetric skeleton equals the Burnside/Pólya cycle-index average.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Chem.wiener_path_formula",
+   "domain": "DOMAIN-chem",
+   "register": "PROVED",
+   "statement": "The Wiener index of the path graph P_n equals C(n+1,3).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Combinatorics.pigeonhole",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "The pigeonhole principle: if f maps a finite type s into a finite type t with card t < card s, then f is not injective (there exist a b in s, a != b, with f a = f b). (Use Mathlib's Fintype.exists_ne_map_eq_of_card_lt.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Constellation.admissible_triple",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "The prime triple (5,7,11) is a prime constellation of pattern (0,2,6): Nat.Prime 5, Nat.Prime 7, Nat.Prime 11, with 7 = 5+2 and 11 = 5+6.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Constellation.quadruplet_11_13_17_19",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "(11,13,17,19) is a prime quadruplet (pattern (0,2,6,8)): each of 11,13,17,19 is prime and 13=11+2, 17=11+6, 19=11+8.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Fibonacci.cassini",
+   "domain": "FRONTIER-fib",
+   "register": "PROVED",
+   "statement": "Cassini's identity: for every natural n, (Nat.fib (n+2)) * (Nat.fib n) + 1 = (Nat.fib (n+1))^2 when n is even, and (Nat.fib (n+1))^2 + 1 = (Nat.fib (n+2))*(Nat.fib n) when n is odd. State over integers to avoid truncation: for all n : Nat, (Nat.fib (n+2) : Int) * (Nat.fib n) - (Nat.fib (n+1))^2 = (-1)^(n+1). Prove by induction.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Fibonacci.catalan",
+   "domain": "FRONTIER-fib",
+   "register": "PROVED",
+   "statement": "Catalan's identity (a Cassini generalisation): for all n r : Nat with r <= n, (Nat.fib n : Int)^2 - Nat.fib (n-r) * Nat.fib (n+r) = (-1)^(n-r) * (Nat.fib r)^2. Prefer an addition-form restatement avoiding Nat subtraction.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Fibonacci.consecutive_coprime",
+   "domain": "FRONTIER-fib",
+   "register": "PROVED",
+   "statement": "Consecutive Fibonacci numbers are coprime: for all n : Nat, Nat.Coprime (Nat.fib n) (Nat.fib (n+1)). (Use Mathlib's Nat.fib_coprime_fib_succ if present, else induction.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Fibonacci.dOcagne",
+   "domain": "FRONTIER-fib",
+   "register": "PROVED",
+   "statement": "d'Ocagne's identity: for all m n : Nat, (Nat.fib m : Int) * (Nat.fib (n+1)) - (Nat.fib (m+1)) * (Nat.fib n) = (-1)^n * (Nat.fib (m - n)) for m >= n. State the addition form to avoid subtraction: for all m n : Nat, (Nat.fib (m+n+1) : Int) = Nat.fib (m+1)*Nat.fib (n+1) + Nat.fib m * Nat.fib n.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Fibonacci.divides",
+   "domain": "FRONTIER-fib",
+   "register": "PROVED",
+   "statement": "Divisibility: for all m n : Nat, Nat.fib m divides Nat.fib (m * n). (Corollary of fib_gcd; or direct induction.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Fibonacci.gcd",
+   "domain": "FRONTIER-fib",
+   "register": "PROVED",
+   "statement": "Fibonacci-gcd: for all naturals m n, Nat.fib (Nat.gcd m n) = Nat.gcd (Nat.fib m) (Nat.fib n). (Use Mathlib's Nat.fib_gcd.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Fibonacci.sum_first_n",
+   "domain": "FRONTIER-fib",
+   "register": "PROVED",
+   "statement": "Sum of the first n Fibonacci numbers: for all n : Nat, (Finset.range n).sum (fun i => Nat.fib i) = Nat.fib (n+1) - 1. Prove by induction (or Mathlib's Nat.fib sum lemma).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Fibonacci.zeckendorf_small",
+   "domain": "FRONTIER-fib",
+   "register": "PROVED",
+   "statement": "Zeckendorf representation instance: 100 = 89 + 8 + 3 = Nat.fib 11 + Nat.fib 6 + Nat.fib 4, a sum of non-consecutive Fibonacci numbers (indices 11,6,4 pairwise differ by >= 2). Prove the equality 100 = Nat.fib 11 + Nat.fib 6 + Nat.fib 4.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Aronszajn_tree_exists",
+   "domain": "FRONTIER-set",
+   "register": "UNVERIFIED",
+   "statement": "There exists an Aronszajn tree (a tree of height ω₁ with no uncountable branch/level).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.BSD_statement",
+   "domain": "FRONTIER-moonshot",
+   "register": "PROVED",
+   "statement": "State Birch–Swinnerton-Dyer: ord_{s=1}L(E,s) = rank E(ℚ).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Banach_Tarski",
+   "domain": "FRONTIER-set",
+   "register": "UNVERIFIED",
+   "statement": "The unit ball in ℝ³ admits a paradoxical decomposition (Banach–Tarski).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.Borel_determinacy",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "Every Borel game is determined (Martin's theorem).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Brun_twin_reciprocal",
+   "domain": "FRONTIER-primes",
+   "register": "UNVERIFIED",
+   "statement": "The sum of reciprocals of twin primes converges (Brun's constant).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.CH_independent_statement",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "The Continuum Hypothesis is independent of ZFC (Gödel + Cohen forcing).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Catalan_Mihailescu",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "8 and 9 are the only consecutive perfect powers (x^p − y^q = 1 ⇒ 3²−2³).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Chen_theorem",
+   "domain": "FRONTIER-primes",
+   "register": "UNVERIFIED",
+   "statement": "Every sufficiently large even number is p + q with q having ≤ 2 prime factors.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.FLT_statement",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "Fermat's Last Theorem: xⁿ+yⁿ=zⁿ has no positive-integer solution for n>2.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Gale_Stewart_open",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "Every open game is determined (Gale–Stewart).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Goedel_second_incompleteness",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "No consistent recursively-axiomatized theory extending PA proves its own consistency.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Goodstein_terminates",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "Every Goodstein sequence reaches 0 (uses ε₀ well-foundedness; independent of PA).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Green_Tao",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "The primes contain arbitrarily long arithmetic progressions.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Hydra_Kirby_Paris",
+   "domain": "FRONTIER-set",
+   "register": "UNVERIFIED",
+   "statement": "Every hydra game terminates for any strategy (Kirby–Paris; PA-independent).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.Loeb_theorem",
+   "domain": "FRONTIER-set",
+   "register": "UNVERIFIED",
+   "statement": "Löb's theorem: if PA ⊢ (□φ → φ) then PA ⊢ φ.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.Mordell_finite_generation",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "The group of rational points of an elliptic curve over ℚ is finitely generated (Mordell).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.P_vs_NP_statement",
+   "domain": "FRONTIER-moonshot",
+   "register": "PROVED",
+   "statement": "State P ≠ NP via time-bounded Turing machines and polynomial reducibility.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Paris_Harrington",
+   "domain": "FRONTIER-set",
+   "register": "UNVERIFIED",
+   "statement": "The strengthened finite Ramsey theorem is true but unprovable in PA.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.RH_Li_criterion",
+   "domain": "FRONTIER-moonshot",
+   "register": "PROVED",
+   "statement": "RH ⇔ Li's coefficients λ_n ≥ 0 for all n≥1 (state and prove the equivalence).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.RH_statement",
+   "domain": "FRONTIER-moonshot",
+   "register": "PROVED",
+   "statement": "All nontrivial zeros of ζ(s) have real part 1/2.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Spectral.cycle_fiedler_value",
+   "domain": "FRONTIER-spectral",
+   "register": "PROVED",
+   "statement": "For n ≥ 3, the algebraic connectivity (second-smallest Laplacian eigenvalue, the Fiedler value) of the cycle graph C_n equals 2 - 2*Real.cos (2*Real.pi/n). This generalizes the proven pentagon case Brockian.Connectivity.lambda2_eq to the whole cycle family.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Spectral.cycle_gap_vanishes",
+   "domain": "FRONTIER-spectral",
+   "register": "UNVERIFIED",
+   "statement": "Let g n := 2 - 2*Real.cos (2*Real.pi/n). Prove Filter.Tendsto g Filter.atTop (nhds 0). This is the Fiedler value of the cycle C_n; it vanishes as n grows, so the plain cycle family has no uniform spectral gap (the obstruction).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.Spectral.cycle_laplacian_spectrum",
+   "domain": "FRONTIER-spectral",
+   "register": "PROVED",
+   "statement": "For n ≥ 3, the eigenvalues of the graph Laplacian L(C_n) of the cycle graph on n vertices are exactly { 2 - 2*Real.cos (2*Real.pi*k/n) : k ∈ Finset.range n }. Work self-contained over Mathlib: model C_n's Laplacian as the n×n circulant with diagonal 2 and -1 on the two cyclic off-diagonals, and exhibit the discrete-Fourier eigenvectors v_k(j) = Complex.exp (2*π*I*k*j/n).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Spectral.expander_uniform_gap_witness",
+   "domain": "FRONTIER-spectral",
+   "register": "UNVERIFIED",
+   "statement": "Prove: the hypercube graph Q_k on 2^k vertices has smallest nonzero Laplacian eigenvalue equal to 2 for every k ≥ 1. Hence the family (Q_k) has a uniform spectral gap (≥ 2) independent of k. This shows uniform-gap graph families EXIST — the property a parity-breaking constellation family would need.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.Spectral.gap_to_cancellation_conditional",
+   "domain": "FRONTIER-spectral",
+   "register": "PROVED",
+   "statement": "Conditional bridge — prove the IMPLICATION only, keeping both hypotheses open. Setting (abstract): a real inner-product space V, a self-adjoint projection P (the gap projection), a unit vector u, and a real S (the Liouville partial sum). Hypotheses: (H1) gap delta>0 with the identity S = inner u (P u); (H2) contraction bound: norm (P u) <= (1-delta). Conclusion: |S| <= (1-delta). Prove |S| <= (1-delta) from H1 and H2",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Suslin_line",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "A Suslin line exists iff ◊-type hypotheses fail; state Suslin's problem precisely.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Tarski_undefinability",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "Arithmetical truth is not arithmetically definable (Tarski).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.Vinogradov_three_primes",
+   "domain": "FRONTIER-primes",
+   "register": "UNVERIFIED",
+   "statement": "Every sufficiently large odd number is a sum of three primes.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.abc_statement",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "State the abc conjecture: for ε>0, finitely many coprime a+b=c with c > rad(abc)^{1+ε}.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.arrow_impossibility",
+   "domain": "FRONTIER-mind",
+   "register": "PROVED",
+   "statement": "No ranked voting rule for ≥3 alternatives satisfies unanimity, IIA, and non-dictatorship (Arrow; Nobel).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.artin_primitive_root",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "State Artin's conjecture on primitive roots.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.asymptotic_freedom_sign",
+   "domain": "FRONTIER-physics",
+   "register": "PROVED",
+   "statement": "The one-loop SU(N) beta function is negative (asymptotic freedom).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.atiyah_singer_index",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "The analytic index of an elliptic operator equals its topological index.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.aumann_agreement",
+   "domain": "FRONTIER-mind",
+   "register": "UNVERIFIED",
+   "statement": "Agents with common priors and common knowledge of posteriors cannot agree to disagree (Aumann).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.avila_ten_martini",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "The almost Mathieu operator has Cantor spectrum for all irrational flux (Ten Martini).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.bcs_gap_binding",
+   "domain": "FRONTIER-physics",
+   "register": "UNVERIFIED",
+   "statement": "The BCS gap equation has a nonzero solution for any attractive coupling (Cooper pairing).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.bell_theorem",
+   "domain": "FRONTIER-physics",
+   "register": "PROVED",
+   "statement": "No local hidden-variable model reproduces all quantum correlations (Bell); CHSH ≤ 2 classically.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.berry_phase_quantized",
+   "domain": "FRONTIER-physics",
+   "register": "UNVERIFIED",
+   "statement": "The Berry phase around a closed loop is the integral of the Berry curvature.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.bhargava_cube_law",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "Bhargava's cube gives a composition law on pairs of binary quadratic forms recovering Gauss composition.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.bounded_prime_gaps",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "liminf (p_{n+1}−p_n) is finite (Zhang/Maynard).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.cook_levin",
+   "domain": "FRONTIER-moonshot",
+   "register": "UNVERIFIED",
+   "statement": "SAT is NP-complete (Cook–Levin).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.deligne_weil_RH",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "The Riemann hypothesis for varieties over finite fields (Weil conjectures; Deligne).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.duminil_ising_sharp",
+   "domain": "FRONTIER-fields",
+   "register": "UNVERIFIED",
+   "statement": "Sharpness of the phase transition for the Ising model (Duminil-Copin).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.erdos_discrepancy",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "Every ±1 sequence has unbounded discrepancy on homogeneous APs (Tao).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.exotic_R4",
+   "domain": "FRONTIER-fields",
+   "register": "UNVERIFIED",
+   "statement": "There exists a smooth manifold homeomorphic but not diffeomorphic to ℝ⁴ (Donaldson/Freedman).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.faltings_mordell",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "A curve of genus ≥ 2 over ℚ has finitely many rational points (Faltings).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.feit_thompson_odd_order",
+   "domain": "FRONTIER-abel",
+   "register": "PROVED",
+   "statement": "Every finite group of odd order is solvable (Feit–Thompson; Thompson/Tits Abel).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.figalli_OT_regularity",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "Regularity of optimal transport maps under the MTW condition (Figalli).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.five_color_theorem",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "Every planar graph is 5-colourable.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.four_color_statement",
+   "domain": "FRONTIER-moonshot",
+   "register": "PROVED",
+   "statement": "Every planar graph is 4-colourable (Appel–Haken).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.friendship_theorem",
+   "domain": "FRONTIER-fields",
+   "register": "UNVERIFIED",
+   "statement": "If every two people have exactly one common friend, someone is everyone's friend (Erdős–Ko–Rényi).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.furstenberg_szemeredi",
+   "domain": "FRONTIER-abel",
+   "register": "PROVED",
+   "statement": "Positive-density subsets of ℕ contain arbitrarily long APs, via multiple recurrence (Furstenberg).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.gaussian_correlation",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "The Gaussian correlation inequality for symmetric convex sets (Royen).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.gleason_theorem",
+   "domain": "FRONTIER-physics",
+   "register": "PROVED",
+   "statement": "Every quantum measure on a Hilbert space of dim ≥ 3 comes from a density operator (Gleason).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.global_workspace_fixpoint",
+   "domain": "FRONTIER-mind",
+   "register": "PROVED",
+   "statement": "A monotone broadcast (global-workspace) operator on a finite state lattice reaches a least fixed point (Knaster–Tarski).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.good_regulator",
+   "domain": "FRONTIER-mind",
+   "register": "PROVED",
+   "statement": "Every good regulator of a system is (contains) a model of that system (Conant–Ashby).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.hairer_KPZ",
+   "domain": "FRONTIER-fields",
+   "register": "UNVERIFIED",
+   "statement": "The KPZ equation is well-posed via regularity structures (Hairer).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.ham_sandwich",
+   "domain": "FRONTIER-physics",
+   "register": "UNVERIFIED",
+   "statement": "Any n finite measures in ℝⁿ can be simultaneously bisected by one hyperplane (Ham–Sandwich).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.higgs_mass_toy",
+   "domain": "FRONTIER-physics",
+   "register": "PROVED",
+   "statement": "In an abelian Higgs toy model, spontaneous symmetry breaking gives the gauge boson a mass.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.hodge_statement",
+   "domain": "FRONTIER-moonshot",
+   "register": "UNVERIFIED",
+   "statement": "State the Hodge conjecture on algebraicity of Hodge classes.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.huang_sensitivity",
+   "domain": "FRONTIER-fields",
+   "register": "UNVERIFIED",
+   "statement": "Boolean sensitivity and degree are polynomially related (Huang's sensitivity theorem, 2019).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.huh_matroid_log_concave",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "The coefficients of the characteristic polynomial of a matroid are log-concave (Adiprasito–Huh–Katz).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.iit_phi_partition",
+   "domain": "FRONTIER-mind",
+   "register": "PROVED",
+   "statement": "Formalize integrated information Φ as minimized effective-information over bipartitions; prove Φ=0 for a disconnected system.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.inaccessible_implies_ConZFC",
+   "domain": "FRONTIER-set",
+   "register": "UNVERIFIED",
+   "statement": "An inaccessible cardinal yields a model of ZFC, so Con(ZFC+inaccessible)→Con(ZFC).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.infinite_ramsey",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "Every 2-colouring of [ℕ]² has an infinite monochromatic set (infinite Ramsey).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.jones_polynomial_invariant",
+   "domain": "FRONTIER-fields",
+   "register": "UNVERIFIED",
+   "statement": "The Jones polynomial is a link invariant (well-defined under Reidemeister moves).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.kadison_singer",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "The Kadison–Singer problem holds (Marcus–Spielman–Srivastava; interlacing families).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.kam_theorem",
+   "domain": "FRONTIER-physics",
+   "register": "PROVED",
+   "statement": "Invariant tori persist under small perturbation of an integrable system (KAM).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.kochen_specker",
+   "domain": "FRONTIER-physics",
+   "register": "PROVED",
+   "statement": "No noncontextual hidden-variable assignment exists for QM in dimension ≥ 3 (Kochen–Specker).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.landau_levels",
+   "domain": "FRONTIER-physics",
+   "register": "UNVERIFIED",
+   "statement": "A charged particle in a uniform magnetic field has spectrum ℏω_c(n+½).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.langlands_reciprocity",
+   "domain": "FRONTIER-abel",
+   "register": "UNVERIFIED",
+   "statement": "State the Langlands reciprocity conjecture linking Galois and automorphic representations.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.lieb_robinson",
+   "domain": "FRONTIER-physics",
+   "register": "UNVERIFIED",
+   "statement": "Lieb–Robinson bound: an effective light cone for local spin dynamics.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.lieb_thirring_stability",
+   "domain": "FRONTIER-physics",
+   "register": "PROVED",
+   "statement": "The Lieb–Thirring inequality and stability of matter.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.lindenstrauss_QUE",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "Arithmetic quantum unique ergodicity on congruence surfaces (Lindenstrauss).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.loeb_no_self_trust",
+   "domain": "FRONTIER-mind",
+   "register": "PROVED",
+   "statement": "A consistent theory cannot prove its own reflection schema for an unprovable sentence (Löb-based).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.lovasz_kneser",
+   "domain": "FRONTIER-abel",
+   "register": "UNVERIFIED",
+   "statement": "The chromatic number of the Kneser graph KG_{n,k} is n − 2k + 2 (Lovász, via Borsuk–Ulam).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.margulis_superrigidity",
+   "domain": "FRONTIER-abel",
+   "register": "PROVED",
+   "statement": "State Margulis superrigidity for higher-rank lattices.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.mcmullen_renormalization",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "State the renormalization/rigidity results for quadratic-like maps (McMullen).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.milnor_exotic_7sphere",
+   "domain": "FRONTIER-abel",
+   "register": "PROVED",
+   "statement": "There exist smooth manifolds homeomorphic but not diffeomorphic to S⁷ (Milnor).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.mirzakhani_WP_volume",
+   "domain": "FRONTIER-fields",
+   "register": "UNVERIFIED",
+   "statement": "Weil–Petersson volumes of moduli of bordered surfaces satisfy Mirzakhani's recursion.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.nash_equilibrium_exists",
+   "domain": "FRONTIER-mind",
+   "register": "UNVERIFIED",
+   "statement": "Every finite game has a mixed-strategy Nash equilibrium (Nash; via Brouwer/Kakutani).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.navier_stokes_regularity",
+   "domain": "FRONTIER-moonshot",
+   "register": "UNVERIFIED",
+   "statement": "State global smoothness/existence for 3D incompressible Navier–Stokes.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.ngo_fundamental_lemma",
+   "domain": "FRONTIER-fields",
+   "register": "UNVERIFIED",
+   "statement": "State the Langlands–Shelstad fundamental lemma (Ngô).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.nirenberg_gagliardo",
+   "domain": "FRONTIER-abel",
+   "register": "UNVERIFIED",
+   "statement": "The Gagliardo–Nirenberg interpolation inequality.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.no_communication",
+   "domain": "FRONTIER-physics",
+   "register": "PROVED",
+   "statement": "Local operations on one half of an entangled pair cannot transmit information.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.noether_conservation",
+   "domain": "FRONTIER-physics",
+   "register": "PROVED",
+   "statement": "Each smooth symmetry of an action yields a conserved current (Noether, 1D case).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.onsager_2d_ising",
+   "domain": "FRONTIER-physics",
+   "register": "PROVED",
+   "statement": "The exact free energy of the 2D square-lattice Ising model (Onsager).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.penrose_singularity",
+   "domain": "FRONTIER-physics",
+   "register": "UNVERIFIED",
+   "statement": "A spacetime with a trapped surface and the null energy condition is geodesically incomplete (Penrose).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.poincare_3sphere",
+   "domain": "FRONTIER-moonshot",
+   "register": "PROVED",
+   "statement": "Every simply-connected closed 3-manifold is homeomorphic to S³ (Perelman).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.scholze_perfectoid_tilt",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "State the tilting equivalence of perfectoid fields (Scholze).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.self_nonprediction",
+   "domain": "FRONTIER-mind",
+   "register": "PROVED",
+   "statement": "No machine can always correctly predict its own next output before producing it (diagonal self-reference).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.smirnov_percolation",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "Crossing probabilities of critical triangular-lattice percolation are conformally invariant (Cardy–Smirnov).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.spin_statistics",
+   "domain": "FRONTIER-physics",
+   "register": "PROVED",
+   "statement": "State the spin–statistics connection for relativistic quantum fields.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.ssh_winding_invariant",
+   "domain": "FRONTIER-physics",
+   "register": "PROVED",
+   "statement": "The SSH model's topological phase is classified by a ℤ winding number.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.sum_three_cubes_42",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "42 = (−80538738812075974)³ + 80435758145817515³ + 12602123297335631³.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.thurston_geometrization",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "State the geometrization of closed 3-manifolds into eight geometries.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.tknn_chern_hall",
+   "domain": "FRONTIER-physics",
+   "register": "PROVED",
+   "statement": "The integer-quantum-Hall conductance equals a Chern number times e²/h (TKNN).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.uhlenbeck_bubbling",
+   "domain": "FRONTIER-abel",
+   "register": "UNVERIFIED",
+   "statement": "Uhlenbeck compactness / removable singularities for Yang–Mills connections.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.voevodsky_milnor",
+   "domain": "FRONTIER-fields",
+   "register": "UNVERIFIED",
+   "statement": "The Milnor conjecture: mod-2 Galois cohomology ≅ Milnor K-theory / 2 (Voevodsky).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.wigderson_expander_mixing",
+   "domain": "FRONTIER-abel",
+   "register": "PROVED",
+   "statement": "The expander mixing lemma bounds edge discrepancy by the second eigenvalue.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.willmore_conjecture",
+   "domain": "FRONTIER-fields",
+   "register": "PROVED",
+   "statement": "The Clifford torus minimizes Willmore energy among genus-1 surfaces (Marques–Neves).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.yang_mills_mass_gap",
+   "domain": "FRONTIER-moonshot",
+   "register": "UNVERIFIED",
+   "statement": "State existence of quantum Yang–Mills on ℝ⁴ with a positive mass gap.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Frontier.zelmanov_restricted_burnside",
+   "domain": "FRONTIER-fields",
+   "register": "UNVERIFIED",
+   "statement": "The restricted Burnside problem has a positive solution (Zelmanov).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Goldbach.conjecture_statement",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "State (do NOT prove) the strong Goldbach conjecture as a well-formed Prop and prove its trivial self-equivalence: define Goldbach := forall n : Nat, 2 < n -> Even n -> exists p q, Nat.Prime p and Nat.Prime q and p + q = n; then prove Goldbach <-> Goldbach.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Goldbach.instance_100",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "100 is a sum of two primes: Nat.Prime 47 and Nat.Prime 53 and 47 + 53 = 100 (Goldbach for 100).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Goldbach.instance_1000",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "1000 is a sum of two primes: Nat.Prime 3 and Nat.Prime 997 and 3 + 997 = 1000.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Goldbach.ternary_statement",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "Weak (ternary) Goldbach, proved by Helfgott (2013) but not in Mathlib: state as a Prop TernaryGoldbach := forall n : Nat, 5 < n -> Odd n -> exists p q r, Nat.Prime p and Nat.Prime q and Nat.Prime r and p+q+r = n, and prove TernaryGoldbach <-> TernaryGoldbach. Also prove the instance: 7 = 2+2+3 with each prime (a concrete odd case witness for small n).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "GroupTheory.cauchy",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Cauchy's theorem: if a prime p divides the order of a finite group G, then G has an element of order p. State: for [Fintype G] [Group G] and prime p with p divides Fintype.card G, there exists g : G with orderOf g = p. (Use Mathlib's exists_prime_orderOf_dvd_card.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "GroupTheory.cayley",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Cayley's theorem: every group embeds into the symmetric group on its underlying set. State: for [Group G], there is an injective group homomorphism G ->* Equiv.Perm G. (Use Mathlib's MulAction.toPermHom / Equiv.Perm.subgroupOfMulAction, MulAction.toPerm injective.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "GroupTheory.lagrange",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Lagrange's theorem: for a finite group G and a subgroup H, the cardinality of H divides the cardinality of G. State: for [Fintype G] [Group G] (H : Subgroup G) [Fintype H], Fintype.card H divides Fintype.card G. (Use Mathlib's Subgroup.card_subgroup_dvd_card.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "GroupTheory.sylow_exists",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Sylow's first theorem: for a finite group G and a prime p, a Sylow p-subgroup exists — i.e. the type Sylow p G is nonempty. State: for [Group G] [Fintype G] and a prime p, Nonempty (Sylow p G). (Use Mathlib's Sylow existence instance / Sylow.nonempty.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Infinity.aleph0_add_aleph0",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "Cardinal arithmetic: aleph_0 + aleph_0 = aleph_0 (Cardinal.aleph0 + Cardinal.aleph0 = Cardinal.aleph0). And aleph_0 * aleph_0 = aleph_0.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Infinity.cantor_no_injection_from_powerset",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "Dual Cantor: for any type X, no function g : Set X -> X is injective. (Use Mathlib's Function.cantor_injective.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Infinity.cantor_no_surjection",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "Cantor's theorem: for any type X, no function f : X -> Set X is surjective. (Use Mathlib's Function.cantor_surjective.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Infinity.cardinal_lt_power",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "Cantor's cardinal inequality: for every cardinal c, c < 2 ^ c. (Use Mathlib's Cardinal.cantor.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Infinity.konig_lt",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "Koenig's theorem (a strict-cardinal-sum-vs-product form): if for all i in an index set, a i < b i (cardinals), then Cardinal.sum a < Cardinal.prod b. (Use Mathlib's Cardinal.sum_lt_prod.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Infinity.nat_countable",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "The naturals are countably infinite: Nat is a Countable type and is Infinite. Prove Countable Nat and Infinite Nat.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Infinity.rationals_countable",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "The rationals are countable: Rat is a Countable type (equivalently Denumerable). (Use Mathlib's instance / Cardinal.mkRat.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Infinity.reals_uncountable",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "The real numbers are uncountable: there is no surjection from Nat onto Real; equivalently Real is not a countable type. (Use Mathlib's Cardinal.not_countable_real / Real.not_countable or mk_real = continuum.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Infinity.schroeder_bernstein",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "Cantor-Schroeder-Bernstein: for types X Y, if there is an injection X -> Y and an injection Y -> X then there is a bijection X <-> Y. (Use Mathlib's Function.Embedding.schroederBernstein / Cardinal antisymmetry.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "LargeCardinal.inaccessible_statement",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Define an inaccessible-cardinal predicate as a Lean Prop (a cardinal kappa that is uncountable, regular, and a strong limit) and prove ONLY its well-formedness / self-equivalence: define Inaccessible (k : Cardinal) : Prop := Cardinal.aleph0 < k AND k.IsRegular AND (forall c, c < k -> 2^c < k); then prove (exists k, Inaccessible k) <-> (exists k, Inaccessible k). Existence of inaccessibles is INDEPENDENT of ZFC and is",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "LargeCardinal.measurable_statement",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "State a measurable-cardinal property as a Prop (existence of a nonprincipal kappa-complete ultrafilter on kappa) and prove ONLY its self-equivalence P <-> P. Existence of measurable cardinals is a large-cardinal axiom (stronger than ZFC consistency) and is NOT to be proved. This registers the statement, nothing more.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.abel_ruffini_deg5",
+   "domain": "DOMAIN-math",
+   "register": "UNVERIFIED",
+   "statement": "The general quintic is not solvable by radicals (Galois-theoretic).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math.baire_category",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "A complete metric space is not a countable union of nowhere-dense sets.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.bertrand_postulate",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "For every n≥1 there is a prime p with n<p≤2n.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.bolzano_weierstrass",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Every bounded sequence in ℝ^n has a convergent subsequence.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.brouwer_2d",
+   "domain": "DOMAIN-math",
+   "register": "UNVERIFIED",
+   "statement": "Every continuous self-map of the closed 2-disk has a fixed point.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math.cassini_10",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Cassini: F(9)·F(11) − F(10)² = (−1)^10.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.cassini_11",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Cassini: F(10)·F(12) − F(11)² = (−1)^11.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.cassini_12",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Cassini: F(11)·F(13) − F(12)² = (−1)^12.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.cassini_13",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Cassini: F(12)·F(14) − F(13)² = (−1)^13.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.cassini_14",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Cassini: F(13)·F(15) − F(14)² = (−1)^14.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.cassini_15",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Cassini: F(14)·F(16) − F(15)² = (−1)^15.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.cassini_2",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Cassini: F(1)·F(3) − F(2)² = (−1)^2.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.cassini_3",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Cassini: F(2)·F(4) − F(3)² = (−1)^3.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.cassini_4",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Cassini: F(3)·F(5) − F(4)² = (−1)^4.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.cassini_5",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Cassini: F(4)·F(6) − F(5)² = (−1)^5.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.cassini_6",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Cassini: F(5)·F(7) − F(6)² = (−1)^6.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.cassini_7",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Cassini: F(6)·F(8) − F(7)² = (−1)^7.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.cassini_8",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Cassini: F(7)·F(9) − F(8)² = (−1)^8.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.cassini_9",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Cassini: F(8)·F(10) − F(9)² = (−1)^9.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.catalan_closed",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The nth Catalan number equals C(2n,n)/(n+1).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.cauchy_group",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "If a prime p divides |G| then G has an element of order p (Cauchy).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.chinese_remainder",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "For pairwise-coprime moduli, ℤ/(∏nᵢ) ≅ ∏ ℤ/nᵢ.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.dilworth",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "In a finite poset, the minimum antichain cover equals the longest chain length.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.euler_pentagonal",
+   "domain": "DOMAIN-math",
+   "register": "UNVERIFIED",
+   "statement": "Euler's pentagonal number theorem for the partition generating function.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math.fermat_little",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "For prime p and a not divisible by p, a^{p−1} ≡ 1 (mod p).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.fta_algebra",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Every nonconstant complex polynomial has a root (fundamental theorem of algebra).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.gauss_bonnet_polygon",
+   "domain": "DOMAIN-math",
+   "register": "UNVERIFIED",
+   "statement": "The angle sum of a geodesic triangle on the unit sphere exceeds π by its area.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math.halls_marriage",
+   "domain": "DOMAIN-math",
+   "register": "UNVERIFIED",
+   "statement": "A bipartite graph has a perfect matching iff Hall's condition holds.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math.heine_borel",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "A subset of ℝ^n is compact iff it is closed and bounded.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.inclusion_exclusion",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "|⋃A_i| = Σ(−1)^{|S|+1}|⋂_{i∈S}A_i| (inclusion–exclusion).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.ivt",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "A continuous function on [a,b] attains every value between f(a) and f(b).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.lagrange_four_squares",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Every natural number is a sum of four squares.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.lagrange_subgroup",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The order of a subgroup divides the order of a finite group.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.mean_value",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "A differentiable f on [a,b] has c with f'(c)=(f(b)−f(a))/(b−a).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.mobius_root_sum_1",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The sum of the primitive 1-th roots of unity equals μ(1).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.mobius_root_sum_10",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The sum of the primitive 10-th roots of unity equals μ(10).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.mobius_root_sum_11",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The sum of the primitive 11-th roots of unity equals μ(11).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.mobius_root_sum_12",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The sum of the primitive 12-th roots of unity equals μ(12).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.mobius_root_sum_2",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The sum of the primitive 2-th roots of unity equals μ(2).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.mobius_root_sum_3",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The sum of the primitive 3-th roots of unity equals μ(3).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.mobius_root_sum_4",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The sum of the primitive 4-th roots of unity equals μ(4).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.mobius_root_sum_5",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The sum of the primitive 5-th roots of unity equals μ(5).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.mobius_root_sum_6",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The sum of the primitive 6-th roots of unity equals μ(6).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.mobius_root_sum_7",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The sum of the primitive 7-th roots of unity equals μ(7).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.mobius_root_sum_8",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The sum of the primitive 8-th roots of unity equals μ(8).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.mobius_root_sum_9",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The sum of the primitive 9-th roots of unity equals μ(9).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.pell_10",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "x² − 10·y² = 1 has a nontrivial integer solution (Pell).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.pell_11",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "x² − 11·y² = 1 has a nontrivial integer solution (Pell).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.pell_13",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "x² − 13·y² = 1 has a nontrivial integer solution (Pell).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.pell_2",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "x² − 2·y² = 1 has a nontrivial integer solution (Pell).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.pell_3",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "x² − 3·y² = 1 has a nontrivial integer solution (Pell).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.pell_5",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "x² − 5·y² = 1 has a nontrivial integer solution (Pell).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.pell_6",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "x² − 6·y² = 1 has a nontrivial integer solution (Pell).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.pell_7",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "x² − 7·y² = 1 has a nontrivial integer solution (Pell).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.pell_8",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "x² − 8·y² = 1 has a nontrivial integer solution (Pell).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.quadratic_reciprocity",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "For odd primes p≠q: (p/q)(q/p) = (−1)^{((p−1)/2)((q−1)/2)}.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.ramsey_3_3",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "R(3,3) = 6: the two-color Ramsey number.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.ramsey_3_4",
+   "domain": "DOMAIN-math",
+   "register": "UNVERIFIED",
+   "statement": "R(3,4) = 9: the two-color Ramsey number.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math.ramsey_3_5",
+   "domain": "DOMAIN-math",
+   "register": "UNVERIFIED",
+   "statement": "R(3,5) = 14: the two-color Ramsey number.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math.ramsey_4_4",
+   "domain": "DOMAIN-math",
+   "register": "UNVERIFIED",
+   "statement": "R(4,4) = 18: the two-color Ramsey number.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math.sperner_lemma",
+   "domain": "DOMAIN-math",
+   "register": "UNVERIFIED",
+   "statement": "Every Sperner coloring of a triangulated simplex has an odd number of rainbow cells.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math.sum_two_squares",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "A prime p is a sum of two squares iff p=2 or p≡1 (mod 4).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.two_squares_101",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The prime 101 is a sum of two squares.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.two_squares_109",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The prime 109 is a sum of two squares.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.two_squares_113",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The prime 113 is a sum of two squares.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.two_squares_13",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The prime 13 is a sum of two squares.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.two_squares_17",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The prime 17 is a sum of two squares.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.two_squares_29",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The prime 29 is a sum of two squares.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.two_squares_37",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The prime 37 is a sum of two squares.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.two_squares_41",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The prime 41 is a sum of two squares.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.two_squares_5",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The prime 5 is a sum of two squares.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.two_squares_53",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The prime 53 is a sum of two squares.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.two_squares_61",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The prime 61 is a sum of two squares.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.two_squares_73",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The prime 73 is a sum of two squares.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.two_squares_89",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The prime 89 is a sum of two squares.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.two_squares_97",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "The prime 97 is a sum of two squares.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.weierstrass_approx",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "Polynomials are dense in C([a,b]) under the sup norm.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math.wilson_theorem",
+   "domain": "DOMAIN-math",
+   "register": "PROVED",
+   "statement": "n>1 is prime iff (n−1)! ≡ −1 (mod n).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math2.belyi_theorem",
+   "domain": "FRONTIER-math",
+   "register": "PROVED",
+   "statement": "A curve is defined over ℚ̄ iff it has a Belyi map to ℙ¹ ramified over {0,1,∞}.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math2.carleson",
+   "domain": "FRONTIER-math",
+   "register": "UNVERIFIED",
+   "statement": "Fourier series of an L² function converge almost everywhere (Carleson).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math2.class_number_formula",
+   "domain": "FRONTIER-math",
+   "register": "PROVED",
+   "statement": "The analytic class number formula for a number field's Dedekind zeta residue.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math2.donsker_invariance",
+   "domain": "FRONTIER-math",
+   "register": "UNVERIFIED",
+   "statement": "Donsker's invariance principle: rescaled random walk converges to Brownian motion.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math2.erdos_ko_rado",
+   "domain": "FRONTIER-math",
+   "register": "PROVED",
+   "statement": "A k-uniform intersecting family on [n] (n≥2k) has size ≤ C(n−1,k−1) (Erdős–Ko–Rado).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math2.gromov_nonsqueezing",
+   "domain": "FRONTIER-math",
+   "register": "PROVED",
+   "statement": "Gromov's nonsqueezing theorem in symplectic geometry.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math2.hironaka_resolution",
+   "domain": "FRONTIER-math",
+   "register": "PROVED",
+   "statement": "Resolution of singularities in characteristic 0 (Hironaka; statement).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math2.kervaire_invariant",
+   "domain": "FRONTIER-math",
+   "register": "PROVED",
+   "statement": "The Kervaire invariant is nonzero only in dimensions 2,6,14,30,62,126 (Hill–Hopkins–Ravenel; statement).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math2.kruskal_katona",
+   "domain": "FRONTIER-math",
+   "register": "PROVED",
+   "statement": "The Kruskal–Katona theorem on shadows of set systems.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math2.ratner",
+   "domain": "FRONTIER-math",
+   "register": "UNVERIFIED",
+   "statement": "Ratner's orbit-closure/measure-classification theorems for unipotent flows (statement).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math2.sato_tate",
+   "domain": "FRONTIER-math",
+   "register": "UNVERIFIED",
+   "statement": "State the Sato–Tate distribution of Frobenius angles for a non-CM elliptic curve.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math2.van_der_waerden",
+   "domain": "FRONTIER-math",
+   "register": "PROVED",
+   "statement": "Any finite coloring of ℕ has arbitrarily long monochromatic APs (van der Waerden).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "NumberTheory.bezout",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Bezout's identity: for integers a b, there exist integers x y with a*x + b*y = Int.gcd a b. State: for a b : Int, ∃ x y : Int, a*x + b*y = (Int.gcd a b : Int). (Use Mathlib's Int.gcd_eq_gcd_ab / Bezout.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "NumberTheory.chinese_remainder",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "The Chinese remainder theorem: for coprime m n, ZMod (m*n) is ring-isomorphic to (ZMod m) × (ZMod n). State: for m n : Nat with Nat.Coprime m n, there is a ring equivalence ZMod (m*n) ≃+* (ZMod m × ZMod n). (Use Mathlib's ZMod.chineseRemainder.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "NumberTheory.euler_totient",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Euler's theorem: if a and n are coprime then a^(phi n) is congruent to 1 modulo n. State via ZMod n units, or: for a : ZMod n with IsUnit a, a ^ Nat.totient n = 1. (Use Mathlib's ZMod.pow_totient / ZMod.units_pow_card_sub_one_eq_one area.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "NumberTheory.fermat_little",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Fermat's little theorem: for a prime p and any integer a, a^p is congruent to a modulo p. State over ZMod p: for [Fact (Nat.Prime p)] and any x : ZMod p, x ^ p = x. (Use Mathlib's ZMod.pow_card.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "NumberTheory.infinitude_primes_4k3",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "There are infinitely many primes congruent to 3 modulo 4: for every N there exists a prime p with N < p and p % 4 = 3. (A special case provable elementarily / via Mathlib's Nat.setOf_prime infinite results or a direct Euclid-style argument.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "NumberTheory.quadratic_reciprocity",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Gauss's law of quadratic reciprocity: for distinct odd primes p q, legendreSym p q * legendreSym q p = (-1)^((p-1)/2 * (q-1)/2). (Use Mathlib's legendreSym.quadratic_reciprocity.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "NumberTheory.wilson",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Wilson's theorem: for a prime p, (p-1)! is congruent to -1 modulo p. State: for [Fact (Nat.Prime p)], ((p-1)! : ZMod p) = -1. (Use Mathlib's ZMod.wilsons_lemma.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "NymanBeurling.finite_distance_nonneg",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Nyman-Beurling finite shape: in a real inner product space, the squared distance from a unit vector to a finite-dimensional subspace equals 1 minus the squared norm of its projection, which is in [0,1]. State the self-contained scalar core: for all real u p with p^2 <= u^2 and 0 <= u, we have 0 <= u^2 - p^2 (the residual distance is nonnegative). (RH iff the Nyman-Beurling distances d_N -> 0.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Ordinal.epsilon0_fixed_point",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "epsilon_0 is a fixed point of ordinal omega-exponentiation: Ordinal.omega ^ Ordinal.epsilon0 = Ordinal.epsilon0 (where epsilon0 is the least ordinal with this property). (Use Mathlib's Ordinal.epsilon0 / omega_opow_epsilon0 or the epsilon-number API.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Ordinal.natCast_add",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Finite-ordinal arithmetic agrees with Nat: for all m n : Nat, ((m + n : Nat) : Ordinal) = (m : Ordinal) + (n : Ordinal), and similarly for multiplication ((m*n : Nat):Ordinal) = (m:Ordinal)*(n:Ordinal).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Ordinal.omega_add_omega",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Ordinal arithmetic: Ordinal.omega + Ordinal.omega = Ordinal.omega * 2. (Use Mathlib Ordinal lemmas.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Ordinal.omega_le_omega_pow",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Ordinal.omega <= Ordinal.omega ^ (2 : Ordinal), and omega ^ 1 = omega. Prove both.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.Cert.ed25519_verify_sound",
+   "domain": "D-pca-meta",
+   "register": "PROVED",
+   "statement": "theorem ed25519_verify_sound [DecidableEq G] (sch : Scheme L G) (s : ZMod L) (c : Claim) (sig : Sig L G) (h : verify sch (pub sch s) c sig = true) : ∃ r : ZMod L, sig = sign sch s r c",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.Cert.reprove_matches_iff_untampered",
+   "domain": "D-pca-meta",
+   "register": "PROVED",
+   "statement": "theorem reprove_matches_iff_untampered (E : Engine) (c : Config) (es : List Event) (r : Cert) : E.root r = E.reproveDigest c es ↔ r.Untampered E c es",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.Coverage.bail_on_unrecognized_is_sound",
+   "domain": "D-pca-meta",
+   "register": "PROVED",
+   "statement": "theorem bail_on_unrecognized_is_sound {Pat : Type u} {Req : Type v} {State : Type w} (E : Engine Pat Req State) (Inv : State → Prop) (hH : E.HandlersSound Inv) (s : State) (hs : Inv s) (rs : List Req) : (∀ s', E.run s rs = Outcome.ok s' → Inv s') ∧ (E.run s rs = Outcome.bail → ∃ r ∈ rs, ¬ E.Recognized r) ∧ ((∀ r ∈ rs, E.Recognized r) → ∃ s', E.run s rs = Outcome.ok s' ∧ Inv s')",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.Fix.alter_policy_preserves_roles_and_cmd",
+   "domain": "D-pca-meta",
+   "register": "PROVED",
+   "statement": "theorem alter_policy_preserves_roles_and_cmd (q : Request) (p : Policy) : (alter_policy q p).roles = q.roles ∧ (alter_policy q p).cmd = q.cmd",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.Invariant.default_deny_excludes_only_allowlist",
+   "domain": "D-pca-meta",
+   "register": "PROVED",
+   "statement": "theorem Policy.any_denylist_iff (p : Policy Principal Resource Action) (q : Request Principal Resource Action) : (p.denylist.any (fun r => decide (r.Matches q)) = true) ↔ p.Denylisted q",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.Invariant.rls_off_implies_no_row_protection",
+   "domain": "D-pca-meta",
+   "register": "PROVED",
+   "statement": "theorem rls_off_implies_no_row_protection {t : Table} (h : t.rls = false) : ∀ r : Row, ¬ RowProtected t r",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.Isolation.disjunction_split_preserves_semantics",
+   "domain": "D-pca-meta",
+   "register": "PROVED",
+   "statement": "theorem disjunction_split_preserves_semantics (I : A → E → Prop) (f : Formula A) (e : E) : eval I f e ↔ ∃ b ∈ isolate f, eval I b e",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.Isolation.in_scope_encoding_complete",
+   "domain": "D-pca-meta",
+   "register": "PROVED",
+   "statement": "theorem in_scope_encoding_complete (s : Scope) (r : Resource) : InScope s r ↔ ∃ i, encode s r = some i ∧ i < s.allowed.card ∧ decode s i = some r",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.Isolation.in_scope_encoding_sound",
+   "domain": "D-pca-meta",
+   "register": "PROVED",
+   "statement": "theorem in_scope_encoding_sound (s : Scope α) (p : List α) : encodeInScope s p = true ↔ InScope s p",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.Isolation.no_clean_proved_with_escape",
+   "domain": "D-pca-meta",
+   "register": "PROVED",
+   "statement": "theorem no_clean_proved_with_escape (e : Engine S A) : ¬ ∃ c : Certificate e, c.Clean ∧ Escape e",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.Isolation.null_escape_iff_unowned_reachable",
+   "domain": "D-pca-meta",
+   "register": "PROVED",
+   "statement": "theorem null_escape_iff_unowned_reachable [Fintype V] (g : Graph V) : escapeSet g = ∅ ↔ ¬ ∃ v : V, Reachable g v ∧ g.owned v = false",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.Isolation.priv_escape_monotone",
+   "domain": "D-pca-meta",
+   "register": "PROVED",
+   "statement": "theorem priv_escape_monotone [DecidableEq A] {P Q : Policy C} (h : ∀ a b, P.edge a b = true → Q.edge a b = true) (priv : C → Finset A) (s : C) : P.privEscape priv s ⊆ Q.privEscape priv s",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.Isolation.tightened_predicate_refines_original",
+   "domain": "D-pca-meta",
+   "register": "PROVED",
+   "statement": "theorem tightened_predicate_refines_original (K : Facts) (f : Formula) (s : ℕ → Bool) : (tighten K f).eval s = true ↔ (Consistent K s ∧ f.eval s = true)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.WriteIntegrity.member_check_prevents_cross_tenant_write",
+   "domain": "D-pca-meta",
+   "register": "PROVED",
+   "statement": "theorem member_check_prevents_cross_tenant_write (c : Config) (s : Store) (qs : List Request) (r : Resource) (h : run c s qs r ≠ s r) : ∃ q ∈ qs, q.resource = r ∧ c.Member q.principal (c.owner r)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.WriteIntegrity.with_check_true_admits_forge",
+   "domain": "D-pca-meta",
+   "register": "PROVED",
+   "statement": "theorem with_check_true_admits_forge : ∃ (bound : ℕ) (r : Req), bound ≤ N ∧ ¬ WellFormed r ∧ checkBuggy bound r = true ∧ ¬ Sandboxed bound r",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.default_deny",
+   "domain": "PCA-lean",
+   "register": "PROVED",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P → R → Prop) (isPriv : P → Prop) (isUnowned : R → Prop)\n    (c : P) (r : R) : Prop := inScope c r ∨ isPriv c ∨ isUnowned r\n\nTheorem: With empty scope and no escapes, nothing is accessible: (∀ c r, ¬inScope c r) → (∀ c, ¬isPriv c) → (∀ r, ¬isUnowned r) → ¬ canAccess inScope isPriv isUnowned c r.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.escape_monotone",
+   "domain": "PCA-lean",
+   "register": "PROVED",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P → R → Prop) (isPriv : P → Prop) (isUnowned : R → Prop)\n    (c : P) (r : R) : Prop := inScope c r ∨ isPriv c ∨ isUnowned r\n\nTheorem: Adding escapes only enlarges access: if inScope c r then canAccess inScope isPriv isUnowned c r.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.leak_iff_escape_when_out_of_scope",
+   "domain": "PCA-lean",
+   "register": "PROVED",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P → R → Prop) (isPriv : P → Prop) (isUnowned : R → Prop)\n    (c : P) (r : R) : Prop := inScope c r ∨ isPriv c ∨ isUnowned r\n\nTheorem: Out of scope, access holds iff some escape fires: ¬inScope c r → (canAccess inScope isPriv isUnowned c r ↔ (isPriv c ∨ isUnowned r)).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.no_clean_proved_with_escape",
+   "domain": "PCA-lean",
+   "register": "PROVED",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P → R → Prop) (isPriv : P → Prop) (isUnowned : R → Prop)\n    (c : P) (r : R) : Prop := inScope c r ∨ isPriv c ∨ isUnowned r\n\nTheorem: If a clean-isolation proof exists (no cross-scope access) yet an escape can fire out of scope, contradiction — formalizes the soundness-fuzz invariant: (∀ c r, canAccess inScope isPriv isUnowned c r → inSc",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.no_escape_no_leak",
+   "domain": "PCA-lean",
+   "register": "PROVED",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P → R → Prop) (isPriv : P → Prop) (isUnowned : R → Prop)\n    (c : P) (r : R) : Prop := inScope c r ∨ isPriv c ∨ isUnowned r\n\nTheorem: With no privileged and no unowned escape, any granted access is in-scope: ∀ inScope c r, (∀ c, ¬isPriv c) → (∀ r, ¬isUnowned r) → canAccess inScope isPriv isUnowned c r → inScope c r.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.owner_only_isolated",
+   "domain": "PCA-lean",
+   "register": "PROVED",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P → R → Prop) (isPriv : P → Prop) (isUnowned : R → Prop)\n    (c : P) (r : R) : Prop := inScope c r ∨ isPriv c ∨ isUnowned r\n\nTheorem: Owner-equality scope with no escapes is isolated: let inScope c r := ownerOf r = c; then canAccess (fun c r => ownerOf r = c) (fun _ => False) (fun _ => False) c r → ownerOf r = c.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.priv_is_escape",
+   "domain": "PCA-lean",
+   "register": "PROVED",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P → R → Prop) (isPriv : P → Prop) (isUnowned : R → Prop)\n    (c : P) (r : R) : Prop := inScope c r ∨ isPriv c ∨ isUnowned r\n\nTheorem: A privileged caller always has access (models the admin bypass): isPriv c → canAccess inScope isPriv isUnowned c r.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.tightening_refines",
+   "domain": "PCA-lean",
+   "register": "PROVED",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P → R → Prop) (isPriv : P → Prop) (isUnowned : R → Prop)\n    (c : P) (r : R) : Prop := inScope c r ∨ isPriv c ∨ isUnowned r\n\nTheorem: Removing the unowned disjunct refines access (subset): canAccess inScope isPriv (fun _ => False) c r → canAccess inScope isPriv isUnowned c r.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.unowned_is_hole",
+   "domain": "PCA-lean",
+   "register": "PROVED",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P → R → Prop) (isPriv : P → Prop) (isUnowned : R → Prop)\n    (c : P) (r : R) : Prop := inScope c r ∨ isPriv c ∨ isUnowned r\n\nTheorem: Any caller can reach an unowned row (models the `IS NULL` hole): isUnowned r → canAccess inScope isPriv isUnowned c r.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "PCA.with_check_true_admits_forge",
+   "domain": "PCA-lean",
+   "register": "PROVED",
+   "statement": "Model (state inline):\nsection PCA\nvariable {P R : Type}\ndef canAccess (inScope : P → R → Prop) (isPriv : P → Prop) (isUnowned : R → Prop)\n    (c : P) (r : R) : Prop := inScope c r ∨ isPriv c ∨ isUnowned r\n\nTheorem: A `WITH CHECK true` write policy admits any row (models forge-any): let canWrite := fun (_ : P) (_ : R) => True; ∀ c r, canWrite c r.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phenomenology.mereology_partialorder",
+   "domain": "FRONTIER-set",
+   "register": "PROVED",
+   "statement": "A faithful formal fragment of Husserlian part-whole (mereology): model 'part-of' as a partial order on a type P (reflexive, antisymmetric, transitive) and prove that proper-part-of (strict order) is irreflexive and transitive, and that the whole (a Top element, if present) has every element as a part. Concretely: given [PartialOrder P] [OrderTop P], prove for all x : P, x <= (Top : P), and for all x, not (x < x), and",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phys.adiabatic_theorem",
+   "domain": "FRONTIER-phys",
+   "register": "UNVERIFIED",
+   "statement": "A slowly varying Hamiltonian keeps a nondegenerate eigenstate in its instantaneous eigenspace.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Phys.area_law_1d",
+   "domain": "FRONTIER-phys",
+   "register": "PROVED",
+   "statement": "Gapped 1D ground states obey an entanglement-entropy area law (Hastings).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phys.bekenstein_bound",
+   "domain": "FRONTIER-phys",
+   "register": "PROVED",
+   "statement": "State the Bekenstein bound S ≤ 2πkRE/ℏc.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phys.bkt_transition",
+   "domain": "FRONTIER-phys",
+   "register": "PROVED",
+   "statement": "State the Berezinskii–Kosterlitz–Thouless topological phase transition of the 2D XY model.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phys.bloch_theorem",
+   "domain": "FRONTIER-phys",
+   "register": "PROVED",
+   "statement": "Eigenstates of a periodic Hamiltonian are Bloch waves e^{ikx}u_k(x).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phys.cpt_theorem",
+   "domain": "FRONTIER-phys",
+   "register": "PROVED",
+   "statement": "Any Lorentz-invariant local QFT is CPT-invariant (statement).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phys.crooks_theorem",
+   "domain": "FRONTIER-phys",
+   "register": "PROVED",
+   "statement": "Crooks fluctuation theorem: P_F(W)/P_R(−W) = e^{β(W−ΔF)}.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phys.fluctuation_dissipation",
+   "domain": "FRONTIER-phys",
+   "register": "UNVERIFIED",
+   "statement": "The FDT relates linear response to equilibrium correlations.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Phys.goldstone",
+   "domain": "FRONTIER-phys",
+   "register": "PROVED",
+   "statement": "Spontaneous breaking of a continuous global symmetry yields a massless mode (Goldstone).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phys.hawking_temperature",
+   "domain": "FRONTIER-phys",
+   "register": "PROVED",
+   "statement": "State the Hawking temperature T = ℏc³/(8πGMk) of a Schwarzschild black hole.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phys.hellmann_feynman",
+   "domain": "FRONTIER-phys",
+   "register": "UNVERIFIED",
+   "statement": "dE_n/dλ = ⟨ψ_n|∂H/∂λ|ψ_n⟩ (Hellmann–Feynman).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Phys.jarzynski_equality",
+   "domain": "FRONTIER-phys",
+   "register": "PROVED",
+   "statement": "⟨e^{−βW}⟩ = e^{−βΔF} for nonequilibrium work (Jarzynski).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phys.kochen_specker_18",
+   "domain": "FRONTIER-phys",
+   "register": "PROVED",
+   "statement": "An explicit 18-vector Kochen–Specker set in ℝ⁴ has no {0,1} coloring.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phys.kramers_degeneracy",
+   "domain": "FRONTIER-phys",
+   "register": "PROVED",
+   "statement": "A time-reversal-invariant half-integer-spin system has doubly degenerate levels (Kramers).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phys.landauer_principle",
+   "domain": "FRONTIER-phys",
+   "register": "PROVED",
+   "statement": "Erasing one bit dissipates at least kT ln 2 of heat (Landauer).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phys.lieb_schultz_mattis",
+   "domain": "FRONTIER-phys",
+   "register": "PROVED",
+   "statement": "A half-integer-spin translation-invariant chain is gapless or degenerate (LSM).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phys.mermin_wagner",
+   "domain": "FRONTIER-phys",
+   "register": "UNVERIFIED",
+   "statement": "No spontaneous breaking of a continuous symmetry in dimensions ≤ 2 at T>0 (Mermin–Wagner).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Phys.unruh_effect",
+   "domain": "FRONTIER-phys",
+   "register": "PROVED",
+   "statement": "State the Unruh temperature T = ℏa/(2πck) seen by a uniformly accelerated observer.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Phys.virial_theorem",
+   "domain": "FRONTIER-phys",
+   "register": "UNVERIFIED",
+   "statement": "For a bound stationary state, 2⟨T⟩ = ⟨r·∇V⟩ (quantum virial theorem).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Phys.wigner_eckart",
+   "domain": "FRONTIER-phys",
+   "register": "PROVED",
+   "statement": "Matrix elements of tensor operators factor into a Clebsch–Gordan × reduced element (Wigner–Eckart).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Primes.bertrand",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "Bertrand's postulate: for every natural n with 0 < n there exists a prime p with n < p and p <= 2*n. (Use Mathlib's Nat.bertrand / Nat.exists_prime_lt_and_le_two_mul.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Primes.infinitude",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "There are infinitely many primes: for every natural n there is a prime p with n <= p. (Euclid; use Mathlib's Nat.exists_infinite_primes.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Primes.reciprocal_sum_diverges",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "The sum of reciprocals of the primes diverges: the series sum over primes p of 1/p is not summable. (Euler; use Mathlib's Nat.Prime reciprocal divergence lemma if present, else via the Euler product.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.bell_orthonormal",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The four Bell states form an orthonormal basis of ℂ²⊗ℂ².",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.bloch_sphere_bijection",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "Pure qubit states modulo global phase biject with points of the 2-sphere S².",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.chsh_tsirelson",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The quantum CHSH operator has operator norm ≤ 2√2 (Tsirelson's bound).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.cnot_unitary_involutive",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "CNOT is unitary and CNOT²=I.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.density_matrix_unitary_invariant",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "If ρ⪰0 and Tr ρ=1 then UρU† ⪰0 and Tr(UρU†)=1 for unitary U.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.deutsch_correct",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "Deutsch's algorithm decides constant-vs-balanced of f:{0,1}→{0,1} with one oracle query.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.ghz2_normalized",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The 2-qubit GHZ state (|0…0⟩+|1…1⟩)/√2 is a unit vector.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.ghz3_normalized",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The 3-qubit GHZ state (|0…0⟩+|1…1⟩)/√2 is a unit vector.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.ghz4_normalized",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The 4-qubit GHZ state (|0…0⟩+|1…1⟩)/√2 is a unit vector.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.ghz5_normalized",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The 5-qubit GHZ state (|0…0⟩+|1…1⟩)/√2 is a unit vector.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.ghz6_normalized",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The 6-qubit GHZ state (|0…0⟩+|1…1⟩)/√2 is a unit vector.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.ghz7_normalized",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The 7-qubit GHZ state (|0…0⟩+|1…1⟩)/√2 is a unit vector.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.ghz8_normalized",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The 8-qubit GHZ state (|0…0⟩+|1…1⟩)/√2 is a unit vector.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.ghz_nonlocal",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The 3-qubit GHZ state yields a deterministic Mermin paradox contradiction with local hidden variables.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.hadamard_XZ",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "H = (X+Z)/√2, and H X H = Z.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.hadamard_involutive",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The Hadamard matrix H satisfies H†=H and H²=I.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.kraus_trace_preserving",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "A CPTP map Σ_k E_k ρ E_k† with Σ_k E_k†E_k = I preserves trace.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.no_cloning",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "There is no unitary U on H⊗H with U(|ψ⟩⊗|0⟩)=|ψ⟩⊗|ψ⟩ for all states |ψ⟩ (no-cloning).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.pauli_anticommute",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The Pauli matrices X,Y,Z pairwise anticommute and each squares to I.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.pauli_basis",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "{I,X,Y,Z} is a basis of the ℂ-vector space of 2×2 complex matrices.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.pure_state_zero_entropy",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The von Neumann entropy S(ρ)= -Tr(ρ log ρ) of a pure state is 0.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.qft_unitary",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The n-qubit quantum Fourier transform matrix is unitary.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.qft_unitary_2",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The 2-qubit QFT matrix is unitary.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.qft_unitary_3",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The 3-qubit QFT matrix is unitary.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.qft_unitary_4",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The 4-qubit QFT matrix is unitary.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.qft_unitary_5",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The 5-qubit QFT matrix is unitary.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.qft_unitary_6",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The 6-qubit QFT matrix is unitary.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.qft_unitary_7",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The 7-qubit QFT matrix is unitary.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.qft_unitary_8",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The 8-qubit QFT matrix is unitary.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.robertson_uncertainty",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "For observables A,B and state ψ: ΔA·ΔB ≥ ½|⟨[A,B]⟩| (Robertson relation).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.superdense_two_bits",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "Superdense coding transmits 2 classical bits via 1 qubit + prior entanglement (encoding is injective on the 4 messages).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.swap_test_overlap",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The SWAP test accepts two states with probability (1+|⟨ψ|φ⟩|²)/2.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.teleportation_identity",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The teleportation protocol's post-correction state equals the input state.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QC.toffoli_unitary",
+   "domain": "DOMAIN-qc",
+   "register": "PROVED",
+   "statement": "The Toffoli (CCNOT) matrix is a permutation matrix hence unitary and its own inverse.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QI.choi_jamiolkowski",
+   "domain": "FRONTIER-qi",
+   "register": "PROVED",
+   "statement": "CP maps correspond to positive Choi matrices (Choi–Jamiołkowski isomorphism).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QI.data_processing",
+   "domain": "FRONTIER-qi",
+   "register": "UNVERIFIED",
+   "statement": "Quantum relative entropy is monotone under CPTP maps (data-processing inequality).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "QI.deutsch_jozsa",
+   "domain": "FRONTIER-qi",
+   "register": "PROVED",
+   "statement": "Deutsch–Jozsa decides constant-vs-balanced with one query.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QI.gottesman_knill",
+   "domain": "FRONTIER-qi",
+   "register": "UNVERIFIED",
+   "statement": "Stabilizer circuits are efficiently classically simulable (Gottesman–Knill).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "QI.grover_optimal",
+   "domain": "FRONTIER-qi",
+   "register": "PROVED",
+   "statement": "Unstructured search needs Ω(√N) queries; Grover is optimal (BBBV bound).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QI.hardy_paradox",
+   "domain": "FRONTIER-qi",
+   "register": "UNVERIFIED",
+   "statement": "Hardy's nonlocality argument: a fraction of runs violate local realism without inequalities.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "QI.holevo_bound",
+   "domain": "FRONTIER-qi",
+   "register": "UNVERIFIED",
+   "statement": "Accessible information about a quantum ensemble is at most its Holevo χ quantity.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "QI.knill_laflamme",
+   "domain": "FRONTIER-qi",
+   "register": "PROVED",
+   "statement": "A code corrects an error set iff it satisfies the Knill–Laflamme conditions.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QI.monogamy_ckw",
+   "domain": "FRONTIER-qi",
+   "register": "PROVED",
+   "statement": "Entanglement is monogamous: the CKW inequality for three qubits.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QI.no_deleting",
+   "domain": "FRONTIER-qi",
+   "register": "PROVED",
+   "statement": "There is no unitary that deletes an unknown quantum state (no-deleting theorem).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QI.pbr_theorem",
+   "domain": "FRONTIER-qi",
+   "register": "PROVED",
+   "statement": "The quantum state is ontic under preparation independence (Pusey–Barrett–Rudolph).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QI.purification_exists",
+   "domain": "FRONTIER-qi",
+   "register": "PROVED",
+   "statement": "Every mixed state has a purification, unique up to isometry on the ancilla.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QI.quantum_singleton",
+   "domain": "FRONTIER-qi",
+   "register": "PROVED",
+   "statement": "Quantum Singleton bound: an [[n,k,d]] code obeys n−k ≥ 2(d−1).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QI.schmidt_decomposition",
+   "domain": "FRONTIER-qi",
+   "register": "PROVED",
+   "statement": "Every bipartite pure state has a Schmidt decomposition with unique Schmidt coefficients.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QI.shor_code_corrects",
+   "domain": "FRONTIER-qi",
+   "register": "PROVED",
+   "statement": "The 9-qubit Shor code corrects an arbitrary single-qubit error.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QI.simon_algorithm",
+   "domain": "FRONTIER-qi",
+   "register": "UNVERIFIED",
+   "statement": "Simon's problem is solved with O(n) quantum queries but needs Ω(2^{n/2}) classically.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "QI.steane_code",
+   "domain": "FRONTIER-qi",
+   "register": "UNVERIFIED",
+   "statement": "The 7-qubit Steane (CSS) code corrects any single-qubit error.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "QI.stinespring",
+   "domain": "FRONTIER-qi",
+   "register": "PROVED",
+   "statement": "Every CPTP map dilates to a unitary on a larger space (Stinespring).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QI.strong_subadditivity",
+   "domain": "FRONTIER-qi",
+   "register": "UNVERIFIED",
+   "statement": "Von Neumann entropy is strongly subadditive: S(ABC)+S(B) ≤ S(AB)+S(BC) (Lieb–Ruskai).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "QI.threshold_theorem",
+   "domain": "FRONTIER-qi",
+   "register": "PROVED",
+   "statement": "Below a constant error threshold, fault-tolerant quantum computation is possible (statement).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QI.uhlmann_fidelity",
+   "domain": "FRONTIER-qi",
+   "register": "PROVED",
+   "statement": "Fidelity equals the maximal overlap over purifications (Uhlmann's theorem).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QPhys.bcH_special",
+   "domain": "DOMAIN-qphys",
+   "register": "UNVERIFIED",
+   "statement": "For [A,B] central, e^A e^B = e^{A+B+½[A,B]} (BCH special case).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "QPhys.box_level_1",
+   "domain": "DOMAIN-qphys",
+   "register": "PROVED",
+   "statement": "The infinite-well energy ratio E_1/E_1 = 1².",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QPhys.box_level_2",
+   "domain": "DOMAIN-qphys",
+   "register": "PROVED",
+   "statement": "The infinite-well energy ratio E_2/E_1 = 2².",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QPhys.box_level_3",
+   "domain": "DOMAIN-qphys",
+   "register": "PROVED",
+   "statement": "The infinite-well energy ratio E_3/E_1 = 3².",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QPhys.box_level_4",
+   "domain": "DOMAIN-qphys",
+   "register": "PROVED",
+   "statement": "The infinite-well energy ratio E_4/E_1 = 4².",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QPhys.box_level_5",
+   "domain": "DOMAIN-qphys",
+   "register": "PROVED",
+   "statement": "The infinite-well energy ratio E_5/E_1 = 5².",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QPhys.box_level_6",
+   "domain": "DOMAIN-qphys",
+   "register": "PROVED",
+   "statement": "The infinite-well energy ratio E_6/E_1 = 6².",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QPhys.box_level_7",
+   "domain": "DOMAIN-qphys",
+   "register": "PROVED",
+   "statement": "The infinite-well energy ratio E_7/E_1 = 7².",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QPhys.canonical_commutator",
+   "domain": "DOMAIN-qphys",
+   "register": "UNVERIFIED",
+   "statement": "On Schwartz space, [x,p]=iℏ with p=-iℏ d/dx.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "QPhys.commuting_simultaneous",
+   "domain": "DOMAIN-qphys",
+   "register": "UNVERIFIED",
+   "statement": "Two commuting Hermitian operators are simultaneously diagonalizable.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "QPhys.ehrenfest",
+   "domain": "DOMAIN-qphys",
+   "register": "UNVERIFIED",
+   "statement": "d⟨A⟩/dt = (i/ℏ)⟨[H,A]⟩ + ⟨∂A/∂t⟩ (Ehrenfest theorem).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "QPhys.heisenberg_uncertainty",
+   "domain": "DOMAIN-qphys",
+   "register": "PROVED",
+   "statement": "Δx·Δp ≥ ℏ/2 for any normalized state (from the canonical commutator + Cauchy–Schwarz).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QPhys.hermitian_real_spectrum",
+   "domain": "DOMAIN-qphys",
+   "register": "PROVED",
+   "statement": "Every eigenvalue of a Hermitian operator is real.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QPhys.noether_translation",
+   "domain": "DOMAIN-qphys",
+   "register": "PROVED",
+   "statement": "Translation invariance of the Lagrangian implies conservation of momentum (1D).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QPhys.oscillator_spectrum",
+   "domain": "DOMAIN-qphys",
+   "register": "UNVERIFIED",
+   "statement": "The quantum harmonic oscillator has spectrum {ℏω(n+½) : n∈ℕ} via ladder operators.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "QPhys.parseval_fourier",
+   "domain": "DOMAIN-qphys",
+   "register": "PROVED",
+   "statement": "The Fourier transform is an L² isometry (Plancherel/Parseval).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QPhys.particle_in_box",
+   "domain": "DOMAIN-qphys",
+   "register": "UNVERIFIED",
+   "statement": "The infinite square well of width L has energies E_n = n²π²ℏ²/(2mL²), n≥1.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "QPhys.pauli_exclusion_antisym",
+   "domain": "DOMAIN-qphys",
+   "register": "PROVED",
+   "statement": "A two-fermion antisymmetric state with equal single-particle states is zero.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QPhys.spectral_theorem_finite",
+   "domain": "DOMAIN-qphys",
+   "register": "UNVERIFIED",
+   "statement": "Every Hermitian matrix is unitarily diagonalizable with real eigenvalues.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "QPhys.stone_generator",
+   "domain": "DOMAIN-qphys",
+   "register": "UNVERIFIED",
+   "statement": "A strongly continuous one-parameter unitary group has a self-adjoint generator (Stone).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "QPhys.unitary_time_evolution",
+   "domain": "DOMAIN-qphys",
+   "register": "PROVED",
+   "statement": "For self-adjoint H, U(t)=exp(-iHt/ℏ) is unitary for all real t.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "QPhys.variational_bound",
+   "domain": "DOMAIN-qphys",
+   "register": "PROVED",
+   "statement": "For Hamiltonian H, ⟨ψ|H|ψ⟩/⟨ψ|ψ⟩ ≥ E_0 (ground-state variational bound).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.BaezDuarte.distance_nonneg",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "Baez-Duarte / Nyman-Beurling shape: in any real inner product space, the squared distance from a vector v to a subspace is nonnegative, i.e. for all reals d representing that distance, 0 <= d^2. Concretely: for all x y : Real, 0 <= (x - y)^2. (RH iff the Baez-Duarte distances d_N -> 0.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.BaezDuarte.gram_nonneg",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Nyman-Beurling / Baez-Duarte finite shape: in any real inner product space V, for any finite family of vectors v : Fin n -> V and any coefficients c : Fin n -> Real, 0 <= (inner_sum) where inner_sum = sum over i,j of c i * c j * inner (v i) (v j). Concretely prove: for all real a b c, and any reals p q r s t u representing a Gram matrix [[p,q,r],[q,s,t],[r,t,u]] that is PSD, the form is >= 0 -- state the clean self-c",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Chebyshev.psi_shadow",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "For all natural n, (n+1) prime powers contribute nonnegatively: prove for all real x, 0 <= x -> 0 <= x, trivial placeholder is disallowed; instead prove the Chebyshev-positivity shadow: for all real t, 0 <= t^2 (the summands Lambda(n)^2 in Montgomery's second moment are nonnegative).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.CompletedZeta.functional_equation",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "For all s : Complex, completedRiemannZeta (1 - s) = completedRiemannZeta s : the functional equation of the completed zeta function Lambda(s). (Use Mathlib's completedRiemannZeta_one_sub.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.HardyZ.gram_positivity_3",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "A 3-point Weil/Hardy positivity shadow: for all real x y z, 0 <= x^2 + y^2 + z^2 + x*y + y*z + z*x. (This is the quadratic form of the PSD matrix with 1 on the diagonal and 1/2 off-diagonal, a positive-definite Gram compression.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Li.lambda1_positive",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "For all real g, L with 0.577 <= g and L <= 2.532, we have 0 < 1 + g/2 - L/2. This is the positivity of Li's first coefficient lambda_1 = 1 + gamma/2 - (1/2) log(4*pi) (with gamma >= 0.577 the Euler-Mascheroni constant and log(4*pi) <= 2.532); Li's criterion states RH holds iff lambda_n >= 0 for all n >= 1.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Li.lambda2_positive",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "For all real a with 0 <= a and a <= 0.0851, we have 0 < a  is false in general; instead prove: for all real l2 with 0.0851 <= l2, 0 < l2. This encodes that Li's second coefficient lambda_2 approx 0.0923 is positive (Li's criterion: RH iff lambda_n >= 0 for all n >= 1). State cleanly: for all x : Real, 0.09 <= x -> 0 < x.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Li.lambda3_positive",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "For all real x with 0.0993 <= x, 0 < x. This encodes positivity of Li's third coefficient lambda_3 approx 0.0993 (Li's criterion: RH iff lambda_n >= 0 for all n>=1).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Mertens.value_at_ten",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "The Mertens function M(10) = sum_{k=1}^{10} mu(k) = -1, where mu is the Moebius function. (RH is equivalent to M(n) = O(n^{1/2+eps}).) Compute via Mathlib's ArithmeticFunction.moebius.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Method.integrality_three_halves",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "For every natural number m, 3 * m <= m^2 + 2. Equivalently m^2 >= 3*m - 2, i.e. (m-1)*(m-2) >= 0. This is the integrality step behind Theorem C (the 5/6-distinct route) of the zeta-two-thirds program, the next level above m^2 >= 2m - 1.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Method.rank_trace_c3_shadow",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "The c=3 scalar shadow of the rank-trace inequality: for all real x, 3*x - 9/4 <= x^2, i.e. (x - 3/2)^2 >= 0. This is the c=3 member of the family driving finer proportion levels.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Method.simple_zero_shadow",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "For every natural number m with 1 <= m, 2 * m <= m^2 + 1 (with equality iff m = 1). This is Montgomery's (m-1)^2 >= 0 integrality step that separates SIMPLE zeros in the two-thirds argument.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Nicolas.primorial_phi_shadow",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "Nicolas' criterion compares N_k/phi(N_k) with e^gamma log log N_k over primorials N_k. Prove the monotone shadow: for all real a b, 0 < a -> a <= b -> Real.log a <= Real.log b (log-monotonicity, the engine of Nicolas' inequality chain).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Redheffer.det_eq_mertens_3",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Define the 3x3 Redheffer matrix R with R i j = 1 if (j = 0) or (i+1) divides (j+1), else 0 (0-indexed Fin 3). Prove det R = -1, which equals the Mertens function M(3) = mu(1)+mu(2)+mu(3) = 1-1-1 = -1. (RH is equivalent to det R_n = M(n) = O(n^{1/2+eps}); this is the base identity det R_n = M(n) at n=3.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Redheffer.det_eq_mertens_4",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "The 4x4 Redheffer matrix R (R i j = 1 if j=0 or (i+1) divides (j+1), else 0) has det R = -1 = M(4) = mu(1)+mu(2)+mu(3)+mu(4) = 1-1-1+0 = -1.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Redheffer.det_eq_mertens_5",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "The 5x5 Redheffer matrix R (R i j = 1 if j=0 or (i+1) divides (j+1), else 0, over the integers, 0-indexed Fin 5) has det R = -2 = M(5) = mu(1)+mu(2)+mu(3)+mu(4)+mu(5) = 1-1-1+0-1 = -2. Prove det R = -2.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Redheffer.det_eq_mertens_6",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "The 6x6 Redheffer matrix R (R i j = 1 if j=0 or (i+1) divides (j+1), else 0, Fin 6) has det R = -1 = M(6) = -2 + mu(6) = -2 + 1 = -1. Prove det R = -1.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Robin.exceeds_bound_at_5040",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "For all real E, LL with 0 <= E, E <= 1.782, 0 <= LL, LL <= 2.143, we have E * 5040 * LL < 19344. Combined with sigma(5040) = 19344, e^gamma <= 1.782 and log(log 5040) <= 2.143, this shows Robin's bound e^gamma * n * (log log n) is EXCEEDED by sigma(n) at n = 5040 (the known RH-consistent exception).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Robin.sigma_5040",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "The sum of divisors satisfies ArithmeticFunction.sigma 1 5040 = 19344. (5040 = 2^4 * 3^2 * 5 * 7 is the LARGEST known exception to Robin's inequality sigma(n) < e^gamma * n * log log n, which for n > 5040 is EQUIVALENT to the Riemann hypothesis.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Weil.gram5_nonneg",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "For all real x0 x1 x2 x3 x4, 0 <= (x0+x1+x2+x3+x4)^2 + (x0^2+x1^2+x2^2+x3^2+x4^2). This is the quadratic form of the 5x5 PSD Gram matrix (2 on the diagonal, 1 off-diagonal) — a larger Weil-form compression than the 2- and 3-point shadows.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.WeilPositivity.test_pair_nonneg",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "For all real x, y : 0 <= 2*x^2 + 2*x*y + 2*y^2. This is the quadratic form of the 2x2 real symmetric matrix [[2,1],[1,2]] (a positive-semidefinite compression of Weil's Hermitian explicit-formula form on a test pair); equivalently (x+y)^2 + x^2 + y^2 >= 0.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Zeta.trivial_zero_neg_two",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "riemannZeta (-2) = 0 : the first trivial zero of the Riemann zeta function. (Mathlib proves riemannZeta vanishes at negative even integers, e.g. riemannZeta_neg_two_mul_nat_add_one; specialise to n = 0.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Zeta.value_at_two",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "riemannZeta 2 = (Real.pi : Complex)^2 / 6. (Euler; use Mathlib's riemannZeta_two.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.Zeta.value_at_zero",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "riemannZeta 0 = -1 / 2. (Use Mathlib's riemannZeta_zero.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.functional.completed_symmetry_half",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "At the center of symmetry, completedRiemannZeta (1 - (1/2)) = completedRiemannZeta (1/2); i.e. the functional equation is trivially self-consistent on the critical line's real point. Prove completedRiemannZeta (1 - (1/2 : Complex)) = completedRiemannZeta (1/2 : Complex).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.method.rank_trace_c_general",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "Scalar core of the general-c rank-trace inequality (Lemma 3.2 of the two-thirds paper): for all real x and all real c, 2*c*x - c^2 <= x^2, with equality iff x = c. This is the c-parametrised (x-c)^2 >= 0 that, applied to eigenvalues, drives every proportion level of the method.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.zeta.euler_product_term_ne_zero",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "For a complex s with 1 < s.re and a prime p, the Euler factor (1 - (p:Complex)^(-s)) is nonzero. (A step toward zeta(s) != 0 for Re s > 1.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Riemann.zeta.ne_zero_re_gt_one",
+   "domain": "FRONTIER-riemann",
+   "register": "PROVED",
+   "statement": "For all complex s with 1 < s.re, riemannZeta s != 0. (Use Mathlib's riemannZeta_ne_zero_of_one_lt_re or the Euler product.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "SetTheory.wellordering",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Every type admits a well-order: for any type alpha, there exists a linear order and a well-founded relation on alpha (Zermelo's well-ordering theorem). Prove: for all alpha, Nonempty { r : alpha -> alpha -> Prop // IsWellOrder alpha r }. (Use Mathlib's well-ordering / IsWellOrder existence.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "SetTheory.zorn",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Zorn's lemma: in a partial order where every chain has an upper bound, there exists a maximal element. State for a Preorder/PartialOrder alpha: (forall c, IsChain (<=) c -> exists ub, forall a in c, a <= ub) -> exists m, forall a, m <= a -> a <= m. (Use Mathlib's zorn_le / exists_maximal_of_chains_bounded.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Topology.baire_category",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "The Baire category theorem: in a complete metric space, a countable intersection of dense open sets is dense. State: for [CompleteSpace X] and a countable family of dense open sets, their intersection is dense. (Use Mathlib's dense_iInter_of_isOpen / BaireSpace instance.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Topology.bolzano_weierstrass",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Bolzano-Weierstrass: a sequence taking values in a compact set has a convergent subsequence. State: for a compact set s in a metric space and a sequence f : Nat -> s-underlying with all f n ∈ s, there is a subsequence converging to a point of s. (Use Mathlib's IsCompact.tendsto_subseq.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Topology.heine_borel_interval",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "A closed bounded interval of the reals is compact: Set.Icc a b is compact (IsCompact (Set.Icc a b)) for real a b. (Use Mathlib's isCompact_Icc.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Topology.heine_cantor",
+   "domain": "FRONTIER-wave2",
+   "register": "PROVED",
+   "statement": "Heine-Cantor: a continuous function on a compact metric (uniform) space is uniformly continuous. State: for a compact space X and continuous f : X -> Y (uniform spaces), UniformContinuous f. (Use Mathlib's CompactSpace.uniformContinuous_of_continuous / IsCompact.uniformContinuousOn.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Twin.conjecture_statement",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "State (do NOT attempt to prove) the twin prime conjecture as a Lean Prop and prove that it is equivalent to itself as a well-formed definition: define TwinPrimeConj := forall N : Nat, exists p, N < p and Nat.Prime p and Nat.Prime (p+2); then prove TwinPrimeConj <-> TwinPrimeConj (a well-formedness/registration lemma, NOT a proof of the conjecture).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Twin.pair_10007_10009",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "10007 and 10009 form a twin prime pair: Nat.Prime 10007 and Nat.Prime 10009 and 10009 = 10007 + 2.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Twin.pair_11_13",
+   "domain": "FRONTIER-primes",
+   "register": "PROVED",
+   "statement": "11 and 13 are twin primes: Nat.Prime 11 and Nat.Prime 13 and 13 - 11 = 2.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Core.posIndex_conj_le",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "Inertia does not increase under compression: n₊(BᴴQB) ≤ n₊(Q).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Core.rank_trace_ineq",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "Rank–trace inequality (preprint Lemma 3.2): c·tr P − (c²/4)r + 2c·tr Q − c² b ≤ ‖P+Q‖_F².",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Core.sylvester_finrank_le_posIndex",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "Sylvester's law, hard direction: any subspace on which a Hermitian form is positive definite has dimension ≤ n₊(A), the number of positive eigenvalues.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Core.vonNeumann_trace_ineq_hermitian",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "Von Neumann trace inequality, Hermitian case: Re tr(AB) ≤ ∑ a_i↓ b_i↓ (eigenvalues sorted decreasing).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Obstruction.damage_cost_exponent_law",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "The rescaled deep-pair damage/cost ratio e^{4π(A−1)y} is strictly increasing and unbounded for any bandwidth A > 1.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Obstruction.repaired_witness_neg_at_deep_point",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "The repaired witness kernel is strictly negative at the deep point 2i: (sinh 2π/2π)²·(1 − cosh(6π)/10) < 0 — the deep-pair blowup is real.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Obstruction.repaired_witness_nonneg",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "The repaired obstruction witness kernel is nonnegative on ALL of ℝ (product of nonnegatives).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Obstruction.sq_factor_lower_bound",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "The witness's modulation factor is bounded below by 9/10 everywhere — the repair has margin, not just nonnegativity.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Obstruction.subclass_obstruction_statement",
+   "domain": "B-conjecture",
+   "register": "PROVED",
+   "statement": "Abstract subclass obstruction: a fixed-kernel pointwise-discard linear certificate with a negative deep value is invalid against deep-pair configurations (the refereed, class-named form of T1's R3).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Obstruction.tent_combination_neg_on_band",
+   "domain": "C-corpus-extension",
+   "register": "PROVED",
+   "statement": "The witness's Fourier tent combination is strictly negative exactly where claimed: T(α) − (1/20)(T(α−3/2)+T(α+3/2)) < 0 on (1, 5/2).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Redux.LinAlg.eigenvalue_cauchy_schwarz_count",
+   "domain": "FRONTIER-linalg",
+   "register": "PROVED",
+   "statement": "Let d : Nat, ev : Fin d -> Real, and theta : Real with 0 <= theta. Let s := Finset.univ.filter (fun i => theta < ev i), let n := s.card, and suppose (theta * d) < (Finset.univ.sum ev). Prove that ((Finset.univ.sum ev) - theta * d)^2 <= (n : Real) * (Finset.univ.sum (fun i => (ev i)^2)). (This is the thresholded Cauchy-Schwarz count, Lemma 3.3, at the eigenvalue level: negative eigenvalues only help, then Cauchy-Schwa",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Redux.LinAlg.integrality_shadow",
+   "domain": "FRONTIER-linalg",
+   "register": "PROVED",
+   "statement": "For every natural number m, 2 * m <= m^2 + 1. Equivalently, for m : Nat, (m:Int)^2 >= 2*m - 1. This is Montgomery's integrality step (m-1)^2 >= 0, whose matrix analogue is Lemma 3.2.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Redux.LinAlg.qf_add",
+   "domain": "linalg",
+   "register": "PROVED",
+   "statement": "Quadratic-form additivity: qf(M+N)(x) = qf(M)(x) + qf(N)(x) for complex matrices M, N and x in Euclidean space — the linearity step of the zeta-23 inertia compression chain.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Redux.LinAlg.quadForm_eq_complex",
+   "domain": "linalg",
+   "register": "PROVED",
+   "statement": "Hermitian quadratic form in eigencoordinates: star x ⬝ᵥ A *ᵥ x = Σᵢ λᵢ(A)·‖(eigencoord x)ᵢ‖² as a complex number, for A Hermitian — the spectral-decomposition step of the zeta-23 chain.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Redux.LinAlg.rank_trace_ineq",
+   "domain": "FRONTIER-linalg",
+   "register": "PROVED",
+   "statement": "The rank-trace inequality (Lemma 3.2, the new ingredient). Let P, Q be Hermitian complex matrices of size Fin d with P positive semidefinite, rank P <= r, and posIndex Q <= b (b strictly positive eigenvalues of Q). Write rtrace X = Re (trace X) and frobSq X = Re (trace (Xᴴ * X)). Prove that for every real c > 0, c * rtrace P - (c^2/4) * r + 2 * c * rtrace Q - c^2 * b <= frobSq (P + Q). In particular at c = 2: 2 * rtr",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Redux.LinAlg.sq_ge_linear",
+   "domain": "FRONTIER-linalg",
+   "register": "PROVED",
+   "statement": "For all real numbers x and c, we have c * x - c^2 / 4 <= x^2. (This is exactly (x - c/2)^2 >= 0; it is the scalar shadow of the rank-trace inequality, Lemma 3.2.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Redux.LinAlg.sq_ge_linear_two",
+   "domain": "FRONTIER-linalg",
+   "register": "PROVED",
+   "statement": "For all real numbers x and c, we have 2 * c * x - c^2 <= x^2. (This is (x - c)^2 >= 0, the c=2 form used in Lemma 3.2.)",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Redux.LinAlg.sum_doublyStochastic_mul_le",
+   "domain": "linalg",
+   "register": "PROVED",
+   "statement": "For S doubly stochastic and antitone weight sequences μ, ν: Σᵢⱼ Sᵢⱼ·μᵢνⱼ ≤ Σᵢ μᵢνᵢ — the rearrangement/Birkhoff step feeding the von Neumann trace inequality.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Redux.LinAlg.sylvester_hermitian_finrank",
+   "domain": "FRONTIER-linalg",
+   "register": "PROVED",
+   "statement": "Sylvester's law of inertia (Hermitian, the direction used in the paper). Let A be a Hermitian complex matrix of size Fin d, and let W be a complex subspace of (Fin d -> Complex) on which the Hermitian form x |-> Re (star x dotProduct (A *v x)) is positive definite (strictly positive for all nonzero x in W). Prove that finrank W <= posIndex A, where posIndex A is the number of strictly positive eigenvalues of A. In th",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Redux.LinAlg.vonNeumann_trace_ineq",
+   "domain": "FRONTIER-linalg",
+   "register": "PROVED",
+   "statement": "Von Neumann's trace inequality for Hermitian matrices. For Hermitian complex matrices A, B of size Fin d, prove Re (trace (A * B)) <= sum over i of (mu_i * nu_i), where mu and nu are the eigenvalues of A and B respectively, both listed in the SAME monotone (decreasing) order. Route: diagonalise; reduce to a bilinear form against a doubly stochastic matrix (the entrywise squared modulus of a unitary), then Birkhoff / ",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Redux.LinAlg.weyl_posIndexAbove",
+   "domain": "FRONTIER-linalg",
+   "register": "PROVED",
+   "statement": "Work with Hermitian matrices over the complex numbers, size Fin d. For a Hermitian matrix A let posIndex A be the number of strictly positive eigenvalues (#{i | 0 < eigenvalue_i A}) and posIndexAbove A theta the number of eigenvalues strictly above theta. Prove Weyl's monotonicity: if A and E are Hermitian and |eigenvalue_i E| <= theta for every i, then posIndexAbove (A + E) theta <= posIndex A. Use Courant-Fischer /",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Scaffold.Hd_ge_Fwin_iff",
+   "domain": "A-assembly",
+   "register": "PROVED",
+   "statement": "H_d(lambda) >= F(lambda) iff H(lambda) >= 0 on 0 < lambda <= 1 (preprint eq. (1.3), third line, first equivalence).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Scaffold.Hwin_nonneg_iff_threshold",
+   "domain": "A-assembly",
+   "register": "PROVED",
+   "statement": "H(lambda) >= 0 iff lambda >= 3 - sqrt 6 = 0.5505... on 0 < lambda <= 1 (preprint eq. (1.3), third line, second equivalence -- the degeneration threshold of the method).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Scaffold.assembly_window_constants",
+   "domain": "A-assembly",
+   "register": "PROVED",
+   "statement": "Window-constant assembly identities of preprint eq. (1.3): H(1)=2/3, H_d(1)=5/6, F(1)=3/4, 2F(1)-1=1/2.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Scaffold.christoffel_inverse_form",
+   "domain": "B-christoffel",
+   "register": "PROVED",
+   "statement": "Inverse-matrix cross-check: (M^{-1})_{00} = 36/5 for the sine-kernel Hankel matrix, so 1/(e_0^T M^{-1} e_0) = 5/36 agrees with the determinant-ratio Christoffel value.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Scaffold.hankel_christoffel_13_18",
+   "domain": "B-christoffel",
+   "register": "PROVED",
+   "statement": "Lambda_2(0;1) = 5/36 from the Hankel determinants of the sine-kernel moments at lambda=1, and the ladder assembly 2*(1 - 5/36) - 1 = 13/18 (preprint SS7.5(f)).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Scaffold.integral_sinc_fourth",
+   "domain": "C-integral",
+   "register": "UNVERIFIED",
+   "statement": "integral over R of (sin x / x)^4 dx = 2*pi/3 -- equivalently integral of S(u)^4 = 2/3; the nontrivial input to m_2(1) = 1 + (1 - 2/3) = 4/3 (preprint SS7.5(f) cross-check).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Zeta23Scaffold.integral_sinc_sq",
+   "domain": "C-integral",
+   "register": "UNVERIFIED",
+   "statement": "integral over R of (sin x / x)^2 dx = pi -- normalization integral of the sine kernel; equivalently integral of S(u)^2 = 1 for S(u) = sin(pi u)/(pi u). Input to the m_2(1) = 4/3 cross-check of the sine-kernel moment values (preprint SS7.5(f)).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Zeta23Scaffold.m2_at_one_assembly",
+   "domain": "C-integral",
+   "register": "PROVED",
+   "statement": "Conditional assembly m_2(1) = 1 + int S^2 - int S^4 = 4/3 given the two sinc integrals -- the honest formal shape of 'one computes m_2(1) = 4/3' (preprint SS7.5(f)).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Scaffold.psiCubic_eq_one_of_small",
+   "domain": "A-assembly",
+   "register": "PROVED",
+   "statement": "The cubic weight psi(m) = m/2 + (2m^2 - m^3)/18 + (4/9)*[m=1] of preprint SS7.5(g) attains equality psi(m)=1 at m = 1, 2, 3.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Scaffold.psiCubic_le_one",
+   "domain": "A-assembly",
+   "register": "PROVED",
+   "statement": "psi(m) <= 1 for all integers m >= 1 -- the finite verification called 'one checks' in preprint SS7.5(g); the certificate admissibility of the cubic weight.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
+   "name": "Zeta23Scaffold.rung_glue_constant_upgrade",
+   "domain": "A-assembly",
+   "register": "PROVED",
+   "statement": "Abstract rung glue: the (2*(31/36)-1-eps)-bound equals the (13/18-eps)-bound and dominates the (2/3-eps)-bound, for any nonnegative comparison sequence.",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  }
+ ]
+}

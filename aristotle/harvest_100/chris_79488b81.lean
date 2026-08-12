@@ -1,0 +1,49 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace QC
+
+/-- The Pauli `X` matrix. -/
+def X : Matrix (Fin 2) (Fin 2) ℂ := !![0, 1; 1, 0]
+
+/-- The Pauli `Y` matrix. -/
+def Y : Matrix (Fin 2) (Fin 2) ℂ := !![0, -Complex.I; Complex.I, 0]
+
+/-- The Pauli `Z` matrix. -/
+def Z : Matrix (Fin 2) (Fin 2) ℂ := !![1, 0; 0, -1]
+
+/-- The Pauli matrices `X`, `Y`, `Z` pairwise anticommute and each squares to the
+identity matrix. -/
+theorem pauli_anticommute :
+    X * Y + Y * X = 0 ∧ Y * Z + Z * Y = 0 ∧ Z * X + X * Z = 0 ∧
+      X * X = 1 ∧ Y * Y = 1 ∧ Z * Z = 1 := by
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩ <;>
+    simp [X, Y, Z, ← Matrix.ext_iff, Fin.forall_fin_two, Matrix.one_fin_two,
+      Complex.ext_iff]
+
+end QC
+
+#print axioms QC.pauli_anticommute
+
