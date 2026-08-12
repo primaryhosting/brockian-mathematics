@@ -1,0 +1,31 @@
+== constants (30 dps) ==
+   c1* = 0.75329606785607067722
+   V_A = 2 - 1/c1* = 0.67250070367941164573
+
+== Lemma F spot check (200k random exact-cone points) ==
+   min S_total over cone samples = 1.154907e-03  (lemma: >= 0)
+
+== components on [0, 25] (ghost-0's refereed window reach A <= 25) ==
+   [GUE  ] min S_O = +0.000e+00  min S_P = +0.000e+00
+   [GUE  ] max cone residual X^2 - 4 S_O S_P = +0.000e+00  (relative +0.000e+00; oob X sits ON the cone floor, so any positive value at fp-epsilon scale is rounding)
+   [GUE  ] band |S_total - alpha| max = 0.000e+00
+   [GUE  ] min oob S_total = +1.000e+00 (Lemma F: >=0)
+   [ghost] min S_O = +7.796e-17  min S_P = +2.000e+00
+   [ghost] max cone residual X^2 - 4 S_O S_P = +2.441e-04  (relative +1.110e-16; oob X sits ON the cone floor, so any positive value at fp-epsilon scale is rounding)
+   [ghost] band |S_total - alpha| max = 7.754e-16
+   [ghost] min oob S_total = +8.429e-02 (Lemma F: >=0)
+
+== mixture x*GUE + (1-x)*ghost-0 at x = V_A, tol = 0 ==
+   band |S_total - alpha| max = 5.551e-16
+   cone residual max = +0.000e+00  (SOC convexity predicts <= 0)
+   min oob S_total = +7.001e-01   min S_O = +6.550e-01
+   eta_GUE >= -1: min of -sinc^2 = -1 at x=0 (exact); ghost eta = 50 >= -1 (exact)
+   count = 1.0  (= 1 exact: True)
+   I5 LHS = 2 + x = 2.6725007036794116457
+   I5 RHS = 4 - 1/c1* = 2.6725007036794116457
+   I5 slack = 0.0  (saturation is EXACT algebra: 2 + V_A = 4 - 1/c1* <=> V_A = 2 - 1/c1*)
+
+VERDICT [CERT-2LEVEL]: value(C0+I5 + out-of-band S>=0) = V_A exactly,
+both sides; marginal price of OOB positivity in the 2-level certificate
+class = 0 at every rung (Lemma F).  The V_A -> V_B increment is a
+[DATA-1DELTA] phenomenon only.

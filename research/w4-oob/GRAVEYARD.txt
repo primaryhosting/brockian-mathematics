@@ -1,0 +1,85 @@
+W4 GRAVEYARD (dead ends + wrongness found, per method law)
+===========================================================
+G-W4-1. REAL-WINDOW WINGS for negative oob spectral mass -- DEAD (algebra).
+    A real symmetric window q = core + wing has wing x mirror-wing
+    autocorrelation (w+ * w-)(alpha) > 0 near alpha ~ 2 s_wing in (1, 2T]
+    (product of two negative wings), so every real-window family leaks a
+    POSITIVE out-of-band speck exactly where the sign must be <= 0, unless
+    supp q <= [0, 1/2] (= Montgomery-Taylor, no oob reach).  The phase of a
+    COMPLEX profile is the degree of freedom that evades this.
+
+G-W4-2. Free-complex SLSQP search (closed_form.py) -- ABANDONED-AS-METHOD.
+    (a) constraint margin made the MT start infeasible (hundreds of
+    violated rows -> "inequality constraints incompatible"); (b) with the
+    margin at 0 the optimizer exploited constraint-GRID slack: its "LB =
+    0.713" point violated rho <= 0 between grid points -- above the LP
+    adversary value, i.e. self-refuting.  Kept as the derivation +
+    calibration file; the search moved to closed_form2/3.
+
+G-W4-3. Structural modulated family (sum of separate squares, env >= 0 at
+    frequency phi) -- CANNOT LEAVE V_A (second order, modal_probe.py).
+    sup_{env>=0} Q_phi < 0 for all admissible phi in [1/4, 1/2] (top
+    unsigned eigenvalues -5e-5 .. -7e-4).  Structural reason: a
+    sum-of-separate-squares kernel has NO cross terms (R, J, G additive
+    across components), the joint Hessian at MT is block-diagonal, MT is
+    optimal on the band block, and each modulated block is <= 0.  The
+    improving kernel MUST couple band and oob spectrum inside ONE square
+    -- which is exactly what the LP dual kernels do.  (This also explains
+    why closed_form2's honest restarts all returned to V_A: the ABNORMAL
+    "improvements" were R -> 0 pole artifacts violating the J+G >= R
+    identity forced by GUE feasibility.)
+
+G-W4-4. "J+G < R is impossible" -- BANKED AS VALIDITY FILTER.  GUE
+    feasibility forces J + G >= R for every valid kernel of the chain
+    (plug eta_GUE = -sinc^2 into the budget).  Any optimizer output
+    violating it is a bug/artifact detector, used twice (G-W4-2, G-W4-3).
+
+G-W4-5. Truncated-MT start with a nonzero knot at t = 1.0 -- TWICE WRONG:
+    (i) MT*1_{t<=1} is not pw-linear representable (support overhang to
+    the next knot injects positive rho past the band edge, +5.3e-3);
+    (ii) linspace(0,1.4,57)[40] = 0.99999999999999989 < 1.0, so the
+    "T1 < 1.0" cutoff kept the 0.76-sized knot anyway.  Both caught by the
+    oob feasibility print at the start; fix = zero every knot >= 0.999.
+
+G-W4-6. Deep-depth pair columns at A = 3 with y >= 0.65 -- HiGHS "Model
+    error" (cosh^2(2 pi A y) overflows double).  Depth ladder rerun at
+    A = 2 (log_depth_ladder.txt); depths beyond ~1 remain numerically
+    unreachable in this basis -- the y -> infinity limit is analytic
+    territory (exponent law), not LP territory.
+
+G-W4-7. Continuum-x promotion of the GRID dual kernels -- FAILS at every
+    basis (kernel dips ~ -0.005..-0.02, always at x ~ XF, the cell-basis
+    edge).  The grid-class certified bounds do NOT extend to arbitrary
+    densities on (0, XF] by kernel-positivity; the continuum bound has to
+    come from the structural family (closed_form3), not from LP duals.
+
+G-W4-8. refD's builders directory (scratchpad/refD) -- LOST with the
+    scratchpad wipe before this session (as was this wave's first
+    transcript).  The mixture witness was REBUILT from REFEREED.md D1's
+    description and re-verified (frame_lemma.py); nothing else of refD's
+    was needed.  Session-scratchpad storage is a reproducibility hazard:
+    this directory is mirrored into the repo (research/w4-oob).
+
+G-W4-9. In-loop constraint grids vs an adversarial optimizer -- TWICE
+    EXPLOITED before being closed: (i) v3's SLP threaded rho-positivity
+    between 400 evenly spaced oob points (LB "0.710" > the 0.684 grid
+    value = self-refuting); (ii) with constraints moved to the native lag
+    grid, the ascent rediscovered the R -> 0 scale pole THROUGH the
+    margin by oscillating u at the lag-grid frequency (aliased threading,
+    J+G = -3 violating the G-W4-4 identity).  Closed structurally in v4:
+    the SLP constrains the per-interval CLOSED-FORM CUBIC MAXIMA of the
+    surrogate (there is no grid between constraint and certificate), and
+    the scale is pinned by exact rescaling.  Margin must also dominate
+    quadrature error by orders of magnitude (the "0.9996 certificate"
+    of the DELTA=2e-3 pre-fix run rested on a different lie, see G-W4-10).
+
+G-W4-10. np.correlate CONJUGATES its second argument -- passing
+    np.conj(u) double-conjugates and silently corrupts every COMPLEX-u
+    autocorrelation (J low by 0.12, G by 0.23 at the final point), while
+    every REAL-u calibration (MT gate, env-only structural family) passes
+    perfectly.  Caught only by an independent scipy.quad re-evaluation of
+    the same control points (0.6536 vs the claimed 0.9996).  BANKED
+    METHOD LESSON: a calibration gate that exercises only a measure-zero
+    subfamily (here: real windows) of the search space certifies the
+    machinery for that subfamily only; every new degree of freedom needs
+    its own independent-path check.  All four closed_form*.py fixed.

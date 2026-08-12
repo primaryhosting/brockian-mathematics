@@ -1,0 +1,18 @@
+======== SIMPLES-ONLY PROBE (psi_2..5 == 0): does OOB pay without the multiplicity mechanism? ========
+[simples band-only] XF=80 na=601 tol=0.0002 band-only
+   LP value = 1.0000000   psi = [ 1. -0. -0. -0. -0.]
+   DUAL re-verified grid-class bound = 1.0000000  (leakage <= 0.00e+00; tail-budget dual mass = 0.00e+00)
+[simples +oob] XF=80 na=601 tol=0.0002 A=3
+   LP value = 1.0000000   psi = [ 1. -0. -0. -0. -0.]
+   DUAL re-verified grid-class bound = 1.0000000  (leakage <= 0.00e+00; tail-budget dual mass = 0.00e+00)
+[simples+pairs band-only] XF=80 na=601 tol=0.0002 band-only depths=(0.1, 0.2, 0.3, 0.4, 0.5)
+   LP value = 0.7165904   psi = [ 0.71659 -0.       0.       0.       0.     ]   p = [0.141705 0.       0.       0.       0.      ]
+   DUAL re-verified grid-class bound = 0.7165904  (leakage <= 5.32e-13; tail-budget dual mass = 0.00e+00)
+[simples+pairs +oob] XF=80 na=601 tol=0.0002 A=3 depths=(0.1, 0.2, 0.3, 0.4, 0.5)
+   LP value = 0.7197489   psi = [ 0.71975 -0.       0.       0.       0.     ]   p = [0.140126 0.       0.       0.       0.      ]
+   DUAL re-verified grid-class bound = 0.7197470  (leakage <= 9.90e-06; tail-budget dual mass = 1.64e-11)
+
+   OOB price w/o integrality (no pairs):  +0.0000000
+   OOB price w/o integrality (with pairs): +0.0031585
+
+Done.

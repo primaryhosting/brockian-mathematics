@@ -1,0 +1,53 @@
+== the one genuine kill: T1 Variant-A optimal adversary ==
+[Variant A optimum] XF=80 na=601 tol=0.0002 band-only
+   LP value = 0.6790247   psi = [0.67902 0.16049 0.      0.      0.     ]
+   S(alpha) on (1, 5]: min = -42.4584 at alpha = 1.0245; S < 0 on 32.9% of the grid
+   -> the Variant-A extremal configuration VIOLATES out-of-band positivity massively [1D-OOB: DIES]
+   (Referee A's R1 missing-constraint attack, reproduced from this program's own committed solve)
+
+== MENAGERIE TABLE (verdicts + provenance) ==
+witness                     2LV-OOB          1D-EXIST          1D-OOB
+---------------------------------------------------------------------------
+GUE (all-simple)            PASS (Lemma F)   YES (closed form) PASS: S=1 oob
+                            [frame_lemma]    [controls C2]     (structural)
+ghost-0 (refC, psi==0)      PASS (Lemma F +  NO: S(0+)=4 != 0  -- (does not
+  p_.1=1/2 + tall cell      direct check,    without the X     exist there)
+                            frame_lemma)     channel
+ghost-2 (W3 multiplicity    PASS (its S =    NO: S(0+)=2 != 0  -- (does not
+  ghost, psi_2=1/4)         1+cosh^2 > 0     without X         exist there)
+                            everywhere)
+refD mixture                PASS (verified   NO (ghost-0       --
+  V_A*GUE+(1-V_A)*ghost-0   tol=0, incl. I5  component)
+                            saturation)
+sec.7.5(a) all-pairs        PASS (= ghost-0  INFEASIBLE at     never reached:
+                            up to depth      band-only: Fejer  dead before
+                            bookkeeping)     cap D2+4p<=4/3,   S>=0 is asked
+                                             t* = 0.81 [C3]
+T1 Variant-A extremal       n/a (1-delta     YES (it is the    DIES (above:
+  (simples+doubles+CCLM17   object)          band-only         S << 0 on
+  correlation)                               optimum)          most of oob)
+deep-pair increment         PASS             YES (depth-       SURVIVES and
+  (rescaled, R3 exponent                     capped class)     HELPS: pairs
+  law)                                                         inject e^{4piAy}
+                                                               POSITIVE oob mass;
+                                                               active at the
+                                                               depth cap w/ mass
+                                                               6e-5 [log_pairs]
+W4 crystallized adversary   n/a              YES (Variant-B    SURVIVES: S
+  (eta = -1 + integer-                       optimum)          touches 0 on
+  spaced peaks, psi_2~0.158)                                   thick oob sets
+                                                               [log_anatomy]
+---------------------------------------------------------------------------
+STRUCTURE OF THE SURVIVING FAMILY: out-of-band positivity is a
+FRAME-DEPENDENT killer.  In the 2-level certificate class it kills nothing
+(cone-implied, Lemma F) -- every ghost survives untouched, so the ladder's
+certified constants are unchanged.  In the one-delta data frame it kills
+exactly one thing: the smooth CCLM17-type extremal correlation (whose oob
+spectrum is very negative).  What survives is (a) GUE and its mixtures,
+(b) configurations whose correlation CRYSTALLIZES (hard anticorrelation
+eta = -1 + near-integer-spaced positive peaks, spectrum pinned to 0 on
+out-of-band intervals -- the binding adversary of the doubly-positive
+problem), and (c) vanishing-mass deep pairs at the class depth cap, which
+BUY oob positivity (their spectral injection is positive) at o(1) band
+cost -- the R3 exponent law re-entering on the adversary's side.
+

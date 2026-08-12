@@ -1,0 +1,21 @@
+======== VARIANT C: adversary WITH off-line pair species ========
+[C ymax=0.5] XF=80 na=601 tol=0.0002 A=3 depths=(0.1, 0.2, 0.3, 0.4, 0.5)
+   LP value = 0.6872824   psi = [0.68728 0.1563  0.      0.      0.     ]   p = [0.0e+00 0.0e+00 0.0e+00 0.0e+00 6.2e-05]
+   DUAL re-verified grid-class bound = 0.6872798  (leakage <= 2.66e-03; tail-budget dual mass = 2.01e-11)
+   active pair masses: {0.5: 6.2e-05}
+[C ymax=1] XF=80 na=601 tol=0.0002 A=3 depths=(0.1, 0.2, 0.3, 0.4, 0.5, 0.75, 1.0)
+   status 2: (HiGHS Status 2: Model error)
+[C ymax=2] XF=80 na=601 tol=0.0002 A=3 depths=(0.1, 0.2, 0.3, 0.4, 0.5, 1.0, 1.5, 2.0)
+   status 2: (HiGHS Status 2: Model error)
+
+[C ymax=0.5] XF=160 na=1201 tol=0.0002 A=3 depths=(0.1, 0.2, 0.3, 0.4, 0.5)
+   LP value = 0.6831095   psi = [0.68311 0.15838 0.      0.      0.     ]   p = [0.0e+00 0.0e+00 0.0e+00 0.0e+00 6.1e-05]
+   DUAL re-verified grid-class bound = 0.6831069  (leakage <= 1.05e-02; tail-budget dual mass = 0.00e+00)
+   active pair masses: {0.5: 6.1e-05}
+[C ymax=1] XF=160 na=1201 tol=0.0002 A=3 depths=(0.1, 0.2, 0.3, 0.4, 0.5, 0.75, 1.0)
+   status 2: (HiGHS Status 2: Model error)
+[C ymax=2] XF=160 na=1201 tol=0.0002 A=3 depths=(0.1, 0.2, 0.3, 0.4, 0.5, 1.0, 1.5, 2.0)
+   status 2: (HiGHS Status 2: Model error)
+
+
+Done.

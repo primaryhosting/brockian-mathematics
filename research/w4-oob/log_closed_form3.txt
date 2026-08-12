@@ -1,0 +1,544 @@
+== SLP ascent from Montgomery-Taylor ==
+   start: LB = 0.6478995  (V_A = 0.6725007);  oob max = -9.63e-04
+   it   0: LB = 0.6673585  tr = 0.0800
+   it   5: LB = 3.0600511  tr = 0.3000
+   it  10: LB = 3.3266387  tr = 0.3000
+   it  15: LB = 3.8764140  tr = 0.3000
+   it  20: LB = 4.5371857  tr = 0.3000
+   it  25: LB = 13.9961985  tr = 0.3000
+   it  30: LB = 50739.5349954  tr = 0.3000
+   it  35: LB = 29639997.3973292  tr = 0.3000
+   it  38: LB = 569944552.7240956  tr = 0.1500
+   it  40: LB = 665212769.9413028  tr = 0.1500
+   it  41: LB = 665212769.9413028  tr = 0.0750
+   it  42: LB = 665212769.9413028  tr = 0.0375
+   it  44: LB = 2800221552.5028348  tr = 0.0187
+   it  45: LB = 2800221552.5028348  tr = 0.0094
+   it  46: LB = 2800221552.5028348  tr = 0.0047
+   it  47: LB = 2800221552.5028348  tr = 0.0023
+   it  48: LB = 2800221552.5028348  tr = 0.0012
+   it  50: LB = 2987880019.2062855  tr = 0.0006
+   it  52: LB = 3088562929.6113257  tr = 0.0003
+   it  54: LB = 3140741971.5072651  tr = 0.0001
+   it  55: LB = 3140741971.5072651  tr = 0.0001
+   it  57: LB = 3153984550.3541422  tr = 0.0000
+   it  59: LB = 3160635931.2659154  tr = 0.0000
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== REPAIR: scale buffer envelope to certified feasibility ==
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+
+== CERTIFICATION (refine 8x) ==
+   R = 0.000000001  J = -0.161361019  G = -2.971081163
+   LB = 2 - (J+G)/R = 3129574240.3455763
+   secant interior (J+G)/R = -3129574238.345576 in (1,2): False
+   oob (1, 1.4]: piecewise-cubic certified max of surrogate s = rho_f + cos(.8 pi) g  <= +2.301e-01 (cubic-fit residual 1.0e-03 included)  (FAIL)
+   (s <= 0 implies rho <= 0 there since cos(.8 pi a) <= -0.80902 on [1, 1.5] and g >= 0)
+   oob (1.4, 1.5]: rho = cos(0.8 pi a) g(a) <= 0 STRUCTURAL (env >= 0: min = +0.00e+00); rho = 0 beyond 1.5
+   K >= 0 on R: STRUCTURAL (sum of squares)
+   pair-column margins (C_y - 2 mu R)/R  (>= 0 -> bound also covers adversaries with pairs at depth y):
+      y = 0.05: -245030343.7246
+      y = 0.10: -1098524791.9342
+      y = 0.20: -6821817419.7767
+      y = 0.30: -30331476877.4036
+      y = 0.40: -128123587409.0772
+      y = 0.50: -544840876975.4301
+   repair FAILED within c <= 2.5
+
+RESULT [DATA-1DELTA, continuum, on-line adversary, any A >= 3/2]: certified psi_1 lower bound = 3129574240.3455763  (OOB CERT FAILED -- not claimable)
+   vs V_A = 0.6725007: increment +3129574239.6730757
+   control points saved: closed_form3_best.npy

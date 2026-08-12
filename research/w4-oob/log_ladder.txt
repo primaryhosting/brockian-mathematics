@@ -1,0 +1,73 @@
+======== VARIANT A (band-only) vs VARIANT B (+oob rows), matched bases ========
+[A] XF=80 na=601 tol=0.0002 band-only
+   LP value = 0.6790247   psi = [0.67902 0.16049 0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6790247  (leakage <= 2.38e-13; tail-budget dual mass = 0.00e+00)
+[B] XF=80 na=601 tol=0.0002 A=3
+   LP value = 0.6882308   psi = [0.68823 0.15588 0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6882279  (leakage <= 6.68e-06; tail-budget dual mass = 0.00e+00)
+   KERNEL: 361 atoms; band mass +1.0145 oob mass -0.0145
+   KERNEL min on (0,XF]: grid -8.513e-03 at x = 79.790; Lipschitz-certified min -1.256e-02 -> continuum-x promotion FAIL (grid-cell class only)
+   MARGINAL PRICE of oob rows at this basis: +0.0092061
+
+[A] XF=80 na=1201 tol=0.0002 band-only
+   LP value = 0.6791444   psi = [0.67914 0.16043 0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6791444  (leakage <= 2.16e-13; tail-budget dual mass = 0.00e+00)
+[B] XF=80 na=1201 tol=0.0002 A=3
+   LP value = 0.6886301   psi = [0.68863 0.15568 0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6886274  (leakage <= 6.89e-06; tail-budget dual mass = 0.00e+00)
+   KERNEL: 365 atoms; band mass +1.0147 oob mass -0.0147
+   KERNEL min on (0,XF]: grid -1.831e-02 at x = 79.800; Lipschitz-certified min -2.159e-02 -> continuum-x promotion FAIL (grid-cell class only)
+   MARGINAL PRICE of oob rows at this basis: +0.0094857
+
+[A] XF=160 na=1201 tol=0.0002 band-only
+   LP value = 0.6766369   psi = [0.67664 0.16168 0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6766369  (leakage <= 1.00e-12; tail-budget dual mass = 0.00e+00)
+[B] XF=160 na=1201 tol=0.0002 A=3
+   LP value = 0.6841004   psi = [0.6841  0.15795 0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6840929  (leakage <= 1.42e-05; tail-budget dual mass = 0.00e+00)
+   KERNEL: 671 atoms; band mass +1.0145 oob mass -0.0145
+   KERNEL min on (0,XF]: grid -1.429e-02 at x = 160.000; Lipschitz-certified min -1.964e-02 -> continuum-x promotion FAIL (grid-cell class only)
+   MARGINAL PRICE of oob rows at this basis: +0.0074635
+
+[A] XF=160 na=2001 tol=0.0002 band-only
+   LP value = 0.6766843   psi = [0.67668 0.16166 0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6766843  (leakage <= 3.26e-13; tail-budget dual mass = 0.00e+00)
+[B] XF=160 na=2001 tol=0.0002 A=3
+   LP value = 0.6842612   psi = [0.68426 0.15787 0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6842588  (leakage <= 4.13e-06; tail-budget dual mass = 0.00e+00)
+   KERNEL: 675 atoms; band mass +1.0143 oob mass -0.0143
+   KERNEL min on (0,XF]: grid -8.711e-03 at x = 159.791; Lipschitz-certified min -1.239e-02 -> continuum-x promotion FAIL (grid-cell class only)
+   MARGINAL PRICE of oob rows at this basis: +0.0075769
+
+[A] XF=240 na=2001 tol=0.0002 band-only
+   LP value = 0.6758437   psi = [0.67584 0.16208 0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6758437  (leakage <= 2.90e-13; tail-budget dual mass = 0.00e+00)
+[B] XF=240 na=2001 tol=0.0002 A=3
+   LP value = 0.6833551   psi = [0.68336 0.15832 0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6833478  (leakage <= 1.16e-05; tail-budget dual mass = 0.00e+00)
+   KERNEL: 979 atoms; band mass +1.0127 oob mass -0.0127
+   KERNEL min on (0,XF]: grid -5.313e-03 at x = 239.815; Lipschitz-certified min -8.388e-03 -> continuum-x promotion FAIL (grid-cell class only)
+   MARGINAL PRICE of oob rows at this basis: +0.0075115
+
+---- tol sensitivity at (160, 1201, 800, 3) ----
+[B tol=0.0002] XF=160 na=1201 tol=0.0002 A=3
+   LP value = 0.6841004   psi = [0.6841  0.15795 0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6840929  (leakage <= 1.42e-05; tail-budget dual mass = 0.00e+00)
+[B tol=5e-05] XF=160 na=1201 tol=5e-05 A=3
+   LP value = 0.6846092   psi = [0.68461 0.1577  0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6846030  (leakage <= 1.03e-05; tail-budget dual mass = 0.00e+00)
+[B tol=1e-05] XF=160 na=1201 tol=1e-05 A=3
+   LP value = 0.6850384   psi = [0.68504 0.15748 0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6850314  (leakage <= 1.32e-05; tail-budget dual mass = 0.00e+00)
+---- window sensitivity at (160, 1201) ----
+[B A=2] XF=160 na=1201 tol=0.0002 A=2
+   LP value = 0.6837702   psi = [0.68377 0.15811 0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6837627  (leakage <= 1.92e-05; tail-budget dual mass = 0.00e+00)
+[B A=3] XF=160 na=1201 tol=0.0002 A=3
+   LP value = 0.6841004   psi = [0.6841  0.15795 0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6840929  (leakage <= 1.42e-05; tail-budget dual mass = 0.00e+00)
+[B A=5] XF=160 na=1201 tol=0.0002 A=5
+   LP value = 0.6850234   psi = [0.68502 0.15749 0.      0.      0.     ]
+   DUAL re-verified grid-class bound = 0.6850229  (leakage <= 7.45e-07; tail-budget dual mass = 0.00e+00)
+
+Done.

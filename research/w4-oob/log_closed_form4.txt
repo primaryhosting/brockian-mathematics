@@ -1,0 +1,26 @@
+== v4 SLP (cubic-max constraints, pinned scale) ==
+   start: LB = 0.6478995 (V_A = 0.6725007); max cubic-max = -1.14e-03; R = 1.000000
+   it   0: LB = 0.6566256  tr = 0.0600  maxcub = -1.6e-03
+   it  10: LB = 0.6696503  tr = 0.0600  maxcub = -1.4e-03
+   it  20: LB = 0.6723005  tr = 0.0600  maxcub = -1.3e-03
+   it  30: LB = 0.6738743  tr = 0.0600  maxcub = -1.1e-03
+   it  35: LB = 0.6742613  tr = 0.0300  maxcub = -1.1e-03
+   it  36: LB = 0.6742613  tr = 0.0150  maxcub = -1.1e-03
+   it  37: LB = 0.6742613  tr = 0.0075  maxcub = -1.1e-03
+   it  38: LB = 0.6742613  tr = 0.0037  maxcub = -1.1e-03
+   it  39: LB = 0.6742613  tr = 0.0019  maxcub = -1.1e-03
+
+== FINAL CERTIFICATION (FINE = 128) ==
+   R = 1.000000040  J = 0.316658221  G = 1.009075233
+   LB = 2 - (J+G)/R = 0.6742666
+   secant interior (J+G)/R in (1,2): True
+   validity identity J+G >= R: True
+   oob (1,1.4]: certified cubic max + residual = -1.121e-03  (PASS)
+   oob (1.4, 1.5]: structural (env >= 0); 0 beyond 1.5; K >= 0 structural
+   pair-column margins (C_y - 2 mu R)/R:
+      y = 0.1: +0.2161
+      y = 0.3: +2.2604
+      y = 0.5: -2.5267
+
+RESULT [DATA-1DELTA, continuum, on-line adversary, any A >= 3/2]: certified psi_1 >= 0.6742666
+   vs V_A = 0.6725007: increment +0.0017659
