@@ -1,6 +1,6 @@
-# Aristotle-generated, kernel-trusted proofs
+# Aristotle-generated, AXLE-verified quantum-computing proofs
 
-Axiom-clean (only propext/Classical.choice/Quot.sound), lake-verified, cross-checked.
+Kernel-checked in AXLE cloud on Lean 4.32.0. These are formalizations of known results; this manifest makes no claim of mathematical novelty.
 
 - `QC.no_cloning` (DOMAIN-qc) — QC_no_cloning.lean
 - `QC.pauli_anticommute` (DOMAIN-qc) — QC_pauli_anticommute.lean
