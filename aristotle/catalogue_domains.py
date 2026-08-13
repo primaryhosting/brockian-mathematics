@@ -12,7 +12,7 @@ import re
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
-QUEUES = [ROOT / q for q in ("domains_queue.json", "mined_queue.json", "next_100.json",
+QUEUES = [ROOT / q for q in ("reconciled_queue.json", "domains_queue.json", "mined_queue.json", "next_100.json",
           "pca_lean_queue.json", "frontier_queue.json", "frontier2.json",
           "reattack_queue.json", "frontier_spectral.json", "frontier_betrothed_queue.json", "frontier_linalg.json", "frontier_riemann.json", "frontier_infinity.json", "frontier_fibonacci.json", "frontier_primes.json", "frontier_rh2.json", "frontier_wave2.json", "frontier_wave3.json", "frontier_wave4.json", "frontier_wave5.json")]
 LEDGER = ROOT / "harvest_ledger.json"

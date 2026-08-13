@@ -1,0 +1,3345 @@
+{
+ "count": 371,
+ "note": "Auto-generated 2026-08-13 by harvest-orphan reconciliation: PROVED ledger targets absent from every queue file. Statements are the ACTUAL Lean signatures extracted from best_proofs (statements-bind-not-names). def-kind entries must never render PROVED.",
+ "queue": [
+  {
+   "target": "ArithmeticFunction.liouville_apply",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (hn : n ≠ 0) : liouville n = (-1) ^ cardFactors n",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BSCS.UnitaryRep.Uop_mul",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .UnitaryRep.Uop_mul {G : Type} [Group G] {H : Type} [BSCS.HilbertC H] (ρ : BSCS.UnitaryRep G H) (g h : G) : ρ.Uop (g * h) = (ρ.Uop g).comp (ρ.Uop h)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "BZFC.BrockRay.residue_le_four",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .BrockRay.residue_le_four (r : BZFC.BrockRay) : BZFC.BrockRay.residue r ≤ 4",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brock.GoldenRatio.sqrt5_pos",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .GoldenRatio.sqrt5_pos : 0 < Real.sqrt (5 : ℝ)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brock.mem_translate_iff",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .mem_translate_iff {G : Finset (ZMod q)} {r0 x : ZMod q} : x ∈ Brock.translate r0 G ↔ ∃ g ∈ G, r0 + g = x",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.ArithmeticFiber.mapsTo_orthogonal_of_annihilates",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {L : H →L[𝕜] H} (hL : IsSelfAdjoint L) {u : H} (hu : L u = 0) (x : H) : L x ∈ (𝕜 ∙ u)ᗮ",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Cassini.cassini",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : (Nat.fib n : ℤ) * (Nat.fib (n + 2)) - (Nat.fib (n + 1) : ℤ) ^ 2 = (-1) ^ (n + 1)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.CatalanClosed.succ_mul_catalan_eq_choose",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : (n + 1) * Nat.catalan n = Nat.choose (2 * n) n",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Cayley.forestFinset_self",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (A : Finset V) : forestFinset A A = {id}",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.D5.allElements_complete",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .D5.allElements_complete (g : Brockian.D5) : g ∈ Brockian.D5.allElements",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Dilworth.ChainColoring.mono",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .mono {s : Finset α} {n m : ℕ} {f : α → ℕ} (h : ChainColoring s n f) (hnm : n ≤ m) : ChainColoring s m f",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.EgyptianFraction.egyptian_fraction",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (a b : ℕ) (ha : 0 < a) (hab : a < b) : ∃ S : Finset ℕ, (∀ d ∈ S, 0 < d) ∧ ∑ d ∈ S, (1 / (d : ℚ)) = (a : ℚ) / b",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Equidistribution.coe_fract",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (x : ℝ) : ((Int.fract x : ℝ) : UnitAddCircle) = (x : UnitAddCircle)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.Equidistribution.integrable_of_continuousMap",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (f : C(AddCircle (1 : ℝ), ℂ)) : Integrable (fun z => f z) volume",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Equidistribution.integral_fourier",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (k : ℤ) : ∫ t : AddCircle T, fourier k t ∂haarAddCircle = if k = 0 then 1 else 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.Equidistribution.integral_fourier_ne_zero",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {k : ℤ} (hk : k ≠ 0) : ∫ x : AddCircle (1 : ℝ), fourier k x ∂AddCircle.haarAddCircle = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.EquidistributionBVReduction.geom_avg_tendsto",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (z : ℂ) (hz : ‖z‖ = 1) (hz1 : z ≠ 1) : Tendsto (fun N : ℕ => (∑ n ∈ range N, z ^ n) / (N : ℂ)) atTop (𝓝 0)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.EquidistributionUniformity.measure_singleton_eq_of_transitive",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (μ : Measure X) [SMulInvariantMeasure G X μ] (htrans : ∀ x y : X, ∃ g : G, g • x = y) (x y : X) : μ {x} = μ {y}",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.EquidistributionUniformity.singleton_measure_eq_of_transitive",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] [Group G] [MulAction G α] [MulAction.IsPretransitive G α] [MeasurableSpace α] (μ : Measure α) [SMulInvariantMeasure G α μ] (x y : α) : μ {y} = μ {x}",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.ErdosGinzburgZiv.erdos_ginzburg_ziv",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) (hn : 0 < n) (f : Fin (2 * n - 1) → ZMod n) : ∃ s : Finset (Fin (2 * n - 1)), s.card = n ∧ ∑ i ∈ s, f i = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.ErdosSzekeres.erdos_szekeres",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (r s : ℕ) (f : Fin (r * s + 1) → ℝ) (hf : Function.Injective f) : (∃ t : Finset (Fin (r * s + 1)), t.card = r + 1 ∧ StrictMonoOn f ↑t) ∨ (∃ t : Finset (Fin (r * s + 1)), t.card = s + 1 ∧ StrictAntiOn f ↑t)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.EvenPerfectLastDigit.perfect_two_pow_mul_odd",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {k m : ℕ} (hk : 1 ≤ k) (hm : Odd m) (hp : Nat.Perfect (2 ^ k * m)) : m = 2 ^ (k + 1) - 1 ∧ Nat.Prime m",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.EvenPerfectMod9.euclidEuler_form_mod9",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {k : ℕ} (hprime : Nat.Prime (mersenne (k + 1))) (hlarge : 6 < 2 ^ k * mersenne (k + 1)) : (2 ^ k * mersenne (k + 1)) % 9 = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.EvenPerfectMod9.sigma_two_pow_eq_mersenne_succ_main",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (k : ℕ) : σ 1 (2 ^ k) = mersenne (k + 1)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.EvenPerfectTriangular.even_perfect_triangular",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (he : Even n) (hp : Nat.Perfect n) : ∃ k : ℕ, n = k * (k + 1) / 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.EvenPerfectTriangular.sigma_two_pow_eq_mersenne_succ",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (k : ℕ) : σ 1 (2 ^ k) = mersenne (k + 1)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.EvenSuperperfect.sigma_two_pow_eq_mersenne_succ",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (k : ℕ) : σ 1 (2 ^ k) = mersenne (k + 1)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.FibGcd.fib_gcd",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (m n : ℕ) : Nat.fib (Nat.gcd m n) = Nat.gcd (Nat.fib m) (Nat.fib n)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.FreshmanDream.freshman_dream",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p a b : ℕ) (hp : p.Prime) : (a + b) ^ p ≡ a ^ p + b ^ p [MOD p]",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.FrobeniusAbove.frobenius_above",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (a b : ℕ) (ha : 1 < a) (hb : 1 < b) (hcop : Nat.Coprime a b) (m : ℕ) (hm : a * b - a - b < m) : ∃ x y : ℕ, a * x + b * y = m",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.FrobeniusMcNugget.frobenius_not_representable",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (a b : ℕ) (ha : 1 < a) (hb : 1 < b) (hcop : Nat.Coprime a b) : ¬ ∃ x y : ℕ, a * x + b * y = a * b - a - b",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.GaussWilson.prod_units_sq_eq_one",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) [NeZero n] : (∏ u : (ZMod n)ˣ, u) ^ 2 = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.GoldbachComb.gCount_eq",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℕ) [Fact p.Prime] (c : ZMod p) : gCount p c = if c = 0 then p - 1 else p - 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.GoldbachSchema.integral_chr",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (k : ℤ) : (∫ a in (0:ℝ)..1, chr k a) = if k = 0 then 1 else 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.GoldenRatio.pos",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .GoldenRatio.pos : 0 < Brockian.φ",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.GraphAcyclic.side_invariant",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (g : V → ℤ) (hinj : Function.Injective g) {a b : V} (h1 : g b = g a + 1) {H : SimpleGraph V} (hstep : ∀ ⦃u v : V⦄, H.Adj u v → g v = g u + 1 ∨ g v = g u - 1) {x y : V} (p : H.Walk x y) (hp : s(a, b) ∉ p.edges) : g x ≤ g a ↔ g y ≤ g a",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.HockeyStick.hockey_stick",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n r : ℕ) (h : r ≤ n) : ∑ i ∈ Finset.Icc r n, Nat.choose i r = Nat.choose (n + 1) (r + 1)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.KummerTheorem.kummer",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p m n : ℕ) (hp : p.Prime) : (Nat.choose (m + n) m).factorization p * (p - 1) = (Nat.digits p m).sum + (Nat.digits p n).sum - (Nat.digits p (m + n)).sum",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.LegendreThreeSquare.QF_conj",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {k : ℕ} (A U : Matrix (Fin k) (Fin k) ℤ) (v : Fin k → ℤ) : QF (Uᵀ * A * U) v = QF A (U.mulVec v)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.LegendreThreeSquare.sum_three_squares_iff",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : (∃ a b c : ℕ, n = a ^ 2 + b ^ 2 + c ^ 2) ↔ ¬ ∃ k m : ℕ, n = 4 ^ k * (8 * m + 7)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.LteTwo.emult_two_pow_sub_pow",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {x y : ℤ} (n : ℕ) (hxy : 4 ∣ x - y) (hx : ¬ (2 : ℤ) ∣ x) : emultiplicity 2 (x ^ n - y ^ n) = emultiplicity 2 (x - y) + emultiplicity (2 : ℤ) n",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.LucasTheorem.lucas",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℕ) (hp : p.Prime) (m n : ℕ) : Nat.choose m n ≡ Nat.choose (m / p) (n / p) * Nat.choose (m % p) (n % p) [MOD p]",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MasonStothers.natDegree_radical_le_card_roots",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {K : Type*} [Field K] [DecidableEq K] [CharZero K] [IsAlgClosed K] {p : K[X]} (hp : p ≠ 0) : (radical p).natDegree ≤ p.roots.toFinset.card",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.MsBeatty.beatty",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (r s : ℝ) (hr : 1 < r) (hirr : Irrational r) (hsum : 1 / r + 1 / s = 1) (n : ℕ) (hn : 0 < n) : (∃ m : ℕ, 0 < m ∧ ⌊(m : ℝ) * r⌋ = (n : ℤ)) ↔ ¬ (∃ m : ℕ, 0 < m ∧ ⌊(m : ℝ) * s⌋ = (n : ℤ))",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsBinet.binet",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : (Nat.fib n : ℝ) = (((1 + Real.sqrt 5) / 2) ^ n - ((1 - Real.sqrt 5) / 2) ^ n) / Real.sqrt 5",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsBirkhoff.birkhoff_von_neumann",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (M : Matrix (Fin n) (Fin n) ℝ) (hnn : ∀ i j, 0 ≤ M i j) (hrow : ∀ i, ∑ j, M i j = 1) (hcol : ∀ j, ∑ i, M i j = 1) : ∃ (s : Finset (Equiv.Perm (Fin n))) (w : Equiv.Perm (Fin n) → ℝ), (∀ σ ∈ s, 0 ≤ w σ) ∧ (∑ σ ∈ s, w σ = 1) ∧ M = ∑ σ ∈ s, w σ • (σ.permMatrix ℝ)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsBritishFlag.british_flag",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (P A u v : E) (h : inner ℝ u v = (0 : ℝ)) : dist P A ^ 2 + dist P (A + u + v) ^ 2 = dist P (A + u) ^ 2 + dist P (A + v) ^ 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsCatalanSquareSum.sum_choose_sq",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : ∑ k ∈ Finset.range (n + 1), (Nat.choose n k) ^ 2 = Nat.choose (2 * n) n",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsCauchyDavenport.cauchy_davenport",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {p : ℕ} [Fact p.Prime] (A B : Finset (ZMod p)) (hA : A.Nonempty) (hB : B.Nonempty) : min p (A.card + B.card - 1) ≤ (A + B).card",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsCeva.indep_of_not_collinear",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {A B C : EuclideanSpace ℝ (Fin 2)} (h : ¬ Collinear ℝ ({A, B, C} : Set (EuclideanSpace ℝ (Fin 2)))) (x y : ℝ) (hxy : x • (B - A) + y • (C - A) = 0) : x = 0 ∧ y = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.MsChebyshevSum.chebyshev_sum",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (a b : Fin n → ℝ) (hmono : Monotone a) (hmono' : Monotone b) : (n : ℝ) * ∑ i, a i * b i ≥ (∑ i, a i) * (∑ i, b i)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsChebyshevTheta.chebyshev_theta",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : ∑ p ∈ (Finset.range (n + 1)).filter Nat.Prime, Real.log p ≤ n * Real.log 4",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsDerangement.derangement_closed",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : (numDerangements n : ℚ) = (n.factorial : ℚ) * ∑ k ∈ Finset.range (n + 1), (-1) ^ k / (k.factorial : ℚ)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsE2Irrational.exp_two_irrational",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Irrational (Real.exp 2)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsErdosAnning.quad_three_roots",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {α β γ a b c : ℝ} (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c) (ha : α * a ^ 2 + β * a + γ = 0) (hb : α * b ^ 2 + β * b + γ = 0) (hc : α * c ^ 2 + β * c + γ = 0) : α = 0 ∧ β = 0 ∧ γ = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.MsEulerPentagonal.restricted_true",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : Nat.Partition.restricted n (fun _ ↦ True) = Finset.univ",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsFrobeniusGeneral.two_gen_rep",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p q n : ℕ) (hp : 0 < p) (hcop : Nat.Coprime p q) (hn : p * q ≤ n) : ∃ x y : ℕ, p * x + q * y = n",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.MsFrobeniusGroup.sol_eq_solEq_one",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : sol G n = solEq n (1 : G)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.MsGaussLucas.gauss_lucas",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : Polynomial ℂ) (hp : 0 < p.degree) (z : ℂ) (hz : p.derivative.IsRoot z) : z ∈ convexHull ℝ {w : ℂ | p.IsRoot w}",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsGaussSum.gauss_sum_abs_sq",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℕ) [Fact p.Prime] (hp : Odd p) : ‖∑ k : ZMod p, Complex.exp (2 * Real.pi * Complex.I * ((k.val : ℂ) ^ 2) / (p : ℂ))‖ ^ 2 = (p : ℝ)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsHermiteHadamard.hh_le_max",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {f : ℝ → ℝ} {a b : ℝ} (hab : a ≤ b) (hf : ConvexOn ℝ (Set.Icc a b) f) {x : ℝ} (hx : x ∈ Set.Icc a b) : f x ≤ max (f a) (f b)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.MsHeron.heron",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] ' (A B C : ℝ × ℝ) : let a",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsLYM.lym",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {α : Type*} [Fintype α] [DecidableEq α] (𝒜 : Finset (Finset α)) (h : IsAntichain (· ⊆ ·) (𝒜 : Set (Finset α))) : ∑ A ∈ 𝒜, (1 : ℚ) / ((Fintype.card α).choose A.card) ≤ 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsLagrangeIdentity.lagrange_identity",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (a b : Fin n → ℝ) : (∑ i, a i ^ 2) * (∑ i, b i ^ 2) - (∑ i, a i * b i) ^ 2 = ∑ i, ∑ j, (if i < j then (a i * b j - a j * b i) ^ 2 else 0)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsMachin.machin",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Real.pi / 4 = 4 * Real.arctan (1 / 5) - Real.arctan (1 / 239)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsMenelaus.indep_of_not_collinear",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {V : Type*} [AddCommGroup V] [Module ℝ V] (A B C : V) (h : ¬ Collinear ℝ ({A, B, C} : Set V)) : ∀ x y : ℝ, x • (B - A) + y • (C - A) = 0 → x = 0 ∧ y = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.MsMirsky.height_filter_nonempty",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (x : α) : (Finset.univ.filter (fun c : Finset α => IsChain (· ≤ ·) (c : Set α) ∧ ∀ y ∈ c, y ≤ x)).Nonempty",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.MsNapoleon.napoleon",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (a b c : ℂ) (ω : ℂ) (hω : ω ^ 2 + ω + 1 = 0) : let g₁",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsPell.pell_solvable",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (d : ℕ) (hd : 0 < d) (hnsq : ¬ IsSquare d) : ∃ x y : ℤ, 0 < y ∧ x ^ 2 - (d : ℤ) * y ^ 2 = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsPepin.pepin",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) (hn : 1 ≤ n) : (2 ^ (2 ^ n) + 1).Prime ↔ (3 : ZMod (2 ^ (2 ^ n) + 1)) ^ (2 ^ (2 ^ n) / 2) = -1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsPerronFrobenius.Kset_nonneg",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {δ : ℝ} (hδ : 0 ≤ δ) {x : Fin n → ℝ} (hx : x ∈ Kset n δ) (i : Fin n) : 0 ≤ x i",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.MsPocklington.pocklington",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (N q m : ℕ) (hN : 1 < N) (hfac : N - 1 = q * m) (hq : q.Prime) (hqbig : N < q * q) (a : ℕ) (h1 : a ^ (N - 1) ≡ 1 [MOD N]) (h2 : Nat.gcd (a ^ ((N - 1) / q) - 1) N = 1) : N.Prime",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsPrimitiveRootCount.primitive_root_count",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {p : ℕ} [Fact p.Prime] : (Finset.univ.filter (fun g : (ZMod p)ˣ => orderOf g = Fintype.card (ZMod p)ˣ)).card = Nat.totient (p - 1)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsProth.proth",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (k n N : ℕ) (hk : Odd k) (hkn : k < 2 ^ n) (hN : N = k * 2 ^ n + 1) : N.Prime ↔ ∃ a : ZMod N, a ^ ((N - 1) / 2) = -1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsQrTwo.two_is_qr_iff",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {p : ℕ} (hp : p.Prime) (hodd : Odd p) : IsSquare (2 : ZMod p) ↔ p % 8 = 1 ∨ p % 8 = 7",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsSchurInequality.schur_inequality",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (x y z t : ℝ) (hx : 0 ≤ x) (hy : 0 ≤ y) (hz : 0 ≤ z) (ht : 0 < t) : 0 ≤ x ^ t * (x - y) * (x - z) + y ^ t * (y - x) * (y - z) + z ^ t * (z - x) * (z - y)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsSchurInequality.schur_ordered",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (x y z t : ℝ) (hz : 0 ≤ z) (hzy : z ≤ y) (hyx : y ≤ x) (ht : 0 < t) : 0 ≤ x ^ t * (x - y) * (x - z) + y ^ t * (y - x) * (y - z) + z ^ t * (z - x) * (z - y)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.MsStewart.stewart",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (A B C D : EuclideanSpace ℝ (Fin 2)) (t : ℝ) (ht0 : 0 ≤ t) (ht1 : t ≤ 1) (hD : D = B + t • (C - B)) : dist A B ^ 2 * dist D C + dist A C ^ 2 * dist B D = dist B C * (dist A D ^ 2 + dist B D * dist D C)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsThue.thue_lemma",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n a : ℕ) (hn : 1 < n) : ∃ x y : ℤ, (x ≠ 0 ∨ y ≠ 0) ∧ x.natAbs ≤ Nat.sqrt n ∧ y.natAbs ≤ Nat.sqrt n ∧ (n : ℤ) ∣ (x - a * y)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsVanDerWaerden.van_der_waerden",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (k r : ℕ) (hk : 0 < k) (hr : 0 < r) : ∃ N : ℕ, ∀ c : ℕ → Fin r, ∃ a d : ℕ, 0 < d ∧ (∀ i, i < k → a + i * d ≤ N) ∧ (∀ i j, i < k → j < k → c (a + i * d) = c (a + j * d))",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsViete.viete_product",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (x : ℝ) (n : ℕ) (h : Real.sin (x / 2 ^ n) ≠ 0) : ∏ k ∈ Finset.Icc 1 n, Real.cos (x / 2 ^ k) = Real.sin x / (2 ^ n * Real.sin (x / 2 ^ n))",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsViviani.ptolemy_inequality",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (A B C D : E) : dist A C * dist B D ≤ dist A B * dist C D + dist B C * dist A D",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsWilsonPrimePower.wilson_prime_power",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p k : ℕ) [NeZero (p ^ k)] (hp : p.Prime) (hodd : Odd p) (hk : 0 < k) : (∏ u : (ZMod (p ^ k))ˣ, (u : ZMod (p ^ k))) = -1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.MsZeckendorf.pairwise_of_isZeckendorfRep",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {l : List ℕ} (hl : l.IsZeckendorfRep) : (l ++ [0]).Pairwise (fun a b ↦ b + 2 ≤ a)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.Nicomachus.sq_sum_eq_sum_cubes",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : (∑ k ∈ Finset.range (n + 1), k) ^ 2 = ∑ k ∈ Finset.range (n + 1), k ^ 3",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Niven.niven_cos",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (q r : ℚ) (h : Real.cos (q * Real.pi) = (r : ℝ)) : Real.cos (q * Real.pi) = 0 ∨ Real.cos (q * Real.pi) = 1 ∨ Real.cos (q * Real.pi) = -1 ∨ Real.cos (q * Real.pi) = 1 / 2 ∨ Real.cos (q * Real.pi) = -(1 / 2)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.OddPerfectEuler.oddPerfect_euler_form",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (hodd : Odd n) (hperf : Nat.Perfect n) : ∃ p k m : ℕ, p.Prime ∧ p % 4 = 1 ∧ k % 4 = 1 ∧ ¬ p ∣ m ∧ n = p ^ k * m ^ 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.OddPerfectThreePrimes.geomSum_mul_pred",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p a : ℕ) (hp : 1 ≤ p) : (∑ i ∈ Finset.range (a + 1), p ^ i) * (p - 1) + 1 = p ^ (a + 1)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.OddPerfectThreePrimes.oddPerfect_three_primes",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (ho : Odd n) (hp : Nat.Perfect n) : 3 ≤ n.primeFactors.card",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.PerfectReciprocalSum.perfect_reciprocal_sum",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) (hn : 0 < n) (hp : Nat.Perfect n) : ∑ d ∈ n.divisors, (1 / (d : ℚ)) = 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.PhaseDepthTorus.rho_period",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℤ) : rho (n + 5) = rho n",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.PseudoprimesBaseTwo.infinite_pseudoprimes_base_two",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : {n : ℕ | ¬ n.Prime ∧ 1 < n ∧ 2 ^ n ≡ 2 [MOD n]}.Infinite",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Ramanujan7.qb_succ_succ",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (q : R) (n k : ℕ) : qb q (n + 1) (k + 1) = qb q n k + q ^ (k + 1) * qb q n (k + 1)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.Schur.fR_pos",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (k : ℕ) : 0 < fR k",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.SieveHamiltonian.twin_pins_mod_three",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (a : ZMod 3) : (a ≠ 0 ∧ a + 2 ≠ 0) ↔ a = 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.SophieGermain.a4_add_4b4_not_prime",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (a b : ℕ) (ha : 1 < a) (hb : 1 < b) : ¬ (a ^ 4 + 4 * b ^ 4).Prime",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Sperner.sperner_card_le",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {α : Type*} [Fintype α] [DecidableEq α] (𝒜 : Finset (Finset α)) (h : IsAntichain (· ⊆ ·) (𝒜 : Set (Finset α))) : 𝒜.card ≤ (Fintype.card α).choose (Fintype.card α / 2)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.StarOfDavid.star_of_david",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n k : ℕ) (hk : 1 ≤ k) (hkn : k ≤ n) : Nat.gcd (Nat.gcd (Nat.choose (n - 1) (k - 1)) (Nat.choose n (k + 1))) (Nat.choose (n + 1) k) = Nat.gcd (Nat.gcd (Nat.choose (n - 1) k) (Nat.choose n (k - 1))) (Nat.choose (n + 1) (k + 1))",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.SylvesterSchur.piCount_le_self",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (k : ℕ) : piCount k ≤ k",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.SylvesterSchur.sylvester_schur",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n k : ℕ) (h : k < n) (hk : 0 < k) : ∃ i ∈ Finset.range k, ∃ p, p.Prime ∧ k < p ∧ p ∣ (n + 1 + i)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Turan.turan",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {V : Type*} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj] (r : ℕ) (hr : 0 < r) (h : G.CliqueFree (r + 1)) : 2 * r * G.edgeFinset.card ≤ (r - 1) * (Fintype.card V) ^ 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.TwoSquares.sum_two_squares_iff",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) (hn : 0 < n) : (∃ a b : ℕ, n = a ^ 2 + b ^ 2) ↔ ∀ p, p.Prime → p % 4 = 3 → Even (n.factorization p)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.TwoSquaresUnique.two_squares_unique",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {p a b c d : ℕ} (hp : p.Prime) (hp1 : p % 4 = 1) (hab : p = a ^ 2 + b ^ 2) (hcd : p = c ^ 2 + d ^ 2) (h1 : a ≤ b) (h2 : c ≤ d) : a = c ∧ b = d",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.UnbalancedPentagon.mem_Wfib_iff",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (x : EuclideanSpace ℝ (V m)) : x ∈ Wfib m ↔ ∀ i, ∑ a : Fin (m i), x ⟨i, a⟩ = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.UnbalancedPentagon.sqrt_sum_sq_le_sum_abs",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (w : Fin 5 → ℝ) : Real.sqrt (∑ i, |w i| ^ 2) ≤ ∑ i, |w i|",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.Vandermonde.vandermonde",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (m n p : ℕ) : ∑ k ∈ Finset.range (p + 1), Nat.choose m k * Nat.choose n (p - k) = Nat.choose (m + n) p",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Weyl.BoundedVTarget.dirichletPotential_solution_zero",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (lam : ℂ) (y y' y'' : ℝ → ℂ) (hy : IsSolution dirichletPotential lam y y' y'') : ∀ x, y x = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.Weyl.DeficiencyODE.WeakRegularity.of_continuous",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .of_continuous {q : ℝ → ℂ} (hq : Continuous q) : WeakRegularity q",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Weyl.DeficiencyODE.locallyIntegrable_potential_mul",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (hq : Continuous q) {y : ℝ → ℂ} (hy : LocallyIntegrable y volume) : LocallyIntegrable (fun t => ((q t : ℂ) - lam) * y t) volume",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Weyl.DeficiencyODE.norm_subI_sq",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (hsym : A.IsFormalAdjoint A) (x : A.domain) : ‖subI A x‖ ^ 2 = ‖A x‖ ^ 2 + ‖(x : H)‖ ^ 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.Weyl.DichotomyTarget.radius_tendsto_zero_iff_counterexample",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : ∃ (c : ℝ) (I : ℝ → ℝ), 0 < c ∧ (∀ b, 0 ≤ I b) ∧ Monotone I ∧ Tendsto (fun b => 1 / (2 * c * I b)) atTop (𝓝 0) ∧ ¬ Tendsto I atTop atTop",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Weyl.FreeLaplacian2.continuous_symbol",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Continuous (symbol d)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Weyl.FreeLaplacian2.norm_sub_I_smul_sq",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (ι A : D →ₗ[ℂ] H) (hsymm : ∀ f g : D, ⟪A f, ι g⟫ = ⟪ι f, A g⟫) (g : D) : ‖A g - Complex.I • ι g‖ ^ 2 = ‖A g‖ ^ 2 + ‖ι g‖ ^ 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Weyl.KatoTarget.isSelfAdjoint_add",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {A B : H →L[ℂ] H} (hA : IsSelfAdjoint A) (hB : IsSelfAdjoint B) : IsSelfAdjoint (A + B)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Weyl.dense_range_iff_forall_inner_eq_zero",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (f : D →ₗ[ℂ] H) : Dense (Set.range f) ↔ ∀ v : H, (∀ x, ⟪f x, v⟫ = 0) → v = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Wolstenholme.wolstenholme",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℕ) (hp : p.Prime) (h5 : 5 ≤ p) : (p : ℤ) ^ 3 ∣ (Nat.choose (2 * p) p : ℤ) - 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.Zsygmondy.Phi_pos",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (hn : 2 < n) (a : ℕ) : 0 < Phi n a",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.adjoint_le_adjoint_of_le",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {A B : H →ₗ.[ℂ] H} (hA : Dense (A.domain : Set H)) (h : A ≤ B) : B.adjoint ≤ A.adjoint",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.brockian_multiplicity_one",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (sys : BrockianSystem) [B0 sys] [B12 sys] [B3 sys] [B4 sys] : sys.transformEquiv ∧ (∀ σ ∈ sys.prime, sys.multiplicity σ = 1)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.const_of_transitive_invariant",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {M : Type*} (w : X → M) (htrans : ∀ x y : X, ∃ g : G, g • x = y) (hinv : ∀ (g : G) (x : X), w (g • x) = w x) : ∀ x y : X, w x = w y",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.countMultiples_eq_div",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (N q : ℕ) : countMultiples N q = N / q",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.eVariationOn_sub_le",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {α : Type*} [LinearOrder α] (f g : α → ℝ) (s : Set α) : eVariationOn (fun t => f t - g t) s ≤ eVariationOn f s + eVariationOn g s",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.fourier_lineDerivOp_sq",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (f : 𝓢(V, ℂ)) (m : V) (ξ : V) : 𝓕 (lineDerivOp m (lineDerivOp m f)) ξ = (2 * π * Complex.I) ^ 2 * ((inner ℝ ξ m : ℝ) : ℂ) ^ 2 * 𝓕 f ξ",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.haar_eq_volume",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : (haarAddCircle : Measure (AddCircle (1:ℝ))) = (volume : Measure (AddCircle (1:ℝ)))",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.integrable_continuousMap",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (f : C(UnitAddCircle, ℂ)) : Integrable (fun x => f x)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.lexAdj_mulVec_apply",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (B : Matrix V V ℝ) (F : Fin 5 × V → ℝ) (i : Fin 5) (v : V) : (lexAdj B *ᵥ F) (i, v) = (∑ j, cycle5 i j * ∑ w, F (j, w)) + (B *ᵥ fun w => F (i, w)) v",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.phi_pos",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .phi_pos : 0 < Brockian.φ",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.phi_squared",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .phi_squared : Brockian.φ ^ 2 = Brockian.φ + 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Brockian.spectralParameter_isReal_iff",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (s : ℂ) : (spectralParameter s).im = 0 ↔ s.re = 1 / 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.sqrt_block",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (K j : ℕ) (hj : j < 2 * K + 1) : Nat.sqrt (K ^ 2 + j) = K",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.upperFn_nonneg",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (c r d : ℝ) (x : Circ) : 0 ≤ upperFn c r d x",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.volume_circ_univ",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : (volume (Set.univ : Set Circ)) = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Brockian.weight_const_of_transitive",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] [MulAction.IsPretransitive G X] {w : X → ℝ} (hinv : ∀ (g : G) (x : X), w (g • x) = w x) (x y : X) : w x = w y",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianFoundations.phi_pos",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .phi_pos : 0 < φ",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianFramework.golden_ratio_quadratic",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .golden_ratio_quadratic : BrockianFramework.φ^2 = BrockianFramework.φ + 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianFrontier.Gilbreath.gilbreath_rows_9_16",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : (row 9).headI = 1 ∧ (row 10).headI = 1 ∧ (row 11).headI = 1 ∧ (row 12).headI = 1 ∧ (row 13).headI = 1 ∧ (row 14).headI = 1 ∧ (row 15).headI = 1 ∧ (row 16).headI = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianFrontier.PathSpectrum.H4_eigenvalue_golden",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : H4.charpoly.eval (2 - 2 * Real.cos (Real.pi / 5)) = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianFrontier.PentagonSpectrum.C5_golden_eigenvalue",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : C5.charpoly.eval ((Real.sqrt 5 - 1) / 2) = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianFrontier.SieveK5.nu_le_card",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (G : Finset ℕ) (p : ℕ) : nu G p ≤ G.card",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "BrockianFrontier.SingularSeries.localFactor_pos_of_lt",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (G : Finset ℕ) (p : ℕ) (h : p.Prime → nu G p < p) : 0 < localFactor G p",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianMagnumOpus.φ_pos",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .φ_pos : 0 < BrockianMagnumOpus.φ",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "BrockianQuantum.CNOT_sq",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : CNOT * CNOT = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.E0_idem",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : E0 * E0 = E0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.F_symmetric",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Fmatᵀ = Fmat",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.H_sq",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : H * H = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.P0_idem",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : P0 * P0 = P0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.PX_sq",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : PX * PX = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.Rz_zero",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Rz 0 = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.S_Z_commute",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : S * PZ = PZ * S",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.S_sq_eq_Z",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : S * S = PZ",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.Tof_sq",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Tof * Tof = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.W2_unitary",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : W2 * W2ᴴ = (2 : ℂ) • 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.braid_relation_conj",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (a b g : Matrix (Fin n) (Fin n) ℂ) [Invertible g] (h : a * b * a = b * a * b) : (g * a * ⅟ g) * (g * b * ⅟ g) * (g * a * ⅟ g) = (g * b * ⅟ g) * (g * a * ⅟ g) * (g * b * ⅟ g)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.clock_pow_card",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : (clock d) ^ d = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.fib_fusion_gold_eigenvalue",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : (Matrix.of ![![(0:ℝ), 1], ![1, 1]]).charpoly.eval goldenRatio = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.golden_eq",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : goldenRatio = (1 + Real.sqrt 5) / 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.normSq_c",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Complex.normSq c = 1/2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.om_pow_five",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : om ^ 5 = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.phiP_XX_eigen",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : XX.mulVec phiP = phiP",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.qft_mul_conjTranspose",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : qft d * (qft d)ᴴ = (d : ℂ) • (1 : Matrix (ZMod d) (ZMod d) ℂ)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.shift_pow_card",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : (shift d) ^ d = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianQuantum.shift_unitary",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : shift d * (shift d)ᴴ = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianSieve.legendre_count",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (x P : ℕ) (hP : P ≠ 0) : ((((Finset.Icc 1 x).filter (fun n => Nat.Coprime n P)).card : ℤ)) = ∑ d ∈ P.divisors, (moebius d : ℤ) * ((x / d : ℕ) : ℤ)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "BrockianSieve.legendre_sieve",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (x P : ℕ) (hP : P ≠ 0) : (((Finset.Icc 1 x).filter (fun n => Nat.Coprime n P)).card : ℤ) = ∑ d ∈ P.divisors, ArithmeticFunction.moebius d * ((x / d : ℕ) : ℤ)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianSieve.squarefree_count",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (x : ℕ) : (((Finset.Icc 1 x).filter Squarefree).card : ℤ) = ∑ d ∈ (Finset.Icc 1 x).filter (fun d => d ^ 2 ≤ x), ArithmeticFunction.moebius d * ((x / d ^ 2 : ℕ) : ℤ)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "BrockianSieve.totient_eq_sum_moebius",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) (hn : n ≠ 0) : (Nat.totient n : ℤ) = ∑ d ∈ n.divisors, ArithmeticFunction.moebius d * ((n / d : ℕ) : ℤ)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.Alg3.cramer_solve",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (A : Matrix (Fin n) (Fin n) ℝ) (hA : IsUnit A.det) (b : Fin n → ℝ) : A.mulVec (A⁻¹.mulVec b) = b",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.An4.ftc",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (f : ℝ → ℝ) (a b : ℝ) (hf : ∀ x, HasDerivAt F (f x) x) (hc : Continuous f) : ∫ x in a..b, f x = F b - F a",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.BSieve3.lf_pos_eight",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℕ) : 0 < localFactor ({0,2,6,8,12,18,20,26} : Finset ℕ) p",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.BSpec3.P7_eigen_center",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : P7.charpoly.eval 2 = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.CS2.no_universal_decider",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : ¬ ∃ b : Bool, b = !b",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.Comb3.sum_range_id",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : ∑ i ∈ range n, i = n*(n-1)/2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.Crypto2.otp_bij",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) (m : BitVec n) : Function.Bijective (fun k : BitVec n => m ^^^ k)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.Geo2.apollonius",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℝ V] (a b : V) : ‖a‖^2 + ‖b‖^2 = 2*‖(1/2 : ℝ) • (a+b)‖^2 + 2*‖(1/2 : ℝ) • (a-b)‖^2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.Graph2.degree_sum_edges",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {V : Type*} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj] : ∑ v, G.degree v = 2 * G.edgeFinset.card",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.IT3.entropy_term_bound",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℝ) (h0 : 0 ≤ p) (h1 : p ≤ 1) : 0 ≤ -p*Real.log p",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.NT4.order_dvd_card",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℕ) [Fact p.Prime] (a : (ZMod p)ˣ) : orderOf a ∣ (p - 1)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.Phys3.spin_comm_xy",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Sx * Sy - Sy * Sx = (2*Complex.I) • Sz",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.Prob2b.markov_ineq",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (x : Fin n → ℝ) (hx : ∀ i, 0 ≤ x i) (a : ℝ) (ha : 0 < a) : (a * ((univ.filter (fun i => a ≤ x i)).card) : ℝ) ≤ ∑ i, x i",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.QI4.swap_involutive",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : SWAP * SWAP = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.SetT.zorn",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (α : Type*) [PartialOrder α] (h : ∀ c : Set α, IsChain (· ≤ ·) c → ∃ ub, ∀ a ∈ c, a ≤ ub) : ∃ m : α, ∀ a, m ≤ a → a = m",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C2.Topo2.continuous_image_compact",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] (f : X → Y) (hf : Continuous f) (s : Set X) (hs : IsCompact s) : IsCompact (f '' s)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.Alg4.crt_ring",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (m n : ℕ) (h : Nat.Coprime m n) : Nonempty (ZMod (m*n) ≃+* ZMod m × ZMod n)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.An5.abel_summation",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (a b : ℕ → ℝ) (n : ℕ) : ∑ k ∈ Finset.range n, a k * b k = 0 → True",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.BCon.twin_adm_count_bound",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) [NeZero n] (hn : 0 < n) : (Finset.univ.filter (fun a : ZMod n => IsUnit a ∧ IsUnit (a + 2))).card ≤ n",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.BD5.dihedral5_card",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Nat.card (DihedralGroup 5) = 10",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.BSieve4.nu_lt_nine",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℕ) (hp : p.Prime) : nu ({0,2,6,8,12,18,20,26,30} : Finset ℕ) p < p",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.BSpec4.P8_eigen_center",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : P8.charpoly.eval (2 - 2*Real.cos (Real.pi/9)) = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.Comb4.stirling_second_recurrence",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n k : ℕ) : (n+1).choose k = n.choose k + n.choose (k-1) → True",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.Graph3.complete_edges",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : (⊤ : SimpleGraph (Fin n)).edgeFinset.card = n.choose 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.LinAlg.gram_schmidt_orthonormal",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (v : Fin n → EuclideanSpace ℝ (Fin n)) (hv : LinearIndependent ℝ v) : ∃ w : Fin n → EuclideanSpace ℝ (Fin n), Orthonormal ℝ w",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.Meas.measure_mono",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {X : Type*} [MeasurableSpace X] (μ : Measure X) {s t : Set X} (h : s ⊆ t) : μ s ≤ μ t",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.NT5.legendre_euler",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℕ) [Fact p.Prime] (hp : p ≠ 2) (a : ℤ) : (legendreSym p a : ZMod p) = (a : ZMod p) ^ ((p-1)/2)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.Phys4.number_op_diag",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : (ad * a).IsDiag",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.Prob3.chebyshev_ineq",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (x : Fin n → ℝ) (a : ℝ) (ha : 0 < a) : (a^2 * (univ.filter (fun i => a ≤ |x i|)).card : ℝ) ≤ ∑ i, (x i)^2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.QC5.phase_kickback",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : X * (!![1;1] : Matrix (Fin 2) (Fin 1) ℂ) = !![1;1]",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.QI5.toffoli_involutive",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : CCX * CCX = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.RA6.cont_add",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {f g : ℝ → ℝ} (hf : Continuous f) (hg : Continuous g) : Continuous (f + g)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C3.Topo3.closed_inter_compact",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {X : Type*} [TopologicalSpace X] (s t : Set X) (hs : IsCompact s) (ht : IsClosed t) : IsCompact (s ∩ t)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.Alg5.cayley_hamilton_field",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (A : Matrix (Fin n) (Fin n) ℚ) : (A.charpoly).eval₂ (algebraMap ℚ (Matrix (Fin n) (Fin n) ℚ)) A = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.An6.taylor_zeroth",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (f : ℝ → ℝ) (x : ℝ) (hf : Continuous f) : Tendsto (fun h => f (x + h)) (nhds 0) (nhds (f x))",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.BChar.dihedral_card",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) [NeZero n] : Nat.card (DihedralGroup n) = 2*n",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.BM3.pentagonal_pentagon_area",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : (5:ℝ) * Real.sin (2*Real.pi/5) / 2 > 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.BS5.lf_pos_ten",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℕ) : 0 < lF ({0,2,6,8,12,18,20,26,30,32} : Finset ℕ) p",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.BSp5.P9_eigen_center",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : P9.charpoly.eval 2 = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.Comb5.inclusion_exclusion_three",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {α : Type*} [DecidableEq α] (A B C : Finset α) : (A ∪ B ∪ C).card = A.card + B.card + C.card - (A∩B).card - (A∩C).card - (B∩C).card + (A∩B∩C).card",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.G4.empty_graph_no_edges",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {V : Type*} [Fintype V] [DecidableEq V] : (⊥ : SimpleGraph V).edgeFinset.card = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.Geo3.inner_self_nonneg",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℝ V] (a : V) : 0 ≤ (inner ℝ a a : ℝ)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.IT4.log_le_sub",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (x : ℝ) (hx : 0 < x) : Real.log x ≤ x - 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.LA2.transpose_mul",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {m n k : ℕ} (A : Matrix (Fin m) (Fin n) ℝ) (B : Matrix (Fin n) (Fin k) ℝ) : (A*B)ᵀ = Bᵀ * Aᵀ",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.NT6.quadratic_reciprocity",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p q : ℕ) [Fact p.Prime] [Fact q.Prime] (hp : p ≠ 2) (hq : q ≠ 2) (hpq : p ≠ q) : legendreSym p q * legendreSym q p = (-1) ^ ((p/2) * (q/2))",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.Phys5.comm_yz",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Sy*Sz - Sz*Sy = (2*Complex.I) • Sx",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.Prob4.am_qm",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (x : Fin n → ℝ) (hx : ∀ i, 0 ≤ x i) (hn : 0 < n) : (∑ i, x i)/n ≤ Real.sqrt ((∑ i, (x i)^2)/n)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.QC6.T_sq_eq_S",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : T * T = S",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.RA7.abs_triangle",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (a b : ℝ) : |a + b| ≤ |a| + |b|",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C4.ST2.powerset_card",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {α : Type*} [Fintype α] : Fintype.card (Set α) = 2 ^ Fintype.card α",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C5.Alg6.ker_normal",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {G H : Type*} [Group G] [Group H] (f : G →* H) : (f.ker).Normal",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C5.An7.continuous_polynomial",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (a b c : ℝ) : Continuous (fun x : ℝ => a*x^2 + b*x + c)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C5.BS6.nu_lt_of_prime",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℕ) (hp : p.Prime) : nu ({0,2,6,8,12,18,20,26,30,32,36} : Finset ℕ) p < p",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C5.BSp6.P10_symm",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : P10.IsSymm",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C5.C6.sum_range_succ_id",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : 2 * ∑ i ∈ range (n+1), i = n*(n+1)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C5.NT7.even_perfect_form",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) (hn : Nat.Perfect n) (he : Even n) : ∃ p : ℕ, (2^p - 1).Prime ∧ n = 2^(p-1)*(2^p - 1)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C5.Ph6.spin_total_sq",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Sx*Sx+Sy*Sy+Sz*Sz = (3:ℂ)•(1:Matrix (Fin 2) (Fin 2) ℂ)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C5.QI7.ghz_norm",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : (GHZᴴ * GHZ) 0 0 = 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C6.Alg7.subgroup_mul_mem",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {G : Type*} [Group G] (H : Subgroup G) (a b : G) (ha : a ∈ H) (hb : b ∈ H) : a*b ∈ H",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C6.An8.deriv_cos",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (x : ℝ) : deriv Real.cos x = -Real.sin x",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C6.BD6.golden_pow4",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : ((1+Real.sqrt 5)/2)^4 = 3*((1+Real.sqrt 5)/2) + 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C6.BS7.adm_37",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (g : ZMod 37) (hg : g ≠ 0) : (Finset.univ.filter (fun r : ZMod 37 => r ≠ 0 ∧ r ≠ -g)).card = 35",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C6.BSp7.C8_trace",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Matrix.trace C8 = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C6.C7.sum_sq_formula",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : 6 * ∑ i ∈ range (n+1), i^2 = n*(n+1)*(2*n+1)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C6.Geo4.norm_nonneg_v",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {V : Type*} [NormedAddCommGroup V] (a : V) : 0 ≤ ‖a‖",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C6.IT5.log_mul_pos",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (a b : ℝ) (ha : 0 < a) (hb : 0 < b) : Real.log (a*b) = Real.log a + Real.log b",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C6.NT8.sum_totient_divisors",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) (hn : 0 < n) : ∑ d ∈ Nat.divisors n, Nat.totient d = n",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C6.P5.prob_sum_one",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (p : Fin n → ℝ) (hp : ∀ i, 0 ≤ p i) (hs : ∑ i, p i = 1) : ∀ i, p i ≤ 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C6.QC7.xyz_eq_i",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : X*Y*Z = Complex.I • (1 : Matrix (Fin 2) (Fin 2) ℂ)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "C6.T4.union_open",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {X : Type*} [TopologicalSpace X] (s t : Set X) (hs : IsOpen s) (ht : IsOpen t) : IsOpen (s ∪ t)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "CS.size_pos",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (G : ConstraintGraph q) : 0 < G.size",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "D5.card",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .card : Fintype.card D5 = 10",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "D5Structure.phi_squared",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .phi_squared : D5Structure.φ ^ 2 = D5Structure.φ + 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "D5_card",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .card : Fintype.card D5 = 10",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "D5_card_verified",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Fintype.card D5 = 10",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "FirstProofQ6.laplacian_eq_sum_sq",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .laplacian_eq_sum_sq (G : SimpleGraph V) (x : V → ℝ) : x ⬝ᵥ (FirstProofQ6.laplacianMatrix G) *ᵥ x = (1/2) * ∑ i, ∑ j, if G.Adj i j then (x i - x j)^2 else 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "FirstProofQ6.psdLe_refl",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .psdLe_refl {V : Type*} [Fintype V] [DecidableEq V] (M : Matrix V V ℝ) : M ⪯ M",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.AlgebraLogic.lagrange",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {G : Type*} [Group G] [Fintype G] (H : Subgroup G) [Fintype H] : Fintype.card H ∣ Fintype.card G",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.AnalysisCalculus.am_gm_two",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (a b : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) : Real.sqrt (a*b) ≤ (a+b)/2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.BrockianNextLevel.excluded_residue_count",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (q : ℕ) [NeZero q] (g : ZMod q) (hg : g ≠ 0) : (Finset.univ.filter (fun r : ZMod q => r = 0 ∨ r = -g)).card = 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.BrockianSieveDeep.nu_le_card",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (G : Finset ℕ) (p : ℕ) : nu G p ≤ G.card",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.CombinatoricsGraph.handshake",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {V : Type*} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj] : Even (∑ v, G.degree v)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.ContainsAP.mono_set",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .mono_set {A B : Set ℕ} {k : ℕ} (h : ContainsAP A k) (hAB : A ⊆ B) : ContainsAP B k",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Frontier.CryptoComplexity.otp_bijective",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) (m : BitVec n) : Bijective (fun k : BitVec n => m ^^^ k)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.InformationTheory.entropy_term_nonneg",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℝ) (h0 : 0 ≤ p) (h1 : p ≤ 1) : 0 ≤ - p * Real.log p",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.NTClassics.fermat_little",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℕ) (hp : p.Prime) (a : ℤ) : a^p ≡ a [ZMOD p]",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.PhysicsQM.pauli_sq_X",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : X * X = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.RH_iff_riemannHypothesis",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : RH ↔ RiemannHypothesis",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.Sensitivity.flipAt_apply",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (k i : Fin n) (u : Q n) : flipAt k u i = if i = k then !u i else u i",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "Frontier.chsh_pointwise_le_two",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (a0 a1 b0 b1 : ℝ) (h0 : |a0| ≤ 1) (h1 : |a1| ≤ 1) (g0 : |b0| ≤ 1) (g1 : |b1| ≤ 1) : a0 * b0 + a0 * b1 + a1 * b0 - a1 * b1 ≤ 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.coulombEnergy_one_one",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (z₀ : ℝ) (x₀ R₀ : Space) : coulombEnergy (fun _ : Fin 1 => z₀) (fun _ : Fin 1 => x₀) (fun _ : Fin 1 => R₀) = -(z₀ / dist x₀ R₀)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.erdosDiscrepancy_iff_no_uniform_bound",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : ErdosDiscrepancy ↔ ∀ f : ℕ → ℤ, IsPlusMinusOne f → ¬ ∃ C : ℤ, ∀ d n : ℕ, 0 < d → 0 < n → |apSum f d n| ≤ C",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.isP2_of_prime",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {q : ℕ} (hq : Nat.Prime q) : IsP2 q",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.isingPartition_pos",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) (K : ℝ) : 0 < isingPartition n K",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.measure_mul_le_measure_inter_of_subset",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (μ : Measure E) [IsProbabilityMeasure μ] {K L : Set E} (h : K ⊆ L ∨ L ⊆ K) : μ K * μ L ≤ μ (K ∩ L)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.not_isPrimitiveRootMod_of_isSquare",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {a : ℤ} (ha : IsSquare a) {p : ℕ} (hp : p.Prime) (hp2 : p ≠ 2) : ¬IsPrimitiveRootMod a p",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Frontier.riemannZeta_eq_zero_of_isTrivialZero",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {s : ℂ} (hs : IsTrivialZero s) : riemannZeta s = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "F₂_zero_at_prime",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {p : ℕ} (hp : Nat.Prime p) : F₂ p = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "GoldbachSpectral.reps_positive_implies_goldbach",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .reps_positive_implies_goldbach {n : ℕ} (h : (GoldbachSpectral.goldbach_reps n : ℝ) > 0) : ∃ p q : ℕ, Nat.Prime p ∧ Nat.Prime q ∧ p + q = n",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "GoldenRatio.pos",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .pos : 0 < phi",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "H_op_is_self_adjoint",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : IsSelfAdjoint H_op",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "HarmonicArch.ray_add",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .ray_add (a b : ℕ) : HarmonicArch.ray (a + b) = ⟨((HarmonicArch.ray a).val + (HarmonicArch.ray b).val) % 5, Nat.mod_lt _ (by decide)⟩",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "HarmonicArch.ray_unique",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .ray_unique (n : ℕ) : ∃! r : HarmonicArch.RaySpace, HarmonicArch.ray n = r",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Infinity.countable_nat",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Countable Nat",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "L2Layer.MulOpData.memLp_infinity",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .MulOpData.memLp_infinity (d : L2Layer.MulOpData μ) : MemLp d.f ⊤ μ",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "LinearRecurrence.casoratian_step",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p q : R) (x y : ℕ → R) (hx : ∀ n, x (n + 2) = p * x (n + 1) + q * x n) (hy : ∀ n, y (n + 2) = p * y (n + 1) + q * y n) (n : ℕ) : casoratian x y (n + 1) = -q * casoratian x y n",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS.Algebra.lagrange_subgroup",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {G : Type*} [Group G] [Fintype G] (H : Subgroup G) [Fintype H] : Fintype.card H ∣ Fintype.card G",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS.Analysis.intermediate_value",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (f : ℝ → ℝ) (a b : ℝ) (hab : a ≤ b) (hf : ContinuousOn f (Set.Icc a b)) (y : ℝ) (hy : y ∈ Set.Icc (f a) (f b)) : ∃ c ∈ Set.Icc a b, f c = y",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS.Brockian.universal_admissibility_count",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (q : ℕ) [NeZero q] (g : ZMod q) (hg : g ≠ 0) : (admissibleResidues q g).card = q - 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS.Combinatorics.ramsey_finite",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (r s : ℕ) : ∃ N : ℕ, ∀ (f : Sym2 (Fin N) → Bool), (∃ A : Finset (Fin N), r ≤ A.card ∧ ∀ x ∈ A, ∀ y ∈ A, x ≠ y → f s(x,y) = true) ∨ (∃ B : Finset (Fin N), s ≤ B.card ∧ ∀ x ∈ B, ∀ y ∈ B, x ≠ y → f s(x,y) = false)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS.Foundations.fundamental_theorem_of_algebra",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : Polynomial ℂ) (hp : 0 < p.degree) : ∃ z, p.eval z = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS.Inequalities.cauchy_schwarz",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (a b : Fin n → ℝ) : (∑ i, a i * b i) ^ 2 ≤ (∑ i, (a i) ^ 2) * (∑ i, (b i) ^ 2)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS.LogicQuantum.schroeder_bernstein",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {α β : Type*} (f : α → β) (g : β → α) (hf : Function.Injective f) (hg : Function.Injective g) : Nonempty (α ≃ β)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS.Topology.brouwer_fixed_point",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (f : (Metric.closedBall (0 : EuclideanSpace ℝ (Fin n)) 1) → (Metric.closedBall (0 : EuclideanSpace ℝ (Fin n)) 1)) (hf : Continuous f) : ∃ x, f x = x",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS2.Algebra2.orbit_stabilizer",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {G α : Type*} [Group G] [MulAction G α] [Fintype G] (a : α) [Fintype (MulAction.orbit G a)] [Fintype (MulAction.stabilizer G a)] : Fintype.card (MulAction.orbit G a) * Fintype.card (MulAction.stabilizer G a) = Fintype.card G",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS2.Analysis2.squeeze",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (f g h : ℕ → ℝ) (a : ℝ) (hf : Tendsto f atTop (nhds a)) (hh : Tendsto h atTop (nhds a)) (hfg : ∀ n, f n ≤ g n) (hgh : ∀ n, g n ≤ h n) : Tendsto g atTop (nhds a)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS2.BSpec2.P6_eigen_center",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : P6.charpoly.eval (2 - 2*Real.cos (Real.pi/7)) = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS2.CSLogic.cantor_diagonal",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {α : Type*} (f : α → (α → Bool)) : ¬ Function.Surjective f",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS2.Combinatorics2.catalan_recurrence",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : (catalan (n+1)) = ∑ i ∈ range (n+1), catalan i * catalan (n-i)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS2.FibLucas.cassini",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : (Nat.fib (n+2) : ℤ) * (Nat.fib n : ℤ) + (-1)^n = (Nat.fib (n+1) : ℤ)^2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS2.Geometry.law_of_cosines",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℝ V] (a b : V) : ‖a - b‖^2 = ‖a‖^2 + ‖b‖^2 - 2 * inner ℝ a b",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS2.IT2.entropy_nonneg",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℝ) (h0 : 0 ≤ p) (h1 : p ≤ 1) : 0 ≤ -p * Real.log p",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS2.NT2.chinese_remainder",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (m n : ℕ) (h : Nat.Coprime m n) : Nonempty (ZMod (m*n) ≃+* ZMod m × ZMod n)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS2.NTG2.wolstenholme_weak",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℕ) (hp : p.Prime) (h5 : 5 ≤ p) : True",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS2.Prob2.am_gm_three",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (a b c : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) (hc : 0 ≤ c) : (a*b*c)^((1:ℝ)/3) ≤ (a+b+c)/3",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS2.Probability.markov_finite",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (x : Fin n → ℝ) (hx : ∀ i, 0 ≤ x i) (a : ℝ) (ha : 0 < a) : (a * (univ.filter (fun i => a ≤ x i)).card : ℝ) ≤ ∑ i, x i",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "MS2.QI3.cnot_involutive",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : CNOT * CNOT = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Mod5Ray.card",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .card : Fintype.card Mod5Ray = 5",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "NumberTheory.bezout_nat",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (m n : Nat) : ∃ x y : Int, (m : Int) * x + (n : Int) * y = (Nat.gcd m n : Int)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "PCA.Isolation.evalF_bigOr",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {α : Type} (v : α → Bool) (fs : List (Formula α)) : evalF v (bigOr fs) = true ↔ ∃ f ∈ fs, evalF v f = true",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "PenroseTiling.sqrt5_gt_one",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .sqrt5_gt_one : 1 < sqrt 5",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "PrimeAdmissibility.universal_admissibility_count",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .universal_admissibility_count (q : ℕ) [Fact q.Prime] (g : ℕ) (hg : (g : ZMod q) ≠ 0) : (admissible_residues q g).card = q - 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "ProvabilityStructure.imp_self_thm",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : T.Sentence) : T.Thm (T.imp p p)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "QC.exists_norm_eq_one",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] [Nontrivial H] : ∃ ψ : H, ‖ψ‖ = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "QC.tens_add_left",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (ψ ψ' φ : Qubit) : tens (ψ + ψ') φ = tens ψ φ + tens ψ' φ",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "QI.apply_entry_eq_sum",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (Φ : Matrix n n ℂ →ₗ[ℂ] Matrix m m ℂ) (X : Matrix n n ℂ) (a b : m) : Φ X a b = ∑ i, ∑ j, X i j * Φ (Matrix.single i j 1) a b",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "QI.apply_eq_sum_choi",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (Φ : Matrix n n ℂ →ₗ[ℂ] Matrix m m ℂ) (X : Matrix n n ℂ) (α β : m) : Φ X α β = ∑ i, ∑ j, X i j * choi Φ (i, α) (j, β)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "QI.bellState_normalized",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : ∑ x, ‖bellState x‖ ^ 2 = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "QI.classical_query_lower_bound_rpow",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n q : ℕ} (A : QueryAlg n) (hA : ∀ (f : BV n → BV n) (s : BV n), IsSimon f s → result A f q = s) : (2 : ℝ) ^ ((n : ℝ) / 2) ≤ (q : ℝ) + 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "QI.hasDerivAt_logAnti",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {a b : ℝ} (ha : 0 < a) (hb : 0 < b) {t : ℝ} (ht : 0 ≤ t) : HasDerivAt (logAnti a b) (a ^ 2 / (b + t * a) - a / (1 + t)) t",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "QI.hasDerivAt_neg_inv",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {c : ℝ} (hc : 0 < c) {t : ℝ} (ht : 0 ≤ t) : HasDerivAt (fun t : ℝ => -(c + t)⁻¹) ((c + t)⁻¹ * (c + t)⁻¹) t",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "QI.inner_kron",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {α β : Type*} [Fintype α] [Fintype β] (u u' : EuclideanSpace ℂ α) (v v' : EuclideanSpace ℂ β) : (inner ℂ (kron u v) (kron u' v') : ℂ) = (inner ℂ u u' : ℂ) * (inner ℂ v v' : ℂ)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "QI.inner_tens_tens",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {ι κ : Type*} [Fintype ι] [Fintype κ] (x x' : EuclideanSpace ℂ ι) (y y' : EuclideanSpace ℂ κ) : inner ℂ (tens x y) (tens x' y') = inner ℂ x x' * inner ℂ y y'",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "QI.inner_toVec",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (A B : Matrix n m ℂ) : ⟪toVec A, toVec B⟫_ℂ = (Aᴴ * B).trace",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "QI.isContraction_iff",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {p q : Type*} [Fintype p] [Fintype q] [DecidableEq q] (M : Matrix p q ℂ) : IsContraction M ↔ ∀ x : EuclideanSpace ℂ q, ‖Matrix.toEuclideanLin M x‖ ≤ ‖x‖",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "QI.isSelfAdjoint_conj",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (u : unitary (Matrix n n ℂ)) {A : Matrix n n ℂ} (hA : IsSelfAdjoint A) : IsSelfAdjoint ((u : Matrix n n ℂ) * A * star (u : Matrix n n ℂ))",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "QI.jointlyDiagonalizable_of_commute",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (ρ : X → Matrix n n ℂ) (hherm : ∀ x, (ρ x).IsHermitian) (hcomm : ∀ x x', Commute (ρ x) (ρ x')) : JointlyDiagonalizable ρ",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "QI.ptraceSnd_outer",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (v : n × m → ℂ) : ptraceSnd (outer v) = reshape v * (reshape v)ᴴ",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "QI.ptrace_pureProj",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (psi : n × m → ℂ) : ptraceAncilla (pureProj psi) = toMat psi * (toMat psi)ᴴ",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "QI.rho_apply",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (ψ : EuclideanSpace ℂ (Fin m × Fin n)) (i i' : Fin m) : rho ψ i i' = ∑ j, ψ (i, j) * conj (ψ (i', j))",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "QI.ten3_ofLp",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {m : ℕ} (a b : Qubit) (c : Anc m) (p : Fin 2 × Fin 2 × Fin m) : (ten3 a b c).ofLp p = a.ofLp p.1 * b.ofLp p.2.1 * c.ofLp p.2.2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "QPhys.dLdq_eq_zero_of_translationInvariant",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {L : ℝ → ℝ → ℝ} (h : TranslationInvariant L) (q v : ℝ) : dLdq L q v = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "QuantumInfoII.clifford_HXH",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : M * X * M = (2 : ℤ) • Z",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Ray.card",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .card : Fintype.card Ray = 5",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Ray.toNat_E",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .toNat_E : Ray.toNat Ray.E = 0",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "Riemann.Robin.sigma_one_sixteen",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : ArithmeticFunction.sigma 1 16 = 31",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "UnitaryRep.preserves_inner",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] .preserves_inner {G : Type*} [Group G] {H : Type u} [NormedAddCommGroup H] [InnerProductSpace ℂ H] (rep : UnitaryRep G H) (g : G) (x y : H) : inner ℂ (rep.ρ g x) (rep.ρ g y) = inner ℂ x y",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "allowed_classes_zmod_card",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (q : ℕ) [Fact (Nat.Prime q)] (G : Finset ℕ) : (AllowedClassesZMod q G).card = q - nu_p G q",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "bridge",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (h : ∀ s ∈ RegularizedCompletedZeros, s.re = 1 / 2) : RiemannHypothesis ``` Its premise concerns zeros of `completedRiemannZeta₀`, which satisfies `completedRiemannZeta = completedRiemannZeta₀ - 1/s - 1/(1-s)`; therefore a nontrivial zeta zero is not thereby a zero of `completedRiemannZeta₀`. The corrected bridge is stated using `riemannXi`. -/ /-- Every nontrivial zeta zero is a zero of the classical ξ-factor. -/ le",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "brockianSpiral_continuous",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (k α : ℝ) : Continuous (brockianSpiral k α)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "card_admissibleLabels",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {p : ℕ} [Fact p.Prime] (g : ZMod p) (hg : g ≠ 0) : ((univ : Finset (ZMod p)).filter (fun i => i ≠ 0 ∧ i + g ≠ 0)).card = p - 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "edgeMat_psd",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (u v : V) : (edgeMat u v).PosSemidef",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "epsilonLight_of_sumAv",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {V : Type*} [Fintype V] [DecidableEq V] (G : SimpleGraph V) (S : Finset V) (ε : ℝ) (hBridge : Ls G S ⪯ ∑ v ∈ S, Av G v) : (∑ v ∈ S, Av G v) ⪯ ε • L G → IsEpsilonLight G S ε",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "gamma_lt_log_four_pi",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Real.eulerMascheroniConstant < Real.log (4 * Real.pi)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "goldbachReps_nonneg",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : 0 ≤ goldbachReps n",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "goldbach_from_count",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {n : ℕ} (h : goldbachCount n ≥ 1) : ∃ p q, Nat.Prime p ∧ Nat.Prime q ∧ p + q = n",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "golden_fundamental",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : φ^2 = φ + 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "idemp_implies_double_idemp",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {α : Type*} [Magma α] (h : ∀ x : α, x ◇ x = x) : ∀ x : α, (x ◇ x) ◇ (x ◇ x) = x",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "imp_A1",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (h : ∀ x y : G, x * y = x) : ∀ x : G, x * x = x",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "induced_laplacian_quad_form",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {V : Type*} [Fintype V] [DecidableEq V] (G : SimpleGraph V) (S : Finset V) (x : V → ℝ) : dotProduct (inducedLaplacian G S *ᵥ x) x = ∑ e ∈ (G.induce ↑S).edgeFinset, (x (Quot.out e).1 - x (Quot.out e).2) ^ 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "laplacian_quadratic_form",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {V : Type*} [Fintype V] [DecidableEq V] (G : SimpleGraph V) (x : V → ℝ) : x ⬝ᵥ (laplacianMatrix G *ᵥ x) = (∑ i : V, ∑ j : V, if G.Adj i j then (x i - x j) ^ 2 else 0) / 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "laplacian_symmetric",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (G : SimpleGraph V) : (laplacianMatrix G).IsSymm",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "left_proj_imp_idem",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (h : ∀ x y : G, x ◇ y = x) : ∀ x : G, x ◇ x = x",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "mem_ray_iff",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℕ) (i : ZMod p) (n : ℕ) : n ∈ Ray p i ↔ (n : ZMod p) = i",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "norm_mul_le_bound",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] {α : Type*} [MeasureSpace α] {f : α → ℂ} {g : α → ℂ} {M : ℝ} (hM : 0 ≤ M) (hf : ∀ᵐ x ∂volume, ‖f x‖ ≤ M) (hg : AEStronglyMeasurable g volume) : eLpNorm (f * g) 2 volume ≤ ENNReal.ofReal M * eLpNorm g 2 volume",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "nu_p_eq_image_card",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (g : ℕ → ℕ) (k p : ℕ) : nu_p (Finset.image g (Finset.range k)) p = nu_p' g k p",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "pairs_always_q_minus_2",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (q : ℕ) [Fact (Nat.Prime q)] (g : ℕ → ℕ) (hga : AdmissibleTuple q g 2) : (PrincipalKTuples q g 2).card = q - 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "pattern_reflection_invariance",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : residuePattern n = residuePattern (10 - (n % 10))",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "pentagon_chord_formula",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (j k : Fin 5) : pentDist j k = 2 * |Real.sin (Real.pi * (k.val - j.val : ℤ) / 5)|",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "phi_equation",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : phi^2 = phi + 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "phi_minimal_polynomial",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : φ^2 = φ + 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "phi_pos",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : 0 < phi",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "phi_squared",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : φ ^ 2 = φ + 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "principal_pair_count",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (g : ℕ) (hg : g % 5 ≠ 0) : (filter (λ (p : BrockRay × BrockRay) => p.1 ≠ .E ∧ p.2 ≠ .E ∧ (p.2.residue.val : ℤ) = (p.1.residue.val + g) % 5) univ).card = 3",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "problem_normal_0001",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (G : Type _) [Magma G] (h : ∀ (x : G) (y : G) (z : G) (w : G), x = ((y ◇ (x ◇ y)) ◇ z) ◇ w) : ∀ (x : G) (y : G) (z : G) (w : G), x = (y ◇ (x ◇ z)) ◇ (y ◇ w)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "problem_normal_0166",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (G : Type _) [Magma G] (h : ∀ (x : G) (y : G) (z : G), x = y ◇ (((z ◇ x) ◇ z) ◇ z)) : ∀ (x : G) (y : G) (z : G), x = (x ◇ (y ◇ x)) ◇ z",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "problem_normal_0355",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (G : Type _) [Magma G] (h : ∀ (x : G) (y : G) (z : G), x = y ◇ ((x ◇ z) ◇ (z ◇ z))) : ∀ (x : G) (y : G), (x ◇ x) ◇ x = (y ◇ y) ◇ y",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "problem_normal_0765",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (G : Type _) [Magma G] (h : ∀ (x : G) (y : G) (z : G) (w : G), x = (y ◇ x) ◇ ((z ◇ y) ◇ w)) : ∀ (x : G) (y : G) (z : G) (w : G), x = (((y ◇ z) ◇ w) ◇ x) ◇ w",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "ray_cover",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℕ) (n : ℕ) : ∃ i : ZMod p, n ∈ ray p i",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "ray_unique_factorization",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : ∃! r : RaySpace, ray n = r",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "ray_zero_singularity",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : ℕ) (hp : p.Prime) (h_large : p > 5) : ray p ≠ ⟨0, by decide⟩",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "residue_injective",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : Function.Injective BrockRay.residue",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "rotate_order_4",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (j : ActiveRay) : rotate (rotate (rotate (rotate j))) = j",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "rotation_is_complex_mul",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (k : Fin 5) : complexPentagonVertex (k + 1) = zeta5 * complexPentagonVertex k",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "sigma_of_prime",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p s : ℕ) (hp : p.Prime) : sigma s p = 1 + (p : ℤ) ^ s",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "spiralPrime_norm",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (p : BPrime) : ‖spiralPrime p‖ = p.val",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "spiral_continuous",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (k : ℝ) : Continuous (brockianSpiral k)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "spiral_phase_security",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] : ∀ key : BrockianKey, spiral_phase_problem key → ∃ proof : Prop, proof ↔ NPComplete proof",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "square_free_and_ne_one_implies_not_square",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (k : ℕ) (hk : ∀ n > 1, ¬(n^2 ∣ k)) (hk_ne_one : k ≠ 1) : ¬IsSquare k",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "lemma"
+  },
+  {
+   "target": "submission",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (G : Type) [Magma G] (h : ∀ (x y z w : G), x = ((y ◇ (x ◇ y)) ◇ z) ◇ w) : ∀ (x y z w : G), x = (y ◇ (x ◇ z)) ◇ (y ◇ w)",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "test",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (a b c : Nat) (h : a = b) (h2 : b = c) : a = c",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "twin_prime_case",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (g : ℕ) (hg : g % 3 ≠ 0) : (admissible_residues 3 g).card = 1",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "unique_membership",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (n : ℕ) : ∃! r : BrockRay, r.contains n",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "universal_admissibility_count",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (q : ℕ) [Fact q.Prime] (g : ℕ) (hg : (g : ZMod q) ≠ 0) : (admissible_residues q g).card = q - 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  },
+  {
+   "target": "universal_count_theorem",
+   "tier": "harvest-reconciled",
+   "rank": 9,
+   "difficulty": "DONE",
+   "statement": "[Lean signature, verbatim from the harvested proof] (q g : ℕ) (hq_prime : Nat.Prime q) (hq_odd : q > 2) (hg_coprime : Nat.gcd g q = 1) : (principalPairsQ q g).card = q - 2",
+   "goal": "(harvest reconciliation entry — proof already landed; statement extracted from the proof file so the catalogue can file it honestly; register decided by AXLE attestation as usual)",
+   "kind": "theorem"
+  }
+ ]
+}
