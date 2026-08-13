@@ -1,0 +1,102 @@
+{
+  "count": 12,
+  "note": "Brockian.Characters5 — ZMod 5 character / discrete-Fourier mini-library. The rigorous bridge between the five-ray wheel (naturals by n mod 5) and Dirichlet characters mod 5, and the backbone for the pole-killing fact behind the Brockian zeta twist: the period-5 block sum of e^{2πik/5} vanishes, so partial sums are bounded and Dirichlet's test gives convergence of Σ e(n mod 5)/n^s beyond Re s > 1. Definitions live in aristotle/core_consolidation/Characters5_draft.lean; each goal below repeats the needed definitions inline so targets are self-contained. Plays to fleet strengths: Finset sum algebra (Finset.sum_congr, sum_comm, sum_ite_eq'), roots of unity, ZMod arithmetic. Every statement numerically verified 2026-08-13 (max partial-sum norm is the golden ratio 1.618... ≤ 2). All targets: Lean 4 / Mathlib at lean-4.32.0, axiom-clean (no sorry/admit/native_decide). Shared inline preamble for all goals: noncomputable def ω : ℂ := Complex.exp (2 * Real.pi * Complex.I / 5) ; noncomputable def e : ZMod 5 → ℂ := fun k => ω ^ k.val.",
+  "queue": [
+    {
+      "target": "Brockian.Characters5.omega_pow_five",
+      "tier": "characters",
+      "rank": 1,
+      "difficulty": "EASY",
+      "statement": "The Brockian ray rotation returns to start after five steps: ω^5 = 1, where ω = e^{2πi/5}.",
+      "goal": "With ω as in the preamble, prove: theorem omega_pow_five : ω ^ 5 = 1. Suggested route: (Complex.isPrimitiveRoot_exp 5 (by norm_num)).pow_eq_one after aligning the cast (5 : ℂ) with ((5 : ℕ) : ℂ) via push_cast/norm_num; or directly rw [ω, ← Complex.exp_nat_mul] and reduce exp (5 * (2πI/5)) = exp (2πI) = 1 via Complex.exp_two_pi_mul_I and field arithmetic."
+    },
+    {
+      "target": "Brockian.Characters5.sum_omega_pow",
+      "tier": "characters",
+      "rank": 1,
+      "difficulty": "EASY",
+      "statement": "The zero-mean twist: the sum of all five 5th roots of unity vanishes, Σ_{k=0}^{4} ω^k = 0 — the single identity that kills the pole of the twisted zeta at s = 1.",
+      "goal": "With ω as in the preamble, prove: theorem sum_omega_pow : ∑ k ∈ Finset.range 5, ω ^ k = 0. Suggested route: (Complex.isPrimitiveRoot_exp 5 (by norm_num)).geom_sum_eq_zero (by norm_num) (Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots), aligning the (5 : ℂ) vs ((5 : ℕ) : ℂ) cast; alternatively multiply the geometric sum by (ω - 1) ≠ 0 and use omega_pow_five, or expand with Fin.sum_univ_five-style range expansion and geom_sum_eq."
+    },
+    {
+      "target": "Brockian.Characters5.norm_e",
+      "tier": "characters",
+      "rank": 1,
+      "difficulty": "EASY",
+      "statement": "The additive character has unit modulus: ‖e k‖ = 1 for every k : ZMod 5.",
+      "goal": "With ω, e as in the preamble, prove: theorem norm_e (k : ZMod 5) : ‖e k‖ = 1. Suggested route: unfold e; norm_pow reduces to ‖ω‖ = 1; ‖exp z‖ = Real.exp z.re (Complex.norm_exp, formerly Complex.abs_exp) with re (2πI/5 scaled) = 0: show (2 * ↑Real.pi * Complex.I / 5).re = 0 by simp [Complex.div_re, Complex.mul_re] or by writing the exponent as (2π/5 : ℝ) * I and using Complex.norm_exp_ofReal_mul_I."
+    },
+    {
+      "target": "Brockian.Characters5.e_add",
+      "tier": "characters",
+      "rank": 1,
+      "difficulty": "MEDIUM",
+      "statement": "e is an additive-to-multiplicative homomorphism: e (j + k) = e j * e k for all j k : ZMod 5.",
+      "goal": "With ω, e as in the preamble, prove: theorem e_add (j k : ZMod 5) : e (j + k) = e j * e k. Suggested route: rw [← pow_add]; it remains ω ^ (j + k).val = ω ^ (j.val + k.val); use ZMod.val_add ((j+k).val = (j.val + k.val) % 5), write j.val + k.val = 5 * ((j.val + k.val) / 5) + (j.val + k.val) % 5 via Nat.div_add_mod, then pow_add, pow_mul and omega_pow_five (ω^5 = 1, see target omega_pow_five — prove it inline or reuse). Alternative fleet-friendly route: Decidable case split on j and k via Fin cases (25 cases), each closed by ZMod.val computation and pow arithmetic."
+    },
+    {
+      "target": "Brockian.Characters5.e_eq_stdAddChar",
+      "tier": "characters",
+      "rank": 1,
+      "difficulty": "MEDIUM",
+      "statement": "The bespoke character equals Mathlib's standard additive character mod 5: e k = ZMod.stdAddChar k for all k, unlocking Mathlib's whole AddChar API for the five-ray wheel.",
+      "goal": "With ω, e as in the preamble, prove: theorem e_eq_stdAddChar (k : ZMod 5) : e k = ZMod.stdAddChar (N := 5) k. Suggested route: RHS is ↑(ZMod.toCircle k) = Complex.exp (2 * ↑Real.pi * Complex.I * k.val / 5) by ZMod.stdAddChar_apply and ZMod.toCircle_apply (Mathlib.Analysis.SpecialFunctions.Complex.CircleAddChar); LHS is ω ^ k.val = Complex.exp (k.val * (2 * ↑Real.pi * Complex.I / 5)) by ← Complex.exp_nat_mul; conclude with congr 1; ring."
+    },
+    {
+      "target": "Brockian.Characters5.sum_e_mul",
+      "tier": "characters",
+      "rank": 2,
+      "difficulty": "MEDIUM",
+      "statement": "Additive-character orthogonality on ZMod 5: Σ_{x : ZMod 5} e (a * x) equals 5 when a = 0 and 0 otherwise.",
+      "goal": "With ω, e as in the preamble, prove: theorem sum_e_mul (a : ZMod 5) : ∑ x : ZMod 5, e (a * x) = if a = 0 then 5 else 0. Suggested route: rewrite e via e_eq_stdAddChar (see that target; prove inline or reuse), commute a * x = x * a, then apply AddChar.sum_mulShift a (ZMod.isPrimitive_stdAddChar 5) (Mathlib.NumberTheory.LegendreSymbol.AddCharacter: ∑ x, ψ (x * b) = if b = 0 then Fintype.card R else 0) and close with ZMod.card 5 and Nat.cast_ofNat. Alternative: case a = 0 gives ∑ 1 = 5 by Finset.sum_const and Finset.card_univ; case a ≠ 0 uses that x ↦ a * x is a bijection of ZMod 5 (a is a unit since 5 is prime; Equiv.mulLeft₀) to reduce to ∑ k ∈ range 5, ω^k = 0 (target sum_omega_pow)."
+    },
+    {
+      "target": "Brockian.Characters5.rayIndicator_eq_charSum",
+      "tier": "characters",
+      "rank": 2,
+      "difficulty": "MEDIUM",
+      "statement": "Indicator decomposition: the ray indicator 𝟙[n ≡ r (mod 5)] equals (1/5) Σ_{a : ZMod 5} e (a * (n - r)), spectrally decomposing membership in one ray of the five-ray wheel.",
+      "goal": "With ω, e as in the preamble and def rayIndicator (r : ZMod 5) (n : ℕ) : ℂ := if (n : ZMod 5) = r then 1 else 0, prove: theorem rayIndicator_eq_charSum (r : ZMod 5) (n : ℕ) : rayIndicator r n = (1 / 5 : ℂ) * ∑ a : ZMod 5, e (a * ((n : ZMod 5) - r)). Suggested route: set b := (n : ZMod 5) - r; rewrite each summand e (a * b) = e (b * a) by mul_comm and apply orthogonality (target sum_e_mul with a := b, i.e. ∑ a, e (b * a) = if b = 0 then 5 else 0); then sub_eq_zero converts b = 0 ↔ (n : ZMod 5) = r, and both if-branches close by norm_num ((1/5) * 5 = 1, (1/5) * 0 = 0)."
+    },
+    {
+      "target": "Brockian.Characters5.dft_inversion",
+      "tier": "characters",
+      "rank": 2,
+      "difficulty": "MEDIUM",
+      "statement": "Fourier inversion on ZMod 5: with dft f a = Σ_x e(a*x) f(x), every f is recovered as f x = (1/5) Σ_a e(-(a*x)) * dft f a.",
+      "goal": "With ω, e as in the preamble and noncomputable def dft (f : ZMod 5 → ℂ) : ZMod 5 → ℂ := fun a => ∑ x : ZMod 5, e (a * x) * f x, prove: theorem dft_inversion (f : ZMod 5 → ℂ) (x : ZMod 5) : f x = (1 / 5 : ℂ) * ∑ a : ZMod 5, e (-(a * x)) * dft f a. Suggested route: unfold dft; distribute and swap the double sum with Finset.sum_comm and Finset.mul_sum; combine characters e (-(a * x)) * e (a * y) = e (a * (y - x)) using e_add and its consequence e (-k) * e k = 1 (from e_add, e 0 = 1; targets e_add/omega_pow_five, prove inline or reuse); the inner sum over a is orthogonality (target sum_e_mul via mul_comm), leaving ∑ y, f y * (if y - x = 0 then 5 else 0), which collapses by sub_eq_zero and Finset.sum_ite_eq' to 5 * f x; finish by norm_num. Note: Mathlib's ZMod.dft_dft (Mathlib.Analysis.Fourier.ZMod) is the same fact for the conjugate-convention transform and can guide the proof shape."
+    },
+    {
+      "target": "Brockian.Characters5.parseval",
+      "tier": "characters",
+      "rank": 3,
+      "difficulty": "MEDIUM",
+      "statement": "Parseval/Plancherel on ZMod 5 with the unnormalized transform: Σ_a ‖dft f a‖² = 5 Σ_x ‖f x‖².",
+      "goal": "With ω, e, dft as in targets above, prove: theorem parseval (f : ZMod 5 → ℂ) : ∑ a : ZMod 5, ‖dft f a‖ ^ 2 = 5 * ∑ x : ZMod 5, ‖f x‖ ^ 2. Suggested route: prove the complex-valued core identity first: ∑ a, dft f a * (starRingEnd ℂ) (dft f a) = 5 * ∑ x, f x * (starRingEnd ℂ) (f x), by expanding dft, pushing conj through sums and products (map_sum, map_mul), using conj (e k) = e (-k) (from norm_e / e_add: e k has unit modulus so its conjugate is its inverse e (-k)), swapping sums (Finset.sum_comm), and applying orthogonality (target sum_e_mul) to the inner sum, collapsing with Finset.sum_ite_eq'. Then convert to norms via Complex.mul_conj and Complex.normSq_eq_norm_sq (normSq z = ‖z‖^2), taking real parts with Complex.ofReal_inj or by comparing re of both sides."
+    },
+    {
+      "target": "Brockian.Characters5.dirichlet_sum_eq_zero",
+      "tier": "characters",
+      "rank": 2,
+      "difficulty": "EASY",
+      "statement": "Multiplicative-character orthogonality mod 5: every nontrivial Dirichlet character χ mod 5 with values in ℂ satisfies Σ_{x : ZMod 5} χ x = 0.",
+      "goal": "Prove: theorem dirichlet_sum_eq_zero (χ : DirichletCharacter ℂ 5) (hχ : χ ≠ 1) : ∑ x : ZMod 5, χ x = 0. Suggested route: DirichletCharacter ℂ 5 is definitionally MulChar (ZMod 5) ℂ, and ℂ is a domain, so this is exactly MulChar.sum_eq_zero_of_ne_one hχ (Mathlib.NumberTheory.MulChar.Basic); exact should close it, possibly after unfolding the DirichletCharacter abbreviation."
+    },
+    {
+      "target": "Brockian.Characters5.raySum_eq_charSum",
+      "tier": "characters",
+      "rank": 3,
+      "difficulty": "MEDIUM",
+      "statement": "Ray-count identity: for a finite set S of naturals, the number of elements on ray r, #{n ∈ S | n ≡ r (mod 5)}, equals (1/5) Σ_{a : ZMod 5} Σ_{n ∈ S} e (a * (n - r)) — equidistribution over the five-ray wheel measured by character sums.",
+      "goal": "With ω, e as in the preamble and def raySum (S : Finset ℕ) (r : ZMod 5) : ℕ := (S.filter fun n => (n : ZMod 5) = r).card, prove: theorem raySum_eq_charSum (S : Finset ℕ) (r : ZMod 5) : ((raySum S r : ℕ) : ℂ) = (1 / 5 : ℂ) * ∑ a : ZMod 5, ∑ n ∈ S, e (a * ((n : ZMod 5) - r)). Suggested route: write the card of the filter as a sum of indicators, (raySum S r : ℂ) = ∑ n ∈ S, if (n : ZMod 5) = r then (1 : ℂ) else 0, via Finset.card_filter and Nat.cast_sum (or Finset.sum_boole); rewrite each indicator by the decomposition target rayIndicator_eq_charSum (prove inline or reuse); then swap the two sums with Finset.sum_comm and pull the constant (1/5) out with Finset.mul_sum; Finset.sum_congr aligns summands pointwise."
+    },
+    {
+      "target": "Brockian.Characters5.twistPartialSum_norm_le",
+      "tier": "characters",
+      "rank": 3,
+      "difficulty": "MEDIUM",
+      "statement": "Bounded partial sums of the zero-mean twist: ‖Σ_{n < N} e(n mod 5)‖ ≤ 2 for every N (the true maximum is the golden ratio 1.618..., so 2 is a safe honest bound) — the Dirichlet-test seed for convergence of the Brockian zeta twist Σ e(n mod 5)/n^s beyond Re s > 1.",
+      "goal": "With ω, e as in the preamble and noncomputable def twistPartialSum (N : ℕ) : ℂ := ∑ n ∈ Finset.range N, e ((n : ZMod 5)), prove: theorem twistPartialSum_norm_le (N : ℕ) : ‖twistPartialSum N‖ ≤ 2. Suggested route: first establish the period-5 step as an inline lemma, twistPartialSum (N + 5) = twistPartialSum N: split range (N+5) as range N plus the window Finset.Ico N (N+5) (Finset.sum_range_succ five times, or Finset.range_eq_Ico with Finset.sum_Ico_consecutive), then show the window sum vanishes by reindexing by j ∈ range 5 via n = N + j (Finset.sum_bij / Finset.sum_nbij'); j ↦ ((N + j : ℕ) : ZMod 5) hits each residue exactly once (x ↦ (N : ZMod 5) + x is a bijection; Equiv.addLeft or Finset.sum_bijective), reducing to ∑ x : ZMod 5, e x = 0, which is orthogonality at a = 1 (target sum_e_mul with mul_one) or AddChar.sum_eq_zero_of_ne_one after the stdAddChar bridge. Then induct (Nat.strong_induction_on, or induction on N/5 via Nat.div_add_mod, giving twistPartialSum N = twistPartialSum (N % 5)) to reduce to the five base cases N = 0, 1, 2, 3, 4. Each base case is a concrete sum of at most four unit-norm terms: N = 0 gives 0; N = 1 gives ‖1‖ = 1; N = 2: ‖1 + ω‖ ≤ 2 by norm_add_le and ‖ω‖ = 1 (target norm_e); N = 4: the full five-term sum vanishes (target sum_omega_pow), so Σ_{n<4} = -ω^4 with norm 1; N = 3: likewise Σ_{n<3} = -(ω^3 + ω^4), norm ≤ 2 by norm_neg, norm_add_le. Only the triangle inequality and the zero-mean identity are needed; no trigonometric estimates."
+    }
+  ]
+}
