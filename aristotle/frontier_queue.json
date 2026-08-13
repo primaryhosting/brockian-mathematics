@@ -1,5 +1,5 @@
 {
-  "count": 132,
+  "count": 135,
   "queue": [
     {
       "target": "Zeta23Obstruction.repaired_witness_nonneg",
@@ -1056,6 +1056,30 @@
       "difficulty": "EASY",
       "statement": "Sexy primes (p, p+6 both prime, p > 5) travel exactly the roads 1→2, 2→3, 3→4: (p+6) ≡ p + 1 (mod 5) and neither endpoint can sit on ray 0.",
       "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): for p : ℕ, hp : p.Prime, hq : (p+6).Prime, h5 : 5 < p → (p % 5, (p+6) % 5) = (1,2) ∨ = (2,3) ∨ = (3,4). Route: same as cousin_prime_roads — 5 ∤ p and 5 ∤ (p+6) for primes > 5, and p % 5 = 4 forces (p+6) % 5 = 0, excluded. omega after the two divisibility contradictions."
+    },
+    {
+      "target": "Brockian.ConeLine.quadruplet_visits_all_active_rays",
+      "tier": "cone-line",
+      "rank": 1,
+      "difficulty": "EASY",
+      "statement": "A prime quadruplet (p, p+2, p+6, p+8) with p > 5 visits all four active rays exactly once, always in the order (1, 3, 2, 4): p ≡ 1 (mod 5) is forced.",
+      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): for p : ℕ with p.Prime, (p+2).Prime, (p+6).Prime, (p+8).Prime, 5 < p: p % 5 = 1 ∧ (p+2) % 5 = 3 ∧ (p+6) % 5 = 2 ∧ (p+8) % 5 = 4. Route: none of the four can be ≡ 0 mod 5 (each is prime > 5, so 5 ∤ each — use that 5 ∣ q with q prime forces q = 5); the residues are p, p+2, p+1, p+3 mod 5, four distinct values avoiding 0 leaves only p ≡ 1. omega closes after the four non-divisibility facts."
+    },
+    {
+      "target": "Brockian.ConeLine.triplet_two_patterns",
+      "tier": "cone-line",
+      "rank": 2,
+      "difficulty": "EASY",
+      "statement": "A prime triplet (p, p+2, p+6) with p > 5 has exactly two possible ray patterns: (1,3,2) or (2,4,3).",
+      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): for p : ℕ with p.Prime, (p+2).Prime, (p+6).Prime, 5 < p: (p % 5 = 1 ∧ (p+2) % 5 = 3 ∧ (p+6) % 5 = 2) ∨ (p % 5 = 2 ∧ (p+2) % 5 = 4 ∧ (p+6) % 5 = 3). Route: 5 ∤ p, 5 ∤ p+2, 5 ∤ p+6 (primes > 5), then omega on p % 5."
+    },
+    {
+      "target": "Brockian.ConeLine.sophie_germain_avoids_ray2",
+      "tier": "cone-line",
+      "rank": 2,
+      "difficulty": "EASY",
+      "statement": "A Sophie Germain prime p > 5 (p and 2p+1 both prime) never sits on ray 2: p ≡ 2 (mod 5) would force 5 ∣ 2p+1. Its roads are 1→3, 3→2, 4→4 — ray 4 maps to itself.",
+      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): for p : ℕ with p.Prime, (2*p+1).Prime, 5 < p: p % 5 ≠ 2 ∧ ((p % 5, (2*p+1) % 5) = (1,3) ∨ = (3,2) ∨ = (4,4)). Route: 5 ∤ p and 5 ∤ 2p+1 (both prime > 5); p ≡ 2 mod 5 gives 2p+1 ≡ 0, contradiction; then omega enumerates the remaining residues."
     }
   ]
 }
