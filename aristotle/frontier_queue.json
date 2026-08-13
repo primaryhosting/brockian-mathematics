@@ -1,5 +1,5 @@
 {
-  "count": 135,
+  "count": 137,
   "queue": [
     {
       "target": "Zeta23Obstruction.repaired_witness_nonneg",
@@ -1080,6 +1080,22 @@
       "difficulty": "EASY",
       "statement": "A Sophie Germain prime p > 5 (p and 2p+1 both prime) never sits on ray 2: p ≡ 2 (mod 5) would force 5 ∣ 2p+1. Its roads are 1→3, 3→2, 4→4 — ray 4 maps to itself.",
       "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): for p : ℕ with p.Prime, (2*p+1).Prime, 5 < p: p % 5 ≠ 2 ∧ ((p % 5, (2*p+1) % 5) = (1,3) ∨ = (3,2) ∨ = (4,4)). Route: 5 ∤ p and 5 ∤ 2p+1 (both prime > 5); p ≡ 2 mod 5 gives 2p+1 ≡ 0, contradiction; then omega enumerates the remaining residues."
+    },
+    {
+      "target": "Brockian.ConeLine.fib_uniform_mod5",
+      "tier": "cone-line",
+      "rank": 1,
+      "difficulty": "EASY",
+      "statement": "Fibonacci is uniformly distributed on the wheel: within one Pisano period (20 terms), each residue mod 5 occurs exactly 4 times — every ray receives an equal share of the Fibonacci sequence. (Five and its powers are the only moduli where Fibonacci is uniformly distributed — Kuipers–Shiue 1972 / Niederreiter 1972.)",
+      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): the multiset [Nat.fib k % 5 | k in Finset.range 20] contains each of 0,1,2,3,4 exactly 4 times — e.g. ∀ r : Fin 5, (Finset.range 20).filter (fun k => Nat.fib k % 5 = r.val) |>.card = 4. Route: decide (finite computation over 20 fib values). Also prove periodicity seed: Nat.fib 20 % 5 = 0 ∧ Nat.fib 21 % 5 = 1 (the Pisano-20 restart)."
+    },
+    {
+      "target": "Brockian.ConeLine.square_ray_primes_mod20",
+      "tier": "cone-line",
+      "rank": 2,
+      "difficulty": "EASY",
+      "statement": "Primes on the square rays refine to four classes mod 20: a prime p > 5 with p ≡ 1 or 4 (mod 5) satisfies p mod 20 ∈ {1, 9, 11, 19}. (Rescued form of the 'pentagon-ray primes' claim from the July 2026 verified paper, where it was misstated for all active-ray primes.)",
+      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): for p : ℕ, p.Prime, 5 < p, (p % 5 = 1 ∨ p % 5 = 4) → (p % 20 = 1 ∨ p % 20 = 9 ∨ p % 20 = 11 ∨ p % 20 = 19). Route: p is odd (2 < p prime); p % 5 and p % 2 determine p % 10, lift to % 20 by case analysis; omega after extracting oddness (p % 2 = 1 from p.Prime and 5 < p)."
     }
   ]
 }
