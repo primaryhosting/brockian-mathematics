@@ -4,7 +4,7 @@
   "intake_snapshot": {
     "mailbox": "chrisbrock54@gmail.com",
     "latest_harvest_received": "2026-08-13T23:26:56Z",
-    "latest_completion_seen": "2026-08-13T23:33:22Z",
+    "latest_completion_seen": "2026-08-13T23:43:26Z",
     "accounts_observed_in_harvest": [
       "admin",
       "chris"
@@ -346,7 +346,8 @@
       "prior_status": "absent from pinned audit",
       "provisional_classification": "routine formalization",
       "classification_confidence": "high",
-      "claim_flags": ["finite_periodic_mod5_fact_only"]
+      "claim_flags": ["finite_periodic_mod5_fact_only"],
+      "remote_reported_axioms": ["propext", "Classical.choice", "Quot.sound"]
     },
     {
       "target": "Brockian.ConeLine.stride_ray_walk_classification",

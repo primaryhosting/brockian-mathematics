@@ -21,6 +21,11 @@ the live intake adds 762 terminal records, 748 remote `PROVED` candidates, and 1
 immediate reconciliation queue remains 40 unique targets: 27 new targets, 12 fresh
 attempts for prior AXLE failures, and one previously unselected target.
 
+One further completion email arrived at 2026-08-13 23:43:26 UTC for the already queued
+`Brockian.ConeLine.fib_uniform_mod5` target. Its reported theorem is a finite kernel
+computation over the first 20 Fibonacci values modulo 5; it does not add a 41st target
+and does not change the harvested lifetime totals until the next two-account pull.
+
 ## Provisional classification
 
 These labels are editorial triage based on target names, queue descriptions, and the
