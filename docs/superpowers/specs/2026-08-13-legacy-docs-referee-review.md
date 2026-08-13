@@ -66,9 +66,7 @@ explorer UI ideas) — all already flowing into /labs/number-line.
 - G-LEG-6: Doc 3 spectral-geometry errors: Γ₀(5) "no elliptic points" (ν₂=2), cusp
   forms in (0,1/4) (inverted), ‖V‖ ~ log log P (Mertens gives log P), "multiplication
   operator is smoothing" (false), three inconsistent heat-trace constants.
-- G-LEG-7: Doc 4 local errors: rotation formula (θ(n+5)=θ(n), not +2π/5), terminal-
-  digit star-pattern vertex orders (impossible under its own map; true only for
-  multiples sequences), Fibonacci index/value confusion, cubic residue table (3 of 4
+- G-LEG-7: Doc 4 local errors: rotation formula (θ(n+5)=θ(n), not +2π/5), terminal-digit star-pattern WORDING and printed vertex orders (the numbers themselves sit on one ray; it is their MULTIPLES that trace the patterns, and the doc printed a pentagon order for a star) — the PHENOMENON is true and verified: strides ≡2 mod 5 all trace the same pentagram (2,4,1,3,0), ≡3 its mirror, ≡1/≡4 the two spirals, ≡0 the straight ray; nested star circuits at growing radius, Fibonacci index/value confusion, cubic residue table (3 of 4
   entries wrong; cubes hit EVERY ray — bijection, worth showing as a contrast fact),
   "F_n and F_{n+5} share a vertex" (period is 20), scalar functional equation
   (Hurwitz decomposition gives a matrix relation).

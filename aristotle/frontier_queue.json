@@ -1,5 +1,5 @@
 {
-  "count": 149,
+  "count": 150,
   "queue": [
     {
       "target": "Zeta23Obstruction.repaired_witness_nonneg",
@@ -1192,6 +1192,14 @@
       "difficulty": "MEDIUM",
       "statement": "Bounded partial sums of the zero-mean twist: ‖Σ_{n < N} e(n mod 5)‖ ≤ 2 for every N (the true maximum is the golden ratio 1.618..., so 2 is a safe honest bound) — the Dirichlet-test seed for convergence of the Brockian zeta twist Σ e(n mod 5)/n^s beyond Re s > 1.",
       "goal": "With ω, e as in the preamble and noncomputable def twistPartialSum (N : ℕ) : ℂ := ∑ n ∈ Finset.range N, e ((n : ZMod 5)), prove: theorem twistPartialSum_norm_le (N : ℕ) : ‖twistPartialSum N‖ ≤ 2. Suggested route: first establish the period-5 step as an inline lemma, twistPartialSum (N + 5) = twistPartialSum N: split range (N+5) as range N plus the window Finset.Ico N (N+5) (Finset.sum_range_succ five times, or Finset.range_eq_Ico with Finset.sum_Ico_consecutive), then show the window sum vanishes by reindexing by j ∈ range 5 via n = N + j (Finset.sum_bij / Finset.sum_nbij'); j ↦ ((N + j : ℕ) : ZMod 5) hits each residue exactly once (x ↦ (N : ZMod 5) + x is a bijection; Equiv.addLeft or Finset.sum_bijective), reducing to ∑ x : ZMod 5, e x = 0, which is orthogonality at a = 1 (target sum_e_mul with mul_one) or AddChar.sum_eq_zero_of_ne_one after the stdAddChar bridge. Then induct (Nat.strong_induction_on, or induction on N/5 via Nat.div_add_mod, giving twistPartialSum N = twistPartialSum (N % 5)) to reduce to the five base cases N = 0, 1, 2, 3, 4. Each base case is a concrete sum of at most four unit-norm terms: N = 0 gives 0; N = 1 gives ‖1‖ = 1; N = 2: ‖1 + ω‖ ≤ 2 by norm_add_le and ‖ω‖ = 1 (target norm_e); N = 4: the full five-term sum vanishes (target sum_omega_pow), so Σ_{n<4} = -ω^4 with norm 1; N = 3: likewise Σ_{n<3} = -(ω^3 + ω^4), norm ≤ 2 by norm_neg, norm_add_le. Only the triangle inequality and the zero-mean identity are needed; no trigonometric estimates."
+    },
+    {
+      "target": "Brockian.ConeLine.stride_ray_walk_classification",
+      "tier": "cone-line",
+      "rank": 1,
+      "difficulty": "EASY",
+      "statement": "The multiples of s walk the rays in the fixed cyclic order determined by s mod 5: strides ≡ 2 (terminal digits 2,7) trace the pentagram order (2,4,1,3,0); ≡ 3 (digits 3,8) its mirror (3,1,4,2,0); ≡ 1 the pentagon (1,2,3,4,0); ≡ 4 its mirror; ≡ 0 never leave ray 0.",
+      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): ∀ s k : ℕ, ((k+1)*s) % 5 = (k*s % 5 + s % 5) % 5 (constant ray-step), and the instantiations: s % 5 = 2 → (List.range 5).map (fun k => ((k+1)*s) % 5) = [2,4,1,3,0], and the analogous lists for s%5 = 3 ([3,1,4,2,0]), 1 ([1,2,3,4,0]), 4 ([4,3,2,1,0]), 0 ([0,0,0,0,0]). Route: Nat.add_mul_mod_self style rewrites + decide on the five list identities after substituting s % 5."
     }
   ]
 }
