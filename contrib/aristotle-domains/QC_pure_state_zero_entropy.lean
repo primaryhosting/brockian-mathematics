@@ -1,3 +1,12 @@
+/-!
+# Pure State Zero Entropy
+Category: Quantum Computing
+Target: QC.pure_state_zero_entropy
+Statement: The von Neumann entropy S(ρ)= -Tr(ρ log ρ) of a pure state is 0.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

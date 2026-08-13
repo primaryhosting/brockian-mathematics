@@ -1,3 +1,12 @@
+/-!
+# Cnot Unitary Involutive
+Category: Quantum Computing
+Target: QC.cnot_unitary_involutive
+Statement: CNOT is unitary and CNOT²=I.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

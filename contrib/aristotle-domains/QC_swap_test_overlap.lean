@@ -1,3 +1,12 @@
+/-!
+# Swap Test Overlap
+Category: Quantum Computing
+Target: QC.swap_test_overlap
+Statement: The SWAP test accepts two states with probability (1+|⟨ψ|φ⟩|²)/2.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

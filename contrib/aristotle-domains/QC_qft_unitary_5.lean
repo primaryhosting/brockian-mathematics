@@ -1,3 +1,12 @@
+/-!
+# Qft Unitary 5
+Category: Quantum Computing
+Target: QC.qft_unitary_5
+Statement: The 5-qubit QFT matrix is unitary.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

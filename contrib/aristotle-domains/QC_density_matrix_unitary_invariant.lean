@@ -1,3 +1,12 @@
+/-!
+# Density Matrix Unitary Invariant
+Category: Quantum Computing
+Target: QC.density_matrix_unitary_invariant
+Statement: If ρ⪰0 and Tr ρ=1 then UρU† ⪰0 and Tr(UρU†)=1 for unitary U.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

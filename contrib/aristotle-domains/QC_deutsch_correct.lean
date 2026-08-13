@@ -1,3 +1,12 @@
+/-!
+# Deutsch Correct
+Category: Quantum Computing
+Target: QC.deutsch_correct
+Statement: Deutsch's algorithm decides constant-vs-balanced of f:{0,1}→{0,1} with one oracle query.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

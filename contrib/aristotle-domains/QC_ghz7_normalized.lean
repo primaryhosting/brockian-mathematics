@@ -1,3 +1,12 @@
+/-!
+# Ghz 7 Normalized
+Category: Quantum Computing
+Target: QC.ghz7_normalized
+Statement: The 7-qubit GHZ state (|0…0⟩+|1…1⟩)/√2 is a unit vector.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators
@@ -25,50 +34,35 @@ set_option grind.warning false
 
 namespace QC
 
-/-- The all-zeros bit string on 7 qubits, i.e. the label of the basis vector `|0…0⟩`. -/
-def allZeros : Fin 7 → Fin 2 := fun _ => 0
+/-- The state space of 7 qubits: the complex Hilbert space `ℂ^(2^7)`, indexed by
+bit strings `Fin 7 → Fin 2`. -/
+abbrev Qubits7 : Type := EuclideanSpace ℂ (Fin 7 → Fin 2)
 
-/-- The all-ones bit string on 7 qubits, i.e. the label of the basis vector `|1…1⟩`. -/
-def allOnes : Fin 7 → Fin 2 := fun _ => 1
+/-- The 7-qubit GHZ state `(|0…0⟩ + |1…1⟩)/√2`: the amplitude is `1/√2` on the
+all-zeros and all-ones bit strings, and `0` elsewhere. -/
+noncomputable def ghz7 : Qubits7 :=
+  WithLp.toLp 2 fun v =>
+    if v = (fun _ => 0) ∨ v = (fun _ => 1) then (((Real.sqrt 2)⁻¹ : ℝ) : ℂ) else 0
 
-/-- The 7-qubit GHZ state `(|0…0⟩ + |1…1⟩)/√2`, as a vector in the Hilbert space
-`EuclideanSpace ℂ (Fin 7 → Fin 2)` (whose coordinates are indexed by 7-bit strings). -/
-noncomputable def ghz7 : EuclideanSpace ℂ (Fin 7 → Fin 2) :=
-  WithLp.toLp 2 (fun v => if v = allZeros then ((1 / Real.sqrt 2 : ℝ) : ℂ) else
-    if v = allOnes then ((1 / Real.sqrt 2 : ℝ) : ℂ) else 0)
-
-@[simp] theorem ghz7_apply (v : Fin 7 → Fin 2) :
-    ghz7.ofLp v = if v = allZeros then ((1 / Real.sqrt 2 : ℝ) : ℂ) else
-      if v = allOnes then ((1 / Real.sqrt 2 : ℝ) : ℂ) else 0 := rfl
-
-theorem allZeros_ne_allOnes : (allZeros : Fin 7 → Fin 2) ≠ allOnes := by
-  intro h
-  have := congrFun h 0
-  simp [allZeros, allOnes] at this
-
-/-- The 7-qubit GHZ state `(|0…0⟩ + |1…1⟩)/√2` is a unit vector. -/
+/-- The 7-qubit GHZ state is a unit vector. -/
 theorem ghz7_normalized : ‖ghz7‖ = 1 := by
-  have key : ∀ v : Fin 7 → Fin 2, ‖ghz7.ofLp v‖ ^ 2
-      = (if v = allZeros then (1 / 2 : ℝ) else 0) + (if v = allOnes then (1 / 2 : ℝ) else 0) := by
-    intro v
-    have hs : ‖((1 / Real.sqrt 2 : ℝ) : ℂ)‖ ^ 2 = (1 / 2 : ℝ) := by
-      rw [Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (by positivity), div_pow, one_pow,
-        Real.sq_sqrt (by norm_num)]
-    by_cases h0 : v = allZeros
-    · subst h0
-      rw [ghz7_apply, if_pos rfl, if_pos rfl, if_neg allZeros_ne_allOnes, hs, add_zero]
-    · by_cases h1 : v = allOnes
-      · subst h1
-        rw [ghz7_apply, if_neg h0, if_pos rfl, if_neg h0, if_pos rfl, hs, zero_add]
-      · simp [h0, h1]
+  have hne : (fun _ : Fin 7 => (0 : Fin 2)) ≠ (fun _ : Fin 7 => (1 : Fin 2)) := by
+    intro h
+    have := congrFun h ⟨0, by norm_num⟩
+    simp at this
   rw [EuclideanSpace.norm_eq]
-  have hsum : ∑ v : Fin 7 → Fin 2, ‖ghz7.ofLp v‖ ^ 2 = 1 := by
-    simp only [key]
-    rw [Finset.sum_add_distrib, Finset.sum_ite_eq' Finset.univ allZeros (fun _ => (1 / 2 : ℝ)),
-      Finset.sum_ite_eq' Finset.univ allOnes (fun _ => (1 / 2 : ℝ))]
-    norm_num
-  rw [hsum, Real.sqrt_one]
+  have key : ∀ v : (Fin 7 → Fin 2), ‖ghz7.ofLp v‖ ^ 2
+      = if v ∈ ({(fun _ => 0), (fun _ => 1)} : Finset (Fin 7 → Fin 2)) then (2 : ℝ)⁻¹ else 0 := by
+    intro v
+    simp only [ghz7, WithLp.ofLp_toLp, Finset.mem_insert, Finset.mem_singleton]
+    by_cases h : v = (fun _ => 0) ∨ v = (fun _ => 1)
+    · rw [if_pos h, if_pos h, Complex.norm_real, Real.norm_eq_abs,
+        abs_of_nonneg (by positivity), ← Real.sqrt_inv, Real.sq_sqrt (by norm_num)]
+    · rw [if_neg h, if_neg h]
+      simp
+  simp only [key]
+  rw [Finset.sum_ite_mem, Finset.univ_inter, Finset.sum_const, Finset.card_pair hne]
+  norm_num
 
 end QC
-#print axioms QC.ghz7_normalized
 

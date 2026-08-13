@@ -1,3 +1,12 @@
+/-!
+# Qft Unitary 7
+Category: Quantum Computing
+Target: QC.qft_unitary_7
+Statement: The 7-qubit QFT matrix is unitary.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

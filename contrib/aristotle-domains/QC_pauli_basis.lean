@@ -1,3 +1,12 @@
+/-!
+# Pauli Basis
+Category: Quantum Computing
+Target: QC.pauli_basis
+Statement: {I,X,Y,Z} is a basis of the ℂ-vector space of 2×2 complex matrices.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

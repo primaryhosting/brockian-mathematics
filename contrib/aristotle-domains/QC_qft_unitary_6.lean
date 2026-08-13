@@ -1,15 +1,13 @@
-import Mathlib
-
 /-!
-# Unitarity of the 6-qubit Quantum Fourier Transform
-
-The quantum Fourier transform on `n = 6` qubits acts on the `2^6 = 64` dimensional
-state space.  Its matrix has entries
-
-`F j k = (1 / √64) * exp (2πi * j * k / 64) = (1/8) * exp (2πi * j * k / 64)`.
-
-We prove that this matrix is unitary, i.e. it belongs to `Matrix.unitaryGroup (Fin 64) ℂ`.
+# Qft Unitary 6
+Category: Quantum Computing
+Target: QC.qft_unitary_6
+Statement: The 6-qubit QFT matrix is unitary.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
 -/
+
+import Mathlib
 
 namespace QC
 

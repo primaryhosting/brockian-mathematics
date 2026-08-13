@@ -1,3 +1,12 @@
+/-!
+# Pauli Anticommute
+Category: Quantum Computing
+Target: QC.pauli_anticommute
+Statement: The Pauli matrices X,Y,Z pairwise anticommute and each squares to I.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

@@ -1,3 +1,12 @@
+/-!
+# Hadamard XZ
+Category: Quantum Computing
+Target: QC.hadamard_XZ
+Statement: H = (X+Z)/√2, and H X H = Z.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

@@ -1,3 +1,12 @@
+/-!
+# Teleportation Identity
+Category: Quantum Computing
+Target: QC.teleportation_identity
+Statement: The teleportation protocol's post-correction state equals the input state.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

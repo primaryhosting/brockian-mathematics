@@ -1,3 +1,12 @@
+/-!
+# Hadamard Involutive
+Category: Quantum Computing
+Target: QC.hadamard_involutive
+Statement: The Hadamard matrix H satisfies H†=H and H²=I.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

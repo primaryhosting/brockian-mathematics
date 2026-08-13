@@ -1,3 +1,12 @@
+/-!
+# Ghz Nonlocal
+Category: Quantum Computing
+Target: QC.ghz_nonlocal
+Statement: The 3-qubit GHZ state yields a deterministic Mermin paradox contradiction with local hidden variables.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

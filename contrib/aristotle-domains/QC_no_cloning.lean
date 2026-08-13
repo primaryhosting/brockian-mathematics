@@ -1,3 +1,12 @@
+/-!
+# No Cloning
+Category: Quantum Computing
+Target: QC.no_cloning
+Statement: There is no unitary U on H⊗H with U(|ψ⟩⊗|0⟩)=|ψ⟩⊗|ψ⟩ for all states |ψ⟩ (no-cloning).
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

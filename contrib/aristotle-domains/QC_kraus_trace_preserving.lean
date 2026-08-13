@@ -1,3 +1,12 @@
+/-!
+# Kraus Trace Preserving
+Category: Quantum Computing
+Target: QC.kraus_trace_preserving
+Statement: A CPTP map Σ_k E_k ρ E_k† with Σ_k E_k†E_k = I preserves trace.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

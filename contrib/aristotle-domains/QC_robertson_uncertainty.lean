@@ -1,3 +1,12 @@
+/-!
+# Robertson Uncertainty
+Category: Quantum Computing
+Target: QC.robertson_uncertainty
+Statement: For observables A,B and state ψ: ΔA·ΔB ≥ ½|⟨[A,B]⟩| (Robertson relation).
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

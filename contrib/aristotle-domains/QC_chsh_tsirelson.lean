@@ -1,3 +1,12 @@
+/-!
+# Chsh Tsirelson
+Category: Quantum Computing
+Target: QC.chsh_tsirelson
+Statement: The quantum CHSH operator has operator norm ≤ 2√2 (Tsirelson's bound).
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators

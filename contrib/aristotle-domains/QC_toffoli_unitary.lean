@@ -1,3 +1,12 @@
+/-!
+# Toffoli Unitary
+Category: Quantum Computing
+Target: QC.toffoli_unitary
+Statement: The Toffoli (CCNOT) matrix is a permutation matrix hence unitary and its own inverse.
+Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 import Mathlib
 
 open scoped BigOperators
