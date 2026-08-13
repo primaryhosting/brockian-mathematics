@@ -147,7 +147,5 @@ Kernel-checked cloud Lean 4.32.0 (AXLE); axiom-clean.
 - `Chem.gibbs_phase_rule` (DOMAIN-chem) — Chem_gibbs_phase_rule.lean
 - `Chem.leChatelier_sign` (DOMAIN-chem) — Chem_leChatelier_sign.lean
 - `Chem.molecular_orbital_count` (DOMAIN-chem) — Chem_molecular_orbital_count.lean
-- `Chem.huckel_C15` (DOMAIN-chem) — Chem_huckel_C15.lean
 - `Chem.huckel_C17` (DOMAIN-chem) — Chem_huckel_C17.lean
 - `Chem.huckel_C18` (DOMAIN-chem) — Chem_huckel_C18.lean
-- `Chem.huckel_C19` (DOMAIN-chem) — Chem_huckel_C19.lean
