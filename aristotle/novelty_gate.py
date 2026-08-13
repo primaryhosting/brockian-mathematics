@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""novelty_gate.py — SEMANTIC check that a frontier target has no Mathlib equivalent,
-using LeanSearch (semantic search over Mathlib). For each target we query LeanSearch
-with its statement and inspect the top results: a target is flagged LIKELY-PRESENT only
-if a distinctive concept token from its name actually appears in a returned Mathlib
-declaration name/module (high precision — a bare semantic "nearest" match doesn't count).
-Otherwise it's treated as NOVEL (worth spending compute on).
+"""novelty_gate.py — scoped Mathlib declaration-name overlap check.
 
-Then re-ranks frontier_queue.json: likely-present → rank 9 (deprioritized, not deleted).
-Resumable via novelty_report.json; paced. Falls back to NOVEL on any query error.
+LeanSearch is queried with each target statement. A target is marked ``likely_present``
+only when all distinctive target-name tokens occur in a returned Mathlib declaration
+name/module. A negative result means only "no distinctive Mathlib name match found."
+It does NOT establish mathematical novelty, first-formalization novelty, or absence from
+other Lean repositories or the literature.
+
+Likely Mathlib-name matches are deprioritized to rank 9, not deleted. Results are cached
+in novelty_report.json and requests are paced.
 """
 import json
 import os
@@ -28,6 +29,8 @@ COMMON = {"theorem", "statement", "problem", "conjecture", "exists", "terminates
           "color", "gaussian", "partition", "regulator", "penrose", "willmore"}
 PACE = float(os.environ.get("NOVELTY_PACE", "2.5"))   # LeanSearch 403s if hammered
 MAX = int(os.environ.get("NOVELTY_MAX", "120"))
+SCOPE = ("distinctive Mathlib declaration-name match only; "
+         "not mathematical or formalization novelty")
 
 
 def tokens(name):
@@ -55,7 +58,7 @@ def main():
     q = json.loads(QUEUE.read_text())["queue"]
     report = json.loads(OUT.read_text()) if OUT.exists() else {}
     todo = [it for it in q if it["target"] not in report][:MAX]
-    print(f"{len(q)} frontier targets; LeanSearch novelty-checking {len(todo)}")
+    print(f"{len(q)} frontier targets; Mathlib-name overlap-checking {len(todo)}")
     for it in todo:
         toks = [t.lower() for t in tokens(it["target"])]
         present, matched = False, None
@@ -75,9 +78,20 @@ def main():
                 present, matched = True, {"decl": ".".join(r.get("name", [])), "on": toks}
                 break
         report[it["target"]] = {"difficulty": it["difficulty"], "likely_present": present,
-                                "match": matched}
+                                "match": matched, "scope": SCOPE,
+                                "interpretation": ("distinctive Mathlib name match found"
+                                                   if present else
+                                                   "no distinctive Mathlib name match found")}
         OUT.write_text(json.dumps(report, indent=1))
         time.sleep(PACE)
+
+    # Backfill cached records written by older versions with claim-safe semantics.
+    for r in report.values():
+        r.setdefault("scope", SCOPE)
+        r.setdefault("interpretation", ("distinctive Mathlib name match found"
+                                        if r.get("likely_present") else
+                                        "no distinctive Mathlib name match found"))
+    OUT.write_text(json.dumps(report, indent=1))
 
     present = [t for t, r in report.items() if r.get("likely_present")]
     # re-rank: deprioritize likely-present in the queue
@@ -88,7 +102,8 @@ def main():
             changed += 1
     QUEUE.write_text(json.dumps({"count": len(q), "queue": q}, indent=1))
     print(f"checked {len(report)}/{len(q)} | likely-in-Mathlib: {len(present)} | "
-          f"NOVEL: {len(report)-len(present)} | deprioritized {changed}")
+          f"no-distinctive-Mathlib-match: {len(report)-len(present)} | "
+          f"deprioritized {changed}")
     for t in present[:20]:
         print(f"  present: {t}  <- {report[t]['match']}")
 

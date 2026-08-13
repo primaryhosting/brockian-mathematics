@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""annotate_headers.py — make AXLE-verified best_proofs human-legible + PR-ready.
+"""annotate_headers.py — make AXLE-passing best_proofs human-legible + PR-ready.
 
-For every best_proofs/<target>.lean that AXLE verified, rewrite it to:
-  1. NORMALIZED form (imports hoisted+deduped to the top) — this is exactly the text
-     AXLE kernel-checked, so the shipped file is the verified file (fixes the prior
-     gap where auto_pr shipped raw Aristotle output with a mid-file duplicate import).
-  2. A leading `/-! ... -/` doc header naming the problem (category, human name,
-     statement) — a comment is inert to the kernel, so verification still holds.
+For every selected proof with ``verified: true`` in the AXLE ledger, reproduce the
+normalized import/body form used as verification input and add a leading human-readable
+Lean module comment. The comment is semantically inert, but it changes the byte hash;
+strict byte-for-byte provenance therefore requires a refreshed check of the emitted
+PR-ready file.
 
-Idempotent (skips files already headed). Statements pulled from all queue files.
+Idempotent. Statements are pulled from the queue files.
 """
 import json
 import pathlib
