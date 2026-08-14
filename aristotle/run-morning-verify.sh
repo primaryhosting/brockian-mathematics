@@ -34,12 +34,25 @@ CROSS_MAX=6 /opt/homebrew/bin/python3 aristotle/cross_check.py
 AUTO_PR_LIVE=0 /opt/homebrew/bin/python3 aristotle/auto_pr.py
 /opt/homebrew/bin/python3 aristotle/observatory.py
 
-git add aristotle/harvest_ledger.json aristotle/submitted_night.json \
-  aristotle/harvest_report.md aristotle/harvest_100 aristotle/best_proofs \
-  aristotle/axle_verify.json aristotle/axiom_reports registry/domains.json \
-  pipeline/ledger/reviews/2026-08-13-aristotle-runtime-reconciliation.json \
-  pipeline/ledger/reviews/2026-08-13-aristotle-runtime-reconciliation.md
-if ! git diff --cached --quiet; then
-  git commit -m "aristotle: checkpoint consolidated harvest and verification evidence"
-  git push origin HEAD:top3-aristotle-ledger-2026-08-11
+AUDIT_BRANCH="top3-aristotle-ledger-2026-08-11"
+if [[ "$(git branch --show-current)" == "$AUDIT_BRANCH" ]]; then
+  EVIDENCE_PATHS=(
+    aristotle/harvest_ledger.json
+    aristotle/submitted_night.json
+    aristotle/harvest_report.md
+    aristotle/harvest_100
+    aristotle/best_proofs
+    aristotle/axle_verify.json
+    aristotle/axiom_reports
+    registry/domains.json
+    pipeline/ledger/reviews/2026-08-13-aristotle-runtime-reconciliation.json
+    pipeline/ledger/reviews/2026-08-13-aristotle-runtime-reconciliation.md
+  )
+  git add -- "${EVIDENCE_PATHS[@]}"
+  if ! git diff --cached --quiet -- "${EVIDENCE_PATHS[@]}"; then
+    git commit --only -m "aristotle: checkpoint consolidated harvest and verification evidence" -- "${EVIDENCE_PATHS[@]}"
+    git push origin "$AUDIT_BRANCH"
+  fi
+else
+  echo "evidence generated but not pushed: pull/switch to $AUDIT_BRANCH before checkpointing"
 fi

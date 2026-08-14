@@ -103,8 +103,9 @@ remote attestations. Saved independent axiom output remains required.
 
 ## Operational changes in this PR
 
-- Generic night submission is paused by a tracked sentinel; harvesting and verification
-  remain enabled.
+- The audit branch contains a hard pause sentinel for generic night submission;
+  harvesting and verification remain enabled. The active key-bearing host takes this
+  pause after it pulls the branch.
 - Harvest counters now separate lifetime records from the current submission ledger.
 - Remote `PROVED` is no longer described as “axiom-clean.”
 - Harvest files use full UUIDs; source and declaration signatures receive SHA-256 IDs.
