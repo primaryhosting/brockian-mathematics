@@ -1,0 +1,59 @@
+{
+  "id": "math2-kahn-kalai",
+  "domain": "math",
+  "title": "Park–Pham / Kahn–Kalai expectation-threshold theorem",
+  "statement": "There is a universal positive constant K such that every finite increasing family F satisfies pThreshold F ≤ K · qThreshold F · log (ell F), in the Park–Pham formulation of the Kahn–Kalai expectation-threshold conjecture.",
+  "status": "partial",
+  "source": {
+    "citation": "J. Park and H. T. Pham, A proof of the Kahn–Kalai conjecture; Aristotle completion email received 2026-08-11",
+    "external_status": "solved"
+  },
+  "difficulty": 5,
+  "tags": [
+    "kahn-kalai",
+    "park-pham",
+    "probabilistic-combinatorics",
+    "aristotle",
+    "novelty-candidate"
+  ],
+  "formal_targets": [
+    {
+      "kind": "lean_theorem",
+      "name": "Math2.kahn_kalai",
+      "path": null
+    }
+  ],
+  "attack_modes": [
+    "formalize",
+    "dual_prover",
+    "literature"
+  ],
+  "verification": {
+    "backend": "lean_axle",
+    "criteria": [
+      "complete Aristotle source bundle imported into the pinned repository toolchain",
+      "lake build succeeds with no sorry, admit, native_decide, or added axioms",
+      "#print axioms is contained in propext, Classical.choice, Quot.sound",
+      "independent AXLE verification succeeds",
+      "pThreshold, qThreshold, ell, IsUp, cover, and product-measure definitions match Park–Pham, including edge cases"
+    ]
+  },
+  "risk_tier": 3,
+  "notes": "Aristotle reports a clean proof with K = 648 / log 2, but the source bundle is not on main or open PR #2 and has not been independently checked here. Public Lean search found statement/scaffold files with sorry, not a prior complete proof. Novelty remains provisional; never promote to PROVED from the email summary.",
+  "attempts": [
+    {
+      "ts": "2026-08-11T21:27:16Z",
+      "mode": "formalize",
+      "result": "proved",
+      "note": "Unverified Aristotle completion claim: six-file Park–Pham development, clean build, and standard axiom set reported. Source files and verifier output are not yet in this repository.",
+      "artifacts": [
+        "pipeline/ledger/reviews/2026-08-11-aristotle-top3.md"
+      ],
+      "agent": "aristotle"
+    }
+  ],
+  "ledger_refs": [
+    "pipeline/ledger/reviews/2026-08-11-aristotle-top3.md"
+  ],
+  "priority": 100
+}

@@ -1,14 +1,8 @@
 #!/usr/bin/env python3
-"""annotate_headers.py — make AXLE-verified best_proofs human-legible + PR-ready.
+"""Create human-readable preview copies of V4/V5 selected proof artifacts.
 
-For every best_proofs/<target>.lean that AXLE verified, rewrite it to:
-  1. NORMALIZED form (imports hoisted+deduped to the top) — this is exactly the text
-     AXLE kernel-checked, so the shipped file is the verified file (fixes the prior
-     gap where auto_pr shipped raw Aristotle output with a mid-file duplicate import).
-  2. A leading `/-! ... -/` doc header naming the problem (category, human name,
-     statement) — a comment is inert to the kernel, so verification still holds.
-
-Idempotent (skips files already headed). Statements pulled from all queue files.
+The output is a comment-annotated preview and is not byte-identical to the AXLE input.
+Release automation ships the exact V5-checked artifact from ``best_proofs`` instead.
 """
 import json
 import pathlib
@@ -20,23 +14,41 @@ import titles  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent
 BEST = ROOT / "best_proofs"
-OUT = ROOT / "pr_ready"   # shippable copies: normalized (verified form) + human header
+OUT = ROOT / "pr_ready"
 AXLE = ROOT / "axle_verify.json"
-HARV = ROOT / "harvest_ledger.json"
-QUEUE_FILES = ["domains_queue.json", "mined_queue.json", "next_100.json",
-               "pca_lean_queue.json", "frontier_queue.json", "frontier2.json",
-               "reattack_queue.json", "frontier_spectral.json", "frontier_betrothed_queue.json", "frontier_linalg.json", "frontier_riemann.json", "frontier_infinity.json", "frontier_fibonacci.json", "frontier_primes.json", "frontier_rh2.json", "frontier_wave2.json", "frontier_wave3.json", "frontier_wave4.json", "frontier_wave5.json"]
+MANIFEST = BEST / "manifest.json"
+HARVEST = ROOT / "harvest_ledger.json"
+QUEUE_FILES = [
+    "domains_queue.json",
+    "mined_queue.json",
+    "next_100.json",
+    "pca_lean_queue.json",
+    "frontier_queue.json",
+    "frontier2.json",
+    "reattack_queue.json",
+    "frontier_spectral.json",
+    "frontier_betrothed_queue.json",
+    "frontier_linalg.json",
+    "frontier_riemann.json",
+    "frontier_infinity.json",
+    "frontier_fibonacci.json",
+    "frontier_primes.json",
+    "frontier_rh2.json",
+    "frontier_wave2.json",
+    "frontier_wave3.json",
+    "frontier_wave4.json",
+    "frontier_wave5.json",
+]
 
 
-def normalize(content: str) -> str:
+def normalize(content):
     imports, body = [], []
-    for l in content.splitlines():
-        if l.strip().startswith("import "):
-            if l.strip() not in imports:
-                imports.append(l.strip())
+    for line in content.splitlines():
+        if line.strip().startswith("import "):
+            if line.strip() not in imports:
+                imports.append(line.strip())
         else:
-            body.append(l)
-    # drop any pre-existing leading doc header so this is idempotent
+            body.append(line)
     text = "\n".join(body)
     text = re.sub(r"\A\s*/-!.*?-/\s*", "", text, count=1, flags=re.S)
     return "\n".join(imports), text.lstrip("\n")
@@ -44,35 +56,37 @@ def normalize(content: str) -> str:
 
 def main():
     axle = json.loads(AXLE.read_text()) if AXLE.exists() else {}
-    har = json.loads(HARV.read_text()) if HARV.exists() else {}
+    manifest = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else {}
+    harvest = json.loads(HARVEST.read_text()) if HARVEST.exists() else {}
     tier_of = {}
-    for pid, m in har.items():
-        if m.get("verdict") == "PROVED":
-            tier_of.setdefault(m["target"], m.get("tier"))
-    stmt = {}
-    for qf in QUEUE_FILES:
-        p = ROOT / qf
-        if p.exists():
-            d = json.loads(p.read_text())
-            q = d["queue"] if isinstance(d, dict) else d
-            for it in q:
-                stmt.setdefault(it["target"], it.get("statement"))
-
-    def san(t):
-        return re.sub(r"[^A-Za-z0-9]+", "_", t) + ".lean"
+    for meta in harvest.values():
+        if meta.get("verdict") == "PROVED" and meta.get("target"):
+            tier_of.setdefault(meta["target"], meta.get("tier"))
+    statements = {}
+    for queue_name in QUEUE_FILES:
+        path = ROOT / queue_name
+        if not path.exists():
+            continue
+        data = json.loads(path.read_text())
+        items = data.get("queue", []) if isinstance(data, dict) else data
+        for item in items:
+            statements.setdefault(item["target"], item.get("statement"))
 
     OUT.mkdir(exist_ok=True)
-    verified = {t for t in tier_of if axle.get(san(t), {}).get("verified") is True}
     done = 0
-    for target in sorted(verified):
-        f = BEST / san(target)
-        if not f.exists():
+    for target, selected in sorted(manifest.items()):
+        artifact = selected.get("artifact_file")
+        if not artifact or axle.get(artifact, {}).get("verified") is not True:
             continue
-        imports, body = normalize(f.read_text(errors="ignore"))
-        head = titles.header(target, tier_of.get(target), stmt.get(target), verified=True)
-        (OUT / san(target)).write_text(head + "\n\n" + imports + "\n\n" + body + "\n")
+        source = BEST / artifact
+        if not source.exists():
+            continue
+        imports, body = normalize(source.read_text(errors="ignore"))
+        header = titles.header(target, tier_of.get(target), statements.get(target), verified=True)
+        (OUT / artifact).write_text(header + "\n\n" + imports + "\n\n" + body + "\n")
         done += 1
-    print(f"annotated + normalized {done} AXLE-verified proofs -> {OUT}/")
+    print(f"annotated {done} AXLE-passing preview copies -> {OUT}/")
+    print("release automation uses exact V5-checked best_proofs artifacts, not these previews")
 
 
 if __name__ == "__main__":

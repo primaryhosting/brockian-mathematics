@@ -1,0 +1,60 @@
+{
+  "id": "cs-hilbert10-undecidable",
+  "domain": "cs",
+  "title": "Hilbert's tenth problem undecidability via full MRDP",
+  "statement": "There exist a finite number of variables and an integer multivariate polynomial whose solvability predicate, with one input parameter and existential natural-number witnesses, is not computable; an integer-witness version should follow by four-square substitution.",
+  "status": "partial",
+  "source": {
+    "citation": "D. Larchey-Wendling and Y. Forster, Hilbert's Tenth Problem in Coq (FSCD 2019); Aristotle completion email received 2026-08-11",
+    "external_status": "solved"
+  },
+  "difficulty": 5,
+  "tags": [
+    "hilbert-tenth",
+    "mrdp",
+    "diophantine",
+    "computability",
+    "aristotle",
+    "novelty-candidate"
+  ],
+  "formal_targets": [
+    {
+      "kind": "lean_theorem",
+      "name": "CS.hilbert10_undecidable",
+      "path": null
+    }
+  ],
+  "attack_modes": [
+    "formalize",
+    "dual_prover",
+    "literature"
+  ],
+  "verification": {
+    "backend": "lean_axle",
+    "criteria": [
+      "complete Aristotle source bundle imported into the pinned repository toolchain",
+      "lake build succeeds with no sorry, admit, native_decide, or added axioms",
+      "#print axioms is contained in propext, Classical.choice, Quot.sound",
+      "independent AXLE verification succeeds",
+      "audit the halting-set reduction, bounded-universal closure, MRDP normalization, MvPolynomial evaluation, and natural-to-integer four-square step for circularity and type-faithful semantics"
+    ]
+  },
+  "risk_tier": 3,
+  "notes": "Aristotle reports a full Lean MRDP/H10 chain, but only the email summary is available here. A full Coq mechanization already exists, so this is not a first formalization in any prover; it may be a first complete Lean formalization. Do not promote to PROVED until source and independent verifier artifacts land.",
+  "attempts": [
+    {
+      "ts": "2026-08-11T22:29:27Z",
+      "mode": "formalize",
+      "result": "proved",
+      "note": "Unverified Aristotle completion claim: full DPR/MRDP development through noncomputability of a Diophantine-solvability predicate, plus an integer variant. Source files and verifier output are not yet in this repository.",
+      "artifacts": [
+        "pipeline/ledger/reviews/2026-08-11-aristotle-top3.md"
+      ],
+      "agent": "aristotle"
+    }
+  ],
+  "ledger_refs": [
+    "pipeline/ledger/reviews/2026-08-11-aristotle-top3.md"
+  ],
+  "priority": 99
+}

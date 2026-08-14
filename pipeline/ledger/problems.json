@@ -1,23 +1,82 @@
 {
-  "count": 16,
+  "count": 19,
   "by_register": {
+    "PARTIAL": 6,
     "SCAFFOLD": 5,
     "OPEN": 4,
-    "PARTIAL": 3,
     "CONDITIONAL": 2,
     "COMPUTATION": 1,
     "LITERATURE": 1
   },
   "by_domain": {
-    "math": 5,
+    "math": 6,
+    "cs": 4,
     "erdos": 4,
-    "cs": 2,
     "distillation": 2,
     "physics": 1,
     "quantum": 1,
     "sair": 1
   },
   "problems": [
+    {
+      "id": "math2-kahn-kalai",
+      "domain": "math",
+      "title": "Park\u2013Pham / Kahn\u2013Kalai expectation-threshold theorem",
+      "status": "partial",
+      "register": "PARTIAL",
+      "difficulty": 5,
+      "priority": 100,
+      "risk_tier": 3,
+      "backend": "lean_axle",
+      "attempts": 1,
+      "tags": [
+        "kahn-kalai",
+        "park-pham",
+        "probabilistic-combinatorics",
+        "aristotle",
+        "novelty-candidate"
+      ]
+    },
+    {
+      "id": "cs-hilbert10-undecidable",
+      "domain": "cs",
+      "title": "Hilbert's tenth problem undecidability via full MRDP",
+      "status": "partial",
+      "register": "PARTIAL",
+      "difficulty": 5,
+      "priority": 99,
+      "risk_tier": 3,
+      "backend": "lean_axle",
+      "attempts": 1,
+      "tags": [
+        "hilbert-tenth",
+        "mrdp",
+        "diophantine",
+        "computability",
+        "aristotle",
+        "novelty-candidate"
+      ]
+    },
+    {
+      "id": "cs-blum-speedup",
+      "domain": "cs",
+      "title": "Blum speedup theorem for arbitrary complexity measures",
+      "status": "partial",
+      "register": "PARTIAL",
+      "difficulty": 5,
+      "priority": 98,
+      "risk_tier": 3,
+      "backend": "lean_axle",
+      "attempts": 1,
+      "tags": [
+        "blum-speedup",
+        "complexity-measure",
+        "computability",
+        "recursion-theorem",
+        "aristotle",
+        "novelty-candidate"
+      ]
+    },
     {
       "id": "distill-etp-stage1",
       "domain": "distillation",

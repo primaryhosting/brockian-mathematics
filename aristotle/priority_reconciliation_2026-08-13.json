@@ -1,0 +1,371 @@
+{
+  "schema_version": 1,
+  "purpose": "Forty-target consolidation queue derived from the fresh two-account harvest and the pinned 2026-08-13 audit.",
+  "intake_snapshot": {
+    "mailbox": "chrisbrock54@gmail.com",
+    "latest_harvest_received": "2026-08-13T23:26:56Z",
+    "latest_completion_seen": "2026-08-13T23:43:26Z",
+    "accounts_observed_in_harvest": [
+      "admin",
+      "chris"
+    ],
+    "lifetime_terminal_records": 2400,
+    "remote_proved_candidates": 2270,
+    "stopped_records": 130,
+    "current_submission_ledger_ids": 1817,
+    "counter_warning": "The legacy 2400/1817 display mixes a lifetime numerator with a current-ledger denominator and is not a completion ratio.",
+    "pinned_audit": {
+      "commit": "990b7af54325994760f2794dd728368ad79197ce",
+      "jobs": 1638,
+      "remote_proved_candidates": 1522,
+      "stopped_records": 116,
+      "selected_targets": 916,
+      "axle_pass": 717,
+      "axle_fail": 197,
+      "axle_indeterminate": 2
+    },
+    "delta_from_pinned_audit": {
+      "terminal_records": 762,
+      "remote_proved_candidates": 748,
+      "stopped_records": 14
+    },
+    "priority_targets": 40,
+    "priority_breakdown": {
+      "new_targets": 27,
+      "fresh_attempts_for_prior_nonpasses": 12,
+      "previously_unselected": 1
+    }
+  },
+  "verification_policy": {
+    "remote_proved": "Candidate only; no promotion.",
+    "deduplication": "Exact normalized source SHA-256 and normalized theorem-signature SHA-256 after download.",
+    "promotion": "Requires local pinned Lean build, AXLE pass, expected-target match, and saved #print axioms output."
+  },
+  "targets": [
+    {
+      "target": "Frontier.figalli_OT_regularity",
+      "intake_kind": "fresh_attempt_for_prior_nonpass",
+      "prior_status": "AXLE fail",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "low",
+      "claim_flags": ["headline_name_exceeds_current_statement_evidence"]
+    },
+    {
+      "target": "Chem.huckel_cycle_spectrum",
+      "intake_kind": "fresh_attempt_for_prior_nonpass",
+      "prior_status": "AXLE fail",
+      "provisional_classification": "useful library result",
+      "classification_confidence": "medium",
+      "claim_flags": ["general_spectrum_claim_requires_exact_statement_check"]
+    },
+    {
+      "target": "Chem.alkane_tree",
+      "intake_kind": "fresh_attempt_for_prior_nonpass",
+      "prior_status": "AXLE fail",
+      "provisional_classification": "useful library result",
+      "classification_confidence": "medium",
+      "claim_flags": []
+    },
+    {
+      "target": "Chem.polya_isomer_count",
+      "intake_kind": "fresh_attempt_for_prior_nonpass",
+      "prior_status": "AXLE fail",
+      "provisional_classification": "useful library result",
+      "classification_confidence": "medium",
+      "claim_flags": ["polya_name_requires_orbit_counting_generality_check"]
+    },
+    {
+      "target": "Chem.huckel_C8",
+      "intake_kind": "fresh_attempt_for_prior_nonpass",
+      "prior_status": "AXLE fail",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": []
+    },
+    {
+      "target": "Chem.huckel_C9",
+      "intake_kind": "fresh_attempt_for_prior_nonpass",
+      "prior_status": "AXLE fail",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": []
+    },
+    {
+      "target": "Chem.huckel_C11",
+      "intake_kind": "fresh_attempt_for_prior_nonpass",
+      "prior_status": "AXLE fail",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": []
+    },
+    {
+      "target": "Chem.huckel_C13",
+      "intake_kind": "fresh_attempt_for_prior_nonpass",
+      "prior_status": "AXLE fail",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": []
+    },
+    {
+      "target": "Chem.huckel_C14",
+      "intake_kind": "fresh_attempt_for_prior_nonpass",
+      "prior_status": "AXLE fail",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": []
+    },
+    {
+      "target": "Chem.huckel_C16",
+      "intake_kind": "fresh_attempt_for_prior_nonpass",
+      "prior_status": "AXLE fail",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": []
+    },
+    {
+      "target": "Frontier.Spectral.cycle_gap_vanishes",
+      "intake_kind": "fresh_attempt_for_prior_nonpass",
+      "prior_status": "AXLE fail",
+      "provisional_classification": "useful library result",
+      "classification_confidence": "medium",
+      "claim_flags": []
+    },
+    {
+      "target": "Math.gauss_bonnet_polygon",
+      "intake_kind": "fresh_attempt_for_prior_nonpass",
+      "prior_status": "AXLE fail",
+      "provisional_classification": "useful library result",
+      "classification_confidence": "low",
+      "claim_flags": ["gauss_bonnet_name_requires_exact_geometric_content_check"]
+    },
+    {
+      "target": "Frontier.furstenberg_szemeredi",
+      "intake_kind": "previously_unselected",
+      "prior_status": "remote PROVED target without selected source",
+      "provisional_classification": "useful library result",
+      "classification_confidence": "low",
+      "claim_flags": ["headline_name_requires_statement_fidelity_check"]
+    },
+    {
+      "target": "Brockian.Characters5.twistPartialSum_norm_le",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "useful library result",
+      "classification_confidence": "medium",
+      "claim_flags": []
+    },
+    {
+      "target": "Brockian.Characters5.dirichlet_sum_eq_zero",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": ["completion_email_reports_direct_use_of_MulChar.sum_eq_zero_of_ne_one"]
+    },
+    {
+      "target": "Brockian.Characters5.sum_e_mul",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "useful library result",
+      "classification_confidence": "medium",
+      "claim_flags": ["finite_ZMod5_orthogonality_not_a_novelty_claim"]
+    },
+    {
+      "target": "Math2.hironaka_resolution",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "low",
+      "claim_flags": ["major_theorem_name_without_exact_source_statement", "do_not_describe_as_Hironaka_resolution"]
+    },
+    {
+      "target": "Math2.riemann_roch_curve",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "low",
+      "claim_flags": ["major_theorem_name_without_exact_source_statement", "do_not_describe_as_full_Riemann_Roch"]
+    },
+    {
+      "target": "Math2.belyi_theorem",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "low",
+      "claim_flags": ["major_theorem_name_without_exact_source_statement", "do_not_describe_as_Belyi_theorem"]
+    },
+    {
+      "target": "Math2.ratner",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "low",
+      "claim_flags": ["major_theorem_name_without_exact_source_statement", "do_not_describe_as_Ratner_classification"]
+    },
+    {
+      "target": "Math2.donsker_invariance",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "low",
+      "claim_flags": ["major_theorem_name_without_exact_source_statement", "do_not_describe_as_Donsker_invariance_principle"]
+    },
+    {
+      "target": "Math2.gromov_nonsqueezing",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "low",
+      "claim_flags": ["major_theorem_name_without_exact_source_statement", "do_not_describe_as_Gromov_nonsqueezing"]
+    },
+    {
+      "target": "Math2.kervaire_invariant",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "low",
+      "claim_flags": ["major_theorem_name_without_exact_source_statement", "queued_description_is_itself_oversimplified"]
+    },
+    {
+      "target": "Math2.sato_tate",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "low",
+      "claim_flags": ["major_theorem_name_without_exact_source_statement", "do_not_describe_as_Sato_Tate"]
+    },
+    {
+      "target": "Frontier.szemeredi_regularity",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "low",
+      "claim_flags": ["major_theorem_name_without_exact_source_statement", "do_not_describe_as_full_regularity_lemma"]
+    },
+    {
+      "target": "QI.shor_period",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "low",
+      "claim_flags": ["algorithmic_success_claim_without_exact_probability_model", "do_not_describe_as_verified_Shor_algorithm"]
+    },
+    {
+      "target": "CS.ladner",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "low",
+      "claim_flags": ["complexity_theorem_name_without_machine_language_reduction_definitions", "do_not_describe_as_Ladner_theorem"]
+    },
+    {
+      "target": "Brockian.DilationGenerator.boundary_term_vanishes",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "useful library result",
+      "classification_confidence": "medium",
+      "claim_flags": ["research_program_component_not_novelty_evidence"]
+    },
+    {
+      "target": "Brockian.DilationGenerator.symmetric_on_core",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "useful library result",
+      "classification_confidence": "medium",
+      "claim_flags": ["operator_domain_and_core_hypotheses_require_review", "research_program_component_not_novelty_evidence"]
+    },
+    {
+      "target": "Brockian.DilationGenerator.mellin_log_unitary",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "useful library result",
+      "classification_confidence": "medium",
+      "claim_flags": ["unitarity_and_measure_normalization_require_review", "research_program_component_not_novelty_evidence"]
+    },
+    {
+      "target": "Brockian.DilationGenerator.conjugation_to_momentum",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "useful library result",
+      "classification_confidence": "medium",
+      "claim_flags": ["conjugation_domain_and_closure_require_review", "research_program_component_not_novelty_evidence"]
+    },
+    {
+      "target": "Brockian.ConeLine.square_mod5_mem",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": []
+    },
+    {
+      "target": "Brockian.ConeLine.triangular_mod5_mem",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": []
+    },
+    {
+      "target": "Brockian.ConeLine.sexy_prime_roads",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": ["figurative_roads_name_should_not_imply_new_prime_distribution_result"],
+      "remote_reported_axioms": ["propext", "Classical.choice", "Quot.sound"]
+    },
+    {
+      "target": "Brockian.ConeLine.quadruplet_visits_all_active_rays",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": ["finite_mod5_residue_classification_only"],
+      "remote_reported_axioms": ["propext", "Classical.choice", "Quot.sound"]
+    },
+    {
+      "target": "Brockian.ConeLine.sophie_germain_avoids_ray2",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": ["finite_mod5_residue_classification_only"]
+    },
+    {
+      "target": "Brockian.ConeLine.cousin_prime_roads",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": ["finite_mod5_residue_classification_only"]
+    },
+    {
+      "target": "Brockian.ConeLine.fib_uniform_mod5",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": ["finite_periodic_mod5_fact_only"],
+      "remote_reported_axioms": ["propext", "Classical.choice", "Quot.sound"]
+    },
+    {
+      "target": "Brockian.ConeLine.stride_ray_walk_classification",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": ["five_case_mod5_list_computation_only"],
+      "remote_reported_axioms": ["propext", "Quot.sound"]
+    },
+    {
+      "target": "Brockian.ConeLine.triplet_two_patterns",
+      "intake_kind": "new_target",
+      "prior_status": "absent from pinned audit",
+      "provisional_classification": "routine formalization",
+      "classification_confidence": "high",
+      "claim_flags": ["finite_mod5_residue_classification_only"],
+      "remote_reported_axioms": ["propext", "Classical.choice", "Quot.sound"]
+    }
+  ]
+}

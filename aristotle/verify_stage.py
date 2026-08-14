@@ -1,27 +1,26 @@
 #!/usr/bin/env python3
-"""verify_stage.py — robustly lake-verify the harvested proofs and STAGE promotions
-(does NOT edit registry/theorems.json — it's already dirty from in-flight work).
+"""Run pinned-repository local Lean checks over harvested candidates.
 
-- Operates on the already-downloaded aristotle/harvest_100/*.lean (no re-download).
-- Per file: `lake env lean <file>` with a per-file timeout, isolated (one timeout
-  never kills the run), resumable via verify_state.json.
-- Maps namespace.theorem -> registry entry; records a PROPOSED promotion
-  (CONDITIONAL->DISCHARGED / CONJECTURE->PROVED) into proposed_promotions.json.
-- Parallelism: 2 workers (lean+Mathlib is memory-heavy on 16GB).
-Apply step (separate, on user OK): apply_promotions.py reads proposed_promotions.json.
+Local success is recorded as V3 evidence only.  This stage never emits an eligible
+registry promotion by itself; promotion requires the later AXLE, expected-target, and
+saved-axiom gates recorded by ``reconcile_proofs.py``.
 """
-import concurrent.futures as cf
+import concurrent.futures as futures
 import glob
+import hashlib
 import json
 import os
-import re
-import subprocess
 import pathlib
+import subprocess
+
+try:
+    from proof_identity import declaration_signatures, target_is_represented
+except ModuleNotFoundError:  # imported as a package in tests/tools
+    from .proof_identity import declaration_signatures, target_is_represented
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
 OUT = ROOT / "harvest_100"
-REG = REPO / "registry" / "theorems.json"
 STATE = OUT / "verify_state.json"
 PROPOSED = OUT / "proposed_promotions.json"
 REPORT = OUT / "verify_report.md"
@@ -29,86 +28,128 @@ TIMEOUT = int(os.environ.get("VERIFY_TIMEOUT", "1500"))
 WORKERS = int(os.environ.get("VERIFY_WORKERS", "2"))
 
 
-def reg_index():
-    d = json.loads(REG.read_text())
-    items = d if isinstance(d, list) else d.get("theorems") or next((v for v in d.values() if isinstance(v, list)), [])
-    return {t["name"]: t for t in items if isinstance(t, dict) and "name" in t}
+def source_sha(path):
+    return hashlib.sha256(pathlib.Path(path).read_bytes()).hexdigest()
 
 
-def targets_in(lean, idx):
-    """All registry entries whose fullname (namespace.theorem) appears in this file."""
-    nss = re.findall(r"namespace\s+(Brockian\.\S+|Brockian)", lean)
-    thms = re.findall(r"(?:theorem|lemma)\s+(\w+)", lean)
-    hits = []
-    for name, entry in idx.items():
-        short = name.split(".")[-1]
-        if short in thms and any(name.startswith(ns) or name.rsplit(".", 1)[0].endswith(ns.split(".")[-1]) for ns in nss):
-            hits.append((name, entry.get("register")))
-    return hits
+def repository_revision():
+    process = subprocess.run(
+        ["git", "rev-parse", "HEAD"], cwd=REPO, capture_output=True, text=True, timeout=20
+    )
+    return process.stdout.strip() if process.returncode == 0 else None
 
 
-def verify_one(f):
+def lean_version():
+    process = subprocess.run(
+        ["lake", "env", "lean", "--version"],
+        cwd=REPO,
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+    return ((process.stdout or "") + (process.stderr or "")).strip()[:300]
+
+
+def verify_one(path):
+    sha = source_sha(path)
     try:
-        r = subprocess.run(["lake", "env", "lean", f], cwd=REPO,
-                           capture_output=True, text=True, timeout=TIMEOUT)
-        errs = (r.stderr + r.stdout)
-        ok = r.returncode == 0 and "error:" not in errs.lower()
-        return f, ok, ("" if ok else errs[:300])
+        process = subprocess.run(
+            ["lake", "env", "lean", path],
+            cwd=REPO,
+            capture_output=True,
+            text=True,
+            timeout=TIMEOUT,
+        )
+        output = (process.stderr or "") + (process.stdout or "")
+        ok = process.returncode == 0 and "error:" not in output.lower()
+        return path, ok, ("" if ok else output[:1000]), sha
     except subprocess.TimeoutExpired:
-        return f, None, f"timeout >{TIMEOUT}s"
-    except Exception as e:  # noqa: BLE001
-        return f, None, str(e)[:200]
+        return path, None, f"timeout >{TIMEOUT}s", sha
+    except Exception as exc:  # noqa: BLE001
+        return path, None, str(exc)[:500], sha
 
 
 def main():
-    idx = reg_index()
     state = json.loads(STATE.read_text()) if STATE.exists() else {}
     files = sorted(glob.glob(str(OUT / "*.lean")))
-    todo = [f for f in files if os.path.basename(f) not in state]
-    print(f"{len(files)} proofs, {len(todo)} to verify ({WORKERS} workers, {TIMEOUT}s cap each)")
 
-    with cf.ThreadPoolExecutor(max_workers=WORKERS) as ex:
-        for f, ok, detail in ex.map(verify_one, todo):
-            b = os.path.basename(f)
-            lean = open(f, errors="ignore").read()
-            hits = targets_in(lean, idx)
-            state[b] = {"compiles": ok, "detail": detail,
-                        "targets": [{"name": n, "register": r} for n, r in hits]}
+    def stale(path):
+        filename = os.path.basename(path)
+        previous = state.get(filename)
+        return (
+            previous is None
+            or previous.get("compiles") is None
+            or previous.get("source_sha256") != source_sha(path)
+        )
+
+    todo = [path for path in files if stale(path)]
+    revision = repository_revision()
+    version = lean_version()
+    print(f"{len(files)} candidates, {len(todo)} to verify ({WORKERS} workers, {TIMEOUT}s cap)")
+
+    with futures.ThreadPoolExecutor(max_workers=WORKERS) as executor:
+        for path, ok, detail, sha in executor.map(verify_one, todo):
+            filename = os.path.basename(path)
+            text = pathlib.Path(path).read_text(errors="ignore")
+            declarations = declaration_signatures(text)
+            state[filename] = {
+                "compiles": ok,
+                "detail": detail,
+                "source_sha256": sha,
+                "repository_revision": revision,
+                "lean_version": version,
+                "declarations": declarations,
+            }
             STATE.write_text(json.dumps(state, indent=1))
-            print(f"  {'OK ' if ok else 'xx '} {b}  targets={[n.split('.')[-1] for n,_ in hits] or '?'}  {detail[:60]}")
+            mark = "OK " if ok else (".. " if ok is None else "xx ")
+            print(f"  {mark}{filename} {detail[:100]}")
 
-    # stage proposed promotions from verified files
-    proposed = {}
-    for b, s in state.items():
-        if not s.get("compiles"):
+    # Preserve the historical file path, but make every record explicitly ineligible.
+    # reconcile_proofs.py is the only component that may mark a V5 target promotable.
+    local_candidates = {}
+    ledger_path = ROOT / "harvest_ledger.json"
+    ledger = json.loads(ledger_path.read_text()) if ledger_path.exists() else {}
+    by_filename = {}
+    for project_id, meta in ledger.items():
+        for filename in (f"{meta.get('account')}_{project_id}.lean", f"{meta.get('account')}_{project_id[:8]}.lean"):
+            by_filename[filename] = meta.get("target")
+    for filename, record in state.items():
+        if record.get("compiles") is not True:
             continue
-        for t in s["targets"]:
-            new = "DISCHARGED" if t["register"] == "CONDITIONAL" else ("PROVED" if t["register"] == "CONJECTURE" else None)
-            if new:
-                proposed[t["name"]] = {"from": t["register"], "to": new, "proof_file": b}
-    PROPOSED.write_text(json.dumps(proposed, indent=1))
+        target = by_filename.get(filename)
+        represented = target_is_represented(target, record.get("declarations", [])) if target else False
+        if target:
+            local_candidates[target] = {
+                "proof_file": filename,
+                "local_compile": True,
+                "target_represented": represented,
+                "promotion_eligible": False,
+                "reason": "V3 local evidence only; AXLE and saved axiom report required",
+            }
+    PROPOSED.write_text(json.dumps(local_candidates, indent=1) + "\n")
 
-    verified = [b for b, s in state.items() if s.get("compiles")]
-    failed = [b for b, s in state.items() if s.get("compiles") is False]
-    pend = [b for b, s in state.items() if s.get("compiles") is None]
-    lines = [f"# verify+stage — {len(verified)}/{len(state)} compiled",
-             f"- lake-VERIFIED: {len(verified)}",
-             f"- failed: {len(failed)} | timed-out/pending: {len(pend)}",
-             f"- PROPOSED promotions (staged, not applied): {len(proposed)}", "",
-             "## Proposed promotions"]
-    for name, p in sorted(proposed.items()):
-        lines.append(f"- {name}: {p['from']} -> {p['to']}  ({p['proof_file']})")
-    lines.append("\n## Verified files w/o a registry match (new lemmas / helper-only)")
-    for b, s in state.items():
-        if s.get("compiles") and not s["targets"]:
-            lines.append(f"- {b}")
-    lines.append("\n## Failed / timed out")
-    for b, s in state.items():
-        if not s.get("compiles"):
-            lines.append(f"- {b}: {s.get('detail','')[:120]}")
-    REPORT.write_text("\n".join(lines))
-    print(f"\nverified {len(verified)} | proposed {len(proposed)} | failed {len(failed)} | pending {len(pend)}")
-    print(f"report {REPORT}\nproposed {PROPOSED}")
+    verified = [name for name, record in state.items() if record.get("compiles") is True]
+    failed = [name for name, record in state.items() if record.get("compiles") is False]
+    pending = [name for name, record in state.items() if record.get("compiles") is None]
+    lines = [
+        f"# local verify — {len(verified)}/{len(state)} compiled",
+        f"- local Lean V3 evidence: {len(verified)}",
+        f"- failed: {len(failed)}",
+        f"- timed out/indeterminate: {len(pending)}",
+        "- promotion-eligible from this stage: 0",
+        f"- repository revision: `{revision}`",
+        f"- Lean: `{version}`",
+        "",
+        "## Failed / indeterminate",
+    ]
+    for filename, record in state.items():
+        if record.get("compiles") is not True:
+            lines.append(f"- {filename}: {record.get('detail', '')[:240]}")
+    REPORT.write_text("\n".join(lines) + "\n")
+    print(
+        f"\nlocal V3 {len(verified)} | failed {len(failed)} | indeterminate {len(pending)} | "
+        "promotion eligible 0"
+    )
 
 
 if __name__ == "__main__":

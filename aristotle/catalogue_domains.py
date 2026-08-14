@@ -1,74 +1,100 @@
 #!/usr/bin/env python3
-"""catalogue_domains.py — file verified NEW-DOMAIN proofs (QC / quantum-physics /
-chemistry / CS / pure-math) into their own registry, separate from the Brockian
-program. Reads the domain queues (for statements) + harvest_ledger + verify_state,
-and writes registry/domains.json — deduped, with verification status + provenance.
+"""Catalogue new-domain proof candidates with explicit verification levels.
 
-Never touches the Brockian registry. Domain proofs are a distinct catalogue.
+The catalogue never maps a local/AXLE compile directly to ``PROVED``.  Only V5
+records from the reconciliation ledger are ``VERIFIED``; remote-only entries remain
+``REMOTE_CANDIDATE`` and incomplete independent gates remain ``VERIFICATION_PENDING``.
 """
 import json
 import pathlib
-import re
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
-QUEUES = [ROOT / q for q in ("domains_queue.json", "mined_queue.json", "next_100.json",
-          "pca_lean_queue.json", "frontier_queue.json", "frontier2.json",
-          "reattack_queue.json", "frontier_spectral.json", "frontier_betrothed_queue.json", "frontier_linalg.json", "frontier_riemann.json", "frontier_infinity.json", "frontier_fibonacci.json", "frontier_primes.json", "frontier_rh2.json", "frontier_wave2.json", "frontier_wave3.json", "frontier_wave4.json", "frontier_wave5.json")]
+QUEUES = [
+    ROOT / name
+    for name in (
+        "domains_queue.json",
+        "mined_queue.json",
+        "next_100.json",
+        "pca_lean_queue.json",
+        "frontier_queue.json",
+        "frontier2.json",
+        "reattack_queue.json",
+        "frontier_spectral.json",
+        "frontier_betrothed_queue.json",
+        "frontier_linalg.json",
+        "frontier_riemann.json",
+        "frontier_infinity.json",
+        "frontier_fibonacci.json",
+        "frontier_primes.json",
+        "frontier_rh2.json",
+        "frontier_wave2.json",
+        "frontier_wave3.json",
+        "frontier_wave4.json",
+        "frontier_wave5.json",
+    )
+]
 LEDGER = ROOT / "harvest_ledger.json"
-VSTATE = ROOT / "harvest_100" / "verify_state.json"
 BEST = ROOT / "best_proofs" / "manifest.json"
+RECON = REPO / "pipeline/ledger/reviews/2026-08-13-aristotle-runtime-reconciliation.json"
 OUT = REPO / "registry" / "domains.json"
 
 
 def main():
-    stmt = {}
-    for qf in QUEUES:
-        if qf.exists():
-            for it in json.loads(qf.read_text())["queue"]:
-                stmt[it["target"]] = {"statement": it.get("statement"), "domain": it["tier"]}
+    statements = {}
+    for queue_file in QUEUES:
+        if not queue_file.exists():
+            continue
+        data = json.loads(queue_file.read_text())
+        items = data.get("queue", []) if isinstance(data, dict) else data
+        for item in items:
+            statements[item["target"]] = {
+                "statement": item.get("statement"),
+                "domain": item.get("tier"),
+            }
+
     ledger = json.loads(LEDGER.read_text()) if LEDGER.exists() else {}
     best = json.loads(BEST.read_text()) if BEST.exists() else {}
-    # which harvested files compiled (verify_state keyed by filename)
-    vstate = json.loads(VSTATE.read_text()) if VSTATE.exists() else {}
-    file_compiles = {b: s.get("compiles") for b, s in vstate.items()}
-    # AXLE cloud verification (keyed by best_proofs sanitized-target filename)
-    axle = {}
-    axp = ROOT / "axle_verify.json"
-    if axp.exists():
-        axle = json.loads(axp.read_text())
+    reconciliation = json.loads(RECON.read_text()) if RECON.exists() else {"targets": []}
+    gates = {record["target"]: record for record in reconciliation.get("targets", [])}
+    catalogue = json.loads(OUT.read_text()) if OUT.exists() else {}
 
-    def axle_ok(target):
-        return axle.get(re.sub(r"[^A-Za-z0-9]+", "_", target) + ".lean", {}).get("verified") is True
+    by_target = {}
+    for project_id, meta in ledger.items():
+        target = meta.get("target")
+        if target and target in statements and meta.get("verdict") == "PROVED":
+            by_target.setdefault(target, []).append((project_id, meta))
 
-    cat = json.loads(OUT.read_text()) if OUT.exists() else {}
-    added = 0
-    for pid, meta in ledger.items():
-        t = meta.get("target")
-        if not t or t not in stmt or meta.get("verdict") != "PROVED":
-            continue
-        fname = f"{meta['account']}_{pid[:8]}.lean"
-        entry = cat.get(t, {})
-        axle_verified = axle_ok(t)
-        verified = axle_verified or file_compiles.get(fname) is True or (best.get(t, {}).get("compiles") is True)
-        # keep the strongest status seen
-        register = "PROVED" if verified else "PROVED_UNVERIFIED"
-        if entry.get("register") == "PROVED":
-            continue
-        cat[t] = {"register": register, "domain": stmt[t]["domain"], "statement": stmt[t]["statement"],
-                  "proof_file": f"aristotle/harvest_100/{fname}",
-                  "provenance": f"Harmonic/Aristotle {pid} ({meta['account']})",
-                  "verification": ("AXLE cloud lean-4.32.0 OK" if axle_verified
-                                   else "lake env lean OK" if verified
-                                   else "axiom-clean by inspection; verification pending")}
-        added += 1
-    OUT.write_text(json.dumps(cat, indent=1))
-    import collections
-    reg = collections.Counter(v["register"] for v in cat.values())
-    dom = collections.Counter(v["domain"].split("-")[-1] for v in cat.values())
-    print(f"catalogued {len(cat)} domain results (+{added} this run) -> {OUT}")
-    print("  by register:", dict(reg))
-    print("  by domain:", dict(dom))
+    for target, jobs in by_target.items():
+        gate = gates.get(target)
+        if gate and gate.get("verification_level") == "V5":
+            register = "VERIFIED"
+            verification = gate.get("verification_detail")
+        elif target in best:
+            register = "VERIFICATION_PENDING"
+            verification = "selected source exists; full V5 gate incomplete"
+        else:
+            register = "REMOTE_CANDIDATE"
+            verification = "Aristotle remote PROVED only; source/independent gate incomplete"
+        project_id, meta = jobs[-1]
+        catalogue[target] = {
+            "register": register,
+            "domain": statements[target]["domain"],
+            "statement": statements[target]["statement"],
+            "proof_file": (
+                f"aristotle/best_proofs/{best[target]['artifact_file']}" if target in best else None
+            ),
+            "provenance": f"Harmonic/Aristotle {project_id} ({meta['account']})",
+            "remote_proved_jobs": len(jobs),
+            "verification": verification,
+            "verification_level": gate.get("verification_level") if gate else "V1",
+        }
+    OUT.write_text(json.dumps(catalogue, indent=1) + "\n")
+    counts = {}
+    for entry in catalogue.values():
+        counts[entry["register"]] = counts.get(entry["register"], 0) + 1
+    print(f"catalogued {len(catalogue)} domain records -> {OUT}")
+    print("by register:", counts)
 
 
 if __name__ == "__main__":

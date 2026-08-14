@@ -1,0 +1,10 @@
+Generic two-account Aristotle night submission is paused for audit consolidation.
+
+Paused: 2026-08-13
+Scope: aristotle/night_submit.py and aristotle/run-night-submit.sh
+Reason: reconcile the 2,400-record remote harvest, independently verify the 40-target
+priority set, save axiom reports, and review claim fidelity before creating more jobs.
+
+Harvest and verification remain enabled. To resume, remove this file in an intentional
+reviewed commit after the reconciliation gate is green; do not bypass it with an
+environment variable.

@@ -67,7 +67,8 @@ def header(target, tier, statement=None, verified=True):
         if len(stmt) > 400:
             stmt = stmt[:397] + "..."
         lines.append(f"Statement: {stmt}")
-    lines.append("Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean"
+    lines.append("Verification: AXLE cloud compile (Lean 4.32.0, Mathlib); "
+                 "imported axiom dependencies not enumerated"
                  if verified else "Verification: pending")
     lines.append("Provenance: Aristotle theorem prover (Harmonic)")
     lines.append("-/")

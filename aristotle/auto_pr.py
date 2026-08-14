@@ -1,15 +1,9 @@
 #!/usr/bin/env python3
-"""auto_pr.py — open a GitHub PR for KERNEL-TRUSTED new-domain proofs.
+"""Open a proof PR containing only exact V5-gated selected artifacts.
 
-Safety:
-- DRY-RUN by default. Actually pushing/opening a PR requires AUTO_PR_LIVE=1.
-- Eligible = cross_check trusted (axiom-clean, no sorryAx) AND catalogued as a
-  new-domain result. Nothing else is ever PR'd.
-- Works in an ISOLATED worktree off clean origin/main — never touches the (dirty)
-  main working tree; the PR contains ONLY the proof files + a manifest.
-- Batches all eligible proofs into ONE PR.
-
-Env: AUTO_PR_LIVE=1 to actually push+open; PR_DIR (default contrib/aristotle-domains).
+Dry-run by default.  V5 means local pinned Lean + AXLE + expected-target match + a
+saved standard-axiom report.  The exact ``best_proofs`` bytes are shipped; annotated
+preview copies are deliberately excluded from the release path.
 """
 import datetime
 import json
@@ -20,12 +14,9 @@ import subprocess
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
-CROSS = ROOT / "cross_check.json"
-LEDGER = ROOT / "harvest_ledger.json"
+RECON = REPO / "pipeline/ledger/reviews/2026-08-13-aristotle-runtime-reconciliation.json"
 DOMAINS = REPO / "registry" / "domains.json"
-MIN = ROOT / "minimized"
 BEST = ROOT / "best_proofs"
-PR_READY = ROOT / "pr_ready"   # annotated (human header) + normalized shippable copies
 PLAN = ROOT / "pr_plan.json"
 PR_LEDGER = ROOT / "pr_submitted.json"
 LIVE = os.environ.get("AUTO_PR_LIVE") == "1"
@@ -33,84 +24,109 @@ PR_DIR = os.environ.get("PR_DIR", "contrib/aristotle-domains")
 
 
 def eligible():
-    """Kernel-trusted (AXLE cloud lean-4.32.0) proofs that are catalogued new-domain
-    results. best_proofs/<sanitized target>.lean is exactly what AXLE verified."""
-    import re
-    axle = json.loads((ROOT / "axle_verify.json").read_text()) if (ROOT / "axle_verify.json").exists() else {}
+    reconciliation = json.loads(RECON.read_text()) if RECON.exists() else {"targets": []}
     domains = json.loads(DOMAINS.read_text()) if DOMAINS.exists() else {}
-    out = []
-    for target, dmeta in domains.items():
-        san = re.sub(r"[^A-Za-z0-9]+", "_", target) + ".lean"
-        if axle.get(san, {}).get("verified") is not True:
+    output = []
+    for record in reconciliation.get("targets", []):
+        if record.get("promotion_allowed") is not True:
             continue
-        # prefer the annotated+normalized shippable copy; fall back to raw best_proofs
-        src = PR_READY / san
-        if not src.exists():
-            src = BEST / san
-        if not src.exists():
+        target = record["target"]
+        selected = record.get("selected") or {}
+        artifact = selected.get("artifact_file")
+        source = BEST / artifact if artifact else None
+        if target not in domains or not source or not source.exists():
             continue
-        out.append({"target": target, "domain": dmeta.get("domain"),
-                    "src": str(src), "verification": "AXLE cloud lean-4.32.0",
-                    "environment": axle[san].get("environment", "lean-4.32.0")})
-    return out
+        output.append(
+            {
+                "target": target,
+                "domain": domains[target].get("domain"),
+                "artifact_file": artifact,
+                "source": str(source),
+                "verification": record.get("verification_detail"),
+                "verification_level": "V5",
+            }
+        )
+    return output
 
 
-def run(cmd, cwd):
-    return subprocess.run(cmd, cwd=cwd, capture_output=True, text=True)
+def run(command, cwd):
+    return subprocess.run(command, cwd=cwd, capture_output=True, text=True)
 
 
 def main():
-    elig = eligible()
-    PLAN.write_text(json.dumps({"eligible": elig, "count": len(elig), "live": LIVE}, indent=1))
-    # idempotent: only PR targets not already PR'd (safe for permanent every-2h operation)
+    candidates = eligible()
+    PLAN.write_text(json.dumps({"eligible": candidates, "count": len(candidates), "live": LIVE}, indent=1))
     ledger = json.loads(PR_LEDGER.read_text()) if PR_LEDGER.exists() else {"targets": [], "runs": []}
     done = set(ledger.get("targets", []))
-    new = [e for e in elig if e["target"] not in done]
-    print(f"{len(elig)} AXLE-verified eligible, {len(new)} NEW ({'LIVE' if LIVE else 'DRY-RUN'})")
-    for e in new[:12]:
-        print(f"  - {e['target']} ({e['domain']})")
+    new = [candidate for candidate in candidates if candidate["target"] not in done]
+    print(f"{len(candidates)} V5 eligible; {len(new)} new ({'LIVE' if LIVE else 'DRY-RUN'})")
     if not new:
-        print("nothing new to PR."); return
+        return
     if not LIVE:
-        print(f"\nDRY-RUN: {len(new)} new proofs would be PR'd. Set AUTO_PR_LIVE=1 to push + open.")
+        print("review the V5 reconciliation and set AUTO_PR_LIVE=1 intentionally")
         return
 
     date = datetime.date.today().isoformat()
-    seq = len(ledger.get("runs", [])) + 1
-    branch = f"aristotle-domains-{date}-{seq}"
-    wt = pathlib.Path(f"/tmp/pr-wt-{date}-{seq}")
-    if wt.exists():
-        run(["git", "worktree", "remove", "--force", str(wt)], REPO)
+    sequence = len(ledger.get("runs", [])) + 1
+    branch = f"aristotle-v5-{date}-{sequence}"
+    worktree = pathlib.Path(f"/tmp/aristotle-v5-{date}-{sequence}")
+    if worktree.exists():
+        run(["git", "worktree", "remove", "--force", str(worktree)], REPO)
     run(["git", "fetch", "origin"], REPO)
-    r = run(["git", "worktree", "add", "-b", branch, str(wt), "origin/main"], REPO)
-    if r.returncode != 0:
-        print("worktree add failed:", r.stderr[:300]); return
+    created = run(["git", "worktree", "add", "-b", branch, str(worktree), "origin/main"], REPO)
+    if created.returncode != 0:
+        print("worktree add failed:", created.stderr[:500])
+        return
     try:
-        d = wt / PR_DIR
-        d.mkdir(parents=True, exist_ok=True)
-        man = ["# Aristotle-generated, AXLE-verified proofs", "",
-               "Kernel-checked cloud Lean 4.32.0 (AXLE); axiom-clean.", ""]
-        for e in new:
-            safe = e["target"].replace(".", "_") + ".lean"
-            shutil.copy(e["src"], d / safe)
-            man.append(f"- `{e['target']}` ({e['domain']}) — {safe}")
-        (d / "MANIFEST.md").write_text("\n".join(man))
-        run(["git", "add", PR_DIR], wt)
-        run(["git", "commit", "-m", f"Add {len(new)} AXLE-verified Aristotle domain proofs ({date} #{seq})"], wt)
-        pr = run(["git", "push", "-u", "origin", branch], wt)
-        if pr.returncode != 0:
-            print("push failed:", pr.stderr[:300]); return
-        body = "\n".join(man) + "\n\n🤖 Aristotle proof fleet; AXLE-verified axiom-clean."
-        gh = run(["gh", "pr", "create", "--title",
-                  f"Aristotle domain proofs ({len(new)}) — {date} #{seq}", "--body", body,
-                  "--head", branch], wt)
-        url = (gh.stdout or gh.stderr).strip()
+        destination = worktree / PR_DIR
+        destination.mkdir(parents=True, exist_ok=True)
+        manifest = [
+            "# Aristotle-generated, V5-gated proof artifacts",
+            "",
+            "Exact bytes independently checked by local pinned Lean and AXLE, with expected-target matching and saved axiom reports.",
+            "",
+        ]
+        for candidate in new:
+            shutil.copy(candidate["source"], destination / candidate["artifact_file"])
+            manifest.append(
+                f"- `{candidate['target']}` ({candidate['domain']}) — {candidate['artifact_file']}"
+            )
+        (destination / "MANIFEST.md").write_text("\n".join(manifest) + "\n")
+        run(["git", "add", PR_DIR], worktree)
+        committed = run(
+            ["git", "commit", "-m", f"Add {len(new)} V5-gated Aristotle proof artifacts"],
+            worktree,
+        )
+        if committed.returncode != 0:
+            print("commit failed:", committed.stderr[:500])
+            return
+        pushed = run(["git", "push", "-u", "origin", branch], worktree)
+        if pushed.returncode != 0:
+            print("push failed:", pushed.stderr[:500])
+            return
+        body = "\n".join(manifest) + "\n\nNo mathematical-novelty claim is made."
+        opened = run(
+            [
+                "gh",
+                "pr",
+                "create",
+                "--title",
+                f"V5-gated Aristotle proof artifacts ({len(new)})",
+                "--body",
+                body,
+                "--head",
+                branch,
+                "--draft",
+            ],
+            worktree,
+        )
+        url = (opened.stdout or opened.stderr).strip()
         print(url)
-        ledger["targets"] = sorted(done | {e["target"] for e in new})
-        ledger.setdefault("runs", []).append({"branch": branch, "count": len(new), "url": url[:200]})
-        PR_LEDGER.write_text(json.dumps(ledger, indent=1))
+        ledger["targets"] = sorted(done | {candidate["target"] for candidate in new})
+        ledger.setdefault("runs", []).append({"branch": branch, "count": len(new), "url": url[:300]})
+        PR_LEDGER.write_text(json.dumps(ledger, indent=1) + "\n")
     finally:
-        run(["git", "worktree", "remove", "--force", str(wt)], REPO)
+        run(["git", "worktree", "remove", "--force", str(worktree)], REPO)
 
 
 if __name__ == "__main__":

@@ -1,19 +1,33 @@
 #!/usr/bin/env python3
-"""select_best.py — dedup the racing attempts: for each target with ≥1 harvested
-PROVED proof (across both accounts + repeats), pick the BEST one and collect it.
+"""Select one harvested source per expected target without filename collisions.
 
-Best = compiles (per verify_state, if known) > axiom-clean > shortest. Writes
-best_proofs/<sanitized_target>.lean + best_proofs/manifest.json.
+Selection prefers a known local compile, then absence of placeholder tokens, then
+shorter source.  Remote ``PROVED`` remains candidate provenance; selection itself is
+not verification.  ``manifest.json`` is the authoritative target-to-artifact map.
 """
-import glob
 import json
 import pathlib
 import re
 
+try:
+    from proof_identity import (
+        artifact_filenames,
+        harvested_source_path,
+        identity_metadata,
+        target_is_represented,
+    )
+except ModuleNotFoundError:  # imported as a package in tests/tools
+    from .proof_identity import (
+        artifact_filenames,
+        harvested_source_path,
+        identity_metadata,
+        target_is_represented,
+    )
+
 ROOT = pathlib.Path(__file__).resolve().parent
-H = ROOT / "harvest_100"
+HARVEST = ROOT / "harvest_100"
 LEDGER = ROOT / "harvest_ledger.json"
-VSTATE = H / "verify_state.json"
+VERIFY_STATE = HARVEST / "verify_state.json"
 OUT = ROOT / "best_proofs"
 BAD = re.compile(r"\b(sorry|admit|native_decide|sorryAx)\b")
 
@@ -21,41 +35,65 @@ BAD = re.compile(r"\b(sorry|admit|native_decide|sorryAx)\b")
 def main():
     OUT.mkdir(exist_ok=True)
     ledger = json.loads(LEDGER.read_text()) if LEDGER.exists() else {}
-    vstate = json.loads(VSTATE.read_text()) if VSTATE.exists() else {}
-    compiles = {b: s.get("compiles") for b, s in vstate.items()}
+    verify_state = json.loads(VERIFY_STATE.read_text()) if VERIFY_STATE.exists() else {}
+    compiles = {filename: state.get("compiles") for filename, state in verify_state.items()}
 
-    # gather candidate proofs per target
     by_target = {}
-    for pid, meta in ledger.items():
+    for project_id, meta in ledger.items():
         if meta.get("verdict") != "PROVED":
             continue
-        f = H / f"{meta['account']}_{pid[:8]}.lean"
-        if not f.exists():
+        source = harvested_source_path(HARVEST, meta["account"], project_id)
+        if source is None:
             continue
-        text = f.read_text(errors="ignore")
-        body = "\n".join(l for l in text.splitlines() if not l.strip().startswith("--"))
-        cand = {"file": f, "account": meta["account"], "project_id": pid,
-                "lines": len(text.splitlines()), "axiom_clean": not BAD.search(body),
-                "compiles": compiles.get(f.name)}
-        by_target.setdefault(meta["target"], []).append(cand)
+        text = source.read_text(errors="ignore")
+        body = "\n".join(line for line in text.splitlines() if not line.strip().startswith("--"))
+        identity = identity_metadata(text)
+        candidate = {
+            "file": source,
+            "account": meta["account"],
+            "project_id": project_id,
+            "lines": len(text.splitlines()),
+            "placeholder_free": not BAD.search(body),
+            "compiles": compiles.get(source.name),
+            "identity": identity,
+            "target_represented": target_is_represented(meta["target"], identity["declarations"]),
+        }
+        by_target.setdefault(meta["target"], []).append(candidate)
 
-    def score(c):
-        # prefer known-compiles, then axiom-clean, then fewer lines
-        return (0 if c["compiles"] is True else (1 if c["compiles"] is None else 2),
-                0 if c["axiom_clean"] else 1, c["lines"])
+    def score(candidate):
+        return (
+            0 if candidate["compiles"] is True else (1 if candidate["compiles"] is None else 2),
+            0 if candidate["placeholder_free"] else 1,
+            0 if candidate["target_represented"] else 1,
+            candidate["lines"],
+        )
 
+    artifact_name = artifact_filenames(by_target)
     manifest = {}
-    for target, cands in by_target.items():
-        best = min(cands, key=score)
-        safe = re.sub(r"[^A-Za-z0-9]+", "_", target)
-        (OUT / f"{safe}.lean").write_text(best["file"].read_text(errors="ignore"))
-        manifest[target] = {"chosen": best["file"].name, "account": best["account"],
-                            "project_id": best["project_id"], "lines": best["lines"],
-                            "axiom_clean": best["axiom_clean"], "compiles": best["compiles"],
-                            "n_candidates": len(cands)}
+    for target, candidates in by_target.items():
+        best = min(candidates, key=score)
+        artifact = artifact_name[target]
+        (OUT / artifact).write_text(best["file"].read_text(errors="ignore"))
+        manifest[target] = {
+            "artifact_file": artifact,
+            "chosen": best["file"].name,
+            "account": best["account"],
+            "project_id": best["project_id"],
+            "lines": best["lines"],
+            "placeholder_free": best["placeholder_free"],
+            "compiles": best["compiles"],
+            "target_represented": best["target_represented"],
+            "source_sha256": best["identity"]["source_sha256"],
+            "normalized_source_sha256": best["identity"]["normalized_source_sha256"],
+            "declarations": best["identity"]["declarations"],
+            "n_candidates": len(candidates),
+        }
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=1))
-    print(f"selected best proof for {len(manifest)} targets "
-          f"(from {sum(len(v) for v in by_target.values())} candidates)")
+    print(
+        f"selected one source for {len(manifest)} targets "
+        f"(from {sum(len(value) for value in by_target.values())} candidates; "
+        f"collision-safe artifacts active)"
+    )
 
 
 if __name__ == "__main__":
