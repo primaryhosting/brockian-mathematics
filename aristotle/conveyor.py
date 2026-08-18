@@ -48,6 +48,14 @@ a resident daemon). Each cycle:
      was never executed and now carries enabled:false). Issues are left
      UNASSIGNED (NOETHER is in an error state and must not be assigned).
 
+  6. PUBLISH + NOTIFY legs (conveyor_notify.py): a registry hop that changed
+     the PROVED count queues ONE honest showcase-update draft on the Lovable
+     manager (queue-submit only, approval-gated); Lovable-draft-ready and
+     attest-failure events each post ONE idempotent Today approval card to
+     ACUTIS approval_gates via :18820; and the first cycle after 6am local
+     stages ONE conveyor_daily_digest outbox event for the prior day (email
+     remains behind the SOLVER_NOTIFY_EMAIL opt-in, default OFF).
+
 State + cursor use atomic writes (temp + fsync + rename — the same pattern as
 solver_watch._atomic_json_dump) so a crash or ENOSPC preserves the prior file.
 """
@@ -64,6 +72,11 @@ import signal
 import subprocess
 import sys
 import urllib.request
+
+try:  # package import (tests) vs script import (launchd) — same convention
+    from aristotle import conveyor_notify  # type: ignore
+except ImportError:
+    import conveyor_notify  # type: ignore
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
@@ -654,6 +667,84 @@ def build_lovable_prompt(cycle):
     )
 
 
+# ------------------------------------------------ publish + notify legs
+
+PROVED_DRAFTS_KEEP = 100
+
+
+def maybe_queue_proved_draft(state, cycle, before, after, poster=None,
+                             card_poster=None, card_prober=None,
+                             state_path=None):
+    """When a completed registry hop changed the PROVED count, queue ONE
+    Lovable showcase-update draft (via /queue-submit only — the manager's
+    approval gate holds it) and post ONE Today approval card. Idempotent via
+    a deterministic receipt over (before, after, new names) guarded in
+    state["proved_drafts"]. Snapshots of None (unreadable registry) queue
+    nothing — unknown is never treated as zero."""
+    if state_path is None:
+        state_path = STATE
+    if not before or not after or after["count"] == before["count"]:
+        return False
+    new_names = sorted(after["names"] - before["names"])
+    rid = conveyor_notify.draft_receipt_id(
+        before["count"], after["count"], new_names)
+    drafts = state.setdefault("proved_drafts", {})
+    if rid in drafts:
+        return False
+    prompt = conveyor_notify.build_draft_prompt(before, after)
+    queue_or_send_lovable(state, prompt, poster=poster)  # sent or queued: drafted
+    drafts[rid] = {"at": _now(), "proved_before": before["count"],
+                   "proved_after": after["count"],
+                   "new_names": new_names[:40]}
+    if len(drafts) > PROVED_DRAFTS_KEEP:
+        state["proved_drafts"] = dict(
+            list(drafts.items())[-PROVED_DRAFTS_KEEP:])
+    cycle["lovable_drafts_queued"] = cycle.get("lovable_drafts_queued", 0) + 1
+    _atomic_json_dump(state, state_path)
+    log(f"proved-count draft queued: {before['count']} -> {after['count']} "
+        f"({len(new_names)} new name(s)) receipt {rid}")
+    if conveyor_notify.post_approval_card(
+            state, rid,
+            conveyor_notify.build_draft_ready_gate(rid, before, after,
+                                                   new_names),
+            poster=card_poster, prober=card_prober, state_path=state_path):
+        cycle["approval_cards_posted"] = \
+            cycle.get("approval_cards_posted", 0) + 1
+    return True
+
+
+DEFERRED_REASON = "verify_stage already running; deferred"
+
+
+def maybe_post_attest_failure_card(state, cycle, digests, fp,
+                                   card_poster=None, card_prober=None,
+                                   state_path=None):
+    """One Today approval card per DISTINCT attest failure (chain stage
+    failure or truth-gate stop). The receipt covers (reason, receipts, attest
+    fingerprint), so the same failure retrying every 15 min posts exactly one
+    card. A deferral behind an already-running verify_stage is not a
+    failure."""
+    if state_path is None:
+        state_path = STATE
+    reason = cycle.get("stopped_reason")
+    if not reason or reason == DEFERRED_REASON:
+        return False
+    rid = conveyor_notify.attest_failure_receipt_id(
+        reason, [ev.get("receipt_id") for ev in digests], fp)
+    detail = ""
+    stages = cycle.get("stages") or []
+    if stages:
+        detail = stages[-1].get("tail") or ""
+    posted = conveyor_notify.post_approval_card(
+        state, rid, conveyor_notify.build_attest_failure_gate(rid, reason,
+                                                              detail),
+        poster=card_poster, prober=card_prober, state_path=state_path)
+    if posted:
+        cycle["approval_cards_posted"] = \
+            cycle.get("approval_cards_posted", 0) + 1
+    return posted
+
+
 # ---------------------------------------------------------------- main cycle
 
 def run_cycle():
@@ -663,7 +754,9 @@ def run_cycle():
     first_run = not os.path.exists(CURSOR)
 
     cycle = {"started_at": _now(), "new_receipts": 0, "candidates": [],
-             "stages": [], "registry_hop": {"ran": False}, "stopped_reason": None}
+             "stages": [], "registry_hop": {"ran": False},
+             "stopped_reason": None, "lovable_drafts_queued": 0,
+             "approval_cards_posted": 0}
 
     # 0. retry lovable events queued while :18793 was down (cheap; every cycle)
     flushed = flush_pending_lovable(state)
@@ -673,6 +766,16 @@ def run_cycle():
         # for hours, and a crash before the end-of-cycle dump would resurrect
         # already-delivered events next cycle (duplicate delivery).
         _atomic_json_dump(state, STATE)
+
+    # 0b. retry Today approval cards queued while :18820 was down, then the
+    # daily digest: ONE conveyor_daily_digest outbox event at the first cycle
+    # after 6am local, covering the prior day (email stays behind the
+    # SOLVER_NOTIFY_EMAIL opt-in inside solver_watch's dispatch path).
+    cards_flushed = conveyor_notify.flush_pending_approval_cards(
+        state, state_path=STATE)
+    if cards_flushed:
+        cycle["approval_cards_flushed"] = cards_flushed
+    conveyor_notify.emit_daily_digest(state, state_path=STATE)
 
     # 1. read outbox from the cursor
     digests = new_digests(read_outbox_events(), processed)
@@ -717,6 +820,7 @@ def run_cycle():
 
     # 2. registry hop — only on a NEW attestation fingerprint (truth-gated)
     fp = attestation_fingerprint()
+    proved_before = conveyor_notify.registry_proved_snapshot()
     last_fp = cursor.get("attestation_fingerprint")
     if last_fp is None:
         cycle["registry_hop"] = {
@@ -731,6 +835,12 @@ def run_cycle():
                                  "stages": list(results)}
         if ok:
             cursor["attestation_fingerprint"] = fp
+            # PUBLISH LEG: a hop that changed the registry PROVED count queues
+            # ONE showcase-update draft on the Lovable manager (approval-gated
+            # there) + ONE Today approval card. Both are idempotent via a
+            # deterministic receipt over (before, after, new names).
+            proved_after = conveyor_notify.registry_proved_snapshot()
+            maybe_queue_proved_draft(state, cycle, proved_before, proved_after)
         else:
             cycle["stopped_reason"] = cycle["stopped_reason"] or why
     elif fp != last_fp:
@@ -760,6 +870,13 @@ def run_cycle():
     if did_work and not first_run and state.get("last_notified") != key:
         queue_or_send_lovable(state, build_lovable_prompt(cycle))
         state["last_notified"] = key
+
+    # 4b. attest-failure Today card (one per distinct failure signature) +
+    # fold this cycle into the daily-digest accumulator (observed counts only).
+    maybe_post_attest_failure_card(state, cycle, digests, fp)
+    proved_now = conveyor_notify.registry_proved_snapshot()
+    conveyor_notify.accumulate_daily_stats(
+        state, cycle, proved_now["count"] if proved_now else None)
 
     state["updated_at"] = _now()
     state["last_cycle"] = cycle
