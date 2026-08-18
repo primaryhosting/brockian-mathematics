@@ -1,0 +1,31 @@
+{
+  "id": "BM-CORR-2026-08-18-PRIME-PAIRS-IN-AP",
+  "date": "2026-08-18",
+  "status": "active",
+  "summary": "Retire Bombieri-Vinogradov branding from prime-pair asymptotic interfaces and separate fixed-modulus from uniform-in-modulus hypotheses.",
+  "old_language": [
+    "BVPrimePairAsymptotic",
+    "Hardy-Littlewood / Bombieri-Vinogradov form",
+    "level-of-distribution / Bombieri-Vinogradov form of the prime-pair correlation"
+  ],
+  "replacement": {
+    "fixed_modulus": "Brockian.Hypothesis.PrimePairsInAPAtModulus",
+    "uniform_range": "Brockian.Hypothesis.UniformPrimePairsInAP Q",
+    "required_public_boundary": "Conjectural; not implied by Bombieri-Vinogradov. Any uniformity claim must state its modulus range Q(X)."
+  },
+  "scope": [
+    "Lean identifiers and docstrings",
+    "paper source and captions",
+    "README and observatory copy",
+    "website and generated artifacts",
+    "GitHub issue, PR, release, and commit messaging",
+    "previously circulated PDFs and review packets"
+  ],
+  "migration_policy": "Legacy BV-named modules are quarantined until their theorem interfaces carry explicit Prop hypotheses. Historical artifacts remain traceable; they are not silently rewritten.",
+  "owner_checklist": [
+    "Scan active source and generated surfaces for old language.",
+    "Update all active identifiers and imports.",
+    "Publish a superseding artifact hash for every already-circulated document.",
+    "Record any unavoidable historical occurrence in this correction ledger."
+  ]
+}
