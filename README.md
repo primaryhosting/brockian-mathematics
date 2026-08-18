@@ -65,6 +65,8 @@ run across the corpus; a local from-source `lake build` has still not been repro
 tracked as pending in the registry. Per-declaration attestations live in
 `registry/attestations/`.
 
+Change history for verification-posture wording and gate semantics: [`docs/CHANGELOG-2026-08-17.md`](docs/CHANGELOG-2026-08-17.md)
+
 ## Verified so far
 
 See [`REGISTRY.md`](REGISTRY.md) for the live list. Current PROVED headline results:
