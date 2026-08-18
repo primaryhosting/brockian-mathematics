@@ -2,7 +2,7 @@
 
 **Status: DRAFT for internal review — not published, not submitted.**
 Date: 2026-08-11 · Author: BCC / Brockian Mathematics program
-Verification: local `lake build` (Lean toolchain pinned at `leanprover/lean4:v4.32.0` + Mathlib) and the AXLE cloud kernel (Lean 4.32.0). No `sorry`, `admit`, or added `axiom` appears in any file cited below.
+Verification: AXLE cloud kernel (Lean 4.32.0); local `lake build` on the pinned toolchain (leanprover/lean4:v4.32.0 + Mathlib) is pending, matching the registry's lake_build:"pending" posture. No `sorry`, `admit`, or added `axiom` appears in any file cited below.
 
 ---
 
@@ -26,7 +26,7 @@ The **two-cycle / quasi-cycle viewpoint** of betrothed numbers, and the structur
 
 ### 2b. NEW FORMALIZATION — the exact Lean statements in this repository
 
-In `Brockian/BetrothedNumbers/Dynamics.lean` (integrated, builds locally on `Brockian/BetrothedNumbers.lean`) we give an exact Lean rendering of the classical two-cycle picture and an exact abundance **balance law** for the standard `2^k · p` construction family.
+In `Brockian/BetrothedNumbers/Dynamics.lean` (integrated into the core via `Brockian.lean`, importing `Brockian/BetrothedNumbers.lean`; local `lake build` pending like the rest of the registry — the AXLE-verified self-contained twin is `aristotle/betrothed_faithful.lean`, Lean 4.32.0, see the Honesty note below) we give an exact Lean rendering of the classical two-cycle picture and an exact abundance **balance law** for the standard `2^k · p` construction family.
 
 Define the **partner map** `partner n := s(n) − 1`. Betrothed pairs are exactly its nontrivial two-cycles:
 
@@ -95,8 +95,8 @@ Independently reproduced from scratch (`aristotle/betrothed_verification_report.
 | Two-cycle / quasi-cycle viewpoint | Classical (Hagis–Lord 1977) | No | — |
 | Same-parity ⇒ square / twice-square restriction | Classical (Hagis–Lord 1977) | No | — |
 | Density zero | Classical (Pollack 2011) | No | — |
-| Exact Lean two-cycle reformulation (`betrothed_iff_twoCycle`, partner involutivity/ne-self) | New **formalization** | Yes (repo) | `lake build`, Lean 4.32.0 |
-| `2^k·p` abundance **balance law** + deficient/perfect/abundant phase boundary | New **formalization**, **conditional** on σ-criterion | Yes (repo) | `lake build` + AXLE, Lean 4.32.0 |
+| Exact Lean two-cycle reformulation (`betrothed_iff_twoCycle`, partner involutivity/ne-self) | New **formalization** | Yes (repo) | AXLE (twin file), local build pending |
+| `2^k·p` abundance **balance law** + deficient/perfect/abundant phase boundary | New **formalization**, **conditional** on σ-criterion | Yes (repo) | AXLE (twin file), Lean 4.32.0; local build pending |
 | **Mersenne / shifted-prime obstruction** (`no_pair_of_mersenne_and_shifted_prime`) | New **deduction** (original small theorem), **unconditional** | Yes | AXLE kernel, Lean 4.32.0 |
 | 996,888-pair falsifier; 0/31,955 both-prime successes | Computation (evidence) | Yes (reproduced) | independent script |
 | Concrete pair witnesses (`48/75`, …, `5775/6128`) | Computation / kernel | Yes | `decide` / `norm_num`, kernel |
@@ -107,7 +107,7 @@ Independently reproduced from scratch (`aristotle/betrothed_verification_report.
 
 ## 4. Provenance and verification method
 
-- **Local repo module:** `Brockian/BetrothedNumbers.lean` (definitions `aliquot`, `Betrothed`) and `Brockian/BetrothedNumbers/Dynamics.lean` (two-cycle reformulation + balance law). Builds with `lake build`; toolchain pinned at `leanprover/lean4:v4.32.0` + Mathlib.
+- **Local repo module:** `Brockian/BetrothedNumbers.lean` (definitions `aliquot`, `Betrothed`) and `Brockian/BetrothedNumbers/Dynamics.lean` (two-cycle reformulation + balance law). Local `lake build` pending; toolchain pinned at `leanprover/lean4:v4.32.0` + Mathlib.
 - **AXLE-verified self-contained twin:** `aristotle/betrothed_faithful.lean` (Lean 4.32.0), rebuilt against the repo's real definitions after the originally delivered `BetrothedDynamics.lean` was found to reference a nonexistent `IsBetrothedPair` predicate.
 - **Unconditional obstruction:** `aristotle/best_proofs/Brockian_BetrothedNumbers_no_pair_of_mersenne_and_shifted_prime.lean`, produced via the Aristotle prover and kernel-checked. Confirmed no unproven hypotheses in the signature and no `sorry`/`axiom` in the proof.
 - **Computation:** `aristotle/betrothed_verification_report.json`, independently reproduced from scratch.
