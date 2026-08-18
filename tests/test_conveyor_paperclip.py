@@ -23,6 +23,19 @@ def _isolated_log(tmp_path, monkeypatch):
     monkeypatch.setattr(conveyor, "LOG", str(tmp_path / "conveyor.test.log"))
 
 
+@pytest.fixture(autouse=True)
+def _no_real_notify(monkeypatch):
+    """run_cycle integration tests must never reach the real ACUTIS :18820
+    approval_gates proxy or the solver outbox (see test_conveyor.py)."""
+    from aristotle import conveyor_notify
+    monkeypatch.setattr(conveyor_notify, "post_approval_gate",
+                        lambda payload, **kw: {"id": "test-gate-id"})
+    monkeypatch.setattr(conveyor_notify, "gate_exists_serverside",
+                        lambda rid, **kw: False)
+    monkeypatch.setattr(conveyor_notify, "emit_daily_digest",
+                        lambda state, **kw: None)
+
+
 BODY = (
     "2 Aristotle projects completed in this poll.\n"
     "\U0001f9ea CANDIDATE [admin] arsub_j7c_r59_\n"

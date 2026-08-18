@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 import pytest
 
-from aristotle import conveyor
+from aristotle import conveyor, conveyor_notify
 
 
 @pytest.fixture(autouse=True)
@@ -15,6 +15,22 @@ def _no_real_paperclip(monkeypatch):
     monkeypatch.setattr(
         conveyor, "post_paperclip_issue",
         lambda payload, **kw: {"id": "test-issue-id", "identifier": "RIE-0"})
+
+
+@pytest.fixture(autouse=True)
+def _no_real_notify(monkeypatch):
+    """The publish/notify legs must never reach the real ACUTIS :18820 or the
+    solver outbox from run_cycle unit tests — a live server happily accepts
+    real approval_gates rows (this bit once on 2026-08-18; four test-artifact
+    cards landed in production). Dedicated leg tests live in
+    tests/test_conveyor_notify.py and inject their own posters/probers/
+    dispatchers."""
+    monkeypatch.setattr(conveyor_notify, "post_approval_gate",
+                        lambda payload, **kw: {"id": "test-gate-id"})
+    monkeypatch.setattr(conveyor_notify, "gate_exists_serverside",
+                        lambda rid, **kw: False)
+    monkeypatch.setattr(conveyor_notify, "emit_daily_digest",
+                        lambda state, **kw: None)
 
 
 # Real outbox lines (verbatim shapes from aristotle/solver_notification_outbox.jsonl)
