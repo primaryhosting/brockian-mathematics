@@ -24,6 +24,9 @@ from typing import Any, Iterable
 
 VALID_RUNGS = {"classical", "literature", "open"}
 OPEN_REGISTERS = {"CONDITIONAL", "CONJECTURE"}
+# Keep textually in sync with ALLOWED_AXIOMS in scripts/gen_registry.py — the
+# derivation rule and this audit must agree on the allowed axiom set.
+ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 SUMMARY_ORDER = [
     "PROVED",
     "CONDITIONAL",
@@ -295,6 +298,75 @@ def find_open_consistency(
     return findings
 
 
+def find_register_invariants(entries: list[dict[str, Any]]) -> list[Finding]:
+    """Re-derive the register invariant on the committed registry entries themselves.
+
+    gen_registry derives registers, but registry/theorems.json is the committed
+    source of truth — a hand-edited or drifted entry could claim PROVED while its
+    own recorded facts contradict it. This section catches exactly that.
+    """
+    findings: list[Finding] = []
+    for entry in entries:
+        register = str(entry.get("register", ""))
+        name = str(entry.get("name", ""))
+
+        raw_flags = entry.get("flags")
+        flags = raw_flags if isinstance(raw_flags, dict) else {}
+        raw_ver = entry.get("verification")
+        ver = raw_ver if isinstance(raw_ver, dict) else {}
+        raw_axle = ver.get("axle")
+        axle = raw_axle if isinstance(raw_axle, dict) else {}
+        raw_axioms = entry.get("axioms")
+        axioms = raw_axioms if isinstance(raw_axioms, list) else None
+
+        if register == "PROVED":
+            malformed = []
+            if axioms is None:
+                malformed.append("axioms")
+            if raw_flags is not None and not isinstance(raw_flags, dict):
+                malformed.append("flags")
+            if raw_ver is not None and not isinstance(raw_ver, dict):
+                malformed.append("verification")
+            if isinstance(raw_ver, dict) and raw_axle is not None and not isinstance(raw_axle, dict):
+                malformed.append("verification.axle")
+            if malformed:
+                findings.append(
+                    Finding("ERROR", "proved-malformed", name,
+                            f"missing or wrong-typed field(s): {', '.join(malformed)}")
+                )
+            extra = set(axioms or []) - ALLOWED_AXIOMS
+            if extra:
+                findings.append(
+                    Finding("ERROR", "proved-invariant", name,
+                            f"axioms escape allowed set: {sorted(extra)}")
+                )
+            for key in ("sorry", "native_decide", "exact_search"):
+                if flags.get(key):
+                    findings.append(
+                        Finding("ERROR", "proved-invariant", name, f"flags.{key} is true")
+                    )
+            if axle.get("verdict") != "verified":
+                findings.append(
+                    Finding("ERROR", "proved-invariant", name,
+                            f"axle verdict is {axle.get('verdict')!r}, not 'verified'")
+                )
+            if entry.get("conditional_rung") is not None:
+                findings.append(
+                    Finding("ERROR", "proved-invariant", name,
+                            f"conditional_rung is {entry.get('conditional_rung')!r} on a PROVED entry")
+                )
+        elif register in ("CONDITIONAL", "DISCHARGED"):
+            # flags.sorry mirrors sorryAx in gen_registry output; check both so
+            # single-field drift is still caught.
+            if "sorryAx" in (axioms or []) or flags.get("sorry"):
+                findings.append(
+                    Finding("ERROR", "open-register-sorry", name,
+                            "entry records sorryAx/flags.sorry — a sorry-backed proof "
+                            "cannot carry an open register")
+                )
+    return findings
+
+
 def find_missing_provenance(entries: list[dict[str, Any]]) -> list[Finding]:
     findings: list[Finding] = []
     for entry in entries:
@@ -531,6 +603,7 @@ def main() -> int:
 
     sections = [
         ("Open-entry consistency", find_open_consistency(repo, entries, verdicts)),
+        ("Register invariants", find_register_invariants(entries)),
         ("Missing provenance", find_missing_provenance(entries)),
         ("Stale open entries", find_stale_open_entries(entries)),
         ("Duplicate names", find_duplicates(entries)),
