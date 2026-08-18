@@ -716,21 +716,22 @@ def maybe_queue_proved_draft(state, cycle, before, after, poster=None,
 DEFERRED_REASON = "verify_stage already running; deferred"
 
 
-def maybe_post_attest_failure_card(state, cycle, digests, fp,
+def maybe_post_attest_failure_card(state, cycle, fp,
                                    card_poster=None, card_prober=None,
                                    state_path=None):
     """One Today approval card per DISTINCT attest failure (chain stage
-    failure or truth-gate stop). The receipt covers (reason, receipts, attest
-    fingerprint), so the same failure retrying every 15 min posts exactly one
-    card. A deferral behind an already-running verify_stage is not a
-    failure."""
+    failure or truth-gate stop). The receipt covers (reason, attest
+    fingerprint) ONLY — deliberately not the digest receipts, which step 3
+    consumes even when the registry hop fails — so the same failure retrying
+    every 15 min posts exactly one card, including across the
+    receipts-consumed boundary. A deferral behind an already-running
+    verify_stage is not a failure."""
     if state_path is None:
         state_path = STATE
     reason = cycle.get("stopped_reason")
     if not reason or reason == DEFERRED_REASON:
         return False
-    rid = conveyor_notify.attest_failure_receipt_id(
-        reason, [ev.get("receipt_id") for ev in digests], fp)
+    rid = conveyor_notify.attest_failure_receipt_id(reason, fp)
     detail = ""
     stages = cycle.get("stages") or []
     if stages:
@@ -873,7 +874,7 @@ def run_cycle():
 
     # 4b. attest-failure Today card (one per distinct failure signature) +
     # fold this cycle into the daily-digest accumulator (observed counts only).
-    maybe_post_attest_failure_card(state, cycle, digests, fp)
+    maybe_post_attest_failure_card(state, cycle, fp)
     proved_now = conveyor_notify.registry_proved_snapshot()
     conveyor_notify.accumulate_daily_stats(
         state, cycle, proved_now["count"] if proved_now else None)

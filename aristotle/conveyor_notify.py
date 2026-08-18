@@ -179,10 +179,15 @@ def build_draft_ready_gate(receipt_id, before, after, new_names):
     }
 
 
-def attest_failure_receipt_id(reason, receipt_ids, fingerprint):
+def attest_failure_receipt_id(reason, fingerprint):
+    """Deterministic per (reason, attest fingerprint) ONLY — never the digest
+    receipts. run_cycle step 3 consumes the digests even when the registry hop
+    fails the truth gate (its cursor is the attest fingerprint, not the
+    receipts), so a receipts-bearing id would change on the retry cycle
+    (digests=[]) and double-post the identical failure's Today card. reason
+    already encodes stage+rc; fp pins the attestation set."""
     canonical = json.dumps(
-        {"reason": reason, "receipts": sorted(receipt_ids or []),
-         "fp": fingerprint},
+        {"reason": reason, "fp": fingerprint},
         sort_keys=True, separators=(",", ":")).encode()
     return "conveyor_attest_fail_" + hashlib.sha256(canonical).hexdigest()[:24]
 
@@ -355,7 +360,10 @@ def accumulate_daily_stats(state, cycle, proved_count, now=None):
             s["registry_hops_stopped"] += 1
     s["paperclip_issues"] += cycle.get("paperclip_issues_filed", 0)
     s["lovable_drafts"] += cycle.get("lovable_drafts_queued", 0)
-    s["approval_cards"] += cycle.get("approval_cards_posted", 0)
+    # cards delivered from the retry queue (queued during a :18820 outage,
+    # flushed this cycle) are posted cards too — count both
+    s["approval_cards"] += (cycle.get("approval_cards_posted", 0)
+                            + cycle.get("approval_cards_flushed", 0))
     if s.get("proved_first") is None:
         s["proved_first"] = proved_count
     if proved_count is not None:
@@ -402,30 +410,59 @@ def build_daily_digest(stats, day):
     return f"Aristotle Conveyor daily digest — {day}", "\n".join(lines)
 
 
+def _missed_digest_days(last_emitted_for, digest_day_str, stats_all):
+    """Un-digested days strictly between last_emitted_for and digest_day that
+    have OBSERVED stats (retained DAILY_STATS_KEEP days). Days with no stats
+    are skipped silently — only digest_day itself gets the honest 'no cycles
+    observed' digest. Bounded by the stats retention window; a malformed
+    guard value yields no catch-up rather than a crash."""
+    if not last_emitted_for:
+        return []
+    try:
+        d = datetime.date.fromisoformat(last_emitted_for)
+        end = datetime.date.fromisoformat(digest_day_str)
+    except ValueError:
+        return []
+    days = []
+    d += datetime.timedelta(days=1)
+    while d < end:
+        if d.isoformat() in stats_all:
+            days.append(d.isoformat())
+        d += datetime.timedelta(days=1)
+    return days
+
+
 def emit_daily_digest(state, now=None, dispatcher=None, state_path=None):
-    """At the first cycle after 6am, stage EXACTLY ONE conveyor_daily_digest
-    outbox event for the prior day via solver_watch's staging path (which
-    also honors the SOLVER_NOTIFY_EMAIL opt-in, default OFF). The guard is
-    state["daily_digest_emitted_for"], persisted immediately after dispatch
-    so a crash cannot double-send. Returns the receipt info or None."""
+    """At the first cycle after 6am, stage ONE conveyor_daily_digest outbox
+    event for the prior day via solver_watch's staging path (which also
+    honors the SOLVER_NOTIFY_EMAIL opt-in, default OFF) — plus one catch-up
+    digest per earlier un-digested day that has observed stats (machine down
+    across a 6am window must not silently drop a day's real work). The guard
+    is state["daily_digest_emitted_for"], advanced + persisted immediately
+    after EACH dispatch so a crash cannot double-send. Returns the prior-day
+    digest's receipt info or None."""
     now = now or local_now()
     if not should_emit_daily_digest(now, state.get("daily_digest_emitted_for")):
         return None
     day = digest_day(now)
+    stats_all = state.get("daily_stats") or {}
     if (state.get("daily_digest_emitted_for") is None
-            and day not in (state.get("daily_stats") or {})):
+            and day not in stats_all):
         # first run with no observed prior-day stats: baseline the guard
         # without claiming anything (solver_watch first-run convention)
         state["daily_digest_emitted_for"] = day
         _persist(state, state_path)
         _log(f"daily digest baselined at {day} (first run, no observed stats)")
         return None
-    subject, body = build_daily_digest(
-        (state.get("daily_stats") or {}).get(day), day)
     if dispatcher is None:
         dispatcher = _sibling("solver_watch").dispatch_notification
-    result = dispatcher(subject, body, kind="conveyor_daily_digest")
-    state["daily_digest_emitted_for"] = day
-    _persist(state, state_path)
-    _log(f"daily digest emitted for {day}: {result}")
+    result = None
+    days = _missed_digest_days(
+        state.get("daily_digest_emitted_for"), day, stats_all) + [day]
+    for d in days:
+        subject, body = build_daily_digest(stats_all.get(d), d)
+        result = dispatcher(subject, body, kind="conveyor_daily_digest")
+        state["daily_digest_emitted_for"] = d
+        _persist(state, state_path)
+        _log(f"daily digest emitted for {d}: {result}")
     return result

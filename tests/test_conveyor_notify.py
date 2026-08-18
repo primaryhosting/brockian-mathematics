@@ -270,27 +270,62 @@ def test_attest_failure_card_skips_deferral_and_dedupes(tmp_path):
     sp = str(tmp_path / "s.json")
     deferred = {"stopped_reason": conveyor.DEFERRED_REASON}
     assert conveyor.maybe_post_attest_failure_card(
-        state, deferred, [], "fp", card_poster=poster,
+        state, deferred, "fp", card_poster=poster,
         card_prober=never_probes, state_path=sp) is False
     assert poster.calls == []
 
     failing = {"stopped_reason": "stage axle_verify failed (rc=1)",
                "stages": [{"name": "axle_verify", "tail": "boom"}]}
     assert conveyor.maybe_post_attest_failure_card(
-        state, dict(failing), [{"receipt_id": "a"}], "fp",
+        state, dict(failing), "fp",
         card_poster=poster, card_prober=never_probes, state_path=sp) is True
     # identical failure signature next cycle -> no second card
     assert conveyor.maybe_post_attest_failure_card(
-        state, dict(failing), [{"receipt_id": "a"}], "fp",
+        state, dict(failing), "fp",
         card_poster=poster, card_prober=never_probes, state_path=sp) is False
     assert len(poster.calls) == 1
     assert poster.calls[0]["metadata"]["event"] == "attest_failure"
     # a DIFFERENT failure posts its own card
     assert conveyor.maybe_post_attest_failure_card(
         state, {"stopped_reason": "audit_registry_consistency --strict failed"},
-        [{"receipt_id": "a"}], "fp",
+        "fp",
         card_poster=poster, card_prober=never_probes, state_path=sp) is True
     assert len(poster.calls) == 2
+    # ...and so does the SAME reason on a NEW attestation fingerprint
+    assert conveyor.maybe_post_attest_failure_card(
+        state, dict(failing), "fp2",
+        card_poster=poster, card_prober=never_probes, state_path=sp) is True
+    assert len(poster.calls) == 3
+
+
+def test_attest_failure_receipt_ignores_consumed_receipts(tmp_path):
+    """Regression: run_cycle step 3 advances processed_receipt_ids on
+    chain_ok even when the registry hop fails the truth gate, so the retry
+    cycle sees digests=[]. The receipt must therefore cover ONLY
+    (reason, fingerprint) — otherwise the identical failure posts a second
+    Today card across the receipts-consumed boundary."""
+    rid = conveyor_notify.attest_failure_receipt_id(
+        "hop stage audit failed (rc=1)", "fp")
+    # deterministic, and there is no receipts input to vary
+    assert rid == conveyor_notify.attest_failure_receipt_id(
+        "hop stage audit failed (rc=1)", "fp")
+    assert rid != conveyor_notify.attest_failure_receipt_id(
+        "hop stage audit failed (rc=1)", "fp2")
+    assert rid != conveyor_notify.attest_failure_receipt_id(
+        "other reason", "fp")
+
+    # end-to-end across the boundary: cycle 1 (digests consumed) then cycle 2
+    # (digests empty, same reason + fp) -> exactly one card
+    state, poster = {}, RecordingPoster()
+    sp = str(tmp_path / "s.json")
+    failing = {"stopped_reason": "hop stage audit failed (rc=1)"}
+    assert conveyor.maybe_post_attest_failure_card(
+        state, dict(failing), "fp", card_poster=poster,
+        card_prober=never_probes, state_path=sp) is True
+    assert conveyor.maybe_post_attest_failure_card(
+        state, dict(failing), "fp", card_poster=poster,
+        card_prober=never_probes, state_path=sp) is False
+    assert len(poster.calls) == 1
 
 
 # ---------------------------------------------------------------- digest boundary
@@ -363,6 +398,70 @@ def test_emit_daily_digest_once_with_prior_day_stats(tmp_path):
     assert len(calls) == 1
 
 
+def _day_stats(**over):
+    s = {"cycles": 1, "receipts": 1, "candidates": 1, "chain_failures": 0,
+         "failure_reasons": [], "registry_hops_ok": 0,
+         "registry_hops_stopped": 0, "paperclip_issues": 0,
+         "lovable_drafts": 0, "approval_cards": 0,
+         "proved_first": 100, "proved_last": 100}
+    s.update(over)
+    return s
+
+
+def test_digest_catches_up_missed_days_with_observed_stats(tmp_path):
+    """Machine down across a 6am window: last digest covered Aug 18; Aug 19
+    accumulated real stats but its window was missed; first cycle back is
+    Aug 21 09:00 (digest_day = Aug 20, no stats). BOTH days must be digested:
+    Aug 19 with its real numbers, Aug 20 honestly as 'no cycles observed'."""
+    state = {
+        "daily_digest_emitted_for": "2026-08-18",
+        "daily_stats": {"2026-08-19": _day_stats(receipts=3, candidates=7)},
+    }
+    calls = []
+
+    def dispatcher(subject, body, kind=None):
+        calls.append((subject, body, kind))
+        return {"receipt_id": f"n{len(calls)}", "email": "disabled"}
+
+    res = conveyor_notify.emit_daily_digest(
+        state, now=T(9, day=21), dispatcher=dispatcher,
+        state_path=str(tmp_path / "s.json"))
+    assert res == {"receipt_id": "n2", "email": "disabled"}
+    assert len(calls) == 2
+    assert "2026-08-19" in calls[0][0] and "7 candidate(s)" in calls[0][1]
+    assert "2026-08-20" in calls[1][0]
+    assert "No conveyor cycles were observed" in calls[1][1]
+    assert state["daily_digest_emitted_for"] == "2026-08-20"
+    # same morning again: everything is covered, nothing re-emits
+    assert conveyor_notify.emit_daily_digest(
+        state, now=T(9, 30, day=21), dispatcher=dispatcher,
+        state_path=str(tmp_path / "s.json")) is None
+    assert len(calls) == 2
+
+
+def test_digest_catchup_skips_statless_gap_days(tmp_path):
+    """Gap days with NO observed stats are skipped silently (nothing to
+    report is not 'no cycles observed' x N spam); only digest_day itself
+    always emits."""
+    state = {"daily_digest_emitted_for": "2026-08-15",
+             "daily_stats": {"2026-08-19": _day_stats()}}
+    calls = []
+    conveyor_notify.emit_daily_digest(
+        state, now=T(7, day=21),
+        dispatcher=lambda s, b, kind=None: calls.append(s) or {"ok": 1},
+        state_path=str(tmp_path / "s.json"))
+    # 16th/17th/18th had no stats -> skipped; 19th has stats; 20th = digest day
+    assert len(calls) == 2
+    assert "2026-08-19" in calls[0] and "2026-08-20" in calls[1]
+
+
+def test_missed_digest_days_bad_guard_value_is_safe():
+    assert conveyor_notify._missed_digest_days(
+        "not-a-date", "2026-08-20", {"2026-08-19": {}}) == []
+    assert conveyor_notify._missed_digest_days(
+        None, "2026-08-20", {"2026-08-19": {}}) == []
+
+
 def test_digest_with_no_stats_admits_nothing_happened():
     subject, body = conveyor_notify.build_daily_digest(None, "2026-08-14")
     assert "No conveyor cycles were observed" in body
@@ -394,6 +493,18 @@ def test_accumulate_daily_stats_counts_observed_cycles_only():
     assert s["paperclip_issues"] == 2
     assert s["lovable_drafts"] == 1 and s["approval_cards"] == 1
     assert s["proved_first"] == 11126 and s["proved_last"] == 11130
+
+
+def test_accumulate_daily_stats_counts_flushed_cards_too():
+    """Cards queued during a :18820 outage and delivered later via
+    flush_pending_approval_cards are posted cards — the digest's 'Today
+    approval cards posted' must include them, not undercount."""
+    state = {}
+    cycle = {"new_receipts": 0, "candidates": [],
+             "registry_hop": {"ran": False},
+             "approval_cards_posted": 1, "approval_cards_flushed": 2}
+    s = conveyor_notify.accumulate_daily_stats(state, cycle, 100, now=T(9))
+    assert s["approval_cards"] == 3
 
 
 def test_accumulate_daily_stats_prunes_old_days():
