@@ -316,9 +316,18 @@ def post_lovable_queue(prompt, url=None, opener=None):
     payload = json.dumps(
         {"items": [{"project": LOVABLE_PROJECT, "prompt": prompt}]}
     ).encode("utf-8")
+    headers = {"Content-Type": "application/json"}
+    # Same token fallback chain as lovable_grader.py; the manager fails closed
+    # without it. The wrapper script exports it from the manager's own plist.
+    token = (os.environ.get("LOVABLE_MANAGER_TOKEN")
+             or os.environ.get("LOVABLE_MANAGER_AUTH_TOKEN")
+             or os.environ.get("OPENCLAW_AUTH_TOKEN")
+             or os.environ.get("AUTH_TOKEN") or "").strip()
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
     req = urllib.request.Request(
         url or LOVABLE_QUEUE_SUBMIT, data=payload,
-        headers={"Content-Type": "application/json"}, method="POST",
+        headers=headers, method="POST",
     )
     try:
         with (opener or urllib.request.urlopen)(req, timeout=15) as r:

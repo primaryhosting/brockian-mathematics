@@ -319,6 +319,7 @@ def test_failed_registry_hop_keeps_stale_fingerprint_for_retry(
 # --------------------------------------------------------- lovable queueing
 
 def test_lovable_down_queues_event_in_state(tmp_path, monkeypatch):
+    monkeypatch.setattr(conveyor, "LOG", str(tmp_path / "log"))
     state = {}
     ok = conveyor.queue_or_send_lovable(
         state, "update", poster=lambda prompt: False)

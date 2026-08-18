@@ -14,5 +14,15 @@ set +a
 : "${CROSS_MAX:=6}"
 : "${CONVEYOR_VERIFY_BUDGET:=900}"
 export SOLVER_NOTIFY_TO AXLE_MAX HARVEST_ALL_MAX CROSS_MAX CONVEYOR_VERIFY_BUDGET
+# Lovable manager bearer token: read from the manager's own launchd plist so
+# /queue-submit auth always matches what the manager accepts. Never printed.
+if [ -z "$OPENCLAW_AUTH_TOKEN" ]; then
+  _lm_plist="$HOME/Library/LaunchAgents/ai.openclaw.lovable-manager.plist"
+  if [ -f "$_lm_plist" ]; then
+    OPENCLAW_AUTH_TOKEN=$(/usr/libexec/PlistBuddy -c \
+      "Print :EnvironmentVariables:OPENCLAW_AUTH_TOKEN" "$_lm_plist" 2>/dev/null)
+    [ -n "$OPENCLAW_AUTH_TOKEN" ] && export OPENCLAW_AUTH_TOKEN
+  fi
+fi
 cd "$HOME/Projects/brockian-mathematics" || exit 1
 exec /opt/homebrew/bin/python3 aristotle/conveyor.py
