@@ -58,8 +58,12 @@ def check_firewall(thms: list[dict]) -> list[str]:
 def check_self_consistency(thms: list[dict]) -> list[str]:
     """#36 — honest use of the register vocabulary."""
     v = []
-    proved = {t["name"] for t in thms if t.get("register") == "PROVED"}
-    proved |= {t["name"].split(".")[-1] for t in thms if t.get("register") == "PROVED"}
+    # discharged_by must resolve UNAMBIGUOUSLY: a fully-qualified PROVED name, or a
+    # short name matching exactly one PROVED entry (mirrors scripts/gen_registry.py).
+    proved_full = {t["name"] for t in thms if t.get("register") == "PROVED"}
+    proved_by_short: dict[str, set[str]] = {}
+    for n in proved_full:
+        proved_by_short.setdefault(n.split(".")[-1], set()).add(n)
     for t in thms:
         reg, name, kind = t.get("register"), t["name"], t.get("kind")
         if reg == "CONDITIONAL":
@@ -70,7 +74,14 @@ def check_self_consistency(thms: list[dict]) -> list[str]:
             db = t.get("discharged_by")
             if not db:
                 v.append(f"[consistency] DISCHARGED {name}: no discharged_by recorded")
-            elif db not in proved:
+            elif db in proved_full or len(proved_by_short.get(db, ())) == 1:
+                pass  # unambiguous resolution — honest discharge
+            elif len(proved_by_short.get(db, ())) > 1:
+                v.append(
+                    f"[consistency] DISCHARGED {name}: discharged_by {db!r} is AMBIGUOUS among "
+                    f"PROVED theorems {sorted(proved_by_short[db])} — must use the full name"
+                )
+            else:
                 v.append(f"[consistency] DISCHARGED {name}: discharged_by {db!r} is not a PROVED theorem in-core")
         if reg == "CONJECTURE" and kind in ("theorem", "lemma"):
             v.append(f"[consistency] CONJECTURE {name}: kind is {kind!r} — a conjecture must be a Prop container, not a theorem")

@@ -15,6 +15,8 @@ from __future__ import annotations
 import glob
 import json
 import os
+import sys
+from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
@@ -155,19 +157,31 @@ def generate(attest_dir: str, verdicts_path: str) -> dict[str, Any]:
         stem = os.path.basename(ap)[:-5]
         if built is not None and stem not in built:
             continue  # skip attestations not backed by a root import (stray/parallel-tool)
-        att = json.load(open(ap))
+        # Fail LOUD (naming the offending file) on malformed attestations — never
+        # skip, since skipping silently shrinks the registry (the dishonest direction).
+        try:
+            att = json.load(open(ap))
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"{ap}: malformed attestation JSON: {exc}") from exc
+        if not isinstance(att.get("module"), str) or not isinstance(att.get("declarations"), list):
+            raise ValueError(f"{ap}: malformed attestation (module/declarations)")
         module = att["module"]
         env = att.get("environment")
         for d in att["declarations"]:
+            if not isinstance(d, dict):
+                raise ValueError(f"{ap}: declaration entry is not an object")
+            name = d.get("name")
+            if not name:
+                raise ValueError(f"{ap}: declaration missing name")
             axl = att.get("module_verified") and d.get("axle_verdict") == "verified"
             axioms = d.get("axioms") or []
             facts = DeclFacts(
-                name=d["name"], kind=d.get("kind", "theorem"),
+                name=name, kind=d.get("kind", "theorem"),
                 axioms=axioms,
                 flags=Flags(native_decide=d.get("native_decide", False)),
                 axle_verified=True if axl else (False if d.get("axle_verdict") == "failed" else None),
             )
-            prov = _provenance_for(module, d["name"], verdicts)
+            prov = _provenance_for(module, name, verdicts)
             if prov.get("kind_override") is not None:
                 facts.kind = prov["kind_override"]
             facts.conditional_rung = prov.get("conditional_rung")
@@ -184,12 +198,26 @@ def generate(attest_dir: str, verdicts_path: str) -> dict[str, Any]:
     # (its hypothesis/conclusion is now proved elsewhere) is reclassified DISCHARGED — no longer
     # open frontier, but distinct from PROVED since it is a conditional-form lemma. Honest count:
     # DISCHARGED is NOT counted as an open conditional and NOT as an unconditional PROVED.
-    proved = {e["name"] for e in entries if e["register"] == "PROVED"}
-    proved |= {e["name"].split(".")[-1] for e in entries if e["register"] == "PROVED"}
+    # discharged_by is resolved UNAMBIGUOUSLY: either a fully-qualified PROVED name,
+    # or a short name matching exactly ONE PROVED entry across the whole registry.
+    # A colliding short name (same short name in several PROVED modules) must NOT
+    # discharge anything — it stays CONDITIONAL with a stderr warning.
+    full_names = {e["name"] for e in entries if e["register"] == "PROVED"}
+    by_short: dict[str, set[str]] = defaultdict(set)
+    for n in full_names:
+        by_short[n.split(".")[-1]].add(n)
     for e in entries:
         db = e.get("discharged_by")
-        if e["register"] == "CONDITIONAL" and db and db in proved:
+        if e["register"] != "CONDITIONAL" or not db:
+            continue
+        if db in full_names or len(by_short.get(db, ())) == 1:
             e["register"] = "DISCHARGED"
+        elif len(by_short.get(db, ())) > 1:
+            print(
+                f"WARNING: {e['name']}: discharged_by {db!r} is ambiguous among PROVED "
+                f"theorems {sorted(by_short[db])}; leaving CONDITIONAL",
+                file=sys.stderr,
+            )
     by_reg: dict[str, int] = {}
     for e in entries:
         by_reg[e["register"]] = by_reg.get(e["register"], 0) + 1
