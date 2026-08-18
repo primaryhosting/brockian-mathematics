@@ -9,11 +9,12 @@ set -a
 [ -f "$HOME/.openclaw/vault-bridges.env" ] && source "$HOME/.openclaw/vault-bridges.env"
 set +a
 : "${SOLVER_NOTIFY_TO:=chrisbrock54@gmail.com}"
+: "${SOLVER_NOTIFY_EMAIL:=0}"   # daily-digest email is OPT-IN; outbox + Today tile are primary
 : "${AXLE_MAX:=120}"
 : "${HARVEST_ALL_MAX:=80}"
 : "${CROSS_MAX:=6}"
 : "${CONVEYOR_VERIFY_BUDGET:=900}"
-export SOLVER_NOTIFY_TO AXLE_MAX HARVEST_ALL_MAX CROSS_MAX CONVEYOR_VERIFY_BUDGET
+export SOLVER_NOTIFY_TO SOLVER_NOTIFY_EMAIL AXLE_MAX HARVEST_ALL_MAX CROSS_MAX CONVEYOR_VERIFY_BUDGET
 # Lovable manager bearer token: read from the manager's own launchd plist so
 # /queue-submit auth always matches what the manager accepts. Never printed.
 if [ -z "$OPENCLAW_AUTH_TOKEN" ]; then
