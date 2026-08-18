@@ -445,7 +445,7 @@ def post_paperclip_issue(payload, base=None, company_id=None, opener=None):
             body = r.read()
         issue = json.loads(body)
         if not isinstance(issue, dict) or not issue.get("id"):
-            log(f"paperclip create returned unexpected body; treating as failure")
+            log("paperclip create returned unexpected body; treating as failure")
             return None
         return issue
     except Exception as e:  # noqa: BLE001
@@ -453,7 +453,34 @@ def post_paperclip_issue(payload, base=None, company_id=None, opener=None):
         return None
 
 
-PENDING_PAPERCLIP_KEEP = 50
+# Cap sized above the largest real backlog seen (142 receipts on 2026-08-18
+# while :3101 was down); trimming past it permanently drops attributions
+# because the cursor has already advanced, so it must never trim silently.
+PENDING_PAPERCLIP_KEEP = 500
+
+
+def _trim_pending_paperclip(pending):
+    """Trim the retry queue to the cap, LOUDLY: anything trimmed here is an
+    attribution permanently lost (the cursor is already past its receipt)."""
+    kept = pending[-PENDING_PAPERCLIP_KEEP:]
+    dropped = len(pending) - len(kept)
+    if dropped:
+        log(f"pending_paperclip over cap ({len(pending)} > "
+            f"{PENDING_PAPERCLIP_KEEP}): PERMANENTLY dropping {dropped} "
+            f"oldest undelivered attribution(s): "
+            f"{[p.get('receipt_id') for p in pending[:dropped]]}")
+    return kept
+
+
+def _persist_state(state, state_path):
+    """Per-POST durability. The Paperclip API has no dedupe, so the receipt
+    guard must hit disk after EVERY successful POST: a hard kill (SIGKILL /
+    power loss — this machine's known crash mode) mid-batch then re-posts at
+    most the single in-flight issue whose success response was lost, never
+    the whole batch. state_path is None in unit tests that exercise the pure
+    guard logic without a state file."""
+    if state_path:
+        _atomic_json_dump(state, state_path)
 
 
 def _record_paperclip_issue(issues, rid, res):
@@ -464,13 +491,15 @@ def _record_paperclip_issue(issues, rid, res):
         f"for receipt {rid}")
 
 
-def flush_pending_paperclip(state, poster=None):
+def flush_pending_paperclip(state, poster=None, state_path=None):
     """Retry attribution issues queued while :3101 was down. The cursor may
     have advanced past their receipts (a successful chain does not wait for
     Paperclip), so this pending queue — not the outbox — is their only path
-    to attribution. Delivered items are guarded into paperclip_issues so a
-    crash between delivery and dump cannot duplicate (the guard is checked
-    before every POST). Returns the number delivered."""
+    to attribution. State is persisted to state_path immediately after EACH
+    successful POST (the guard is checked before every POST, and a delivered
+    item still sitting in the dumped pending list is dropped by that guard on
+    reload), so a hard kill mid-flush can duplicate at most the single
+    in-flight issue. Returns the number delivered."""
     poster = poster or post_paperclip_issue
     issues = state.setdefault("paperclip_issues", {})
     pending = state.get("pending_paperclip") or []
@@ -483,20 +512,25 @@ def flush_pending_paperclip(state, poster=None):
         res = poster(item.get("payload") or {})
         if res:
             _record_paperclip_issue(issues, rid, res)
+            _persist_state(state, state_path)
             delivered += 1
         else:
             still.append(item)
-    state["pending_paperclip"] = still[-PENDING_PAPERCLIP_KEEP:]
+    state["pending_paperclip"] = _trim_pending_paperclip(still)
+    if delivered:
+        _persist_state(state, state_path)  # drained pending list
     return delivered
 
 
-def post_attribution_issues(state, digests, poster=None):
+def post_attribution_issues(state, digests, poster=None, state_path=None):
     """Per candidate batch, POST exactly one RIE issue. Idempotency: the API
     has no dedupe (verified — originFingerprint is ignored), so the guard is
     state["paperclip_issues"][receipt_id]; a receipt already recorded is NEVER
-    re-posted. A failed POST queues the payload in state["pending_paperclip"]
-    (retried every cycle even after the cursor advances past the receipt).
-    Returns the number of issues created this call."""
+    re-posted, and state is persisted to state_path immediately after EACH
+    successful POST — a hard kill mid-batch re-posts at most the one in-flight
+    issue, never the whole batch. A failed POST queues the payload in
+    state["pending_paperclip"] (retried every cycle even after the cursor
+    advances past the receipt). Returns the number of issues created."""
     poster = poster or post_paperclip_issue
     issues = state.setdefault("paperclip_issues", {})
     pending = state.setdefault("pending_paperclip", [])
@@ -517,11 +551,12 @@ def post_attribution_issues(state, digests, poster=None):
         res = poster(payload)
         if res:
             _record_paperclip_issue(issues, rid, res)
+            _persist_state(state, state_path)
             created += 1
         else:
             pending.append({"receipt_id": rid, "payload": payload,
                             "queued_at": _now()})
-            state["pending_paperclip"] = pending[-PENDING_PAPERCLIP_KEEP:]
+            state["pending_paperclip"] = _trim_pending_paperclip(pending)
     return created
 
 
@@ -553,10 +588,13 @@ def build_proof_attempt_issue(week):
             "description": body}
 
 
-def maybe_post_proof_attempt_request(state, poster=None, now=None):
+def maybe_post_proof_attempt_request(state, poster=None, now=None,
+                                     state_path=None):
     """File the weekly proof-attempt RIE issue at most once per ISO week.
-    Guarded by state["proof_attempt_requests"][week]; a failed POST records
-    nothing so the next cycle retries. Returns True when an issue was filed."""
+    Guarded by state["proof_attempt_requests"][week], persisted to state_path
+    immediately after a successful POST (no-dedupe API — see _persist_state);
+    a failed POST records nothing so the next cycle retries. Returns True
+    when an issue was filed."""
     poster = poster or post_paperclip_issue
     week = proof_attempt_week(now)
     done = state.setdefault("proof_attempt_requests", {})
@@ -567,6 +605,7 @@ def maybe_post_proof_attempt_request(state, poster=None, now=None):
         return False
     done[week] = {"issue_id": res.get("id"),
                   "identifier": res.get("identifier"), "created_at": _now()}
+    _persist_state(state, state_path)
     log(f"weekly proof-attempt request filed: {res.get('identifier')} ({week})")
     return True
 
@@ -646,15 +685,16 @@ def run_cycle():
 
     # 1b. spend attribution: one RIE Paperclip issue per candidate batch,
     # plus the weekly proof-attempt request. Guarded by receipt_id / ISO week
-    # in state (the API has no dedupe). Persist state IMMEDIATELY after any
-    # creation: the heavy chain below can run for hours, and a crash before
-    # the end-of-cycle dump would re-post the same issues next cycle.
-    pc_flushed = flush_pending_paperclip(state)
-    filed = post_attribution_issues(state, digests)
+    # in state (the API has no dedupe). state_path=STATE makes the helpers
+    # persist state after EVERY successful POST — a hard kill (SIGKILL /
+    # power loss) mid-batch re-posts at most the single in-flight issue,
+    # never the whole batch (the live first run was 142 sequential POSTs).
+    pc_flushed = flush_pending_paperclip(state, state_path=STATE)
+    filed = post_attribution_issues(state, digests, state_path=STATE)
     cycle["paperclip_issues_filed"] = filed + pc_flushed
-    weekly = maybe_post_proof_attempt_request(state)
+    weekly = maybe_post_proof_attempt_request(state, state_path=STATE)
     if filed or pc_flushed or weekly:
-        _atomic_json_dump(state, STATE)
+        _atomic_json_dump(state, STATE)  # belt-and-suspenders + pending queue
 
     chain_ok = True
     if digests:

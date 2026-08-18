@@ -164,6 +164,102 @@ def test_partial_failure_only_retries_the_failed_receipt():
     assert "arsub_other" in retry.calls[0]["description"]
 
 
+# ------------------------------------- per-POST durability (hard-kill window)
+
+class KillAfterFirst:
+    """Succeeds on the first POST, then simulates a hard kill mid-batch."""
+
+    def __init__(self):
+        self.calls = []
+
+    def __call__(self, payload, **kw):
+        self.calls.append(payload)
+        if len(self.calls) > 1:
+            raise RuntimeError("simulated hard kill mid-batch")
+        return {"id": "issue-1", "identifier": "RIE-901"}
+
+
+def test_batch_guard_hits_disk_after_each_post(tmp_path):
+    """A hard kill between a successful POST and end-of-batch must NOT re-post
+    the already-created issues next cycle: state_path is dumped per-POST."""
+    sp = str(tmp_path / "state.json")
+    state = {}
+    with pytest.raises(RuntimeError):
+        conveyor.post_attribution_issues(
+            state, [_ev("r1"), _ev("r2")], KillAfterFirst(), state_path=sp)
+    on_disk = json.loads((tmp_path / "state.json").read_text())
+    assert on_disk["paperclip_issues"]["r1"]["identifier"] == "RIE-901"
+
+    # "reboot": reload from disk — only the un-filed receipt is posted
+    resumed = FakePoster()
+    assert conveyor.post_attribution_issues(
+        on_disk, [_ev("r1"), _ev("r2")], resumed, state_path=sp) == 1
+    assert len(resumed.calls) == 1
+    assert "r2" in resumed.calls[0]["description"]
+
+
+def test_flush_guard_hits_disk_after_each_post(tmp_path):
+    sp = str(tmp_path / "state.json")
+    state = {"pending_paperclip": [
+        {"receipt_id": "r1", "payload": {"title": "t1", "description": "d1"}},
+        {"receipt_id": "r2", "payload": {"title": "t2", "description": "d2"}},
+    ]}
+    with pytest.raises(RuntimeError):
+        conveyor.flush_pending_paperclip(state, KillAfterFirst(), state_path=sp)
+    on_disk = json.loads((tmp_path / "state.json").read_text())
+    assert "r1" in on_disk["paperclip_issues"]
+
+    # reload: the stale delivered item still in pending is dropped by the
+    # guard; only r2 is posted
+    resumed = FakePoster()
+    assert conveyor.flush_pending_paperclip(on_disk, resumed, state_path=sp) == 1
+    assert len(resumed.calls) == 1
+    assert resumed.calls[0]["title"] == "t2"
+    assert on_disk["pending_paperclip"] == []
+
+
+def test_weekly_guard_hits_disk_immediately(tmp_path):
+    sp = str(tmp_path / "state.json")
+    now = datetime.datetime(2026, 8, 18, tzinfo=datetime.UTC)  # 2026-W34
+    assert conveyor.maybe_post_proof_attempt_request(
+        {}, FakePoster(), now, state_path=sp) is True
+    on_disk = json.loads((tmp_path / "state.json").read_text())
+    assert "2026-W34" in on_disk["proof_attempt_requests"]
+
+
+def test_no_state_path_writes_no_file(tmp_path, monkeypatch):
+    """Pure-guard unit calls (state_path omitted) never touch the real state
+    file, even if conveyor.STATE points somewhere real."""
+    monkeypatch.setattr(conveyor, "STATE", str(tmp_path / "real_state.json"))
+    conveyor.post_attribution_issues({}, [_ev("r1")], FakePoster())
+    assert not (tmp_path / "real_state.json").exists()
+
+
+# ------------------------------------------------------- pending-queue cap
+
+def test_pending_trim_over_cap_is_loud(tmp_path):
+    """Trimming the retry queue permanently drops attributions (the cursor is
+    already past their receipts) — it must log, never drop silently."""
+    n_over = 3
+    pending = [{"receipt_id": f"r{i}", "payload": {"title": f"t{i}"}}
+               for i in range(conveyor.PENDING_PAPERCLIP_KEEP + n_over)]
+    state = {"pending_paperclip": pending}
+    down = FakePoster(up=False)
+    assert conveyor.flush_pending_paperclip(state, down) == 0
+    assert len(state["pending_paperclip"]) == conveyor.PENDING_PAPERCLIP_KEEP
+    # oldest were dropped, newest kept
+    assert state["pending_paperclip"][0]["receipt_id"] == f"r{n_over}"
+    logged = open(conveyor.LOG, encoding="utf-8").read()
+    assert "PERMANENTLY dropping 3" in logged
+    assert "'r0'" in logged and "'r2'" in logged
+
+
+def test_cap_covers_the_real_142_receipt_backlog():
+    """The live first run queued 142 receipts while :3101 was down; the cap
+    must hold at least that with headroom."""
+    assert conveyor.PENDING_PAPERCLIP_KEEP >= 142 * 2
+
+
 # ------------------------------------------------- weekly proof-attempt issue
 
 def test_weekly_proof_attempt_filed_once_per_iso_week():
