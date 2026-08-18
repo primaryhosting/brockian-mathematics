@@ -393,12 +393,31 @@ def find_attestation_smells(repo: Path, attest_dir: Path, root: Path) -> list[Fi
         if att.get("module_verified") is not True:
             findings.append(
                 Finding(
-                    "WARN",
+                    "ERROR",
                     "attestation-unverified",
                     path.name,
                     f"module_verified is {att.get('module_verified')!r}",
                 )
             )
+        for dec in att.get("declarations") or []:
+            if not isinstance(dec, dict):
+                continue
+            name = str(dec.get("name", ""))
+            if "sorryAx" in (dec.get("axioms") or []):
+                findings.append(
+                    Finding("ERROR", "attestation-sorry-axiom", path.name,
+                            f"{name} axioms include sorryAx (proof-by-sorry)")
+                )
+            if dec.get("axioms_ok") is False:
+                findings.append(
+                    Finding("ERROR", "attestation-axioms-not-ok", path.name,
+                            f"{name} axioms_ok is False")
+                )
+            if dec.get("axle_verdict") == "failed":
+                findings.append(
+                    Finding("ERROR", "attestation-axle-failed", path.name,
+                            f"{name} axle_verdict is 'failed'")
+                )
     for module, names in sorted(modules.items()):
         if module and len(names) > 1:
             findings.append(
