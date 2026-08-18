@@ -374,6 +374,14 @@ def _axle_counts():
     return {"axle_entries": len(st), "axle_verified": verified}
 
 
+def notify_key(digests, fp, chain_ok):
+    """Dedupe key for the Lovable status card: same receipts + same
+    attestation fingerprint + same chain outcome = the same card. Stored in
+    state["last_notified"] so an unchanged repeat is never re-queued."""
+    rids = ",".join(sorted(ev.get("receipt_id") or "" for ev in digests))
+    return hashlib.sha256(f"{rids}|{fp}|{chain_ok}".encode()).hexdigest()
+
+
 def build_lovable_prompt(cycle):
     cands = cycle.get("candidates") or []
     names = ", ".join(sorted({c["name"] for c in cands})[:20])
@@ -415,6 +423,10 @@ def run_cycle():
     flushed = flush_pending_lovable(state)
     if flushed:
         cycle["lovable_flushed"] = flushed
+        # Persist the drained pending list NOW: the heavy chain below can run
+        # for hours, and a crash before the end-of-cycle dump would resurrect
+        # already-delivered events next cycle (duplicate delivery).
+        _atomic_json_dump(state, STATE)
 
     # 1. read outbox from the cursor
     digests = new_digests(read_outbox_events(), processed)
@@ -478,10 +490,17 @@ def run_cycle():
 
     cycle["finished_at"] = _now()
 
-    # 4. notify (queue-submit only; approval-gated downstream)
-    did_work = bool(digests) or cycle["registry_hop"].get("ran")
-    if did_work and not first_run:
+    # 4. notify (queue-submit only; approval-gated downstream). Only COMPLETED
+    # work notifies: a failed or deferred chain keeps the cursor, so notifying
+    # would queue a near-duplicate card every 15 min for the whole outage — and
+    # each card would falsely claim "digests processed: N". Belt-and-braces, a
+    # dedupe key over (receipts, fingerprint, outcome) skips unchanged repeats
+    # (e.g. a registry hop failing the same way on the same attestations).
+    did_work = (bool(digests) and chain_ok) or cycle["registry_hop"].get("ran")
+    key = notify_key(digests, fp, chain_ok)
+    if did_work and not first_run and state.get("last_notified") != key:
         queue_or_send_lovable(state, build_lovable_prompt(cycle))
+        state["last_notified"] = key
 
     state["updated_at"] = _now()
     state["last_cycle"] = cycle

@@ -355,3 +355,92 @@ def test_post_lovable_targets_queue_submit_only(monkeypatch):
     assert captured["url"].endswith("/queue-submit")
     assert captured["payload"] == {
         "items": [{"project": "spectral", "prompt": "hello"}]}
+
+
+# --------------------------------------------------------- notify idempotency
+
+def test_failed_chain_cycle_run_twice_never_notifies(tmp_path, monkeypatch):
+    """A failed chain keeps the cursor, so every 15-min retry re-detects the
+    same receipts. It must NOT queue a status card each time (the card would
+    falsely claim the digests were processed). Reviewer bound: at most once;
+    with completed-work gating the correct count is zero."""
+    _isolate(tmp_path, monkeypatch, [_digest_event("aristotle_notice_fail")],
+             cursor_obj={"processed_receipt_ids": [],
+                         "attestation_fingerprint":
+                             conveyor.attestation_fingerprint(
+                                 str(tmp_path / "attest"))})
+    fail = conveyor.StageResult(name="harvest_proofs", status="failed",
+                                rc=1, seconds=0.1, tail="boom")
+    with patch.object(conveyor, "run_chain",
+                      return_value=([fail], False)), \
+         patch.object(conveyor.subprocess, "run") as prun, \
+         patch.object(conveyor, "post_lovable_queue",
+                      return_value=True) as post:
+        prun.return_value.returncode = 1  # pgrep: no verify_stage running
+        conveyor.run_cycle()   # failed-chain cycle
+        conveyor.run_cycle()   # 15 min later: same receipts, fails again
+    assert post.call_count == 0
+
+
+def test_deferred_chain_pgrep_guard_never_notifies(tmp_path, monkeypatch):
+    """verify_stage already running -> chain deferred; no status card either."""
+    _isolate(tmp_path, monkeypatch, [_digest_event("aristotle_notice_defer")],
+             cursor_obj={"processed_receipt_ids": [],
+                         "attestation_fingerprint":
+                             conveyor.attestation_fingerprint(
+                                 str(tmp_path / "attest"))})
+    with patch.object(conveyor, "run_chain",
+                      side_effect=AssertionError("chain must not run")), \
+         patch.object(conveyor.subprocess, "run") as prun, \
+         patch.object(conveyor, "post_lovable_queue",
+                      return_value=True) as post:
+        prun.return_value.returncode = 0  # pgrep: verify_stage IS running
+        cycle = conveyor.run_cycle()
+    assert cycle["stopped_reason"] == "verify_stage already running; deferred"
+    assert post.call_count == 0
+
+
+def test_repeating_failed_registry_hop_notifies_once(tmp_path, monkeypatch):
+    """A registry hop failing the same way on the same attestations (stale
+    fingerprint retained for retry) sends exactly one card, not one per
+    15-min cycle — deduped by state['last_notified']."""
+    attest = _isolate(tmp_path, monkeypatch, [],
+                      cursor_obj={"processed_receipt_ids": [],
+                                  "attestation_fingerprint": "stale"})
+    (attest / "Mod.json").write_text('{"module": "Mod"}')
+    hop = conveyor.StageResult(name="audit_strict", status="failed", rc=1,
+                               seconds=0.0, tail="")
+    with patch.object(
+            conveyor, "run_registry_hop",
+            return_value=([hop], False,
+                          "audit_registry_consistency --strict failed")), \
+         patch.object(conveyor, "post_lovable_queue",
+                      return_value=True) as post:
+        conveyor.run_cycle()
+        conveyor.run_cycle()
+    assert post.call_count == 1
+
+
+def test_flushed_pending_events_persist_before_heavy_chain(
+        tmp_path, monkeypatch):
+    """Delivered pending events must be persisted immediately after the flush:
+    the heavy chain can run for hours, and a crash before the end-of-cycle
+    state dump must not resurrect already-delivered events (dup delivery)."""
+    _isolate(tmp_path, monkeypatch, [_digest_event("aristotle_notice_crash")],
+             cursor_obj={"processed_receipt_ids": [],
+                         "attestation_fingerprint": "stale"})
+    (tmp_path / "state.json").write_text(json.dumps({
+        "pending_lovable_events": [
+            {"queued_at": "2026-08-18T00:00:00+00:00",
+             "project": "spectral", "prompt": "queued while :18793 was down"}],
+    }))
+    with patch.object(conveyor, "post_lovable_queue", return_value=True), \
+         patch.object(conveyor.subprocess, "run") as prun, \
+         patch.object(conveyor, "run_chain",
+                      side_effect=RuntimeError("crash mid-chain")), \
+         pytest.raises(RuntimeError):
+        prun.return_value.returncode = 1  # pgrep: no verify_stage running
+        conveyor.run_cycle()
+    # the delivered event is already gone from the persisted state on disk
+    persisted = json.loads((tmp_path / "state.json").read_text())
+    assert persisted["pending_lovable_events"] == []
