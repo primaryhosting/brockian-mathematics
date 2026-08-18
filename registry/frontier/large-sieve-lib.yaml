@@ -1,0 +1,30 @@
+# External frontier project record (non-built, NOT part of the verified core).
+# Added per the third-party audit "LargeSieveLib × Brockian Mathematics ×
+# Axiom PrimeGapsLib" (2026-08-18), §5 "Add a frontier record to Brockian".
+#
+# HONESTY GATE: the headline theorems of this project are NOT registered as
+# PROVED or CONDITIONAL anywhere in registry/theorems.json and must not be
+# until the standalone project has actually verified declarations
+# (sorry-free build, permitted axioms only, Comparator clean, independent
+# verification, human review).
+
+id: large-sieve-lib
+lane: classical-bombieri-vinogradov
+repository: riemannlabs/LargeSieveLib   # local working copy: ~/Projects/LargeSieveLib (not yet pushed anywhere)
+status: statement-audit
+verified_import: false
+relationship:
+  - upstream-of: axiom-prime-gaps-bv-hypothesis
+  - distinct-from: prime-pair-equidistribution-hypothesis
+
+notes: >
+  v0.2 contract-repair state (2026-08-18): entirely red — 2 trusted-contract
+  placeholders + 18 library placeholders, all sorry'd statements. Targets the
+  CLASSICAL Bombieri-Vinogradov lane (single primes in APs, averaged over
+  moduli), which is distinct from Brockian/EquidistributionBVReduction.lean's
+  prime-pair Hardy-Littlewood hypothesis (BVPrimePairAsymptotic). Headline
+  targets: additive large sieve with constant 2πN + 1/δ and multiplicative
+  large sieve with constant 2πN + Q². Does not prove Bombieri-Vinogradov or
+  make PrimeGapsLib unconditional.
+audit: LargeSieveLib docs/AUDIT-2026-08-18.md
+recorded: 2026-08-18
