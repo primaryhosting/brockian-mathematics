@@ -241,7 +241,8 @@ def render(doc: dict[str, Any]) -> str:
 <header class="hero">
   <h1>Observatory</h1>
   <p class="sub">{prog} — public claim surface. Badges are derived from the
-  machine-verified Lean registry; they are never hand-painted.</p>
+  AXLE-attested Lean registry (independent cloud re-check at lean-4.32.0 + axiom audit;
+  local from-source lake build pending); they are never hand-painted.</p>
   <div class="pills">{reg_pills}</div>
   <div class="pills">{status_pills}</div>
   <p class="meta">Generated {gen} · from <code>registry/theorems.json</code> +
