@@ -47,7 +47,8 @@ the dihedral group $D_5$ inside $\mathrm{Aut}(C_5)$; an exact local-covariance k
 Goldbach residual; and a ``silver'' spectral alphabet governing a sieve on prime constellations.
 Equally, we contribute the \emph{method}: an audit ledger of named failure modes, a four-tier
 register (\textsc{proved}/\textsc{computation}/\textsc{conditional}/\textsc{conjecture}), a
-\emph{triple-verification} gate (local build $+$ axiom check $+$ independent re-check), and a
+\emph{triple-verification} gate (independent AXLE re-check $+$ axiom audit, with a
+local-build leg tracked per entry and currently pending), and a
 machine-generated registry that makes it structurally impossible to label a result verified
 that the build does not earn. We are deliberate about what is \emph{not} proved: the
 Riemann-Hypothesis attack is formalised only as an open schema, and its status is recorded as
@@ -121,13 +122,18 @@ Every declaration in the core carries exactly one \emph{register}, and the regis
 
 \subsection{Triple verification}\label{sec:triple}
 A \textsc{proved} label requires three independent checks to agree:
-(1) a local \lean{lake build} on the pinned toolchain; (2) a local axiom audit via
-\lean{\#print axioms}; and (3) an independent re-check by \emph{AXLE}~\cite{axle}, a
+(1) a local \lean{lake build} on the pinned toolchain; (2) an axiom audit (currently
+carried by the AXLE re-check, which reports the axiom footprint; a local
+\lean{\#print axioms} reproduction accompanies the local build); and (3) an independent
+re-check by \emph{AXLE}~\cite{axle}, a
 cloud-hosted Lean~4 engine that recompiles each proof against Mathlib at a named environment
 (\lean{lean-4.32.0}) and, via its \lean{verify\_proof} tool, checks that the proof discharges
 the intended statement rather than a drifted one. Because generative provers can self-report
-success while smuggling a custom axiom, no engine is trusted on its own word: the three gates
-run on every proof regardless of its provenance. A subtle but important point: a \lean{sorry}
+success while smuggling a custom axiom, no generating engine is trusted on its own word: the
+axiom audit (2) and independent re-check (3) are recorded per-entry in the registry for every
+proof regardless of its provenance; the local lake-build leg (1) is tracked per entry and is
+currently pending across the corpus (see the Honest-limitation remark in \S\ref{sec:repro}),
+with CI defined to supply it where the Mathlib cache is reachable. A subtle but important point: a \lean{sorry}
 raises a \emph{warning}, not an error, so a naive ``did it compile'' check passes it; our gate
 treats any sorry/admit warning, and any \lean{sorry}-derived axiom, as a hard failure.
 

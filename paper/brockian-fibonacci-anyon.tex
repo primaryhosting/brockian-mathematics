@@ -30,7 +30,7 @@
 \newcommand{\lean}[1]{\texttt{\small #1}}
 \newcommand{\verified}{\textcolor{green!60!black}{\checkmark}}
 
-\title{Machine-Verified Fibonacci Anyon Fusion Rules\\via Pentagonal Prime Dynamics}
+\title{Machine-Verified Fibonacci Anyon Fusion Rules\thanks{``Machine-verified'' here means checked by the Aristotle (Harmonic) generation pipeline. Most theorems cited in this paper await independent AXLE re-check and registry integration; see the provenance caveat in Section~\ref{sec:verification}.}\\via Pentagonal Prime Dynamics}
 
 \author{Christopher Brock\\
   Riemann Labs / QuantumProof\\
@@ -53,8 +53,10 @@ gap identity $\varphi - 1/\varphi = 1$, and the contractivity $|\psi| < 1$ of th
 subdominant eigenvalue --- all kernel-checked in Lean~4 with Mathlib.
 These results provide the first formally verified foundation for the algebraic
 data underlying topological quantum computation with Fibonacci anyons.
-The full verification comprises 2,023 machine-checked theorems across 171
-Aristotle (Harmonic) projects, totalling 64,538 lines of Lean~4 code.
+The full verification corpus comprises 2,023 theorems checked by the Aristotle
+(Harmonic) generation pipeline across 171 projects, totalling 64,538 lines of
+Lean~4 code; independent re-check (AXLE) and attested-registry integration of
+the cited theorems is in progress (see Section~\ref{sec:verification}).
 \end{abstract}
 
 \noindent\textbf{MSC 2020:} 11A41, 11B39, 81P68, 68V15\\
@@ -332,6 +334,20 @@ The Lean source code for all theorems cited in this paper is available at:
   \url{https://github.com/riemannlabs/brockian-mathematics}
 \end{center}
 
+\paragraph{Provenance caveat.}
+The counts above are Aristotle generator self-reports: each project's output
+was checked by the Aristotle/Harmonic pipeline at generation time, but most
+have not yet been independently re-checked (AXLE cloud kernel) nor integrated
+into the attested registry (\texttt{registry/theorems.json}) that backs this
+project's public claims. Of the theorems cited in
+Table~\ref{tab:theorems}, four currently have attested registry counterparts
+(\lean{Brockian.Core.binet\_formula}, \lean{Brockian.Penrose.phi\_squared},
+\lean{Brockian.Penrose.phi\_sum\_conjugate},
+\lean{Brockian.Penrose.phi\_product\_conjugate}); the remaining fourteen,
+including all matrix/spectral and $D_5$ results, are generator self-reports
+pending AXLE re-check and registry integration. A local \texttt{lake build}
+of the registry on its pinned toolchain is likewise pending across the corpus.
+
 % ══════════════════════════════════════════════════════════════════════════════
 \section{Discussion}\label{sec:discussion}
 % ══════════════════════════════════════════════════════════════════════════════
@@ -479,7 +495,7 @@ arXiv:2603.26342 (2026).
 \lean{trace\_rotation\_eq\_golden} & $\mathrm{tr}(\rho(r)) = \varphi - 1$ & \verified \\
 \bottomrule
 \end{tabular}
-\caption{Machine-verified theorems cited in this paper. All checked in Lean~4 v4.24.0 + Mathlib.}
+\caption{Theorems cited in this paper, as reported by the Aristotle (Harmonic) generation pipeline (Lean~4 v4.24.0 + Mathlib). \emph{Provenance:} four table theorems currently have attested registry counterparts (\lean{Brockian.Core.binet\_formula}, \lean{Brockian.Penrose.phi\_squared}, \lean{Brockian.Penrose.phi\_sum\_conjugate}, \lean{Brockian.Penrose.phi\_product\_conjugate}); the remaining fourteen, including all matrix/spectral and $D_5$ results, are generator self-reports pending AXLE re-check and registry integration (see Section~\ref{sec:verification}).}
 \label{tab:theorems}
 \end{table}
 
