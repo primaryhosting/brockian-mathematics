@@ -1,7 +1,15 @@
 # Brockian Verified Mathematics — Program Status
 
-*A live status report. Every number here is derived from `registry/theorems.json` (mechanically
-generated from AXLE attestations); nothing is hand-asserted. Regenerate with
+> **Staleness note (2026-08-18):** Snapshot last updated 2026-08-04. The live
+> `registry/theorems.json` now records **PROVED 11,126 / DISCHARGED 7** (confirmed as a verified
+> no-op regeneration in commit `ee94165`); the "Commits in the last 6 hours" figure is frozen from
+> snapshot time. Regenerate before quoting numbers. Note: no script currently regenerates this
+> file — `scripts/gen_program_report.py` writes `docs/PROGRAM-REPORT.md` (itself stale at PROVED
+> 10,568), and `scripts/gen_registry.py` regenerates the registry, not this doc; numbers here must
+> be synced by hand from the registry summary until a generator exists.
+
+*A status report. Numbers below are copied from the `registry/theorems.json` summary (mechanically
+generated from AXLE attestations) at snapshot time; sync by hand from the registry summary after
 `python3 scripts/gen_registry.py`.*
 
 ## Snapshot
