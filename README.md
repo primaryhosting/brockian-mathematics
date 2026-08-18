@@ -33,7 +33,7 @@ Each declaration carries exactly one *register*, derived mechanically — never 
 
 | Register | Meaning | Gate |
 |----------|---------|------|
-| **PROVED** | sorry-free, `#print axioms ⊆ {propext, Classical.choice, Quot.sound}`, no `native_decide`, **and** independently verified by AXLE | all three legs must pass |
+| **PROVED** | sorry-free, axiom footprint ⊆ {propext, Classical.choice, Quot.sound} and no native_decide (as reported by AXLE), and independently re-checked by AXLE at lean-4.32.0 including statement fidelity | AXLE re-check passes; local from-source `lake build` NOT yet reproduced (registry lake_build: 'pending') |
 | **COMPUTATION** | finite `decide` / `native_decide` checks | recorded as computation, never PROVED |
 | **CONDITIONAL** | depends on a named hypothesis; records its rung (classical / literature / open) | never counted as unconditional evidence |
 | **CONJECTURE** | a named `def` / Prop container | never typed as a theorem |
@@ -43,9 +43,9 @@ The register lives in a machine-generated registry (`registry/theorems.json`, re
 single source of truth. A theorem cannot be labelled PROVED unless the build and an
 independent third-party check both agree.
 
-### Triple verification
+### Verification legs
 
-A **PROVED** theorem passes three independent legs:
+A **PROVED** theorem is *intended* to pass three independent legs:
 
 1. **local `lake build`** on the pinned toolchain,
 2. **local `#print axioms`** — only the three standard axioms,
@@ -53,8 +53,17 @@ A **PROVED** theorem passes three independent legs:
    Lean 4 + Mathlib prover that re-checks the proof at a named environment (`lean-4.32.0`),
    including statement fidelity.
 
-This directly closes the intake ledger's long-standing caveat that no independent build had
-ever been run. Per-declaration attestations live in `registry/attestations/`.
+Of these three legs, only the AXLE cloud re-check has actually run across the corpus. That
+re-check also reports the axiom footprint (leg 2 — only the three standard axioms, no
+`native_decide`) and statement fidelity, so legs 2 and 3 are covered by AXLE. **Leg 1 — a
+local from-source `lake build` on the pinned toolchain — is pending for every entry**: the
+registry marks `lake_build: 'pending'` for all 11,819 declarations, pending CI/local compute
+with a reachable Mathlib cache.
+
+An independent third-party cloud re-check (AXLE, at the pinned lean-4.32.0 environment) has
+run across the corpus; a local from-source `lake build` has still not been reproduced and is
+tracked as pending in the registry. Per-declaration attestations live in
+`registry/attestations/`.
 
 ## Verified so far
 
