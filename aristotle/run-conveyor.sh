@@ -14,7 +14,12 @@ set +a
 : "${HARVEST_ALL_MAX:=80}"
 : "${CROSS_MAX:=6}"
 : "${CONVEYOR_VERIFY_BUDGET:=900}"
-export SOLVER_NOTIFY_TO SOLVER_NOTIFY_EMAIL AXLE_MAX HARVEST_ALL_MAX CROSS_MAX CONVEYOR_VERIFY_BUDGET
+# Obsidian knowledge-graph leg (post-audit registry changes only; never a
+# cycle blocker — the vault is a slow USB volume that may be unmounted).
+: "${OBSIDIAN_VAULT:=/Volumes/BCC-Storage/knowledge/brockian-math}"
+: "${OBSIDIAN_EXPORT_BUDGET:=240}"
+: "${CONVEYOR_OBSIDIAN_TIMEOUT:=300}"
+export SOLVER_NOTIFY_TO SOLVER_NOTIFY_EMAIL AXLE_MAX HARVEST_ALL_MAX CROSS_MAX CONVEYOR_VERIFY_BUDGET OBSIDIAN_VAULT OBSIDIAN_EXPORT_BUDGET CONVEYOR_OBSIDIAN_TIMEOUT
 # Lovable manager bearer token: read from the manager's own launchd plist so
 # /queue-submit auth always matches what the manager accepts. Never printed.
 if [ -z "$OPENCLAW_AUTH_TOKEN" ]; then

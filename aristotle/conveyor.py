@@ -56,6 +56,12 @@ a resident daemon). Each cycle:
      stages ONE conveyor_daily_digest outbox event for the prior day (email
      remains behind the SOLVER_NOTIFY_EMAIL opt-in, default OFF).
 
+  7. KNOWLEDGE-GRAPH LEG (scripts/export_obsidian.py): a registry hop that
+     completed AND passed audit --strict refreshes the Obsidian vault notes
+     on /Volumes/BCC-Storage (one note per PROVED module + honest index).
+     Subprocess + timeout, content-hash idempotent, NEVER a cycle blocker —
+     an unmounted or stalled USB vault is recorded and skipped.
+
 State + cursor use atomic writes (temp + fsync + rename — the same pattern as
 solver_watch._atomic_json_dump) so a crash or ENOSPC preserves the prior file.
 """
@@ -336,6 +342,30 @@ def run_registry_hop(runner=_run_repo_script):
     if res["status"] != "ok":
         return results, False, "gen_observatory failed"
     return results, True, None
+
+
+# ------------------------------------------------- obsidian knowledge-graph leg
+
+def run_obsidian_export(runner=None, timeout=None):
+    """Vault knowledge-graph export (scripts/export_obsidian.py). Called ONLY
+    after a registry hop that passed audit --strict (the caller guards), and
+    NON-BLOCKING by construction: it runs as a subprocess with its own
+    timeout, every outcome (including the vault being unmounted or the USB
+    volume stalling) is recorded in the cycle and NEVER affects chain_ok,
+    the cursor, or the attestation fingerprint. Kill switch:
+    CONVEYOR_OBSIDIAN=0."""
+    if os.environ.get("CONVEYOR_OBSIDIAN", "1") != "1":
+        return {"ran": False, "note": "disabled via CONVEYOR_OBSIDIAN=0"}
+    try:
+        res = (runner or _run_repo_script)(
+            "export_obsidian", ["scripts/export_obsidian.py"],
+            timeout=int(timeout
+                        or os.environ.get("CONVEYOR_OBSIDIAN_TIMEOUT", "300")))
+        return {"ran": True, "status": res["status"],
+                "tail": (res.get("tail") or "")[-300:]}
+    except Exception as e:  # noqa: BLE001 — belt-and-braces: never blocks
+        log(f"obsidian export failed (non-blocking): {e}")
+        return {"ran": True, "status": "error", "tail": str(e)[:300]}
 
 
 # ---------------------------------------------------------------- lovable queue
@@ -842,6 +872,13 @@ def run_cycle():
             # deterministic receipt over (before, after, new names).
             proved_after = conveyor_notify.registry_proved_snapshot()
             maybe_queue_proved_draft(state, cycle, proved_before, proved_after)
+            # KNOWLEDGE-GRAPH LEG: the registry just changed AND passed audit
+            # --strict, so refresh the Obsidian vault notes. Guarded (only
+            # here, never on an unchanged or failed hop) and non-blocking
+            # (subprocess + timeout; a stalled USB vault is recorded, never
+            # fatal — the export is content-hash idempotent so the next
+            # successful run converges).
+            cycle["obsidian_export"] = run_obsidian_export()
         else:
             cycle["stopped_reason"] = cycle["stopped_reason"] or why
     elif fp != last_fp:

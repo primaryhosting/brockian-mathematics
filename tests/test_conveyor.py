@@ -33,6 +33,16 @@ def _no_real_notify(monkeypatch):
                         lambda state, **kw: None)
 
 
+@pytest.fixture(autouse=True)
+def _no_real_obsidian(monkeypatch):
+    """The knowledge-graph leg must never reach the real Obsidian vault on
+    /Volumes/BCC-Storage from run_cycle unit tests. Dedicated export tests
+    (tmp vault) live in tests/test_export_obsidian.py."""
+    monkeypatch.setattr(
+        conveyor, "run_obsidian_export",
+        lambda **kw: {"ran": False, "note": "mocked in unit tests"})
+
+
 # Real outbox lines (verbatim shapes from aristotle/solver_notification_outbox.jsonl)
 REAL_DIGEST_BODY = (
     "2 Aristotle projects completed in this poll.\n"
