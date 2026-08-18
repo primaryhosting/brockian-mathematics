@@ -7,6 +7,16 @@ import pytest
 from aristotle import conveyor
 
 
+@pytest.fixture(autouse=True)
+def _no_real_paperclip(monkeypatch):
+    """The spend-attribution hop must never reach the real Paperclip :3101
+    from unit tests. Dedicated idempotency tests live in
+    tests/test_conveyor_paperclip.py and inject their own posters."""
+    monkeypatch.setattr(
+        conveyor, "post_paperclip_issue",
+        lambda payload, **kw: {"id": "test-issue-id", "identifier": "RIE-0"})
+
+
 # Real outbox lines (verbatim shapes from aristotle/solver_notification_outbox.jsonl)
 REAL_DIGEST_BODY = (
     "2 Aristotle projects completed in this poll.\n"

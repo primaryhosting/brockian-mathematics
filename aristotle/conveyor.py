@@ -29,6 +29,24 @@ a resident daemon). Each cycle:
      project key "spectral" — the manager's approval gate + pending-approvals
      queue is the point; the conveyor never publishes or deploys. If :18793 is
      down the event is queued in conveyor_state.json and retried next cycle.
+  5. SPEND ATTRIBUTION (Paperclip): per candidate batch (= one solver digest
+     receipt) it POSTs exactly ONE Riemann Labs issue to Paperclip :3101 —
+     "Aristotle: <project> — candidate ready" with the candidates + local
+     verdict-evidence links in the body. The Paperclip create endpoint IGNORES
+     client-supplied originFingerprint (verified 2026-08-18: the probe's
+     originKind/originFingerprint came back "manual"/"default"), so the API
+     provides NO dedupe — idempotency is guarded client-side in
+     conveyor_state.json ("paperclip_issues", keyed by receipt_id) and the
+     state is persisted immediately after each successful POST, so re-running
+     a cycle NEVER duplicates an issue. If :3101 is down the payload is queued
+     in state["pending_paperclip"] and retried every cycle (the cursor can
+     advance past the receipt, so the pending queue — not the outbox — is the
+     retry path, mirroring pending_lovable_events). It also files ONE weekly
+     RIE issue requesting a Hermes proof attempt against this repo — the
+     replacement for the dead ~/.hermes/cron/proof-attempt.json nightly job
+     (the hermes cron scheduler only loads cron/jobs.json; the per-name file
+     was never executed and now carries enabled:false). Issues are left
+     UNASSIGNED (NOETHER is in an error state and must not be assigned).
 
 State + cursor use atomic writes (temp + fsync + rename — the same pattern as
 solver_watch._atomic_json_dump) so a crash or ENOSPC preserves the prior file.
@@ -364,6 +382,195 @@ def queue_or_send_lovable(state, prompt, poster=None):
     return True
 
 
+# ------------------------------------------------- paperclip spend attribution
+
+PAPERCLIP_BASE = os.environ.get("CONVEYOR_PAPERCLIP_BASE", "http://127.0.0.1:3101")
+# Riemann Labs (prefix RIE) — from the Paperclip company registry.
+RIEMANN_COMPANY_ID = os.environ.get(
+    "CONVEYOR_PAPERCLIP_COMPANY", "2305362b-28e3-4fa0-93b3-cc8eab3165f2")
+REPO_PATH = "/Users/acutis/Projects/brockian-mathematics"
+
+VERDICT_LINKS = (
+    "Verdict evidence (local, honest — candidates are NOT registry-PROVED "
+    "until verification passes):\n"
+    f"- watcher verdicts per project uuid: {REPO_PATH}/aristotle/solver_state.json\n"
+    f"- independent AXLE verdicts:        {REPO_PATH}/aristotle/axle_verify.json\n"
+    f"- registry truth (post-audit only): {REPO_PATH}/registry/theorems.json\n"
+    f"- provenance / verdict map:         {REPO_PATH}/provenance/verdicts.yaml"
+)
+
+
+def paperclip_issue_title(candidates):
+    names = sorted({c["name"] for c in candidates})
+    first = names[0] if names else "solver batch"
+    extra = f" (+{len(names) - 1} more)" if len(names) > 1 else ""
+    return f"Aristotle: {first}{extra} — candidate ready"
+
+
+def build_paperclip_issue(ev, candidates):
+    """One issue payload per digest batch: title from the project name(s),
+    body = the candidates + verdict-evidence links + the receipt id (the
+    idempotency key, stated in-band so the attribution is auditable)."""
+    lines = [
+        "Aristotle solver batch produced proof CANDIDATE(s) — spend attribution.",
+        f"Receipt (idempotency key): {ev.get('receipt_id')}",
+        "",
+        "Candidates:",
+    ]
+    for c in candidates:
+        lines.append(f"- [{c['account']}] {c['name']} — uuid {c['uuid'] or 'unknown'}")
+    lines += ["", VERDICT_LINKS, "",
+              "Next: the conveyor's verify/attest chain runs locally; the "
+              "registry hop is gated on audit_registry_consistency --strict.",
+              "Do NOT assign NOETHER (agent in error state); leave unassigned "
+              "or assign TURING."]
+    return {"title": paperclip_issue_title(candidates),
+            "description": "\n".join(lines)}
+
+
+def post_paperclip_issue(payload, base=None, company_id=None, opener=None):
+    """POST one issue to Paperclip. Returns the created issue dict (contains
+    id + identifier, e.g. RIE-276) or None on any failure. The endpoint was
+    probed 2026-08-18: minimal {title, description} → 201; client-supplied
+    originFingerprint/originKind are IGNORED by the server, so there is no
+    server-side dedupe — callers must guard via conveyor_state."""
+    url = (f"{base or PAPERCLIP_BASE}/api/companies/"
+           f"{company_id or RIEMANN_COMPANY_ID}/issues")
+    req = urllib.request.Request(
+        url, data=json.dumps(payload).encode("utf-8"),
+        headers={"Content-Type": "application/json"}, method="POST",
+    )
+    try:
+        with (opener or urllib.request.urlopen)(req, timeout=15) as r:
+            body = r.read()
+        issue = json.loads(body)
+        if not isinstance(issue, dict) or not issue.get("id"):
+            log(f"paperclip create returned unexpected body; treating as failure")
+            return None
+        return issue
+    except Exception as e:  # noqa: BLE001
+        log(f"paperclip issue create unavailable ({e}); will retry next cycle")
+        return None
+
+
+PENDING_PAPERCLIP_KEEP = 50
+
+
+def _record_paperclip_issue(issues, rid, res):
+    issues[rid] = {"issue_id": res.get("id"),
+                   "identifier": res.get("identifier"),
+                   "created_at": _now()}
+    log(f"paperclip attribution issue {res.get('identifier')} "
+        f"for receipt {rid}")
+
+
+def flush_pending_paperclip(state, poster=None):
+    """Retry attribution issues queued while :3101 was down. The cursor may
+    have advanced past their receipts (a successful chain does not wait for
+    Paperclip), so this pending queue — not the outbox — is their only path
+    to attribution. Delivered items are guarded into paperclip_issues so a
+    crash between delivery and dump cannot duplicate (the guard is checked
+    before every POST). Returns the number delivered."""
+    poster = poster or post_paperclip_issue
+    issues = state.setdefault("paperclip_issues", {})
+    pending = state.get("pending_paperclip") or []
+    still = []
+    delivered = 0
+    for item in pending:
+        rid = item.get("receipt_id")
+        if rid in issues:
+            continue  # already filed elsewhere; drop
+        res = poster(item.get("payload") or {})
+        if res:
+            _record_paperclip_issue(issues, rid, res)
+            delivered += 1
+        else:
+            still.append(item)
+    state["pending_paperclip"] = still[-PENDING_PAPERCLIP_KEEP:]
+    return delivered
+
+
+def post_attribution_issues(state, digests, poster=None):
+    """Per candidate batch, POST exactly one RIE issue. Idempotency: the API
+    has no dedupe (verified — originFingerprint is ignored), so the guard is
+    state["paperclip_issues"][receipt_id]; a receipt already recorded is NEVER
+    re-posted. A failed POST queues the payload in state["pending_paperclip"]
+    (retried every cycle even after the cursor advances past the receipt).
+    Returns the number of issues created this call."""
+    poster = poster or post_paperclip_issue
+    issues = state.setdefault("paperclip_issues", {})
+    pending = state.setdefault("pending_paperclip", [])
+    created = 0
+    for ev in digests:
+        rid = ev.get("receipt_id")
+        if not rid or rid in issues:
+            continue
+        if any(p.get("receipt_id") == rid for p in pending):
+            continue  # already queued for retry
+        cands = parse_candidates(ev.get("body", ""))
+        if not cands:
+            # a digest with no CANDIDATE entries attributes no spend; record
+            # it so it is never re-examined as an issue source
+            issues[rid] = {"skipped": "no candidates", "at": _now()}
+            continue
+        payload = build_paperclip_issue(ev, cands)
+        res = poster(payload)
+        if res:
+            _record_paperclip_issue(issues, rid, res)
+            created += 1
+        else:
+            pending.append({"receipt_id": rid, "payload": payload,
+                            "queued_at": _now()})
+            state["pending_paperclip"] = pending[-PENDING_PAPERCLIP_KEEP:]
+    return created
+
+
+def proof_attempt_week(now=None):
+    d = now or datetime.datetime.now(datetime.UTC)
+    iso = d.isocalendar()
+    return f"{iso[0]}-W{iso[1]:02d}"
+
+
+def build_proof_attempt_issue(week):
+    """The weekly replacement for the dead nightly hermes cron job
+    (~/.hermes/cron/proof-attempt.json — never loaded by the hermes cron
+    scheduler, which reads only cron/jobs.json; the file is now enabled:false).
+    Hermes work flows through Paperclip attribution instead."""
+    body = (
+        f"Weekly proof-attempt request ({week}) — replaces the deprecated "
+        "nightly 2am hermes cron job that targeted the old Desktop Lean path.\n\n"
+        f"Target repo: {REPO_PATH}\n\n"
+        "Task: find axiomatized results (grep for `axiom`/`sorry` in "
+        "Brockian/*.lean), pick the most approachable one, attempt a proof, "
+        "and verify with `lake build`. Record the outcome honestly: an "
+        "attempt that does not compile is a FAILED attempt, never a claim.\n\n"
+        "Truth gate: registry claims only change via scripts/gen_registry.py "
+        "followed by scripts/audit_registry_consistency.py --strict.\n\n"
+        "Do NOT assign NOETHER (agent in error state); leave unassigned or "
+        "assign TURING."
+    )
+    return {"title": f"Aristotle: weekly proof attempt — {week}",
+            "description": body}
+
+
+def maybe_post_proof_attempt_request(state, poster=None, now=None):
+    """File the weekly proof-attempt RIE issue at most once per ISO week.
+    Guarded by state["proof_attempt_requests"][week]; a failed POST records
+    nothing so the next cycle retries. Returns True when an issue was filed."""
+    poster = poster or post_paperclip_issue
+    week = proof_attempt_week(now)
+    done = state.setdefault("proof_attempt_requests", {})
+    if week in done:
+        return False
+    res = poster(build_proof_attempt_issue(week))
+    if not res:
+        return False
+    done[week] = {"issue_id": res.get("id"),
+                  "identifier": res.get("identifier"), "created_at": _now()}
+    log(f"weekly proof-attempt request filed: {res.get('identifier')} ({week})")
+    return True
+
+
 # ---------------------------------------------------------------- cycle summary
 
 def _axle_counts():
@@ -436,6 +643,18 @@ def run_cycle():
     cycle["new_receipts"] = len(digests)
     cycle["candidates"] = candidates
     log(f"outbox: {len(digests)} new digest(s), {len(candidates)} candidate(s)")
+
+    # 1b. spend attribution: one RIE Paperclip issue per candidate batch,
+    # plus the weekly proof-attempt request. Guarded by receipt_id / ISO week
+    # in state (the API has no dedupe). Persist state IMMEDIATELY after any
+    # creation: the heavy chain below can run for hours, and a crash before
+    # the end-of-cycle dump would re-post the same issues next cycle.
+    pc_flushed = flush_pending_paperclip(state)
+    filed = post_attribution_issues(state, digests)
+    cycle["paperclip_issues_filed"] = filed + pc_flushed
+    weekly = maybe_post_proof_attempt_request(state)
+    if filed or pc_flushed or weekly:
+        _atomic_json_dump(state, STATE)
 
     chain_ok = True
     if digests:

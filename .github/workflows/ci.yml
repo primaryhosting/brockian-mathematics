@@ -27,7 +27,7 @@ jobs:
         run: python3 -m pip install --quiet pyyaml pytest
 
       - name: Script unit tests
-        run: python3 -m pytest tests/test_gen_registry.py tests/test_audit_registry_consistency.py tests/test_no_theater_lint.py tests/test_ingest_discover.py tests/test_conveyor.py -q
+        run: python3 -m pytest tests/test_gen_registry.py tests/test_audit_registry_consistency.py tests/test_no_theater_lint.py tests/test_ingest_discover.py tests/test_conveyor.py tests/test_conveyor_paperclip.py -q
 
       - name: No-theater lint (blocking on holes in closed modules)
         run: |
