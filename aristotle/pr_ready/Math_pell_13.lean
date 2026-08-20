@@ -34,8 +34,8 @@ set_option grind.warning false
 
 namespace Math
 
-/-- Pell's equation `x² - 13·y² = 1` has a nontrivial integer solution
-(here `x = 649`, `y = 180`). -/
+/-- Pell's equation `x² - 13 y² = 1` has a nontrivial integer solution
+(one with `y ≠ 0`), namely `(x, y) = (649, 180)`. -/
 theorem pell_13 : ∃ x y : ℤ, x ^ 2 - 13 * y ^ 2 = 1 ∧ y ≠ 0 := by
   refine ⟨649, 180, by norm_num, by norm_num⟩
 

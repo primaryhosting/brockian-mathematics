@@ -9,6 +9,44 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+namespace CS
+
+/-- Euclid's algorithm on the natural numbers: `euclid a b` repeatedly replaces
+the pair `(a, b)` by `(b % a, a)` until the first component is `0`.
+
+The definition is accepted by Lean only together with a termination proof: the
+first argument strictly decreases at each recursive call, since `b % a < a`
+whenever `a ≠ 0`. Hence `euclid` is a total function — the algorithm terminates
+on every input. -/
+def euclid (a b : Nat) : Nat :=
+  if a = 0 then b else euclid (b % a) a
+decreasing_by
+  exact Nat.mod_lt _ (Nat.pos_of_ne_zero (by assumption))
+
+@[simp] theorem euclid_zero_left (b : Nat) : euclid 0 b = b := by
+  rw [euclid]; simp
+
+/-- One step of the algorithm. -/
+theorem euclid_of_ne_zero (a b : Nat) (h : a ≠ 0) : euclid a b = euclid (b % a) a := by
+  rw [euclid]; simp [h]
+
+/-- **Correctness of Euclid's algorithm**: for all natural numbers `a` and `b`,
+the (terminating) algorithm `euclid` returns `gcd a b`. -/
+theorem euclid_gcd_correct (a b : Nat) : euclid a b = Nat.gcd a b := by
+  induction a, b using euclid.induct with
+  | case1 b => simp
+  | case2 a b h ih => rw [euclid_of_ne_zero a b h, Nat.gcd_rec, ih]
+
+/-- The value returned by Euclid's algorithm is a greatest common divisor: it
+divides both inputs, and every common divisor of the inputs divides it. -/
+theorem euclid_spec (a b : Nat) :
+    euclid a b ∣ a ∧ euclid a b ∣ b ∧ ∀ c : Nat, c ∣ a → c ∣ b → c ∣ euclid a b := by
+  rw [euclid_gcd_correct]
+  exact ⟨Nat.gcd_dvd_left a b, Nat.gcd_dvd_right a b, fun c => Nat.dvd_gcd⟩
+
+end CS
+
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -31,50 +69,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace CS
-
-/-- Euclid's algorithm, by repeated remainder.  The recursion is on the second
-argument, which strictly decreases (`a % (b+1) < b+1`); Lean accepts the
-definition precisely because this measure is well founded, so the algorithm
-terminates on every input. -/
-def euclid : Nat → Nat → Nat
-  | a, 0 => a
-  | a, b + 1 => euclid (b + 1) (a % (b + 1))
-decreasing_by exact Nat.mod_lt _ (Nat.succ_pos b)
-
-@[simp] theorem euclid_zero (a : Nat) : euclid a 0 = a := by
-  rw [euclid]
-
-theorem euclid_succ (a b : Nat) : euclid a (b + 1) = euclid (b + 1) (a % (b + 1)) := by
-  rw [euclid]
-
-/-- The recursive step, stated for an arbitrary nonzero second argument. -/
-theorem euclid_pos (a b : Nat) (hb : b ≠ 0) : euclid a b = euclid b (a % b) := by
-  obtain ⟨c, rfl⟩ : ∃ c, b = c + 1 := ⟨b - 1, by omega⟩
-  exact euclid_succ a c
-
-/-- **Termination**: `euclid` is a total function on `ℕ × ℕ`, and each recursive
-call strictly decreases the second argument, hence the algorithm halts. -/
-theorem euclid_measure_decreases (a b : Nat) (hb : b ≠ 0) : a % b < b :=
-  Nat.mod_lt _ (Nat.pos_of_ne_zero hb)
-
-/-- **Correctness**: Euclid's algorithm computes the greatest common divisor. -/
-theorem euclid_gcd_correct (a b : Nat) : euclid a b = Nat.gcd a b := by
-  induction b using Nat.strong_induction_on generalizing a with
-  | _ b ih =>
-    match b with
-    | 0 => simp
-    | (c + 1) =>
-      rw [euclid_succ, ih _ (Nat.mod_lt _ (Nat.succ_pos c)), Nat.gcd_comm a (c + 1),
-        Nat.gcd_rec (c + 1) a, Nat.gcd_comm]
-
-/-- Correctness spelled out: `euclid a b` divides both arguments and is divisible
-by every common divisor, i.e. it really is the greatest common divisor. -/
-theorem euclid_isGreatestCommonDivisor (a b : Nat) :
-    (euclid a b ∣ a ∧ euclid a b ∣ b) ∧ ∀ d : Nat, d ∣ a → d ∣ b → d ∣ euclid a b := by
-  rw [euclid_gcd_correct]
-  exact ⟨⟨Nat.gcd_dvd_left a b, Nat.gcd_dvd_right a b⟩, fun d ha hb => Nat.dvd_gcd ha hb⟩
-
-end CS
 

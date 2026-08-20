@@ -1,0 +1,67 @@
+/-!
+# Alter Policy Preserves Roles And Cmd
+Category: Proof-Carrying Apps
+Target: PCA.Fix.alter_policy_preserves_roles_and_cmd
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+namespace PCA
+
+/-- A role held by a principal in the isolation engine's model. -/
+abbrev Role := String
+
+/-- A command that a proof-carrying app may attempt to run. -/
+abbrev Cmd := String
+
+/-- A policy of the isolation engine: which `(cmd, role)` pairs are permitted. -/
+structure Policy where
+  /-- `allowed c r` says the policy lets role `r` execute command `c`. -/
+  allowed : Cmd → Role → Bool
+
+/-- A capability request handled by the isolation engine: a command, the roles
+carried by the requesting principal, and the policy in force. -/
+structure Capability where
+  /-- The command being requested. -/
+  cmd : Cmd
+  /-- The roles carried by the requesting principal. -/
+  roles : List Role
+  /-- The policy currently in force. -/
+  policy : Policy
+
+/-- The engine's decision procedure: the request is granted iff some carried
+role is permitted to run the command by the policy in force. -/
+
+def Capability.granted (c : Capability) : Bool :=
+  c.roles.any fun r => c.policy.allowed c.cmd r
+
+namespace Fix
+
+/-- The "alter policy" repair action of the isolation engine: swap in a new
+policy, leaving the request's command and roles untouched. -/
+
+def alterPolicy (c : Capability) (p : Policy) : Capability :=
+  { c with policy := p }
+
+/-- **Target.** Altering the policy in force preserves both the roles carried by
+the request and the command being requested, while installing exactly the
+supplied policy.
+
+Concerning the hint to look for an existing Mathlib lemma: none is needed here.
+Structure eta makes each projection of `{ c with policy := p }` definitionally
+equal to the corresponding projection of `c` (resp. to `p`), so the goal is
+closed by `rfl` on each conjunct (`exact?` likewise reports `⟨rfl, rfl, rfl⟩`,
+i.e. `And.intro` applied to `rfl`). -/
+
+theorem alter_policy_preserves_roles_and_cmd (c : Capability) (p : Policy) :
+    (alterPolicy c p).roles = c.roles ∧
+      (alterPolicy c p).cmd = c.cmd ∧
+      (alterPolicy c p).policy = p :=
+  ⟨rfl, rfl, rfl⟩
+
+/-- Consequence for the engine's decision procedure: after altering the policy,
+the grant decision is obtained by evaluating the *new* policy against the
+*unchanged* command and roles. -/

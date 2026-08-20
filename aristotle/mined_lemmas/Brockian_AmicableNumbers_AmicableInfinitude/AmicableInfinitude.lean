@@ -1,0 +1,64 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-
+# Amicable Infinitude
+Category: Brockian Conjecture
+Target: Brockian.AmicableNumbers.AmicableInfinitude
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Amicable Infinitude
+Category: Brockian Conjecture
+Target: Brockian.AmicableNumbers.AmicableInfinitude
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+
+Whether there are infinitely many amicable numbers is an open problem.  What is proved here
+is an unconditional formalisation of Thabit ibn Qurra's rule together with the resulting
+*conditional reduction*: if there are infinitely many Thabit indices `k` (i.e. indices for
+which `3·2^(k-1) - 1`, `3·2^k - 1` and `9·2^(2k-1) - 1` are all prime), then there are
+infinitely many amicable numbers.
+-/
+
+namespace Brockian.AmicableNumbers
+
+open Finset ArithmeticFunction
+open scoped ArithmeticFunction.sigma
+
+/-- The sum of the proper divisors of `n` (the classical `s`-function). -/
+
+theorem AmicableInfinitude (h : {k | ThabitIndex k}.Infinite) : amicableSet.Infinite := by
+  refine Set.infinite_of_forall_exists_gt fun N => ?_
+  obtain ⟨k, hk, hNk⟩ := h.exists_gt N
+  exact ⟨2 ^ k * (3 * 2 ^ (k - 1) - 1) * (3 * 2 ^ k - 1), isAmicable_thabit hk,
+    hNk.trans (lt_thabit_amicable hk)⟩
+
+/-- The Thabit hypothesis is not vacuous: `k = 2` is a Thabit index, giving the
+classical amicable pair `(220, 284)`. -/

@@ -9,6 +9,15 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-
+# Halting Undecidable
+Category: Computer Science
+Target: CS.halting_undecidable
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,63 +32,47 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace CS
 
-open Nat.Partrec Nat.Partrec.Code
+open Nat.Partrec Nat.Partrec.Code Denumerable
 
-/-- The diagonal partial function: on input `n` it halts (returning `0`) exactly when
-`H n n = false`, and diverges otherwise. It is partial recursive whenever `H` is computable. -/
-noncomputable def diag (H : ℕ → ℕ → Bool) : ℕ →. ℕ :=
-  fun n => Nat.rfind fun _ => Part.some (!(H n n))
+/-- **Diagonalization lemma.**  There is no partial recursive function `d` that halts on
+input `n` exactly when the `n`-th program fails to halt on input `n`. -/
+theorem no_diagonal_partrec :
+    ¬ ∃ d : ℕ →. ℕ, Partrec d ∧
+        ∀ n : ℕ, (d n).Dom ↔ ¬ (eval (ofNat Nat.Partrec.Code n) n).Dom := by
+  rintro ⟨d, hd, hspec⟩
+  -- `d` has a code `c`; instantiate the specification at the encoding of `c` itself.
+  obtain ⟨c, hc⟩ := exists_code.1 (Partrec.nat_iff.mp hd)
+  have h := hspec (Encodable.encode c)
+  rw [Denumerable.ofNat_encode, hc] at h
+  exact (iff_not_self h).elim
 
-theorem diag_partrec {H : ℕ → ℕ → Bool} (hH : Computable₂ H) : Nat.Partrec (diag H) := by
-  refine Partrec.nat_iff.1 (Partrec.rfind ?_)
-  exact ((((Primrec.dom_bool (fun b => !b)).to_comp.comp
-    (hH.comp Computable.id Computable.id))).comp Computable.fst).partrec
+/-- **The halting problem is undecidable.**
 
-/-- The diagonal function halts on `n` iff `H n n = false`. -/
-theorem diag_dom_iff (H : ℕ → ℕ → Bool) (n : ℕ) : (diag H n).Dom ↔ H n n = false := by
-  constructor
-  · intro h
-    have := Nat.rfind_spec (Part.get_mem h)
-    simpa using this
-  · intro h
-    have : (0 : ℕ) ∈ diag H n := by
-      rw [diag, Nat.mem_rfind]
-      simp [h]
-    exact this.fst
-
-/-- **Undecidability of the halting problem** (by diagonalization).
-
-There is no total computable function `H` which, given (a code for) a program `c` and an
-input `x`, decides whether the program `c` halts on input `x`. -/
+There is no total computable function `H` which, given (a code for) a program `p` and an
+input `x`, decides whether `p` halts on `x`.  Here programs are the partial recursive
+codes `Nat.Partrec.Code`, `eval p x` is the (possibly divergent) run of `p` on input `x`,
+and "`p` halts on `x`" means `(eval p x).Dom`. -/
 theorem halting_undecidable :
-    ¬ ∃ H : ℕ → ℕ → Bool, Computable₂ H ∧
-        ∀ (c : Nat.Partrec.Code) (x : ℕ),
-          H (Encodable.encode c) x = true ↔ (Nat.Partrec.Code.eval c x).Dom := by
+    ¬ ∃ H : Nat.Partrec.Code → ℕ → Bool,
+        Computable₂ H ∧ ∀ (p : Nat.Partrec.Code) (x : ℕ), H p x = true ↔ (eval p x).Dom := by
   rintro ⟨H, hH, hspec⟩
-  obtain ⟨c, hc⟩ := Nat.Partrec.Code.exists_code.1 (diag_partrec hH)
-  set n : ℕ := Encodable.encode c
-  have h1 : (Nat.Partrec.Code.eval c n).Dom ↔ H n n = false := by
-    rw [hc]; exact diag_dom_iff H n
-  have h2 : H n n = true ↔ (Nat.Partrec.Code.eval c n).Dom := hspec c n
-  cases hb : H n n with
-  | false =>
-      have h3 : H n n = true := h2.2 (h1.2 hb)
-      rw [hb] at h3
-      exact Bool.false_ne_true h3
-  | true =>
-      have : H n n = false := h1.1 (h2.1 hb)
-      simp [hb] at this
+  -- The diagonal function: diverge if `H` says the `n`-th program halts on `n`, else return `0`.
+  refine no_diagonal_partrec
+    ⟨fun n => cond (H (ofNat Nat.Partrec.Code n) n) Part.none (Part.some 0), ?_, ?_⟩
+  · exact Partrec.cond (hH.comp (Computable.ofNat _) Computable.id)
+      (Partrec.const' Part.none) (Partrec.const' (Part.some 0))
+  · intro n
+    by_cases h : H (ofNat Nat.Partrec.Code n) n = true
+    · have hdom := (hspec (ofNat Nat.Partrec.Code n) n).1 h
+      simp [h, hdom]
+    · have hdom : ¬ (eval (ofNat Nat.Partrec.Code n) n).Dom :=
+        fun hd => h ((hspec (ofNat Nat.Partrec.Code n) n).2 hd)
+      simp only [Bool.not_eq_true] at h
+      simp [h, hdom]
 
 end CS
 

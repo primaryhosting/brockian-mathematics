@@ -9,49 +9,38 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-
+# Pauli Anticommute
+Category: Quantum Computing
+Target: QC.pauli_anticommute
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
 
 namespace QC
 
+open Matrix
+
 /-- The Pauli `X` matrix. -/
-def pauliX : Matrix (Fin 2) (Fin 2) ℂ := !![0, 1; 1, 0]
+def PauliX : Matrix (Fin 2) (Fin 2) ℂ := !![0, 1; 1, 0]
 
 /-- The Pauli `Y` matrix. -/
-def pauliY : Matrix (Fin 2) (Fin 2) ℂ := !![0, -Complex.I; Complex.I, 0]
+def PauliY : Matrix (Fin 2) (Fin 2) ℂ := !![0, -Complex.I; Complex.I, 0]
 
 /-- The Pauli `Z` matrix. -/
-def pauliZ : Matrix (Fin 2) (Fin 2) ℂ := !![1, 0; 0, -1]
+def PauliZ : Matrix (Fin 2) (Fin 2) ℂ := !![1, 0; 0, -1]
 
 /-- The Pauli matrices `X`, `Y`, `Z` pairwise anticommute, and each squares to the
 identity matrix. -/
 theorem pauli_anticommute :
-    pauliX * pauliY + pauliY * pauliX = 0 ∧
-    pauliY * pauliZ + pauliZ * pauliY = 0 ∧
-    pauliX * pauliZ + pauliZ * pauliX = 0 ∧
-    pauliX * pauliX = 1 ∧ pauliY * pauliY = 1 ∧ pauliZ * pauliZ = 1 := by
-  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩ <;> ext i j <;> fin_cases i <;> fin_cases j <;>
-    simp [pauliX, pauliY, pauliZ, Matrix.mul_apply, Fin.sum_univ_two, Complex.I_mul_I]
+    (PauliX * PauliY + PauliY * PauliX = 0) ∧
+    (PauliY * PauliZ + PauliZ * PauliY = 0) ∧
+    (PauliX * PauliZ + PauliZ * PauliX = 0) ∧
+    (PauliX * PauliX = 1) ∧ (PauliY * PauliY = 1) ∧ (PauliZ * PauliZ = 1) := by
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩ <;>
+    simp [PauliX, PauliY, PauliZ, ← Matrix.one_fin_two, Complex.I_mul_I] <;>
+    ext i j <;> fin_cases i <;> fin_cases j <;> simp
 
 end QC
 

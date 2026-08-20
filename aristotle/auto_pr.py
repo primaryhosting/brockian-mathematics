@@ -12,46 +12,68 @@ Safety:
 Env: AUTO_PR_LIVE=1 to actually push+open; PR_DIR (default contrib/aristotle-domains).
 """
 import datetime
+import hashlib
 import json
 import os
 import pathlib
-import shutil
 import subprocess
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
 CROSS = ROOT / "cross_check.json"
-LEDGER = ROOT / "harvest_ledger.json"
 DOMAINS = REPO / "registry" / "domains.json"
-MIN = ROOT / "minimized"
 BEST = ROOT / "best_proofs"
-PR_READY = ROOT / "pr_ready"   # annotated (human header) + normalized shippable copies
 PLAN = ROOT / "pr_plan.json"
 PR_LEDGER = ROOT / "pr_submitted.json"
 LIVE = os.environ.get("AUTO_PR_LIVE") == "1"
 PR_DIR = os.environ.get("PR_DIR", "contrib/aristotle-domains")
 
 
+def normalize(content: str) -> str:
+    """Return the exact byte form axle_verify checked."""
+    imports, body = [], []
+    for line in content.splitlines():
+        if line.strip().startswith("import "):
+            if line.strip() not in imports:
+                imports.append(line.strip())
+        else:
+            body.append(line)
+    return "\n".join(imports + [""] + body)
+
+
+def content_hash(content: str) -> str:
+    return hashlib.sha256(normalize(content).encode()).hexdigest()[:16]
+
+
 def eligible():
-    """Kernel-trusted (AXLE cloud lean-4.32.0) proofs that are catalogued new-domain
-    results. best_proofs/<sanitized target>.lean is exactly what AXLE verified."""
+    """Return only independently checked, current-environment new-domain proofs.
+
+    This is deliberately stricter than catalogue membership: AXLE and the separate
+    cross-check must both accept the same sanitized target before it is even staged.
+    """
     import re
     axle = json.loads((ROOT / "axle_verify.json").read_text()) if (ROOT / "axle_verify.json").exists() else {}
+    cross = json.loads(CROSS.read_text()) if CROSS.exists() else {}
     domains = json.loads(DOMAINS.read_text()) if DOMAINS.exists() else {}
     out = []
     for target, dmeta in domains.items():
         san = re.sub(r"[^A-Za-z0-9]+", "_", target) + ".lean"
-        if axle.get(san, {}).get("verified") is not True:
+        axle_rec = axle.get(san, {})
+        cross_rec = cross.get(san, {})
+        best_src = BEST / san
+        if not best_src.exists():
             continue
-        # prefer the annotated+normalized shippable copy; fall back to raw best_proofs
-        src = PR_READY / san
-        if not src.exists():
-            src = BEST / san
-        if not src.exists():
+        current_hash = content_hash(best_src.read_text(errors="ignore"))
+        if axle_rec.get("verified") is not True or axle_rec.get("environment") != "lean-4.32.2":
+            continue
+        if (cross_rec.get("trusted") is not True
+                or axle_rec.get("hash") != current_hash
+                or cross_rec.get("hash") != current_hash):
             continue
         out.append({"target": target, "domain": dmeta.get("domain"),
-                    "src": str(src), "verification": "AXLE cloud lean-4.32.0",
-                    "environment": axle[san].get("environment", "lean-4.32.0")})
+                    "src": str(best_src), "hash": current_hash,
+                    "verification": "AXLE cloud lean-4.32.2 + cross-check",
+                    "environment": axle_rec["environment"]})
     return out
 
 
@@ -88,11 +110,12 @@ def main():
     try:
         d = wt / PR_DIR
         d.mkdir(parents=True, exist_ok=True)
-        man = ["# Aristotle-generated, AXLE-verified proofs", "",
-               "Kernel-checked cloud Lean 4.32.0 (AXLE); axiom-clean.", ""]
+        man = ["# Aristotle-generated, independently verified proofs", "",
+               "Local Lean + AXLE cloud Lean 4.32.2 + content-matched axiom audit.", ""]
         for e in new:
             safe = e["target"].replace(".", "_") + ".lean"
-            shutil.copy(e["src"], d / safe)
+            source = pathlib.Path(e["src"]).read_text(errors="ignore")
+            (d / safe).write_text(normalize(source))
             man.append(f"- `{e['target']}` ({e['domain']}) — {safe}")
         (d / "MANIFEST.md").write_text("\n".join(man))
         run(["git", "add", PR_DIR], wt)

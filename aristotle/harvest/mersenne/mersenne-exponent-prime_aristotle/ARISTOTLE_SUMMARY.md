@@ -1,0 +1,2 @@
+# Summary of changes for run 9e257cf6-edd5-4f51-9542-6f17dd687313
+Proved `Brockian.MersenneExponentPrime.mersenne_exponent_prime` in `MersenneExponentPrime.lean`. The proof rules out `n = 1`, then applies Mathlib’s general primality theorem for numbers of the form `a^n - 1`. The project builds successfully with no `sorry`/`admit`, and axiom verification reports only permitted foundational axioms (`propext`, `Classical.choice`, and `Quot.sound`).

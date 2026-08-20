@@ -7,6 +7,81 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 import Mathlib
+import RequestProject.PCAFix
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+namespace PCA
+
+/-- A role held by a principal in the isolation engine's model. -/
+abbrev Role := String
+
+/-- A command that a proof-carrying app may attempt to run. -/
+abbrev Cmd := String
+
+/-- A policy of the isolation engine: which `(cmd, role)` pairs are permitted. -/
+structure Policy where
+  /-- `allowed c r` says the policy lets role `r` execute command `c`. -/
+  allowed : Cmd → Role → Bool
+
+/-- A capability request handled by the isolation engine: a command, the roles
+carried by the requesting principal, and the policy in force. -/
+structure Capability where
+  /-- The command being requested. -/
+  cmd : Cmd
+  /-- The roles carried by the requesting principal. -/
+  roles : List Role
+  /-- The policy currently in force. -/
+  policy : Policy
+
+/-- The engine's decision procedure: the request is granted iff some carried
+role is permitted to run the command by the policy in force. -/
+def Capability.granted (c : Capability) : Bool :=
+  c.roles.any fun r => c.policy.allowed c.cmd r
+
+namespace Fix
+
+/-- The "alter policy" repair action of the isolation engine: swap in a new
+policy, leaving the request's command and roles untouched. -/
+def alterPolicy (c : Capability) (p : Policy) : Capability :=
+  { c with policy := p }
+
+/-- **Target.** Altering the policy in force preserves both the roles carried by
+the request and the command being requested, while installing exactly the
+supplied policy.
+
+Concerning the hint to look for an existing Mathlib lemma: none is needed here.
+Structure eta makes each projection of `{ c with policy := p }` definitionally
+equal to the corresponding projection of `c` (resp. to `p`), so the goal is
+closed by `rfl` on each conjunct (`exact?` likewise reports `⟨rfl, rfl, rfl⟩`,
+i.e. `And.intro` applied to `rfl`). -/
+theorem alter_policy_preserves_roles_and_cmd (c : Capability) (p : Policy) :
+    (alterPolicy c p).roles = c.roles ∧
+      (alterPolicy c p).cmd = c.cmd ∧
+      (alterPolicy c p).policy = p :=
+  ⟨rfl, rfl, rfl⟩
+
+/-- Consequence for the engine's decision procedure: after altering the policy,
+the grant decision is obtained by evaluating the *new* policy against the
+*unchanged* command and roles. -/
+theorem granted_alterPolicy (c : Capability) (p : Policy) :
+    (alterPolicy c p).granted = c.roles.any fun r => p.allowed c.cmd r := by
+  obtain ⟨hroles, hcmd, hpolicy⟩ := alter_policy_preserves_roles_and_cmd c p
+  simp only [Capability.granted, hroles, hcmd, hpolicy]
+
+/-- Altering the policy twice is the same as altering it once with the second
+policy. -/
+theorem alterPolicy_alterPolicy (c : Capability) (p q : Policy) :
+    alterPolicy (alterPolicy c p) q = alterPolicy c q := rfl
+
+/-- Re-installing the policy already in force is a no-op. -/
+theorem alterPolicy_self (c : Capability) : alterPolicy c c.policy = c := rfl
+
+end Fix
+
+end PCA
+
 
 open scoped BigOperators
 open scoped Real
@@ -30,211 +105,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-/-!
-# A formal model of a policy-controlled isolation engine
-
-This file develops a small but complete formal model of the *isolation engine* of a
-privileged-command arbiter (`PCA`).  A request carries
-
-* the set of `roles` held by the caller,
-* the `cmd` (privileged command) that is being requested,
-* the `policy` currently in force,
-
-and the engine returns a boolean decision.  The engine is *deny-overrides*: a request is
-executed when some held role is granted the command and no held role is denied it.
-
-We prove:
-
-* `PCA.Engine.decision_sound`  — the boolean engine only accepts requests that the
-  declarative semantics `PCA.Permits` allows;
-* `PCA.Engine.decision_complete` — the boolean engine accepts every request that the
-  declarative semantics allows (so `PCA.Engine.decision_iff_permits` is an exact
-  characterisation, i.e. the engine model is sound *and* complete);
-* `PCA.Engine.isolation` — the decision only depends on the fragment of the policy that
-  mentions the requested command: policies that agree on `cmd` are indistinguishable
-  (command isolation / non-interference);
-* the `PCA.Fix` layer: repairing a request by altering the policy, with
-  `PCA.Fix.alter_policy_preserves_roles_and_cmd` as the key frame property, and
-  `PCA.Fix.repair_permits` showing the repair really does make the request executable.
--/
-
-namespace PCA
-
-/-- A role identifier. -/
-abbrev Role : Type := Nat
-
-/-- A privileged command identifier. -/
-abbrev Cmd : Type := Nat
-
-/-- A policy is a pair of access-control lists: explicit grants and explicit denials,
-each recorded as a `(role, command)` pair. -/
-structure Policy where
-  allow : List (Role × Cmd)
-  deny : List (Role × Cmd)
-  deriving DecidableEq, Repr
-
-/-- A request presented to the isolation engine. -/
-structure Request where
-  roles : List Role
-  cmd : Cmd
-  policy : Policy
-  deriving DecidableEq, Repr
-
-namespace Policy
-
-/-- `p.allows r c` holds when the policy explicitly grants command `c` to role `r`. -/
-def allows (p : Policy) (r : Role) (c : Cmd) : Bool := decide ((r, c) ∈ p.allow)
-
-/-- `p.denies r c` holds when the policy explicitly denies command `c` to role `r`. -/
-def denies (p : Policy) (r : Role) (c : Cmd) : Bool := decide ((r, c) ∈ p.deny)
-
-@[simp] theorem allows_iff (p : Policy) (r : Role) (c : Cmd) :
-    p.allows r c = true ↔ (r, c) ∈ p.allow := by
-  simp [allows]
-
-@[simp] theorem denies_iff (p : Policy) (r : Role) (c : Cmd) :
-    p.denies r c = true ↔ (r, c) ∈ p.deny := by
-  simp [denies]
-
-/-- Add an explicit grant of `c` to `r`. -/
-def grant (p : Policy) (r : Role) (c : Cmd) : Policy :=
-  { p with allow := (r, c) :: p.allow }
-
-/-- Remove every denial of the command `c`. -/
-def clearDenials (p : Policy) (c : Cmd) : Policy :=
-  { p with deny := p.deny.filter (fun q => decide (q.2 ≠ c)) }
-
-@[simp] theorem mem_clearDenials (p : Policy) (c : Cmd) (q : Role × Cmd) :
-    q ∈ (p.clearDenials c).deny ↔ q ∈ p.deny ∧ q.2 ≠ c := by
-  simp [clearDenials, List.mem_filter]
-
-@[simp] theorem mem_grant_allow (p : Policy) (r : Role) (c : Cmd) (q : Role × Cmd) :
-    q ∈ (p.grant r c).allow ↔ q = (r, c) ∨ q ∈ p.allow := by
-  simp [grant]
-
-@[simp] theorem grant_deny (p : Policy) (r : Role) (c : Cmd) :
-    (p.grant r c).deny = p.deny := rfl
-
-@[simp] theorem clearDenials_allow (p : Policy) (c : Cmd) :
-    (p.clearDenials c).allow = p.allow := rfl
-
-end Policy
-
-/-- Declarative semantics of the engine: the policy `p` permits the command `c` to a
-caller holding the roles `rs` exactly when some held role is granted `c` and no held role
-is denied `c` (deny overrides allow). -/
-def Permits (p : Policy) (rs : List Role) (c : Cmd) : Prop :=
-  (∃ r ∈ rs, (r, c) ∈ p.allow) ∧ ∀ r ∈ rs, (r, c) ∉ p.deny
-
-namespace Engine
-
-/-- The executable decision procedure of the isolation engine. -/
-def decision (q : Request) : Bool :=
-  q.roles.any (fun r => q.policy.allows r q.cmd) &&
-    !q.roles.any (fun r => q.policy.denies r q.cmd)
-
-/-- **Soundness**: whatever the engine accepts is permitted by the declarative semantics. -/
-theorem decision_sound (q : Request) (h : decision q = true) :
-    Permits q.policy q.roles q.cmd := by
-  simp only [decision, Bool.and_eq_true, Bool.not_eq_true', List.any_eq_true,
-    List.any_eq_false, Policy.allows_iff, Policy.denies_iff] at h
-  obtain ⟨⟨r, hr, hra⟩, hd⟩ := h
-  refine ⟨⟨r, hr, hra⟩, fun r' hr' hmem => ?_⟩
-  have := hd r' hr'
-  simp [hmem] at this
-
-/-- **Completeness**: whatever the declarative semantics permits is accepted by the engine. -/
-theorem decision_complete (q : Request) (h : Permits q.policy q.roles q.cmd) :
-    decision q = true := by
-  obtain ⟨⟨r, hr, hra⟩, hd⟩ := h
-  simp only [decision, Bool.and_eq_true, Bool.not_eq_true', List.any_eq_true,
-    List.any_eq_false, Policy.allows_iff, Policy.denies_iff]
-  refine ⟨⟨r, hr, hra⟩, fun r' hr' => ?_⟩
-  simp [hd r' hr']
-
-/-- The engine model is exactly the declarative semantics. -/
-theorem decision_iff_permits (q : Request) :
-    decision q = true ↔ Permits q.policy q.roles q.cmd :=
-  ⟨decision_sound q, decision_complete q⟩
-
-/-- **Command isolation** (non-interference): the decision on a request depends only on
-the fragment of the policy that mentions the requested command.  Changing grants and
-denials of *other* commands cannot change the decision. -/
-theorem isolation (rs : List Role) (c : Cmd) (p₁ p₂ : Policy)
-    (ha : ∀ r : Role, ((r, c) ∈ p₁.allow ↔ (r, c) ∈ p₂.allow))
-    (hd : ∀ r : Role, ((r, c) ∈ p₁.deny ↔ (r, c) ∈ p₂.deny)) :
-    decision ⟨rs, c, p₁⟩ = decision ⟨rs, c, p₂⟩ := by
-  have key : ∀ p : Policy, decision ⟨rs, c, p⟩ = true ↔
-      ((∃ r ∈ rs, (r, c) ∈ p.allow) ∧ ∀ r ∈ rs, (r, c) ∉ p.deny) :=
-    fun p => decision_iff_permits ⟨rs, c, p⟩
-  have : (decision ⟨rs, c, p₁⟩ = true) ↔ (decision ⟨rs, c, p₂⟩ = true) := by
-    rw [key, key]
-    constructor
-    · rintro ⟨⟨r, hr, hra⟩, hdn⟩
-      exact ⟨⟨r, hr, (ha r).1 hra⟩, fun r' hr' hmem => hdn r' hr' ((hd r').2 hmem)⟩
-    · rintro ⟨⟨r, hr, hra⟩, hdn⟩
-      exact ⟨⟨r, hr, (ha r).2 hra⟩, fun r' hr' hmem => hdn r' hr' ((hd r').1 hmem)⟩
-  cases h₁ : decision ⟨rs, c, p₁⟩ <;> cases h₂ : decision ⟨rs, c, p₂⟩ <;>
-    simp [h₁, h₂] at this ⊢
-
-end Engine
-
-namespace Fix
-
-/-- The primitive repair action of the isolation engine: install a new policy, leaving
-the caller's roles and the requested command untouched. -/
-def alter_policy (q : Request) (p : Policy) : Request :=
-  { q with policy := p }
-
-/-- **Frame property of the repair layer.**  Altering the policy of a request changes
-neither the caller's roles nor the requested command. -/
-theorem alter_policy_preserves_roles_and_cmd (q : Request) (p : Policy) :
-    (alter_policy q p).roles = q.roles ∧ (alter_policy q p).cmd = q.cmd := by
-  exact ⟨rfl, rfl⟩
-
-@[simp] theorem alter_policy_policy (q : Request) (p : Policy) :
-    (alter_policy q p).policy = p := rfl
-
-@[simp] theorem alter_policy_roles (q : Request) (p : Policy) :
-    (alter_policy q p).roles = q.roles := rfl
-
-@[simp] theorem alter_policy_cmd (q : Request) (p : Policy) :
-    (alter_policy q p).cmd = q.cmd := rfl
-
-/-- Altering the policy twice is the same as altering it once. -/
-@[simp] theorem alter_policy_idem (q : Request) (p₁ p₂ : Policy) :
-    alter_policy (alter_policy q p₁) p₂ = alter_policy q p₂ := rfl
-
-/-- Reinstalling the current policy is a no-op. -/
-@[simp] theorem alter_policy_self (q : Request) : alter_policy q q.policy = q := rfl
-
-/-- The repair of a request for a role `r`: grant the command to `r` and drop every
-denial of that command. -/
-def repair (q : Request) (r : Role) : Request :=
-  alter_policy q ((q.policy.clearDenials q.cmd).grant r q.cmd)
-
-/-- Repairing a request preserves the caller's roles and the requested command. -/
-theorem repair_preserves_roles_and_cmd (q : Request) (r : Role) :
-    (repair q r).roles = q.roles ∧ (repair q r).cmd = q.cmd :=
-  alter_policy_preserves_roles_and_cmd q _
-
-/-- **Adequacy of the repair.**  If `r` is one of the caller's roles, the repaired
-request is permitted by the declarative semantics. -/
-theorem repair_permits (q : Request) (r : Role) (hr : r ∈ q.roles) :
-    Permits (repair q r).policy (repair q r).roles (repair q r).cmd := by
-  refine ⟨⟨r, hr, ?_⟩, fun r' _ hmem => ?_⟩
-  · simp [repair]
-  · simp only [repair, alter_policy_policy, alter_policy_cmd, Policy.grant_deny,
-      Policy.mem_clearDenials] at hmem
-    exact hmem.2 rfl
-
-/-- The engine accepts every repaired request (for a role actually held by the caller). -/
-theorem decision_repair (q : Request) (r : Role) (hr : r ∈ q.roles) :
-    Engine.decision (repair q r) = true :=
-  Engine.decision_complete _ (repair_permits q r hr)
-
-end Fix
-
-end PCA
 

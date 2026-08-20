@@ -1,0 +1,71 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-
+# Steane Code
+Category: Frontier Qi
+Target: QI.steane_code
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (The header above uses `/-` rather than `/-!` only because Lean 4 requires every
+-- `import` to precede any module docstring; the text is otherwise verbatim.)
+
+import Mathlib
+
+/-!
+# Steane Code
+Category: Frontier Qi
+Target: QI.steane_code
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace QI
+
+/-! ## The binary field and the Hamming parity-check matrix -/
+
+/-- The two-element field `GF(2)`. -/
+abbrev F2 := ZMod 2
+
+/-- Column `i` of the parity-check matrix of the `[7,4,3]` Hamming code: the binary
+expansion of `i + 1`.  The seven columns are exactly the seven nonzero vectors of
+`GF(2)³`, which is what makes the code single-error correcting. -/
+
+def hcol (i : Fin 7) (r : Fin 3) : F2 := if Nat.testBit (i.val + 1) r.val then 1 else 0
+
+/-- The columns of the parity-check matrix are pairwise distinct. -/
+
+def Pauli.SingleQubit (E : Pauli) : Prop := ∃ i : Fin 7, ∀ k : Fin 7, k ≠ i → E.x k = 0 ∧ E.z k = 0
+
+/-- A single-qubit error is precisely one of the form `X^a Z^b` acting at a single site. -/
+
+def locate (s : Fin 3 → F2) : Fin 7 → F2 := fun i => if hcol i = s then 1 else 0
+
+/-- The Steane decoder: run the Hamming decoder on each of the two syndromes. -/
+
+def decode (s : (Fin 3 → F2) × (Fin 3 → F2)) : Pauli := ⟨locate s.1, locate s.2⟩
+
+/-- Correctness of the decoder on the single-site errors `X^a Z^b`. -/

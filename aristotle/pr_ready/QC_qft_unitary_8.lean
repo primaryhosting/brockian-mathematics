@@ -9,6 +9,86 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-
+# Qft Unitary 8
+Category: Quantum Computing
+Target: QC.qft_unitary_8
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
+open Finset Complex Real ZMod AddChar
+
+namespace QC
+
+/-- The `N × N` quantum Fourier transform matrix, indexed by `ZMod N`:
+its `(j, k)` entry is `exp (2 π i j k / N) / √N`. -/
+noncomputable def qftMatrix (N : ℕ) : Matrix (ZMod N) (ZMod N) ℂ :=
+  Matrix.of fun j k => Complex.exp (2 * Real.pi * Complex.I * (j.val * k.val) / N) / Real.sqrt N
+
+/-- The entries of the QFT matrix in terms of the standard additive character of `ZMod N`. -/
+lemma qftMatrix_apply (N : ℕ) [NeZero N] (j k : ZMod N) :
+    qftMatrix N j k = (Real.sqrt N : ℂ)⁻¹ * ZMod.stdAddChar (j * k) := by
+  have h : ((j.val * k.val : ℕ) : ZMod N) = j * k := by push_cast [ZMod.natCast_val]; simp
+  rw [qftMatrix]
+  simp only [Matrix.of_apply]
+  rw [div_eq_inv_mul, ← h,
+    show ((j.val * k.val : ℕ) : ZMod N) = (((j.val * k.val : ℕ) : ℤ) : ZMod N) by push_cast; ring,
+    ZMod.stdAddChar_coe]
+  push_cast
+  ring_nf
+
+/-- Complex conjugation inverts the standard additive character. -/
+lemma conj_stdAddChar (N : ℕ) [NeZero N] (x : ZMod N) :
+    (starRingEnd ℂ) (ZMod.stdAddChar x) = ZMod.stdAddChar (-x) := by
+  rw [AddChar.starComp_apply (by simp [ZMod.ringChar_zmod_n, Nat.pos_of_neZero]), AddChar.inv_apply]
+
+/-- Orthogonality relation: the character sum `∑ k, ζ^(k t)` is `N` if `t = 0` and `0` otherwise. -/
+lemma sum_stdAddChar (N : ℕ) [NeZero N] (t : ZMod N) :
+    ∑ k : ZMod N, ZMod.stdAddChar (k * t) = if t = 0 then (N : ℂ) else 0 := by
+  split_ifs with h
+  · simp [h]
+  · simpa [AddChar.mulShift_apply, mul_comm] using
+      AddChar.sum_eq_zero_of_ne_one (ZMod.isPrimitive_stdAddChar N h)
+
+/-- The `N`-dimensional quantum Fourier transform matrix is unitary. -/
+theorem qftMatrix_unitary (N : ℕ) [NeZero N] :
+    qftMatrix N ∈ Matrix.unitaryGroup (ZMod N) ℂ := by
+  have hN : (0 : ℝ) < N := Nat.cast_pos.2 (Nat.pos_of_neZero N)
+  have hsq : ((Real.sqrt N : ℂ)) * ((Real.sqrt N : ℂ)) = (N : ℂ) := by
+    rw [← Complex.ofReal_mul, Real.mul_self_sqrt hN.le]; simp
+  have hne : ((Real.sqrt N : ℂ)) ≠ 0 := by
+    simp only [ne_eq, Complex.ofReal_eq_zero, Real.sqrt_eq_zero', not_le]
+    exact hN
+  have hs : ((Real.sqrt N : ℂ))⁻¹ * ((Real.sqrt N : ℂ))⁻¹ * (N : ℂ) = 1 := by
+    rw [← hsq]; field_simp
+  rw [Matrix.mem_unitaryGroup_iff']
+  ext j l
+  rw [Matrix.mul_apply]
+  have key : ∀ k : ZMod N, (star (qftMatrix N)) j k * qftMatrix N k l
+      = (Real.sqrt N : ℂ)⁻¹ * (Real.sqrt N : ℂ)⁻¹ * ZMod.stdAddChar (k * (l - j)) := by
+    intro k
+    have h1 : (starRingEnd ℂ) ((Real.sqrt N : ℂ)⁻¹) = (Real.sqrt N : ℂ)⁻¹ := by simp
+    have hchar : ZMod.stdAddChar (-(k * j)) * ZMod.stdAddChar (k * l)
+        = ZMod.stdAddChar (k * (l - j)) := by
+      rw [← AddChar.map_add_eq_mul]; congr 1; ring
+    rw [Matrix.star_apply, RCLike.star_def, qftMatrix_apply, qftMatrix_apply, map_mul,
+      conj_stdAddChar, h1, ← hchar]
+    ring
+  rw [Finset.sum_congr rfl (fun k _ => key k), ← Finset.mul_sum, sum_stdAddChar]
+  rcases eq_or_ne j l with h | h
+  · simp [h, hs, Matrix.one_apply]
+  · rw [if_neg (by simpa [sub_eq_zero, eq_comm] using h)]
+    simp [h]
+
+/-- The 8-qubit quantum Fourier transform matrix (of size `2^8 = 256`) is unitary. -/
+theorem qft_unitary_8 : qftMatrix (2 ^ 8) ∈ Matrix.unitaryGroup (ZMod (2 ^ 8)) ℂ :=
+  qftMatrix_unitary _
+
+end QC
+
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -31,98 +111,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace QC
-
-open Complex
-
-/-- The primitive `n`-th root of unity `exp (2πi / n)` used by the discrete Fourier transform. -/
-noncomputable def omega (n : ℕ) : ℂ := Complex.exp (2 * (Real.pi : ℂ) * Complex.I / (n : ℂ))
-
-/-- The `n`-dimensional quantum Fourier transform matrix:
-`QFT j k = ω^(j*k) / √n` with `ω = exp (2πi/n)`. -/
-noncomputable def qftMatrix (n : ℕ) : Matrix (Fin n) (Fin n) ℂ :=
-  fun j k => ((Real.sqrt n : ℝ) : ℂ)⁻¹ * omega n ^ ((j : ℕ) * (k : ℕ))
-
-lemma omega_ne_zero (n : ℕ) : omega n ≠ 0 := Complex.exp_ne_zero _
-
-lemma isPrimitiveRoot_omega (n : ℕ) (hn : n ≠ 0) : IsPrimitiveRoot (omega n) n :=
-  Complex.isPrimitiveRoot_exp n hn
-
-lemma conj_omega (n : ℕ) : (starRingEnd ℂ) (omega n) = (omega n)⁻¹ := by
-  rw [omega, ← Complex.exp_conj, ← Complex.exp_neg]
-  congr 1
-  rw [map_div₀, map_mul, map_mul, Complex.conj_I, Complex.conj_ofReal, Complex.conj_natCast,
-    map_ofNat]
-  ring
-
-lemma omega_inv_pow_mul (n a b c : ℕ) :
-    ((omega n)⁻¹) ^ (a * b) * omega n ^ (a * c) = (omega n ^ ((c : ℤ) - (b : ℤ))) ^ a := by
-  have hne : omega n ≠ 0 := omega_ne_zero n
-  rw [inv_pow, ← zpow_natCast (omega n) (a * b), ← zpow_natCast (omega n) (a * c),
-    ← zpow_natCast (omega n ^ ((c : ℤ) - (b : ℤ))) a, ← zpow_neg, ← zpow_add₀ hne, ← zpow_mul]
-  congr 1
-  push_cast
-  ring
-
-/-- The geometric sum of the powers of `ω^d` vanishes when `n` does not divide `d`. -/
-lemma sum_omega_zpow_eq_zero (n : ℕ) (hn : n ≠ 0) (d : ℤ) (hd : ¬ ((n : ℤ) ∣ d)) :
-    ∑ i ∈ Finset.range n, (omega n ^ d) ^ i = 0 := by
-  have hprim : IsPrimitiveRoot (omega n) n := isPrimitiveRoot_omega n hn
-  have hne : omega n ^ d ≠ 1 := fun h => hd ((hprim.zpow_eq_one_iff_dvd d).mp h)
-  have hpow : (omega n ^ d) ^ n = 1 := by
-    rw [← zpow_natCast (omega n ^ d) n, ← zpow_mul, mul_comm, zpow_mul, zpow_natCast,
-      hprim.pow_eq_one, one_zpow]
-  rw [geom_sum_eq hne, hpow, sub_self, zero_div]
-
-/-- The `n`-dimensional QFT matrix is unitary, for every `n ≠ 0`. -/
-theorem qft_unitary (n : ℕ) (hn : n ≠ 0) : qftMatrix n ∈ Matrix.unitaryGroup (Fin n) ℂ := by
-  have hnpos : (0 : ℝ) < (n : ℝ) := by positivity
-  have hsqrt : ((Real.sqrt n : ℝ) : ℂ)⁻¹ * ((Real.sqrt n : ℝ) : ℂ)⁻¹ = ((n : ℂ))⁻¹ := by
-    have h : ((Real.sqrt n : ℝ) : ℂ) * ((Real.sqrt n : ℝ) : ℂ) = (n : ℂ) := by
-      rw [← Complex.ofReal_mul, Real.mul_self_sqrt hnpos.le]
-      simp
-    rw [← mul_inv, h]
-  rw [Matrix.mem_unitaryGroup_iff']
-  ext j k
-  rw [Matrix.mul_apply, Matrix.one_apply]
-  have key : ∀ i : Fin n, (star (qftMatrix n)) j i * qftMatrix n i k
-      = ((n : ℂ))⁻¹ * (omega n ^ ((k : ℤ) - (j : ℤ))) ^ (i : ℕ) := by
-    intro i
-    rw [Matrix.star_apply]
-    show (starRingEnd ℂ) (qftMatrix n i j) * qftMatrix n i k = _
-    rw [qftMatrix, qftMatrix]
-    simp only [map_mul, map_pow, conj_omega, map_inv₀, Complex.conj_ofReal]
-    rw [show ((Real.sqrt n : ℝ) : ℂ)⁻¹ * (omega n)⁻¹ ^ ((i : ℕ) * (j : ℕ)) *
-        (((Real.sqrt n : ℝ) : ℂ)⁻¹ * omega n ^ ((i : ℕ) * (k : ℕ)))
-        = (((Real.sqrt n : ℝ) : ℂ)⁻¹ * ((Real.sqrt n : ℝ) : ℂ)⁻¹) *
-          ((omega n)⁻¹ ^ ((i : ℕ) * (j : ℕ)) * omega n ^ ((i : ℕ) * (k : ℕ))) by ring]
-    rw [hsqrt]
-    congr 1
-    exact omega_inv_pow_mul n (i : ℕ) (j : ℕ) (k : ℕ)
-  rw [Finset.sum_congr rfl (fun i _ => key i), ← Finset.mul_sum]
-  rw [Fin.sum_univ_eq_sum_range (fun i => (omega n ^ ((k : ℤ) - (j : ℤ))) ^ i) n]
-  by_cases h : j = k
-  · subst h
-    have hnC : (n : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hn
-    simp only [sub_self, zpow_zero, one_pow, Finset.sum_const, Finset.card_range, nsmul_eq_mul,
-      mul_one, if_true]
-    field_simp
-  · have hd : ¬ ((n : ℤ) ∣ ((k : ℤ) - (j : ℤ))) := by
-      intro hdvd
-      have hjk : (j : ℕ) < n := j.isLt
-      have hkn : (k : ℕ) < n := k.isLt
-      have habs : |(k : ℤ) - (j : ℤ)| < (n : ℤ) := by
-        rw [abs_lt]; omega
-      have := Int.eq_zero_of_abs_lt_dvd hdvd habs
-      exact h (Fin.ext (by omega))
-    rw [sum_omega_zpow_eq_zero n hn _ hd, mul_zero, if_neg h]
-
-/-- The 8-qubit quantum Fourier transform matrix (dimension `2^8 = 256`) is unitary. -/
-theorem qft_unitary_8 : qftMatrix (2 ^ 8) ∈ Matrix.unitaryGroup (Fin (2 ^ 8)) ℂ :=
-  qft_unitary (2 ^ 8) (by norm_num)
-
-end QC
-
-#print axioms QC.qft_unitary_8
 

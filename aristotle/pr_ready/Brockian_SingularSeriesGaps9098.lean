@@ -8,126 +8,25 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open scoped BigOperators
+/-
+# Singular Series Gaps 9098
+Category: Brockian Corpus
+Target: Brockian.SingularSeriesGaps9098
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (The header above is a plain block comment because Lean 4 does not permit a module
+-- docstring before `import`; the same header is repeated as a module docstring below.)
 
-namespace Brockian
 
-open Finset
 
-/-- A finite set of integers is *admissible* if for every prime `p` it omits at least one
-residue class modulo `p`. -/
-def Admissible (H : Finset ℤ) : Prop :=
-  ∀ p : ℕ, p.Prime → ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r
-
-/-- The `k`-term arithmetic progression tuple with common difference `d`, i.e. the gap pattern
-`{0, d, 2d, …, (k-1)d}`. -/
-def apTuple (k : ℕ) (d : ℤ) : Finset ℤ :=
-  (Finset.range k).image (fun j : ℕ => (j : ℤ) * d)
-
-lemma card_apTuple_le (k : ℕ) (d : ℤ) : (apTuple k d).card ≤ k := by
-  rw [apTuple]
-  exact le_trans Finset.card_image_le (by simp)
-
-/-- A set with fewer than `p` elements always omits a residue class mod `p`. -/
-lemma exists_residue_notMem_of_card_lt {H : Finset ℤ} {p : ℕ} (hp : p.Prime)
-    (hcard : H.card < p) : ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r := by
-  haveI : Fact p.Prime := ⟨hp⟩
-  by_contra hcon
-  push_neg at hcon
-  have huniv : (H.image (fun h : ℤ => (h : ZMod p))) = Finset.univ := by
-    refine Finset.eq_univ_iff_forall.mpr ?_
-    intro r
-    obtain ⟨h, hh, hhr⟩ := hcon r
-    exact Finset.mem_image.mpr ⟨h, hh, hhr⟩
-  have h1 : (Finset.univ : Finset (ZMod p)).card ≤ H.card := by
-    rw [← huniv]; exact Finset.card_image_le
-  rw [Finset.card_univ, ZMod.card] at h1
-  omega
-
-/-- **Characterisation of admissible AP gap tuples.**  The progression
-`{0, d, 2d, …, (k-1)d}` is admissible if and only if every prime `p ≤ k` divides `d`. -/
-theorem admissible_apTuple_iff (k : ℕ) (d : ℤ) :
-    Admissible (apTuple k d) ↔ ∀ p : ℕ, p.Prime → p ≤ k → (p : ℤ) ∣ d := by
-  constructor
-  · intro hadm p hp hpk
-    by_contra hdvd
-    obtain ⟨r, hr⟩ := hadm p hp
-    haveI : Fact p.Prime := ⟨hp⟩
-    have hd : (d : ZMod p) ≠ 0 := by
-      intro h0
-      exact hdvd ((ZMod.intCast_zmod_eq_zero_iff_dvd d p).mp h0)
-    set j : ℕ := (r * (d : ZMod p)⁻¹).val with hj
-    have hjlt : j < p := ZMod.val_lt _
-    have hmem : ((j : ℤ) * d) ∈ apTuple k d := by
-      refine Finset.mem_image.mpr ⟨j, Finset.mem_range.mpr (lt_of_lt_of_le hjlt hpk), rfl⟩
-    have := hr _ hmem
-    apply this
-    push_cast
-    rw [hj, ZMod.natCast_val, ZMod.cast_id]
-    field_simp
-  · intro hdvd p hp
-    haveI : Fact p.Prime := ⟨hp⟩
-    by_cases hpk : p ≤ k
-    · refine ⟨1, ?_⟩
-      intro h hh
-      obtain ⟨j, -, rfl⟩ := Finset.mem_image.mp hh
-      have hzero : (((j : ℤ) * d : ℤ) : ZMod p) = 0 := by
-        have : ((p : ℤ)) ∣ ((j : ℤ) * d) := Dvd.dvd.mul_left (hdvd p hp hpk) _
-        exact (ZMod.intCast_zmod_eq_zero_iff_dvd _ p).mpr this
-      rw [hzero]
-      exact zero_ne_one
-    · exact exists_residue_notMem_of_card_lt hp
-        (lt_of_le_of_lt (card_apTuple_le k d) (by omega))
-
-/-- The primorial `n#`: the product of all primes `≤ n`. -/
-def primorialUpTo (n : ℕ) : ℕ := ∏ p ∈ (Finset.range (n + 1)).filter Nat.Prime, p
-
-lemma dvd_primorialUpTo {p n : ℕ} (hp : p.Prime) (hpn : p ≤ n) : p ∣ primorialUpTo n :=
-  Finset.dvd_prod_of_mem _ (Finset.mem_filter.mpr ⟨Finset.mem_range.mpr (by omega), hp⟩)
-
-lemma not_dvd_primorialUpTo {p n : ℕ} (hp : p.Prime) (hpn : n < p) : ¬ p ∣ primorialUpTo n := by
-  intro hdvd
-  obtain ⟨q, hq, hpq⟩ := (Nat.Prime.prime hp).exists_mem_finset_dvd hdvd
-  obtain ⟨hqr, hqp⟩ := Finset.mem_filter.mp hq
-  have : p = q := ((Nat.prime_dvd_prime_iff_eq hp hqp).mp hpq)
-  have := Finset.mem_range.mp hqr
-  omega
-
-/-- **New admissible gap ranges, `90 ≤ k ≤ 98`.**  For every length `k` in the range
-`90 ≤ k ≤ 98`, the arithmetic progression tuple `{0, d, 2d, …, (k-1)d}` with common difference
-the primorial `98#` is admissible; moreover, for such `k` a difference `d` yields an admissible
-tuple exactly when every prime `p ≤ k` divides `d`, and the smaller primorial `89#` works
-precisely for `k ≤ 96`. -/
-theorem SingularSeriesGaps9098 :
-    (∀ k : ℕ, 90 ≤ k → k ≤ 98 → Admissible (apTuple k (primorialUpTo 98 : ℤ))) ∧
-    (∀ k : ℕ, ∀ d : ℤ, 90 ≤ k → k ≤ 98 →
-      (Admissible (apTuple k d) ↔ ∀ p : ℕ, p.Prime → p ≤ k → (p : ℤ) ∣ d)) ∧
-    (∀ k : ℕ, 90 ≤ k → k ≤ 96 → Admissible (apTuple k (primorialUpTo 89 : ℤ))) ∧
-    (∀ k : ℕ, 97 ≤ k → k ≤ 98 → ¬ Admissible (apTuple k (primorialUpTo 89 : ℤ))) := by
-  refine ⟨?_, ?_, ?_, ?_⟩
-  · intro k _ hk98
-    refine (admissible_apTuple_iff k _).mpr ?_
-    intro p hp hpk
-    exact_mod_cast Int.natCast_dvd_natCast.mpr (dvd_primorialUpTo hp (by omega))
-  · intro k d _ _
-    exact admissible_apTuple_iff k d
-  · intro k _ hk96
-    refine (admissible_apTuple_iff k _).mpr ?_
-    intro p hp hpk
-    have hp96 : p ≤ 96 := le_trans hpk hk96
-    have hp89 : p ≤ 89 := by
-      by_contra hcon
-      push_neg at hcon
-      -- there is no prime strictly between 89 and 97
-      interval_cases p <;> revert hp <;> decide
-    exact_mod_cast Int.natCast_dvd_natCast.mpr (dvd_primorialUpTo hp hp89)
-  · intro k hk97 _ hadm
-    have h97 : ((97 : ℕ) : ℤ) ∣ (primorialUpTo 89 : ℤ) :=
-      (admissible_apTuple_iff k _).mp hadm 97 (by norm_num) (by omega)
-    exact not_dvd_primorialUpTo (p := 97) (n := 89) (by norm_num) (by norm_num)
-      (Int.natCast_dvd_natCast.mp h97)
-
-end Brockian
+/-!
+# Singular Series Gaps 9098
+Category: Brockian Corpus
+Target: Brockian.SingularSeriesGaps9098
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 
 open scoped BigOperators
@@ -152,4 +51,106 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Brockian
+
+/-- A finite set `H` of integers is *admissible* (in the sense of the Hardy–Littlewood
+prime `k`-tuples conjecture: the singular series `𝔖(H)` is nonzero exactly for such `H`)
+if for every prime `p` the reductions of the elements of `H` modulo `p` miss at least one
+residue class. -/
+def Admissible (H : Finset ℤ) : Prop :=
+  ∀ p : ℕ, p.Prime → ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r
+
+/-- For a prime `p` strictly larger than the size of `H`, the residues of `H` modulo `p`
+cannot cover all of `ZMod p`; this is the pigeonhole half of admissibility. -/
+theorem exists_missed_residue_of_card_lt (H : Finset ℤ) (p : ℕ) [Fact p.Prime]
+    (hp : H.card < p) : ∃ r : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ r := by
+  by_contra hcon
+  push_neg at hcon
+  -- if no residue is missed, the cast map from `H` is onto `ZMod p`
+  have hsub : (Finset.univ : Finset (ZMod p)) ⊆ H.image (fun h : ℤ => (h : ZMod p)) := by
+    intro r _
+    obtain ⟨h, hh, hr⟩ := hcon r
+    exact Finset.mem_image.2 ⟨h, hh, hr⟩
+  have hcard : p ≤ H.card := by
+    have h1 : (Finset.univ : Finset (ZMod p)).card ≤ (H.image fun h : ℤ => (h : ZMod p)).card :=
+      Finset.card_le_card hsub
+    have h2 : (H.image fun h : ℤ => (h : ZMod p)).card ≤ H.card := Finset.card_image_le
+    have h3 : (Finset.univ : Finset (ZMod p)).card = p := by
+      simp [ZMod.card]
+    omega
+  omega
+
+/-- `0 ≠ 1` in `ZMod 2`. -/
+theorem zmod_two_zero_ne_one : (0 : ZMod 2) ≠ 1 := by decide
+
+/-- Every pair `{0, d}` with `d` even is admissible: modulo `2` both entries are `0`,
+and for odd `p` the pigeonhole bound applies. -/
+theorem admissible_pair_of_even (d : ℤ) (hd : Even d) : Admissible {0, d} := by
+  intro p hp
+  haveI : Fact p.Prime := ⟨hp⟩
+  rcases eq_or_ne p 2 with rfl | hp2
+  · refine ⟨1, ?_⟩
+    intro h hh
+    have hh' : h = 0 ∨ h = d := by simpa using hh
+    have hzero : ((d : ℤ) : ZMod 2) = 0 :=
+      (ZMod.intCast_zmod_eq_zero_iff_dvd d 2).2 (by exact_mod_cast hd.two_dvd)
+    rcases hh' with rfl | rfl
+    · simp
+    · rw [hzero]
+      exact zmod_two_zero_ne_one
+  · have hcard : ({0, d} : Finset ℤ).card < p := by
+      have h1 : ({0, d} : Finset ℤ).card ≤ 2 := Finset.card_insert_le _ _ |>.trans (by simp)
+      have h2 : 2 ≤ p := hp.two_le
+      have h3 : p ≠ 2 := hp2
+      omega
+    exact exists_missed_residue_of_card_lt _ p hcard
+
+/-- The tuple `{0, 2, 6, 8, 9098}` misses the residue `1` modulo `2`. -/
+theorem tuple_ne_one_mod_two (h : ℤ) (hh : h = 0 ∨ h = 2 ∨ h = 6 ∨ h = 8 ∨ h = 9098) :
+    (h : ZMod 2) ≠ 1 := by
+  rcases hh with rfl | rfl | rfl | rfl | rfl <;> decide
+
+/-- The tuple `{0, 2, 6, 8, 9098}` misses the residue `1` modulo `3`. -/
+theorem tuple_ne_one_mod_three (h : ℤ) (hh : h = 0 ∨ h = 2 ∨ h = 6 ∨ h = 8 ∨ h = 9098) :
+    (h : ZMod 3) ≠ 1 := by
+  rcases hh with rfl | rfl | rfl | rfl | rfl <;> decide
+
+/-- The tuple `{0, 2, 6, 8, 9098}` misses the residue `4` modulo `5`. -/
+theorem tuple_ne_four_mod_five (h : ℤ) (hh : h = 0 ∨ h = 2 ∨ h = 6 ∨ h = 8 ∨ h = 9098) :
+    (h : ZMod 5) ≠ 4 := by
+  rcases hh with rfl | rfl | rfl | rfl | rfl <;> decide
+
+/-- **Singular Series Gaps 9098.**
+
+`(a)` every even gap `d` gives an admissible pair `{0, d}` — in particular the gap `9098`;
+`(b)` the `5`-tuple `{0, 2, 6, 8, 9098}` is admissible, so it is a new admissible gap range:
+its residues miss `1 mod 2`, `1 mod 3`, `4 mod 5`, and pigeonhole covers all primes `p ≥ 7`.
+
+Mathlib ingredients used: `Finset.card_le_card`, `Finset.card_image_le` and `ZMod.card`
+for the pigeonhole step, and `ZMod.intCast_zmod_eq_zero_iff_dvd` for the even-gap step. -/
+theorem SingularSeriesGaps9098 :
+    (∀ d : ℤ, Even d → Admissible {0, d}) ∧
+      Admissible ({0, 9098} : Finset ℤ) ∧
+      Admissible ({0, 2, 6, 8, 9098} : Finset ℤ) := by
+  refine ⟨admissible_pair_of_even, admissible_pair_of_even 9098 ⟨4549, by norm_num⟩, ?_⟩
+  intro p hp
+  haveI : Fact p.Prime := ⟨hp⟩
+  have hmem : ∀ h ∈ ({0, 2, 6, 8, 9098} : Finset ℤ),
+      h = 0 ∨ h = 2 ∨ h = 6 ∨ h = 8 ∨ h = 9098 := by
+    intro h hh
+    simpa using hh
+  by_cases hlt : ({0, 2, 6, 8, 9098} : Finset ℤ).card < p
+  · exact exists_missed_residue_of_card_lt _ p hlt
+  · -- `p ≤ 5`, so `p ∈ {2, 3, 5}`
+    have hcard : ({0, 2, 6, 8, 9098} : Finset ℤ).card = 5 := by decide
+    have hple : p ≤ 5 := by omega
+    have h2le : 2 ≤ p := hp.two_le
+    interval_cases p
+    · exact ⟨1, fun h hh => tuple_ne_one_mod_two h (hmem h hh)⟩
+    · exact ⟨1, fun h hh => tuple_ne_one_mod_three h (hmem h hh)⟩
+    · exact absurd hp (by norm_num)
+    · exact ⟨4, fun h hh => tuple_ne_four_mod_five h (hmem h hh)⟩
+
+end Brockian
 

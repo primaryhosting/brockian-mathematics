@@ -1,0 +1,26 @@
+/-!
+# Ngo Fundamental Lemma
+Category: Frontier — Fields Medal Work
+Target: Frontier.ngo_fundamental_lemma
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-!
+## Overview
+
+This file states the Langlands–Shelstad fundamental lemma (proved in general by
+Ngô Bảo Châu) in the following shape, and proves a base case together with two
+Lean-checked reductions.
+
+For an unramified endoscopic datum `(H, s, η)` for a reductive group `G` over a
+non-archimedean local field `F`, with `q` the residue cardinality, the fundamental
+
+def signPow : Nat → Int
+  | 0 => 1
+  | k + 1 => -signPow k
+
+/--
+The number of vertices at distance `k` from a fixed vertex in the `(q+1)`-regular
+Bruhat–Tits tree of `PGL(2, F)`.
+-/

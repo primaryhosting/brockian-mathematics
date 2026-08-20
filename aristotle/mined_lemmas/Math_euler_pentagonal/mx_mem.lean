@@ -1,0 +1,27 @@
+import Mathlib
+
+/-!
+# Franklin's involution
+
+Combinatorial core of Euler's pentagonal number theorem: the signed count of partitions of
+`n` into distinct parts (sign `(-1)^(number of parts)`) is `0` unless `n` is a generalized
+pentagonal number.
+
+Partitions into distinct parts are encoded as finite sets of positive naturals.
+-/
+
+namespace EulerPentagonal
+
+open Finset
+
+/-- The largest element of `s` (junk value `0` for `s = ∅`). -/
+
+lemma mx_mem {s : Finset ℕ} (hne : s.Nonempty) : mx s ∈ s := by
+  classical
+  obtain ⟨a, ha⟩ := hne
+  have : mx s = s.max' ⟨a, ha⟩ := by
+    rw [Finset.max'_eq_sup' , Finset.sup'_eq_sup]
+    rfl
+  rw [this]
+  exact s.max'_mem _
+

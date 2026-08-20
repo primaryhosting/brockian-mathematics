@@ -9,6 +9,23 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-
+# Qft Unitary 7
+Category: Quantum Computing
+Target: QC.qft_unitary_7
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
+/-!
+# Qft Unitary 7
+Category: Quantum Computing
+Target: QC.qft_unitary_7
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,94 +40,67 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace QC
 
-open Finset
+open Complex Finset
 
-/-- The `N`-dimensional discrete Fourier transform (quantum Fourier transform) matrix:
-its `(j, k)` entry is `exp (2 π i j k / N) / √N`.  For `n` qubits one takes `N = 2 ^ n`. -/
-noncomputable def qftMatrix (N : ℕ) : Matrix (Fin N) (Fin N) ℂ :=
-  fun j k => Complex.exp (2 * Real.pi * Complex.I * (j.val * k.val) / N) / Real.sqrt N
+/-- The `N × N` quantum Fourier transform matrix, with rows and columns indexed by `ZMod N`:
+its `(j, k)` entry is `N ^ (-1/2) * exp (2 π i j k / N)`.  For `N = 2 ^ n` this is the QFT on
+`n` qubits (with computational basis states identified with residues mod `2 ^ n`). -/
+noncomputable def qftMatrix (N : ℕ) : Matrix (ZMod N) (ZMod N) ℂ := fun j k =>
+  (Real.sqrt N : ℂ)⁻¹ * Complex.exp (2 * Real.pi * Complex.I * (j.val * k.val) / N)
 
-/-- Geometric sum of `N`-th roots of unity: `∑_{k<N} exp (2 π i a k / N)` equals `N` when
-`N ∣ a` and `0` otherwise. -/
-theorem sum_exp_int (N : ℕ) (hN : 0 < N) (a : ℤ) :
-    ∑ k : Fin N, Complex.exp (2 * Real.pi * Complex.I * a * k.val / N)
-      = if (N : ℤ) ∣ a then (N : ℂ) else 0 := by
-  have hprim := Complex.isPrimitiveRoot_exp N hN.ne'
-  set ξ : ℂ := Complex.exp (2 * Real.pi * Complex.I / N) with hxi
-  set w : ℂ := ξ ^ (a : ℤ) with hw
-  have hN0 : (N : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hN.ne'
-  have hterm : ∀ k : Fin N, Complex.exp (2 * Real.pi * Complex.I * a * k.val / N)
-      = w ^ (k.val) := by
-    intro k
-    rw [hw, hxi, ← Complex.exp_int_mul, ← Complex.exp_nat_mul]
-    congr 1
-    field_simp
-  rw [Finset.sum_congr rfl (fun k _ => hterm k),
-    Fin.sum_univ_eq_sum_range (fun i => w ^ i) N]
-  have hwN : w ^ N = 1 := by
-    rw [hw, ← zpow_natCast (ξ ^ (a : ℤ)) N, ← zpow_mul, mul_comm, zpow_mul,
-      zpow_natCast, hprim.pow_eq_one, one_zpow]
-  by_cases h : (N : ℤ) ∣ a
-  · have hw1 : w = 1 := (hprim.zpow_eq_one_iff_dvd a).mpr h
-    simp [hw1, h]
-  · have hw1 : w ≠ 1 := fun hc => h ((hprim.zpow_eq_one_iff_dvd a).mp hc)
-    rw [geom_sum_eq hw1, hwN, if_neg h]
-    simp
+/-- The entries of the QFT matrix are given by the standard additive character of `ZMod N`. -/
+lemma qftMatrix_apply (N : ℕ) [NeZero N] (j k : ZMod N) :
+    qftMatrix N j k = (Real.sqrt N : ℂ)⁻¹ * ZMod.stdAddChar (j * k) := by
+  have h : ((j.val * k.val : ℤ) : ZMod N) = j * k := by
+    push_cast [ZMod.natCast_val, ZMod.cast_id]; ring
+  rw [qftMatrix, ← h, ZMod.stdAddChar_coe]
+  push_cast
+  ring_nf
 
-/-- The `N`-dimensional discrete Fourier transform matrix is unitary, for any `N > 0`. -/
-theorem qft_unitary (N : ℕ) (hN : 0 < N) : qftMatrix N ∈ Matrix.unitaryGroup (Fin N) ℂ := by
-  have hN0 : (N : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hN.ne'
-  have hsq : ((Real.sqrt N : ℝ) : ℂ) * ((Real.sqrt N : ℝ) : ℂ) = (N : ℂ) := by
-    rw [← Complex.ofReal_mul, Real.mul_self_sqrt (by positivity)]
-    simp
+/-- The standard additive character takes values on the unit circle, so complex conjugation
+inverts it. -/
+lemma conj_stdAddChar (N : ℕ) [NeZero N] (x : ZMod N) :
+    (starRingEnd ℂ) (ZMod.stdAddChar x) = ZMod.stdAddChar (-x) := by
+  rw [ZMod.stdAddChar_apply, ZMod.stdAddChar_apply, AddChar.map_neg_eq_inv,
+    ← Circle.coe_inv_eq_conj]
+
+/-- Orthogonality relation: the character sum `∑ k, e (t k / N)` is `N` if `t = 0` and `0`
+otherwise. -/
+lemma sum_stdAddChar (N : ℕ) [NeZero N] (t : ZMod N) :
+    ∑ k : ZMod N, ZMod.stdAddChar (t * k) = if t = 0 then (N : ℂ) else 0 := by
+  split_ifs with h
+  · simp [h, Finset.card_univ, ZMod.card]
+  · exact AddChar.sum_eq_zero_of_ne_one (ZMod.isPrimitive_stdAddChar N h)
+
+/-- The `N × N` quantum Fourier transform matrix is unitary, for any `N ≠ 0`. -/
+theorem qft_unitary (N : ℕ) [NeZero N] : qftMatrix N ∈ Matrix.unitaryGroup (ZMod N) ℂ := by
+  have hN : (N : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr (NeZero.ne N)
+  have hsq : ((Real.sqrt N : ℝ) : ℂ)⁻¹ * ((Real.sqrt N : ℝ) : ℂ)⁻¹ = (N : ℂ)⁻¹ := by
+    rw [← mul_inv, ← Complex.ofReal_mul, Real.mul_self_sqrt (Nat.cast_nonneg N)]
+    norm_num
   rw [Matrix.mem_unitaryGroup_iff]
-  ext l j
-  rw [Matrix.mul_apply, Matrix.one_apply]
-  have key : ∀ k : Fin N, qftMatrix N l k * (star (qftMatrix N)) k j
-      = Complex.exp (2 * Real.pi * Complex.I * (((l : ℤ) - (j : ℤ) : ℤ) : ℂ) * k.val / N)
-        / N := by
+  ext j l
+  rw [Matrix.mul_apply]
+  have key : ∀ k : ZMod N, qftMatrix N j k * (star (qftMatrix N)) k l
+      = (N : ℂ)⁻¹ * ZMod.stdAddChar ((j - l) * k) := by
     intro k
-    simp only [qftMatrix, Matrix.star_apply, Complex.star_def]
-    rw [map_div₀, ← Complex.exp_conj, Complex.conj_ofReal]
-    rw [show (starRingEnd ℂ) (2 * Real.pi * Complex.I * (j.val * k.val) / N)
-        = -(2 * Real.pi * Complex.I * (j.val * k.val) / N) by
-      simp only [map_div₀, map_mul, Complex.conj_I, Complex.conj_ofReal,
-        Complex.conj_natCast, map_ofNat]
-      ring]
-    rw [div_mul_div_comm, ← Complex.exp_add, hsq]
-    congr 1
-    push_cast
-    field_simp
-    ring_nf
-  rw [Finset.sum_congr rfl (fun k _ => key k), ← Finset.sum_div,
-    sum_exp_int N hN ((l : ℤ) - (j : ℤ))]
-  by_cases h : l = j
-  · simp [h, hN0]
-  · rw [if_neg h, if_neg, zero_div]
-    intro hd
-    apply h
-    have hz : ((l : ℤ) - (j : ℤ)) = 0 := by
-      refine Int.eq_zero_of_abs_lt_dvd hd ?_
-      have h1 := l.isLt
-      have h2 := j.isLt
-      rw [abs_lt]
-      omega
-    exact Fin.ext (by omega)
+    rw [Matrix.star_apply, qftMatrix_apply, qftMatrix_apply]
+    simp only [star_mul', RCLike.star_def, map_inv₀, Complex.conj_ofReal, conj_stdAddChar]
+    rw [show (j - l) * k = j * k + -(l * k) by ring, AddChar.map_add_eq_mul, ← hsq]
+    ring
+  rw [Finset.sum_congr rfl (fun k _ => key k), ← Finset.mul_sum, sum_stdAddChar, Matrix.one_apply]
+  simp only [sub_eq_zero]
+  split_ifs with h
+  · rw [inv_mul_cancel₀ hN]
+  · rw [mul_zero]
 
-/-- **The 7-qubit quantum Fourier transform matrix is unitary.** -/
-theorem qft_unitary_7 : qftMatrix (2 ^ 7) ∈ Matrix.unitaryGroup (Fin (2 ^ 7)) ℂ :=
-  qft_unitary _ (by positivity)
+/-- The 7-qubit quantum Fourier transform matrix (of size `2 ^ 7 = 128`) is unitary. -/
+theorem qft_unitary_7 : qftMatrix (2 ^ 7) ∈ Matrix.unitaryGroup (ZMod (2 ^ 7)) ℂ :=
+  qft_unitary (2 ^ 7)
 
 end QC
 

@@ -1,0 +1,52 @@
+import Mathlib
+
+/-!
+# Avila Ten Martini
+Category: Frontier — Fields Medal Work
+Target: Frontier.avila_ten_martini
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 400000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+namespace Frontier
+
+noncomputable section
+
+/-! ## The Hilbert space `ℓ²(ℤ)` -/
+
+/-- The Hilbert space `ℓ²(ℤ; ℂ)` on which the almost Mathieu operator acts. -/
+abbrev Ell2 := lp (fun _ : ℤ => ℂ) 2
+
+instance : Nontrivial Ell2 := by
+  refine ⟨lp.single 2 0 1, 0, ?_⟩
+  intro h
+  have := congrArg (fun f : Ell2 => (f : ℤ → ℂ) 0) h
+  simp at this
+
+
+private theorem reindexLM_norm (e : ℤ ≃ ℤ) (f : Ell2) : ‖reindexLM e f‖ ≤ 1 * ‖f‖ := by
+  rw [one_mul]
+  apply lp.norm_le_of_tsum_le (by norm_num) (norm_nonneg _)
+  have h := lp.norm_rpow_eq_tsum (p := 2) (E := fun _ : ℤ => ℂ) (by norm_num) f
+  have hc : ∀ i : ℤ, ‖(reindexLM e f) i‖ = ‖f (e i)‖ := fun i => rfl
+  simp only [hc, ENNReal.toReal_ofNat] at *
+  rw [Equiv.tsum_eq e (fun i => ‖f i‖ ^ (2 : ℝ))]
+  exact le_of_eq h.symm
+
+/-- Reindexing of an `ℓ²` sequence along a bijection of the index set, as a bounded operator. -/

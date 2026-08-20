@@ -9,6 +9,26 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+namespace Chem
+
+/-- **LCAO dimension preservation.**
+
+A linear combination of atomic orbitals (LCAO) built from `n` linearly independent
+atomic orbitals `atomicOrbital : Fin n → V` spans the space of molecular orbitals,
+which has dimension exactly `n`: the number of molecular orbitals obtained equals
+the number of atomic orbitals used.
+
+The key Mathlib ingredient is `finrank_span_eq_card`. -/
+theorem molecular_orbital_count
+    {K V : Type*} [DivisionRing K] [AddCommGroup V] [Module K V]
+    (n : ℕ) (atomicOrbital : Fin n → V)
+    (hindep : LinearIndependent K atomicOrbital) :
+    Module.finrank K (Submodule.span K (Set.range atomicOrbital)) = n := by
+  simpa using finrank_span_eq_card hindep
+
+end Chem
+
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -31,41 +51,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace Chem
-
-/-- The LCAO (Linear Combination of Atomic Orbitals) construction: given `n` atomic
-orbitals `ao : Fin n → V` and a coefficient matrix `C`, the `i`-th molecular orbital is
-`∑ j, C i j • ao j`. -/
-noncomputable def lcao {n : ℕ} {V : Type*} [AddCommGroup V] [Module ℂ V]
-    (ao : Fin n → V) (C : Matrix (Fin n) (Fin n) ℂ) : Fin n → V :=
-  fun i => ∑ j, C i j • ao j
-
-/-- The matrix of the LCAO family with respect to the atomic-orbital basis is the
-transpose of the coefficient matrix. -/
-lemma toMatrix_lcao {n : ℕ} {V : Type*} [AddCommGroup V] [Module ℂ V]
-    (ao : Module.Basis (Fin n) ℂ V) (C : Matrix (Fin n) (Fin n) ℂ) :
-    ao.toMatrix (lcao (⇑ao) C) = C.transpose := by
-  ext i j
-  simp [Module.Basis.toMatrix_apply, lcao, Matrix.transpose_apply, Finsupp.single_apply,
-    Finset.sum_ite_eq']
-
-/-- **LCAO preserves dimension.**  If `n` atomic orbitals form a basis of the orbital space
-`V` and the LCAO coefficient matrix `C` is invertible, then the resulting `n` molecular
-orbitals are linearly independent and span `V`; in particular they form a basis, so the
-number of molecular orbitals equals the number `n` of atomic orbitals, which is the
-dimension of `V`. -/
-theorem molecular_orbital_count {n : ℕ} {V : Type*} [AddCommGroup V] [Module ℂ V]
-    (ao : Module.Basis (Fin n) ℂ V) (C : Matrix (Fin n) (Fin n) ℂ) (hC : IsUnit C.det) :
-    LinearIndependent ℂ (lcao (⇑ao) C) ∧
-      Submodule.span ℂ (Set.range (lcao (⇑ao) C)) = ⊤ ∧
-      Module.finrank ℂ V = n := by
-  have hdet : IsUnit (ao.det (lcao (⇑ao) C)) := by
-    rw [Module.Basis.det_apply, toMatrix_lcao, Matrix.det_transpose]
-    exact hC
-  obtain ⟨hli, hsp⟩ := (ao.is_basis_iff_det).2 hdet
-  refine ⟨hli, hsp, ?_⟩
-  simpa using Module.finrank_eq_card_basis ao
-
-end Chem
 

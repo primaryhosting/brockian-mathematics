@@ -1,0 +1,29 @@
+/-!
+# Erdos Discrepancy
+Category: Frontier — Prime Numbers
+Target: Frontier.erdos_discrepancy
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-
+This file is deliberately self-contained (no imports): a Lean module docstring
+must be the first command in a file, so the required header above forces the
+file to contain no `import` lines.  Everything below therefore uses only the
+Lean 4 core library.  The file `RequestProject/Main.lean` re-states the results
+in Mathlib terms (`∑ i ∈ Finset.Icc 1 n, f (i * d)` and `|·|`) and proves that
+the two formulations agree.
+-/
+
+namespace Frontier
+
+/-- The partial sum of `f` along the homogeneous arithmetic progression with
+common difference `d`, over its first `n` terms:  `f d + f (2d) + ⋯ + f (n d)`. -/
+
+theorem hapSum_four_three : hapSum f 4 3 = f 3 + f 6 + f 9 + f 12 := by
+  simp [hapSum, List.range_succ]
+  omega
+
+end Expansions
+
+/-- Two `±1` values whose sum has absolute value at most `1` are opposite. -/

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""axle_verify.py — verify harvested proofs with AXLE (cloud Lean 4.32.0 + Mathlib).
+"""axle_verify.py — verify harvested proofs with AXLE (pinned cloud Lean + Mathlib).
 
 The local `lake env lean` path pays a >2min import-Mathlib tax per file, so
 verify_stage can't keep up. AXLE checks cloud-side in ~seconds with a strict verdict
@@ -52,10 +52,12 @@ def main():
         b = pathlib.Path(f).name
         if b not in state:
             return True
+        if state[b].get("environment") != ax.DEFAULT_ENV:
+            return True
         prev = state[b].get("hash")
         return prev is not None and prev != _hash(normalize(open(f, errors="ignore").read()))
     todo = [f for f in files if stale(f)][:MAX]
-    print(f"{len(files)} best proofs; AXLE-verifying {len(todo)} (cloud lean-4.32.0)")
+    print(f"{len(files)} best proofs; AXLE-verifying {len(todo)} (cloud {ax.DEFAULT_ENV})")
     for f in todo:
         b = pathlib.Path(f).name
         content = normalize(open(f, errors="ignore").read())

@@ -1,0 +1,25 @@
+import Mathlib
+-- (Lean 4 requires `import` commands to precede any module docstring, so the required
+-- header comment is reproduced verbatim immediately below.)
+
+/-!
+# Aronszajn Tree Exists
+Category: Frontier — Set Theory
+Target: Frontier.Aronszajn_tree_exists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open Ordinal Set Cardinal
+open scoped Ordinal
+
+namespace Aronszajn
+
+/-! ## Countable ordinals -/
+
+/-- An ordinal is countable (i.e. its set of predecessors is countable) iff it is `< ω₁`. -/
+
+lemma exists_lvl_eq {β : Ordinal.{0}} (hβ : β < ω₁) : ∃ a : Tree, lvl a = β := by
+  refine ⟨⟨(β, rest (ee β) β), hβ, fun ξ hξ => if_neg (not_lt.2 hξ), β, le_rfl, hβ,
+    fun ξ hξ => if_pos hξ⟩, rfl⟩
+

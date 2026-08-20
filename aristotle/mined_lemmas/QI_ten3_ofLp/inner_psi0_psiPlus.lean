@@ -1,0 +1,56 @@
+import Mathlib
+
+/-!
+# No Deleting
+Category: Frontier Qi
+Target: QI.no_deleting
+Statement: There is no unitary that deletes an unknown quantum state (no-deleting theorem).
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+open scoped InnerProductSpace
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace QI
+
+/-- A qubit: the two dimensional complex Hilbert space. -/
+abbrev Qubit : Type := EuclideanSpace ℂ (Fin 2)
+
+/-- The ancilla register: an `m`-dimensional complex Hilbert space. -/
+abbrev Anc (m : ℕ) : Type := EuclideanSpace ℂ (Fin m)
+
+/-- The full register: two qubits together with an `m`-dimensional ancilla,
+realized concretely as the Hilbert space with index set `Fin 2 × Fin 2 × Fin m`. -/
+abbrev Reg (m : ℕ) : Type := EuclideanSpace ℂ (Fin 2 × Fin 2 × Fin m)
+
+/-- The (unnormalized) product state `a ⊗ b ⊗ c` inside `Reg m`. -/
+
+lemma inner_psi0_psiPlus : ⟪psi0, psiPlus⟫_ℂ = invSqrtTwo := by
+  simp [PiLp.inner_apply, RCLike.inner_apply, psi0, psiPlus, Fin.sum_univ_two]
+
+/-- **No-deleting theorem.** There is no unitary (linear isometric equivalence) of the
+two-qubit-plus-ancilla register which, for every unknown pure qubit state `ψ`, maps the two
+copies `ψ ⊗ ψ` together with a fixed ancilla state to `ψ` tensored with a fixed blank state and a
+fixed final ancilla state.  In other words, a copy of an unknown quantum state cannot be deleted:
+the second copy cannot be replaced by a standard blank state while leaving the ancilla in a state
+independent of `ψ`. -/

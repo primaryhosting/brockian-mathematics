@@ -1,0 +1,85 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-
+# Practical Twin Infinitude
+Category: Brockian Conjecture
+Target: Brockian.PracticalNumbers.PracticalTwinInfinitude
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean requires `import` to precede any doc-comment command, so the header above is written as a
+-- plain block comment; its text is verbatim as requested.)
+
+import Mathlib
+
+/-!
+The main result of this file is `Brockian.PracticalNumbers.PracticalTwinInfinitude`:
+there are infinitely many `n` such that both `n` and `n + 2` are practical numbers.
+
+The proof is completely explicit. We show that for every `t`, the pair
+`(2 * (3 ^ 2 ^ t - 1), 2 * 3 ^ 2 ^ t)` is a pair of practical numbers differing by `2`
+(e.g. `(4, 6)`, `(16, 18)`, `(160, 162)`, `(13120, 13122)`, ...).
+
+The engine is the classical closure property `IsPractical.mul`: if `n` is practical and
+`0 < m ≤ σ n + 1`, then `n * m` is practical. Iterating it along the factorisation
+`3 ^ 2 ^ t - 1 = 2 * (3 ^ 2 ^ 0 + 1) * (3 ^ 2 ^ 1 + 1) * ⋯ * (3 ^ 2 ^ (t-1) + 1)`
+(realised here as a simple induction on `t`) yields practicality of `2 * (3 ^ 2 ^ t - 1)`,
+while practicality of `2 * 3 ^ a` is an even simpler induction.
+-/
+
+namespace Brockian.PracticalNumbers
+
+open Finset
+
+/-- `n` is a *practical number* if it is positive and every `k ≤ n` can be written as a sum of
+distinct divisors of `n`. -/
+
+theorem practical_two_mul_three_pow_two_pow_sub_one (t : ℕ) :
+    IsPractical (2 * (3 ^ 2 ^ t - 1)) := by
+  induction t with
+  | zero =>
+      have h : 2 * (3 ^ 2 ^ 0 - 1) = 2 * 2 := by norm_num
+      rw [h]
+      exact practical_two.mul' (by norm_num) (by norm_num)
+  | succ t ih =>
+      have hx3 : 3 ≤ 3 ^ 2 ^ t := by
+        calc (3:ℕ) = 3 ^ 1 := by norm_num
+        _ ≤ 3 ^ 2 ^ t := Nat.pow_le_pow_right (by norm_num) Nat.one_le_two_pow
+      have hsq : (3:ℕ) ^ 2 ^ (t + 1) = 3 ^ 2 ^ t * 3 ^ 2 ^ t := by
+        rw [← pow_add]
+        congr 1
+        rw [pow_succ]
+        omega
+      have hstep : (3:ℕ) ^ 2 ^ (t + 1) - 1 = (3 ^ 2 ^ t - 1) * (3 ^ 2 ^ t + 1) := by
+        rw [hsq, nat_sq_sub_one _ (by omega)]
+      have hle : 3 ^ 2 ^ t + 1 ≤ 2 * (3 ^ 2 ^ t - 1) + 1 := by omega
+      have hres := ih.mul' (m := 3 ^ 2 ^ t + 1) (by omega) hle
+      have he : 2 * (3 ^ 2 ^ t - 1) * (3 ^ 2 ^ t + 1) = 2 * (3 ^ 2 ^ (t + 1) - 1) := by
+        rw [hstep]; ring
+      rwa [he] at hres
+
+/-- Sanity check that the definition is not vacuous: `5` is not practical (it has divisors `1`
+and `5`, so `4` is not a sum of distinct divisors). -/

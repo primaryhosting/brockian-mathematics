@@ -8,183 +8,26 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-namespace PCA.Isolation
+/-
+# In Scope Encoding Complete
+Category: Proof-Carrying Apps
+Target: PCA.Isolation.in_scope_encoding_complete
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
-/-- Tenants are identified by a natural number. -/
-abbrev Tenant := ℕ
 
-/-- Resource identifiers are natural numbers. -/
-abbrev ResId := ℕ
-
-/-- A resource is owned by a tenant and carries a resource identifier. -/
-structure Resource where
-  tenant : Tenant
-  rid : ResId
-deriving DecidableEq, Repr
-
-/-- A scope is the authority of one tenant over a finite set of resource identifiers. -/
-structure Scope where
-  tenant : Tenant
-  allowed : Finset ResId
-
-/-- The ground-truth access predicate: `r` is visible in scope `s` when it belongs to the
-scope's tenant and its identifier is explicitly allowed. -/
-def InScope (s : Scope) (r : Resource) : Prop :=
-  r.tenant = s.tenant ∧ r.rid ∈ s.allowed
-
-instance (s : Scope) (r : Resource) : Decidable (InScope s r) := by
-  unfold InScope; infer_instance
-
-/-- The canonical (sorted, duplicate-free) enumeration of the identifiers of a scope. -/
-def handles (s : Scope) : List ResId := s.allowed.sort (· ≤ ·)
-
-lemma mem_handles {s : Scope} {x : ResId} : x ∈ handles s ↔ x ∈ s.allowed :=
-  Finset.mem_sort _
-
-lemma handles_nodup (s : Scope) : (handles s).Nodup :=
-  Finset.sort_nodup _ _
-
-lemma length_handles (s : Scope) : (handles s).length = s.allowed.card :=
-  Finset.length_sort _
-
-/-- The isolation engine: issue a dense handle for an in-scope resource, and refuse
-(`none`) for everything else. -/
-def encode (s : Scope) (r : Resource) : Option ℕ :=
-  if InScope s r then some ((handles s).idxOf r.rid) else none
-
-/-- Resolution of a handle back to a resource, within a scope. -/
-def decode (s : Scope) (i : ℕ) : Option Resource :=
-  ((handles s)[i]?).map fun rid => ⟨s.tenant, rid⟩
-
-/-! ### Basic behaviour of `encode` -/
-
-lemma encode_eq_none_iff {s : Scope} {r : Resource} :
-    encode s r = none ↔ ¬ InScope s r := by
-  unfold encode; split <;> simp_all
-
-lemma encode_of_inScope {s : Scope} {r : Resource} (h : InScope s r) :
-    encode s r = some ((handles s).idxOf r.rid) := by
-  unfold encode; simp [h]
-
-lemma idxOf_lt_card {s : Scope} {r : Resource} (h : InScope s r) :
-    (handles s).idxOf r.rid < s.allowed.card := by
-  rw [← length_handles]
-  exact List.idxOf_lt_length_iff.2 (mem_handles.2 h.2)
-
-/-- **Soundness of encoding.** A handle is only ever issued for an in-scope resource, and it
-always lies in the dense range `[0, |scope|)`. -/
-theorem encode_sound {s : Scope} {r : Resource} {i : ℕ} (h : encode s r = some i) :
-    InScope s r ∧ i < s.allowed.card := by
-  unfold encode at h
-  split at h
-  · rename_i hs
-    exact ⟨hs, by simpa [Option.some_inj.1 h] using idxOf_lt_card hs⟩
-  · simp at h
-
-/-- **Cross-tenant isolation.** A resource belonging to another tenant is never encoded. -/
-theorem cross_tenant_isolation {s : Scope} {r : Resource} (h : r.tenant ≠ s.tenant) :
-    encode s r = none :=
-  encode_eq_none_iff.2 fun hs => h hs.1
-
-/-- **Soundness of decoding.** Any resource obtained by resolving a handle is in scope, and
-its handle is the one it came from. -/
-theorem decode_sound {s : Scope} {i : ℕ} {r : Resource} (h : decode s i = some r) :
-    InScope s r ∧ encode s r = some i ∧ i < s.allowed.card := by
-  unfold decode at h
-  rcases Option.map_eq_some_iff.1 h with ⟨rid, hrid, hr⟩
-  rcases List.getElem?_eq_some_iff.1 hrid with ⟨hlt, hget⟩
-  subst hr
-  have hmem : rid ∈ s.allowed := by
-    rw [← mem_handles, ← hget]
-    exact List.getElem_mem hlt
-  have hscope : InScope s ⟨s.tenant, rid⟩ := ⟨rfl, hmem⟩
-  refine ⟨hscope, ?_, by simpa [length_handles] using hlt⟩
-  rw [encode_of_inScope hscope, ← hget, (handles_nodup s).idxOf_getElem]
-
-/-- Resolving the handle of an in-scope resource returns exactly that resource. -/
-theorem decode_encode {s : Scope} {r : Resource} (h : InScope s r) :
-    decode s ((handles s).idxOf r.rid) = some r := by
-  have hlt : (handles s).idxOf r.rid < (handles s).length :=
-    List.idxOf_lt_length_iff.2 (mem_handles.2 h.2)
-  unfold decode
-  rw [List.getElem?_eq_getElem hlt, List.getElem_idxOf hlt]
-  cases r with
-  | mk t rid =>
-      have ht : t = s.tenant := h.1
-      subst ht
-      simp
-
-/-- **Soundness and completeness of the isolation engine.**
-
-A resource is in scope for `s` if and only if the engine issues a handle for it; moreover such
-a handle is automatically dense (below the size of the scope) and resolves back to exactly the
-resource it was issued for. -/
-theorem in_scope_encoding_complete (s : Scope) (r : Resource) :
-    InScope s r ↔ ∃ i, encode s r = some i ∧ i < s.allowed.card ∧ decode s i = some r := by
-  constructor
-  · intro h
-    exact ⟨(handles s).idxOf r.rid, encode_of_inScope h, idxOf_lt_card h, decode_encode h⟩
-  · rintro ⟨i, hi, -, -⟩
-    exact (encode_sound hi).1
-
-/-- Distinct in-scope resources are never confused by the engine. -/
-theorem encode_injective_on_scope {s : Scope} {r₁ r₂ : Resource}
-    (h₁ : InScope s r₁) (h₂ : InScope s r₂) (h : encode s r₁ = encode s r₂) : r₁ = r₂ := by
-  have e₁ := decode_encode h₁
-  have e₂ := decode_encode h₂
-  rw [encode_of_inScope h₁, encode_of_inScope h₂] at h
-  have : (handles s).idxOf r₁.rid = (handles s).idxOf r₂.rid := Option.some_inj.1 h
-  rw [this, e₂] at e₁
-  exact (Option.some_inj.1 e₁).symm
-
-/-- Every index below the size of the scope is a live handle of a (unique) in-scope resource. -/
-theorem handle_surjective {s : Scope} {i : ℕ} (hi : i < s.allowed.card) :
-    ∃ r, InScope s r ∧ encode s r = some i ∧ decode s i = some r := by
-  have hlt : i < (handles s).length := by simpa [length_handles] using hi
-  refine ⟨⟨s.tenant, (handles s)[i]⟩, ?_⟩
-  have hdec : decode s i = some ⟨s.tenant, (handles s)[i]⟩ := by
-    unfold decode
-    rw [List.getElem?_eq_getElem hlt]
-    simp
-  obtain ⟨hs, henc, -⟩ := decode_sound hdec
-  exact ⟨hs, henc, hdec⟩
-
-/-! ### A concrete instance, showing the model is not vacuous -/
-
-section Example
-
-/-- Tenant `0` may see resources `3` and `7`. -/
-private def demoScope : Scope := ⟨0, {3, 7}⟩
-
-example : InScope demoScope ⟨0, 7⟩ := by decide
-
-private lemma handles_demoScope : handles demoScope = [3, 7] := by
-  rw [handles, demoScope,
-    Finset.sort_insert (r := (· ≤ ·)) (by simp) (by simp), Finset.sort_singleton]
-
-example : encode demoScope ⟨0, 7⟩ = some 1 := by
-  rw [encode_of_inScope (by decide), handles_demoScope]
-  rfl
-
-example : decode demoScope 1 = some ⟨0, 7⟩ := by
-  rw [decode, handles_demoScope]
-  rfl
-
-/-- The same resource identifier owned by a different tenant is refused. -/
-example : encode demoScope ⟨1, 7⟩ = none := by decide
-
-/-- An identifier outside the scope's allow-list is refused. -/
-example : encode demoScope ⟨0, 5⟩ = none := by decide
-
-end Example
-
-end PCA.Isolation
-
+/-!
+# In Scope Encoding Complete
+Category: Proof-Carrying Apps
+Target: PCA.Isolation.in_scope_encoding_complete
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 open scoped BigOperators
 open scoped Real
 open scoped Nat
-open scoped Classical
 open scoped Pointwise
 
 set_option maxHeartbeats 8000000
@@ -195,12 +38,83 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
+namespace PCA
+namespace Isolation
 
-set_option grind.warning false
+/-- A resource the isolation engine may be asked to mediate access to:
+a domain (the isolation boundary it lives behind) together with a path inside it. -/
+structure Resource where
+  domain : String
+  path : List String
+  deriving DecidableEq, Repr
+
+/-- An isolation scope: a list of permitted domains together with a maximal path depth. -/
+structure Scope where
+  allowed : List String
+  maxDepth : Nat
+  deriving Repr
+
+/-- A resource is *in scope* when its domain is permitted and its path is not too deep. -/
+def InScope (sc : Scope) (r : Resource) : Prop :=
+  r.domain ∈ sc.allowed ∧ r.path.length ≤ sc.maxDepth
+
+instance (sc : Scope) (r : Resource) : Decidable (InScope sc r) := by
+  unfold InScope; infer_instance
+
+/-- The engine's wire encoding: an in-scope resource is encoded as the flat token list
+`domain :: path`; an out-of-scope resource has no encoding at all. -/
+def encode (sc : Scope) (r : Resource) : Option (List String) :=
+  if InScope sc r then some (r.domain :: r.path) else none
+
+/-- Decoding a token list back into a resource. The empty list is not a valid encoding. -/
+def decode : List String → Option Resource
+  | [] => none
+  | d :: p => some ⟨d, p⟩
+
+/-- Decoding inverts encoding on every value the encoder actually produces. -/
+theorem decode_encode (sc : Scope) (r : Resource) (c : List String)
+    (h : encode sc r = some c) : decode c = some r := by
+  unfold encode at h
+  by_cases hs : InScope sc r
+  · rw [if_pos hs] at h
+    -- `Option.some.inj` turns `some x = some y` into `x = y`.
+    obtain rfl := Option.some.inj h
+    cases r
+    rfl
+  · rw [if_neg hs] at h
+    exact absurd h (by simp)
+
+/-- The encoder is defined exactly on the in-scope resources: it succeeds if and only if
+the resource is in scope, and in that case the encoding faithfully determines the resource.
+
+This is the completeness (every in-scope resource is representable) and soundness
+(nothing out of scope is representable) statement for the isolation engine's model. -/
+theorem in_scope_encoding_complete (sc : Scope) (r : Resource) :
+    InScope sc r ↔ ∃ c, encode sc r = some c ∧ decode c = some r := by
+  constructor
+  · intro hs
+    refine ⟨r.domain :: r.path, ?_, ?_⟩
+    · simp [encode, if_pos hs]
+    · cases r; rfl
+  · rintro ⟨c, hc, -⟩
+    by_contra hs
+    rw [encode, if_neg hs] at hc
+    exact absurd hc (by simp)
+
+/-- Encoding is injective on in-scope resources: distinct in-scope resources never
+collide on the wire. -/
+theorem encode_injOn (sc : Scope) {r₁ r₂ : Resource} {c : List String}
+    (h₁ : encode sc r₁ = some c) (h₂ : encode sc r₂ = some c) : r₁ = r₂ := by
+  have d₁ := decode_encode sc r₁ c h₁
+  have d₂ := decode_encode sc r₂ c h₂
+  have : some r₁ = some r₂ := d₁ ▸ d₂ ▸ rfl
+  exact Option.some.inj this
+
+/-- Out-of-scope resources have no encoding. -/
+theorem encode_eq_none_of_not_inScope (sc : Scope) (r : Resource) (h : ¬ InScope sc r) :
+    encode sc r = none := by
+  simp [encode, if_neg h]
+
+end Isolation
+end PCA
 

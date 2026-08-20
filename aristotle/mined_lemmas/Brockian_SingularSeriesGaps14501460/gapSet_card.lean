@@ -1,0 +1,23 @@
+/-
+# Singular Series Gaps 14501460 — Mathlib formulation
+
+Companion to `RequestProject/SingularSeriesGaps14501460.lean`.  The target theorem there is
+stated in plain core Lean (its file has to start with a fixed header comment, which forbids
+`import`s).  Here the same mathematical content is formalized in the idiomatic Mathlib way,
+with tuples as `Finset ℤ`, primality as `Nat.Prime`, and residues in `ZMod p`.
+-/
+
+import Mathlib
+
+namespace Brockian
+
+/-- A finite set `H` of integers is *admissible* (in the sense of the Hardy–Littlewood
+prime `k`-tuple conjecture) when, for every prime `p`, the elements of `H` fail to cover
+all residue classes modulo `p`.  Equivalently, the singular series attached to `H` is
+nonzero. -/
+
+theorem gapSet_card : gapSet.card = 4 := by decide
+
+/-- `{1450, 1452, 1456, 1458}` is admissible: modulo `2` it misses the class of `1`, modulo
+`3` it misses the class of `2`, and for every prime `p ≥ 5` it has too few elements to cover
+all residues. -/

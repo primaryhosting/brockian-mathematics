@@ -7,161 +7,94 @@ Provenance: Aristotle theorem prover (Harmonic)
 -/
 
 import Mathlib
-import RequestProject.Isolation
+
+/-
+# Null Escape Iff Unowned Reachable
+Category: Proof-Carrying Apps
+Target: PCA.Isolation.null_escape_iff_unowned_reachable
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
+/-!
+# Null Escape Iff Unowned Reachable
+Category: Proof-Carrying Apps
+Target: PCA.Isolation.null_escape_iff_unowned_reachable
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 namespace PCA.Isolation
 
-/-- A finite object graph together with an ownership predicate and a set of roots. -/
-structure Graph (V : Type*) where
-  /-- The objects directly referenced by an object. -/
-  succ : V → Finset V
-  /-- `owned v = true` means `v` belongs to the isolation domain. -/
-  owned : V → Bool
-  /-- Entry points of the isolation domain. -/
-  roots : Finset V
+variable {α : Type*}
 
-variable {V : Type*} [DecidableEq V]
+/-- An *isolate*: the abstract model used by the isolation engine.
 
-/-- Specification: the objects reachable from the roots by following references. -/
-inductive Reachable (g : Graph V) : V → Prop
-  | root {v : V} (hv : v ∈ g.roots) : Reachable g v
-  | step {u v : V} (hu : Reachable g u) (huv : v ∈ g.succ u) : Reachable g v
-
-/-- One saturation step of the engine: add all successors of the current set. -/
-def expand (g : Graph V) (s : Finset V) : Finset V := s ∪ s.biUnion g.succ
-
-lemma subset_expand (g : Graph V) (s : Finset V) : s ⊆ expand g s :=
-  Finset.subset_union_left
-
-lemma mem_expand_of_succ {g : Graph V} {s : Finset V} {u v : V} (hu : u ∈ s)
-    (huv : v ∈ g.succ u) : v ∈ expand g s :=
-  Finset.mem_union_right _ (Finset.mem_biUnion.mpr ⟨u, hu, huv⟩)
-
-lemma expand_subset {g : Graph V} {s t : Finset V} (hst : s ⊆ t)
-    (ht : ∀ u ∈ t, ∀ v ∈ g.succ u, v ∈ t) : expand g s ⊆ t := by
-  intro v hv
-  rcases Finset.mem_union.mp hv with hv | hv
-  · exact hst hv
-  · rcases Finset.mem_biUnion.mp hv with ⟨u, hu, huv⟩
-    exact ht u (hst hu) v huv
-
-/-- The engine: iterate `expand` until a fixpoint is reached. -/
-def closure [Fintype V] (g : Graph V) (s : Finset V) : Finset V :=
-  if expand g s ⊆ s then s else closure g (expand g s)
-termination_by Fintype.card V - s.card
-decreasing_by
-  rename_i h
-  have hss : s ⊂ expand g s := ⟨subset_expand g s, h⟩
-  have hcard : s.card < (expand g s).card := Finset.card_lt_card hss
-  have hle : (expand g s).card ≤ Fintype.card V := by
-    simpa using Finset.card_le_univ (expand g s)
-  omega
-
-lemma subset_closure [Fintype V] (g : Graph V) (s : Finset V) : s ⊆ closure g s := by
-  fun_induction closure g s with
-  | case1 s h => exact Finset.Subset.refl s
-  | case2 s h ih => exact (subset_expand g s).trans ih
-
-lemma closure_closed [Fintype V] (g : Graph V) (s : Finset V) :
-    ∀ u ∈ closure g s, ∀ v ∈ g.succ u, v ∈ closure g s := by
-  fun_induction closure g s with
-  | case1 s h => exact fun u hu v huv => h (mem_expand_of_succ hu huv)
-  | case2 s h ih => exact ih
-
-lemma closure_least [Fintype V] {g : Graph V} {s t : Finset V} (hst : s ⊆ t)
-    (ht : ∀ u ∈ t, ∀ v ∈ g.succ u, v ∈ t) : closure g s ⊆ t := by
-  fun_induction closure g s with
-  | case1 s h => exact hst
-  | case2 s h ih => exact ih (expand_subset hst ht)
-
-/-- The set of objects the engine considers reachable from the roots. -/
-def reachSet [Fintype V] (g : Graph V) : Finset V := closure g g.roots
-
-/-- Soundness and completeness of the reachability engine. -/
-theorem mem_reachSet_iff [Fintype V] (g : Graph V) (v : V) : v ∈ reachSet g ↔ Reachable g v := by
-  classical
-  constructor
-  · intro hv
-    have hsub : reachSet g ⊆ Finset.univ.filter (fun w => Reachable g w) := by
-      refine closure_least (fun w hw => ?_) (fun u hu w hw => ?_)
-      · exact Finset.mem_filter.mpr ⟨Finset.mem_univ w, Reachable.root hw⟩
-      · exact Finset.mem_filter.mpr
-          ⟨Finset.mem_univ w, Reachable.step (Finset.mem_filter.mp hu).2 hw⟩
-    exact (Finset.mem_filter.mp (hsub hv)).2
-  · intro hv
-    induction hv with
-    | root hw => exact subset_closure g g.roots hw
-    | step _ huv ih => exact closure_closed g g.roots _ ih _ huv
-
-/-- The set of *escaping* objects: reachable from the roots but not owned by the domain. -/
-def escapeSet [Fintype V] (g : Graph V) : Finset V := (reachSet g).filter (fun v => g.owned v = false)
-
-/-- Soundness and completeness of the escape analysis. -/
-theorem mem_escapeSet_iff [Fintype V] (g : Graph V) (v : V) :
-    v ∈ escapeSet g ↔ Reachable g v ∧ g.owned v = false := by
-  rw [escapeSet, Finset.mem_filter, mem_reachSet_iff]
-
-/-- **Main theorem.** The isolation engine reports no escape exactly when no unowned object
-is reachable from the roots of the domain. -/
-theorem null_escape_iff_unowned_reachable [Fintype V] (g : Graph V) :
-    escapeSet g = ∅ ↔ ¬ ∃ v : V, Reachable g v ∧ g.owned v = false := by
-  constructor
-  · intro h ⟨v, hv⟩
-    have : v ∈ escapeSet g := (mem_escapeSet_iff g v).mpr hv
-    rw [h] at this
-    exact absurd this (Finset.notMem_empty v)
-  · intro h
-    refine Finset.eq_empty_of_forall_notMem (fun v hv => h ⟨v, ?_⟩)
-    exact (mem_escapeSet_iff g v).mp hv
-
-/-- Contrapositive form: a nonempty escape set witnesses an unowned reachable object. -/
-theorem escape_nonempty_iff_unowned_reachable [Fintype V] (g : Graph V) :
-    (escapeSet g).Nonempty ↔ ∃ v : V, Reachable g v ∧ g.owned v = false := by
-  rw [Finset.nonempty_iff_ne_empty, ne_eq, null_escape_iff_unowned_reachable, not_not]
-
-
-/-! ### Worked examples
-
-Two small instances showing that both sides of the main theorem are inhabited, i.e. that the
-statement is not vacuous.
+* `edge a b` means the object `a` holds a reference to the object `b`;
+* `owned` is the set of objects that belong to (are owned by) the isolate;
+* `root` is the isolate's entry object.
 -/
+structure Isolate (α : Type*) where
+  /-- `edge a b` holds when object `a` stores a reference to object `b`. -/
+  edge : α → α → Prop
+  /-- The set of objects owned by the isolate. -/
+  owned : Set α
+  /-- The entry object of the isolate. -/
+  root : α
 
-namespace Example
+/-- `Reaches I a b` : `b` is reachable from `a` by following references. -/
+def Reaches (I : Isolate α) : α → α → Prop :=
+  Relation.ReflTransGen I.edge
 
-/-- A leaking configuration: object `0` (a root, owned) references `1` (owned), which
-references `2`, which is *not* owned by the domain. -/
-def leaky : Graph (Fin 3) where
-  succ := ![{1}, {2}, ∅]
-  owned := ![true, true, false]
-  roots := {0}
+/-- A *null escape trace* is the concrete counterexample the engine produces: a finite
+reference trace `root :: l` all of whose consecutive steps are references, whose final
+object is **not** owned by the isolate (so the null reference travelling along the trace
+leaves the isolate). -/
+def EscapeTrace (I : Isolate α) (l : List α) : Prop :=
+  List.IsChain I.edge (I.root :: l) ∧
+    (I.root :: l).getLast (List.cons_ne_nil _ _) ∉ I.owned
 
-lemma reachable_leaky_two : Reachable leaky 2 :=
-  Reachable.step (v := 2) (Reachable.step (u := 0) (v := 1) (Reachable.root (by decide))
-    (by decide)) (by decide)
+/-- A null reference escapes the isolate when some escape trace exists. -/
+def NullEscape (I : Isolate α) : Prop :=
+  ∃ l : List α, EscapeTrace I l
 
-/-- The engine detects the escape of object `2`. -/
-lemma leaky_escapes : (escapeSet leaky).Nonempty :=
-  (escape_nonempty_iff_unowned_reachable leaky).mpr ⟨2, reachable_leaky_two, by decide⟩
+/-- **Soundness and completeness of the isolation engine's model.**
+A null reference escapes the isolate (i.e. the engine can exhibit a reference trace out of
+the isolate) if and only if some object that is not owned by the isolate is reachable from
+its root.
 
-/-- An isolated configuration: the domain `{0, 1}` is closed under references, and the
-unowned object `2` is not reachable from the root `0`. -/
-def isolated : Graph (Fin 3) where
-  succ := ![{1}, {0}, ∅]
-  owned := ![true, true, false]
-  roots := {0}
+The two directions are exactly Mathlib's correspondence between `Relation.ReflTransGen` and
+finite chains, `List.exists_isChain_cons_of_relationReflTransGen` and
+`List.relationReflTransGen_of_exists_isChain_cons`. -/
+theorem null_escape_iff_unowned_reachable (I : Isolate α) :
+    NullEscape I ↔ ∃ n, Reaches I I.root n ∧ n ∉ I.owned := by
+  constructor
+  · rintro ⟨l, hchain, hlast⟩
+    exact ⟨_, List.relationReflTransGen_of_exists_isChain_cons l hchain rfl, hlast⟩
+  · rintro ⟨n, hreach, hn⟩
+    obtain ⟨l, hchain, hlast⟩ :=
+      List.exists_isChain_cons_of_relationReflTransGen (r := I.edge) hreach
+    exact ⟨l, hchain, by rw [hlast]; exact hn⟩
 
-lemma reachable_isolated (v : Fin 3) (hv : Reachable isolated v) : v = 0 ∨ v = 1 := by
-  induction hv with
-  | root hw => left; simpa [isolated] using hw
-  | step _ huv ih => rcases ih with rfl | rfl <;> simp [isolated] at huv <;> simp [huv]
+/-- **Soundness.** If every object reachable from the root is owned by the isolate, then no
+null reference can escape it. -/
+theorem not_nullEscape_of_forall_reachable_owned (I : Isolate α)
+    (h : ∀ n, Reaches I I.root n → n ∈ I.owned) : ¬ NullEscape I := by
+  rw [null_escape_iff_unowned_reachable]
+  rintro ⟨n, hreach, hn⟩
+  exact hn (h n hreach)
 
-/-- The engine reports no escape for the isolated configuration. -/
-lemma isolated_no_escape : escapeSet isolated = ∅ := by
-  refine (null_escape_iff_unowned_reachable isolated).mpr ?_
-  rintro ⟨v, hv, hunowned⟩
-  rcases reachable_isolated v hv with rfl | rfl <;> simp [isolated] at hunowned
+/-- **Completeness.** If some unowned object is reachable, the engine can exhibit an escape
+trace. -/
+theorem nullEscape_of_unowned_reachable (I : Isolate α) {n : α}
+    (hreach : Reaches I I.root n) (hn : n ∉ I.owned) : NullEscape I :=
+  (null_escape_iff_unowned_reachable I).2 ⟨n, hreach, hn⟩
 
-end Example
+/-- If the root itself is not owned, a null reference escapes immediately. -/
+theorem nullEscape_of_root_not_owned (I : Isolate α) (h : I.root ∉ I.owned) :
+    NullEscape I :=
+  nullEscape_of_unowned_reachable I Relation.ReflTransGen.refl h
 
 end PCA.Isolation
 

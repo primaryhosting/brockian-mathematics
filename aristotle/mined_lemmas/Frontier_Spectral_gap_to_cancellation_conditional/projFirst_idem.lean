@@ -1,0 +1,34 @@
+/-
+# Gap To Cancellation Conditional
+Category: Frontier — Spectral Geometry
+Target: Frontier.Spectral.gap_to_cancellation_conditional
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Gap To Cancellation Conditional
+Category: Frontier — Spectral Geometry
+Target: Frontier.Spectral.gap_to_cancellation_conditional
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
+
+namespace Frontier.Spectral
+
+open RealInnerProductSpace
+
+variable {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℝ V]
+
+/-- Key intermediate lemma: for a unit vector `u`, the inner product `⟪u, P u⟫`
+is bounded in absolute value by `‖P u‖` (Cauchy–Schwarz). -/
+
+theorem projFirst_idem (x : EuclideanSpace ℝ (Fin 2)) :
+    projFirst (projFirst x) = projFirst x := by
+  ext i; fin_cases i <;> simp [projFirst, EuclideanSpace.single_apply]
+

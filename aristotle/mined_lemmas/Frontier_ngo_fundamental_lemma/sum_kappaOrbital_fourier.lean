@@ -1,0 +1,122 @@
+/-
+# Ngo Fundamental Lemma
+Category: Frontier — Fields Medal Work
+Target: Frontier.ngo_fundamental_lemma
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Ngo Fundamental Lemma
+Category: Frontier — Fields Medal Work
+Target: Frontier.ngo_fundamental_lemma
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Frontier
+
+universe u v w
+
+/-!
+## The Langlands–Shelstad fundamental lemma (Ngô)
+
+Informal statement.  Let `F` be a non-archimedean local field with ring of integers `O`,
+let `G` be an unramified connected reductive group over `F` with hyperspecial maximal
+compact subgroup `K = G(O)`, and let `(H, s, η)` be an unramified endoscopic datum for `G`
+with hyperspecial maximal compact `K_H = H(O)`.  Let `γ_H ∈ H(F)` be a strongly
+`G`-regular semisimple element with image `γ ∈ G(F)`.  Then
+
+  `Δ(γ_H, γ) · SO_{γ_H}(1_{K_H}) = O^κ_γ(1_K)`,
+
+where `Δ` is the Langlands–Shelstad transfer factor, `SO` is the stable orbital integral
+on `H`, and `O^κ` is the `κ`-orbital integral on `G`, `κ` being the character of the
+Kottwitz obstruction group determined by `s`.
+
+Formalization.  A full formalization of `G`, `K`, `Δ` and the orbital integrals themselves
+is far beyond currently available Lean infrastructure (it needs the Hitchin fibration,
+perverse sheaves and the support theorem, none of which exist in Mathlib).  What is
+formalized here is the *combinatorial skeleton* of the identity, which is exactly the
+shape in which the fundamental lemma is used in the stabilization of the trace formula:
+
+* the stable conjugacy class of `γ` in `G(F)` breaks up into a finite set `GClasses` of
+  rational conjugacy classes, and each such class carries a Kottwitz invariant
+  `gObstruction : GClasses → 𝔎`, an element of a finite abelian group `𝔎 = 𝔎(I_γ/F)`;
+* orbital integrals `O_{γ'}(1_K)` for `γ'` running through these classes are recorded by
+  `gOrbital : GClasses → ℂ`, and likewise `hOrbital` on the `H`-side;
+* the endoscopic character is an additive character `κ : AddChar 𝔎 ℂ`, and the
+  `κ`-orbital integral is the twisted sum `∑ κ(inv γ') O_{γ'}`, while the stable orbital
+  integral is the untwisted sum;
+* the transfer factor is a complex number `Δ`.
+
+With this data, `EndoscopicData.FundamentalLemma` is the asserted identity, and the
+theorems below prove the base case (trivial endoscopic datum, `κ = 1`, where the identity
+is the tautology "stable = sum of rational"), the unobstructed case (`𝔎` trivial, e.g.
+`G = GL n`, where every stable class is a single rational class), and two Lean-checked
+reductions: multiplicativity in products of groups, and the Fourier inversion which shows
+that the family of all `κ`-orbital integrals determines the individual orbital integrals
+(the mechanism by which the fundamental lemma stabilizes the trace formula).
+-/
+
+/-- The `κ`-orbital integral attached to a stable conjugacy class:
+`O^κ_γ(f) = ∑_{γ' ∼_{st} γ} κ(inv(γ')) O_{γ'}(f)`, where the sum runs over the rational
+conjugacy classes `γ'` inside the stable class of `γ`, `inv` is the Kottwitz invariant and
+`orb γ'` records the ordinary orbital integral `O_{γ'}(f)`. -/
+
+theorem sum_kappaOrbital_fourier {A : Type u} {C : Type v} [AddCommGroup A] [Fintype A]
+    [DecidableEq A] [Fintype C] (inv : C → A) (orb : C → ℂ) (a : A) :
+    ∑ κ : AddChar A ℂ, κ (-a) * kappaOrbital inv orb κ
+      = (Fintype.card A : ℂ) * ∑ c ∈ Finset.univ.filter (fun c : C => inv c = a), orb c := by
+  have key : ∀ c : C, (∑ κ : AddChar A ℂ, κ (-a) * (κ (inv c) * orb c))
+      = (if inv c = a then (Fintype.card A : ℂ) else 0) * orb c := by
+    intro c
+    have h1 : ∀ κ : AddChar A ℂ, κ (-a) * (κ (inv c) * orb c) = κ (inv c - a) * orb c := by
+      intro κ
+      rw [sub_eq_add_neg, AddChar.map_add_eq_mul]
+      ring
+    simp only [h1, ← Finset.sum_mul, AddChar.sum_apply_eq_ite, sub_eq_zero]
+  simp only [kappaOrbital, Finset.mul_sum]
+  rw [Finset.sum_comm]
+  simp only [key]
+  rw [Finset.sum_filter]
+  exact Finset.sum_congr rfl fun c _ => by split <;> simp
+
+/-!
+### An explicit non-trivial instance
+
+The simplest genuinely endoscopic situation: `G = SL 2` over a `p`-adic field and a
+regular semisimple elliptic `γ` whose stable class splits into two rational classes,
+indexed by the Kottwitz group `𝔎 = ℤ/2`, with the elliptic endoscopic group `H` a torus.
+The endoscopic character `κ` is the non-trivial character of `ℤ/2`, so the `κ`-orbital
+integral is the *difference* of the two orbital integrals; when these agree (both equal to
+`1` after normalization) the `κ`-orbital integral vanishes, matching the vanishing stable
+orbital integral on the endoscopic side.  This instance shows the statement above is not
+vacuous: the `κ`-orbital integral really differs from the stable one.
+-/
+
+/-- The non-trivial character of the Kottwitz group `ℤ/2`. -/

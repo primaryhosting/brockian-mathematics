@@ -1,0 +1,2 @@
+# Summary of changes for run 302ab1cd-84aa-4dac-a17e-d76435990c9f
+Proved the theorem in `FibGcd.lean`: `Nat.fib (Nat.gcd m n) = Nat.gcd (Nat.fib m) (Nat.fib n)`, with the statement unchanged. The result follows directly from core Mathlib's `Nat.fib_gcd`, so the proof is a single `exact Nat.fib_gcd m n` — no non-core identifiers are referenced. The file compiles with zero errors against a bare `import Mathlib`, contains no `sorry`/`admit`/`native_decide`, and the theorem depends only on the standard axioms (`propext`, `Quot.sound`). Work is committed and pushed.

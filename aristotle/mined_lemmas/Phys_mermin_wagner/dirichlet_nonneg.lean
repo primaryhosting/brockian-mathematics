@@ -1,0 +1,21 @@
+/-
+The classical XY model on a finite graph, and the finite-volume Mermin-Wagner bound
+on its magnetization in terms of the Dirichlet energy of a spin-wave profile.
+-/
+import RequestProject.Core
+
+open MeasureTheory Real
+
+namespace Phys
+
+noncomputable section
+
+variable {S ι : Type} [Fintype S]
+
+/-- The energy of the classical XY model on a finite graph whose edges are indexed by
+`bonds`, with endpoints `src` and `tgt`, coupling `J` and external field `h`. -/
+
+lemma dirichlet_nonneg (bonds : Finset ι) (src tgt : ι → S) (v : S → ℝ) :
+    0 ≤ dirichlet bonds src tgt v :=
+  Finset.sum_nonneg fun _ _ => sq_nonneg _
+

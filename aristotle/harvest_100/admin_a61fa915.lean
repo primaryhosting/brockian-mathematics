@@ -1,0 +1,51 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-
+# Two Squares 113
+Category: Pure Mathematics
+Target: Math.two_squares_113
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (The requested header is kept verbatim above, as a plain block comment: Lean 4
+-- rejects a `/-! ... -/` module docstring placed before the `import` command.)
+
+import Mathlib
+
+namespace Math
+
+/-- The prime `113` is a sum of two squares: `113 = 7 ^ 2 + 8 ^ 2`. -/
+theorem two_squares_113 : Nat.Prime 113 ∧ ∃ a b : ℕ, 113 = a ^ 2 + b ^ 2 :=
+  ⟨by norm_num, 7, 8, by norm_num⟩
+
+/-- Restatement via Mathlib's `Nat.Prime.sq_add_sq`: every prime `p % 4 ≠ 3` is a sum of
+two squares; applied to `113`. -/
+theorem two_squares_113_of_mathlib : ∃ a b : ℕ, a ^ 2 + b ^ 2 = 113 :=
+  haveI : Fact (Nat.Prime 113) := ⟨by norm_num⟩
+  Nat.Prime.sq_add_sq (p := 113) (by norm_num)
+
+end Math
+

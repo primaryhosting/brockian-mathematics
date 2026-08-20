@@ -1,0 +1,61 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
+
+set_option autoImplicit false
+
+/-!
+# Parallel β-reduction has the diamond property
+
+We formalize the untyped λ-calculus with de Bruijn indices, define parallel
+one-step β-reduction `CS.Par`, and prove that it satisfies the diamond
+property (Takahashi's method of complete developments).
+-/
+
+namespace CS
+
+/-- λ-terms with de Bruijn indices. -/
+inductive Term : Type
+  | var : ℕ → Term
+  | app : Term → Term → Term
+  | lam : Term → Term
+  deriving DecidableEq
+
+namespace Term
+
+/-- Lifting of a renaming under a binder. -/
+
+theorem up_subst_comp (s₁ s₂ : ℕ → Term) :
+    up (fun n => subst s₂ (s₁ n)) = fun n => subst (up s₂) (up s₁ n) := by
+  funext n
+  cases n with
+  | zero => rfl
+  | succ n =>
+    show ren Nat.succ (subst s₂ (s₁ n)) = subst (up s₂) (ren Nat.succ (s₁ n))
+    rw [ren_subst, subst_ren]
+    rfl
+
+/-- Composition of substitutions. -/

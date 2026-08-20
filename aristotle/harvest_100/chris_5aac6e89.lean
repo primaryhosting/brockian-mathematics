@@ -1,0 +1,50 @@
+import Mathlib
+/-!
+# Freiman Two A
+Category: Frontier Wave 2 (deeper machinery)
+Target: AdditiveComb.freiman_two_A
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace AdditiveComb
+
+open Finset Pointwise
+
+/-- **Basic doubling lower bound**: for a finite nonempty set `A` of integers,
+`2 * |A| - 1 ≤ |A + A|`.
+
+This is the Cauchy–Davenport bound in a linearly ordered cancellative additive semigroup
+(`cauchy_davenport_add_of_linearOrder_isCancelAdd` in Mathlib), specialised to `s = t = A`. -/
+theorem freiman_two_A {A : Finset ℤ} (hA : A.Nonempty) :
+    2 * A.card - 1 ≤ (A + A).card := by
+  have h := cauchy_davenport_add_of_linearOrder_isCancelAdd hA hA
+  omega
+
+end AdditiveComb
+
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+

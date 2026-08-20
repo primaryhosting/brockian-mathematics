@@ -1,0 +1,66 @@
+import Mathlib
+
+/-!
+# Higgs Mass Toy
+Category: Frontier Physics
+Target: Frontier.higgs_mass_toy
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Frontier
+
+/-- The Mexican-hat potential of the abelian Higgs toy model, written as a function of the
+modulus `r = |φ|` of the complex scalar field:  `V(r) = lam * (r ^ 2 - v ^ 2) ^ 2`. -/
+
+theorem higgs_vev_is_unique_minimum {lam v : ℝ} (hlam : 0 < lam) (hv : 0 < v) :
+    higgsPotential lam v v = 0 ∧
+      (∀ r : ℝ, 0 ≤ r → 0 ≤ higgsPotential lam v r) ∧
+      (∀ r : ℝ, 0 ≤ r → higgsPotential lam v r = 0 → r = v) ∧
+      0 < higgsPotential lam v 0 := by
+  refine ⟨by simp [higgsPotential], ?_, ?_, ?_⟩
+  · intro r _
+    have : 0 ≤ (r ^ 2 - v ^ 2) ^ 2 := sq_nonneg _
+    exact mul_nonneg hlam.le this
+  · intro r hr hzero
+    have h : (r ^ 2 - v ^ 2) ^ 2 = 0 := by
+      rcases mul_eq_zero.1 hzero with h | h
+      · exact absurd h hlam.ne'
+      · exact h
+    have h2 : r ^ 2 = v ^ 2 := by
+      have := pow_eq_zero_iff (n := 2) (by norm_num) |>.1 h
+      linarith
+    nlinarith [hr, hv]
+  · have hv2 : (0 : ℝ) < v ^ 2 := by positivity
+    have h0 : (0 : ℝ) < ((0 : ℝ) ^ 2 - v ^ 2) ^ 2 := by nlinarith
+    simpa [higgsPotential] using mul_pos hlam h0
+
+/-- **Higgs mass toy model.**  In the abelian Higgs toy model with positive gauge coupling `g`,
+positive quartic coupling `lam` and positive symmetry-breaking scale `v`, the scalar potential
+is minimized at the nonzero vacuum expectation value `r = v` (spontaneous symmetry breaking),
+and the gauge boson acquires there a strictly positive mass `m = g * v`, whereas in the
+symmetric (unbroken) configuration `r = 0` the gauge boson would remain massless. -/

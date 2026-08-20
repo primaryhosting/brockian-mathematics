@@ -1,0 +1,28 @@
+import RequestProject.Machine
+
+/-!
+# The inductive counting construction
+
+Given a nondeterministic branching program we build, by Immerman and Szelepcsényi's
+inductive counting method, a nondeterministic branching program of polynomially larger
+size accepting exactly the complementary language.
+-/
+
+namespace CS
+
+namespace Compl
+
+variable {n : ℕ} (P : Setup n)
+
+/-! ### The invariant -/
+
+variable (x : Fin n → Bool)
+
+/-- The set of configurations of the original machine reachable in at most `i` steps. -/
+
+lemma inv_of_reach {s : CSt P.N P.V} (h : Relation.ReflTransGen (cstep P x) (cstart P) s) :
+    Inv P x s := by
+  induction h with
+  | refl => exact inv_start P x
+  | tail _ hstep ih => exact inv_step P x ih hstep
+

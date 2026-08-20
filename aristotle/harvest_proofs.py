@@ -3,17 +3,19 @@
 
 Authoritative source: submitted_night.json {target: {ids:[{account,project_id,ts}]}}
 (full uuids captured by night_submit). For each id not yet harvested, download under
-that account's key, classify PROVED (axiom-clean) vs STOPPED, and save PROVED proofs
+that account's key, classify a sorry-free candidate (legacy token PROVED) vs STOPPED, and save candidates
 to aristotle/harvest_100/<acct>_<id8>.lean so verify_stage can lake-verify them.
 
 Empty download => still proving => retried next run. Resumable via harvest_ledger.json.
 Emails a digest of newly-terminal results. No LLM calls; safe hourly.
 """
 import glob
+import fcntl
 import json
 import os
 import pathlib
 import re
+import shutil
 import subprocess
 import tempfile
 import urllib.request
@@ -22,19 +24,30 @@ ROOT = pathlib.Path(__file__).resolve().parent
 NIGHT = ROOT / "submitted_night.json"
 OUT = ROOT / "harvest_100"
 LEDGER = ROOT / "harvest_ledger.json"
+LOCK = ROOT / ".harvest.lock"
 REPORT = ROOT / "harvest_report.md"
 NOTIFY = os.environ.get("SOLVER_NOTIFY_TO", "chrisbrock54@gmail.com")
 KEYENV = {"admin": "ARISTOTLE_API_KEY", "chris": "ARISTOTLE_API_KEY_CHRIS"}
 MAX = int(os.environ.get("HARVEST_MAX", "60"))
 BAD = re.compile(r"\b(sorry|admit|native_decide|sorryAx)\b")
+PINNED_ARISTOTLE_BIN = os.path.expanduser(
+    "~/.local/share/aristotlelib-2.1.0/bin/aristotle"
+)
+ARISTOTLE_BIN = (
+    os.environ.get("ARISTOTLE_BIN")
+    or (PINNED_ARISTOTLE_BIN if os.path.isfile(PINNED_ARISTOTLE_BIN) else None)
+    or shutil.which("aristotle")
+)
 
 
 def run(args, key, t=180):
+    if not ARISTOTLE_BIN:
+        return ""
     e = dict(os.environ)
     if key:
         e["ARISTOTLE_API_KEY"] = key
     try:
-        return subprocess.run(["uvx", "--from", "aristotlelib@latest", "aristotle", *args],
+        return subprocess.run([ARISTOTLE_BIN, *args],
                               capture_output=True, text=True, env=e, timeout=t).stdout
     except Exception:  # noqa: BLE001
         return ""
@@ -67,6 +80,12 @@ def email(subj, body):
 
 
 def main():
+    lock_handle = LOCK.open("a+")
+    try:
+        fcntl.flock(lock_handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        print("harvest already running; skipped this overlapping poll")
+        return
     OUT.mkdir(exist_ok=True)
     night = json.loads(NIGHT.read_text()) if NIGHT.exists() else {}
     harvested = json.loads(LEDGER.read_text()) if LEDGER.exists() else {}
@@ -95,9 +114,9 @@ def main():
     proved = [h for h in harvested.values() if h["verdict"] == "PROVED"]
     total_ids = sum(len(v.get("ids", [])) for v in night.values())
     lines = [f"# Aristotle harvest — {len(harvested)}/{total_ids} resolved",
-             f"- PROVED (axiom-clean, queued for lake-verify): {len(proved)}",
+             f"- Proof candidates (legacy internal verdict `PROVED`; queued for independent verification): {len(proved)}",
              f"- STOPPED: {len(harvested)-len(proved)}",
-             f"- still proving: {total_ids-len(harvested)}", "", "## PROVED"]
+             f"- still proving: {total_ids-len(harvested)}", "", "## Proof candidates"]
     for h in sorted(proved, key=lambda x: x["target"]):
         lines.append(f"- [{h['tier']}] {h['target']} ({h['account']})")
     REPORT.write_text("\n".join(lines))

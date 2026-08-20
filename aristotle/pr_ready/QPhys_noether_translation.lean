@@ -9,6 +9,23 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-
+# Noether Translation
+Category: Quantum Physics
+Target: QPhys.noether_translation
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
+/-!
+# Noether Translation
+Category: Quantum Physics
+Target: QPhys.noether_translation
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,69 +40,48 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 namespace QPhys
 
-/-- If a Lagrangian `L (x, v)` is invariant under translations of the position variable,
+/-- The partial derivative `∂L/∂q` of a one-dimensional Lagrangian
+`L : position → velocity → time → ℝ`. -/
+noncomputable def dLdq (L : ℝ → ℝ → ℝ → ℝ) (q v t : ℝ) : ℝ := deriv (fun x => L x v t) q
+
+/-- The partial derivative `∂L/∂v` of a one-dimensional Lagrangian
+`L : position → velocity → time → ℝ`; evaluated along a trajectory this is the
+canonical momentum. -/
+noncomputable def dLdv (L : ℝ → ℝ → ℝ → ℝ) (q v t : ℝ) : ℝ := deriv (fun w => L q w t) v
+
+/-- **Key lemma.** If the Lagrangian is invariant under spatial translations,
 then its partial derivative with respect to position vanishes identically. -/
-theorem partial_pos_eq_zero_of_translation_invariant
-    (L : ℝ → ℝ → ℝ) (Lx : ℝ → ℝ → ℝ)
-    (hLx : ∀ x v, HasDerivAt (fun y : ℝ => L y v) (Lx x v) x)
-    (hinv : ∀ x s v, L (x + s) v = L x v) :
-    ∀ x v, Lx x v = 0 := by
-  intro x v
-  have hconst : (fun y : ℝ => L y v) = fun _ : ℝ => L 0 v := by
-    funext y
-    have := hinv 0 y v
-    simpa using this
-  have h0 : HasDerivAt (fun y : ℝ => L y v) 0 x := by
-    rw [hconst]
-    exact hasDerivAt_const x (L 0 v)
-  exact (hLx x v).unique h0
+theorem dLdq_eq_zero_of_translation_invariant
+    (L : ℝ → ℝ → ℝ → ℝ) (hinv : ∀ a x v t : ℝ, L (x + a) v t = L x v t)
+    (q v t : ℝ) : dLdq L q v t = 0 := by
+  have hconst : (fun x : ℝ => L x v t) = fun _ : ℝ => L 0 v t := by
+    funext x
+    have h := hinv x 0 v t
+    simpa using h
+  simp [dLdq, hconst]
 
-/-- **Noether's theorem for translation invariance in one dimension.**
-
-Let `L : ℝ → ℝ → ℝ` be a Lagrangian, written `L x v` in terms of position `x` and
-velocity `v`, with partial derivatives `Lx` (in position) and `Lv` (in velocity),
-i.e. `Lx x v = ∂L/∂x` and `Lv x v = ∂L/∂v`.
-
-Assume `L` is invariant under translations of the position: `L (x + s) v = L x v`.
-
-Let `q` be a trajectory with velocity `qd` (`qd t = q' t`) satisfying the
-Euler–Lagrange equation
-`d/dt (Lv (q t) (qd t)) = Lx (q t) (qd t)`,
-and let `p t = Lv (q t) (qd t)` be the canonical momentum.
-
-Then the momentum `p` is conserved: it takes the same value at all times. -/
+/-- **Noether's theorem for spatial translations (1D).**
+If the Lagrangian `L` is invariant under translations of the position variable
+(`L (x + a) v t = L x v t`), and the trajectory `q` satisfies the Euler-Lagrange
+equation `d/dt (∂L/∂v) = ∂L/∂q` along its path, then the canonical momentum
+`p t = ∂L/∂v (q t, q' t, t)` is conserved. -/
 theorem noether_translation
-    (L Lx Lv : ℝ → ℝ → ℝ)
-    (hLx : ∀ x v, HasDerivAt (fun y : ℝ => L y v) (Lx x v) x)
-    (hLv : ∀ x v, HasDerivAt (fun w : ℝ => L x w) (Lv x v) v)
-    (hinv : ∀ x s v, L (x + s) v = L x v)
-    (q qd p : ℝ → ℝ)
-    (hq : ∀ t, HasDerivAt q (qd t) t)
-    (hp : ∀ t, p t = Lv (q t) (qd t))
-    (hEL : ∀ t, HasDerivAt (fun s : ℝ => Lv (q s) (qd s)) (Lx (q t) (qd t)) t) :
-    ∀ t₁ t₂ : ℝ, p t₁ = p t₂ := by
-  have hzero : ∀ x v, Lx x v = 0 :=
-    partial_pos_eq_zero_of_translation_invariant L Lx hLx hinv
-  have hEL0 : ∀ t : ℝ, HasDerivAt (fun s : ℝ => Lv (q s) (qd s)) 0 t := by
+    (L : ℝ → ℝ → ℝ → ℝ) (q : ℝ → ℝ)
+    (hinv : ∀ a x v t : ℝ, L (x + a) v t = L x v t)
+    (hEL : ∀ t : ℝ, HasDerivAt (fun s : ℝ => dLdv L (q s) (deriv q s) s)
+                      (dLdq L (q t) (deriv q t) t) t) :
+    ∀ t s : ℝ, dLdv L (q t) (deriv q t) t = dLdv L (q s) (deriv q s) s := by
+  set p : ℝ → ℝ := fun s : ℝ => dLdv L (q s) (deriv q s) s with hpdef
+  have hp0 : ∀ t : ℝ, HasDerivAt p 0 t := by
     intro t
-    have := hEL t
-    rwa [hzero (q t) (qd t)] at this
-  have hdiff : Differentiable ℝ (fun s : ℝ => Lv (q s) (qd s)) := fun t => (hEL0 t).differentiableAt
-  have hderiv : ∀ t : ℝ, deriv (fun s : ℝ => Lv (q s) (qd s)) t = 0 := fun t => (hEL0 t).deriv
-  intro t₁ t₂
-  rw [hp t₁, hp t₂]
-  exact is_const_of_deriv_eq_zero hdiff hderiv t₁ t₂
+    have h := hEL t
+    rwa [dLdq_eq_zero_of_translation_invariant L hinv] at h
+  have hdiff : Differentiable ℝ p := fun t => (hp0 t).differentiableAt
+  have hderiv : ∀ t : ℝ, deriv p t = 0 := fun t => (hp0 t).deriv
+  intro t s
+  exact is_const_of_deriv_eq_zero hdiff hderiv t s
 
 end QPhys
 

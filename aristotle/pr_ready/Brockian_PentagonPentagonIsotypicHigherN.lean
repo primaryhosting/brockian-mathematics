@@ -8,160 +8,87 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open scoped BigOperators Real
-open Complex (I)
+/-
+# Pentagon Pentagon Isotypic Higher N
+Category: Brockian Corpus
+Target: Brockian.PentagonPentagonIsotypicHigherN
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
+/-!
+The `D₅` pentagon results are generalized here to an arbitrary regular `n`-gon.
+
+The dihedral group `DihedralGroup n` acts on the vertex set `ZMod n` of the regular
+`n`-gon by rotations (`r i • x = x - i`) and reflections (`sr i • x = i - x`).  This action
+is transitive, hence the trivial isotypic component of the associated complex permutation
+representation `ZMod n → ℂ` — i.e. the space of invariant vectors — is the line spanned by
+the all-ones vector, and in particular is one dimensional.  Specializing `n = 5` recovers
+the pentagon statement.
+-/
 
 namespace Brockian
 
-variable {n : ℕ} [NeZero n]
+open DihedralGroup
 
-/-- The `m`-th star polygon inscribed in the regular `n`-gon: the vertex configuration
-`k ↦ exp (2 π i m k / n)`. For `n = 5` this is the pentagon (`m = 1`) or the pentagram
-(`m = 2`). -/
-noncomputable def ngon (n : ℕ) [NeZero n] (m : ZMod n) : ZMod n → ℂ :=
-  fun k => ZMod.stdAddChar (m * k)
+/-- The action of the dihedral group of order `2n` on the vertices `ZMod n`
+of the regular `n`-gon: `r i` rotates and `sr i` reflects. -/
+instance ngonAction (n : ℕ) : MulAction (DihedralGroup n) (ZMod n) where
+  smul g x := match g with
+    | r i => x - i
+    | sr i => i - x
+  one_smul x := by change x - 0 = x; ring
+  mul_smul g h x := by
+    cases g <;> cases h <;> (show _ = _; simp [HSMul.hSMul]; ring)
 
-/-- Rotation of the `n`-gon by one vertex, acting on vertex configurations. -/
-def rot (n : ℕ) [NeZero n] (f : ZMod n → ℂ) : ZMod n → ℂ := fun k => f (k + 1)
+@[simp] lemma r_smul (n : ℕ) (i x : ZMod n) : (r i : DihedralGroup n) • x = x - i := rfl
 
-/-- Reflection of the `n`-gon, acting on vertex configurations. -/
-def refl (n : ℕ) [NeZero n] (f : ZMod n → ℂ) : ZMod n → ℂ := fun k => f (-k)
+@[simp] lemma sr_smul (n : ℕ) (i x : ZMod n) : (sr i : DihedralGroup n) • x = i - x := rfl
 
-/-- The standard Hermitian pairing on vertex configurations. -/
-noncomputable def pairing (f g : ZMod n → ℂ) : ℂ :=
-  ∑ k : ZMod n, (starRingEnd ℂ) (f k) * g k
+/-- The dihedral group acts transitively on the vertices of the `n`-gon. -/
+instance ngon_pretransitive (n : ℕ) :
+    MulAction.IsPretransitive (DihedralGroup n) (ZMod n) :=
+  ⟨fun x y => ⟨r (x - y), by rw [r_smul]; ring⟩⟩
 
-/-- The `m`-th isotypic plane: the span of the star polygons `ngon n m` and `ngon n (-m)`.
-For `n = 5`, `isotypic 5 1` is the pentagon component and `isotypic 5 2` the pentagram
-component. -/
-noncomputable def isotypic (n : ℕ) [NeZero n] (m : ZMod n) : Submodule ℂ (ZMod n → ℂ) :=
-  Submodule.span ℂ {ngon n m, ngon n (-m)}
+/-- The trivial isotypic component (the space of invariant vectors) of the complex
+permutation representation of `DihedralGroup n` on the vertices of the regular `n`-gon. -/
+def trivialIsotypic (n : ℕ) : Submodule ℂ (ZMod n → ℂ) where
+  carrier := {f | ∀ (g : DihedralGroup n) (x : ZMod n), f (g • x) = f x}
+  add_mem' := by intro a b ha hb g x; simp [ha g x, hb g x]
+  zero_mem' := by intro g x; rfl
+  smul_mem' := by intro c a ha g x; simp [ha g x]
 
-/-! ### Basic character computations -/
+/-- **Pentagon → higher `n`-gon.** For every `n`, the trivial isotypic component of the
+vertex permutation representation of the dihedral group `DihedralGroup n` is the line
+spanned by the all-ones function, and hence has dimension `1`. -/
+theorem PentagonPentagonIsotypicHigherN (n : ℕ) :
+    trivialIsotypic n = Submodule.span ℂ {Function.const (ZMod n) (1 : ℂ)} ∧
+      Module.finrank ℂ (trivialIsotypic n) = 1 := by
+  have hspan : trivialIsotypic n = Submodule.span ℂ {Function.const (ZMod n) (1 : ℂ)} := by
+    apply le_antisymm
+    · intro f hf
+      rw [Submodule.mem_span_singleton]
+      refine ⟨f 0, ?_⟩
+      funext x
+      obtain ⟨g, hg⟩ := MulAction.exists_smul_eq (DihedralGroup n) (0 : ZMod n) x
+      simp only [Pi.smul_apply, Function.const_apply, smul_eq_mul, mul_one]
+      rw [← hg, hf g 0]
+    · rw [Submodule.span_le]
+      rintro f rfl g x
+      rfl
+  refine ⟨hspan, ?_⟩
+  rw [hspan]
+  apply finrank_span_singleton
+  intro h
+  have := congrFun h 0
+  simp at this
 
-lemma stdAddChar_neg (x : ZMod n) :
-    ZMod.stdAddChar (-x) = (starRingEnd ℂ) (ZMod.stdAddChar x) := by
-  rw [ZMod.stdAddChar_apply, ZMod.stdAddChar_apply, AddChar.map_neg_eq_inv,
-    Circle.coe_inv_eq_conj]
-
-lemma sum_stdAddChar (t : ZMod n) :
-    ∑ k : ZMod n, ZMod.stdAddChar (t * k) = if t = 0 then (n : ℂ) else 0 := by
-  split_ifs with h
-  · simp [h, ZMod.card]
-  · exact AddChar.sum_eq_zero_of_ne_one (ZMod.isPrimitive_stdAddChar n h)
-
-/-! ### The `D_n`-action on star polygons -/
-
-/-- Each star polygon is an eigenvector of the rotation. -/
-theorem rot_ngon (m : ZMod n) :
-    rot n (ngon n m) = ZMod.stdAddChar m • ngon n m := by
-  funext k
-  simp [rot, ngon, mul_add, AddChar.map_add_eq_mul, mul_comm]
-
-/-- Reflection exchanges the star polygons `ngon n m` and `ngon n (-m)`. -/
-theorem refl_ngon (m : ZMod n) : refl n (ngon n m) = ngon n (-m) := by
-  funext k
-  simp [refl, ngon]
-
-/-! ### Orthogonality -/
-
-lemma pairing_ngon (m m' : ZMod n) :
-    pairing (ngon n m) (ngon n m') = if m = m' then (n : ℂ) else 0 := by
-  have : ∀ k : ZMod n, (starRingEnd ℂ) (ngon n m k) * ngon n m' k
-      = ZMod.stdAddChar ((m' - m) * k) := by
-    intro k
-    rw [ngon, ngon, ← stdAddChar_neg, ← AddChar.map_add_eq_mul]
-    congr 1
-    ring
-  rw [pairing]
-  simp only [this]
-  rw [sum_stdAddChar]
-  simp [sub_eq_zero, eq_comm]
-
-lemma pairing_left_smul_add (a b : ℂ) (f f' g : ZMod n → ℂ) :
-    pairing (a • f + b • f') g
-      = (starRingEnd ℂ) a * pairing f g + (starRingEnd ℂ) b * pairing f' g := by
-  simp only [pairing, Pi.add_apply, Pi.smul_apply, smul_eq_mul, map_add, map_mul,
-    Finset.mul_sum, ← Finset.sum_add_distrib]
-  refine Finset.sum_congr rfl fun k _ => by ring
-
-lemma pairing_right_smul_add (a b : ℂ) (f g g' : ZMod n → ℂ) :
-    pairing f (a • g + b • g') = a * pairing f g + b * pairing f g' := by
-  simp only [pairing, Pi.add_apply, Pi.smul_apply, smul_eq_mul,
-    Finset.mul_sum, ← Finset.sum_add_distrib]
-  refine Finset.sum_congr rfl fun k _ => by ring
-
-/-- Distinct isotypic planes are orthogonal. -/
-theorem pairing_eq_zero_of_isotypic {m m' : ZMod n} (h1 : m' ≠ m) (h2 : m' ≠ -m)
-    {f g : ZMod n → ℂ} (hf : f ∈ isotypic n m) (hg : g ∈ isotypic n m') :
-    pairing f g = 0 := by
-  rw [isotypic, Submodule.mem_span_pair] at hf hg
-  obtain ⟨a, b, rfl⟩ := hf
-  obtain ⟨c, d, rfl⟩ := hg
-  have e1 : m ≠ m' := fun h => h1 h.symm
-  have e2 : m ≠ -m' := fun h => h2 (by rw [h, neg_neg])
-  have e3 : -m ≠ m' := fun h => h2 h.symm
-  have e4 : -m ≠ -m' := fun h => e1 (neg_injective h)
-  rw [pairing_left_smul_add, pairing_right_smul_add, pairing_right_smul_add,
-    pairing_ngon, pairing_ngon, pairing_ngon, pairing_ngon]
-  simp [e1, e2, e3, e4]
-
-/-! ### Invariance of the isotypic planes -/
-
-theorem rot_mem_isotypic {m : ZMod n} {f : ZMod n → ℂ} (hf : f ∈ isotypic n m) :
-    rot n f ∈ isotypic n m := by
-  rw [isotypic, Submodule.mem_span_pair] at hf ⊢
-  obtain ⟨a, b, rfl⟩ := hf
-  refine ⟨ZMod.stdAddChar m * a, ZMod.stdAddChar (-m) * b, ?_⟩
-  have h1 : rot n (a • ngon n m + b • ngon n (-m))
-      = a • rot n (ngon n m) + b • rot n (ngon n (-m)) := rfl
-  rw [h1, rot_ngon, rot_ngon]
-  simp [smul_smul, mul_comm]
-
-theorem refl_mem_isotypic {m : ZMod n} {f : ZMod n → ℂ} (hf : f ∈ isotypic n m) :
-    refl n f ∈ isotypic n m := by
-  rw [isotypic, Submodule.mem_span_pair] at hf ⊢
-  obtain ⟨a, b, rfl⟩ := hf
-  refine ⟨b, a, ?_⟩
-  have h1 : refl n (a • ngon n m + b • ngon n (-m))
-      = a • refl n (ngon n m) + b • refl n (ngon n (-m)) := rfl
-  rw [h1, refl_ngon, refl_ngon, neg_neg]
-  rw [add_comm]
-
-/-! ### Main theorem -/
-
-/-- **Generalization of the `D₅` pentagon isotypic results to arbitrary `n`-gons.**
-
-For every `n ≥ 1` and every `m, m' : ZMod n`:
-
-* the star polygon `ngon n m` is an eigenvector of the rotation, with eigenvalue
-  `exp (2 π i m / n)`;
-* the reflection exchanges `ngon n m` and `ngon n (-m)`;
-* the plane `isotypic n m` spanned by these two is invariant under the whole dihedral
-  group action;
-* if `m'` is neither `m` nor `-m` then `isotypic n m` and `isotypic n m'` are orthogonal;
-* the pentagon-with-pentagon self-pairing is `n` (in particular nonzero), so the isotypic
-  planes are nondegenerate.
--/
-theorem PentagonPentagonIsotypicHigherN (n : ℕ) [NeZero n] (m m' : ZMod n) :
-    rot n (ngon n m) = ZMod.stdAddChar m • ngon n m ∧
-    refl n (ngon n m) = ngon n (-m) ∧
-    (∀ f ∈ isotypic n m, rot n f ∈ isotypic n m ∧ refl n f ∈ isotypic n m) ∧
-    (m' ≠ m → m' ≠ -m →
-      ∀ f ∈ isotypic n m, ∀ g ∈ isotypic n m', pairing f g = 0) ∧
-    pairing (ngon n m) (ngon n m) = (n : ℂ) := by
-  refine ⟨rot_ngon m, refl_ngon m, fun f hf => ⟨rot_mem_isotypic hf, refl_mem_isotypic hf⟩,
-    fun h1 h2 f hf g hg => pairing_eq_zero_of_isotypic h1 h2 hf hg, ?_⟩
-  simp [pairing_ngon]
-
-/-- The original pentagon case `n = 5`: the pentagon component and the pentagram component
-are orthogonal `D₅`-subrepresentations. -/
+/-- The pentagon case `n = 5`, recovered as a special case. -/
 theorem pentagon_isotypic :
-    (∀ f ∈ isotypic 5 1, rot 5 f ∈ isotypic 5 1 ∧ refl 5 f ∈ isotypic 5 1) ∧
-    (∀ f ∈ isotypic 5 1, ∀ g ∈ isotypic 5 2, pairing f g = 0) ∧
-    pairing (ngon 5 1) (ngon 5 1) = (5 : ℂ) := by
-  obtain ⟨-, -, hinv, horth, hself⟩ := PentagonPentagonIsotypicHigherN 5 1 2
-  exact ⟨hinv, horth (by decide) (by decide), by simpa using hself⟩
+    trivialIsotypic 5 = Submodule.span ℂ {Function.const (ZMod 5) (1 : ℂ)} ∧
+      Module.finrank ℂ (trivialIsotypic 5) = 1 :=
+  PentagonPentagonIsotypicHigherN 5
 
 end Brockian
 

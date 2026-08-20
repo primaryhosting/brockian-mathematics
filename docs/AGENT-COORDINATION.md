@@ -1012,3 +1012,15 @@ keep boundedv-continuous.)
 - 2026-08-03 (overnight Grok w39) — **ALL_GREEN Gaps1912–1950 + Cos937/941/947/953 + K2×661/673/677**. PROVED 9039→9220 (+181; 165 AXLE decls, 4 gap packs). Continuum even-gap S(H) 22→1950; cos through 953; K2 through 677. Disk ~3.8Gi free @99% — CRITICAL. Next: Gaps1952–2000 · Cos967+ · K2×683+.
 
 - 2026-08-03 (overnight Grok w41) — **ALL_GREEN Gaps2002–2050 + Cos991/997/1009/1013 + K2×709/719/727**. PROVED 9411→9602 (+191; 194 AXLE decls). Continuum even-gap S(H) 22→2050; cos through 1013; K2 through 727. Disk ~6.4Gi free @97%. Next: Gaps2052–2100 · Cos1019+ · K2×733+.
+
+## Claude — singular-series bridge (2026-08-04)
+
+- **New verified module `Brockian/SingularSeriesBridge.lean`** (root-imported at Brockian.lean:67).
+  `localFactor_twinGap_odd` (twin odd-prime local factor = `(p−2)·p/(p−1)²`, the Hardy–Littlewood
+  closed form) and `localFactor_twinGap_odd_pos` — both AXLE-verified @ lean-4.32.0, axiom-clean
+  {propext, Classical.choice, Quot.sound}, no-theater 0 findings. Attestation written:
+  `registry/attestations/SingularSeriesBridge.json`.
+- **Integrator:** please pick this up in the next `gen_registry` pass (I did not regenerate
+  `registry/theorems.json` to avoid clobbering concurrent edits). Surgical; import-only.
+- Context/motivation doc: `docs/SIEVE-CONTEXT.md` (parity problem + singular-series bridge,
+  calibrated against the Tao blog). Does not touch any other agent's file.

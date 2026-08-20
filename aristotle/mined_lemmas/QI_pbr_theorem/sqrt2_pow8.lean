@@ -1,0 +1,48 @@
+import Mathlib
+
+/-!
+# Pbr Theorem
+Category: Frontier Qi
+Target: QI.pbr_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+namespace QI
+
+open Complex Finset
+
+/-! ## The two-qubit vectors used in the PBR argument -/
+
+/-- The normalisation constant `1/√2`. -/
+
+lemma sqrt2_pow8 : (Real.sqrt 2) ^ 8 = 16 := by
+  have : (Real.sqrt 2) ^ 8 = ((Real.sqrt 2) ^ 2) ^ 4 := by ring
+  rw [this, sqrt2_sq]; norm_num
+
+/-- Normalising tactic for the explicit amplitude computations. -/
+local macro "pbr_calc" : tactic =>
+  `(tactic| (ring_nf;
+             try simp [s_sq, s_pow3, s_pow4, s_pow6, sqrt2_inv_sq, sqrt2_inv_pow4,
+                       sqrt2_sq, sqrt2_pow4, sqrt2_pow6, sqrt2_pow8];
+             try ring_nf;
+             try norm_num))
+
+/-- The four PBR vectors are orthonormal, so they really do form a measurement
+basis of the two-qubit space. -/

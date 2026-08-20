@@ -1,0 +1,72 @@
+import Mathlib
+import RequestProject.Circuits
+
+/-!
+# Pcp Theorem
+Category: Frontier Cs
+Target: CS.pcp_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+set_option maxHeartbeats 4000000
+set_option autoImplicit false
+
+/-!
+## Overview
+
+This file formalises the statement `NP = PCP(log n, O(1))` (the PCP theorem) in the
+non-uniform (Boolean circuit) model of efficient computation, and proves the "easy"
+inclusion `PCP(log n, O(1)) ⊆ NP` in full.
+
+*  A language is a predicate on bit strings (`CS.Language`).
+*  `CS.InNP L` says that `L` has a polynomial-length witness that is checked by a
+   polynomial-size Boolean circuit.
+*  `CS.InPCP L` says that `L` has a probabilistically checkable proof system with
+   `O(log n)` random bits, a constant number `q` of queries, perfect completeness and
+   soundness error at most `1/2`; the query positions and the decision predicate are
+   computed by polynomial-size circuits.
+
+`CS.pcp_subset_np` proves `PCP(log n, O(1)) ⊆ NP` unconditionally: a witness for the NP
+system is the table of answers of the PCP verifier on all `2^{O(log n)} = poly(n)` random
+strings, together with the consistency requirement that two queries landing on the same
+proof position receive the same answer.
+
+Proof positions are named by bit strings of length `pbits n` with `pbits` polynomially
+bounded; since the verifier only ever inspects `2 ^ rlen n * q = poly(n)` positions, no
+further restriction on the proof length is needed.
+
+The reverse inclusion `NP ⊆ PCP(log n, O(1))` is the deep content of the PCP theorem
+(Arora–Safra, Arora–Lund–Motwani–Sudan–Szegedy); it is *not* proved here, and appears as
+an explicit hypothesis `hard` of `CS.pcp_theorem`.
+-/
+
+namespace CS
+
+/-- A language: a set of finite bit strings. -/
+abbrev Language := List Bool → Prop
+
+/-- The variable assignment described by a bit string (out-of-range variables are `false`). -/
+
+lemma tableList_getD {q R i j : ℕ} {a : ℕ → ℕ → Bool} (hi : i < R) (hj : j < q) :
+    (tableList q R a).getD (i * q + j) false = a i j := by
+  have hq : 0 < q := Nat.pos_of_ne_zero (by rintro rfl; omega)
+  have hlt : i * q + j < R * q := by
+    have : (i + 1) * q ≤ R * q := Nat.mul_le_mul_right _ hi
+    have h2 : i * q + j < (i + 1) * q := by
+      have : (i + 1) * q = i * q + q := by ring
+      omega
+    omega
+  have hlen : i * q + j < (tableList q R a).length := by simpa using hlt
+  rw [List.getD_eq_getElem _ _ hlen]
+  have hcomm : i * q + j = j + q * i := by ring
+  have hdiv : (i * q + j) / q = i := by
+    rw [hcomm, Nat.add_mul_div_left _ _ hq, Nat.div_eq_of_lt hj, Nat.zero_add]
+  have hmod : (i * q + j) % q = j := by
+    rw [hcomm, Nat.add_mul_mod_self_left, Nat.mod_eq_of_lt hj]
+  simp [tableList, hdiv, hmod]
+
+/-! ## The circuits simulating a PCP verifier -/
+
+/-- Substitution used to evaluate a position circuit: input variables stay, random bits are
+hard-wired to the `i`-th random string. -/

@@ -1,0 +1,11 @@
+import Mathlib
+/-!
+# Batch 11 — Fibonacci-anyon extras (F-matrix, fusion, golden identities). All TRUE; bare import Mathlib.
+-/
+namespace BrockianQuantum
+-- `Real` is opened so that `goldenRatio` refers to `Real.goldenRatio`
+-- (`gold_sq` is the deprecated alias of `Real.goldenRatio_sq`).
+open Matrix Real
+
+def Nfus : Matrix (Fin 2) (Fin 2) ℝ := !![0,1; 1,1]
+

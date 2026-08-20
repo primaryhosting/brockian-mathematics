@@ -1,0 +1,56 @@
+import Mathlib
+/-!
+# Virial Theorem
+Category: Frontier Phys
+Target: Phys.virial_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Phys
+
+open MeasureTheory Filter Topology
+
+/-- The auxiliary ("virial current") function
+`F x = c * (x * ψ'(x)^2 + ψ(x) * ψ'(x)) - x * (V x - E) * ψ x ^ 2`
+attached to a solution of the stationary Schrödinger equation
+`-c * ψ'' + V ψ = E ψ` (here `c = ℏ²/2m`). -/
+
+theorem tendsto_pow_mul_gaussian_atBot (n : ℕ) :
+    Tendsto (fun x : ℝ => x ^ n * Real.exp (-x ^ 2)) atBot (𝓝 0) := by
+  have h := ((tendsto_pow_mul_gaussian_atTop n).comp tendsto_neg_atBot_atTop).const_mul ((-1:ℝ) ^ n)
+  rw [mul_zero] at h
+  refine h.congr fun x => ?_
+  simp only [Function.comp_apply, neg_sq]
+  have hone : ((-1:ℝ) ^ n) * ((-1:ℝ) ^ n) = 1 := by rw [← mul_pow]; norm_num
+  have h2 : (-x:ℝ) ^ n = (-1) ^ n * x ^ n := by rw [← neg_one_mul, mul_pow]
+  rw [h2]
+  calc (-1:ℝ) ^ n * ((-1) ^ n * x ^ n * Real.exp (-x ^ 2))
+      = ((-1:ℝ) ^ n * (-1) ^ n) * (x ^ n * Real.exp (-x ^ 2)) := by ring
+    _ = x ^ n * Real.exp (-x ^ 2) := by rw [hone, one_mul]
+
+/-- `x ↦ x² exp (-x²)` is integrable on `ℝ`. -/

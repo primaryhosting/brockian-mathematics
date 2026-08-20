@@ -1,0 +1,24 @@
+/-
+# Huckel C 7
+Category: Chemistry
+Target: Chem.huckel_C7
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+namespace Chem
+
+open Complex Matrix
+
+/-- The adjacency matrix of the cycle graph `C₇` (the Hückel matrix of a 7-membered
+ring, in units where α = 0 and β = 1): the vertices are `Fin 7` and `i` is adjacent to
+`i + 1` and `i - 1`, the arithmetic being modulo 7. -/
+
+lemma w7_ne_zero : w7 ≠ 0 := by
+  intro h
+  have h7 := w7_pow_seven
+  rw [h] at h7
+  norm_num at h7
+

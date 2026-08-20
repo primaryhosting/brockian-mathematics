@@ -7,50 +7,43 @@ Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
-
 namespace PCA
 
-section PCA
-
+section
 variable {P R : Type}
 
-/-- A principal `c` can access a resource `r` if `r` is in `c`'s scope, or `c` is
-privileged, or `r` is unowned. -/
+/-- Access is granted when the capability is in scope, or the capability is
+privileged, or the resource is unowned. -/
 def canAccess (inScope : P → R → Prop) (isPriv : P → Prop) (isUnowned : R → Prop)
     (c : P) (r : R) : Prop := inScope c r ∨ isPriv c ∨ isUnowned r
 
-/-- Adding escapes only enlarges access: being in scope implies access. -/
+/-- Adding escape hatches (privilege, unowned resources) only enlarges access:
+being in scope already suffices for access.  This is closed by the Mathlib/core
+lemma `Or.inl` (found by `exact?`). -/
 theorem escape_monotone (inScope : P → R → Prop) (isPriv : P → Prop)
     (isUnowned : R → Prop) (c : P) (r : R) (h : inScope c r) :
     canAccess inScope isPriv isUnowned c r :=
   Or.inl h
 
-end PCA
+/-- `canAccess` is monotone in each of its three policy predicates: weakening the
+scope relation, or the privilege / unowned predicates, only enlarges access. -/
+theorem canAccess_mono {inScope inScope' : P → R → Prop} {isPriv isPriv' : P → Prop}
+    {isUnowned isUnowned' : R → Prop}
+    (hs : ∀ c r, inScope c r → inScope' c r) (hp : ∀ c, isPriv c → isPriv' c)
+    (hu : ∀ r, isUnowned r → isUnowned' r) (c : P) (r : R)
+    (h : canAccess inScope isPriv isUnowned c r) :
+    canAccess inScope' isPriv' isUnowned' c r :=
+  h.imp (hs c r) (Or.imp (hp c) (hu r))
+
+end
 
 end PCA
+
+#print axioms PCA.escape_monotone
+#print axioms PCA.canAccess_mono
 

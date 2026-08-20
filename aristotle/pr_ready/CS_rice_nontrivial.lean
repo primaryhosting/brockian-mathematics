@@ -9,52 +9,49 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+/-
+# Rice Nontrivial
+Category: Computer Science
+Target: CS.rice_nontrivial
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean 4 requires `import` to precede every command, including module doc-comments `/-! ... -/`,
+-- so the header above is written as a plain block comment and repeated as a module docstring below.)
 
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
 
-set_option relaxedAutoImplicit false
+/-!
+# Rice Nontrivial
+Category: Computer Science
+Target: CS.rice_nontrivial
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
 set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
 
 namespace CS
 
-open Nat.Partrec (Code)
-open Nat.Partrec.Code
+open Nat.Partrec
 
-/-- **Rice's theorem**: every nontrivial semantic (extensional) property of programs is
-undecidable.
+/-- **Rice's theorem.** Let `P` be a *semantic* property of programs (codes for partial
+recursive functions): whether `P` holds of a code depends only on the partial function that
+code computes. If `P` is *nontrivial*, i.e. some program satisfies it and some program does
+not, then `P` is undecidable.
 
-Here programs are the codes `Nat.Partrec.Code` for the partial recursive functions, and
-`eval` sends a code to the partial function it computes.  A property `C : Set Code` is
-*semantic* if it only depends on the computed function (`hsem`), and *nontrivial* if some
-program has the property and some program does not (`hf`, `hg`).  Under these hypotheses
-`C` is not decidable. -/
-theorem rice_nontrivial (C : Set Code)
-    (hsem : ∀ cf cg : Code, eval cf = eval cg → (cf ∈ C ↔ cg ∈ C))
-    (hf : ∃ cf : Code, cf ∈ C) (hg : ∃ cg : Code, cg ∉ C) :
-    ¬ ComputablePred (fun c : Code => c ∈ C) := by
-  intro h
-  rcases (ComputablePred.rice₂ C hsem).1 h with rfl | rfl
-  · obtain ⟨cf, hcf⟩ := hf
-    exact hcf
-  · obtain ⟨cg, hcg⟩ := hg
-    exact hcg (Set.mem_univ cg)
+The proof is immediate from `ComputablePred.rice₂` in Mathlib. -/
+theorem rice_nontrivial (P : Code → Prop)
+    (hsem : ∀ c₁ c₂ : Code, Code.eval c₁ = Code.eval c₂ → (P c₁ ↔ P c₂))
+    (cyes cno : Code) (hyes : P cyes) (hno : ¬ P cno) :
+    ¬ ComputablePred P := by
+  intro hcomp
+  rcases (ComputablePred.rice₂ {c | P c} hsem).mp hcomp with h | h
+  · have : cyes ∈ ({c | P c} : Set Code) := hyes
+    rw [h] at this
+    exact this
+  · exact hno (by
+      have : cno ∈ ({c | P c} : Set Code) := by rw [h]; trivial
+      exact this)
 
 end CS
 

@@ -1,0 +1,44 @@
+import Mathlib
+import RequestProject.Brun.Final
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-- **Brun's theorem**: the sum of the reciprocals of the twin primes converges.
+
+The twin primes are indexed by the subtype of naturals `p` such that both `p` and `p + 2`
+are prime, and the summand is `1 / p`. -/
+
+lemma alt_choose_sum (m k : ℕ) (hm : 1 ≤ m) :
+    ∑ j ∈ range (k + 1), (-1 : ℝ) ^ j * (m.choose j : ℝ)
+      = (-1) ^ k * ((m - 1).choose k : ℝ) := by
+  induction k with
+  | zero => simp
+  | succ k ih =>
+      rw [Finset.sum_range_succ, ih]
+      obtain ⟨m', rfl⟩ : ∃ m', m = m' + 1 := ⟨m - 1, by omega⟩
+      simp only [Nat.add_sub_cancel]
+      rw [Nat.choose_succ_succ m' k]
+      push_cast
+      ring
+

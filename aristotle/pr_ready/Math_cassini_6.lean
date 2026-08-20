@@ -34,7 +34,7 @@ set_option grind.warning false
 
 namespace Math
 
-/-- Cassini's identity at `n = 6`: `F 5 * F 7 - F 6 ^ 2 = (-1) ^ 6`, over `ℤ`. -/
+/-- Cassini's identity at `n = 6`: `F 5 * F 7 - F 6 ^ 2 = (-1) ^ 6`. -/
 theorem cassini_6 :
     (Nat.fib 5 : ℤ) * (Nat.fib 7 : ℤ) - (Nat.fib 6 : ℤ) ^ 2 = (-1) ^ 6 := by
   norm_num [Nat.fib]

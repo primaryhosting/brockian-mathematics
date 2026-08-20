@@ -1,0 +1,59 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-
+# Threshold Theorem
+Category: Frontier Qi
+Target: QI.threshold_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Threshold Theorem
+Category: Frontier Qi
+Target: QI.threshold_theorem
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace QI
+
+open Filter Topology
+
+/-- `logicalErrorRate c p k` is the failure probability of a logical gate protected by `k`
+levels of code concatenation, in the standard recursive model of fault tolerance:
+a level-`0` (unencoded) gate fails with probability `p`, and a level-`(k+1)` gate fails only if
+at least two of its level-`k` constituent blocks fail, which happens with probability at most
+`c * (level-k failure rate)^2`, where `c` counts the malignant pairs of fault locations in the
+fault-tolerant gadget. -/
+
+@[simp] theorem logicalErrorRate_succ (c p : ℝ) (k : ℕ) :
+    logicalErrorRate c p (k + 1) = c * (logicalErrorRate c p k) ^ 2 := rfl
+
+/-- Exact solution of the concatenation recursion: after `k` levels of concatenation the
+rescaled error rate is `(c * p)` raised to the power `2 ^ k`. -/

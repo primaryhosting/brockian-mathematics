@@ -8,169 +8,13 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-namespace PCA
-
-/-- Identifier of a role (a database principal). -/
-abbrev RoleId := Nat
-
-/-- Identifier of a row. -/
-abbrev RowId := Nat
-
-/-- A row of a table: its identity, its owning role and its tenant. -/
-structure Row where
-  id : RowId
-  owner : RoleId
-  tenant : Nat
-  deriving DecidableEq, Repr
-
-/-- A row level security policy: it applies to a set of roles (the empty list
-meaning "all roles") and carries a `USING`-style predicate on rows. -/
-structure Policy where
-  name : String
-  roles : List RoleId
-  predicate : Row → Bool
-
-/-- A table: whether RLS is enabled, whether it is *forced* (so that the table
-owner is not exempt), the owning role, and the list of attached policies. -/
-structure Table where
-  rls : Bool
-  forceRls : Bool
-  owner : RoleId
-  policies : List Policy
-
-/-- A subject performing an access: its role and whether it holds the
-`BYPASSRLS` attribute. -/
-structure Subject where
-  role : RoleId
-  bypassRls : Bool
-  deriving DecidableEq, Repr
-
-/-- A policy applies to a subject when its role list is empty (all roles) or
-mentions the subject's role. -/
-def Policy.appliesTo (p : Policy) (s : Subject) : Bool :=
-  p.roles.isEmpty || p.roles.contains s.role
-
-/-- A subject is exempt from the policies of a table when it can bypass RLS, or
-when it owns the table and RLS is not forced. -/
-def Table.subjectExempt (t : Table) (s : Subject) : Bool :=
-  s.bypassRls || (decide (s.role = t.owner) && !t.forceRls)
-
-namespace Engine
-
-/-- The access decision of the isolation engine: with RLS off everything is
-visible; otherwise exempt subjects see everything and all other subjects see
-exactly the rows admitted by some applicable policy. -/
-def visible (t : Table) (s : Subject) (r : Row) : Bool :=
-  if !t.rls then true
-  else if t.subjectExempt s then true
-  else t.policies.any (fun p => p.appliesTo s && p.predicate r)
-
-end Engine
-
-namespace Spec
-
-/-- The declarative specification of the isolation model: a subject may see a
-row iff RLS is off, or the subject is exempt, or some applicable policy admits
-the row. -/
-def Allowed (t : Table) (s : Subject) (r : Row) : Prop :=
-  t.rls = false ∨ t.subjectExempt s = true ∨
-    ∃ p ∈ t.policies, p.appliesTo s = true ∧ p.predicate r = true
-
-end Spec
-
-namespace Engine
-
-/-- **Soundness**: every access granted by the engine is allowed by the
-specification. -/
-theorem sound {t : Table} {s : Subject} {r : Row}
-    (h : visible t s r = true) : Spec.Allowed t s r := by
-  unfold visible at h
-  by_cases hrls : t.rls
-  · simp only [hrls, Bool.not_true] at h
-    by_cases hex : t.subjectExempt s
-    · exact Or.inr (Or.inl hex)
-    · simp only [hex] at h
-      refine Or.inr (Or.inr ?_)
-      obtain ⟨p, hp, hp'⟩ := List.any_eq_true.mp h
-      exact ⟨p, hp, by simpa using hp'⟩
-  · exact Or.inl (by simpa using hrls)
-
-/-- **Completeness**: every access allowed by the specification is granted by
-the engine. -/
-theorem complete {t : Table} {s : Subject} {r : Row}
-    (h : Spec.Allowed t s r) : visible t s r = true := by
-  unfold visible
-  rcases h with h | h | ⟨p, hp, hps, hpr⟩
-  · simp [h]
-  · simp [h]
-  · by_cases hrls : t.rls
-    · simp only [hrls, Bool.not_true]
-      by_cases hex : t.subjectExempt s
-      · simp [hex]
-      · simp only [hex]
-        exact List.any_eq_true.mpr ⟨p, hp, by simp [hps, hpr]⟩
-    · simp [hrls]
-
-/-- The engine decision is exactly the specification. -/
-theorem visible_iff_allowed (t : Table) (s : Subject) (r : Row) :
-    visible t s r = true ↔ Spec.Allowed t s r :=
-  ⟨sound, complete⟩
-
-end Engine
-
-/-- A row is *protected* in a table when some subject is denied access to it. -/
-def RowProtected (t : Table) (r : Row) : Prop :=
-  ∃ s : Subject, Engine.visible t s r = false
-
-namespace Invariant
-
-/-- **Main invariant.** If row level security is switched off on a table, then
-no row of the table is protected: the isolation engine grants every subject
-access to every row. -/
-theorem rls_off_implies_no_row_protection {t : Table} (h : t.rls = false) :
-    ∀ r : Row, ¬ RowProtected t r := by
-  rintro r ⟨s, hs⟩
-  rw [Engine.visible, h] at hs
-  simp at hs
-
-/-- Contrapositive form: a protected row witnesses that RLS is enabled. -/
-theorem row_protected_implies_rls_on {t : Table} {r : Row}
-    (h : RowProtected t r) : t.rls = true := by
-  by_contra hc
-  exact rls_off_implies_no_row_protection (by simpa using hc) r h
-
-/-- With RLS off the specification allows every access, so the model itself
-(not merely its implementation) provides no isolation. -/
-theorem rls_off_allows_all {t : Table} (h : t.rls = false) (s : Subject) (r : Row) :
-    Spec.Allowed t s r := Or.inl h
-
-/-- Conversely, a table with forced RLS and no policies protects every row:
-any subject without `BYPASSRLS` is denied. -/
-theorem forced_rls_no_policies_protects {t : Table} (hrls : t.rls = true)
-    (hforce : t.forceRls = true) (hpol : t.policies = []) (r : Row) :
-    RowProtected t r := by
-  refine ⟨⟨t.owner, false⟩, ?_⟩
-  simp [Engine.visible, Table.subjectExempt, hrls, hforce, hpol]
-
-/-- No fabrication of access: whenever the engine grants a non-exempt subject
-access to a row under enabled RLS, an actual policy justifies it. -/
-theorem grant_has_witness {t : Table} {s : Subject} {r : Row}
-    (hrls : t.rls = true) (hex : t.subjectExempt s = false)
-    (h : Engine.visible t s r = true) :
-    ∃ p ∈ t.policies, p.appliesTo s = true ∧ p.predicate r = true := by
-  rcases Engine.sound h with h' | h' | h'
-  · exact absurd h' (by simp [hrls])
-  · exact absurd h' (by simp [hex])
-  · exact h'
-
-end Invariant
-
-end PCA
-
-#print axioms PCA.Invariant.rls_off_implies_no_row_protection
-#print axioms PCA.Engine.visible_iff_allowed
-#print axioms PCA.Invariant.forced_rls_no_policies_protects
-#print axioms PCA.Invariant.grant_has_witness
+/-
+# Rls Off Implies No Row Protection
+Category: Proof-Carrying Apps
+Target: PCA.Invariant.rls_off_implies_no_row_protection
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 
 open scoped BigOperators
@@ -195,4 +39,101 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace PCA
+
+/-- A row-level security policy: it says which principals are permitted to see which rows. -/
+structure Policy (Principal Row : Type*) where
+  /-- `permits p r` holds when the policy grants principal `p` access to row `r`. -/
+  permits : Principal → Row → Prop
+
+/-- A table of the isolation engine's model: a row-level-security (RLS) switch together with
+the list of policies that are consulted when the switch is on. -/
+structure Table (Principal Row : Type*) where
+  /-- Whether row-level security is enabled for this table. -/
+  rlsEnabled : Bool
+  /-- The policies attached to the table (only consulted when `rlsEnabled = true`). -/
+  policies : List (Policy Principal Row)
+
+variable {Principal Row : Type*}
+
+/-- Access semantics of the engine: when RLS is off every row is visible to every principal;
+when RLS is on a row is visible only if some attached policy permits it. -/
+def Table.Visible (t : Table Principal Row) (p : Principal) (r : Row) : Prop :=
+  t.rlsEnabled = false ∨ ∃ pol ∈ t.policies, pol.permits p r
+
+/-- A row is *protected* when at least one principal is denied access to it. -/
+def Table.RowProtected (t : Table Principal Row) (r : Row) : Prop :=
+  ∃ p : Principal, ¬ t.Visible p r
+
+/-- The set of rows that enjoy some protection. -/
+def Table.protectedRows (t : Table Principal Row) : Set Row :=
+  {r | t.RowProtected r}
+
+namespace Invariant
+
+/-- **Main invariant.** If row-level security is switched off on a table, then no row of that
+table is protected: every principal can see every row.
+
+(The core step is just `Or.inl`, i.e. `Mathlib`'s disjunction introduction, after unfolding the
+access semantics; `not_exists`-style reasoning is handled by `simp`.) -/
+theorem rls_off_implies_no_row_protection
+    (t : Table Principal Row) (h : t.rlsEnabled = false) :
+    ∀ r : Row, ¬ t.RowProtected r := by
+  rintro r ⟨p, hp⟩
+  exact hp (Or.inl h)
+
+/-- Equivalent phrasing: with RLS off the set of protected rows is empty. -/
+theorem protectedRows_eq_empty_of_rls_off
+    (t : Table Principal Row) (h : t.rlsEnabled = false) :
+    t.protectedRows = (∅ : Set Row) := by
+  ext r
+  simpa [Table.protectedRows] using rls_off_implies_no_row_protection t h r
+
+/-- Equivalent phrasing: with RLS off, every principal sees every row. -/
+theorem visible_of_rls_off
+    (t : Table Principal Row) (h : t.rlsEnabled = false) (p : Principal) (r : Row) :
+    t.Visible p r :=
+  Or.inl h
+
+/-- Converse (completeness of the invariant): if some row is protected, RLS must be on. -/
+theorem rls_on_of_row_protected
+    (t : Table Principal Row) {r : Row} (h : t.RowProtected r) :
+    t.rlsEnabled = true := by
+  rcases h with ⟨p, hp⟩
+  cases hb : t.rlsEnabled with
+  | false => exact absurd (Or.inl hb) hp
+  | true => rfl
+
+/-- Exact characterisation of protection in the model: a row is protected precisely when RLS is
+on and some principal is permitted by none of the attached policies. -/
+theorem rowProtected_iff (t : Table Principal Row) (r : Row) :
+    t.RowProtected r ↔
+      t.rlsEnabled = true ∧ ∃ p : Principal, ∀ pol ∈ t.policies, ¬ pol.permits p r := by
+  constructor
+  · intro h
+    refine ⟨rls_on_of_row_protected t h, ?_⟩
+    rcases h with ⟨p, hp⟩
+    exact ⟨p, fun pol hpol hperm => hp (Or.inr ⟨pol, hpol, hperm⟩)⟩
+  · rintro ⟨hon, p, hp⟩
+    refine ⟨p, ?_⟩
+    rintro (hoff | ⟨pol, hpol, hperm⟩)
+    · exact absurd (hon.symm.trans hoff) (by simp)
+    · exact hp pol hpol hperm
+
+/-- Switching RLS off on any table wipes out all row protection. -/
+theorem protectedRows_disableRls_eq_empty (t : Table Principal Row) :
+    ({t with rlsEnabled := false} : Table Principal Row).protectedRows = (∅ : Set Row) :=
+  protectedRows_eq_empty_of_rls_off _ rfl
+
+/-- The invariant is not vacuous: with RLS *on* and no permitting policy, a row really is
+protected. -/
+theorem exists_rowProtected_of_rls_on :
+    ∃ t : Table Bool Unit, t.rlsEnabled = true ∧ t.RowProtected () := by
+  refine ⟨⟨true, []⟩, rfl, ?_⟩
+  exact (rowProtected_iff _ ()).2 ⟨rfl, true, by simp⟩
+
+end Invariant
+
+end PCA
 

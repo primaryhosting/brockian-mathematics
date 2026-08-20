@@ -8,104 +8,13 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open scoped BigOperators
-open scoped Classical
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-/-!
-# Local constellation counts
-
-For a *constellation* (admissible tuple) `H = (h₁, …, h_k)` of integer shifts, the
-*local count* at a modulus `p` is the number of residue classes `a mod p` for which none of
-`a + h₁, …, a + h_k` is divisible by `p`; equivalently, the number of `a : ZMod p` with
-`a + hᵢ ≠ 0` for all `i`.
-
-This file gives the general closed formula (`Brockian.localCount_eq`) and specializes it to
-tuples of length one, two and three; the `k = 3` case is
-`Brockian.ConstellationLocalCountK3`, with an arithmetic (divisibility) restatement in
-`Brockian.ConstellationLocalCountK3_dvd`.
+/-
+# Constellation Local Count K 3
+Category: Brockian Corpus
+Target: Brockian.ConstellationLocalCountK3
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
 -/
-
-namespace Brockian
-
-/-- The local constellation count of the shift set `H` at modulus `p`: the number of residues
-`a : ZMod p` such that `a + h ≠ 0` for every shift `h ∈ H`. -/
-noncomputable def localCount (p : ℕ) [NeZero p] (H : Finset ℤ) : ℕ :=
-  (Finset.univ.filter (fun a : ZMod p => ∀ h ∈ H, a + (h : ZMod p) ≠ 0)).card
-
-/-- Closed formula for the local count: the forbidden residues are exactly the classes `-h`
-for `h ∈ H`, so the count is `p` minus the number of distinct such classes. -/
-theorem localCount_eq (p : ℕ) [NeZero p] (H : Finset ℤ) :
-    localCount p H = p - (H.image (fun h : ℤ => -(h : ZMod p))).card := by
-  have key : (Finset.univ.filter (fun a : ZMod p => ∀ h ∈ H, a + (h : ZMod p) ≠ 0))
-      = (H.image (fun h : ℤ => -(h : ZMod p)))ᶜ := by
-    ext a
-    simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_compl,
-      Finset.mem_image, not_exists, not_and]
-    exact ⟨fun h x hx hc => h x hx (by rw [← hc]; ring),
-      fun h x hx hc => h x hx (by linear_combination -hc)⟩
-  rw [localCount, key, Finset.card_compl, ZMod.card]
-
-/-- The empty constellation: every residue is allowed. -/
-theorem ConstellationLocalCountK0 (p : ℕ) [NeZero p] : localCount p (∅ : Finset ℤ) = p := by
-  simp [localCount_eq]
-
-/-- A one-element constellation forbids exactly one residue class. -/
-theorem ConstellationLocalCountK1 (p : ℕ) [NeZero p] (h1 : ℤ) :
-    localCount p {h1} = p - 1 := by
-  simp [localCount_eq]
-
-/-- A two-element constellation with distinct shifts mod `p` forbids exactly two classes. -/
-theorem ConstellationLocalCountK2 (p : ℕ) [NeZero p] (h1 h2 : ℤ)
-    (h12 : (h1 : ZMod p) ≠ (h2 : ZMod p)) :
-    localCount p {h1, h2} = p - 2 := by
-  rw [localCount_eq]
-  congr 1
-  rw [show ({h1, h2} : Finset ℤ).image (fun h : ℤ => -(h : ZMod p))
-      = {-(h1 : ZMod p), -(h2 : ZMod p)} by simp]
-  rw [Finset.card_insert_of_notMem (by simp [neg_inj, h12]), Finset.card_singleton]
-
-/-- **Local constellation count for `k = 3`.** If the three shifts are pairwise distinct modulo
-`p`, then exactly three residue classes are forbidden, so the local count is `p - 3`. -/
-theorem ConstellationLocalCountK3 (p : ℕ) [NeZero p] (h1 h2 h3 : ℤ)
-    (h12 : (h1 : ZMod p) ≠ (h2 : ZMod p)) (h13 : (h1 : ZMod p) ≠ (h3 : ZMod p))
-    (h23 : (h2 : ZMod p) ≠ (h3 : ZMod p)) :
-    localCount p {h1, h2, h3} = p - 3 := by
-  rw [localCount_eq]
-  congr 1
-  rw [show ({h1, h2, h3} : Finset ℤ).image (fun h : ℤ => -(h : ZMod p))
-      = {-(h1 : ZMod p), -(h2 : ZMod p), -(h3 : ZMod p)} by simp]
-  rw [Finset.card_insert_of_notMem (by simp [neg_inj, h12, h13]),
-    Finset.card_insert_of_notMem (by simp [neg_inj, h23]), Finset.card_singleton]
-
-/-- Distinctness modulo `p` is the same as non-divisibility of the differences. -/
-theorem intCast_ne_intCast_iff_not_dvd (p : ℕ) [NeZero p] (a b : ℤ) :
-    (a : ZMod p) ≠ (b : ZMod p) ↔ ¬ ((p : ℤ) ∣ (a - b)) := by
-  rw [← ZMod.intCast_zmod_eq_zero_iff_dvd, Int.cast_sub, sub_eq_zero]
-
-/-- Arithmetic form of the `k = 3` local count: if `p` divides none of the pairwise
-differences of the shifts, the local count is `p - 3`. -/
-theorem ConstellationLocalCountK3_dvd (p : ℕ) [NeZero p] (h1 h2 h3 : ℤ)
-    (h12 : ¬ ((p : ℤ) ∣ (h1 - h2))) (h13 : ¬ ((p : ℤ) ∣ (h1 - h3)))
-    (h23 : ¬ ((p : ℤ) ∣ (h2 - h3))) :
-    localCount p {h1, h2, h3} = p - 3 :=
-  ConstellationLocalCountK3 p h1 h2 h3
-    ((intCast_ne_intCast_iff_not_dvd p h1 h2).2 h12)
-    ((intCast_ne_intCast_iff_not_dvd p h1 h3).2 h13)
-    ((intCast_ne_intCast_iff_not_dvd p h2 h3).2 h23)
-
-/-- For a prime `p > 3` a `3`-shift constellation with pairwise distinct shifts mod `p` still
-admits a residue class, i.e. the local count is positive. -/
-theorem ConstellationLocalCountK3_pos (p : ℕ) [NeZero p] (hp : 3 < p) (h1 h2 h3 : ℤ)
-    (h12 : (h1 : ZMod p) ≠ (h2 : ZMod p)) (h13 : (h1 : ZMod p) ≠ (h3 : ZMod p))
-    (h23 : (h2 : ZMod p) ≠ (h3 : ZMod p)) :
-    0 < localCount p {h1, h2, h3} := by
-  rw [ConstellationLocalCountK3 p h1 h2 h3 h12 h13 h23]
-  omega
-
-end Brockian
 
 
 open scoped BigOperators
@@ -130,4 +39,69 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Brockian
+
+/-- The local count of a constellation (`k`-tuple of shifts) `H` modulo `p`: the number of
+residues `n` such that none of the shifted values `n + h`, `h ∈ H`, is divisible by `p`.
+This is the quantity `p - ν_H(p)` appearing in the singular series of the Hardy–Littlewood
+prime `k`-tuple heuristic. -/
+noncomputable def constellationLocalCount (p : ℕ) [NeZero p] (H : Finset (ZMod p)) : ℕ :=
+  (Finset.univ.filter (fun n : ZMod p => ∀ h ∈ H, n + h ≠ 0)).card
+
+/-- The set of residues avoiding all shifts in `H` is the complement of `-H`. -/
+theorem constellationAvoidSetEqSdiff (p : ℕ) [NeZero p] (H : Finset (ZMod p)) :
+    (Finset.univ.filter (fun n : ZMod p => ∀ h ∈ H, n + h ≠ 0)) =
+      Finset.univ \ H.image (fun h => -h) := by
+  ext n
+  simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_sdiff,
+    Finset.mem_image, not_exists, not_and]
+  constructor
+  · intro hn h hh hEq
+    exact hn h hh (by rw [← hEq]; ring)
+  · intro hn h hh hEq
+    exact hn h hh (by linear_combination -hEq)
+
+/-- General local count: for any set `H` of shifts (as residues mod `p`), exactly
+`p - |H|` residues avoid all of them. -/
+theorem constellationLocalCount_eq (p : ℕ) [NeZero p] (H : Finset (ZMod p)) :
+    constellationLocalCount p H = p - H.card := by
+  have hinj : Set.InjOn (fun h : ZMod p => -h) H := fun x _ y _ h => by
+    simpa using neg_injective h
+  have hcard : (H.image (fun h => -h)).card = H.card := Finset.card_image_of_injOn hinj
+  rw [constellationLocalCount, constellationAvoidSetEqSdiff p H,
+    Finset.card_univ_diff, hcard, ZMod.card]
+
+/-- **Constellation local count, `k = 3`.**  For a prime `p` and three pairwise distinct
+shifts `a, b, c` modulo `p`, the number of residues `n` mod `p` for which none of
+`n + a`, `n + b`, `n + c` vanishes — equivalently `(n+a)(n+b)(n+c) ≢ 0 (mod p)` — is exactly
+`p - 3`. -/
+theorem ConstellationLocalCountK3 (p : ℕ) [Fact (Nat.Prime p)] (a b c : ZMod p)
+    (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c) :
+    (Finset.univ.filter
+        (fun n : ZMod p => (n + a) * (n + b) * (n + c) ≠ 0)).card = p - 3 := by
+  haveI : NeZero p := ⟨(Fact.out (p := Nat.Prime p)).ne_zero⟩
+  have hset :
+      (Finset.univ.filter (fun n : ZMod p => (n + a) * (n + b) * (n + c) ≠ 0)) =
+        (Finset.univ.filter (fun n : ZMod p => ∀ h ∈ ({a, b, c} : Finset (ZMod p)), n + h ≠ 0)) := by
+    ext n
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and, Finset.mem_insert,
+      Finset.mem_singleton, mul_ne_zero_iff]
+    constructor
+    · rintro ⟨⟨h1, h2⟩, h3⟩ h (rfl | rfl | rfl) <;> assumption
+    · intro h
+      exact ⟨⟨h a (Or.inl rfl), h b (Or.inr (Or.inl rfl))⟩, h c (Or.inr (Or.inr rfl))⟩
+  have hcard : ({a, b, c} : Finset (ZMod p)).card = 3 := by
+    rw [Finset.card_insert_of_notMem (by simp [hab, hac]),
+      Finset.card_insert_of_notMem (by simp [hbc]), Finset.card_singleton]
+  have := constellationLocalCount_eq p ({a, b, c} : Finset (ZMod p))
+  rw [constellationLocalCount, hcard] at this
+  rw [hset, this]
+
+/-- Sanity check: mod `5`, the shifts `0, 1, 2` leave exactly `5 - 3 = 2` admissible residues. -/
+example : (Finset.univ.filter
+    (fun n : ZMod 5 => (n + 0) * (n + 1) * (n + 2) ≠ 0)).card = 5 - 3 :=
+  @ConstellationLocalCountK3 5 ⟨by norm_num⟩ 0 1 2 (by decide) (by decide) (by decide)
+
+end Brockian
 

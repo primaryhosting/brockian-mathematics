@@ -8,6 +8,15 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-
+# Admissibility Ktuple K 4
+Category: Brockian Corpus
+Target: Brockian.AdmissibilityKTupleK4
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -22,67 +31,57 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Brockian
 
-/-- A `k`-tuple of integers `h : Fin k → ℤ` is *admissible* (in the sense of the
-Hardy–Littlewood prime `k`-tuple conjecture) if for every prime `p` the values
-`h 0, …, h (k-1)` do not cover every residue class modulo `p`. -/
-def Admissible {k : ℕ} (h : Fin k → ℤ) : Prop :=
-  ∀ p : ℕ, p.Prime → ∃ r : ZMod p, ∀ i, (h i : ZMod p) ≠ r
+/-- A finite set of integers is **admissible** (in the sense of the Hardy–Littlewood
+prime `k`-tuples conjecture) if, for every prime `p`, its reduction modulo `p` misses
+at least one residue class. -/
+def Admissible (H : Finset ℤ) : Prop :=
+  ∀ p : ℕ, p.Prime → ∃ a : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ a
 
-/-- A tuple of length `k` can never cover all residues modulo a prime `p > k`. -/
-theorem missesResidue_of_card_lt {k : ℕ} (h : Fin k → ℤ) (p : ℕ) [Fact p.Prime]
-    (hp : k < p) : ∃ r : ZMod p, ∀ i, (h i : ZMod p) ≠ r := by
+/-- A set of integers with fewer than `p` elements cannot cover all residues mod `p`. -/
+theorem exists_missed_residue_of_card_lt (H : Finset ℤ) (p : ℕ) (hp : p.Prime)
+    (hcard : H.card < p) : ∃ a : ZMod p, ∀ h ∈ H, (h : ZMod p) ≠ a := by
+  haveI : NeZero p := ⟨hp.ne_zero⟩
   by_contra hcon
   push_neg at hcon
-  have hsurj : Function.Surjective (fun i : Fin k => ((h i : ZMod p))) := by
-    intro r
-    obtain ⟨i, hi⟩ := hcon r
-    exact ⟨i, hi⟩
-  have := Fintype.card_le_of_surjective _ hsurj
-  simp [ZMod.card] at this
+  have hsub : (Finset.univ : Finset (ZMod p)) ⊆ H.image (fun h : ℤ => (h : ZMod p)) := by
+    intro a _
+    obtain ⟨h, hh, hha⟩ := hcon a
+    exact Finset.mem_image.2 ⟨h, hh, hha⟩
+  have hle := Finset.card_le_card hsub
+  rw [Finset.card_univ, ZMod.card] at hle
+  exact absurd (hle.trans Finset.card_image_le) (by omega)
+
+/-- The `4`-tuple `(0, 2, 6, 8)` misses a residue class modulo `2`. -/
+theorem missed_residue_two : ∃ a : ZMod 2, ∀ h ∈ ({0, 2, 6, 8} : Finset ℤ), (h : ZMod 2) ≠ a := by
+  decide
+
+/-- The `4`-tuple `(0, 2, 6, 8)` misses a residue class modulo `3`. -/
+theorem missed_residue_three :
+    ∃ a : ZMod 3, ∀ h ∈ ({0, 2, 6, 8} : Finset ℤ), (h : ZMod 3) ≠ a := by
+  decide
+
+/-- **Admissibility for `4`-tuples.** The `4`-element set `{0, 2, 6, 8}` is an admissible
+`k`-tuple with `k = 4`: it has exactly four elements, and for every prime `p` some residue
+class mod `p` is missed by it. -/
+theorem AdmissibilityKTupleK4 :
+    (({0, 2, 6, 8} : Finset ℤ).card = 4) ∧ Admissible ({0, 2, 6, 8} : Finset ℤ) := by
+  refine ⟨by decide, ?_⟩
+  intro p hp
+  have hcard : (({0, 2, 6, 8} : Finset ℤ)).card = 4 := by decide
+  by_cases hp2 : p = 2
+  · subst hp2; exact missed_residue_two
+  by_cases hp3 : p = 3
+  · subst hp3; exact missed_residue_three
+  -- otherwise `p ≥ 5 > 4 = card`, since `4` is not prime
+  refine exists_missed_residue_of_card_lt _ p hp ?_
+  rw [hcard]
+  have hp4 : p ≠ 4 := by rintro rfl; exact absurd hp (by decide)
+  have := hp.two_le
   omega
-
-/-- **Admissibility criterion for 4-tuples.** A 4-tuple of integers is admissible
-if and only if it fails to cover all residue classes modulo `2` and modulo `3`;
-no other prime needs to be checked. -/
-theorem AdmissibilityKTupleK4 (h : Fin 4 → ℤ) :
-    Admissible h ↔
-      ((∃ r : ZMod 2, ∀ i, (h i : ZMod 2) ≠ r) ∧
-       (∃ r : ZMod 3, ∀ i, (h i : ZMod 3) ≠ r)) := by
-  constructor
-  · intro hadm
-    exact ⟨hadm 2 Nat.prime_two, hadm 3 Nat.prime_three⟩
-  · rintro ⟨h2, h3⟩ p hp
-    haveI : Fact p.Prime := ⟨hp⟩
-    rcases lt_or_ge 4 p with hlt | hle
-    · exact missesResidue_of_card_lt h p hlt
-    · interval_cases p
-      · exact absurd hp (by decide)
-      · exact absurd hp (by decide)
-      · exact h2
-      · exact h3
-      · exact absurd hp (by decide)
-
-/-- The classical prime quadruplet pattern `(0, 2, 6, 8)` is admissible. -/
-theorem admissible_zero_two_six_eight :
-    Admissible ![(0 : ℤ), 2, 6, 8] := by
-  rw [AdmissibilityKTupleK4]
-  constructor
-  · exact ⟨1, by decide⟩
-  · exact ⟨1, by decide⟩
-
-#print axioms AdmissibilityKTupleK4
-#print axioms admissible_zero_two_six_eight
 
 end Brockian
 

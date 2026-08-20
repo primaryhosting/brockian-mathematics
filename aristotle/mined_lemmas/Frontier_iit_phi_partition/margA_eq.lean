@@ -1,0 +1,42 @@
+/-
+# Iit Phi Partition
+Category: Frontier Mind
+Target: Frontier.iit_phi_partition
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+namespace Frontier
+
+variable {V : Type*} [Fintype V] [DecidableEq V]
+
+/-- The restriction of a global state `x` to the part `A` of the system. -/
+
+lemma margA_eq (h : DisconnectedAt f A) (a : ↥A → Bool) :
+    margA f A a = cntA f A a / (Fintype.card (↥A → Bool) : ℝ) := by
+  have hNA : (Fintype.card (↥A → Bool) : ℝ) ≠ 0 := by
+    exact_mod_cast Fintype.card_ne_zero
+  have hNB : (Fintype.card (↥Aᶜ → Bool) : ℝ) ≠ 0 := by
+    exact_mod_cast Fintype.card_ne_zero
+  unfold margA
+  simp only [jointProb, num_factor f A h]
+  rw [← Finset.sum_div, ← Finset.mul_sum, cntB_total, card_split A]
+  field_simp
+

@@ -15,8 +15,6 @@ Target: Brockian.CosTraceNorm3001
 Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
--- (The header above uses `/- -/` rather than `/-! -/` because Lean 4 does not permit a
--- module docstring before `import`; the module docstring is repeated after the imports.)
 
 
 /-!
@@ -32,7 +30,6 @@ open scoped Real
 open scoped Nat
 open scoped Classical
 open scoped Pointwise
-open scoped Matrix
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
@@ -42,65 +39,61 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
 
 namespace Brockian
 
-/-- The `2 × n` real matrix whose `i`-th column is the unit vector
-`(cos (θ i), sin (θ i))`. -/
-noncomputable def cosGramFactor {n : ℕ} (θ : Fin n → ℝ) : Matrix (Fin 2) (Fin n) ℝ :=
-  Matrix.of fun k i => if k = 0 then Real.cos (θ i) else Real.sin (θ i)
+/-- The real diagonal matrix whose `i`-th diagonal entry is `cos (θ i)`. -/
+noncomputable def cosDiag (n : ℕ) (θ : Fin n → ℝ) : Matrix (Fin n) (Fin n) ℝ :=
+  Matrix.diagonal fun i => Real.cos (θ i)
 
-/-- The real `n × n` "cosine kernel" matrix with entries `cos (θ i - θ j)`. -/
-noncomputable def cosMatrix {n : ℕ} (θ : Fin n → ℝ) : Matrix (Fin n) (Fin n) ℝ :=
-  Matrix.of fun i j => Real.cos (θ i - θ j)
+/-- Trace norm (Schatten `1`-norm) of a real diagonal matrix with diagonal `d`: since the
+singular values of `Matrix.diagonal d` are the numbers `|d i|`, the trace norm is `∑ i, |d i|`. -/
+noncomputable def diagTraceNorm (n : ℕ) (d : Fin n → ℝ) : ℝ := ∑ i, |d i|
 
-/-- The cosine kernel matrix is the Gram matrix of the planar unit vectors
-`(cos (θ i), sin (θ i))`, by the cosine subtraction formula. -/
-lemma cosGramFactor_conjTranspose_mul_self {n : ℕ} (θ : Fin n → ℝ) :
-    (cosGramFactor θ)ᴴ * (cosGramFactor θ) = cosMatrix θ := by
-  ext i j
-  simp [Matrix.mul_apply, cosGramFactor, cosMatrix, Fin.sum_univ_two, Real.cos_sub]
+/-- **Cos trace norm bounds.** For the diagonal matrix `cosDiag n θ` with diagonal entries
+`cos (θ i)`:
 
-/-- The cosine kernel matrix is positive semidefinite: it is a Gram matrix
-(`Matrix.posSemidef_conjTranspose_mul_self`). -/
-lemma cosMatrix_posSemidef {n : ℕ} (θ : Fin n → ℝ) : (cosMatrix θ).PosSemidef := by
-  rw [← cosGramFactor_conjTranspose_mul_self θ]
-  exact Matrix.posSemidef_conjTranspose_mul_self _
-
-/-- The cosine kernel matrix is (real) symmetric, hence Hermitian; so the hypothesis of
-`CosTraceNorm3001` is always satisfiable. -/
-lemma cosMatrix_isHermitian {n : ℕ} (θ : Fin n → ℝ) : (cosMatrix θ).IsHermitian :=
-  (cosMatrix_posSemidef θ).isHermitian
-
-/-- The diagonal entries of the cosine kernel matrix are `cos 0 = 1`, so its trace is `n`. -/
-lemma cosMatrix_trace {n : ℕ} (θ : Fin n → ℝ) : (cosMatrix θ).trace = n := by
-  simp [Matrix.trace, Matrix.diag, cosMatrix]
-
-/--
-**Cos Trace Norm 3001.**
-
-For any phases `θ : Fin n → ℝ`, the trace norm (Schatten `1`-norm, i.e. the sum of the
-absolute values of the eigenvalues of this symmetric matrix, which are its singular values)
-of the cosine kernel matrix `M i j = cos (θ i - θ j)` equals `n`.
-
-The matrix is positive semidefinite, being the Gram matrix of the unit vectors
-`(cos (θ i), sin (θ i))`, so its trace norm coincides with its trace, which is `n`
-since every diagonal entry is `cos 0 = 1`.
-
-Key Mathlib ingredients: `Matrix.posSemidef_conjTranspose_mul_self`,
-`Matrix.PosSemidef.eigenvalues_nonneg`, `Matrix.IsHermitian.trace_eq_sum_eigenvalues`.
+* the absolute value of its trace is at most its trace norm;
+* its trace norm is at most `n`;
+* the trace norm equals `n` exactly when every `cos (θ i)` is `±1`.
 -/
-theorem CosTraceNorm3001 {n : ℕ} (θ : Fin n → ℝ)
-    (hH : (cosMatrix θ).IsHermitian) :
-    ∑ i, |hH.eigenvalues i| = (n : ℝ) := by
-  have hpsd := cosMatrix_posSemidef θ
-  have h1 : ∀ i, |hH.eigenvalues i| = hH.eigenvalues i := fun i =>
-    abs_of_nonneg (hpsd.eigenvalues_nonneg i)
-  simp only [h1]
-  have htr := hH.trace_eq_sum_eigenvalues
-  rw [cosMatrix_trace] at htr
-  exact_mod_cast htr.symm
+theorem CosTraceNorm3001 (n : ℕ) (θ : Fin n → ℝ) :
+    |(cosDiag n θ).trace| ≤ diagTraceNorm n (fun i => Real.cos (θ i)) ∧
+      diagTraceNorm n (fun i => Real.cos (θ i)) ≤ (n : ℝ) ∧
+      (diagTraceNorm n (fun i => Real.cos (θ i)) = (n : ℝ) ↔
+        ∀ i, Real.cos (θ i) = 1 ∨ Real.cos (θ i) = -1) := by
+  have habs : ∀ i : Fin n, |Real.cos (θ i)| ≤ (1 : ℝ) := fun i => Real.abs_cos_le_one (θ i)
+  have htrace : (cosDiag n θ).trace = ∑ i, Real.cos (θ i) := by
+    simp [cosDiag, Matrix.trace, Matrix.diag]
+  have hsum : diagTraceNorm n (fun i => Real.cos (θ i)) ≤ (n : ℝ) := by
+    have := Finset.sum_le_sum (s := (Finset.univ : Finset (Fin n)))
+      (f := fun i : Fin n => |Real.cos (θ i)|)
+      (g := fun _ : Fin n => (1 : ℝ)) (fun i _ => habs i)
+    simpa [diagTraceNorm] using this
+  refine ⟨?_, hsum, ?_⟩
+  · rw [htrace]
+    simpa [diagTraceNorm] using
+      Finset.abs_sum_le_sum_abs (fun i : Fin n => Real.cos (θ i)) Finset.univ
+  · constructor
+    · intro heq i
+      have hall : ∀ j ∈ (Finset.univ : Finset (Fin n)), |Real.cos (θ j)| = 1 := by
+        refine (Finset.sum_eq_sum_iff_of_le (fun j _ => habs j)).1 ?_
+        simpa [diagTraceNorm, eq_comm] using heq
+      have : |Real.cos (θ i)| = 1 := hall i (Finset.mem_univ i)
+      exact abs_eq (by norm_num) |>.1 this
+    · intro h
+      have : ∀ i : Fin n, |Real.cos (θ i)| = 1 := by
+        intro i
+        rcases h i with h1 | h1 <;> simp [h1]
+      simp [diagTraceNorm, this]
 
 end Brockian
 

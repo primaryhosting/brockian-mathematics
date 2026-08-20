@@ -44,7 +44,7 @@ def build_snapshot(manifest: dict, now_iso: str) -> dict:
                for j in jobs if j.get("status") == "RUNNING"]
     # Only real watch-observed outcomes; BASELINE = finished before the watch
     # existed and must not flood the recent list.
-    finished = [j for j in jobs if j.get("verdict") in ("PROVED", "STOPPED")]
+    finished = [j for j in jobs if j.get("verdict") in ("CANDIDATE", "PROVED", "STOPPED")]
     # finished_at is stamped by solver_watch at the RUNNING->IDLE transition;
     # pre-wiring records carry it as ABSENT or null -- `or ""` tolerates both
     # (None would raise TypeError under sort) and sorts them last.

@@ -1,0 +1,22 @@
+/-
+Minimum fragments (Park-Pham) and the key lemma: the cover built from the large
+minimum fragments has small expected cost.
+-/
+import RequestProject.Basic
+
+open scoped BigOperators
+open Finset
+
+namespace KahnKalai
+
+variable {α : Type*} [DecidableEq α]
+
+/-! ### Minimum fragments -/
+
+/-- The candidate fragments of `S` relative to `W`: the sets `S' \ W` for edges `S'` of `H`
+contained in `W ∪ S`. -/
+
+lemma mu_mono_subset {p : ℝ} (hp0 : 0 ≤ p) (hp1 : p ≤ 1) {F G : Finset (Finset α)}
+    (h : F ⊆ G) : mu p F ≤ mu p G :=
+  Finset.sum_le_sum_of_subset_of_nonneg h (fun A _ _ => wt_nonneg hp0 hp1 A)
+

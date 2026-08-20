@@ -1,0 +1,37 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Chem
+
+open Polynomial Matrix
+
+/-- The primitive 17-th root of unity `exp (2πi/17)`. -/
+
+lemma A_eq_conj :
+    A = (Uu : Matrix (Fin 17) (Fin 17) ℂ) * D * ((Uu⁻¹ : (Matrix (Fin 17) (Fin 17) ℂ)ˣ) :
+      Matrix (Fin 17) (Fin 17) ℂ) := by
+  show A = U * D * V
+  rw [← A_mul_U, mul_assoc, U_mul_V, mul_one]
+

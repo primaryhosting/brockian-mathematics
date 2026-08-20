@@ -9,6 +9,15 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-
+# Qft Unitary 5
+Category: Quantum Computing
+Target: QC.qft_unitary_5
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,114 +32,68 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace QC
 
-/-- The `N`-dimensional quantum Fourier transform matrix:
-`(QFT_N)_{j,k} = exp(2πi·jk/N) / √N`. -/
+/-- The `N × N` discrete Fourier transform matrix, with entries
+`(1/√N) · ω^(j·k)` where `ω = exp(2πi/N)`. -/
 noncomputable def qftMatrix (N : ℕ) : Matrix (Fin N) (Fin N) ℂ :=
-  Matrix.of fun j k =>
-    Complex.exp (2 * Real.pi * Complex.I * ((j : ℕ) * (k : ℕ) : ℕ) / N) / (Real.sqrt N : ℝ)
+  fun j k => (Real.sqrt N : ℂ)⁻¹ * Complex.exp (2 * Real.pi * Complex.I / N) ^ ((j : ℕ) * (k : ℕ))
 
-/-- The geometric sum of `N`-th roots of unity: `∑_{k<N} exp(2πi·kd/N)` is `N` when `N ∣ d`
-and `0` otherwise. -/
-lemma sum_root_unity (N : ℕ) (hN : 0 < N) (d : ℤ) :
-    ∑ k : Fin N, Complex.exp (2 * Real.pi * Complex.I * ((k : ℕ) * d) / N)
-      = if (N : ℤ) ∣ d then (N : ℂ) else 0 := by
-  have hN0 : (N : ℂ) ≠ 0 := by exact_mod_cast hN.ne'
-  have hpi : (Real.pi : ℂ) ≠ 0 := by simp [Real.pi_ne_zero]
-  obtain ⟨z, hz⟩ : ∃ z : ℂ, z = 2 * Real.pi * Complex.I * d / N := ⟨_, rfl⟩
-  have hterm : ∀ k : Fin N, Complex.exp (2 * Real.pi * Complex.I * ((k : ℕ) * d) / N)
-      = Complex.exp z ^ (k : ℕ) := by
-    intro k
-    rw [← Complex.exp_nat_mul]
-    congr 1
-    rw [hz]
-    field_simp
-  rw [Finset.sum_congr rfl (fun k _ => hterm k),
-    ← Finset.sum_range fun i => Complex.exp z ^ i]
-  have hzone : Complex.exp z = 1 ↔ (N : ℤ) ∣ d := by
-    rw [Complex.exp_eq_one_iff]
-    constructor
-    · rintro ⟨n, hn⟩
-      rw [hz] at hn
-      field_simp at hn
-      exact ⟨n, by exact_mod_cast hn⟩
-    · rintro ⟨n, hn⟩
-      refine ⟨n, ?_⟩
-      rw [hz, hn]
-      push_cast
-      field_simp
-  by_cases h : (N : ℤ) ∣ d
-  · simp [h, hzone.2 h, Finset.sum_const]
-  · rw [if_neg h]
-    have hne : Complex.exp z ≠ 1 := fun hc => h (hzone.1 hc)
-    rw [geom_sum_eq hne]
-    have hpow : Complex.exp z ^ N = 1 := by
-      rw [← Complex.exp_nat_mul]
-      have he : (N : ℂ) * z = (d : ℂ) * (2 * Real.pi * Complex.I) := by
-        rw [hz]; field_simp
-      rw [he]
-      exact_mod_cast Complex.exp_int_mul_two_pi_mul_I d
-    rw [hpow]
-    simp
+/-- The quantum Fourier transform on `n` qubits: the DFT matrix of dimension `2^n`. -/
+noncomputable def qft (n : ℕ) : Matrix (Fin (2 ^ n)) (Fin (2 ^ n)) ℂ :=
+  qftMatrix (2 ^ n)
 
-/-- The `N`-dimensional QFT matrix is unitary for every `N > 0`. -/
-theorem qft_unitary (N : ℕ) (hN : 0 < N) : qftMatrix N ∈ Matrix.unitaryGroup (Fin N) ℂ := by
-  have hN0 : (N : ℂ) ≠ 0 := by exact_mod_cast hN.ne'
+/-- The `N`-dimensional DFT matrix is unitary for every `N ≠ 0`. -/
+theorem qftMatrix_unitary (N : ℕ) (hN : N ≠ 0) :
+    qftMatrix N ∈ Matrix.unitaryGroup (Fin N) ℂ := by
+  rw [Matrix.mem_unitaryGroup_iff]
+  set ω : ℂ := Complex.exp (2 * Real.pi * Complex.I / N) with hωdef
+  have hprim : IsPrimitiveRoot ω N := Complex.isPrimitiveRoot_exp N hN
+  have hnorm : ‖ω‖ = 1 := by rw [hωdef, Complex.norm_exp]; norm_num
+  have hω0 : ω ≠ 0 := by intro h; rw [h] at hnorm; simp at hnorm
   have hsq : ((Real.sqrt N : ℝ) : ℂ) * ((Real.sqrt N : ℝ) : ℂ) = (N : ℂ) := by
-    rw [← Complex.ofReal_mul, Real.mul_self_sqrt (by positivity)]
-    simp
-  have hstar : ∀ a : ℕ,
-      star (Complex.exp (2 * Real.pi * Complex.I * (a : ℕ) / N) / ((Real.sqrt N : ℝ) : ℂ))
-        = Complex.exp (-(2 * Real.pi * Complex.I * (a : ℕ) / N)) / ((Real.sqrt N : ℝ) : ℂ) := by
-    intro a
-    simp [Complex.conj_ofReal, ← Complex.exp_conj, map_ofNat]
-    ring_nf
-  rw [Matrix.mem_unitaryGroup_iff']
-  ext j l
-  rw [Matrix.mul_apply, Matrix.one_apply]
-  have hkey : ∀ k : Fin N, (star (qftMatrix N)) j k * qftMatrix N k l
-      = (1 / (N : ℂ)) *
-          Complex.exp (2 * Real.pi * Complex.I * ((k : ℕ) * ((l : ℕ) - (j : ℕ) : ℤ)) / N) := by
-    intro k
-    rw [Matrix.star_apply, qftMatrix]
-    simp only [Matrix.of_apply]
-    rw [hstar ((k : ℕ) * (j : ℕ)), div_mul_div_comm, ← Complex.exp_add, hsq, one_div,
-      ← div_eq_inv_mul]
-    congr 1
-    push_cast
-    ring_nf
-  rw [Finset.sum_congr rfl (fun k _ => hkey k), ← Finset.mul_sum,
-    sum_root_unity N hN ((l : ℕ) - (j : ℕ) : ℤ)]
-  by_cases h : j = l
-  · subst h
-    simp [hN0]
-  · have hne : ((l : ℕ) : ℤ) - (j : ℕ) ≠ 0 := by
-      simp only [sub_ne_zero]
-      intro hc
-      exact h (Fin.ext (by exact_mod_cast hc.symm))
-    have hnd : ¬ ((N : ℤ) ∣ ((l : ℕ) - (j : ℕ) : ℤ)) := by
-      intro hd
-      refine hne (Int.eq_zero_of_abs_lt_dvd hd ?_)
-      have h1 := j.isLt
-      have h2 := l.isLt
-      rw [abs_lt]
-      omega
-    rw [if_neg hnd, if_neg h]
+    norm_cast
+    exact Real.mul_self_sqrt (by positivity)
+  have hinvsq : ((Real.sqrt N : ℝ) : ℂ)⁻¹ * ((Real.sqrt N : ℝ) : ℂ)⁻¹ = (N : ℂ)⁻¹ := by
+    rw [← mul_inv, hsq]
+  have hconj : (starRingEnd ℂ) ω = ω⁻¹ := (Complex.inv_eq_conj hnorm).symm
+  -- Each entry of `F * Fᴴ` is a geometric sum in `z = ω^j * (ω^l)⁻¹`.
+  have key : ∀ j l k : Fin N, qftMatrix N j k * (star (qftMatrix N)) k l
+      = (N : ℂ)⁻¹ * (ω ^ (j : ℕ) * (ω ^ (l : ℕ))⁻¹) ^ (k : ℕ) := by
+    intro j l k
+    rw [show (star (qftMatrix N)) k l = (starRingEnd ℂ) (qftMatrix N l k) from rfl]
+    simp only [qftMatrix, ← hωdef, map_mul, map_inv₀, Complex.conj_ofReal, map_pow, hconj]
+    rw [mul_pow, ← inv_pow, pow_mul, pow_mul, ← hinvsq]
     ring
+  have hωN : ω ^ N = 1 := hprim.pow_eq_one
+  have hpowN : ∀ m : ℕ, (ω ^ m) ^ N = 1 := by
+    intro m; rw [← pow_mul, mul_comm, pow_mul, hωN, one_pow]
+  ext j l
+  rw [Matrix.mul_apply]
+  simp only [key]
+  rw [← Finset.mul_sum, Fin.sum_univ_eq_sum_range (fun k => (ω ^ (j : ℕ) * (ω ^ (l : ℕ))⁻¹) ^ k)]
+  by_cases hjl : j = l
+  · -- Diagonal: the summand is `1`, so the sum is `N`.
+    subst hjl
+    rw [mul_inv_cancel₀ (pow_ne_zero _ hω0)]
+    simp [hN]
+  · -- Off-diagonal: `z ≠ 1` is an `N`-th root of unity, so the geometric sum vanishes.
+    have hzne : ω ^ (j : ℕ) * (ω ^ (l : ℕ))⁻¹ ≠ 1 := by
+      intro h
+      apply hjl
+      have hpe : ω ^ (j : ℕ) = ω ^ (l : ℕ) := by field_simp at h; exact h
+      exact Fin.ext (hprim.pow_inj j.isLt l.isLt hpe)
+    have hzN : (ω ^ (j : ℕ) * (ω ^ (l : ℕ))⁻¹) ^ N = 1 := by
+      rw [mul_pow, inv_pow, hpowN, hpowN, inv_one, mul_one]
+    rw [geom_sum_eq hzne, hzN, sub_self, zero_div, mul_zero, Matrix.one_apply_ne hjl]
 
-/-- The 5-qubit QFT matrix (dimension `2^5 = 32`) is unitary. -/
-theorem qft_unitary_5 : qftMatrix (2 ^ 5) ∈ Matrix.unitaryGroup (Fin (2 ^ 5)) ℂ :=
-  qft_unitary (2 ^ 5) (by norm_num)
+/-- **The 5-qubit quantum Fourier transform matrix is unitary.** -/
+theorem qft_unitary_5 : qft 5 ∈ Matrix.unitaryGroup (Fin (2 ^ 5)) ℂ :=
+  qftMatrix_unitary _ (by positivity)
 
 end QC
+
+#print axioms QC.qft_unitary_5
 

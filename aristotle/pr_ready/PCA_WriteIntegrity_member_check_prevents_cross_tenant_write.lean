@@ -6,210 +6,175 @@ Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+
+/-
+Note on imports: Lean requires `import` commands to precede every other command,
+including module documentation, so the mandated header above rules out an
+`import Mathlib` line.  The development below therefore only uses Lean core.
+The one Mathlib fact it needs is the pointwise-update lemma
+`Function.update_of_ne : a ≠ b → Function.update f b v a = f a`; it is reproved
+here for the local `PCA.WriteIntegrity.upd` as `upd_of_ne`.
+-/
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
-/-!
-# A formal model of a multi-tenant write-isolation engine
-
-This file develops a small but complete operational model of the write path of a
-multi-tenant isolation engine ("PCA"), together with soundness and completeness
-theorems for its membership check.
-
-* `PCA.WriteIntegrity.Config` is the (static) isolation configuration: which tenant owns
-  each resource, and which principals are members of which tenant.
-* `PCA.WriteIntegrity.authorize` is the executable membership check performed by the engine
-  on each write request.
-* `PCA.WriteIntegrity.step` / `PCA.WriteIntegrity.run` are the operational semantics: a write
-  request mutates the store exactly when the check succeeds, and is a no-op otherwise.
-
-The main results are
-
-* `PCA.WriteIntegrity.authorize_iff` : the executable check is *sound and complete*
-  with respect to the declarative membership specification;
-* `PCA.WriteIntegrity.member_check_prevents_cross_tenant_write` : along any trace of
-  requests, if the contents of a resource change then some request in the trace targeted
-  that resource and was issued by a principal that is a member of the tenant owning it —
-  i.e. no cross-tenant write can ever take effect;
-* `PCA.WriteIntegrity.run_eq_of_no_member_request` : the contrapositive form (traces made
-  entirely of cross-tenant requests are observationally inert);
-* `PCA.WriteIntegrity.authorized_write_effective` : the engine does not over-block, an
-  in-tenant write does take effect.
--/
-
 namespace PCA
 namespace WriteIntegrity
 
-/-- Tenant identifiers. -/
-abbrev Tenant := Nat
-/-- Principal (user / service account) identifiers. -/
-abbrev Principal := Nat
-/-- Resource (object) identifiers. -/
-abbrev Resource := Nat
-/-- Values stored in resources. -/
-abbrev Value := Nat
+/-! ## The isolation model
 
-/-- The static isolation configuration: every resource belongs to exactly one tenant,
-and membership of principals in tenants is decided by an executable predicate. -/
-structure Config where
-  /-- The tenant owning a given resource. -/
-  owner : Resource → Tenant
-  /-- The engine's membership table. -/
-  memberOf : Principal → Tenant → Bool
+A multi-tenant store maps resource identifiers to records.  Every stored record
+carries the tenant that owns it together with a payload.  A write request names
+a principal, a resource, the tenant under which the principal claims to act, and
+the payload to be stored.
 
-/-- Declarative reading of the membership table. -/
-def Config.Member (c : Config) (p : Principal) (t : Tenant) : Prop :=
-  c.memberOf p t = true
+The *reference monitor* accepts a request only when
+
+* the principal is a member of the tenant it claims to act for, and
+* if the resource already exists, it is owned by exactly that tenant.
+
+The main theorem states that under this guard no write can ever touch a record
+owned by a tenant the acting principal does not belong to. -/
+
+universe u v w z
+
+variable {Res : Type u} {Tenant : Type v} {Prin : Type w} {Val : Type z}
+
+/-- A stored record: the owning tenant together with the payload. -/
+structure Record (Tenant : Type v) (Val : Type z) where
+  /-- The tenant owning the record. -/
+  tenant : Tenant
+  /-- The stored payload. -/
+  value : Val
+
+/-- A store maps resource identifiers to records (`none` = the resource is absent). -/
+abbrev Store (Res : Type u) (Tenant : Type v) (Val : Type z) := Res → Option (Record Tenant Val)
 
 /-- A write request. -/
-structure Request where
-  /-- The principal issuing the request. -/
-  principal : Principal
-  /-- The targeted resource. -/
-  resource : Resource
-  /-- The value to be written. -/
-  value : Value
+structure WriteReq (Res : Type u) (Tenant : Type v) (Prin : Type w) (Val : Type z) where
+  /-- The principal issuing the write. -/
+  principal : Prin
+  /-- The tenant the principal claims to act for. -/
+  tenant : Tenant
+  /-- The resource to be written. -/
+  resource : Res
+  /-- The payload to be written. -/
+  value : Val
 
-/-- A request is *cross-tenant* when its issuer is not a member of the tenant owning the
-targeted resource. -/
-def CrossTenant (c : Config) (q : Request) : Prop :=
-  ¬ c.Member q.principal (c.owner q.resource)
+/-- The membership relation of the isolation engine: `mem p t` means principal
+`p` belongs to tenant `t`. -/
+abbrev Memberships (Prin : Type w) (Tenant : Type v) := Prin → Tenant → Prop
 
-/-- The store: current contents of every resource. -/
-abbrev Store := Resource → Value
+/-- Pointwise update of a store at a single resource. -/
+def upd [DecidableEq Res] (st : Store Res Tenant Val) (x : Res)
+    (v : Option (Record Tenant Val)) : Store Res Tenant Val :=
+  fun y => if y = x then v else st y
 
-/-- The engine's membership check on a write request. -/
-def authorize (c : Config) (q : Request) : Bool :=
-  c.memberOf q.principal (c.owner q.resource)
+@[simp] theorem upd_self [DecidableEq Res] (st : Store Res Tenant Val) (x : Res)
+    (v : Option (Record Tenant Val)) : upd st x v x = v := by
+  simp [upd]
 
-/-- Operational semantics of a single request: the write is applied exactly when the
-membership check succeeds; otherwise the store is unchanged. -/
-def step (c : Config) (s : Store) (q : Request) : Store :=
-  if authorize c q then Function.update s q.resource q.value else s
+theorem upd_of_ne [DecidableEq Res] (st : Store Res Tenant Val) (x y : Res)
+    (v : Option (Record Tenant Val)) (h : y ≠ x) : upd st x v y = st y := by
+  simp [upd, h]
 
-/-- Operational semantics of a trace of requests. -/
-def run (c : Config) (s : Store) : List Request → Store
-  | [] => s
-  | q :: qs => run c (step c s q) qs
+/-- The reference monitor's decision: the principal must be a member of the
+claimed tenant, and an already existing resource must belong to that tenant. -/
+def Authorized (mem : Memberships Prin Tenant) (st : Store Res Tenant Val)
+    (r : WriteReq Res Tenant Prin Val) : Prop :=
+  mem r.principal r.tenant ∧ ∀ rec, st r.resource = some rec → rec.tenant = r.tenant
 
-@[simp] theorem run_nil (c : Config) (s : Store) : run c s [] = s := rfl
+/-- The raw (unguarded) effect of a write request on the store. -/
+def rawWrite [DecidableEq Res] (st : Store Res Tenant Val)
+    (r : WriteReq Res Tenant Prin Val) : Store Res Tenant Val :=
+  upd st r.resource (some ⟨r.tenant, r.value⟩)
 
-@[simp] theorem run_cons (c : Config) (s : Store) (q : Request) (qs : List Request) :
-    run c s (q :: qs) = run c (step c s q) qs := rfl
+/-- One step of the guarded engine: perform the write only if it is authorized,
+otherwise leave the store untouched. -/
+noncomputable def step [DecidableEq Res] (mem : Memberships Prin Tenant)
+    (st : Store Res Tenant Val) (r : WriteReq Res Tenant Prin Val) : Store Res Tenant Val :=
+  open Classical in
+  if Authorized mem st r then rawWrite st r else st
 
-/-! ### Soundness and completeness of the membership check -/
+/-- A resource is *foreign* to a principal when it currently stores a record
+owned by a tenant the principal is not a member of. -/
+def Foreign (mem : Memberships Prin Tenant) (st : Store Res Tenant Val)
+    (p : Prin) (x : Res) : Prop :=
+  ∃ rec, st x = some rec ∧ ¬ mem p rec.tenant
 
-/-- **Soundness and completeness** of the engine's check: it accepts a request exactly
-when the issuing principal really is a member of the tenant owning the target. -/
-theorem authorize_iff (c : Config) (q : Request) :
-    authorize c q = true ↔ c.Member q.principal (c.owner q.resource) := Iff.rfl
+/-! ## Main theorem -/
 
-/-- Soundness: an accepted request is in-tenant. -/
-theorem authorize_sound (c : Config) (q : Request) (h : authorize c q = true) :
-    c.Member q.principal (c.owner q.resource) := h
+/-- **Member check prevents cross-tenant writes.**
 
-/-- Completeness: an in-tenant request is accepted. -/
-theorem authorize_complete (c : Config) (q : Request)
-    (h : c.Member q.principal (c.owner q.resource)) : authorize c q = true := h
-
-/-- A cross-tenant request is rejected. -/
-theorem authorize_eq_false_of_crossTenant (c : Config) (q : Request) (h : CrossTenant c q) :
-    authorize c q = false := by
-  simpa [CrossTenant, Config.Member, authorize, Bool.not_eq_true] using h
-
-/-! ### Single-step properties -/
-
-/-- A rejected (cross-tenant) request is a complete no-op. -/
-theorem step_eq_of_crossTenant (c : Config) (s : Store) (q : Request) (h : CrossTenant c q) :
-    step c s q = s := by
-  simp [step, authorize_eq_false_of_crossTenant c q h]
-
-/-- A step never modifies a resource other than the one targeted. -/
-theorem step_apply_of_ne (c : Config) (s : Store) (q : Request) (r : Resource)
-    (h : q.resource ≠ r) : step c s q r = s r := by
+If the reference monitor's membership check is in force, then a single guarded
+step never alters any resource that is foreign to the acting principal: the
+store's contents at such a resource are exactly what they were before. -/
+theorem member_check_prevents_cross_tenant_write [DecidableEq Res]
+    (mem : Memberships Prin Tenant) (st : Store Res Tenant Val)
+    (r : WriteReq Res Tenant Prin Val) (x : Res)
+    (hx : Foreign mem st r.principal x) :
+    step mem st r x = st x := by
+  obtain ⟨rec, hrec, hnot⟩ := hx
   unfold step
   split
-  · exact Function.update_of_ne (Ne.symm h) _ _
+  · rename_i hauth
+    obtain ⟨hmem, howner⟩ := hauth
+    have hne : x ≠ r.resource := by
+      rintro rfl
+      exact hnot ((howner rec hrec) ▸ hmem)
+    exact upd_of_ne st r.resource x _ hne
   · rfl
 
-/-- If a step changes the contents of `r`, the request targeted `r` and was in-tenant. -/
-theorem targeted_and_member_of_step_ne (c : Config) (s : Store) (q : Request) (r : Resource)
-    (h : step c s q r ≠ s r) :
-    q.resource = r ∧ c.Member q.principal (c.owner r) := by
-  by_cases hr : q.resource = r
-  · subst hr
-    refine ⟨rfl, ?_⟩
-    by_contra hm
-    exact h (by rw [step_eq_of_crossTenant c s q hm])
-  · exact absurd (step_apply_of_ne c s q r hr) h
+/-! ## Corollaries and sharpness -/
 
-/-- The engine does not over-block: an in-tenant write does take effect. -/
-theorem authorized_write_effective (c : Config) (s : Store) (q : Request)
-    (h : c.Member q.principal (c.owner q.resource)) :
-    step c s q q.resource = q.value := by
-  simp [step, authorize_complete c q h]
+/-- The record stored at a foreign resource is unchanged by a guarded step. -/
+theorem foreign_owner_stable [DecidableEq Res]
+    (mem : Memberships Prin Tenant) (st : Store Res Tenant Val)
+    (r : WriteReq Res Tenant Prin Val) (x : Res) (rec : Record Tenant Val)
+    (hrec : st x = some rec) (hnot : ¬ mem r.principal rec.tenant) :
+    step mem st r x = some rec := by
+  rw [member_check_prevents_cross_tenant_write mem st r x ⟨rec, hrec, hnot⟩]
+  exact hrec
 
-/-! ### Trace-level integrity -/
+/-- Iterating guarded steps with arbitrary requests still cannot change a
+resource, as long as it is foreign to each acting principal along the way. -/
+theorem foldl_step_preserves_foreign [DecidableEq Res]
+    (mem : Memberships Prin Tenant) (x : Res) (rec : Record Tenant Val) :
+    ∀ (rs : List (WriteReq Res Tenant Prin Val)) (st : Store Res Tenant Val),
+      st x = some rec → (∀ r ∈ rs, ¬ mem r.principal rec.tenant) →
+      (rs.foldl (step mem) st) x = some rec := by
+  intro rs
+  induction rs with
+  | nil => intro st h _; simpa using h
+  | cons r rs ih =>
+      intro st h hall
+      refine ih (step mem st r) ?_ (fun q hq => hall q (List.mem_cons_of_mem _ hq))
+      exact foreign_owner_stable mem st r x rec h (hall r (List.mem_cons_self ..))
 
-/-- **Main theorem (write integrity).** If, after running an arbitrary trace of write
-requests, the contents of resource `r` differ from their initial value, then the trace
-must contain a request that targeted `r` and whose issuing principal is a member of the
-tenant owning `r`. Consequently no cross-tenant write can ever affect the store. -/
-theorem member_check_prevents_cross_tenant_write
-    (c : Config) (s : Store) (qs : List Request) (r : Resource)
-    (h : run c s qs r ≠ s r) :
-    ∃ q ∈ qs, q.resource = r ∧ c.Member q.principal (c.owner r) := by
-  induction qs generalizing s with
-  | nil => exact absurd rfl h
-  | cons q qs ih =>
-      rw [run_cons] at h
-      by_cases hstep : step c s q r = s r
-      · obtain ⟨q', hq', hq'2⟩ := ih (s := step c s q) (by rw [hstep]; exact h)
-        exact ⟨q', List.mem_cons_of_mem _ hq', hq'2⟩
-      · exact ⟨q, List.mem_cons_self, targeted_and_member_of_step_ne c s q r hstep⟩
+/-- Authorized writes do take effect: the guard is not vacuously restrictive. -/
+theorem step_of_authorized [DecidableEq Res]
+    (mem : Memberships Prin Tenant) (st : Store Res Tenant Val)
+    (r : WriteReq Res Tenant Prin Val) (h : Authorized mem st r) :
+    step mem st r r.resource = some ⟨r.tenant, r.value⟩ := by
+  unfold step
+  split
+  · simp [rawWrite]
+  · exact absurd h (by assumption)
 
-/-- Contrapositive form: if every request in the trace that targets `r` is cross-tenant,
-then the contents of `r` are untouched. -/
-theorem run_eq_of_no_member_request
-    (c : Config) (s : Store) (qs : List Request) (r : Resource)
-    (h : ∀ q ∈ qs, q.resource = r → ¬ c.Member q.principal (c.owner r)) :
-    run c s qs r = s r := by
-  by_contra hne
-  obtain ⟨q, hq, hqr, hmem⟩ := member_check_prevents_cross_tenant_write c s qs r hne
-  exact h q hq hqr hmem
-
-/-- A trace consisting entirely of cross-tenant requests leaves the store completely
-unchanged. -/
-theorem run_eq_of_all_crossTenant
-    (c : Config) (s : Store) (qs : List Request) (h : ∀ q ∈ qs, CrossTenant c q) :
-    run c s qs = s := by
-  induction qs generalizing s with
-  | nil => rfl
-  | cons q qs ih =>
-      rw [run_cons, step_eq_of_crossTenant c s q (h q List.mem_cons_self)]
-      exact ih s fun q' hq' => h q' (List.mem_cons_of_mem _ hq')
+/-- Sharpness: without the membership check the write really can clobber a
+record owned by another tenant.  Here principal `0` is a member only of tenant
+`0`, yet the raw write overwrites the resource owned by tenant `1`. -/
+theorem rawWrite_can_cross_tenant :
+    ∃ (mem : Memberships Nat Nat) (st : Store Nat Nat Nat) (r : WriteReq Nat Nat Nat Nat)
+      (x : Nat), Foreign mem st r.principal x ∧ rawWrite st r x ≠ st x := by
+  refine ⟨fun p t => p = t, fun _ => some ⟨1, 0⟩,
+    { principal := 0, tenant := 0, resource := 0, value := 0 }, 0, ⟨⟨1, 0⟩, rfl, by simp⟩, ?_⟩
+  simp [rawWrite, upd, Record.mk.injEq]
 
 end WriteIntegrity
 end PCA

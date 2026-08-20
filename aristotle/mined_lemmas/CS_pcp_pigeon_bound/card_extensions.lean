@@ -1,0 +1,33 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace CS
+
+/-- The finite set of all binary words (lists of booleans) of length `n`. -/
+
+theorem card_extensions (N : ℕ) (w : List Bool) :
+    (extensions N w).card = 2 ^ (N - w.length) := by
+  rw [extensions, Finset.card_image_of_injective _ (List.append_right_injective w), card_words]
+

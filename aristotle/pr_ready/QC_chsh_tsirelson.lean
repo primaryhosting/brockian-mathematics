@@ -23,110 +23,101 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
 set_option grind.warning false
+
+-- (Lean requires `import` lines to precede any module doc comment.)
+
+/-!
+# Chsh Tsirelson
+Category: Quantum Computing
+Target: QC.chsh_tsirelson
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-!
+The CHSH operator `S = A₀B₀ + A₀B₁ + A₁B₀ - A₁B₁` built from a CHSH tuple
+(four ±1-valued observables, with the `A`s commuting with the `B`s) inside a
+C⋆-algebra satisfies Tsirelson's bound `‖S‖ ≤ 2√2`.
+
+The algebraic half of the argument is Mathlib's `tsirelson_inequality`
+(`Mathlib/Algebra/Star/CHSH.lean`), which gives the order bound
+`A₀ * B₀ + A₀ * B₁ + A₁ * B₀ - A₁ * B₁ ≤ √2 ^ 3 • 1`.
+Applying it also to the CHSH tuple `(A₀, A₁, -B₀, -B₁)` bounds `-S` as well, and for a
+self-adjoint element of a C⋆-algebra a two-sided order bound gives a norm bound.
+-/
 
 namespace QC
 
-variable {A : Type*}
+variable {A : Type*} [CStarAlgebra A] [PartialOrder A] [StarOrderedRing A]
 
-/-- The CHSH operator associated to a tuple of observables
-`A₀, A₁` (Alice) and `B₀, B₁` (Bob). -/
-def chshOp [Mul A] [Add A] [Sub A] (A₀ A₁ B₀ B₁ : A) : A :=
-  A₀ * B₀ + A₀ * B₁ + A₁ * B₀ - A₁ * B₁
+/-- A C⋆-algebra is a star module over `ℝ` (via the scalar action of `ℂ`). -/
+instance instStarModuleRealOfCStarAlgebra : StarModule ℝ A where
+  star_smul r a := by
+    rw [← algebraMap_smul ℂ r a, star_smul, star_trivial (r : ℝ)]
+    rw [show star ((algebraMap ℝ ℂ) r) = (algebraMap ℝ ℂ) r by
+      simp [Complex.conj_ofReal, RCLike.star_def]]
+    rw [algebraMap_smul]
 
-section Ring
+omit [PartialOrder A] [StarOrderedRing A] in
+/-- Negating both `B` observables of a CHSH tuple again gives a CHSH tuple. -/
+theorem isCHSHTuple_neg_B {A₀ A₁ B₀ B₁ : A} (T : IsCHSHTuple A₀ A₁ B₀ B₁) :
+    IsCHSHTuple A₀ A₁ (-B₀) (-B₁) where
+  A₀_inv := T.A₀_inv
+  A₁_inv := T.A₁_inv
+  B₀_inv := by simpa using T.B₀_inv
+  B₁_inv := by simpa using T.B₁_inv
+  A₀_sa := T.A₀_sa
+  A₁_sa := T.A₁_sa
+  B₀_sa := by simp [T.B₀_sa]
+  B₁_sa := by simp [T.B₁_sa]
+  A₀B₀_commutes := by simp [T.A₀B₀_commutes]
+  A₀B₁_commutes := by simp [T.A₀B₁_commutes]
+  A₁B₀_commutes := by simp [T.A₁B₀_commutes]
+  A₁B₁_commutes := by simp [T.A₁B₁_commutes]
 
-variable [Ring A] [StarRing A] {A₀ A₁ B₀ B₁ : A}
+/-- For a self-adjoint element of a C⋆-algebra, a two-sided order bound by a scalar
+gives the corresponding norm bound. -/
+theorem norm_le_of_le_algebraMap_of_neg_le {a : A} (ha : IsSelfAdjoint a) {r : ℝ} (hr : 0 ≤ r)
+    (h₁ : a ≤ algebraMap ℝ A r) (h₂ : -a ≤ algebraMap ℝ A r) : ‖a‖ ≤ r := by
+  by_cases! nontriv : Nontrivial A
+  · rcases CStarAlgebra.norm_or_neg_norm_mem_spectrum ha with h | h
+    · exact (le_algebraMap_iff_spectrum_le ha).mp h₁ _ h
+    · have h₂' : algebraMap ℝ A (-r) ≤ a := by
+        rw [map_neg, neg_le]; exact h₂
+      have := (algebraMap_le_iff_le_spectrum ha).mp h₂' _ h
+      linarith
+  · simpa [Subsingleton.elim a 0] using hr
 
-/-- The square of the CHSH operator equals `4` minus the product of the two commutators. -/
-theorem chshOp_mul_self (T : IsCHSHTuple A₀ A₁ B₀ B₁) :
-    chshOp A₀ A₁ B₀ B₁ * chshOp A₀ A₁ B₀ B₁ =
-      4 - (A₀ * A₁ - A₁ * A₀) * (B₀ * B₁ - B₁ * B₀) := by
-  have sA₀ : A₀ * A₀ = 1 := by rw [← sq, T.A₀_inv]
-  have sA₁ : A₁ * A₁ = 1 := by rw [← sq, T.A₁_inv]
-  have sB₀ : B₀ * B₀ = 1 := by rw [← sq, T.B₀_inv]
-  have sB₁ : B₁ * B₁ = 1 := by rw [← sq, T.B₁_inv]
-  have hA₀ : ∀ x : A, A₀ * (A₀ * x) = x := by intro x; rw [← mul_assoc, sA₀, one_mul]
-  have hA₁ : ∀ x : A, A₁ * (A₁ * x) = x := by intro x; rw [← mul_assoc, sA₁, one_mul]
-  have d₀₀ : ∀ x : A, B₀ * (A₀ * x) = A₀ * (B₀ * x) := by
-    intro x; rw [← mul_assoc, ← T.A₀B₀_commutes, mul_assoc]
-  have d₀₁ : ∀ x : A, B₁ * (A₀ * x) = A₀ * (B₁ * x) := by
-    intro x; rw [← mul_assoc, ← T.A₀B₁_commutes, mul_assoc]
-  have d₁₀ : ∀ x : A, B₀ * (A₁ * x) = A₁ * (B₀ * x) := by
-    intro x; rw [← mul_assoc, ← T.A₁B₀_commutes, mul_assoc]
-  have d₁₁ : ∀ x : A, B₁ * (A₁ * x) = A₁ * (B₁ * x) := by
-    intro x; rw [← mul_assoc, ← T.A₁B₁_commutes, mul_assoc]
-  have e4 : (4 : A) = 1 + 1 + 1 + 1 := by norm_num
-  unfold chshOp
-  rw [e4]
-  noncomm_ring
-  simp only [d₀₀, d₀₁, d₁₀, d₁₁, hA₀, hA₁, sA₀, sA₁, sB₀, sB₁, mul_one]
-  abel
-
-/-- The CHSH operator of a CHSH tuple is self-adjoint. -/
-theorem isSelfAdjoint_chshOp (T : IsCHSHTuple A₀ A₁ B₀ B₁) :
-    IsSelfAdjoint (chshOp A₀ A₁ B₀ B₁) := by
-  unfold IsSelfAdjoint chshOp
-  simp only [star_sub, star_add, star_mul, T.A₀_sa, T.A₁_sa, T.B₀_sa, T.B₁_sa,
-    ← T.A₀B₀_commutes, ← T.A₀B₁_commutes, ← T.A₁B₀_commutes, ← T.A₁B₁_commutes]
-
-end Ring
-
-section CStar
-
-variable [NormedRing A] [StarRing A] [CStarRing A] [NormOneClass A] {A₀ A₁ B₀ B₁ : A}
-
-/-- A self-adjoint involution in a C⋆-algebra has norm one. -/
-theorem norm_eq_one_of_sa_involution {x : A} (hsa : star x = x) (hx : x ^ 2 = 1) :
-    ‖x‖ = 1 := by
-  have h : ‖x‖ * ‖x‖ = 1 := by
-    have := CStarRing.norm_star_mul_self (x := x)
-    rw [hsa] at this
-    rw [← this, ← sq, hx, norm_one]
-  nlinarith [norm_nonneg x]
-
-omit [StarRing A] [CStarRing A] [NormOneClass A] in
-/-- The norm of a commutator of two elements of norm one is at most `2`. -/
-theorem norm_commutator_le {x y : A} (hx : ‖x‖ = 1) (hy : ‖y‖ = 1) :
-    ‖x * y - y * x‖ ≤ 2 := by
-  calc ‖x * y - y * x‖ ≤ ‖x * y‖ + ‖y * x‖ := norm_sub_le _ _
-    _ ≤ ‖x‖ * ‖y‖ + ‖y‖ * ‖x‖ := by gcongr <;> exact norm_mul_le _ _
-    _ = 2 := by rw [hx, hy]; norm_num
-
-/-- **Tsirelson's bound**: in a C⋆-algebra, the CHSH operator built from a CHSH tuple
-(two pairs of self-adjoint observables squaring to one, with Alice's commuting with Bob's)
-has operator norm at most `2√2`. -/
-theorem chsh_tsirelson (T : IsCHSHTuple A₀ A₁ B₀ B₁) :
-    ‖chshOp A₀ A₁ B₀ B₁‖ ≤ 2 * Real.sqrt 2 := by
-  set C : A := chshOp A₀ A₁ B₀ B₁
-  have hnA₀ : ‖A₀‖ = 1 := norm_eq_one_of_sa_involution T.A₀_sa T.A₀_inv
-  have hnA₁ : ‖A₁‖ = 1 := norm_eq_one_of_sa_involution T.A₁_sa T.A₁_inv
-  have hnB₀ : ‖B₀‖ = 1 := norm_eq_one_of_sa_involution T.B₀_sa T.B₀_inv
-  have hnB₁ : ‖B₁‖ = 1 := norm_eq_one_of_sa_involution T.B₁_sa T.B₁_inv
-  have hcommA : ‖A₀ * A₁ - A₁ * A₀‖ ≤ 2 := norm_commutator_le hnA₀ hnA₁
-  have hcommB : ‖B₀ * B₁ - B₁ * B₀‖ ≤ 2 := norm_commutator_le hnB₀ hnB₁
-  have h4 : ‖(4 : A)‖ ≤ 4 := by
-    have e4 : (4 : A) = 1 + 1 + 1 + 1 := by norm_num
-    rw [e4]
-    calc ‖(1 : A) + 1 + 1 + 1‖ ≤ ‖(1 : A) + 1 + 1‖ + ‖(1 : A)‖ := norm_add_le _ _
-      _ ≤ (‖(1 : A) + 1‖ + ‖(1 : A)‖) + ‖(1 : A)‖ := by gcongr; exact norm_add_le _ _
-      _ ≤ ((‖(1 : A)‖ + ‖(1 : A)‖) + ‖(1 : A)‖) + ‖(1 : A)‖ := by gcongr; exact norm_add_le _ _
-      _ = 4 := by rw [norm_one]; norm_num
-  have hsq : ‖C‖ * ‖C‖ ≤ 8 := by
-    have hstar : star C * C = C * C := by rw [(isSelfAdjoint_chshOp T : star C = C)]
-    have : ‖C‖ * ‖C‖ = ‖C * C‖ := by
-      rw [← CStarRing.norm_star_mul_self, hstar]
-    rw [this, chshOp_mul_self T]
-    calc ‖(4 : A) - (A₀ * A₁ - A₁ * A₀) * (B₀ * B₁ - B₁ * B₀)‖
-        ≤ ‖(4 : A)‖ + ‖(A₀ * A₁ - A₁ * A₀) * (B₀ * B₁ - B₁ * B₀)‖ := norm_sub_le _ _
-      _ ≤ 4 + ‖A₀ * A₁ - A₁ * A₀‖ * ‖B₀ * B₁ - B₁ * B₀‖ := by
-            gcongr; exact norm_mul_le _ _
-      _ ≤ 4 + 2 * 2 := by gcongr
-      _ = 8 := by norm_num
-  have hs2 : Real.sqrt 2 ^ 2 = 2 := Real.sq_sqrt (by norm_num)
-  nlinarith [norm_nonneg C, Real.sqrt_nonneg 2]
-
-end CStar
+/-- **Tsirelson's bound**: the CHSH operator `A₀B₀ + A₀B₁ + A₁B₀ - A₁B₁` associated with a
+CHSH tuple of observables in a C⋆-algebra has operator norm at most `2√2`. -/
+theorem chsh_tsirelson (A₀ A₁ B₀ B₁ : A) (T : IsCHSHTuple A₀ A₁ B₀ B₁) :
+    ‖A₀ * B₀ + A₀ * B₁ + A₁ * B₀ - A₁ * B₁‖ ≤ 2 * Real.sqrt 2 := by
+  set S : A := A₀ * B₀ + A₀ * B₁ + A₁ * B₀ - A₁ * B₁ with hS
+  have hsqrt : Real.sqrt 2 ^ 3 • (1 : A) = algebraMap ℝ A (2 * Real.sqrt 2) := by
+    have : Real.sqrt 2 ^ 3 = 2 * Real.sqrt 2 := by
+      have h2 : Real.sqrt 2 ^ 2 = 2 := Real.sq_sqrt (by norm_num)
+      rw [pow_succ, h2]
+    rw [this, Algebra.algebraMap_eq_smul_one]
+  have hupper : S ≤ algebraMap ℝ A (2 * Real.sqrt 2) := by
+    rw [← hsqrt]; exact tsirelson_inequality A₀ A₁ B₀ B₁ T
+  have hlower : -S ≤ algebraMap ℝ A (2 * Real.sqrt 2) := by
+    rw [← hsqrt]
+    have := tsirelson_inequality A₀ A₁ (-B₀) (-B₁) (isCHSHTuple_neg_B T)
+    simpa [hS, mul_neg, sub_eq_add_neg, neg_add, add_comm, add_left_comm, add_assoc] using this
+  have hsa : IsSelfAdjoint S := by
+    have : star S = S := by
+      simp only [hS, star_sub, star_add, star_mul, T.A₀_sa, T.A₁_sa, T.B₀_sa, T.B₁_sa,
+        ← T.A₀B₀_commutes, ← T.A₀B₁_commutes, ← T.A₁B₀_commutes, ← T.A₁B₁_commutes]
+    exact this
+  exact norm_le_of_le_algebraMap_of_neg_le hsa (by positivity) hupper hlower
 
 end QC
 

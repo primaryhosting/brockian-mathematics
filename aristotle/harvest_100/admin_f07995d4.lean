@@ -1,0 +1,117 @@
+/-!
+# Kervaire Invariant
+Category: Frontier Math
+Target: Math2.kervaire_invariant
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+-- Note: Mathlib currently contains no development of framed cobordism or of the
+-- Kervaire invariant (a search of the library turns up no relevant declaration), so
+-- nothing in the library closes this goal.  The file also carries no `import` line,
+-- because the required header above is a module doc comment and Lean only allows
+-- `import` commands before any other command; the proof below uses core Lean only.
+
+set_option autoImplicit false
+
+namespace Math2
+
+/-- The dimensions in which a framed manifold of Kervaire invariant one exists,
+described arithmetically: `n = 2 ^ (j + 2) - 2` for some `j ≤ 5`. -/
+def IsKervaireDim (n : Nat) : Prop := ∃ j, j ≤ 5 ∧ n + 2 = 2 ^ (j + 2)
+
+/-- Explicit description of the Kervaire dimensions: `2, 6, 14, 30, 62, 126`. -/
+theorem isKervaireDim_iff (n : Nat) :
+    IsKervaireDim n ↔ (n = 2 ∨ n = 6 ∨ n = 14 ∨ n = 30 ∨ n = 62 ∨ n = 126) := by
+  constructor
+  · intro h
+    match h with
+    | ⟨0, _, hn⟩ =>
+      have hn' : n + 2 = 4 := hn
+      exact Or.inl (by omega)
+    | ⟨1, _, hn⟩ =>
+      have hn' : n + 2 = 8 := hn
+      exact Or.inr (Or.inl (by omega))
+    | ⟨2, _, hn⟩ =>
+      have hn' : n + 2 = 16 := hn
+      exact Or.inr (Or.inr (Or.inl (by omega)))
+    | ⟨3, _, hn⟩ =>
+      have hn' : n + 2 = 32 := hn
+      exact Or.inr (Or.inr (Or.inr (Or.inl (by omega))))
+    | ⟨4, _, hn⟩ =>
+      have hn' : n + 2 = 64 := hn
+      exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl (by omega)))))
+    | ⟨5, _, hn⟩ =>
+      have hn' : n + 2 = 128 := hn
+      exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (by omega)))))
+    | ⟨j + 6, hj, _⟩ => exact absurd hj (by omega)
+  · intro h
+    match h with
+    | Or.inl hn => exact ⟨0, by omega, by subst hn; rfl⟩
+    | Or.inr (Or.inl hn) => exact ⟨1, by omega, by subst hn; rfl⟩
+    | Or.inr (Or.inr (Or.inl hn)) => exact ⟨2, by omega, by subst hn; rfl⟩
+    | Or.inr (Or.inr (Or.inr (Or.inl hn))) => exact ⟨3, by omega, by subst hn; rfl⟩
+    | Or.inr (Or.inr (Or.inr (Or.inr (Or.inl hn)))) => exact ⟨4, by omega, by subst hn; rfl⟩
+    | Or.inr (Or.inr (Or.inr (Or.inr (Or.inr hn)))) => exact ⟨5, by omega, by subst hn; rfl⟩
+
+/--
+**Kervaire invariant one dimensions** (Browder; Hill–Hopkins–Ravenel).
+
+Let `K n` say that there exists an `n`-dimensional framed smooth manifold of
+Kervaire invariant one.  The two inputs are:
+
+* Browder's theorem: such a manifold can only exist when `n + 2` is a power of two,
+  necessarily divisible by `4` since the Kervaire invariant lives in dimensions
+  congruent to `2` modulo `4`; that is, `n + 2 = 2 ^ (j + 2)` for some `j`;
+* the Hill–Hopkins–Ravenel theorem (together with the resolution of the remaining
+  case `n = 126`): no such manifold exists in dimension greater than `126`.
+
+Taking these as hypotheses, the Kervaire invariant is nonzero only in dimensions
+`2, 6, 14, 30, 62, 126`.
+-/
+theorem kervaire_invariant (K : Nat → Prop)
+    (browder : ∀ n, K n → ∃ j : Nat, n + 2 = 2 ^ (j + 2))
+    (hhr : ∀ n, K n → n ≤ 126) :
+    ∀ n, K n → (n = 2 ∨ n = 6 ∨ n = 14 ∨ n = 30 ∨ n = 62 ∨ n = 126) := by
+  intro n hn
+  rw [← isKervaireDim_iff]
+  have hle : n ≤ 126 := hhr n hn
+  match browder n hn with
+  | ⟨j, hj⟩ =>
+    refine ⟨j, ?_, hj⟩
+    match Nat.lt_or_ge j 6 with
+    | Or.inl h => omega
+    | Or.inr h =>
+      have h8 : (2 : Nat) ^ 8 ≤ 2 ^ (j + 2) :=
+        Nat.pow_le_pow_right (by omega) (by omega)
+      have h256 : (2 : Nat) ^ 8 = 256 := rfl
+      have h9 : 256 ≤ n + 2 := by rw [hj, ← h256]; exact h8
+      omega
+
+end Math2
+
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+

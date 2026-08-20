@@ -1,0 +1,61 @@
+/-
+# Knill Laflamme
+Category: Frontier Qi
+Target: QI.knill_laflamme
+Statement: A code corrects an error set iff it satisfies the Knill–Laflamme conditions.
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+import Mathlib
+
+/-!
+# Knill Laflamme
+Category: Frontier Qi
+Target: QI.knill_laflamme
+Statement: A code corrects an error set iff it satisfies the Knill–Laflamme conditions.
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+open scoped ComplexOrder
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+namespace QI
+
+open Matrix
+
+variable {n ι : Type*} [Fintype n] [DecidableEq n] [Fintype ι] [DecidableEq ι]
+
+/-- A quantum code, given by the orthogonal projection `P` onto the code subspace. -/
+structure IsCodeProj (P : Matrix n n ℂ) : Prop where
+  /-- The projection is self-adjoint. -/
+  herm : Pᴴ = P
+  /-- The projection is idempotent. -/
+  idem : P * P = P
+
+/-- The Knill–Laflamme conditions for the code with projection `P` and the error set `E`:
+there is a matrix of scalars `c` with `P * (E a)ᴴ * (E b) * P = c a b • P` for all errors
+`E a`, `E b`. -/
+
+lemma vecMulVec_mulVec (y w z : n → ℂ) :
+    vecMulVec y w *ᵥ z = (w ⬝ᵥ z) • y := by
+  ext i
+  simp only [vecMulVec, mulVec, dotProduct, Pi.smul_apply, smul_eq_mul, Finset.sum_mul,
+    of_apply]
+  exact Finset.sum_congr rfl fun x _ => by ring
+
+omit [DecidableEq n] in

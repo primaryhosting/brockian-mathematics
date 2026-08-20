@@ -1,0 +1,58 @@
+/-
+# Riemann Roch Curve
+Category: Frontier Math
+Target: Math2.riemann_roch_curve
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean requires `import` lines to precede any module docstring; the required header is
+-- reproduced verbatim as the module docstring immediately below the import.)
+
+import RequestProject.Math2.Canonical
+
+/-!
+# Riemann Roch Curve
+Category: Frontier Math
+Target: Math2.riemann_roch_curve
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-!
+## Statement
+
+For a smooth projective curve, described here through its function field `F / K` with its
+family of places `P` (see `Math2.PreCurve` and `Math2.PreCurve.IsCurve`), there exists a
+*canonical divisor* `W` such that for every divisor `D`
+
+  `ℓ(D) - ℓ(W - D) = deg D + 1 - g`,
+
+where `ℓ(D) = dim_K L(D)` is the dimension of the Riemann-Roch space of `D`, `deg D` is the
+degree of `D` and `g` is the genus of the curve.  The canonical divisor moreover satisfies
+`ℓ(W) = g` and `deg W = 2g - 2`.
+-/
+
+namespace Math2
+
+open PreCurve
+
+variable {K : Type u} {F : Type v} {P : Type w} [Field K] [Field F] [Algebra K F]
+
+/-- **Riemann-Roch for a smooth projective curve.**
+
+There is a canonical divisor `W` (of degree `2g - 2` and with `ℓ(W) = g`) such that for every
+divisor `D` on the curve,
+`ℓ(D) - ℓ(W - D) = deg D + 1 - g`. -/
+
+lemma exists_finPlace_support (x : RatFunc K) (hx : x ≠ 0) :
+    ∃ T : Finset (FinPlace K), ∀ q : FinPlace K, q ∉ T →
+      cnt q x.num = 0 ∧ cnt q x.denom = 0 := by
+  classical
+  obtain ⟨T₁, hT₁⟩ := exists_finset_cnt x.num (RatFunc.num_ne_zero hx)
+  obtain ⟨T₂, hT₂⟩ := exists_finset_cnt x.denom (RatFunc.denom_ne_zero x)
+  refine ⟨T₁ ∪ T₂, fun q hq => ⟨hT₁ q ?_, hT₂ q ?_⟩⟩
+  · exact fun h => hq (Finset.mem_union_left _ h)
+  · exact fun h => hq (Finset.mem_union_right _ h)
+
+open Classical in
+/-- The canonical finite set of places carrying the divisor of a nonzero rational function. -/

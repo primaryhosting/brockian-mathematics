@@ -6,36 +6,49 @@ pipeline and so were invisible to harvest_proofs.py.
 
 For each IDLE project not already in harvest_ledger.json:
   - download + untar, read the .lean,
-  - classify PROVED (axiom-clean) vs STOPPED,
+  - classify a sorry-free proof CANDIDATE (legacy internal token PROVED) vs STOPPED,
   - derive a target key from the proof's own `namespace`/`theorem` name (falls back
     to the project NAME, then the pid),
-  - save PROVED proofs to harvest_100/<acct>_<id8>.lean and record in the ledger.
+  - save candidates to harvest_100/<acct>_<id8>.lean and record them in the ledger.
 
 Downstream select_best -> axle_verify then verify them with no further changes.
 Resumable (skips pids already in the ledger). Paced. Read-only against Aristotle.
 Env: HARVEST_ALL_MAX (default 200), HARVEST_ALL_PAGES (default 20 pages x100/acct).
 """
 import glob
+import fcntl
 import json
 import os
 import pathlib
 import re
+import shutil
 import subprocess
 import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent
 OUT = ROOT / "harvest_100"
 LEDGER = ROOT / "harvest_ledger.json"
+LOCK = ROOT / ".harvest.lock"
 NIGHT = ROOT / "submitted_night.json"
 KEYENV = {"admin": "ARISTOTLE_API_KEY", "chris": "ARISTOTLE_API_KEY_CHRIS"}
 BAD = re.compile(r"\b(sorry|admit|native_decide|sorryAx)\b")
 UUID = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
 MAXDL = int(os.environ.get("HARVEST_ALL_MAX", "200"))
 PAGES = int(os.environ.get("HARVEST_ALL_PAGES", "20"))
+PINNED_ARISTOTLE_BIN = os.path.expanduser(
+    "~/.local/share/aristotlelib-2.1.0/bin/aristotle"
+)
+ARISTOTLE_BIN = (
+    os.environ.get("ARISTOTLE_BIN")
+    or (PINNED_ARISTOTLE_BIN if os.path.isfile(PINNED_ARISTOTLE_BIN) else None)
+    or shutil.which("aristotle")
+)
 
 
 def alist(key, pagkey=None):
-    args = ["uvx", "--from", "aristotlelib@latest", "aristotle", "list",
+    if not ARISTOTLE_BIN:
+        return [], None
+    args = [ARISTOTLE_BIN, "list",
             "--status", "IDLE", "--limit", "100"]
     if pagkey:
         args += ["--pagination-key", pagkey]
@@ -79,11 +92,13 @@ def all_idle(key):
 
 
 def fetch(pid, key):
+    if not ARISTOTLE_BIN:
+        return False, None, ""
     d = tempfile.mkdtemp(prefix="harvall_")
     tar = os.path.join(d, f"{pid}.tar.gz")
     e = dict(os.environ, ARISTOTLE_API_KEY=key)
     try:
-        subprocess.run(["uvx", "--from", "aristotlelib@latest", "aristotle", "download",
+        subprocess.run([ARISTOTLE_BIN, "download",
                         pid, "--destination", tar], capture_output=True, env=e, timeout=180)
         subprocess.run(["tar", "xzf", tar, "-C", d], capture_output=True, timeout=60)
     except Exception:  # noqa: BLE001
@@ -112,6 +127,12 @@ def target_from(lean, name, pid):
 
 
 def main():
+    lock_handle = LOCK.open("a+")
+    try:
+        fcntl.flock(lock_handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        print("harvest already running; skipped this overlapping poll")
+        return
     OUT.mkdir(exist_ok=True)
     ledger = json.loads(LEDGER.read_text()) if LEDGER.exists() else {}
     night = json.loads(NIGHT.read_text()) if NIGHT.exists() else {}

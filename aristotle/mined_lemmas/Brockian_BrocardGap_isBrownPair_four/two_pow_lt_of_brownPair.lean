@@ -1,0 +1,78 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-
+# Brocard Gap Conjecture
+Category: Brockian Conjecture
+Target: Brockian.BrocardGap.BrocardGapConjecture
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Brocard Gap Conjecture
+
+Brocard's problem asks for the solutions of `n ! + 1 = m ^ 2`; the only known ones are the
+*Brown pairs* `(4, 5)`, `(5, 11)`, `(7, 71)`, and Brocard's conjecture (still open) states that
+there are no further solutions.
+
+This file develops the *gap* side of the problem, i.e. how far apart the perfect squares
+surrounding `n ! + 1` are, and records what can be proved unconditionally:
+
+* `Brockian.BrocardGap.BrocardGapConjecture` : for `n ≥ 10` the two consecutive squares
+  bracketing `n ! + 1` are more than `2 ^ (n + 1)` apart;
+* `Brockian.BrocardGap.unique_sq_near_factorial` : consequently, for `n ≥ 10` at most one
+  natural number has its square within `2 ^ n` of `n ! + 1`;
+* `Brockian.BrocardGap.no_brownPair_of_mem_Icc_eight_hundred` : an unconditional verification
+  that there is no Brown pair with `8 ≤ n ≤ 100`;
+* `Brockian.BrocardGap.two_pow_lt_of_brownPair` : any solution with `n ≥ 10` has `2 ^ n < m`;
+* `Brockian.BrocardGap.brownPair_eq_sqrt`, `brownPair_factorization`, `brownPair_odd` :
+  elementary structure of a solution;
+* `Brockian.BrocardGap.brocardConjecture_iff_no_square` : a reformulation of the full
+  (open) Brocard conjecture as the statement that `n ! + 1` is never a perfect square
+  for `n ≥ 8`.
+-/
+
+open scoped Nat
+
+namespace Brockian.BrocardGap
+
+/-- A *Brown pair* is a pair `(n, m)` solving Brocard's equation `n ! + 1 = m ^ 2`. -/
+
+theorem two_pow_lt_of_brownPair (n m : ℕ) (hn : 10 ≤ n) (h : IsBrownPair n m) : 2 ^ n < m := by
+  have hfac := two_mul_four_pow_le_factorial n hn
+  have h4 : ((2 : ℕ) ^ n) ^ 2 = 4 ^ n := by rw [← pow_mul, mul_comm, pow_mul]; norm_num
+  have h' : n ! + 1 = m ^ 2 := h
+  have hlt : ((2 : ℕ) ^ n) ^ 2 < m ^ 2 := by omega
+  exact lt_of_pow_lt_pow_left' 2 hlt
+
+/-! ### The gap between the squares surrounding `n ! + 1` -/
+
+/-- **Brocard Gap Conjecture (gap form).**
+For `n ≥ 10`, the two consecutive perfect squares bracketing `n ! + 1`, namely `m ^ 2` and
+`(m + 1) ^ 2` for `m = ⌊√(n ! + 1)⌋`, are more than `2 ^ (n + 1)` apart: Brocard's quantity
+`n ! + 1` lies in a region where perfect squares are exponentially sparse. -/

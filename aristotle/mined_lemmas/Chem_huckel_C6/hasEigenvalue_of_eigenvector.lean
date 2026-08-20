@@ -1,0 +1,51 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-
+# Huckel C 6
+Category: Chemistry
+Target: Chem.huckel_C6
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+open scoped Real
+
+set_option maxHeartbeats 2000000
+set_option maxRecDepth 4000
+
+namespace Chem
+
+/-- Adjacency matrix of the cycle graph `C₆` (the Hückel connectivity matrix of benzene):
+vertex `i` is adjacent to `i ± 1 mod 6`. -/
+
+lemma hasEigenvalue_of_eigenvector {μ : ℂ} {v : Fin 6 → ℂ} (hv : v ≠ 0)
+    (h : C6adj.mulVec v = μ • v) : Module.End.HasEigenvalue (Matrix.toLin' C6adj) μ := by
+  refine Module.End.hasEigenvalue_of_hasEigenvector (x := v) ⟨?_, hv⟩
+  rw [Module.End.mem_eigenspace_iff, Matrix.toLin'_apply, h]
+
+/-- Eigenvector for the eigenvalue `2`. -/

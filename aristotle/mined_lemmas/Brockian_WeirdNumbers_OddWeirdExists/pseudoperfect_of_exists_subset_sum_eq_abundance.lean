@@ -1,0 +1,76 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-
+# Odd Weird Exists
+Category: Brockian Conjecture
+Target: Brockian.WeirdNumbers.OddWeirdExists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+-- (Lean requires `import` to be the first command, so the header above is a plain block comment
+-- and is repeated verbatim as the module docstring below.)
+
+import Mathlib
+
+/-!
+# Odd Weird Exists
+Category: Brockian Conjecture
+Target: Brockian.WeirdNumbers.OddWeirdExists
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open Finset
+
+namespace Brockian.WeirdNumbers
+
+/-! ## Setup
+
+We use Mathlib's `Nat.Weird`: `n` is weird if it is *abundant*
+(`n < ∑ i ∈ n.properDivisors, i`) but not *pseudoperfect* (no subset of its proper divisors
+sums to `n`).
+
+The statement "there exists an odd weird number" is an open problem, so the target
+`OddWeirdExists` is formalised as a **conditional reduction**: from a verifiable criterion on a
+single odd number we deduce the existence of an odd weird number.  The criterion involves the
+*abundance* `∑ i ∈ n.properDivisors, i - n`, which is typically far smaller than `n`, so it is a
+genuine reduction of the search problem.
+-/
+
+/-- The abundance of `n`: the sum of the proper divisors of `n` minus `n` (truncated
+subtraction). -/
+
+theorem pseudoperfect_of_exists_subset_sum_eq_abundance {n : ℕ} (hn : 0 < n) (hab : n.Abundant)
+    (h : ∃ s ⊆ n.properDivisors, ∑ i ∈ s, i = abundance n) : n.Pseudoperfect := by
+  obtain ⟨s, hs, hsum⟩ := h
+  refine ⟨hn, n.properDivisors \ s, Finset.sdiff_subset, ?_⟩
+  rw [sum_sdiff_properDivisors hs, hsum]
+  have : n ≤ ∑ i ∈ n.properDivisors, i := le_of_lt hab
+  simp only [abundance]
+  omega
+
+/-- **Abundance criterion.**  A positive abundant number is pseudoperfect if and only if some
+subset of its proper divisors sums to its abundance. -/

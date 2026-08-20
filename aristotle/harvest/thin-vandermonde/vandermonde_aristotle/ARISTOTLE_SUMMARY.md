@@ -1,0 +1,2 @@
+# Summary of changes for run 6185c746-c27f-4e7d-bf0b-e0c821e795d4
+Proved `Brockian.Vandermonde.vandermonde` in `Vandermonde.lean` with the statement unchanged. The proof rewrites `C(m+n,p)` as a sum over the antidiagonal and converts that to the range sum, using only core Mathlib results. The file builds cleanly against a bare `import Mathlib`, with no `sorry`, `admit`, or `native_decide`, and the work is committed and pushed.

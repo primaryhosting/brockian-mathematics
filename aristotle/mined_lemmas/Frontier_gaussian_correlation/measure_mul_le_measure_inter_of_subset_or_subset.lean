@@ -1,0 +1,96 @@
+import Mathlib
+
+/-!
+# Gaussian Correlation
+Category: Frontier — Fields Medal Work
+Target: Frontier.gaussian_correlation
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+open MeasureTheory ProbabilityTheory
+
+namespace Frontier
+
+/-!
+## The Gaussian correlation inequality
+
+The Gaussian correlation inequality (conjectured by Dunnett–Sobel / Das Gupta et al., proved by
+Thomas Royen in 2014) states that for a centred Gaussian measure `μ` on `ℝⁿ` and any two
+symmetric convex sets `s`, `t`,
+`μ s * μ t ≤ μ (s ∩ t)`.
+
+A search of Mathlib (`exact?`/`apply?`/`rw?` and name search for `gaussian` / `correlation`)
+shows that no form of this inequality is currently available: Mathlib contains
+`ProbabilityTheory.gaussianReal` and the class `ProbabilityTheory.IsGaussian`, but no correlation
+inequality for Gaussian measures.  We therefore formalise the statement below
+(`Frontier.GaussianCorrelationInequality`), and prove:
+
+* the *base case*, dimension one (`Frontier.gaussian_correlation`), in the strong form where no
+  measurability of the sets and no centring of the Gaussian is assumed;
+* a dimension-free *reduction*: the inequality holds in any dimension as soon as the two sets are
+  nested (`Frontier.gaussian_correlation_of_subset_or_subset`);
+* a *reduction along linear isomorphisms*
+  (`Frontier.GaussianCorrelationInequality.of_continuousLinearEquiv`): the inequality only depends
+  on the linear-homeomorphism class of the ambient space;
+* consequently the case `n = 1` of Royen's theorem on `EuclideanSpace ℝ (Fin 1)`
+  (`Frontier.gaussianCorrelationInequality_euclideanSpace_fin_one`).
+
+The general case (`n ≥ 2`), i.e. Royen's theorem itself, is not proved here.
+
+The proof of the base case is the classical one: in dimension one any two symmetric convex sets
+are nested (`Frontier.SymmetricConvex.subset_or_subset`), and for nested sets the inequality is
+immediate from `μ ≤ 1` for a probability measure.
+-/
+
+/-- A subset of a real vector space is *symmetric convex* if it is convex and invariant under
+`x ↦ -x`.  These are the sets occurring in the Gaussian correlation inequality. -/
+structure SymmetricConvex {E : Type*} [AddCommGroup E] [Module ℝ E] (s : Set E) : Prop where
+  /-- The set is convex. -/
+  convex : Convex ℝ s
+  /-- The set is symmetric about the origin. -/
+  neg_mem : ∀ ⦃x : E⦄, x ∈ s → -x ∈ s
+
+/-- Any point of absolute value at most `|x|` lies in a symmetric convex subset of `ℝ`
+containing `x`: such a set is "an interval around the origin". -/
+
+theorem measure_mul_le_measure_inter_of_subset_or_subset {Ω : Type*} [MeasurableSpace Ω]
+    (μ : Measure Ω) [IsProbabilityMeasure μ] {s t : Set Ω} (h : s ⊆ t ∨ t ⊆ s) :
+    μ s * μ t ≤ μ (s ∩ t) := by
+  rcases h with h | h
+  · rw [Set.inter_eq_self_of_subset_left h]
+    calc μ s * μ t ≤ μ s * 1 := by gcongr; exact prob_le_one
+      _ = μ s := mul_one _
+  · rw [Set.inter_eq_self_of_subset_right h]
+    calc μ s * μ t ≤ 1 * μ t := by gcongr; exact prob_le_one
+      _ = μ t := one_mul _
+
+/-- **The Gaussian correlation inequality, dimension one (base case).**
+For any Gaussian measure `μ` on `ℝ` and any two symmetric convex sets `s`, `t` one has
+`μ s * μ t ≤ μ (s ∩ t)`.
+
+This is the base case of Royen's theorem.  It is stated here in a strong form: neither
+measurability of `s` and `t` nor centring of `μ` is needed. -/

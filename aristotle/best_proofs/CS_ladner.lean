@@ -1,3 +1,4 @@
+import Mathlib
 /-!
 # Ladner
 Category: Frontier Cs
@@ -6,631 +7,395 @@ Verification: pending
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-/-
+/-!
 ## Ladner's theorem
 
-  If `P ≠ NP` then `NP`-intermediate problems exist: there is a language in `NP` which is
-  neither in `P` nor `NP`-hard.
+If `P ≠ NP`, then there is an `NP`-intermediate language: a language in `NP` that is
+neither in `P` nor `NP`-complete.
 
-Languages are modelled as predicates on the natural numbers (natural numbers stand for the
-strings over the underlying alphabet, under a fixed encoding), and `len x` is the length of
-the string encoded by `x`.
+Mathlib has no development of computational complexity, so the ambient complexity-theoretic
+setting is packaged into the structure `CS.Model` below: it fixes the classes `P` and `NP`
+(as sets of languages, a language being a set of natural numbers viewed as encoded strings),
+a length function, an effective enumeration `dec` of the polynomial-time decision procedures
+and an effective enumeration `red` of the polynomial-time functions (used to define
+polynomial-time many-one reducibility), together with the standard closure properties of
+these classes.
 
-The development is organised around a `CS.Setting`, which bundles the data and the standard
-structural facts about polynomial-time computation used by Ladner's proof:
-
-* `P ⊆ NP`, closure of `P` under finite variations, and the fact that `P` is *recursively
-  presentable*, i.e. it comes with an enumeration `Penum` of all of its members;
-* an enumeration `redFun` of the polynomial-time computable functions, such that `Red A B`
-  ("`A` reduces to `B`") holds exactly when some `redFun i` is a many-one reduction of `A` to
-  `B`, together with the downward closure of `P` under `Red`;
-* an `NP`-complete language `SAT`;
-* the *effectiveness* input of Ladner's proof: the language produced by the delayed
-  diagonalisation construction below (`ladnerLang`) belongs to `NP`.  In the concrete setting
-  this holds because Ladner's stage function is polynomial-time computable, so that the
-  constructed language is the intersection of `SAT` with a polynomial-time decidable set of
-  lengths.
-
-What is proved here from `P ≠ NP` is the delayed diagonalisation ("looking back") argument
-itself: the constructed language is not in `P`, and `SAT` does not reduce to it, so it is
-`NP`-intermediate.
-
-The file is deliberately self-contained: it uses only the Lean 4 core library.
+Everything in the proof of `CS.ladner` — the delayed-diagonalization construction
+(`CS.Model.stage`, defined by well-founded recursion) and all its properties — is carried out
+from these data.  The one remaining machine-model fact is supplied as the explicit hypothesis
+`hstage` of `CS.ladner`: the "hole" set `{x | Even (stage L (len x))}` determined by the stage
+function lies in `P`.  This is the routine clock/bookkeeping part of Ladner's argument: the
+witness search performed at stage `n` only inspects inputs of length at most `log₂ log₂ n`
+(see `CS.Model.Wit`), so the values `stage L 0, …, stage L n` can be tabulated in time
+polynomial in `n`.
 -/
 
 namespace CS
 
-/-- A language: a set of natural numbers, where natural numbers encode strings. -/
-abbrev Lang := Nat → Prop
+open scoped Classical
 
-/-! ### Two elementary facts about the natural numbers -/
+/-- A language is a set of (encoded) inputs. -/
+abbrev Lang : Type := Set ℕ
 
-/-- Classical least-witness principle. -/
-theorem exists_least (p : Nat → Prop) (h : ∃ n, p n) :
-    ∃ n, p n ∧ ∀ m, m < n → ¬ p m := by
-  classical
-  have key : ∀ n, p n → ∃ k, p k ∧ ∀ m, m < k → ¬ p m := by
-    intro n
-    induction n using Nat.strongRecOn with
-    | _ n ih =>
-        intro hpn
-        by_cases hex : ∃ m, m < n ∧ p m
-        · have ⟨m, hm, hpm⟩ := hex
-          exact ih m hm hpm
-        · exact ⟨n, hpn, fun m hm hpm => hex ⟨m, hm, hpm⟩⟩
-  have ⟨n, hn⟩ := h
-  exact key n hn
-
-/-- A bounded monotone sequence of naturals is eventually constant. -/
-theorem eventually_const (g : Nat → Nat) (hmono : ∀ m n, m ≤ n → g m ≤ g n) :
-    ∀ c, (∀ n, g n ≤ c) → ∃ N, ∀ n, N ≤ n → g n = g N := by
-  classical
-  intro c
-  induction c with
-  | zero =>
-      intro hb
-      exact ⟨0, fun n _ => by have := hb n; have := hb 0; omega⟩
-  | succ c ih =>
-      intro hb
-      by_cases hex : ∃ N, g N = c + 1
-      · have ⟨N, hN⟩ := hex
-        refine ⟨N, fun n hn => ?_⟩
-        have h1 := hmono N n hn
-        have h2 := hb n
-        omega
-      · refine ih (fun n => ?_)
-        have h1 := hb n
-        have h2 : g n ≠ c + 1 := fun hc => hex ⟨n, hc⟩
-        omega
-
-/-- If `A ↔ ¬ B` fails then `A ↔ B`. -/
-theorem iff_of_not_iff_not (A B : Prop) (h : ¬ (A ↔ ¬ B)) : A ↔ B := by
-  classical
-  by_cases hb : B
-  · refine ⟨fun _ => hb, fun _ => ?_⟩
-    by_cases ha : A
-    · exact ha
-    · exact absurd (Iff.intro (fun x => absurd x ha) (fun x => absurd hb x)) h
-  · exact ⟨fun ha => absurd (Iff.intro (fun _ => hb) (fun _ => ha)) h, fun x => absurd x hb⟩
-
-/-! ### Ladner's delayed diagonalisation -/
-
-section Construction
-
-variable (len : Nat → Nat) (Penum : Nat → Lang) (redFun : Nat → Nat → Nat) (SAT : Lang)
-
-/-- The language `SAT ∩ {x | g (len x) is even}`, where `g` is a "stage function". -/
-def slice (g : Nat → Nat) : Lang := fun x => SAT x ∧ g (len x) % 2 = 0
-
-/-- The diagonalisation requirement of the current stage `g n` is met by length `n`.
-
-If the current stage `g n = 2 * i` is even we look for a string of length at most `n` on which
-the `i`-th language of `P` differs from the constructed language; if `g n = 2 * i + 1` is odd
-we look for a string of length at most `n` witnessing that the `i`-th polynomial-time function
-is not a many-one reduction of `SAT` to the constructed language. -/
-def Done (g : Nat → Nat) (n : Nat) : Prop :=
-  (g n % 2 = 0 ∧ ∃ x, len x ≤ n ∧ (slice len SAT g x ↔ ¬ Penum (g n / 2) x)) ∨
-  (g n % 2 = 1 ∧ ∃ x, len x ≤ n ∧ len (redFun (g n / 2) x) ≤ n ∧
-      ¬ (SAT x ↔ slice len SAT g (redFun (g n / 2) x)))
-
-open Classical in
-/-- Auxiliary recursion: `Fseq n` agrees with Ladner's stage function on all arguments `≤ n`. -/
-noncomputable def Fseq : Nat → Nat → Nat
-  | 0 => fun _ => 0
-  | (n + 1) => fun k =>
-      if k ≤ n then Fseq n k
-      else if Done len Penum redFun SAT (Fseq n) n then Fseq n n + 1 else Fseq n n
-
-/-- Ladner's stage function: it starts at `0` and increases by one exactly at those lengths at
-which the diagonalisation requirement of the current stage has just been met. -/
-noncomputable def ladnerF (n : Nat) : Nat := Fseq len Penum redFun SAT n n
-
-/-- The language constructed by Ladner's delayed diagonalisation. -/
-def ladnerLang : Lang := slice len SAT (ladnerF len Penum redFun SAT)
-
-variable {len Penum redFun SAT}
-
-theorem Fseq_stable : ∀ (n k : Nat), k ≤ n →
-    Fseq len Penum redFun SAT n k = ladnerF len Penum redFun SAT k := by
-  intro n
-  induction n with
-  | zero =>
-      intro k hk
-      have hk0 : k = 0 := Nat.le_zero.mp hk
-      subst hk0
-      rfl
-  | succ n ih =>
-      intro k hk
-      by_cases h : k ≤ n
-      · have e : Fseq len Penum redFun SAT (n + 1) k = Fseq len Penum redFun SAT n k := by
-          simp only [Fseq, if_pos h]
-        rw [e, ih k h]
-      · have hkeq : k = n + 1 := by omega
-        subst hkeq
-        rfl
-
-theorem slice_congr {g h : Nat → Nat} {x : Nat} (hx : g (len x) = h (len x)) :
-    slice len SAT g x ↔ slice len SAT h x := by
-  simp only [slice, hx]
-
-theorem Done_congr {g h : Nat → Nat} (n : Nat) (H : ∀ k, k ≤ n → g k = h k) :
-    Done len Penum redFun SAT g n ↔ Done len Penum redFun SAT h n := by
-  have hn : g n = h n := H n (Nat.le_refl n)
-  unfold Done
-  rw [hn]
-  constructor
-  · intro hd
-    cases hd with
-    | inl hd =>
-        have ⟨he, x, hx, hxs⟩ := hd
-        exact Or.inl ⟨he, x, hx, Iff.trans (slice_congr (H _ hx)).symm hxs⟩
-    | inr hd =>
-        have ⟨he, x, hx, hx2, hxs⟩ := hd
-        exact Or.inr ⟨he, x, hx, hx2,
-          fun hc => hxs (Iff.trans hc (slice_congr (H _ hx2)).symm)⟩
-  · intro hd
-    cases hd with
-    | inl hd =>
-        have ⟨he, x, hx, hxs⟩ := hd
-        exact Or.inl ⟨he, x, hx, Iff.trans (slice_congr (H _ hx)) hxs⟩
-    | inr hd =>
-        have ⟨he, x, hx, hx2, hxs⟩ := hd
-        exact Or.inr ⟨he, x, hx, hx2,
-          fun hc => hxs (Iff.trans hc (slice_congr (H _ hx2)))⟩
-
-theorem ladnerF_zero : ladnerF len Penum redFun SAT 0 = 0 := rfl
-
-open Classical in
-theorem ladnerF_succ (n : Nat) :
-    ladnerF len Penum redFun SAT (n + 1) =
-      if Done len Penum redFun SAT (ladnerF len Penum redFun SAT) n then
-        ladnerF len Penum redFun SAT n + 1
-      else ladnerF len Penum redFun SAT n := by
-  have h1 : Fseq len Penum redFun SAT n n = ladnerF len Penum redFun SAT n :=
-    Fseq_stable n n (Nat.le_refl n)
-  have h2 : Done len Penum redFun SAT (Fseq len Penum redFun SAT n) n ↔
-      Done len Penum redFun SAT (ladnerF len Penum redFun SAT) n :=
-    Done_congr n (fun k hk => Fseq_stable n k hk)
-  have h0 : ladnerF len Penum redFun SAT (n + 1) =
-      if Done len Penum redFun SAT (Fseq len Penum redFun SAT n) n then
-        Fseq len Penum redFun SAT n n + 1
-      else Fseq len Penum redFun SAT n n := by
-    simp only [ladnerF, Fseq, if_neg (Nat.not_succ_le_self n)]
-  rw [h0]
-  by_cases hD : Done len Penum redFun SAT (ladnerF len Penum redFun SAT) n
-  · rw [if_pos (h2.mpr hD), if_pos hD, h1]
-  · rw [if_neg (fun hc => hD (h2.mp hc)), if_neg hD, h1]
-
-end Construction
-
-/-! ### The setting -/
-
-/-- A setting for Ladner's theorem: the data of a model of polynomial-time computation
-together with the standard structural facts about it that the proof uses. -/
-structure Setting where
-  /-- The length of (the string encoded by) a natural number. -/
-  len : Nat → Nat
-  /-- An enumeration of the languages in `P` (recursive presentability of `P`). -/
-  Penum : Nat → Lang
-  /-- An enumeration of the polynomial-time computable functions. -/
-  redFun : Nat → Nat → Nat
-  /-- An `NP`-complete language. -/
-  SAT : Lang
-  /-- The complexity class `P`. -/
-  P : Lang → Prop
-  /-- The complexity class `NP`. -/
-  NP : Lang → Prop
-  /-- Polynomial-time many-one reducibility. -/
-  Red : Lang → Lang → Prop
+/-- The complexity-theoretic data the argument runs on: the classes `P` and `NP`, a length
+function on encoded inputs, effective enumerations of polynomial-time deciders and of
+polynomial-time functions, and the standard closure properties. -/
+structure Model where
+  /-- The class `P`. -/
+  P : Set Lang
+  /-- The class `NP`. -/
+  NP : Set Lang
+  /-- Length of an encoded input. -/
+  len : ℕ → ℕ
+  /-- `dec i` is the decision procedure of the `i`-th polynomial-time machine. -/
+  dec : ℕ → ℕ → Bool
+  /-- `red i` is the `i`-th polynomial-time computable function. -/
+  red : ℕ → ℕ → ℕ
+  /-- There are only finitely many inputs of any given length. -/
+  len_finite : ∀ t : ℕ, {x : ℕ | len x ≤ t}.Finite
+  /-- `P` is exactly the class of languages decided by the enumerated machines. -/
+  P_eq : ∀ A : Lang, A ∈ P ↔ ∃ i, ∀ x, x ∈ A ↔ dec i x = true
   /-- `P ⊆ NP`. -/
-  P_subset_NP : ∀ A, P A → NP A
-  /-- The empty language is in `P`. -/
-  empty_mem_P : P (fun _ => False)
-  /-- `P` is closed under finite variation: changing a language on strings of length below
-  some bound keeps it in `P`. -/
-  P_variation : ∀ A B : Lang, P A → (∃ N, ∀ x, N ≤ len x → (A x ↔ B x)) → P B
-  /-- The enumeration `Penum` lists only languages of `P`. -/
-  Penum_mem : ∀ i, P (Penum i)
-  /-- The enumeration `Penum` lists all languages of `P`. -/
-  Penum_covers : ∀ A, P A → ∃ i, ∀ x, (A x ↔ Penum i x)
-  /-- `A` reduces to `B` exactly when some polynomial-time computable function is a many-one
-  reduction of `A` to `B`. -/
-  Red_iff : ∀ A B : Lang, Red A B ↔ ∃ i, ∀ x, (A x ↔ B (redFun i x))
-  /-- `P` is downward closed under reductions. -/
-  Red_P : ∀ A B : Lang, Red A B → P B → P A
-  /-- `SAT ∈ NP`. -/
-  SAT_mem_NP : NP SAT
-  /-- `SAT` is `NP`-hard. -/
-  SAT_complete : ∀ A, NP A → Red A SAT
-  /-- Effectiveness of the construction: Ladner's stage function is polynomial-time
-  computable, hence the diagonal language is the intersection of `SAT` with a
-  polynomial-time decidable set of lengths and therefore lies in `NP`. -/
-  ladnerLang_mem_NP : NP (ladnerLang len Penum redFun SAT)
+  P_subset_NP : P ⊆ NP
+  /-- `NP` is closed under intersection with languages in `P`. -/
+  NP_inter_P : ∀ A ∈ NP, ∀ B ∈ P, A ∩ B ∈ NP
+  /-- Finite languages are in `P`. -/
+  P_of_finite : ∀ A : Lang, A.Finite → A ∈ P
+  /-- `P` is closed under finite variation. -/
+  P_of_finite_symmDiff : ∀ A ∈ P, ∀ B : Lang, {x | ¬ (x ∈ A ↔ x ∈ B)}.Finite → B ∈ P
+  /-- `P` is closed downwards under polynomial-time many-one reductions. -/
+  P_red_closed : ∀ A B : Lang, (∃ i, ∀ x, x ∈ A ↔ red i x ∈ B) → B ∈ P → A ∈ P
+  /-- Polynomial-time functions have polynomially bounded output length. -/
+  red_poly : ∀ i, ∃ c, ∀ x, len (red i x) ≤ c * (len x + 1) ^ c
 
-namespace Setting
+namespace Model
 
-variable (S : Setting)
+variable (M : Model)
 
-/-- Ladner's stage function of the setting. -/
-noncomputable def f : Nat → Nat := ladnerF S.len S.Penum S.redFun S.SAT
+/-- Polynomial-time many-one reducibility `A ≤ₚ B`. -/
+def Red (A B : Lang) : Prop := ∃ i, ∀ x, x ∈ A ↔ M.red i x ∈ B
 
-/-- The language constructed by Ladner's delayed diagonalisation in the setting. -/
-def L : Lang := ladnerLang S.len S.Penum S.redFun S.SAT
+/-- `A` is `NP`-complete: it lies in `NP` and every `NP` language reduces to it. -/
+def NPComplete (A : Lang) : Prop := A ∈ M.NP ∧ ∀ B ∈ M.NP, M.Red B A
 
-/-- The diagonalisation requirement of the current stage is met by length `n`. -/
-def SDone (n : Nat) : Prop := Done S.len S.Penum S.redFun S.SAT S.f n
+/-- `A` is `NP`-intermediate: in `NP`, not in `P`, and not `NP`-complete. -/
+def NPIntermediate (A : Lang) : Prop := A ∈ M.NP ∧ A ∉ M.P ∧ ¬ M.NPComplete A
 
-theorem mem_L_iff (x : Nat) : S.L x ↔ (S.SAT x ∧ S.f (S.len x) % 2 = 0) := Iff.rfl
+end Model
 
-theorem f_zero : S.f 0 = 0 := rfl
+/-- `llog n = log₂ (log₂ n)`. -/
+def llog (n : ℕ) : ℕ := Nat.log 2 (Nat.log 2 n)
 
-open Classical in
-theorem f_succ (n : Nat) : S.f (n + 1) = if S.SDone n then S.f n + 1 else S.f n :=
-  ladnerF_succ n
+lemma llog_le_self (n : ℕ) : llog n ≤ n :=
+  le_trans (Nat.log_le_self 2 _) (Nat.log_le_self 2 n)
 
-theorem f_done {n : Nat} (h : S.SDone n) : S.f (n + 1) = S.f n + 1 := by
-  classical
-  rw [f_succ, if_pos h]
+lemma llog_mono : Monotone llog := fun _ _ h =>
+  Nat.log_mono_right (Nat.log_mono_right h)
 
-theorem f_not_done {n : Nat} (h : ¬ S.SDone n) : S.f (n + 1) = S.f n := by
-  classical
-  rw [f_succ, if_neg h]
+lemma llog_unbounded (t : ℕ) : ∃ n, t ≤ llog n := by
+  refine ⟨2 ^ 2 ^ t, ?_⟩
+  have h1 : Nat.log 2 (2 ^ 2 ^ t) = 2 ^ t := Nat.log_pow (by norm_num) _
+  simp [llog, h1, Nat.log_pow]
 
-theorem f_le_succ (n : Nat) : S.f n ≤ S.f (n + 1) := by
-  classical
-  rw [f_succ]; split <;> omega
+namespace Model
 
-theorem f_succ_le (n : Nat) : S.f (n + 1) ≤ S.f n + 1 := by
-  classical
-  rw [f_succ]; split <;> omega
+variable (M : Model)
 
-theorem f_mono : ∀ m n, m ≤ n → S.f m ≤ S.f n := by
-  intro m n h
-  induction n with
-  | zero =>
-      have : m = 0 := Nat.le_zero.mp h
-      subst this
-      exact Nat.le_refl _
-  | succ n ih =>
-      by_cases hm : m ≤ n
-      · exact Nat.le_trans (ih hm) (S.f_le_succ n)
-      · have : m = n + 1 := by omega
-        subst this
-        exact Nat.le_refl _
+/-- Requirement `k` is violated at the input `x`, where membership in the diagonal language
+is computed using the (partial) stage function `F`.
 
-theorem SAT_not_mem_P (hPNP : S.P ≠ S.NP) : ¬ S.P S.SAT := by
-  intro hs
-  exact hPNP (funext (fun A => propext
-    ⟨fun h => S.P_subset_NP A h, fun h => S.Red_P A S.SAT (S.SAT_complete A h) hs⟩))
+Even requirements `k = 2 i` say that the `i`-th polynomial-time machine does not decide the
+diagonal language; odd requirements `k = 2 i + 1` say that the `i`-th polynomial-time function
+is not a reduction of `L` to the diagonal language. -/
+def Mism (L : Lang) (F : ℕ → ℕ) (k x : ℕ) : Prop :=
+  if k % 2 = 0 then
+    ¬ ((x ∈ L ∧ Even (F (M.len x))) ↔ M.dec (k / 2) x = true)
+  else
+    ¬ ((x ∈ L) ↔ (M.red (k / 2) x ∈ L ∧ Even (F (M.len (M.red (k / 2) x)))))
 
-/-- The heart of Ladner's argument: the stage function is unbounded, i.e. every
-diagonalisation requirement is eventually met. -/
-theorem f_unbounded (hPNP : S.P ≠ S.NP) : ∀ c, ∃ n, c ≤ S.f n := by
-  classical
-  intro c
-  by_cases hcon : ∃ n, c ≤ S.f n
-  · exact hcon
-  · exfalso
-    have hb : ∀ n, S.f n ≤ c := by
-      intro n
-      by_cases h : S.f n ≤ c
-      · exact h
-      · exact absurd ⟨n, by omega⟩ hcon
-    have ⟨N, hN⟩ := eventually_const S.f S.f_mono c hb
-    -- from `N` on, the stage function is constant, so no requirement is ever met again
-    have hnd : ∀ n, N ≤ n → ¬ S.SDone n := by
-      intro n hn hd
-      have h1 : S.f (n + 1) = S.f n + 1 := S.f_done hd
-      have h2 : S.f (n + 1) = S.f N := hN (n + 1) (Nat.le_trans hn (Nat.le_succ n))
-      have h3 : S.f n = S.f N := hN n hn
+/-- Requirement `k` has a witness found by stage `n`: the search only inspects inputs `x`
+of length at most `llog n` whose image under the relevant reduction also has length at most
+`llog n`. -/
+def Wit (L : Lang) (F : ℕ → ℕ) (k n : ℕ) : Prop :=
+  ∃ x, M.len x ≤ llog n ∧ M.len (M.red (k / 2) x) ≤ llog n ∧ M.Mism L F k x
+
+/-- The stage function of the delayed diagonalization: `stage L n` is the number of
+requirements that have been satisfied by stage `n`. -/
+noncomputable def stage (L : Lang) : ℕ → ℕ
+  | 0 => 0
+  | (n + 1) =>
+      if M.Wit L (fun m => if _h : m ≤ n then stage L m else 0) (stage L n) n then
+        stage L n + 1
+      else stage L n
+
+lemma stage_zero (L : Lang) : M.stage L 0 = 0 := by
+  simp [stage]
+
+lemma stage_succ (L : Lang) (n : ℕ) :
+    M.stage L (n + 1) =
+      if M.Wit L (fun m => if _h : m ≤ n then M.stage L m else 0) (M.stage L n) n then
+        M.stage L n + 1
+      else M.stage L n := by
+  rw [stage]
+
+lemma stage_le_succ (L : Lang) (n : ℕ) : M.stage L n ≤ M.stage L (n + 1) := by
+  rw [stage_succ]; split <;> omega
+
+lemma stage_succ_le (L : Lang) (n : ℕ) : M.stage L (n + 1) ≤ M.stage L n + 1 := by
+  rw [stage_succ]; split <;> omega
+
+lemma stage_mono (L : Lang) : Monotone (M.stage L) :=
+  monotone_nat_of_le_succ (M.stage_le_succ L)
+
+/-- The value of `Mism` only depends on the values of `F` at the lengths of `x` and of its
+image under the reduction. -/
+lemma mism_congr (L : Lang) (F G : ℕ → ℕ) (k x : ℕ)
+    (h1 : F (M.len x) = G (M.len x))
+    (h2 : F (M.len (M.red (k / 2) x)) = G (M.len (M.red (k / 2) x))) :
+    M.Mism L F k x ↔ M.Mism L G k x := by
+  unfold Mism
+  split <;> simp only [h1, h2]
+
+/-- If the stage counter increases at `n`, then requirement `stage L n` genuinely fails,
+witnessed by some input. -/
+lemma mism_of_progress (L : Lang) (n : ℕ)
+    (h : M.stage L (n + 1) = M.stage L n + 1) :
+    ∃ x, M.Mism L (M.stage L) (M.stage L n) x := by
+  rw [stage_succ] at h
+  split at h
+  · rename_i hw
+    obtain ⟨x, hx1, hx2, hx3⟩ := hw
+    refine ⟨x, ?_⟩
+    have hxn : M.len x ≤ n := le_trans hx1 (llog_le_self n)
+    have hrn : M.len (M.red (M.stage L n / 2) x) ≤ n := le_trans hx2 (llog_le_self n)
+    rw [M.mism_congr L _ (M.stage L) _ x (by simp [hxn]) (by simp [hrn])] at hx3
+    exact hx3
+  · omega
+
+/-- If the stage counter does not increase at `n`, then no short input witnesses the
+current requirement. -/
+lemma not_mism_of_no_progress (L : Lang) (n : ℕ)
+    (h : M.stage L (n + 1) = M.stage L n) :
+    ∀ x, M.len x ≤ llog n → M.len (M.red (M.stage L n / 2) x) ≤ llog n →
+      ¬ M.Mism L (M.stage L) (M.stage L n) x := by
+  intro x hx1 hx2 hmis
+  rw [stage_succ] at h
+  split at h
+  · omega
+  · rename_i hw
+    refine hw ⟨x, hx1, hx2, ?_⟩
+    have hxn : M.len x ≤ n := le_trans hx1 (llog_le_self n)
+    have hrn : M.len (M.red (M.stage L n / 2) x) ≤ n := le_trans hx2 (llog_le_self n)
+    rw [M.mism_congr L _ (M.stage L) _ x (by simp [hxn]) (by simp [hrn])]
+    exact hmis
+
+end Model
+
+/-- **Ladner's theorem.**  In the complexity-theoretic setting given by `M`, if `P ≠ NP`
+then there is an `NP`-intermediate language: a language in `NP` which is neither in `P`
+nor `NP`-complete. -/
+theorem ladner (M : Model)
+    (hstage : ∀ L : Lang, L ∈ M.NP → {x | Even (M.stage L (M.len x))} ∈ M.P)
+    (hPNP : M.P ≠ M.NP) :
+    ∃ A : Lang, M.NPIntermediate A := by
+  -- Pick a language in `NP \ P`.
+  obtain ⟨L, hLNP, hLP⟩ : ∃ L, L ∈ M.NP ∧ L ∉ M.P := by
+    by_contra hcon
+    push_neg at hcon
+    exact hPNP (Set.Subset.antisymm M.P_subset_NP hcon)
+  -- Step 1: the stage function is unbounded.
+  have hunb : ∀ B : ℕ, ∃ n, B < M.stage L n := by
+    by_contra hcon
+    push_neg at hcon
+    obtain ⟨B, hB⟩ := hcon
+    -- the stage function is eventually constant, with value `k`
+    have hbdd : BddAbove (Set.range (M.stage L)) := ⟨B, by rintro _ ⟨n, rfl⟩; exact hB n⟩
+    have hne : (Set.range (M.stage L)).Nonempty := ⟨M.stage L 0, 0, rfl⟩
+    obtain ⟨N, hN⟩ : sSup (Set.range (M.stage L)) ∈ Set.range (M.stage L) :=
+      Nat.sSup_mem hne hbdd
+    obtain ⟨k, hk⟩ : ∃ k, M.stage L N = k := ⟨_, rfl⟩
+    have hconst : ∀ n, N ≤ n → M.stage L n = k := by
+      intro n hn
+      have h1 : M.stage L N ≤ M.stage L n := M.stage_mono L hn
+      have h2 : M.stage L n ≤ sSup (Set.range (M.stage L)) := le_csSup hbdd ⟨n, rfl⟩
       omega
-    by_cases hpar : S.f N % 2 = 0
-    · -- even stage `2 * i`: the constructed language equals `Penum i ∈ P`, and it differs
-      -- from `SAT` only on short strings, so `SAT ∈ P`
-      have hfN : S.f N = 2 * (S.f N / 2) := by omega
-      have hi : ∀ x, S.L x ↔ S.Penum (S.f N / 2) x := by
+    -- hence requirement `k` is never satisfied
+    have hnomis : ∀ x, ¬ M.Mism L (M.stage L) k x := by
+      intro x
+      obtain ⟨n0, hn0⟩ := llog_unbounded (max (M.len x) (M.len (M.red (k / 2) x)))
+      obtain ⟨n, hnmax⟩ : ∃ n, n = max n0 N := ⟨_, rfl⟩
+      have hlog : max (M.len x) (M.len (M.red (k / 2) x)) ≤ llog n := by
+        rw [hnmax]; exact le_trans hn0 (llog_mono (le_max_left n0 N))
+      have hNn : N ≤ n := by rw [hnmax]; exact le_max_right n0 N
+      have hfn : M.stage L n = k := hconst n hNn
+      have hstep : M.stage L (n + 1) = M.stage L n := by
+        rw [hconst (n + 1) (by omega), hfn]
+      have h2 := M.not_mism_of_no_progress L n hstep x
+      rw [hfn] at h2
+      exact h2 (le_trans (le_max_left _ _) hlog) (le_trans (le_max_right _ _) hlog)
+    -- both parities lead to `L ∈ P`, a contradiction
+    rcases Nat.even_or_odd k with hpar | hpar
+    · -- `k` even: the diagonal language is in `P` and differs from `L` on finitely many inputs
+      have hpar' : k % 2 = 0 := Nat.even_iff.mp hpar
+      have hAP : {x | x ∈ L ∧ Even (M.stage L (M.len x))} ∈ M.P := by
+        rw [M.P_eq]
+        refine ⟨k / 2, fun x => ?_⟩
+        have hx := hnomis x
+        unfold Model.Mism at hx
+        rw [if_pos hpar'] at hx
+        simpa using not_not.mp hx
+      refine hLP (M.P_of_finite_symmDiff _ hAP L ?_)
+      refine Set.Finite.subset (M.len_finite N) ?_
+      intro x hx
+      simp only [Set.mem_setOf_eq] at hx ⊢
+      by_contra hlen
+      push_neg at hlen
+      have hfx : M.stage L (M.len x) = k := hconst _ (le_of_lt hlen)
+      exact hx (by simp [hfx, Nat.even_iff.mpr hpar'])
+    · -- `k` odd: the diagonal language is finite, hence in `P`, and `L` reduces to it
+      have hpar' : ¬ (k % 2 = 0) := by
+        have := Nat.odd_iff.mp hpar; omega
+      have hred : ∀ x, x ∈ L ↔ M.red (k / 2) x ∈ {x | x ∈ L ∧ Even (M.stage L (M.len x))} := by
         intro x
-        have hn1 : N ≤ max N (S.len x) := Nat.le_max_left _ _
-        have hlen : S.len x ≤ max N (S.len x) := Nat.le_max_right _ _
-        have hfn : S.f (max N (S.len x)) = S.f N := hN _ hn1
-        have hnot := hnd _ hn1
-        have heven : S.f (max N (S.len x)) % 2 = 0 := by rw [hfn]; exact hpar
-        have hdiv : S.f (max N (S.len x)) / 2 = S.f N / 2 := by rw [hfn]
-        have hkey : ¬ (S.L x ↔ ¬ S.Penum (S.f N / 2) x) := by
-          intro hc
-          refine hnot (Or.inl ⟨heven, x, hlen, ?_⟩)
-          rw [hdiv]
-          exact hc
-        exact iff_of_not_iff_not _ _ hkey
-      have hLP : S.P S.L :=
-        S.P_variation (S.Penum (S.f N / 2)) S.L (S.Penum_mem _) ⟨0, fun x _ => (hi x).symm⟩
-      have hSAT : S.P S.SAT := by
-        refine S.P_variation S.L S.SAT hLP ⟨N, fun x hx => ?_⟩
-        have hfx : S.f (S.len x) = S.f N := hN _ hx
-        constructor
-        · intro h; exact ((S.mem_L_iff x).mp h).1
-        · intro h; exact (S.mem_L_iff x).mpr ⟨h, by rw [hfx]; exact hpar⟩
-      exact S.SAT_not_mem_P hPNP hSAT
-    · -- odd stage `2 * i + 1`: the constructed language is finite, hence in `P`, but `SAT`
-      -- reduces to it
-      have hodd : S.f N % 2 = 1 := by omega
-      have hshort : ∀ x, S.L x → S.len x < N := by
+        have hx := hnomis x
+        unfold Model.Mism at hx
+        rw [if_neg hpar'] at hx
+        simpa using not_not.mp hx
+      have hAfin : {x | x ∈ L ∧ Even (M.stage L (M.len x))}.Finite := by
+        refine Set.Finite.subset (M.len_finite N) ?_
         intro x hx
-        by_cases h : S.len x < N
-        · exact h
-        · exfalso
-          have hfx : S.f (S.len x) = S.f N := hN _ (by omega)
-          have := ((S.mem_L_iff x).mp hx).2
-          rw [hfx] at this
-          omega
-      have hLP : S.P S.L := by
-        refine S.P_variation (fun _ => False) S.L S.empty_mem_P ⟨N, fun x hx => ?_⟩
-        constructor
-        · intro h; exact absurd h (fun h => h)
-        · intro h; exact absurd (hshort x h) (by omega)
-      have hred : ∀ x, S.SAT x ↔ S.L (S.redFun (S.f N / 2) x) := by
-        intro x
-        have hn1 : N ≤ max (max N (S.len x)) (S.len (S.redFun (S.f N / 2) x)) :=
-          Nat.le_trans (Nat.le_max_left _ _) (Nat.le_max_left _ _)
-        have hlen : S.len x ≤ max (max N (S.len x)) (S.len (S.redFun (S.f N / 2) x)) :=
-          Nat.le_trans (Nat.le_max_right _ _) (Nat.le_max_left _ _)
-        have hlen2 : S.len (S.redFun (S.f N / 2) x)
-            ≤ max (max N (S.len x)) (S.len (S.redFun (S.f N / 2) x)) := Nat.le_max_right _ _
-        have hfn : S.f (max (max N (S.len x)) (S.len (S.redFun (S.f N / 2) x))) = S.f N :=
-          hN _ hn1
-        have hnot := hnd _ hn1
-        have hoddn : S.f (max (max N (S.len x)) (S.len (S.redFun (S.f N / 2) x))) % 2 = 1 := by
-          rw [hfn]; exact hodd
-        have hdiv : S.f (max (max N (S.len x)) (S.len (S.redFun (S.f N / 2) x))) / 2
-            = S.f N / 2 := by rw [hfn]
-        by_cases hc : S.SAT x ↔ S.L (S.redFun (S.f N / 2) x)
-        · exact hc
-        · exfalso
-          refine hnot (Or.inr ⟨hoddn, x, hlen, ?_, ?_⟩)
-          · rw [hdiv]; exact hlen2
-          · rw [hdiv]; exact hc
-      have : S.Red S.SAT S.L := (S.Red_iff S.SAT S.L).mpr ⟨S.f N / 2, hred⟩
-      exact S.SAT_not_mem_P hPNP (S.Red_P S.SAT S.L this hLP)
-
-/-- Every stage is reached, and its diagonalisation requirement is eventually met. -/
-theorem exists_done (hPNP : S.P ≠ S.NP) (c : Nat) : ∃ n, S.f n = c ∧ S.SDone n := by
-  classical
-  have h : ∃ n, c + 1 ≤ S.f n := S.f_unbounded hPNP (c + 1)
-  have ⟨m, hm, hmin⟩ := exists_least (fun n => c + 1 ≤ S.f n) h
-  have hm0 : m ≠ 0 := by
-    intro h0
-    rw [h0, S.f_zero] at hm
-    omega
-  have ⟨k, hk⟩ : ∃ k, m = k + 1 := ⟨m - 1, by omega⟩
-  subst hk
-  have hkmin : ¬ (c + 1 ≤ S.f k) := hmin k (by omega)
-  have h1 : S.f (k + 1) ≤ S.f k + 1 := S.f_succ_le k
-  have hfk : S.f k = c := by omega
-  refine ⟨k, hfk, ?_⟩
-  by_cases hd : S.SDone k
-  · exact hd
-  · exfalso
-    have := S.f_not_done hd
-    omega
-
-end Setting
-
-/-! ### Ladner's theorem -/
-
-/-- **Ladner's theorem.**  If `P ≠ NP`, then there exists an `NP`-intermediate language: a
-language which lies in `NP`, does not lie in `P`, and is not `NP`-hard (in particular it is
-not `NP`-complete). -/
-theorem ladner (S : Setting) (hPNP : S.P ≠ S.NP) :
-    ∃ L : Lang, S.NP L ∧ ¬ S.P L ∧ ¬ (∀ A : Lang, S.NP A → S.Red A L) := by
-  classical
-  refine ⟨S.L, S.ladnerLang_mem_NP, ?_, ?_⟩
-  · -- the constructed language is not in `P`
-    intro hLP
-    have ⟨i, hi⟩ := S.Penum_covers S.L hLP
-    have ⟨n, hfn, hdone⟩ := S.exists_done hPNP (2 * i)
-    have heven : S.f n % 2 = 0 := by omega
-    have hdiv : S.f n / 2 = i := by omega
-    cases hdone with
-    | inl hd =>
-        have ⟨_, x, _, hxs⟩ := hd
-        rw [hdiv] at hxs
-        have hx : S.L x ↔ ¬ S.Penum i x := hxs
-        have hcontra : S.Penum i x ↔ ¬ S.Penum i x := Iff.trans (hi x).symm hx
-        by_cases hp : S.Penum i x
-        · exact (hcontra.mp hp) hp
-        · exact hp (hcontra.mpr hp)
-    | inr hd =>
-        have ⟨ho, _⟩ := hd
+        simp only [Set.mem_setOf_eq]
+        by_contra hlen
+        push_neg at hlen
+        have h1 : M.stage L (M.len x) = k := hconst _ (le_of_lt hlen)
+        have h2 : Even (M.stage L (M.len x)) := hx.2
+        rw [h1] at h2
+        have := Nat.even_iff.mp h2
         omega
-  · -- `SAT` does not reduce to the constructed language
-    intro hall
-    have ⟨i, hi⟩ := (S.Red_iff S.SAT S.L).mp (hall S.SAT S.SAT_mem_NP)
-    have ⟨n, hfn, hdone⟩ := S.exists_done hPNP (2 * i + 1)
-    cases hdone with
-    | inl hd =>
-        have ⟨he, _⟩ := hd
-        omega
-    | inr hd =>
-        have ⟨_, x, _, _, hxs⟩ := hd
-        have hdiv : S.f n / 2 = i := by omega
-        rw [hdiv] at hxs
-        exact hxs (hi x)
+      exact hLP (M.P_red_closed L _ ⟨k / 2, hred⟩ (M.P_of_finite _ hAfin))
+  -- Step 2: every requirement is eventually satisfied.
+  have hprog : ∀ k : ℕ, ∃ n, M.stage L n = k ∧ M.stage L (n + 1) = M.stage L n + 1 := by
+    intro k
+    have hex : ∃ m, k + 1 ≤ M.stage L m := by
+      obtain ⟨m, hm⟩ := hunb k; exact ⟨m, hm⟩
+    have hmspec : k + 1 ≤ M.stage L (Nat.find hex) := Nat.find_spec hex
+    have hm0 : Nat.find hex ≠ 0 := by
+      intro h
+      rw [h, M.stage_zero L] at hmspec
+      omega
+    obtain ⟨n, hn⟩ : ∃ n, Nat.find hex = n + 1 := ⟨Nat.find hex - 1, by omega⟩
+    have hlt : ¬ (k + 1 ≤ M.stage L n) := Nat.find_min hex (by omega)
+    rw [hn] at hmspec
+    have hle : M.stage L (n + 1) ≤ M.stage L n + 1 := M.stage_succ_le L n
+    exact ⟨n, by omega, by omega⟩
+  have hreq : ∀ k : ℕ, ∃ x, M.Mism L (M.stage L) k x := by
+    intro k
+    obtain ⟨n, hn1, hn2⟩ := hprog k
+    have h := M.mism_of_progress L n hn2
+    rw [hn1] at h
+    exact h
+  -- Step 3: the diagonal language is `NP`-intermediate.
+  refine ⟨{x | x ∈ L ∧ Even (M.stage L (M.len x))}, ?_, ?_, ?_⟩
+  · have hinter : {x | x ∈ L ∧ Even (M.stage L (M.len x))}
+        = L ∩ {x | Even (M.stage L (M.len x))} := by ext x; simp
+    rw [hinter]
+    exact M.NP_inter_P L hLNP _ (hstage L hLNP)
+  · intro hAP
+    obtain ⟨i, hi⟩ := (M.P_eq _).mp hAP
+    obtain ⟨x, hx⟩ := hreq (2 * i)
+    unfold Model.Mism at hx
+    rw [if_pos (by omega : (2 * i) % 2 = 0), (by omega : 2 * i / 2 = i)] at hx
+    exact hx (by simpa using hi x)
+  · rintro ⟨-, hc⟩
+    obtain ⟨i, hi⟩ := hc L hLNP
+    obtain ⟨x, hx⟩ := hreq (2 * i + 1)
+    unfold Model.Mism at hx
+    rw [if_neg (by omega : ¬ ((2 * i + 1) % 2 = 0)), (by omega : (2 * i + 1) / 2 = i)] at hx
+    exact hx (by simpa using hi x)
 
-/-! ### Consistency of the setting
+/-!
+## Consistency of the axioms
 
-The axioms bundled in `CS.Setting` are consistent: a (degenerate) model is exhibited below,
-so that Ladner's theorem above is not vacuous for trivial reasons.  In this model `P = NP`
-holds, so it does not, of course, provide any information about the real classes; producing a
-model with `P ≠ NP` would require the whole of complexity theory (and, in particular, an
-effective version of the construction). -/
+The axioms bundled in `CS.Model` are consistent, and are consistent with `P ≠ NP`: the toy
+instance below (where `P` consists of the finite languages and `NP` of the finite languages
+together with the full language) satisfies all of them, and separates its two classes.
+This rules out the possibility that `CS.ladner` is vacuously true because of contradictory
+assumptions on the model.  (Of course the toy instance does not satisfy the hypothesis
+`hstage` of `CS.ladner` for any interesting reason; it is only a consistency witness.)
+-/
 
-namespace Consistency
+/-- A toy instance of `Model`: `P` is the class of finite languages, and `NP` is the class of
+finite languages together with the full language. -/
+def toyModel : Model where
+  P := {A : Lang | A.Finite}
+  NP := {A : Lang | A.Finite ∨ A = Set.univ}
+  len := id
+  dec := fun i x => decide (x ∈ (Denumerable.ofNat (Finset ℕ) i))
+  red := fun _ x => x
+  len_finite := fun t => Set.finite_Iic t
+  P_eq := by
+    intro A
+    constructor
+    · intro hA
+      refine ⟨Denumerable.eqv (Finset ℕ) hA.toFinset, fun x => ?_⟩
+      have h : Denumerable.ofNat (Finset ℕ) (Denumerable.eqv (Finset ℕ) hA.toFinset)
+          = hA.toFinset := by simp [Denumerable.eqv]
+      rw [decide_eq_true_eq, h]
+      exact (Set.Finite.mem_toFinset hA).symm
+    · rintro ⟨i, hi⟩
+      have h : A = ↑(Denumerable.ofNat (Finset ℕ) i) := by ext x; simpa using hi x
+      rw [h]; exact (Denumerable.ofNat (Finset ℕ) i).finite_toSet
+  P_subset_NP := fun _ hA => Or.inl hA
+  NP_inter_P := by
+    rintro A - B hB
+    exact Or.inl (hB.subset Set.inter_subset_right)
+  P_of_finite := fun _ hA => hA
+  P_of_finite_symmDiff := by
+    intro A hA B hfin
+    have hsub : B ⊆ A ∪ {x | ¬ (x ∈ A ↔ x ∈ B)} := by
+      intro x hx
+      by_cases h : x ∈ A
+      · exact Or.inl h
+      · exact Or.inr (by simp [h, hx])
+    exact (hA.union hfin).subset hsub
+  P_red_closed := by
+    rintro A B ⟨i, hi⟩ hB
+    have h : A = B := by ext x; simpa using hi x
+    rw [h]; exact hB
+  red_poly := fun _ => ⟨1, fun x => by simp⟩
 
-/-- Decoding a natural number as a finite set of naturals: `decB i x` is the `x`-th binary
-digit of `i`. -/
-def decB : Nat → Nat → Bool
-  | i, 0 => i % 2 == 1
-  | i, x + 1 => decB (i / 2) x
-
-theorem decB_eq_false : ∀ (x i : Nat), i < 2 ^ x → decB i x = false := by
-  intro x
-  induction x with
-  | zero =>
-      intro i hi
-      have : i = 0 := by simpa using hi
-      subst this
-      rfl
-  | succ x ih =>
-      intro i hi
-      have h2 : (2 : Nat) ^ (x + 1) = 2 * 2 ^ x := by
-        rw [Nat.pow_succ]; omega
-      have hlt : i / 2 < 2 ^ x := by omega
-      show decB (i / 2) x = false
-      exact ih _ hlt
-
-theorem decB_eq_false_of_le {i x : Nat} (h : i ≤ x) : decB i x = false := by
-  refine decB_eq_false x i (Nat.lt_of_lt_of_le Nat.lt_two_pow_self ?_)
-  exact Nat.pow_le_pow_right (by omega) h
-
-/-- Every language with bounded support is decoded from some natural number. -/
-theorem decB_covers : ∀ (N : Nat) (A : Nat → Prop), (∀ x, N ≤ x → ¬ A x) →
-    ∃ i, ∀ x, (A x ↔ decB i x = true) := by
-  classical
-  intro N
-  induction N with
-  | zero =>
-      intro A hA
-      refine ⟨0, fun x => ?_⟩
-      have h1 : ¬ A x := hA x (Nat.zero_le x)
-      have h2 : decB 0 x = false := decB_eq_false_of_le (Nat.zero_le x)
-      constructor
-      · intro h; exact absurd h h1
-      · intro h; rw [h2] at h; exact absurd h (by simp)
-  | succ N ih =>
-      intro A hA
-      have ⟨i', hi'⟩ := ih (fun y => A (y + 1)) (fun y hy => hA (y + 1) (by omega))
-      refine ⟨(if A 0 then 1 else 0) + 2 * i', fun x => ?_⟩
-      cases x with
-      | zero =>
-          by_cases hA0 : A 0
-          · have h : ((if A 0 then 1 else 0) + 2 * i') % 2 = 1 := by
-              rw [if_pos hA0]; omega
-            constructor
-            · intro _; show (_ == 1) = true; rw [h]; rfl
-            · intro _; exact hA0
-          · have h : ((if A 0 then 1 else 0) + 2 * i') % 2 = 0 := by
-              rw [if_neg hA0]; omega
-            constructor
-            · intro hc; exact absurd hc hA0
-            · intro hc
-              have : ((if A 0 then 1 else 0) + 2 * i') % 2 = 1 := by
-                have := hc
-                simp only [decB, beq_iff_eq] at this
-                exact this
-              omega
-      | succ x =>
-          have hdiv : ((if A 0 then 1 else 0) + 2 * i') / 2 = i' := by
-            by_cases hA0 : A 0
-            · rw [if_pos hA0]; omega
-            · rw [if_neg hA0]; omega
-          show A (x + 1) ↔ decB (((if A 0 then 1 else 0) + 2 * i') / 2) x = true
-          rw [hdiv]
-          exact hi' x
-
-/-- The length function of the model: numbers are their own length. -/
-def toyLen : Nat → Nat := fun x => x
-
-/-- The enumeration of the "easy" languages of the model: the languages with bounded
-support. -/
-def toyPenum (i : Nat) : Lang := fun x => decB i x = true
-
-/-- The enumeration of the "reductions" of the model. -/
-def toyRedFun (i x : Nat) : Nat := if decB i x then 0 else x + 1
-
-/-- The "complete" language of the model. -/
-def toySAT : Lang := fun x => x = 0
-
-/-- The class `P` (= `NP`) of the model: the languages with bounded support. -/
-def toyP : Lang → Prop := fun A => ∃ N, ∀ x, N ≤ x → ¬ A x
-
-/-- Reducibility in the model. -/
-def toyRed (A B : Lang) : Prop := ∃ i, ∀ x, (A x ↔ B (toyRedFun i x))
-
-/-- A model of `CS.Setting`; it witnesses that the assumptions collected there are
-consistent.  (It is degenerate: in it `P = NP`.) -/
-def toySetting : Setting where
-  len := toyLen
-  Penum := toyPenum
-  redFun := toyRedFun
-  SAT := toySAT
-  P := toyP
-  NP := toyP
-  Red := toyRed
-  P_subset_NP := fun _ h => h
-  empty_mem_P := ⟨0, fun _ _ h => h⟩
-  P_variation := by
-    intro A B hA hvar
-    have ⟨N₁, h₁⟩ := hA
-    have ⟨N₂, h₂⟩ := hvar
-    refine ⟨N₁ + N₂, fun x hx hB => ?_⟩
-    have hx2 : N₂ ≤ toyLen x := show N₂ ≤ x by omega
-    exact h₁ x (by omega) ((h₂ x hx2).mpr hB)
-  Penum_mem := fun i => ⟨i, fun x hx hc => by
-    have hc' : decB i x = true := hc
-    rw [decB_eq_false_of_le hx] at hc'
-    exact Bool.noConfusion hc'⟩
-  Penum_covers := by
-    intro A hA
-    have ⟨N, hN⟩ := hA
-    exact decB_covers N A hN
-  Red_iff := fun _ _ => Iff.rfl
-  Red_P := by
-    intro A B hAB hB
-    have ⟨i, hi⟩ := hAB
-    have ⟨N, hN⟩ := hB
-    refine ⟨N + i, fun x hx hA => ?_⟩
-    have hfalse : decB i x = false := decB_eq_false_of_le (by omega)
-    have hred : toyRedFun i x = x + 1 := by
-      show (if decB i x then 0 else x + 1) = x + 1
-      rw [hfalse]; rfl
-    have : B (toyRedFun i x) := (hi x).mp hA
-    rw [hred] at this
-    exact hN (x + 1) (by omega) this
-  SAT_mem_NP := ⟨1, fun x hx hc => by
-    have : x = 0 := hc
-    omega⟩
-  SAT_complete := by
-    intro A hA
-    have ⟨N, hN⟩ := hA
-    have ⟨i, hi⟩ := decB_covers N A hN
-    refine ⟨i, fun x => ?_⟩
-    show A x ↔ (toyRedFun i x = 0)
-    by_cases hb : decB i x = true
-    · have hred : toyRedFun i x = 0 := by
-        show (if decB i x then 0 else x + 1) = 0
-        rw [hb]; rfl
-      constructor
-      · intro _; exact hred
-      · intro _; exact (hi x).mpr hb
-    · have hb' : decB i x = false := by
-        cases h : decB i x with
-        | false => rfl
-        | true => exact absurd h hb
-      have hred : toyRedFun i x = x + 1 := by
-        show (if decB i x then 0 else x + 1) = x + 1
-        rw [hb']; rfl
-      constructor
-      · intro hc; exact absurd ((hi x).mp hc) hb
-      · intro hc; rw [hred] at hc; omega
-  ladnerLang_mem_NP := ⟨1, fun x hx hc => by
-    have h0 : toySAT x := hc.1
-    have : x = 0 := h0
-    omega⟩
-
-/-- In the model above the two classes coincide, so Ladner's theorem says nothing there. -/
-theorem toySetting_P_eq_NP : toySetting.P = toySetting.NP := rfl
-
-end Consistency
+/-- The toy model separates `P` from `NP`; in particular the axioms of `Model` do not
+already imply `P = NP`. -/
+theorem toyModel_P_ne_NP : toyModel.P ≠ toyModel.NP := by
+  intro h
+  have h1 : (Set.univ : Lang) ∈ toyModel.P := by rw [h]; exact Or.inr rfl
+  exact Set.infinite_univ (h1 : (Set.univ : Set ℕ).Finite)
 
 end CS
+
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
 

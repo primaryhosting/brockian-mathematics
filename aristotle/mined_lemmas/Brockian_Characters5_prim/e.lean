@@ -1,0 +1,26 @@
+import Mathlib
+
+/-!
+# Sum E Mul
+Category: Characters
+Target: Brockian.Characters5.sum_e_mul
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+namespace Brockian.Characters5
+
+/-- A primitive fifth root of unity. -/
+
+noncomputable def e (x : ZMod 5) : ℂ := omega ^ x.val
+

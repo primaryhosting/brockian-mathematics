@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 10992,
+    "PROVED": 11126,
     "DEFINITION": 626,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -115000,6 +115000,72 @@
       "provenance_note": "OPEN-TERRITORY Legendre's conjecture -- Landau's 3rd problem (open-territory loop, AXLE @4.32, axiom-clean). PrimeBetweenSquares n := exists prime p with n^2 < p < (n+1)^2. CONCRETE: twelve witnesses legendre_1..legendre_12 (primes 2,5,11,17,29,37,53,67,83,101,127,149). BONUS bertrand_holds: Bertrand's postulate (prime in (n,2n], PROVEN, reused from Mathlib Nat.exists_prime_lt_and_le_two_mul) -- the weaker window Legendre would strengthen to (n^2,(n+1)^2). LegendreConjecture is an unproven def -- OPEN, never asserted. Bertrand is a THEOREM, never marked open."
     },
     {
+      "name": "Brockian.LegendreError.legendre_sieve_error",
+      "kind": "theorem",
+      "module": "Brockian.LegendreError",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LegendreError.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Tao-guided sieve wave 2; Aristotle dbcb784d, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Legendre sieve main term + error: |#{n<=x: gcd(n,P)=1} - x*prod_{p|P}(1-1/p)| <= 2^omega(P). Elementary sieve bound complementing Mathlib's SelbergSieve framework. AXLE-verified @4.32 axiom-clean."
+    },
+    {
+      "name": "Brockian.LegendreSieve.legendre_sieve",
+      "kind": "theorem",
+      "module": "Brockian.LegendreSieve",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LegendreSieve.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Tao-guided sieve wave; Aristotle 06a22f46, independently AXLE-verified @lean-4.32.0",
+      "provenance_note": "Legendre's sieve (inclusion-exclusion / sieve of Eratosthenes): #{n in [1,x] : gcd(n,P)=1} = sum_{d|P} mu(d)*floor(x/d), an identity in Z. Foundational sieve-theory identity, not previously in Mathlib. Aristotle-proved @4.28, independently AXLE-verified @4.32 axiom-clean. Classical result (formalization contribution, not new mathematics)."
+    },
+    {
       "name": "Brockian.LehmerTotient.Lehmer",
       "kind": "def",
       "module": "Brockian.LehmerTotient",
@@ -115126,6 +115192,72 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY necessary conditions on a counterexample to Lehmer's totient problem (open since 1932: does phi(n)|n-1 imply n prime?). Open-territory loop, AXLE @4.32, axiom-clean. A Lehmer number = composite n with phi(n)|(n-1). PROVED: any such n is ODD (lehmer_odd; phi even vs n-1 odd), SQUAREFREE (lehmer_squarefree, flagship; p^2|n => p|phi(n)|n-1 while p|n), and has >=3 distinct prime factors (lehmer_three_primes; the p*q case reduces to ab|(a+b) with a,b>=2 a!=b, impossible). Existence is NEVER asserted or denied."
+    },
+    {
+      "name": "Brockian.LiouvilleParity.liouville_divisor_sum",
+      "kind": "theorem",
+      "module": "Brockian.LiouvilleParity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LiouvilleParity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Tao-guided sieve wave; Aristotle 6047b082, AXLE-verified @lean-4.32.0",
+      "provenance_note": "liouville_divisor_sum (sum_{d|n} lambda(d) = [n a perfect square]: the parity backbone lambda*1 = square-indicator) and squarefree_divisor_count (sum_{d|n} mu(d)^2 = 2^omega(n)); plus prime-power helpers. Aristotle @4.28; clashing local liouville decls (now in Mathlib 4.32) stripped in the port; AXLE-verified @4.32 axiom-clean. Parity/sieve infra motivated by Tao's parity-problem posts (docs/TAO-GUIDANCE.md). Classical."
+    },
+    {
+      "name": "Brockian.LiouvilleParity.squarefree_divisor_count",
+      "kind": "theorem",
+      "module": "Brockian.LiouvilleParity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LiouvilleParity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Tao-guided sieve wave; Aristotle 6047b082, AXLE-verified @lean-4.32.0",
+      "provenance_note": "liouville_divisor_sum (sum_{d|n} lambda(d) = [n a perfect square]: the parity backbone lambda*1 = square-indicator) and squarefree_divisor_count (sum_{d|n} mu(d)^2 = 2^omega(n)); plus prime-power helpers. Aristotle @4.28; clashing local liouville decls (now in Mathlib 4.32) stripped in the port; AXLE-verified @4.32 axiom-clean. Parity/sieve infra motivated by Tao's parity-problem posts (docs/TAO-GUIDANCE.md). Classical."
     },
     {
       "name": "Brockian.LteTwo.emult_two_pow_sub_pow",
@@ -133787,6 +133919,4098 @@
       "quarantine": true,
       "ledger_run": "Harmonic/Aristotle moonshot; AXLE @4.32",
       "provenance_note": "HARMONIC-PROVED moonshot (Aristotle, project pseudoprimes-base-two), independently AXLE-verified @lean-4.32.0, axiom-clean. A classical theorem formalized from core Mathlib. Namespace Brockian.PseudoprimesBaseTwo."
+    },
+    {
+      "name": "Brockian.QCBell.phiM_ZZ_eigen",
+      "kind": "theorem",
+      "module": "Brockian.QCBell",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCBell.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCBell) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCBell.phiP_XX_eigen",
+      "kind": "theorem",
+      "module": "Brockian.QCBell",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCBell.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCBell) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCBell.phiP_ZZ_eigen",
+      "kind": "theorem",
+      "module": "Brockian.QCBell",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCBell.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCBell) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCBell.phiP_normalized",
+      "kind": "theorem",
+      "module": "Brockian.QCBell",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCBell.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCBell) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCBell.phiP_psiP_orthogonal",
+      "kind": "theorem",
+      "module": "Brockian.QCBell",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCBell.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCBell) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCBell.psiM_ZZ_eigen",
+      "kind": "theorem",
+      "module": "Brockian.QCBell",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCBell.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCBell) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCBell.psiP_XX_eigen",
+      "kind": "theorem",
+      "module": "Brockian.QCBell",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCBell.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCBell) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCBraidTL.braid_relation_conj",
+      "kind": "theorem",
+      "module": "Brockian.QCBraidTL",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCBraidTL.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCBraidTL) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCBraidTL.temperley_lieb_loop",
+      "kind": "theorem",
+      "module": "Brockian.QCBraidTL",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCBraidTL.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCBraidTL) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCClifford.HS_conj_X",
+      "kind": "theorem",
+      "module": "Brockian.QCClifford",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCClifford.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCClifford) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCClifford.HS_conj_Z",
+      "kind": "theorem",
+      "module": "Brockian.QCClifford",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCClifford.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCClifford) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCClifford.H_conj_Y",
+      "kind": "theorem",
+      "module": "Brockian.QCClifford",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCClifford.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCClifford) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCClifford.S_Z_commute",
+      "kind": "theorem",
+      "module": "Brockian.QCClifford",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCClifford.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCClifford) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCClifford.S_conj_Y",
+      "kind": "theorem",
+      "module": "Brockian.QCClifford",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCClifford.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCClifford) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCClifford.S_conj_Z",
+      "kind": "theorem",
+      "module": "Brockian.QCClifford",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCClifford.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCClifford) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCClifford.S_unitary_left",
+      "kind": "theorem",
+      "module": "Brockian.QCClifford",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCClifford.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCClifford) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCCyclotomic.cyclotomic_five",
+      "kind": "theorem",
+      "module": "Brockian.QCCyclotomic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCCyclotomic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCCyclotomic) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCCyclotomic.goldConj_eq",
+      "kind": "theorem",
+      "module": "Brockian.QCCyclotomic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCCyclotomic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCCyclotomic) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCCyclotomic.golden_add_conj",
+      "kind": "theorem",
+      "module": "Brockian.QCCyclotomic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCCyclotomic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCCyclotomic) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCCyclotomic.golden_eq",
+      "kind": "theorem",
+      "module": "Brockian.QCCyclotomic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCCyclotomic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCCyclotomic) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCCyclotomic.golden_mul_conj",
+      "kind": "theorem",
+      "module": "Brockian.QCCyclotomic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCCyclotomic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCCyclotomic) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCCyclotomic.one_lt_golden",
+      "kind": "theorem",
+      "module": "Brockian.QCCyclotomic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCCyclotomic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCCyclotomic) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCCyclotomic.sqrt5_sq",
+      "kind": "theorem",
+      "module": "Brockian.QCCyclotomic",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCCyclotomic.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCCyclotomic) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCDensity.Dplus_idem",
+      "kind": "theorem",
+      "module": "Brockian.QCDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCDensity) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCDensity.P0_P1_orthogonal",
+      "kind": "theorem",
+      "module": "Brockian.QCDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCDensity) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCDensity.P0_idem",
+      "kind": "theorem",
+      "module": "Brockian.QCDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCDensity) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCDensity.P0_trace_one",
+      "kind": "theorem",
+      "module": "Brockian.QCDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCDensity) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCDensity.PX_PZ_traceless",
+      "kind": "theorem",
+      "module": "Brockian.QCDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCDensity) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCDensity.PX_traceless",
+      "kind": "theorem",
+      "module": "Brockian.QCDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCDensity) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCDensity.completeness",
+      "kind": "theorem",
+      "module": "Brockian.QCDensity",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCDensity.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCDensity) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFibonacci2.F_det",
+      "kind": "theorem",
+      "module": "Brockian.QCFibonacci2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFibonacci2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFibonacci2) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFibonacci2.F_symmetric",
+      "kind": "theorem",
+      "module": "Brockian.QCFibonacci2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFibonacci2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFibonacci2) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFibonacci2.F_unitary",
+      "kind": "theorem",
+      "module": "Brockian.QCFibonacci2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFibonacci2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFibonacci2) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFibonacci2.fusion_det",
+      "kind": "theorem",
+      "module": "Brockian.QCFibonacci2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFibonacci2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFibonacci2) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFibonacci2.fusion_trace",
+      "kind": "theorem",
+      "module": "Brockian.QCFibonacci2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFibonacci2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFibonacci2) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFibonacci2.golden_inv",
+      "kind": "theorem",
+      "module": "Brockian.QCFibonacci2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFibonacci2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFibonacci2) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFibonacci2.golden_sq",
+      "kind": "theorem",
+      "module": "Brockian.QCFibonacci2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFibonacci2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFibonacci2) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFibonacciAnyon.fib_fusion_gold_eigenvalue",
+      "kind": "theorem",
+      "module": "Brockian.QCFibonacciAnyon",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFibonacciAnyon.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFibonacciAnyon) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFibonacciAnyon.fibonacci_F_involutory",
+      "kind": "theorem",
+      "module": "Brockian.QCFibonacciAnyon",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFibonacciAnyon.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFibonacciAnyon) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFifthRoots.om_conj_eq",
+      "kind": "theorem",
+      "module": "Brockian.QCFifthRoots",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFifthRoots.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFifthRoots) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFifthRoots.om_geom_sum",
+      "kind": "theorem",
+      "module": "Brockian.QCFifthRoots",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFifthRoots.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFifthRoots) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFifthRoots.om_inv_eq",
+      "kind": "theorem",
+      "module": "Brockian.QCFifthRoots",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFifthRoots.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFifthRoots) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFifthRoots.om_ne_one",
+      "kind": "theorem",
+      "module": "Brockian.QCFifthRoots",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFifthRoots.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFifthRoots) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFifthRoots.om_norm_one",
+      "kind": "theorem",
+      "module": "Brockian.QCFifthRoots",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFifthRoots.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFifthRoots) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFifthRoots.om_pow_five",
+      "kind": "theorem",
+      "module": "Brockian.QCFifthRoots",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFifthRoots.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFifthRoots) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCFifthRoots.om_pow_ten",
+      "kind": "theorem",
+      "module": "Brockian.QCFifthRoots",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCFifthRoots.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCFifthRoots) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCGHZ.GHZ_IZZ_eigen",
+      "kind": "theorem",
+      "module": "Brockian.QCGHZ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCGHZ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCGHZ) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCGHZ.GHZ_W_orthogonal",
+      "kind": "theorem",
+      "module": "Brockian.QCGHZ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCGHZ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCGHZ) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCGHZ.GHZ_XXX_eigen",
+      "kind": "theorem",
+      "module": "Brockian.QCGHZ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCGHZ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCGHZ) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCGHZ.GHZ_ZIZ_eigen",
+      "kind": "theorem",
+      "module": "Brockian.QCGHZ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCGHZ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCGHZ) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCGHZ.GHZ_ZZI_eigen",
+      "kind": "theorem",
+      "module": "Brockian.QCGHZ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCGHZ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCGHZ) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCGHZ.GHZ_normalized",
+      "kind": "theorem",
+      "module": "Brockian.QCGHZ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCGHZ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCGHZ) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCGHZ.W_normalized",
+      "kind": "theorem",
+      "module": "Brockian.QCGHZ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCGHZ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCGHZ) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCGHZ.normSq_c",
+      "kind": "theorem",
+      "module": "Brockian.QCGHZ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCGHZ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCGHZ) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCGHZ.normSq_dd",
+      "kind": "theorem",
+      "module": "Brockian.QCGHZ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCGHZ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCGHZ) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCHadamard.H_X_H",
+      "kind": "theorem",
+      "module": "Brockian.QCHadamard",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCHadamard.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCHadamard) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCHadamard.H_Y_H",
+      "kind": "theorem",
+      "module": "Brockian.QCHadamard",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCHadamard.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCHadamard) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCHadamard.H_Z_H",
+      "kind": "theorem",
+      "module": "Brockian.QCHadamard",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCHadamard.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCHadamard) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCHadamard.H_det",
+      "kind": "theorem",
+      "module": "Brockian.QCHadamard",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCHadamard.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCHadamard) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCHadamard.H_eq_sum",
+      "kind": "theorem",
+      "module": "Brockian.QCHadamard",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCHadamard.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCHadamard) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCHadamard.H_sq",
+      "kind": "theorem",
+      "module": "Brockian.QCHadamard",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCHadamard.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCHadamard) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCHadamard.H_unitary",
+      "kind": "theorem",
+      "module": "Brockian.QCHadamard",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCHadamard.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCHadamard) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCPauliAlgebra.PX_PY",
+      "kind": "theorem",
+      "module": "Brockian.QCPauliAlgebra",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCPauliAlgebra.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCPauliAlgebra) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCPauliAlgebra.PX_PY_PZ",
+      "kind": "theorem",
+      "module": "Brockian.QCPauliAlgebra",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCPauliAlgebra.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCPauliAlgebra) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCPauliAlgebra.PX_sq",
+      "kind": "theorem",
+      "module": "Brockian.QCPauliAlgebra",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCPauliAlgebra.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCPauliAlgebra) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCPauliAlgebra.PY_PZ",
+      "kind": "theorem",
+      "module": "Brockian.QCPauliAlgebra",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCPauliAlgebra.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCPauliAlgebra) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCPauliAlgebra.PY_sq",
+      "kind": "theorem",
+      "module": "Brockian.QCPauliAlgebra",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCPauliAlgebra.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCPauliAlgebra) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCPauliAlgebra.PZ_PX",
+      "kind": "theorem",
+      "module": "Brockian.QCPauliAlgebra",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCPauliAlgebra.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCPauliAlgebra) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCPauliAlgebra.PZ_sq",
+      "kind": "theorem",
+      "module": "Brockian.QCPauliAlgebra",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCPauliAlgebra.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCPauliAlgebra) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCPhaseGates.S_conj_X_eq_Y",
+      "kind": "theorem",
+      "module": "Brockian.QCPhaseGates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCPhaseGates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCPhaseGates) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCPhaseGates.S_pow_four",
+      "kind": "theorem",
+      "module": "Brockian.QCPhaseGates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCPhaseGates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCPhaseGates) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCPhaseGates.S_sq_eq_Z",
+      "kind": "theorem",
+      "module": "Brockian.QCPhaseGates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCPhaseGates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCPhaseGates) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCPhaseGates.S_unitary",
+      "kind": "theorem",
+      "module": "Brockian.QCPhaseGates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCPhaseGates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCPhaseGates) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCPhaseGates.T_pow_eight",
+      "kind": "theorem",
+      "module": "Brockian.QCPhaseGates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCPhaseGates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCPhaseGates) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCPhaseGates.T_sq_eq_S",
+      "kind": "theorem",
+      "module": "Brockian.QCPhaseGates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCPhaseGates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCPhaseGates) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCPhaseGates.T_unitary",
+      "kind": "theorem",
+      "module": "Brockian.QCPhaseGates",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCPhaseGates.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCPhaseGates) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCProjectors.E0_E1_orthogonal",
+      "kind": "theorem",
+      "module": "Brockian.QCProjectors",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCProjectors.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCProjectors) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCProjectors.E0_hermitian",
+      "kind": "theorem",
+      "module": "Brockian.QCProjectors",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCProjectors.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCProjectors) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCProjectors.E0_idem",
+      "kind": "theorem",
+      "module": "Brockian.QCProjectors",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCProjectors.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCProjectors) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCProjectors.E1_idem",
+      "kind": "theorem",
+      "module": "Brockian.QCProjectors",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCProjectors.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCProjectors) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCProjectors.Zproj_minus",
+      "kind": "theorem",
+      "module": "Brockian.QCProjectors",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCProjectors.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCProjectors) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCProjectors.Zproj_plus",
+      "kind": "theorem",
+      "module": "Brockian.QCProjectors",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCProjectors.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCProjectors) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCProjectors.qutrit_completeness",
+      "kind": "theorem",
+      "module": "Brockian.QCProjectors",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCProjectors.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCProjectors) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQFT.W2_det",
+      "kind": "theorem",
+      "module": "Brockian.QCQFT",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQFT.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQFT) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQFT.W2_sq",
+      "kind": "theorem",
+      "module": "Brockian.QCQFT",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQFT.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQFT) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQFT.W2_unitary",
+      "kind": "theorem",
+      "module": "Brockian.QCQFT",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQFT.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQFT) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQFT.W4_row0",
+      "kind": "theorem",
+      "module": "Brockian.QCQFT",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQFT.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQFT) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQFT.W4_sq_reversal",
+      "kind": "theorem",
+      "module": "Brockian.QCQFT",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQFT.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQFT) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQFT.W4_symmetric",
+      "kind": "theorem",
+      "module": "Brockian.QCQFT",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQFT.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQFT) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQFT.W4_unitary",
+      "kind": "theorem",
+      "module": "Brockian.QCQFT",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQFT.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQFT) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQFTUnitary.qft_mul_conjTranspose",
+      "kind": "theorem",
+      "module": "Brockian.QCQFTUnitary",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQFTUnitary.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQFTUnitary) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQudit2.clockT_clock",
+      "kind": "theorem",
+      "module": "Brockian.QCQudit2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQudit2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQudit2) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQudit2.clock_diag_apply",
+      "kind": "theorem",
+      "module": "Brockian.QCQudit2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQudit2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQudit2) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQudit2.clock_off_diag",
+      "kind": "theorem",
+      "module": "Brockian.QCQudit2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQudit2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQudit2) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQudit2.clock_pow_card",
+      "kind": "theorem",
+      "module": "Brockian.QCQudit2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQudit2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQudit2) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQudit2.shiftT_shift",
+      "kind": "theorem",
+      "module": "Brockian.QCQudit2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQudit2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQudit2) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQudit2.shift_off_diag",
+      "kind": "theorem",
+      "module": "Brockian.QCQudit2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQudit2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQudit2) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQudit2.weyl_reverse",
+      "kind": "theorem",
+      "module": "Brockian.QCQudit2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQudit2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQudit2) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQuditWeyl.clock_shift_weyl",
+      "kind": "theorem",
+      "module": "Brockian.QCQuditWeyl",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQuditWeyl.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQuditWeyl) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCQuditWeyl.shift_pow_card",
+      "kind": "theorem",
+      "module": "Brockian.QCQuditWeyl",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCQuditWeyl.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCQuditWeyl) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCRotations.Rz_add",
+      "kind": "theorem",
+      "module": "Brockian.QCRotations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCRotations.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCRotations) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCRotations.Rz_conj",
+      "kind": "theorem",
+      "module": "Brockian.QCRotations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCRotations.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCRotations) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCRotations.Rz_det",
+      "kind": "theorem",
+      "module": "Brockian.QCRotations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCRotations.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCRotations) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCRotations.Rz_four_pi",
+      "kind": "theorem",
+      "module": "Brockian.QCRotations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCRotations.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCRotations) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCRotations.Rz_two_pi",
+      "kind": "theorem",
+      "module": "Brockian.QCRotations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCRotations.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCRotations) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCRotations.Rz_unitary",
+      "kind": "theorem",
+      "module": "Brockian.QCRotations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCRotations.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCRotations) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCRotations.Rz_zero",
+      "kind": "theorem",
+      "module": "Brockian.QCRotations",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCRotations.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCRotations) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCStabilizer.clock_unitary",
+      "kind": "theorem",
+      "module": "Brockian.QCStabilizer",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCStabilizer.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCStabilizer) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCStabilizer.pauli_anticommute",
+      "kind": "theorem",
+      "module": "Brockian.QCStabilizer",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCStabilizer.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCStabilizer) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCStabilizer.shift_unitary",
+      "kind": "theorem",
+      "module": "Brockian.QCStabilizer",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCStabilizer.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCStabilizer) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCThreeQubit.CCZ_sq",
+      "kind": "theorem",
+      "module": "Brockian.QCThreeQubit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCThreeQubit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCThreeQubit) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCThreeQubit.CCZ_symmetric",
+      "kind": "theorem",
+      "module": "Brockian.QCThreeQubit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCThreeQubit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCThreeQubit) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCThreeQubit.Fred_sq",
+      "kind": "theorem",
+      "module": "Brockian.QCThreeQubit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCThreeQubit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCThreeQubit) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCThreeQubit.Fred_symmetric",
+      "kind": "theorem",
+      "module": "Brockian.QCThreeQubit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCThreeQubit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCThreeQubit) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCThreeQubit.Tof_sq",
+      "kind": "theorem",
+      "module": "Brockian.QCThreeQubit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCThreeQubit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCThreeQubit) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCThreeQubit.Tof_symmetric",
+      "kind": "theorem",
+      "module": "Brockian.QCThreeQubit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCThreeQubit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCThreeQubit) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCThreeQubit.Tof_unitary",
+      "kind": "theorem",
+      "module": "Brockian.QCThreeQubit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCThreeQubit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCThreeQubit) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCTwoQubit.CNOT_sq",
+      "kind": "theorem",
+      "module": "Brockian.QCTwoQubit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCTwoQubit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCTwoQubit) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCTwoQubit.CNOT_unitary",
+      "kind": "theorem",
+      "module": "Brockian.QCTwoQubit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCTwoQubit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCTwoQubit) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCTwoQubit.CZ_sq",
+      "kind": "theorem",
+      "module": "Brockian.QCTwoQubit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCTwoQubit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCTwoQubit) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCTwoQubit.CZ_symmetric",
+      "kind": "theorem",
+      "module": "Brockian.QCTwoQubit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCTwoQubit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCTwoQubit) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCTwoQubit.CZ_unitary",
+      "kind": "theorem",
+      "module": "Brockian.QCTwoQubit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCTwoQubit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCTwoQubit) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCTwoQubit.SWAP_sq",
+      "kind": "theorem",
+      "module": "Brockian.QCTwoQubit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCTwoQubit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCTwoQubit) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
+    },
+    {
+      "name": "Brockian.QCTwoQubit.SWAP_unitary",
+      "kind": "theorem",
+      "module": "Brockian.QCTwoQubit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QCTwoQubit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "QC autonomous loop (Aug 5); Aristotle @4.28, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Known quantum-computing algebra (QCTwoQubit) formalized with Brockian pentagon/root-5/golden structure; AXLE-verified @4.32 axiom-clean; not new physics/algorithms."
     },
     {
       "name": "Brockian.QuasiperfectNumbers.AlmostPerfect",
@@ -352671,6 +356895,72 @@
       "provenance_note": "wires singular_series_pos' into downstream (roadmap #15). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; verdict re-checked by Claude's gate before integration."
     },
     {
+      "name": "Brockian.SingularSeriesBridge.localFactor_twinGap_odd",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeriesBridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeriesBridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.SingularSeriesBridge.localFactor_twinGap_odd_pos",
+      "kind": "theorem",
+      "module": "Brockian.SingularSeriesBridge",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SingularSeriesBridge.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.SophieGermain.SophieGermain",
       "kind": "def",
       "module": "Brockian.SophieGermain",
@@ -354050,6 +358340,105 @@
       "provenance_note": "HARMONIC-PROVED moonshot (Aristotle, project sperner), independently AXLE-verified @lean-4.32.0, axiom-clean. A classical theorem formalized from core Mathlib. Namespace Brockian.Sperner."
     },
     {
+      "name": "Brockian.SquarefreeCount.squarefree_count",
+      "kind": "theorem",
+      "module": "Brockian.SquarefreeCount",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SquarefreeCount.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Tao-guided sieve wave 2; Aristotle 5edf33d8, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Count of squarefree integers via the Mobius sieve: #{n in [1,x]: Squarefree n} = sum_{d^2<=x} mu(d)*floor(x/d^2). Classical; AXLE-verified @4.32 axiom-clean."
+    },
+    {
+      "name": "Brockian.SquarefreeSquareDivisors.liouville_eq_sum_moebius_sq_divisors",
+      "kind": "theorem",
+      "module": "Brockian.SquarefreeSquareDivisors",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SquarefreeSquareDivisors.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Tao-guided sieve wave; Aristotle 806823f1, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Two square-divisor identities on Mathlib's moebius/liouville: mu(n)^2 = sum_{d^2|n} mu(d) (squarefree indicator) and liouville(n) = sum_{d^2|n} mu(n/d^2) (from L(lambda,s)=zeta(2s)/zeta(s)). Aristotle @4.28; redundant local liouville def stripped in the 4.32 port (Mathlib now ships it); AXLE-verified @4.32 axiom-clean. Classical."
+    },
+    {
+      "name": "Brockian.SquarefreeSquareDivisors.moebius_sq_eq_sum_sq_divisors",
+      "kind": "theorem",
+      "module": "Brockian.SquarefreeSquareDivisors",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SquarefreeSquareDivisors.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Tao-guided sieve wave; Aristotle 806823f1, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Two square-divisor identities on Mathlib's moebius/liouville: mu(n)^2 = sum_{d^2|n} mu(d) (squarefree indicator) and liouville(n) = sum_{d^2|n} mu(n/d^2) (from L(lambda,s)=zeta(2s)/zeta(s)). Aristotle @4.28; redundant local liouville def stripped in the 4.32 port (Mathlib now ships it); AXLE-verified @4.32 axiom-clean. Classical."
+    },
+    {
       "name": "Brockian.StarOfDavid.choose_add_mul_factorial",
       "kind": "theorem",
       "module": "Brockian.StarOfDavid",
@@ -354597,6 +358986,39 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.TotientMoebius.totient_eq_sum_moebius",
+      "kind": "theorem",
+      "module": "Brockian.TotientMoebius",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TotientMoebius.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.0"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Tao-guided sieve wave 2; Aristotle 85669593, AXLE-verified @lean-4.32.0",
+      "provenance_note": "Euler totient as Mobius convolution phi = mu * id: phi(n) = sum_{d|n} mu(d)*(n/d). Classical; Aristotle @4.28, AXLE-verified @4.32 axiom-clean."
     },
     {
       "name": "Brockian.TotientStructure.gauss_sum_totient",

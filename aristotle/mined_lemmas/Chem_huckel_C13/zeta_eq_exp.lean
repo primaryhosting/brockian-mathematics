@@ -1,0 +1,47 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-!
+# Hückel theory for the 13-cycle
+
+The adjacency matrix of the cycle graph `C₁₃` has spectrum `{2 cos (2πk/13) | k = 0, …, 12}`.
+
+The proof diagonalizes the adjacency matrix by the discrete Fourier matrix
+`U i j = ω^(i * j)`, where `ω = exp (2πi/13)` is a primitive 13-th root of unity.
+-/
+
+namespace Chem
+
+open Complex Matrix
+
+/-- A primitive 13-th root of unity. -/
+
+lemma zeta_eq_exp (k : Fin 13) :
+    zeta k = Complex.exp (((2 * Real.pi * k.val / 13 : ℝ) : ℂ) * Complex.I) := by
+  rw [zeta, w, ← Complex.exp_nat_mul]
+  congr 1
+  push_cast
+  ring
+

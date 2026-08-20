@@ -9,6 +9,57 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-
+# Ghz 8 Normalized
+Category: Quantum Computing
+Target: QC.ghz8_normalized
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
+namespace QC
+
+/-- The state space of 8 qubits: the complex Hilbert space with orthonormal basis indexed by
+the computational basis states `Fin 8 → Bool`. -/
+abbrev Qubits8 := EuclideanSpace ℂ (Fin 8 → Bool)
+
+/-- The computational basis state `|b⟩` of 8 qubits. -/
+noncomputable def basisState (b : Fin 8 → Bool) : Qubits8 := EuclideanSpace.single b 1
+
+/-- The 8-qubit GHZ state `(|0…0⟩ + |1…1⟩)/√2`. -/
+noncomputable def ghz8 : Qubits8 :=
+  ((1 / Real.sqrt 2 : ℝ) : ℂ) • (basisState (fun _ => false) + basisState (fun _ => true))
+
+/-- For two distinct computational basis states, `‖|x⟩ + |y⟩‖ = √2`. -/
+theorem norm_basisState_add_basisState {x y : Fin 8 → Bool} (h : x ≠ y) :
+    ‖basisState x + basisState y‖ = Real.sqrt 2 := by
+  rw [EuclideanSpace.norm_eq]
+  congr 1
+  have key : ∀ b : (Fin 8 → Bool), ‖(basisState x + basisState y : Qubits8) b‖ ^ 2
+      = (if b = x then (1 : ℝ) else 0) + (if b = y then 1 else 0) := by
+    intro b
+    by_cases hx : b = x <;> by_cases hy : b = y <;>
+      simp_all [basisState, EuclideanSpace.single_apply]
+  calc ∑ b : (Fin 8 → Bool), ‖(basisState x + basisState y : Qubits8) b‖ ^ 2
+      = ∑ b : (Fin 8 → Bool), ((if b = x then (1 : ℝ) else 0) + (if b = y then 1 else 0)) :=
+        Finset.sum_congr rfl (fun b _ => key b)
+    _ = 2 := by rw [Finset.sum_add_distrib]; simp; norm_num
+
+/-- The 8-qubit GHZ state `(|0…0⟩ + |1…1⟩)/√2` is a unit vector. -/
+theorem ghz8_normalized : ‖ghz8‖ = 1 := by
+  have hne : (fun _ => false : Fin 8 → Bool) ≠ (fun _ => true) := by
+    intro h
+    have := congrFun h 0
+    simp at this
+  have h2 : (0 : ℝ) < Real.sqrt 2 := Real.sqrt_pos.mpr (by norm_num)
+  rw [ghz8, norm_smul, norm_basisState_add_basisState hne]
+  simp only [Complex.norm_real, Real.norm_eq_abs, abs_of_pos (by positivity : (0:ℝ) < 1 / Real.sqrt 2)]
+  field_simp
+
+end QC
+
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -31,56 +82,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace QC
-
-/-- The state space of 8 qubits: the (finite-dimensional) complex Hilbert space with orthonormal
-basis indexed by bit strings `Fin 8 → Bool`. -/
-abbrev Qubits8 : Type := EuclideanSpace ℂ (Fin 8 → Bool)
-
-/-- The computational basis state `|x⟩` for a bit string `x : Fin 8 → Bool`. -/
-noncomputable def ket (x : Fin 8 → Bool) : Qubits8 :=
-  EuclideanSpace.single x 1
-
-/-- The 8-qubit GHZ state `(|0…0⟩ + |1…1⟩)/√2`. -/
-noncomputable def ghz8 : Qubits8 :=
-  ((Real.sqrt 2 : ℂ))⁻¹ • (ket (fun _ => false) + ket (fun _ => true))
-
-/-- The all-zeros and all-ones bit strings are distinct. -/
-theorem allFalse_ne_allTrue : (fun _ : Fin 8 => false) ≠ (fun _ : Fin 8 => true) := by
-  intro h
-  have := congrFun h 0
-  simp at this
-
-/-- The coordinates of the GHZ state: `1/√2` at `|0…0⟩` and at `|1…1⟩`, and `0` elsewhere. -/
-theorem ghz8_apply (x : Fin 8 → Bool) :
-    ghz8 x = if x = (fun _ => false) then ((Real.sqrt 2 : ℂ))⁻¹
-             else if x = (fun _ => true) then ((Real.sqrt 2 : ℂ))⁻¹ else 0 := by
-  have hne := allFalse_ne_allTrue
-  simp only [ghz8, ket]
-  by_cases h1 : x = (fun _ => false)
-  · subst h1; simp [hne]
-  · by_cases h2 : x = (fun _ => true)
-    · subst h2; simp [h1]
-    · simp [h1, h2]
-
-/-- The 8-qubit GHZ state `(|0…0⟩ + |1…1⟩)/√2` is a unit vector. -/
-theorem ghz8_normalized : ‖ghz8‖ = 1 := by
-  have hne := allFalse_ne_allTrue
-  rw [EuclideanSpace.norm_eq]
-  have key : ∀ x : Fin 8 → Bool, ‖ghz8 x‖ ^ 2 =
-      (if x = (fun _ => false) then (1 / 2 : ℝ) else 0)
-        + (if x = (fun _ => true) then (1 / 2 : ℝ) else 0) := by
-    intro x
-    rw [ghz8_apply]
-    by_cases h1 : x = (fun _ => false)
-    · subst h1; simp [hne]
-    · by_cases h2 : x = (fun _ => true)
-      · subst h2; simp [h1]
-      · simp [h1, h2]
-  simp_rw [key]
-  rw [Finset.sum_add_distrib, Finset.sum_ite_eq' Finset.univ, Finset.sum_ite_eq' Finset.univ]
-  norm_num
-
-end QC
 

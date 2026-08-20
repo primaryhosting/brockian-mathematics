@@ -80,11 +80,19 @@ The graph→operator gate has been driven nearly to a full close (all AXLE-verif
 - **Exact operator spectrum** (`ConstellationGlobalSpectrum.H123_spectrum`) — the assembled block
   operator's spectrum is *exactly* `{2−√2, 1, 2, 3, 2+√2}`.
 
-**The one remaining open step:** the pure `adjMatrix`→block-diagonal reindexing (identifying
-`SimpleGraph.adjMatrix ℝ G` with `⨁ Pₖ` via a connected-component `Matrix.reindex`), which would transport
-`H123_spectrum` from the assembled block operator to the graph Hamiltonian itself. Mathlib lacks the
-`ConnectedComponent → Matrix.reindex` block decomposition and `charpoly` over `ℝ` is undecidable; two
-independent automated attempts delivered structural fragments but did not close this matrix step. It is
-recorded as open, honestly — a *formalization* gap, not a mathematical one. Full write-up:
-`docs/CONSTELLATION-SIEVE-PAPER.md`; the open step is stated as an attack-ready problem in
-`docs/OPEN-adjmatrix-block-reindex.md`.
+**The matrix-infrastructure step is now closed** (independently AXLE-verified @ `lean-4.32.0`,
+axiom-clean; Codex lane). `GraphComponentMatrix` proves the general fact — a finite graph's vertex type
+is canonically `≃ Σ` of its connected-component fibers (`componentEquiv`), any matrix with vanishing
+cross-component entries reindexes to a `blockDiagonal'` (`reindex_componentEquiv_eq_blockDiagonal'`), and
+its characteristic polynomial factors as `∏` of the component-block charpolys
+(`charpoly_eq_prod_componentBlocks`), specialized to `adjMatrix` and to `r•I − A`. `ConstellationGateClose`
+applies it to the actual twin graph: **`graph_hamiltonian_charpoly_components`** — the real graph
+Hamiltonian's charpoly `= ∏` over its genuine connected components. This closes the `adjMatrix`→block
+reindexing that the earlier automated attempts could not.
+
+**The one remaining open step** is now the *combinatorial* residual: identify each actual component
+block's charpoly with `H₁`, `H₂`, or `H₃` (each component is a `P₁/P₂/P₃`, already proved structurally by
+`G_embeds_intLine` + `forest_of_paths`) and group the factors by the arithmetic multiplicities `n₁,n₂,n₃`,
+yielding the actual graph's spectrum `= {2−√2, 1, 2, 3, 2+√2}`. This packaging is genuinely open (WIP in
+`SieveSpectrumDeletion`), and — as always — it remains a finite structural result, *not* a proof of
+twin-prime infinitude. Full write-up: `docs/CONSTELLATION-SIEVE-PAPER.md`.

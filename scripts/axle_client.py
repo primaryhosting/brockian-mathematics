@@ -1,6 +1,6 @@
 """Thin client for the AXLE (Axiom Lean Engine) HTTP API.
 
-AXLE runs Lean 4 + Mathlib cloud-side, per environment (e.g. "lean-4.32.0"), and is
+AXLE runs Lean 4 + Mathlib cloud-side, per environment (e.g. "lean-4.32.2"), and is
 used here as the INDEPENDENT verification leg of the triple-verification PROVED gate
 (spec 2A). Never trust an engine's own success report blindly — this normalizes the
 raw response to a strict `verified` boolean derived from the actual Lean messages.
@@ -18,7 +18,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 AXLE_BASE = os.environ.get("AXLE_BASE_URL", "https://axle.axiommath.ai/api/v1")
-DEFAULT_ENV = os.environ.get("AXLE_ENV", "lean-4.32.0")
+DEFAULT_ENV = os.environ.get("AXLE_ENV", "lean-4.32.2")
 
 
 class AxleError(RuntimeError):
@@ -65,6 +65,9 @@ def _verdict_from_check(resp: dict[str, Any], environment: str) -> AxleResult:
     warnings = list(lean_msgs.get("warnings") or [])
     failed = list(resp.get("failed_declarations") or [])
     okay = bool(resp.get("okay", False))
+    service_error = resp.get("user_error") or resp.get("error")
+    if service_error:
+        errors.append(f"AXLE service error: {service_error}")
     # A `sorry` is a WARNING, not an error, so `okay` alone would pass it. Treat any
     # sorry/admit warning as a hard failure — a proof with a hole is never verified.
     sorry_hit = [w for w in warnings

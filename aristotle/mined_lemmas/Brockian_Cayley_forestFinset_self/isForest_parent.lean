@@ -1,0 +1,53 @@
+import Mathlib
+
+namespace Brockian.Cayley
+
+open Finset
+
+/-!
+# Cayley's formula
+
+The number of labeled trees on `n` vertices is `n ^ (n - 2)`.
+
+The proof goes through *rooted forests*, encoded as "parent functions": a rooted forest on a
+vertex set `A` with set of roots `S ⊆ A` is a function `f : V → V` which fixes everything
+outside `A \ S`, maps `A \ S` into `A`, and such that iterating `f` from any vertex of `A`
+eventually lands in `S`.
+
+The main counting statement is
+`|A| * #(forests on A with roots S) = |S| * |A| ^ (|A| - |S|)`,
+proved by induction on `|A|` (deleting a root and summing over the set of its children).
+
+Specialising to `A = univ` and `S = {0}` in `Fin n` and putting rooted forests with a single
+root in bijection with trees gives Cayley's formula.
+-/
+
+/-! ### Rooted forests, encoded by parent functions -/
+
+section Forest
+
+variable {V : Type*} [Fintype V] [DecidableEq V]
+
+/-- `IsForest A S f` says that `f` is the parent function of a rooted forest on the vertex
+set `A` whose set of roots is `S`. -/
+structure IsForest (A S : Finset V) (f : V → V) : Prop where
+  /-- Vertices which are not non-root vertices of the forest are fixed. -/
+  fixed : ∀ v, v ∉ A \ S → f v = v
+  /-- The parent of a non-root vertex is a vertex. -/
+  maps : ∀ v ∈ A \ S, f v ∈ A
+  /-- Iterating the parent function eventually reaches a root. -/
+  reaches : ∀ v ∈ A, ∃ m, f^[m] v ∈ S
+
+/-- The finset of rooted forests on `A` with roots `S`, encoded by parent functions. -/
+
+lemma isForest_parent (hG : G.IsTree) :
+    IsForest (Finset.univ : Finset (Fin (N + 1))) {0} (parent hG) := by
+  refine ⟨fun v hv => ?_, fun v _ => Finset.mem_univ _, fun v _ => ?_⟩
+  · simp only [Finset.sdiff_singleton_eq_erase, Finset.mem_erase, Finset.mem_univ, and_true,
+      not_not] at hv
+    subst hv
+    exact parent_zero hG
+  · obtain ⟨m, hm⟩ := parent_reaches hG v
+    exact ⟨m, by simp [hm]⟩
+
+/-- If `p (p v) = v` then the orbit of `v` under `p` is `{v, p v}`. -/

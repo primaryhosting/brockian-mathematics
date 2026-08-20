@@ -9,6 +9,7 @@ present (skipped otherwise — never handles a key it doesn't have). Slow (lake)
 on the small deduped best_proofs set, resumable, capped per run.
 """
 import glob
+import hashlib
 import json
 import os
 import pathlib
@@ -25,8 +26,24 @@ TIMEOUT = int(os.environ.get("CROSS_TIMEOUT", "1500"))
 MAX = int(os.environ.get("CROSS_MAX", "20"))
 
 
+def normalize(content: str) -> str:
+    """Match the exact normalization used by axle_verify."""
+    imports, body = [], []
+    for line in content.splitlines():
+        if line.strip().startswith("import "):
+            if line.strip() not in imports:
+                imports.append(line.strip())
+        else:
+            body.append(line)
+    return "\n".join(imports + [""] + body)
+
+
+def content_hash(content: str) -> str:
+    return hashlib.sha256(normalize(content).encode()).hexdigest()[:16]
+
+
 def axioms_of(leanfile):
-    text = open(leanfile, errors="ignore").read()
+    text = normalize(open(leanfile, errors="ignore").read())
     names = DECL.findall(text)
     if not names:
         return None, "no theorem/lemma found"
@@ -52,17 +69,23 @@ def axioms_of(leanfile):
 def main():
     state = json.loads(STATE.read_text()) if STATE.exists() else {}
     files = sorted(glob.glob(str(BEST / "*.lean")))
-    todo = [f for f in files if pathlib.Path(f).name not in state][:MAX]
+    todo = [
+        f for f in files
+        if pathlib.Path(f).name not in state
+        or state[pathlib.Path(f).name].get("hash") != content_hash(open(f, errors="ignore").read())
+    ][:MAX]
     print(f"{len(files)} best proofs, cross-checking {len(todo)} (axiom audit)")
     for f in todo:
         ax, err = axioms_of(pathlib.Path(f))
         b = pathlib.Path(f).name
+        digest = content_hash(open(f, errors="ignore").read())
         if ax is None:
-            state[b] = {"trusted": None, "detail": err}
+            state[b] = {"trusted": None, "detail": err, "hash": digest}
         else:
             extra = sorted(ax - SAFE)
             trusted = ("sorryAx" not in ax) and all(a in SAFE for a in ax if a[0].islower() or "." in a)
-            state[b] = {"trusted": len(extra) == 0, "axioms": sorted(ax), "extra_axioms": extra}
+            state[b] = {"trusted": trusted and len(extra) == 0, "axioms": sorted(ax),
+                        "extra_axioms": extra, "hash": digest}
         STATE.write_text(json.dumps(state, indent=1))
         print(f"  {b}: {state[b].get('trusted')}  {state[b].get('extra_axioms', state[b].get('detail',''))}")
     trusted = sum(1 for s in state.values() if s.get("trusted") is True)

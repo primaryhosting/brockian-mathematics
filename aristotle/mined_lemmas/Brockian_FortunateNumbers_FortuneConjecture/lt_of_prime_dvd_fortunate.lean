@@ -1,0 +1,83 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-!
+# Fortune Conjecture
+Category: Brockian Conjecture
+Target: Brockian.FortunateNumbers.FortuneConjecture
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+## Overview
+
+Reid Fortune's conjecture states that for every `n`, the *fortunate number*
+
+  `F n = the least m > 1 such that n# + m is prime`
+
+(where `n#` is the primorial, the product of all primes `≤ n`) is a prime number.
+This is an open problem: no unconditional proof is known, because it would require an
+upper bound on the prime gap after `n#` far stronger than anything currently provable.
+
+What *is* provable, and what this file establishes, is the standard reduction:
+
+* every prime factor of `F n` exceeds `n` (`Brockian.FortunateNumbers.lt_of_prime_dvd_fortunate`),
+  because all primes `≤ n` divide `n#`;
+* hence if `F n ≤ n ^ 2`, then `F n` must be prime
+  (`Brockian.FortunateNumbers.fortunate_prime_of_le_sq`);
+* consequently, the quadratic gap bound `∀ n ≥ 2, F n ≤ n ^ 2` implies the full Fortune
+  conjecture (`Brockian.FortunateNumbers.FortuneConjecture`).
+
+The target theorem `Brockian.FortunateNumbers.FortuneConjecture` is therefore stated as a
+*conditional* reduction: it derives the conjecture for **all** `n` from the gap hypothesis,
+with the two degenerate cases `n = 0, 1` handled unconditionally.
+-/
+
+namespace Brockian.FortunateNumbers
+
+open Finset
+
+/-- There is some `m > 1` with `primorial n + m` prime; this is what makes the
+fortunate number well defined. -/
+
+theorem lt_of_prime_dvd_fortunate {n p : ℕ} (hp : p.Prime) (hdvd : p ∣ fortunate n) :
+    n < p := by
+  by_contra hle
+  push_neg at hle
+  have hsum : p ∣ primorial n + fortunate n :=
+    Dvd.dvd.add (prime_dvd_primorial hp hle) hdvd
+  have hq := prime_primorial_add_fortunate n
+  have hpe : p = primorial n + fortunate n :=
+    (hq.eq_one_or_self_of_dvd p hsum).resolve_left hp.ne_one
+  have hple : p ≤ fortunate n := Nat.le_of_dvd (by have := one_lt_fortunate n; omega) hdvd
+  have := primorial_pos n
+  omega
+
+/-- **The reduction.** If the fortunate number `F n` does not exceed `n ^ 2`, then it is
+prime.  Indeed a composite `m` satisfies `m.minFac ^ 2 ≤ m`, while every prime factor of
+`F n` exceeds `n`. -/

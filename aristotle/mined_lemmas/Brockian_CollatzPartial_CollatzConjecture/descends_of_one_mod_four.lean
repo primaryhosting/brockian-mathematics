@@ -1,0 +1,73 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-!
+# Collatz Conjecture
+Category: Brockian Conjecture
+Target: Brockian.CollatzPartial.CollatzConjecture
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+/-
+This file is deliberately self-contained (no `import` lines), so that the header comment
+above can literally be the first thing in the file: Lean requires `import` commands to
+precede every other command, including module documentation.  Consequently the few
+standard facts about function iteration that are used below are proved from scratch.
+
+The Collatz conjecture is a famous open problem.  What is established here is:
+
+* an unconditional reduction of the conjecture to a *descent* hypothesis
+  (`reaches1_of_descends`);
+* unconditional proofs of descent for every residue class modulo `32` except
+  `7`, `15`, `27` and `31`, which sharpen the reduction so that only those four
+  classes remain (`CollatzConjecture`);
+* unconditional verification of the conjecture for all powers of two and for all
+  positive integers below `1000`.
+-/
+
+namespace Brockian.CollatzPartial
+
+/-! ## Iteration -/
+
+/-- `iterate f k n` is the `k`-fold application of `f` to `n`. -/
+
+theorem descends_of_one_mod_four {n : Nat} (hn : 1 < n) (h : n % 4 = 1) : Descends n := by
+  obtain ⟨m, hm, rfl⟩ : ∃ m : Nat, 0 < m ∧ n = 4 * m + 1 := ⟨n / 4, by omega, by omega⟩
+  refine ⟨3, by omega, ?_⟩
+  have h1 : collatz (4 * m + 1) = 12 * m + 4 := by
+    rw [collatz_odd (by omega)]; omega
+  have h2 : collatz (12 * m + 4) = 6 * m + 2 := by
+    rw [collatz_even (by omega)]; omega
+  have h3 : collatz (6 * m + 2) = 3 * m + 1 := by
+    rw [collatz_even (by omega)]; omega
+  show iterate collatz 3 (4 * m + 1) < 4 * m + 1
+  rw [iterate_succ_apply, iterate_succ_apply, iterate_succ_apply, iterate_zero, h1, h2, h3]
+  omega
+
+/--
+**Sharpened conditional reduction.** It suffices to establish the descent property for the
+integers congruent to `3` modulo `4`; descent is unconditional in the other residue classes.
+-/

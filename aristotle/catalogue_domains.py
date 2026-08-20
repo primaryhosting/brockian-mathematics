@@ -7,6 +7,7 @@ and writes registry/domains.json — deduped, with verification status + provena
 Never touches the Brockian registry. Domain proofs are a distinct catalogue.
 """
 import json
+import hashlib
 import pathlib
 import re
 
@@ -18,7 +19,23 @@ QUEUES = [ROOT / q for q in ("reconciled_queue.json", "domains_queue.json", "min
 LEDGER = ROOT / "harvest_ledger.json"
 VSTATE = ROOT / "harvest_100" / "verify_state.json"
 BEST = ROOT / "best_proofs" / "manifest.json"
+BEST_DIR = ROOT / "best_proofs"
 OUT = REPO / "registry" / "domains.json"
+
+
+def normalize(content: str) -> str:
+    imports, body = [], []
+    for line in content.splitlines():
+        if line.strip().startswith("import "):
+            if line.strip() not in imports:
+                imports.append(line.strip())
+        else:
+            body.append(line)
+    return "\n".join(imports + [""] + body)
+
+
+def content_hash(content: str) -> str:
+    return hashlib.sha256(normalize(content).encode()).hexdigest()[:16]
 
 
 def main():
@@ -37,9 +54,24 @@ def main():
     axp = ROOT / "axle_verify.json"
     if axp.exists():
         axle = json.loads(axp.read_text())
+    cross = {}
+    cross_path = ROOT / "cross_check.json"
+    if cross_path.exists():
+        cross = json.loads(cross_path.read_text())
 
-    def axle_ok(target):
-        return axle.get(re.sub(r"[^A-Za-z0-9]+", "_", target) + ".lean", {}).get("verified") is True
+    def independent_ok(target):
+        san = re.sub(r"[^A-Za-z0-9]+", "_", target) + ".lean"
+        proof = BEST_DIR / san
+        if not proof.exists():
+            return False
+        digest = content_hash(proof.read_text(errors="ignore"))
+        ax = axle.get(san, {})
+        cc = cross.get(san, {})
+        return (ax.get("verified") is True
+                and ax.get("environment") == "lean-4.32.2"
+                and ax.get("hash") == digest
+                and cc.get("trusted") is True
+                and cc.get("hash") == digest)
 
     cat = json.loads(OUT.read_text()) if OUT.exists() else {}
     added = 0
@@ -49,8 +81,11 @@ def main():
             continue
         fname = f"{meta['account']}_{pid[:8]}.lean"
         entry = cat.get(t, {})
-        axle_verified = axle_ok(t)
-        verified = axle_verified or file_compiles.get(fname) is True or (best.get(t, {}).get("compiles") is True)
+        independently_verified = independent_ok(t)
+        # Registry PROVED requires local compilation, the independent AXLE leg,
+        # a clean axiom audit, and one shared content hash across all three.
+        locally_compiles = file_compiles.get(fname) is True or (best.get(t, {}).get("compiles") is True)
+        verified = independently_verified and locally_compiles
         # keep the strongest status seen
         register = "PROVED" if verified else "PROVED_UNVERIFIED"
         if entry.get("register") == "PROVED":
@@ -58,9 +93,10 @@ def main():
         cat[t] = {"register": register, "domain": stmt[t]["domain"], "statement": stmt[t]["statement"],
                   "proof_file": f"aristotle/harvest_100/{fname}",
                   "provenance": f"Harmonic/Aristotle {pid} ({meta['account']})",
-                  "verification": ("AXLE cloud lean-4.32.0 OK" if axle_verified
-                                   else "lake env lean OK" if verified
-                                   else "axiom-clean by inspection; verification pending")}
+                  "verification": ("local Lean + AXLE lean-4.32.2 + axiom audit OK" if verified
+                                   else "local Lean OK; independent AXLE verification pending"
+                                   if locally_compiles
+                                   else "sorry-free Aristotle candidate; verification pending")}
         added += 1
     OUT.write_text(json.dumps(cat, indent=1))
     import collections

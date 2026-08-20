@@ -10,64 +10,42 @@ Provenance: Aristotle theorem prover (Harmonic)
 import Mathlib
 
 open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
+open Finset
 
 namespace Math
 
-open Finset
+/-- **Inclusion–exclusion principle**.
 
-/-- The finite intersection `t.inf' h A` of the sets `A i` for `i ∈ t` is indeed
-`{a | ∀ i ∈ t, a ∈ A i}`. -/
-theorem mem_inf'_iff {ι α : Type*} [DecidableEq α] {t : Finset ι} (h : t.Nonempty)
-    (A : ι → Finset α) (a : α) : a ∈ t.inf' h A ↔ ∀ i ∈ t, a ∈ A i := by
-  simp [Finset.mem_inf']
+For a finite index set `s` and a family of finite sets `S i`, the cardinality of the union
+`⋃ i ∈ s, S i` equals the alternating sum over all nonempty subsets `t ⊆ s` of
+`(-1) ^ (|t| + 1) * |⋂ i ∈ t, S i|`.
 
-/-- **Inclusion-exclusion principle**:
-`|⋃_{i ∈ s} A i| = ∑_{∅ ≠ S ⊆ s} (-1)^(|S|+1) |⋂_{i ∈ S} A i|`.
+Here the intersection `⋂ i ∈ t, S i` is realized as the elements of the union that lie in every
+`S i` for `i ∈ t` (which, for nonempty `t ⊆ s`, is exactly the intersection).
 
-The sum ranges over all subsets `t` of the index set `s`; the empty subset contributes `0`,
-and a nonempty subset `t` contributes `(-1)^(|t|+1) * |⋂_{i ∈ t} A i|`, where the intersection
-is `t.inf' h A` (see `Math.mem_inf'_iff`). -/
-theorem inclusion_exclusion {ι α : Type*} [DecidableEq α] [DecidableEq ι]
-    (s : Finset ι) (A : ι → Finset α) :
-    (#(s.biUnion A) : ℤ) = ∑ t ∈ s.powerset,
-      if h : t.Nonempty then (-1 : ℤ) ^ (#t + 1) * #(t.inf' h A) else 0 := by
-  classical
-  set F : Finset ι → ℤ := fun t =>
-    if h : t.Nonempty then (-1 : ℤ) ^ (#t + 1) * #(t.inf' h A) else 0 with hF
-  have h1 : ∑ t ∈ s.powerset.filter (·.Nonempty), F t = ∑ t ∈ s.powerset, F t := by
-    refine Finset.sum_filter_of_ne ?_
-    intro t _ ht
-    by_contra hne
-    rw [hF] at ht
-    simp [Finset.not_nonempty_iff_eq_empty.1 (by simpa using hne)] at ht
-  rw [Finset.inclusion_exclusion_card_biUnion s A, ← h1,
-    ← Finset.sum_coe_sort (s.powerset.filter (·.Nonempty)) F]
-  refine Finset.sum_congr rfl (fun t _ => ?_)
-  simp only [hF, dif_pos (Finset.mem_filter.1 t.2).2]
+This is derived from `Finset.inclusion_exclusion_card_biUnion` in Mathlib. -/
+theorem inclusion_exclusion {ι α : Type*} [DecidableEq α] (s : Finset ι) (S : ι → Finset α) :
+    (#(s.biUnion S) : ℤ) = ∑ t ∈ s.powerset.filter (·.Nonempty),
+      (-1 : ℤ) ^ (#t + 1) * #((s.biUnion S).filter (fun a => ∀ i ∈ t, a ∈ S i)) := by
+  rw [Finset.inclusion_exclusion_card_biUnion s S,
+    ← Finset.sum_attach (s.powerset.filter (·.Nonempty))
+      (fun t => (-1 : ℤ) ^ (#t + 1) * #((s.biUnion S).filter (fun a => ∀ i ∈ t, a ∈ S i)))]
+  refine Finset.sum_congr rfl ?_
+  rintro ⟨t, ht⟩ -
+  have ht' := Finset.mem_filter.1 ht
+  have hne : t.Nonempty := ht'.2
+  have hsub : t ⊆ s := Finset.mem_powerset.1 ht'.1
+  have hEq : t.inf' hne S = (s.biUnion S).filter (fun a => ∀ i ∈ t, a ∈ S i) := by
+    ext a
+    simp only [Finset.mem_inf', Finset.mem_filter, Finset.mem_biUnion]
+    constructor
+    · intro h
+      obtain ⟨i, hi⟩ := hne
+      exact ⟨⟨i, hsub hi, h i hi⟩, h⟩
+    · exact fun h => h.2
+  simp only [hEq]
 
 end Math
 
 #print axioms Math.inclusion_exclusion
-#print axioms Math.mem_inf'_iff
 

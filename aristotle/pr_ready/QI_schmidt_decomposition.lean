@@ -10,494 +10,395 @@ Provenance: Aristotle theorem prover (Harmonic)
 import Mathlib
 
 open scoped BigOperators
-open Matrix
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+open Finset Matrix
+open scoped ComplexConjugate InnerProductSpace
 
 namespace QI
 
-/-! ### Power sums determine a finite multiset of positive reals -/
+variable {m n : ℕ}
 
-open Polynomial in
-/-- If two multisets of positive reals have the same power sums `∑ xᵏ` for every `k ≥ 1`,
-they are equal. -/
-theorem multiset_eq_of_powerSum_eq {A B : Multiset ℝ}
-    (hA : ∀ x ∈ A, 0 < x) (hB : ∀ x ∈ B, 0 < x)
-    (h : ∀ k : ℕ, 1 ≤ k → (A.map (· ^ k)).sum = (B.map (· ^ k)).sum) : A = B := by
-  classical
-  refine Multiset.ext.mpr fun c => ?_
-  set S : Finset ℝ := A.toFinset ∪ B.toFinset with hS
-  set d : ℝ → ℝ := fun x => (A.count x : ℝ) - (B.count x : ℝ) with hd
-  have hApos : ∀ x ∈ S, (0:ℝ) < x := by
-    intro x hx
-    rcases Finset.mem_union.mp hx with hx | hx
-    · exact hA x (Multiset.mem_toFinset.mp hx)
-    · exact hB x (Multiset.mem_toFinset.mp hx)
-  have key : ∀ k : ℕ, 1 ≤ k → ∑ x ∈ S, d x * x ^ k = 0 := by
-    intro k hk
-    have hAk : (A.map (· ^ k)).sum = ∑ x ∈ S, (A.count x : ℝ) * x ^ k := by
-      calc (A.map (· ^ k)).sum = ∑ x ∈ A.toFinset, A.count x • x ^ k :=
-            Finset.sum_multiset_map_count A _
-        _ = ∑ x ∈ A.toFinset, (A.count x : ℝ) * x ^ k := by simp [nsmul_eq_mul]
-        _ = ∑ x ∈ S, (A.count x : ℝ) * x ^ k := by
-            refine Finset.sum_subset Finset.subset_union_left ?_
-            intro x _ hx
-            simp [Multiset.count_eq_zero.mpr (fun hm => hx (Multiset.mem_toFinset.mpr hm))]
-    have hBk : (B.map (· ^ k)).sum = ∑ x ∈ S, (B.count x : ℝ) * x ^ k := by
-      calc (B.map (· ^ k)).sum = ∑ x ∈ B.toFinset, B.count x • x ^ k :=
-            Finset.sum_multiset_map_count B _
-        _ = ∑ x ∈ B.toFinset, (B.count x : ℝ) * x ^ k := by simp [nsmul_eq_mul]
-        _ = ∑ x ∈ S, (B.count x : ℝ) * x ^ k := by
-            refine Finset.sum_subset Finset.subset_union_right ?_
-            intro x _ hx
-            simp [Multiset.count_eq_zero.mpr (fun hm => hx (Multiset.mem_toFinset.mpr hm))]
-    have hk' := h k hk
-    rw [hAk, hBk] at hk'
-    have hzero : ∑ x ∈ S, ((A.count x : ℝ) * x ^ k - (B.count x : ℝ) * x ^ k) = 0 := by
-      rw [Finset.sum_sub_distrib, hk', sub_self]
-    rw [← hzero]
-    exact Finset.sum_congr rfl fun x _ => by simp [hd]; ring
-  have main : ∀ c ∈ S, d c = 0 := by
-    intro c hc
-    have hc0 : (0:ℝ) < c := hApos c hc
-    set p : ℝ[X] := X * ∏ y ∈ S.erase c, (C (c - y)⁻¹ * (X - C y)) with hp
-    have hpc : p.eval c = c := by
-      rw [hp]
-      simp only [eval_mul, eval_X, eval_prod, eval_sub, eval_C]
-      rw [Finset.prod_congr rfl (fun y hy => ?_), Finset.prod_const_one, mul_one]
-      have : c - y ≠ 0 := sub_ne_zero.mpr (Ne.symm (Finset.ne_of_mem_erase hy))
-      field_simp
-    have hpy : ∀ y ∈ S, y ≠ c → p.eval y = 0 := by
-      intro y hy hyc
-      rw [hp]
-      simp only [eval_mul, eval_prod, eval_sub, eval_C, eval_X]
-      have hmem : y ∈ S.erase c := Finset.mem_erase.mpr ⟨hyc, hy⟩
-      rw [Finset.prod_eq_zero hmem (by simp)]
-      ring
-    have hp0 : p.coeff 0 = 0 := by
-      rw [Polynomial.coeff_zero_eq_eval_zero, hp]
-      simp
-    have hsum : ∑ x ∈ S, d x * p.eval x = 0 := by
-      have hrw : ∀ x ∈ S, d x * p.eval x
-          = ∑ i ∈ Finset.range (p.natDegree + 1), (d x * p.coeff i) * x ^ i := by
-        intro x _
-        rw [Polynomial.eval_eq_sum_range, Finset.mul_sum]
-        exact Finset.sum_congr rfl fun i _ => by ring
-      rw [Finset.sum_congr rfl hrw, Finset.sum_comm]
-      refine Finset.sum_eq_zero fun i hi => ?_
-      rcases Nat.eq_zero_or_pos i with hi0 | hi0
-      · subst hi0; simp [hp0]
-      · calc ∑ x ∈ S, (d x * p.coeff i) * x ^ i = p.coeff i * ∑ x ∈ S, d x * x ^ i := by
-              rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun x _ => by ring
-          _ = 0 := by rw [key i hi0, mul_zero]
-    have hsingle : ∑ x ∈ S, d x * p.eval x = d c * c := by
-      rw [Finset.sum_eq_single c]
-      · rw [hpc]
-      · intro x hx hxc
-        rw [hpy x hx hxc, mul_zero]
-      · intro hcS; exact absurd hc hcS
-    rw [hsingle] at hsum
-    exact (mul_eq_zero.mp hsum).resolve_right (ne_of_gt hc0)
-  by_cases hcS : c ∈ S
-  · have hdc := main c hcS
-    simp only [hd, sub_eq_zero] at hdc
-    exact_mod_cast hdc
-  · have h1 : A.count c = 0 := Multiset.count_eq_zero.mpr fun hm =>
-      hcS (Finset.mem_union_left _ (Multiset.mem_toFinset.mpr hm))
-    have h2 : B.count c = 0 := Multiset.count_eq_zero.mpr fun hm =>
-      hcS (Finset.mem_union_right _ (Multiset.mem_toFinset.mpr hm))
-    rw [h1, h2]
-
-/-! ### Outer products -/
-
-/-- The rank-one matrix `x yᴴ`. -/
-noncomputable def outer {m : ℕ} (x y : EuclideanSpace ℂ (Fin m)) :
-    Matrix (Fin m) (Fin m) ℂ :=
-  Matrix.of fun j a => x j * (starRingEnd ℂ) (y a)
-
-lemma outer_apply {m : ℕ} (x y : EuclideanSpace ℂ (Fin m)) (j a : Fin m) :
-    outer x y j a = x j * (starRingEnd ℂ) (y a) := rfl
-
-lemma outer_mul_outer {m : ℕ} (x y z w : EuclideanSpace ℂ (Fin m)) :
-    outer x y * outer z w = (inner ℂ y z : ℂ) • outer x w := by
-  ext j a
-  simp [outer, Matrix.mul_apply, PiLp.inner_apply, RCLike.inner_apply, Finset.mul_sum,
-    mul_comm, mul_left_comm]
-
-lemma trace_outer {m : ℕ} (x y : EuclideanSpace ℂ (Fin m)) :
-    Matrix.trace (outer x y) = (inner ℂ y x : ℂ) := by
-  simp [outer, Matrix.trace, Matrix.diag, PiLp.inner_apply, RCLike.inner_apply]
-
-/-- Coordinate form of orthonormality. -/
-lemma sum_conj_of_orthonormal {N r : ℕ} {v : Fin r → EuclideanSpace ℂ (Fin N)}
-    (hv : Orthonormal ℂ v) (i l : Fin r) :
-    ∑ k, v i k * (starRingEnd ℂ) (v l k) = if i = l then 1 else 0 := by
-  have h := (orthonormal_iff_ite.mp hv) l i
-  rw [PiLp.inner_apply] at h
-  simp only [RCLike.inner_apply] at h
-  simpa [mul_comm, eq_comm] using h
-
-/-! ### The Schmidt decomposition predicate -/
-
-/-- `IsSchmidtDecomposition psi s u v` says that the bipartite state `psi` (a vector in
-`ℂ^m ⊗ ℂ^n`, presented via its amplitudes indexed by pairs) is written as
-`∑ i, s i • (u i ⊗ v i)` with strictly positive coefficients `s i` and orthonormal
-families `u`, `v` in the two factors. -/
-structure IsSchmidtDecomposition {m n r : ℕ} (psi : EuclideanSpace ℂ (Fin m × Fin n))
-    (s : Fin r → ℝ) (u : Fin r → EuclideanSpace ℂ (Fin m))
-    (v : Fin r → EuclideanSpace ℂ (Fin n)) : Prop where
-  pos : ∀ i, 0 < s i
+/-- `IsSchmidtDecomposition psi σ u v` says that the bipartite pure state `psi`, a vector of the
+tensor product `ℂ^m ⊗ ℂ^n` realized as `EuclideanSpace ℂ (Fin m × Fin n)`, is written as
+`psi = ∑ k, σ k • (u k ⊗ v k)` where the `σ k` are strictly positive reals (the Schmidt
+coefficients) and `u`, `v` are orthonormal families in the two factors. -/
+structure IsSchmidtDecomposition {ι : Type} [Fintype ι]
+    (psi : EuclideanSpace ℂ (Fin m × Fin n)) (σ : ι → ℝ)
+    (u : ι → EuclideanSpace ℂ (Fin m)) (v : ι → EuclideanSpace ℂ (Fin n)) : Prop where
+  coeff_pos : ∀ k, 0 < σ k
   left_orthonormal : Orthonormal ℂ u
   right_orthonormal : Orthonormal ℂ v
-  amp : ∀ j k, psi (j, k) = ∑ i, (s i : ℂ) * u i j * v i k
+  sum_eq : ∀ i j, psi (i, j) = ∑ k, (σ k : ℂ) * u k i * v k j
 
-/-! ### The Gram matrix of a decomposition -/
+/-- The matrix of coefficients of a bipartite state in the product basis. -/
+noncomputable def coeffMatrix (psi : EuclideanSpace ℂ (Fin m × Fin n)) : Matrix (Fin m) (Fin n) ℂ :=
+  fun i j => psi (i, j)
 
-section
+/-- The (unnormalized) reduced density matrix of `psi` on the first factor. -/
+noncomputable def reducedLeft (psi : EuclideanSpace ℂ (Fin m × Fin n)) : Matrix (Fin m) (Fin m) ℂ :=
+  coeffMatrix psi * (coeffMatrix psi)ᴴ
 
-variable {m n r : ℕ} {M : Matrix (Fin m) (Fin n) ℂ} {s : Fin r → ℝ}
-  {u : Fin r → EuclideanSpace ℂ (Fin m)} {v : Fin r → EuclideanSpace ℂ (Fin n)}
+lemma reducedLeft_apply (psi : EuclideanSpace ℂ (Fin m × Fin n)) (i a : Fin m) :
+    reducedLeft psi i a = ∑ j, psi (i, j) * conj (psi (a, j)) := by
+  simp [reducedLeft, coeffMatrix, Matrix.mul_apply, Matrix.conjTranspose_apply]
 
-lemma mul_conjTranspose_of_decomp (hv : Orthonormal ℂ v)
-    (hM : ∀ j k, M j k = ∑ i, (s i : ℂ) * u i j * v i k) :
-    M * Mᴴ = ∑ i, ((s i : ℂ) ^ 2) • outer (u i) (u i) := by
-  ext j a
-  rw [Matrix.mul_apply]
-  have expand : ∀ k, M j k * Mᴴ k a
-      = ∑ i, ∑ l, ((s i : ℂ) * u i j * v i k) *
-          ((s l : ℂ) * (starRingEnd ℂ) (u l a) * (starRingEnd ℂ) (v l k)) := by
-    intro k
-    rw [Matrix.conjTranspose_apply, hM, hM, star_sum, Finset.sum_mul_sum]
-    refine Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun l _ => ?_
-    simp only [← starRingEnd_apply, map_mul, Complex.conj_ofReal]
-  simp only [expand]
+lemma reducedLeft_isHermitian (psi : EuclideanSpace ℂ (Fin m × Fin n)) :
+    (reducedLeft psi).IsHermitian :=
+  Matrix.isHermitian_mul_conjTranspose_self _
+
+/-- The inner product on `EuclideanSpace` written as a sum of coordinates. -/
+lemma inner_euclidean {N : ℕ} (x y : EuclideanSpace ℂ (Fin N)) :
+    ⟪x, y⟫_ℂ = ∑ i, conj (x i) * y i := by
+  simp [PiLp.inner_apply, RCLike.inner_apply, mul_comm]
+
+/-- Resolution of the identity for an orthonormal basis of `EuclideanSpace ℂ (Fin m)`. -/
+lemma sum_mul_conj_orthonormalBasis
+    (w : OrthonormalBasis (Fin m) ℂ (EuclideanSpace ℂ (Fin m))) (i a : Fin m) :
+    ∑ k, (w k) i * conj ((w k) a) = if i = a then 1 else 0 := by
+  have h := w.sum_inner_mul_inner (EuclideanSpace.single i (1 : ℂ))
+    (EuclideanSpace.single a (1 : ℂ))
+  simpa [EuclideanSpace.inner_single_left, EuclideanSpace.inner_single_right,
+    EuclideanSpace.single_apply, eq_comm] using h
+
+/-- Auxiliary vectors in the second factor: `y k` is the `k`-th row of the coefficient matrix
+in the eigenbasis `w` of the reduced density matrix. -/
+noncomputable def yvec (psi : EuclideanSpace ℂ (Fin m × Fin n))
+    (w : Fin m → EuclideanSpace ℂ (Fin m)) (k : Fin m) : EuclideanSpace ℂ (Fin n) :=
+  (WithLp.toLp 2 (fun j => ∑ a, conj (w k a) * psi (a, j)) : EuclideanSpace ℂ (Fin n))
+
+@[simp] lemma yvec_apply (psi : EuclideanSpace ℂ (Fin m × Fin n))
+    (w : Fin m → EuclideanSpace ℂ (Fin m)) (k : Fin m) (j : Fin n) :
+    yvec psi w k j = ∑ a, conj (w k a) * psi (a, j) := rfl
+
+section Aux
+
+variable (psi : EuclideanSpace ℂ (Fin m × Fin n))
+
+/-- Inner products of the auxiliary vectors, computed from the eigenvector equation. -/
+lemma inner_yvec (w : OrthonormalBasis (Fin m) ℂ (EuclideanSpace ℂ (Fin m))) (lam : Fin m → ℝ)
+    (hw : ∀ k, (reducedLeft psi) *ᵥ (w k).ofLp = lam k • (w k).ofLp) (k l : Fin m) :
+    ⟪yvec psi (fun i => w i) k, yvec psi (fun i => w i) l⟫_ℂ =
+      (lam k : ℂ) * (if l = k then 1 else 0) := by
+  rw [inner_euclidean]
+  have e1 : ∀ j : Fin n, conj (yvec psi (fun i => w i) k j) * yvec psi (fun i => w i) l j
+      = ∑ b, ∑ a, (conj ((w l) b) * psi (b, j)) * ((w k) a * conj (psi (a, j))) := by
+    intro j
+    simp only [yvec_apply, map_sum, map_mul, Complex.conj_conj, ← Finset.sum_mul_sum]
+    rw [mul_comm]
+  simp only [e1]
   rw [Finset.sum_comm]
-  have key : ∀ i : Fin r, ∑ k, ∑ l, ((s i : ℂ) * u i j * v i k) *
-          ((s l : ℂ) * (starRingEnd ℂ) (u l a) * (starRingEnd ℂ) (v l k))
-      = ((s i : ℂ) ^ 2) * (u i j * (starRingEnd ℂ) (u i a)) := by
-    intro i
+  have e2 : ∀ b : Fin m, ∑ j, ∑ a, (conj ((w l) b) * psi (b, j)) * ((w k) a * conj (psi (a, j)))
+      = conj ((w l) b) * (((reducedLeft psi) *ᵥ (w k).ofLp) b) := by
+    intro b
     rw [Finset.sum_comm]
-    have step : ∀ l : Fin r, ∑ k, ((s i : ℂ) * u i j * v i k) *
-          ((s l : ℂ) * (starRingEnd ℂ) (u l a) * (starRingEnd ℂ) (v l k))
-        = ((s i : ℂ) * u i j * ((s l : ℂ) * (starRingEnd ℂ) (u l a))) *
-            (if i = l then 1 else 0) := by
-      intro l
-      rw [← sum_conj_of_orthonormal hv i l, Finset.mul_sum]
-      exact Finset.sum_congr rfl fun k _ => by ring
-    simp only [step]
-    simp
+    simp only [Matrix.mulVec, dotProduct, reducedLeft_apply, Finset.mul_sum, Finset.sum_mul]
+    exact Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun j _ => by ring
+  simp only [e2, hw k]
+  have h : ∑ b, conj ((w l) b) * (((lam k) • (w k).ofLp) b) = (lam k : ℂ) * ⟪w l, w k⟫_ℂ := by
+    rw [inner_euclidean, Finset.mul_sum]
+    refine Finset.sum_congr rfl fun b _ => ?_
+    simp [Complex.real_smul]
     ring
-  simp only [key]
-  simp [outer, Matrix.sum_apply, smul_eq_mul]
+  rw [h, orthonormal_iff_ite.mp w.orthonormal l k]
 
-lemma pow_sum_outer (hu : Orthonormal ℂ u) (c : Fin r → ℂ) (k : ℕ) :
-    (∑ i, c i • outer (u i) (u i)) ^ (k + 1) = ∑ i, (c i) ^ (k + 1) • outer (u i) (u i) := by
-  induction k with
-  | zero => simp
-  | succ k ih =>
-    rw [pow_succ, ih, Finset.sum_mul_sum]
-    refine Finset.sum_congr rfl fun i _ => ?_
-    rw [Finset.sum_eq_single i]
-    · rw [smul_mul_smul_comm, outer_mul_outer, (orthonormal_iff_ite.mp hu) i i]
-      simp [pow_succ]
-    · intro l _ hl
-      rw [smul_mul_smul_comm, outer_mul_outer, (orthonormal_iff_ite.mp hu) i l,
-        if_neg (Ne.symm hl)]
-      simp
-    · simp
+/-- Reconstruction of the coefficient matrix from an orthonormal eigenbasis. -/
+lemma coeff_eq_sum_yvec (w : OrthonormalBasis (Fin m) ℂ (EuclideanSpace ℂ (Fin m)))
+    (i : Fin m) (j : Fin n) :
+    psi (i, j) = ∑ k, w k i * yvec psi (fun i => w i) k j := by
+  have h : ∑ k, (w k) i * yvec psi (fun i => w i) k j
+      = ∑ a, (∑ k, (w k) i * conj ((w k) a)) * psi (a, j) := by
+    simp only [yvec_apply, Finset.mul_sum, Finset.sum_mul]
+    rw [Finset.sum_comm]
+    exact Finset.sum_congr rfl fun a _ => Finset.sum_congr rfl fun k _ => by ring
+  rw [h]
+  simp [sum_mul_conj_orthonormalBasis w]
 
-lemma trace_pow_mul_conjTranspose (hu : Orthonormal ℂ u) (hv : Orthonormal ℂ v)
-    (hM : ∀ j k, M j k = ∑ i, (s i : ℂ) * u i j * v i k) (k : ℕ) :
-    Matrix.trace ((M * Mᴴ) ^ (k + 1)) = ∑ i, (((s i : ℂ) ^ 2)) ^ (k + 1) := by
-  rw [mul_conjTranspose_of_decomp hv hM, pow_sum_outer hu, Matrix.trace_sum]
-  refine Finset.sum_congr rfl fun i _ => ?_
-  rw [Matrix.trace_smul, trace_outer, (orthonormal_iff_ite.mp hu) i i]
-  simp
+end Aux
 
-end
-
-/-! ### Uniqueness of the Schmidt coefficients -/
-
-theorem schmidt_coefficients_unique {m n : ℕ} {psi : EuclideanSpace ℂ (Fin m × Fin n)}
-    {r r' : ℕ} {s : Fin r → ℝ} {s' : Fin r' → ℝ}
-    {u : Fin r → EuclideanSpace ℂ (Fin m)} {v : Fin r → EuclideanSpace ℂ (Fin n)}
-    {u' : Fin r' → EuclideanSpace ℂ (Fin m)} {v' : Fin r' → EuclideanSpace ℂ (Fin n)}
-    (h : IsSchmidtDecomposition psi s u v) (h' : IsSchmidtDecomposition psi s' u' v') :
-    Multiset.map s Finset.univ.val = Multiset.map s' Finset.univ.val := by
+/-- **Existence** of a Schmidt decomposition. -/
+theorem exists_schmidtDecomposition (psi : EuclideanSpace ℂ (Fin m × Fin n)) :
+    ∃ (r : ℕ) (σ : Fin r → ℝ) (u : Fin r → EuclideanSpace ℂ (Fin m))
+      (v : Fin r → EuclideanSpace ℂ (Fin n)), IsSchmidtDecomposition psi σ u v := by
   classical
-  set M : Matrix (Fin m) (Fin n) ℂ := Matrix.of fun j k => psi (j, k) with hMdef
-  have hM : ∀ j k, M j k = ∑ i, (s i : ℂ) * u i j * v i k := fun j k => h.amp j k
-  have hM' : ∀ j k, M j k = ∑ i, (s' i : ℂ) * u' i j * v' i k := fun j k => h'.amp j k
-  have hpow : ∀ k : ℕ, 1 ≤ k → (∑ i, ((s i) ^ 2) ^ k) = ∑ i, ((s' i) ^ 2) ^ k := by
+  have hA : (reducedLeft psi).IsHermitian := reducedLeft_isHermitian psi
+  set w := hA.eigenvectorBasis with hwdef
+  set lam := hA.eigenvalues with hlamdef
+  have hw : ∀ k, (reducedLeft psi) *ᵥ (w k).ofLp = lam k • (w k).ofLp :=
+    fun k => hA.mulVec_eigenvectorBasis k
+  set y : Fin m → EuclideanSpace ℂ (Fin n) := fun k => yvec psi (fun i => w i) k with hydef
+  have hyy : ∀ k l, ⟪y k, y l⟫_ℂ = (lam k : ℂ) * (if l = k then 1 else 0) :=
+    inner_yvec psi w lam hw
+  have hself : ∀ k, ⟪y k, y k⟫_ℂ = (lam k : ℂ) := by
+    intro k
+    rw [hyy k k, if_pos rfl, mul_one]
+  have hnn : ∀ k, 0 ≤ lam k := by
+    intro k
+    have h2 := inner_self_nonneg (𝕜 := ℂ) (x := y k)
+    rw [hself k] at h2
+    simpa using h2
+  have hzero : ∀ k, lam k = 0 → y k = 0 := by
     intro k hk
-    obtain ⟨k, rfl⟩ : ∃ j, k = j + 1 := ⟨k - 1, by omega⟩
-    have h1 := trace_pow_mul_conjTranspose h.left_orthonormal h.right_orthonormal hM k
-    have h2 := trace_pow_mul_conjTranspose h'.left_orthonormal h'.right_orthonormal hM' k
-    have h3 : (∑ i, (((s i : ℂ)) ^ 2) ^ (k + 1)) = ∑ i, (((s' i : ℂ)) ^ 2) ^ (k + 1) := by
-      rw [← h1, ← h2]
-    exact_mod_cast h3
-  have hA : ∀ x ∈ Multiset.map (fun i => (s i) ^ 2) (Finset.univ : Finset (Fin r)).val, 0 < x := by
-    intro x hx
-    obtain ⟨i, -, rfl⟩ := Multiset.mem_map.mp hx
-    exact pow_pos (h.pos i) 2
-  have hB : ∀ x ∈ Multiset.map (fun i => (s' i) ^ 2) (Finset.univ : Finset (Fin r')).val, 0 < x := by
-    intro x hx
-    obtain ⟨i, -, rfl⟩ := Multiset.mem_map.mp hx
-    exact pow_pos (h'.pos i) 2
-  have hsq : Multiset.map (fun i => (s i) ^ 2) (Finset.univ : Finset (Fin r)).val
-      = Multiset.map (fun i => (s' i) ^ 2) (Finset.univ : Finset (Fin r')).val := by
-    refine multiset_eq_of_powerSum_eq hA hB fun k hk => ?_
-    rw [Multiset.map_map, Multiset.map_map, ← Finset.sum_eq_multiset_sum,
-      ← Finset.sum_eq_multiset_sum]
-    simpa [Function.comp] using hpow k hk
-  have e1 : Multiset.map Real.sqrt (Multiset.map (fun i => (s i) ^ 2)
-      (Finset.univ : Finset (Fin r)).val) = Multiset.map s Finset.univ.val := by
-    rw [Multiset.map_map]
-    refine Multiset.map_congr rfl fun i _ => ?_
-    simp [Function.comp, Real.sqrt_sq (h.pos i).le]
-  have e2 : Multiset.map Real.sqrt (Multiset.map (fun i => (s' i) ^ 2)
-      (Finset.univ : Finset (Fin r')).val) = Multiset.map s' Finset.univ.val := by
-    rw [Multiset.map_map]
-    refine Multiset.map_congr rfl fun i _ => ?_
-    simp [Function.comp, Real.sqrt_sq (h'.pos i).le]
-  rw [← e1, ← e2, hsq]
-
-/-! ### Existence -/
-
-theorem schmidt_exists {m n : ℕ} (psi : EuclideanSpace ℂ (Fin m × Fin n)) :
-    ∃ (r : ℕ) (s : Fin r → ℝ) (u : Fin r → EuclideanSpace ℂ (Fin m))
-      (v : Fin r → EuclideanSpace ℂ (Fin n)), IsSchmidtDecomposition psi s u v := by
-  classical
-  set M : Matrix (Fin m) (Fin n) ℂ := Matrix.of fun j k => psi (j, k) with hMdef
-  have hA : (M * Mᴴ).IsHermitian := isHermitian_mul_conjTranspose_self M
-  set b := hA.eigenvectorBasis with hbdef
-  set mu := hA.eigenvalues with hmudef
-  set w : Fin m → Fin n → ℂ := fun i k => ∑ j, (starRingEnd ℂ) (b i j) * M j k with hwdef
-  -- the eigenvalue equation, in coordinates
-  have heig : ∀ i a, ∑ j, (M * Mᴴ) a j * b i j = (mu i : ℂ) * b i a := by
-    intro i a
-    have h := congrFun (hA.mulVec_eigenvectorBasis i) a
-    simpa [Matrix.mulVec, dotProduct, Complex.real_smul] using h
-  -- the vectors `w i` are orthogonal, with squared norms the eigenvalues
-  have gram : ∀ i l, ∑ k, (starRingEnd ℂ) (w i k) * w l k
-      = (mu i : ℂ) * (if l = i then 1 else 0) := by
-    intro i l
-    have e0 : ∑ k, (starRingEnd ℂ) (w i k) * w l k
-        = ∑ a, (starRingEnd ℂ) (b l a) * ∑ j, (M * Mᴴ) a j * b i j := by
-      have e1 : ∀ k, (starRingEnd ℂ) (w i k) * w l k
-          = ∑ j, ∑ a, (b i j * (starRingEnd ℂ) (M j k)) * ((starRingEnd ℂ) (b l a) * M a k) := by
-        intro k
-        rw [hwdef]
-        simp only [map_sum, map_mul, Complex.conj_conj]
-        rw [Finset.sum_mul_sum]
-      simp only [e1]
-      rw [Finset.sum_comm]
-      have e2 : ∀ j : Fin m, ∑ k, ∑ a, (b i j * (starRingEnd ℂ) (M j k)) *
-            ((starRingEnd ℂ) (b l a) * M a k)
-          = ∑ a, ∑ k, (b i j * (starRingEnd ℂ) (M j k)) * ((starRingEnd ℂ) (b l a) * M a k) :=
-        fun j => Finset.sum_comm
-      simp only [e2]
-      rw [Finset.sum_comm]
-      refine Finset.sum_congr rfl fun a _ => ?_
-      rw [Finset.mul_sum]
-      refine Finset.sum_congr rfl fun j _ => ?_
-      rw [Matrix.mul_apply, Finset.sum_mul, Finset.mul_sum]
-      exact Finset.sum_congr rfl fun k _ => by simp [Matrix.conjTranspose_apply]; ring
-    rw [e0]
-    simp only [heig]
-    have e3 : ∑ a, (starRingEnd ℂ) (b l a) * ((mu i : ℂ) * b i a)
-        = (mu i : ℂ) * (inner ℂ (b l) (b i)) := by
-      rw [PiLp.inner_apply, Finset.mul_sum]
-      exact Finset.sum_congr rfl fun a _ => by simp [RCLike.inner_apply]; ring
-    rw [e3, (orthonormal_iff_ite.mp b.orthonormal) l i]
-  have hsq : ∀ i, mu i = ∑ k, ‖w i k‖ ^ 2 := by
-    intro i
-    have h := gram i i
-    rw [if_pos rfl, mul_one] at h
-    have h2 : (∑ k, (starRingEnd ℂ) (w i k) * w i k) = ((∑ k, ‖w i k‖ ^ 2 : ℝ) : ℂ) := by
-      push_cast
-      exact Finset.sum_congr rfl fun k _ => by rw [mul_comm, Complex.mul_conj']
-    rw [h2] at h
-    exact_mod_cast h.symm
-  have hmupos : ∀ i, 0 ≤ mu i := fun i => by rw [hsq i]; positivity
-  have hw0 : ∀ i, mu i = 0 → ∀ k, w i k = 0 := by
-    intro i hi k
-    have h := hsq i
-    rw [hi] at h
-    have h3 := (Finset.sum_eq_zero_iff_of_nonneg (fun k _ => by positivity)).mp h.symm k
-      (Finset.mem_univ k)
-    simpa using h3
-  have hrecon : ∀ j k, M j k = ∑ i, b i j * w i k := by
-    intro j k
-    have h := b.sum_repr' (WithLp.toLp 2 (fun j => M j k) : EuclideanSpace ℂ (Fin m))
-    have h2 := congrArg (fun (x : EuclideanSpace ℂ (Fin m)) => x j) h
-    simp only [PiLp.inner_apply, RCLike.inner_apply] at h2
-    simp at h2
-    rw [← h2]
-    refine Finset.sum_congr rfl fun i _ => ?_
-    rw [hwdef, mul_comm]
-    congr 1
-    exact Finset.sum_congr rfl fun a _ => mul_comm _ _
-  -- the indices with nonzero eigenvalue
-  set S : Finset (Fin m) := Finset.univ.filter (fun i => mu i ≠ 0) with hSdef
-  have hmemS : ∀ x, x ∈ S ↔ mu x ≠ 0 := by
-    intro x; rw [hSdef, Finset.mem_filter]; simp
-  set g : Fin S.card → Fin m := fun i => ((S.equivFin.symm i : {x // x ∈ S}) : Fin m) with hgdef
-  have hgne : ∀ i, mu (g i) ≠ 0 := fun i => (hmemS _).mp (S.equivFin.symm i).2
-  have hginj : Function.Injective g := by
-    intro i j hij
-    have h : (S.equivFin.symm i) = (S.equivFin.symm j) := Subtype.ext hij
-    simpa using h
-  have hgpos : ∀ i, 0 < Real.sqrt (mu (g i)) :=
-    fun i => Real.sqrt_pos.mpr (lt_of_le_of_ne (hmupos _) (Ne.symm (hgne i)))
-  have hsqrt_ne : ∀ i, ((Real.sqrt (mu (g i)) : ℂ)) ≠ 0 := by
-    intro i
-    exact_mod_cast Complex.ofReal_ne_zero.mpr (ne_of_gt (hgpos i))
-  have hsqrt_sq : ∀ i, ((Real.sqrt (mu (g i)) : ℂ)) ^ 2 = (mu (g i) : ℂ) := by
-    intro i
-    have : Real.sqrt (mu (g i)) ^ 2 = mu (g i) := Real.sq_sqrt (hmupos _)
-    exact_mod_cast congrArg (fun x : ℝ => (x : ℂ)) this
-  refine ⟨S.card, fun i => Real.sqrt (mu (g i)), fun i => b (g i),
-    fun i => (WithLp.toLp 2 (fun k => ((Real.sqrt (mu (g i)) : ℂ))⁻¹ * w (g i) k) :
-      EuclideanSpace ℂ (Fin n)), hgpos, b.orthonormal.comp g hginj, ?_, ?_⟩
+    have h := hself k
+    rw [hk] at h
+    exact inner_self_eq_zero (𝕜 := ℂ) (x := y k) |>.mp (by simpa using h)
+  set s : Finset (Fin m) := Finset.univ.filter (fun k => lam k ≠ 0) with hsdef
+  set e : Fin s.card → Fin m := fun t => ((s.equivFin.symm t : {x // x ∈ s}) : Fin m) with hedef
+  have hemem : ∀ t, e t ∈ s := fun t => (s.equivFin.symm t).2
+  have hepos : ∀ t, 0 < lam (e t) := by
+    intro t
+    have h := hemem t
+    rw [hsdef, Finset.mem_filter] at h
+    exact lt_of_le_of_ne (hnn _) (Ne.symm h.2)
+  have heinj : Function.Injective e :=
+    Subtype.val_injective.comp s.equivFin.symm.injective
+  have hsq : ∀ t, ((Real.sqrt (lam (e t)) : ℝ) : ℂ) ≠ 0 := by
+    intro t
+    simpa using (Real.sqrt_pos.mpr (hepos t)).ne'
+  refine ⟨s.card, fun t => Real.sqrt (lam (e t)), fun t => w (e t),
+    fun t => ((Real.sqrt (lam (e t)) : ℝ) : ℂ)⁻¹ • y (e t), ?_, ?_, ?_, ?_⟩
+  · intro t; exact Real.sqrt_pos.mpr (hepos t)
+  · exact w.orthonormal.comp e heinj
   · rw [orthonormal_iff_ite]
-    intro i l
-    rw [PiLp.inner_apply]
-    simp only [RCLike.inner_apply]
-    have hcalc : ∑ k, (starRingEnd ℂ) (((Real.sqrt (mu (g i)) : ℂ))⁻¹ * w (g i) k) *
-        (((Real.sqrt (mu (g l)) : ℂ))⁻¹ * w (g l) k)
-        = ((Real.sqrt (mu (g i)) : ℂ))⁻¹ * ((Real.sqrt (mu (g l)) : ℂ))⁻¹ *
-            ((mu (g i) : ℂ) * (if g l = g i then 1 else 0)) := by
-      rw [← gram (g i) (g l), Finset.mul_sum]
-      refine Finset.sum_congr rfl fun k _ => ?_
-      simp only [map_mul, map_inv₀, Complex.conj_ofReal]
-      ring
-    have hswap : ∑ k, ((Real.sqrt (mu (g l)) : ℂ))⁻¹ * w (g l) k *
-        (starRingEnd ℂ) (((Real.sqrt (mu (g i)) : ℂ))⁻¹ * w (g i) k)
-        = ∑ k, (starRingEnd ℂ) (((Real.sqrt (mu (g i)) : ℂ))⁻¹ * w (g i) k) *
-            (((Real.sqrt (mu (g l)) : ℂ))⁻¹ * w (g l) k) :=
-      Finset.sum_congr rfl fun k _ => by ring
-    rw [hswap, hcalc]
-    by_cases hil : i = l
-    · subst hil
-      rw [if_pos rfl, if_pos rfl, mul_one]
+    intro t l
+    rw [inner_smul_left, inner_smul_right, hyy]
+    rcases eq_or_ne t l with rfl | htl
+    · have h1 : ((Real.sqrt (lam (e t)) : ℝ) : ℂ) * ((Real.sqrt (lam (e t)) : ℝ) : ℂ)
+          = (lam (e t) : ℂ) := by
+        norm_cast
+        exact Real.mul_self_sqrt (le_of_lt (hepos t))
+      have hne := hsq t
+      rw [if_pos rfl, map_inv₀, Complex.conj_ofReal, mul_one, if_pos rfl, ← h1]
       field_simp
-      rw [hsqrt_sq i, div_self (Complex.ofReal_ne_zero.mpr (hgne i))]
-    · rw [if_neg hil, if_neg (fun hc => hil (hginj hc).symm)]
+    · rw [if_neg (fun h => htl (heinj h).symm), if_neg htl]
       ring
-  · intro j k
-    have hzero : ∀ x ∈ (Finset.univ : Finset (Fin m)), x ∉ S → b x j * w x k = 0 := by
-      intro x _ hx
-      have hx0 : mu x = 0 := by
+  · intro i j
+    have h1 : psi (i, j) = ∑ k, w k i * y k j := coeff_eq_sum_yvec psi w i j
+    have h2 : ∑ k, w k i * y k j = ∑ k ∈ s, w k i * y k j := by
+      refine (Finset.sum_subset (Finset.subset_univ s) ?_).symm
+      intro k _ hk
+      have hk0 : lam k = 0 := by
+        rw [hsdef, Finset.mem_filter] at hk
         by_contra hne
-        exact hx ((hmemS x).mpr hne)
-      rw [hw0 x hx0 k, mul_zero]
-    have step : ∑ i, b i j * w i k = ∑ i : Fin S.card, (Real.sqrt (mu (g i)) : ℂ) * b (g i) j *
-        (((Real.sqrt (mu (g i)) : ℂ))⁻¹ * w (g i) k) := by
-      rw [← Finset.sum_subset (Finset.subset_univ S) hzero,
-        ← Finset.sum_coe_sort S (fun i => b i j * w i k),
-        ← Equiv.sum_comp (S.equivFin.symm)
-          (fun (x : {x // x ∈ S}) => b (x : Fin m) j * w (x : Fin m) k)]
-      refine Finset.sum_congr rfl fun i _ => ?_
-      have hgi : ((S.equivFin.symm i : {x // x ∈ S}) : Fin m) = g i := rfl
-      rw [hgi]
-      calc b (g i) j * w (g i) k
-          = (((Real.sqrt (mu (g i)) : ℂ)) * ((Real.sqrt (mu (g i)) : ℂ))⁻¹) *
-              (b (g i) j * w (g i) k) := by
-            rw [mul_inv_cancel₀ (hsqrt_ne i), one_mul]
-        _ = _ := by ring
-    have hpsi : psi (j, k) = M j k := rfl
-    rw [hpsi, hrecon j k, step]
+        exact hk ⟨Finset.mem_univ k, hne⟩
+      rw [hzero k hk0]
+      simp
+    have h3 : ∑ k ∈ s, w k i * y k j = ∑ t : Fin s.card, w (e t) i * y (e t) j := by
+      rw [← Finset.sum_coe_sort s (fun k => w k i * y k j)]
+      exact (Equiv.sum_comp s.equivFin.symm (fun x : {x // x ∈ s} => w x i * y x j)).symm
+    rw [h1, h2, h3]
+    refine Finset.sum_congr rfl fun t _ => ?_
+    rw [PiLp.smul_apply, smul_eq_mul]
+    field_simp [hsq t]
 
-lemma sum_sq_coeff {m n : ℕ} {psi : EuclideanSpace ℂ (Fin m × Fin n)} {r : ℕ} {s : Fin r → ℝ}
-    {u : Fin r → EuclideanSpace ℂ (Fin m)} {v : Fin r → EuclideanSpace ℂ (Fin n)}
-    (h : IsSchmidtDecomposition psi s u v) : ∑ i, (s i) ^ 2 = ‖psi‖ ^ 2 := by
+section Uniqueness
+
+variable {ι : Type} [Fintype ι] {psi : EuclideanSpace ℂ (Fin m × Fin n)} {σ : ι → ℝ}
+  {u : ι → EuclideanSpace ℂ (Fin m)} {v : ι → EuclideanSpace ℂ (Fin n)}
+
+/-- The reduced density matrix computed from a Schmidt decomposition. -/
+lemma reducedLeft_of_schmidt (h : IsSchmidtDecomposition psi σ u v) (i a : Fin m) :
+    reducedLeft psi i a = ∑ k, ((σ k ^ 2 : ℝ) : ℂ) * u k i * conj (u k a) := by
   classical
-  set M : Matrix (Fin m) (Fin n) ℂ := Matrix.of fun j k => psi (j, k) with hMdef
-  have hM : ∀ j k, M j k = ∑ i, (s i : ℂ) * u i j * v i k := fun j k => h.amp j k
-  have h1 := trace_pow_mul_conjTranspose h.left_orthonormal h.right_orthonormal hM 0
-  have h2 : Matrix.trace (M * Mᴴ) = ((∑ p : Fin m × Fin n, ‖psi p‖ ^ 2 : ℝ) : ℂ) := by
-    rw [Matrix.trace]
-    simp only [Matrix.diag_apply, Matrix.mul_apply, Matrix.conjTranspose_apply, hMdef,
-      Matrix.of_apply, Fintype.sum_prod_type]
+  have hv : ∀ k l, (∑ j, v k j * conj (v l j)) = if l = k then 1 else 0 := by
+    intro k l
+    have hkl := orthonormal_iff_ite.mp h.right_orthonormal l k
+    rw [inner_euclidean] at hkl
+    rw [← hkl]
+    exact Finset.sum_congr rfl fun j _ => mul_comm _ _
+  rw [reducedLeft_apply]
+  have step : ∀ j : Fin n, psi (i, j) * conj (psi (a, j))
+      = ∑ k, ∑ l, ((σ k : ℂ) * u k i * ((σ l : ℂ) * conj (u l a))) * (v k j * conj (v l j)) := by
+    intro j
+    rw [h.sum_eq i j, h.sum_eq a j, map_sum, Finset.sum_mul_sum]
+    refine Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => ?_
+    simp only [map_mul, Complex.conj_ofReal]
+    ring
+  simp only [step]
+  have swap : ∑ j, ∑ k, ∑ l, ((σ k : ℂ) * u k i * ((σ l : ℂ) * conj (u l a)))
+        * (v k j * conj (v l j))
+      = ∑ k, ∑ l, ((σ k : ℂ) * u k i * ((σ l : ℂ) * conj (u l a)))
+        * (∑ j, v k j * conj (v l j)) := by
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl fun k _ => ?_
+    rw [Finset.sum_comm]
+    exact Finset.sum_congr rfl fun l _ => (Finset.mul_sum _ _ _).symm
+  rw [swap]
+  refine Finset.sum_congr rfl fun k _ => ?_
+  simp only [hv]
+  rw [Finset.sum_eq_single k]
+  · rw [if_pos rfl]
     push_cast
-    exact Finset.sum_congr rfl fun j _ => Finset.sum_congr rfl fun k _ => by
-      rw [← starRingEnd_apply, Complex.mul_conj']
-  rw [pow_one, h2] at h1
-  simp only [zero_add, pow_one] at h1
-  have h3 : (∑ p : Fin m × Fin n, ‖psi p‖ ^ 2) = ∑ i, (s i) ^ 2 := by exact_mod_cast h1
-  rw [← h3, EuclideanSpace.norm_eq, Real.sq_sqrt (by positivity)]
+    ring
+  · intro l _ hl
+    rw [if_neg hl, mul_zero]
+  · intro hk
+    exact absurd (Finset.mem_univ k) hk
 
-/-! ### Main theorem -/
+/-- The operator associated with the reduced density matrix, in terms of a Schmidt
+decomposition. -/
+lemma toEuclideanLin_reducedLeft_of_schmidt (h : IsSchmidtDecomposition psi σ u v)
+    (x : EuclideanSpace ℂ (Fin m)) :
+    Matrix.toEuclideanLin (reducedLeft psi) x =
+      ∑ k, ((σ k ^ 2 : ℝ) : ℂ) • (⟪u k, x⟫_ℂ • u k) := by
+  refine PiLp.ext fun i => ?_
+  have hlhs : (Matrix.toEuclideanLin (reducedLeft psi) x) i = ∑ a, reducedLeft psi i a * x a := by
+    simp [Matrix.toEuclideanLin, Matrix.mulVec, dotProduct]
+  have hrhs : ((∑ k, ((σ k ^ 2 : ℝ) : ℂ) • (⟪u k, x⟫_ℂ • u k) : EuclideanSpace ℂ (Fin m))) i
+      = ∑ k, ((σ k ^ 2 : ℝ) : ℂ) * (⟪u k, x⟫_ℂ * u k i) := by
+    simp
+  rw [hlhs, hrhs]
+  simp only [fun a => reducedLeft_of_schmidt h i a, inner_euclidean, Finset.sum_mul]
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl fun k _ => ?_
+  rw [Finset.mul_sum]
+  exact Finset.sum_congr rfl fun a _ => by ring
 
-/-- **Schmidt decomposition.** Every bipartite pure state `psi ∈ ℂ^m ⊗ ℂ^n` can be written as
-`psi = ∑ i, s i • (u i ⊗ v i)` with strictly positive reals `s i` and orthonormal families
-`u`, `v`; the sum of the squares of the coefficients is `‖psi‖ ^ 2` (so it is `1` for a
-normalized state), and the multiset of Schmidt coefficients is uniquely determined by `psi`. -/
-theorem schmidt_decomposition {m n : ℕ} (psi : EuclideanSpace ℂ (Fin m × Fin n)) :
-    ∃ (r : ℕ) (s : Fin r → ℝ) (u : Fin r → EuclideanSpace ℂ (Fin m))
-      (v : Fin r → EuclideanSpace ℂ (Fin n)),
-      IsSchmidtDecomposition psi s u v ∧
-      (∑ i, (s i) ^ 2 = ‖psi‖ ^ 2) ∧
-      (∀ (r' : ℕ) (s' : Fin r' → ℝ) (u' : Fin r' → EuclideanSpace ℂ (Fin m))
-        (v' : Fin r' → EuclideanSpace ℂ (Fin n)), IsSchmidtDecomposition psi s' u' v' →
-        Multiset.map s' Finset.univ.val = Multiset.map s Finset.univ.val) := by
-  obtain ⟨r, s, u, v, h⟩ := schmidt_exists psi
-  exact ⟨r, s, u, v, h, sum_sq_coeff h, fun r' s' u' v' h' =>
-    schmidt_coefficients_unique h' h⟩
+/-- The eigenspace for a positive eigenvalue `t` of an operator given in "spectral" form
+`T x = ∑ k, c k • ⟪u k, x⟫ • u k` with `u` orthonormal and `c` positive is spanned by the
+`u k` with `c k = t`; in particular its dimension is the number of such `k`. -/
+lemma finrank_eigenspace_of_spectral {c : ι → ℝ}
+    (hu : Orthonormal ℂ u) (T : Module.End ℂ (EuclideanSpace ℂ (Fin m)))
+    (hT : ∀ x, T x = ∑ k, ((c k : ℝ) : ℂ) • (⟪u k, x⟫_ℂ • u k)) {t : ℝ} (ht : 0 < t) :
+    Module.finrank ℂ (T.eigenspace ((t : ℝ) : ℂ)) = #{k | c k = t} := by
+  classical
+  have htne : ((t : ℝ) : ℂ) ≠ 0 := by simpa using ht.ne'
+  have hTinner : ∀ (l : ι) (x : EuclideanSpace ℂ (Fin m)),
+      ⟪u l, T x⟫_ℂ = (c l : ℂ) * ⟪u l, x⟫_ℂ := by
+    intro l x
+    rw [hT x, inner_sum, Finset.sum_eq_single l]
+    · rw [inner_smul_right, inner_smul_right, orthonormal_iff_ite.mp hu l l, if_pos rfl]
+      ring
+    · intro b _ hb
+      rw [inner_smul_right, inner_smul_right, orthonormal_iff_ite.mp hu l b, if_neg (Ne.symm hb)]
+      ring
+    · intro hl
+      exact absurd (Finset.mem_univ l) hl
+  have key : T.eigenspace ((t : ℝ) : ℂ)
+      = Submodule.span ℂ (Set.range (fun k : {k : ι // c k = t} => u (k : ι))) := by
+    refine le_antisymm ?_ ?_
+    · intro x hx
+      rw [Module.End.mem_eigenspace_iff] at hx
+      have ha : ∀ l, c l ≠ t → ⟪u l, x⟫_ℂ = 0 := by
+        intro l hl
+        have h1 := hTinner l x
+        rw [hx, inner_smul_right] at h1
+        have h2 : ((c l : ℂ) - ((t : ℝ) : ℂ)) * ⟪u l, x⟫_ℂ = 0 := by linear_combination -h1
+        rcases mul_eq_zero.mp h2 with h3 | h3
+        · exact absurd (Complex.ofReal_inj.mp (sub_eq_zero.mp h3)) hl
+        · exact h3
+      have h1 : x = ((t : ℝ) : ℂ)⁻¹ • ∑ k, ((c k : ℝ) : ℂ) • (⟪u k, x⟫_ℂ • u k) := by
+        rw [← hT x, hx, smul_smul, inv_mul_cancel₀ htne, one_smul]
+      rw [Finset.smul_sum] at h1
+      have h2 : (∑ k, ((t : ℝ) : ℂ)⁻¹ • (((c k : ℝ) : ℂ) • (⟪u k, x⟫_ℂ • u k)))
+          = ∑ k ∈ Finset.univ.filter (fun k => c k = t), ⟪u k, x⟫_ℂ • u k := by
+        rw [Finset.sum_filter]
+        refine Finset.sum_congr rfl fun k _ => ?_
+        by_cases hk : c k = t
+        · rw [if_pos hk, hk, smul_smul, inv_mul_cancel₀ htne, one_smul]
+        · rw [if_neg hk, ha k hk, zero_smul, smul_zero, smul_zero]
+      rw [h1.trans h2]
+      refine Submodule.sum_mem _ fun k hk => Submodule.smul_mem _ _ (Submodule.subset_span ?_)
+      exact ⟨⟨k, (Finset.mem_filter.mp hk).2⟩, rfl⟩
+    · rw [Submodule.span_le]
+      rintro _ ⟨k, rfl⟩
+      rw [SetLike.mem_coe, Module.End.mem_eigenspace_iff, hT, Finset.sum_eq_single (k : ι)]
+      · rw [orthonormal_iff_ite.mp hu (k : ι) (k : ι), if_pos rfl, k.2, one_smul]
+      · intro b _ hb
+        rw [orthonormal_iff_ite.mp hu b (k : ι), if_neg hb, zero_smul, smul_zero]
+      · intro hk
+        exact absurd (Finset.mem_univ (k : ι)) hk
+  have hli : LinearIndependent ℂ (fun k : {k : ι // c k = t} => u (k : ι)) :=
+    (hu.comp _ Subtype.val_injective).linearIndependent
+  rw [key, finrank_span_eq_card hli]
+  simp [Fintype.card_subtype]
 
-/-! ### Formulation on the genuine tensor product `ℂ^m ⊗ ℂ^n` -/
+end Uniqueness
 
-open TensorProduct in
-/-- The canonical identification of `ℂ^m ⊗ ℂ^n` with amplitudes indexed by pairs. -/
-noncomputable def tensorEquiv (m n : ℕ) :
-    (EuclideanSpace ℂ (Fin m) ⊗[ℂ] EuclideanSpace ℂ (Fin n)) ≃ₗ[ℂ]
-      EuclideanSpace ℂ (Fin m × Fin n) :=
-  ((EuclideanSpace.basisFun (Fin m) ℂ).toBasis.tensorProduct
-    (EuclideanSpace.basisFun (Fin n) ℂ).toBasis).equivFun ≪≫ₗ
-    (WithLp.linearEquiv 2 ℂ (Fin m × Fin n → ℂ)).symm
+/-- **Uniqueness** of the Schmidt coefficients: any two Schmidt decompositions of the same state
+have the same number of terms and the same multiset of Schmidt coefficients. -/
+theorem schmidt_coefficients_unique {ι κ : Type} [Fintype ι] [Fintype κ]
+    {psi : EuclideanSpace ℂ (Fin m × Fin n)} {σ : ι → ℝ}
+    {u : ι → EuclideanSpace ℂ (Fin m)} {v : ι → EuclideanSpace ℂ (Fin n)} {τ : κ → ℝ}
+    {u' : κ → EuclideanSpace ℂ (Fin m)} {v' : κ → EuclideanSpace ℂ (Fin n)}
+    (h : IsSchmidtDecomposition psi σ u v) (h' : IsSchmidtDecomposition psi τ u' v') :
+    (Finset.univ.val.map σ) = (Finset.univ.val.map τ) := by
+  classical
+  have hT1 : ∀ x, (Matrix.toEuclideanLin (reducedLeft psi)) x
+      = ∑ k, ((σ k ^ 2 : ℝ) : ℂ) • (⟪u k, x⟫_ℂ • u k) :=
+    fun x => toEuclideanLin_reducedLeft_of_schmidt h x
+  have hT2 : ∀ x, (Matrix.toEuclideanLin (reducedLeft psi)) x
+      = ∑ k, ((τ k ^ 2 : ℝ) : ℂ) • (⟪u' k, x⟫_ℂ • u' k) :=
+    fun x => toEuclideanLin_reducedLeft_of_schmidt h' x
+  refine Multiset.ext.mpr fun a => ?_
+  rcases le_or_gt a 0 with hle | hpos
+  · have e1 : ∀ {J : Type} [Fintype J] (f : J → ℝ), (∀ k, 0 < f k) →
+        Multiset.count a (Multiset.map f Finset.univ.val) = 0 := by
+      intro J _ f hf
+      refine Multiset.count_eq_zero.mpr ?_
+      simp only [Multiset.mem_map, Finset.mem_val, Finset.mem_univ, true_and, not_exists]
+      intro k hk
+      exact absurd (hk ▸ hf k) (not_lt.mpr hle)
+    rw [e1 σ h.coeff_pos, e1 τ h'.coeff_pos]
+  · have c1 : ∀ {J : Type} [Fintype J] (f : J → ℝ), (∀ k, 0 < f k) →
+        Multiset.count a (Multiset.map f Finset.univ.val) = #{k | f k ^ 2 = a ^ 2} := by
+      intro J _ f hf
+      rw [Multiset.count_map]
+      have hfin : Finset.filter (fun k => a = f k) Finset.univ
+          = Finset.filter (fun k => f k ^ 2 = a ^ 2) Finset.univ := by
+        ext k
+        simp only [Finset.mem_filter, Finset.mem_univ, true_and]
+        constructor
+        · rintro rfl; ring
+        · intro hk
+          have := hf k
+          nlinarith [sq_nonneg (f k - a), sq_nonneg (f k + a)]
+      calc (Multiset.filter (fun k => a = f k) Finset.univ.val).card
+          = #{k | a = f k} := rfl
+        _ = #{k | f k ^ 2 = a ^ 2} := by rw [hfin]
+    have ha2 : (0 : ℝ) < a ^ 2 := by positivity
+    rw [c1 σ h.coeff_pos, c1 τ h'.coeff_pos,
+      ← finrank_eigenspace_of_spectral h.left_orthonormal _ hT1 ha2,
+      ← finrank_eigenspace_of_spectral h'.left_orthonormal _ hT2 ha2]
 
-open TensorProduct in
-lemma tensorEquiv_tmul {m n : ℕ} (x : EuclideanSpace ℂ (Fin m)) (y : EuclideanSpace ℂ (Fin n))
-    (j : Fin m) (k : Fin n) : tensorEquiv m n (x ⊗ₜ[ℂ] y) (j, k) = x j * y k := by
-  simp [tensorEquiv, Module.Basis.tensorProduct_repr_tmul_apply, mul_comm]
-
-open TensorProduct in
-lemma tensorEquiv_apply_of_sum {m n r : ℕ} (s : Fin r → ℝ)
-    (u : Fin r → EuclideanSpace ℂ (Fin m)) (v : Fin r → EuclideanSpace ℂ (Fin n))
-    (j : Fin m) (k : Fin n) :
-    tensorEquiv m n (∑ i, (s i : ℂ) • (u i ⊗ₜ[ℂ] v i)) (j, k)
-      = ∑ i, (s i : ℂ) * u i j * v i k := by
-  rw [map_sum]
-  simp only [map_smul]
-  rw [show ((∑ i, (s i : ℂ) • tensorEquiv m n (u i ⊗ₜ[ℂ] v i)) :
-      EuclideanSpace ℂ (Fin m × Fin n)) (j, k)
-      = ∑ i, (s i : ℂ) * (tensorEquiv m n (u i ⊗ₜ[ℂ] v i)) (j, k) from by simp]
-  exact Finset.sum_congr rfl fun i _ => by rw [tensorEquiv_tmul]; ring
-
-open TensorProduct in
-/-- **Schmidt decomposition, tensor product form.** Every vector of `ℂ^m ⊗ ℂ^n` is of the form
-`∑ i, s i • (u i ⊗ v i)` with `s i > 0` and `u`, `v` orthonormal families, and the multiset of
-the coefficients `s` is uniquely determined. -/
-theorem schmidt_decomposition_tensor {m n : ℕ}
-    (psi : EuclideanSpace ℂ (Fin m) ⊗[ℂ] EuclideanSpace ℂ (Fin n)) :
-    ∃ (r : ℕ) (s : Fin r → ℝ) (u : Fin r → EuclideanSpace ℂ (Fin m))
-      (v : Fin r → EuclideanSpace ℂ (Fin n)),
-      (∀ i, 0 < s i) ∧ Orthonormal ℂ u ∧ Orthonormal ℂ v ∧
-      psi = ∑ i, (s i : ℂ) • (u i ⊗ₜ[ℂ] v i) ∧
-      (∀ (r' : ℕ) (s' : Fin r' → ℝ) (u' : Fin r' → EuclideanSpace ℂ (Fin m))
-        (v' : Fin r' → EuclideanSpace ℂ (Fin n)), (∀ i, 0 < s' i) → Orthonormal ℂ u' →
-        Orthonormal ℂ v' → psi = ∑ i, (s' i : ℂ) • (u' i ⊗ₜ[ℂ] v' i) →
-        Multiset.map s' Finset.univ.val = Multiset.map s Finset.univ.val) := by
-  obtain ⟨r, s, u, v, hd⟩ := schmidt_exists (tensorEquiv m n psi)
-  refine ⟨r, s, u, v, hd.pos, hd.left_orthonormal, hd.right_orthonormal, ?_, ?_⟩
-  · refine (tensorEquiv m n).injective ?_
-    ext p
-    rw [tensorEquiv_apply_of_sum]
-    exact hd.amp p.1 p.2
-  · intro r' s' u' v' hpos' hu' hv' heq
-    refine schmidt_coefficients_unique ⟨hpos', hu', hv', ?_⟩ hd
-    intro j k
-    conv_lhs => rw [heq]
-    exact tensorEquiv_apply_of_sum s' u' v' j k
+/-- **Schmidt decomposition.** Every bipartite pure state `psi ∈ ℂ^m ⊗ ℂ^n` admits a Schmidt
+decomposition `psi = ∑ k, σ k • (u k ⊗ v k)` with positive Schmidt coefficients `σ k` and
+orthonormal families `u`, `v`; moreover the Schmidt coefficients are unique: any two Schmidt
+decompositions have the same multiset of coefficients (hence the same Schmidt rank). -/
+theorem schmidt_decomposition (psi : EuclideanSpace ℂ (Fin m × Fin n)) :
+    (∃ (r : ℕ) (σ : Fin r → ℝ) (u : Fin r → EuclideanSpace ℂ (Fin m))
+        (v : Fin r → EuclideanSpace ℂ (Fin n)), IsSchmidtDecomposition psi σ u v) ∧
+      (∀ (r r' : ℕ) (σ : Fin r → ℝ) (u : Fin r → EuclideanSpace ℂ (Fin m))
+          (v : Fin r → EuclideanSpace ℂ (Fin n)) (τ : Fin r' → ℝ)
+          (u' : Fin r' → EuclideanSpace ℂ (Fin m)) (v' : Fin r' → EuclideanSpace ℂ (Fin n)),
+        IsSchmidtDecomposition psi σ u v → IsSchmidtDecomposition psi τ u' v' →
+          r = r' ∧ (Finset.univ.val.map σ) = (Finset.univ.val.map τ)) := by
+  refine ⟨exists_schmidtDecomposition psi, ?_⟩
+  intro r r' σ u v τ u' v' h h'
+  have hm := schmidt_coefficients_unique h h'
+  refine ⟨?_, hm⟩
+  have := congrArg Multiset.card hm
+  simpa using this
 
 end QI
 

@@ -1,0 +1,69 @@
+/-
+# Singular Series Gaps 9098
+Category: Brockian Corpus
+Target: Brockian.SingularSeriesGaps9098
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+import Mathlib
+
+/-!
+# Singular Series Gaps 9098
+Category: Brockian Corpus
+Target: Brockian.SingularSeriesGaps9098
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace Brockian
+
+/-- A finite set of integers is *admissible* (in the sense of the Hardy–Littlewood
+prime `k`-tuples conjecture) when, for every prime `p`, it misses at least one
+residue class modulo `p`.  Equivalently, the singular series attached to the tuple
+is nonzero. -/
+
+theorem gapPattern9098_admissible : AdmissibleSet gapPattern9098 := by
+  apply admissibleSet_of_small_primes
+  intro p hp hle
+  rw [gapPattern9098_card] at hle
+  interval_cases p
+  · exact absurd hp (by decide)
+  · exact absurd hp (by decide)
+  · exact ⟨1, by decide⟩
+  · exact ⟨1, by decide⟩
+  · exact absurd hp (by decide)
+  · exact ⟨4, by decide⟩
+  · exact absurd hp (by decide)
+  · exact ⟨3, by decide⟩
+  · exact absurd hp (by decide)
+  · exact absurd hp (by decide)
+
+/-- **Singular Series Gaps 9098.**
+The `9`-element pattern `{0, 2, 6, 8, 12, 18, 20, 26, 30}` of diameter `30` is admissible,
+and so is every one of its integer translates; consequently the whole family of gap
+ranges `{a, a+2, a+6, a+8, a+12, a+18, a+20, a+26, a+30}` consists of admissible
+`9`-tuples, each of which has nonvanishing singular series. -/

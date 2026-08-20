@@ -1,0 +1,55 @@
+/-
+# Scholze Perfectoid Tilt
+Category: Frontier — Fields Medal Work
+Target: Frontier.scholze_perfectoid_tilt
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+import Mathlib
+
+/-!
+# Scholze Perfectoid Tilt
+Category: Frontier — Fields Medal Work
+Target: Frontier.scholze_perfectoid_tilt
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+namespace Frontier
+
+/-! ## The tilt: inverse limit along Frobenius -/
+
+section Tilt
+
+variable (p : ℕ) (R : Type*) [CommRing R] [Fact p.Prime] [CharP R p]
+
+/-- The **tilt** of a commutative ring `R` of characteristic `p`: the inverse limit
+`lim_{x ↦ x^p} R`, realised as the subring of sequences `f : ℕ → R` satisfying
+`f (n+1) ^ p = f n`. -/
+
+theorem tilt_integers_perfect [Fact p.Prime] [Fact (v (p : K) < 1)] :
+    CharP (Tilt p (residuePMod v p)) p ∧
+      Function.Bijective (frobenius (Tilt p (residuePMod v p)) p) :=
+  ⟨Tilt.charP, tilt_frobenius_bijective⟩
+
+end MixedChar
+
+end Frontier
+

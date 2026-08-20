@@ -9,6 +9,73 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-
+# Toffoli Unitary
+Category: Quantum Computing
+Target: QC.toffoli_unitary
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
+/-!
+# Toffoli Unitary
+Category: Quantum Computing
+Target: QC.toffoli_unitary
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace QC
+
+open Matrix Equiv
+
+/-- The permutation of the computational basis `|abc⟩` (indexed by `Fin 8` via
+`i = 4a + 2b + c`) realized by the Toffoli (CCNOT) gate: it flips the target bit
+exactly on the two basis states `|110⟩ = 6` and `|111⟩ = 7`. -/
+def toffoliPerm : Equiv.Perm (Fin 8) := Equiv.swap 6 7
+
+/-- The Toffoli (CCNOT) gate as an `8 × 8` complex matrix: the permutation matrix
+of `toffoliPerm`. -/
+def toffoli : Matrix (Fin 8) (Fin 8) ℂ := toffoliPerm.permMatrix ℂ
+
+/-- The Toffoli matrix in explicit form: the identity on `|000⟩, …, |101⟩`,
+and the `X` gate on the last two basis states `|110⟩, |111⟩`. -/
+theorem toffoli_eq : toffoli =
+    !![1, 0, 0, 0, 0, 0, 0, 0;
+       0, 1, 0, 0, 0, 0, 0, 0;
+       0, 0, 1, 0, 0, 0, 0, 0;
+       0, 0, 0, 1, 0, 0, 0, 0;
+       0, 0, 0, 0, 1, 0, 0, 0;
+       0, 0, 0, 0, 0, 1, 0, 0;
+       0, 0, 0, 0, 0, 0, 0, 1;
+       0, 0, 0, 0, 0, 0, 1, 0] := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [toffoli, toffoliPerm, Equiv.swap_apply_def]
+
+/-- The Toffoli matrix is its own inverse. -/
+theorem toffoli_mul_self : toffoli * toffoli = 1 := by
+  rw [toffoli, ← Matrix.permMatrix_mul]
+  simp [toffoliPerm, Equiv.swap_mul_self]
+
+/-- The Toffoli matrix is self-adjoint (it is a real symmetric permutation matrix). -/
+theorem toffoli_conjTranspose : toffoliᴴ = toffoli := by
+  rw [toffoli, Matrix.conjTranspose_permMatrix]
+  simp [toffoliPerm]
+
+/-- **The Toffoli (CCNOT) matrix is unitary.** It is the permutation matrix of the
+transposition `(|110⟩ |111⟩)`, hence unitary; moreover it is self-adjoint and equal
+to its own inverse. -/
+theorem toffoli_unitary : toffoli ∈ Matrix.unitaryGroup (Fin 8) ℂ ∧
+    star toffoli = toffoli ∧ toffoli * toffoli = 1 := by
+  refine ⟨?_, toffoli_conjTranspose, toffoli_mul_self⟩
+  rw [Matrix.mem_unitaryGroup_iff, Matrix.star_eq_conjTranspose, toffoli_conjTranspose,
+    toffoli_mul_self]
+
+end QC
+
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -31,75 +98,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace QC
-
-open Matrix
-
-/-- The eight classical basis states of a three-qubit register. -/
-abbrev Q3 : Type := Fin 2 × Fin 2 × Fin 2
-
-/-- The Toffoli (CCNOT) action on classical basis states: the third (target) bit is
-flipped exactly when both control bits are `1`. -/
-def toffoliMap (p : Q3) : Q3 :=
-  (p.1, p.2.1, if p.1 = 1 ∧ p.2.1 = 1 then p.2.2 + 1 else p.2.2)
-
-/-- The Toffoli action is an involution of the basis states. -/
-theorem toffoliMap_involutive : Function.Involutive toffoliMap := by
-  intro x; revert x; decide
-
-theorem toffoliMap_eq_iff (i j : Q3) : toffoliMap i = j ↔ i = toffoliMap j :=
-  ⟨fun h => h ▸ (toffoliMap_involutive i).symm, fun h => h ▸ toffoliMap_involutive j⟩
-
-/-- The Toffoli gate as a permutation of the eight classical basis states. -/
-def toffoliPerm : Equiv.Perm Q3 := toffoliMap_involutive.toPerm _
-
-@[simp] theorem toffoliPerm_apply (p : Q3) : toffoliPerm p = toffoliMap p := rfl
-
-/-- The Toffoli (CCNOT) matrix, acting on `ℂ`-valued three-qubit states:
-`toffoli i j = 1` exactly when the basis state `j` is mapped to the basis state `i`. -/
-def toffoli : Matrix Q3 Q3 ℂ := Matrix.of fun i j => if i = toffoliMap j then 1 else 0
-
-/-- The Toffoli matrix is the permutation matrix of `toffoliPerm`. -/
-theorem toffoli_eq_permMatrix : toffoli = toffoliPerm.permMatrix ℂ := by
-  ext i j
-  rw [Equiv.Perm.permMatrix, PEquiv.toMatrix_apply]
-  show (if i = toffoliMap j then (1 : ℂ) else 0) = _
-  simp only [Equiv.toPEquiv_apply, Option.mem_def, Option.some.injEq, toffoliPerm_apply]
-  simp only [toffoliMap_eq_iff]
-
-/-- The Toffoli matrix is symmetric under conjugate transpose. -/
-theorem toffoli_conjTranspose : toffoliᴴ = toffoli := by
-  ext i j
-  have h : (j = toffoliMap i) ↔ (i = toffoliMap j) := by
-    rw [← toffoliMap_eq_iff, eq_comm]
-  simp only [Matrix.conjTranspose_apply, toffoli, Matrix.of_apply, h]
-  split <;> simp
-
-/-- The Toffoli gate is its own inverse. -/
-theorem toffoli_mul_self : toffoli * toffoli = 1 := by
-  ext i k
-  rw [Matrix.mul_apply, Finset.sum_eq_single (toffoliMap k)]
-  · simp [toffoli, Matrix.one_apply, toffoliMap_involutive k]
-  · intro b _ hb
-    simp [toffoli, hb]
-  · intro h
-    exact absurd (Finset.mem_univ _) h
-
-/-- **The Toffoli (CCNOT) matrix is a permutation matrix, hence unitary, and it is its
-own inverse.** -/
-theorem toffoli_unitary :
-    toffoli = toffoliPerm.permMatrix ℂ ∧
-      toffoli ∈ Matrix.unitaryGroup Q3 ℂ ∧
-      toffoliᴴ * toffoli = 1 ∧ toffoli * toffoliᴴ = 1 ∧
-      toffoli * toffoli = 1 := by
-  have hH : toffoliᴴ * toffoli = 1 := by
-    rw [toffoli_conjTranspose]; exact toffoli_mul_self
-  have hH' : toffoli * toffoliᴴ = 1 := by
-    rw [toffoli_conjTranspose]; exact toffoli_mul_self
-  refine ⟨toffoli_eq_permMatrix, ?_, hH, hH', toffoli_mul_self⟩
-  rw [Matrix.mem_unitaryGroup_iff']
-  exact hH
-
-end QC
 

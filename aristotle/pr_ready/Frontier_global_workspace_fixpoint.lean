@@ -9,82 +9,13 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-namespace Frontier
-
-/-- A **global workspace** on a state lattice `α`: a broadcast operator that is
-monotone, i.e. broadcasting from a larger workspace state yields a larger state. -/
-structure GlobalWorkspace (α : Type*) [CompleteLattice α] where
-  /-- The broadcast (global-workspace) operator. -/
-  broadcast : α → α
-  /-- Broadcasting is monotone. -/
-  mono : Monotone broadcast
-
-variable {α : Type*} [CompleteLattice α]
-
-/-- The `n`-th stage of the broadcast cascade, starting from the empty workspace `⊥`. -/
-def GlobalWorkspace.stage (W : GlobalWorkspace α) (n : ℕ) : α :=
-  W.broadcast^[n] ⊥
-
-@[simp] theorem GlobalWorkspace.stage_zero (W : GlobalWorkspace α) : W.stage 0 = ⊥ := rfl
-
-theorem GlobalWorkspace.stage_succ (W : GlobalWorkspace α) (n : ℕ) :
-    W.stage (n + 1) = W.broadcast (W.stage n) :=
-  Function.iterate_succ_apply' _ _ _
-
-/-- The broadcast cascade is a monotone (increasing) chain of workspace states. -/
-theorem GlobalWorkspace.stage_mono (W : GlobalWorkspace α) : Monotone W.stage := by
-  apply monotone_nat_of_le_succ
-  intro n
-  induction n with
-  | zero => simp [GlobalWorkspace.stage]
-  | succ k ih =>
-      rw [W.stage_succ (k + 1)]
-      conv_lhs => rw [W.stage_succ k]
-      exact W.mono ih
-
-/-- Every stage of the cascade lies below every pre-fixed point of the broadcast operator. -/
-theorem GlobalWorkspace.stage_le_of_prefixed (W : GlobalWorkspace α) {q : α}
-    (hq : W.broadcast q ≤ q) (n : ℕ) : W.stage n ≤ q := by
-  induction n with
-  | zero => simp
-  | succ k ih => exact (W.stage_succ k ▸ (W.mono ih).trans hq)
-
-/-- **Knaster–Tarski for a finite global workspace.**
-
-For a monotone broadcast operator on a finite complete lattice of workspace states,
-the broadcast cascade started from the empty workspace `⊥` stabilises after finitely
-many steps at a state `p` that is a fixed point of broadcasting and is the least
-pre-fixed point (hence the least fixed point) of the operator. -/
-theorem global_workspace_fixpoint [Finite α] (W : GlobalWorkspace α) :
-    ∃ n : ℕ, ∃ p : α, p = W.stage n ∧ W.broadcast p = p ∧
-      (∀ q : α, W.broadcast q ≤ q → p ≤ q) ∧
-      (∀ q : α, W.broadcast q = q → p ≤ q) := by
-  obtain ⟨i, j, hij, hval⟩ := Finite.exists_ne_map_eq_of_infinite W.stage
-  -- WLOG `m < n`
-  obtain ⟨m, n, hmn, hmn'⟩ : ∃ m n : ℕ, m < n ∧ W.stage m = W.stage n := by
-    rcases lt_or_gt_of_ne hij with h | h
-    · exact ⟨i, j, h, hval⟩
-    · exact ⟨j, i, h, hval.symm⟩
-  have hfix : W.broadcast (W.stage m) = W.stage m := by
-    have h1 : W.stage m ≤ W.stage (m + 1) := W.stage_mono (Nat.le_succ m)
-    have h2 : W.stage (m + 1) ≤ W.stage n := W.stage_mono hmn
-    have := le_antisymm (hmn' ▸ h2) h1
-    rw [← W.stage_succ m]
-    exact this
-  refine ⟨m, W.stage m, rfl, hfix, fun q hq => W.stage_le_of_prefixed hq m,
-    fun q hq => W.stage_le_of_prefixed hq.le m⟩
-
-/-- The least fixed point supplied by `OrderHom.lfp` agrees with the stabilised stage of the
-broadcast cascade. -/
-theorem global_workspace_lfp_eq_stage [Finite α] (W : GlobalWorkspace α) :
-    ∃ n : ℕ, OrderHom.lfp ⟨W.broadcast, W.mono⟩ = W.stage n := by
-  obtain ⟨n, p, hp, hfix, hle, -⟩ := global_workspace_fixpoint W
-  refine ⟨n, ?_⟩
-  refine le_antisymm ?_ ?_
-  · exact hp ▸ OrderHom.lfp_le _ (le_of_eq hfix)
-  · exact hp ▸ hle _ (le_of_eq (OrderHom.map_lfp ⟨W.broadcast, W.mono⟩))
-
-end Frontier
+/-
+# Global Workspace Fixpoint
+Category: Frontier Mind
+Target: Frontier.global_workspace_fixpoint
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
 
 
 open scoped BigOperators
@@ -109,4 +40,80 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
+
+namespace Frontier
+
+/-- A **broadcast (global-workspace) operator** on a state lattice `S`:
+a map `ignite : S → S` sending a coalition of active contents to the contents that
+become globally available after one broadcast step, required to be `Monotone`
+(more active content in, no less active content out). -/
+structure Broadcast (S : Type*) [CompleteLattice S] where
+  /-- One global broadcast step. -/
+  ignite : S → S
+  /-- Broadcasting is monotone in the current workspace content. -/
+  mono : Monotone ignite
+
+variable {S : Type*} [CompleteLattice S]
+
+/-- A state is a *workspace fixpoint* when broadcasting it changes nothing:
+the global workspace is stable / self-sustaining. -/
+def IsWorkspaceFixpoint (B : Broadcast S) (s : S) : Prop := B.ignite s = s
+
+/-- Every iterate of `ignite` started from the empty workspace `⊥` lies below any fixpoint. -/
+theorem iterate_bot_le_fixpoint (B : Broadcast S) {t : S} (ht : IsWorkspaceFixpoint B t) :
+    ∀ n : ℕ, B.ignite^[n] ⊥ ≤ t := by
+  intro n
+  induction n with
+  | zero => simp
+  | succ n ih =>
+      rw [Function.iterate_succ_apply']
+      calc B.ignite (B.ignite^[n] ⊥) ≤ B.ignite t := B.mono ih
+        _ = t := ht
+
+/-- On a *finite* state lattice the ascending chain `⊥ ≤ ignite ⊥ ≤ ignite² ⊥ ≤ ⋯`
+stabilizes after finitely many broadcast rounds. -/
+theorem exists_iterate_bot_stabilizes [Finite S] (B : Broadcast S) :
+    ∃ n : ℕ, B.ignite^[n + 1] ⊥ = B.ignite^[n] ⊥ := by
+  have hchain : Monotone (fun n : ℕ => B.ignite^[n] (⊥ : S)) :=
+    B.mono.monotone_iterate_of_le_map bot_le
+  obtain ⟨a, b, hab, hval⟩ :=
+    Finite.exists_ne_map_eq_of_infinite (fun n : ℕ => B.ignite^[n] (⊥ : S))
+  rcases lt_or_gt_of_ne hab with h | h
+  · refine ⟨a, le_antisymm ?_ (hchain (Nat.le_succ a))⟩
+    calc B.ignite^[a + 1] (⊥ : S) ≤ B.ignite^[b] ⊥ := hchain h
+      _ = B.ignite^[a] ⊥ := hval.symm
+  · refine ⟨b, le_antisymm ?_ (hchain (Nat.le_succ b))⟩
+    calc B.ignite^[b + 1] (⊥ : S) ≤ B.ignite^[a] ⊥ := hchain h
+      _ = B.ignite^[b] ⊥ := hval
+
+/-- **Global workspace fixpoint (Knaster–Tarski, finite state lattice).**
+
+A monotone broadcast operator `B` on a finite complete lattice `S` of states has a
+least fixed point: a state `s` that is stable under broadcasting (`B.ignite s = s`)
+and below every other stable state.  Moreover it is *reached constructively* by
+finitely many broadcast rounds from the empty workspace, `s = B.ignite^[n] ⊥`.
+
+The existence part alone is `OrderHom.isLeast_lfp` in Mathlib (Knaster–Tarski for
+complete lattices); finiteness additionally gives the terminating iteration. -/
+theorem global_workspace_fixpoint [Finite S] (B : Broadcast S) :
+    ∃ s : S, IsWorkspaceFixpoint B s ∧
+      (∀ t : S, IsWorkspaceFixpoint B t → s ≤ t) ∧
+      ∃ n : ℕ, s = B.ignite^[n] ⊥ := by
+  obtain ⟨n, hn⟩ := exists_iterate_bot_stabilizes B
+  refine ⟨B.ignite^[n] ⊥, ?_, ?_, ⟨n, rfl⟩⟩
+  · have : B.ignite (B.ignite^[n] (⊥ : S)) = B.ignite^[n + 1] ⊥ :=
+      (Function.iterate_succ_apply' B.ignite n ⊥).symm
+    exact this.trans hn
+  · intro t ht
+    exact iterate_bot_le_fixpoint B ht n
+
+/-- The state produced by `global_workspace_fixpoint` is exactly the Knaster–Tarski
+least fixed point `OrderHom.lfp` of the broadcast operator. -/
+theorem global_workspace_fixpoint_eq_lfp [Finite S] (B : Broadcast S) {s : S}
+    (hs : IsWorkspaceFixpoint B s) (hmin : ∀ t : S, IsWorkspaceFixpoint B t → s ≤ t) :
+    s = OrderHom.lfp ⟨B.ignite, B.mono⟩ := by
+  obtain ⟨hfix, hle⟩ := OrderHom.isLeast_lfp (⟨B.ignite, B.mono⟩ : S →o S)
+  exact le_antisymm (hmin _ hfix) (hle hs)
+
+end Frontier
 

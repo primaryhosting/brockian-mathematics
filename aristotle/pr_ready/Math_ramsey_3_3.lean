@@ -9,6 +9,15 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+/-
+# Ramsey 3 3
+Category: Pure Mathematics
+Target: Math.ramsey_3_3
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -23,69 +32,56 @@ set_option synthInstance.maxSize 128
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
 
 namespace Math
 
-/-- Pigeonhole: any 2-coloring of five items has three items of the same colour. -/
-lemma three_same_of_five (f : Fin 5 → Bool) :
-    ∃ i j k : Fin 5, i < j ∧ j < k ∧ f i = f j ∧ f j = f k := by
+/-- Pigeonhole: among five Booleans, three are equal. -/
+private lemma pigeon_five (f : Fin 5 → Bool) :
+    ∃ a b d : Fin 5, a ≠ b ∧ a ≠ d ∧ b ≠ d ∧ f a = f b ∧ f a = f d := by
   revert f
-  decide +kernel
+  decide
 
-/-- The 5-cycle colouring of the edges of `K₅`. -/
-def cycle5 (i j : Fin 5) : Bool :=
-  decide (i.val = (j.val + 1) % 5 ∨ j.val = (i.val + 1) % 5)
+/-- The pentagon colouring of `K₅`: an edge is `true` iff its endpoints are
+consecutive modulo `5`. -/
+private def pentagon (i j : Fin 5) : Bool :=
+  decide ((i.val + 1) % 5 = j.val ∨ (j.val + 1) % 5 = i.val)
 
-lemma cycle5_symm (i j : Fin 5) : cycle5 i j = cycle5 j i := by
-  simp [cycle5, or_comm]
+/-- **R(3,3) = 6.**  Every symmetric 2-colouring of the edges of `K₆` contains a
+monochromatic triangle, while `K₅` admits a symmetric 2-colouring with none.
 
-lemma cycle5_no_mono_triangle (a b d : Fin 5) (hab : a ≠ b) (had : a ≠ d) (hbd : b ≠ d) :
-    ¬ (cycle5 a b = cycle5 a d ∧ cycle5 a d = cycle5 b d) := by
-  revert hab had hbd
-  revert a b d
-  decide +kernel
-
-/-- Any 2-colouring of the edges of `K₆` contains a monochromatic triangle. -/
-theorem ramsey_3_3_upper (c : Fin 6 → Fin 6 → Bool) :
-    ∃ a b d : Fin 6, a ≠ b ∧ a ≠ d ∧ b ≠ d ∧ c a b = c a d ∧ c a d = c b d := by
-  obtain ⟨i, j, k, hij, hjk, h1, h2⟩ := three_same_of_five (fun i => c 0 i.succ)
-  set A := i.succ with hA
-  set B := j.succ with hB
-  set C := k.succ with hC
-  have hAB : A ≠ B := fun h => absurd (Fin.succ_injective _ h) (ne_of_lt hij)
-  have hBC : B ≠ C := fun h => absurd (Fin.succ_injective _ h) (ne_of_lt hjk)
-  have hAC : A ≠ C := fun h =>
-    absurd (Fin.succ_injective _ h) (ne_of_lt (lt_trans hij hjk))
-  have h0A : (0 : Fin 6) ≠ A := (Fin.succ_ne_zero i).symm
-  have h0B : (0 : Fin 6) ≠ B := (Fin.succ_ne_zero j).symm
-  have h0C : (0 : Fin 6) ≠ C := (Fin.succ_ne_zero k).symm
-  by_cases e1 : c A B = c 0 A
-  · exact ⟨0, A, B, h0A, h0B, hAB, h1, by rw [← h1, ← e1]⟩
-  by_cases e2 : c A C = c 0 A
-  · exact ⟨0, A, C, h0A, h0C, hAC, h1.trans h2, by rw [← h1.trans h2, ← e2]⟩
-  by_cases e3 : c B C = c 0 A
-  · exact ⟨0, B, C, h0B, h0C, hBC, h2, (e3.trans (h1.trans h2)).symm⟩
-  · refine ⟨A, B, C, hAB, hAC, hBC, ?_, ?_⟩
-    · rw [Bool.eq_iff_iff]; revert e1 e2; cases c A B <;> cases c A C <;> cases c 0 A <;> simp
-    · rw [Bool.eq_iff_iff]; revert e2 e3; cases c B C <;> cases c A C <;> cases c 0 A <;> simp
-
-/-- **R(3,3) = 6**: every 2-colouring of the edges of `K₆` has a monochromatic triangle,
-while `K₅` admits a 2-colouring with no monochromatic triangle. -/
+The symmetry hypothesis in the first part is part of the notion of an edge
+colouring, but the proof given here does not actually need it. -/
 theorem ramsey_3_3 :
     (∀ c : Fin 6 → Fin 6 → Bool, (∀ i j, c i j = c j i) →
-      ∃ a b d : Fin 6, a ≠ b ∧ a ≠ d ∧ b ≠ d ∧ c a b = c a d ∧ c a d = c b d) ∧
+      ∃ x y z : Fin 6, x ≠ y ∧ x ≠ z ∧ y ≠ z ∧ c x y = c x z ∧ c x y = c y z) ∧
     (∃ c : Fin 5 → Fin 5 → Bool, (∀ i j, c i j = c j i) ∧
-      ∀ a b d : Fin 5, a ≠ b → a ≠ d → b ≠ d →
-        ¬ (c a b = c a d ∧ c a d = c b d)) := by
-  refine ⟨fun c _ => ramsey_3_3_upper c, ⟨cycle5, cycle5_symm, cycle5_no_mono_triangle⟩⟩
+      ∀ x y z : Fin 5, x ≠ y → x ≠ z → y ≠ z →
+        ¬ (c x y = c x z ∧ c x y = c y z)) := by
+  constructor
+  · intro c hsym
+    obtain ⟨a, b, d, hab, had, hbd, h1, h2⟩ := pigeon_five (fun i => c 0 i.succ)
+    have hAB : a.succ ≠ b.succ := fun h => hab (Fin.succ_injective _ h)
+    have hAD : a.succ ≠ d.succ := fun h => had (Fin.succ_injective _ h)
+    have hBD : b.succ ≠ d.succ := fun h => hbd (Fin.succ_injective _ h)
+    have hA0 : (0 : Fin 6) ≠ a.succ := (Fin.succ_ne_zero a).symm
+    have hB0 : (0 : Fin 6) ≠ b.succ := (Fin.succ_ne_zero b).symm
+    have hD0 : (0 : Fin 6) ≠ d.succ := (Fin.succ_ne_zero d).symm
+    by_cases e1 : c a.succ b.succ = c 0 a.succ
+    · exact ⟨0, a.succ, b.succ, hA0, hB0, hAB, h1, e1.symm⟩
+    by_cases e2 : c a.succ d.succ = c 0 a.succ
+    · exact ⟨0, a.succ, d.succ, hA0, hD0, hAD, h2, e2.symm⟩
+    by_cases e3 : c b.succ d.succ = c 0 b.succ
+    · exact ⟨0, b.succ, d.succ, hB0, hD0, hBD, h1.symm.trans h2, e3.symm⟩
+    · refine ⟨a.succ, b.succ, d.succ, hAB, hAD, hBD, ?_, ?_⟩
+      · revert e1 e2
+        cases c a.succ b.succ <;> cases c a.succ d.succ <;> cases c 0 a.succ <;> simp
+      · rw [← h1] at e3
+        revert e1 e3
+        cases c a.succ b.succ <;> cases c b.succ d.succ <;> cases c 0 a.succ <;> simp
+  · refine ⟨pentagon, ?_, ?_⟩
+    · decide
+    · decide
 
 end Math
 

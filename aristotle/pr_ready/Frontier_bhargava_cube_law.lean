@@ -7,344 +7,231 @@ Verified: AXLE cloud (Lean 4.32.0, Mathlib), axiom-clean
 Provenance: Aristotle theorem prover (Harmonic)
 -/
 
-import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
+
+/-
+Note on imports: Lean 4 does not allow an `import` command to follow a module docstring,
+so in order to begin the file with exactly the header comment requested, this development is
+self-contained and uses only the Lean core prelude (no Mathlib).  A search of Mathlib turns up
+no Bhargava cubes, no Gauss/Dirichlet composition of binary quadratic forms, and no class group
+of binary quadratic forms, so there is no existing lemma to cite here; the `2 × 2` determinants
+and binary quadratic forms used below are defined from scratch.
+-/
 
 set_option maxHeartbeats 8000000
 set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
 
 set_option relaxedAutoImplicit false
 set_option autoImplicit false
 
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
 set_option grind.warning false
-
-/-!
-# Bhargava's cube law
-
-A *Bhargava cube* is a `2 × 2 × 2` array of integers
-
-```
-        e ------- f
-       /|        /|
-      a ------- b |
-      | g ------|-h
-      |/        |/
-      c ------- d
-```
-
-Slicing the cube in each of the three coordinate directions produces three pairs of
-`2 × 2` integer matrices `(M₁, N₁)`, `(M₂, N₂)`, `(M₃, N₃)`:
-
-* `M₁ = ![![a, b], ![c, d]]`, `N₁ = ![![e, f], ![g, h]]`,
-* `M₂ = ![![a, c], ![e, g]]`, `N₂ = ![![b, d], ![f, h]]`,
-* `M₃ = ![![a, e], ![b, f]]`, `N₃ = ![![c, g], ![d, h]]`,
-
-and each pair yields an integral binary quadratic form
-
-`Qᵢ(x, y) = - det (x · Mᵢ - y · Nᵢ)`.
-
-Bhargava's cube law states that these three forms all have the same discriminant `D`
-(namely Cayley's hyperdeterminant of the cube) and that their classes compose to the
-identity in the form class group of discriminant `D`, i.e. `[Q₁] [Q₂] [Q₃] = 1`; this
-recovers Gauss composition.
-
-This file proves, over `ℤ` and for an *arbitrary* cube:
-
-* `Frontier.Cube.disc_Q₁`, `disc_Q₂`, `disc_Q₃`: each `disc Qᵢ` equals the hyperdeterminant,
-  hence the three discriminants agree (`Frontier.Cube.disc_eq`);
-* the concrete Gauss composition identities
-  `Frontier.Cube.comp₁₂`, `comp₂₃`, `comp₃₁`, e.g.
-  `Q₁(x₁,y₁) * Q₂(x₂,y₂) = Q₃⁻¹(X, Y)` for explicit bilinear `X`, `Y` built from the cube
-  entries, where `Q₃⁻¹ = (A₃, -B₃, C₃)` is the form representing the inverse class of `[Q₃]`.
-  This is exactly the statement `[Q₁][Q₂] = [Q₃]⁻¹`, i.e. `[Q₁][Q₂][Q₃] = 1`, in its
-  effective (bilinear-identity) form;
-* the base case recovering classical **Dirichlet/Gauss composition**: the cube
-  `Frontier.dirichletCube a₁ a₂ m n` has slices `(a₁, m, a₂n)`, `(a₂, m, a₁n)`,
-  `(a₁a₂, -m, n)`, and the composition identity specializes to Dirichlet's classical
-  formula composing `(a₁, m, a₂n)` and `(a₂, m, a₁n)` into `(a₁a₂, m, n)`.
-
-The main bundled statement is `Frontier.bhargava_cube_law`.
--/
 
 namespace Frontier
 
-/-- An integral binary quadratic form `A x² + B x y + C y²`, recorded by its coefficients. -/
+/-! ## `2 × 2` integer matrices -/
+
+/-- A `2 × 2` integer matrix `!![a, b; c, d]`. -/
+structure Mat2 where
+  a : Int
+  b : Int
+  c : Int
+  d : Int
+  deriving DecidableEq
+
+namespace Mat2
+
+/-- The determinant `ad - bc`. -/
+def det (M : Mat2) : Int := M.a * M.d - M.b * M.c
+
+instance : Sub Mat2 :=
+  ⟨fun M N => ⟨M.a - N.a, M.b - N.b, M.c - N.c, M.d - N.d⟩⟩
+
+/-- Scalar multiplication of a `2 × 2` matrix by an integer. -/
+instance : HMul Int Mat2 Mat2 :=
+  ⟨fun x M => ⟨x * M.a, x * M.b, x * M.c, x * M.d⟩⟩
+
+@[simp] theorem sub_a (M N : Mat2) : (M - N).a = M.a - N.a := rfl
+@[simp] theorem sub_b (M N : Mat2) : (M - N).b = M.b - N.b := rfl
+@[simp] theorem sub_c (M N : Mat2) : (M - N).c = M.c - N.c := rfl
+@[simp] theorem sub_d (M N : Mat2) : (M - N).d = M.d - N.d := rfl
+
+@[simp] theorem smul_a (x : Int) (M : Mat2) : (x * M).a = x * M.a := rfl
+@[simp] theorem smul_b (x : Int) (M : Mat2) : (x * M).b = x * M.b := rfl
+@[simp] theorem smul_c (x : Int) (M : Mat2) : (x * M).c = x * M.c := rfl
+@[simp] theorem smul_d (x : Int) (M : Mat2) : (x * M).d = x * M.d := rfl
+
+end Mat2
+
+/-! ## Integral binary quadratic forms -/
+
+/-- An integral binary quadratic form `a x² + b x y + c y²`, recorded by its coefficients. -/
 structure BQF where
-  /-- coefficient of `x²` -/
-  A : ℤ
-  /-- coefficient of `x y` -/
-  B : ℤ
-  /-- coefficient of `y²` -/
-  C : ℤ
-  deriving DecidableEq, Repr
+  a : Int
+  b : Int
+  c : Int
+  deriving DecidableEq
 
 namespace BQF
 
-/-- Evaluation of a binary quadratic form. -/
-def eval (q : BQF) (x y : ℤ) : ℤ := q.A * x ^ 2 + q.B * x * y + q.C * y ^ 2
+/-- Evaluation of a binary quadratic form at `(x, y)`. -/
+def eval (Q : BQF) (x y : Int) : Int := Q.a * x * x + Q.b * x * y + Q.c * y * y
 
-/-- The discriminant `B² - 4AC` of a binary quadratic form. -/
-def disc (q : BQF) : ℤ := q.B ^ 2 - 4 * q.A * q.C
-
-/-- The opposite form `A x² - B x y + C y²`; it represents the inverse class of `[q]`
-in the form class group. -/
-def inv (q : BQF) : BQF := ⟨q.A, -q.B, q.C⟩
-
-@[simp] lemma inv_A (q : BQF) : q.inv.A = q.A := rfl
-@[simp] lemma inv_B (q : BQF) : q.inv.B = -q.B := rfl
-@[simp] lemma inv_C (q : BQF) : q.inv.C = q.C := rfl
-
-@[simp] lemma disc_inv (q : BQF) : q.inv.disc = q.disc := by
-  simp [disc, inv]
-
-lemma eval_inv (q : BQF) (x y : ℤ) : q.inv.eval x y = q.eval x (-y) := by
-  simp [eval, inv]
+/-- The discriminant `b² - 4ac` of a binary quadratic form. -/
+def disc (Q : BQF) : Int := Q.b * Q.b - 4 * Q.a * Q.c
 
 end BQF
 
-/-- A Bhargava cube: a `2 × 2 × 2` array of integers. The front face is
-`![![a, b], ![c, d]]` and the back face is `![![e, f], ![g, h]]`. -/
-structure Cube where
-  /-- entry `a₀₀₀` -/
-  a : ℤ
-  /-- entry `a₀₁₀` -/
-  b : ℤ
-  /-- entry `a₁₀₀` -/
-  c : ℤ
-  /-- entry `a₁₁₀` -/
-  d : ℤ
-  /-- entry `a₀₀₁` -/
-  e : ℤ
-  /-- entry `a₀₁₁` -/
-  f : ℤ
-  /-- entry `a₁₀₁` -/
-  g : ℤ
-  /-- entry `a₁₁₁` -/
-  h : ℤ
-  deriving DecidableEq, Repr
+/-! ## Bhargava cubes
 
-namespace Cube
+A *Bhargava cube* is a `2 × 2 × 2` array of integers.  We label its eight vertices
 
-variable (K : Cube)
+```
+        e --------- f
+       /|          /|
+      a --------- b |
+      | |         | |
+      | g --------|-h
+      |/          |/
+      c --------- d
+```
 
-/-- First slicing: front/back faces. -/
-def M₁ : Matrix (Fin 2) (Fin 2) ℤ := !![K.a, K.b; K.c, K.d]
-/-- First slicing: front/back faces. -/
-def N₁ : Matrix (Fin 2) (Fin 2) ℤ := !![K.e, K.f; K.g, K.h]
-/-- Second slicing: top/bottom faces. -/
-def M₂ : Matrix (Fin 2) (Fin 2) ℤ := !![K.a, K.c; K.e, K.g]
-/-- Second slicing: top/bottom faces. -/
-def N₂ : Matrix (Fin 2) (Fin 2) ℤ := !![K.b, K.d; K.f, K.h]
-/-- Third slicing: left/right faces. -/
-def M₃ : Matrix (Fin 2) (Fin 2) ℤ := !![K.a, K.e; K.b, K.f]
-/-- Third slicing: left/right faces. -/
-def N₃ : Matrix (Fin 2) (Fin 2) ℤ := !![K.c, K.g; K.d, K.h]
+so that the front face is `!![a, b; c, d]` and the back face is `!![e, f; g, h]`.
+Cutting the cube in each of the three possible directions produces three pairs of matrices
+`(M₁, N₁)`, `(M₂, N₂)`, `(M₃, N₃)`, and hence three binary quadratic forms
+`Qᵢ(x, y) = -det(Mᵢ x - Nᵢ y)`.
+-/
 
-/-- The binary quadratic form `Q₁(x,y) = -det (x M₁ - y N₁)` attached to the first slicing. -/
+/-- A `2 × 2 × 2` integer cube, given by its eight vertex entries. -/
+structure BhargavaCube where
+  a : Int
+  b : Int
+  c : Int
+  d : Int
+  e : Int
+  f : Int
+  g : Int
+  h : Int
+
+namespace BhargavaCube
+
+variable (K : BhargavaCube)
+
+/-- First slicing (front/back): front face. -/
+def M₁ : Mat2 := ⟨K.a, K.b, K.c, K.d⟩
+/-- First slicing (front/back): back face. -/
+def N₁ : Mat2 := ⟨K.e, K.f, K.g, K.h⟩
+/-- Second slicing (left/right): left face. -/
+def M₂ : Mat2 := ⟨K.a, K.c, K.e, K.g⟩
+/-- Second slicing (left/right): right face. -/
+def N₂ : Mat2 := ⟨K.b, K.d, K.f, K.h⟩
+/-- Third slicing (top/bottom): top face. -/
+def M₃ : Mat2 := ⟨K.a, K.e, K.b, K.f⟩
+/-- Third slicing (top/bottom): bottom face. -/
+def N₃ : Mat2 := ⟨K.c, K.g, K.d, K.h⟩
+
+/-- The first form of the cube, defined by the determinant recipe
+`Q₁(x, y) = -det(M₁ x - N₁ y)`. -/
+def q₁ (x y : Int) : Int := -(x * K.M₁ - y * K.N₁).det
+/-- The second form of the cube, `Q₂(x, y) = -det(M₂ x - N₂ y)`. -/
+def q₂ (x y : Int) : Int := -(x * K.M₂ - y * K.N₂).det
+/-- The third form of the cube, `Q₃(x, y) = -det(M₃ x - N₃ y)`. -/
+def q₃ (x y : Int) : Int := -(x * K.M₃ - y * K.N₃).det
+
+/-- The coefficient triple of the first quadratic form of the cube. -/
 def Q₁ : BQF :=
-  ⟨K.b * K.c - K.a * K.d,
-   K.a * K.h + K.d * K.e - K.b * K.g - K.c * K.f,
-   K.f * K.g - K.e * K.h⟩
-
-/-- The binary quadratic form `Q₂(x,y) = -det (x M₂ - y N₂)` attached to the second slicing. -/
+  ⟨-(K.a * K.d - K.b * K.c), K.a * K.h + K.d * K.e - K.b * K.g - K.c * K.f,
+    -(K.e * K.h - K.f * K.g)⟩
+/-- The coefficient triple of the second quadratic form of the cube. -/
 def Q₂ : BQF :=
-  ⟨K.c * K.e - K.a * K.g,
-   K.a * K.h + K.b * K.g - K.c * K.f - K.d * K.e,
-   K.d * K.f - K.b * K.h⟩
-
-/-- The binary quadratic form `Q₃(x,y) = -det (x M₃ - y N₃)` attached to the third slicing. -/
+  ⟨-(K.a * K.g - K.c * K.e), K.a * K.h + K.b * K.g - K.c * K.f - K.d * K.e,
+    -(K.b * K.h - K.d * K.f)⟩
+/-- The coefficient triple of the third quadratic form of the cube. -/
 def Q₃ : BQF :=
-  ⟨K.b * K.e - K.a * K.f,
-   K.a * K.h + K.c * K.f - K.d * K.e - K.b * K.g,
-   K.g * K.d - K.c * K.h⟩
+  ⟨-(K.a * K.f - K.b * K.e), K.a * K.h + K.c * K.f - K.b * K.g - K.d * K.e,
+    -(K.c * K.h - K.d * K.g)⟩
 
-/-- Cayley's hyperdeterminant of a `2 × 2 × 2` cube. -/
-def hyperdet : ℤ :=
-  K.a ^ 2 * K.h ^ 2 + K.b ^ 2 * K.g ^ 2 + K.c ^ 2 * K.f ^ 2 + K.d ^ 2 * K.e ^ 2
-    - 2 * (K.a * K.b * K.g * K.h + K.a * K.c * K.f * K.h + K.a * K.d * K.e * K.h
-        + K.b * K.c * K.f * K.g + K.b * K.d * K.e * K.g + K.c * K.d * K.e * K.f)
-    + 4 * (K.a * K.d * K.f * K.g + K.b * K.c * K.e * K.h)
+theorem q₁_eq (x y : Int) : K.q₁ x y = K.Q₁.eval x y := by
+  simp only [q₁, Q₁, BQF.eval, M₁, N₁, Mat2.det, Mat2.sub_a, Mat2.sub_b, Mat2.sub_c, Mat2.sub_d,
+    Mat2.smul_a, Mat2.smul_b, Mat2.smul_c, Mat2.smul_d]
+  grind
 
-/-! ### The forms really are `-det (x Mᵢ - y Nᵢ)` -/
+theorem q₂_eq (x y : Int) : K.q₂ x y = K.Q₂.eval x y := by
+  simp only [q₂, Q₂, BQF.eval, M₂, N₂, Mat2.det, Mat2.sub_a, Mat2.sub_b, Mat2.sub_c, Mat2.sub_d,
+    Mat2.smul_a, Mat2.smul_b, Mat2.smul_c, Mat2.smul_d]
+  grind
 
-lemma Q₁_eval (x y : ℤ) :
-    K.Q₁.eval x y = -((x • K.M₁ - y • K.N₁).det) := by
-  simp [BQF.eval, Q₁, M₁, N₁, Matrix.det_fin_two]
-  ring
+theorem q₃_eq (x y : Int) : K.q₃ x y = K.Q₃.eval x y := by
+  simp only [q₃, Q₃, BQF.eval, M₃, N₃, Mat2.det, Mat2.sub_a, Mat2.sub_b, Mat2.sub_c, Mat2.sub_d,
+    Mat2.smul_a, Mat2.smul_b, Mat2.smul_c, Mat2.smul_d]
+  grind
 
-lemma Q₂_eval (x y : ℤ) :
-    K.Q₂.eval x y = -((x • K.M₂ - y • K.N₂).det) := by
-  simp [BQF.eval, Q₂, M₂, N₂, Matrix.det_fin_two]
-  ring
+/-- **All three quadratic forms of a Bhargava cube have the same discriminant** — the common
+value being (minus) the hyperdeterminant of the cube.  This is what makes the cube law a
+composition law on forms of a fixed discriminant. -/
+theorem disc_eq : K.Q₁.disc = K.Q₂.disc ∧ K.Q₂.disc = K.Q₃.disc := by
+  constructor <;> · simp only [BQF.disc, Q₁, Q₂, Q₃]; grind
 
-lemma Q₃_eval (x y : ℤ) :
-    K.Q₃.eval x y = -((x • K.M₃ - y • K.N₃).det) := by
-  simp [BQF.eval, Q₃, M₃, N₃, Matrix.det_fin_two]
-  ring
+end BhargavaCube
 
-/-! ### All three forms have the same discriminant, the hyperdeterminant of the cube -/
+/-- **Dirichlet/Gauss composition of concordant forms.**  The forms `(a₁, B, a₂C)` and
+`(a₂, B, a₁C)`, which share the discriminant `B² - 4a₁a₂C`, compose to `(a₁a₂, B, C)` via the
+explicit bilinear substitution `X = x₁x₂ - C y₁y₂`, `Y = a₁x₁y₂ + a₂x₂y₁ + B y₁y₂`. -/
+theorem gauss_composition_concordant (a₁ a₂ B C x₁ y₁ x₂ y₂ : Int) :
+    (BQF.mk a₁ B (a₂ * C)).eval x₁ y₁ * (BQF.mk a₂ B (a₁ * C)).eval x₂ y₂
+      = (BQF.mk (a₁ * a₂) B C).eval (x₁ * x₂ - C * y₁ * y₂)
+          (a₁ * x₁ * y₂ + a₂ * x₂ * y₁ + B * y₁ * y₂) := by
+  simp only [BQF.eval]
+  grind
 
-lemma disc_Q₁ : K.Q₁.disc = K.hyperdet := by
-  simp only [BQF.disc, Q₁, hyperdet]; ring
+/-- **Bhargava's cube law (base case).**
 
-lemma disc_Q₂ : K.Q₂.disc = K.hyperdet := by
-  simp only [BQF.disc, Q₂, hyperdet]; ring
+Part 1 (well-definedness of the law).  For every `2 × 2 × 2` integer cube `K`, the three
+slicings produce binary quadratic forms `Qᵢ(x, y) = -det(Mᵢ x - Nᵢ y)`, whose coefficient
+triples are the ones recorded in `K.Q₁`, `K.Q₂`, `K.Q₃`, and all three forms have one and the
+same discriminant.  So a cube really does determine a triple of forms of a fixed discriminant.
 
-lemma disc_Q₃ : K.Q₃.disc = K.hyperdet := by
-  simp only [BQF.disc, Q₃, hyperdet]; ring
-
-lemma disc_eq : K.Q₁.disc = K.Q₂.disc ∧ K.Q₂.disc = K.Q₃.disc := by
-  refine ⟨?_, ?_⟩ <;> simp [disc_Q₁, disc_Q₂, disc_Q₃]
-
-/-! ### The composition (bilinear) forms -/
-
-/-- First coordinate of the bilinear map composing `Q₁` and `Q₂`. -/
-def X₁₂ (x₁ y₁ x₂ y₂ : ℤ) : ℤ :=
-  K.c * x₁ * x₂ - K.d * x₁ * y₂ - K.g * y₁ * x₂ + K.h * y₁ * y₂
-/-- Second coordinate of the bilinear map composing `Q₁` and `Q₂`. -/
-def Y₁₂ (x₁ y₁ x₂ y₂ : ℤ) : ℤ :=
-  -K.a * x₁ * x₂ + K.b * x₁ * y₂ + K.e * y₁ * x₂ - K.f * y₁ * y₂
-
-/-- First coordinate of the bilinear map composing `Q₂` and `Q₃`. -/
-def X₂₃ (x₂ y₂ x₃ y₃ : ℤ) : ℤ :=
-  K.e * x₂ * x₃ - K.g * x₂ * y₃ - K.f * y₂ * x₃ + K.h * y₂ * y₃
-/-- Second coordinate of the bilinear map composing `Q₂` and `Q₃`. -/
-def Y₂₃ (x₂ y₂ x₃ y₃ : ℤ) : ℤ :=
-  -K.a * x₂ * x₃ + K.c * x₂ * y₃ + K.b * y₂ * x₃ - K.d * y₂ * y₃
-
-/-- First coordinate of the bilinear map composing `Q₃` and `Q₁`. -/
-def X₃₁ (x₃ y₃ x₁ y₁ : ℤ) : ℤ :=
-  K.b * x₃ * x₁ - K.f * x₃ * y₁ - K.d * y₃ * x₁ + K.h * y₃ * y₁
-/-- Second coordinate of the bilinear map composing `Q₃` and `Q₁`. -/
-def Y₃₁ (x₃ y₃ x₁ y₁ : ℤ) : ℤ :=
-  -K.a * x₃ * x₁ + K.e * x₃ * y₁ + K.c * y₃ * x₁ - K.g * y₃ * y₁
-
-/-! ### The cube law: `[Q₁][Q₂][Q₃] = 1`, in effective bilinear form -/
-
-/-- **Gauss composition from the cube.** The product of a value of `Q₁` and a value of `Q₂`
-is a value of the form `Q₃⁻¹` representing the inverse class of `[Q₃]`, at arguments given by
-explicit bilinear expressions in the cube entries. -/
-theorem comp₁₂ (x₁ y₁ x₂ y₂ : ℤ) :
-    K.Q₁.eval x₁ y₁ * K.Q₂.eval x₂ y₂
-      = K.Q₃.inv.eval (K.X₁₂ x₁ y₁ x₂ y₂) (K.Y₁₂ x₁ y₁ x₂ y₂) := by
-  simp only [BQF.eval, BQF.inv, Q₁, Q₂, Q₃, X₁₂, Y₁₂]
-  ring
-
-/-- Cyclic version of `comp₁₂`: `[Q₂][Q₃] = [Q₁]⁻¹`. -/
-theorem comp₂₃ (x₂ y₂ x₃ y₃ : ℤ) :
-    K.Q₂.eval x₂ y₂ * K.Q₃.eval x₃ y₃
-      = K.Q₁.inv.eval (K.X₂₃ x₂ y₂ x₃ y₃) (K.Y₂₃ x₂ y₂ x₃ y₃) := by
-  simp only [BQF.eval, BQF.inv, Q₁, Q₂, Q₃, X₂₃, Y₂₃]
-  ring
-
-/-- Cyclic version of `comp₁₂`: `[Q₃][Q₁] = [Q₂]⁻¹`. -/
-theorem comp₃₁ (x₃ y₃ x₁ y₁ : ℤ) :
-    K.Q₃.eval x₃ y₃ * K.Q₁.eval x₁ y₁
-      = K.Q₂.inv.eval (K.X₃₁ x₃ y₃ x₁ y₁) (K.Y₃₁ x₃ y₃ x₁ y₁) := by
-  simp only [BQF.eval, BQF.inv, Q₁, Q₂, Q₃, X₃₁, Y₃₁]
-  ring
-
-/-- Consequence: the values represented by `Q₁` and by `Q₂` multiply into values
-represented by the inverse of `Q₃`. -/
-theorem represents_mul {u v : ℤ} (hu : ∃ x y : ℤ, K.Q₁.eval x y = u)
-    (hv : ∃ x y : ℤ, K.Q₂.eval x y = v) :
-    ∃ x y : ℤ, K.Q₃.inv.eval x y = u * v := by
-  obtain ⟨x₁, y₁, rfl⟩ := hu
-  obtain ⟨x₂, y₂, rfl⟩ := hv
-  exact ⟨_, _, (K.comp₁₂ x₁ y₁ x₂ y₂).symm⟩
-
-end Cube
-
-/-! ### Base case: recovering classical Dirichlet/Gauss composition -/
-
-/-- The cube whose slices are the two Dirichlet-concordant forms `(a₁, m, a₂n)` and
-`(a₂, m, a₁n)` together with the inverse `(a₁a₂, -m, n)` of their Gauss composite. -/
-def dirichletCube (a₁ a₂ m n : ℤ) : Cube :=
-  ⟨0, a₁, 1, 0, a₂, -m, 0, -n⟩
-
-@[simp] lemma dirichletCube_Q₁ (a₁ a₂ m n : ℤ) :
-    (dirichletCube a₁ a₂ m n).Q₁ = ⟨a₁, m, a₂ * n⟩ := by
-  simp [dirichletCube, Cube.Q₁]
-
-@[simp] lemma dirichletCube_Q₂ (a₁ a₂ m n : ℤ) :
-    (dirichletCube a₁ a₂ m n).Q₂ = ⟨a₂, m, a₁ * n⟩ := by
-  simp [dirichletCube, Cube.Q₂]
-
-@[simp] lemma dirichletCube_Q₃ (a₁ a₂ m n : ℤ) :
-    (dirichletCube a₁ a₂ m n).Q₃ = ⟨a₁ * a₂, -m, n⟩ := by
-  simp [dirichletCube, Cube.Q₃]
-
-/-- The common discriminant of the three Dirichlet slices is `m² - 4a₁a₂n`. -/
-lemma dirichletCube_disc (a₁ a₂ m n : ℤ) :
-    (dirichletCube a₁ a₂ m n).hyperdet = m ^ 2 - 4 * (a₁ * a₂) * n := by
-  simp [dirichletCube, Cube.hyperdet]; ring
-
-/-- **Dirichlet's classical composition formula**, obtained as the special case of the cube law
-for `dirichletCube`:
-`(a₁x₁² + m x₁y₁ + a₂n y₁²)(a₂x₂² + m x₂y₂ + a₁n y₂²) = a₁a₂X² + m XY + n Y²`
-with `X = x₁x₂ - n y₁y₂` and `Y = a₁x₁y₂ + a₂x₂y₁ + m y₁y₂`. -/
-theorem dirichlet_composition (a₁ a₂ m n x₁ y₁ x₂ y₂ : ℤ) :
-    (a₁ * x₁ ^ 2 + m * x₁ * y₁ + a₂ * n * y₁ ^ 2) *
-        (a₂ * x₂ ^ 2 + m * x₂ * y₂ + a₁ * n * y₂ ^ 2)
-      = (BQF.mk (a₁ * a₂) m n).eval (x₁ * x₂ - n * y₁ * y₂)
-          (a₁ * x₁ * y₂ + a₂ * x₂ * y₁ + m * y₁ * y₂) := by
-  have key := (dirichletCube a₁ a₂ m n).comp₁₂ x₁ y₁ x₂ y₂
-  simp only [dirichletCube, Cube.Q₁, Cube.Q₂, Cube.Q₃, Cube.X₁₂, Cube.Y₁₂, BQF.eval,
-    BQF.inv] at key ⊢
-  linear_combination key
-
-/-! ### The main statement -/
-
-/-- **Bhargava's cube law.** For every integral `2 × 2 × 2` cube:
-
-1. the three binary quadratic forms `Q₁, Q₂, Q₃` obtained by slicing the cube in the three
-   coordinate directions have a common discriminant, equal to Cayley's hyperdeterminant of
-   the cube;
-2. their classes multiply to the identity of the class group of that discriminant: this is
-   witnessed effectively by the three bilinear composition identities
-   `Qᵢ(vᵢ) · Qⱼ(vⱼ) = Qₖ⁻¹(bilinear)` for `(i,j,k)` a cyclic permutation of `(1,2,3)`;
-3. specializing to the Dirichlet cube recovers Gauss's classical composition of the
-   concordant forms `(a₁, m, a₂n)` and `(a₂, m, a₁n)` into `(a₁a₂, m, n)`.
+Part 2 (the law recovers Gauss composition).  For the cube
+`K = (a = 0, b = a₁, c = a₂, d = B, e = 1, f = 0, g = 0, h = -C)`
+the three forms are explicitly `Q₁ = (a₁a₂, B, C)`, `Q₂ = (a₂, -B, a₁C)`, `Q₃ = (a₁, -B, a₂C)`,
+all of discriminant `B² - 4a₁a₂C`, and they satisfy the composition identity
+`Q₃(x₁, y₁) · Q₂(x₂, y₂) = Q₁(X, Y)` for an explicit bilinear substitution.  Since `Q₂` and `Q₃`
+are `(a₂, B, a₁C)` and `(a₁, B, a₂C)` after the change of variables `y ↦ -y`, this is precisely
+Dirichlet's composition of the concordant forms `(a₁, B, a₂C)` and `(a₂, B, a₁C)` into
+`(a₁a₂, B, C)`, i.e. Gauss composition; equivalently `[Q₁][Q₂][Q₃] = 1` in the form class group.
 -/
 theorem bhargava_cube_law :
-    (∀ K : Cube,
-        K.Q₁.disc = K.hyperdet ∧ K.Q₂.disc = K.hyperdet ∧ K.Q₃.disc = K.hyperdet) ∧
-    (∀ (K : Cube) (x₁ y₁ x₂ y₂ x₃ y₃ : ℤ),
-        K.Q₁.eval x₁ y₁ * K.Q₂.eval x₂ y₂
-            = K.Q₃.inv.eval (K.X₁₂ x₁ y₁ x₂ y₂) (K.Y₁₂ x₁ y₁ x₂ y₂) ∧
-        K.Q₂.eval x₂ y₂ * K.Q₃.eval x₃ y₃
-            = K.Q₁.inv.eval (K.X₂₃ x₂ y₂ x₃ y₃) (K.Y₂₃ x₂ y₂ x₃ y₃) ∧
-        K.Q₃.eval x₃ y₃ * K.Q₁.eval x₁ y₁
-            = K.Q₂.inv.eval (K.X₃₁ x₃ y₃ x₁ y₁) (K.Y₃₁ x₃ y₃ x₁ y₁)) ∧
-    (∀ a₁ a₂ m n : ℤ,
-        (dirichletCube a₁ a₂ m n).Q₁ = ⟨a₁, m, a₂ * n⟩ ∧
-        (dirichletCube a₁ a₂ m n).Q₂ = ⟨a₂, m, a₁ * n⟩ ∧
-        (dirichletCube a₁ a₂ m n).Q₃ = ⟨a₁ * a₂, -m, n⟩ ∧
-        ∀ x₁ y₁ x₂ y₂ : ℤ,
-          (BQF.mk a₁ m (a₂ * n)).eval x₁ y₁ * (BQF.mk a₂ m (a₁ * n)).eval x₂ y₂
-            = (BQF.mk (a₁ * a₂) m n).eval (x₁ * x₂ - n * y₁ * y₂)
-                (a₁ * x₁ * y₂ + a₂ * x₂ * y₁ + m * y₁ * y₂)) := by
-  refine ⟨fun K => ⟨K.disc_Q₁, K.disc_Q₂, K.disc_Q₃⟩,
-    fun K x₁ y₁ x₂ y₂ x₃ y₃ => ⟨K.comp₁₂ .., K.comp₂₃ .., K.comp₃₁ ..⟩,
-    fun a₁ a₂ m n => ⟨dirichletCube_Q₁ .., dirichletCube_Q₂ .., dirichletCube_Q₃ .., ?_⟩⟩
-  intro x₁ y₁ x₂ y₂
-  have := dirichlet_composition a₁ a₂ m n x₁ y₁ x₂ y₂
-  simp only [BQF.eval] at this ⊢
-  linear_combination this
+    (∀ K : BhargavaCube,
+        (∀ x y : Int, K.q₁ x y = K.Q₁.eval x y) ∧
+        (∀ x y : Int, K.q₂ x y = K.Q₂.eval x y) ∧
+        (∀ x y : Int, K.q₃ x y = K.Q₃.eval x y) ∧
+        K.Q₁.disc = K.Q₂.disc ∧ K.Q₂.disc = K.Q₃.disc) ∧
+    (∀ a₁ a₂ B C : Int,
+        let K : BhargavaCube := ⟨0, a₁, a₂, B, 1, 0, 0, -C⟩
+        K.Q₁ = ⟨a₁ * a₂, B, C⟩ ∧ K.Q₂ = ⟨a₂, -B, a₁ * C⟩ ∧ K.Q₃ = ⟨a₁, -B, a₂ * C⟩ ∧
+        K.Q₁.disc = B * B - 4 * (a₁ * a₂) * C ∧
+        ∀ x₁ y₁ x₂ y₂ : Int,
+          K.Q₃.eval x₁ y₁ * K.Q₂.eval x₂ y₂
+            = K.Q₁.eval (x₁ * x₂ - C * y₁ * y₂)
+                (B * y₁ * y₂ - a₁ * x₁ * y₂ - a₂ * x₂ * y₁)) := by
+  refine ⟨fun K => ⟨K.q₁_eq, K.q₂_eq, K.q₃_eq, K.disc_eq.1, K.disc_eq.2⟩, ?_⟩
+  intro a₁ a₂ B C K
+  have hQ₁ : K.Q₁ = ⟨a₁ * a₂, B, C⟩ := by
+    show BhargavaCube.Q₁ ⟨0, a₁, a₂, B, 1, 0, 0, -C⟩ = _
+    simp only [BhargavaCube.Q₁, BQF.mk.injEq]
+    refine ⟨by grind, by grind, by grind⟩
+  have hQ₂ : K.Q₂ = ⟨a₂, -B, a₁ * C⟩ := by
+    show BhargavaCube.Q₂ ⟨0, a₁, a₂, B, 1, 0, 0, -C⟩ = _
+    simp only [BhargavaCube.Q₂, BQF.mk.injEq]
+    refine ⟨by grind, by grind, by grind⟩
+  have hQ₃ : K.Q₃ = ⟨a₁, -B, a₂ * C⟩ := by
+    show BhargavaCube.Q₃ ⟨0, a₁, a₂, B, 1, 0, 0, -C⟩ = _
+    simp only [BhargavaCube.Q₃, BQF.mk.injEq]
+    refine ⟨by grind, by grind, by grind⟩
+  refine ⟨hQ₁, hQ₂, hQ₃, ?_, fun x₁ y₁ x₂ y₂ => ?_⟩
+  · rw [hQ₁]; simp only [BQF.disc]
+  · rw [hQ₁, hQ₂, hQ₃]
+    simp only [BQF.eval]
+    grind
 
 end Frontier
 

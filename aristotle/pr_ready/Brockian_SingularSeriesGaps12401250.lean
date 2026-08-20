@@ -33,80 +33,69 @@ set_option grind.warning false
 
 namespace Brockian
 
-/-- A finite set of integers is **admissible** if for every prime `p` it misses at least one
-residue class modulo `p` (equivalently, the local factor of the Hardy–Littlewood singular
-series attached to the tuple is nonzero at every prime). -/
-def Admissible (S : Finset ℤ) : Prop :=
-  ∀ p : ℕ, p.Prime → ∃ r : ZMod p, ∀ a ∈ S, (a : ZMod p) ≠ r
+/-- A finite set of shifts `H` is *admissible* (in the sense of the Hardy–Littlewood
+prime `k`-tuple conjecture) if for every prime `p` the residues of `H` modulo `p`
+do not cover all of `ℤ/pℤ`.  Equivalently, the local factor of the singular series
+attached to `H` is nonzero at every prime. -/
+def Admissible (H : Finset ℕ) : Prop :=
+  ∀ p : ℕ, p.Prime → (H.image (· % p)).card < p
 
-/-- The gap pair `{0, n}` is admissible exactly when the gap `n` is even. -/
-theorem admissible_pair_iff (n : ℤ) : Admissible ({0, n} : Finset ℤ) ↔ Even n := by
+/-- Only primes `p ≤ #H` need to be tested for admissibility: for larger primes the
+residues of `H` cannot cover all residue classes for cardinality reasons. -/
+theorem admissible_iff_small_primes (H : Finset ℕ) :
+    Admissible H ↔ ∀ p : ℕ, p.Prime → p ≤ H.card → (H.image (· % p)).card < p := by
+  constructor
+  · intro h p hp _
+    exact h p hp
+  · intro h p hp
+    by_cases hle : p ≤ H.card
+    · exact h p hp hle
+    · exact lt_of_le_of_lt (Finset.card_image_le) (by omega)
+
+/-- The two–element pattern `{0, g}` is admissible exactly when the gap `g`
+is even.  (For odd `g` one of `0, g` is even and the other odd, so the pattern covers
+both residue classes mod `2`.) -/
+theorem admissible_pair_iff_even {g : ℕ} :
+    Admissible ({0, g} : Finset ℕ) ↔ Even g := by
   constructor
   · intro h
-    obtain ⟨r, hr⟩ := h 2 Nat.prime_two
-    have h0 : ((0 : ℤ) : ZMod 2) ≠ r := hr 0 (by simp)
-    have hn : ((n : ℤ) : ZMod 2) ≠ r := hr n (by simp)
-    have key : ∀ x y : ZMod 2, (0 : ZMod 2) ≠ y → x ≠ y → x = 0 := by decide
-    have hz : ((n : ℤ) : ZMod 2) = 0 := key _ r (by simpa using h0) hn
-    have hdvd : (2 : ℤ) ∣ n := by
-      simpa using (ZMod.intCast_zmod_eq_zero_iff_dvd n 2).mp hz
-    obtain ⟨k, hk⟩ := hdvd
-    exact ⟨k, by omega⟩
-  · intro hn p hp
-    have hdvd : (2 : ℤ) ∣ n := hn.two_dvd
-    have hz2 : ((n : ℤ) : ZMod 2) = 0 :=
-      (ZMod.intCast_zmod_eq_zero_iff_dvd n 2).mpr (by simpa using hdvd)
-    rcases eq_or_ne p 2 with rfl | hp2
-    · refine ⟨1, ?_⟩
-      intro a ha
-      simp only [Finset.mem_insert, Finset.mem_singleton] at ha
-      rcases ha with rfl | rfl
+    have h2 := h 2 Nat.prime_two
+    by_contra hodd
+    have hg2 : g % 2 = 1 := Nat.not_even_iff.mp hodd
+    have hsub : ({0, 1} : Finset ℕ) ⊆ ({0, g} : Finset ℕ).image (· % 2) := by
+      intro x hx
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+      rcases hx with rfl | rfl
       · simp
-      · rw [hz2]; decide
-    · have hp3 : 3 ≤ p := by have := hp.two_le; omega
-      haveI : Fact p.Prime := ⟨hp⟩
-      obtain ⟨r, hr⟩ : ∃ r : ZMod p, r ∉ ({0, ((n : ℤ) : ZMod p)} : Finset (ZMod p)) := by
-        by_contra hcon
-        push_neg at hcon
-        have hsub : (Finset.univ : Finset (ZMod p)) ⊆
-            ({0, ((n : ℤ) : ZMod p)} : Finset (ZMod p)) := fun x _ => hcon x
-        have hle := Finset.card_le_card hsub
-        have h1 : (({0, ((n : ℤ) : ZMod p)} : Finset (ZMod p))).card ≤ 2 := by
-          refine le_trans (Finset.card_insert_le _ _) ?_
-          simp
-        have h2 : (Finset.univ : Finset (ZMod p)).card = p := by
-          simp [ZMod.card p]
+      · simp [hg2]
+    have hle := Finset.card_le_card hsub
+    have hc : ({0, 1} : Finset ℕ).card = 2 := by decide
+    omega
+  · intro heven p hp
+    rcases eq_or_ne p 2 with rfl | hp2
+    · have hg2 : g % 2 = 0 := Nat.even_iff.mp heven
+      have himg : ({0, g} : Finset ℕ).image (· % 2) = {0} := by
+        ext x
+        simp [hg2]
+      rw [himg]
+      simp
+    · have hp3 : 3 ≤ p := by
+        have := hp.two_le
         omega
-      refine ⟨r, ?_⟩
-      simp only [Finset.mem_insert, Finset.mem_singleton] at hr
-      push_neg at hr
-      intro a ha
-      simp only [Finset.mem_insert, Finset.mem_singleton] at ha
-      rcases ha with rfl | rfl
-      · exact fun hc => hr.1 (by simpa using hc.symm)
-      · exact fun hc => hr.2 hc.symm
+      have hcard : ({0, g} : Finset ℕ).card ≤ 2 := Finset.card_insert_le _ _ |>.trans (by simp)
+      exact lt_of_le_of_lt (Finset.card_image_le.trans hcard) (by omega)
 
-/-- **New admissible gap ranges (1240–1250).** For every gap `n` in the range `1240 ≤ n ≤ 1250`,
-the pair `{0, n}` is admissible — hence its Hardy–Littlewood singular series is nonvanishing —
-precisely when `n` is even. (The range hypotheses `h1`, `h2` are part of the requested
-statement; the equivalence in fact holds for every `n`, cf. `Brockian.admissible_pair_iff`.) -/
-theorem SingularSeriesGaps12401250 (n : ℕ) (h1 : 1240 ≤ n) (h2 : n ≤ 1250) :
-    Admissible ({0, (n : ℤ)} : Finset ℤ) ↔ Even n := by
-  rw [admissible_pair_iff]
-  exact Int.even_coe_nat n
-
-/-- Explicitly: each even gap in the range 1240–1250 is admissible. -/
-theorem admissible_even_gaps_1240_1250 (n : ℕ) (h1 : 1240 ≤ n) (h2 : n ≤ 1250) (hn : Even n) :
-    Admissible ({0, (n : ℤ)} : Finset ℤ) :=
-  (SingularSeriesGaps12401250 n h1 h2).mpr hn
-
-/-- Sample instance of the new range: the gap 1246 is admissible. -/
-theorem admissible_gap_1246 : Admissible ({0, (1246 : ℤ)} : Finset ℤ) :=
-  admissible_even_gaps_1240_1250 1246 (by norm_num) (by norm_num) (by decide)
+/-- **Singular Series Gaps 1240–1250.**
+For every gap `g` in the range `1240 ≤ g ≤ 1250`, the two-element pattern `{0, g}`
+is admissible (equivalently, the singular series `𝔖({0,g})` is nonzero) precisely when
+`g` is even.  In particular the admissible gaps in this range are exactly
+`1240, 1242, 1244, 1246, 1248, 1250`. -/
+theorem SingularSeriesGaps12401250 :
+    (∀ g : ℕ, 1240 ≤ g → g ≤ 1250 → (Admissible ({0, g} : Finset ℕ) ↔ Even g)) ∧
+      (Finset.Icc 1240 1250).filter (fun g => Even g) =
+        ({1240, 1242, 1244, 1246, 1248, 1250} : Finset ℕ) := by
+  refine ⟨fun g _ _ => admissible_pair_iff_even, ?_⟩
+  decide
 
 end Brockian
-
-#print axioms Brockian.SingularSeriesGaps12401250
-#print axioms Brockian.admissible_even_gaps_1240_1250
-#print axioms Brockian.admissible_gap_1246
 

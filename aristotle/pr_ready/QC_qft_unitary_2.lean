@@ -9,44 +9,32 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-open scoped BigOperators
-open scoped Real
-open scoped Nat
-open scoped Classical
-open scoped Pointwise
-
-set_option maxHeartbeats 8000000
-set_option maxRecDepth 4000
-set_option synthInstance.maxHeartbeats 20000
-set_option synthInstance.maxSize 128
-
-set_option relaxedAutoImplicit false
-set_option autoImplicit false
-
-set_option pp.fullNames true
-set_option pp.structureInstances true
-set_option pp.coercions.types true
-set_option pp.funBinderTypes true
-set_option pp.letVarTypes true
-set_option pp.piBinderTypes true
-
-set_option grind.warning false
-
 namespace QC
 
-/-- The 2-qubit quantum Fourier transform matrix: the `4 × 4` matrix with entries
-`(1/2) * i^(j*k)`, where `i` is the primitive 4th root of unity. -/
-noncomputable def qft2 : Matrix (Fin 4) (Fin 4) ℂ :=
-  fun j k => (1 / 2 : ℂ) * Complex.I ^ ((j : ℕ) * (k : ℕ))
+open Matrix Complex
+
+/-- The 2-qubit quantum Fourier transform matrix, a `4 × 4` complex matrix whose
+`(j, k)` entry is `(1/√4) * ω ^ (j * k)` with `ω = exp(2πi/4) = i`.  Since `i` has
+order `4`, the exponent may be reduced modulo `4`. -/
+noncomputable def qftMatrix2 : Matrix (Fin 4) (Fin 4) ℂ :=
+  fun j k => (1 / 2 : ℂ) * Complex.I ^ ((j.val * k.val) % 4)
 
 /-- The 2-qubit QFT matrix is unitary. -/
-theorem qft_unitary_2 : qft2 ∈ Matrix.unitaryGroup (Fin 4) ℂ := by
-  constructor <;>
-  · ext i j
-    fin_cases i <;> fin_cases j <;>
-      simp [qft2, Matrix.mul_apply, Fin.sum_univ_four, Matrix.star_apply,
-        pow_succ, Complex.ext_iff] <;>
-      norm_num
+theorem qft_unitary_2 : qftMatrix2 ∈ Matrix.unitaryGroup (Fin 4) ℂ := by
+  rw [Matrix.mem_unitaryGroup_iff']
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [Matrix.mul_apply, Fin.sum_univ_succ, qftMatrix2, Complex.ext_iff,
+      pow_succ, Complex.I_mul_I] <;>
+    norm_num
+
+/-- Explicit form of unitarity: `qftMatrix2ᴴ * qftMatrix2 = 1`. -/
+theorem qft_conjTranspose_mul_self_2 : qftMatrix2ᴴ * qftMatrix2 = 1 :=
+  Matrix.mem_unitaryGroup_iff'.mp qft_unitary_2
+
+/-- Explicit form of unitarity: `qftMatrix2 * qftMatrix2ᴴ = 1`. -/
+theorem qft_mul_conjTranspose_self_2 : qftMatrix2 * qftMatrix2ᴴ = 1 :=
+  Matrix.mem_unitaryGroup_iff.mp qft_unitary_2
 
 end QC
 

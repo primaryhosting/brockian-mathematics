@@ -1,0 +1,89 @@
+import Mathlib
+
+/-!
+# Lieb Thirring Stability
+Category: Frontier Physics
+Target: Frontier.lieb_thirring_stability
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+open MeasureTheory
+
+namespace Frontier
+
+/-!
+## Overview
+
+We formalize, and prove, the one–dimensional base case of the Lieb–Thirring family of
+inequalities, in its variational (quadratic form) formulation, which is exactly the
+statement of *stability* for a one–dimensional one–particle Schrödinger operator
+`H = -d²/dx² + V`:
+
+for every `C¹` test function `ψ` of compact support,
+`⟪ψ, Hψ⟫ = ∫ |ψ'|² + ∫ V |ψ|² ≥ - (1/4) (∫ V₋)² ∫ |ψ|²`,
+
+where `V₋ x = max (-V x) 0` is the negative part of the potential.  Equivalently, the
+bottom of the spectrum obeys `E₀ ≥ -(1/4) (∫ V₋)²`, i.e. `|E₀|^{1/2} ≤ (1/2) ∫ V₋`,
+which is the `γ = 1/2`, `d = 1` Lieb–Thirring bound restricted to a single bound state,
+with the sharp constant `L_{1/2,1} = 1/2`.
+
+The proof is the classical one:
+
+* `Frontier.sq_le_integral_abs_mul_abs` : `|ψ(x)|² ≤ ∫ |ψ| |ψ'|`
+  (fundamental theorem of calculus, applied to `ψ²` from both `-∞` and `+∞`);
+* `Frontier.integral_abs_mul_abs_le_sqrt_mul_sqrt` : `∫ |ψ| |ψ'| ≤ ‖ψ‖₂ ‖ψ'‖₂`
+  (Cauchy–Schwarz, i.e. Hölder with `p = q = 2`, via
+  `MeasureTheory.integral_mul_le_Lp_mul_Lq_of_nonneg`);
+* hence `∫ V |ψ|² ≥ - ‖ψ‖_∞² ∫ V₋ ≥ - ‖ψ‖₂ ‖ψ'‖₂ ∫ V₋`, and the result follows from
+  `(‖ψ'‖₂ - ‖ψ‖₂ (∫ V₋)/2)² ≥ 0`.
+
+Mathlib does not contain the Lieb–Thirring inequality (nor Schrödinger operator spectral
+theory), so no single existing lemma closes the goal; the Mathlib inputs used are cited
+above and in the individual proofs.
+-/
+
+/-- **Cauchy–Schwarz** for two continuous, compactly supported functions on `ℝ`:
+`∫ |f| |g| ≤ (∫ f²)^(1/2) (∫ g²)^(1/2)`.  This is Hölder's inequality with `p = q = 2`
+(`MeasureTheory.integral_mul_le_Lp_mul_Lq_of_nonneg`). -/
+
+theorem integral_abs_mul_abs_le_sqrt_mul_sqrt
+    (f g : ℝ → ℝ) (hf : Continuous f) (hg : Continuous g)
+    (hfs : HasCompactSupport f) (hgs : HasCompactSupport g) :
+    ∫ x, |f x| * |g x| ≤ Real.sqrt (∫ x, f x ^ 2) * Real.sqrt (∫ x, g x ^ 2) := by
+  have h2 : (2 : ℝ).HolderConjugate 2 := ⟨by norm_num, by norm_num, by norm_num⟩
+  have hmf : MemLp (fun x => |f x|) (ENNReal.ofReal 2) volume :=
+    hf.abs.memLp_of_hasCompactSupport hfs.abs
+  have hmg : MemLp (fun x => |g x|) (ENNReal.ofReal 2) volume :=
+    hg.abs.memLp_of_hasCompactSupport hgs.abs
+  have h := integral_mul_le_Lp_mul_Lq_of_nonneg (μ := volume) h2
+    (f := fun x => |f x|) (g := fun x => |g x|)
+    (Filter.Eventually.of_forall fun x => abs_nonneg _)
+    (Filter.Eventually.of_forall fun x => abs_nonneg _) hmf hmg
+  simpa [Real.rpow_two, Real.sqrt_eq_rpow, sq_abs] using h
+
+/-- If `ψ` is everywhere differentiable with derivative `dψ` and has compact support, then
+`dψ` has compact support as well. -/

@@ -1,0 +1,321 @@
+/-
+# Aks Primes In P
+Category: Frontier Cs
+Target: CS.aks_primes_in_p
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+import Mathlib
+import RequestProject.AKS.Algorithm
+import RequestProject.AKS.Cost
+
+/-!
+# Aks Primes In P
+Category: Frontier Cs
+Target: CS.aks_primes_in_p
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+set_option maxHeartbeats 8000000
+
+namespace CS
+
+/-- **PRIMES is in P** (Agrawal–Kayal–Saxena).
+
+`AKS.aksBool : ℕ → Bool` is an explicit, fully computable implementation of the AKS primality
+test.  On input `n` it checks that `n ≥ 2`, that `n` is not a perfect power, that no `a ≤ r`
+shares a nontrivial factor with `n`, and — unless `n ≤ r` — that the congruences
+`(X + a)^n = X^n + a` hold in `(ZMod n)[X]/(X^r - 1)` for all `1 ≤ a ≤ ℓ`, where `r = AKS.rAlg n`
+is the least modulus for which the multiplicative order of `n` exceeds `(bit length)^4` and
+`ℓ = AKS.ellAlg n`.  The congruences are evaluated by repeated squaring in a computable
+coefficient-vector model of the quotient ring.
+
+`AKS.aksI : ℕ → Bool × ℕ` is the same algorithm instrumented with a counter: it is a structural
+copy of every function involved, threading a count of the primitive operations performed
+(see `RequestProject/AKS/Cost.lean` for the cost assigned to each leaf primitive: `r * r`
+coefficient multiplications for one cyclic convolution, `bits n` for one `Nat.gcd`, and so on).
+Costs are therefore measured in arithmetic operations on numbers of `O(log n)` bits, not in
+bit operations.
+
+The statement below records:
+
+* **the instrumented algorithm computes the same answer** as the plain one;
+* **correctness**: `AKS.aksBool` decides primality exactly;
+* **polynomial running time**: on every input `n ≥ 2` the algorithm performs at most
+  `(bit length of n) ^ 45` primitive operations;
+* **polynomial size of the parameters**: `r ≤ 2 · (bit length)^12` and `ℓ ≤ 4 · (bit length)^7 + 2`.
+-/
+
+theorem prime_of_accepts {n : ℕ} (hacc : AKSAccepts n) : n.Prime := by
+  classical
+  obtain ⟨hn2, hpp, hgcd, hcase⟩ := hacc
+  set r := rOf n with hrdef
+  set p := n.minFac with hpdef
+  have hp : p.Prime := Nat.minFac_prime (by omega)
+  have hpn : p ∣ n := Nat.minFac_dvd n
+  have hpn' : p ≤ n := Nat.minFac_le (by omega)
+  haveI : Fact p.Prime := ⟨hp⟩
+  have hgcdp : p ≤ r → n = p := by
+    intro hle
+    have h := hgcd p hp.one_lt.le hle
+    rw [Nat.gcd_eq_left hpn] at h
+    rcases h with h1 | h1
+    · exact absurd h1 hp.ne_one
+    · exact h1.symm
+  by_cases hnr : n ≤ r
+  · have hnp : n = p := hgcdp (le_trans hpn' hnr)
+    rw [hnp]; exact hp
+  have hrn : r < n := by omega
+  -- The main case: `r < n`.
+  have hpoly := hcase.resolve_left (not_le.mpr hrn)
+  have hpr : r < p := by
+    by_contra hcon
+    push_neg at hcon
+    have := hgcdp hcon
+    omega
+  have hord : thr n < orderOf ((n : ZMod r)) := thr_lt_orderOf n hn2
+  set k := bits n with hkdef
+  have hk2 : 2 ≤ k := two_le_bits hn2
+  have hnk : n < 2 ^ k := lt_two_pow_bits n
+  have hthr : thr n = k ^ 4 := rfl
+  -- `r ≥ 2`
+  have hr2 : 2 ≤ r := by
+    rcases Nat.lt_or_ge r 2 with hlt | hge
+    · exfalso
+      interval_cases r
+      · have hk4pos : 0 < k ^ 4 := by positivity
+        have hfin : IsOfFinOrder ((n : ZMod 0)) := orderOf_pos_iff.mp (by
+          rw [hthr] at hord; omega)
+        obtain ⟨mm, hm, hmm⟩ := isOfFinOrder_iff_pow_eq_one.mp hfin
+        have hz : ((n : ℤ)) ^ mm = 1 := hmm
+        have hz' : ((n ^ mm : ℕ) : ℤ) = 1 := by push_cast; exact hz
+        have h1 : n ^ mm = 1 := by exact_mod_cast hz'
+        rcases Nat.pow_eq_one.mp h1 with h | h <;> omega
+      · have hk4pos : 0 < k ^ 4 := by positivity
+        have h1 : ((n : ZMod 1)) = 1 := Subsingleton.elim _ _
+        rw [h1, orderOf_one, hthr] at hord
+        omega
+    · exact hge
+  haveI : NeZero r := ⟨by omega⟩
+  -- coprimality
+  have hcop : Nat.Coprime n r := by
+    have hfin : IsOfFinOrder ((n : ZMod r)) := orderOf_pos_iff.mp (by omega)
+    exact (ZMod.isUnit_iff_coprime n r).mp hfin.isUnit
+  have hcopp : Nat.Coprime p r := by
+    refine (Nat.Prime.coprime_iff_not_dvd hp).mpr ?_
+    intro hdvd
+    have := Nat.le_of_dvd (by omega) hdvd
+    omega
+  -- the field with a primitive `r`-th root of unity
+  set F := AlgebraicClosure (ZMod p) with hFdef
+  haveI : NeZero ((r : ℕ) : F) := by
+    constructor
+    have h1 : ((r : ℕ) : ZMod p) ≠ 0 := by
+      rw [Ne, ZMod.natCast_eq_zero_iff]
+      intro hdvd
+      have := Nat.le_of_dvd (by omega) hdvd
+      omega
+    have h2 : ((r : ℕ) : F) = algebraMap (ZMod p) F ((r : ℕ) : ZMod p) := by push_cast; ring
+    rw [h2]
+    simpa using fun h => h1 ((algebraMap (ZMod p) F).injective (by simpa using h))
+  obtain ⟨ζ, hζroot⟩ := IsAlgClosed.exists_root (Polynomial.cyclotomic r F) (by
+    rw [Polynomial.degree_cyclotomic]
+    have hpos : 0 < r.totient := Nat.totient_pos.mpr (by omega)
+    exact_mod_cast hpos.ne')
+  have hζ : IsPrimitiveRoot ζ r := Polynomial.isRoot_cyclotomic_iff.mp hζroot
+  -- the group generated by `p` and `n` modulo `r`
+  set G : Finset (ZMod r) :=
+    Finset.univ.filter (fun x : ZMod r => ∃ i j : ℕ, x = ((p ^ i * n ^ j : ℕ) : ZMod r)) with hGdef
+  set t := G.card with htdef
+  have hmemG : ∀ i j : ℕ, ((p ^ i * n ^ j : ℕ) : ZMod r) ∈ G := by
+    intro i j
+    simp only [hGdef, Finset.mem_filter, Finset.mem_univ, true_and]
+    exact ⟨i, j, rfl⟩
+  -- `t` is at least the order of `n` mod `r`
+  have htord : orderOf ((n : ZMod r)) ≤ t := by
+    set d := orderOf ((n : ZMod r)) with hddef
+    have himg : (Finset.range d).image (fun i => ((n : ZMod r)) ^ i) ⊆ G := by
+      intro x hx
+      simp only [Finset.mem_image, Finset.mem_range] at hx
+      obtain ⟨i, _, rfl⟩ := hx
+      have : ((n : ZMod r)) ^ i = ((p ^ 0 * n ^ i : ℕ) : ZMod r) := by push_cast; ring
+      rw [this]
+      exact hmemG 0 i
+    have hcard : ((Finset.range d).image (fun i => ((n : ZMod r)) ^ i)).card = d := by
+      refine Finset.card_image_of_injOn ?_ |>.trans (Finset.card_range d)
+      intro x hx y hy hxy
+      simp only [Finset.coe_range, Set.mem_Iio] at hx hy
+      exact pow_injOn_Iio_orderOf (x := (n : ZMod r)) hx hy hxy
+    calc d = _ := hcard.symm
+      _ ≤ t := Finset.card_le_card himg
+  have htk : k ^ 4 < t := lt_of_lt_of_le (hthr ▸ hord) htord
+  -- `t ≤ φ(r)`
+  have httot : t ≤ Nat.totient r := by
+    have hsub : G ⊆ Finset.univ.image (fun u : (ZMod r)ˣ => (u : ZMod r)) := by
+      intro x hx
+      simp only [hGdef, Finset.mem_filter, Finset.mem_univ, true_and] at hx
+      obtain ⟨i, j, rfl⟩ := hx
+      have hu : IsUnit (((p ^ i * n ^ j : ℕ) : ZMod r)) := by
+        have h1 : IsUnit ((p : ZMod r)) := (ZMod.isUnit_iff_coprime p r).mpr hcopp
+        have h2 : IsUnit ((n : ZMod r)) := (ZMod.isUnit_iff_coprime n r).mpr hcop
+        have : ((p ^ i * n ^ j : ℕ) : ZMod r) = (p : ZMod r) ^ i * (n : ZMod r) ^ j := by
+          push_cast; ring
+        rw [this]
+        exact (h1.pow i).mul (h2.pow j)
+      simp only [Finset.mem_image, Finset.mem_univ, true_and]
+      exact ⟨hu.unit, hu.unit_spec⟩
+    calc t ≤ (Finset.univ.image (fun u : (ZMod r)ˣ => (u : ZMod r))).card :=
+          Finset.card_le_card hsub
+      _ = Fintype.card (ZMod r)ˣ := by
+          rw [Finset.card_image_of_injective _ (fun a b h => Units.ext h), Finset.card_univ]
+      _ = Nat.totient r := ZMod.card_units_eq_totient r
+  have htotlt : Nat.totient r < r := Nat.totient_lt r (by omega)
+  -- `k ≥ 3`
+  have hk3 : 3 ≤ k := by
+    rcases Nat.lt_or_ge k 3 with hlt | hge
+    · exfalso
+      have hk : k = 2 := by omega
+      have h1 : k ^ 4 = 16 := by rw [hk]; norm_num
+      have h2 : (2 : ℕ) ^ k = 4 := by rw [hk]; norm_num
+      omega
+    · exact hge
+  -- the parameters
+  set sigma := Nat.sqrt t with hsigmadef
+  set m := 2 * sigma * k with hmdef
+  have hmt : m + 2 < t := arith_deg hk3 htk
+  have hell : ell n = 2 * Nat.sqrt (Nat.totient r) * k + 2 := rfl
+  have hmell : m + 2 ≤ ell n := by
+    rw [hell, hmdef]
+    have : sigma ≤ Nat.sqrt (Nat.totient r) := Nat.sqrt_le_sqrt httot
+    exact Nat.add_le_add_right (Nat.mul_le_mul_right k (Nat.mul_le_mul_left 2 this)) 2
+  have hellp : ell n < p := by
+    have := arith_ell hk3 htk httot htotlt
+    rw [hell]
+    omega
+  -- introspectivity for the tested polynomials
+  have hintroP : ∀ a : ℕ, 1 ≤ a → a ≤ ell n → Intro p r p (X + C (a : ZMod p)) :=
+    fun a _ _ => intro_p_self hp
+  have hintroN : ∀ a : ℕ, 1 ≤ a → a ≤ ell n → Intro p r n (X + C (a : ZMod p)) :=
+    fun a h1 h2 => intro_n_of_poly hpn (hpoly a h1 h2)
+  have hintroU : ∀ (i j : ℕ) (a : ℕ), 1 ≤ a → a ≤ ell n →
+      Intro p r (p ^ i * n ^ j) (X + C (a : ZMod p)) := by
+    intro i j a h1 h2
+    exact ((hintroP a h1 h2).pow i).mul_nat ((hintroN a h1 h2).pow j)
+  -- the set `B` of tested values, avoiding the (at most one) value with `ζ + a = 0`
+  set B : Finset ℕ := (Finset.Icc 1 (m + 2)).filter
+    (fun a => ζ + (algebraMap (ZMod p) F) (a : ZMod p) ≠ 0) with hBdef
+  have hBsub : ∀ a ∈ B, 1 ≤ a ∧ a ≤ m + 2 := by
+    intro a ha
+    simp only [hBdef, Finset.mem_filter, Finset.mem_Icc] at ha
+    exact ha.1
+  have hBp : ∀ a ∈ B, a < p := by
+    intro a ha
+    have := (hBsub a ha).2
+    omega
+  have hBne : ∀ a ∈ B, ζ + (algebraMap (ZMod p) F) (a : ZMod p) ≠ 0 := by
+    intro a ha
+    simp only [hBdef, Finset.mem_filter] at ha
+    exact ha.2
+  have hBsubset : B ⊆ Finset.Icc 1 (m + 2) := Finset.filter_subset _ _
+  have hBcard : m + 1 ≤ B.card := by
+    have hbad : ((Finset.Icc 1 (m + 2)) \ B).card ≤ 1 := by
+      refine Finset.card_le_one.mpr ?_
+      intro a ha b hb
+      rw [Finset.mem_sdiff, hBdef, Finset.mem_filter, not_and_or, not_not] at ha hb
+      have ha1 := Finset.mem_Icc.mp ha.1
+      have hb1 := Finset.mem_Icc.mp hb.1
+      have ha2 : ζ + (algebraMap (ZMod p) F) ((a : ℕ) : ZMod p) = 0 := by
+        rcases ha.2 with h | h
+        · exact absurd ha.1 h
+        · exact h
+      have hb2 : ζ + (algebraMap (ZMod p) F) ((b : ℕ) : ZMod p) = 0 := by
+        rcases hb.2 with h | h
+        · exact absurd hb.1 h
+        · exact h
+      have hab : ((a : ZMod p)) = ((b : ZMod p)) := by
+        refine (algebraMap (ZMod p) F).injective ?_
+        linear_combination ha2 - hb2
+      have hva := congrArg ZMod.val hab
+      rw [ZMod.val_natCast_of_lt (by omega), ZMod.val_natCast_of_lt (by omega)] at hva
+      exact hva
+    have hsplit := Finset.card_sdiff_add_card_eq_card hBsubset
+    rw [Nat.card_Icc] at hsplit
+    omega
+  have hBcard' : B.card < t := by
+    have h1 : B.card ≤ (Finset.Icc 1 (m + 2)).card := Finset.card_le_card hBsubset
+    rw [Nat.card_Icc] at h1
+    omega
+  -- the main dichotomy
+  by_cases hpow : ∃ e, n = p ^ e
+  · obtain ⟨e, he⟩ := hpow
+    rcases Nat.lt_or_ge e 2 with hlt | hge
+    · interval_cases e
+      · simp at he; omega
+      · rw [pow_one] at he; rw [he]; exact hp
+    · exact absurd he (hpp p e hge)
+  · exfalso
+    -- pigeonhole in `G`
+    have hcardS : G.card < ((Finset.range (sigma + 1)) ×ˢ (Finset.range (sigma + 1))).card := by
+      rw [Finset.card_product, Finset.card_range]
+      have := Nat.lt_succ_sqrt' t
+      calc G.card = t := rfl
+        _ < (sigma + 1) ^ 2 := by rw [hsigmadef]; exact Nat.lt_succ_sqrt' t
+        _ = (sigma + 1) * (sigma + 1) := by ring
+    obtain ⟨x, hx, y, hy, hxy, hfxy⟩ := Finset.exists_ne_map_eq_of_card_lt_of_maps_to hcardS
+      (f := fun ij : ℕ × ℕ => ((p ^ ij.1 * n ^ ij.2 : ℕ) : ZMod r))
+      (by intro ij _; exact hmemG ij.1 ij.2)
+    simp only [Finset.mem_product, Finset.mem_range] at hx hy
+    -- the two introspective numbers
+    set u₁ := p ^ x.1 * n ^ x.2 with hu₁def
+    set u₂ := p ^ y.1 * n ^ y.2 with hu₂def
+    have hune : u₁ ≠ u₂ := by
+      intro heq
+      exact hpow (pow_of_ne hp hn2 hxy heq)
+    -- an upper bound on both
+    have hbound : ∀ (i j : ℕ), i ≤ sigma → j ≤ sigma → p ^ i * n ^ j < 2 ^ m := by
+      intro i j hi hj
+      have h1 : p ^ i * n ^ j ≤ n ^ sigma * n ^ sigma := by
+        exact Nat.mul_le_mul (le_trans (Nat.pow_le_pow_left hpn' i)
+          (Nat.pow_le_pow_right (by omega) hi)) (Nat.pow_le_pow_right (by omega) hj)
+      have h2 : n ^ sigma * n ^ sigma = n ^ (2 * sigma) := by rw [← pow_add]; ring_nf
+      have hsigmapos : 0 < sigma := by
+        rw [hsigmadef]
+        have : 0 < t := by omega
+        exact Nat.sqrt_pos.mpr (by omega)
+      have h3 : n ^ (2 * sigma) < (2 ^ k) ^ (2 * sigma) :=
+        Nat.pow_lt_pow_left hnk (by omega)
+      have h4 : (2 ^ k) ^ (2 * sigma) = 2 ^ m := by
+        rw [← pow_mul, hmdef]; ring_nf
+      omega
+    -- apply the counting lemma to the larger of the two
+    have hkey : ∀ (i j i' j' : ℕ), i ≤ sigma → j ≤ sigma → i' ≤ sigma → j' ≤ sigma →
+        p ^ i' * n ^ j' < p ^ i * n ^ j →
+        ((p ^ i' * n ^ j' : ℕ) : ZMod r) = ((p ^ i * n ^ j : ℕ) : ZMod r) → False := by
+      intro i j i' j' hi hj hi' hj' hlt hcong
+      have hmain := two_pow_card_le (t := t) (u₁ := p ^ i * n ^ j) (u₂ := p ^ i' * n ^ j')
+        hp hr2 hζ B hBp hBne G (le_refl t)
+        (by
+          intro x hx
+          simp only [hGdef, Finset.mem_filter, Finset.mem_univ, true_and] at hx
+          obtain ⟨i₀, j₀, rfl⟩ := hx
+          refine ⟨p ^ i₀ * n ^ j₀, rfl, ?_⟩
+          intro a ha
+          exact hintroU i₀ j₀ a (hBsub a ha).1 (le_trans (hBsub a ha).2 hmell))
+        hBcard'
+        (fun a ha => hintroU i j a (hBsub a ha).1 (le_trans (hBsub a ha).2 hmell))
+        (fun a ha => hintroU i' j' a (hBsub a ha).1 (le_trans (hBsub a ha).2 hmell))
+        hlt hcong.symm
+      have h1 : 2 ^ (m + 1) ≤ 2 ^ B.card := Nat.pow_le_pow_right (by norm_num) hBcard
+      have h2 : p ^ i * n ^ j < 2 ^ m := hbound i j hi hj
+      have h3 : 2 ^ m < 2 ^ (m + 1) := by
+        apply Nat.pow_lt_pow_right (by norm_num); omega
+      omega
+    rcases lt_trichotomy u₁ u₂ with hlt | heq | hlt
+    · exact hkey y.1 y.2 x.1 x.2 (Nat.lt_succ_iff.mp hy.1) (Nat.lt_succ_iff.mp hy.2)
+        (Nat.lt_succ_iff.mp hx.1) (Nat.lt_succ_iff.mp hx.2) hlt hfxy
+    · exact hune heq
+    · exact hkey x.1 x.2 y.1 y.2 (Nat.lt_succ_iff.mp hx.1) (Nat.lt_succ_iff.mp hx.2)
+        (Nat.lt_succ_iff.mp hy.1) (Nat.lt_succ_iff.mp hy.2) hlt hfxy.symm
+
+/-- The AKS criterion is correct. -/

@@ -1,0 +1,40 @@
+import Mathlib
+
+/-!
+# Pos Index Conj Le
+Category: Brockian Corpus
+Target: Zeta23Core.posIndex_conj_le
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option grind.warning false
+
+namespace Zeta23Core
+
+open Matrix
+
+variable {𝕜 : Type*} [RCLike 𝕜] {m d : Type*} [Fintype m] [DecidableEq m] [Fintype d]
+  [DecidableEq d]
+
+/-- Unfolding lemma for `Matrix.toEuclideanLin`. -/
+
+lemma toEuclideanLin_eigenvectorBasis {Q : Matrix m m 𝕜} (hQ : Q.IsHermitian) (i : m) :
+    Matrix.toEuclideanLin Q (hQ.eigenvectorBasis i)
+      = (hQ.eigenvalues i : 𝕜) • hQ.eigenvectorBasis i := by
+  rw [toEuclideanLin_apply', hQ.mulVec_eigenvectorBasis, WithLp.toLp_smul, WithLp.toLp_ofLp,
+    RCLike.real_smul_eq_coe_smul (K := 𝕜)]
+

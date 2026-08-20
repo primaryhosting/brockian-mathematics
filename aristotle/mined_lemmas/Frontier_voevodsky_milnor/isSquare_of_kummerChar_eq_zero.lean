@@ -1,0 +1,71 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+import Mathlib
+
+/-!
+# Mod-2 Milnor K-theory of a field
+
+`K^M_n(F)/2` is the abelian group (a `ZMod 2`-vector space) presented by generators the
+symbols `{a₁, …, aₙ}` with `aᵢ ∈ Fˣ`, subject to
+* multilinearity `{…, a·b, …} = {…, a, …} + {…, b, …}`, and
+* the Steinberg relation `{…, a, …, 1 - a, …} = 0`.
+
+Since the coefficients are taken in `ZMod 2` this is exactly Milnor K-theory modulo `2`.
+
+## Main definitions
+
+* `Frontier.milnorRelations F n` : the set of defining relations.
+* `Frontier.KMilnorMod2 F n` : the group `K^M_n(F)/2`.
+* `Frontier.symbol F v` : the symbol `{v 0, …, v (n-1)}`.
+
+## Main results
+
+* `Frontier.kMilnorMod2ZeroEquiv` : `K^M_0(F)/2 ≃ ℤ/2`.
+* `Frontier.exists_symbol_eq_one` : in degree one, every element is a single symbol.
+-/
+
+namespace Frontier
+
+variable (F : Type) [Field F]
+
+/-- The defining relations of `K^M_n(F)/2`: multilinearity in each slot and the Steinberg
+relation `{…, a, …, 1 - a, …} = 0`. -/
+
+lemma isSquare_of_kummerChar_eq_zero (hF : (2 : F) ≠ 0) (a : Fˣ)
+    (h : (kummerChar a : GalGroup F → ZMod 2) = 0) : ∃ b : Fˣ, a = b * b := by
+  have hfix : ∀ σ : GalGroup F, σ (sqrtIn a) = sqrtIn a := fun σ =>
+    (kummerChar_eq_zero_iff a σ).1 (congrFun h σ)
+  obtain ⟨b0, hb0⟩ : sqrtIn a ∈ Set.range (algebraMap F (SeparableClosure F)) :=
+    (InfiniteGalois.mem_range_algebraMap_iff_fixed _).2 hfix
+  have hb0ne : b0 ≠ 0 := by
+    intro hz
+    exact sqrtIn_ne_zero hF a (by rw [← hb0, hz, map_zero])
+  have hsq : algebraMap F (SeparableClosure F) (b0 ^ 2)
+      = algebraMap F (SeparableClosure F) (a : F) := by
+    rw [map_pow, hb0, sqrtIn_sq hF]
+  have h2 : b0 ^ 2 = (a : F) := (algebraMap F (SeparableClosure F)).injective hsq
+  exact ⟨Units.mk0 b0 hb0ne, Units.ext (by simp [← h2, sq])⟩
+

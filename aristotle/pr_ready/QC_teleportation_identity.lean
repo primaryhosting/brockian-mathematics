@@ -9,6 +9,72 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
+namespace QC
+
+noncomputable def invSqrt2 : ℂ := ((Real.sqrt 2)⁻¹ : ℝ)
+
+lemma invSqrt2_conj : (starRingEnd ℂ) invSqrt2 = invSqrt2 := by
+  simp [invSqrt2]
+
+lemma invSqrt2_sq : invSqrt2 * invSqrt2 = 1 / 2 := by
+  have h : (Real.sqrt 2)⁻¹ * (Real.sqrt 2)⁻¹ = (1 : ℝ) / 2 := by
+    rw [← mul_inv, Real.mul_self_sqrt (by norm_num)]
+    norm_num
+  rw [invSqrt2, ← Complex.ofReal_mul, h]
+  norm_num
+
+/-- The `±1` sign `(-1)^(a*i)` occurring in the Pauli `Z` operator. -/
+def sgn (a i : Bool) : ℂ := if a && i then -1 else 1
+
+/-- Amplitudes of the Bell basis state `|B_{a,b}⟩ = (1/√2) Σ_i (-1)^(a i) |i, i ⊕ b⟩`
+on the two-qubit computational basis. -/
+noncomputable def bell (a b i j : Bool) : ℂ :=
+  invSqrt2 * sgn a i * (if j = xor i b then 1 else 0)
+
+/-- The initial three-qubit state `|ψ⟩ ⊗ |B_{0,0}⟩`, where qubit `1` carries the
+unknown state `ψ` and qubits `2,3` are a shared EPR pair. -/
+noncomputable def init (psi : Bool → ℂ) (i j k : Bool) : ℂ :=
+  psi i * invSqrt2 * (if j = k then 1 else 0)
+
+/-- The (unnormalized) state of the receiver's qubit after a Bell measurement with
+outcome `(a, b)` on the first two qubits. -/
+noncomputable def measured (psi : Bool → ℂ) (a b k : Bool) : ℂ :=
+  ∑ i : Bool, ∑ j : Bool, (starRingEnd ℂ) (bell a b i j) * init psi i j k
+
+/-- The receiver's state after applying the Pauli correction `Z^a X^b` dictated by the
+classical outcome `(a, b)` and renormalizing (the measurement outcome has probability
+`1/4`, so the correct normalization factor is `2`). -/
+noncomputable def corrected (psi : Bool → ℂ) (a b k : Bool) : ℂ :=
+  2 * (sgn a k * measured psi a b (xor k b))
+
+/-- **Teleportation identity.** For every input qubit state `ψ` and every Bell-measurement
+outcome `(a, b)`, the receiver's post-correction state equals the input state `ψ`. -/
+theorem teleportation_identity (psi : Bool → ℂ) (a b : Bool) :
+    corrected psi a b = psi := by
+  funext k
+  cases a <;> cases b <;> cases k <;>
+    simp [corrected, measured, bell, init, sgn, invSqrt2_conj] <;>
+    ring_nf <;>
+    rw [show invSqrt2 ^ 2 = invSqrt2 * invSqrt2 from sq invSqrt2, invSqrt2_sq] <;> ring
+
+section Sanity
+
+/-- Sanity check: without the Pauli correction the receiver's state is genuinely wrong,
+e.g. for outcome `(a, b) = (false, true)` it is the bit-flipped input. -/
+example (psi : Bool → ℂ) (k : Bool) :
+    2 * measured psi false true k = psi (xor k true) := by
+  cases k <;>
+    simp [measured, bell, init, sgn, invSqrt2_conj] <;>
+    ring_nf <;>
+    rw [show invSqrt2 ^ 2 = invSqrt2 * invSqrt2 from sq invSqrt2, invSqrt2_sq] <;> ring
+
+end Sanity
+
+end QC
+
+#print axioms QC.teleportation_identity
+
+
 open scoped BigOperators
 open scoped Real
 open scoped Nat
@@ -31,106 +97,4 @@ set_option pp.letVarTypes true
 set_option pp.piBinderTypes true
 
 set_option grind.warning false
-
-namespace QC
-
-/-! ## Quantum teleportation
-
-A single qubit is a vector in `ℂ²`, represented as `Fin 2 → ℂ`.
-Multi-qubit states are represented by their coefficient functions on the
-computational basis (so a three-qubit state is `Fin 2 → Fin 2 → Fin 2 → ℂ`).
-Addition on `Fin 2` is addition mod 2, i.e. the XOR of classical bits.
--/
-
-/-- A one-qubit state vector, given by its coefficients in the basis `|0⟩, |1⟩`. -/
-abbrev Qubit : Type := Fin 2 → ℂ
-
-/-- The scalar `1/√2`. -/
-noncomputable def invSqrt2 : ℂ := ((Real.sqrt 2 : ℝ) : ℂ)⁻¹
-
-lemma invSqrt2_mul_self : invSqrt2 * invSqrt2 = 1 / 2 := by
-  have h2 : ((Real.sqrt 2 : ℝ) : ℂ) * ((Real.sqrt 2 : ℝ) : ℂ) = (2 : ℂ) := by
-    rw [← Complex.ofReal_mul, Real.mul_self_sqrt (by norm_num)]
-    norm_num
-  rw [invSqrt2, ← mul_inv, h2]
-  norm_num
-
-lemma invSqrt2_sq : invSqrt2 ^ 2 = 1 / 2 := by
-  rw [sq, invSqrt2_mul_self]
-
-/-- The Pauli `X` (bit flip) gate acting on a qubit. -/
-def pauliX (v : Qubit) : Qubit := fun k => v (k + 1)
-
-/-- The Pauli `Z` (phase flip) gate acting on a qubit. -/
-def pauliZ (v : Qubit) : Qubit := fun k => (-1 : ℂ) ^ (k : ℕ) * v k
-
-/-- The Bell state `|Φ⁺⟩ = (|00⟩ + |11⟩)/√2` shared by Alice and Bob. -/
-noncomputable def bellPair : Fin 2 → Fin 2 → ℂ :=
-  fun j k => if j = k then invSqrt2 else 0
-
-/-- The Bell basis state `|β_{m₁m₂}⟩ = (|0,m₂⟩ + (-1)^{m₁}|1, 1⊕m₂⟩)/√2`,
-in which Alice measures her two qubits. -/
-noncomputable def bellBasis (m₁ m₂ : Fin 2) : Fin 2 → Fin 2 → ℂ :=
-  fun i j => if j = i + m₂ then invSqrt2 * (-1 : ℂ) ^ ((m₁ : ℕ) * (i : ℕ)) else 0
-
-/-- The four states `|β_{m₁m₂}⟩` form an orthonormal basis of the two-qubit space. -/
-lemma bellBasis_orthonormal (m₁ m₂ n₁ n₂ : Fin 2) :
-    ∑ i : Fin 2, ∑ j : Fin 2,
-        (starRingEnd ℂ) (bellBasis m₁ m₂ i j) * bellBasis n₁ n₂ i j
-      = if m₁ = n₁ ∧ m₂ = n₂ then 1 else 0 := by
-  have hconj : (starRingEnd ℂ) invSqrt2 = invSqrt2 := by
-    simp [invSqrt2, map_inv₀]
-  fin_cases m₁ <;> fin_cases m₂ <;> fin_cases n₁ <;> fin_cases n₂ <;>
-    simp [bellBasis, Fin.sum_univ_two, hconj] <;>
-    ring_nf <;> rw [invSqrt2_sq] <;> ring
-
-/-- The initial three-qubit state `|ψ⟩ ⊗ |Φ⁺⟩`, with Alice holding qubits 1 and 2
-and Bob holding qubit 3. -/
-noncomputable def initialState (psi : Qubit) : Fin 2 → Fin 2 → Fin 2 → ℂ :=
-  fun i j k => psi i * bellPair j k
-
-/-- Bob's (unnormalized) qubit after Alice's Bell measurement yields the outcome
-`(m₁, m₂)`: the projection of the total state onto `|β_{m₁m₂}⟩` on Alice's qubits. -/
-noncomputable def bobResidual (psi : Qubit) (m₁ m₂ : Fin 2) : Qubit :=
-  fun k => ∑ i : Fin 2, ∑ j : Fin 2,
-    (starRingEnd ℂ) (bellBasis m₁ m₂ i j) * initialState psi i j k
-
-/-- Bob's correction operation for the outcome `(m₁, m₂)`: apply `X` if `m₂ = 1`,
-then `Z` if `m₁ = 1`. -/
-def correction (m₁ m₂ : Fin 2) (v : Qubit) : Qubit :=
-  pauliZ^[(m₁ : ℕ)] (pauliX^[(m₂ : ℕ)] v)
-
-/-- Bob's normalized state after correction (the residual has norm `1/2` of `‖ψ‖`). -/
-noncomputable def bobFinal (psi : Qubit) (m₁ m₂ : Fin 2) : Qubit :=
-  (2 : ℂ) • correction m₁ m₂ (bobResidual psi m₁ m₂)
-
-/-- Explicit formula for Bob's residual state. -/
-lemma bobResidual_apply (psi : Qubit) (m₁ m₂ : Fin 2) (k : Fin 2) :
-    bobResidual psi m₁ m₂ k = (1 / 2 : ℂ) * (-1 : ℂ) ^ ((m₁ : ℕ) * ((k + m₂ : Fin 2) : ℕ))
-      * psi (k + m₂) := by
-  have hconj : (starRingEnd ℂ) invSqrt2 = invSqrt2 := by
-    simp [invSqrt2, map_inv₀]
-  fin_cases m₁ <;> fin_cases m₂ <;> fin_cases k <;>
-    simp [bobResidual, bellBasis, initialState, bellPair, Fin.sum_univ_two, hconj] <;>
-    ring_nf <;> rw [invSqrt2_sq] <;> ring
-
-/-- **Quantum teleportation**: after Alice's Bell measurement with any outcome
-`(m₁, m₂)` and Bob's corresponding Pauli correction, Bob's (renormalized) qubit
-is exactly the input state `|ψ⟩`. -/
-theorem teleportation_identity (psi : Qubit) (m₁ m₂ : Fin 2) :
-    bobFinal psi m₁ m₂ = psi := by
-  funext k
-  fin_cases m₁ <;> fin_cases m₂ <;> fin_cases k <;>
-    simp [bobFinal, correction, pauliX, pauliZ, bobResidual_apply]
-
-/-- Each of the four measurement outcomes occurs with probability `1/4`. -/
-theorem teleportation_outcome_prob (psi : Qubit) (m₁ m₂ : Fin 2) :
-    ∑ k : Fin 2, ‖bobResidual psi m₁ m₂ k‖ ^ 2 = (1 / 4) * ∑ i : Fin 2, ‖psi i‖ ^ 2 := by
-  fin_cases m₁ <;> fin_cases m₂ <;>
-    simp [Fin.sum_univ_two, bobResidual_apply, mul_pow] <;> ring
-
-end QC
-
-#print axioms QC.teleportation_identity
-#print axioms QC.teleportation_outcome_prob
 

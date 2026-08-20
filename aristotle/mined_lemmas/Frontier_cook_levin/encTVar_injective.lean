@@ -1,0 +1,83 @@
+/-
+# Cook Levin
+Category: Frontier — Moonshot
+Target: Frontier.cook_levin
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+
+(Note: Lean 4.28 does not allow a module docstring before the import block, so this header
+is a plain block comment; the text is otherwise verbatim.)
+-/
+
+import Mathlib
+import RequestProject.CookLevin.Sat
+import RequestProject.CookLevin.Machine
+import RequestProject.CookLevin.Tableau
+import RequestProject.CookLevin.Forward
+import RequestProject.CookLevin.Backward
+import RequestProject.CookLevin.Size
+import RequestProject.CookLevin.Sanity
+import RequestProject.CookLevin.Certificate
+
+/-!
+## The Cook–Levin theorem
+
+`Frontier.cook_levin` states that SAT is `NP`-hard: every language `L` in `NP` is reduced to
+`SATLang`, the set of satisfiable CNF formulas over `ℕ`, by the explicit computable map
+`Frontier.reduction`, whose output is of polynomial size.
+
+The complexity class `NP` is modelled by single-tape nondeterministic Turing machines
+(`Frontier.NTM`) with a polynomial time bound (`Frontier.InNP`), and the reduction is the
+classical *tableau* construction: `Frontier.tableau M x T` is a CNF formula whose satisfying
+assignments are exactly the accepting computations of `M` on `x` of length `T`
+(`Frontier.tableau_satisfiable_iff`).
+
+### Sources and scope
+
+* Mathlib (at the version pinned by this project) contains no complexity theory: there is no
+  definition of `P`, `NP`, of polynomial-time reductions, or of SAT, and no Cook–Levin
+  statement.  Everything below is therefore developed from scratch, except for the CNF
+  datatype `Std.Sat.CNF` and its relabelling API, which come from the Lean core library.
+* What is proved is the hard half of the Cook–Levin theorem, `NP`-hardness of SAT, for
+  many-one reductions that are computable Lean functions of polynomially bounded output
+  size.  Two ingredients of the textbook statement are *not* formalised here: that the
+  reduction runs in polynomial *time* (this project fixes no cost model for computing the
+  reduction itself), and the easy half `SAT ∈ NP` (which would require programming and
+  verifying a nondeterministic Turing machine that parses and evaluates encoded formulas).
+  `Frontier.satisfiable_iff_exists_certificate` records the certificate characterisation of
+  satisfiability that underlies the easy half.
+-/
+
+namespace Frontier
+
+open Std.Sat
+
+/-! ### Encoding the tableau variables by natural numbers -/
+
+/-- Numerical code of a tape symbol. -/
+
+theorem encTVar_injective : Function.Injective encTVar := by
+  intro u v huv
+  cases u <;> cases v <;> simp only [encTVar] at huv
+  case st.st t q t' q' =>
+    obtain ⟨rfl, rfl⟩ := Nat.pair_eq_pair.1 (show Nat.pair t q = Nat.pair t' q' by omega)
+    rfl
+  case hd.hd t i t' i' =>
+    obtain ⟨rfl, rfl⟩ := Nat.pair_eq_pair.1 (show Nat.pair t i = Nat.pair t' i' by omega)
+    rfl
+  case cell.cell t i a t' i' a' =>
+    obtain ⟨hp, hs⟩ := Nat.pair_eq_pair.1 (show Nat.pair (Nat.pair t i) (symCode a) =
+      Nat.pair (Nat.pair t' i') (symCode a') by omega)
+    obtain ⟨rfl, rfl⟩ := Nat.pair_eq_pair.1 hp
+    rw [symCode_injective hs]
+  case mv.mv t j t' j' =>
+    obtain ⟨rfl, rfl⟩ := Nat.pair_eq_pair.1 (show Nat.pair t j = Nat.pair t' j' by omega)
+    rfl
+  all_goals omega
+
+/-! ### Correctness of the tableau -/
+
+variable {M : NTM} {x : List Bool} {T : ℕ}
+
+/-- **Correctness of the Cook–Levin tableau.**  The formula `tableau M x T` is satisfiable
+if and only if the nondeterministic machine `M` accepts the input `x` within `T` steps. -/

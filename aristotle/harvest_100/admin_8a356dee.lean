@@ -1,0 +1,42 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-!
+# Test Pair Nonneg
+Category: Riemann Program
+Target: Riemann.WeilPositivity.test_pair_nonneg
+Verification: pending
+Provenance: Aristotle theorem prover (Harmonic)
+-/
+
+namespace Riemann.WeilPositivity
+
+/-- The quadratic form of the positive-semidefinite matrix `[[2,1],[1,2]]` is nonnegative:
+`2x² + 2xy + 2y² = (x+y)² + x² + y² ≥ 0`. -/
+theorem test_pair_nonneg (x y : ℝ) : 0 ≤ 2 * x ^ 2 + 2 * x * y + 2 * y ^ 2 := by
+  nlinarith [sq_nonneg (x + y), sq_nonneg x, sq_nonneg y]
+
+end Riemann.WeilPositivity
+

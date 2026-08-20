@@ -1,0 +1,49 @@
+import Mathlib
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+namespace QC
+
+open Matrix
+open scoped Kronecker
+
+/-- Index type for three qubits. -/
+abbrev Idx : Type := (Fin 2 × Fin 2) × Fin 2
+
+/-- A measurement setting for one party: `false` means measure the Pauli `X`
+observable, `true` means measure the Pauli `Y` observable. -/
+abbrev Setting : Type := Bool
+
+/-- The Pauli `X` matrix. -/
+
+theorem mermin_sign_prod :
+    merminSign false false false * merminSign false true true *
+      merminSign true false true * merminSign true true false = -1 := by
+  rfl
+
+/-- **Mermin's GHZ paradox.** There is no local hidden variable model: no
+assignment of (setting-dependent, but outcome-deterministic and local) values
+`A`, `B`, `C` to the three parties can reproduce the quantum mechanical
+predictions for the GHZ state in the four Mermin contexts, i.e. there are no
+`A B C : Setting → ℤ` whose products give the eigenvalues of `triObs` on `ghz`. -/
