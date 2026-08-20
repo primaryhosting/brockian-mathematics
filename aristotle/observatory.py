@@ -28,6 +28,7 @@ def gather():
     reductions = load("reductions.json", {})
     lemmas = load("mined_lemmas/manifest.json", {})
     cross = load("cross_check.json", {})
+    audit = load("axle_axiom_audit.json", {})  # cloud axiom audit — the real gate
     axle = load("axle_verify.json", {})
     pr = load("pr_plan.json", {})
 
@@ -44,8 +45,12 @@ def gather():
         "by_account": dict(sub_by_acct), "by_domain": dict(sub_by_dom),
         "harvested": len(harvest), "proved": proved, "stopped": stopped,
         "axle_verified": sum(1 for s in axle.values() if s.get("verified") is True),
+        # kernel_trusted = cloud axiom audit clean (the gate for registry PROVED).
+        # The local-lake legs are opt-in and produce nothing under RAM pressure, so
+        # they are reported separately and honestly rather than as the headline.
+        "kernel_trusted": sum(1 for s in audit.values() if s.get("trusted") is True),
         "lake_verified": sum(1 for s in vstate.values() if s.get("compiles") is True),
-        "kernel_trusted": sum(1 for s in cross.values() if s.get("trusted") is True),
+        "local_kernel_trusted": sum(1 for s in cross.values() if s.get("trusted") is True),
         "best_proofs": len(best), "domains": len(domains),
         "reductions": sum(len(v) for v in reductions.values()),
         "mined_lemmas": sum(len(v.get("lemmas", [])) for v in lemmas.values()),
