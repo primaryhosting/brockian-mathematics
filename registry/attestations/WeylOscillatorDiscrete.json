@@ -1,6 +1,6 @@
 {
   "module": "Brockian.Weyl.OscillatorDiscrete",
-  "environment": "lean-4.32.0",
+  "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
@@ -11,32 +11,24 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI.ofFactorizations",
+      "name": "Brockian.Weyl.OscillatorDiscrete.ofFactorizations",
       "kind": "def",
       "axle_verdict": "verified",
       "axioms": null,
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI.nonzero_spectrum_is_point_spectrum",
+      "name": "Brockian.Weyl.OscillatorDiscrete.nonzero_spectrum_is_point_spectrum",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI.finiteMultiplicity_nonzero_spectrum",
+      "name": "Brockian.Weyl.OscillatorDiscrete.finiteMultiplicity_nonzero_spectrum",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -57,22 +49,14 @@
       "name": "Brockian.Weyl.OscillatorDiscrete.finiteDimensional_eigenspace_of_isCompact",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Weyl.OscillatorDiscrete.finiteMultiplicityNonzeroSpectrum_of_isCompact",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -93,33 +77,21 @@
       "name": "Brockian.Weyl.OscillatorDiscrete.harmonicOscillator_resolvent_nonzero_spectrum_of_weightedRellich",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Weyl.OscillatorDiscrete.harmonicOscillator_resolvent_finiteMultiplicity_of_weightedRellich",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Weyl.OscillatorDiscrete.nonzeroSpectrumIsPointSpectrum_of_isCompact",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     }
   ]

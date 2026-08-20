@@ -1,6 +1,6 @@
 {
   "module": "Brockian.Weyl.WeightedRellich",
-  "environment": "lean-4.32.0",
+  "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
@@ -11,29 +11,21 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Weyl.WeightedRellich.Factorization.isCompactOperator",
+      "name": "Brockian.Weyl.WeightedRellich.isCompactOperator",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Weyl.WeightedRellich.Factorization.isCompact_closure_image_closedBall",
+      "name": "Brockian.Weyl.WeightedRellich.isCompact_closure_image_closedBall",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Weyl.WeightedRellich.Factorization.ofCompact",
+      "name": "Brockian.Weyl.WeightedRellich.ofCompact",
       "kind": "def",
       "axle_verdict": "verified",
       "axioms": null,
@@ -43,11 +35,7 @@
       "name": "Brockian.Weyl.WeightedRellich.compact_resolvents_of_factorizations",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     }
   ]

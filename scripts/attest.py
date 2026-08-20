@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 import axle_client  # noqa: E402
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from engine.verify import ALLOWED_AXIOMS as ALLOWED  # noqa: E402 — single-sourced axioms
-from engine.verify import DEFAULT_ENV, axioms_in_line  # noqa: E402
+from engine.verify import DEFAULT_ENV, axioms_in_line, qualified_decls  # noqa: E402
 
 
 def _attestation_stem(lean_path: str) -> str:
@@ -37,8 +37,13 @@ def _kind_of(src: str, name: str) -> str:
     if re.search(rf"^\s*(?:@\[[^\]]*\]\s*)*(?:noncomputable\s+)?(?:theorem|lemma)\s+{ident}",
                  src, re.MULTILINE):
         return "theorem"
+    # The declared name may carry an explicit namespace prefix (`def Factorization.ofCompact`),
+    # so allow an optional dotted prefix before the bare identifier — otherwise a prefixed
+    # def falls through to the "theorem" default and gets probed with `#print axioms`, which
+    # fails to resolve (it is not a proof term and not in the theorem/lemma name set).
+    pfx = r"(?:[A-Za-z_][\w'.]*\.)?"
     m = re.search(
-        rf"^\s*(?:@\[[^\]]*\]\s*)*(?:noncomputable\s+)?(?:def|abbrev)\s+{ident}(.*?):=",
+        rf"^\s*(?:@\[[^\]]*\]\s*)*(?:noncomputable\s+)?(?:def|abbrev)\s+{pfx}{ident}(.*?):=",
         src, re.MULTILINE | re.DOTALL)
     if m:
         sig = m.group(1)
@@ -48,7 +53,7 @@ def _kind_of(src: str, name: str) -> str:
             return "conjecture"
         return "def"
     # structures/classes/inductives are definitions, not theorems
-    if re.search(rf"^\s*(?:@\[[^\]]*\]\s*)*(?:structure|class|inductive)\s+{ident}",
+    if re.search(rf"^\s*(?:@\[[^\]]*\]\s*)*(?:structure|class|inductive)\s+{pfx}{ident}",
                  src, re.MULTILINE):
         return "def"
     return "theorem"
@@ -91,14 +96,25 @@ def attest(lean_path: str, namespace: str, names: list[str], env: str) -> dict:
     # `#print axioms` only makes sense for proof terms; on a `structure`/`class` it errors
     # and would fail the whole check. Probe axioms only for theorem/lemma declarations.
     probe_names = [n for n in names if kinds[n] == "theorem"]
-    probe = flat + "\n" + "\n".join(
-        f"open {namespace} in\n#print axioms {n}" for n in probe_names
-    ) + "\n"
+    # Resolve each short name to its FULLY-QUALIFIED name. Declarations may live in nested
+    # namespaces (e.g. Brockian.Weyl.Operator.IsSymmetric.foo), and the `namespace` arg is
+    # not always the real top namespace. `open {namespace} in #print axioms {short}` then
+    # fails to resolve under lean-4.32.2 (4.32.0 was looser). Fully-qualified `#print
+    # axioms {fqn}` resolves regardless of nesting — same approach as axle_axiom_audit.
+    fqn_by_short: dict[str, str] = {}
+    for fq in qualified_decls(flat):
+        fqn_by_short.setdefault(fq.split(".")[-1], fq)
+
+    def fqn(n: str) -> str:
+        return fqn_by_short.get(n, f"{namespace}.{n}")
+
+    probe = flat + "\n\n" + "\n".join(
+        f"#print axioms {fqn(n)}" for n in probe_names) + "\n"
     r = axle_client.check(probe, env=env, timeout=300)
     infos = (r.raw.get("lean_messages") or {}).get("infos", [])
 
     def axioms_for(n: str) -> list[str] | None:
-        needle = f"{namespace}.{n}'"
+        needle = f"{fqn(n)}'"  # Lean prints 'fully.qualified.name' in the axioms line
         for i in infos:
             s = i if isinstance(i, str) else str(i)
             if needle in s and "axioms" in s:

@@ -1,6 +1,6 @@
 {
   "module": "Brockian.Weyl.Operator",
-  "environment": "lean-4.32.0",
+  "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
@@ -12,6 +12,13 @@
     },
     {
       "name": "Brockian.Weyl.Operator.IsSymmetric",
+      "kind": "def",
+      "axle_verdict": "verified",
+      "axioms": null,
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.Operator.eq_zero_of_apply_eq_smul",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -22,7 +29,14 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Weyl.Operator.IsSymmetric.eq_zero_of_apply_eq_smul",
+      "name": "Brockian.Weyl.Operator.im_eq_zero_of_apply_eq_smul",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.Weyl.Operator.inner_apply",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -33,7 +47,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Weyl.Operator.IsSymmetric.im_eq_zero_of_apply_eq_smul",
+      "name": "Brockian.Weyl.Operator.inner_self_im",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -44,29 +58,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Weyl.Operator.IsSymmetric.inner_apply",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Weyl.Operator.IsSymmetric.inner_self_im",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.Weyl.Operator.IsSymmetric.norm_sub_smul_ge",
+      "name": "Brockian.Weyl.Operator.norm_sub_smul_ge",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [

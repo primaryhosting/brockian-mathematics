@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 628
+- **DEFINITION**: 637
 - **DISCHARGED**: 7
-- **PROVED**: 11124
+- **PROVED**: 11115
 
 ## Theorems
 
@@ -1958,27 +1958,27 @@
 | PROVED | `Brockian.D5Representation.d5Pull_mem_constantLine` | ✓ | verified | lean-4.32.2 | 2026-08-01 — finite D5 permutation representation foothold |
 | PROVED | `Brockian.D5Representation.d5Pull_mem_zeroSumSubmodule` | ✓ | verified | lean-4.32.2 | 2026-08-01 — finite D5 permutation representation foothold |
 | DEFINITION | `Brockian.D5Representation.zeroSumSubmodule` | ✓ | verified | lean-4.32.2 | 2026-08-01 — finite D5 permutation representation foothold |
-| DEFINITION | `Brockian.Dilworth.ChainColoring` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.ChainColoring.exists_of_lt` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.ChainColoring.injOn_antichain` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.ChainColoring.mono` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.ChainColoring.subset` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.card_le_card_of_cover` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.cross_comparable` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.dilworth` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.dilworth_cover` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.exact_cover_counterexample` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.exists_chainColoring` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.exists_chainColoring_aux` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.exists_max_min` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.glue` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.glue_mixed` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.glue_of_matching` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.glue_upper` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.mem_up_or_down` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.step` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.step_case_one` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
-| PROVED | `Brockian.Dilworth.step_case_two` | ✓ | verified | lean-4.32.0 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| DEFINITION | `Brockian.Dilworth.ChainColoring` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.card_le_card_of_cover` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.cross_comparable` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.dilworth` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.dilworth_cover` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.exact_cover_counterexample` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.exists_chainColoring` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.exists_chainColoring_aux` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.exists_max_min` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.exists_of_lt` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.glue` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.glue_mixed` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.glue_of_matching` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.glue_upper` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.injOn_antichain` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.mem_up_or_down` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.mono` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.step` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.step_case_one` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.step_case_two` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| PROVED | `Brockian.Dilworth.subset` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.DivisorCountStructure.isSquare_iff_even_factorization` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.DivisorCountStructure.tau_eq_one_iff` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.DivisorCountStructure.tau_eq_two_iff_prime` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
@@ -11159,30 +11159,30 @@
 | PROVED | `Brockian.Weyl.Closure.symmetric_domain_le_adjoint_domain` | ✓ | verified | lean-4.32.2 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | PROVED | `Brockian.Weyl.Closure.symmetric_isClosable` | ✓ | verified | lean-4.32.2 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
 | PROVED | `Brockian.Weyl.Closure.symmetric_le_adjoint` | ✓ | verified | lean-4.32.2 | Weyl capstone 2026-08-01 — closure/adjoint/deficiency (von Neumann inclusion chain) |
-| PROVED | `Brockian.Weyl.Confining.ConfiningPotentialCandidate.isConfining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| DEFINITION | `Brockian.Weyl.Confining.ConfiningPotentialCandidate.of_isConfining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| DEFINITION | `Brockian.Weyl.Confining.IsConfining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| DEFINITION | `Brockian.Weyl.Confining.UnboundedMultiplierShape` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.bound_C_blocks_zeros_outside_ball` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.brockian_realizer_admits_no_finite_bound` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.confiningCandidate_not_bddAbove` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.decaying_not_isConfining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.gate1_vs_confining_shape` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.isConfining_iff_tendsto` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.isConfining_not_bddAbove` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.isConfining_unbounded` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.isConfining_unboundedMultiplierShape` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.no_brockian_eigenvector_outside_bound` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.not_both_decaying_and_confining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.not_isConfining_of_abs_le` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.primeGaussian_blocks_zeros_outside_two` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.primeGaussian_is_decaying` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.primeGaussian_not_isConfining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.primeGaussian_not_unboundedMultiplierShape` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| DEFINITION | `Brockian.Weyl.Confining.quadraticCandidate` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.quadraticCandidate_V` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.quadratic_isConfining` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.Confining.quadratic_unboundedMultiplierShape` | ✓ | verified | lean-4.32.0 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.Confining.IsConfining` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.Confining.UnboundedMultiplierShape` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.bound_C_blocks_zeros_outside_ball` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.brockian_realizer_admits_no_finite_bound` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.confiningCandidate_not_bddAbove` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.decaying_not_isConfining` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.gate1_vs_confining_shape` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.isConfining` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.isConfining_iff_tendsto` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.isConfining_not_bddAbove` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.isConfining_unbounded` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.isConfining_unboundedMultiplierShape` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.no_brockian_eigenvector_outside_bound` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.not_both_decaying_and_confining` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.not_isConfining_of_abs_le` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.Confining.of_isConfining` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.primeGaussian_blocks_zeros_outside_two` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.primeGaussian_is_decaying` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.primeGaussian_not_isConfining` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.primeGaussian_not_unboundedMultiplierShape` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.Confining.quadraticCandidate` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.quadraticCandidate_V` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.quadratic_isConfining` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.Confining.quadratic_unboundedMultiplierShape` | ✓ | verified | lean-4.32.2 | roadmap #5 (A5 honesty step) — confining vs decaying dichotomy; AXLE @4.32 |
 | DEFINITION | `Brockian.Weyl.ConfiningShape.CompactResolventShape` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | DEFINITION | `Brockian.Weyl.ConfiningShape.DiscreteSpectrumCandidate` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | DEFINITION | `Brockian.Weyl.ConfiningShape.EigenvalueCountingAsymptotic` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
@@ -11278,16 +11278,16 @@
 | PROVED | `Brockian.Weyl.Extension.le_closure_le_adjoint` | ✓ | verified | lean-4.32.2 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.Extension.smulPMap_closure_eigenvalue_im_zero` | ✓ | verified | lean-4.32.2 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.Extension.smulPMap_closure_isSymmetric` | ✓ | verified | lean-4.32.2 | roadmap #4 — closure/adjoint/uniqueness/real-spectrum; AXLE @4.32 |
-| DEFINITION | `Brockian.Weyl.FourierMultiplier.FourierMultiplierInput` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.FourierMultiplier.FourierMultiplierInput.dense_domain_position` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.FourierMultiplier.FourierMultiplierInput.essentiallySelfAdjoint_position` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.FourierMultiplier.dense_domain_transfer` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.FourierMultiplier.dense_rangeAddI_transfer_iff` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.FourierMultiplier.dense_rangeSMulSub_transfer_iff` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.FourierMultiplier.dense_rangeSubI_transfer_iff` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_of_multiplier_dense_ranges` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_of_multiplier_esa` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_of_multiplier_shift_dense` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.FourierMultiplier.FourierMultiplierInput` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.dense_domain_position` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.dense_domain_transfer` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.dense_rangeAddI_transfer_iff` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.dense_rangeSMulSub_transfer_iff` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.dense_rangeSubI_transfer_iff` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_of_multiplier_dense_ranges` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_of_multiplier_esa` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_of_multiplier_shift_dense` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_position` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.Weyl.FreeLaplacian.FreeLaplacianModel` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.Weyl.FreeLaplacian.conjCLM` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Weyl.FreeLaplacian.dense_domain_vadd_clm` | ✓ | verified | lean-4.32.2 |  |
@@ -11414,13 +11414,13 @@
 | PROVED | `Brockian.Weyl.KatoResolventConstruction.essentiallySelfAdjoint_perturb_of_unitShiftRightResolvents_norm_lt_one_via_chain` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Weyl.KatoResolventConstruction.norm_mul_Radd_lt_one_of_unitShiftRightResolvents` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Weyl.KatoResolventConstruction.norm_mul_Rsub_lt_one_of_unitShiftRightResolvents` | ✓ | verified | lean-4.32.2 |  |
-| DEFINITION | `Brockian.Weyl.KatoResolventPackage.ResolventAtI` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.KatoResolventPackage.ResolventAtI.boundedPerturbationTransfer` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.KatoResolventPackage.ResolventAtI.norm_mul_add_lt_one` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.KatoResolventPackage.ResolventAtI.norm_mul_sub_lt_one` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.KatoResolventPackage.ResolventAtI.perturbed_ranges_eq_univ` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.KatoResolventPackage.essentiallySelfAdjoint_perturb_of_resolventAtI` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.Weyl.KatoResolventPackage.essentiallySelfAdjoint_perturb_of_resolventAtI_via_chain` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.Weyl.KatoResolventPackage.ResolventAtI` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Weyl.KatoResolventPackage.boundedPerturbationTransfer` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Weyl.KatoResolventPackage.essentiallySelfAdjoint_perturb_of_resolventAtI` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Weyl.KatoResolventPackage.essentiallySelfAdjoint_perturb_of_resolventAtI_via_chain` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Weyl.KatoResolventPackage.norm_mul_add_lt_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Weyl.KatoResolventPackage.norm_mul_sub_lt_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Weyl.KatoResolventPackage.perturbed_ranges_eq_univ` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Weyl.KatoTarget.dense_range_add_sub_of_selfAdjoint` | ✓ | verified | lean-4.32.2 | Aristotle/Harmonic close; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.KatoTarget.isSelfAdjoint_add` | ✓ | verified | lean-4.32.2 | Aristotle/Harmonic close; AXLE @4.32 |
 | DEFINITION | `Brockian.Weyl.KatoUnbounded.BoundedPerturbationTransfer` | ✓ | verified | lean-4.32.2 | roadmap #2 — bounded self-adjoint perturbation of ESA operator; AXLE-verified @4.32 |
@@ -11474,78 +11474,78 @@
 | PROVED | `Brockian.Weyl.LimitPointContinuous.wronskian_const_of_solutions` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Weyl.LimitPointContinuous.wronskian_hasDerivAt` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Weyl.LimitPointContinuous.wronskian_isConst` | ✓ | verified | lean-4.32.2 |  |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.conjugateDomainEmbedding` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.conjugateDomainEmbedding_injective` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.conjugateDomainEquiv` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap_apply` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap_domain` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.fourierDefinedFreeLaplacian` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Plancherel.fourierDefinedFreeLaplacian_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.L2R` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.continuous_quadraticResolventMultiplier` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.norm_quadraticResolventMultiplier_le` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadratic` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_dense` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_isSymmetric` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_rangeSMulSub_eq_top` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticResolventMultiplier` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticResolventMultiplier_memLp_top` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadratic_resolvent_inverse` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.quadratic_sub_ne_zero` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.Quadratic.schwartzToL2_mem_maximalMulDomain` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.coeFn_maximalMul` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.coeFn_maximalMulValue` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.coeFn_shiftPreimage` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.exists_maximalMul_shift_preimage` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| DEFINITION | `Brockian.Weyl.MaximalMultiplication.maximalMul` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| DEFINITION | `Brockian.Weyl.MaximalMultiplication.maximalMulDomain` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| DEFINITION | `Brockian.Weyl.MaximalMultiplication.maximalMulValue` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.maximalMul_domain` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.rangeSMulSub_maximalMul_eq_top` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| DEFINITION | `Brockian.Weyl.MaximalMultiplication.shiftPreimage` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MaximalMultiplication.shiftPreimage_mem_domain` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
-| PROVED | `Brockian.Weyl.MulReal.FreeMulModel` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.FreeMulModel.essentiallySelfAdjoint_mulOp` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.FreeMulModel.isSelfAdjoint_mulOp` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| DEFINITION | `Brockian.Weyl.MulReal.FreeMulModel.mulOp` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| DEFINITION | `Brockian.Weyl.MulReal.H2` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.add_clm_mul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.add_constMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.add_mulLpCLM_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.add_mulLpCLM_isSelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| DEFINITION | `Brockian.Weyl.MulReal.constFreeMulModel` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.constFreeMulModel_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| DEFINITION | `Brockian.Weyl.MulReal.constFun` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.constFun_memLp_top` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.constFun_norm_le` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.constFun_real` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| DEFINITION | `Brockian.Weyl.MulReal.constMulCLM` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.constMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.isSelfAdjoint_constMulCLM` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.isSelfAdjoint_oneMulCLM` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.mulLpCLM_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| DEFINITION | `Brockian.Weyl.MulReal.oneFreeMulModel` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| DEFINITION | `Brockian.Weyl.MulReal.oneMulCLM` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.oneMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| DEFINITION | `Brockian.Weyl.MulReal.primeGaussianFreeMulModel` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.primeGaussianFreeMulModel_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
-| PROVED | `Brockian.Weyl.MulReal.primeGaussianMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MaximalMultiplication.L2R` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.coeFn_maximalMul` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.coeFn_maximalMulValue` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.coeFn_shiftPreimage` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| DEFINITION | `Brockian.Weyl.MaximalMultiplication.conjugateDomainEmbedding` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.conjugateDomainEmbedding_injective` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| DEFINITION | `Brockian.Weyl.MaximalMultiplication.conjugateDomainEquiv` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| DEFINITION | `Brockian.Weyl.MaximalMultiplication.conjugatePMap` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.conjugatePMap_apply` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.conjugatePMap_domain` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.conjugatePMap_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.continuous_quadraticResolventMultiplier` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.exists_maximalMul_shift_preimage` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| DEFINITION | `Brockian.Weyl.MaximalMultiplication.fourierDefinedFreeLaplacian` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.fourierDefinedFreeLaplacian_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| DEFINITION | `Brockian.Weyl.MaximalMultiplication.maximalMul` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| DEFINITION | `Brockian.Weyl.MaximalMultiplication.maximalMulDomain` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| DEFINITION | `Brockian.Weyl.MaximalMultiplication.maximalMulValue` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.maximalMul_domain` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.norm_quadraticResolventMultiplier_le` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| DEFINITION | `Brockian.Weyl.MaximalMultiplication.quadratic` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.quadraticMaximal_dense` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.quadraticMaximal_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.quadraticMaximal_isSymmetric` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.quadraticMaximal_rangeSMulSub_eq_top` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| DEFINITION | `Brockian.Weyl.MaximalMultiplication.quadraticResolventMultiplier` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.quadraticResolventMultiplier_memLp_top` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.quadratic_resolvent_inverse` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.quadratic_sub_ne_zero` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.rangeSMulSub_maximalMul_eq_top` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.schwartzToL2_mem_maximalMulDomain` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| DEFINITION | `Brockian.Weyl.MaximalMultiplication.shiftPreimage` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| PROVED | `Brockian.Weyl.MaximalMultiplication.shiftPreimage_mem_domain` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — maximal multiplication and Plancherel free Laplacian |
+| DEFINITION | `Brockian.Weyl.MulReal.FreeMulModel` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.H2` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.add_clm_mul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.add_constMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.add_mulLpCLM_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.add_mulLpCLM_isSelfAdjoint` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.constFreeMulModel` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.constFreeMulModel_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.constFun` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.constFun_memLp_top` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.constFun_norm_le` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.constFun_real` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.constMulCLM` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.constMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.essentiallySelfAdjoint_mulOp` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.isSelfAdjoint_constMulCLM` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.isSelfAdjoint_mulOp` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.isSelfAdjoint_oneMulCLM` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.mulLpCLM_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.mulOp` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.oneFreeMulModel` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.oneMulCLM` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.oneMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| DEFINITION | `Brockian.Weyl.MulReal.primeGaussianFreeMulModel` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.primeGaussianFreeMulModel_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.MulReal.primeGaussianMul_essentiallySelfAdjoint` | ✓ | verified | lean-4.32.2 | Weyl free-model rung — real L-infinity multiplication ESA; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.MultiplicationUpstream.maximalMul_essentiallySelfAdjoint_of_unit_resolvents` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 - maximal multiplication extraction |
-| DEFINITION | `Brockian.Weyl.Operator.EssentiallySelfAdjoint` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
-| PROVED | `Brockian.Weyl.Operator.IsSymmetric` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
-| PROVED | `Brockian.Weyl.Operator.IsSymmetric.eq_zero_of_apply_eq_smul` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
-| PROVED | `Brockian.Weyl.Operator.IsSymmetric.im_eq_zero_of_apply_eq_smul` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
-| PROVED | `Brockian.Weyl.Operator.IsSymmetric.inner_apply` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
-| PROVED | `Brockian.Weyl.Operator.IsSymmetric.inner_self_im` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
-| PROVED | `Brockian.Weyl.Operator.IsSymmetric.norm_sub_smul_ge` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
-| DEFINITION | `Brockian.Weyl.Operator.deficiencySpace` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
-| PROVED | `Brockian.Weyl.Operator.mem_deficiencySpace_iff` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
-| DEFINITION | `Brockian.Weyl.Operator.smulPMap` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
-| PROVED | `Brockian.Weyl.Operator.smulPMap_domain` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
-| PROVED | `Brockian.Weyl.Operator.smulPMap_isSymmetric` | ✓ | verified | lean-4.32.0 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
+| DEFINITION | `Brockian.Weyl.Operator.EssentiallySelfAdjoint` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
+| DEFINITION | `Brockian.Weyl.Operator.IsSymmetric` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
+| DEFINITION | `Brockian.Weyl.Operator.deficiencySpace` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
+| PROVED | `Brockian.Weyl.Operator.eq_zero_of_apply_eq_smul` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
+| PROVED | `Brockian.Weyl.Operator.im_eq_zero_of_apply_eq_smul` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
+| PROVED | `Brockian.Weyl.Operator.inner_apply` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
+| PROVED | `Brockian.Weyl.Operator.inner_self_im` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
+| PROVED | `Brockian.Weyl.Operator.mem_deficiencySpace_iff` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
+| PROVED | `Brockian.Weyl.Operator.norm_sub_smul_ge` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
+| DEFINITION | `Brockian.Weyl.Operator.smulPMap` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
+| PROVED | `Brockian.Weyl.Operator.smulPMap_domain` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
+| PROVED | `Brockian.Weyl.Operator.smulPMap_isSymmetric` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — symmetric unbounded-operator framework |
 | DEFINITION | `Brockian.Weyl.OperatorChoice.ConfiningPotentialCandidate` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.Weyl.OperatorChoice.DecayingPotentialCandidate` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Weyl.OperatorChoice.brockian_eigenvalue_norm` | ✓ | verified | lean-4.32.2 |  |
@@ -11559,19 +11559,19 @@
 | DEFINITION | `Brockian.Weyl.OperatorChoice.primeGaussian_decaying` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Weyl.OperatorChoice.primeGaussian_not_realize_large_zero` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Weyl.OperatorChoice.rh_operator_needs_unbounded_spectrum` | ✓ | verified | lean-4.32.2 |  |
-| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
-| PROVED | `Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI.finiteMultiplicity_nonzero_spectrum` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
-| PROVED | `Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI.nonzero_spectrum_is_point_spectrum` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
-| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI.ofFactorizations` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
-| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.FiniteMultiplicityNonzeroSpectrum` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
-| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.NonzeroSpectrumIsPointSpectrum` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
-| PROVED | `Brockian.Weyl.OscillatorDiscrete.finiteDimensional_eigenspace_of_isCompact` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
-| PROVED | `Brockian.Weyl.OscillatorDiscrete.finiteMultiplicityNonzeroSpectrum_of_isCompact` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
-| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.harmonicOscillatorClosureResolventAtI` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
-| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.harmonicOscillatorCompactResolventAtI_of_weightedRellich` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
-| PROVED | `Brockian.Weyl.OscillatorDiscrete.harmonicOscillator_resolvent_finiteMultiplicity_of_weightedRellich` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
-| PROVED | `Brockian.Weyl.OscillatorDiscrete.harmonicOscillator_resolvent_nonzero_spectrum_of_weightedRellich` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
-| PROVED | `Brockian.Weyl.OscillatorDiscrete.nonzeroSpectrumIsPointSpectrum_of_isCompact` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.FiniteMultiplicityNonzeroSpectrum` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.NonzeroSpectrumIsPointSpectrum` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| PROVED | `Brockian.Weyl.OscillatorDiscrete.finiteDimensional_eigenspace_of_isCompact` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| PROVED | `Brockian.Weyl.OscillatorDiscrete.finiteMultiplicityNonzeroSpectrum_of_isCompact` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| PROVED | `Brockian.Weyl.OscillatorDiscrete.finiteMultiplicity_nonzero_spectrum` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.harmonicOscillatorClosureResolventAtI` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.harmonicOscillatorCompactResolventAtI_of_weightedRellich` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| PROVED | `Brockian.Weyl.OscillatorDiscrete.harmonicOscillator_resolvent_finiteMultiplicity_of_weightedRellich` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| PROVED | `Brockian.Weyl.OscillatorDiscrete.harmonicOscillator_resolvent_nonzero_spectrum_of_weightedRellich` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| PROVED | `Brockian.Weyl.OscillatorDiscrete.nonzeroSpectrumIsPointSpectrum_of_isCompact` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| PROVED | `Brockian.Weyl.OscillatorDiscrete.nonzero_spectrum_is_point_spectrum` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
+| DEFINITION | `Brockian.Weyl.OscillatorDiscrete.ofFactorizations` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — compact-resolvent Fredholm consequences |
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_pos_limit_of_mass_finite` | ✓ | verified | lean-4.32.2 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_counterexample` | ✓ | verified | lean-4.32.2 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
 | PROVED | `Brockian.Weyl.RadiusDichotomy.radius_tendsto_zero_iff_of_pos` | ✓ | verified | lean-4.32.2 | Aristotle proj 50ca67ca — radius dichotomy; AXLE-verified @4.32 (1-line port from 4.28) |
@@ -11663,11 +11663,11 @@
 | DEFINITION | `Brockian.Weyl.SymmetryPackage.symmetricRealSpectrum` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Weyl.Upstream.deficiencySpace_eq_bot_of_closure_isSelfAdjoint` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — Mathlib extraction candidate |
 | PROVED | `Brockian.Weyl.Upstream.essentiallySelfAdjoint_iff_closure_isSelfAdjoint` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — Mathlib extraction candidate |
-| DEFINITION | `Brockian.Weyl.WeightedRellich.Factorization` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — weighted Rellich factorization |
-| PROVED | `Brockian.Weyl.WeightedRellich.Factorization.isCompactOperator` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — weighted Rellich factorization |
-| PROVED | `Brockian.Weyl.WeightedRellich.Factorization.isCompact_closure_image_closedBall` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — weighted Rellich factorization |
-| DEFINITION | `Brockian.Weyl.WeightedRellich.Factorization.ofCompact` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — weighted Rellich factorization |
-| PROVED | `Brockian.Weyl.WeightedRellich.compact_resolvents_of_factorizations` | ✓ | verified | lean-4.32.0 | Codex 2026-08-03 — weighted Rellich factorization |
+| DEFINITION | `Brockian.Weyl.WeightedRellich.Factorization` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — weighted Rellich factorization |
+| PROVED | `Brockian.Weyl.WeightedRellich.compact_resolvents_of_factorizations` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — weighted Rellich factorization |
+| PROVED | `Brockian.Weyl.WeightedRellich.isCompactOperator` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — weighted Rellich factorization |
+| PROVED | `Brockian.Weyl.WeightedRellich.isCompact_closure_image_closedBall` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — weighted Rellich factorization |
+| DEFINITION | `Brockian.Weyl.WeightedRellich.ofCompact` | ✓ | verified | lean-4.32.2 | Codex 2026-08-03 — weighted Rellich factorization |
 | DEFINITION | `Brockian.Weyl.WeylLawTarget.MatchesRiemannVonMangoldt` | ✓ | verified | lean-4.32.2 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
 | DEFINITION | `Brockian.Weyl.WeylLawTarget.N_model` | ✓ | verified | lean-4.32.2 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
 | DEFINITION | `Brockian.Weyl.WeylLawTarget.N_op` | ✓ | verified | lean-4.32.2 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
@@ -11688,17 +11688,17 @@
 | PROVED | `Brockian.Weyl.WeylLawTarget.point_spectrum_unbounded_of_candidate` | ✓ | verified | lean-4.32.2 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
 | DEFINITION | `Brockian.Weyl.WeylLawTarget.riemannVonMangoldtMain` | ✓ | verified | lean-4.32.2 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
 | PROVED | `Brockian.Weyl.WeylLawTarget.riemannVonMangoldtMain_tendsto_atTop` | ✓ | verified | lean-4.32.2 | Grok swarm 2026-08-01 Lane E#25 — N(T)~(T/2π)log conditional schema (CONDITIONAL) |
-| DEFINITION | `Brockian.WeylPlancherelScaffold.IsPlancherelUnitary` | ✓ | verified | lean-4.32.0 |  |
-| DEFINITION | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.dense_domain_position` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.dense_range_addI_position` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.dense_range_subI_position` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.essentiallySelfAdjoint_position` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.essentiallySelfAdjoint_position_of_multiplier_esa` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.isPlancherel` | ✓ | verified | lean-4.32.0 |  |
-| DEFINITION | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.toFourierMultiplierInput` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.WeylPlancherelScaffold.essentiallySelfAdjoint_of_plancherel_multiplier_dense_ranges` | ✓ | verified | lean-4.32.0 |  |
-| PROVED | `Brockian.WeylPlancherelScaffold.isPlancherelUnitary` | ✓ | verified | lean-4.32.0 |  |
+| DEFINITION | `Brockian.WeylPlancherelScaffold.IsPlancherelUnitary` | ✓ | verified | lean-4.32.2 |  |
+| DEFINITION | `Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.dense_domain_position` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.dense_range_addI_position` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.dense_range_subI_position` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.essentiallySelfAdjoint_of_plancherel_multiplier_dense_ranges` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.essentiallySelfAdjoint_position` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.essentiallySelfAdjoint_position_of_multiplier_esa` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.isPlancherel` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.WeylPlancherelScaffold.isPlancherelUnitary` | ✓ | verified | lean-4.32.2 |  |
+| DEFINITION | `Brockian.WeylPlancherelScaffold.toFourierMultiplierInput` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.WeylWeakEnergy.L2R` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.WeylWeakEnergy.conjugateLp_eq_star` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.WeylWeakEnergy.conjugateRHSLp_eq_potential_sub` | ✓ | verified | lean-4.32.2 |  |

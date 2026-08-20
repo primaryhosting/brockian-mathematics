@@ -1,6 +1,6 @@
 {
   "module": "Brockian.Weyl.Confining",
-  "environment": "lean-4.32.0",
+  "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
@@ -11,18 +11,14 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Weyl.Confining.ConfiningPotentialCandidate.isConfining",
+      "name": "Brockian.Weyl.Confining.isConfining",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
-      "name": "Brockian.Weyl.Confining.ConfiningPotentialCandidate.of_isConfining",
+      "name": "Brockian.Weyl.Confining.of_isConfining",
       "kind": "def",
       "axle_verdict": "verified",
       "axioms": null,
@@ -182,33 +178,21 @@
       "name": "Brockian.Weyl.Confining.no_brockian_eigenvector_outside_bound",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Weyl.Confining.primeGaussian_blocks_zeros_outside_two",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Weyl.Confining.brockian_realizer_admits_no_finite_bound",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -222,11 +206,7 @@
       "name": "Brockian.Weyl.Confining.isConfining_unboundedMultiplierShape",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -244,11 +224,7 @@
       "name": "Brockian.Weyl.Confining.primeGaussian_not_unboundedMultiplierShape",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     }
   ]

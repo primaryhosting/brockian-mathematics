@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11124,
-    "DEFINITION": 628,
+    "PROVED": 11115,
+    "DEFINITION": 637,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
     "DISCHARGED": 7
@@ -58742,136 +58742,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Harmonic/Aristotle moonshot; AXLE @4.32",
-      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle, project ms-dilworth), independently AXLE-verified @lean-4.32.0, axiom-clean. A classical theorem formalized from core Mathlib. Namespace Brockian.Dilworth."
-    },
-    {
-      "name": "Brockian.Dilworth.ChainColoring.exists_of_lt",
-      "kind": "theorem",
-      "module": "Brockian.Dilworth",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Dilworth.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Harmonic/Aristotle moonshot; AXLE @4.32",
-      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle, project ms-dilworth), independently AXLE-verified @lean-4.32.0, axiom-clean. A classical theorem formalized from core Mathlib. Namespace Brockian.Dilworth."
-    },
-    {
-      "name": "Brockian.Dilworth.ChainColoring.injOn_antichain",
-      "kind": "theorem",
-      "module": "Brockian.Dilworth",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Dilworth.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Harmonic/Aristotle moonshot; AXLE @4.32",
-      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle, project ms-dilworth), independently AXLE-verified @lean-4.32.0, axiom-clean. A classical theorem formalized from core Mathlib. Namespace Brockian.Dilworth."
-    },
-    {
-      "name": "Brockian.Dilworth.ChainColoring.mono",
-      "kind": "theorem",
-      "module": "Brockian.Dilworth",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Dilworth.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Harmonic/Aristotle moonshot; AXLE @4.32",
-      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle, project ms-dilworth), independently AXLE-verified @lean-4.32.0, axiom-clean. A classical theorem formalized from core Mathlib. Namespace Brockian.Dilworth."
-    },
-    {
-      "name": "Brockian.Dilworth.ChainColoring.subset",
-      "kind": "theorem",
-      "module": "Brockian.Dilworth",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Dilworth.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -58904,7 +58775,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -58937,7 +58808,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -58970,7 +58841,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -59003,7 +58874,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -59036,7 +58907,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -59069,7 +58940,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -59102,7 +58973,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -59135,7 +59006,40 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle moonshot; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle, project ms-dilworth), independently AXLE-verified @lean-4.32.0, axiom-clean. A classical theorem formalized from core Mathlib. Namespace Brockian.Dilworth."
+    },
+    {
+      "name": "Brockian.Dilworth.exists_of_lt",
+      "kind": "theorem",
+      "module": "Brockian.Dilworth",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dilworth.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -59168,7 +59072,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -59201,7 +59105,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -59234,7 +59138,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -59267,7 +59171,39 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle moonshot; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle, project ms-dilworth), independently AXLE-verified @lean-4.32.0, axiom-clean. A classical theorem formalized from core Mathlib. Namespace Brockian.Dilworth."
+    },
+    {
+      "name": "Brockian.Dilworth.injOn_antichain",
+      "kind": "theorem",
+      "module": "Brockian.Dilworth",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dilworth.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -59300,7 +59236,39 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle moonshot; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle, project ms-dilworth), independently AXLE-verified @lean-4.32.0, axiom-clean. A classical theorem formalized from core Mathlib. Namespace Brockian.Dilworth."
+    },
+    {
+      "name": "Brockian.Dilworth.mono",
+      "kind": "theorem",
+      "module": "Brockian.Dilworth",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dilworth.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -59333,7 +59301,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -59366,7 +59334,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -59399,7 +59367,39 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Harmonic/Aristotle moonshot; AXLE @4.32",
+      "provenance_note": "HARMONIC-PROVED moonshot (Aristotle, project ms-dilworth), independently AXLE-verified @lean-4.32.0, axiom-clean. A classical theorem formalized from core Mathlib. Namespace Brockian.Dilworth."
+    },
+    {
+      "name": "Brockian.Dilworth.subset",
+      "kind": "theorem",
+      "module": "Brockian.Dilworth",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Dilworth.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -334806,68 +334806,6 @@
       "provenance_note": "T \u2286 T\u0304 \u2286 T* for symmetric T, T* closed, symmetric \u21d2 closable, deficiency space closed in H. Full criterion (T\u0304=T**, Cayley, extension bijection) OPEN \u2014 Mathlib 4.32 lacks it."
     },
     {
-      "name": "Brockian.Weyl.Confining.ConfiningPotentialCandidate.isConfining",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Confining",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylConfining.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
-      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
-    },
-    {
-      "name": "Brockian.Weyl.Confining.ConfiningPotentialCandidate.of_isConfining",
-      "kind": "def",
-      "module": "Brockian.Weyl.Confining",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylConfining.lean"
-      },
-      "register": "DEFINITION",
-      "axioms": [],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
-      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
-    },
-    {
       "name": "Brockian.Weyl.Confining.IsConfining",
       "kind": "def",
       "module": "Brockian.Weyl.Confining",
@@ -334887,7 +334825,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -334916,7 +334854,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -334949,7 +334887,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -334967,11 +334905,7 @@
         "file": "Brockian/WeylConfining.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -334982,7 +334916,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335015,7 +334949,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335048,7 +334982,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335081,7 +335015,36 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.isConfining",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylConfining.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335114,7 +335077,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335147,7 +335110,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335180,7 +335143,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335198,11 +335161,7 @@
         "file": "Brockian/WeylConfining.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -335213,7 +335172,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335231,11 +335190,7 @@
         "file": "Brockian/WeylConfining.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -335246,7 +335201,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335279,7 +335234,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335312,7 +335267,36 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #5 (A5 honesty step) \u2014 confining vs decaying dichotomy; AXLE @4.32",
+      "provenance_note": "IsConfining (V\u2192+\u221e); quadratic confining; bounded V NOT confining; prime-Gaussian is decaying\u21d2not confining\u21d2unbounded needed; brockian_realizer_admits_no_finite_bound (any bounded operator MISSES large zeta zeros). Explicitly does NOT claim ESA/discrete spectrum \u2014 the honest proof the current bounded operator cannot be the RH operator."
+    },
+    {
+      "name": "Brockian.Weyl.Confining.of_isConfining",
+      "kind": "def",
+      "module": "Brockian.Weyl.Confining",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylConfining.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335330,11 +335314,7 @@
         "file": "Brockian/WeylConfining.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -335345,7 +335325,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335378,7 +335358,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335411,7 +335391,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335429,11 +335409,7 @@
         "file": "Brockian/WeylConfining.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -335444,7 +335420,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335473,7 +335449,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335506,7 +335482,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335539,7 +335515,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -335572,7 +335548,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -338556,7 +338532,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -338566,7 +338542,7 @@
       "provenance_note": null
     },
     {
-      "name": "Brockian.Weyl.FourierMultiplier.FourierMultiplierInput.dense_domain_position",
+      "name": "Brockian.Weyl.FourierMultiplier.dense_domain_position",
       "kind": "theorem",
       "module": "Brockian.Weyl.FourierMultiplier",
       "statement": "",
@@ -338574,11 +338550,7 @@
         "file": "Brockian/WeylFourierMultiplier.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -338589,40 +338561,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
-      "name": "Brockian.Weyl.FourierMultiplier.FourierMultiplierInput.essentiallySelfAdjoint_position",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.FourierMultiplier",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylFourierMultiplier.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -338655,7 +338594,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -338673,11 +338612,7 @@
         "file": "Brockian/WeylFourierMultiplier.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -338688,7 +338623,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -338706,11 +338641,7 @@
         "file": "Brockian/WeylFourierMultiplier.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -338721,7 +338652,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -338739,11 +338670,7 @@
         "file": "Brockian/WeylFourierMultiplier.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -338754,7 +338681,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -338772,11 +338699,7 @@
         "file": "Brockian/WeylFourierMultiplier.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -338787,7 +338710,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -338805,11 +338728,7 @@
         "file": "Brockian/WeylFourierMultiplier.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -338820,7 +338739,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -338838,11 +338757,7 @@
         "file": "Brockian/WeylFourierMultiplier.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -338853,7 +338768,36 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.FourierMultiplier.essentiallySelfAdjoint_position",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.FourierMultiplier",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylFourierMultiplier.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -342656,7 +342600,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -342666,7 +342610,7 @@
       "provenance_note": null
     },
     {
-      "name": "Brockian.Weyl.KatoResolventPackage.ResolventAtI.boundedPerturbationTransfer",
+      "name": "Brockian.Weyl.KatoResolventPackage.boundedPerturbationTransfer",
       "kind": "theorem",
       "module": "Brockian.Weyl.KatoResolventPackage",
       "statement": "",
@@ -342674,11 +342618,7 @@
         "file": "Brockian/WeylKatoResolventPackage.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -342689,106 +342629,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
-      "name": "Brockian.Weyl.KatoResolventPackage.ResolventAtI.norm_mul_add_lt_one",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.KatoResolventPackage",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylKatoResolventPackage.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
-      "name": "Brockian.Weyl.KatoResolventPackage.ResolventAtI.norm_mul_sub_lt_one",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.KatoResolventPackage",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylKatoResolventPackage.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
-      "name": "Brockian.Weyl.KatoResolventPackage.ResolventAtI.perturbed_ranges_eq_univ",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.KatoResolventPackage",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylKatoResolventPackage.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -342806,11 +342647,7 @@
         "file": "Brockian/WeylKatoResolventPackage.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -342821,7 +342658,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -342839,11 +342676,7 @@
         "file": "Brockian/WeylKatoResolventPackage.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -342854,7 +342687,94 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventPackage.norm_mul_add_lt_one",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoResolventPackage",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoResolventPackage.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventPackage.norm_mul_sub_lt_one",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoResolventPackage",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoResolventPackage.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Weyl.KatoResolventPackage.perturbed_ranges_eq_univ",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.KatoResolventPackage",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylKatoResolventPackage.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -344509,19 +344429,15 @@
       "provenance_note": null
     },
     {
-      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.conjugateDomainEmbedding",
-      "kind": "theorem",
+      "name": "Brockian.Weyl.MaximalMultiplication.L2R",
+      "kind": "def",
       "module": "Brockian.Weyl.MaximalMultiplication",
       "statement": "",
       "source": {
         "file": "Brockian/WeylMaximalMultiplication.lean"
       },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "register": "DEFINITION",
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -344532,700 +344448,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.conjugateDomainEmbedding_injective",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.conjugateDomainEquiv",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap_apply",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap_domain",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.conjugatePMap_essentiallySelfAdjoint",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.fourierDefinedFreeLaplacian",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Plancherel.fourierDefinedFreeLaplacian_essentiallySelfAdjoint",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.L2R",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.continuous_quadraticResolventMultiplier",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.norm_quadraticResolventMultiplier_le",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadratic",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_dense",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_essentiallySelfAdjoint",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_isSymmetric",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticMaximal_rangeSMulSub_eq_top",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticResolventMultiplier",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadraticResolventMultiplier_memLp_top",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadratic_resolvent_inverse",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.quadratic_sub_ne_zero",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
-      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
-    },
-    {
-      "name": "Brockian.Weyl.MaximalMultiplication.Quadratic.schwartzToL2_mem_maximalMulDomain",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MaximalMultiplication",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMaximalMultiplication.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345258,7 +344481,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345291,7 +344514,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345324,7 +344547,239 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.conjugateDomainEmbedding",
+      "kind": "def",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.conjugateDomainEmbedding_injective",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.conjugateDomainEquiv",
+      "kind": "def",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.conjugatePMap",
+      "kind": "def",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.conjugatePMap_apply",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.conjugatePMap_domain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.conjugatePMap_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.continuous_quadraticResolventMultiplier",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345342,11 +344797,7 @@
         "file": "Brockian/WeylMaximalMultiplication.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -345357,7 +344808,65 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.fourierDefinedFreeLaplacian",
+      "kind": "def",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.fourierDefinedFreeLaplacian_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345386,7 +344895,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345415,7 +344924,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345444,7 +344953,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345477,7 +344986,297 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.norm_quadraticResolventMultiplier_le",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.quadratic",
+      "kind": "def",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.quadraticMaximal_dense",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.quadraticMaximal_essentiallySelfAdjoint",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.quadraticMaximal_isSymmetric",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.quadraticMaximal_rangeSMulSub_eq_top",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.quadraticResolventMultiplier",
+      "kind": "def",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.quadraticResolventMultiplier_memLp_top",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.quadratic_resolvent_inverse",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.quadratic_sub_ne_zero",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345495,11 +345294,7 @@
         "file": "Brockian/WeylMaximalMultiplication.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -345510,7 +345305,36 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 maximal multiplication and Plancherel free Laplacian",
+      "provenance_note": "Generic maximal multiplication LinearPMap on L2, explicit bounded inverse multiplier proving full nonreal shifted ranges, the maximal x^2 multiplier's dense domain/symmetry/essential self-adjointness, and preservation of ESA under unitary conjugation. The Fourier-defined free Laplacian is therefore ESA. The separate Schwartz-core identity with -f'' and oscillator ESA are not claimed. AXLE 4.32 verified; axioms only propext/Classical.choice/Quot.sound."
+    },
+    {
+      "name": "Brockian.Weyl.MaximalMultiplication.schwartzToL2_mem_maximalMulDomain",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MaximalMultiplication",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMaximalMultiplication.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345539,7 +345363,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345557,11 +345381,7 @@
         "file": "Brockian/WeylMaximalMultiplication.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -345572,7 +345392,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345583,105 +345403,6 @@
     },
     {
       "name": "Brockian.Weyl.MulReal.FreeMulModel",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MulReal",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMulReal.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
-      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
-    },
-    {
-      "name": "Brockian.Weyl.MulReal.FreeMulModel.essentiallySelfAdjoint_mulOp",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MulReal",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMulReal.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
-      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
-    },
-    {
-      "name": "Brockian.Weyl.MulReal.FreeMulModel.isSelfAdjoint_mulOp",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.MulReal",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylMulReal.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
-      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
-    },
-    {
-      "name": "Brockian.Weyl.MulReal.FreeMulModel.mulOp",
       "kind": "def",
       "module": "Brockian.Weyl.MulReal",
       "statement": "",
@@ -345700,7 +345421,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345729,7 +345450,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345762,7 +345483,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345795,7 +345516,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345828,7 +345549,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345861,7 +345582,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345890,7 +345611,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345908,11 +345629,7 @@
         "file": "Brockian/WeylMulReal.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -345923,7 +345640,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345952,7 +345669,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -345985,7 +345702,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346018,7 +345735,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346051,7 +345768,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346080,7 +345797,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346113,7 +345830,36 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.essentiallySelfAdjoint_mulOp",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346146,7 +345892,40 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.isSelfAdjoint_mulOp",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMulReal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346179,7 +345958,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346212,7 +345991,36 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Weyl free-model rung \u2014 real L-infinity multiplication ESA; AXLE @4.32",
+      "provenance_note": "Real essentially-bounded multiplication operators are ESA (dual to FreeLaplacian): constant/identity/prime-Gaussian multipliers + sums, FreeMulModel container. Explicitly does NOT construct unbounded xi->xi^2 multiplication (left OPEN, no fake unbounded operator)."
+    },
+    {
+      "name": "Brockian.Weyl.MulReal.mulOp",
+      "kind": "def",
+      "module": "Brockian.Weyl.MulReal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylMulReal.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346241,7 +346049,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346270,7 +346078,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346303,7 +346111,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346332,7 +346140,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346350,11 +346158,7 @@
         "file": "Brockian/WeylMulReal.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -346365,7 +346169,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346383,11 +346187,7 @@
         "file": "Brockian/WeylMulReal.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -346398,7 +346198,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346456,7 +346256,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346467,18 +346267,14 @@
     },
     {
       "name": "Brockian.Weyl.Operator.IsSymmetric",
-      "kind": "theorem",
+      "kind": "def",
       "module": "Brockian.Weyl.Operator",
       "statement": "",
       "source": {
         "file": "Brockian/WeylOperator.lean"
       },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "register": "DEFINITION",
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -346489,172 +346285,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
-      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
-    },
-    {
-      "name": "Brockian.Weyl.Operator.IsSymmetric.eq_zero_of_apply_eq_smul",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Operator",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylOperator.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
-      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
-    },
-    {
-      "name": "Brockian.Weyl.Operator.IsSymmetric.im_eq_zero_of_apply_eq_smul",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Operator",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylOperator.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
-      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
-    },
-    {
-      "name": "Brockian.Weyl.Operator.IsSymmetric.inner_apply",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Operator",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylOperator.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
-      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
-    },
-    {
-      "name": "Brockian.Weyl.Operator.IsSymmetric.inner_self_im",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Operator",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylOperator.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
-      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
-    },
-    {
-      "name": "Brockian.Weyl.Operator.IsSymmetric.norm_sub_smul_ge",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.Operator",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylOperator.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346683,7 +346314,135 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.eq_zero_of_apply_eq_smul",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOperator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.im_eq_zero_of_apply_eq_smul",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOperator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.inner_apply",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOperator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.inner_self_im",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOperator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346716,7 +346475,40 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Weyl campaign 2026-08-01 \u2014 symmetric unbounded-operator framework",
+      "provenance_note": "IsSymmetric (LinearPMap), real spectrum, KEY inequality |Im z|\u2016v\u2016 \u2264 \u2016(T\u2212z)v\u2016, honest deficiency spaces + ess-self-adjoint predicate + Gate-0 witness. Weyl equivalence OPEN (Mathlib lacks von Neumann extension theory)."
+    },
+    {
+      "name": "Brockian.Weyl.Operator.norm_sub_smul_ge",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.Operator",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOperator.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346745,7 +346537,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346778,7 +346570,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -346811,7 +346603,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -347245,102 +347037,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
-      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
-    },
-    {
-      "name": "Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI.finiteMultiplicity_nonzero_spectrum",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.OscillatorDiscrete",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylOscillatorDiscrete.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
-      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
-    },
-    {
-      "name": "Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI.nonzero_spectrum_is_point_spectrum",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.OscillatorDiscrete",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylOscillatorDiscrete.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
-      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
-    },
-    {
-      "name": "Brockian.Weyl.OscillatorDiscrete.CompactResolventAtI.ofFactorizations",
-      "kind": "def",
-      "module": "Brockian.Weyl.OscillatorDiscrete",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylOscillatorDiscrete.lean"
-      },
-      "register": "DEFINITION",
-      "axioms": [],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -347369,7 +347066,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -347398,7 +347095,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -347416,11 +347113,7 @@
         "file": "Brockian/WeylOscillatorDiscrete.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -347431,7 +347124,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -347449,11 +347142,7 @@
         "file": "Brockian/WeylOscillatorDiscrete.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -347464,7 +347153,36 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
+      "name": "Brockian.Weyl.OscillatorDiscrete.finiteMultiplicity_nonzero_spectrum",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -347493,7 +347211,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -347522,7 +347240,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -347540,11 +347258,7 @@
         "file": "Brockian/WeylOscillatorDiscrete.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -347555,7 +347269,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -347573,11 +347287,7 @@
         "file": "Brockian/WeylOscillatorDiscrete.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -347588,7 +347298,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -347606,11 +347316,7 @@
         "file": "Brockian/WeylOscillatorDiscrete.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -347621,7 +347327,65 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
+      "name": "Brockian.Weyl.OscillatorDiscrete.nonzero_spectrum_is_point_spectrum",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 compact-resolvent Fredholm consequences",
+      "provenance_note": "Compact unit resolvents have nonzero spectrum equal to point spectrum with finite-dimensional eigenspaces. Oscillator specialization assumes oscillator ESA and weighted-Rellich factorizations; no unbounded spectral mapping or full discreteness claim."
+    },
+    {
+      "name": "Brockian.Weyl.OscillatorDiscrete.ofFactorizations",
+      "kind": "def",
+      "module": "Brockian.Weyl.OscillatorDiscrete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylOscillatorDiscrete.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -350377,7 +350141,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -350387,7 +350151,7 @@
       "provenance_note": "A resolvent factoring through a compactly embedded weighted space is compact; compact closed-ball images and both unit resolvents follow. The actual oscillator weighted embedding remains an explicit input because Mathlib 4.32 lacks Rellich-Kondrachov."
     },
     {
-      "name": "Brockian.Weyl.WeightedRellich.Factorization.isCompactOperator",
+      "name": "Brockian.Weyl.WeightedRellich.compact_resolvents_of_factorizations",
       "kind": "theorem",
       "module": "Brockian.Weyl.WeightedRellich",
       "statement": "",
@@ -350395,11 +350159,7 @@
         "file": "Brockian/WeylWeightedRellich.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -350410,7 +350170,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -350420,7 +350180,7 @@
       "provenance_note": "A resolvent factoring through a compactly embedded weighted space is compact; compact closed-ball images and both unit resolvents follow. The actual oscillator weighted embedding remains an explicit input because Mathlib 4.32 lacks Rellich-Kondrachov."
     },
     {
-      "name": "Brockian.Weyl.WeightedRellich.Factorization.isCompact_closure_image_closedBall",
+      "name": "Brockian.Weyl.WeightedRellich.isCompactOperator",
       "kind": "theorem",
       "module": "Brockian.Weyl.WeightedRellich",
       "statement": "",
@@ -350428,11 +350188,7 @@
         "file": "Brockian/WeylWeightedRellich.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -350443,7 +350199,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -350453,7 +350209,36 @@
       "provenance_note": "A resolvent factoring through a compactly embedded weighted space is compact; compact closed-ball images and both unit resolvents follow. The actual oscillator weighted embedding remains an explicit input because Mathlib 4.32 lacks Rellich-Kondrachov."
     },
     {
-      "name": "Brockian.Weyl.WeightedRellich.Factorization.ofCompact",
+      "name": "Brockian.Weyl.WeightedRellich.isCompact_closure_image_closedBall",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.WeightedRellich",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylWeightedRellich.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "Codex 2026-08-03 \u2014 weighted Rellich factorization",
+      "provenance_note": "A resolvent factoring through a compactly embedded weighted space is compact; compact closed-ball images and both unit resolvents follow. The actual oscillator weighted embedding remains an explicit input because Mathlib 4.32 lacks Rellich-Kondrachov."
+    },
+    {
+      "name": "Brockian.Weyl.WeightedRellich.ofCompact",
       "kind": "def",
       "module": "Brockian.Weyl.WeightedRellich",
       "statement": "",
@@ -350472,40 +350257,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "Codex 2026-08-03 \u2014 weighted Rellich factorization",
-      "provenance_note": "A resolvent factoring through a compactly embedded weighted space is compact; compact closed-ball images and both unit resolvents follow. The actual oscillator weighted embedding remains an explicit input because Mathlib 4.32 lacks Rellich-Kondrachov."
-    },
-    {
-      "name": "Brockian.Weyl.WeightedRellich.compact_resolvents_of_factorizations",
-      "kind": "theorem",
-      "module": "Brockian.Weyl.WeightedRellich",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylWeightedRellich.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -351126,7 +350878,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -351155,7 +350907,7 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -351165,7 +350917,7 @@
       "provenance_note": null
     },
     {
-      "name": "Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.dense_domain_position",
+      "name": "Brockian.WeylPlancherelScaffold.dense_domain_position",
       "kind": "theorem",
       "module": "Brockian.WeylPlancherelScaffold",
       "statement": "",
@@ -351173,204 +350925,6 @@
         "file": "Brockian/WeylPlancherelScaffold.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
-      "name": "Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.dense_range_addI_position",
-      "kind": "theorem",
-      "module": "Brockian.WeylPlancherelScaffold",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylPlancherelScaffold.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
-      "name": "Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.dense_range_subI_position",
-      "kind": "theorem",
-      "module": "Brockian.WeylPlancherelScaffold",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylPlancherelScaffold.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
-      "name": "Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.essentiallySelfAdjoint_position",
-      "kind": "theorem",
-      "module": "Brockian.WeylPlancherelScaffold",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylPlancherelScaffold.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
-      "name": "Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.essentiallySelfAdjoint_position_of_multiplier_esa",
-      "kind": "theorem",
-      "module": "Brockian.WeylPlancherelScaffold",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylPlancherelScaffold.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
-      "name": "Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.isPlancherel",
-      "kind": "theorem",
-      "module": "Brockian.WeylPlancherelScaffold",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylPlancherelScaffold.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.0"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": false,
-      "ledger_run": null,
-      "provenance_note": null
-    },
-    {
-      "name": "Brockian.WeylPlancherelScaffold.PlancherelFreeLaplacianInput.toFourierMultiplierInput",
-      "kind": "def",
-      "module": "Brockian.WeylPlancherelScaffold",
-      "statement": "",
-      "source": {
-        "file": "Brockian/WeylPlancherelScaffold.lean"
-      },
-      "register": "DEFINITION",
       "axioms": [],
       "flags": {
         "native_decide": false,
@@ -351382,7 +350936,65 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.dense_range_addI_position",
+      "kind": "theorem",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.dense_range_subI_position",
+      "kind": "theorem",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -351400,11 +351012,7 @@
         "file": "Brockian/WeylPlancherelScaffold.lean"
       },
       "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -351415,7 +351023,94 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.essentiallySelfAdjoint_position",
+      "kind": "theorem",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.essentiallySelfAdjoint_position_of_multiplier_esa",
+      "kind": "theorem",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.isPlancherel",
+      "kind": "theorem",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
@@ -351448,7 +351143,36 @@
         "axioms_ok": true,
         "axle": {
           "verdict": "verified",
-          "environment": "lean-4.32.0"
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.WeylPlancherelScaffold.toFourierMultiplierInput",
+      "kind": "def",
+      "module": "Brockian.WeylPlancherelScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/WeylPlancherelScaffold.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
         }
       },
       "conditional_rung": null,
