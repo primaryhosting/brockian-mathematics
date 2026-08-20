@@ -1,6 +1,6 @@
 {
   "module": "Brockian.GraphComponentMatrix",
-  "environment": "lean-4.32.0",
+  "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
@@ -17,22 +17,14 @@
       "name": "Brockian.GraphComponentMatrix.reindex_componentEquiv_eq_blockDiagonal'",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.GraphComponentMatrix.charpoly_eq_prod_componentBlocks",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -90,11 +82,7 @@
       "name": "Brockian.GraphComponentMatrix.shiftedAdjacency_reindex_components",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -112,11 +100,7 @@
       "name": "Brockian.GraphComponentMatrix.shiftedAdjacency_charpoly_components",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     }
   ]

@@ -1,6 +1,6 @@
 {
   "module": "Brockian.WeylWeakEnergy",
-  "environment": "lean-4.32.0",
+  "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
@@ -32,11 +32,7 @@
       "name": "Brockian.WeylWeakEnergy.laplacianSymbol_mul_locallyIntegrable",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -109,22 +105,14 @@
       "name": "Brockian.WeylWeakEnergy.weakSolutionVanishing_of_continuous_bounded",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.WeylWeakEnergy.schrodinger_essentiallySelfAdjoint_of_continuous_bounded",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     }
   ]

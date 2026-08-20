@@ -1,6 +1,6 @@
 {
   "module": "Brockian.NewEra",
-  "environment": "lean-4.32.0",
+  "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
@@ -73,11 +73,7 @@
       "name": "Brockian.NewEra.decaying_potential_cannot_realize_large_zeros",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {

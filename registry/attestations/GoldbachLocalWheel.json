@@ -1,6 +1,6 @@
 {
   "module": "Brockian.Goldbach.LocalWheel",
-  "environment": "lean-4.32.0",
+  "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
@@ -300,11 +300,7 @@
       "name": "Brockian.Goldbach.LocalWheel.K23_above_even_nonthree_baseline_iff",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -399,11 +395,7 @@
       "name": "Brockian.Goldbach.LocalWheel.local_covariance_three_zero_gt_ne_zero",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     }
   ]

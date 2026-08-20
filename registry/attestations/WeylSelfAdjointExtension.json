@@ -1,6 +1,6 @@
 {
   "module": "Brockian.Weyl.Extension",
-  "environment": "lean-4.32.0",
+  "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
@@ -62,11 +62,7 @@
       "name": "Brockian.Weyl.Extension.isSelfAdjoint_closure_iff_eq_adjoint",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -117,11 +113,7 @@
       "name": "Brockian.Weyl.Extension.adjoint_eigen_neg_I_eq_zero_of_essSA",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -139,11 +131,7 @@
       "name": "Brockian.Weyl.Extension.closure_le_of_isSelfAdjoint_extension",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {

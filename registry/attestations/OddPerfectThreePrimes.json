@@ -1,6 +1,6 @@
 {
   "module": "Brockian.OddPerfectThreePrimes",
-  "environment": "lean-4.32.0",
+  "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
@@ -29,11 +29,7 @@
       "name": "Brockian.OddPerfectThreePrimes.sum_divisors_lt_two_mul_of_two_primes",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -51,11 +47,7 @@
       "name": "Brockian.OddPerfectThreePrimes.eq_pow_mul_pow_of_primeFactors_eq_pair",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -73,22 +65,14 @@
       "name": "Brockian.OddPerfectThreePrimes.odd_deficient_of_primeFactors_eq_pair",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.OddPerfectThreePrimes.odd_deficient_of_primeFactors_card_le_two",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {

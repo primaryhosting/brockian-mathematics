@@ -1,17 +1,13 @@
 {
   "module": "Brockian.AdmissibilityDiagonal",
-  "environment": "lean-4.32.0",
+  "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
       "name": "Brockian.AdmissibilityDiagonal.admissibility_count_dichotomy",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -40,11 +36,7 @@
       "name": "Brockian.AdmissibilityDiagonal.diagonal_admissibility_count_of_eq_zero",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {

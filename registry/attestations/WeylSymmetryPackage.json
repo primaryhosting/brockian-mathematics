@@ -1,6 +1,6 @@
 {
   "module": "Brockian.Weyl.SymmetryPackage",
-  "environment": "lean-4.32.0",
+  "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
@@ -87,22 +87,14 @@
       "name": "Brockian.Weyl.SymmetryPackage.smulPMap_quadratic_form_im_zero",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Weyl.SymmetryPackage.smulPMap_not_eigenvalue_of_im_ne_zero",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     }
   ]

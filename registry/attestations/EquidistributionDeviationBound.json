@@ -1,39 +1,27 @@
 {
   "module": "Brockian.Equidistribution.DeviationBound",
-  "environment": "lean-4.32.0",
+  "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
       "name": "Brockian.Equidistribution.DeviationBound.perConfig_deviation_le_err",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Equidistribution.DeviationBound.totalConfig_deviation_le_scaled_err",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Equidistribution.DeviationBound.pairCount_deviation_le_scaled_err_of_large_pairs",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -47,55 +35,35 @@
       "name": "Brockian.Equidistribution.DeviationBound.perConfig_normalized_deviation_le_epsilon",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Equidistribution.DeviationBound.totalConfig_normalized_deviation_le_scaled_epsilon",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Equidistribution.DeviationBound.pairCount_normalized_deviation_le_scaled_epsilon_of_large_pairs",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Equidistribution.DeviationBound.perConfig_normalized_deviation_le_one_third",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Equidistribution.DeviationBound.totalConfig_normalized_deviation_le_one_third_scaled",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     }
   ]

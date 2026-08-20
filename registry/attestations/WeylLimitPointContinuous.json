@@ -1,6 +1,6 @@
 {
   "module": "Brockian.Weyl.LimitPointContinuous",
-  "environment": "lean-4.32.0",
+  "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
@@ -42,11 +42,7 @@
       "name": "Brockian.Weyl.LimitPointContinuous.isSolution_iff_isSolutionOn",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -64,11 +60,7 @@
       "name": "Brockian.Weyl.LimitPointContinuous.continuous_deriv_of_isSolution",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -97,11 +89,7 @@
       "name": "Brockian.Weyl.LimitPointContinuous.continuous_const_potential",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -119,22 +107,14 @@
       "name": "Brockian.Weyl.LimitPointContinuous.const_continuous_isLimitPoint",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Weyl.LimitPointContinuous.contBounded_const_isLimitPoint",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -170,11 +150,7 @@
       "name": "Brockian.Weyl.LimitPointContinuous.wronskian_const_of_solutions",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -203,44 +179,28 @@
       "name": "Brockian.Weyl.LimitPointContinuous.isLimitPoint_of_non_L2_solution",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Weyl.LimitPointContinuous.isLimitPoint_of_fundSystem_member_not_L2",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Weyl.LimitPointContinuous.isLimitPoint_of_fundSystem_not_both_L2",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
       "name": "Brockian.Weyl.LimitPointContinuous.no_nonzero_global_L2_of_contBounded",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -254,11 +214,7 @@
       "name": "Brockian.Weyl.LimitPointContinuous.contBounded_isLimitPoint_of_FS_obligation",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     }
   ]

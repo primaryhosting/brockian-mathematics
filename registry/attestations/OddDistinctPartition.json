@@ -1,6 +1,6 @@
 {
   "module": "Brockian.OddDistinctPartition",
-  "environment": "lean-4.32.0",
+  "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
@@ -29,11 +29,7 @@
       "name": "Brockian.OddDistinctPartition.countRestricted_two_eq_distincts",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -194,11 +190,7 @@
       "name": "Brockian.OddDistinctPartition.card_oddDistincts_le_distincts",
       "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
+      "axioms": [],
       "axioms_ok": true
     },
     {
