@@ -29,18 +29,32 @@ The repository grew three engines that do adjacent work with duplicated machiner
 
 The engines are not in conflict; the problem is **duplication and drift**:
 
-- **AXLE compile + axiom-audit logic exists at least twice** — the conveyor's
-  `axle_verify.py` + `axle_axiom_audit.py` (per-proof, `lean-4.32.2`) and the registry's
-  `attest.py` (per-module, `lean-4.32.0`). The two paths disagree on the Lean
-  environment, and `lean-4.32.0` is now deprecated server-side.
-- **The PROVED gate is copy-pasted in ≥3 files** — `gen_registry.derive_register`
-  (`scripts/gen_registry.py:44`), `audit_registry_consistency.find_register_invariants`
-  (`scripts/audit_registry_consistency.py:301`), and `verify_firewall.py` (#35). The
-  `ALLOWED_AXIOMS` set is textually duplicated with "keep in sync" comments.
-- **`normalize()` / `content_hash()` is redefined in ~6 files** (`axle_verify.py`,
-  `axle_axiom_audit.py`, `cross_check.py`, `catalogue_domains.py`, `auto_pr.py`,
-  `attest.py`) — a single formatting change must be made in six places or hashes
-  silently stop matching.
+- **AXLE compile + axiom-audit logic exists at least twice, in two different shapes** —
+  the conveyor's `axle_verify.py` + `axle_axiom_audit.py` (per-proof, `lean-4.32.2`,
+  hoist-imports normalization) and the registry's `attest.py` (per-module,
+  `lean-4.32.0`, `_flatten()` inlines Brockian dependency bodies before the AXLE call).
+  The two paths disagree on the Lean environment (`lean-4.32.0` is now deprecated
+  server-side) and construct the `#print axioms` probe differently. They are not
+  interchangeable today, but they share a verdict-and-axiom-parsing core that should live
+  in one place.
+- **The PROVED criterion is duplicated across a generator and two validators** — the
+  forward derivation `gen_registry.derive_register` (`scripts/gen_registry.py:44`) and the
+  post-hoc validators `audit_registry_consistency.find_register_invariants`
+  (`scripts/audit_registry_consistency.py:311`) and `verify_firewall.check_firewall`
+  (`scripts/verify_firewall.py:39`). They agree in outcome but are structurally separate
+  code, and the `ALLOWED_AXIOMS` set is textually triplicated
+  (`gen_registry.py:23`, `audit_registry_consistency.py:29`, `verify_firewall.py:27`) with
+  "keep in sync" comments — a change to the allowed-axiom set must be made in three places.
+- **`normalize()` / `content_hash()` is redefined across the harvest path** — the five
+  harvest files `axle_verify.py` (as `_hash(normalize(...))`, `:41`), `axle_axiom_audit.py`
+  (`:69`), `cross_check.py` (`:41`), `catalogue_domains.py` (`:37`), and `auto_pr.py`
+  (`:47`) each carry their own copy. The five harvest `normalize()` bodies are currently
+  byte-identical, which is exactly why the catalogue's hash-match gate works — and exactly
+  why a single formatting change must land in all five at once or the hashes silently stop
+  matching. (`attest.py` is *not* on this hash path; it uses `_flatten()`, a different
+  normalization, and computes no content hash. `annotate_headers.py` also has a
+  `normalize()`, but a deliberately different one — it strips a doc header — and is not on
+  the hash path either.)
 - **`pipeline/`'s good idea — a domain-agnostic intake/triage front door — is stranded**
   because its verify step was never wired to AXLE.
 
@@ -80,9 +94,12 @@ engine/
                 # axle_axiom_audit.py, attest.py, cross_check.py.
   register.py   # THE derived-register gate. One PROVED definition + ALLOWED_AXIOMS,
                 # as a pure function facts -> register {PROVED, CONDITIONAL, COMPUTATION,
-                # DEFINITION, CONJECTURE, DISCHARGED, UNVERIFIED}. Consumed by
-                # gen_registry, catalogue_domains, audit_registry_consistency,
-                # verify_firewall, auto_pr, and pipeline's card register.
+                # DEFINITION, CONJECTURE, UNVERIFIED}. (DISCHARGED is a whole-registry
+                # post-pass that stays in gen_registry and calls this for the base
+                # derivation.) Consumed by gen_registry, catalogue_domains,
+                # audit_registry_consistency, verify_firewall, auto_pr, and — for the
+                # shared PROVED/CONDITIONAL/COMPUTATION sub-decision only — pipeline's
+                # richer card register.
   audit.py      # THE honesty gate. Re-derives register invariants on committed data,
                 # runs the no-theater patterns, and the overclaim/self-consistency
                 # firewall — one --strict surface. Consolidates
@@ -139,16 +156,29 @@ The single AXLE verification core. Public surface:
 - `content_hash(content) -> str` — `sha256(normalize(content))[:16]`. Every other module
   imports these two; they are defined exactly once.
 - `qualified_decls(text) -> list[str]` — fully-qualified theorem/lemma names via a
-  namespace/section stack (the fix already shipped in `axle_axiom_audit.py`; `attest.py`
-  and `cross_check.py` share the bare-name bug and are corrected by delegating here).
-- `axiom_audit(content, *, env="lean-4.32.2") -> AuditResult` — submit the proof plus
-  fully-qualified `#print axioms` probes to AXLE `check`, parse `lean_messages.infos`,
-  return `{trusted: bool|None, axioms, extra_axioms, environment, hash, detail}`.
+  namespace/section stack (the fix already shipped in `axle_axiom_audit.py`). This is
+  the default probe-target strategy for the harvest path. `cross_check.py:51` has the
+  bare-name bug (`#print axioms {n}` on un-qualified names) and is corrected by
+  delegating here. **`attest.py` is different and keeps its own model:** it receives an
+  explicit `names` list plus a namespace from its caller and probes via
+  `open {namespace} in #print axioms {n}` (`attest.py:86`), and it `_flatten()`s Brockian
+  dependency bodies into the submitted unit (`attest.py:56`). `attest.py` therefore does
+  *not* switch to `qualified_decls`; it supplies its own probe targets and flattened
+  content to the shared submit/parse functions below.
+- `axiom_audit(content, *, probe_targets, env="lean-4.32.2") -> AuditResult` — submit the
+  content plus `#print axioms` probes for the given `probe_targets` to AXLE `check`, parse
+  `lean_messages.infos`, return `{trusted: bool|None, axioms, extra_axioms, environment,
+  detail}`. `probe_targets` come from `qualified_decls(text)` on the harvest path, or from
+  `attest.py`'s caller-supplied names on the registry path — the parse-and-verdict logic
+  is shared; how the targets are chosen is the caller's.
 - `compile_check(content, *, env) -> VerifyResult` — the strict compile verdict
   (`axle_client.check` normalized): compiles ∧ no errors ∧ no sorry/admit warning.
 
 `env` defaults to `lean-4.32.2` from one constant. `axle_client.py` stays the transport;
-`engine.verify` is the semantics layer above it.
+`engine.verify` is the shared semantics layer above it — the AXLE submission and the
+axiom/verdict parsing. Content normalization and probe-target selection are supplied by
+the caller (hoist-imports + `qualified_decls` for harvest; `_flatten` + explicit names for
+`attest.py`), because those two paths legitimately differ.
 
 ### 4.2 `engine.register`
 
@@ -175,16 +205,33 @@ overclaim/self-consistency firewall. It supersedes `audit_registry_consistency.p
 once callers move). The conveyor's `run_registry_hop` truth gate calls
 `engine.audit --strict`; a failure still STOPS the hop and is never bypassed.
 
+**Behavior change to call out (not pure refactor):** today the conveyor hop gates only on
+`audit_registry_consistency.py --strict` (`aristotle/conveyor.py:359`); `verify_firewall`
+and `no_theater_lint` run as independent surfaces and are *not* enforced on the hop.
+Folding all three into `engine.audit --strict` means those two checks become newly
+enforced on every registry hop. This is desirable (stronger truth gate) but is a real
+behavior change — the migration step that introduces it must first confirm the current
+registry passes all three, so the hop does not start failing on pre-existing state.
+
 ### 4.4 `engine.intake` + `engine.attack`
 
 `intake` lifts `pipeline/core/schema.py` (the `ProblemCard` model) and
 `pipeline/core/stages.py`/`triage.py` (triage + attack-queue) mostly verbatim.
 `attack` defines a small mode interface — `attack(card) -> Iterable[Candidate]` — with
 two initial modes: `harvest` (wraps the Aristotle conveyor's harvest+select) and `author`
-(the Brockian library path). `pipeline/core/ledger.derive_problem_register` is rewired to
-call `engine.register.derive` (with the AXLE fact supplied by `engine.verify`, not a human
-boolean). The dormant CLI (`pipeline/scripts/pipeline_cli.py`) keeps working, now backed
-by the live core.
+(the Brockian library path).
+
+**`pipeline` keeps its own register vocabulary.** `pipeline/core/ledger.py:47`
+`derive_problem_register` returns a richer, problem-level set —
+`OPEN, SCAFFOLD, CONDITIONAL, COMPUTATION, DISTILLED, PROVED, REFUTED, DISCHARGED,
+BLOCKED, LITERATURE, PARTIAL` — with `BLOCKED`/`REFUTED` winning at the top of precedence.
+`engine.register.derive` only models the theorem-level sub-decision
+(`PROVED/CONDITIONAL/COMPUTATION/…`). So `derive_problem_register` is **not** replaced;
+it is refactored to *call* `engine.register.derive` for the shared PROVED/CONDITIONAL/
+COMPUTATION decision (fed by an AXLE fact from `engine.verify` instead of a
+human-supplied boolean) while keeping its own problem-level states around that core. The
+dormant CLI (`pipeline/scripts/pipeline_cli.py`) keeps working, now backed by the live
+verify core.
 
 ## 5. Migration sequence (strangler, each step independently shippable)
 
@@ -195,12 +242,19 @@ commit with a one-command rollback.
    `axle_client.check` wrapper). Add unit tests. No caller changes yet.
 2. **`engine.register`** — create it from `gen_registry.derive_register` verbatim + tests.
 3. **Delegate the harvest verify path** — `axle_verify.py`, `axle_axiom_audit.py`,
-   `cross_check.py` import `engine.verify`; delete their local `normalize`/`content_hash`/
-   probe. Confirm `axle_verify.json` / `axle_axiom_audit.json` hashes are byte-identical
-   on a sample before/after (hash-stability gate).
-4. **Delegate the registry attest path** — `attest.py` imports `engine.verify`; this also
-   fixes its namespace bare-name bug and moves it to `lean-4.32.2`. New attestations record
-   `environment: lean-4.32.2`.
+   `cross_check.py`, `catalogue_domains.py`, `auto_pr.py` import `engine.verify`'s
+   `normalize`/`content_hash`; delete their five local copies. Fix `cross_check.py`'s
+   bare-name probe by using `engine.verify.qualified_decls`. Confirm `content_hash` is
+   byte-identical on a sample of proofs before/after (hash-stability gate) — this is safe
+   precisely because the five bodies are already byte-identical (§1).
+4. **Delegate the registry attest path** — `attest.py` keeps its `_flatten()` +
+   caller-supplied `names` model but delegates the AXLE submission and axiom/verdict
+   parsing to `engine.verify.axiom_audit(content, probe_targets=names, env=…)`, and moves
+   its env default to `lean-4.32.2`. This is a **behavior change** (new env → different
+   attestation environment; deprecated `lean-4.32.0` retired), not a pure refactor: the
+   step is gated by re-attesting a small sample and confirming the verdicts match the
+   `lean-4.32.0` results before the lazy full drain (step 8). It does *not* alter
+   `attest.py`'s probe construction or flattening.
 5. **Delegate the register gate** — `gen_registry`, `catalogue_domains`, `auto_pr`,
    `audit_registry_consistency`, `verify_firewall` import `engine.register`; delete the
    copies. `check_registry_fresh.py` must show `theorems.json` unchanged (behavior-preserving).
