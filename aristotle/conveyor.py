@@ -20,8 +20,9 @@ a resident daemon). Each cycle:
   3. Registry hop, gated on TRUTH: only when the registry/attestations/*
      fingerprint changed since the last recorded one (first run records a
      baseline, mirroring solver_watch's first-run behavior) does it run
-     gen_registry → audit_registry_consistency --strict. An audit failure STOPS
-     the hop and records why — it is never bypassed. Only after a clean audit do
+     gen_registry → engine.audit --strict (registry consistency + overclaim firewall
+     + no-theater lint). An audit failure STOPS the hop and records why — it is never
+     bypassed. Only after a clean audit do
      gen_claims + gen_observatory run. (Verified property: with no new
      attestations, gen_registry regeneration is byte-identical, so skipping it
      is a no-op by construction.)
@@ -356,11 +357,13 @@ def run_registry_hop(runner=_run_repo_script):
     results.append(res)
     if res["status"] != "ok":
         return results, False, "gen_registry failed"
-    res = runner("audit_strict", ["scripts/audit_registry_consistency.py", "--strict"])
+    # TRUTH GATE: the unified honesty gate (registry consistency + overclaim firewall +
+    # no-theater lint) as one --strict surface. Previously only the first of the three
+    # ran on the hop. An audit failure stops this hop and is never bypassed.
+    res = runner("audit_strict", ["-m", "engine.audit", "--strict"])
     results.append(res)
     if res["status"] != "ok":
-        # TRUTH GATE: an audit failure stops this hop. It is never bypassed.
-        return results, False, "audit_registry_consistency --strict failed"
+        return results, False, "engine.audit --strict failed"
     res = runner("gen_claims", ["scripts/gen_claims.py"])
     results.append(res)
     if res["status"] != "ok":
@@ -651,7 +654,7 @@ def build_proof_attempt_issue(week):
         "and verify with `lake build`. Record the outcome honestly: an "
         "attempt that does not compile is a FAILED attempt, never a claim.\n\n"
         "Truth gate: registry claims only change via scripts/gen_registry.py "
-        "followed by scripts/audit_registry_consistency.py --strict.\n\n"
+        "followed by the unified `python -m engine.audit --strict` gate.\n\n"
         "Do NOT assign NOETHER (agent in error state); leave unassigned or "
         "assign TURING."
     )

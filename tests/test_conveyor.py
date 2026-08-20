@@ -346,7 +346,7 @@ def test_registry_hop_stops_on_strict_audit_failure():
 
     results, ok, why = conveyor.run_registry_hop(runner=runner)
     assert not ok
-    assert why == "audit_registry_consistency --strict failed"
+    assert why == "engine.audit --strict failed"
     # audit failure = STOP: claims/observatory are never generated
     assert calls == ["gen_registry", "audit_strict"]
 
