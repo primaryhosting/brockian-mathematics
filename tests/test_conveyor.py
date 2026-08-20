@@ -261,6 +261,49 @@ def test_verify_stage_budget_exhaustion_is_nonfatal():
         s[0] for s in conveyor.chain_stages()]
 
 
+def test_cross_check_budget_exhaustion_is_nonfatal():
+    """Regression: cross_check's LOCAL lake axiom-audit leg cannot clear its
+    backlog in one cycle (Mathlib loads thrash under RAM pressure). A fatal
+    timeout here froze the whole chain — cursor never advanced, the same
+    receipts reprocessed forever, and the registry never hopped. It must be
+    non-fatal (like verify_stage): budget exhaustion is recorded, chain runs
+    on, and downstream stages + the registry hop still execute."""
+    def runner(name, script, env_extra=None, timeout=None, timeout_fatal=True):
+        status = "budget_exhausted" if name == "cross_check" else "ok"
+        return conveyor.StageResult(name=name, status=status, rc=None,
+                                    seconds=0.0, tail="")
+
+    results, ok = conveyor.run_chain(runner=runner)
+    assert ok, "cross_check budget exhaustion must not stop the chain"
+    assert [r["name"] for r in results] == [
+        s[0] for s in conveyor.chain_stages()]
+
+
+def test_cross_check_stage_is_configured_nonfatal_and_bounded():
+    """The chain_stages() wiring itself must keep cross_check non-fatal and on a
+    dedicated budget strictly under the full stage timeout, so a single hung
+    lake load can never consume the whole cycle."""
+    by_name = {s[0]: s for s in conveyor.chain_stages()}
+    name, script, env, timeout, timeout_fatal = by_name["cross_check"]
+    assert timeout_fatal is False
+    assert timeout < int(os.environ.get("CONVEYOR_STAGE_TIMEOUT", "1800"))
+    assert "CROSS_TIMEOUT" in env  # per-file ceiling is passed through
+
+
+def test_axle_axiom_audit_runs_before_catalogue_and_is_nonfatal():
+    """The cloud axiom audit must run BEFORE catalogue_domains (so the same cycle
+    can promote freshly-audited proofs) and be non-fatal (an AXLE outage records a
+    budget/error but never freezes the chain — catalogue just uses prior state)."""
+    names = [s[0] for s in conveyor.chain_stages()]
+    assert "axle_axiom_audit" in names
+    assert names.index("axle_axiom_audit") > names.index("axle_verify")
+    assert names.index("axle_axiom_audit") < names.index("catalogue_domains")
+    by_name = {s[0]: s for s in conveyor.chain_stages()}
+    _, _, _, timeout, timeout_fatal = by_name["axle_axiom_audit"]
+    assert timeout_fatal is False
+    assert timeout < int(os.environ.get("CONVEYOR_STAGE_TIMEOUT", "1800"))
+
+
 def test_chain_forces_auto_pr_live_off():
     stages = {name: env for name, _, env, _, _ in conveyor.chain_stages()}
     assert stages["auto_pr"]["AUTO_PR_LIVE"] == "0"

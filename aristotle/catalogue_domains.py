@@ -54,24 +54,52 @@ def main():
     axp = ROOT / "axle_verify.json"
     if axp.exists():
         axle = json.loads(axp.read_text())
+    # cloud axiom audit (AXLE #print axioms) — the soundness leg that gates PROVED
+    audit = {}
+    audit_path = ROOT / "axle_axiom_audit.json"
+    if audit_path.exists():
+        audit = json.loads(audit_path.read_text())
+    # local lake axiom audit — an OPTIONAL confirmation, recorded in provenance when
+    # the box can run local Lean; never required (it cannot run under RAM pressure).
     cross = {}
     cross_path = ROOT / "cross_check.json"
     if cross_path.exists():
         cross = json.loads(cross_path.read_text())
 
+    def _san(target):
+        return re.sub(r"[^A-Za-z0-9]+", "_", target) + ".lean"
+
     def independent_ok(target):
-        san = re.sub(r"[^A-Za-z0-9]+", "_", target) + ".lean"
+        """Registry PROVED gate: AXLE cloud compile (verified) AND AXLE cloud axiom
+        audit (kernel-clean: only {propext, Classical.choice, Quot.sound}, no
+        sorryAx), both keyed to the SAME proof content hash. Local Lean is an
+        optional upgrade (see local_confirmed), never required — it cannot run on
+        this RAM-starved box, so requiring it would strand every cloud-verified
+        proof at PROVED_UNVERIFIED forever."""
+        san = _san(target)
         proof = BEST_DIR / san
         if not proof.exists():
             return False
         digest = content_hash(proof.read_text(errors="ignore"))
         ax = axle.get(san, {})
-        cc = cross.get(san, {})
+        aud = audit.get(san, {})
         return (ax.get("verified") is True
                 and ax.get("environment") == "lean-4.32.2"
                 and ax.get("hash") == digest
-                and cc.get("trusted") is True
-                and cc.get("hash") == digest)
+                and aud.get("trusted") is True
+                and aud.get("environment") == "lean-4.32.2"
+                and aud.get("hash") == digest)
+
+    def local_confirmed(target):
+        """True when the local lake axiom audit independently agrees for THIS exact
+        proof content — a second-toolchain confirmation on top of the cloud gate."""
+        san = _san(target)
+        proof = BEST_DIR / san
+        if not proof.exists():
+            return False
+        digest = content_hash(proof.read_text(errors="ignore"))
+        cc = cross.get(san, {})
+        return cc.get("trusted") is True and cc.get("hash") == digest
 
     cat = json.loads(OUT.read_text()) if OUT.exists() else {}
     added = 0
@@ -81,22 +109,30 @@ def main():
             continue
         fname = f"{meta['account']}_{pid[:8]}.lean"
         entry = cat.get(t, {})
-        independently_verified = independent_ok(t)
-        # Registry PROVED requires local compilation, the independent AXLE leg,
-        # a clean axiom audit, and one shared content hash across all three.
+        # Registry PROVED requires the independent AXLE cloud leg to both COMPILE
+        # the proof and pass a clean axiom audit, keyed to one shared content hash.
+        # Local compilation is an optional second-toolchain confirmation (it cannot
+        # run on this box), recorded in provenance but not required.
+        verified = independent_ok(t)
         locally_compiles = file_compiles.get(fname) is True or (best.get(t, {}).get("compiles") is True)
-        verified = independently_verified and locally_compiles
+        local_ok = locally_compiles or local_confirmed(t)
         # keep the strongest status seen
         register = "PROVED" if verified else "PROVED_UNVERIFIED"
         if entry.get("register") == "PROVED":
             continue
+        if verified:
+            ver = ("local Lean + AXLE lean-4.32.2 cloud compile + cloud axiom audit OK"
+                   if local_ok else
+                   "AXLE lean-4.32.2 cloud compile + cloud axiom audit (kernel-clean); "
+                   "local lake-build pending")
+        elif axle.get(_san(t), {}).get("verified") is True:
+            ver = "AXLE cloud compile OK; independent axiom audit pending"
+        else:
+            ver = "sorry-free Aristotle candidate; independent verification pending"
         cat[t] = {"register": register, "domain": stmt[t]["domain"], "statement": stmt[t]["statement"],
                   "proof_file": f"aristotle/harvest_100/{fname}",
                   "provenance": f"Harmonic/Aristotle {pid} ({meta['account']})",
-                  "verification": ("local Lean + AXLE lean-4.32.2 + axiom audit OK" if verified
-                                   else "local Lean OK; independent AXLE verification pending"
-                                   if locally_compiles
-                                   else "sorry-free Aristotle candidate; verification pending")}
+                  "verification": ver}
         added += 1
     OUT.write_text(json.dumps(cat, indent=1))
     import collections

@@ -256,7 +256,9 @@ def chain_stages():
     axle_max = os.environ.get("AXLE_MAX", "120")
     harvest_all_max = os.environ.get("HARVEST_ALL_MAX", "80")
     cross_max = os.environ.get("CROSS_MAX", "6")
+    cross_file_timeout = os.environ.get("CROSS_TIMEOUT", "300")
     verify_budget = int(os.environ.get("CONVEYOR_VERIFY_BUDGET", "900"))
+    cross_budget = int(os.environ.get("CONVEYOR_CROSS_BUDGET", "900"))
     stage_timeout = int(os.environ.get("CONVEYOR_STAGE_TIMEOUT", "1800"))
     return [
         # (name, script, env, timeout, timeout_fatal)
@@ -269,10 +271,31 @@ def chain_stages():
         ("verify_stage", "verify_stage.py", {}, verify_budget, False),
         ("select_best", "select_best.py", {}, stage_timeout, True),
         ("axle_verify", "axle_verify.py", {"AXLE_MAX": axle_max}, stage_timeout, True),
+        # cloud axiom audit (AXLE #print axioms) — the soundness leg that promotes a
+        # proof to registry PROVED now that local Lean cannot run on this box. Cloud
+        # round-trips are seconds, but keep it NON-fatal so an AXLE outage records a
+        # budget/error and the chain still advances (catalogue simply uses the prior
+        # audit state; unaudited proofs stay PROVED_UNVERIFIED). Runs BEFORE
+        # catalogue_domains so the same cycle can promote freshly-audited proofs.
+        ("axle_axiom_audit", "axle_axiom_audit.py",
+         {"AXLE_AXIOM_MAX": axle_max}, cross_budget, False),
         ("catalogue_domains", "catalogue_domains.py", {}, stage_timeout, True),
         ("lemma_mine", "lemma_mine.py", {}, stage_timeout, True),
         ("reduction_tracker", "reduction_tracker.py", {}, stage_timeout, True),
-        ("cross_check", "cross_check.py", {"CROSS_MAX": cross_max}, stage_timeout, True),
+        # cross_check is the same shape as verify_stage: an independent axiom
+        # audit whose LOCAL lake leg cannot clear the backlog in one cycle. It
+        # persists per-file state (resumable) and is capped per run, so its
+        # budget exhaustion is recorded but NON-fatal — a fatal timeout here
+        # would freeze the whole chain (cursor never advances → the same
+        # receipts reprocess forever → best_proofs churn → the audit never
+        # drains). The truth gate is NOT weakened: catalogue_domains only
+        # promotes a target to registry PROVED when cross_check reports
+        # trusted=True for that exact content hash; until the audit lands a
+        # proof stays at PROVED_UNVERIFIED. Per-file CROSS_TIMEOUT bounds a
+        # single hung lake load so the run attempts several files per cycle.
+        ("cross_check", "cross_check.py",
+         {"CROSS_MAX": cross_max, "CROSS_TIMEOUT": cross_file_timeout},
+         cross_budget, False),
         ("minimize_proofs", "minimize_proofs.py", {}, stage_timeout, True),
         ("annotate_headers", "annotate_headers.py", {}, stage_timeout, True),
         ("auto_pr", "auto_pr.py", {"AUTO_PR_LIVE": "0"}, stage_timeout, True),

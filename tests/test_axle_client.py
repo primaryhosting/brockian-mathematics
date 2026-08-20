@@ -14,7 +14,7 @@ pytestmark = pytest.mark.skipif(
     not os.environ.get("AXLE_API_KEY"), reason="AXLE_API_KEY not set"
 )
 
-ENV = os.environ.get("AXLE_ENV", "lean-4.32.0")
+ENV = os.environ.get("AXLE_ENV", "lean-4.32.2")
 
 
 def test_check_true_theorem():
