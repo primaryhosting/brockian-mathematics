@@ -24,9 +24,11 @@ from typing import Any, Iterable
 
 VALID_RUNGS = {"classical", "literature", "open"}
 OPEN_REGISTERS = {"CONDITIONAL", "CONJECTURE"}
-# Keep textually in sync with ALLOWED_AXIOMS in scripts/gen_registry.py — the
-# derivation rule and this audit must agree on the allowed axiom set.
-ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
+# ALLOWED_AXIOMS is single-sourced from engine.verify — the derivation rule, this audit,
+# and the firewall all import the one definition, so the allowed axiom set cannot drift.
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from engine.verify import ALLOWED_AXIOMS  # noqa: E402
 SUMMARY_ORDER = [
     "PROVED",
     "CONDITIONAL",

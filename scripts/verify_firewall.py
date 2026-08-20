@@ -24,7 +24,8 @@ import json
 import os
 import sys
 
-ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from engine.verify import ALLOWED_AXIOMS  # noqa: E402 — single source of the kernel axioms
 VALID_RUNGS = {"classical", "literature", "open"}
 REGISTRY = "registry/theorems.json"
 
