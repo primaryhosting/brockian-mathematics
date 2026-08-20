@@ -250,9 +250,17 @@ def _run_stage(name, script, env_extra=None, timeout=1800, timeout_fatal=True):
 
 
 def chain_stages():
-    """The verify/attest chain — the same stages run-morning-verify.sh runs,
-    with the same caps. AUTO_PR_LIVE=0 is forced: the public GitHub mutation
-    stays behind the existing human gate."""
+    """The verify/attest chain. The DEFAULT hot path is the cloud spine — AXLE
+    compiles AND axiom-audits every proof in seconds, and that is the gate the
+    registry uses. AUTO_PR_LIVE=0 is forced: the public GitHub mutation stays
+    behind the existing human gate.
+
+    The local lake legs (verify_stage, cross_check) are OFF by default: local Lean
+    cannot run on this RAM-starved box (`lake env` wedges at 0% CPU even on a
+    trivial file), so they produce nothing and only burn ~30 min/cycle. They remain
+    available as an opt-in offline confirmation via CONVEYOR_LOCAL_LAKE=1 for when
+    the build host has memory to spare; nothing downstream requires them (catalogue
+    and auto_pr gate on the cloud audit and treat a local agreement as a bonus)."""
     axle_max = os.environ.get("AXLE_MAX", "120")
     harvest_all_max = os.environ.get("HARVEST_ALL_MAX", "80")
     cross_max = os.environ.get("CROSS_MAX", "6")
@@ -260,47 +268,44 @@ def chain_stages():
     verify_budget = int(os.environ.get("CONVEYOR_VERIFY_BUDGET", "900"))
     cross_budget = int(os.environ.get("CONVEYOR_CROSS_BUDGET", "900"))
     stage_timeout = int(os.environ.get("CONVEYOR_STAGE_TIMEOUT", "1800"))
-    return [
+    local_lake = os.environ.get("CONVEYOR_LOCAL_LAKE", "0") == "1"
+
+    stages = [
         # (name, script, env, timeout, timeout_fatal)
         ("harvest_proofs", "harvest_proofs.py", {}, stage_timeout, True),
         ("harvest_all", "harvest_all.py",
          {"HARVEST_ALL_MAX": harvest_all_max}, stage_timeout, True),
-        # verify_stage persists per-file state and is resumable; the local lake
-        # leg cannot clear the backlog in one cycle by design, so its budget
-        # exhaustion is recorded but NON-fatal (AXLE is the independent leg).
-        ("verify_stage", "verify_stage.py", {}, verify_budget, False),
+    ]
+    # OPTIONAL local lake verification (resumable, non-fatal) — off by default.
+    if local_lake:
+        stages.append(("verify_stage", "verify_stage.py", {}, verify_budget, False))
+    stages += [
         ("select_best", "select_best.py", {}, stage_timeout, True),
         ("axle_verify", "axle_verify.py", {"AXLE_MAX": axle_max}, stage_timeout, True),
         # cloud axiom audit (AXLE #print axioms) — the soundness leg that promotes a
-        # proof to registry PROVED now that local Lean cannot run on this box. Cloud
-        # round-trips are seconds, but keep it NON-fatal so an AXLE outage records a
-        # budget/error and the chain still advances (catalogue simply uses the prior
-        # audit state; unaudited proofs stay PROVED_UNVERIFIED). Runs BEFORE
-        # catalogue_domains so the same cycle can promote freshly-audited proofs.
+        # proof to registry PROVED. Cloud round-trips are seconds; NON-fatal so an
+        # AXLE outage records an error and the chain still advances (catalogue uses
+        # prior audit state; unaudited proofs stay PROVED_UNVERIFIED). Runs BEFORE
+        # catalogue_domains so the same cycle promotes freshly-audited proofs.
         ("axle_axiom_audit", "axle_axiom_audit.py",
          {"AXLE_AXIOM_MAX": axle_max}, cross_budget, False),
         ("catalogue_domains", "catalogue_domains.py", {}, stage_timeout, True),
         ("lemma_mine", "lemma_mine.py", {}, stage_timeout, True),
         ("reduction_tracker", "reduction_tracker.py", {}, stage_timeout, True),
-        # cross_check is the same shape as verify_stage: an independent axiom
-        # audit whose LOCAL lake leg cannot clear the backlog in one cycle. It
-        # persists per-file state (resumable) and is capped per run, so its
-        # budget exhaustion is recorded but NON-fatal — a fatal timeout here
-        # would freeze the whole chain (cursor never advances → the same
-        # receipts reprocess forever → best_proofs churn → the audit never
-        # drains). The truth gate is NOT weakened: catalogue_domains only
-        # promotes a target to registry PROVED when cross_check reports
-        # trusted=True for that exact content hash; until the audit lands a
-        # proof stays at PROVED_UNVERIFIED. Per-file CROSS_TIMEOUT bounds a
-        # single hung lake load so the run attempts several files per cycle.
-        ("cross_check", "cross_check.py",
-         {"CROSS_MAX": cross_max, "CROSS_TIMEOUT": cross_file_timeout},
-         cross_budget, False),
+    ]
+    # OPTIONAL local lake axiom audit — off by default; the cloud axiom audit above
+    # is the real gate. Kept resumable + non-fatal for opt-in offline runs.
+    if local_lake:
+        stages.append(("cross_check", "cross_check.py",
+                       {"CROSS_MAX": cross_max, "CROSS_TIMEOUT": cross_file_timeout},
+                       cross_budget, False))
+    stages += [
         ("minimize_proofs", "minimize_proofs.py", {}, stage_timeout, True),
         ("annotate_headers", "annotate_headers.py", {}, stage_timeout, True),
         ("auto_pr", "auto_pr.py", {"AUTO_PR_LIVE": "0"}, stage_timeout, True),
         ("observatory", "observatory.py", {}, stage_timeout, True),
     ]
+    return stages
 
 
 def run_chain(runner=_run_stage, stages=None):

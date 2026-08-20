@@ -244,12 +244,32 @@ def test_new_candidates_invoke_chain_in_order_and_stop_on_failure():
 
     results, ok = conveyor.run_chain(runner=runner)
     assert not ok
-    assert calls == ["harvest_proofs", "harvest_all", "verify_stage",
+    assert calls == ["harvest_proofs", "harvest_all",
                      "select_best"]  # stops cleanly at the failed stage
     assert results[-1]["status"] == "failed"
 
 
-def test_verify_stage_budget_exhaustion_is_nonfatal():
+def test_default_chain_is_cloud_lean_local_lake_opt_in(monkeypatch):
+    """The default hot path is the cloud spine — no local-lake stages (they produce
+    nothing on this box and waste ~30 min/cycle). CONVEYOR_LOCAL_LAKE=1 re-adds them
+    for opt-in offline confirmation."""
+    monkeypatch.setenv("CONVEYOR_LOCAL_LAKE", "0")
+    default_names = [s[0] for s in conveyor.chain_stages()]
+    assert "verify_stage" not in default_names
+    assert "cross_check" not in default_names
+    assert "axle_verify" in default_names and "axle_axiom_audit" in default_names
+
+    monkeypatch.setenv("CONVEYOR_LOCAL_LAKE", "1")
+    opt_in_names = [s[0] for s in conveyor.chain_stages()]
+    assert "verify_stage" in opt_in_names and "cross_check" in opt_in_names
+    # local lake legs sit around their cloud counterparts, order preserved
+    assert opt_in_names.index("verify_stage") < opt_in_names.index("select_best")
+    assert opt_in_names.index("cross_check") < opt_in_names.index("minimize_proofs")
+
+
+def test_verify_stage_budget_exhaustion_is_nonfatal(monkeypatch):
+    monkeypatch.setenv("CONVEYOR_LOCAL_LAKE", "1")  # verify_stage is opt-in now
+
     def runner(name, script, env_extra=None, timeout=None, timeout_fatal=True):
         status = "budget_exhausted" if name == "verify_stage" else "ok"
         return conveyor.StageResult(name=name, status=status, rc=None,
@@ -261,13 +281,15 @@ def test_verify_stage_budget_exhaustion_is_nonfatal():
         s[0] for s in conveyor.chain_stages()]
 
 
-def test_cross_check_budget_exhaustion_is_nonfatal():
+def test_cross_check_budget_exhaustion_is_nonfatal(monkeypatch):
     """Regression: cross_check's LOCAL lake axiom-audit leg cannot clear its
     backlog in one cycle (Mathlib loads thrash under RAM pressure). A fatal
     timeout here froze the whole chain — cursor never advanced, the same
-    receipts reprocessed forever, and the registry never hopped. It must be
-    non-fatal (like verify_stage): budget exhaustion is recorded, chain runs
-    on, and downstream stages + the registry hop still execute."""
+    receipts reprocessed forever, and the registry never hopped. When enabled it
+    must be non-fatal (like verify_stage): budget exhaustion is recorded, the chain
+    runs on, and downstream stages + the registry hop still execute."""
+    monkeypatch.setenv("CONVEYOR_LOCAL_LAKE", "1")
+
     def runner(name, script, env_extra=None, timeout=None, timeout_fatal=True):
         status = "budget_exhausted" if name == "cross_check" else "ok"
         return conveyor.StageResult(name=name, status=status, rc=None,
@@ -279,10 +301,11 @@ def test_cross_check_budget_exhaustion_is_nonfatal():
         s[0] for s in conveyor.chain_stages()]
 
 
-def test_cross_check_stage_is_configured_nonfatal_and_bounded():
-    """The chain_stages() wiring itself must keep cross_check non-fatal and on a
-    dedicated budget strictly under the full stage timeout, so a single hung
-    lake load can never consume the whole cycle."""
+def test_cross_check_stage_is_configured_nonfatal_and_bounded(monkeypatch):
+    """When opt-in, the cross_check wiring must stay non-fatal and on a dedicated
+    budget strictly under the full stage timeout, so a single hung lake load can
+    never consume the whole cycle."""
+    monkeypatch.setenv("CONVEYOR_LOCAL_LAKE", "1")
     by_name = {s[0]: s for s in conveyor.chain_stages()}
     name, script, env, timeout, timeout_fatal = by_name["cross_check"]
     assert timeout_fatal is False

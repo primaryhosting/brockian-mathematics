@@ -20,6 +20,9 @@ import subprocess
 
 ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
+# cloud axiom audit (AXLE) is the soundness gate; the local lake audit
+# (cross_check.json) cannot run on this box and is only an optional confirmation.
+AUDIT = ROOT / "axle_axiom_audit.json"
 CROSS = ROOT / "cross_check.json"
 DOMAINS = REPO / "registry" / "domains.json"
 BEST = ROOT / "best_proofs"
@@ -48,31 +51,40 @@ def content_hash(content: str) -> str:
 def eligible():
     """Return only independently checked, current-environment new-domain proofs.
 
-    This is deliberately stricter than catalogue membership: AXLE and the separate
-    cross-check must both accept the same sanitized target before it is even staged.
+    This is deliberately stricter than catalogue membership: the AXLE compile leg AND
+    the AXLE cloud axiom audit must both accept the same sanitized target (same content
+    hash) before it is even staged. A local lake axiom-audit agreement, when present,
+    is recorded as an extra confirmation but is not required.
     """
     import re
     axle = json.loads((ROOT / "axle_verify.json").read_text()) if (ROOT / "axle_verify.json").exists() else {}
+    audit = json.loads(AUDIT.read_text()) if AUDIT.exists() else {}
     cross = json.loads(CROSS.read_text()) if CROSS.exists() else {}
     domains = json.loads(DOMAINS.read_text()) if DOMAINS.exists() else {}
     out = []
     for target, dmeta in domains.items():
         san = re.sub(r"[^A-Za-z0-9]+", "_", target) + ".lean"
         axle_rec = axle.get(san, {})
-        cross_rec = cross.get(san, {})
+        audit_rec = audit.get(san, {})
         best_src = BEST / san
         if not best_src.exists():
             continue
         current_hash = content_hash(best_src.read_text(errors="ignore"))
         if axle_rec.get("verified") is not True or axle_rec.get("environment") != "lean-4.32.2":
             continue
-        if (cross_rec.get("trusted") is not True
+        # cloud axiom audit is the soundness gate (kernel-clean, no sorryAx)
+        if (audit_rec.get("trusted") is not True
+                or audit_rec.get("environment") != "lean-4.32.2"
                 or axle_rec.get("hash") != current_hash
-                or cross_rec.get("hash") != current_hash):
+                or audit_rec.get("hash") != current_hash):
             continue
+        cross_rec = cross.get(san, {})
+        local_ok = (cross_rec.get("trusted") is True
+                    and cross_rec.get("hash") == current_hash)
         out.append({"target": target, "domain": dmeta.get("domain"),
                     "src": str(best_src), "hash": current_hash,
-                    "verification": "AXLE cloud lean-4.32.2 + cross-check",
+                    "verification": ("AXLE cloud lean-4.32.2 compile + cloud axiom audit"
+                                     + (" + local lake confirmed" if local_ok else "")),
                     "environment": axle_rec["environment"]})
     return out
 
