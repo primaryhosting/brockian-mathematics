@@ -40,7 +40,7 @@ The engines are not in conflict; the problem is **duplication and drift**:
 - **The PROVED criterion is duplicated across a generator and two validators** — the
   forward derivation `gen_registry.derive_register` (`scripts/gen_registry.py:44`) and the
   post-hoc validators `audit_registry_consistency.find_register_invariants`
-  (`scripts/audit_registry_consistency.py:311`) and `verify_firewall.check_firewall`
+  (`scripts/audit_registry_consistency.py:301`) and `verify_firewall.check_firewall`
   (`scripts/verify_firewall.py:39`). They agree in outcome but are structurally separate
   code, and the `ALLOWED_AXIOMS` set is textually triplicated
   (`gen_registry.py:23`, `audit_registry_consistency.py:29`, `verify_firewall.py:27`) with
