@@ -95,19 +95,28 @@ def qualified_decls(text: str) -> list:
     return out
 
 
-def parse_axioms(infos) -> set:
-    """Union the axiom sets reported by every `#print axioms` info line.
+def axioms_in_line(line) -> list | None:
+    """Axiom names in ONE `#print axioms` info line, in printed order, or None if the line
+    is not an axioms report. "does not depend on any axioms" → []; "depends on axioms:
+    [a, b, c]" → [a, b, c]. Used both for the aggregate audit and for attest's per-decl
+    attribution (it matches a specific declaration's line, then parses it here)."""
+    s = str(line)
+    if "does not depend on any axioms" in s:
+        return []
+    m = re.search(r"depends on axioms:\s*\[(.*?)\]", s)
+    if m:
+        return [a.strip() for a in m.group(1).split(",") if a.strip()]
+    return None
 
-    Lean prints either "'name' does not depend on any axioms" (→ empty) or
-    "'name' depends on axioms: [a, b, c]". A hole yields `sorryAx` in that list."""
+
+def parse_axioms(infos) -> set:
+    """Union the axiom sets reported by every `#print axioms` info line. A hole yields
+    `sorryAx` in the list."""
     used = set()
     for line in infos or []:
-        s = str(line)
-        if "does not depend on any axioms" in s:
-            continue
-        m = re.search(r"depends on axioms:\s*\[(.*?)\]", s)
-        if m:
-            used |= {a.strip() for a in m.group(1).split(",") if a.strip()}
+        got = axioms_in_line(line)
+        if got:
+            used |= set(got)
     return used
 
 

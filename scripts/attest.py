@@ -6,7 +6,7 @@ recording the independent verdict + axiom set per declaration (spec §2A / §5).
 
 Usage:
     python3 scripts/attest.py Brockian/GoldbachComb.lean Brockian.GoldbachComb \
-        gCount_eq gCount_centered local_covariance [--env lean-4.32.0]
+        gCount_eq gCount_centered local_covariance [--env lean-4.32.2]
 """
 from __future__ import annotations
 
@@ -18,8 +18,9 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 import axle_client  # noqa: E402
-
-ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from engine.verify import ALLOWED_AXIOMS as ALLOWED  # noqa: E402 — single-sourced axioms
+from engine.verify import DEFAULT_ENV, axioms_in_line  # noqa: E402
 
 
 def _attestation_stem(lean_path: str) -> str:
@@ -101,8 +102,8 @@ def attest(lean_path: str, namespace: str, names: list[str], env: str) -> dict:
         for i in infos:
             s = i if isinstance(i, str) else str(i)
             if needle in s and "axioms" in s:
-                m = re.search(r"\[([^\]]*)\]", s)
-                return [a.strip() for a in m.group(1).split(",")] if m else []
+                got = axioms_in_line(s)  # shared parser (engine.verify)
+                return got if got is not None else []
         return None
 
     decls = []
@@ -135,7 +136,7 @@ def main() -> int:
     ap.add_argument("lean_path")
     ap.add_argument("namespace")
     ap.add_argument("names", nargs="+")
-    ap.add_argument("--env", default="lean-4.32.0")
+    ap.add_argument("--env", default=DEFAULT_ENV)  # lean-4.32.2 (4.32.0 deprecated)
     args = ap.parse_args()
     att = attest(args.lean_path, args.namespace, args.names, args.env)
     out = os.path.join("registry", "attestations", _attestation_stem(args.lean_path) + ".json")

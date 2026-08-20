@@ -55,6 +55,14 @@ def test_parse_axioms_formats():
     assert verify.parse_axioms(["info: 'h' depends on axioms: [sorryAx]\n"]) == {"sorryAx"}
 
 
+def test_axioms_in_line_per_line_parser():
+    # attest.py's per-decl attribution relies on this: order-preserving list, or None
+    assert verify.axioms_in_line("info: 'a' does not depend on any axioms\n") == []
+    assert verify.axioms_in_line(
+        "info: 'b' depends on axioms: [propext, Quot.sound]\n") == ["propext", "Quot.sound"]
+    assert verify.axioms_in_line("some unrelated info line\n") is None
+
+
 # ---------------------------------------------------------- axiom_audit verdicts
 
 def _mock(monkeypatch, resp):
