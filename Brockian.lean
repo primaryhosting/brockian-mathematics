@@ -907,3 +907,5 @@ import Brockian.HighAssuranceKernel
 import Brockian.HighAssuranceScheduler
 import Brockian.HighAssuranceRevocation
 import Brockian.HighAssuranceSMTMirror
+import Brockian.HighAssuranceAvailability
+import Brockian.HighAssuranceRefinementChain

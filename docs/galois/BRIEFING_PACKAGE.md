@@ -29,6 +29,9 @@ We built the **verified security core of a capability microkernel** — the seL4
 - `Scheduler.{sched_safety, no_starvation, work_conserving}` — scheduler safety (only runnable threads run), round-robin fairness (no starvation within a cycle), work-conserving; blocked threads provably never dispatched.
 - `Revocation.{no_residual_authority, revoke_preserves_unrelated, revoke_monotone, revoke_idempotent}` — capability revocation reclaims all derived authority (complete), touches nothing unrelated (surgical), never grants (monotone), settles in one shot — the CDT modeled as a faithful forest.
 
+- `Availability.availability_guarantee` — **CIA triad complete**: reservation-based DoS-resistance; a subject's guaranteed quota cannot be exhausted by others.
+- `RefinementChain.{sim_compose, safety_transported_chain}` — refinement COMPOSES: safety rides a 3-level abstract⊒intermediate⊒concrete chain (seL4's abstract⊒executable⊒C architecture).
+
 **Crypto layer** — `Brockian.HighAssurance.*`
 - `MAC.{verify_sound, mac_determines_tag, no_forgery}` — structural guarantees unconditional; unforgeability from a named premise.
 - `AEAD.{aead_roundtrip, auth_required, tamper_rejected, replay_rejected}` — encrypt-then-MAC composition.
@@ -39,7 +42,7 @@ We built the **verified security core of a capability microkernel** — the seL4
 
 **Multi-prover mirror** — `Brockian.HighAssurance.SMTMirror.*` (3 theorems) cross-verified by Z3 and Lean/AXLE via `scripts/smt_gate.py`.
 
-Corpus at time of writing: **11,499 PROVED**, 33 CONDITIONAL, gate 4/4 (registry-consistency + overclaim-firewall + no-theater-lint + attestation-integrity).
+Corpus at time of writing: **11,516 PROVED** (CIA triad complete: integrity + confidentiality + availability), 33 CONDITIONAL, gate 4/4 (registry-consistency + overclaim-firewall + no-theater-lint + attestation-integrity).
 
 ## Multi-prover cross-verification (Phase-1, working)
 

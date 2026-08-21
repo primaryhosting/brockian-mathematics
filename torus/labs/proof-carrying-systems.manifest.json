@@ -50,6 +50,21 @@
       "visualRef": "revocation"
     },
     {
+      "claim": "Availability (CIA triad complete): a subject with headroom can always allocate up to its reserved quota, provably independent of every other subject's activity — no cross-subject denial of service.",
+      "theorem": "Brockian.HighAssurance.Availability.availability_guarantee",
+      "visualRef": "availability"
+    },
+    {
+      "claim": "Refinement composes: a safety property proved on the abstract spec is transported across a 3-level chain (abstract capability-set ⊒ intermediate log ⊒ concrete bitmap) to secure the implementation — the seL4 abstract⊒executable⊒C architecture, mechanized.",
+      "theorem": "Brockian.HighAssurance.RefinementChain.safety_transported_chain",
+      "visualRef": "refinement-chain"
+    },
+    {
+      "claim": "Multi-prover: three security properties (OTP involution, default-deny, unauthorized-write frame) are cross-verified by BOTH Z3 (SMT) and Lean/AXLE on identical statements — 'verified' is not one-prover-deep.",
+      "theorem": "Brockian.HighAssurance.SMTMirror.xor_otp_involution",
+      "visualRef": "multi-prover"
+    },
+    {
       "claim": "MAC: a message has a unique valid tag under a key, so verification accepts only the authentic tag (blind guessing is the only structure-respecting attack).",
       "theorem": "Brockian.HighAssurance.MAC.mac_determines_tag",
       "visualRef": "mac"
