@@ -1,5 +1,5 @@
 {
- "count": 151,
+ "count": 152,
  "queue": [
   {
    "target": "Zeta23Obstruction.repaired_witness_nonneg",
@@ -1207,6 +1207,13 @@
    "rank": 1,
    "difficulty": "MEDIUM",
    "goal": "Prove in Lean 4 (Mathlib, lean-4.32.2), axiom-clean (no sorry/admit/native_decide): for any additive commutative group G and any two functions c1 c2 : ZMod 5 -> G such that (Finset.sum Finset.univ c1) = (Finset.sum Finset.univ c2), there exists h : ZMod 5 -> G with the property that for every j : ZMod 5, c1 j - c2 j = h (j + 1) - h j. This is the completeness (converse) half of a discrete-cohomology no-go: equal total sum over the 5-cycle forces the difference to be a coboundary. Hint: set g j = c1 j - c2 j (so its sum is 0); define h by partial sums h(k) = sum of g over the representatives below k (h 0 = 0, h 1 = g 0, ..., h 4 = g 0 + g 1 + g 2 + g 3); the seam j = 4 (where j+1 = 0) closes because the total sum of g is zero. Use fin_cases on j and the zero-sum hypothesis for the seam case. State the theorem exactly as: theorem coboundary_of_sum_eq {G : Type*} [AddCommGroup G] (c1 c2 : ZMod 5 -> G) (hs : (Finset.univ.sum c1) = (Finset.univ.sum c2)) : exists h : ZMod 5 -> G, forall j, c1 j - c2 j = h (j + 1) - h j."
+  },
+  {
+   "target": "Brockian.Vaughan.vaughan_identity",
+   "tier": "B-brockian-frontier",
+   "rank": 1,
+   "difficulty": "MEDIUM",
+   "goal": "Prove in Lean 4 (Mathlib, lean-4.32.2), axiom-clean (no sorry/admit/native_decide): Vaughan's identity as a Dirichlet-convolution identity of arithmetic functions. Define truncLE U f and truncGT U f (an ArithmeticFunction \u211d equal to f on arguments <= U resp. > U, and 0 elsewhere). Prove, for all U V : \u2115, with `*` Dirichlet convolution, `\u03b6` the zeta arithmetic function (constant 1 on n>=1), `log` and `vonMangoldt` the standard ArithmeticFunction \u211d, and (moebius : ArithmeticFunction \u211d): (vonMangoldt : ArithmeticFunction \u211d) = truncLE V vonMangoldt + truncLE U moebius * log - truncLE U moebius * truncLE V vonMangoldt * \u03b6 + truncGT U moebius * truncGT V vonMangoldt * \u03b6. DERIVATION (pure convolution algebra, verified numerically): start from moebius_mul_log_eq_vonMangoldt (\u039b = \u03bc\u2217log). Split \u03bc = truncLE U \u03bc + truncGT U \u03bc, so \u039b = (truncLE U \u03bc)\u2217log + (truncGT U \u03bc)\u2217log. Use log = \u039b\u2217\u03b6 (from vonMangoldt_sum) to write (truncGT U \u03bc)\u2217log = (truncGT U \u03bc)\u2217\u03b6\u2217\u039b = (truncGT U \u03bc)\u2217\u03b6\u2217(truncLE V \u039b + truncGT V \u039b). Use \u03bc\u2217\u03b6 = 1 (the ring identity \u03b4; coe_moebius_mul_coe_zeta) with \u03bc = truncLE U \u03bc + truncGT U \u03bc to get (truncGT U \u03bc)\u2217\u03b6 = 1 - (truncLE U \u03bc)\u2217\u03b6. Substitute: (truncGT U \u03bc)\u2217\u03b6\u2217(truncLE V \u039b) = truncLE V \u039b - (truncLE U \u03bc)\u2217(truncLE V \u039b)\u2217\u03b6, and (truncGT U \u03bc)\u2217\u03b6\u2217(truncGT V \u039b) = (truncGT U \u03bc)\u2217(truncGT V \u039b)\u2217\u03b6. Collect. The ArithmeticFunction \u211d is a CommRing so associativity/commutativity of \u2217 is `ring`/`mul_comm`/`mul_assoc`. Also prove the helper truncLE_add_truncGT: truncLE U f + truncGT U f = f (ext + split on n \u2264 U)."
   }
  ]
 }
