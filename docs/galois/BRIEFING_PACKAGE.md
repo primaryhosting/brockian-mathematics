@@ -39,6 +39,10 @@ We built the **verified security core of a capability microkernel** — the seL4
 
 Corpus at time of writing: **11,450 PROVED**, 33 CONDITIONAL, gate 4/4 (registry-consistency + overclaim-firewall + no-theater-lint + attestation-integrity).
 
+## Multi-prover cross-verification (Phase-1, working)
+
+`scripts/smt_gate.py` proves three properties (bitvector OTP involution, boolean default-deny, array-theory write-frame) in **Z3** AND in **Lean/AXLE** on identical statements, requiring agreement. Output: **ALL CROSS-VERIFIED: True** (`docs/galois/smt_cross_verification.json`). This is the concrete answer to "your gate is Lean-only" and the seed of the multi-prover foundry — directly relevant to seL4's SMT-backed binary translation-validation leg.
+
 ## Suggested talking track (≈15 min)
 
 1. **Frame (2 min).** The scarce resource inverted: generating proofs is cheap; *verification and trust* are the moat. We're not here to re-prove seL4 (it's done, in Isabelle, ~20 person-years) — we're here to show a pipeline that verifies seL4-*class* properties with an independent gate and a trust discipline for AI-generated proof.

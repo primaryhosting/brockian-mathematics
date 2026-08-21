@@ -48,6 +48,12 @@ Each theorem separates what is proved *unconditionally on the model* from the on
 
 The honesty pattern across the crypto layer *is* the pitch to a high-assurance audience: every computational assumption is a named, visible hypothesis, and the structural guarantees around it are proved outright.
 
+## 2.6 Multi-prover cross-verification (Phase-1 preview — the answer to "Lean-only")
+
+`scripts/smt_gate.py` + `docs/galois/smt_cross_verification.json`: three security-relevant properties — a bitvector one-time-pad involution `(m⊕k)⊕k = m`, a boolean access-control default-deny law, and an array-theory unauthorized-write memory frame — are each discharged **independently by Z3 (SMT, v4.16.0)** *and* by **Lean 4/Mathlib (AXLE-verified)** on the identical statement (`Brockian.HighAssurance.SMTMirror.*`). The gate marks a property **CROSS-VERIFIED only when both verdicts agree**. Result: `ALL CROSS-VERIFIED: True`.
+
+This is a working proof-of-concept of the multi-prover gate (§7 Phase 1): the same class of obligation that seL4's binary translation-validation and Galois's SAW/Cryptol workflow discharge with SMT is here checked by an SMT solver *and* an interactive prover, with agreement required. "Verified" is not Lean-only.
+
 ## 3. The pipeline (how, and why it is trustworthy)
 
 ```

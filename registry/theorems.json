@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11495,
+    "PROVED": 11499,
     "DEFINITION": 650,
     "CONJECTURE": 40,
     "CONDITIONAL": 33,
@@ -114961,6 +114961,131 @@
       },
       "register": "PROVED",
       "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.SMTMirror.auth_write_updates",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.SMTMirror",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceSMTMirror.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.SMTMirror.default_deny_denies",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.SMTMirror",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceSMTMirror.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.SMTMirror.unauth_write_frame",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.SMTMirror",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceSMTMirror.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.SMTMirror.xor_otp_involution",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.SMTMirror",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceSMTMirror.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
         "propext"
       ],
       "flags": {
