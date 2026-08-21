@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 637
+- **DEFINITION**: 639
 - **DISCHARGED**: 7
-- **PROVED**: 11115
+- **PROVED**: 11120
 
 ## Theorems
 
@@ -1958,6 +1958,13 @@
 | PROVED | `Brockian.D5Representation.d5Pull_mem_constantLine` | ✓ | verified | lean-4.32.2 | 2026-08-01 — finite D5 permutation representation foothold |
 | PROVED | `Brockian.D5Representation.d5Pull_mem_zeroSumSubmodule` | ✓ | verified | lean-4.32.2 | 2026-08-01 — finite D5 permutation representation foothold |
 | DEFINITION | `Brockian.D5Representation.zeroSumSubmodule` | ✓ | verified | lean-4.32.2 | 2026-08-01 — finite D5 permutation representation foothold |
+| DEFINITION | `Brockian.DepthHolonomySeparation.K₁` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.DepthHolonomySeparation.K₁_holonomy_trivial` | ✓ | verified | lean-4.32.2 |  |
+| DEFINITION | `Brockian.DepthHolonomySeparation.K₂` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.DepthHolonomySeparation.K₂_holonomy_nontrivial` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.DepthHolonomySeparation.K₂_holonomy_order_two` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.DepthHolonomySeparation.depth_holonomy_separates` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.DepthHolonomySeparation.same_residue_weights` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.Dilworth.ChainColoring` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.Dilworth.card_le_card_of_cover` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.Dilworth.cross_comparable` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |

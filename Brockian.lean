@@ -848,3 +848,4 @@ import Brockian.QCRotations
 import Brockian.QCStabilizer
 import Brockian.QCThreeQubit
 import Brockian.QCTwoQubit
+import Brockian.DepthHolonomySeparation

@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11115,
-    "DEFINITION": 637,
+    "PROVED": 11120,
+    "DEFINITION": 639,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
     "DISCHARGED": 7
@@ -58721,6 +58721,229 @@
       "quarantine": true,
       "ledger_run": "2026-08-01 \u2014 finite D5 permutation representation foothold",
       "provenance_note": "VertexSpace = Fin 5 -> C; pullback action of Aut(C5)/D5 on vertex functions; constants fixed; coordinate sum invariant; zero-sum hyperplane invariant; constant vector is zero-sum iff c=0. First rung for character/isotypic-projector work, downstream of Aut(C5) ~= D5."
+    },
+    {
+      "name": "Brockian.DepthHolonomySeparation.K\u2081",
+      "kind": "def",
+      "module": "Brockian.DepthHolonomySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DepthHolonomySeparation.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.DepthHolonomySeparation.K\u2081_holonomy_trivial",
+      "kind": "theorem",
+      "module": "Brockian.DepthHolonomySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DepthHolonomySeparation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.DepthHolonomySeparation.K\u2082",
+      "kind": "def",
+      "module": "Brockian.DepthHolonomySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DepthHolonomySeparation.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.DepthHolonomySeparation.K\u2082_holonomy_nontrivial",
+      "kind": "theorem",
+      "module": "Brockian.DepthHolonomySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DepthHolonomySeparation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.DepthHolonomySeparation.K\u2082_holonomy_order_two",
+      "kind": "theorem",
+      "module": "Brockian.DepthHolonomySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DepthHolonomySeparation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.DepthHolonomySeparation.depth_holonomy_separates",
+      "kind": "theorem",
+      "module": "Brockian.DepthHolonomySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DepthHolonomySeparation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.DepthHolonomySeparation.same_residue_weights",
+      "kind": "theorem",
+      "module": "Brockian.DepthHolonomySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DepthHolonomySeparation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.Dilworth.ChainColoring",
