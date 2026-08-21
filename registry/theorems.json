@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11168,
+    "PROVED": 11179,
     "DEFINITION": 649,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -2578,6 +2578,303 @@
       "quarantine": true,
       "ledger_run": "paper-audit target \u2014 separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32",
       "provenance_note": "additiveAut(ZMod p)=(ZMod p)\u02e3\u2245C_{p-1} (order p-1, NOT D_p); graph Aut(C_p)\u2245D_p (order 2p); {i\u21a6\u00b1i+c} = dihedral subgroup order 2p of Aff(1,F_p). symmetry_separation (orders 4/10/10) proves additive-aut\u2260D\u2085 \u2014 retires the Papers 2&4 error with correct theorems."
+    },
+    {
+      "name": "Brockian.AlmostPerfect.almost_perfect_16",
+      "kind": "theorem",
+      "module": "Brockian.AlmostPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AlmostPerfect.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AlmostPerfect.almost_perfect_2",
+      "kind": "theorem",
+      "module": "Brockian.AlmostPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AlmostPerfect.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AlmostPerfect.almost_perfect_32",
+      "kind": "theorem",
+      "module": "Brockian.AlmostPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AlmostPerfect.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AlmostPerfect.almost_perfect_4",
+      "kind": "theorem",
+      "module": "Brockian.AlmostPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AlmostPerfect.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AlmostPerfect.almost_perfect_64",
+      "kind": "theorem",
+      "module": "Brockian.AlmostPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AlmostPerfect.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AlmostPerfect.almost_perfect_8",
+      "kind": "theorem",
+      "module": "Brockian.AlmostPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AlmostPerfect.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AlmostPerfect.almost_perfect_pow2_examples",
+      "kind": "theorem",
+      "module": "Brockian.AlmostPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AlmostPerfect.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AlmostPerfect.deficient_pow2_16",
+      "kind": "theorem",
+      "module": "Brockian.AlmostPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AlmostPerfect.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AlmostPerfect.not_almost_perfect_6",
+      "kind": "theorem",
+      "module": "Brockian.AlmostPerfect",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AlmostPerfect.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.AmicableNumbers.Amicable",
@@ -334027,6 +334324,68 @@
       "quarantine": true,
       "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
       "provenance_note": "HARMONIC-PROVED (Aristotle, project vandermonde), independently AXLE-verified @lean-4.32.0, axiom-clean. Classical identity, namespace Brockian.Vandermonde."
+    },
+    {
+      "name": "Brockian.VaughanSplit.truncLE_add_truncGT",
+      "kind": "theorem",
+      "module": "Brockian.VaughanSplit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/VaughanSplit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.VaughanSplit.vonMangoldt_eq_truncLE_mul_add_truncGT_mul",
+      "kind": "theorem",
+      "module": "Brockian.VaughanSplit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/VaughanSplit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.VonMangoldtPointwise.vonMangoldt_eq_sum_moebius_mul_log",

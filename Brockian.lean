@@ -862,3 +862,5 @@ import Brockian.ProductHolonomy
 import Brockian.HolonomyHomomorphism
 import Brockian.TruncatedConvolution
 import Brockian.HolonomyIsomorphism
+import Brockian.AlmostPerfect
+import Brockian.VaughanSplit
