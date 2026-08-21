@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11141,
-    "DEFINITION": 646,
+    "PROVED": 11145,
+    "DEFINITION": 647,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
     "DISCHARGED": 7
@@ -108447,6 +108447,167 @@
       "quarantine": true,
       "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
       "provenance_note": "HARMONIC-PROVED (Aristotle, project hockey-stick), independently AXLE-verified @lean-4.32.0, axiom-clean. Classical identity, namespace Brockian.HockeyStick."
+    },
+    {
+      "name": "Brockian.HolonomyFaithful.K",
+      "kind": "def",
+      "module": "Brockian.HolonomyFaithful",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HolonomyFaithful.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HolonomyFaithful.holonomy_after_loop",
+      "kind": "theorem",
+      "module": "Brockian.HolonomyFaithful",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HolonomyFaithful.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HolonomyFaithful.holonomy_faithful",
+      "kind": "theorem",
+      "module": "Brockian.HolonomyFaithful",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HolonomyFaithful.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HolonomyFaithful.holonomy_injective_via_loop",
+      "kind": "theorem",
+      "module": "Brockian.HolonomyFaithful",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HolonomyFaithful.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HolonomyFaithful.order_classifies",
+      "kind": "theorem",
+      "module": "Brockian.HolonomyFaithful",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HolonomyFaithful.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.HyperperfectNumbers.Hyperperfect",

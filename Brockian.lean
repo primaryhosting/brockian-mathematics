@@ -854,3 +854,4 @@ import Brockian.DepthHolonomyGeneral
 import Brockian.DepthHolonomyZMod4
 import Brockian.TwoSeamHolonomy
 import Brockian.NonabelianHolonomy
+import Brockian.HolonomyFaithful

@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 646
+- **DEFINITION**: 647
 - **DISCHARGED**: 7
-- **PROVED**: 11141
+- **PROVED**: 11145
 
 ## Theorems
 
@@ -3543,6 +3543,11 @@
 | PROVED | `Brockian.GraphComponentMatrix.shiftedAdjacency_eq_zero_of_components_ne` | ✓ | verified | lean-4.32.2 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
 | PROVED | `Brockian.GraphComponentMatrix.shiftedAdjacency_reindex_components` | ✓ | verified | lean-4.32.2 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
 | PROVED | `Brockian.HockeyStick.hockey_stick` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
+| DEFINITION | `Brockian.HolonomyFaithful.K` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyFaithful.holonomy_after_loop` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyFaithful.holonomy_faithful` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyFaithful.holonomy_injective_via_loop` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyFaithful.order_classifies` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.HyperperfectNumbers.Hyperperfect` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.HyperperfectNumbers.HyperperfectAllK` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.HyperperfectNumbers.HyperperfectInfinitude` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
