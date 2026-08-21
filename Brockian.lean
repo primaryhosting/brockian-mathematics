@@ -856,3 +856,4 @@ import Brockian.TwoSeamHolonomy
 import Brockian.NonabelianHolonomy
 import Brockian.HolonomyFaithful
 import Brockian.HolonomyConjugacy
+import Brockian.FareySeparation

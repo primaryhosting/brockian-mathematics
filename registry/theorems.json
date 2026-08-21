@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11151,
-    "DEFINITION": 648,
+    "PROVED": 11152,
+    "DEFINITION": 649,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
     "DISCHARGED": 7
@@ -64519,6 +64519,68 @@
       "quarantine": true,
       "ledger_run": "Aristotle 56bc9245; Codex AXLE audit @ lean-4.32.0",
       "provenance_note": "Archive-free Euclid-Euler classification for even perfect numbers and the unconditional corollary that every even perfect number is triangular. Exact target statement; all four declarations AXLE-verified and axiom-clean."
+    },
+    {
+      "name": "Brockian.FareySeparation.IsSeparated",
+      "kind": "def",
+      "module": "Brockian.FareySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FareySeparation.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.FareySeparation.farey_separated",
+      "kind": "theorem",
+      "module": "Brockian.FareySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FareySeparation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.FermatNumbers.FermatPrimeBeyondFour",

@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 648
+- **DEFINITION**: 649
 - **DISCHARGED**: 7
-- **PROVED**: 11151
+- **PROVED**: 11152
 
 ## Theorems
 
@@ -2142,6 +2142,8 @@
 | PROVED | `Brockian.EvenPerfectTriangular.eq_two_pow_mul_prime_mersenne_of_even_perfect` | ✓ | verified | lean-4.32.2 | Aristotle 56bc9245; Codex AXLE audit @ lean-4.32.0 |
 | PROVED | `Brockian.EvenPerfectTriangular.even_perfect_triangular` | ✓ | verified | lean-4.32.2 | Aristotle 56bc9245; Codex AXLE audit @ lean-4.32.0 |
 | PROVED | `Brockian.EvenPerfectTriangular.sigma_two_pow_eq_mersenne_succ` | ✓ | verified | lean-4.32.2 | Aristotle 56bc9245; Codex AXLE audit @ lean-4.32.0 |
+| DEFINITION | `Brockian.FareySeparation.IsSeparated` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.FareySeparation.farey_separated` | ✓ | verified | lean-4.32.2 |  |
 | CONJECTURE | `Brockian.FermatNumbers.FermatPrimeBeyondFour` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.FermatNumbers.fermat` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.FermatNumbers.fermat_0_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
