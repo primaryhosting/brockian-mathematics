@@ -1,0 +1,68 @@
+{
+  "labId": "proof-carrying-systems",
+  "title": "Proof-Carrying Systems — Verified High-Assurance Security Core",
+  "description": "AI-generated, independently AXLE-verified, axiom-clean proofs of seL4-class security properties (integrity, confidentiality, separation, capability confinement, refinement) plus a crypto-verification layer (MAC, AEAD, Merkle, constant-time) and the Proof-Carrying Apps software-security layer. Every claim binds to a formally verified theorem; each renders its own certificate. Prepared as the demonstrator for a Galois briefing.",
+  "registrySchema": "brockian-public-verified-registry/v1",
+  "claims": [
+    {
+      "claim": "Integrity (authority confinement): from a policy-conformant start, every reachable state's capabilities stay within policy — no operation manufactures unauthorized authority.",
+      "theorem": "Brockian.HighAssurance.CapabilityIntegrity.integrity_confinement",
+      "visualRef": "integrity"
+    },
+    {
+      "claim": "Take-grant confinement: reachable authority never exceeds the take-grant closure of the initial protection graph (the general form of kernel integrity).",
+      "theorem": "Brockian.HighAssurance.TakeGrant.authority_confined",
+      "visualRef": "take-grant"
+    },
+    {
+      "claim": "Confidentiality (noninterference) over an arbitrary security lattice: a domain's observation depends only on the domains cleared to influence it; secrets leak zero information downward.",
+      "theorem": "Brockian.HighAssurance.LatticeNoninterference.noninterference",
+      "visualRef": "noninterference"
+    },
+    {
+      "claim": "Memory separation: the contents of an address are unchanged unless an authorized write targets it; disjoint-authority subjects are mutually invisible.",
+      "theorem": "Brockian.HighAssurance.MemorySeparation.frame",
+      "visualRef": "mem-separation"
+    },
+    {
+      "claim": "IPC confinement: every message delivered to a subject is explained by an authorized send on an endpoint both parties hold capabilities for — no unmediated channel.",
+      "theorem": "Brockian.HighAssurance.IPCConfinement.ipc_confinement",
+      "visualRef": "ipc"
+    },
+    {
+      "claim": "Refinement: an abstract safety property is transported through a forward-simulation refinement to a structurally-different concrete layer — the seL4 methodology, mechanized.",
+      "theorem": "Brockian.HighAssurance.Refinement.safety_transported",
+      "visualRef": "refinement"
+    },
+    {
+      "claim": "MAC: a message has a unique valid tag under a key, so verification accepts only the authentic tag (blind guessing is the only structure-respecting attack).",
+      "theorem": "Brockian.HighAssurance.MAC.mac_determines_tag",
+      "visualRef": "mac"
+    },
+    {
+      "claim": "AEAD: a tampered ciphertext is rejected (decryption fails closed) whenever the MAC distinguishes it from the authentic one.",
+      "theorem": "Brockian.HighAssurance.AEAD.tamper_rejected",
+      "visualRef": "aead"
+    },
+    {
+      "claim": "Merkle tamper-evidence: altering a leaf value provably changes the computed root along the same proof path — you cannot swap committed data without breaking the proof.",
+      "theorem": "Brockian.HighAssurance.Merkle.tamper_detected",
+      "visualRef": "merkle"
+    },
+    {
+      "claim": "Constant-time: for data-oblivious programs the observable trace (branch outcomes + accessed addresses) is provably independent of secret inputs — no timing/cache side channel.",
+      "theorem": "Brockian.HighAssurance.ConstantTime.ct_trace_noninterference",
+      "visualRef": "const-time"
+    },
+    {
+      "claim": "Write integrity (Proof-Carrying Apps): a foreign-tenant write is prevented — the member check blocks cross-tenant mutation.",
+      "theorem": "PCA.WriteIntegrity.member_check_prevents_cross_tenant_write",
+      "visualRef": "pca-write"
+    },
+    {
+      "claim": "Certificate soundness (Proof-Carrying Apps): ed25519 verification is sound with respect to the signing equation.",
+      "theorem": "PCA.Cert.ed25519_verify_sound",
+      "visualRef": "pca-cert"
+    }
+  ]
+}
