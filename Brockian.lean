@@ -910,3 +910,4 @@ import Brockian.HighAssuranceSMTMirror
 import Brockian.HighAssuranceAvailability
 import Brockian.HighAssuranceRefinementChain
 import Brockian.HighAssuranceDeclassification
+import Brockian.HighAssuranceProgress

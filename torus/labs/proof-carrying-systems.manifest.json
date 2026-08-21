@@ -45,6 +45,11 @@
       "visualRef": "scheduler"
     },
     {
+      "claim": "Deadlock-freedom (liveness): a well-matched synchronous-IPC system never wedges — every rendezvous strictly reduces the blocked count, so the system provably drains to quiescence; a lone thread awaiting an external partner is honest waiting, not deadlock.",
+      "theorem": "Brockian.HighAssurance.Progress.no_deadlock",
+      "visualRef": "deadlock-freedom"
+    },
+    {
       "claim": "Capability revocation: revoking a capability reclaims all authority derived from it — after revoke, no live capability is a descendant in the derivation tree (complete), while unrelated capabilities are untouched (surgical).",
       "theorem": "Brockian.HighAssurance.Revocation.no_residual_authority",
       "visualRef": "revocation"

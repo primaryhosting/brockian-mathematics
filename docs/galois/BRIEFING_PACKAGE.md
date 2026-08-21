@@ -27,6 +27,7 @@ We built the **verified security core of a capability microkernel** — the seL4
 - `Refinement.{forward_simulation, safety_transported}` — the seL4 refinement methodology, mechanized.
 - **`Kernel.kernel_security`** — **the capstone**: a unified kernel state machine whose single guarded step relation covers grant/write/send, with one composite invariant (integrity ∧ memory separation ∧ IPC confinement) proved preserved across *all* reachable states. Non-vacuous: a concrete run reaches a secure state, and a specific off-policy configuration is proved categorically unreachable.
 - `Scheduler.{sched_safety, no_starvation, work_conserving}` — scheduler safety (only runnable threads run), round-robin fairness (no starvation within a cycle), work-conserving; blocked threads provably never dispatched.
+- `Progress.{rendezvous_progress, no_deadlock, drains_to_quiescent}` — **liveness / deadlock-freedom**: a well-matched IPC system provably drains to quiescence (progress is a strictly-decreasing measure); honest line between deadlock and legitimate waiting. **Safety AND liveness both covered.**
 - `Revocation.{no_residual_authority, revoke_preserves_unrelated, revoke_monotone, revoke_idempotent}` — capability revocation reclaims all derived authority (complete), touches nothing unrelated (surgical), never grants (monotone), settles in one shot — the CDT modeled as a faithful forest.
 
 - `Availability.availability_guarantee` — **CIA triad complete**: reservation-based DoS-resistance; a subject's guaranteed quota cannot be exhausted by others.
@@ -43,7 +44,7 @@ We built the **verified security core of a capability microkernel** — the seL4
 
 **Multi-prover mirror** — `Brockian.HighAssurance.SMTMirror.*` (3 theorems) cross-verified by Z3 and Lean/AXLE via `scripts/smt_gate.py`.
 
-Corpus at time of writing: **11,525 PROVED** (CIA triad complete: integrity + confidentiality + availability), 33 CONDITIONAL, gate 4/4 (registry-consistency + overclaim-firewall + no-theater-lint + attestation-integrity).
+Corpus at time of writing: **11,544 PROVED** — full CIA triad, safety + liveness, single + composed refinement, crypto, multi-prover, controlled declassification (CIA triad complete: integrity + confidentiality + availability), 33 CONDITIONAL, gate 4/4 (registry-consistency + overclaim-firewall + no-theater-lint + attestation-integrity).
 
 ## Multi-prover cross-verification (Phase-1, working)
 
