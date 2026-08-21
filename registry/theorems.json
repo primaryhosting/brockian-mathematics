@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11152,
+    "PROVED": 11161,
     "DEFINITION": 649,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -108895,6 +108895,138 @@
       "provenance_note": null
     },
     {
+      "name": "Brockian.HolonomyHomomorphism.loop_hom_bundle",
+      "kind": "theorem",
+      "module": "Brockian.HolonomyHomomorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HolonomyHomomorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HolonomyHomomorphism.loop_homomorphism",
+      "kind": "theorem",
+      "module": "Brockian.HolonomyHomomorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HolonomyHomomorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HolonomyHomomorphism.loop_identity",
+      "kind": "theorem",
+      "module": "Brockian.HolonomyHomomorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HolonomyHomomorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HolonomyHomomorphism.loop_translates",
+      "kind": "theorem",
+      "module": "Brockian.HolonomyHomomorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HolonomyHomomorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.HyperperfectNumbers.Hyperperfect",
       "kind": "def",
       "module": "Brockian.HyperperfectNumbers",
@@ -128822,6 +128954,138 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY practical numbers (open-territory loop, AXLE @4.32, axiom-clean). Practical n := every m<=n is a subset-sum of the divisors of n. FLAGSHIP GENERAL THEOREM practical_pow_two: EVERY power of 2 is practical -- real induction on k (binary representation), not a table lookup. CONCRETE: practical_{6,12,20,28}; non-example not_practical_10. PracticalTwinInfinitude (Margenstern-type: infinitely many p with p,p+2 both practical) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.ProductHolonomy.holonomy_after_loop",
+      "kind": "theorem",
+      "module": "Brockian.ProductHolonomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ProductHolonomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ProductHolonomy.order_is_lcm",
+      "kind": "theorem",
+      "module": "Brockian.ProductHolonomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ProductHolonomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ProductHolonomy.product_holonomy_separates",
+      "kind": "theorem",
+      "module": "Brockian.ProductHolonomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ProductHolonomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ProductHolonomy.residue_marginal_indep",
+      "kind": "theorem",
+      "module": "Brockian.ProductHolonomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ProductHolonomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.PseudoprimesBaseTwo.A",
@@ -333532,6 +333796,35 @@
       "quarantine": true,
       "ledger_run": "Harmonic/Aristotle; AXLE @4.32",
       "provenance_note": "HARMONIC-PROVED (Aristotle, project vandermonde), independently AXLE-verified @lean-4.32.0, axiom-clean. Classical identity, namespace Brockian.Vandermonde."
+    },
+    {
+      "name": "Brockian.VonMangoldtPointwise.vonMangoldt_eq_sum_moebius_mul_log",
+      "kind": "theorem",
+      "module": "Brockian.VonMangoldtPointwise",
+      "statement": "",
+      "source": {
+        "file": "Brockian/VonMangoldtPointwise.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.WeirdNumbers.Abundant",

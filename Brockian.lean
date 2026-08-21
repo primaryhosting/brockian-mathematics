@@ -857,3 +857,6 @@ import Brockian.NonabelianHolonomy
 import Brockian.HolonomyFaithful
 import Brockian.HolonomyConjugacy
 import Brockian.FareySeparation
+import Brockian.VonMangoldtPointwise
+import Brockian.ProductHolonomy
+import Brockian.HolonomyHomomorphism
