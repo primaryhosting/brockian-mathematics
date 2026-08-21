@@ -899,3 +899,7 @@ import Brockian.HighAssuranceTakeGrant
 import Brockian.HighAssuranceIPCConfinement
 import Brockian.HighAssuranceLatticeNoninterference
 import Brockian.HighAssuranceMemorySeparation
+import Brockian.HighAssuranceMAC
+import Brockian.HighAssuranceConstantTime
+import Brockian.HighAssuranceAEAD
+import Brockian.HighAssuranceMerkle

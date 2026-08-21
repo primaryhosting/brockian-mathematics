@@ -39,8 +39,14 @@ Seven modules, 20+ verified theorems (namespaces `PCA`, `PCA.Isolation`, `PCA.Wr
 
 Together these five plus §2.1–2.2 are the verified security core of a capability microkernel: **integrity, confidentiality (2-domain and full-lattice), spatial separation, communication confinement, and refinement** — the crown-jewel property classes of the seL4 proof, mechanized and independently gated.
 
-### 2.5 Crypto layer
-<!-- SECTION-CRYPTO: MAC, Merkle tamper-evidence, AEAD, constant-time — appended as wave 2 lands. -->
+### 2.5 Crypto layer (wave 2 — Cryptol/SAW idiom, honest about assumptions)
+Each theorem separates what is proved *unconditionally on the model* from the one genuinely *computational* assumption, which is always named explicitly (never smuggled in as proved).
+- **MAC** — `Brockian.HighAssurance.MAC.{verify_correct, verify_sound, mac_determines_tag, cross_key_rejects, no_forgery}`: correctness, soundness (verify accepts *only* the true tag), unique-tag, and cross-key rejection are unconditional; computational unforgeability is derived from an explicit hardness premise `hHard`. The reduction "forgery ⇒ computing the tag" is itself the unconditional `forged_reveals_tag`.
+- **AEAD** (encrypt-then-MAC) — `Brockian.HighAssurance.AEAD.{aead_roundtrip, auth_required, tamper_rejected, replay_rejected}`: roundtrip correctness and fail-closed authentication are unconditional; tamper/replay rejection is gated on MAC collision-freedom. A concrete XOR construction *provably satisfies* that assumption (`cMac_inj2`), so the hypotheses are demonstrably non-vacuous.
+- **Merkle tamper-evidence** — `Brockian.HighAssurance.Merkle.{inclusion_complete, tamper_detected, root_binding, inclusion_sound}`: completeness is assumption-free; tamper-evidence and root-binding need *no axioms*; full soundness holds under honestly-stated hash-injectivity + domain-separation (the agent flagged the domain-separation requirement rather than hide it — without it soundness is genuinely false).
+- **Constant-time / side-channel** — `Brockian.HighAssurance.ConstantTime.{ct_trace_noninterference, leaky_program_leaks}`: for data-oblivious programs the observable trace (branch outcomes + accessed addresses = the timing/cache leakage model) is provably independent of secrets; a `branchOnSecret` counterexample proves the restriction has teeth; `condMove` preserves functional correctness while leaking nothing.
+
+The honesty pattern across the crypto layer *is* the pitch to a high-assurance audience: every computational assumption is a named, visible hypothesis, and the structural guarantees around it are proved outright.
 
 ## 3. The pipeline (how, and why it is trustworthy)
 
