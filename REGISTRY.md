@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 639
+- **DEFINITION**: 642
 - **DISCHARGED**: 7
-- **PROVED**: 11120
+- **PROVED**: 11123
 
 ## Theorems
 
@@ -4087,6 +4087,12 @@
 | PROVED | `Brockian.PerfectTotient.pt_81` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.PerfectTotient.pt_9` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.PerfectTotient.totientSumAux` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.PhaseDepthNoGo.Cohomologous` | ✓ | verified | lean-4.32.2 |  |
+| DEFINITION | `Brockian.PhaseDepthNoGo.coboundary` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNoGo.sum_coboundary` | ✓ | verified | lean-4.32.2 |  |
+| DEFINITION | `Brockian.PhaseDepthNoGo.totalDepth` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNoGo.totalDepth_const` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNoGo.totalDepth_eq_of_cohomologous` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.PhaseDepthTorus.PhaseDepth` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
 | DEFINITION | `Brockian.PhaseDepthTorus.TwinAdmissibleAt` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
 | PROVED | `Brockian.PhaseDepthTorus.compatible_closure` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
