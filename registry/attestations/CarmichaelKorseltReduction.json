@@ -1,0 +1,43 @@
+{
+  "module": "Brockian.CarmichaelKorseltReduction",
+  "environment": "lean-4.32.2",
+  "module_verified": true,
+  "declarations": [
+    {
+      "name": "Brockian.CarmichaelKorseltReduction.pow_modEq_self_of_sub_one_dvd",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CarmichaelKorseltReduction.isCarmichael_of_korselt",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CarmichaelKorseltReduction.isCarmichael_chernick",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CarmichaelKorseltReduction.ThreePrimeCarmichaelInfinitude",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    }
+  ]
+}

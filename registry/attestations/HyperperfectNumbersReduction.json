@@ -1,0 +1,39 @@
+{
+  "module": "Brockian.HyperperfectNumbersReduction",
+  "environment": "lean-4.32.2",
+  "module_verified": true,
+  "declarations": [
+    {
+      "name": "Brockian.HyperperfectNumbersReduction.sigma_one_mul_of_primes",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.HyperperfectNumbersReduction.isHyperperfect_mul_of_prime",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.HyperperfectNumbersReduction.le_mul_of_prime",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.HyperperfectNumbersReduction.HyperperfectInfinitude",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    }
+  ]
+}

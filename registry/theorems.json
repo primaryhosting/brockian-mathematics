@@ -1,10 +1,10 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11254,
+    "PROVED": 11325,
     "DEFINITION": 649,
     "CONJECTURE": 40,
-    "CONDITIONAL": 20,
+    "CONDITIONAL": 33,
     "DISCHARGED": 7
   },
   "theorems": [
@@ -4703,6 +4703,171 @@
       "provenance_note": "OPEN-TERRITORY Brocard's CONJECTURE -- >=4 primes between consecutive prime squares (open-territory loop, AXLE @4.32, axiom-clean). DISTINCT from Brocard's PROBLEM n!+1=m^2 (separate module BrocardProblem). FourPrimesBetweenSquares p q exhibits 4 increasing primes in (p^2, q^2). CONCRETE: brocard_{3_5,5_7,7_11,11_13,13_17}, e.g. between 9 and 25: 11,13,17,19. BrocardGapConjecture (>=4 primes between consecutive prime squares, p>=3) is an unproven def -- OPEN, never asserted."
     },
     {
+      "name": "Brockian.BrocardGapReduction.BrocardGapConjecture",
+      "kind": "theorem",
+      "module": "Brockian.BrocardGapReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardGapReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": "open",
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": "At least four primes between consecutive prime squares GIVEN Oppermann's conjecture. Oppermann is open."
+    },
+    {
+      "name": "Brockian.BrocardGapReduction.four_primes_of_oppermann",
+      "kind": "theorem",
+      "module": "Brockian.BrocardGapReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardGapReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.BrocardGapReduction.nth_prime_one",
+      "kind": "theorem",
+      "module": "Brockian.BrocardGapReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardGapReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.BrocardGapReduction.succ_nth_prime_ge",
+      "kind": "theorem",
+      "module": "Brockian.BrocardGapReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardGapReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.BrocardGapReduction.three_le_nth_prime",
+      "kind": "theorem",
+      "module": "Brockian.BrocardGapReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardGapReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.BrocardProblem.BrocardConjecture",
       "kind": "conjecture",
       "module": "Brockian.BrocardProblem",
@@ -4982,6 +5147,204 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY Brocard's problem / Brown numbers (open-territory loop, AXLE @4.32, axiom-clean). BrownPair n m := n!+1=m^2. CONCRETE: the three known Brown pairs brown_4_5, brown_5_11, brown_7_71 (only three known in centuries). Structural: brown_m_odd (m odd for n>=2), brown_factorization (n! = (m-1)(m+1)). Search-narrowing: no_brown_8_9_10 (no solutions for n=8,9,10, via consecutive-square gaps). Brocard's conjecture (only n in {4,5,7}) is an unproven def BrocardConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.BrocardProblemReduction.BrocardConjecture",
+      "kind": "theorem",
+      "module": "Brockian.BrocardProblemReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardProblemReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": "open",
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": "Brocard finiteness (finitely many n with n!+1 a perfect square) GIVEN the ABC conjecture (Overholt reduction via the radical bound); the n<=7 determination is unconditional. ABC is a genuine open external hypothesis."
+    },
+    {
+      "name": "Brockian.BrocardProblemReduction.brocard_le_seven",
+      "kind": "theorem",
+      "module": "Brockian.BrocardProblemReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardProblemReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.BrocardProblemReduction.factorial_le_of_abc",
+      "kind": "theorem",
+      "module": "Brockian.BrocardProblemReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardProblemReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.BrocardProblemReduction.finite_of_factorial_le",
+      "kind": "theorem",
+      "module": "Brockian.BrocardProblemReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardProblemReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.BrocardProblemReduction.radical_brocard_le",
+      "kind": "theorem",
+      "module": "Brockian.BrocardProblemReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardProblemReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.BrocardProblemReduction.radical_factorial_le",
+      "kind": "theorem",
+      "module": "Brockian.BrocardProblemReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/BrocardProblemReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
     },
     {
       "name": "Brockian.C5SpectralMultiplicities.c5DistinctEigs",
@@ -6613,6 +6976,130 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY Carmichael numbers via Korselt's criterion (open-territory loop, AXLE @4.32, axiom-clean). Korselt n = composite squarefree n with (p-1)|(n-1) for every prime p|n (equivalent to being a Carmichael number). CONCRETE verified: korselt_561 (3*11*17, flagship), korselt_1105 (5*13*17), korselt_1729 (7*13*19, the taxicab number). Structural: korselt_odd (every Carmichael number is odd). HONESTY: general Carmichael infinitude is a THEOREM (Alford-Granville-Pomerance 1994), NOT recorded as open; only the genuinely-open THREE-prime-factor refinement is an unproven def ThreePrimeCarmichaelInfinitude. Mathlib has no Korselt/Carmichael-number predicate (its ArithmeticFunction.carmichael is the reduced-totient function), so Korselt is developed from scratch."
+    },
+    {
+      "name": "Brockian.CarmichaelKorseltReduction.ThreePrimeCarmichaelInfinitude",
+      "kind": "theorem",
+      "module": "Brockian.CarmichaelKorseltReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CarmichaelKorseltReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": "open",
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": "Infinitely many three-prime Carmichael numbers GIVEN the Chernick/Dickson triple hypothesis (6k+1,12k+1,18k+1 simultaneously prime infinitely often), via Korselt's criterion (proved). The triple hypothesis is open."
+    },
+    {
+      "name": "Brockian.CarmichaelKorseltReduction.isCarmichael_chernick",
+      "kind": "theorem",
+      "module": "Brockian.CarmichaelKorseltReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CarmichaelKorseltReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CarmichaelKorseltReduction.isCarmichael_of_korselt",
+      "kind": "theorem",
+      "module": "Brockian.CarmichaelKorseltReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CarmichaelKorseltReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CarmichaelKorseltReduction.pow_modEq_self_of_sub_one_dvd",
+      "kind": "theorem",
+      "module": "Brockian.CarmichaelKorseltReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CarmichaelKorseltReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
     },
     {
       "name": "Brockian.Cassini.cassini",
@@ -64998,6 +65485,336 @@
       "provenance_note": "OPEN-TERRITORY partial results toward the Erdos-Straus conjecture (open since 1948; 4/n = 1/x+1/y+1/z in positive integers). Swarm-built, AXLE @4.32, axiom-clean. UNCONDITIONALLY PROVED: the even case, the divisible-by-3 case, the multiplicativity reduction erdosStraus_of_dvd (inherited by multiples), erdosStraus_of_prime_case (the whole conjecture REDUCES TO PRIMES), and residue classes n=3 mod 4 and n=2 mod 3, via explicit verified Egyptian-fraction identities. The full conjecture ErdosStrausConjecture is a DEFINITION (unproven statement), NOT a theorem -- deliberately. Open frontier: primes in the hard residues p = 1,121,169,289,361,529 mod 840. This is an honest formalized contribution to an open problem, resolving all but a density-zero set of n; it does NOT claim to solve the conjecture."
     },
     {
+      "name": "Brockian.ErdosStrausReduction.ErdosStrausConjecture",
+      "kind": "theorem",
+      "module": "Brockian.ErdosStrausReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ErdosStrausReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": "open",
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": "Erdos-Straus EQUIVALENCE: the full conjecture iff solvability for primes p = 1 mod 24 (all other residues solved unconditionally in-module). The iff is proved; the hard residue class is open."
+    },
+    {
+      "name": "Brockian.ErdosStrausReduction.solvable_of_dvd",
+      "kind": "theorem",
+      "module": "Brockian.ErdosStrausReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ErdosStrausReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ErdosStrausReduction.solvable_of_even",
+      "kind": "theorem",
+      "module": "Brockian.ErdosStrausReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ErdosStrausReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ErdosStrausReduction.solvable_of_mod_24_ne_one",
+      "kind": "theorem",
+      "module": "Brockian.ErdosStrausReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ErdosStrausReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ErdosStrausReduction.solvable_of_mod_eight_eq_five",
+      "kind": "theorem",
+      "module": "Brockian.ErdosStrausReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ErdosStrausReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ErdosStrausReduction.solvable_of_mod_four_eq_three",
+      "kind": "theorem",
+      "module": "Brockian.ErdosStrausReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ErdosStrausReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ErdosStrausReduction.solvable_of_mod_three_eq_two",
+      "kind": "theorem",
+      "module": "Brockian.ErdosStrausReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ErdosStrausReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ErdosStrausReduction.solvable_of_three_dvd",
+      "kind": "theorem",
+      "module": "Brockian.ErdosStrausReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ErdosStrausReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ErdosStrausReduction.solvable_three",
+      "kind": "theorem",
+      "module": "Brockian.ErdosStrausReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ErdosStrausReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ErdosStrausReduction.solvable_two",
+      "kind": "theorem",
+      "module": "Brockian.ErdosStrausReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ErdosStrausReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.ErdosStrausResidues.erdosStraus_covered",
       "kind": "theorem",
       "module": "Brockian.ErdosStrausResidues",
@@ -66606,6 +67423,203 @@
       "provenance_note": "OPEN-TERRITORY Fermat numbers F_n = 2^(2^n)+1 (open-territory loop, AXLE @4.32, axiom-clean). CONCRETE PRIMES: the five known Fermat primes fermat_{0..4}_prime (3,5,17,257,65537). CONCRETE COMPOSITES: fermat_5_eq/not_prime (Euler's 641*6700417) and fermat_6_eq/not_prime (274177*67280421310721). STRUCTURAL THEOREM fermat_coprime: Fermat numbers are pairwise coprime (Goldbach; derived from Mathlib's Nat.coprime_fermatNumber_fermatNumber), which yields infinitude of primes. Reuses Mathlib's Nat.fermatNumber API (fermat_eq_fermatNumber by rfl). The OPEN question -- is any F_n prime for n>=5? -- is an unproven def FermatPrimeBeyondFour; conjectured none, never asserted or refuted."
     },
     {
+      "name": "Brockian.FermatNumbersReduction.FermatPrimeBeyondFour",
+      "kind": "theorem",
+      "module": "Brockian.FermatNumbersReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FermatNumbersReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": "open",
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": "Fermat-prime-beyond-4 EQUIVALENCE via Pepin's test. The iff is proved unconditionally; both sides remain open."
+    },
+    {
+      "name": "Brockian.FermatNumbersReduction.fermatNumber_mod_four",
+      "kind": "theorem",
+      "module": "Brockian.FermatNumbersReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FermatNumbersReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.FermatNumbersReduction.fermatNumber_mod_three",
+      "kind": "theorem",
+      "module": "Brockian.FermatNumbersReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FermatNumbersReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.FermatNumbersReduction.pepin_at_four",
+      "kind": "theorem",
+      "module": "Brockian.FermatNumbersReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FermatNumbersReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.FermatNumbersReduction.pepin_converse",
+      "kind": "theorem",
+      "module": "Brockian.FermatNumbersReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FermatNumbersReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.FermatNumbersReduction.pepin_iff",
+      "kind": "theorem",
+      "module": "Brockian.FermatNumbersReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FermatNumbersReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.FibGcd.fib_gcd",
       "kind": "theorem",
       "module": "Brockian.FibGcd",
@@ -67767,6 +68781,101 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.FortunateNumbersReduction.FortuneConjecture",
+      "kind": "theorem",
+      "module": "Brockian.FortunateNumbersReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbersReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": "open",
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": "Every fortunate number is prime GIVEN the gap bound m <= n^2. The gap bound is the open input; existence of fortunate numbers is unconditional."
+    },
+    {
+      "name": "Brockian.FortunateNumbersReduction.not_dvd_of_prime_le",
+      "kind": "theorem",
+      "module": "Brockian.FortunateNumbersReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbersReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.FortunateNumbersReduction.prime_of_prime_primorial_add_of_le_sq",
+      "kind": "theorem",
+      "module": "Brockian.FortunateNumbersReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbersReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
     },
     {
       "name": "Brockian.FranklinFixedPoint.downMs_upPart",
@@ -73488,6 +74597,105 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY Gilbreath's conjecture (open-territory loop, AXLE @4.32, axiom-clean; proofs are pure kernel rfl -> empty axiom set). adjDiff = adjacent Nat.dist; gilbreathRow start k = adjDiff iterated k times; primes25 = first 25 primes. CONCRETE: gilbreath_row{1..10}_head prove (gilbreathRow primes25 k).headI = 1 for k=1..10 -- the leading 1 in every difference-triangle row over the first 25 primes; bonus gilbreath_row1_eq gives the exact first difference row. GilbreathConjecture (every row head is 1 over every finite prime segment) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.GilbreathConjectureReduction.GilbreathConjecture",
+      "kind": "theorem",
+      "module": "Brockian.GilbreathConjectureReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjectureReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": "open",
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": "Gilbreath's conjecture GIVEN Odlyzko's clean-window hypothesis; clean-window propagation proved. Odlyzko hypothesis is open."
+    },
+    {
+      "name": "Brockian.GilbreathConjectureReduction.cleanWindow_succ",
+      "kind": "theorem",
+      "module": "Brockian.GilbreathConjectureReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjectureReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.GilbreathConjectureReduction.head_of_cleanWindow",
+      "kind": "theorem",
+      "module": "Brockian.GilbreathConjectureReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GilbreathConjectureReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
     },
     {
       "name": "Brockian.GiugaNumbers.GiugaNumber",
@@ -111729,6 +112937,126 @@
       "provenance_note": "OPEN-TERRITORY hyperperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Hyperperfect k n := k*sigma(n) = (k+1)*n + (k-1); k=1 recovers perfect numbers. CONCRETE: hyperperfect_1_{6,28} (perfect), hyperperfect_2_{21,2133}, hyperperfect_6_301. FLAGSHIP hyperperfect_one_iff_sigma_two_mul: 1-hyperperfect <=> sigma(n)=2n (perfect) -- hyperperfect generalizes perfect. Non-example not_hyperperfect_2_6. HyperperfectAllK (k-hyperperfect exists for every k) and HyperperfectInfinitude are unproven defs -- OPEN, never asserted."
     },
     {
+      "name": "Brockian.HyperperfectNumbersReduction.HyperperfectInfinitude",
+      "kind": "theorem",
+      "module": "Brockian.HyperperfectNumbersReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HyperperfectNumbersReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": "open",
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": "Infinitely many hyperperfect numbers GIVEN infinitude of primes p with p^2-p+1 prime (Minoli-Bear construction p*(p^2-p+1)). The prime-family infinitude is open."
+    },
+    {
+      "name": "Brockian.HyperperfectNumbersReduction.isHyperperfect_mul_of_prime",
+      "kind": "theorem",
+      "module": "Brockian.HyperperfectNumbersReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HyperperfectNumbersReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HyperperfectNumbersReduction.le_mul_of_prime",
+      "kind": "theorem",
+      "module": "Brockian.HyperperfectNumbersReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HyperperfectNumbersReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HyperperfectNumbersReduction.sigma_one_mul_of_primes",
+      "kind": "theorem",
+      "module": "Brockian.HyperperfectNumbersReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HyperperfectNumbersReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.KorseltCarmichael.korselt_carmichael",
       "kind": "theorem",
       "module": "Brockian.KorseltCarmichael",
@@ -112309,6 +113637,184 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOneReduction.LandauFourthConjecture",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOneReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOneReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": "open",
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": "Landau's fourth problem (infinitely many n with n^2+1 prime) GIVEN Bunyakovsky's conjecture, instantiated at X^2+1 (irreducibility and no-fixed-prime-divisor proved). Bunyakovsky is open."
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOneReduction.eval_X_sq_add_one",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOneReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOneReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOneReduction.irreducible_X_sq_add_one",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOneReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOneReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOneReduction.leadingCoeff_X_sq_add_one",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOneReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOneReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOneReduction.natDegree_X_sq_add_one",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOneReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOneReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOneReduction.no_fixed_prime_divisor",
+      "kind": "theorem",
+      "module": "Brockian.LandauNSquaredPlusOneReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauNSquaredPlusOneReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
     },
     {
       "name": "Brockian.LegendreConjecture.LegendreConjecture",
@@ -114235,6 +115741,632 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY even perfect numbers <-> Mersenne primes (open-territory loop, AXLE @4.32, axiom-clean). CONCRETE: perfect_6, perfect_28, perfect_496, perfect_8128 (even perfect numbers) and mersenne_{2,3,5,7}_prime (the Mersenne primes 3,7,31,127). The Euclid-Euler correspondence lemmas live only in Mathlib's Archive (not import Mathlib), so BOTH directions were RE-PROVED from main-library API inside this module. STRETCH proved: infinitude_equiv (MersennePrimeInfinitude <-> EvenPerfectInfinitude). HONESTY: Euclid-Euler is a THEOREM (here reproved), NOT open; the two infinitude defs (MersennePrimeInfinitude, EvenPerfectInfinitude) are UNPROVEN -- infinitely many Mersenne primes / even perfect numbers is one of the oldest open problems, never asserted, only their equivalence is proved."
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.EvenPerfectInfinitude",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": "open",
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": "Euclid-Euler EQUIVALENCE: even-perfect infinitude iff Mersenne-exponent infinitude. The iff is proved unconditionally; registered CONDITIONAL because neither open side is resolved - an equivalence, not a resolution."
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.MersennePrimeInfinitude",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": "open",
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": "Euclid-Euler EQUIVALENCE: Mersenne-prime infinitude iff even-perfect infinitude. The iff is proved unconditionally; both sides remain open."
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.eq_two_pow_mul_odd",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.eq_two_pow_mul_prime_mersenne_of_even_perfect",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.euclidMap_injective",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.euclidMap_strictMono",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.euclidPerfect_injOn",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.euclidPerfect_mem_evenPerfects",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.euclidPerfect_strictMonoOn",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.evenPerfect_infinite_of_mersenne_infinite",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.evenPerfects_eq_image",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.evenPerfects_subset_image",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.even_and_perfect_iff",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.even_two_pow_mul_mersenne_of_prime",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.mersenne_infinite_of_evenPerfect_infinite",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.mersenne_succ_pos",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.ne_zero_of_prime_mersenne",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.perfect_two_pow_mul_mersenne_of_prime",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.sigma_two_pow_eq_mersenne_succ",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.MersennePerfectReduction.six_mem_evenPerfects",
+      "kind": "theorem",
+      "module": "Brockian.MersennePerfectReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MersennePerfectReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
     },
     {
       "name": "Brockian.MetallicFamily.H3_ground_metallic",
@@ -131251,6 +133383,270 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY de Polignac's conjecture -- cousin (gap 4) and sexy (gap 6) primes (open-territory loop, AXLE @4.32, axiom-clean). PrimeGapPair k p := p.Prime and (p+k).Prime. CONCRETE: eight cousin pairs cousin_{3,7,13,19,37,43,67,79} and eight sexy pairs sexy_{5,7,11,13,17,23,31,47}. STRUCTURAL cousin_mod_six: a cousin prime p>3 satisfies p=1 mod 6 (p=5 mod 6 would give 3|p+4); corollary cousin_form_6k (6k+1,6k+5); sexy_same_mod_six (p,p+6 share residue in {1,5}). Generalizes twin primes (gap 2) under one predicate. de Polignac's conjecture (every even gap infinitely often) is an unproven def PolignacConjecture -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PolignacPrimesReduction.PolignacConjecture",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimesReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": "open",
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": "Polignac (infinitely many consecutive-prime gaps equal to n, for even n>0) GIVEN a Dickson-pair hypothesis. Genuine open external input."
+    },
+    {
+      "name": "Brockian.PolignacPrimesReduction.admissible",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimesReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PolignacPrimesReduction.bigPrime_dvd_modulus",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimesReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PolignacPrimesReduction.bigPrime_dvd_shift_add",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimesReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PolignacPrimesReduction.bigPrime_inj",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimesReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PolignacPrimesReduction.bigPrime_prime",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimesReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PolignacPrimesReduction.lt_bigPrime",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimesReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PolignacPrimesReduction.modulus_pos",
+      "kind": "theorem",
+      "module": "Brockian.PolignacPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PolignacPrimesReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
     },
     {
       "name": "Brockian.PracticalNumbers.Practical",
@@ -335871,6 +338267,299 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY twin primes (open-territory loop, AXLE @4.32, axiom-clean). TwinPrime p := p.Prime and (p+2).Prime. CONCRETE: eight twin pairs twin_{3,5,11,17,29,41,59,71}. FLAGSHIP STRUCTURAL twin_middle_div_six: the middle of any twin pair p>=5 is divisible by 6 (p odd => 2|p+1; among p,p+1,p+2 exactly one is div by 3, and p,p+2 prime>=5 aren't, so 3|p+1). Corollary twin_form_6k: the pair is (6k-1, 6k+1). The twin prime conjecture (infinitely many) is an unproven def TwinPrimeConjecture -- OPEN, one of the most famous open problems; never asserted."
+    },
+    {
+      "name": "Brockian.TwinPrimesReduction.TwinPrimeConjecture",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimesReduction.lean"
+      },
+      "register": "CONDITIONAL",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": "open",
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": "Twin-prime infinitude GIVEN Dickson's conjecture on admissible k-tuples; admissibility of {n,n+2} is proved unconditionally. Dickson is open."
+    },
+    {
+      "name": "Brockian.TwinPrimesReduction.isTwinPrime_eleven",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimesReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimesReduction.isTwinPrime_five",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimesReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimesReduction.isTwinPrime_seventeen",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimesReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimesReduction.isTwinPrime_three",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimesReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimesReduction.twinForms_admissible",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimesReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimesReduction.twinForms_pos",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimesReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimesReduction.twinPrimeStatement_of_not_summable",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimesReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TwinPrimesReduction.twin_mod_six",
+      "kind": "theorem",
+      "module": "Brockian.TwinPrimesReduction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TwinPrimesReduction.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)",
+      "provenance_note": null
     },
     {
       "name": "Brockian.TwoSeamHolonomy.K",

@@ -1,0 +1,53 @@
+{
+  "module": "Brockian.LandauNSquaredPlusOneReduction",
+  "environment": "lean-4.32.2",
+  "module_verified": true,
+  "declarations": [
+    {
+      "name": "Brockian.LandauNSquaredPlusOneReduction.irreducible_X_sq_add_one",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOneReduction.natDegree_X_sq_add_one",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOneReduction.leadingCoeff_X_sq_add_one",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOneReduction.eval_X_sq_add_one",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOneReduction.no_fixed_prime_divisor",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.LandauNSquaredPlusOneReduction.LandauFourthConjecture",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    }
+  ]
+}

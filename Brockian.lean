@@ -873,3 +873,15 @@ import Brockian.Figurate
 import Brockian.NonabelianOrderHolonomy
 import Brockian.Characters5
 import Brockian.ConeLine
+import Brockian.LandauNSquaredPlusOneReduction
+import Brockian.CarmichaelKorseltReduction
+import Brockian.GilbreathConjectureReduction
+import Brockian.FortunateNumbersReduction
+import Brockian.BrocardGapReduction
+import Brockian.HyperperfectNumbersReduction
+import Brockian.MersennePerfectReduction
+import Brockian.ErdosStrausReduction
+import Brockian.FermatNumbersReduction
+import Brockian.BrocardProblemReduction
+import Brockian.TwinPrimesReduction
+import Brockian.PolignacPrimesReduction
