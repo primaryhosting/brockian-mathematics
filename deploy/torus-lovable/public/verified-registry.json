@@ -19,16 +19,16 @@
     "verified_by"
   ],
   "summary": {
-    "total": 12180,
+    "total": 12195,
     "by_source": {
       "brockian": {
-        "total": 12142,
+        "total": 12157,
         "by_register": {
           "CONDITIONAL": 33,
           "CONJECTURE": 40,
           "DEFINITION": 649,
           "DISCHARGED": 7,
-          "PROVED": 11413
+          "PROVED": 11428
         }
       },
       "unknown": {
@@ -44,7 +44,7 @@
       "CONJECTURE": 40,
       "DEFINITION": 650,
       "DISCHARGED": 7,
-      "PROVED": 11450
+      "PROVED": 11465
     }
   },
   "theorems": [
@@ -65188,6 +65188,282 @@
       "conditional_rung": null,
       "discharged_by": null,
       "axioms": [],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.badState_insecure",
+      "module": "Brockian.HighAssurance.Kernel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.badState_unreachable",
+      "module": "Brockian.HighAssurance.Kernel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.demo_authorized_grant",
+      "module": "Brockian.HighAssurance.Kernel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.demo_authorized_send",
+      "module": "Brockian.HighAssurance.Kernel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.demo_authorized_write",
+      "module": "Brockian.HighAssurance.Kernel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.demo_bad_cap_blocked",
+      "module": "Brockian.HighAssurance.Kernel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.demo_bad_send_blocked",
+      "module": "Brockian.HighAssurance.Kernel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.demo_bad_write_blocked",
+      "module": "Brockian.HighAssurance.Kernel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.demo_grant_preserves_secure",
+      "module": "Brockian.HighAssurance.Kernel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.demo_reachable_secure",
+      "module": "Brockian.HighAssurance.Kernel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.demo_write_preserves_secure",
+      "module": "Brockian.HighAssurance.Kernel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.initState_secure",
+      "module": "Brockian.HighAssurance.Kernel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.kernel_security",
+      "module": "Brockian.HighAssurance.Kernel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.kstep_preserves",
+      "module": "Brockian.HighAssurance.Kernel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.reachable_writes_authorized",
+      "module": "Brockian.HighAssurance.Kernel",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
       "axioms_ok": true,
       "axle_verdict": "verified",
       "env": "lean-4.32.2",

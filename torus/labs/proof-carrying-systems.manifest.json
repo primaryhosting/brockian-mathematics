@@ -5,6 +5,11 @@
   "registrySchema": "brockian-public-verified-registry/v1",
   "claims": [
     {
+      "claim": "Capstone — whole-kernel security: from a policy-conformant start, EVERY reachable state of the unified capability-microkernel model preserves the full composite policy (integrity AND memory separation AND IPC confinement), across arbitrarily many operations in any interleaving.",
+      "theorem": "Brockian.HighAssurance.Kernel.kernel_security",
+      "visualRef": "capstone"
+    },
+    {
       "claim": "Integrity (authority confinement): from a policy-conformant start, every reachable state's capabilities stay within policy — no operation manufactures unauthorized authority.",
       "theorem": "Brockian.HighAssurance.CapabilityIntegrity.integrity_confinement",
       "visualRef": "integrity"

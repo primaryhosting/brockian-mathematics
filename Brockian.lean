@@ -903,3 +903,4 @@ import Brockian.HighAssuranceMAC
 import Brockian.HighAssuranceConstantTime
 import Brockian.HighAssuranceAEAD
 import Brockian.HighAssuranceMerkle
+import Brockian.HighAssuranceKernel
