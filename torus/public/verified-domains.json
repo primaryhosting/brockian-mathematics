@@ -3,11 +3,11 @@
  "generated_from": "registry/domains.json via scripts/export_public_domains.py (allowlist sanitizer)",
  "naming_caveat": "Lean identifiers in this catalogue can be aspirational labels: a name like 'TwinPrimeConjecture' may denominate a machine-verified REDUCTION or CONDITIONAL theorem, never a proof of the open problem unless the statement text says so. The binding content of every entry is its statement field. Open problems remain open.",
  "summary": {
-  "total": 983,
-  "PROVED_attested": 770,
+  "total": 1021,
+  "PROVED_attested": 774,
   "STATEMENT_only": 0,
-  "UNVERIFIED": 213,
-  "excluded_no_statement": 0
+  "UNVERIFIED": 247,
+  "excluded_no_statement": 1
  },
  "entries": [
   {
@@ -299,12 +299,188 @@
    "env": "lean-4.32.0"
   },
   {
+   "name": "Brockian.Characters5.dft_inversion",
+   "domain": "characters",
+   "register": "UNVERIFIED",
+   "statement": "Fourier inversion on ZMod 5: with dft f a = Σ_x e(a*x) f(x), every f is recovered as f x = (1/5) Σ_a e(-(a*x)) * dft f a.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Characters5.dirichlet_sum_eq_zero",
+   "domain": "characters",
+   "register": "UNVERIFIED",
+   "statement": "Multiplicative-character orthogonality mod 5: every nontrivial Dirichlet character χ mod 5 with values in ℂ satisfies Σ_{x : ZMod 5} χ x = 0.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Characters5.e_add",
+   "domain": "characters",
+   "register": "UNVERIFIED",
+   "statement": "e is an additive-to-multiplicative homomorphism: e (j + k) = e j * e k for all j k : ZMod 5.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Characters5.e_eq_stdAddChar",
+   "domain": "characters",
+   "register": "UNVERIFIED",
+   "statement": "The bespoke character equals Mathlib's standard additive character mod 5: e k = ZMod.stdAddChar k for all k, unlocking Mathlib's whole AddChar API for the five-ray wheel.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Characters5.norm_e",
+   "domain": "characters",
+   "register": "UNVERIFIED",
+   "statement": "The additive character has unit modulus: ‖e k‖ = 1 for every k : ZMod 5.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Characters5.omega_pow_five",
+   "domain": "characters",
+   "register": "UNVERIFIED",
+   "statement": "The Brockian ray rotation returns to start after five steps: ω^5 = 1, where ω = e^{2πi/5}.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Characters5.parseval",
+   "domain": "characters",
+   "register": "UNVERIFIED",
+   "statement": "Parseval/Plancherel on ZMod 5 with the unnormalized transform: Σ_a ‖dft f a‖² = 5 Σ_x ‖f x‖².",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Characters5.rayIndicator_eq_charSum",
+   "domain": "characters",
+   "register": "UNVERIFIED",
+   "statement": "Indicator decomposition: the ray indicator 𝟙[n ≡ r (mod 5)] equals (1/5) Σ_{a : ZMod 5} e (a * (n - r)), spectrally decomposing membership in one ray of the five-ray wheel.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Characters5.raySum_eq_charSum",
+   "domain": "characters",
+   "register": "UNVERIFIED",
+   "statement": "Ray-count identity: for a finite set S of naturals, the number of elements on ray r, #{n ∈ S | n ≡ r (mod 5)}, equals (1/5) Σ_{a : ZMod 5} Σ_{n ∈ S} e (a * (n - r)) — equidistribution over the five-ray wheel measured by character sums.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Characters5.sum_e_mul",
+   "domain": "characters",
+   "register": "UNVERIFIED",
+   "statement": "Additive-character orthogonality on ZMod 5: Σ_{x : ZMod 5} e (a * x) equals 5 when a = 0 and 0 otherwise.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Characters5.sum_omega_pow",
+   "domain": "characters",
+   "register": "UNVERIFIED",
+   "statement": "The zero-mean twist: the sum of all five 5th roots of unity vanishes, Σ_{k=0}^{4} ω^k = 0 — the single identity that kills the pole of the twisted zeta at s = 1.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.Characters5.twistPartialSum_norm_le",
+   "domain": "characters",
+   "register": "UNVERIFIED",
+   "statement": "Bounded partial sums of the zero-mean twist: ‖Σ_{n < N} e(n mod 5)‖ ≤ 2 for every N (the true maximum is the golden ratio 1.618..., so 2 is a safe honest bound) — the Dirichlet-test seed for convergence of the Brockian zeta twist Σ e(n mod 5)/n^s beyond Re s > 1.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
    "name": "Brockian.CollatzPartial.CollatzConjecture",
    "domain": "B-conjecture",
    "register": "PROVED",
    "statement": "theorem CollatzConjecture (hdesc : ∀ n : Nat, 1 < n → (n % 32 = 7 ∨ n % 32 = 15 ∨ n % 32 = 27 ∨ n % 32 = 31) → Descends n) : ∀ n : Nat, 0 < n → ∃ k : Nat, iterate collatz k n = 1",
    "verified_by": "AXLE cloud",
    "env": "lean-4.32.0"
+  },
+  {
+   "name": "Brockian.ConeLine.cousin_prime_roads",
+   "domain": "cone-line",
+   "register": "UNVERIFIED",
+   "statement": "Cousin primes (p, p+4 both prime, p > 5) travel exactly the roads 2→1, 3→2, 4→3 on the five-ray wheel: p mod 5 ∈ {2,3,4} and (p+4) ≡ p − 1 (mod 5).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.ConeLine.fib_uniform_mod5",
+   "domain": "cone-line",
+   "register": "UNVERIFIED",
+   "statement": "Fibonacci is uniformly distributed on the wheel: within one Pisano period (20 terms), each residue mod 5 occurs exactly 4 times — every ray receives an equal share of the Fibonacci sequence. (Five and its powers are the only moduli where Fibonacci is uniformly distributed — Kuipers–Shiue 1972 / Niederreiter 1972.)",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.ConeLine.quadruplet_visits_all_active_rays",
+   "domain": "cone-line",
+   "register": "UNVERIFIED",
+   "statement": "A prime quadruplet (p, p+2, p+6, p+8) with p > 5 visits all four active rays exactly once, always in the order (1, 3, 2, 4): p ≡ 1 (mod 5) is forced.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.ConeLine.sexy_prime_roads",
+   "domain": "cone-line",
+   "register": "UNVERIFIED",
+   "statement": "Sexy primes (p, p+6 both prime, p > 5) travel exactly the roads 1→2, 2→3, 3→4: (p+6) ≡ p + 1 (mod 5) and neither endpoint can sit on ray 0.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.ConeLine.sophie_germain_avoids_ray2",
+   "domain": "cone-line",
+   "register": "UNVERIFIED",
+   "statement": "A Sophie Germain prime p > 5 (p and 2p+1 both prime) never sits on ray 2: p ≡ 2 (mod 5) would force 5 ∣ 2p+1. Its roads are 1→3, 3→2, 4→4 — ray 4 maps to itself.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.ConeLine.square_mod5_mem",
+   "domain": "cone-line",
+   "register": "UNVERIFIED",
+   "statement": "Perfect squares land only on rays 0, 1, 4: for every integer n, n² mod 5 ∈ {0, 1, 4} — rays 2 and 3 are square-free.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.ConeLine.square_ray_primes_mod20",
+   "domain": "cone-line",
+   "register": "UNVERIFIED",
+   "statement": "Primes on the square rays refine to four classes mod 20: a prime p > 5 with p ≡ 1 or 4 (mod 5) satisfies p mod 20 ∈ {1, 9, 11, 19}. (Rescued form of the 'pentagon-ray primes' claim from the July 2026 verified paper, where it was misstated for all active-ray primes.)",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.ConeLine.stride_ray_walk_classification",
+   "domain": "cone-line",
+   "register": "UNVERIFIED",
+   "statement": "The multiples of s walk the rays in the fixed cyclic order determined by s mod 5: strides ≡ 2 (terminal digits 2,7) trace the pentagram order (2,4,1,3,0); ≡ 3 (digits 3,8) its mirror (3,1,4,2,0); ≡ 1 the pentagon (1,2,3,4,0); ≡ 4 its mirror; ≡ 0 never leave ray 0.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.ConeLine.triangular_mod5_mem",
+   "domain": "cone-line",
+   "register": "UNVERIFIED",
+   "statement": "Triangular numbers land only on rays 0, 1, 3: for every n, T(n) = n(n+1)/2 satisfies T(n) mod 5 ∈ {0, 1, 3} — rays 2 and 4 carry no triangular number.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.ConeLine.triplet_two_patterns",
+   "domain": "cone-line",
+   "register": "UNVERIFIED",
+   "statement": "A prime triplet (p, p+2, p+6) with p > 5 has exactly two possible ray patterns: (1,3,2) or (2,4,3).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
   },
   {
    "name": "Brockian.ConstellationLocalCountK3",
@@ -395,6 +571,38 @@
    "env": "lean-4.32.0"
   },
   {
+   "name": "Brockian.DilationGenerator.boundary_term_vanishes",
+   "domain": "gate1-operator",
+   "register": "UNVERIFIED",
+   "statement": "For f, g smooth with compact support in (0,∞), the boundary term x·f(x)·conj(g(x)) tends to 0 as x→0⁺ and as x→∞ (immediate from compact support — the honest form of the 'vanishing boundary' crux).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.DilationGenerator.conjugation_to_momentum",
+   "domain": "gate1-operator",
+   "register": "UNVERIFIED",
+   "statement": "Under the log substitution, the dilation generator transports to the momentum operator: for smooth compactly-supported f on (0,∞), U(i((1/2)f + x f')) = i·(U f)' — i.e. A = U⁻¹ ∘ (i·d/dt) ∘ U on the core (the route to essential self-adjointness that mirrors the proven freeLaplacian-via-Plancherel pattern).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.DilationGenerator.mellin_log_unitary",
+   "domain": "gate1-operator",
+   "register": "UNVERIFIED",
+   "statement": "The substitution x = e^t induces a unitary U : L²(0,∞) ≃ L²(ℝ), (U f)(t) = e^{t/2}·f(e^t) — norm-preserving with inverse (U⁻¹ h)(x) = x^{-1/2}·h(log x).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Brockian.DilationGenerator.symmetric_on_core",
+   "domain": "gate1-operator",
+   "register": "UNVERIFIED",
+   "statement": "The Berry–Keating dilation generator A f = i·((1/2)·f + x·f') is symmetric on the C_c^∞(0,∞) core: ∫ (A f)·conj g = ∫ f·conj (A g) (integration by parts; boundary terms vanish by compact support).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
    "name": "Brockian.Dilworth.ChainColoring.mono",
    "domain": "harvest-reconciled",
    "register": "PROVED",
@@ -422,7 +630,7 @@
    "name": "Brockian.Equidistribution.equidistribution_of_asymptotic",
    "domain": "A2-discharge-open",
    "register": "UNVERIFIED",
-   "statement": "theorem equidistribution_of_asymptotic (x : ℕ → ℝ) (hW : ∀ k : ℤ, k ≠ 0 → Tendsto (fun N : ℕ => (N : ℂ)⁻¹ * ∑ n ∈ Finset.range N, Complex.exp (2 * π * Complex.I * k * x n)) atTop (𝓝 0)) {a b : ℝ} (ha : 0 ≤ a) (hab : a ≤ b) (hb : b ≤ 1) : Tendsto (fun N : ℕ => (((Finset.range N).filter fun n => Int.fract (x n) ∈ Set.Ico a b).card : ℝ) / N) atTop (𝓝 (b - a))",
+   "statement": "theorem equidistribution_of_asymptotic (x : ℕ → ℝ) (D : Set ℝ) (hD : Dense D) (hasym : ∀ c ∈ D, 0 ≤ c → c ≤ 1 → Tendsto (fun N => edf x N c) atTop (𝓝 c)) {a b : ℝ} (ha : 0 ≤ a) (hab : a ≤ b) (hb : b ≤ 1) : Tendsto (fun N => (countIco x N a b : ℝ) / N) atTop (𝓝 (b - a))",
    "verified_by": "Aristotle-reported only (NOT attested)",
    "env": null
   },
@@ -478,7 +686,7 @@
    "name": "Brockian.EquidistributionBVReduction.equidistribution_of_BV_uniform",
    "domain": "A1-discharge-literature",
    "register": "UNVERIFIED",
-   "statement": "theorem equidistribution_of_BV_uniform {u : ℕ → ℝ} (hu : UniformlyDistributedMod1 u) {f : ℝ → ℝ} (hf : BoundedVariationOn f (Set.Icc 0 1)) : Tendsto (avg u f) atTop (𝓝 (∫ x in (0 : ℝ)..1, f x))",
+   "statement": "theorem equidistribution_of_BV_uniform {x : ℕ → ℝ} (hx : UniformlyDistributedMod1 x) {f : ℝ → ℝ} (hf : BoundedVariationOn f (Set.Icc (0:ℝ) 1)) : Tendsto (fun N : ℕ => (∑ n ∈ Finset.range N, f (Int.fract (x n))) / N) atTop (𝓝 (∫ t in (0:ℝ)..1, f t))",
    "verified_by": "Aristotle-reported only (NOT attested)",
    "env": null
   },
@@ -630,7 +838,7 @@
    "name": "Brockian.FreeLaplacianPlancherel.freeLaplacian_essentiallySelfAdjoint_via_plancherel",
    "domain": "A2-discharge-open",
    "register": "UNVERIFIED",
-   "statement": "theorem freeLaplacian_essentiallySelfAdjoint_via_plancherel : DenseRange (fun f : 𝓢(ℝ, ℂ) => toL2 f) ∧ IsSymmetricGraph freeLaplacianGraph ∧ IsEssentiallySelfAdjointGraph freeLaplacianGraph",
+   "statement": "theorem freeLaplacian_essentiallySelfAdjoint_via_plancherel : IsEssentiallySelfAdjoint (freeLaplacianDomain E) (freeLaplacian E)",
    "verified_by": "Aristotle-reported only (NOT attested)",
    "env": null
   },
@@ -822,17 +1030,17 @@
    "name": "Brockian.LandauNSquaredPlusOne.LandauFourthConjecture",
    "domain": "B-conjecture",
    "register": "UNVERIFIED",
-   "statement": "theorem LandauFourthConjecture (H : HardyLittlewoodLowerBound) : {n : ℕ | Nat.Prime (n ^ 2 + 1)}.Infinite",
+   "statement": "theorem LandauFourthConjecture (hB : BunyakovskyConjecture) : {n : ℕ | Nat.Prime (n ^ 2 + 1)}.Infinite",
    "verified_by": "Aristotle-reported only (NOT attested)",
    "env": null
   },
   {
    "name": "Brockian.LegendreConjecture.LegendreConjecture",
    "domain": "B-conjecture",
-   "register": "UNVERIFIED",
-   "statement": "theorem LegendreConjecture (hgap : ShortGapHypothesis) : LegendreStatement",
-   "verified_by": "Aristotle-reported only (NOT attested)",
-   "env": null
+   "register": "PROVED",
+   "statement": "theorem LegendreConjecture (h : ShortIntervalPrimes) : LegendreStatement",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
   },
   {
    "name": "Brockian.LegendreThreeSquare.QF_conj",
@@ -886,7 +1094,7 @@
    "name": "Brockian.MersennePerfect.MersennePrimeInfinitude",
    "domain": "B-conjecture",
    "register": "UNVERIFIED",
-   "statement": "theorem MersennePrimeInfinitude : MersenneExponents.Infinite ↔ EvenPerfects.Infinite",
+   "statement": "theorem MersennePrimeInfinitude : mersennePrimes.Infinite ↔ evenPerfects.Infinite",
    "verified_by": "Aristotle-reported only (NOT attested)",
    "env": null
   },
@@ -1358,7 +1566,7 @@
    "name": "Brockian.QuasiperfectNumbers.QuasiperfectExists",
    "domain": "B-conjecture",
    "register": "UNVERIFIED",
-   "statement": "theorem QuasiperfectExists : (∃ n : ℕ, Quasiperfect n) ↔ (∃ n : ℕ, Quasiperfect n ∧ Odd n ∧ IsSquare n)",
+   "statement": "theorem QuasiperfectExists : (∃ n : ℕ, Quasiperfect n) ↔ ∃ k : ℕ, Odd k ∧ 1 < k ∧ (¬ ∃ p e : ℕ, p.Prime ∧ k = p ^ e) ∧ Quasiperfect (k ^ 2)",
    "verified_by": "Aristotle-reported only (NOT attested)",
    "env": null
   },
@@ -1515,14 +1723,6 @@
    "env": "lean-4.32.0"
   },
   {
-   "name": "Brockian.SuperperfectNumbers.OddSuperperfectExists",
-   "domain": "B-conjecture",
-   "register": "UNVERIFIED",
-   "statement": "theorem OddSuperperfectExists : (∃ n, Odd n ∧ Superperfect n) ↔ ∃ n, Odd n ∧ Superperfect n ∧ 1000 < n ∧ ¬ n.Prime ∧ ∃ a k, Odd k ∧ sig n = 2 ^ a * k ∧ (2 ^ (a + 1) - 1) * sig k = 2 * n",
-   "verified_by": "Aristotle-reported only (NOT attested)",
-   "env": null
-  },
-  {
    "name": "Brockian.SylvesterSchur.piCount_le_self",
    "domain": "harvest-reconciled",
    "register": "PROVED",
@@ -1606,7 +1806,7 @@
    "name": "Brockian.WeirdNumbers.OddWeirdExists",
    "domain": "B-conjecture",
    "register": "UNVERIFIED",
-   "statement": "theorem OddWeirdExists {n : ℕ} (hodd : Odd n) (hab : n.Abundant) (hrep : ∀ s ⊆ n.properDivisors, ∑ i ∈ s, i ≠ abundance n) : OddWeirdStatement",
+   "statement": "theorem OddWeirdExists : (∃ n : ℕ, Odd n ∧ n.Weird) ↔ ∀ N : ℕ, ∃ n : ℕ, N < n ∧ Odd n ∧ n.Weird",
    "verified_by": "Aristotle-reported only (NOT attested)",
    "env": null
   },
@@ -1654,7 +1854,7 @@
    "name": "Brockian.Weyl.DeficiencyODE.schrodinger_essentiallySelfAdjoint_of_weakRegularity",
    "domain": "A1-discharge-literature",
    "register": "UNVERIFIED",
-   "statement": "theorem schrodinger_essentiallySelfAdjoint_of_weakRegularity (V : ℤ → ℝ) (hV : ∃ C, ∀ n, |V n| ≤ C) : IsSymmetricOn finSupp (schrodingerLM V hV) ∧ EssentiallySelfAdjointOn finSupp (schrodingerLM V hV)",
+   "statement": "theorem schrodinger_essentiallySelfAdjoint_of_weakRegularity [CompleteSpace H] {G : OperatorGraph H} (hG : EssentiallySelfAdjoint G) {V : H →L[ℂ] H} (hV : WeaklyRegularPotential V) : EssentiallySelfAdjoint (schrodingerGraph V G)",
    "verified_by": "Aristotle-reported only (NOT attested)",
    "env": null
   },
@@ -1678,7 +1878,7 @@
    "name": "Brockian.Weyl.FreeLaplacian2.freeLaplacian_essentiallySelfAdjoint_of_fourier",
    "domain": "A2-discharge-open",
    "register": "UNVERIFIED",
-   "statement": "theorem freeLaplacian_essentiallySelfAdjoint_of_fourier : IsSelfAdjoint (freeLaplacian V).closure",
+   "statement": "theorem freeLaplacian_essentiallySelfAdjoint_of_fourier : EssentiallySelfAdjoint (freeLaplacian d)",
    "verified_by": "Aristotle-reported only (NOT attested)",
    "env": null
   },
@@ -1702,7 +1902,7 @@
    "name": "Brockian.Weyl.SchrodingerMinimal.schrodinger_essentiallySelfAdjoint_of_ode",
    "domain": "A2-discharge-open",
    "register": "UNVERIFIED",
-   "statement": "theorem schrodinger_essentiallySelfAdjoint_of_ode (V₀ : ℝ) : (∀ f g : ℝ → ℂ, IsTestFunction f → IsTestFunction g → ∫ x, (starRingEnd ℂ) (schrodingerExpr V₀ f x) * g x = ∫ x, (starRingEnd ℂ) (f x) * schrodingerExpr V₀ g x) ∧ (∀ z : ℂ, z.im ≠ 0 → ∀ w : ℝ → ℂ, MemLp w 2 volume → ∀ ε : ℝ, 0 < ε → ∃ f : ℝ → ℂ, IsTestFunction f ∧ eLpNorm (fun x => w x - (schrodingerExpr V₀ f x - z * f x)) 2 volume < ENNReal.ofReal ε)",
+   "statement": "theorem schrodinger_essentiallySelfAdjoint_of_ode (T : L2R →ₗ.[ℂ] L2R) (hdense : Dense (T.domain : Set L2R)) (hsymm : T.IsFormalAdjoint T) (hode_pos : ∀ (u : L2R) (hu : u ∈ (T†).domain), T† ⟨u, hu⟩ = Complex.I • u → u = 0) (hode_neg : ∀ (u : L2R) (hu : u ∈ (T†).domain), T† ⟨u, hu⟩ = -Complex.I • u → u = 0) : EssentiallySelfAdjoint T",
    "verified_by": "Aristotle-reported only (NOT attested)",
    "env": null
   },
@@ -1710,7 +1910,7 @@
    "name": "Brockian.Weyl.WeylLawTarget.counting_diverges_of_candidate",
    "domain": "A2-discharge-open",
    "register": "UNVERIFIED",
-   "statement": "theorem counting_diverges_of_candidate (c : Candidate α) (M : Nat) : ∃ T0 : α, ∀ T : α, T0 ≤ T → ∀ k : Nat, IsCount c T k → M ≤ k",
+   "statement": "theorem counting_diverges_of_candidate (C : Candidate) : Filter.Tendsto (fun t : ℝ => C.counting t) Filter.atTop Filter.atTop",
    "verified_by": "Aristotle-reported only (NOT attested)",
    "env": null
   },
@@ -1750,7 +1950,7 @@
    "name": "Brockian.WilsonPrimes.WilsonPrimeInfinitude",
    "domain": "B-conjecture",
    "register": "UNVERIFIED",
-   "statement": "theorem WilsonPrimeInfinitude (h : ∀ N : ℕ, ∃ p : ℕ, p.Prime ∧ N < p ∧ p ∣ wilsonQuotient p) : {p : ℕ | WilsonPrime p}.Infinite",
+   "statement": "theorem WilsonPrimeInfinitude (H : ∀ N : ℕ, ∃ p : ℕ, p.Prime ∧ N < p ∧ (p - 2)! ≡ p + 1 [MOD p ^ 2]) : {p : ℕ | WilsonPrime p}.Infinite",
    "verified_by": "Aristotle-reported only (NOT attested)",
    "env": null
   },
@@ -3059,6 +3259,14 @@
    "env": "lean-4.32.0"
   },
   {
+   "name": "CS.toda_theorem",
+   "domain": "FRONTIER-cs",
+   "register": "UNVERIFIED",
+   "statement": "PH ⊆ P^{#P} (Toda's theorem).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
    "name": "CS.valiant_permanent",
    "domain": "FRONTIER-cs",
    "register": "PROVED",
@@ -4067,6 +4275,14 @@
    "env": "lean-4.32.0"
   },
   {
+   "name": "Frontier.hadwiger_nelson_5",
+   "domain": "FRONTIER-moonshot",
+   "register": "UNVERIFIED",
+   "statement": "The chromatic number of the plane is ≥ 5 (de Grey's unit-distance graph).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
    "name": "Frontier.hairer_KPZ",
    "domain": "FRONTIER-fields",
    "register": "UNVERIFIED",
@@ -4417,6 +4633,14 @@
    "statement": "42 = (−80538738812075974)³ + 80435758145817515³ + 12602123297335631³.",
    "verified_by": "AXLE cloud",
    "env": "lean-4.32.0"
+  },
+  {
+   "name": "Frontier.szemeredi_regularity",
+   "domain": "FRONTIER-abel",
+   "register": "UNVERIFIED",
+   "statement": "State and prove Szemerédi's regularity lemma for graphs.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
   },
   {
    "name": "Frontier.thurston_geometrization",
@@ -5507,10 +5731,34 @@
    "env": "lean-4.32.0"
   },
   {
+   "name": "Math2.cap_set",
+   "domain": "FRONTIER-math",
+   "register": "PROVED",
+   "statement": "The cap-set bound: subsets of 𝔽₃ⁿ with no 3-term AP have size o(3ⁿ) (Croot–Lev–Pach / Ellenberg–Gijswijt).",
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
+  },
+  {
    "name": "Math2.carleson",
    "domain": "FRONTIER-math",
    "register": "UNVERIFIED",
    "statement": "Fourier series of an L² function converge almost everywhere (Carleson).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math2.chebotarev",
+   "domain": "FRONTIER-math",
+   "register": "UNVERIFIED",
+   "statement": "Chebotarev density theorem for Frobenius conjugacy classes.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math2.chern_gauss_bonnet",
+   "domain": "FRONTIER-math",
+   "register": "UNVERIFIED",
+   "statement": "The Chern–Gauss–Bonnet theorem for even-dimensional closed manifolds.",
    "verified_by": "Aristotle-reported only (NOT attested)",
    "env": null
   },
@@ -5547,12 +5795,28 @@
    "env": "lean-4.32.0"
   },
   {
+   "name": "Math2.hales_jewett",
+   "domain": "FRONTIER-math",
+   "register": "UNVERIFIED",
+   "statement": "The Hales–Jewett theorem on combinatorial lines.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
    "name": "Math2.hironaka_resolution",
    "domain": "FRONTIER-math",
    "register": "PROVED",
    "statement": "Resolution of singularities in characteristic 0 (Hironaka; statement).",
    "verified_by": "AXLE cloud",
    "env": "lean-4.32.0"
+  },
+  {
+   "name": "Math2.kahn_kalai",
+   "domain": "FRONTIER-math",
+   "register": "UNVERIFIED",
+   "statement": "Expectation and threshold are within a log factor (Park–Pham proof of Kahn–Kalai).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
   },
   {
    "name": "Math2.kervaire_invariant",
@@ -5571,6 +5835,14 @@
    "env": "lean-4.32.0"
   },
   {
+   "name": "Math2.nash_embedding",
+   "domain": "FRONTIER-math",
+   "register": "UNVERIFIED",
+   "statement": "Every Riemannian manifold embeds isometrically in some ℝ^N (Nash).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
    "name": "Math2.ratner",
    "domain": "FRONTIER-math",
    "register": "UNVERIFIED",
@@ -5579,10 +5851,34 @@
    "env": null
   },
   {
+   "name": "Math2.riemann_roch_curve",
+   "domain": "FRONTIER-math",
+   "register": "UNVERIFIED",
+   "statement": "Riemann–Roch for a smooth projective curve: ℓ(D)−ℓ(K−D)=deg D+1−g.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math2.robertson_seymour",
+   "domain": "FRONTIER-math",
+   "register": "UNVERIFIED",
+   "statement": "Graphs are well-quasi-ordered by the minor relation (Robertson–Seymour).",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
    "name": "Math2.sato_tate",
    "domain": "FRONTIER-math",
    "register": "UNVERIFIED",
    "statement": "State the Sato–Tate distribution of Frobenius angles for a non-CM elliptic curve.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
+  },
+  {
+   "name": "Math2.sunflower_bound",
+   "domain": "FRONTIER-math",
+   "register": "UNVERIFIED",
+   "statement": "The improved sunflower lemma bound (Alweiss–Lovett–Wu–Zhang).",
    "verified_by": "Aristotle-reported only (NOT attested)",
    "env": null
   },
@@ -6061,10 +6357,10 @@
   {
    "name": "Phys.mermin_wagner",
    "domain": "FRONTIER-phys",
-   "register": "UNVERIFIED",
+   "register": "PROVED",
    "statement": "No spontaneous breaking of a continuous symmetry in dimensions ≤ 2 at T>0 (Mermin–Wagner).",
-   "verified_by": "Aristotle-reported only (NOT attested)",
-   "env": null
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
   },
   {
    "name": "Phys.unruh_effect",
@@ -6517,10 +6813,10 @@
   {
    "name": "QI.holevo_bound",
    "domain": "FRONTIER-qi",
-   "register": "UNVERIFIED",
+   "register": "PROVED",
    "statement": "Accessible information about a quantum ensemble is at most its Holevo χ quantity.",
-   "verified_by": "Aristotle-reported only (NOT attested)",
-   "env": null
+   "verified_by": "AXLE cloud",
+   "env": "lean-4.32.0"
   },
   {
    "name": "QI.inner_kron",
@@ -6657,6 +6953,14 @@
    "statement": "The 9-qubit Shor code corrects an arbitrary single-qubit error.",
    "verified_by": "AXLE cloud",
    "env": "lean-4.32.0"
+  },
+  {
+   "name": "QI.shor_period",
+   "domain": "FRONTIER-qi",
+   "register": "UNVERIFIED",
+   "statement": "Shor's algorithm recovers the period of a modular-exponentiation function w.h.p.",
+   "verified_by": "Aristotle-reported only (NOT attested)",
+   "env": null
   },
   {
    "name": "QI.simon_algorithm",
