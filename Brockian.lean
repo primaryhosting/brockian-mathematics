@@ -864,3 +864,6 @@ import Brockian.TruncatedConvolution
 import Brockian.HolonomyIsomorphism
 import Brockian.AlmostPerfect
 import Brockian.VaughanSplit
+import Brockian.HarmonicDivisor
+import Brockian.PrimitiveRoot
+import Brockian.ConvSplit

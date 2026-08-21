@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11179,
+    "PROVED": 11200,
     "DEFINITION": 649,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -12370,6 +12370,138 @@
       "quarantine": true,
       "ledger_run": "Brockian constellation-sieve brick 3; AXLE @4.32",
       "provenance_note": "SWARM-PROVED Constellation Sieve Spectrum BRICK 3 (AXLE @4.32, axiom-clean): the WHEEL PRODUCT. admissibleU_squarefree: for squarefree Q, (admissibleU Q H).card = prod over p|Q of (p - nu_p(H)) -- the exact Euler product of local confinement counts, proved by strong induction peeling one prime factor (Brick 2 multiplicativity splits, Brick 1 evaluates each prime). twin_wheel_count: for squarefree Q with all prime factors >=3, the twin count = prod (p-2). This makes the sieve constants A=prod(p-2) PROVED, not assumed: the local prime confinements wrap into the wheel's global count as a verified Euler product."
+    },
+    {
+      "name": "Brockian.ConvSplit.moebius_delta_split",
+      "kind": "theorem",
+      "module": "Brockian.ConvSplit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConvSplit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ConvSplit.truncLE_add_truncGT",
+      "kind": "theorem",
+      "module": "Brockian.ConvSplit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConvSplit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ConvSplit.truncLE_mul_add_truncGT_mul",
+      "kind": "theorem",
+      "module": "Brockian.ConvSplit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConvSplit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ConvSplit.vonMangoldt_split",
+      "kind": "theorem",
+      "module": "Brockian.ConvSplit",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ConvSplit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.Core.Ray",
@@ -108775,6 +108907,336 @@
       "provenance_note": "Reusable finite-graph theorem, AXLE 4.32 verified with standard axioms only. Vertices are canonically equivalent to the sigma of connected-component fibers; every cross-component-zero matrix reindexes to a dependent blockDiagonal'; adjacency matrices and shifted adjacencies specialize exactly; charpolys factor over actual components via Matrix.BlockTriangular.charpoly."
     },
     {
+      "name": "Brockian.HarmonicDivisor.harmonic_140",
+      "kind": "theorem",
+      "module": "Brockian.HarmonicDivisor",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HarmonicDivisor.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HarmonicDivisor.harmonic_270",
+      "kind": "theorem",
+      "module": "Brockian.HarmonicDivisor",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HarmonicDivisor.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HarmonicDivisor.harmonic_28",
+      "kind": "theorem",
+      "module": "Brockian.HarmonicDivisor",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HarmonicDivisor.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HarmonicDivisor.harmonic_6",
+      "kind": "theorem",
+      "module": "Brockian.HarmonicDivisor",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HarmonicDivisor.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HarmonicDivisor.harmonic_examples",
+      "kind": "theorem",
+      "module": "Brockian.HarmonicDivisor",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HarmonicDivisor.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HarmonicDivisor.harmonic_mean_140",
+      "kind": "theorem",
+      "module": "Brockian.HarmonicDivisor",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HarmonicDivisor.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HarmonicDivisor.harmonic_mean_270",
+      "kind": "theorem",
+      "module": "Brockian.HarmonicDivisor",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HarmonicDivisor.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HarmonicDivisor.harmonic_mean_28",
+      "kind": "theorem",
+      "module": "Brockian.HarmonicDivisor",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HarmonicDivisor.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HarmonicDivisor.harmonic_mean_6",
+      "kind": "theorem",
+      "module": "Brockian.HarmonicDivisor",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HarmonicDivisor.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HarmonicDivisor.not_harmonic_4",
+      "kind": "theorem",
+      "module": "Brockian.HarmonicDivisor",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HarmonicDivisor.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.HockeyStick.hockey_stick",
       "kind": "theorem",
       "module": "Brockian.HockeyStick",
@@ -129416,6 +129878,230 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY practical numbers (open-territory loop, AXLE @4.32, axiom-clean). Practical n := every m<=n is a subset-sum of the divisors of n. FLAGSHIP GENERAL THEOREM practical_pow_two: EVERY power of 2 is practical -- real induction on k (binary representation), not a table lookup. CONCRETE: practical_{6,12,20,28}; non-example not_practical_10. PracticalTwinInfinitude (Margenstern-type: infinitely many p with p,p+2 both practical) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PrimitiveRoot.primitive_roots_examples",
+      "kind": "theorem",
+      "module": "Brockian.PrimitiveRoot",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PrimitiveRoot.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PrimitiveRoot.three_not_primroot_mod11",
+      "kind": "theorem",
+      "module": "Brockian.PrimitiveRoot",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PrimitiveRoot.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PrimitiveRoot.three_order6_mod7",
+      "kind": "theorem",
+      "module": "Brockian.PrimitiveRoot",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PrimitiveRoot.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PrimitiveRoot.three_pow6_mod7",
+      "kind": "theorem",
+      "module": "Brockian.PrimitiveRoot",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PrimitiveRoot.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PrimitiveRoot.two_order10_mod11",
+      "kind": "theorem",
+      "module": "Brockian.PrimitiveRoot",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PrimitiveRoot.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PrimitiveRoot.two_order3_mod7",
+      "kind": "theorem",
+      "module": "Brockian.PrimitiveRoot",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PrimitiveRoot.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PrimitiveRoot.two_pow10_mod11",
+      "kind": "theorem",
+      "module": "Brockian.PrimitiveRoot",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PrimitiveRoot.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.ProductHolonomy.holonomy_after_loop",
