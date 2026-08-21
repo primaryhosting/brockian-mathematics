@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 643
+- **DEFINITION**: 646
 - **DISCHARGED**: 7
-- **PROVED**: 11128
+- **PROVED**: 11141
 
 ## Theorems
 
@@ -1971,6 +1971,12 @@
 | PROVED | `Brockian.DepthHolonomySeparation.K₂_holonomy_order_two` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.DepthHolonomySeparation.depth_holonomy_separates` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.DepthHolonomySeparation.same_residue_weights` | ✓ | verified | lean-4.32.2 |  |
+| DEFINITION | `Brockian.DepthHolonomyZMod4.K` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.DepthHolonomyZMod4.gcd_collision` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.DepthHolonomyZMod4.general_depth_holonomy_separates` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.DepthHolonomyZMod4.holonomy_after_loop` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.DepthHolonomyZMod4.order_separates` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.DepthHolonomyZMod4.residue_marginal_indep` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.Dilworth.ChainColoring` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.Dilworth.card_le_card_of_cover` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.Dilworth.cross_comparable` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
@@ -3821,6 +3827,11 @@
 | PROVED | `Brockian.NewEra.why_five` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Nicomachus.sq_sum_eq_sum_cubes` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.Niven.niven_cos` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
+| DEFINITION | `Brockian.NonabelianHolonomy.K` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.NonabelianHolonomy.holonomy_after_loop` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.NonabelianHolonomy.nonabelian_holonomy_separates` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.NonabelianHolonomy.order_by_conjugacy` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.NonabelianHolonomy.residue_marginal_indep` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.OddDistinctPartition.card_distincts_le_partition` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.OddDistinctPartition.card_distincts_le_powerset` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.OddDistinctPartition.card_oddDistincts_le_distincts` | ✓ | verified | lean-4.32.2 |  |
@@ -11070,6 +11081,11 @@
 | PROVED | `Brockian.TwinPrimes.twin_71` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.TwinPrimes.twin_form_6k` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.TwinPrimes.twin_middle_div_six` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| DEFINITION | `Brockian.TwoSeamHolonomy.K` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.TwoSeamHolonomy.composite_order` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.TwoSeamHolonomy.holonomy_composes` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.TwoSeamHolonomy.residue_marginal_indep` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.TwoSeamHolonomy.two_seam_separates` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.TwoSquares.sum_two_squares_iff` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle cd725c65; AXLE @4.32 |
 | PROVED | `Brockian.TwoSquaresUnique.brahmagupta_one` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.TwoSquaresUnique.brahmagupta_two` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |

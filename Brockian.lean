@@ -851,3 +851,6 @@ import Brockian.QCTwoQubit
 import Brockian.DepthHolonomySeparation
 import Brockian.PhaseDepthNoGo
 import Brockian.DepthHolonomyGeneral
+import Brockian.DepthHolonomyZMod4
+import Brockian.TwoSeamHolonomy
+import Brockian.NonabelianHolonomy
