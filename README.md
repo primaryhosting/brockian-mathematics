@@ -33,7 +33,7 @@ Each declaration carries exactly one *register*, derived mechanically — never 
 
 | Register | Meaning | Gate |
 |----------|---------|------|
-| **PROVED** | sorry-free, axiom footprint ⊆ {propext, Classical.choice, Quot.sound} and no native_decide (as reported by AXLE), and independently re-checked by AXLE at lean-4.32.0 including statement fidelity | AXLE re-check passes; local from-source `lake build` NOT yet reproduced (registry lake_build: 'pending') |
+| **PROVED** | sorry-free, axiom footprint ⊆ {propext, Classical.choice, Quot.sound} and no native_decide (as reported by AXLE), and independently re-checked by AXLE at lean-4.32.2 including statement fidelity | AXLE re-check passes; local from-source `lake build` NOT yet reproduced (registry lake_build: 'pending') |
 | **COMPUTATION** | finite `decide` / `native_decide` checks | recorded as computation, never PROVED |
 | **CONDITIONAL** | depends on a named hypothesis; records its rung (classical / literature / open) | never counted as unconditional evidence |
 | **CONJECTURE** | a named `def` / Prop container | never typed as a theorem |
@@ -50,7 +50,7 @@ A **PROVED** theorem is *intended* to pass three independent legs:
 1. **local `lake build`** on the pinned toolchain,
 2. **local `#print axioms`** — only the three standard axioms,
 3. **AXLE** ([axle.axiommath.ai](https://axle.axiommath.ai)) — an *independent* cloud
-   Lean 4 + Mathlib prover that re-checks the proof at a named environment (`lean-4.32.0`),
+   Lean 4 + Mathlib prover that re-checks the proof at a named environment (`lean-4.32.2`),
    including statement fidelity.
 
 Of these three legs, only the AXLE cloud re-check has actually run across the corpus. That
@@ -60,12 +60,41 @@ local from-source `lake build` on the pinned toolchain — is pending for every 
 registry marks `lake_build: 'pending'` for all 11,819 declarations, pending CI/local compute
 with a reachable Mathlib cache.
 
-An independent third-party cloud re-check (AXLE, at the pinned lean-4.32.0 environment) has
+An independent third-party cloud re-check (AXLE, at the `lean-4.32.2` environment) has
 run across the corpus; a local from-source `lake build` has still not been reproduced and is
 tracked as pending in the registry. Per-declaration attestations live in
-`registry/attestations/`.
+`registry/attestations/` — all 854 modules are attested at `lean-4.32.2`.
+
+> **Environment note.** The AXLE re-check env was migrated `lean-4.32.0 → lean-4.32.2` on
+> 2026-08-20 (the older env is deprecated server-side); all attestations are now at 4.32.2.
+> The local source `lean-toolchain` is still pinned at `v4.32.0` — leg 1 (local build) is
+> pending either way, so the two are not yet reconciled. See
+> [`docs/attestation-gap-exposition.md`](docs/attestation-gap-exposition.md) for why a
+> toolchain move can flip an *attestation* without touching a *proof*.
 
 Change history for verification-posture wording and gate semantics: [`docs/CHANGELOG-2026-08-17.md`](docs/CHANGELOG-2026-08-17.md)
+
+### Verification tooling — one engine, one gate
+
+The machinery that verifies proofs and decides registers is consolidated in a single
+`engine/` package (the single source of truth; the harvest scripts and `scripts/attest.py`
+delegate to it):
+
+- **`engine.verify`** — the one AXLE verification core: canonical `normalize` / content
+  hashing, fully-qualified `#print axioms` targeting, and the strict axiom-audit verdict
+  (pinned to `lean-4.32.2`).
+- **`engine.register`** — the one derived-register gate (the PROVED definition + the
+  allowed-axiom set), a pure function of build facts + the AXLE verdict.
+- **`engine.audit`** — the one honesty gate, run as a single `--strict` surface over four
+  checks: registry consistency, the overclaim/self-consistency firewall, the no-theater
+  lint, and a local attestation↔source integrity check. The registry hop is gated on it.
+
+Run the entire honesty gate — `engine.audit --strict`, registry freshness, and the full
+test suite — with one command:
+
+```bash
+scripts/verify.sh
+```
 
 ## Verified so far
 
@@ -135,10 +164,11 @@ open observatory/era.html            # New Era gallery (charter surface)
 
 ```
 Brockian/            the verified theme modules (one mathematical theme each)
+engine/              the single verification machinery: verify + register + audit
 registry/            theorems.json (generated) + per-module AXLE attestations
 observatory/         public claim surface (map + generated claims + HTML)
 provenance/          verdicts.yaml — hand-authored verdicts + provenance (audited)
-scripts/             axle_client.py, gen_registry.py, gen_claims.py, gen_observatory.py, …
+scripts/             attest.py, gen_registry.py, verify.sh (one-command gate), …
 Archive/             retired inputs (old catalog), kept for reference, not built
 docs/superpowers/    the design spec and implementation plan
 ```
