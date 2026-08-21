@@ -37,7 +37,9 @@ We built the **verified security core of a capability microkernel** — the seL4
 
 **Software-security layer (Proof-Carrying Apps)** — `PCA.*` (7 modules): default-deny access control, tenant isolation, cross-tenant write prevention, ed25519 soundness, RLS invariants.
 
-Corpus at time of writing: **11,450 PROVED**, 33 CONDITIONAL, gate 4/4 (registry-consistency + overclaim-firewall + no-theater-lint + attestation-integrity).
+**Multi-prover mirror** — `Brockian.HighAssurance.SMTMirror.*` (3 theorems) cross-verified by Z3 and Lean/AXLE via `scripts/smt_gate.py`.
+
+Corpus at time of writing: **11,499 PROVED**, 33 CONDITIONAL, gate 4/4 (registry-consistency + overclaim-firewall + no-theater-lint + attestation-integrity).
 
 ## Multi-prover cross-verification (Phase-1, working)
 
@@ -49,7 +51,7 @@ Corpus at time of writing: **11,450 PROVED**, 33 CONDITIONAL, gate 4/4 (registry
 2. **The demonstrator (5 min).** Walk the Proof-Carrying Systems lab: integrity → noninterference (2-domain then full lattice) → memory separation → IPC confinement → refinement → crypto. Emphasize: each is *inductive and non-vacuous* (the guard is load-bearing; counterexamples prove the restriction has teeth), not a `decide` toy.
 3. **The trust story (4 min).** The audit: 114 AI "proofs" of open problems → **zero unsound, but 9 empty stubs scored as passing** and pervasive conditional/circular mislabeling. This is the failure taxonomy a high-assurance org needs before putting AI in the loop — and the gate that enforces it. *This is the part nobody else is showing.*
 4. **The seL4 contribution map (2 min).** The ~20:1 ratio is mostly mechanical invariant/refinement bookkeeping and per-port re-verification — exactly the bounded-but-enormous regime AI is strong at. Independent gate = the acceptance criterion for AI-contributed proofs.
-5. **The ask (2 min).** Phase 1: bridge the gate to an SMT (Z3/CVC5) and Isabelle/HOL backend so "verified" isn't Lean-only — the step that targets seL4's binary translation-validation leg and makes the capability *complete*. Phase 2: SAW+Cryptol / Verus code-level.
+5. **The ask (2 min).** Phase-1 SMT cross-verification is *already working* (Z3 × Lean/AXLE, `ALL CROSS-VERIFIED: True`) — so the ask is to extend the multi-prover gate to an Isabelle/HOL backend (for the l4v corpus) and to SAW+Cryptol / Verus at the code level, and to point it at a concrete seL4-adjacent obligation (a binary translation-validation lemma, or a new above-kernel component). "Verified" is already not Lean-only; make it complete.
 
 ## The honesty line to hold (do not oversell)
 
