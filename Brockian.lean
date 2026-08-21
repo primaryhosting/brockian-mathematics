@@ -885,3 +885,12 @@ import Brockian.FermatNumbersReduction
 import Brockian.BrocardProblemReduction
 import Brockian.TwinPrimesReduction
 import Brockian.PolignacPrimesReduction
+import Brockian.HighAssuranceCapabilityIntegrity
+import Brockian.HighAssuranceNoninterference
+import Brockian.PCA_Core
+import Brockian.PCA_Coverage
+import Brockian.PCA_Fix
+import Brockian.PCA_WriteIntegrity
+import Brockian.PCA_Cert
+import Brockian.PCA_Invariant
+import Brockian.PCA_Isolation
