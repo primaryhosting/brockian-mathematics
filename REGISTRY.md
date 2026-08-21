@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 642
+- **DEFINITION**: 643
 - **DISCHARGED**: 7
-- **PROVED**: 11123
+- **PROVED**: 11128
 
 ## Theorems
 
@@ -1958,6 +1958,12 @@
 | PROVED | `Brockian.D5Representation.d5Pull_mem_constantLine` | ✓ | verified | lean-4.32.2 | 2026-08-01 — finite D5 permutation representation foothold |
 | PROVED | `Brockian.D5Representation.d5Pull_mem_zeroSumSubmodule` | ✓ | verified | lean-4.32.2 | 2026-08-01 — finite D5 permutation representation foothold |
 | DEFINITION | `Brockian.D5Representation.zeroSumSubmodule` | ✓ | verified | lean-4.32.2 | 2026-08-01 — finite D5 permutation representation foothold |
+| DEFINITION | `Brockian.DepthHolonomyGeneral.K` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.DepthHolonomyGeneral.gcd_collision` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.DepthHolonomyGeneral.general_depth_holonomy_separates` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.DepthHolonomyGeneral.holonomy_after_loop` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.DepthHolonomyGeneral.order_separates` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.DepthHolonomyGeneral.residue_marginal_indep` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.DepthHolonomySeparation.K₁` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.DepthHolonomySeparation.K₁_holonomy_trivial` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.DepthHolonomySeparation.K₂` | ✓ | verified | lean-4.32.2 |  |

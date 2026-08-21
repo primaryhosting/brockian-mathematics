@@ -850,3 +850,4 @@ import Brockian.QCThreeQubit
 import Brockian.QCTwoQubit
 import Brockian.DepthHolonomySeparation
 import Brockian.PhaseDepthNoGo
+import Brockian.DepthHolonomyGeneral

@@ -1,8 +1,8 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11123,
-    "DEFINITION": 642,
+    "PROVED": 11128,
+    "DEFINITION": 643,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
     "DISCHARGED": 7
@@ -58721,6 +58721,195 @@
       "quarantine": true,
       "ledger_run": "2026-08-01 \u2014 finite D5 permutation representation foothold",
       "provenance_note": "VertexSpace = Fin 5 -> C; pullback action of Aut(C5)/D5 on vertex functions; constants fixed; coordinate sum invariant; zero-sum hyperplane invariant; constant vector is zero-sum iff c=0. First rung for character/isotypic-projector work, downstream of Aut(C5) ~= D5."
+    },
+    {
+      "name": "Brockian.DepthHolonomyGeneral.K",
+      "kind": "def",
+      "module": "Brockian.DepthHolonomyGeneral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DepthHolonomyGeneral.lean"
+      },
+      "register": "DEFINITION",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.DepthHolonomyGeneral.gcd_collision",
+      "kind": "theorem",
+      "module": "Brockian.DepthHolonomyGeneral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DepthHolonomyGeneral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.DepthHolonomyGeneral.general_depth_holonomy_separates",
+      "kind": "theorem",
+      "module": "Brockian.DepthHolonomyGeneral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DepthHolonomyGeneral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.DepthHolonomyGeneral.holonomy_after_loop",
+      "kind": "theorem",
+      "module": "Brockian.DepthHolonomyGeneral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DepthHolonomyGeneral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.DepthHolonomyGeneral.order_separates",
+      "kind": "theorem",
+      "module": "Brockian.DepthHolonomyGeneral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DepthHolonomyGeneral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.DepthHolonomyGeneral.residue_marginal_indep",
+      "kind": "theorem",
+      "module": "Brockian.DepthHolonomyGeneral",
+      "statement": "",
+      "source": {
+        "file": "Brockian/DepthHolonomyGeneral.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.DepthHolonomySeparation.K\u2081",
