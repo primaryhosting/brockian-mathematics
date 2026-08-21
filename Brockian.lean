@@ -867,3 +867,4 @@ import Brockian.VaughanSplit
 import Brockian.HarmonicDivisor
 import Brockian.PrimitiveRoot
 import Brockian.ConvSplit
+import Brockian.Vaughan
