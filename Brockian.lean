@@ -894,3 +894,7 @@ import Brockian.PCA_WriteIntegrity
 import Brockian.PCA_Cert
 import Brockian.PCA_Invariant
 import Brockian.PCA_Isolation
+import Brockian.HighAssuranceRefinement
+import Brockian.HighAssuranceTakeGrant
+import Brockian.HighAssuranceIPCConfinement
+import Brockian.HighAssuranceLatticeNoninterference
