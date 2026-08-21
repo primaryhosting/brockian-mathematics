@@ -860,3 +860,5 @@ import Brockian.FareySeparation
 import Brockian.VonMangoldtPointwise
 import Brockian.ProductHolonomy
 import Brockian.HolonomyHomomorphism
+import Brockian.TruncatedConvolution
+import Brockian.HolonomyIsomorphism

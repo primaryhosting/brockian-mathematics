@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11161,
+    "PROVED": 11168,
     "DEFINITION": 649,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -109000,6 +109000,171 @@
       "statement": "",
       "source": {
         "file": "Brockian/HolonomyHomomorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HolonomyIsomorphism.holonomy_group_iso",
+      "kind": "theorem",
+      "module": "Brockian.HolonomyIsomorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HolonomyIsomorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HolonomyIsomorphism.holonomy_iso_onto_translations",
+      "kind": "theorem",
+      "module": "Brockian.HolonomyIsomorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HolonomyIsomorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HolonomyIsomorphism.loop_injective",
+      "kind": "theorem",
+      "module": "Brockian.HolonomyIsomorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HolonomyIsomorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HolonomyIsomorphism.loop_probe",
+      "kind": "theorem",
+      "module": "Brockian.HolonomyIsomorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HolonomyIsomorphism.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HolonomyIsomorphism.loop_probe_injective",
+      "kind": "theorem",
+      "module": "Brockian.HolonomyIsomorphism",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HolonomyIsomorphism.lean"
       },
       "register": "PROVED",
       "axioms": [
@@ -331642,6 +331807,72 @@
       "quarantine": true,
       "ledger_run": "Aristotle 18ee0406 clean-prefix harvest; Codex AXLE audit",
       "provenance_note": "Triple admissibility is componentwise under ZMod Chinese remainder and its finite count is multiplicative for coprime moduli. Later returned prime/squarefree product statements contained sorry and were excluded."
+    },
+    {
+      "name": "Brockian.TruncatedConvolution.truncLE_apply",
+      "kind": "theorem",
+      "module": "Brockian.TruncatedConvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TruncatedConvolution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.TruncatedConvolution.truncLE_mul_apply",
+      "kind": "theorem",
+      "module": "Brockian.TruncatedConvolution",
+      "statement": "",
+      "source": {
+        "file": "Brockian/TruncatedConvolution.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.Turan.turan",
