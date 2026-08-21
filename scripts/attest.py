@@ -110,7 +110,11 @@ def attest(lean_path: str, namespace: str, names: list[str], env: str) -> dict:
 
     probe = flat + "\n\n" + "\n".join(
         f"#print axioms {fqn(n)}" for n in probe_names) + "\n"
-    r = axle_client.check(probe, env=env, timeout=300)
+    # The probe recompiles the WHOLE module + #print axioms; large modules (heavy ℂ
+    # character sums, big case analyses) need more than the old hard 300s. Configurable
+    # via ATTEST_TIMEOUT so a big assembled module doesn't false-fail on timeout.
+    _timeout = int(os.environ.get("ATTEST_TIMEOUT", "600"))
+    r = axle_client.check(probe, env=env, timeout=_timeout)
     infos = (r.raw.get("lean_messages") or {}).get("infos", [])
 
     def axioms_for(n: str) -> list[str] | None:
