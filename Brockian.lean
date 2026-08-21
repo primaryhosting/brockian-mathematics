@@ -868,3 +868,6 @@ import Brockian.HarmonicDivisor
 import Brockian.PrimitiveRoot
 import Brockian.ConvSplit
 import Brockian.Vaughan
+import Brockian.PhaseDepthCohomologyComplete
+import Brockian.Figurate
+import Brockian.NonabelianOrderHolonomy

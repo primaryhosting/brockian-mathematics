@@ -1,5 +1,5 @@
 {
-  "count": 151,
+  "count": 150,
   "queue": [
     {
       "target": "Zeta23Obstruction.repaired_witness_nonneg",
@@ -1200,13 +1200,6 @@
       "difficulty": "EASY",
       "statement": "The multiples of s walk the rays in the fixed cyclic order determined by s mod 5: strides \u2261 2 (terminal digits 2,7) trace the pentagram order (2,4,1,3,0); \u2261 3 (digits 3,8) its mirror (3,1,4,2,0); \u2261 1 the pentagon (1,2,3,4,0); \u2261 4 its mirror; \u2261 0 never leave ray 0.",
       "goal": "Prove in Lean 4 (Mathlib, lean-4.32.0): \u2200 s k : \u2115, ((k+1)*s) % 5 = (k*s % 5 + s % 5) % 5 (constant ray-step), and the instantiations: s % 5 = 2 \u2192 (List.range 5).map (fun k => ((k+1)*s) % 5) = [2,4,1,3,0], and the analogous lists for s%5 = 3 ([3,1,4,2,0]), 1 ([1,2,3,4,0]), 4 ([4,3,2,1,0]), 0 ([0,0,0,0,0]). Route: Nat.add_mul_mod_self style rewrites + decide on the five list identities after substituting s % 5."
-    },
-    {
-      "target": "Brockian.PhaseDepthCohomologyComplete.coboundary_of_sum_eq",
-      "tier": "B-brockian-frontier",
-      "rank": 1,
-      "difficulty": "MEDIUM",
-      "goal": "Prove in Lean 4 (Mathlib, lean-4.32.2), axiom-clean (no sorry/admit/native_decide): for any additive commutative group G and any two functions c1 c2 : ZMod 5 -> G such that (Finset.sum Finset.univ c1) = (Finset.sum Finset.univ c2), there exists h : ZMod 5 -> G with the property that for every j : ZMod 5, c1 j - c2 j = h (j + 1) - h j. This is the completeness (converse) half of a discrete-cohomology no-go: equal total sum over the 5-cycle forces the difference to be a coboundary. Hint: set g j = c1 j - c2 j (so its sum is 0); define h by partial sums h(k) = sum of g over the representatives below k (h 0 = 0, h 1 = g 0, ..., h 4 = g 0 + g 1 + g 2 + g 3); the seam j = 4 (where j+1 = 0) closes because the total sum of g is zero. Use fin_cases on j and the zero-sum hypothesis for the seam case. State the theorem exactly as: theorem coboundary_of_sum_eq {G : Type*} [AddCommGroup G] (c1 c2 : ZMod 5 -> G) (hs : (Finset.univ.sum c1) = (Finset.univ.sum c2)) : exists h : ZMod 5 -> G, forall j, c1 j - c2 j = h (j + 1) - h j."
     }
   ]
 }

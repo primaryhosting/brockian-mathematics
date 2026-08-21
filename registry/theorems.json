@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11204,
+    "PROVED": 11218,
     "DEFINITION": 649,
     "CONJECTURE": 40,
     "CONDITIONAL": 20,
@@ -65455,6 +65455,258 @@
       "provenance_note": "HARMONIC-PROVED (Aristotle, project fib-gcd), independently AXLE-verified @lean-4.32.0, axiom-clean. Classical identity, namespace Brockian.FibGcd."
     },
     {
+      "name": "Brockian.Figurate.figurate_values",
+      "kind": "theorem",
+      "module": "Brockian.Figurate",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Figurate.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Figurate.hex2_eq_pent2_add",
+      "kind": "theorem",
+      "module": "Brockian.Figurate",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Figurate.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Figurate.hex2_eq_tri2_odd",
+      "kind": "theorem",
+      "module": "Brockian.Figurate",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Figurate.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Figurate.hex2_succ",
+      "kind": "theorem",
+      "module": "Brockian.Figurate",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Figurate.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Figurate.pent2_decomp",
+      "kind": "theorem",
+      "module": "Brockian.Figurate",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Figurate.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Figurate.pent2_succ",
+      "kind": "theorem",
+      "module": "Brockian.Figurate",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Figurate.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Figurate.tri2_succ",
+      "kind": "theorem",
+      "module": "Brockian.Figurate",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Figurate.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Figurate.two_sq_eq_tri2_pair",
+      "kind": "theorem",
+      "module": "Brockian.Figurate",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Figurate.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.Fin5InnerProduct.conj_omega",
       "kind": "theorem",
       "module": "Brockian.Fin5InnerProduct",
@@ -119304,6 +119556,167 @@
       "provenance_note": null
     },
     {
+      "name": "Brockian.NonabelianOrderHolonomy.holonomy_noncommutative",
+      "kind": "theorem",
+      "module": "Brockian.NonabelianOrderHolonomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/NonabelianOrderHolonomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.NonabelianOrderHolonomy.loop_holonomy",
+      "kind": "theorem",
+      "module": "Brockian.NonabelianOrderHolonomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/NonabelianOrderHolonomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.NonabelianOrderHolonomy.nonabelian_order_separation",
+      "kind": "theorem",
+      "module": "Brockian.NonabelianOrderHolonomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/NonabelianOrderHolonomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.NonabelianOrderHolonomy.order_dependent",
+      "kind": "theorem",
+      "module": "Brockian.NonabelianOrderHolonomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/NonabelianOrderHolonomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.NonabelianOrderHolonomy.residue_marginal_indep",
+      "kind": "theorem",
+      "module": "Brockian.NonabelianOrderHolonomy",
+      "statement": "",
+      "source": {
+        "file": "Brockian/NonabelianOrderHolonomy.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.OddDistinctPartition.card_distincts_le_partition",
       "kind": "theorem",
       "module": "Brockian.OddDistinctPartition",
@@ -127971,6 +128384,39 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PhaseDepthCohomologyComplete.coboundary_of_sum_eq",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthCohomologyComplete",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthCohomologyComplete.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.PhaseDepthNoGo.Cohomologous",
