@@ -904,3 +904,5 @@ import Brockian.HighAssuranceConstantTime
 import Brockian.HighAssuranceAEAD
 import Brockian.HighAssuranceMerkle
 import Brockian.HighAssuranceKernel
+import Brockian.HighAssuranceScheduler
+import Brockian.HighAssuranceRevocation

@@ -26,7 +26,8 @@ We built the **verified security core of a capability microkernel** — the seL4
 - `IPCConfinement.ipc_confinement` — capability-gated endpoints; no unmediated channel.
 - `Refinement.{forward_simulation, safety_transported}` — the seL4 refinement methodology, mechanized.
 - **`Kernel.kernel_security`** — **the capstone**: a unified kernel state machine whose single guarded step relation covers grant/write/send, with one composite invariant (integrity ∧ memory separation ∧ IPC confinement) proved preserved across *all* reachable states. Non-vacuous: a concrete run reaches a secure state, and a specific off-policy configuration is proved categorically unreachable.
-- `Scheduler.*` / `Revocation.*` — scheduler safety + fairness and capability revocation (CDT subtree reclamation) *[integrating as wave 3 finishes]*.
+- `Scheduler.{sched_safety, no_starvation, work_conserving}` — scheduler safety (only runnable threads run), round-robin fairness (no starvation within a cycle), work-conserving; blocked threads provably never dispatched.
+- `Revocation.{no_residual_authority, revoke_preserves_unrelated, revoke_monotone, revoke_idempotent}` — capability revocation reclaims all derived authority (complete), touches nothing unrelated (surgical), never grants (monotone), settles in one shot — the CDT modeled as a faithful forest.
 
 **Crypto layer** — `Brockian.HighAssurance.*`
 - `MAC.{verify_sound, mac_determines_tag, no_forgery}` — structural guarantees unconditional; unforgeability from a named premise.

@@ -40,6 +40,16 @@
       "visualRef": "refinement"
     },
     {
+      "claim": "Scheduler fairness: the round-robin dispatcher is starvation-free — every ready thread is dispatched within one queue cycle; and a blocked thread is never scheduled.",
+      "theorem": "Brockian.HighAssurance.Scheduler.no_starvation",
+      "visualRef": "scheduler"
+    },
+    {
+      "claim": "Capability revocation: revoking a capability reclaims all authority derived from it — after revoke, no live capability is a descendant in the derivation tree (complete), while unrelated capabilities are untouched (surgical).",
+      "theorem": "Brockian.HighAssurance.Revocation.no_residual_authority",
+      "visualRef": "revocation"
+    },
+    {
       "claim": "MAC: a message has a unique valid tag under a key, so verification accepts only the authentic tag (blind guessing is the only structure-respecting attack).",
       "theorem": "Brockian.HighAssurance.MAC.mac_determines_tag",
       "visualRef": "mac"
