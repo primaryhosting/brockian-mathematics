@@ -37,12 +37,13 @@ We built the **verified security core of a capability microkernel** — the seL4
 - `AEAD.{aead_roundtrip, auth_required, tamper_rejected, replay_rejected}` — encrypt-then-MAC composition.
 - `Merkle.{inclusion_complete, tamper_detected, root_binding, inclusion_sound}` — tamper-evidence; assumptions stated openly.
 - `ConstantTime.{ct_trace_noninterference, leaky_program_leaks}` — side-channel noninterference with a counterexample for teeth.
+- `Declassification.{delimited_release, no_declassify_noninterference}` — controlled declassification (Sabelfeld–Sands delimited release): Low learns exactly the released f(high) and no more; pure noninterference is the no-declassify special case.
 
 **Software-security layer (Proof-Carrying Apps)** — `PCA.*` (7 modules): default-deny access control, tenant isolation, cross-tenant write prevention, ed25519 soundness, RLS invariants.
 
 **Multi-prover mirror** — `Brockian.HighAssurance.SMTMirror.*` (3 theorems) cross-verified by Z3 and Lean/AXLE via `scripts/smt_gate.py`.
 
-Corpus at time of writing: **11,516 PROVED** (CIA triad complete: integrity + confidentiality + availability), 33 CONDITIONAL, gate 4/4 (registry-consistency + overclaim-firewall + no-theater-lint + attestation-integrity).
+Corpus at time of writing: **11,525 PROVED** (CIA triad complete: integrity + confidentiality + availability), 33 CONDITIONAL, gate 4/4 (registry-consistency + overclaim-firewall + no-theater-lint + attestation-integrity).
 
 ## Multi-prover cross-verification (Phase-1, working)
 

@@ -19,16 +19,16 @@
     "verified_by"
   ],
   "summary": {
-    "total": 12247,
+    "total": 12256,
     "by_source": {
       "brockian": {
-        "total": 12209,
+        "total": 12218,
         "by_register": {
           "CONDITIONAL": 33,
           "CONJECTURE": 40,
           "DEFINITION": 650,
           "DISCHARGED": 7,
-          "PROVED": 11479
+          "PROVED": 11488
         }
       },
       "unknown": {
@@ -44,7 +44,7 @@
       "CONJECTURE": 40,
       "DEFINITION": 651,
       "DISCHARGED": 7,
-      "PROVED": 11516
+      "PROVED": 11525
     }
   },
   "theorems": [
@@ -65223,6 +65223,167 @@
     {
       "name": "Brockian.HighAssurance.ConstantTime.step_pub_obs",
       "module": "Brockian.HighAssurance.ConstantTime",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Declassification.controlled_release_no_declassify",
+      "module": "Brockian.HighAssurance.Declassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Declassification.delimited_release",
+      "module": "Brockian.HighAssurance.Declassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Declassification.high_write_no_low_effect",
+      "module": "Brockian.HighAssurance.Declassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Declassification.high_write_not_declassified_invisible",
+      "module": "Brockian.HighAssurance.Declassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Declassification.no_declassify_noninterference",
+      "module": "Brockian.HighAssurance.Declassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Declassification.run_delim",
+      "module": "Brockian.HighAssurance.Declassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Declassification.run_low_consistency",
+      "module": "Brockian.HighAssurance.Declassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Declassification.step_delim",
+      "module": "Brockian.HighAssurance.Declassification",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.Declassification.step_low_consistency",
+      "module": "Brockian.HighAssurance.Declassification",
       "register": "PROVED",
       "kind": "theorem",
       "statement": "",
