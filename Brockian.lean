@@ -898,3 +898,4 @@ import Brockian.HighAssuranceRefinement
 import Brockian.HighAssuranceTakeGrant
 import Brockian.HighAssuranceIPCConfinement
 import Brockian.HighAssuranceLatticeNoninterference
+import Brockian.HighAssuranceMemorySeparation

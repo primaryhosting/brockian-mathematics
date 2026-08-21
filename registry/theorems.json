@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11411,
+    "PROVED": 11418,
     "DEFINITION": 650,
     "CONJECTURE": 40,
     "CONDITIONAL": 33,
@@ -112563,6 +112563,221 @@
       "statement": "",
       "source": {
         "file": "Brockian/HighAssuranceLatticeNoninterference.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.MemorySeparation.cross_subject_isolation",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.MemorySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceMemorySeparation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.MemorySeparation.demoAuth_disjoint",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.MemorySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceMemorySeparation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.MemorySeparation.frame",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.MemorySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceMemorySeparation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.MemorySeparation.frame_general",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.MemorySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceMemorySeparation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.MemorySeparation.memory_separation",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.MemorySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceMemorySeparation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.MemorySeparation.run_filtered_indep",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.MemorySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceMemorySeparation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.MemorySeparation.unauth_write_noop",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.MemorySeparation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceMemorySeparation.lean"
       },
       "register": "PROVED",
       "axioms": [
