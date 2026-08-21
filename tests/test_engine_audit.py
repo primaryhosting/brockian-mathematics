@@ -35,7 +35,7 @@ def test_main_nonstrict_never_fails(monkeypatch):
     assert audit.main() == 0
 
 
-def test_run_reports_three_surfaces(monkeypatch):
+def test_run_reports_all_surfaces(monkeypatch):
     calls = []
 
     def fake_subrun(cmd, cwd=None, capture_output=True, text=True):
@@ -48,8 +48,11 @@ def test_run_reports_three_surfaces(monkeypatch):
     monkeypatch.setattr(audit.subprocess, "run", fake_subrun)
     results = audit.run(strict=True)
     names = [n for n, _, _ in results]
-    assert names == ["registry-consistency", "overclaim-firewall", "no-theater-lint"]
+    assert names == ["registry-consistency", "overclaim-firewall",
+                     "no-theater-lint", "attestation-integrity"]
     assert all(ok for _, ok, _ in results)
-    # the registry-consistency surface was invoked with --strict
+    # the registry-consistency + attestation-integrity surfaces get --strict
     assert any(any("audit_registry_consistency.py" in a for a in c) and "--strict" in c
+               for c in calls)
+    assert any(any("check_attestation_integrity.py" in a for a in c) and "--strict" in c
                for c in calls)

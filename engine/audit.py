@@ -7,6 +7,9 @@ Runs the three enforcers as ONE `--strict` surface:
      self-consistency over registry/theorems.json.
   3. no-theater lint       (scripts/no_theater_lint.py) — fake-proof line patterns;
      a sorry/admit in a CLAIMED module (one imported by Brockian.lean) is blocking.
+  4. attestation integrity (scripts/check_attestation_integrity.py) — local, no-AXLE
+     check that every attested declaration exists in its source with a matching kind
+     (catches the attestation-gap class before a costly re-attestation).
 
 This is what the conveyor's registry hop gates on. Previously the hop ran only surface 1,
 so surfaces 2 and 3 were never enforced on the hop; folding them here enforces all three.
@@ -64,6 +67,10 @@ def run(strict: bool = True) -> list:
     else:
         rc, out = 0, "no Brockian/*.lean found"
     results.append(("no-theater-lint", rc == 0, out))
+
+    rc, out = _run([PY, "scripts/check_attestation_integrity.py"]
+                   + (["--strict"] if strict else []))
+    results.append(("attestation-integrity", rc == 0, out))
 
     return results
 
