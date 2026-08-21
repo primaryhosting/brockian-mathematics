@@ -8,9 +8,9 @@
 
 - **CONDITIONAL**: 20
 - **CONJECTURE**: 40
-- **DEFINITION**: 647
+- **DEFINITION**: 648
 - **DISCHARGED**: 7
-- **PROVED**: 11145
+- **PROVED**: 11151
 
 ## Theorems
 
@@ -3543,6 +3543,13 @@
 | PROVED | `Brockian.GraphComponentMatrix.shiftedAdjacency_eq_zero_of_components_ne` | ✓ | verified | lean-4.32.2 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
 | PROVED | `Brockian.GraphComponentMatrix.shiftedAdjacency_reindex_components` | ✓ | verified | lean-4.32.2 | Codex 2026-08-04 - finite graph component matrix decomposition; AXLE @4.32 |
 | PROVED | `Brockian.HockeyStick.hockey_stick` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
+| DEFINITION | `Brockian.HolonomyConjugacy.K` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyConjugacy.all_close_at_30` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyConjugacy.conj_same_period` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyConjugacy.conj_same_period10` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyConjugacy.conj_same_period15` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyConjugacy.holonomy_after_loop` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HolonomyConjugacy.period_is_conjugacy_class_function` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.HolonomyFaithful.K` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HolonomyFaithful.holonomy_after_loop` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HolonomyFaithful.holonomy_faithful` | ✓ | verified | lean-4.32.2 |  |
