@@ -32,6 +32,7 @@ LOCK = ROOT / ".harvest.lock"
 NIGHT = ROOT / "submitted_night.json"
 KEYENV = {"admin": "ARISTOTLE_API_KEY", "chris": "ARISTOTLE_API_KEY_CHRIS"}
 BAD = re.compile(r"\b(sorry|admit|native_decide|sorryAx)\b")
+HAS_DECL = re.compile(r"\b(theorem|lemma)\s+[A-Za-z_]")
 UUID = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
 MAXDL = int(os.environ.get("HARVEST_ALL_MAX", "200"))
 PAGES = int(os.environ.get("HARVEST_ALL_PAGES", "20"))
@@ -109,6 +110,11 @@ def fetch(pid, key):
     if not lean.strip():
         return False, None, ""
     body = "\n".join(l for l in lean.splitlines() if not l.strip().startswith("--"))
+    # An imports-only stub (grand filename, zero theorems) is NOT a proof — the audit
+    # (2026-08-21) found 9 such empty files being scored as "PROVED" candidates of famous
+    # open problems. A real candidate must declare at least one theorem/lemma.
+    if not HAS_DECL.search(body):
+        return True, "STOPPED", lean
     return True, ("STOPPED" if BAD.search(body) else "PROVED"), lean
 
 
