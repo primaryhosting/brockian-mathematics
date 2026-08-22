@@ -180,7 +180,7 @@
     <p class="lede">We did not re-prove seL4 — it is already done, in Isabelle, over roughly twenty person-years. We built the verified <em>mathematics</em> of a secure kernel: its crown-jewel property classes, generated with AI, <strong>independently re-verified</strong> by a second prover, axiom-audited, and honesty-gated.</p>
 
     <div class="status" role="list" aria-label="Verification status">
-      <div class="stat" role="listitem"><div class="n">11,544</div><div class="l">Theorems proved</div></div>
+      <div class="stat" role="listitem"><div class="n">11,555</div><div class="l">Theorems proved</div></div>
       <div class="stat" role="listitem"><div class="n">4<span>/4</span></div><div class="l">Honesty gate surfaces pass</div></div>
       <div class="stat" role="listitem"><div class="n">Z3 × Lean</div><div class="l">Cross-verified</div></div>
       <div class="stat" role="listitem"><div class="n">0</div><div class="l">Unsound proofs in audit</div></div>
@@ -314,7 +314,40 @@
 <section>
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">02 — Trust</span>
+      <span class="eyebrow">02 — For the seL4 ecosystem</span>
+      <h2>A concrete contribution, not just our own models</h2>
+    </div>
+    <p>seL4 the kernel is proven; the systems built <em>on</em> it are not. Its isolation guarantee is conditional on the initial capability layout — described by <strong>capDL</strong>, what <span class="mono">microkit</span> and CAmkES compile to — and nothing in the toolchain formally checks that a given layout enforces the intended isolation. A single mis-wired capability silently breaks it.</p>
+    <div class="cols">
+      <div class="panel">
+        <h3>A verified capDL isolation checker</h3>
+        <p style="font-size:.92rem">A decidable checker with a machine-checked <b>soundness-and-completeness</b> proof: a <span class="mono">true</span> verdict is a formal certificate that a system's capability distribution confines every subsystem to its protection domain — including <em>transitive</em> isolation (an isolated domain is unreachable through any capability chain).</p>
+        <div class="thm" style="overflow-x:auto;margin-top:4px"><code class="mono" style="font-size:.8rem;color:var(--accent-ink)">CapDLIsolation.<b>checkIsolation_correct</b></code></div>
+        <p style="font-size:.86rem;color:var(--muted);margin-top:10px">Operates on capDL — the artifact the seL4 systems frontier already produces — so it needs <em>no</em> Isabelle bridge and drops in as a CI check.</p>
+      </div>
+      <div class="panel">
+        <h3>Worked example — a microkit-shaped system</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;font-family:var(--font-mono);font-size:.84rem">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 12px;border:1px solid var(--line);border-radius:7px">
+            <span>driver &amp; app share only a permitted endpoint</span><span class="chip v" style="align-self:auto">Accepted</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 12px;border:1px solid var(--line);border-radius:7px">
+            <span>one stray cross-domain capability</span><span class="chip o" style="align-self:auto">Rejected</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 12px;border:1px solid var(--line);border-radius:7px">
+            <span>secret domain, reachable from app?</span><span class="chip v" style="align-self:auto">Unreachable</span>
+          </div>
+        </div>
+        <p style="font-size:.84rem;color:var(--muted);margin-top:12px">Every verdict here is a theorem — machine-checked, axiom-clean.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">03 — Trust</span>
       <h2>Independent verification is the moat, not the theorem count</h2>
     </div>
     <div class="cols">
@@ -354,7 +387,7 @@
 <section>
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">03 — Engagement</span>
+      <span class="eyebrow">04 — Engagement</span>
       <h2>What we could do for Galois</h2>
     </div>
     <p>The value we bring is the layer <em>above</em> the provers — AI generation at scale, an independent verification gate, and a compounding verified corpus — not another prover. A phased path that meets your stack where it is.</p>
@@ -386,7 +419,7 @@
 <section>
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">04 — Boundary</span>
+      <span class="eyebrow">05 — Boundary</span>
       <h2>The honest limits</h2>
     </div>
     <div class="boundary">
