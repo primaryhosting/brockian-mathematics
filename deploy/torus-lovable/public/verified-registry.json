@@ -19,16 +19,16 @@
     "verified_by"
   ],
   "summary": {
-    "total": 12275,
+    "total": 12286,
     "by_source": {
       "brockian": {
-        "total": 12237,
+        "total": 12248,
         "by_register": {
           "CONDITIONAL": 33,
           "CONJECTURE": 40,
           "DEFINITION": 650,
           "DISCHARGED": 7,
-          "PROVED": 11507
+          "PROVED": 11518
         }
       },
       "unknown": {
@@ -44,7 +44,7 @@
       "CONJECTURE": 40,
       "DEFINITION": 651,
       "DISCHARGED": 7,
-      "PROVED": 11544
+      "PROVED": 11555
     }
   },
   "theorems": [
@@ -65026,6 +65026,215 @@
       "discharged_by": null,
       "axioms": [
         "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.badSys_rejected",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.checkIsolation_correct",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.goodSys_passes",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.goodSys_wellIsolated",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.isolated_domain_unreachable",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.isolated_domain_unreachable_into",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.names_only_permitted",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.no_cross_domain_cap",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.secret_cannot_reach_app",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.secret_isolated",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "axioms_ok": true,
+      "axle_verdict": "verified",
+      "env": "lean-4.32.2",
+      "sorry_free": true,
+      "source": "brockian",
+      "verified_by": "AXLE"
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.secret_unreachable_from_app",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "register": "PROVED",
+      "kind": "theorem",
+      "statement": "",
+      "conditional_rung": null,
+      "discharged_by": null,
+      "axioms": [
         "Quot.sound",
         "propext"
       ],

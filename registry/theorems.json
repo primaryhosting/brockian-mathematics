@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11544,
+    "PROVED": 11555,
     "DEFINITION": 651,
     "CONJECTURE": 40,
     "CONDITIONAL": 33,
@@ -112424,6 +112424,358 @@
       "register": "PROVED",
       "axioms": [
         "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.badSys_rejected",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceCapDLIsolation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.checkIsolation_correct",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceCapDLIsolation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.goodSys_passes",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceCapDLIsolation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.goodSys_wellIsolated",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceCapDLIsolation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.isolated_domain_unreachable",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceCapDLIsolation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.isolated_domain_unreachable_into",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceCapDLIsolation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.names_only_permitted",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceCapDLIsolation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.no_cross_domain_cap",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceCapDLIsolation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.secret_cannot_reach_app",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceCapDLIsolation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.secret_isolated",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceCapDLIsolation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.CapDLIsolation.secret_unreachable_from_app",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.CapDLIsolation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceCapDLIsolation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
         "Quot.sound",
         "propext"
       ],

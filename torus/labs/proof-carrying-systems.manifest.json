@@ -10,6 +10,16 @@
       "visualRef": "capstone"
     },
     {
+      "claim": "seL4 contribution — verified capDL isolation checker: a decidable checker whose 'true' verdict is a machine-checked certificate that a system's capability distribution enforces its protection-domain policy (sound AND complete).",
+      "theorem": "Brockian.HighAssurance.CapDLIsolation.checkIsolation_correct",
+      "visualRef": "capdl-checker"
+    },
+    {
+      "claim": "seL4 contribution — transitive isolation: an object in a fully-isolated protection domain is unreachable through ANY chain of capabilities from outside, and vice-versa — the seL4 isolation guarantee proved at the capDL level.",
+      "theorem": "Brockian.HighAssurance.CapDLIsolation.isolated_domain_unreachable",
+      "visualRef": "capdl-isolation"
+    },
+    {
       "claim": "Integrity (authority confinement): from a policy-conformant start, every reachable state's capabilities stay within policy — no operation manufactures unauthorized authority.",
       "theorem": "Brockian.HighAssurance.CapabilityIntegrity.integrity_confinement",
       "visualRef": "integrity"

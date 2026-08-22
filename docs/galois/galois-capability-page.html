@@ -1,0 +1,406 @@
+<style>
+  :root{
+    --bg:#f6f8f7; --surface:#ffffff; --surface-2:#f0f3f1;
+    --ink:#141c19; --muted:#566661; --faint:#8b978f; --line:#dbe3df;
+    --accent:#0d7d70; --accent-ink:#0a5d54; --accent-soft:rgba(13,125,112,.09);
+    --verified:#1a7f3c; --verified-soft:rgba(26,127,60,.11);
+    --conditional:#8a5a00; --conditional-soft:rgba(138,90,0,.11);
+    --open:#a33421; --open-soft:rgba(163,52,33,.10);
+    --font-mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code",Menlo,Consolas,monospace;
+    --font-sans:"SF Pro Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --maxw:1060px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0b110f; --surface:#111917; --surface-2:#0e1513;
+      --ink:#e6efe9; --muted:#94a69d; --faint:#65746c; --line:#202d28;
+      --accent:#38cdb6; --accent-ink:#5fe0cd; --accent-soft:rgba(56,205,182,.12);
+      --verified:#4cc879; --verified-soft:rgba(76,200,121,.13);
+      --conditional:#dda63a; --conditional-soft:rgba(221,166,58,.13);
+      --open:#e5745a; --open-soft:rgba(229,116,90,.13);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0b110f; --surface:#111917; --surface-2:#0e1513;
+    --ink:#e6efe9; --muted:#94a69d; --faint:#65746c; --line:#202d28;
+    --accent:#38cdb6; --accent-ink:#5fe0cd; --accent-soft:rgba(56,205,182,.12);
+    --verified:#4cc879; --verified-soft:rgba(76,200,121,.13);
+    --conditional:#dda63a; --conditional-soft:rgba(221,166,58,.13);
+    --open:#e5745a; --open-soft:rgba(229,116,90,.13);
+  }
+  :root[data-theme="light"]{
+    --bg:#f6f8f7; --surface:#ffffff; --surface-2:#f0f3f1;
+    --ink:#141c19; --muted:#566661; --faint:#8b978f; --line:#dbe3df;
+    --accent:#0d7d70; --accent-ink:#0a5d54; --accent-soft:rgba(13,125,112,.09);
+    --verified:#1a7f3c; --verified-soft:rgba(26,127,60,.11);
+    --conditional:#8a5a00; --conditional-soft:rgba(138,90,0,.11);
+    --open:#a33421; --open-soft:rgba(163,52,33,.10);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--font-sans);line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  a{color:var(--accent-ink);text-decoration:none}
+
+  .mono{font-family:var(--font-mono)}
+  .eyebrow{
+    font-family:var(--font-mono);font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent-ink);font-weight:600;
+  }
+  h1,h2,h3{text-wrap:balance;font-weight:640;letter-spacing:-.01em}
+  h2{font-size:clamp(1.35rem,2.4vw,1.9rem);margin:0 0 .2em}
+  h3{font-size:1.05rem;margin:0}
+  p{margin:0 0 1rem;max-width:66ch}
+  .lede{font-size:1.12rem;color:var(--ink)}
+
+  /* ---- masthead ---- */
+  header.mast{
+    border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(var(--accent-soft),transparent 220px),
+      var(--surface);
+    position:relative;overflow:hidden;
+  }
+  .scan{position:absolute;inset:0 0 auto 0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--accent),transparent);
+    opacity:.6;animation:sweep 5.5s ease-in-out infinite}
+  @keyframes sweep{0%{transform:translateX(-100%)}55%,100%{transform:translateX(100%)}}
+  @media (prefers-reduced-motion:reduce){.scan{animation:none;opacity:.35}}
+  .mast .wrap{padding-top:64px;padding-bottom:52px}
+  .mast h1{font-size:clamp(2.1rem,5.2vw,3.5rem);line-height:1.04;margin:.5rem 0 .7rem;max-width:16ch}
+  .kicker{color:var(--accent);font-family:var(--font-mono);font-weight:600}
+
+  .status{
+    display:flex;flex-wrap:wrap;gap:0;margin-top:34px;
+    border:1px solid var(--line);border-radius:10px;background:var(--surface);
+    overflow:hidden;
+  }
+  .stat{flex:1 1 180px;padding:16px 20px;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:0}
+  .stat .n{font-family:var(--font-mono);font-size:1.5rem;font-weight:600;
+    font-variant-numeric:tabular-nums;color:var(--ink);line-height:1.1}
+  .stat .l{font-size:.74rem;color:var(--muted);letter-spacing:.04em;margin-top:4px;
+    text-transform:uppercase;font-family:var(--font-mono)}
+  .stat .n span{color:var(--verified)}
+
+  /* ---- sections ---- */
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:26px;flex-wrap:wrap}
+  .sec-head .eyebrow{white-space:nowrap}
+
+  .callout{
+    border:1px solid var(--line);border-left:3px solid var(--accent);
+    background:var(--surface);border-radius:8px;padding:20px 24px;margin-top:8px}
+  .callout p:last-child{margin-bottom:0}
+  .callout strong{color:var(--ink)}
+
+  /* ---- property matrix ---- */
+  .group{margin-top:30px}
+  .group-label{
+    font-family:var(--font-mono);font-size:.76rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--muted);
+    display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .group-label::after{content:"";flex:1;height:1px;background:var(--line)}
+  .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .cert{
+    background:var(--surface);border:1px solid var(--line);border-radius:9px;
+    padding:15px 16px 14px;display:flex;flex-direction:column;gap:9px;
+    transition:border-color .18s ease,transform .18s ease}
+  .cert:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .cert .claim{font-size:.94rem;color:var(--ink);line-height:1.45}
+  .cert .thm{overflow-x:auto;scrollbar-width:thin}
+  .cert .thm code{font-family:var(--font-mono);font-size:.78rem;color:var(--muted);
+    white-space:nowrap;display:inline-block}
+  .cert .thm code b{color:var(--accent-ink);font-weight:600}
+
+  .chip{
+    align-self:flex-start;display:inline-flex;align-items:center;gap:6px;
+    font-family:var(--font-mono);font-size:.68rem;font-weight:600;letter-spacing:.06em;
+    text-transform:uppercase;padding:3px 9px;border-radius:5px;border:1px solid transparent}
+  .chip::before{content:"";width:6px;height:6px;border-radius:50%}
+  .chip.v{color:var(--verified);background:var(--verified-soft);border-color:var(--verified-soft)}
+  .chip.v::before{background:var(--verified)}
+  .chip.c{color:var(--conditional);background:var(--conditional-soft)}
+  .chip.c::before{background:var(--conditional)}
+  .chip.o{color:var(--open);background:var(--open-soft)}
+  .chip.o::before{background:var(--open)}
+
+  .legend{display:flex;gap:22px;flex-wrap:wrap;margin-top:6px;font-size:.85rem;color:var(--muted)}
+  .legend .chip{font-size:.64rem}
+
+  /* ---- two-col prose ---- */
+  .cols{display:grid;gap:34px;grid-template-columns:1fr 1fr;align-items:start}
+  @media (max-width:760px){.cols{grid-template-columns:1fr;gap:24px}}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px 24px}
+  .panel h3{margin-bottom:10px}
+  .panel .big{font-family:var(--font-mono);font-size:2.1rem;font-weight:600;color:var(--accent);
+    font-variant-numeric:tabular-nums;line-height:1}
+  ul.tight{margin:.4rem 0 0;padding-left:1.1rem}
+  ul.tight li{margin:.35rem 0;color:var(--muted)}
+  ul.tight li b{color:var(--ink);font-weight:600}
+
+  /* ---- phases ---- */
+  .phases{display:flex;flex-direction:column;gap:2px;margin-top:8px;
+    border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--line)}
+  .phase{background:var(--surface);display:grid;grid-template-columns:auto 1fr auto;gap:20px;
+    align-items:start;padding:20px 24px}
+  .phase .idx{font-family:var(--font-mono);font-size:.82rem;color:var(--faint);
+    font-weight:600;letter-spacing:.05em;padding-top:2px;white-space:nowrap}
+  .phase .body h3{font-size:1.02rem;margin-bottom:5px}
+  .phase .body p{margin:0;font-size:.92rem;color:var(--muted);max-width:60ch}
+  .phase .st{font-family:var(--font-mono);font-size:.68rem;font-weight:600;letter-spacing:.06em;
+    text-transform:uppercase;white-space:nowrap;padding-top:3px}
+  .phase .st.done{color:var(--verified)}
+  .phase .st.next{color:var(--accent)}
+  .phase .st.later{color:var(--faint)}
+  @media (max-width:640px){.phase{grid-template-columns:1fr;gap:8px}.phase .st{padding-top:0}}
+
+  .boundary{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:8px}
+  .bcard{border:1px solid var(--line);border-radius:9px;padding:16px 18px;background:var(--surface-2)}
+  .bcard .h{font-family:var(--font-mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--ink);font-weight:600;margin-bottom:6px}
+  .bcard p{font-size:.88rem;color:var(--muted);margin:0}
+
+  footer{padding:40px 0 60px;color:var(--faint);font-size:.82rem}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer .mono{color:var(--muted)}
+
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+</style>
+
+<header class="mast">
+  <div class="scan" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="eyebrow">Capability Brief · prepared for Galois</div>
+    <h1>The verified <span class="kicker">mathematics</span> of a secure kernel.</h1>
+    <p class="lede">We did not re-prove seL4 — it is already done, in Isabelle, over roughly twenty person-years. We built the verified <em>mathematics</em> of a secure kernel: its crown-jewel property classes, generated with AI, <strong>independently re-verified</strong> by a second prover, axiom-audited, and honesty-gated.</p>
+
+    <div class="status" role="list" aria-label="Verification status">
+      <div class="stat" role="listitem"><div class="n">11,544</div><div class="l">Theorems proved</div></div>
+      <div class="stat" role="listitem"><div class="n">4<span>/4</span></div><div class="l">Honesty gate surfaces pass</div></div>
+      <div class="stat" role="listitem"><div class="n">Z3 × Lean</div><div class="l">Cross-verified</div></div>
+      <div class="stat" role="listitem"><div class="n">0</div><div class="l">Unsound proofs in audit</div></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="callout">
+      <p><strong>What this is.</strong> A working demonstrator that our pipeline verifies seL4-<em>class</em> security properties — integrity, confidentiality, separation, capability confinement, availability, liveness, refinement — each machine-checked in Lean 4 / Mathlib and re-verified independently by the AXLE prover, axiom-clean.</p>
+      <p><strong>What it is not.</strong> A re-verification of the seL4 kernel, or a claim that number theory runs a kernel. Every computational cryptographic assumption below is a <em>named, visible hypothesis</em> — never smuggled in as proved.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">01 — The demonstrator</span>
+      <h2>The verified security core of a capability microkernel</h2>
+    </div>
+    <p>Each property is a live, independently-verified theorem — inductive over arbitrary execution and non-vacuous, with the guard shown to be load-bearing rather than a <code class="mono">decide</code> toy. Fully-qualified names resolve in the public registry, where each renders its own certificate.</p>
+
+    <div class="legend" aria-hidden="false">
+      <span class="chip v">Verified</span><span>proved &amp; axiom-clean</span>
+      <span class="chip c">Conditional</span><span>proved under a named hypothesis — never green</span>
+    </div>
+
+    <div class="group">
+      <div class="group-label">Safety</div>
+      <div class="grid">
+        <div class="cert">
+          <span class="chip v">Verified · capstone</span>
+          <div class="claim">The whole kernel model preserves its <em>entire</em> policy — integrity ∧ separation ∧ IPC — across every reachable state.</div>
+          <div class="thm"><code>Kernel.<b>kernel_security</b></code></div>
+        </div>
+        <div class="cert">
+          <span class="chip v">Verified</span>
+          <div class="claim">Authority confinement: no operation ever manufactures capability beyond policy.</div>
+          <div class="thm"><code>CapabilityIntegrity.<b>integrity_confinement</b></code></div>
+        </div>
+        <div class="cert">
+          <span class="chip v">Verified</span>
+          <div class="claim">Take-grant confinement: reachable authority stays within the derivation closure.</div>
+          <div class="thm"><code>TakeGrant.<b>authority_confined</b></code></div>
+        </div>
+        <div class="cert">
+          <span class="chip v">Verified</span>
+          <div class="claim">Memory separation: an address changes only under an authorized write.</div>
+          <div class="thm"><code>MemorySeparation.<b>frame</b></code></div>
+        </div>
+        <div class="cert">
+          <span class="chip v">Verified</span>
+          <div class="claim">IPC confinement: every delivered message crossed an authorized endpoint channel.</div>
+          <div class="thm"><code>IPCConfinement.<b>ipc_confinement</b></code></div>
+        </div>
+        <div class="cert">
+          <span class="chip v">Verified</span>
+          <div class="claim">Capability revocation reclaims all derived authority (complete) and touches nothing else (surgical).</div>
+          <div class="thm"><code>Revocation.<b>no_residual_authority</b></code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-label">Confidentiality</div>
+      <div class="grid">
+        <div class="cert">
+          <span class="chip v">Verified</span>
+          <div class="claim">Noninterference over an arbitrary security lattice — a domain observes only what is cleared to influence it.</div>
+          <div class="thm"><code>LatticeNoninterference.<b>noninterference</b></code></div>
+        </div>
+        <div class="cert">
+          <span class="chip v">Verified</span>
+          <div class="claim">Controlled declassification: through a sanctioned channel, Low learns <em>exactly</em> the released f(high) and nothing more.</div>
+          <div class="thm"><code>Declassification.<b>delimited_release</b></code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-label">Availability &amp; liveness</div>
+      <div class="grid">
+        <div class="cert">
+          <span class="chip v">Verified</span>
+          <div class="claim">A subject with headroom can always allocate its reserved quota — no cross-subject denial of service. Completes the CIA triad.</div>
+          <div class="thm"><code>Availability.<b>availability_guarantee</b></code></div>
+        </div>
+        <div class="cert">
+          <span class="chip v">Verified</span>
+          <div class="claim">Scheduler fairness: every ready thread is dispatched within one round-robin cycle.</div>
+          <div class="thm"><code>Scheduler.<b>no_starvation</b></code></div>
+        </div>
+        <div class="cert">
+          <span class="chip v">Verified</span>
+          <div class="claim">Deadlock-freedom: a well-matched IPC system provably drains to quiescence.</div>
+          <div class="thm"><code>Progress.<b>no_deadlock</b></code></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-label">Refinement &amp; cryptography</div>
+      <div class="grid">
+        <div class="cert">
+          <span class="chip v">Verified</span>
+          <div class="claim">Refinement composes: a safety property rides a 3-level chain — seL4's abstract ⊒ executable ⊒ C.</div>
+          <div class="thm"><code>RefinementChain.<b>safety_transported_chain</b></code></div>
+        </div>
+        <div class="cert">
+          <span class="chip v">Verified</span>
+          <div class="claim">AEAD: a tampered ciphertext fails closed whenever the MAC distinguishes it.</div>
+          <div class="thm"><code>AEAD.<b>tamper_rejected</b></code></div>
+        </div>
+        <div class="cert">
+          <span class="chip v">Verified</span>
+          <div class="claim">Merkle tamper-evidence: altering a leaf provably changes the root along its proof path.</div>
+          <div class="thm"><code>Merkle.<b>tamper_detected</b></code></div>
+        </div>
+        <div class="cert">
+          <span class="chip v">Verified</span>
+          <div class="claim">Constant-time: the observable trace of an oblivious program is independent of secrets.</div>
+          <div class="thm"><code>ConstantTime.<b>ct_trace_noninterference</b></code></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">02 — Trust</span>
+      <h2>Independent verification is the moat, not the theorem count</h2>
+    </div>
+    <div class="cols">
+      <div>
+        <p>Generating a candidate proof is now cheap. The entire locus of value is <strong>verification and trust</strong> — and the failure modes AI introduces are not false proofs (the kernel catches those) but <em>valid proofs of subtly wrong statements</em>, and empty files with grand names.</p>
+        <div class="panel" style="margin-top:6px">
+          <h3>The honesty audit</h3>
+          <p style="margin:0 0 12px">We audited 114 AI-produced "proofs" of famous open problems.</p>
+          <div style="display:flex;gap:26px;flex-wrap:wrap">
+            <div><div class="big">0</div><div class="l mono" style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px">Bogus / unsound</div></div>
+            <div><div class="big" style="color:var(--conditional)">9</div><div class="l mono" style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px">Empty stubs, caught</div></div>
+          </div>
+          <p style="margin:14px 0 0;font-size:.9rem">Nine imports-only files scored as "passing proofs" of famous problems under a naive no-<code class="mono">sorry</code> check. That failure taxonomy — and the gate that enforces it — is what a high-assurance org needs before it lets AI near its proofs.</p>
+        </div>
+      </div>
+      <div>
+        <div class="panel">
+          <h3>The gate every theorem passes</h3>
+          <ul class="tight">
+            <li><b>Independent re-verification</b> — a proof only counts if a second prover (AXLE) agrees.</li>
+            <li><b>Axiom audit</b> — no <code class="mono">native_decide</code>, no <code class="mono">sorryAx</code>; only the trusted kernel axioms.</li>
+            <li><b>Statement fidelity</b> — checked against the intended claim, not merely "it compiles".</li>
+            <li><b>Provenance tiers</b> — verified · conditional · unverified render distinctly; nothing ambiguous.</li>
+          </ul>
+        </div>
+        <div class="panel" style="margin-top:12px">
+          <h3>Multi-prover, already working</h3>
+          <p style="margin:0 0 10px;font-size:.92rem">Three properties — a bitvector one-time-pad involution, a boolean default-deny law, an array-theory write frame — are discharged by <strong>Z3</strong> <em>and</em> <strong>Lean/AXLE</strong> on identical statements, with agreement required.</p>
+          <p style="margin:0;font-family:var(--font-mono);font-size:.82rem;color:var(--verified)">▸ ALL CROSS-VERIFIED: True</p>
+          <p style="margin:10px 0 0;font-size:.86rem;color:var(--muted)">The concrete answer to "your gate is Lean-only" — and the toolchain seL4's binary translation validation already relies on.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">03 — Engagement</span>
+      <h2>What we could do for Galois</h2>
+    </div>
+    <p>The value we bring is the layer <em>above</em> the provers — AI generation at scale, an independent verification gate, and a compounding verified corpus — not another prover. A phased path that meets your stack where it is.</p>
+    <div class="phases">
+      <div class="phase">
+        <div class="idx">PHASE 0</div>
+        <div class="body"><h3>The verified security core</h3><p>seL4-class properties, an independent gate, a provenance surface, and a working Z3 × Lean cross-check. Everything on this page.</p></div>
+        <div class="st done">✓ Done</div>
+      </div>
+      <div class="phase">
+        <div class="idx">PHASE 1</div>
+        <div class="body"><h3>Multi-prover gate</h3><p>Bridge the gate to an Isabelle/HOL backend (for the l4v corpus) and harden the SMT leg — targeting seL4's binary translation-validation obligations. "Verified" stops being one-prover-deep.</p></div>
+        <div class="st next">Proposed</div>
+      </div>
+      <div class="phase">
+        <div class="idx">PHASE 2</div>
+        <div class="body"><h3>Code level</h3><p>Wire SAW + Cryptol (crypto) and Verus / Dafny (code) into dispatch and the gate — your core workflow, and where seL4-based-systems verification lives.</p></div>
+        <div class="st later">Proposed</div>
+      </div>
+      <div class="phase">
+        <div class="idx">PHASE 3</div>
+        <div class="body"><h3>A verified capability-kernel model</h3><p>Refine the security core toward executable code as a joint high-assurance artifact — attacking the ~20:1 proof-to-code ratio with AI on the mechanical bulk.</p></div>
+        <div class="st later">Proposed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">04 — Boundary</span>
+      <h2>The honest limits</h2>
+    </div>
+    <div class="boundary">
+      <div class="bcard"><div class="h">Ecosystem</div><p>seL4 is Isabelle; you are SAW / Cryptol / Coq; we are Lean / AXLE. Our value is multi-prover orchestration and trust — not a claim that Lean subsumes these. A real engagement builds the bridge.</p></div>
+      <div class="bcard"><div class="h">The spec is human</div><p>AI verifies; it does not tell you what "correct" means. Statement fidelity is a permanent human responsibility, and a verified kernel is only as good as its spec.</p></div>
+      <div class="bcard"><div class="h">Trust bootstrapping</div><p>Who verifies AXLE, or the SMT solver? Real high-assurance answers this with proof-producing solvers and a small trusted kernel; our gate must eventually verify itself.</p></div>
+      <div class="bcard"><div class="h">Implementation is years</div><p>We can build the verified <em>mathematics</em> of a secure kernel now and accelerate the proof engineering; a running verified kernel down to binary is seL4-scale.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><span class="mono">Brockian · Proof-Carrying Systems</span> — every claim above binds to a formally verified theorem.</div>
+    <div class="mono">Lean 4 · Mathlib · AXLE lean-4.32.2 · Z3 4.16.0 · gate 4/4</div>
+  </div>
+</footer>
