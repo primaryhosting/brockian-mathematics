@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/primaryhosting/brockian-mathematics/blob/main/ledger/claims/schema.json",
+  "title": "Brockian Claim Registry",
+  "description": "Machine-readable claim, evidence, and publication-boundary records.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "program", "claims"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "program": {"type": "string", "minLength": 1},
+    "claims": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/claim"}
+    }
+  },
+  "$defs": {
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "title", "epistemic_status", "result_kind",
+        "verification_level", "statement", "scope", "lean",
+        "hypotheses_carried", "axioms_consumed", "provenance",
+        "falsifier_or_failure_mode", "public_wording", "correction_history"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^BM-[A-Z0-9]+-[0-9]{3}-v[0-9]+\\.[0-9]+$"},
+        "title": {"type": "string", "minLength": 1},
+        "epistemic_status": {
+          "enum": ["Exact", "Standard", "Conditional", "Computational", "Conjectural", "Experimental", "Speculative"]
+        },
+        "result_kind": {
+          "enum": ["Theorem", "Formalization", "Conditional reduction", "Obstruction", "Finite computation", "Hypothesis", "Benchmark", "Conjecture"]
+        },
+        "verification_level": {"enum": ["V0", "V1", "V2", "V3", "V4", "V5"]},
+        "statement": {"type": "string", "minLength": 1},
+        "scope": {"type": "string", "minLength": 1},
+        "lean": {"$ref": "#/$defs/leanEvidence"},
+        "hypotheses_carried": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/hypothesis"}
+        },
+        "axioms_consumed": {"type": "array", "items": {"type": "string"}},
+        "provenance": {"$ref": "#/$defs/provenance"},
+        "falsifier_or_failure_mode": {"type": "string", "minLength": 1},
+        "public_wording": {"type": "string", "minLength": 1},
+        "correction_history": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "leanEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["declaration", "source_path", "source_hash", "theorem_signature_hash", "environment", "local_build", "independent_check", "axiom_report_hash"],
+      "properties": {
+        "declaration": {"type": ["string", "null"]},
+        "source_path": {"type": ["string", "null"]},
+        "source_hash": {"type": ["string", "null"]},
+        "theorem_signature_hash": {"type": ["string", "null"]},
+        "environment": {"type": ["string", "null"]},
+        "local_build": {"enum": ["pass", "fail", "pending", "not_applicable"]},
+        "independent_check": {"enum": ["pass", "fail", "pending", "not_applicable"]},
+        "axiom_report_hash": {"type": ["string", "null"]}
+      }
+    },
+    "hypothesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "status", "range", "description"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "status": {"enum": ["classical", "literature", "open"]},
+        "range": {"type": "string", "minLength": 1},
+        "description": {"type": "string", "minLength": 1}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prior_art", "artifact_status", "notes"],
+      "properties": {
+        "prior_art": {"type": "string", "minLength": 1},
+        "artifact_status": {"type": "string", "minLength": 1},
+        "notes": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}
