@@ -1,0 +1,104 @@
+{
+  "title": "The Verification Foundry \u2014 Phase-1 Cross-Verification Certificate",
+  "subject": "Real crypto-implementation obligations, discharged by two independent provers",
+  "provers": [
+    "Z3 4.16.0 (SMT \u2014 bit-blast to SAT)",
+    "Lean 4 kernel + AXLE (proof by BitVec algebra / constant-fold, axiom-audited \u2014 NOT a SAT solver)"
+  ],
+  "obligations": [
+    {
+      "name": "otp_involution",
+      "statement": "(m ^ k) ^ k = m  \u2014 one-time-pad / stream-cipher decryption inverts encryption",
+      "smt2": "; obligation: stream-cipher / one-time-pad involution  (m ^ k) ^ k = m\n; proved by asserting the NEGATION and expecting unsat.\n(set-logic QF_BV)\n(declare-const m (_ BitVec 32))\n(declare-const k (_ BitVec 32))\n(assert (not (= (bvxor (bvxor m k) k) m)))\n(check-sat)\n",
+      "z3": {
+        "verdict": "proved",
+        "solver": "Z3 4.16.0",
+        "logic": "QF_BV",
+        "method": "bit-blast to SAT; unsat of the negation"
+      },
+      "lean": {
+        "verdict": "proved",
+        "theorem": "Brockian.HighAssurance.CryptoIdioms.otp_involution",
+        "checker": "Lean 4 kernel + AXLE re-verification (lean-4.32.2), axiom-clean",
+        "method": "kernel-checked BitVec algebra (xor_assoc, xor_self, xor_zero)"
+      },
+      "cross_verified": true
+    },
+    {
+      "name": "mask_select_identity",
+      "statement": "(mask & a) | (~mask & a) = a  \u2014 the masking identity behind constant-time select",
+      "smt2": "; obligation: masking identity  (mask & a) | (~mask & a) = a\n(set-logic QF_BV)\n(declare-const mask (_ BitVec 32))\n(declare-const a (_ BitVec 32))\n(assert (not (= (bvor (bvand mask a) (bvand (bvnot mask) a)) a)))\n(check-sat)\n",
+      "z3": {
+        "verdict": "proved",
+        "solver": "Z3 4.16.0",
+        "logic": "QF_BV",
+        "method": "bit-blast to SAT; unsat of the negation"
+      },
+      "lean": {
+        "verdict": "proved",
+        "theorem": "Brockian.HighAssurance.CryptoIdioms.mask_select_identity",
+        "checker": "Lean 4 kernel + AXLE re-verification (lean-4.32.2), axiom-clean",
+        "method": "kernel-checked BitVec algebra (and_or_distrib_right, or_not_self, allOnes_and)"
+      },
+      "cross_verified": true
+    },
+    {
+      "name": "ct_select_true",
+      "statement": "ctSelect(all-ones, a, b) = a  \u2014 constant-time conditional selects a",
+      "smt2": "; obligation: constant-time select, mask=all-ones selects a\n(set-logic QF_BV)\n(declare-const a (_ BitVec 32))\n(declare-const b (_ BitVec 32))\n(assert (not (= (bvor (bvand (bvnot #x00000000) a) (bvand (bvnot (bvnot #x00000000)) b)) a)))\n(check-sat)\n",
+      "z3": {
+        "verdict": "proved",
+        "solver": "Z3 4.16.0",
+        "logic": "QF_BV",
+        "method": "bit-blast to SAT; unsat of the negation"
+      },
+      "lean": {
+        "verdict": "proved",
+        "theorem": "Brockian.HighAssurance.CryptoIdioms.ct_select_true",
+        "checker": "Lean 4 kernel + AXLE re-verification (lean-4.32.2), axiom-clean",
+        "method": "bv_decide preprocessing constant-folds the literal mask to rfl"
+      },
+      "cross_verified": true
+    },
+    {
+      "name": "ct_select_false",
+      "statement": "ctSelect(0, a, b) = b  \u2014 constant-time conditional selects b",
+      "smt2": "; obligation: constant-time select, mask=0 selects b\n(set-logic QF_BV)\n(declare-const a (_ BitVec 32))\n(declare-const b (_ BitVec 32))\n(assert (not (= (bvor (bvand #x00000000 a) (bvand (bvnot #x00000000) b)) b)))\n(check-sat)\n",
+      "z3": {
+        "verdict": "proved",
+        "solver": "Z3 4.16.0",
+        "logic": "QF_BV",
+        "method": "bit-blast to SAT; unsat of the negation"
+      },
+      "lean": {
+        "verdict": "proved",
+        "theorem": "Brockian.HighAssurance.CryptoIdioms.ct_select_false",
+        "checker": "Lean 4 kernel + AXLE re-verification (lean-4.32.2), axiom-clean",
+        "method": "bv_decide preprocessing constant-folds the literal mask to rfl"
+      },
+      "cross_verified": true
+    },
+    {
+      "name": "xor_swap",
+      "statement": "the XOR-swap trick returns (b, a)  \u2014 in-place swap with no temporary",
+      "smt2": "; obligation: the XOR-swap trick returns (b, a)\n(set-logic QF_BV)\n(declare-const a (_ BitVec 32))\n(declare-const b (_ BitVec 32))\n(define-fun x () (_ BitVec 32) (bvxor a b))\n(define-fun y () (_ BitVec 32) (bvxor x b))\n(define-fun z () (_ BitVec 32) (bvxor x y))\n(assert (not (and (= z b) (= y a))))\n(check-sat)\n",
+      "z3": {
+        "verdict": "proved",
+        "solver": "Z3 4.16.0",
+        "logic": "QF_BV",
+        "method": "bit-blast to SAT; unsat of the negation"
+      },
+      "lean": {
+        "verdict": "proved",
+        "theorem": "Brockian.HighAssurance.CryptoIdioms.xor_swap",
+        "checker": "Lean 4 kernel + AXLE re-verification (lean-4.32.2), axiom-clean",
+        "method": "kernel-checked BitVec algebra after Prod.mk.injEq split"
+      },
+      "cross_verified": true
+    }
+  ],
+  "all_cross_verified": true,
+  "sha256": "f978dcdd317078c04fbeb8ffc426ff87c041fc7a0d5c543200c4f3aa3d8494be",
+  "note": "Portable evidence: recompute sha256 over {provers, obligations} and re-run any SMT solver on each embedded smt2 (unsat = proved). No access to our pipeline required. See recheck.py. HONEST SCOPE: these are small, decidable QF_BV obligations \u2014 the point is the independent-agreement + re-checkability discipline, not proof depth. The two provers use DIFFERENT mathematics: Z3 bit-blasts to SAT; Lean is a kernel-checked algebraic proof re-verified and axiom-audited by AXLE (its axiom gate rejects bv_decide's native SAT/LRAT axiom, so the Lean leg is not a second SAT solver). Agreement across two different methods is stronger than agreement across two SAT engines.",
+  "recheck": "python3 phase1/recheck.py phase1/certificate.json"
+}
