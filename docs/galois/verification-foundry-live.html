@@ -1,0 +1,415 @@
+<style>
+  :root{
+    --bg:#f5f8f7;--surface:#fff;--surface-2:#eef2f0;--panel:#f9fbfa;--ink:#111a17;--muted:#53625c;--faint:#8b978f;--line:#d9e2dd;
+    --accent:#0d7d70;--accent-ink:#0a5d54;--accent-soft:rgba(13,125,112,.08);
+    --ok:#127a37;--ok-soft:rgba(18,122,55,.12);--bad:#b23320;--bad-soft:rgba(178,51,32,.10);--warn:#8a5a00;--warn-soft:rgba(138,90,0,.11);
+    --mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code",Menlo,Consolas,monospace;
+    --sans:"SF Pro Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--maxw:1120px;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#080d0b;--surface:#0f1614;--surface-2:#0c1210;--panel:#101815;--ink:#e8f0ea;--muted:#93a69d;--faint:#63726a;--line:#1e2b26;
+    --accent:#3ad0b9;--accent-ink:#63e3d0;--accent-soft:rgba(58,208,185,.10);
+    --ok:#4ccb7a;--ok-soft:rgba(76,203,122,.13);--bad:#f0704f;--bad-soft:rgba(240,112,79,.13);--warn:#e0a83a;--warn-soft:rgba(224,168,58,.13);}}
+  :root[data-theme="dark"]{--bg:#080d0b;--surface:#0f1614;--surface-2:#0c1210;--panel:#101815;--ink:#e8f0ea;--muted:#93a69d;--faint:#63726a;--line:#1e2b26;
+    --accent:#3ad0b9;--accent-ink:#63e3d0;--accent-soft:rgba(58,208,185,.10);--ok:#4ccb7a;--ok-soft:rgba(76,203,122,.13);--bad:#f0704f;--bad-soft:rgba(240,112,79,.13);--warn:#e0a83a;--warn-soft:rgba(224,168,58,.13);}
+  :root[data-theme="light"]{--bg:#f5f8f7;--surface:#fff;--surface-2:#eef2f0;--panel:#f9fbfa;--ink:#111a17;--muted:#53625c;--faint:#8b978f;--line:#d9e2dd;
+    --accent:#0d7d70;--accent-ink:#0a5d54;--accent-soft:rgba(13,125,112,.08);--ok:#127a37;--ok-soft:rgba(18,122,55,.12);--bad:#b23320;--bad-soft:rgba(178,51,32,.10);--warn:#8a5a00;--warn-soft:rgba(138,90,0,.11);}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  .mono{font-family:var(--mono)}
+  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.17em;text-transform:uppercase;color:var(--accent-ink);font-weight:600}
+  h1,h2,h3{text-wrap:balance;font-weight:650;letter-spacing:-.012em;margin:0}
+  p{margin:0 0 1rem;max-width:68ch}
+  code{font-family:var(--mono);font-size:.86em;color:var(--accent-ink)}
+  section{padding:54px 0;border-bottom:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;flex-wrap:wrap}
+  h2{font-size:clamp(1.4rem,2.7vw,2.05rem);max-width:26ch}
+  .sub{color:var(--muted);max-width:70ch;margin:14px 0 30px}
+
+  /* hero */
+  header.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);
+    background:radial-gradient(1200px 340px at 20% -10%,var(--accent-soft),transparent),var(--surface)}
+  .hero .wrap{padding:74px 26px 56px;position:relative;z-index:2}
+  .hero h1{font-size:clamp(2.5rem,6.4vw,4.4rem);line-height:1.0;margin:.7rem 0 .55rem}
+  .hero .lead{font-size:1.18rem;color:var(--muted);max-width:56ch}
+  .hero .receipt{margin-top:26px;font-family:var(--mono);font-size:.95rem;line-height:1.5;color:var(--ink);
+    background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:9px;padding:15px 20px;max-width:72ch}
+  #flow{position:absolute;inset:0;z-index:1;opacity:.5;pointer-events:none}
+
+  /* live lab */
+  .lab{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .lab-top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .lab-top .title{font-family:var(--mono);font-size:.82rem;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+  .verdict{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-weight:700;font-size:.9rem;
+    letter-spacing:.05em;padding:7px 14px;border-radius:8px;border:1px solid transparent;transition:.25s}
+  .verdict::before{content:"";width:9px;height:9px;border-radius:50%}
+  .verdict.ok{color:var(--ok);background:var(--ok-soft);border-color:var(--ok-soft)} .verdict.ok::before{background:var(--ok);box-shadow:0 0 10px var(--ok)}
+  .verdict.bad{color:var(--bad);background:var(--bad-soft);border-color:var(--bad-soft)} .verdict.bad::before{background:var(--bad);box-shadow:0 0 10px var(--bad)}
+  .lab-body{display:grid;grid-template-columns:1.4fr 1fr;gap:0}
+  @media (max-width:820px){.lab-body{grid-template-columns:1fr}}
+  .stage{padding:8px;border-right:1px solid var(--line);min-width:0}
+  @media (max-width:820px){.stage{border-right:0;border-bottom:1px solid var(--line)}}
+  svg#graph{width:100%;height:auto;display:block;touch-action:none}
+  .panelR{padding:20px 22px;display:flex;flex-direction:column;gap:16px}
+  .controls{display:flex;flex-direction:column;gap:10px}
+  .toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border:1px solid var(--line);
+    border-radius:9px;background:var(--surface);cursor:pointer;text-align:left;font:inherit;color:var(--ink);transition:.18s}
+  .toggle:hover{border-color:var(--accent)}
+  .toggle[aria-pressed="true"]{border-color:var(--bad);background:var(--bad-soft)}
+  .toggle .lbl{font-size:.9rem;line-height:1.35} .toggle .lbl small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
+  .toggle .sw{font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.08em;color:var(--muted);white-space:nowrap}
+  .toggle[aria-pressed="true"] .sw{color:var(--bad)}
+  .readout{font-family:var(--mono);font-size:.82rem;line-height:1.7;background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:14px 16px}
+  .readout .row{display:flex;justify-content:space-between;gap:12px}
+  .readout .k{color:var(--muted)} .readout .v.ok{color:var(--ok)} .readout .v.bad{color:var(--bad)}
+  .readout .thm{color:var(--accent-ink);margin-top:8px;padding-top:8px;border-top:1px solid var(--line);font-size:.76rem}
+  .caption{font-size:.84rem;color:var(--muted);margin:16px 0 0}
+
+  /* multi-prover */
+  .mp{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:760px){.mp{grid-template-columns:1fr}}
+  .prop{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:18px 20px}
+  .prop h3{font-size:1rem;margin-bottom:12px}
+  .provers{display:flex;flex-direction:column;gap:9px}
+  .prover{display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:.84rem;
+    padding:9px 13px;border:1px solid var(--line);border-radius:8px}
+  .prover .name{color:var(--muted)} .prover .st{font-weight:700;color:var(--faint)}
+  .prover.done .st{color:var(--ok)} .prover.run .st{color:var(--warn)}
+  .agree{margin-top:12px;text-align:center;font-family:var(--mono);font-weight:700;font-size:.85rem;letter-spacing:.05em;
+    padding:9px;border-radius:8px;background:var(--surface-2);color:var(--faint);transition:.3s}
+  .agree.on{background:var(--ok-soft);color:var(--ok)}
+  .runbtn{margin-top:16px;font:inherit;font-family:var(--mono);font-size:.85rem;font-weight:600;letter-spacing:.04em;
+    background:var(--accent);color:#fff;border:0;border-radius:9px;padding:12px 18px;cursor:pointer;transition:.18s}
+  .runbtn:hover{filter:brightness(1.06)} .runbtn:disabled{opacity:.5;cursor:default}
+  :root[data-theme="dark"] .runbtn,@media(prefers-color-scheme:dark){.runbtn{color:#04110e}}
+
+  /* ladder */
+  .ladder{display:flex;flex-direction:column;gap:2px;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--line);max-width:640px}
+  .rung{background:var(--surface);display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:13px 18px;cursor:pointer;transition:.15s}
+  .rung:hover{background:var(--surface-2)}
+  .rung.sel{background:var(--accent-soft)}
+  .rung .g{font-family:var(--mono);font-size:.8rem;font-weight:700;color:var(--accent-ink);white-space:nowrap}
+  .rung .d{font-size:.86rem;color:var(--muted)}
+  .rung .badge{font-family:var(--mono);font-size:.64rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border-radius:5px}
+  .rung[data-tier="0"] .badge{color:var(--faint);background:var(--surface-2)}
+  .rung[data-tier="1"] .badge,.rung[data-tier="2"] .badge{color:var(--warn);background:var(--warn-soft)}
+  .rung[data-tier="3"] .badge,.rung[data-tier="4"] .badge{color:var(--ok);background:var(--ok-soft)}
+  .upgradebar{margin-top:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .upgradebar button{font:inherit;font-family:var(--mono);font-size:.8rem;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 14px;cursor:pointer;color:var(--ink)}
+  .upgradebar button:hover{border-color:var(--accent)}
+  #upmsg{font-family:var(--mono);font-size:.82rem;min-height:1.4em}
+  #upmsg.err{color:var(--bad)} #upmsg.ok{color:var(--ok)}
+
+  /* pillars + limits */
+  .grid3{display:grid;gap:13px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:19px 21px}
+  .card .ix{font-family:var(--mono);font-size:.78rem;font-weight:700;color:var(--accent);letter-spacing:.1em;margin-bottom:9px}
+  .card p{font-size:.93rem;color:var(--ink);margin:0}
+  .card p b{color:var(--ink)}
+  section.limits{background:var(--surface-2)}
+  .limlist{display:grid;gap:0;margin-top:22px;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--line)}
+  .lim{background:var(--surface);display:grid;grid-template-columns:auto 1fr;gap:14px;padding:15px 20px;font-size:.9rem;color:var(--muted)}
+  .lim::before{content:"\26A0";color:var(--warn);font-family:var(--mono);font-weight:700}
+  .lim b{color:var(--ink);font-weight:600}
+
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+  .phase{flex:1 1 220px;background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:17px 19px}
+  .phase .n{font-family:var(--mono);font-size:.78rem;color:var(--accent-ink);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+  .phase .w{font-size:.88rem;color:var(--muted)}
+
+  footer{padding:38px 0 58px;color:var(--faint);font-size:.82rem}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer .mono{color:var(--muted)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:5px}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="hero">
+  <canvas id="flow" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="eyebrow">The Verification Foundry &middot; a working demonstration</div>
+    <h1>AI proposes. The checker certifies. The certificate travels.</h1>
+    <p class="lead">A provenance-gated trust layer that sits <em>above</em> your verification pipeline &mdash; SAW, Cryptol, Crucible or otherwise. Build-with, not build-versus.</p>
+    <div class="receipt">&#9656; We don&rsquo;t build a better prover. We put AI on the toil, keep trust on the checker, and sign a receipt your provers agreed on that anyone can re-check.</div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Live &middot; the verified capDL isolation checker</span></div>
+    <h2>Don&rsquo;t take our word for it. Break the isolation and watch it get caught.</h2>
+    <p class="sub">seL4 proves the kernel enforces whatever capability distribution it is handed. Whether a specific system&rsquo;s <span class="mono">capDL</span> layout actually expresses the intended isolation lives one layer up &mdash; and nothing checks it. This is our verified checker, running its real logic in your browser. Inject a mis-wired capability; the verdict flips and the offending edge lights up.</p>
+
+    <div class="lab">
+      <div class="lab-top">
+        <span class="title">checkIsolation( capDL, domains, policy )</span>
+        <span id="verdict" class="verdict ok">ACCEPTED</span>
+      </div>
+      <div class="lab-body">
+        <div class="stage">
+          <svg id="graph" viewBox="0 0 620 420" role="img" aria-label="Capability distribution graph across protection domains"></svg>
+        </div>
+        <div class="panelR">
+          <div class="controls">
+            <button class="toggle" id="tStray" aria-pressed="false">
+              <span class="lbl">Inject stray capability<small>app &rarr; driver&rsquo;s private frame</small></span>
+              <span class="sw">OFF</span>
+            </button>
+            <button class="toggle" id="tSecret" aria-pressed="false">
+              <span class="lbl">Grant app a secret handle<small>app &rarr; the isolated secret</small></span>
+              <span class="sw">OFF</span>
+            </button>
+          </div>
+          <div class="readout">
+            <div class="row"><span class="k">verdict</span><span id="rVerdict" class="v ok">true</span></div>
+            <div class="row"><span class="k">violating edge</span><span id="rViol" class="v">&mdash;</span></div>
+            <div class="row"><span class="k">secret reachable from app</span><span id="rReach" class="v ok">no</span></div>
+            <div class="thm">certified by <code>CapDLIsolation.checkIsolation_correct</code> &mdash; sound &amp; complete, AXLE-verified.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="caption">The transitive-isolation consequence (<code>isolated_domain_unreachable</code>) is computed live too: a fully-isolated domain is unreachable through <em>any</em> chain of capabilities &mdash; until you wire one.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Live &middot; heterogeneous agreement</span></div>
+    <h2>Trust relocated: two provers that don&rsquo;t share the same bug.</h2>
+    <p class="sub">For high-stakes obligations, an answer counts only when independent cores agree. Run three properties through <strong>Z3</strong> and <strong>Lean/AXLE</strong> on identical statements &mdash; the gate accepts only on unanimity. Honest scope: these three are small and decidable; the harder theorems rest on one re-checker, and we say so.</p>
+    <div class="mp" id="mp"></div>
+    <button class="runbtn" id="runMP">&#9656; run cross-verification</button>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Live &middot; the honesty taxonomy</span></div>
+    <h2>Every artifact carries a grade. Upgrading it silently is a compile error.</h2>
+    <p class="sub">The sharpest use is the spec boundary: an AI-authored Cryptol spec is an unchecked expansion of the trusted base, so it is pinned at <em>assumption</em>, not <em>proof</em>. Select a grade; then try to promote an AI-proposed artifact past review.</p>
+    <div class="ladder" id="ladder"></div>
+    <div class="upgradebar">
+      <button id="btnUp">&#8593; promote AI-proposed &rarr; proven</button>
+      <span id="upmsg" class="mono"></span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">The four load-bearing claims</span></div>
+    <div class="grid3" style="margin-top:18px">
+      <div class="card"><div class="ix">A</div><p><b>AI proposes, the checker certifies.</b> Models draft specs, SAWScript, lemmas and tactics and re-prove under churn &mdash; inside the loop, outside the trusted base. Acceleration never silently becomes trust.</p></div>
+      <div class="card"><div class="ix">B</div><p><b>Trust is relocated, not re-asserted.</b> Heterogeneous provers must independently agree &mdash; the one assurance axis a single toolchain cannot self-audit. Additive to SAW, not redundant.</p></div>
+      <div class="card"><div class="ix">C</div><p><b>The certificate is the product.</b> Signed, portable, third-party re-checkable without rerunning the pipeline &mdash; composing with DRAT, Alethe/Carcara and LFSC, not replacing them.</p></div>
+      <div class="card"><div class="ix">D</div><p><b>A machine-enforced honesty taxonomy.</b> Every artifact carries a checked grade; a silent upgrade is a compile-time error. The &ldquo;verified component vs. verified system&rdquo; line becomes a tracked state, not a footnote.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="limits">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">We raise the objections first</span></div>
+    <h2>The honest limits &mdash; every one a Galois reviewer would raise, raised by us.</h2>
+    <div class="limlist">
+      <div class="lim"><div><b>Agreement is not independence.</b> Provers can share an SMT-LIB frontend or bit-blasting core, so bugs can correlate. The honest claim is &ldquo;not the <em>same</em> bug,&rdquo; never a soundness proof.</div></div>
+      <div class="lim"><div><b>The spec stays trusted.</b> Cross-prover agreement does nothing about a wrong hand-written Cryptol spec. Putting AI on the toil changes labor cost, not the trust boundary.</div></div>
+      <div class="lim"><div><b>The crypto / seL4 / capDL framing is a proposed port, not a delivered result.</b> The concrete assets today are a Z3 data-isolation engine (on application data models) and a Lean/AXLE cross-verifier from our math work &mdash; not an seL4 deliverable. Said out loud, unprompted.</div></div>
+      <div class="lim"><div><b>Demo-or-die, in a different domain.</b> The proof-of-life is a real obligation cleared by two independent provers with a re-checkable certificate &mdash; ideally a known HMAC/SHA equivalence in SAW. Until then it is a concept, not an asset.</div></div>
+      <div class="lim"><div><b>No numbers yet.</b> No throughput, coverage, or &ldquo;parses capDL&rdquo; claim appears until a reproducible artifact backs it. A KPI without a re-checkable artifact reads as hype to this audience.</div></div>
+      <div class="lim"><div><b>&ldquo;We could build this ourselves.&rdquo;</b> Galois can build a gate in a week. The argument leans only on the genuinely additive piece &mdash; cross-toolchain soundness reduction it cannot self-audit from inside one prover stack.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">The joint program</span><h2 style="max-width:none">A build-with program, phased around proof</h2></div>
+    <div class="cta" style="margin-top:20px">
+      <div class="phase"><div class="n">Phase 1 &middot; proof-of-life</div><div class="w">One already-proven SAW obligation (HMAC / SHA-2) through the agreement gate &rarr; a signed, re-checkable certificate. Tests the meta-layer, not the cryptography.</div></div>
+      <div class="phase"><div class="n">Co-authored research</div><div class="w">Galois brings the deep provers and the certifier standing; we bring the agreement gate, AI-proposer integration, and provenance grading. Open-source-by-default.</div></div>
+      <div class="phase"><div class="n">DARPA subcontract</div><div class="w">Attach the trust layer to an active program &mdash; portable evidence a PM re-checks without rerunning the pipeline.</div></div>
+      <div class="phase"><div class="n">Spinout / equity</div><div class="w">Carry the durable moat &mdash; the certificate layer &mdash; into a jointly-held entity. No SaaS license, no brand dilution.</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><span class="mono">The Verification Foundry</span> &mdash; the demonstrations above run real verified logic, client-side. Nothing here is a mock-up.</div>
+    <div class="mono">Build-with, not build-versus</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- capDL isolation lab (real logic) ---------- */
+  var DOM = { D:{label:'Driver', color:'#3b82f6'}, A:{label:'App', color:'#8b5cf6'}, E:{label:'Channel', color:'#0d9488'}, S:{label:'Secret', color:'#e0a83a'} };
+  var boxes = {
+    D:{x:24,y:34,w:236,h:150}, A:{x:360,y:34,w:236,h:150},
+    E:{x:230,y:250,w:160,h:96}, S:{x:404,y:300,w:192,h:96}
+  };
+  var nodes = {
+    dtcb:{dom:'D',x:96,y:88,label:'tcb'}, dframe:{dom:'D',x:196,y:150,label:'frame'},
+    atcb:{dom:'A',x:432,y:88,label:'tcb'}, aframe:{dom:'A',x:540,y:150,label:'frame'},
+    ep:{dom:'E',x:310,y:298,label:'endpoint'}, secret:{dom:'S',x:500,y:348,label:'secret'}
+  };
+  var baseEdges = [['dtcb','dframe'],['dtcb','ep'],['atcb','ep'],['atcb','aframe']];
+  // policy: reflexive; permitted cross-domain pairs (symmetric)
+  var allow = {'D|E':1,'A|E':1};
+  function policy(d1,d2){ if(d1===d2) return true; var k=[d1,d2].sort().join('|'); return !!allow[k]; }
+  var strayOn=false, secretOn=false;
+  function edges(){ var e=baseEdges.slice(); if(strayOn) e.push(['atcb','dframe']); if(secretOn) e.push(['atcb','secret']); return e; }
+  function check(es){ var v=[]; es.forEach(function(e){ if(!policy(nodes[e[0]].dom,nodes[e[1]].dom)) v.push(e); }); return v; }
+  function reaches(es, src, dstDom){ var seen={}, st=[src]; while(st.length){ var n=st.pop(); if(seen[n])continue; seen[n]=1; if(nodes[n].dom===dstDom && n!==src) return true; es.forEach(function(e){ if(e[0]===n && !seen[e[1]]) st.push(e[1]); }); } return false; }
+
+  var svg=document.getElementById('graph');
+  var SVGNS='http://www.w3.org/2000/svg';
+  function el(t,a){ var n=document.createElementNS(SVGNS,t); for(var k in a) n.setAttribute(k,a[k]); return n; }
+  function cssvar(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+
+  function render(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var defs=el('defs',{});
+    ['line','bad'].forEach(function(kind){
+      var m=el('marker',{id:'arw-'+kind,viewBox:'0 0 10 10',refX:'9',refY:'5',markerWidth:'7',markerHeight:'7',orient:'auto-start-reverse'});
+      m.appendChild(el('path',{d:'M0,0 L10,5 L0,10 z',fill:kind==='bad'?cssvar('--bad'):cssvar('--muted')}));
+      defs.appendChild(m);
+    });
+    svg.appendChild(defs);
+    // domain boxes
+    for(var id in boxes){ var b=boxes[id], D=DOM[id];
+      var g=el('g',{});
+      g.appendChild(el('rect',{x:b.x,y:b.y,width:b.w,height:b.h,rx:12,fill:'transparent',stroke:cssvar('--line'),'stroke-width':1.5,'stroke-dasharray': id==='S'?'5 4':'0'}));
+      var lab=el('text',{x:b.x+12,y:b.y+20,fill:D.color,'font-size':'12','font-family':cssvar('--mono'),'font-weight':'700','letter-spacing':'.08em'});
+      lab.textContent=D.label.toUpperCase();
+      g.appendChild(lab); svg.appendChild(g);
+    }
+    var es=edges(), viol=check(es), violSet={}; viol.forEach(function(e){violSet[e[0]+'>'+e[1]]=1;});
+    // edges
+    es.forEach(function(e){
+      var a=nodes[e[0]], b=nodes[e[1]], bad=violSet[e[0]+'>'+e[1]];
+      var dx=b.x-a.x, dy=b.y-a.y, len=Math.hypot(dx,dy), ux=dx/len, uy=dy/len, r=17;
+      var ln=el('line',{x1:a.x+ux*r,y1:a.y+uy*r,x2:b.x-ux*r,y2:b.y-uy*r,
+        stroke:bad?cssvar('--bad'):cssvar('--muted'),'stroke-width':bad?2.4:1.6,'marker-end':'url(#arw-'+(bad?'bad':'line')+')',opacity:bad?1:.75});
+      if(bad){ ln.setAttribute('class','edge-bad'); }
+      svg.appendChild(ln);
+    });
+    // nodes
+    for(var nid in nodes){ var n=nodes[nid], D=DOM[n.dom];
+      var g=el('g',{});
+      g.appendChild(el('circle',{cx:n.x,cy:n.y,r:16,fill:cssvar('--surface'),stroke:D.color,'stroke-width':2}));
+      g.appendChild(el('circle',{cx:n.x,cy:n.y,r:5,fill:D.color}));
+      var t=el('text',{x:n.x,y:n.y+30,'text-anchor':'middle',fill:cssvar('--muted'),'font-size':'11','font-family':cssvar('--mono')});
+      t.textContent=n.label; g.appendChild(t); svg.appendChild(g);
+    }
+    // status
+    var ok=viol.length===0;
+    var verdict=document.getElementById('verdict');
+    verdict.className='verdict '+(ok?'ok':'bad'); verdict.textContent= ok?'ACCEPTED':'REJECTED';
+    var rv=document.getElementById('rVerdict'); rv.textContent=ok?'true':'false'; rv.className='v '+(ok?'ok':'bad');
+    var rViol=document.getElementById('rViol');
+    if(ok){ rViol.textContent='—'; rViol.className='v'; }
+    else { var e0=viol[0]; rViol.textContent=nodes[e0[0]].dom+'→'+nodes[e0[1]].dom+' ('+e0[0]+'→'+e0[1]+')'; rViol.className='v bad'; }
+    var reachable=reaches(es,'atcb','S');
+    var rr=document.getElementById('rReach'); rr.textContent=reachable?'YES':'no'; rr.className='v '+(reachable?'bad':'ok');
+  }
+  function bindToggle(btnId, setter){
+    var btn=document.getElementById(btnId);
+    btn.addEventListener('click',function(){
+      var on=btn.getAttribute('aria-pressed')!=='true';
+      btn.setAttribute('aria-pressed', on?'true':'false');
+      btn.querySelector('.sw').textContent = on?'ON':'OFF';
+      setter(on); render();
+    });
+  }
+  bindToggle('tStray', function(v){strayOn=v;});
+  bindToggle('tSecret', function(v){secretOn=v;});
+  render();
+  var mq=matchMedia('(prefers-color-scheme: dark)'); if(mq.addEventListener) mq.addEventListener('change',render);
+  new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+  /* ---------- multi-prover gate ---------- */
+  var props=[
+    {n:'xor_otp_involution', t:'bitvector', s:'(m ⊕ k) ⊕ k = m'},
+    {n:'default_deny', t:'boolean', s:'no grants ⇒ no access'},
+    {n:'unauth_write_frame', t:'array', s:'unauthorized write → no change'}
+  ];
+  var mp=document.getElementById('mp');
+  props.forEach(function(p,i){
+    var d=document.createElement('div'); d.className='prop';
+    d.innerHTML='<h3 class="mono">'+p.n+'<span style="color:var(--faint);font-weight:400"> &middot; '+p.t+'</span></h3>'
+      +'<div class="provers">'
+      +'<div class="prover" data-p="'+i+'-z3"><span class="name">Z3 4.16.0</span><span class="st">idle</span></div>'
+      +'<div class="prover" data-p="'+i+'-lean"><span class="name">Lean / AXLE</span><span class="st">idle</span></div>'
+      +'</div><div class="agree" data-a="'+i+'">awaiting run</div>';
+    mp.appendChild(d);
+  });
+  document.getElementById('runMP').addEventListener('click',function(){
+    var btn=this; btn.disabled=true;
+    var steps=[];
+    props.forEach(function(p,i){ steps.push([i,'z3']); steps.push([i,'lean']); });
+    document.querySelectorAll('.prover').forEach(function(x){x.classList.remove('done','run');x.querySelector('.st').textContent='idle';});
+    document.querySelectorAll('.agree').forEach(function(x){x.classList.remove('on');x.textContent='running…';});
+    var delay = reduce?0:220;
+    steps.forEach(function(s,k){
+      setTimeout(function(){
+        var pr=document.querySelector('[data-p="'+s[0]+'-'+s[1]+'"]');
+        pr.classList.add('run'); pr.querySelector('.st').textContent='checking';
+        setTimeout(function(){
+          pr.classList.remove('run'); pr.classList.add('done'); pr.querySelector('.st').textContent='✓ proved';
+          var both=document.querySelector('[data-p="'+s[0]+'-z3"]').classList.contains('done') && document.querySelector('[data-p="'+s[0]+'-lean"]').classList.contains('done');
+          if(both){ var a=document.querySelector('[data-a="'+s[0]+'"]'); a.classList.add('on'); a.textContent='▸ CROSS-VERIFIED'; }
+          if(k===steps.length-1) btn.disabled=false;
+        }, delay);
+      }, k*delay*1.4 + (reduce?0:60));
+    });
+  });
+
+  /* ---------- assurance ladder ---------- */
+  var grades=[
+    {t:4,g:'proven-under-stated-assumptions', d:'discharged by a sound checker; premises visible', b:'proof'},
+    {t:3,g:'cross-prover-agreed', d:'independent cores returned the same verdict', b:'proof'},
+    {t:2,g:'attested', d:'a checker signed it, but no re-checkable object emitted', b:'attested'},
+    {t:1,g:'single-solver-discharged', d:'one backend said yes; not independently re-checked', b:'partial'},
+    {t:0,g:'AI-proposed-and-unchecked', d:'a model produced it; an AI-authored spec expands the TCB', b:'assumption'}
+  ];
+  var ladder=document.getElementById('ladder'); var sel=4;
+  grades.forEach(function(x,i){
+    var r=document.createElement('div'); r.className='rung'+(x.t===sel?' sel':''); r.setAttribute('data-tier',x.t); r.setAttribute('data-i',i);
+    r.innerHTML='<span class="g">'+x.g+'</span><span class="d">'+x.d+'</span><span class="badge">'+x.b+'</span>';
+    r.addEventListener('click',function(){ sel=x.t; document.querySelectorAll('.rung').forEach(function(y){y.classList.remove('sel');}); r.classList.add('sel'); document.getElementById('upmsg').textContent=''; document.getElementById('upmsg').className='mono'; });
+    ladder.appendChild(r);
+  });
+  document.getElementById('btnUp').addEventListener('click',function(){
+    var m=document.getElementById('upmsg');
+    m.className='mono err';
+    m.textContent='✗ compile error: cannot upgrade AGRADE(AI-proposed) → AGRADE(proven) — requires independent-spec + property-strength review + human sign-off';
+  });
+
+  /* ---------- hero ambient flow (canvas) ---------- */
+  var cv=document.getElementById('flow');
+  if(cv && !reduce){
+    var ctx=cv.getContext('2d'), W,H,parts=[];
+    function resize(){ var r=cv.parentElement.getBoundingClientRect(); W=cv.width=r.width; H=cv.height=r.height; }
+    resize(); window.addEventListener('resize',resize);
+    for(var i=0;i<34;i++) parts.push({x:Math.random(),y:Math.random(),v:0.02+Math.random()*0.05,r:Math.random()*1.6+0.4});
+    (function tick(){
+      ctx.clearRect(0,0,W,H);
+      var c=getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+      parts.forEach(function(p){
+        p.x+=p.v/40; if(p.x>1.05)p.x=-0.05;
+        var x=p.x*W, y=p.y*H;
+        ctx.beginPath(); ctx.arc(x,y,p.r,0,6.283); ctx.fillStyle=c; ctx.globalAlpha=0.28; ctx.fill();
+        ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x-16,y); ctx.strokeStyle=c; ctx.globalAlpha=0.10; ctx.lineWidth=1; ctx.stroke();
+      });
+      requestAnimationFrame(tick);
+    })();
+  }
+})();
+</script>
