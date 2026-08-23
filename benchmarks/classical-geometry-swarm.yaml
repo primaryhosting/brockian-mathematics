@@ -111,6 +111,26 @@ sources:
     page_numbering: printed_pages
     rights_note: User-provided reference copy; metadata and short locators only, no redistribution.
 
+  - id: platt-complex-manifolds-2025
+    title: Complex Manifolds
+    author: Daniel Platt
+    edition_or_version: June 15, 2025
+    uploaded_filename: 2025-06-15-cx-mf-notes.pdf
+    pdf_sha256: 910e1e472920678f9fecbe73da16dac19ac550066bae2e25612f54d67da48825
+    pdf_page_count: 66
+    page_numbering: printed_pages
+    rights_note: User-provided reference copy; metadata and short locators only, no redistribution.
+
+  - id: morrow-kodaira-complex-manifolds-chapter-1
+    title: Complex Manifolds, Chapter 1 preview
+    author: James Morrow and Kunihiko Kodaira
+    edition_or_version: AMS Chelsea preview
+    uploaded_filename: chel-355-h-prev.pdf
+    pdf_sha256: 2594b9f98b787c2d81e248179e47c6479fa22d2a6344440191a44a338a5aa6c6
+    pdf_page_count: 26
+    page_numbering: printed_pages
+    rights_note: User-provided reference copy; metadata and short locators only, no redistribution.
+
 tracks:
   - id: regular-pentagon-golden-ratio
     priority: P0
@@ -230,7 +250,7 @@ tracks:
     priority: P0
     classification: CLASSICAL_REFERENCE
     novelty_ledger: false
-    state: specification_queued
+    state: benchmark_ready
     source_anchors:
       - source_id: cattaneo-notes-on-manifolds-2018
         printed_pages: [2, 3, 4, 5, 6, 7]
@@ -238,6 +258,9 @@ tracks:
       - source_id: hitchin-differentiable-manifolds-2014
         printed_pages: [6, 7, 8, 9, 10]
         anchor: Section 2, coordinate neighbourhoods, atlases, and smooth maps
+      - source_id: morrow-kodaira-complex-manifolds-chapter-1
+        printed_pages: [7, 8, 9, 10]
+        anchor: Complex manifolds and pseudogroup transition structures
     target: >-
       Build one minimal Mathlib-backed chart example on a circle or sphere and
       expose its overlap maps, inverse law, and triple-overlap composition law.
@@ -376,4 +399,30 @@ tracks:
       - Inferring an equivalence from an accidental rank match in degree one.
       - Replacing the finite cycle by the smooth circle without a realization and comparison map.
       - Treating nonabelian conjugacy-class holonomy as ordinary de Rham cohomology.
+    proposed_declarations: []
+
+  - id: complex-torus-deformation-lab
+    priority: P2
+    classification: CLASSICAL_REFERENCE
+    novelty_ledger: false
+    state: specification_queued
+    source_anchors:
+      - source_id: morrow-kodaira-complex-manifolds-chapter-1
+        printed_pages: [18, 19, 20, 21, 22, 23, 24, 25, 26]
+        anchor: Analytic families, deformations, complex tori, Hopf surfaces, and ruled surfaces
+      - source_id: platt-complex-manifolds-2025
+        printed_pages: [8, 9, 10, 11, 12, 13]
+        anchor: Complex-manifold definitions and compact examples
+    target: >-
+      Specify a small analytic-family fixture for complex tori only after the atlas,
+      quotient, and bundle-transition interfaces are green. Keep deformation parameters,
+      lattice discreteness, and quotient hypotheses explicit.
+    required_assumptions:
+      - A declared lattice in a finite-dimensional complex vector space.
+      - Freeness and proper discontinuity of the translation action.
+      - A typed family parameter and explicit compatibility of charts across the family.
+    adversarial_cases:
+      - A degenerate lattice that does not give a compact quotient.
+      - Treating a set quotient as a complex manifold without chart descent.
+      - Inferring deformation equivalence from equal dimensions alone.
     proposed_declarations: []

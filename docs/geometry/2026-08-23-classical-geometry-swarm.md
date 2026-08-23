@@ -39,11 +39,13 @@ python3 scripts/validate_geometry_swarm.py
 | Viaclovsky, *218BC Introduction to Manifolds and Geometry* (2022) | The most build-ready bridge: vector-bundle transition cocycles, the trivial/Mobius line-bundle test on `S1`, finite group quotients, and de Rham computations | P0 cocycle fixture and comparison firewall; P1 quotient descent | Cover-dependent Cech calculations require a good cover or a proved refinement argument. |
 | Cattaneo, *Notes on Manifolds* (2018) | The broad technical reference: charts, bundles, flows, tensors, differential forms, Stokes, symplectic geometry, and Lie groups | P0 atlas and exterior-derivative API work | Its coordinate proofs guide specifications; they should not be reimplemented when Mathlib already supplies the abstraction. |
 | Hitchin, *Differentiable Manifolds* (2014) | The cleanest conceptual specification for closed/exact forms, de Rham cohomology, naturality, orientation, and geodesic flow | P0 de Rham specification; later Riemannian work | Conceptual similarity does not supply a formal comparison map. |
+| Platt, *Complex Manifolds* (2025) | Holomorphic transition cocycles, Dolbeault theory, Chern connections/classes, and Kähler/Hodge structure | P0 bundle vocabulary; later analytic geometry | Mathlib does not yet supply the full holomorphic-bundle/Dolbeault stack needed to formalize the later chapters directly. |
+| Morrow–Kodaira, *Complex Manifolds*, Ch. 1 | Pseudogroup structures, properly discontinuous quotients, complex tori, and analytic families | P1 quotient discipline; P2 deformation lab | Quotients with fixed points are orbifolds, and deformation analogies do not supply descended charts. |
 
 The second uploaded Coxeter file is byte-for-byte identical to the registered
 copy (SHA-256
 `8376cac530c1090c3ef3c3fd591f968f4e9923ae6bc66acae0e6409ab2f03ea1`).
-It is deliberately not added as a seventh source. The benchmark validator now
+It is deliberately not added as an additional source. The benchmark validator now
 rejects duplicate PDF hashes even when the duplicate is given a new source ID.
 
 ## Design decision from the manifold texts
@@ -67,6 +69,24 @@ not de Rham cohomology. Reusing the symbol `H1`, observing that both settings
 encode holonomy, or matching a dimension does not establish an equivalence.
 The `discrete-to-de-rham-comparison-firewall` track makes the missing cochain map
 and quasi-isomorphism obligations executable review criteria.
+
+## Implemented manifold bridge candidates
+
+Five modules now make the first source-guided interfaces concrete:
+
+| Module | Implemented contract | Deliberate boundary |
+| --- | --- | --- |
+| `Brockian.FiniteToDeRhamNoGo` | Every additive map `ZMod 5 →+ ℝ` is zero; no such map is injective. | This blocks a coefficient-level identification; it does not block geometric realizations retaining torsion. |
+| `Brockian.ExteriorDerivative` | Model-space `d² = 0`, smooth exact-implies-closed, and pullback naturality/preservation. | These are normed-vector-space forms, not a global manifold de Rham complex. |
+| `Brockian.PhaseHolonomyCircle` | The complete `totalDepth` invariant is realized faithfully in `rootsOfUnity 5 Circle`, compatibly with `Characters5.e`. | This packages flat holonomy data; it does not yet construct a line bundle or analytic connection. |
+| `Brockian.VectorBundleTransition` | Identity, inverse, and triple-overlap laws are derived from Mathlib's `VectorBundleCore`. | The concrete Möbius open cover and its nontriviality proof remain open. |
+| `Brockian.FordHorocycles` | Positive-denominator Ford centers are points of `ℍ`; simultaneous integral translation preserves their hyperbolic distance. | No modular quotient is claimed; elliptic fixed points require orbifold care. |
+
+The comparison architecture is therefore
+
+`finite cocycle → totalDepth → μ₅-valued holonomy`,
+
+while the real de Rham branch remains separate behind the explicit coefficient firewall.
 
 ## Ford-circle implementation
 
@@ -103,13 +123,11 @@ that these settle directed ratios, zero denominators, ideal points, or a full
 projective extension.
 
 For the manifold branch, the first dispatch should be
-`exterior-derivative-square-zero`: Mathlib already exposes `extDeriv` and its
-square-zero theorem, so this is the fastest way to validate imports, smoothness
-indices, degrees, and the model-space/global-manifold boundary. Next, dispatch
-`atlas-transition-cocycle`, then `real-line-bundle-cocycle-mobius`. The
-`discrete-to-de-rham-comparison-firewall` must pass before either is described as
-a phase-depth correspondence. `finite-quotient-descent` comes after a fixed-point
-audit of the chosen `C5` or `D5` action.
+to verify the five proof candidates above in the pinned Lean environment. After
+that, the next construction is the concrete `real-line-bundle-cocycle-mobius`
+fixture. `finite-quotient-descent` follows only after a fixed-point audit of the
+chosen action. The complex-torus deformation lab remains P2, after quotient and
+transition infrastructure is green.
 
 The independent classical-geometry sequence is unchanged: signed
 Ceva/Menelaus remains the clearest projective delta, and the Poincare/Klein track

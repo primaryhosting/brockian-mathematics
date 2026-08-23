@@ -925,3 +925,8 @@ import Brockian.PhaseDepthFiniteRH
 import Brockian.PhaseDepthNonabelian
 import Brockian.PhaseDepthZeta
 import Brockian.PhaseDepthDetIdentity
+import Brockian.FiniteToDeRhamNoGo
+import Brockian.ExteriorDerivative
+import Brockian.PhaseHolonomyCircle
+import Brockian.VectorBundleTransition
+import Brockian.FordHorocycles
