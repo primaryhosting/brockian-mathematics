@@ -35,6 +35,34 @@ def test_source_anchor_must_resolve_to_a_source_card():
     assert any("source_id does not resolve" in error for error in errors)
 
 
+def test_duplicate_source_pdf_is_rejected():
+    document = _document()
+    duplicate = dict(document["sources"][0])
+    duplicate["id"] = "same-pdf-under-a-second-name"
+    duplicate["uploaded_filename"] = "duplicate.pdf"
+    document["sources"].append(duplicate)
+    errors = validator.validate_document(document, validator.load_registry(), "fixture")
+    assert any("pdf_sha256 duplicates" in error for error in errors)
+
+
+def test_manifold_sources_and_tracks_are_registered():
+    document = _document()
+    source_ids = {source["id"] for source in document["sources"]}
+    track_ids = {track["id"] for track in document["tracks"]}
+    assert {
+        "cattaneo-notes-on-manifolds-2018",
+        "hitchin-differentiable-manifolds-2014",
+        "viaclovsky-introduction-to-manifolds-and-geometry-2022",
+    } <= source_ids
+    assert {
+        "atlas-transition-cocycle",
+        "real-line-bundle-cocycle-mobius",
+        "exterior-derivative-square-zero",
+        "finite-quotient-descent",
+        "discrete-to-de-rham-comparison-firewall",
+    } <= track_ids
+
+
 def test_baseline_must_remain_green():
     document = _document()
     registry = validator.load_registry()

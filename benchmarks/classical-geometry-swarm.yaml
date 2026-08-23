@@ -1,5 +1,5 @@
 schema_version: 1
-benchmark_id: classical-geometry-swarm-v1
+benchmark_id: classical-geometry-swarm-v2
 
 purpose: >-
   A provenance-backed, adversarial benchmark for AI-assisted discovery and
@@ -78,6 +78,36 @@ sources:
     uploaded_filename: dokumen.pub_non-euclidean-geometry-fifth-edition-9781442653207.pdf
     pdf_sha256: 8376cac530c1090c3ef3c3fd591f968f4e9923ae6bc66acae0e6409ab2f03ea1
     pdf_page_count: 325
+    page_numbering: printed_pages
+    rights_note: User-provided reference copy; metadata and short locators only, no redistribution.
+
+  - id: cattaneo-notes-on-manifolds-2018
+    title: Notes on Manifolds
+    author: Alberto S. Cattaneo
+    edition_or_version: April 24, 2018
+    uploaded_filename: manifoldsFS15.pdf
+    pdf_sha256: 30f7fe90a82f088955f4bbe5a9767525653dd9abd370f47a3fc6683e13025003
+    pdf_page_count: 180
+    page_numbering: printed_pages
+    rights_note: User-provided reference copy; metadata and short locators only, no redistribution.
+
+  - id: hitchin-differentiable-manifolds-2014
+    title: Differentiable Manifolds
+    author: Nigel Hitchin
+    edition_or_version: Course C3.3b, 2014
+    uploaded_filename: Hitchin-DifferentiableManifolds.pdf
+    pdf_sha256: 313ad04858e53840925a65f673497cfed6514670d27a188c6b0b9ded78fc73cb
+    pdf_page_count: 94
+    page_numbering: printed_pages
+    rights_note: User-provided reference copy; metadata and short locators only, no redistribution.
+
+  - id: viaclovsky-introduction-to-manifolds-and-geometry-2022
+    title: 218BC Introduction to Manifolds and Geometry
+    author: Jeff A. Viaclovsky
+    edition_or_version: Winter/Spring 2022
+    uploaded_filename: 218BC_2022.pdf
+    pdf_sha256: 842f936e884bfe44387aac99e07441c1bacdd29ae85f90ff0d7fddf06ed312aa
+    pdf_page_count: 127
     page_numbering: printed_pages
     rights_note: User-provided reference copy; metadata and short locators only, no redistribution.
 
@@ -194,4 +224,156 @@ tracks:
       - Using a Euclidean chord as a Poincare geodesic away from a diameter.
       - Treating a boundary point as an interior point.
       - Claiming that a visualization or model analogy proves a phase-depth correspondence.
+    proposed_declarations: []
+
+  - id: atlas-transition-cocycle
+    priority: P0
+    classification: CLASSICAL_REFERENCE
+    novelty_ledger: false
+    state: specification_queued
+    source_anchors:
+      - source_id: cattaneo-notes-on-manifolds-2018
+        printed_pages: [2, 3, 4, 5, 6, 7]
+        anchor: Section 1, charts, atlases, transition maps, and smooth compatibility
+      - source_id: hitchin-differentiable-manifolds-2014
+        printed_pages: [6, 7, 8, 9, 10]
+        anchor: Section 2, coordinate neighbourhoods, atlases, and smooth maps
+    target: >-
+      Build one minimal Mathlib-backed chart example on a circle or sphere and
+      expose its overlap maps, inverse law, and triple-overlap composition law.
+      Reuse the existing manifold API rather than introducing a parallel atlas
+      abstraction, and keep the result a classical infrastructure benchmark.
+    required_assumptions:
+      - A declared model space, topology, and manifold-with-corners structure.
+      - Explicit membership in every chart source, target, and overlap domain.
+      - Smoothness conditions at the exact order required by each transition claim.
+    adversarial_cases:
+      - A theorem that succeeds only because the chart overlap is empty.
+      - Reversing the order of transition-map composition.
+      - Treating coordinate equality as equality of manifold points without chart injectivity.
+      - Rebranding atlas compatibility as a phase-depth cocycle theorem.
+    proposed_declarations: []
+
+  - id: real-line-bundle-cocycle-mobius
+    priority: P0
+    classification: BROCKIAN_BRIDGE
+    novelty_ledger: false
+    state: specification_queued
+    source_anchors:
+      - source_id: viaclovsky-introduction-to-manifolds-and-geometry-2022
+        printed_pages: [5, 8, 10, 19, 20]
+        anchor: Vector bundles, pullbacks, transition cocycles, and the two real line bundles on S1
+      - source_id: cattaneo-notes-on-manifolds-2018
+        printed_pages: [53, 56, 60, 61]
+        anchor: Section 5, vector bundles, bundle charts, transition functions, and sections
+    target: >-
+      Use a real line bundle over S1 as the first explicit transition-cocycle
+      fixture: encode the cover and overlap maps, verify the cocycle law, and
+      separate the trivial and Mobius cases. Only after that fixture is green
+      should a typed map to discrete phase-depth labels or holonomy be proposed.
+    required_assumptions:
+      - A stated open cover and transition maps on each nonempty overlap.
+      - Continuity or smoothness, fibrewise linearity, and the identity/inverse/cocycle laws.
+      - A cover or refinement adequate for the claimed Cech-cohomology computation.
+    adversarial_cases:
+      - Using a two-interval cover of S1 whose overlap is disconnected as though it were a good cover.
+      - Declaring the sign-changing transition function nontrivial without ruling out a coboundary.
+      - Treating a nowhere-zero local section as a global trivialization.
+      - Importing a discrete edge label as a smooth transition function without a comparison map.
+    proposed_declarations: []
+
+  - id: exterior-derivative-square-zero
+    priority: P0
+    classification: CLASSICAL_REFERENCE
+    novelty_ledger: false
+    state: benchmark_ready
+    source_anchors:
+      - source_id: cattaneo-notes-on-manifolds-2018
+        printed_pages: [91, 92, 93, 94, 95, 96]
+        anchor: Section 9, de Rham differential, graded Leibniz law, naturality, and d squared equals zero
+      - source_id: hitchin-differentiable-manifolds-2014
+        printed_pages: [43, 44, 45, 50, 51]
+        anchor: Exterior derivative and the closed/exact definition of de Rham cohomology
+      - source_id: viaclovsky-introduction-to-manifolds-and-geometry-2022
+        printed_pages: [31, 32, 33, 34, 35, 36, 37]
+        anchor: Exterior derivative, pullback naturality, and Cartan calculus
+    target: >-
+      Make a small adapter benchmark around Mathlib's existing extDeriv API:
+      specialize d(d omega)=0 for a twice-smooth differential form on a model
+      vector space, then derive that exact forms are closed. Do not restate the
+      library theorem or silently generalize it to arbitrary manifolds.
+    required_assumptions:
+      - The scalar field, model spaces, form degree, and differentiability order required by Mathlib.
+      - A precise distinction between a model-space differential form and a global manifold form.
+      - The degree shift and zero-form edge case stated explicitly.
+    adversarial_cases:
+      - Dropping the differentiability hypotheses needed for equality of mixed partials.
+      - Confusing the model-space extDeriv theorem with a global de Rham complex.
+      - Losing the degree shift when applying the exterior derivative twice.
+      - Treating exact-implies-closed as the converse.
+    proposed_declarations: []
+
+  - id: finite-quotient-descent
+    priority: P1
+    classification: BROCKIAN_BRIDGE
+    novelty_ledger: false
+    state: specification_queued
+    source_anchors:
+      - source_id: viaclovsky-introduction-to-manifolds-and-geometry-2022
+        printed_pages: [68, 69, 100, 101, 102, 103]
+        anchor: Finite group quotients, quotient manifolds, degree, and covering examples
+    target: >-
+      State a model card for descent along a finite group action and implement
+      the smallest free-action example for which an invariant map or form
+      descends to the quotient. C5 or D5 may supply a symmetry group, but a
+      quotient-manifold claim requires separate smoothness, freeness, and
+      quotient hypotheses.
+    required_assumptions:
+      - A smooth action by a finite group on a specified manifold.
+      - Freeness and the separation/properness hypotheses used to obtain a quotient manifold.
+      - Invariance for descended objects, or equivariance when a nontrivial target action is present.
+    adversarial_cases:
+      - A D5 action with reflection or rotation fixed points.
+      - Proving only a set quotient while claiming a smooth quotient manifold.
+      - Confusing an equivariant map with an invariant map.
+      - Assuming every object on the cover descends without compatibility on overlaps.
+    proposed_declarations: []
+
+  - id: discrete-to-de-rham-comparison-firewall
+    priority: P0
+    classification: BROCKIAN_BRIDGE
+    novelty_ledger: false
+    state: benchmark_ready
+    source_anchors:
+      - source_id: cattaneo-notes-on-manifolds-2018
+        printed_pages: [95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106]
+        anchor: Global de Rham differential, closed and exact forms, and de Rham cohomology
+      - source_id: hitchin-differentiable-manifolds-2014
+        printed_pages: [50, 51, 52, 53, 54, 55, 56]
+        anchor: De Rham cohomology, products, pullbacks, and homotopy invariance
+      - source_id: viaclovsky-introduction-to-manifolds-and-geometry-2022
+        printed_pages: [65, 71, 72, 73, 74, 75, 81, 82, 83, 84, 85, 86, 87]
+        anchor: De Rham cohomology, Poincare lemma, homotopy, Mayer-Vietoris, spheres, and the torus
+    existing_baseline:
+      source_files:
+        - Brockian/PhaseDepthClassification.lean
+        - Brockian/PhaseDepthNonabelian.lean
+      declarations:
+        - Brockian.PhaseDepthClassification.cohomologous_iff_totalDepth_eq
+        - Brockian.PhaseDepthNonabelian.gauge_iff_hol_eq
+    target: >-
+      Enforce a typed comparison contract between the finite C5 edge-cochain
+      complex and the de Rham complex of a chosen geometric realization. No
+      equality, equivalence, or transfer of invariants passes until an explicit
+      degree-preserving cochain map is defined, proved to commute with the two
+      differentials, and shown to have the claimed cohomological property.
+    required_assumptions:
+      - A specified geometric realization and a map between its discrete and smooth coefficient systems.
+      - Explicit cochain groups, gradings, differentials, and the chain-map commutation theorem.
+      - A separately stated injectivity, surjectivity, or quasi-isomorphism claim at each used degree.
+    adversarial_cases:
+      - Identifying two H1 notations merely because both classify a form of holonomy.
+      - Inferring an equivalence from an accidental rank match in degree one.
+      - Replacing the finite cycle by the smooth circle without a realization and comparison map.
+      - Treating nonabelian conjugacy-class holonomy as ordinary de Rham cohomology.
     proposed_declarations: []

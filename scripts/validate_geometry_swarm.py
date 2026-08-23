@@ -83,6 +83,7 @@ def validate_document(doc: dict[str, Any], registry: dict[str, str], label: str)
                 err(f"stage_contracts.{stage} needs required_output")
 
     source_ids: set[str] = set()
+    source_hashes: dict[str, str] = {}
     sources = doc.get("sources")
     if not isinstance(sources, list) or not sources:
         err("sources must be a non-empty list")
@@ -105,6 +106,10 @@ def validate_document(doc: dict[str, Any], registry: dict[str, str], label: str)
             digest = source.get("pdf_sha256")
             if not isinstance(digest, str) or re.fullmatch(r"[0-9a-f]{64}", digest) is None:
                 err(f"{where}.pdf_sha256 must be a lowercase SHA-256 digest")
+            elif digest in source_hashes:
+                err(f"{where}.pdf_sha256 duplicates {source_hashes[digest]}")
+            else:
+                source_hashes[digest] = str(source_id or where)
             if not isinstance(source.get("pdf_page_count"), int) or source["pdf_page_count"] <= 0:
                 err(f"{where}.pdf_page_count must be a positive integer")
             if source.get("page_numbering") != "printed_pages":
