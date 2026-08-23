@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11560,
+    "PROVED": 11564,
     "DEFINITION": 651,
     "CONJECTURE": 40,
     "CONDITIONAL": 33,
@@ -137936,6 +137936,126 @@
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
       "provenance_note": "OPEN-TERRITORY perfect totient numbers (open-territory loop, AXLE @4.32, axiom-clean). PerfectTotient n := n = phi(n)+phi(phi(n))+...+1 (iterated Euler totient sum). CONCRETE: nine instances pt_{3,9,15,27,39,81,111,183,243} including the full powers-of-3 pattern 3,9,27,81,243=3^1..3^5; non-example not_pt_4. PerfectTotientInfinitude (infinitely many perfect totient numbers) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.PhaseDepthClassification.cohomologous_iff_totalDepth_eq",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PhaseDepthClassification.cohomologous_of_totalDepth_eq",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PhaseDepthClassification.sum_coboundary",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PhaseDepthClassification.totalDepth_eq_of_cohomologous",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthClassification",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthClassification.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.PhaseDepthCohomologyComplete.coboundary_of_sum_eq",
