@@ -1,0 +1,197 @@
+schema_version: 1
+benchmark_id: classical-geometry-swarm-v1
+
+purpose: >-
+  A provenance-backed, adversarial benchmark for AI-assisted discovery and
+  formalization of classical geometry. It turns source-guided exploration into
+  a sequence of separately auditable artifacts rather than a theorem claim.
+
+source_policy:
+  access: private_reference_only
+  redistribution: metadata_only
+  theorem_classification: classical_reference_only
+  novelty_ledger: false
+  boundary: >-
+    Numerical sketches, dynamic-geometry observations, and language-model
+    proposals are exploration evidence only. A mathematical result enters the
+    repository registry only through a separately reviewed Lean declaration,
+    clean local build, independent verification, and provenance record.
+
+stages:
+  - explore
+  - formalize
+  - prove
+  - attack
+  - audit
+
+stage_contracts:
+  explore:
+    role: Explorer
+    required_output: >-
+      Exact-coordinate or symbolic examples, a reproducible construction, and
+      at least one attempted falsifier. Floating-point diagrams alone do not pass.
+  formalize:
+    role: Specifier
+    required_output: >-
+      A Lean-ready proposition with every domain, orientation, nondegeneracy,
+      and denominator condition stated explicitly.
+  prove:
+    role: Prover
+    required_output: >-
+      A sorry-free Lean proof candidate and its exact import/environment plan.
+  attack:
+    role: Adversary
+    required_output: >-
+      Counterexamples or proof obligations for omitted hypotheses, degenerate
+      configurations, sign conventions, ideal points, and limiting cases.
+  audit:
+    role: Auditor
+    required_output: >-
+      A provenance record that distinguishes source, computation, formal proof,
+      and any unresolved obligation; it must not promote a benchmark task to novelty.
+
+sources:
+  - id: venema-advanced-euclidean-geometry-2006
+    title: Exploring Advanced Euclidean Geometry with Geometer's Sketchpad
+    author: Gerard A. Venema
+    edition_or_version: July 2006
+    uploaded_filename: eeg.pdf
+    pdf_sha256: 6c43678cc67b3da596348e6d5e0fa99499001bd3ae52599bbd50629fec970bee
+    pdf_page_count: 121
+    page_numbering: printed_pages
+    rights_note: User-provided reference copy; metadata and short locators only, no redistribution.
+
+  - id: yiu-advanced-euclidean-geometry-2013
+    title: Advanced Euclidean Geometry
+    author: Paul Yiu
+    edition_or_version: August 2, 2013
+    uploaded_filename: dokumen.pub_advanced-euclidean-geometry-august-2-2013nbsped.pdf
+    pdf_sha256: 845180baa6cf3fc3c261273684f70dd16e6aca450c4b0a9974c4953b452e4a2f
+    pdf_page_count: 146
+    page_numbering: printed_pages
+    rights_note: User-provided reference copy; metadata and short locators only, no redistribution.
+
+  - id: coxeter-non-euclidean-geometry-fifth-1965
+    title: Non-Euclidean Geometry
+    author: H. S. M. Coxeter
+    edition_or_version: Fifth edition, 1965
+    uploaded_filename: dokumen.pub_non-euclidean-geometry-fifth-edition-9781442653207.pdf
+    pdf_sha256: 8376cac530c1090c3ef3c3fd591f968f4e9923ae6bc66acae0e6409ab2f03ea1
+    pdf_page_count: 325
+    page_numbering: printed_pages
+    rights_note: User-provided reference copy; metadata and short locators only, no redistribution.
+
+tracks:
+  - id: regular-pentagon-golden-ratio
+    priority: P0
+    classification: CLASSICAL_REFERENCE
+    novelty_ledger: false
+    state: benchmark_ready
+    source_anchors:
+      - source_id: yiu-advanced-euclidean-geometry-2013
+        printed_pages: [106, 107]
+        anchor: Section 1.3.1, regular pentagon construction and golden-ratio diagonal
+    existing_baseline:
+      source_files:
+        - Brockian/Geometry.lean
+      declarations:
+        - Brockian.Geometry.pentagon_golden_diagonal
+        - Brockian.Geometry.golden_ratio_in_C5_spectrum
+    target: >-
+      Reproduce the construction with exact Euclidean data, then map only the
+      already-formalized diagonal/golden identities into the C5 spectral context.
+    required_assumptions:
+      - Nondegenerate regular pentagon with a declared side/diagonal convention.
+      - Positive lengths before a ratio or square-root cancellation is used.
+    adversarial_cases:
+      - Reversed side-versus-diagonal convention.
+      - Degenerate or self-intersecting five-point configuration.
+      - Illicit inference that a classical golden identity is a Brockian novelty claim.
+    proposed_declarations: []
+
+  - id: signed-ceva-menelaus-projective-extension
+    priority: P0
+    classification: CLASSICAL_REFERENCE
+    novelty_ledger: false
+    state: specification_queued
+    source_anchors:
+      - source_id: venema-advanced-euclidean-geometry-2006
+        printed_pages: [51, 56, 60, 65, 66]
+        anchor: Chapters 8-9, sensed ratios, ideal points, Ceva, and Menelaus
+      - source_id: yiu-advanced-euclidean-geometry-2013
+        printed_pages: [201, 204]
+        anchor: Sections 5.1 and 5.3, Menelaus and Ceva in directed-ratio form
+    existing_baseline:
+      source_files:
+        - Brockian/MsCeva.lean
+        - Brockian/MsMenelaus.lean
+      declarations:
+        - Brockian.MsCeva.ceva
+        - Brockian.MsMenelaus.menelaus
+    target: >-
+      Specify a signed-ratio/projective extension of the current finite-plane
+      theorems before attempting a proof. Keep the existing interior-segment
+      results as baselines, not as evidence that all ideal-point cases are settled.
+    required_assumptions:
+      - A noncollinear reference triangle.
+      - An explicit orientation or signed-ratio convention.
+      - Explicit treatment of zero denominators and points at infinity.
+    adversarial_cases:
+      - Collinear reference vertices.
+      - A cevian parallel to its opposite side.
+      - A point equal to a triangle vertex or a zero denominator.
+      - Product equals plus or minus one under the wrong orientation convention.
+    proposed_declarations: []
+
+  - id: barycentric-line-at-infinity
+    priority: P1
+    classification: CLASSICAL_REFERENCE
+    novelty_ledger: false
+    state: specification_queued
+    source_anchors:
+      - source_id: yiu-advanced-euclidean-geometry-2013
+        printed_pages: [301, 314]
+        anchor: Chapter 9, homogeneous barycentric coordinates and infinite points
+      - source_id: coxeter-non-euclidean-geometry-fifth-1965
+        printed_pages: [16, 45, 71, 90]
+        anchor: Chapters 2-4, projective foundations, harmonic sets, and homogeneous coordinates
+    target: >-
+      Build a minimal projective-coordinate interface suitable for later Ceva,
+      Menelaus, and polarity work. It is a classical foundation task, not a
+      phase-depth model or a claimed new invariant.
+    required_assumptions:
+      - A field and a three-point noncollinear reference frame.
+      - Equivalence under nonzero homogeneous rescaling.
+      - A precise representation of the line at infinity.
+    adversarial_cases:
+      - Treating two homogeneous triples as unequal after nonzero rescaling.
+      - Forgetting the zero-sum criterion for an infinite point.
+      - Mixing affine coordinates with projective coordinates without a chart condition.
+    proposed_declarations: []
+
+  - id: klein-poincare-model-separation
+    priority: P1
+    classification: CLASSICAL_REFERENCE
+    novelty_ledger: false
+    state: specification_queued
+    source_anchors:
+      - source_id: venema-advanced-euclidean-geometry-2006
+        printed_pages: [96, 100, 104]
+        anchor: Chapter 14, Poincare disk, orthogonal circles, and hyperbolic distance
+      - source_id: coxeter-non-euclidean-geometry-fifth-1965
+        printed_pages: [157, 192, 252, 265]
+        anchor: Chapters 8-9 and 14, Klein model, absolute polarity, and Poincare models
+    target: >-
+      Compare Klein and Poincare model conventions with a formal model card:
+      state space, metric, geodesics, boundary, transformations, and invariant.
+      Do not identify either model with phase-depth or gauge dynamics without a
+      separately stated map and theorem.
+    required_assumptions:
+      - A specified open disk or convex-domain model.
+      - A stated cross-ratio or conformal distance convention.
+      - Explicit boundary exclusion and transformation domain.
+    adversarial_cases:
+      - Using a Euclidean chord as a Poincare geodesic away from a diameter.
+      - Treating a boundary point as an interior point.
+      - Claiming that a visualization or model analogy proves a phase-depth correspondence.
+    proposed_declarations: []
