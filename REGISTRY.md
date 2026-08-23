@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 651
 - **DISCHARGED**: 7
-- **PROVED**: 11606
+- **PROVED**: 11616
 
 ## Theorems
 
@@ -4504,6 +4504,16 @@
 | DEFINITION | `Brockian.PhaseDepthNoGo.totalDepth` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthNoGo.totalDepth_const` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthNoGo.totalDepth_eq_of_cohomologous` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_iff_conj` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_iff_hol_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_of_conj` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_refl` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_stdLabel_conj` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_symm` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_trans` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.gauge_trivialize` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.hol_eq_prod` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthNonabelian.hol_gauge` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.PhaseDepthTorus.PhaseDepth` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
 | DEFINITION | `Brockian.PhaseDepthTorus.TwinAdmissibleAt` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
 | PROVED | `Brockian.PhaseDepthTorus.compatible_closure` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
