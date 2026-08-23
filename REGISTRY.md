@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 651
 - **DISCHARGED**: 7
-- **PROVED**: 11570
+- **PROVED**: 11577
 
 ## Theorems
 
@@ -4470,6 +4470,13 @@
 | PROVED | `Brockian.PhaseDepthClassification.sum_coboundary` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthClassification.totalDepth_eq_of_cohomologous` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthCohomologyComplete.coboundary_of_sum_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthD5.act_mul` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthD5.act_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthD5.d5_covariance` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthD5.d5_pm_class_invariant` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthD5.totalDepth_reflection` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthD5.totalDepth_reflection_invariant` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthD5.totalDepth_rotation` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.PhaseDepthNoGo.Cohomologous` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.PhaseDepthNoGo.coboundary` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthNoGo.sum_coboundary` | ✓ | verified | lean-4.32.2 |  |
