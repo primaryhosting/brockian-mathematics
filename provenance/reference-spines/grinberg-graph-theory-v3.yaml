@@ -1,0 +1,176 @@
+schema_version: 1
+spine_id: grinberg-graph-theory-v3
+
+source:
+  title: An introduction to graph theory
+  author: Darij Grinberg
+  identifier: arXiv:2308.04512v3
+  version_date: 2025-06-07
+  canonical_url: https://arxiv.org/abs/2308.04512
+  pdf_url: https://arxiv.org/pdf/2308.04512
+  uploaded_filename: 2308.04512.pdf
+  pdf_sha256: d4c8265e2307279bc470493da0b87ba5c6b48de31663989df1cf89b75764583c
+  page_count: 454
+  license: CC0-1.0
+  license_locator: printed page 6
+
+classification_tags:
+  CLASSICAL_REFERENCE: >-
+    An externally sourced classical theorem or definition. It may be formalized and
+    verified here, but it is excluded from the Brockian novelty ledger.
+  BROCKIAN_BRIDGE: >-
+    A repository theorem that connects a classical reference result to the phase-depth,
+    transfer, representation, or spectral spine. Integration work is not a novelty claim.
+  BROCKIAN_RESULT: >-
+    A theorem whose mathematical claim, not merely its formalization or packaging, is
+    asserted as a Brockian contribution. This tag requires separate novelty review.
+  EMPIRICAL_COMPUTATION: >-
+    A finite experiment or data analysis. It must not enter the PROVED theorem count.
+
+policy:
+  novelty_ledger:
+    excluded_tags:
+      - CLASSICAL_REFERENCE
+      - BROCKIAN_BRIDGE
+      - EMPIRICAL_COMPUTATION
+    review_required_tag: BROCKIAN_RESULT
+  verified_registry: >-
+    registry_verified means the declaration already appears as PROVED or DEFINITION in
+    registry/theorems.json. lean_source_pending_axle means it is sorry-free Lean source
+    but is not promoted by this manifest and awaits an independent AXLE attestation.
+  source_boundary: >-
+    The weighted Matrix-Tree Theorem is not a gauge/cohomology classification theorem.
+    Grinberg's directed Laplacian uses outdegree minus adjacency and arborescences rooted
+    to the selected vertex; any phase-depth use must state the convention explicitly.
+
+scope:
+  included:
+    - cycle graphs and dihedral automorphisms
+    - adjacency powers and walk counts
+    - C5 adjacency traces and the existing C5 spectral continuation
+    - spanning-tree and Matrix-Tree targets
+    - explicit phase-depth bridge and empirical boundary
+  excluded:
+    - wholesale ingestion of the 454-page text
+    - restating Mathlib theorems without a C5 or phase-depth integration purpose
+    - treating classical graph theory as Brockian novelty
+    - treating empirical discrimination results as formal theorems
+
+slices:
+  - id: c5-cycle-and-dihedral-automorphisms
+    source_locator:
+      pages: [29, 30]
+      anchor: Definition 2.6.3 and the following automorphism discussion
+    classification: CLASSICAL_REFERENCE
+    implementation_status: registry_verified
+    novelty_ledger: false
+    source_files:
+      - Brockian/Automorphism.lean
+      - Brockian/AutomorphismFull.lean
+    declarations:
+      - Brockian.Automorphism.C5
+      - Brockian.Automorphism.Full.autEquivDihedral
+      - Brockian.Automorphism.Full.aut_card_eq_ten
+    note: >-
+      Existing formalization reused. The reference spine deliberately adds no duplicate
+      Aut(C5) isomorphic-to-D5 theorem.
+
+  - id: c5-adjacency-powers-count-walks
+    source_locator:
+      pages: [121]
+      anchor: Theorem 4.5.10
+    classification: CLASSICAL_REFERENCE
+    implementation_status: lean_source_pending_axle
+    novelty_ledger: false
+    source_file: Brockian/GrinbergC5Reference.lean
+    declarations:
+      - Brockian.GrinbergC5Reference.c5_degree_eq_two
+      - Brockian.GrinbergC5Reference.c5_edge_count_eq_five
+      - Brockian.GrinbergC5Reference.c5_adjacency_power_counts_walks
+      - Brockian.GrinbergC5Reference.c5_adjacency_trace_counts_closed_walks
+      - Brockian.GrinbergC5Reference.c5_adjacency_trace_sq_eq_ten
+      - Brockian.GrinbergC5Reference.c5_closed_walks_length_two_eq_ten
+    note: >-
+      First new Lean slice. The general walk theorem is supplied by Mathlib and specialized
+      to the canonical C5; the trace and length-two consequences are proved in-repository.
+
+  - id: c5-spectral-continuation
+    source_locator:
+      relation: downstream of the adjacency-matrix slice; not attributed to this source
+    classification: BROCKIAN_BRIDGE
+    implementation_status: registry_verified
+    novelty_ledger: false
+    source_file: Brockian/CycleSpectrumFamily.lean
+    declarations:
+      - Brockian.CycleSpectrumFamily.golden_in_C5
+      - Brockian.CycleSpectrumFamily.neg_golden_in_C5
+      - Brockian.CycleSpectrumFamily.algebraic_connectivity_five
+    note: >-
+      Existing spectral facts are linked as downstream consumers. Golden cycle spectra are
+      classical; this bridge is excluded from novelty accounting.
+
+  - id: c5-phase-depth-bridge
+    source_locator:
+      relation: internal bridge from the classical C5/D5 and trace spine
+    classification: BROCKIAN_BRIDGE
+    implementation_status: registry_verified
+    novelty_ledger: false
+    source_files:
+      - Brockian/PhaseDepthClassification.lean
+      - Brockian/PhaseDepthD5.lean
+      - Brockian/PhaseDepthTraceMatrix.lean
+    declarations:
+      - Brockian.PhaseDepthClassification.cohomologous_iff_totalDepth_eq
+      - Brockian.PhaseDepthD5.d5_covariance
+      - Brockian.PhaseDepthTraceMatrix.trace_transferMatrix_pow
+      - Brockian.PhaseDepthTraceMatrix.trace_transferMatrix_pow_five_mul
+    note: >-
+      These already-verified declarations make the bridge precise: total depth classifies
+      gauges on one directed pentagonal cycle, D5 acts covariantly, and transfer powers have
+      literal trace formulas. None is attributed to the Matrix-Tree Theorem.
+
+  - id: cycle-spanning-tree-count
+    source_locator:
+      pages: [167, 168]
+      anchor: Example 5.4.4
+    classification: CLASSICAL_REFERENCE
+    implementation_status: queued
+    novelty_ledger: false
+    declarations: []
+    target: Formalize that C5 has exactly five spanning trees without finite brute force.
+
+  - id: directed-cycle-rooted-arborescence
+    source_locator:
+      pages: [208]
+      anchor: Example 5.8.6
+    classification: CLASSICAL_REFERENCE
+    implementation_status: queued
+    novelty_ledger: false
+    declarations: []
+    target: >-
+      Formalize the unique spanning arborescence rooted from vertex 1 in the directed
+      n-cycle, preserving Grinberg's root-orientation convention.
+
+  - id: matrix-tree-theorems
+    source_locator:
+      pages: [252, 280]
+      anchor: Theorems 5.15.1 and 5.19.2
+    classification: CLASSICAL_REFERENCE
+    implementation_status: queued
+    novelty_ledger: false
+    declarations: []
+    target: >-
+      Add the undirected and weighted directed Matrix-Tree interfaces only after the
+      Laplacian sign and root conventions are represented explicitly.
+
+  - id: arithmetic-discrimination-experiment
+    source_locator:
+      relation: internal empirical artifact; not sourced from Grinberg
+    classification: EMPIRICAL_COMPUTATION
+    implementation_status: documented_empirical
+    novelty_ledger: false
+    artifact_path: docs/phase-depth/2026-08-23-arithmetic-discrimination-experiment.md
+    declarations: []
+    note: >-
+      The observed discrimination percentages remain computation-only and are excluded
+      from both the PROVED register and the novelty ledger.

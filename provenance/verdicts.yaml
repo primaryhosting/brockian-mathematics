@@ -104,6 +104,14 @@ runs:
     ledger_run: "run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso"
     provenance_note: "card_aut_le_ten, aut_card_eq_ten (=10), dihedralHom_surjective (pinning), autEquivDihedral : DihedralGroup 5 ≃* (C5 ≃g C5) — the FULL Aut(C5)≅D5 iso. Upgrades run-54 partial to complete. Axiom-clean."
 
+  # ── Grinberg graph-theory reference spine: first C5 adjacency slice ─────────
+  "grinberg-c5-reference":
+    module: Brockian.GrinbergC5Reference
+    verdict: admit
+    quarantine: true
+    ledger_run: "2026-08-23 — Grinberg arXiv:2308.04512v3 classical C5 reference slice"
+    provenance_note: "CLASSICAL_REFERENCE, not Brockian novelty: C5 degree/edge count, adjacency powers count walks (Grinberg Thm 4.5.10 via Mathlib), trace counts closed walks, and the length-two trace/count = 10. Source hash and bridge boundary are machine-checked in provenance/reference-spines/grinberg-graph-theory-v3.yaml. Local Lean source is integrated; registry promotion awaits an independent AXLE attestation."
+
   # ── D5 representation foothold (Aug 1): finite vertex-space action ──────────
   "d5-representation":
     module: Brockian.D5Representation

@@ -15,6 +15,7 @@ import Brockian.CycleSpectrumFamily
 import Brockian.C5SpectralMultiplicities
 import Brockian.Automorphism
 import Brockian.AutomorphismFull
+import Brockian.GrinbergC5Reference
 import Brockian.D5Representation
 import Brockian.D5CharacterTable
 import Brockian.D5Isotypic
