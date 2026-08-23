@@ -1,0 +1,73 @@
+{
+  "labId": "brockian-system",
+  "title": "The Brockian System",
+  "description": "The Brockian phase-depth program end to end: a hidden five-fold structure on the number line, a depth-holonomy invariant that sees beyond residue-Fourier data and is provably complete, the D5 character layer, Bombieri-Vinogradov Layer 4 (Vaughan's identity), and the honest conditional frontier where famous conjectures reduce to named open hypotheses. Every verified result renders green; every conditional reduction renders as an explicit not-a-proof state.",
+  "registrySchema": "brockian-public-verified-registry/v1",
+  "claims": [
+    {
+      "claim": "Primes greater than 5 travel on fixed residue 'roads' mod 5: a cousin-prime pair (p, p+4) can only occupy the residue transitions (2->1), (3->2), or (4->3).",
+      "theorem": "Brockian.ConeLine.cousin_prime_roads",
+      "visualRef": "prime-roads"
+    },
+    {
+      "claim": "The residue walk of a fixed stride around the mod-5 cone is fully classified: every stride's ray sequence is determined.",
+      "theorem": "Brockian.ConeLine.stride_ray_walk_classification",
+      "visualRef": "stride-walk"
+    },
+    {
+      "claim": "The depth-holonomy invariant separates two transfer systems with identical residue-Fourier spectra: branching sees strictly beyond weighted-cyclic Fourier analysis.",
+      "theorem": "Brockian.DepthHolonomySeparation.depth_holonomy_separates",
+      "visualRef": "separation"
+    },
+    {
+      "claim": "No-go (invariance): on a single deterministic 5-cycle, cohomologous roofs share the same total depth - there is no additive invariant finer than the total.",
+      "theorem": "Brockian.PhaseDepthNoGo.totalDepth_eq_of_cohomologous",
+      "visualRef": "nogo-forward"
+    },
+    {
+      "claim": "Completeness (converse): equal total sum over the 5-cycle forces the difference to be a coboundary. With invariance, the total-depth invariant is COMPLETE - both directions proved.",
+      "theorem": "Brockian.PhaseDepthCohomologyComplete.coboundary_of_sum_eq",
+      "visualRef": "nogo-converse"
+    },
+    {
+      "claim": "The depth-holonomy group over a ZMod 6 fiber is an isomorphic copy of ZMod 6: the loop map is a faithful additive homomorphism onto the fiber translations.",
+      "theorem": "Brockian.HolonomyIsomorphism.holonomy_group_iso",
+      "visualRef": "holonomy-iso"
+    },
+    {
+      "claim": "Over a nonabelian S3 fiber the loop holonomy is order-dependent (the two seam elements do not commute) - the first non-order-independent holonomy in the program.",
+      "theorem": "Brockian.NonabelianOrderHolonomy.order_dependent",
+      "visualRef": "nonabelian"
+    },
+    {
+      "claim": "The five fifth-roots-of-unity additive characters on ZMod 5 satisfy Parseval's identity.",
+      "theorem": "Brockian.Characters5.parseval",
+      "visualRef": "parseval"
+    },
+    {
+      "claim": "The additive characters are orthogonal: summing e(a*x) over ZMod 5 gives 5 when a=0 and 0 otherwise.",
+      "theorem": "Brockian.Characters5.sum_e_mul",
+      "visualRef": "orthogonality"
+    },
+    {
+      "claim": "Vaughan's identity (Bombieri-Vinogradov Layer 4): the von Mangoldt function decomposes as a four-term Dirichlet-convolution identity for all truncation parameters U, V.",
+      "theorem": "Brockian.Vaughan.vaughan_identity",
+      "visualRef": "vaughan"
+    },
+    {
+      "claim": "CONDITIONAL: the Twin Prime Conjecture follows from Dickson's conjecture on admissible k-tuples. The implication is proved; Dickson remains open.",
+      "theorem": "Brockian.TwinPrimesReduction.TwinPrimeConjecture",
+      "visualRef": "twin-conditional"
+    },
+    {
+      "claim": "CONDITIONAL: Brocard's problem (finitely many n with n!+1 a perfect square) follows from the ABC conjecture. The implication is proved; ABC remains open.",
+      "theorem": "Brockian.BrocardProblemReduction.BrocardConjecture",
+      "visualRef": "brocard-conditional"
+    },
+    {
+      "claim": "CONDITIONAL (equivalence): even-perfect-number infinitude is equivalent to Mersenne-exponent infinitude (Euclid-Euler). The equivalence is proved; neither open side is resolved.",
+      "theorem": "Brockian.MersennePerfectReduction.EvenPerfectInfinitude",
+      "visualRef": "euclid-euler"
+    }
+  ]
+}

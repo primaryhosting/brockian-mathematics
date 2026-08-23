@@ -57,7 +57,8 @@ Of these three legs, only the AXLE cloud re-check has actually run across the co
 re-check also reports the axiom footprint (leg 2 — only the three standard axioms, no
 `native_decide`) and statement fidelity, so legs 2 and 3 are covered by AXLE. **Leg 1 — a
 local from-source `lake build` on the pinned toolchain — is pending for every entry**: the
-registry marks `lake_build: 'pending'` for all 11,819 declarations, pending CI/local compute
+registry marks `lake_build: 'pending'` for all 12,291 declarations (11,560 PROVED; see the
+`summary` block in `registry/theorems.json`), pending CI/local compute
 with a reachable Mathlib cache.
 
 An independent third-party cloud re-check (AXLE, at the `lean-4.32.2` environment) has

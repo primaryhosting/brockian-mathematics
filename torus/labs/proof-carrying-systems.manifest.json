@@ -1,0 +1,118 @@
+{
+  "labId": "proof-carrying-systems",
+  "title": "Proof-Carrying Systems — Verified High-Assurance Security Core",
+  "description": "AI-generated, independently AXLE-verified, axiom-clean proofs of seL4-class security properties (integrity, confidentiality, separation, capability confinement, refinement) plus a crypto-verification layer (MAC, AEAD, Merkle, constant-time) and the Proof-Carrying Apps software-security layer. Every claim binds to a formally verified theorem; each renders its own certificate. Prepared as the demonstrator for a Galois briefing.",
+  "registrySchema": "brockian-public-verified-registry/v1",
+  "claims": [
+    {
+      "claim": "Capstone — whole-kernel security: from a policy-conformant start, EVERY reachable state of the unified capability-microkernel model preserves the full composite policy (integrity AND memory separation AND IPC confinement), across arbitrarily many operations in any interleaving.",
+      "theorem": "Brockian.HighAssurance.Kernel.kernel_security",
+      "visualRef": "capstone"
+    },
+    {
+      "claim": "seL4 contribution — verified capDL isolation checker: a decidable checker whose 'true' verdict is a machine-checked certificate that a system's capability distribution enforces its protection-domain policy (sound AND complete).",
+      "theorem": "Brockian.HighAssurance.CapDLIsolation.checkIsolation_correct",
+      "visualRef": "capdl-checker"
+    },
+    {
+      "claim": "seL4 contribution — transitive isolation: an object in a fully-isolated protection domain is unreachable through ANY chain of capabilities from outside, and vice-versa — the seL4 isolation guarantee proved at the capDL level.",
+      "theorem": "Brockian.HighAssurance.CapDLIsolation.isolated_domain_unreachable",
+      "visualRef": "capdl-isolation"
+    },
+    {
+      "claim": "Integrity (authority confinement): from a policy-conformant start, every reachable state's capabilities stay within policy — no operation manufactures unauthorized authority.",
+      "theorem": "Brockian.HighAssurance.CapabilityIntegrity.integrity_confinement",
+      "visualRef": "integrity"
+    },
+    {
+      "claim": "Take-grant confinement: reachable authority never exceeds the take-grant closure of the initial protection graph (the general form of kernel integrity).",
+      "theorem": "Brockian.HighAssurance.TakeGrant.authority_confined",
+      "visualRef": "take-grant"
+    },
+    {
+      "claim": "Confidentiality (noninterference) over an arbitrary security lattice: a domain's observation depends only on the domains cleared to influence it; secrets leak zero information downward.",
+      "theorem": "Brockian.HighAssurance.LatticeNoninterference.noninterference",
+      "visualRef": "noninterference"
+    },
+    {
+      "claim": "Memory separation: the contents of an address are unchanged unless an authorized write targets it; disjoint-authority subjects are mutually invisible.",
+      "theorem": "Brockian.HighAssurance.MemorySeparation.frame",
+      "visualRef": "mem-separation"
+    },
+    {
+      "claim": "IPC confinement: every message delivered to a subject is explained by an authorized send on an endpoint both parties hold capabilities for — no unmediated channel.",
+      "theorem": "Brockian.HighAssurance.IPCConfinement.ipc_confinement",
+      "visualRef": "ipc"
+    },
+    {
+      "claim": "Refinement: an abstract safety property is transported through a forward-simulation refinement to a structurally-different concrete layer — the seL4 methodology, mechanized.",
+      "theorem": "Brockian.HighAssurance.Refinement.safety_transported",
+      "visualRef": "refinement"
+    },
+    {
+      "claim": "Scheduler fairness: the round-robin dispatcher is starvation-free — every ready thread is dispatched within one queue cycle; and a blocked thread is never scheduled.",
+      "theorem": "Brockian.HighAssurance.Scheduler.no_starvation",
+      "visualRef": "scheduler"
+    },
+    {
+      "claim": "Deadlock-freedom (liveness): a well-matched synchronous-IPC system never wedges — every rendezvous strictly reduces the blocked count, so the system provably drains to quiescence; a lone thread awaiting an external partner is honest waiting, not deadlock.",
+      "theorem": "Brockian.HighAssurance.Progress.no_deadlock",
+      "visualRef": "deadlock-freedom"
+    },
+    {
+      "claim": "Capability revocation: revoking a capability reclaims all authority derived from it — after revoke, no live capability is a descendant in the derivation tree (complete), while unrelated capabilities are untouched (surgical).",
+      "theorem": "Brockian.HighAssurance.Revocation.no_residual_authority",
+      "visualRef": "revocation"
+    },
+    {
+      "claim": "Availability (CIA triad complete): a subject with headroom can always allocate up to its reserved quota, provably independent of every other subject's activity — no cross-subject denial of service.",
+      "theorem": "Brockian.HighAssurance.Availability.availability_guarantee",
+      "visualRef": "availability"
+    },
+    {
+      "claim": "Refinement composes: a safety property proved on the abstract spec is transported across a 3-level chain (abstract capability-set ⊒ intermediate log ⊒ concrete bitmap) to secure the implementation — the seL4 abstract⊒executable⊒C architecture, mechanized.",
+      "theorem": "Brockian.HighAssurance.RefinementChain.safety_transported_chain",
+      "visualRef": "refinement-chain"
+    },
+    {
+      "claim": "Multi-prover: three security properties (OTP involution, default-deny, unauthorized-write frame) are cross-verified by BOTH Z3 (SMT) and Lean/AXLE on identical statements — 'verified' is not one-prover-deep.",
+      "theorem": "Brockian.HighAssurance.SMTMirror.xor_otp_involution",
+      "visualRef": "multi-prover"
+    },
+    {
+      "claim": "Controlled declassification (delimited release): with a sanctioned downgrade channel releasing f(high), states agreeing on public data AND on f(high) stay indistinguishable to Low forever — Low learns exactly f(high) and nothing more; pure noninterference is the no-declassify special case.",
+      "theorem": "Brockian.HighAssurance.Declassification.delimited_release",
+      "visualRef": "declassification"
+    },
+    {
+      "claim": "MAC: a message has a unique valid tag under a key, so verification accepts only the authentic tag (blind guessing is the only structure-respecting attack).",
+      "theorem": "Brockian.HighAssurance.MAC.mac_determines_tag",
+      "visualRef": "mac"
+    },
+    {
+      "claim": "AEAD: a tampered ciphertext is rejected (decryption fails closed) whenever the MAC distinguishes it from the authentic one.",
+      "theorem": "Brockian.HighAssurance.AEAD.tamper_rejected",
+      "visualRef": "aead"
+    },
+    {
+      "claim": "Merkle tamper-evidence: altering a leaf value provably changes the computed root along the same proof path — you cannot swap committed data without breaking the proof.",
+      "theorem": "Brockian.HighAssurance.Merkle.tamper_detected",
+      "visualRef": "merkle"
+    },
+    {
+      "claim": "Constant-time: for data-oblivious programs the observable trace (branch outcomes + accessed addresses) is provably independent of secret inputs — no timing/cache side channel.",
+      "theorem": "Brockian.HighAssurance.ConstantTime.ct_trace_noninterference",
+      "visualRef": "const-time"
+    },
+    {
+      "claim": "Write integrity (Proof-Carrying Apps): a foreign-tenant write is prevented — the member check blocks cross-tenant mutation.",
+      "theorem": "PCA.WriteIntegrity.member_check_prevents_cross_tenant_write",
+      "visualRef": "pca-write"
+    },
+    {
+      "claim": "Certificate soundness (Proof-Carrying Apps): ed25519 verification is sound with respect to the signing equation.",
+      "theorem": "PCA.Cert.ed25519_verify_sound",
+      "visualRef": "pca-cert"
+    }
+  ]
+}

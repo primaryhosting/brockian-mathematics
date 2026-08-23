@@ -27,7 +27,7 @@ jobs:
         run: python3 -m pip install --quiet pyyaml pytest
 
       - name: Script unit tests
-        run: python3 -m pytest tests/test_gen_registry.py tests/test_audit_registry_consistency.py tests/test_no_theater_lint.py tests/test_ingest_discover.py tests/test_conveyor.py tests/test_conveyor_paperclip.py tests/test_conveyor_notify.py tests/test_export_obsidian.py -q
+        run: python3 -m pytest tests/test_gen_registry.py tests/test_audit_registry_consistency.py tests/test_no_theater_lint.py tests/test_ingest_discover.py tests/test_conveyor.py tests/test_conveyor_paperclip.py tests/test_conveyor_notify.py tests/test_export_obsidian.py tests/test_reference_spines.py tests/test_geometry_swarm.py -q
 
       - name: No-theater lint (blocking on holes in closed modules)
         run: |
@@ -56,6 +56,18 @@ jobs:
           # Every visual claim in every torus lab manifest must resolve to a registry theorem
           # with a green register; absent/UNVERIFIED fails the build. A picture cannot outrun its proof.
           python3 scripts/validate_manifests.py
+
+      - name: Reference-spine provenance firewall (blocking)
+        run: |
+          # Classical sources and bridge work stay out of the novelty ledger; existing
+          # declarations must resolve green, while new Lean source remains pending AXLE.
+          python3 scripts/validate_reference_spines.py
+
+      - name: Classical-geometry swarm firewall (blocking)
+        run: |
+          # Source-guided tasks stay classical, cite source cards, and cannot
+          # advertise planned Lean declarations before a real source exists.
+          python3 scripts/validate_geometry_swarm.py
 
       - name: Record build provenance
         run: |

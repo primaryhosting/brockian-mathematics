@@ -104,6 +104,14 @@ runs:
     ledger_run: "run 54 completed 2026-08-01 — |Aut(C5)|<=10 reverse bound + full iso"
     provenance_note: "card_aut_le_ten, aut_card_eq_ten (=10), dihedralHom_surjective (pinning), autEquivDihedral : DihedralGroup 5 ≃* (C5 ≃g C5) — the FULL Aut(C5)≅D5 iso. Upgrades run-54 partial to complete. Axiom-clean."
 
+  # ── Grinberg graph-theory reference spine: first C5 adjacency slice ─────────
+  "grinberg-c5-reference":
+    module: Brockian.GrinbergC5Reference
+    verdict: admit
+    quarantine: true
+    ledger_run: "2026-08-23 — Grinberg arXiv:2308.04512v3 classical C5 reference slice"
+    provenance_note: "CLASSICAL_REFERENCE, not Brockian novelty: C5 degree/edge count, adjacency powers count walks (Grinberg Thm 4.5.10 via Mathlib), trace counts closed walks, and the length-two trace/count = 10. Source hash and bridge boundary are machine-checked in provenance/reference-spines/grinberg-graph-theory-v3.yaml. Local Lean source is integrated; registry promotion awaits an independent AXLE attestation."
+
   # ── D5 representation foothold (Aug 1): finite vertex-space action ──────────
   "d5-representation":
     module: Brockian.D5Representation
@@ -2088,3 +2096,94 @@ runs:
     quarantine: true
     ledger_run: "Aristotle 794c7ebe-1ca0-4904-b28e-111fec8c1216; Codex Lean 4.32 repair and AXLE audit"
     provenance_note: "Every odd perfect number has at least three distinct prime factors. The proof shows every odd number with at most two prime factors is deficient, using exact divisor-sum bounds for products of two odd prime powers. AXLE 4.32 verified after removing one obsolete simp call; standard axioms only."
+
+  # ---- Aristotle conditional-reductions + equivalences (2026-08-21) ----
+  # H -> conjecture implications and A <-> B equivalences, AXLE-verified axiom-clean.
+  # Only the headline reduction/equivalence theorem is CONDITIONAL; supporting lemmas are PROVED.
+  "aristotle-conditional-brocardproblemreduction":
+    module: Brockian.BrocardProblemReduction
+    ledger_run: "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)"
+    overrides:
+      - name: BrocardConjecture
+        conditional_rung: open
+        provenance_note: "Brocard finiteness (finitely many n with n!+1 a perfect square) GIVEN the ABC conjecture (Overholt reduction via the radical bound); the n<=7 determination is unconditional. ABC is a genuine open external hypothesis."
+  "aristotle-conditional-twinprimesreduction":
+    module: Brockian.TwinPrimesReduction
+    ledger_run: "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)"
+    overrides:
+      - name: TwinPrimeConjecture
+        conditional_rung: open
+        provenance_note: "Twin-prime infinitude GIVEN Dickson's conjecture on admissible k-tuples; admissibility of {n,n+2} is proved unconditionally. Dickson is open."
+  "aristotle-conditional-polignacprimesreduction":
+    module: Brockian.PolignacPrimesReduction
+    ledger_run: "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)"
+    overrides:
+      - name: PolignacConjecture
+        conditional_rung: open
+        provenance_note: "Polignac (infinitely many consecutive-prime gaps equal to n, for even n>0) GIVEN a Dickson-pair hypothesis. Genuine open external input."
+  "aristotle-conditional-landaunsquaredplusonereduction":
+    module: Brockian.LandauNSquaredPlusOneReduction
+    ledger_run: "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)"
+    overrides:
+      - name: LandauFourthConjecture
+        conditional_rung: open
+        provenance_note: "Landau's fourth problem (infinitely many n with n^2+1 prime) GIVEN Bunyakovsky's conjecture, instantiated at X^2+1 (irreducibility and no-fixed-prime-divisor proved). Bunyakovsky is open."
+  "aristotle-conditional-carmichaelkorseltreduction":
+    module: Brockian.CarmichaelKorseltReduction
+    ledger_run: "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)"
+    overrides:
+      - name: ThreePrimeCarmichaelInfinitude
+        conditional_rung: open
+        provenance_note: "Infinitely many three-prime Carmichael numbers GIVEN the Chernick/Dickson triple hypothesis (6k+1,12k+1,18k+1 simultaneously prime infinitely often), via Korselt's criterion (proved). The triple hypothesis is open."
+  "aristotle-conditional-gilbreathconjecturereduction":
+    module: Brockian.GilbreathConjectureReduction
+    ledger_run: "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)"
+    overrides:
+      - name: GilbreathConjecture
+        conditional_rung: open
+        provenance_note: "Gilbreath's conjecture GIVEN Odlyzko's clean-window hypothesis; clean-window propagation proved. Odlyzko hypothesis is open."
+  "aristotle-conditional-fortunatenumbersreduction":
+    module: Brockian.FortunateNumbersReduction
+    ledger_run: "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)"
+    overrides:
+      - name: FortuneConjecture
+        conditional_rung: open
+        provenance_note: "Every fortunate number is prime GIVEN the gap bound m <= n^2. The gap bound is the open input; existence of fortunate numbers is unconditional."
+  "aristotle-conditional-brocardgapreduction":
+    module: Brockian.BrocardGapReduction
+    ledger_run: "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)"
+    overrides:
+      - name: BrocardGapConjecture
+        conditional_rung: open
+        provenance_note: "At least four primes between consecutive prime squares GIVEN Oppermann's conjecture. Oppermann is open."
+  "aristotle-conditional-hyperperfectnumbersreduction":
+    module: Brockian.HyperperfectNumbersReduction
+    ledger_run: "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)"
+    overrides:
+      - name: HyperperfectInfinitude
+        conditional_rung: open
+        provenance_note: "Infinitely many hyperperfect numbers GIVEN infinitude of primes p with p^2-p+1 prime (Minoli-Bear construction p*(p^2-p+1)). The prime-family infinitude is open."
+  "aristotle-conditional-mersenneperfectreduction":
+    module: Brockian.MersennePerfectReduction
+    ledger_run: "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)"
+    overrides:
+      - name: EvenPerfectInfinitude
+        conditional_rung: open
+        provenance_note: "Euclid-Euler EQUIVALENCE: even-perfect infinitude iff Mersenne-exponent infinitude. The iff is proved unconditionally; registered CONDITIONAL because neither open side is resolved - an equivalence, not a resolution."
+      - name: MersennePrimeInfinitude
+        conditional_rung: open
+        provenance_note: "Euclid-Euler EQUIVALENCE: Mersenne-prime infinitude iff even-perfect infinitude. The iff is proved unconditionally; both sides remain open."
+  "aristotle-conditional-erdosstrausreduction":
+    module: Brockian.ErdosStrausReduction
+    ledger_run: "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)"
+    overrides:
+      - name: ErdosStrausConjecture
+        conditional_rung: open
+        provenance_note: "Erdos-Straus EQUIVALENCE: the full conjecture iff solvability for primes p = 1 mod 24 (all other residues solved unconditionally in-module). The iff is proved; the hard residue class is open."
+  "aristotle-conditional-fermatnumbersreduction":
+    module: Brockian.FermatNumbersReduction
+    ledger_run: "Aristotle conditional-reduction; AXLE @lean-4.32.2; additive Reduction module (existing bare-conjecture module untouched)"
+    overrides:
+      - name: FermatPrimeBeyondFour
+        conditional_rung: open
+        provenance_note: "Fermat-prime-beyond-4 EQUIVALENCE via Pepin's test. The iff is proved unconditionally; both sides remain open."
