@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 651
 - **DISCHARGED**: 7
-- **PROVED**: 11618
+- **PROVED**: 11626
 
 ## Theorems
 
@@ -4491,6 +4491,14 @@
 | PROVED | `Brockian.PhaseDepthD5.totalDepth_reflection` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthD5.totalDepth_reflection_invariant` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthD5.totalDepth_rotation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.blockCyclic_det` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.circulant_det` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.cycleType_of_uniform_minimalPeriod` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.cycleType_permCongr` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.cycleType_standardForm` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.det_one_sub_smul_conj` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.det_one_sub_smul_eq_of_cycleType` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthDetIdentity.phase_depth_det_identity` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthFiniteRH.eigenvalue_norm_eq_one` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthFiniteRH.eigenvalue_pow_orderOf` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthFiniteRH.finite_RH` | ✓ | verified | lean-4.32.2 |  |
