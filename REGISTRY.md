@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 651
 - **DISCHARGED**: 7
-- **PROVED**: 11591
+- **PROVED**: 11595
 
 ## Theorems
 
@@ -4522,6 +4522,10 @@
 | PROVED | `Brockian.PhaseDepthTorus.twin_start_admissible` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
 | PROVED | `Brockian.PhaseDepthTorus.twin_survivors` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
 | PROVED | `Brockian.PhaseDepthTorus.winding_coprime` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTraceMatrix.trace_transferMatrix_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTraceMatrix.trace_transferMatrix_pow_eq_zero` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTraceMatrix.trace_transferMatrix_pow_five_mul` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTraceMatrix.transferMatrix_pow` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthTransfer.numPeriodic_eq_zero_of_not_dvd` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthTransfer.numPeriodic_five_mul` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthTransfer.transfer_fst_iterate` | ✓ | verified | lean-4.32.2 |  |

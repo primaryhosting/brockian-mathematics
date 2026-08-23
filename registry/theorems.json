@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11591,
+    "PROVED": 11595,
     "DEFINITION": 651,
     "CONJECTURE": 40,
     "CONDITIONAL": 33,
@@ -139743,6 +139743,130 @@
       "quarantine": true,
       "ledger_run": "Aristotle 9f4eecfe; Codex statement-fidelity harvest",
       "provenance_note": "Signed mod-5 phase geometry, cone radial/nappe identities, phase-depth dynamics, exact tau period/minimality/injectivity, and local twin admissibility. Rejected and omitted the returned orbit_single_cycle (implication-to-True), twin_wheel_two (... or True), three_road_balance_105 (predicate and False), and open TwinPrimeConjecture scaffolds."
+    },
+    {
+      "name": "Brockian.PhaseDepthTraceMatrix.trace_transferMatrix_pow",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTraceMatrix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTraceMatrix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PhaseDepthTraceMatrix.trace_transferMatrix_pow_eq_zero",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTraceMatrix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTraceMatrix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PhaseDepthTraceMatrix.trace_transferMatrix_pow_five_mul",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTraceMatrix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTraceMatrix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.PhaseDepthTraceMatrix.transferMatrix_pow",
+      "kind": "theorem",
+      "module": "Brockian.PhaseDepthTraceMatrix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/PhaseDepthTraceMatrix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.PhaseDepthTransfer.numPeriodic_eq_zero_of_not_dvd",
