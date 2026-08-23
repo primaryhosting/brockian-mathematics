@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 651
 - **DISCHARGED**: 7
-- **PROVED**: 11595
+- **PROVED**: 11606
 
 ## Theorems
 
@@ -4491,6 +4491,13 @@
 | PROVED | `Brockian.PhaseDepthD5.totalDepth_reflection` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthD5.totalDepth_reflection_invariant` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthD5.totalDepth_rotation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthFiniteRH.eigenvalue_norm_eq_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthFiniteRH.eigenvalue_pow_orderOf` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthFiniteRH.finite_RH` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthFiniteRH.phase_depth_eigenvalue_norm_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthFiniteRH.phase_depth_finite_RH` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthFiniteRH.phase_depth_transferMatrix_finite_order` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthFiniteRH.transferMatrix_pow_orderOf_eq_one` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.PhaseDepthNoGo.Cohomologous` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.PhaseDepthNoGo.coboundary` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthNoGo.sum_coboundary` | ✓ | verified | lean-4.32.2 |  |
@@ -4522,6 +4529,10 @@
 | PROVED | `Brockian.PhaseDepthTorus.twin_start_admissible` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
 | PROVED | `Brockian.PhaseDepthTorus.twin_survivors` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
 | PROVED | `Brockian.PhaseDepthTorus.winding_coprime` | ✓ | verified | lean-4.32.2 | Aristotle 9f4eecfe; Codex statement-fidelity harvest |
+| PROVED | `Brockian.PhaseDepthTraceFormula.periodic_card_eq_orbit_sum` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTraceFormula.permMatrix_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTraceFormula.trace_pow_eq_orbit_sum` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthTraceFormula.trace_pow_eq_periodic_card` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthTraceMatrix.trace_transferMatrix_pow` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthTraceMatrix.trace_transferMatrix_pow_eq_zero` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthTraceMatrix.trace_transferMatrix_pow_five_mul` | ✓ | verified | lean-4.32.2 |  |
