@@ -68,6 +68,31 @@ encode holonomy, or matching a dimension does not establish an equivalence.
 The `discrete-to-de-rham-comparison-firewall` track makes the missing cochain map
 and quasi-isomorphism obligations executable review criteria.
 
+## Ford-circle implementation
+
+`Brockian/FordCircles.lean` adds a classical Euclidean bridge from the
+repository's determinant arithmetic to actual circles in the complex upper
+half-plane. It uses Mathlib's `EuclideanGeometry.Sphere.IsExtTangent`; tangency
+is not replaced by an arithmetic definition.
+
+| Lean result | Content |
+| --- | --- |
+| `fordBase_mem_fordCircle` | The rational point `a/q` lies on the Ford circle with center `a/q + i/(2q²)` and radius `1/(2q²)`. |
+| `ford_distance_gap` | The exact squared-distance defect is `(crossDet² - 1)/(q²d²)`. |
+| `ford_isExtTangent_iff_crossDet_natAbs` | Two positive-denominator Ford circles are externally tangent exactly when `|ad-cq| = 1`. |
+| `ford_radius_add_le_dist_of_crossDet_ne_zero` | Nonzero integral cross-determinant implies disjoint interiors; equality is the Farey-neighbor case. |
+| `fibonacciFord_isExtTangent_succ` | Cassini's identity makes consecutive Fibonacci-convergent Ford circles externally tangent. |
+| `tendsto_fibonacciFordCenter` | Their centers converge in `ℂ` to the boundary point `φ⁻¹`. |
+| `tendsto_fibonacciFordRadius_ratio` | Successive radius ratios converge to `φ⁻²`. |
+
+This is a useful geometric realization of Farey adjacency and a test bed for
+later modular-group work. It is not a bridge from finite `C5` cohomology to de
+Rham cohomology, and it does not identify the Farey graph with the phase-depth
+pentagon. Those claims would still require explicit typed maps and their own
+proof obligations. The module is classified as classical reference
+mathematics, with novelty disabled. Its local Lean build is the integration
+gate; independent AXLE attestation remains a separate promotion step.
+
 ## Current baseline and next work
 
 The repository already has green, independently attested baselines for
