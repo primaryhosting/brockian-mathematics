@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 651
 - **DISCHARGED**: 7
-- **PROVED**: 11577
+- **PROVED**: 11591
 
 ## Theorems
 
@@ -4470,6 +4470,20 @@
 | PROVED | `Brockian.PhaseDepthClassification.sum_coboundary` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthClassification.totalDepth_eq_of_cohomologous` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthCohomologyComplete.coboundary_of_sum_eq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.cycle_length_bridge` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.phase_depth_key` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.rho_iterate` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.rho_minimalPeriod` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.rho_period` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_5k` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_bijective` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_five` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_injective` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_iterate` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_minimalPeriod` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_no_fixedPoints` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sigma_period` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.PhaseDepthCycles.sum_shift` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthD5.act_mul` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthD5.act_one` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.PhaseDepthD5.d5_covariance` | ✓ | verified | lean-4.32.2 |  |

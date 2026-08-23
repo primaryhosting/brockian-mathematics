@@ -916,3 +916,4 @@ import Brockian.HighAssuranceCryptoIdioms
 import Brockian.PhaseDepthClassification
 import Brockian.PhaseDepthTransfer
 import Brockian.PhaseDepthD5
+import Brockian.PhaseDepthCycles
