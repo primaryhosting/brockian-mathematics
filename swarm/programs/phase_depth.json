@@ -1,0 +1,8 @@
+{"name":"phase-depth-spine","tasks":[
+{"id":"p1-nonabelian","module":"Brockian.PhaseDepthNonabelian","declaration":"gaugeEquiv_iff_conjugate_holonomy","kind":"prove","statement":"theorem gaugeEquiv_iff_conjugate_holonomy : GaugeEquiv c₁ c₂ ↔ IsConj (holonomy c₁) (holonomy c₂)","roles":["prover","skeptic","explainer"]},
+{"id":"p2-permutation-det","module":"Brockian.PermutationDeterminant","declaration":"det_one_sub_smul_perm","kind":"prove","statement":"theorem det_one_sub_smul_perm : det (1 - z • permutationMatrix σ) = cyclePolynomial σ z","roles":["prover","generalizer","skeptic"]},
+{"id":"p2-transfer-det","module":"Brockian.PhaseDepthDeterminant","declaration":"transfer_determinant","kind":"prove","statement":"theorem transfer_determinant : det (1 - z • T c) = det (1 - z ^ 5 • ρ (holonomy c))","prerequisites":["p2-permutation-det"]},
+{"id":"p4-frobenius","module":"Brockian.PhaseDepthFrobenius","declaration":"frobenius_holonomy_conjugacy","kind":"generalize","statement":"theorem frobenius_holonomy_conjugacy : IsConj (wordHolonomy frobeniusWindow) (artinSymbol windowProduct)","prerequisites":["p1-nonabelian"],"unlocked":false},
+{"id":"p5-finite-rh","module":"Brockian.PhaseDepthFiniteRH","declaration":"zeta_zeros_on_circle_iff","kind":"prove","statement":"theorem zeta_zeros_on_circle_iff : ZetaZeroCondition T ↔ SpectralCircleCondition T","prerequisites":["p2-transfer-det"],"unlocked":false},
+{"id":"x-frobenius-discrimination","module":"experiments.phase_depth.frobenius","declaration":"discrimination_report","kind":"compute","statement":"Compute preregistered discrimination statistics against matched k-step nulls.","roles":["refuter","skeptic","explainer"],"unlocked":false}
+]}
