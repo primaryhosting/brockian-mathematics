@@ -20,7 +20,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 import axle_client  # noqa: E402
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from engine.verify import ALLOWED_AXIOMS as ALLOWED  # noqa: E402 — single-sourced axioms
-from engine.verify import DEFAULT_ENV, axioms_in_line, qualified_decls  # noqa: E402
+from engine.verify import (DEFAULT_ENV, axioms_in_line, flatten_brockian,
+                           qualified_decls)  # noqa: E402
 
 
 def _attestation_stem(lean_path: str) -> str:
@@ -59,39 +60,9 @@ def _kind_of(src: str, name: str) -> str:
     return "theorem"
 
 
-def _flatten(lean_path: str, _seen: set[str] | None = None) -> str:
-    """Produce a self-contained source by inlining `import Brockian.*` dependencies, so a
-    module that builds on sibling Brockian modules can be AXLE-checked as one unit (AXLE
-    `check` is single-file, Mathlib-only, and cannot resolve local imports). Emits one
-    `import Mathlib`, then dependency bodies in topological order, then the target body."""
-    _seen = _seen if _seen is not None else set()
-    src = open(lean_path, encoding="utf-8").read()
-    dep_bodies: list[str] = []
-    body_lines: list[str] = []
-    for line in src.splitlines():
-        s = line.strip()
-        if s.startswith("import Brockian."):
-            mod = s.split()[1]  # e.g. Brockian.Core
-            if mod in _seen:
-                continue
-            _seen.add(mod)
-            dep_path = os.path.join("Brockian", mod.split(".", 1)[1].replace(".", "/") + ".lean")
-            if os.path.exists(dep_path):
-                # inline the dependency (recursively), stripping its own import Mathlib
-                dep = _flatten(dep_path, _seen)
-                dep = "\n".join(l for l in dep.splitlines()
-                                if l.strip() != "import Mathlib")
-                dep_bodies.append(dep)
-            continue
-        if s == "import Mathlib":
-            continue
-        body_lines.append(line)
-    return "import Mathlib\n" + "\n".join(dep_bodies) + "\n" + "\n".join(body_lines)
-
-
 def attest(lean_path: str, namespace: str, names: list[str], env: str) -> dict:
     src = open(lean_path, encoding="utf-8").read()
-    flat = _flatten(lean_path)  # AXLE-checkable unit (inlines Brockian deps)
+    flat = flatten_brockian(lean_path)  # AXLE-checkable unit (inlines Brockian deps)
     kinds = {n: _kind_of(src, n) for n in names}
     # `#print axioms` only makes sense for proof terms; on a `structure`/`class` it errors
     # and would fail the whole check. Probe axioms only for theorem/lemma declarations.

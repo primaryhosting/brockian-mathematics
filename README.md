@@ -8,6 +8,19 @@ the honest scaffolding of a Hilbert–Pólya-style attack on the Riemann Hypothe
 independently machine-verified, and the repository refuses to claim anything the build
 does not earn.**
 
+## Governed AI mathematics swarm
+
+The repository includes an evidence-first campaign engine for proof, refutation,
+generalization, and explanation. Agents propose artifacts; only statement locks, Lean/AXLE
+verification, and axiom audits can promote them. See the
+[`AI math swarm design`](docs/phase-depth/2026-08-23-ai-math-swarm-design.md) and validate the
+current program with:
+
+```bash
+python3 -m swarm.cli program-check swarm/programs/phase_depth.json
+python3 -m unittest tests.test_swarm -v
+```
+
 ## Multi-domain problem attack pipeline
 
 The same process (intake → triage → decompose → attack → verify → **derived register** → publish)

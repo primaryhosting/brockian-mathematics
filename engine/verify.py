@@ -66,6 +66,31 @@ def content_hash(content: str) -> str:
     return hashlib.sha256(normalize(content).encode()).hexdigest()[:16]
 
 
+def flatten_brockian(lean_path: str, _seen: set[str] | None = None) -> str:
+    """Inline local ``import Brockian.*`` dependencies into one AXLE-checkable unit."""
+    _seen = _seen if _seen is not None else set()
+    src = pathlib.Path(lean_path).read_text(encoding="utf-8")
+    dependencies: list[str] = []
+    body: list[str] = []
+    for line in src.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("import Brockian."):
+            module = stripped.split()[1]
+            if module in _seen:
+                continue
+            _seen.add(module)
+            dep = pathlib.Path("Brockian") / (module.split(".", 1)[1].replace(".", "/") + ".lean")
+            if dep.exists():
+                flat = flatten_brockian(str(dep), _seen)
+                dependencies.append("\n".join(x for x in flat.splitlines()
+                                               if x.strip() != "import Mathlib"))
+            continue
+        if stripped == "import Mathlib":
+            continue
+        body.append(line)
+    return "import Mathlib\n" + "\n".join(dependencies + ["\n".join(body)])
+
+
 def qualified_decls(text: str) -> list:
     """Fully-qualified names of every theorem/lemma, in source order.
 
