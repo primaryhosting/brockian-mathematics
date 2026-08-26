@@ -74,6 +74,9 @@ All tables prefixed `atlas_`.
   provides it), `module`, `source_url`, `subject_codes text[]` (MSC 2020, when
   derivable), `first_seen_edition, last_seen_edition, retired boolean`.
   Statements that disappear upstream are marked retired, never deleted (no-delete rule).
+  **Identity key** = `(library_id, native_name)`; an upstream rename therefore reads
+  as retire+add — accepted semantics, and why `retired` counts are reported per
+  edition rather than cumulatively headline-displayed.
 - **`atlas_concepts`** — the curated layer: `id, slug, title, informal_statement,
   wikidata_id?, msc_primary, seed_source` (wiedijk100 / targets-board / curated /
   llm-proposed), `status` (open / partially-formalized / formalized), `notes`.
@@ -82,9 +85,17 @@ All tables prefixed `atlas_`.
   recorded evidence · **CANDIDATE** = machine-proposed, unconfirmed), `evidence`
   (jsonb: who/what matched it, model + prompt hash for LLM matches), `created_by,
   confirmed_by?`. Tier is rendered wherever the alignment is shown.
+  **Curation write path:** curated concepts and tier promotions live as versioned
+  files in the `formal-atlas` repo (`concepts/*.yaml`) — curation-as-code, so the
+  no-delete/provenance story is git history; the pipeline syncs them to Supabase.
+  No human writes directly to Supabase and no admin UI in v0/v1.
 - **`atlas_harvest_runs`** — provenance spine: `library_id, started_at, edition_tag,
   source_commit/version, statements_seen, added, retired, status, log_url`.
   Every page footer cites the edition + per-library harvest timestamps it reflects.
+  **Editions are global:** a weekly release workflow mints edition `N` as a cut
+  across each library's latest successful harvest; `edition_tag` on a run (and
+  `first/last_seen_edition` on statements) is the edition that first shipped that
+  data. Per-library cadences stay independent underneath.
 
 ## 5. Harvesters
 
@@ -138,9 +149,11 @@ Follows the existing DepthShell/register discipline and dual-theme legibility ru
   chip). The atlas's canonical page type.
 - **`/atlas/territory/:msc`** — subject territories with coverage shading per
   library (only over statements that carry MSC codes; the "unclassified" mass is
-  shown, not hidden).
+  shown, not hidden). MSC derivation per library: Mathlib module paths, AFP topic
+  tags, MML section structure, Metamath chapter headers, Brockian domain field —
+  each recorded in the harvester manifest.
 - **`/atlas/frontier`** — famous statements with zero verifications anywhere +
-  partially-formalized concepts; absorbs `/targets` (which 301s here).
+  partially-formalized concepts; absorbs `/targets` (which 301s here in v1).
 - **`/atlas/library/:slug`** — library layer page; Brockian's highlights where it
   extends the world corpus (singular-series family, Weyl family, EGZ, …).
 - **Search** — server-side (Supabase full-text over `atlas_statements.native_name`
@@ -169,6 +182,9 @@ Follows the existing DepthShell/register discipline and dual-theme legibility ru
   and store it in GitHub Actions secrets, not just the vault.
 - Licensing: dataset releases carry per-library license notices (Mathlib Apache-2.0,
   set.mm CC0, AFP per-entry, …); metadata-only harvesting keeps this simple.
+  AFP rule: harvest names/entry/authors + each entry's license string onto its rows;
+  statement bodies are included in releases only where the entry's license permits,
+  otherwise name + link only.
 - Cost: Actions minutes (public repo = free), Supabase storage ~1–2 GB at full scale;
   LLM alignment passes are batched and budget-capped.
 
