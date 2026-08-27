@@ -713,9 +713,9 @@ git add deploy/atlas_frontier_queue.sql scripts/frontier_queue_sync.py && git co
 **Files:**
 - Create: `research/frontier_queue.README.md`
 
-- [ ] **Step 1: Write it** — must cover: schema summary; the legal transition table (`open → assigned → in_progress → proved | refuted`; any → `stale` on source-drop **except `proved`/`refuted`, which never go stale — the generator preserves settled outcomes; this is a documented refinement of the spec's table**; `stale → open` on re-list); engine rules (engines flip statuses by editing the file in normal experiment commits, history entry names the experiment id; `proved`/`refuted` REQUIRE `evidence.attestation`; the registry is the only authority); the two-repo manual sync step (AutoLab main → GitHub via workspace pull or node-tree copy); regen (`python3 scripts/frontier_queue.py --review`) and sync commands; the HARD GATE — no engine consumes the queue until Chris reviews `frontier_queue.REVIEW.md` and says go.
+- [x] **Step 1: Write it** — must cover: schema summary; the legal transition table (`open → assigned → in_progress → proved | refuted`; any → `stale` on source-drop **except `proved`/`refuted`, which never go stale — the generator preserves settled outcomes; this is a documented refinement of the spec's table**; `stale → open` on re-list); engine rules (engines flip statuses by editing the file in normal experiment commits, history entry names the experiment id; `proved`/`refuted` REQUIRE `evidence.attestation`; the registry is the only authority); the two-repo manual sync step (AutoLab main → GitHub via workspace pull or node-tree copy); regen (`python3 scripts/frontier_queue.py --review`) and sync commands; the HARD GATE — no engine consumes the queue until Chris reviews `frontier_queue.REVIEW.md` and says go.
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 git add research/frontier_queue.README.md && git commit --no-verify -m "docs: frontier queue README (lifecycle, engine rules, sync, review gate)"
