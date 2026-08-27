@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 import time
 from collections import Counter, defaultdict
@@ -65,8 +66,16 @@ def domain_of(target: str) -> str:
 
 
 def mangle(target: str) -> str:
-    """Ledger dot-name -> best_proofs/axle filename stem (dots -> underscores)."""
-    return target.replace(".", "_")
+    """Ledger dot-name -> best_proofs/axle filename stem.
+
+    MUST match select_best.py's sanitizer exactly (``re.sub(r"[^A-Za-z0-9]+",
+    "_", target)``): any run of non-ASCII-alphanumerics (dots, unicode like
+    φ/ω/₁/₂, plus adjacent underscores) collapses to a single ``_``. A plain
+    dots->underscores rule orphaned every unicode-named target (e.g.
+    ``BrockianMagnumOpus.φ_pos`` lives on disk as
+    ``BrockianMagnumOpus_pos.lean``), stranding them at stage=candidate.
+    """
+    return re.sub(r"[^A-Za-z0-9]+", "_", target)
 
 
 def parse_night_log(lines) -> list:

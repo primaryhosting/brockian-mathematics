@@ -49,6 +49,30 @@ def test_mangle():
     assert db.mangle("plain") == "plain"
 
 
+def test_mangle_unicode_matches_select_best_sanitizer():
+    """Real pipeline pairs: select_best.py writes best_proofs files via
+    re.sub(r"[^A-Za-z0-9]+", "_", target), so unicode chars and adjacent
+    separators collapse to ONE underscore. These four targets were stranded
+    at stage=candidate (their AXLE results looked like orphans) when mangle
+    only mapped dots to underscores."""
+    assert db.mangle("BrockianMagnumOpus.φ_pos") == "BrockianMagnumOpus_pos"
+    assert db.mangle("Frontier.Q₁_eq_neg_det") == "Frontier_Q_eq_neg_det"
+    assert db.mangle("F₂_zero_at_prime") == "F_zero_at_prime"
+    assert db.mangle("ω_ne_zero") == "_ne_zero"
+
+
+def test_unicode_target_joins_axle_result_not_orphaned():
+    """End-to-end reproduction of the candidate-strand bug: a unicode-named
+    PROVED target whose AXLE file uses the sanitized stem must reach
+    verified, and the axle entry must NOT be reported as an orphan."""
+    ledger = {"u1": _entry("BrockianMagnumOpus.φ_pos", verdict="PROVED")}
+    axle = {"BrockianMagnumOpus_pos.lean": {"verified": True}}
+    rows, warnings = _build(ledger, axle=axle,
+                            best_files={"BrockianMagnumOpus_pos.lean"})
+    assert _row(rows, "BrockianMagnumOpus.φ_pos")["stage"] == "verified"
+    assert not any("orphan" in w for w in warnings)
+
+
 # ---------------------------------------------------------------- dedup
 
 
