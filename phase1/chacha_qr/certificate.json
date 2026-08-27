@@ -1,9 +1,10 @@
 {
-  "title": "The Verification Foundry \u2014 ChaCha20 Quarter-Round Bijectivity Certificate",
-  "subject": "A real crypto round function proved injective by two independent SMT engines",
+  "title": "The Verification Foundry \u2014 ChaCha20 Quarter-Round Bijectivity Certificate (3-prover)",
+  "subject": "A real crypto round function proved a bijection by two SMT engines AND a kernel-checked invertibility proof",
   "provers": [
     "Z3 4.16.0 (SMT \u2014 bit-blast to SAT)",
-    "cvc5 1.3.4 (SMT \u2014 independent engine; same SMT-LIB family, so a corroboration not an independence)"
+    "cvc5 1.3.4 (SMT \u2014 independent engine; same SMT-LIB family as Z3, so a corroboration not an independence)",
+    "Lean 4 kernel + AXLE (kernel-checked invertibility QRinv\u2218QR=id \u21d2 injective, axiom-audited \u2014 the genuinely different method)"
   ],
   "obligations": [
     {
@@ -23,17 +24,17 @@
         "method": "independent SMT engine; unsat of the negation"
       },
       "lean": {
-        "verdict": "not-attempted",
-        "theorem": null,
-        "checker": "Lean 4 kernel + AXLE",
-        "method": "kernel-checked invertibility (QRinv o QR = id) is future work; SMT-only obligation (stated honestly)"
+        "verdict": "proved",
+        "theorem": "Brockian.HighAssurance.ChaChaQR.QR_injective",
+        "checker": "Lean 4 kernel + AXLE re-verification (lean-4.32.2), axiom-clean",
+        "method": "kernel-checked invertibility: QRinv o QR = id (rotate-cancel + xor-cancel + add-sub-cancel), hence injective"
       },
       "cross_verified": true,
-      "coverage": "2-prover SMT (Z3, cvc5) \u2014 kernel-algebra leg not attempted"
+      "coverage": "3-prover (Z3, cvc5, Lean/AXLE \u2014 invertibility proof)"
     }
   ],
   "all_cross_verified": true,
-  "sha256": "7952af6c895164746e9a4c312439eb7e597547cf5d39209ba88dfb0fcf186231",
-  "note": "Portable evidence: recompute sha256 over {provers, obligations} and re-run any SMT solver on the embedded smt2 (unsat = injective). No access to our pipeline required. HONEST SCOPE: TWO-prover SMT obligation; a kernel-checked Lean invertibility proof is future work and is marked not-attempted, not claimed. Z3 and cvc5 are both SMT/SAT engines \u2014 agreement here guards against an engine-specific bug but is corroboration, not strong independence.",
+  "sha256": "817425dfaa6b23c7b6350d646488eb9bd551f0308c4b88a745402e77683bb214",
+  "note": "Portable evidence: recompute sha256 over {provers, obligations} and re-run any SMT solver on the embedded smt2 (unsat = injective). No access to our pipeline required. The SMT engines (Z3, cvc5) settle injectivity by bit-blasting; the Lean/AXLE leg proves the STRONGER fact of invertibility \u2014 an explicit inverse QRinv with QRinv\u2218QR = id, closed by kernel-checked rotate-cancel + xor-cancel + add-sub-cancel (no bv_decide / SAT axiom), which implies injectivity. So this obligation now has three legs across two genuinely different methods (SAT search vs. kernel algebra). Z3 and cvc5 share the SMT-LIB family, so their agreement is a corroboration, not independence \u2014 Lean is the different method.",
   "recheck": "python3 phase1/recheck.py phase1/chacha_qr/certificate.json  (or --solver=cvc5)"
 }

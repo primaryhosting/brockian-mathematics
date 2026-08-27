@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 651
 - **DISCHARGED**: 7
-- **PROVED**: 11646
+- **PROVED**: 11649
 
 ## Theorems
 
@@ -3687,6 +3687,9 @@
 | PROVED | `Brockian.HighAssurance.CapabilityIntegrity.integrity_is_nontrivial` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.CapabilityIntegrity.step_added_in_policy` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.CapabilityIntegrity.step_preserves` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.ChaChaQR.QR_injective` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.ChaChaQR.QR_left_inverse` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.ChaChaQR.rotr_rotl` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.ConstantTime.condMove_correct` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.ConstantTime.condMove_no_leak` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.ConstantTime.ct_trace_noninterference` | ✓ | verified | lean-4.32.2 |  |

@@ -916,6 +916,7 @@ import Brockian.HighAssuranceCryptoIdioms
 import Brockian.HighAssuranceHmacSha2
 import Brockian.HighAssuranceCurve25519Fix
 import Brockian.HighAssuranceSha256Diffusion
+import Brockian.HighAssuranceChaChaQR
 import Brockian.FrontierCollatz
 import Brockian.PhaseDepthClassification
 import Brockian.PhaseDepthTransfer
