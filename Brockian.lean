@@ -873,6 +873,7 @@ import Brockian.PhaseDepthCohomologyComplete
 import Brockian.Figurate
 import Brockian.NonabelianOrderHolonomy
 import Brockian.Characters5
+import Brockian.CharactersQ
 import Brockian.ConeLine
 import Brockian.LandauNSquaredPlusOneReduction
 import Brockian.CarmichaelKorseltReduction
