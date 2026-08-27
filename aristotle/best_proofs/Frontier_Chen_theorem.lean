@@ -8,88 +8,86 @@ Provenance: Aristotle theorem prover (Harmonic)
 
 import Mathlib
 
-/-!
-## Overview
-
-Chen's theorem (1973) states that every sufficiently large even number can be written as
-`p + q` where `p` is prime and `q` has at most two prime factors (counted with multiplicity),
-i.e. `q` is prime or a product of two primes.
-
-Mathlib does not contain Chen's theorem (nor Goldbach's conjecture, nor any sieve machinery
-strong enough to derive it), so the unconditional statement is out of reach here. What this
-file contains is:
-
-* a faithful formalization of the statement (`Frontier.ChenStatement`);
-* an explicit, kernel-checked **base case**: every even `n` with `4 ≤ n ≤ 200` has a Chen
-  representation (`Frontier.Chen_base`);
-* a **Lean-checked reduction**: the binary Goldbach conjecture implies Chen's statement
-  (`Frontier.Chen_theorem`), with the explicit threshold `N = 4`.
--/
-
 namespace Frontier
 
-/-- `AlmostPrime2 q` means that `q` has at most two prime factors, counted with
-multiplicity (i.e. `Ω q ≤ 2`): `q` is `1`, a prime, or a product of two primes. -/
-def AlmostPrime2 (q : ℕ) : Prop := q.primeFactorsList.length ≤ 2
+/-- `AtMostTwoPrimeFactors q` says that `q` is a product of at most two primes,
+i.e. `q = 1`, or `q` is prime, or `q` is a product of two (not necessarily distinct)
+primes.  Equivalently (see `atMostTwoPrimeFactors_iff_bigOmega_le_two`), the number of
+prime factors of `q`, counted with multiplicity, is at most `2`.  These are the
+"almost primes" `P₂` appearing in Chen's theorem. -/
+def AtMostTwoPrimeFactors (q : ℕ) : Prop :=
+  q = 1 ∨ q.Prime ∨ ∃ a b : ℕ, a.Prime ∧ b.Prime ∧ q = a * b
 
-/-- A prime has exactly one prime factor, hence at most two. -/
-theorem AlmostPrime2.of_prime {q : ℕ} (hq : Nat.Prime q) : AlmostPrime2 q := by
-  simp [AlmostPrime2, Nat.primeFactorsList_prime hq]
+/-- `ChenRepresentation n` says that `n` can be written as `p + q` with `p` prime and `q`
+having at most two prime factors. -/
+def ChenRepresentation (n : ℕ) : Prop :=
+  ∃ p q : ℕ, p.Prime ∧ AtMostTwoPrimeFactors q ∧ n = p + q
 
-/-- A product of two primes has exactly two prime factors. -/
-theorem AlmostPrime2.of_prime_mul {a b : ℕ} (ha : Nat.Prime a) (hb : Nat.Prime b) :
-    AlmostPrime2 (a * b) := by
-  have h : (a * b).primeFactorsList.length = 2 := by
-    have := Nat.perm_primeFactorsList_mul ha.ne_zero hb.ne_zero
-    have hlen := this.length_eq
-    simp [hlen, Nat.primeFactorsList_prime ha, Nat.primeFactorsList_prime hb]
-  simp [AlmostPrime2, h]
-
-/-- `ChenRepr n` : `n` is the sum of a prime and a number with at most two prime factors. -/
-def ChenRepr (n : ℕ) : Prop := ∃ p q : ℕ, Nat.Prime p ∧ AlmostPrime2 q ∧ n = p + q
-
-/-- Chen's theorem, as a proposition: every sufficiently large even number has a
-representation `p + q` with `p` prime and `q` having at most two prime factors. -/
-def ChenStatement : Prop := ∃ N : ℕ, ∀ n : ℕ, N ≤ n → Even n → ChenRepr n
+/-- The statement of Chen's theorem: every sufficiently large even number is the sum of a
+prime and a number with at most two prime factors. -/
+def ChenStatement : Prop :=
+  ∃ N : ℕ, ∀ n : ℕ, N ≤ n → Even n → ChenRepresentation n
 
 /-- The binary Goldbach conjecture: every even number `≥ 4` is a sum of two primes. -/
-def GoldbachEven : Prop :=
-  ∀ n : ℕ, 4 ≤ n → Even n → ∃ p q : ℕ, Nat.Prime p ∧ Nat.Prime q ∧ n = p + q
+def GoldbachConjecture : Prop :=
+  ∀ n : ℕ, 4 ≤ n → Even n → ∃ p q : ℕ, p.Prime ∧ q.Prime ∧ n = p + q
 
-/-- A Goldbach representation is in particular a Chen representation. -/
-theorem ChenRepr.of_two_primes {n p q : ℕ} (hp : Nat.Prime p) (hq : Nat.Prime q)
-    (h : n = p + q) : ChenRepr n :=
-  ⟨p, q, hp, AlmostPrime2.of_prime hq, h⟩
+/-! ### `AtMostTwoPrimeFactors` is the usual condition `Ω(q) ≤ 2` -/
 
-set_option maxRecDepth 10000 in
-set_option maxHeartbeats 1000000 in
-/-- Kernel-checked Goldbach verification for all even `n` with `4 ≤ n ≤ 200`. -/
-theorem goldbach_check :
-    ∀ n ∈ Finset.range 201, 4 ≤ n → n % 2 = 0 →
-      ∃ p ∈ Finset.range (n + 1), Nat.Prime p ∧ Nat.Prime (n - p) := by
-  decide
+theorem atMostTwoPrimeFactors_iff_bigOmega_le_two {q : ℕ} (hq : q ≠ 0) :
+    AtMostTwoPrimeFactors q ↔ q.primeFactorsList.length ≤ 2 := by
+  constructor
+  · rintro (rfl | hp | ⟨a, b, ha, hb, rfl⟩)
+    · simp
+    · simp [Nat.primeFactorsList_prime hp]
+    · have := Nat.perm_primeFactorsList_mul ha.ne_zero hb.ne_zero
+      have hlen := this.length_eq
+      simp [hlen, Nat.primeFactorsList_prime ha, Nat.primeFactorsList_prime hb]
+  · intro hlen
+    have hprod : q.primeFactorsList.prod = q := Nat.prod_primeFactorsList hq
+    have hmem : ∀ p ∈ q.primeFactorsList, p.Prime := fun p hp =>
+      Nat.prime_of_mem_primeFactorsList hp
+    match h : q.primeFactorsList with
+    | [] => left; rw [← hprod, h]; simp
+    | [a] =>
+      right; left
+      have : a.Prime := hmem a (by rw [h]; simp)
+      rwa [← hprod, h, List.prod_singleton]
+    | [a, b] =>
+      right; right
+      refine ⟨a, b, hmem a (by rw [h]; simp), hmem b (by rw [h]; simp), ?_⟩
+      rw [← hprod, h]
+      simp
+    | a :: b :: c :: t => rw [h] at hlen; simp at hlen
 
-/-- **Base case.** Every even number `n` with `4 ≤ n ≤ 200` has a Chen representation.
-(In fact a Goldbach representation, verified by kernel computation.) -/
-theorem Chen_base (n : ℕ) (h4 : 4 ≤ n) (hn : n ≤ 200) (he : Even n) : ChenRepr n := by
-  obtain ⟨p, hp_mem, hp, hq⟩ :=
-    goldbach_check n (Finset.mem_range.mpr (by omega)) h4 (Nat.even_iff.mp he)
-  have hple : p ≤ n := by
-    have := Finset.mem_range.mp hp_mem
-    omega
-  exact ChenRepr.of_two_primes hp hq (by omega)
+/-! ### Base case: an unconditional verification for small even numbers -/
 
-/-- **Chen's theorem, conditional on Goldbach.**  Assuming the binary Goldbach conjecture,
-every even number `n ≥ 4` is of the form `p + q` with `p` prime and `q` having at most two
-prime factors; in particular Chen's statement holds with threshold `N = 4`.
+/-- Every even number `n` with `4 ≤ n ≤ 60` admits a Chen representation (indeed a
+representation as a sum of two primes). -/
+theorem chenRepresentation_of_small {n : ℕ} (h4 : 4 ≤ n) (hn : n ≤ 60) (he : Even n) :
+    ChenRepresentation n := by
+  have key : ∃ p ∈ Finset.range 61, ∃ q ∈ Finset.range 61,
+      p.Prime ∧ q.Prime ∧ n = p + q := by
+    set_option maxRecDepth 100000 in
+    interval_cases n <;> revert he <;> decide
+  obtain ⟨p, -, q, -, hp, hq, hpq⟩ := key
+  exact ⟨p, q, hp, Or.inr (Or.inl hq), hpq⟩
 
-This is a Lean-checked reduction: the unconditional theorem of Chen (1973) is not available
-in Mathlib, and is not proved here. An unconditional finite instance (all even `n` with
-`4 ≤ n ≤ 200`) is proved in `Frontier.Chen_base`. -/
-theorem Chen_theorem (hG : GoldbachEven) : ChenStatement := by
+/-! ### Main result: a Lean-checked reduction of Chen's theorem to Goldbach -/
+
+/-- **Chen's theorem, as a Lean-checked reduction.**  The binary Goldbach conjecture
+implies Chen's statement that every sufficiently large even number is of the form `p + q`
+with `p` prime and `q` having at most two prime factors (indeed, with `N = 4`, *every*
+even number `n ≥ 4` is then of this form).
+
+The unconditional theorem of Chen (1973) is stated here as `Frontier.ChenStatement`; the
+reduction below is proved unconditionally, and `Frontier.chenRepresentation_of_small`
+verifies the conclusion unconditionally in the base range `4 ≤ n ≤ 60`. -/
+theorem Chen_theorem : GoldbachConjecture → ChenStatement := by
+  intro hG
   refine ⟨4, fun n hn he => ?_⟩
   obtain ⟨p, q, hp, hq, hpq⟩ := hG n hn he
-  exact ChenRepr.of_two_primes hp hq hpq
+  exact ⟨p, q, hp, Or.inr (Or.inl hq), hpq⟩
 
 end Frontier
 

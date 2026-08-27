@@ -33,6 +33,8 @@ Specializations of `CS.mergesort_correct` to a decidable total transitive relati
 and in particular to `(· ≤ ·)` on `ℕ`.
 -/
 
+universe u
+
 namespace CS
 
 /-- Mergesort correctness for a decidable total transitive relation `r`. -/
