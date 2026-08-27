@@ -60,7 +60,7 @@ cd ~/Projects/brockian-mathematics && git add research/frontier_triage.json rese
 - Create: `tests/test_frontier_queue.py`
 - Create: `scripts/frontier_queue.py` (Task 3)
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 ```python
 """Tests for scripts/frontier_queue.py — the Frontier Target Queue generator.
@@ -248,14 +248,14 @@ if __name__ == "__main__":
     unittest.main()
 ```
 
-- [ ] **Step 2: Run tests, verify they fail on import**
+- [x] **Step 2: Run tests, verify they fail on import** *(NOTE: `python3 -m unittest tests.X` is broken machine-wide — a third-party `tests` regular package in `/opt/homebrew/lib/python3.14/site-packages/tests/` shadows the repo's namespace `tests/` dir. Runner used instead: `python3 tests/test_frontier_queue.py -v` — which reproduced the expected `ModuleNotFoundError: No module named 'frontier_queue'`.)*
 
 ```bash
 cd ~/Projects/brockian-mathematics && python3 -m unittest tests.test_frontier_queue -v 2>&1 | tail -3
 ```
 Expected: `ModuleNotFoundError: No module named 'frontier_queue'`
 
-- [ ] **Step 3: Commit the failing tests**
+- [x] **Step 3: Commit the failing tests**
 
 ```bash
 git add tests/test_frontier_queue.py && git commit --no-verify -m "test: frontier queue generator (failing — TDD)"
