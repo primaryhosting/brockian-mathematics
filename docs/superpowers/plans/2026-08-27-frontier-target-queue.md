@@ -592,7 +592,7 @@ git add research/frontier_queue.json research/frontier_queue.REVIEW.md && git co
 - Create: `deploy/atlas_frontier_queue.sql`
 - Create: `scripts/frontier_queue_sync.py`
 
-- [ ] **Step 1: Write the DDL**
+- [x] **Step 1: Write the DDL**
 
 ```sql
 -- atlas_frontier_queue: read mirror of research/frontier_queue.json
@@ -618,9 +618,9 @@ create policy "anon read frontier queue" on atlas_frontier_queue
 grant select on atlas_frontier_queue to anon;
 ```
 
-- [ ] **Step 2: Apply the DDL** via the claude.ai Lovable MCP `query_database` on project `dd8308ac-0860-42ae-908c-41b306b58858` (the Riemann Lab project owns this Supabase). If that project has no database access, record BLOCKED and continue — the sync script's 401 path covers it.
+- [x] **Step 2: Apply the DDL** *(applied to the Riemann Supabase ahead of this run — table exists)* via the claude.ai Lovable MCP `query_database` on project `dd8308ac-0860-42ae-908c-41b306b58858` (the Riemann Lab project owns this Supabase). If that project has no database access, record BLOCKED and continue — the sync script's 401 path covers it.
 
-- [ ] **Step 3: Write the sync script**
+- [x] **Step 3: Write the sync script**
 
 ```python
 #!/usr/bin/env python3
@@ -693,7 +693,7 @@ if __name__ == "__main__":
     sys.exit(main())
 ```
 
-- [ ] **Step 4: Test the dry run + real run**
+- [x] **Step 4: Test the dry run + real run** *(10/10 tests pass; dry-run 253 rows; real run: `BLOCKED: service key — HTTP 401 from PostgREST`, exit 2 — the spec'd known blocker)*
 
 ```bash
 cd ~/Projects/brockian-mathematics && python3 -m unittest tests.test_frontier_queue -v 2>&1 | tail -4
@@ -702,7 +702,7 @@ source ~/.openclaw/load-vault.sh 2>/dev/null; python3 scripts/frontier_queue_syn
 ```
 Expected: all 10 unit tests pass; dry-run prints the row count; real run prints either `synced N rows` or `BLOCKED: service key` with exit 2 (both acceptable per spec — record which).
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add deploy/atlas_frontier_queue.sql scripts/frontier_queue_sync.py && git commit --no-verify -m "feat: frontier queue Supabase mirror (DDL + sync, loud-BLOCKED on missing service key)"
