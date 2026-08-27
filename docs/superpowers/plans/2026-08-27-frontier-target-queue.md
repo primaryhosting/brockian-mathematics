@@ -29,7 +29,7 @@
 - Create: `research/wiedijk100.json` (curated)
 - Create: `research/top100-problems.json` (vendored via Lovable MCP; skippable)
 
-- [ ] **Step 1: Copy the triage file from the node tree**
+- [x] **Step 1: Copy the triage file from the node tree**
 
 ```bash
 cp /Users/acutis/.autolab/ACUTISs-Mac-mini.local/projects/primaryhosting--brockian-mathematics/nodes/brockian-mm/trees/831a203d/research/frontier_triage.json \
@@ -38,15 +38,15 @@ python3 -c "import json; t=json.load(open('/Users/acutis/Projects/brockian-mathe
 ```
 Expected: `60 targets`
 
-- [ ] **Step 2: Vendor top100-problems.json via Lovable MCP**
+- [x] **Step 2: Vendor top100-problems.json via Lovable MCP** *(vendored ahead of this run; real fields are `name`/`statement`/`status`(open|resolved|disputed|independent)/`brockian` — generator top100 block adjusted accordingly)*
 
 Use `mcp__claude_ai_Lovable__read_file` with `project_id: dd8308ac-0860-42ae-908c-41b306b58858`, `path: src/data/top100-problems.json`; write the content to `research/top100-problems.json`. Verify the shape AND that titles are usable: `python3 -c "import json; d=json.load(open('research/top100-problems.json')); items=d if isinstance(d,list) else d.get('problems',[]); titles=[(p.get('name') or p.get('title') or '') for p in items]; assert len(items)>=100 and all(titles) and len(set(titles))==len(titles), (len(items), titles[:3]); print('OK', len(items))"`. If the real field names differ from `name`/`title`/`status`/`formalized_module`, adjust the generator's top100 block (Task 3) to the actual fields — the plan's names are guesses about unvendored data. If the MCP read fails after 2 attempts, skip (source is optional) and record the skip.
 
-- [ ] **Step 3: Create `research/wiedijk100.json`**
+- [x] **Step 3: Create `research/wiedijk100.json`** *(4 corpus matches: #45 Partition→euler_odd_eq_distinct, #51 Wilson→prime_iff_dvd_factorial_succ, #88 Derangements→derangement_closed, #98 Bertrand→bertrand_holds. Note: canonical #86 is "Lebesgue Measure and Integration" — the Pentagonal Number Theorem is not on Wiedijk's list, so `pentagonalNumberTheorem` has no wiedijk match.)*
 
 Curate the standard Wiedijk "Formalizing 100 Theorems" list as `{"provenance": "Freek Wiedijk, 'Formalizing 100 Theorems' (cs.ru.nl/~freek/100), curated from model knowledge 2026-08-27 — titles unvalidated by test", "theorems": [...]}` where each theorem is `{"index": 1..100, "title": "...", "corpus_match": "<registry name or null>"}`. (The generator reads the `theorems` key when the file is a dict, or the bare array.) Populate `corpus_match` by scanning `registry/theorems.json` names case-insensitively for obvious matches (e.g. `pentagonalNumberTheorem` → #86 "Pentagonal Number Theorem"; check also: FTA, irrationality of √2, e; IVT; Ramsey; Cayley–Hamilton). Be conservative: match only when the registry name unambiguously names the theorem; otherwise `null`. Verify: `python3 -c "import json; w=json.load(open('research/wiedijk100.json')); print(len(w), sum(1 for e in w if e['corpus_match']))"` → `100 <n>` with n small (likely 1–10).
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 cd ~/Projects/brockian-mathematics && git add research/frontier_triage.json research/wiedijk100.json && \
