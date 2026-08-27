@@ -266,7 +266,7 @@ git add tests/test_frontier_queue.py && git commit --no-verify -m "test: frontie
 **Files:**
 - Create: `scripts/frontier_queue.py`
 
-- [ ] **Step 1: Implement**
+- [x] **Step 1: Implement** *(top100 block adjusted to the real vendored fields: `name`/`statement`/`status` (keep only `open`)/`brockian` as formal-module marker; statement rendered as "name: statement")*
 
 ```python
 #!/usr/bin/env python3
@@ -544,14 +544,14 @@ if __name__ == "__main__":
     main()
 ```
 
-- [ ] **Step 2: Run the tests**
+- [x] **Step 2: Run the tests** *(8 pass, 2 TestSync ERROR as expected; runner: `python3 tests/test_frontier_queue.py -v`)*
 
 ```bash
 cd ~/Projects/brockian-mathematics && python3 -m unittest tests.test_frontier_queue -v 2>&1 | tail -8
 ```
 Expected: the 8 generator tests pass; the 2 `TestSync` tests still ERROR (`frontier_queue_sync` not yet written — it lands in Task 5). After Task 5, all 10 pass.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add scripts/frontier_queue.py && git commit --no-verify -m "feat: frontier queue generator (merge 5 sources, rank, append-only, registry reconciliation)"
