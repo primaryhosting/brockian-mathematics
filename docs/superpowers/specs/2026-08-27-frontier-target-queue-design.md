@@ -74,6 +74,16 @@ Rules:
   this invariant and refuses to emit a file that violates it.
 - Regeneration merges *onto* the previous queue file: statuses and history are
   preserved; only ranks/scores/new entries change.
+- **Registry reconciliation on every regen:** if a queued target's registry
+  entry has become PROVED (or been refuted) out-of-band, the generator flips
+  the queue entry itself — `proved` with the registry name as
+  `evidence.attestation` — with a history event `by: "generator:registry"`.
+  The registry is the authority; the queue follows it, engines or not.
+- **Status transitions (the only legal ones):** `open → assigned →
+  in_progress → proved | refuted`; any status `→ stale` when every source
+  drops the entry; `stale → open` when a source re-lists it (append-only
+  history records both). This table is reproduced in the README; engines may
+  not invent other transitions.
 
 ## 4. Generator — `scripts/frontier_queue.py`
 
@@ -86,11 +96,13 @@ Stdlib-only Python (the repo's script conventions), run manually for v1
    into this repo as part of this workstream).
 2. Registry conjectures — the 40 `register: CONJECTURE` entries in
    `registry/theorems.json` (+ 20 CONDITIONAL as lower-priority variants).
-3. Targets board — the top-100 problems dataset behind `/targets`
-   (25 statement-formalized entries rank highest; the "our formalization
-   frontier" list next).
-4. Wiedijk-gaps — entries of the "Formalizing 100 Theorems" list with no
-   counterpart in the corpus (statement-level: `kind: unformalized`).
+3. Targets board — `research/top100-problems.json`, vendored one-time into this
+   repo from the Riemann Lab site's `src/data/top100-problems.json` (the 104-
+   problem `/targets` dataset; refreshed manually). Statement-formalized
+   entries rank highest; the "our formalization frontier" list next.
+4. Wiedijk-gaps — `research/wiedijk100.json`, curated once into this repo from
+   the public "Formalizing 100 Theorems" list with a per-entry corpus-match
+   field; entries with no corpus counterpart enter as `kind: unformalized`.
 
 **Ranking (v1, deterministic):**
 `rank_score = 3·legibility + 2·tractability + 1·novelty`, where
@@ -143,6 +155,10 @@ stranded Zumkeller theorems, which this workstream also syncs back.
   proved-requires-attestation invariant; deterministic ordering.
 - A golden-file test with a small fixture of each source proving the merged
   output byte-stable.
+- A regen test where a source drops an entry: it must flip to `stale`, never
+  disappear; and where a source re-lists it: `stale → open` with history.
+- A registry-reconciliation test: fixture registry marks a queued target
+  PROVED; regen must flip it with `generator:registry` attribution.
 - Sync script: dry-run mode asserting the upsert payload against the file;
   401-path prints `BLOCKED` and exits nonzero without partial writes.
 
@@ -157,6 +173,7 @@ stranded Zumkeller theorems, which this workstream also syncs back.
    repo-sync step.
 5. Zumkeller sync-back: the 4 AXLE-verified theorems from AutoLab main
    registered into the GitHub repo's corpus via the normal registry path.
+   (Separable step: a failure here must not block deliverables 1–4.)
 6. A ranked human-readable rendering of queue v1 for Chris's review gate.
 
 ## 9. Risks
