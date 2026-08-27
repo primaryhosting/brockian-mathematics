@@ -31,7 +31,9 @@ from engine.register import (  # noqa: E402
 def build_entry(f: DeclFacts, prov: dict[str, Any], source: dict[str, Any],
                 statement: str, axle_env: Optional[str]) -> dict[str, Any]:
     register = derive_register(f)
-    return {
+    axioms_ok = (set(f.axioms).issubset(ALLOWED_AXIOMS)
+                 if f.axioms_ok is None else f.axioms_ok)
+    entry = {
         "name": f.name,
         "kind": f.kind,
         "module": prov.get("module", ""),
@@ -46,7 +48,7 @@ def build_entry(f: DeclFacts, prov: dict[str, Any], source: dict[str, Any],
         },
         "verification": {
             "lake_build": prov.get("lake_build", "pending"),
-            "axioms_ok": set(f.axioms).issubset(ALLOWED_AXIOMS),
+            "axioms_ok": axioms_ok,
             "axle": {
                 "verdict": ("verified" if f.axle_verified is True
                             else "failed" if f.axle_verified is False else "pending"),
@@ -59,6 +61,10 @@ def build_entry(f: DeclFacts, prov: dict[str, Any], source: dict[str, Any],
         "ledger_run": prov.get("ledger_run"),
         "provenance_note": prov.get("provenance_note"),
     }
+    if f.verification_quarantine:
+        entry["verification"]["quarantine"] = True
+        entry["verification_quarantine"] = True
+    return entry
 
 
 # ── end-to-end generation from AXLE attestations + provenance/verdicts.yaml ──────
@@ -77,7 +83,8 @@ def _provenance_for(module: str, name: str, verdicts: dict[str, Any]) -> dict[st
     for run in (verdicts.get("runs") or {}).values():
         if run.get("module") != module:
             continue
-        prov = {k: run.get(k) for k in ("module", "quarantine", "ledger_run",
+        prov = {k: run.get(k) for k in ("module", "quarantine",
+                                        "verification_quarantine", "ledger_run",
                                         "provenance_note", "conditional_rung",
                                         "kind_override", "discharged_by")}
         for ov in (run.get("overrides") or []):
@@ -129,15 +136,36 @@ def generate(attest_dir: str, verdicts_path: str) -> dict[str, Any]:
             name = d.get("name")
             if not name:
                 raise ValueError(f"{ap}: declaration missing name")
-            axl = att.get("module_verified") and d.get("axle_verdict") == "verified"
-            axioms = d.get("axioms") or []
+            kind = d.get("kind", "theorem")
+            raw_axioms = d.get("axioms")
+            axioms_known = isinstance(raw_axioms, list)
+            axioms = raw_axioms if axioms_known else []
+            # For proof declarations, a clean list is trusted only when the attester
+            # explicitly says parsing succeeded AND the list itself is within policy.
+            # In particular, ``None`` is unknown evidence, never the empty axiom set.
+            if kind in ("theorem", "lemma"):
+                attested_axioms_ok = (
+                    axioms_known
+                    and d.get("axioms_ok") is True
+                    and set(axioms).issubset(ALLOWED_AXIOMS)
+                )
+            else:
+                attested_axioms_ok = True
+            axl = (att.get("module_verified") is True
+                   and d.get("axle_verdict") == "verified")
+            prov = _provenance_for(module, name, verdicts)
+            verification_quarantine = bool(
+                d.get("verification_quarantine", False)
+                or prov.get("verification_quarantine", False)
+            )
             facts = DeclFacts(
-                name=name, kind=d.get("kind", "theorem"),
+                name=name, kind=kind,
                 axioms=axioms,
                 flags=Flags(native_decide=d.get("native_decide", False)),
                 axle_verified=True if axl else (False if d.get("axle_verdict") == "failed" else None),
+                axioms_ok=attested_axioms_ok,
+                verification_quarantine=verification_quarantine,
             )
-            prov = _provenance_for(module, name, verdicts)
             if prov.get("kind_override") is not None:
                 facts.kind = prov["kind_override"]
             facts.conditional_rung = prov.get("conditional_rung")

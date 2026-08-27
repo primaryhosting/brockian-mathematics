@@ -75,7 +75,9 @@ def main() -> int:
             time.sleep(PACE)
             continue
         was_verified = old.get("module_verified") is True
-        now_verified = new.get("module_verified") is True
+        # A clean module compile without a parsed per-declaration axiom report is an
+        # incomplete attestation, not a successful migration.
+        now_verified = attest.attestation_complete(new)
         if now_verified:
             if not DRY_RUN:
                 json.dump(new, open(f, "w"), indent=2)

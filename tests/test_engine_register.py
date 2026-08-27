@@ -42,6 +42,12 @@ def test_proved_requires_all_legs():
     assert derive(_thm(flags=Flags(exact_search=True))) == "UNVERIFIED"
     assert derive(_thm(axioms=["propext", "sorryAx"])) == "UNVERIFIED"
     assert derive(_thm(axioms=["propext", "Nat.badAxiom"])) == "UNVERIFIED"
+    assert derive(_thm(axioms_ok=False)) == "UNVERIFIED"
+    assert derive(_thm(verification_quarantine=True)) == "UNVERIFIED"
+    assert derive(_thm(verification_quarantine=True,
+                       conditional_rung="literature")) == "UNVERIFIED"
+    assert derive(_thm(verification_quarantine=True,
+                       flags=Flags(native_decide=True))) == "UNVERIFIED"
 
 
 def test_lemma_is_theorem_grade():

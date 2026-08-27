@@ -31,3 +31,36 @@ def CompactResolvent.witness : Nat := 0
 """
     assert attest._kind_of(src, "CompactResolvent") == "conjecture"
     assert attest._kind_of(src, "CompactResolvent.witness") == "def"
+
+
+def test_axioms_for_distinguishes_explicit_empty_from_unparseable():
+    name = "Brockian.X.clean"
+    assert attest._axioms_for(
+        [f"declaration '{name}' does not depend on any axioms"], name) == []
+    assert attest._axioms_for(
+        [f"declaration '{name}' depends on axioms: [propext, Classical.choice]"],
+        name,
+    ) == ["propext", "Classical.choice"]
+    assert attest._axioms_for(
+        [f"declaration '{name}' axioms were omitted by the service"], name) is None
+    assert attest._axioms_for([], name) is None
+
+
+def test_attestation_complete_requires_parsed_axiom_evidence():
+    base = {
+        "module_verified": True,
+        "declarations": [{
+            "name": "Brockian.X.clean",
+            "kind": "theorem",
+            "axle_verdict": "verified",
+            "axioms": [],
+            "axioms_ok": True,
+        }],
+    }
+    assert attest.attestation_complete(base)
+
+    base["declarations"][0]["axioms"] = None
+    assert not attest.attestation_complete(base)
+    base["declarations"][0]["axioms"] = []
+    base["declarations"][0]["verification_quarantine"] = True
+    assert not attest.attestation_complete(base)

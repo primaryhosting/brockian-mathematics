@@ -20,7 +20,12 @@ sys.path.insert(0, os.path.dirname(__file__))
 import axle_client  # noqa: E402
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from engine.verify import ALLOWED_AXIOMS as ALLOWED  # noqa: E402 — single-sourced axioms
-from engine.verify import DEFAULT_ENV, axioms_in_line, qualified_decls  # noqa: E402
+from engine.verify import (  # noqa: E402
+    DEFAULT_ENV,
+    axioms_in_line,
+    content_hash,
+    qualified_decls,
+)
 
 
 def _attestation_stem(lean_path: str) -> str:
@@ -89,6 +94,46 @@ def _flatten(lean_path: str, _seen: set[str] | None = None) -> str:
     return "import Mathlib\n" + "\n".join(dep_bodies) + "\n" + "\n".join(body_lines)
 
 
+def _axioms_for(infos: list, fully_qualified_name: str) -> list[str] | None:
+    """Return the parsed axiom report for one declaration.
+
+    An explicit Lean report that a declaration has no axioms is ``[]``.  A matching
+    but unparseable message, or a missing message, is ``None``.  Keeping those states
+    distinct is load-bearing: unknown evidence must never be promoted as axiom-free.
+    """
+    needle = f"'{fully_qualified_name}'"
+    for info in infos:
+        text = info if isinstance(info, str) else str(info)
+        if needle in text and "axiom" in text:
+            parsed = axioms_in_line(text)
+            if parsed is not None:
+                return parsed
+    return None
+
+
+def attestation_complete(attestation: dict) -> bool:
+    """Whether an attestation carries complete registration evidence.
+
+    Module compilation alone is insufficient.  Every theorem/lemma also needs an
+    independently verified declaration verdict and a successfully parsed axiom list.
+    Definitions and conjecture containers do not have a proof-axiom footprint.
+    """
+    if attestation.get("module_verified") is not True:
+        return False
+    for declaration in attestation.get("declarations", []):
+        if declaration.get("kind", "theorem") not in ("theorem", "lemma"):
+            continue
+        if declaration.get("axle_verdict") != "verified":
+            return False
+        if not isinstance(declaration.get("axioms"), list):
+            return False
+        if declaration.get("axioms_ok") is not True:
+            return False
+        if declaration.get("verification_quarantine") is True:
+            return False
+    return True
+
+
 def attest(lean_path: str, namespace: str, names: list[str], env: str) -> dict:
     src = open(lean_path, encoding="utf-8").read()
     flat = _flatten(lean_path)  # AXLE-checkable unit (inlines Brockian deps)
@@ -113,20 +158,11 @@ def attest(lean_path: str, namespace: str, names: list[str], env: str) -> dict:
     r = axle_client.check(probe, env=env, timeout=300)
     infos = (r.raw.get("lean_messages") or {}).get("infos", [])
 
-    def axioms_for(n: str) -> list[str] | None:
-        needle = f"{fqn(n)}'"  # Lean prints 'fully.qualified.name' in the axioms line
-        for i in infos:
-            s = i if isinstance(i, str) else str(i)
-            if needle in s and "axioms" in s:
-                got = axioms_in_line(s)  # shared parser (engine.verify)
-                return got if got is not None else []
-        return None
-
     decls = []
     for n in names:
         kind = kinds[n]
         if kind == "theorem":
-            ax = axioms_for(n)
+            ax = _axioms_for(infos, fqn(n))
             ax_ok = (ax is not None and set(ax).issubset(ALLOWED))
         else:
             # defs/structures/conjecture-containers carry no proof-axiom footprint;
@@ -143,6 +179,9 @@ def attest(lean_path: str, namespace: str, names: list[str], env: str) -> dict:
         "module": namespace,
         "environment": r.environment,
         "module_verified": r.verified,
+        # Bind the receipt to the exact normalized, flattened dependency closure sent
+        # to AXLE.  The integrity gate recomputes this whenever a hash is present.
+        "content_hash": content_hash(flat),
         "declarations": decls,
     }
 
@@ -159,7 +198,7 @@ def main() -> int:
     os.makedirs(os.path.dirname(out), exist_ok=True)
     json.dump(att, open(out, "w"), indent=2)
     print(json.dumps(att, indent=2))
-    return 0 if att["module_verified"] else 1
+    return 0 if attestation_complete(att) else 1
 
 
 if __name__ == "__main__":
