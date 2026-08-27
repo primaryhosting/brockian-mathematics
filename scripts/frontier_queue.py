@@ -26,11 +26,12 @@ DEFAULT_PATHS = {
     "top100": os.path.join(REPO, "research", "top100-problems.json"),
     "wiedijk": os.path.join(REPO, "research", "wiedijk100.json"),
     "manual": os.path.join(REPO, "research", "manual-targets.json"),
+    "mined": os.path.join(REPO, "research", "mined-targets.json"),
     "queue": os.path.join(REPO, "research", "frontier_queue.json"),
 }
 
 LEGIBILITY = {"wiedijk-gap": 5, "targets-board": 4, "registry-conjecture": 3,
-              "manual": 3, "frontier_triage": 2}
+              "manual": 3, "frontier_triage": 2, "miner": 2}
 STATUSES = {"open", "assigned", "in_progress", "proved", "refuted", "stale"}
 
 
@@ -150,6 +151,15 @@ def collect(paths):
             add(m["slug"], _entry(
                 m["slug"], m["statement"], dict(m.get("lean_target", {})),
                 "manual", 4))
+
+    mined = _load(paths.get("mined", ""))
+    if mined:
+        for m in mined.get("targets", []):
+            # miner candidates carry their own tractability (1-5) from the
+            # verification pass; default conservative 2
+            add(m["slug"], _entry(
+                m["slug"], m["statement"], dict(m.get("lean_target", {})),
+                "miner", int(m.get("tractability", 2))))
     return out
 
 

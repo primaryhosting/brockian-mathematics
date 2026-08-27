@@ -181,3 +181,18 @@ class TestSync(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestMinerSource(unittest.TestCase):
+    def test_miner_entries_collected_with_own_tractability(self):
+        tmp = tempfile.mkdtemp()
+        paths = mini_sources(tmp)
+        paths["mined"] = os.path.join(tmp, "mined.json")
+        with open(paths["mined"], "w") as f:
+            json.dump({"targets": [{"slug": "mined-a", "statement": "mined statement a",
+                                    "lean_target": {"kind": "statement-skeleton", "cluster": "X"},
+                                    "tractability": 4}]}, f)
+        q = fq.generate(paths, now=NOW, commit="testsha")
+        e = next(e for e in q["entries"] if e["source"] == "miner")
+        self.assertEqual(e["scores"]["legibility"], 2)
+        self.assertEqual(e["scores"]["tractability"], 4)
