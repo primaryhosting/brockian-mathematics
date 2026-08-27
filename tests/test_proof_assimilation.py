@@ -13,19 +13,19 @@ NOW = "2026-08-27T17:00:00Z"
 
 def fixture():
     ledger = {
-        "p-short": {"target": "Brockian.Foundation.core", "account": "admin", "verdict": "PROVED"},
-        "p-clean": {"target": "Brockian.Foundation.core", "account": "chris", "verdict": "PROVED"},
+        "p-short": {"target": "Brockian.Foundation.core", "account": "admin", "verdict": "PROVED", "statement_hash_ok": True},
+        "p-clean": {"target": "Brockian.Foundation.core", "account": "chris", "verdict": "PROVED", "statement_hash_ok": True},
         "p-stop": {"target": "Brockian.Foundation.core", "account": "admin", "verdict": "STOPPED"},
-        "p-other": {"target": "Brockian.Other.goal", "account": "admin", "verdict": "PROVED"},
+        "p-other": {"target": "Brockian.Other.goal", "account": "admin", "verdict": "PROVED", "statement_hash_ok": True},
     }
     best = {
         "Brockian.Foundation.core": {
             "project_id": "p-clean", "chosen": "chris_p-clean.lean", "lines": 40,
-            "compiles": True, "n_candidates": 3,
+            "compiles": True, "n_candidates": 3, "chosen_hash": "a",
         },
         "Brockian.Other.goal": {
             "project_id": "p-other", "chosen": "admin_p-other.lean", "lines": 20,
-            "compiles": None, "n_candidates": 1,
+            "compiles": None, "n_candidates": 1, "chosen_hash": "b",
         },
     }
     axle = {
@@ -89,6 +89,49 @@ class TestAssimilation(unittest.TestCase):
         self.assertEqual(foundation["winner_project_id"], "p-clean")
         self.assertEqual(sum(a["gate"] == "rejected" for a in foundation["attempts"]), 1)
         self.assertEqual(report["summary"]["duplicate_attempts"], 2)
+
+    def test_stale_receipts_cannot_promote_new_content(self):
+        ledger, best, axle, axioms, registry, frontier = fixture()
+        best["Brockian.Foundation.core"]["chosen_hash"] = "new-content"
+        report = pa.build_report(
+            ledger=ledger, best=best, axle=axle, axioms=axioms,
+            registry=registry, frontier=frontier, now=NOW,
+        )
+        group = next(g for g in report["proof_groups"] if g["target"] == "Brockian.Foundation.core")
+        self.assertEqual(group["winner_gate"], "proof_candidate")
+        self.assertEqual(group["next_action"], "verify")
+
+    def test_statement_fidelity_is_an_explicit_gate(self):
+        ledger, best, axle, axioms, registry, frontier = fixture()
+        ledger["p-clean"].pop("statement_hash_ok")
+        report = pa.build_report(
+            ledger=ledger, best=best, axle=axle, axioms=axioms,
+            registry=registry, frontier=frontier, now=NOW,
+        )
+        group = next(g for g in report["proof_groups"] if g["target"] == "Brockian.Foundation.core")
+        self.assertEqual(group["winner_gate"], "attested_pending_statement")
+        self.assertEqual(group["next_action"], "statement_review")
+
+    def test_failed_selected_hash_yields_to_retained_alternative(self):
+        ledger, best, axle, axioms, registry, frontier = fixture()
+        best["Brockian.Foundation.core"]["alternatives"] = [
+            {
+                "project_id": "p-clean", "file": "chris_p-clean.lean", "lines": 40,
+                "compiles": True, "hash": "a", "gate": "rejected",
+            },
+            {
+                "project_id": "p-short", "file": "admin_p-short.lean", "lines": 12,
+                "compiles": None, "hash": "c", "gate": "unknown",
+            },
+        ]
+        axle["Brockian_Foundation_core.lean"]["verified"] = False
+        report = pa.build_report(
+            ledger=ledger, best=best, axle=axle, axioms=axioms,
+            registry=registry, frontier=frontier, now=NOW,
+        )
+        group = next(g for g in report["proof_groups"] if g["target"] == "Brockian.Foundation.core")
+        self.assertEqual(group["winner_project_id"], "p-short")
+        self.assertEqual(group["winner_gate"], "proof_candidate")
 
     def test_compounding_value_beats_raw_editorial_score(self):
         report = self.report()

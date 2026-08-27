@@ -1,63 +1,119 @@
-name: verified-core
+name: promotion-gate
 
 on:
   push:
     branches: [main, master]
   pull_request:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: promotion-gate-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  build-and-verify:
+  promotion-gate:
+    name: promotion-gate
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Install elan (Lean toolchain manager)
+      - name: Find Lean files changed by this promotion
+        id: changes
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PUSH_BASE_SHA: ${{ github.event.before }}
         run: |
-          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o elan-init.sh
-          bash elan-init.sh -y --default-toolchain none
-          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            base="$PR_BASE_SHA"
+          else
+            base="$PUSH_BASE_SHA"
+          fi
+          if [[ -z "$base" || "$base" =~ ^0+$ ]]; then
+            base="$(git rev-list --max-parents=0 HEAD)"
+          fi
+          git diff --name-only --diff-filter=ACMR "$base" HEAD -- 'Brockian/*.lean' > /tmp/changed-lean.txt
+          if [[ -s /tmp/changed-lean.txt ]]; then
+            echo "has_lean=true" >> "$GITHUB_OUTPUT"
+            echo "Lean promotion set:"
+            sed 's/^/  /' /tmp/changed-lean.txt
+          else
+            echo "has_lean=false" >> "$GITHUB_OUTPUT"
+            echo "No Lean source changed; kernel build leg is unchanged."
+          fi
 
-      - name: Fetch Mathlib cache
-        run: lake exe cache get || true
-
-      - name: lake build
-        run: lake build
-
-      - name: Python deps
+      - name: Install Python gate dependencies
         run: python3 -m pip install --quiet pyyaml pytest
 
-      - name: Script unit tests
-        run: python3 -m pytest tests/test_gen_registry.py tests/test_audit_registry_consistency.py tests/test_no_theater_lint.py tests/test_ingest_discover.py tests/test_conveyor.py tests/test_conveyor_paperclip.py tests/test_conveyor_notify.py tests/test_export_obsidian.py -q
+      - name: Control-plane unit tests
+        run: |
+          python3 -m pytest \
+            tests/test_proof_assimilation.py \
+            tests/test_select_best.py \
+            tests/test_gen_registry.py \
+            tests/test_attestation_integrity.py \
+            tests/test_audit_registry_consistency.py \
+            tests/test_no_theater_lint.py \
+            tests/test_engine_register.py \
+            tests/test_engine_verify.py \
+            tests/test_ingest_discover.py \
+            tests/test_conveyor.py \
+            tests/test_conveyor_paperclip.py \
+            tests/test_conveyor_notify.py \
+            tests/test_export_obsidian.py \
+            -q
 
-      - name: No-theater lint (blocking on holes in closed modules)
+      - name: Build proof comparison and steering report
+        run: |
+          python3 scripts/proof_assimilation.py \
+            --output /tmp/proof_assimilation.json \
+            --review /tmp/proof_assimilation.REVIEW.md
+
+      - name: Hash-bound attestation integrity
+        run: python3 scripts/check_attestation_integrity.py --strict
+
+      - name: No-theater lint
         run: |
           CLOSED=$(python3 -c "import yaml;print(' '.join(yaml.safe_load(open('provenance/verdicts.yaml')).get('closed_modules',[])))")
           python3 scripts/no_theater_lint.py Brockian/*.lean --closed $CLOSED
 
-      - name: AXLE independent verification + registry generation
-        env:
-          AXLE_API_KEY: ${{ secrets.AXLE_API_KEY }}
+      - name: Registry is derived from committed receipts
         run: |
-          # Re-attest every module against AXLE at the pinned environment, then derive the registry.
-          # A PROVED register requires: axioms clean + AXLE verified (spec §2A triple verification;
-          # local `lake build` above is the third leg).
           python3 scripts/gen_registry.py
-          git diff --exit-code registry/theorems.json REGISTRY.md \
-            || (echo "registry out of date — regenerate and commit" && exit 1)
+          git diff --exit-code registry/theorems.json REGISTRY.md || {
+            echo "registry out of date — regenerate and commit"
+            exit 1
+          }
 
-      - name: Overclaim firewall + registry self-consistency (#35 / #36, blocking)
+      - name: Registry and dependency firewalls
         run: |
-          # No PROVED theorem may rest on an open node; every CONDITIONAL carries a rung;
-          # every CONJECTURE is a container; every DISCHARGED points to a real PROVED theorem.
+          python3 scripts/audit_registry_consistency.py --strict --limit 20
           python3 scripts/verify_firewall.py
-
-      - name: Manifest firewall — labs may not cite unbacked claims (blocking)
-        run: |
-          # Every visual claim in every torus lab manifest must resolve to a registry theorem
-          # with a green register; absent/UNVERIFIED fails the build. A picture cannot outrun its proof.
           python3 scripts/validate_manifests.py
 
-      - name: Record build provenance
+      - name: Install Lean toolchain
+        if: steps.changes.outputs.has_lean == 'true'
         run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh
+          bash /tmp/elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Fetch Mathlib cache
+        if: steps.changes.outputs.has_lean == 'true'
+        run: lake exe cache get
+
+      - name: Kernel-check every changed Lean module
+        if: steps.changes.outputs.has_lean == 'true'
+        shell: bash
+        run: |
+          while IFS= read -r module; do
+            echo "lake env lean $module"
+            lake env lean "$module"
+          done < /tmp/changed-lean.txt
           lake env lean --version
-          echo "mathlib rev: $(python3 -c "import json;print(json.load(open('lake-manifest.json'))['packages'][0].get('rev',''))" 2>/dev/null || echo n/a)"

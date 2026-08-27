@@ -35,7 +35,7 @@ BAD = re.compile(r"\b(sorry|admit|native_decide|sorryAx)\b")
 
 
 def safe_target(target: str) -> str:
-    return re.sub(r"[^A-Za-z0-9]+", "_", target)
+    return re.sub(r"[^A-Za-z0-9]+", "_", target).strip("_")
 
 
 def candidate_gate(

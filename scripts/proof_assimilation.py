@@ -76,6 +76,8 @@ def candidate_gate(candidate: dict[str, Any]) -> str:
     verdict = str(candidate.get("verdict") or candidate.get("status") or "").upper()
     if verdict in REJECTED_VERDICTS:
         return "rejected"
+    if candidate.get("verification_rejected"):
+        return "rejected"
     if candidate.get("statement_hash_ok") is False or candidate.get("faithful") is False:
         return "rejected"
     if candidate.get("has_forbidden_token") or candidate.get("sorry"):
@@ -86,11 +88,16 @@ def candidate_gate(candidate: dict[str, Any]) -> str:
     axle = _bool(candidate.get("axle_verified"))
     axiom = _bool(candidate.get("axiom_trusted"))
     local = _bool(candidate.get("local_lean"))
+    fidelity = _bool(candidate.get("statement_hash_ok"))
+    if fidelity is None:
+        fidelity = _bool(candidate.get("faithful"))
     if axle is False or axiom is False or local is False:
         return "rejected"
-    if axle is True and axiom is True and local is True:
+    if axle is True and axiom is True and local is True and fidelity is True:
         return "promotion_ready"
-    if axle is True and axiom is True:
+    if axle is True and axiom is True and fidelity is not True:
+        return "attested_pending_statement"
+    if axle is True and axiom is True and fidelity is True:
         return "attested_pending_local"
     if verdict in TERMINAL_CANDIDATE:
         return "proof_candidate"
@@ -115,6 +122,12 @@ def build_candidates(
             continue
         picked = best.get(target) if isinstance(best.get(target), dict) else {}
         chosen = str(picked.get("project_id") or "") == str(project_id)
+        alternatives = {
+            str(alt.get("project_id")): alt
+            for alt in (picked.get("alternatives") or [])
+            if isinstance(alt, dict) and alt.get("project_id")
+        }
+        alternative = alternatives.get(str(project_id), {})
         candidate = {
             "project_id": str(project_id),
             "target": target,
@@ -132,16 +145,26 @@ def build_candidates(
             "faithful": raw.get("faithful"),
             "has_forbidden_token": raw.get("has_forbidden_token", False),
         }
+        if alternative:
+            candidate["lines"] = alternative.get("lines", candidate["lines"])
+            candidate["local_lean"] = alternative.get("compiles")
+            candidate["proof_file"] = alternative.get("file")
+            candidate["proof_hash"] = alternative.get("hash")
+            candidate["selector_gate"] = alternative.get("gate")
+            candidate["verification_rejected"] = alternative.get("gate") == "rejected"
         if chosen:
             candidate["lines"] = picked.get("lines", candidate["lines"])
             candidate["local_lean"] = picked.get("compiles")
             candidate["proof_file"] = picked.get("chosen")
+            candidate["proof_hash"] = picked.get("chosen_hash")
             ax = _state_record(axle_state, target)
             au = _state_record(axiom_state, target)
-            candidate["axle_verified"] = ax.get("verified")
+            axle_matches = bool(candidate["proof_hash"] and ax.get("hash") == candidate["proof_hash"])
+            axiom_matches = bool(candidate["proof_hash"] and au.get("hash") == candidate["proof_hash"])
+            candidate["axle_verified"] = ax.get("verified") if axle_matches else None
             candidate["axle_hash"] = ax.get("hash")
-            candidate["axiom_trusted"] = au.get("trusted")
-            candidate["axioms"] = au.get("axioms") or []
+            candidate["axiom_trusted"] = au.get("trusted") if axiom_matches else None
+            candidate["axioms"] = (au.get("axioms") or []) if axiom_matches else []
             candidate["axiom_hash"] = au.get("hash")
         candidate["gate"] = candidate_gate(candidate)
         candidates.append(candidate)
@@ -150,11 +173,12 @@ def build_candidates(
 
 GATE_ORDER = {
     "promotion_ready": 0,
-    "attested_pending_local": 1,
-    "proof_candidate": 2,
-    "pending": 3,
-    "negative_candidate": 4,
-    "rejected": 5,
+    "attested_pending_statement": 1,
+    "attested_pending_local": 2,
+    "proof_candidate": 3,
+    "pending": 4,
+    "negative_candidate": 5,
+    "rejected": 6,
 }
 
 
@@ -197,6 +221,8 @@ def group_candidates(
             action = "blocked_no_clean_candidate"
         elif winner["gate"] == "promotion_ready":
             action = "promote"
+        elif winner["gate"] == "attested_pending_statement":
+            action = "statement_review"
         elif winner["gate"] == "attested_pending_local":
             action = "local_verify"
         else:
@@ -247,7 +273,7 @@ def _frontier_from_registry(registry: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def _backend_route(entry: dict[str, Any], action: str) -> str:
-    if action in {"promote", "verify", "local_verify", "human_review_dispute"}:
+    if action in {"promote", "verify", "statement_review", "local_verify", "human_review_dispute"}:
         return "verification"
     stats = entry.get("backend_stats") or {}
     scored = []
@@ -303,7 +329,7 @@ def score_frontier(
         foundation = bool(entry.get("foundational") or compounding.get("foundational") or target_class in FOUNDATION_CLASSES)
         group = by_target.get(target)
         group_action = group.get("next_action") if group else None
-        proof_bonus = {"promote": 14, "local_verify": 11, "verify": 7}.get(group_action, 0)
+        proof_bonus = {"promote": 14, "statement_review": 12, "local_verify": 11, "verify": 7}.get(group_action, 0)
         failure_count = int(entry.get("failed_attempts") or compounding.get("failed_attempts") or 0)
         cost = float(entry.get("estimated_cost_usd") or compounding.get("estimated_cost_usd") or 0)
         breakdown = {
@@ -318,7 +344,7 @@ def score_frontier(
             "estimated_cost_penalty": -min(10, int(cost / 4)),
         }
         total = sum(breakdown.values())
-        if group_action in {"promote", "local_verify", "verify", "human_review_dispute"}:
+        if group_action in {"promote", "statement_review", "local_verify", "verify", "human_review_dispute"}:
             action = group_action
         elif blocked:
             action = "prove_dependency"
@@ -410,6 +436,7 @@ def build_report(
             "duplicate_attempts": sum(max(0, g["attempt_count"] - 1) for g in groups),
             "disputed_targets": sum(g["disputed"] for g in groups),
             "promotion_ready": gates["promotion_ready"],
+            "attested_pending_statement": gates["attested_pending_statement"],
             "attested_pending_local": gates["attested_pending_local"],
             "proof_candidates": gates["proof_candidate"],
             "rejected": gates["rejected"],
@@ -434,6 +461,7 @@ def render_markdown(report: dict[str, Any], limit: int = 30) -> str:
         f"- Attempts: {summary['attempts']} across {summary['targets_with_attempts']} targets",
         f"- Duplicate attempts compared: {summary['duplicate_attempts']}",
         f"- Promotion-ready: {summary['promotion_ready']}",
+        f"- AXLE/axiom clean but awaiting statement fidelity: {summary['attested_pending_statement']}",
         f"- AXLE/axiom clean but awaiting local Lean: {summary['attested_pending_local']}",
         f"- Disputed targets: {summary['disputed_targets']}",
         "",
