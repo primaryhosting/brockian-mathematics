@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11626,
+    "PROVED": 11646,
     "DEFINITION": 651,
     "CONJECTURE": 40,
     "CONDITIONAL": 33,
@@ -72134,6 +72134,131 @@
       "provenance_note": "HARMONIC-PROVED (Aristotle 11b14535), independently AXLE-verified @4.32, axiom-clean. frobenius_not_representable: for coprime a,b>1, the Frobenius number ab-a-b is NOT a nonnegative combination a*x+b*y. Together with Brockian.FrobeniusAbove (everything above ab-a-b IS representable) this completes the two-coin Frobenius / Chicken McNugget theorem: ab-a-b is exactly the largest non-representable value. Main Mathlib only."
     },
     {
+      "name": "Brockian.Frontier.Collatz.iterate_two_pow",
+      "kind": "theorem",
+      "module": "Brockian.Frontier.Collatz",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FrontierCollatz.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Frontier.Collatz.reaches1_27",
+      "kind": "theorem",
+      "module": "Brockian.Frontier.Collatz",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FrontierCollatz.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Frontier.Collatz.reaches1_two_pow",
+      "kind": "theorem",
+      "module": "Brockian.Frontier.Collatz",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FrontierCollatz.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.Frontier.Collatz.step_two_pow",
+      "kind": "theorem",
+      "module": "Brockian.Frontier.Collatz",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FrontierCollatz.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.GaloisCyclicGroup.alphaSub",
       "kind": "def",
       "module": "Brockian.GaloisCyclicGroup",
@@ -113320,6 +113445,136 @@
       "provenance_note": null
     },
     {
+      "name": "Brockian.HighAssurance.Curve25519Fix.cswapBit_false",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.Curve25519Fix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceCurve25519Fix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.Curve25519Fix.cswapBit_involution",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.Curve25519Fix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceCurve25519Fix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.Curve25519Fix.cswapBit_true",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.Curve25519Fix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceCurve25519Fix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.Curve25519Fix.neg_mask_valid_iff",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.Curve25519Fix",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceCurve25519Fix.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.HighAssurance.Declassification.controlled_release_no_declassify",
       "kind": "theorem",
       "module": "Brockian.HighAssurance.Declassification",
@@ -113576,6 +113831,166 @@
       },
       "register": "PROVED",
       "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.HmacSha2.hmac_key_pad_difference",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.HmacSha2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceHmacSha2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.HmacSha2.hmac_pad_xor_const",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.HmacSha2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceHmacSha2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.HmacSha2.sha256_ch_spec_eq_impl",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.HmacSha2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceHmacSha2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.HmacSha2.sha256_compress_add_assoc",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.HmacSha2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceHmacSha2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.HmacSha2.sha256_maj_spec_eq_impl",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.HmacSha2",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceHmacSha2.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
         "propext"
       ],
       "flags": {
@@ -114219,6 +114634,70 @@
       "provenance_note": null
     },
     {
+      "name": "Brockian.HighAssurance.Kernel.kernel_security_ext",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.Kernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.kstepExt_preserves",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.Kernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.HighAssurance.Kernel.kstep_preserves",
       "kind": "theorem",
       "module": "Brockian.HighAssurance.Kernel",
@@ -114252,6 +114731,38 @@
     },
     {
       "name": "Brockian.HighAssurance.Kernel.reachable_writes_authorized",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.Kernel",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceKernel.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.recv_preserves_all",
       "kind": "theorem",
       "module": "Brockian.HighAssurance.Kernel",
       "statement": "",
@@ -117643,6 +118154,134 @@
       },
       "register": "PROVED",
       "axioms": [
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.Sha256Diffusion.Sigma0_linear",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.Sha256Diffusion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceSha256Diffusion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.Sha256Diffusion.Sigma1_linear",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.Sha256Diffusion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceSha256Diffusion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.Sha256Diffusion.sigma0_linear",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.Sha256Diffusion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceSha256Diffusion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.HighAssurance.Sha256Diffusion.sigma1_linear",
+      "kind": "theorem",
+      "module": "Brockian.HighAssurance.Sha256Diffusion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/HighAssuranceSha256Diffusion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
         "propext"
       ],
       "flags": {

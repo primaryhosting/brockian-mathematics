@@ -913,6 +913,10 @@ import Brockian.HighAssuranceDeclassification
 import Brockian.HighAssuranceProgress
 import Brockian.HighAssuranceCapDLIsolation
 import Brockian.HighAssuranceCryptoIdioms
+import Brockian.HighAssuranceHmacSha2
+import Brockian.HighAssuranceCurve25519Fix
+import Brockian.HighAssuranceSha256Diffusion
+import Brockian.FrontierCollatz
 import Brockian.PhaseDepthClassification
 import Brockian.PhaseDepthTransfer
 import Brockian.PhaseDepthD5

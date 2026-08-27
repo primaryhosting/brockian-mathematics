@@ -34,6 +34,36 @@
       "axioms_ok": true
     },
     {
+      "name": "Brockian.HighAssurance.Kernel.kstepExt_preserves",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.kernel_security_ext",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.HighAssurance.Kernel.recv_preserves_all",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
       "name": "Brockian.HighAssurance.Kernel.initState_secure",
       "kind": "theorem",
       "axle_verdict": "verified",

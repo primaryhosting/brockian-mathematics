@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 651
 - **DISCHARGED**: 7
-- **PROVED**: 11626
+- **PROVED**: 11646
 
 ## Theorems
 
@@ -2378,6 +2378,10 @@
 | PROVED | `Brockian.FreshmanDream.freshman_dream` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.FrobeniusAbove.frobenius_above` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle ab22201e; AXLE @4.32 |
 | PROVED | `Brockian.FrobeniusMcNugget.frobenius_not_representable` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle 11b14535; AXLE @4.32 |
+| PROVED | `Brockian.Frontier.Collatz.iterate_two_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Frontier.Collatz.reaches1_27` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Frontier.Collatz.reaches1_two_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Frontier.Collatz.step_two_pow` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.GaloisCyclicGroup.alphaSub` | ✓ | verified | lean-4.32.2 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
 | PROVED | `Brockian.GaloisCyclicGroup.cycExt` | ✓ | verified | lean-4.32.2 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
 | PROVED | `Brockian.GaloisCyclicGroup.primRoot` | ✓ | verified | lean-4.32.2 | roadmap #7 — Galois group of the real cyclotomic subfield is cyclic of order (p-1)/2; AXLE @4.32 |
@@ -3694,6 +3698,10 @@
 | PROVED | `Brockian.HighAssurance.CryptoIdioms.mask_select_identity` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.CryptoIdioms.otp_involution` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.CryptoIdioms.xor_swap` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Curve25519Fix.cswapBit_false` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Curve25519Fix.cswapBit_involution` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Curve25519Fix.cswapBit_true` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Curve25519Fix.neg_mask_valid_iff` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.Declassification.controlled_release_no_declassify` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.Declassification.delimited_release` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.Declassification.high_write_no_low_effect` | ✓ | verified | lean-4.32.2 |  |
@@ -3703,6 +3711,11 @@
 | PROVED | `Brockian.HighAssurance.Declassification.run_low_consistency` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.Declassification.step_delim` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.Declassification.step_low_consistency` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.HmacSha2.hmac_key_pad_difference` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.HmacSha2.hmac_pad_xor_const` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.HmacSha2.sha256_ch_spec_eq_impl` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.HmacSha2.sha256_compress_add_assoc` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.HmacSha2.sha256_maj_spec_eq_impl` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.IPCConfinement.ipc_confinement` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.IPCConfinement.no_channel_no_delivery` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.IPCConfinement.nonvacuity_authorized_delivers` | ✓ | verified | lean-4.32.2 |  |
@@ -3723,8 +3736,11 @@
 | PROVED | `Brockian.HighAssurance.Kernel.demo_write_preserves_secure` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.Kernel.initState_secure` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.Kernel.kernel_security` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.kernel_security_ext` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.kstepExt_preserves` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.Kernel.kstep_preserves` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.Kernel.reachable_writes_authorized` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Kernel.recv_preserves_all` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.LatticeNoninterference.dflows_antisymm` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.LatticeNoninterference.dflows_l_not_bot` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.LatticeNoninterference.dflows_l_r_incomparable` | ✓ | verified | lean-4.32.2 |  |
@@ -3833,6 +3849,10 @@
 | PROVED | `Brockian.HighAssurance.Scheduler.sched_safety` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.Scheduler.sched_safety_run` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.Scheduler.work_conserving` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Sha256Diffusion.Sigma0_linear` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Sha256Diffusion.Sigma1_linear` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Sha256Diffusion.sigma0_linear` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.HighAssurance.Sha256Diffusion.sigma1_linear` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.TakeGrant.authority_confined` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.TakeGrant.closure_is_strict_over_approximation` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.HighAssurance.TakeGrant.confinement` | ✓ | verified | lean-4.32.2 |  |

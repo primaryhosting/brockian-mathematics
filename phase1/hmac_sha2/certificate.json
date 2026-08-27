@@ -1,0 +1,104 @@
+{
+  "title": "The Verification Foundry \u2014 Phase-1 Cross-Verification Certificate (HMAC-SHA-2)",
+  "subject": "The decidable bitvector obligations inside HMAC-SHA-256, discharged by two independent provers",
+  "provers": [
+    "Z3 4.16.0 (SMT \u2014 bit-blast to SAT)",
+    "Lean 4 kernel + AXLE (proof by per-bit BitVec reasoning / algebra, axiom-audited \u2014 NOT a SAT solver)"
+  ],
+  "obligations": [
+    {
+      "name": "sha256_ch_spec_eq_impl",
+      "statement": "SHA-256 Ch: (x & y) ^ (~x & z) = (x & y) | (~x & z)  \u2014 the FIPS 180-4 'choice' selector's spec (XOR) form equals the constant-time (OR) form",
+      "smt2": "; obligation: SHA-256 Ch \u2014 the FIPS 180-4 \"choice\" selector.\n;   spec (XOR) form  (x & y) ^ (~x & z)  =  impl (OR) form  (x & y) | (~x & z)\n; proved by asserting the NEGATION and expecting unsat.\n(set-logic QF_BV)\n(declare-const x (_ BitVec 32))\n(declare-const y (_ BitVec 32))\n(declare-const z (_ BitVec 32))\n(assert (not (= (bvxor (bvand x y) (bvand (bvnot x) z))\n                (bvor  (bvand x y) (bvand (bvnot x) z)))))\n(check-sat)\n",
+      "z3": {
+        "verdict": "proved",
+        "solver": "Z3 4.16.0",
+        "logic": "QF_BV",
+        "method": "bit-blast to SAT; unsat of the negation"
+      },
+      "lean": {
+        "verdict": "proved",
+        "theorem": "Brockian.HighAssurance.HmacSha2.sha256_ch_spec_eq_impl",
+        "checker": "Lean 4 kernel + AXLE re-verification (lean-4.32.2), axiom-clean",
+        "method": "kernel-checked per-bit reduction (BitVec.getLsbD) + Bool case analysis"
+      },
+      "cross_verified": true
+    },
+    {
+      "name": "sha256_maj_spec_eq_impl",
+      "statement": "SHA-256 Maj: (x&y) ^ (x&z) ^ (y&z) = (x&y) | (x&z) | (y&z)  \u2014 the 'majority' selector's spec (XOR) form equals the OR form",
+      "smt2": "; obligation: SHA-256 Maj \u2014 the FIPS 180-4 \"majority\" selector.\n;   spec (XOR) form  (x&y) ^ (x&z) ^ (y&z)  =  impl (OR) form  (x&y) | (x&z) | (y&z)\n; proved by asserting the NEGATION and expecting unsat.\n(set-logic QF_BV)\n(declare-const x (_ BitVec 32))\n(declare-const y (_ BitVec 32))\n(declare-const z (_ BitVec 32))\n(assert (not (= (bvxor (bvxor (bvand x y) (bvand x z)) (bvand y z))\n                (bvor  (bvor  (bvand x y) (bvand x z)) (bvand y z)))))\n(check-sat)\n",
+      "z3": {
+        "verdict": "proved",
+        "solver": "Z3 4.16.0",
+        "logic": "QF_BV",
+        "method": "bit-blast to SAT; unsat of the negation"
+      },
+      "lean": {
+        "verdict": "proved",
+        "theorem": "Brockian.HighAssurance.HmacSha2.sha256_maj_spec_eq_impl",
+        "checker": "Lean 4 kernel + AXLE re-verification (lean-4.32.2), axiom-clean",
+        "method": "kernel-checked per-bit reduction (BitVec.getLsbD) + Bool case analysis"
+      },
+      "cross_verified": true
+    },
+    {
+      "name": "hmac_key_pad_difference",
+      "statement": "HMAC: (k ^ ipad) ^ (k ^ opad) = ipad ^ opad  \u2014 the inner/outer padded-key difference is independent of the key",
+      "smt2": "; obligation: HMAC (RFC 2104 / FIPS 198-1) \u2014 the inner and outer padded keys\n;   differ by a key-INDEPENDENT constant:  (k ^ ipad) ^ (k ^ opad)  =  ipad ^ opad\n; proved by asserting the NEGATION and expecting unsat.\n(set-logic QF_BV)\n(declare-const k    (_ BitVec 32))\n(declare-const ipad (_ BitVec 32))\n(declare-const opad (_ BitVec 32))\n(assert (not (= (bvxor (bvxor k ipad) (bvxor k opad))\n                (bvxor ipad opad))))\n(check-sat)\n",
+      "z3": {
+        "verdict": "proved",
+        "solver": "Z3 4.16.0",
+        "logic": "QF_BV",
+        "method": "bit-blast to SAT; unsat of the negation"
+      },
+      "lean": {
+        "verdict": "proved",
+        "theorem": "Brockian.HighAssurance.HmacSha2.hmac_key_pad_difference",
+        "checker": "Lean 4 kernel + AXLE re-verification (lean-4.32.2), axiom-clean",
+        "method": "kernel-checked per-bit reduction (BitVec.getLsbD) + Bool case analysis"
+      },
+      "cross_verified": true
+    },
+    {
+      "name": "hmac_pad_xor_const",
+      "statement": "HMAC pads: 0x36363636 ^ 0x5c5c5c5c = 0x6a6a6a6a  \u2014 ipad ^ opad is the fixed constant 0x6a per byte, independent of any key",
+      "smt2": "; obligation: HMAC pad constants (ipad = 0x36, opad = 0x5c per byte) XOR to the\n;   fixed constant 0x6a per byte:  0x36363636 ^ 0x5c5c5c5c = 0x6a6a6a6a\n; proved by asserting the NEGATION and expecting unsat.\n(set-logic QF_BV)\n(assert (not (= (bvxor #x36363636 #x5c5c5c5c) #x6a6a6a6a)))\n(check-sat)\n",
+      "z3": {
+        "verdict": "proved",
+        "solver": "Z3 4.16.0",
+        "logic": "QF_BV",
+        "method": "bit-blast to SAT; unsat of the negation"
+      },
+      "lean": {
+        "verdict": "proved",
+        "theorem": "Brockian.HighAssurance.HmacSha2.hmac_pad_xor_const",
+        "checker": "Lean 4 kernel + AXLE re-verification (lean-4.32.2), axiom-clean",
+        "method": "kernel `decide` over the literal BitVec (constant fold \u2014 no SAT axiom)"
+      },
+      "cross_verified": true
+    },
+    {
+      "name": "sha256_compress_add_assoc",
+      "statement": "SHA-256 compression: (a + b) + c = a + (b + c) mod 2^32  \u2014 associativity of the modular add that folds T1 = h + S1(e) + Ch + Kt + Wt",
+      "smt2": "; obligation: SHA-256 compression \u2014 the round adds are modulo 2^32; folding\n;   T1 = h + S1(e) + Ch + Kt + Wt  is well-defined because + is associative:\n;   (a + b) + c = a + (b + c)  over BitVec 32 (wrapping add).\n; proved by asserting the NEGATION and expecting unsat.\n(set-logic QF_BV)\n(declare-const a (_ BitVec 32))\n(declare-const b (_ BitVec 32))\n(declare-const c (_ BitVec 32))\n(assert (not (= (bvadd (bvadd a b) c) (bvadd a (bvadd b c)))))\n(check-sat)\n",
+      "z3": {
+        "verdict": "proved",
+        "solver": "Z3 4.16.0",
+        "logic": "QF_BV",
+        "method": "bit-blast to SAT; unsat of the negation"
+      },
+      "lean": {
+        "verdict": "proved",
+        "theorem": "Brockian.HighAssurance.HmacSha2.sha256_compress_add_assoc",
+        "checker": "Lean 4 kernel + AXLE re-verification (lean-4.32.2), axiom-clean",
+        "method": "kernel-checked BitVec.add_assoc"
+      },
+      "cross_verified": true
+    }
+  ],
+  "all_cross_verified": true,
+  "sha256": "b205f29643c4d4cf8092d353de769503f8a4d3f72db7b4f6fdcec2a2e141e87e",
+  "note": "Portable evidence: recompute sha256 over {provers, obligations} and re-run any SMT solver on each embedded smt2 (unsat = proved). No access to our pipeline required. See ../recheck.py. HONEST SCOPE: these are the small, DECIDABLE QF_BV obligations that sit inside HMAC-SHA-256 (the Ch/Maj round selectors, the HMAC key-pad structure, the compression fold's modular-add associativity) \u2014 NOT a proof of HMAC-SHA-256 functional correctness or any security property. The point is the impl-vs-spec + independent-agreement + re-checkability discipline on real cryptographic structure, e.g. that the FIPS 180-4 XOR form of Ch/Maj equals the OR form a constant-time implementation emits. The two provers use DIFFERENT mathematics: Z3 bit-blasts to SAT; Lean is a kernel-checked per-bit/algebraic proof re-verified and axiom-audited by AXLE (its axiom gate rejects bv_decide's native SAT/LRAT axiom, so the Lean leg is not a second SAT solver). Agreement across two different methods is stronger than agreement across two SAT engines.",
+  "recheck": "python3 phase1/recheck.py phase1/hmac_sha2/certificate.json"
+}

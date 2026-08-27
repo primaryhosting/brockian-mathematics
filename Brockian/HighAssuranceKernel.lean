@@ -365,4 +365,56 @@ theorem badState_unreachable :
   intro hreach
   exact badState_insecure (kernel_security demoPolicy initState badState initState_secure hreach)
 
+
+/-! ## Capstone extension: a new reference-monitor operation (message consumption) -/
+
+/-- The **extended** kernel step relation: every guarded operation of `kstep`, PLUS a
+new `recvMsg` rule — a subject consuming (removing) the head message of its OWN
+mailbox.  Consumption is unconditionally safe: it only ever shrinks a mailbox. -/
+inductive kstepExt (P : Policy) : KernelState → KernelState → Prop
+  | base {s s' : KernelState} (h : kstep P s s') : kstepExt P s s'
+  | recvMsg (subj : Subject) (st : KernelState) :
+      kstepExt P st
+        { st with mailbox := Function.update st.mailbox subj (st.mailbox subj).tail }
+
+/-- Reachability under the extended reference monitor. -/
+def ReachableExt (P : Policy) : KernelState → KernelState → Prop :=
+  Relation.ReflTransGen (kstepExt P)
+
+/-- One-step preservation for the EXTENDED monitor.  The base steps preserve security
+by `kstep_preserves`; message consumption preserves it because the tail of a mailbox
+is a sublist of the original, so every remaining message was already authorized. -/
+theorem kstepExt_preserves (P : Policy) {s s' : KernelState}
+    (hstep : kstepExt P s s') (hinv : KernelSecure P s) : KernelSecure P s' := by
+  cases hstep with
+  | base h => exact kstep_preserves P h hinv
+  | recvMsg subj st =>
+      obtain ⟨hcaps, hwrite, hmail⟩ := hinv
+      refine ⟨hcaps, hwrite, ?_⟩
+      intro dst d hd
+      dsimp only at hd
+      by_cases hs : dst = subj
+      · subst hs
+        rw [Function.update_self] at hd
+        exact hmail dst d (List.mem_of_mem_tail hd)
+      · rw [Function.update_of_ne hs] at hd
+        exact hmail dst d hd
+
+/-- **The extended capstone.**  The whole composite security policy is preserved
+across *every* reachable state of the extended kernel — guarded operations AND
+message consumption — from any policy-conformant start. -/
+theorem kernel_security_ext (P : Policy) (s0 s : KernelState)
+    (h0 : KernelSecure P s0) (hreach : ReachableExt P s0 s) : KernelSecure P s := by
+  induction hreach with
+  | refl => exact h0
+  | tail _ hstep ih => exact kstepExt_preserves P hstep ih
+
+/-- Message consumption is a strict refinement of the kernel's security guarantee: it
+is a new top-level operation shown safe without weakening any of the three security
+dimensions. -/
+theorem recv_preserves_all (P : Policy) (s : KernelState) (subj : Subject)
+    (hinv : KernelSecure P s) :
+    KernelSecure P { s with mailbox := Function.update s.mailbox subj (s.mailbox subj).tail } :=
+  kstepExt_preserves P (kstepExt.recvMsg subj s) hinv
+
 end Brockian.HighAssurance.Kernel
