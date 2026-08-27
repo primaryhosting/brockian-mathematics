@@ -559,14 +559,14 @@ git add scripts/frontier_queue.py && git commit --no-verify -m "feat: frontier q
 
 ### Task 4: Generate queue v1 + review rendering
 
-- [ ] **Step 1: Run the generator against the real sources**
+- [x] **Step 1: Run the generator against the real sources** *(253 entries — wiedijk-gap 96, targets-board 81, registry-conjecture 73, manual 3; all 60 triage targets deduped into registry-conjecture bodies with tractability merged up)*
 
 ```bash
 cd ~/Projects/brockian-mathematics && python3 scripts/frontier_queue.py --review
 ```
 Expected: `wrote research/frontier_queue.json (<n> entries)` with n ≈ 150–250 (40 CONJ + 33 COND + up to 60 triage-deduped + top100 opens + wiedijk gaps + 3 manual, minus dedup overlap), and `frontier_queue.REVIEW.md`.
 
-- [ ] **Step 2: Sanity-check the output**
+- [x] **Step 2: Sanity-check the output** *(all statuses `open`; top ranks = triage-GO registry conjectures at L/T/N 3/5/3)*
 
 ```bash
 python3 - <<'EOF'
@@ -580,7 +580,7 @@ EOF
 ```
 Expected: statuses all `open` (first generation — unless registry reconciliation legitimately proves something), triage go-targets and manual/wiedijk entries near the top.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add research/frontier_queue.json research/frontier_queue.REVIEW.md && git commit --no-verify -m "feat: frontier queue v1 (first generated queue + review rendering)"
