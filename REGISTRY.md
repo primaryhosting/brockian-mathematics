@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 651
 - **DISCHARGED**: 7
-- **PROVED**: 11649
+- **PROVED**: 11656
 
 ## Theorems
 
@@ -12358,6 +12358,13 @@
 | PROVED | `Brockian.ZumkellerNumbers.zumkeller_twentyeight` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.zumkeller_twentyfour` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.zumkeller_two_mul_le_sigma` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerStructure.not_zumkeller_of_deficient` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ZumkellerStructure.not_zumkeller_of_sigma_odd` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ZumkellerStructure.not_zumkeller_prime_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ZumkellerStructure.odd_zumkeller_not_square` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ZumkellerStructure.zumkeller_iff_partition` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ZumkellerStructure.zumkeller_mul_coprime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ZumkellerStructure.zumkeller_of_perfect` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `PCA.canAccess_mono` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `PCA.default_deny` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `PCA.escape_monotone` | ✓ | verified | lean-4.32.2 |  |

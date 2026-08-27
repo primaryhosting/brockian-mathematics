@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11649,
+    "PROVED": 11656,
     "DEFINITION": 651,
     "CONJECTURE": 40,
     "CONDITIONAL": 33,
@@ -372028,6 +372028,237 @@
       "quarantine": true,
       "ledger_run": "frontier swarm; AXLE @4.32",
       "provenance_note": "SWARM-PROVED Zumkeller numbers with GENERAL structural theorems (AXLE @4.32, axiom-clean). A number is Zumkeller if its divisors split into two equal-sum sets (half-sum characterization exists S subset divisors, 2*sum S = sigma). GENERAL: zumkeller_sigma_even (sigma is even); zumkeller_two_mul_le_sigma (flagship -- every positive Zumkeller number is perfect-or-abundant, 2n <= sigma(n)); not_zumkeller_prime (no prime is Zumkeller, via deficiency). Concrete witnesses 6,12,20,24,28,30 with explicit half-sets. OddZumkellerFrom3Structure is an unproven OPEN def (odd Zumkeller structure; smallest odd Zumkeller is 945). Zumkeller infinitude/odd-density OPEN."
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.not_zumkeller_of_deficient",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.not_zumkeller_of_sigma_odd",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.not_zumkeller_prime_pow",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.odd_zumkeller_not_square",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.zumkeller_iff_partition",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.zumkeller_mul_coprime",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.zumkeller_of_perfect",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "PCA.canAccess_mono",
