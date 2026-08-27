@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aristotle Command Dashboard</title>
 <style>
 :root {
@@ -310,11 +312,12 @@ $("#tiles").innerHTML = tiles.map(t =>
     if (v == null) return `<div class="funnel-row"><div class="name"><b>${esc(name)}</b></div>
       <div class="funnel-track"><span class="sub">not queried</span></div><div class="funnel-val"></div></div>`;
     const w = Math.max(100 * v / max, 0.5);
-    const p = i > 0 && rows[1][1] ? ` <span>(${pct(v / rows[1][1])} of unique)</span>` : "";
+    const p = i === 2 && rows[0][1] ? ` <span>(${pct(v / rows[0][1])} of submissions)</span>`
+      : i > 2 && rows[1][1] ? ` <span>(${pct(v / rows[1][1])} of unique)</span>` : "";
     return `<div class="funnel-row">
       <div class="name"><b>${esc(name)}</b>${esc(why)}</div>
       <div class="funnel-track"><div class="funnel-bar" style="width:${w}%;background:${ramp[i]}"></div></div>
-      <div class="funnel-val">${fmt(v)}${i > 0 ? p : ""}</div></div>`;
+      <div class="funnel-val">${fmt(v)}${p}</div></div>`;
   }).join("");
   const nn = (funnel.registry_attested || 0) && targets.some(t => t.stage === "attested" && !t.certificate);
   if (nn) {
@@ -543,8 +546,10 @@ $("#triage-copy").addEventListener("click", async () => {
   if ((h.recent_events || []).length) {
     html += `<div class="eyebrow" style="margin-top:12px">Recent submissions</div>
       <div style="overflow-x:auto;max-height:220px;overflow-y:auto">` +
-      h.recent_events.slice().reverse().map(e =>
-        `<div class="ev"><span class="${e.ok ? "ok" : "fail"}">${e.ok ? "OK " : "FAIL"}</span> ${esc(e.ts || "")} ${esc(e.account || "")} ${esc(e.target || "")}${e.rate ? " (RATE)" : ""}</div>`).join("") + `</div>`;
+      h.recent_events.slice().reverse().map(e => {
+        const ok = e.status === "OK" || e.ok === true;
+        return `<div class="ev"><span class="${ok ? "ok" : "fail"}">${ok ? "OK " : "FAIL"}</span> ${esc(e.ts || "")} ${esc(e.account || "")} ${esc(e.target || "")}${e.detail ? " (" + esc(e.detail) + ")" : ""}</div>`;
+      }).join("") + `</div>`;
   }
   el.innerHTML = html || `<div class="empty-state">No health events recorded.</div>`;
 })();
