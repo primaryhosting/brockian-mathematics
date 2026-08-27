@@ -1,0 +1,39 @@
+{
+  "title": "The Verification Foundry \u2014 ChaCha20 Quarter-Round Bijectivity Certificate",
+  "subject": "A real crypto round function proved injective by two independent SMT engines",
+  "provers": [
+    "Z3 4.16.0 (SMT \u2014 bit-blast to SAT)",
+    "cvc5 1.3.4 (SMT \u2014 independent engine; same SMT-LIB family, so a corroboration not an independence)"
+  ],
+  "obligations": [
+    {
+      "name": "chacha20_qr_injective",
+      "statement": "ChaCha20 quarter-round (RFC 8439) is INJECTIVE: QR(s1) = QR(s2) => s1 = s2 over the 128-bit state \u2014 hence a bijection. A full add/rotate/xor round function.",
+      "smt2": "; obligation: the ChaCha20 quarter-round (RFC 8439) is INJECTIVE (a bijection).\n; Two input states; assert their QR outputs are equal componentwise AND the inputs\n; differ. unsat = injective (no two distinct states collide). A full add/rotate/xor\n; round function over a 128-bit state \u2014 a genuinely harder QF_BV instance.\n(set-logic QF_BV)\n(declare-const ax (_ BitVec 32))\n(declare-const bx (_ BitVec 32))\n(declare-const cx (_ BitVec 32))\n(declare-const dx (_ BitVec 32))\n(define-fun A1x () (_ BitVec 32) (bvadd ax bx))\n(define-fun D1x () (_ BitVec 32) ((_ rotate_left 16) (bvxor dx A1x)))\n(define-fun C1x () (_ BitVec 32) (bvadd cx D1x))\n(define-fun B1x () (_ BitVec 32) ((_ rotate_left 12) (bvxor bx C1x)))\n(define-fun A2x () (_ BitVec 32) (bvadd A1x B1x))\n(define-fun D2x () (_ BitVec 32) ((_ rotate_left 8) (bvxor D1x A2x)))\n(define-fun C2x () (_ BitVec 32) (bvadd C1x D2x))\n(define-fun B2x () (_ BitVec 32) ((_ rotate_left 7) (bvxor B1x C2x)))\n(declare-const ay (_ BitVec 32))\n(declare-const by (_ BitVec 32))\n(declare-const cy (_ BitVec 32))\n(declare-const dy (_ BitVec 32))\n(define-fun A1y () (_ BitVec 32) (bvadd ay by))\n(define-fun D1y () (_ BitVec 32) ((_ rotate_left 16) (bvxor dy A1y)))\n(define-fun C1y () (_ BitVec 32) (bvadd cy D1y))\n(define-fun B1y () (_ BitVec 32) ((_ rotate_left 12) (bvxor by C1y)))\n(define-fun A2y () (_ BitVec 32) (bvadd A1y B1y))\n(define-fun D2y () (_ BitVec 32) ((_ rotate_left 8) (bvxor D1y A2y)))\n(define-fun C2y () (_ BitVec 32) (bvadd C1y D2y))\n(define-fun B2y () (_ BitVec 32) ((_ rotate_left 7) (bvxor B1y C2y)))\n(assert (and (and (= A2x A2y) (= B2x B2y) (= C2x C2y) (= D2x D2y)) (or (not (= ax ay)) (not (= bx by)) (not (= cx cy)) (not (= dx dy)))))\n(check-sat)\n",
+      "z3": {
+        "verdict": "proved",
+        "solver": "Z3 4.16.0",
+        "logic": "QF_BV",
+        "method": "bit-blast to SAT; unsat of the negation"
+      },
+      "cvc5": {
+        "verdict": "proved",
+        "solver": "cvc5 1.3.4",
+        "logic": "QF_BV",
+        "method": "independent SMT engine; unsat of the negation"
+      },
+      "lean": {
+        "verdict": "not-attempted",
+        "theorem": null,
+        "checker": "Lean 4 kernel + AXLE",
+        "method": "kernel-checked invertibility (QRinv o QR = id) is future work; SMT-only obligation (stated honestly)"
+      },
+      "cross_verified": true,
+      "coverage": "2-prover SMT (Z3, cvc5) \u2014 kernel-algebra leg not attempted"
+    }
+  ],
+  "all_cross_verified": true,
+  "sha256": "7952af6c895164746e9a4c312439eb7e597547cf5d39209ba88dfb0fcf186231",
+  "note": "Portable evidence: recompute sha256 over {provers, obligations} and re-run any SMT solver on the embedded smt2 (unsat = injective). No access to our pipeline required. HONEST SCOPE: TWO-prover SMT obligation; a kernel-checked Lean invertibility proof is future work and is marked not-attempted, not claimed. Z3 and cvc5 are both SMT/SAT engines \u2014 agreement here guards against an engine-specific bug but is corroboration, not strong independence.",
+  "recheck": "python3 phase1/recheck.py phase1/chacha_qr/certificate.json  (or --solver=cvc5)"
+}
