@@ -1,0 +1,29 @@
+{
+  "description": "Manual seed source for the Frontier Target Queue (see docs/superpowers/specs/2026-08-27-frontier-target-queue-design.md, source: manual). Candidates surfaced during the 2026-08-27 visualization reviews.",
+  "targets": [
+    {
+      "slug": "vertex-a-prime-uniqueness",
+      "statement": "5 is the unique prime congruent to 0 mod 5; every prime p > 5 has residue in {1,2,3,4} mod 5.",
+      "lean_target": { "kind": "statement-skeleton", "cluster": "C5/Constellation" },
+      "origin": "BrockianVisualizer review — backs the prime-distribution mode of the pentagon exhibit",
+      "difficulty": "trivial",
+      "notes": "Registry-citation grade for the labs' manifest firewall; near-instant for Aristotle."
+    },
+    {
+      "slug": "negation-as-reflection-c5",
+      "statement": "Negation on ZMod 5 realizes the reflection element of D5 acting on the vertex pentagon: the map n ↦ -n is the automorphism of C5 corresponding to a reflection under Aut(C5) ≅ DihedralGroup 5.",
+      "lean_target": { "kind": "statement-skeleton", "cluster": "GaloisWhyFive / autEquivDihedral" },
+      "origin": "BrockianVisualizer review — the corrected ZMod-5 residue map displays exactly this symmetry",
+      "difficulty": "easy",
+      "notes": "Extends the proved aut_card_eq_ten / autEquivDihedral cluster; theorem-backs the D5 toggle idea."
+    },
+    {
+      "slug": "translated-prime-tuple-inadmissible",
+      "statement": "The offset pattern {p_i − p_1 : i ≤ 9} ∪ {0} for the first nine primes covers both residues mod 2, hence is inadmissible: it has at most one prime translate.",
+      "lean_target": { "kind": "statement-skeleton", "cluster": "AdmissibilityKTuple / AdmissibilityHLCriterion" },
+      "origin": "BrockianSpiralPrimordialPrimes review — the component's fatal bug, formalized",
+      "difficulty": "easy",
+      "notes": "New structural lemma extending the Admissibility cluster; the ν(2) = 2 computation is finite and mechanical."
+    }
+  ]
+}
