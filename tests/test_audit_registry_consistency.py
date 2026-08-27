@@ -162,6 +162,22 @@ def test_proved_with_nonverified_axle_is_error():
         ) == 1
 
 
+def test_proved_with_false_axiom_verdict_is_error():
+    entry = _proved_entry(
+        verification={
+            "lake_build": "pending",
+            "axioms_ok": False,
+            "axle": {"verdict": "verified", "environment": "lean-4.32.2"},
+        }
+    )
+    assert len(_errors(a.find_register_invariants([entry]), "proved-invariant")) == 1
+
+
+def test_proved_with_verification_quarantine_is_error():
+    entry = _proved_entry(verification_quarantine=True)
+    assert len(_errors(a.find_register_invariants([entry]), "proved-invariant")) == 1
+
+
 def test_proved_with_conditional_rung_is_error():
     entry = _proved_entry(conditional_rung="classical")
     assert len(_errors(a.find_register_invariants([entry]), "proved-invariant")) == 1

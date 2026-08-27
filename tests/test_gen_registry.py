@@ -78,7 +78,8 @@ def test_build_entry_records_verification_block():
 
 
 def _write_attestation(attestations, stem, module, module_verified=True,
-                       decl_name=None, verdict="verified"):
+                       decl_name=None, verdict="verified", axioms=CLEAN,
+                       axioms_ok=True, verification_quarantine=False):
     (attestations / f"{stem}.json").write_text(json.dumps({
         "module": module,
         "environment": "lean-4.32.0",
@@ -87,7 +88,9 @@ def _write_attestation(attestations, stem, module, module_verified=True,
             "name": decl_name or f"{module}.thm_a",
             "kind": "theorem",
             "axle_verdict": verdict,
-            "axioms": CLEAN,
+            "axioms": axioms,
+            "axioms_ok": axioms_ok,
+            "verification_quarantine": verification_quarantine,
         }],
     }))
 
@@ -166,6 +169,7 @@ def test_generate_uses_attestation_stem_for_source_path(tmp_path, monkeypatch):
             "kind": "theorem",
             "axle_verdict": "verified",
             "axioms": CLEAN,
+            "axioms_ok": True,
         }],
     }))
     monkeypatch.chdir(tmp_path)
@@ -189,8 +193,55 @@ def _write_module(attestations, stem, module, decl_short):
             "kind": "theorem",
             "axle_verdict": "verified",
             "axioms": CLEAN,
+            "axioms_ok": True,
         }],
     }))
+
+
+def test_unknown_axiom_payload_fails_closed(tmp_path, monkeypatch):
+    (tmp_path / "Brockian.lean").write_text("import Brockian.Unknown\n")
+    attestations = tmp_path / "registry" / "attestations"
+    attestations.mkdir(parents=True)
+    _write_attestation(attestations, "Unknown", "Brockian.Unknown", axioms=None)
+    monkeypatch.chdir(tmp_path)
+
+    (entry,) = g.generate(
+        str(attestations), str(tmp_path / "missing-verdicts.yaml"))["theorems"]
+
+    assert entry["register"] == "UNVERIFIED"
+    assert entry["verification"]["axioms_ok"] is False
+    assert entry["verification"]["axle"]["verdict"] == "verified"
+
+
+def test_explicit_empty_axiom_report_can_be_proved(tmp_path, monkeypatch):
+    (tmp_path / "Brockian.lean").write_text("import Brockian.Empty\n")
+    attestations = tmp_path / "registry" / "attestations"
+    attestations.mkdir(parents=True)
+    _write_attestation(attestations, "Empty", "Brockian.Empty", axioms=[])
+    monkeypatch.chdir(tmp_path)
+
+    (entry,) = g.generate(
+        str(attestations), str(tmp_path / "missing-verdicts.yaml"))["theorems"]
+
+    assert entry["register"] == "PROVED"
+    assert entry["verification"]["axioms_ok"] is True
+
+
+def test_verification_quarantine_blocks_only_that_declaration(tmp_path, monkeypatch):
+    (tmp_path / "Brockian.lean").write_text("import Brockian.Held\n")
+    attestations = tmp_path / "registry" / "attestations"
+    attestations.mkdir(parents=True)
+    _write_attestation(
+        attestations, "Held", "Brockian.Held", verification_quarantine=True)
+    monkeypatch.chdir(tmp_path)
+
+    (entry,) = g.generate(
+        str(attestations), str(tmp_path / "missing-verdicts.yaml"))["theorems"]
+
+    assert entry["register"] == "UNVERIFIED"
+    assert entry["verification_quarantine"] is True
+    assert entry["verification"]["quarantine"] is True
+    assert entry["verification"]["axle"]["verdict"] == "verified"
 
 
 def _discharge_fixture(tmp_path, discharged_by, extra_proved_modules):

@@ -42,6 +42,14 @@ class DeclFacts:
     flags: Flags = field(default_factory=Flags)
     axle_verified: Optional[bool] = None  # None = not yet checked
     conditional_rung: Optional[str] = None  # classical | literature | open
+    # ``None`` preserves the legacy pure-function behavior (derive cleanliness from
+    # ``axioms``).  Registry ingestion supplies the attestation's explicit parse
+    # verdict so missing/unparseable evidence cannot collapse to an empty clean list.
+    axioms_ok: Optional[bool] = None
+    # A per-declaration emergency brake.  It preserves the underlying receipt while
+    # preventing promotion until an anomalous verification result is independently
+    # resolved.
+    verification_quarantine: bool = False
 
 
 def derive(f: DeclFacts) -> str:
@@ -63,13 +71,16 @@ def derive(f: DeclFacts) -> str:
         return "DEFINITION"
     if f.kind not in ("theorem", "lemma"):
         return "CONJECTURE"
+    if f.verification_quarantine:
+        return "UNVERIFIED"
     if f.conditional_rung is not None:
         if f.conditional_rung not in VALID_RUNGS:
             raise ValueError(f"{f.name}: invalid conditional_rung {f.conditional_rung!r}")
         return "CONDITIONAL"
     if f.flags.native_decide:
         return "COMPUTATION"
-    axioms_ok = set(f.axioms).issubset(ALLOWED_AXIOMS)
+    axioms_ok = (set(f.axioms).issubset(ALLOWED_AXIOMS)
+                 if f.axioms_ok is None else f.axioms_ok)
     clean = axioms_ok and not f.flags.sorry and not f.flags.exact_search
     if clean and f.axle_verified is True:
         return "PROVED"

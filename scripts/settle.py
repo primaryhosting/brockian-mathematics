@@ -86,11 +86,15 @@ def _attest_registers(path: str, ns: str | None, env: str) -> tuple[dict, list[d
     att = attest.attest(path, ns, _names(path), env)
     rows = []
     for d in att["declarations"]:
+        raw_axioms = d.get("axioms")
+        axioms_known = isinstance(raw_axioms, list)
         facts = DeclFacts(
             name=d["name"], kind=d.get("kind", "theorem"),
-            axioms=d.get("axioms") or [],
+            axioms=raw_axioms if axioms_known else [],
             flags=Flags(native_decide=d.get("native_decide", False)),
             axle_verified=True if att.get("module_verified") and d.get("axle_verdict") == "verified" else None,
+            axioms_ok=(axioms_known and d.get("axioms_ok") is True),
+            verification_quarantine=bool(d.get("verification_quarantine", False)),
         )
         rows.append({
             "name": d["name"], "kind": d.get("kind"),
@@ -133,7 +137,12 @@ def settle(module: str, env: str, timeout: int, refute: str | None) -> dict:
 
     ns = _namespace(module)
     att, rows = _attest_registers(module, ns, env)
-    axioms_clean = all(r["axioms_ok"] for r in rows)
+    axioms_clean = attest.attestation_complete(att)
+    if not axioms_clean:
+        return {**cert, "verdict": "FAILED", "namespace": ns,
+                "reason": "AXLE compiled, but per-declaration axiom evidence is incomplete",
+                "no_theater": True, "axioms_clean": False,
+                "n_decls": len(rows), "declarations": rows}
     return {**cert, "verdict": "VERIFIED", "namespace": ns,
             "no_theater": True, "axioms_clean": axioms_clean,
             "n_decls": len(rows),

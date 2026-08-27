@@ -53,6 +53,8 @@ def check_firewall(thms: list[dict]) -> list[str]:
             v.append(f"[firewall] PROVED {name}: AXLE verdict is {t['verification']['axle']['verdict']!r}, not verified")
         if not t["verification"].get("axioms_ok", False):
             v.append(f"[firewall] PROVED {name}: axioms_ok is false")
+        if t.get("verification_quarantine") or t["verification"].get("quarantine"):
+            v.append(f"[firewall] PROVED {name}: verification quarantine is active")
     return v
 
 

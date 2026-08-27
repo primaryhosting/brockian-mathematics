@@ -352,6 +352,16 @@ def find_register_invariants(entries: list[dict[str, Any]]) -> list[Finding]:
                     Finding("ERROR", "proved-invariant", name,
                             f"axle verdict is {axle.get('verdict')!r}, not 'verified'")
                 )
+            if ver.get("axioms_ok") is not True:
+                findings.append(
+                    Finding("ERROR", "proved-invariant", name,
+                            f"verification.axioms_ok is {ver.get('axioms_ok')!r}, not true")
+                )
+            if entry.get("verification_quarantine") or ver.get("quarantine"):
+                findings.append(
+                    Finding("ERROR", "proved-invariant", name,
+                            "verification quarantine is active on a PROVED entry")
+                )
             if entry.get("conditional_rung") is not None:
                 findings.append(
                     Finding("ERROR", "proved-invariant", name,
@@ -477,17 +487,19 @@ def find_attestation_smells(repo: Path, attest_dir: Path, root: Path) -> list[Fi
             if not isinstance(dec, dict):
                 continue
             name = str(dec.get("name", ""))
+            quarantined = dec.get("verification_quarantine") is True
             if "sorryAx" in (dec.get("axioms") or []):
                 findings.append(
                     Finding("ERROR", "attestation-sorry-axiom", path.name,
                             f"{name} axioms include sorryAx (proof-by-sorry)")
                 )
-            if dec.get("axioms_ok") is False:
+            if (dec.get("kind", "theorem") in ("theorem", "lemma")
+                    and not quarantined and dec.get("axioms_ok") is not True):
                 findings.append(
                     Finding("ERROR", "attestation-axioms-not-ok", path.name,
-                            f"{name} axioms_ok is False")
+                            f"{name} axioms_ok is not true")
                 )
-            if dec.get("axle_verdict") == "failed":
+            if not quarantined and dec.get("axle_verdict") == "failed":
                 findings.append(
                     Finding("ERROR", "attestation-axle-failed", path.name,
                             f"{name} axle_verdict is 'failed'")
