@@ -74,6 +74,7 @@ def cycleAdj (p : ℕ) : ZMod p → ZMod p → Prop :=
 def cycleGraph (p : ℕ) [Fact p.Prime] : SimpleGraph (ZMod p) where
   Adj := cycleAdj p
   symm := by
+    constructor
     intro a b hab
     rcases hab with h | h
     · -- b = a + 1  ⇒  a = b - 1
@@ -85,6 +86,7 @@ def cycleGraph (p : ℕ) [Fact p.Prime] : SimpleGraph (ZMod p) where
       left
       simpa [h, sub_eq_add_neg, add_assoc, add_left_comm, add_comm]
   loopless := by
+    constructor
     intro a haa
     rcases haa with h | h
     · -- a = a + 1 is impossible unless 1=0
