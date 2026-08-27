@@ -57,7 +57,7 @@ header.top .spacer { flex: 1; }
 button.ghost { background: none; border: 1px solid var(--ring); color: var(--ink-2); border-radius: 6px;
   padding: 4px 10px; font: inherit; font-size: 12px; cursor: pointer; }
 button.ghost:hover { color: var(--ink); border-color: var(--axis); }
-button.ghost:focus-visible, a:focus-visible, tr:focus-visible, select:focus-visible, input:focus-visible {
+button:focus-visible, a:focus-visible, tr:focus-visible, select:focus-visible, input:focus-visible {
   outline: 2px solid var(--accent); outline-offset: 1px; }
 section.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px;
   padding: 18px 20px; margin-bottom: 18px; }
@@ -136,6 +136,13 @@ ol.triage li .why { font-family: system-ui, sans-serif; color: var(--muted); fon
 .split > div { min-width: 3px; }
 .legend { display: flex; gap: 14px; font-size: 11.5px; color: var(--ink-2); flex-wrap: wrap; margin-top: 6px; }
 .legend .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 5px; }
+.legend button.lg { background: none; border: none; padding: 0; font: inherit; font-size: 11.5px;
+  color: var(--ink-2); cursor: pointer; display: inline-flex; align-items: center; }
+.legend button.lg:hover { color: var(--ink); }
+#fail-drill button.drill { display: block; width: 100%; text-align: left; background: none; border: none;
+  padding: 2px 0; font-family: var(--mono); font-size: 11.5px; color: var(--ink); cursor: pointer; }
+#fail-drill button.drill:hover { color: var(--accent-ink); }
+#fail-drill button.drill .why { font-family: system-ui, sans-serif; color: var(--muted); font-size: 11px; }
 #tooltip { position: fixed; pointer-events: none; background: var(--ink); color: var(--page);
   font-size: 11.5px; padding: 5px 9px; border-radius: 6px; z-index: 30; display: none; max-width: 300px; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -169,6 +176,7 @@ ol.triage li .why { font-family: system-ui, sans-serif; color: var(--muted); fon
   <div class="sub">Where the conveyor is producing — and where it's burning submissions.</div>
   <div class="metric-toggle" id="metric-toggle" role="group" aria-label="Matrix metric"></div>
   <div class="hm-wrap"><table class="hm" id="heatmap"></table></div>
+  <div id="hm-more" style="margin-top:8px"></div>
   <div class="foot">Cell = rate · shade = magnitude (one-hue sequential) · <span id="matrix-foot"></span>
     Targets submitted under multiple campaigns appear in each of their cells, so cell sums can exceed unique totals.</div>
 </section>
@@ -176,6 +184,7 @@ ol.triage li .why { font-family: system-ui, sans-serif; color: var(--muted); fon
 <section class="card" id="sec-ledger">
   <div class="eyebrow">Corpus</div>
   <h2>Ledger — <span id="ledger-count">0</span> unique targets</h2>
+  <div id="stage-strip" style="margin:10px 0 4px"></div>
   <div class="filters">
     <select id="f-domain"><option value="">All domains</option></select>
     <select id="f-tier"><option value="">All campaigns</option></select>
@@ -213,6 +222,8 @@ ol.triage li .why { font-family: system-ui, sans-serif; color: var(--muted); fon
   <ol class="triage" id="triage-list"></ol>
   <button class="ghost" id="triage-copy">Copy next 25 targets</button>
   <span class="sub" id="copy-ok" style="display:none;color:var(--good-text)"> Copied.</span>
+  <div class="eyebrow" style="margin-top:14px">AXLE failures by domain</div>
+  <div id="fail-drill"></div>
 </section>
 
 <section class="card" id="sec-health">
@@ -329,6 +340,8 @@ $("#tiles").innerHTML = tiles.map(t =>
 
 /* ---------- heatmap ---------- */
 let metric = "verified_rate";
+let showSmallDoms = false;
+const SMALL_DOM_MIN = 3;
 const METRICS = { verified_rate: "Verified rate", proved_rate: "PROVED rate", stopped_rate: "Stopped rate" };
 $("#metric-toggle").innerHTML = Object.entries(METRICS).map(([k, l]) =>
   `<button class="ghost${k === metric ? " on" : ""}" data-m="${k}">${l}</button>`).join("");
@@ -345,6 +358,9 @@ function renderHeatmap() {
   const domTotals = {};
   m.forEach(c => { domTotals[c.domain] = (domTotals[c.domain] || 0) + (c.unique || 0); });
   const doms = Object.keys(domTotals).sort((a, b) => domTotals[b] - domTotals[a]);
+  const smallDoms = doms.filter(d => (domTotals[d] || 0) < SMALL_DOM_MIN);
+  const shown = (showSmallDoms || smallDoms.length === doms.length) ? doms
+    : doms.filter(d => (domTotals[d] || 0) >= SMALL_DOM_MIN);
   const tierTotals = {};
   m.forEach(c => { tierTotals[c.tier] = (tierTotals[c.tier] || 0) + (c.unique || 0); });
   const tiers = Object.keys(tierTotals).sort((a, b) => tierTotals[b] - tierTotals[a]);
@@ -352,7 +368,7 @@ function renderHeatmap() {
   m.forEach(c => { cell[c.domain + " " + c.tier] = c; });
   const ramp = ["var(--seq-1)","var(--seq-2)","var(--seq-3)","var(--seq-4)","var(--seq-5)","var(--seq-6)","var(--seq-7)","var(--seq-8)","var(--seq-9)"];
   t.innerHTML = `<tr><th></th>${tiers.map(x => `<th class="colh" title="${esc(x)}">${esc(x)}</th>`).join("")}<th class="colh">unique</th></tr>` +
-    doms.map(d => `<tr><th title="${esc(d)}">${esc(d)}</th>` + tiers.map(x => {
+    shown.map(d => `<tr><th title="${esc(d)}">${esc(d)}</th>` + tiers.map(x => {
       const c = cell[d + " " + x];
       if (!c) return `<td class="empty">·</td>`;
       const v = c[metric] ?? 0;
@@ -360,7 +376,13 @@ function renderHeatmap() {
       const ink = v >= 0.45 ? "var(--page)" : "var(--ink)";
       return `<td style="background:${shade};color:${ink}" data-tip="${esc(d)} × ${esc(x)} — ${c.unique} unique, verified ${pct(c.verified_rate)}, PROVED ${pct(c.proved_rate)}, stopped ${pct(c.stopped_rate)}">${pct(v)}</td>`;
     }).join("") + `<td class="empty">${fmt(domTotals[d])}</td></tr>`).join("");
+  $("#hm-more").innerHTML = (smallDoms.length && smallDoms.length < doms.length)
+    ? `<button class="ghost" id="hm-toggle">${showSmallDoms ? "Hide small domains"
+        : `Show ${smallDoms.length} small domains (unique &lt; ${SMALL_DOM_MIN})`}</button>` : "";
 }
+$("#hm-more").addEventListener("click", (e) => {
+  if (e.target.closest("#hm-toggle")) { showSmallDoms = !showSmallDoms; renderHeatmap(); }
+});
 renderHeatmap();
 $("#matrix-foot").textContent = `${(DATA.yield_matrix || []).length} populated cells. `;
 
@@ -372,6 +394,24 @@ document.addEventListener("mousemove", (e) => {
   tip.style.left = Math.min(e.clientX + 14, innerWidth - 310) + "px";
   tip.style.top = (e.clientY + 14) + "px";
 });
+
+/* ---------- stage strip ---------- */
+(function renderStageStrip() {
+  const el = $("#stage-strip");
+  const counts = {};
+  targets.forEach(t => { counts[t.stage] = (counts[t.stage] || 0) + 1; });
+  const order = Object.keys(STAGES).filter(s => counts[s]);
+  if (!order.length) { el.innerHTML = ""; return; }
+  el.innerHTML = `<div class="split" style="max-width:none">` +
+    order.map(s => `<div style="flex:${counts[s]};background:${STAGES[s].color}" data-tip="${esc(STAGES[s].label)}: ${fmt(counts[s])}"></div>`).join("") + `</div>` +
+    `<div class="legend">` + order.map(s =>
+      `<button class="lg" data-stage="${esc(s)}" title="Filter ledger to ${esc(STAGES[s].label)}"><span class="sw" style="background:${STAGES[s].color}"></span>${esc(STAGES[s].label)} ${fmt(counts[s])}</button>`).join("") + `</div>`;
+  el.addEventListener("click", (e) => {
+    const b = e.target.closest("button.lg"); if (!b) return;
+    $("#f-stage").value = b.dataset.stage;
+    $("#f-stage").dispatchEvent(new Event("change"));
+  });
+})();
 
 /* ---------- ledger ---------- */
 const stageRank = { attested: 6, verified: 5, verify_failed: 4, selected: 3, candidate: 2, in_flight: 1, stopped: 0 };
@@ -524,6 +564,25 @@ $("#triage-copy").addEventListener("click", async () => {
     setTimeout(() => $("#copy-ok").style.display = "none", 2000);
   } catch { alert("Clipboard unavailable — select from the list manually."); }
 });
+
+/* ---------- failure drill ---------- */
+(function renderFailDrill() {
+  const el = $("#fail-drill");
+  const per = {};
+  targets.forEach(t => { if (t.stage === "verify_failed") per[t.domain] = (per[t.domain] || 0) + 1; });
+  const top = Object.entries(per).sort((a, b) => b[1] - a[1]).slice(0, 8);
+  el.innerHTML = top.length ? top.map(([d, n]) =>
+    `<button class="drill" data-domain="${esc(d)}">${esc(d)} <span class="why">— ${fmt(n)} failed · view in ledger</span></button>`).join("")
+    : `<div class="empty-state">No AXLE failures recorded.</div>`;
+  el.addEventListener("click", (e) => {
+    const b = e.target.closest("button.drill"); if (!b) return;
+    $("#f-domain").value = b.dataset.domain;
+    $("#f-domain").dispatchEvent(new Event("change"));
+    $("#f-stage").value = "verify_failed";
+    $("#f-stage").dispatchEvent(new Event("change"));
+    $("#sec-ledger").scrollIntoView({ behavior: "smooth" });
+  });
+})();
 
 /* ---------- health ---------- */
 (function renderHealth() {
