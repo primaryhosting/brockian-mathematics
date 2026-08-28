@@ -86,6 +86,31 @@ def test_clean_attestation_has_no_error_findings(tmp_path):
     assert _errors(findings) == []
 
 
+def test_unrooted_failed_attestation_is_warned_but_out_of_scope(tmp_path):
+    root = tmp_path / "Brockian.lean"
+    root.write_text("import Brockian.Imported\n")
+    attdir = tmp_path / "attestations"
+    attdir.mkdir()
+    failed = _attestation(
+        module="Brockian.Orphan",
+        module_verified=False,
+        declarations=[_decl(
+            name="Brockian.Orphan.failed",
+            axle_verdict="failed",
+            axioms=["sorryAx"],
+            axioms_ok=False,
+        )],
+    )
+    (attdir / "Orphan.json").write_text(json.dumps(failed))
+
+    findings = a.find_attestation_smells(tmp_path, attdir, root)
+
+    warnings = [f for f in findings if f.code == "attestation-not-root-imported"]
+    assert len(warnings) == 1
+    assert warnings[0].level == "WARN"
+    assert _errors(findings) == []
+
+
 def test_null_declarations_no_crash_and_nondict_decls_skipped(tmp_path):
     # declarations: null must not crash and must produce exactly one
     # attestation-declarations ERROR.
