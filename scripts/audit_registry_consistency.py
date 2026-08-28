@@ -459,6 +459,12 @@ def find_attestation_smells(repo: Path, attest_dir: Path, root: Path) -> list[Fi
         )
     modules: dict[str, list[str]] = defaultdict(list)
     for path in att_files:
+        # The registry is deliberately root-import-filtered.  Receipts for modules that
+        # are not imported by Brockian.lean are review artifacts, not registration
+        # inputs, so report the warning above but do not let their provisional/failed
+        # state block promotion of the actual registry surface.
+        if path.stem not in imported:
+            continue
         try:
             att = load_json(path)
         except Exception as exc:  # noqa: BLE001 - report malformed registry input
