@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 651
 - **DISCHARGED**: 7
-- **PROVED**: 12301
+- **PROVED**: 12345
 
 ## Theorems
 
@@ -546,6 +546,50 @@
 | PROVED | `Brockian.ConvSplit.truncLE_add_truncGT` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.ConvSplit.truncLE_mul_add_truncGT_mul` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.ConvSplit.vonMangoldt_split` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.admissible_image_add_const` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.admissible_image_neg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.coprime_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.eleven_dvd_of_palindrome_even_digits` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.erdosStraus_of_even` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.erdosStraus_of_mod_three_eq_two` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.evaluation_normal_0100` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.even_of_odd_geom_sum` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.even_of_sq_add_one_prime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.exists_prime_mod_four_dvd_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.firstNinePrimeOffsets_not_admissible` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.fortunateFor_coprime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.fortunateFor_not_dvd_base_prime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.fortunateFor_odd_of_even_base` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.fortunateFor_unique` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.four_not_dvd_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.gcd_sq_add_one_succ_dvd_five` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.goldbachReps_nonneg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.heldout_true_000` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.hyperperfect_one_iff_perfect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.hyperperfect_pos_of_hyperperfect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.idemp_implies_double_idemp` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.imp_A1` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.landau_iff_even_infinite` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.landau_iff_unbounded` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.left_proj_imp_idem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.not_admissible_of_all_residues_mod_seven` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.not_admissible_of_five_consecutive_mod_five` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.not_giugaNumber_prime_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.not_isSquare_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.not_quasiperfect_prime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.not_semiperfect_of_aliquot_lt` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.odd_prime_dvd_sq_add_one_mod_four` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.problem_normal_0166` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.problem_normal_0355` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.problem_normal_0765` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.residueImage_subset` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.semiperfect_mul_right` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.semiperfect_of_perfect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.sigma1_two_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.sigma_eq_aliquot_add_self` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.squarefree_of_lehmerProperty` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.three_not_dvd_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.Conveyor.zumkeller_two_mul_of_odd_zumkeller` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.Core.Ray` | ✓ | verified | lean-4.32.2 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.binet_formula` | ✓ | verified | lean-4.32.2 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |
 | PROVED | `Brockian.Core.cos_2pi_5` | ✓ | verified | lean-4.32.2 | runs 97 / 103 / 112 (consolidation anchors) — φ stack, ray ring, Dirichlet-on-rays |

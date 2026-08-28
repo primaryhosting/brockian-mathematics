@@ -236,3 +236,13 @@ Reviewed 2026-08-28 by a 4-agent adversarial fidelity swarm.
 ## WEAK — `Frontier.zelmanov_restricted_burnside`
 - signature: `theorem zelmanov_restricted_burnside (d:ℕ): RestrictedBurnsideBounded d 2`
 - RestrictedBurnsideBounded d n is defined faithfully (uniform bound on the order of finite d-generated groups of exponent n). But the theorem proves only the exponent n=2 case: exponent-2 groups are elementary abelian of rank ≤d, so |G|≤2^d. This is the trivial classical base case; Zelmanov's Fields-Medal theorem is ∀ d n, n>0 → RestrictedBurnsideBounded d n. Genuine but a strict special case — the name claims the full theorem.
+
+## Bare-name files excluded (grandiose placeholder sibling decls)
+
+These target theorems are FAITHFUL, but their source files also contain an unregistered
+grandiose/placeholder decl (e.g. RH_of_BrockianSystem with a placeholder field). Held for
+manual review to avoid importing the placeholder sibling into the corpus.
+
+- `D5_card_verified`
+- `IntMagma_op`
+- `bridge`
