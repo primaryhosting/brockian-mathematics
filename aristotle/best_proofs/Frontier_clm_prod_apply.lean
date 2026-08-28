@@ -35,7 +35,7 @@ lemma dL_apply_generator_eq_zero
   have hcomp : HasDerivAt
       (fun e : ℝ => L (z.1 + e * X z.1, z.2 + e * (X' z.1 * z.2))) (dL z w) 0 := by
     have := (hL ((fun e : ℝ => (z.1 + e * X z.1, z.2 + e * (X' z.1 * z.2))) 0)).comp_hasDerivAt 0 hc
-    simpa using this
+    simpa [Function.comp_def] using this
   exact hcomp.unique (hinv z)
 
 /-- **Noether's theorem, one-dimensional case.**

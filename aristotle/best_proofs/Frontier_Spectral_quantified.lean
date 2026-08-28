@@ -209,10 +209,11 @@ theorem cycleGapFormula_tendsto_zero :
     tendsto_const_div_atTop_nhds_zero_nat _
   have h2 : Tendsto (fun n : ℕ => Real.cos (2 * Real.pi / (n : ℝ))) atTop (𝓝 1) := by
     have := (Real.continuous_cos.tendsto (0 : ℝ)).comp h1
-    simpa [Function.comp] using this
+    simpa [Function.comp_def] using this
   have h3 : Tendsto (fun n : ℕ => 2 - 2 * Real.cos (2 * Real.pi / (n : ℝ))) atTop
       (𝓝 (2 - 2 * 1)) := tendsto_const_nhds.sub (h2.const_mul 2)
-  simpa [cycleGapFormula] using h3
+  unfold cycleGapFormula
+  simpa using h3
 
 /-! ### The obstruction -/
 
