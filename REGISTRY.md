@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 651
 - **DISCHARGED**: 7
-- **PROVED**: 12246
+- **PROVED**: 12301
 
 ## Theorems
 
@@ -12618,6 +12618,61 @@
 | PROVED | `Fibonacci.gcd` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Fibonacci.sum_first_n` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Fibonacci.zeckendorf_small` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.ContainsAP.mono_set` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Gale_Stewart_open` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Goedel_second_incompleteness` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Goodstein_terminates` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Hydra_Kirby_Paris` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Loeb_theorem` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Paris_Harrington` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Q₁_eq_neg_det` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.RH_iff_riemannHypothesis` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Tarski_undefinability` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.asymptotic_freedom_sign` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.bcs_gap_binding` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.berryFlux_const` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.conjC_conjC` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.coulombEnergy_one_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.erdosDiscrepancyStatement_iff` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.erdosDiscrepancy_iff_no_uniform_bound` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.hapSum_parity` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.higgsPotentialC_eq_higgsPotential` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.higgs_mass_toy` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.infinite_iff_exists_gt` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.infinite_ramsey` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.inner_self_apply_eq_ofReal` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.isCCC_of_separableSpace` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.isingPartition_pos` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.loeb_no_self_trust` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.lowerSpinor_norm` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.measure_mul_le_measure_inter_of_subset` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.nirenberg_gagliardo` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.no_communication` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.noether_conservation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.not_isPrimitiveRootMod_of_isSquare` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.pow_natCard_abelianization_eq_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.riemannZeta_eq_zero_of_isTrivialZero` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.self_nonprediction` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.ssh_winding_invariant` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.sum_centeredIndicator` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.sum_three_cubes_42` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.sup_le_half_integral_abs_deriv` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.szemerediFinitary_three` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.szemeredi_regularity` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.trivialZero_of_re_nonpos` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.wigderson_expander_mixing` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.AlgebraLogic.lagrange` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.AnalysisCalculus.am_gm_two` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.BrockianNextLevel.excluded_residue_count` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.BrockianSieveDeep.nu_le_card` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.CombinatoricsGraph.handshake` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.CryptoComplexity.otp_bijective` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.InformationTheory.entropy_term_nonneg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.PhysicsQM.pauli_sq_X` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Sensitivity.flipAt_apply` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Spectral.cycle_gap_vanishes` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Spectral.isPrimitiveRoot_zeta` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Frontier.Spectral.weightedAvg_add` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Goldbach.instance_100` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Goldbach.instance_1000` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Goldbach.ternary_statement` | ✓ | verified | lean-4.32.2 |  |
