@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 651
 - **DISCHARGED**: 7
-- **PROVED**: 12345
+- **PROVED**: 12356
 
 ## Theorems
 
@@ -59,9 +59,13 @@
 | PROVED | `Brockian.constellationLocalCount_ge` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.coprime_sameParity_twentyOne_primeFactors` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.countBelow_le` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.countMultiples_eq_div` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.count_interval_tendsto` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.eVariationOn_sub_le` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.eq_of_invariant_of_pretransitive` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.exists_residue_not_hit` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.gwPrimes947_prime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.haar_eq_volume` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.isBetrothedPair_iff_nontrivial_twoCycle` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.localCount_compl_eq` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.localCount_eq` | ✓ | verified | lean-4.32.2 |  |
@@ -4087,6 +4091,7 @@
 | PROVED | `Brockian.LegendreConjecture.legendre_9` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LegendreError.legendre_sieve_error` | ✓ | verified | lean-4.32.2 | Tao-guided sieve wave 2; Aristotle dbcb784d, AXLE-verified @lean-4.32.0 |
 | PROVED | `Brockian.LegendreSieve.legendre_sieve` | ✓ | verified | lean-4.32.2 | Tao-guided sieve wave; Aristotle 06a22f46, independently AXLE-verified @lean-4.32.0 |
+| PROVED | `Brockian.LegendreThreeSquare.QF_conj` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.LehmerTotient.Lehmer` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LehmerTotient.lehmer_odd` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LehmerTotient.lehmer_squarefree` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -11896,6 +11901,7 @@
 | PROVED | `Brockian.Weyl.DeficiencyODE.inner_g_potential` | ✓ | verified | lean-4.32.2 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.DeficiencyODE.inner_g_schwartz` | ✓ | verified | lean-4.32.2 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
 | PROVED | `Brockian.Weyl.DeficiencyODE.inner_g_schwartz_D2` | ✓ | verified | lean-4.32.2 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
+| PROVED | `Brockian.Weyl.DeficiencyODE.norm_subI_sq` | ✓ | verified | lean-4.32.2 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
 | DEFINITION | `Brockian.Weyl.DeficiencyODE.reduced_gate1_status` | ✓ | verified | lean-4.32.2 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
 | CONDITIONAL | `Brockian.Weyl.DeficiencyODE.schrodinger_essentiallySelfAdjoint_of_weakRegularity` | ✓ | verified | lean-4.32.2 | roadmap #1 — Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32 |
 | DEFINITION | `Brockian.Weyl.Dichotomy.IsLimitCircleRadius` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
@@ -11907,6 +11913,7 @@
 | PROVED | `Brockian.Weyl.Dichotomy.radius_tendsto_zero_of_atTop` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
 | PROVED | `Brockian.Weyl.Dichotomy.tendsto_atTop_of_monotone_not_bddAbove` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
 | DEFINITION | `Brockian.Weyl.Dichotomy.weylRadius` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — b→∞ radius dichotomy (pure analysis) |
+| PROVED | `Brockian.Weyl.DichotomyTarget.radius_tendsto_zero_iff_counterexample` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.Weyl.Disk.Acoef` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | DEFINITION | `Brockian.Weyl.Disk.Pcoef` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
 | PROVED | `Brockian.Weyl.Disk.boundary_L2_identity` | ✓ | verified | lean-4.32.2 | Weyl campaign 2026-08-01 — finite-b nested-circle geometry (COMPLETE) |
@@ -12529,6 +12536,7 @@
 | PROVED | `BrockianSieve.legendre_count` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `C2.Alg3.cramer_solve` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `C2.An4.ftc` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C2.BSieve3.lf_pos_eight` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `C2.BSpec3.P7_eigen_center` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `C2.CS2.no_universal_decider` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `C2.Comb3.sum_range_id` | ✓ | verified | lean-4.32.2 |  |
@@ -12560,6 +12568,7 @@
 | PROVED | `C3.RA6.cont_add` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `C3.Topo3.closed_inter_compact` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `C4.Alg5.cayley_hamilton_field` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `C4.An6.taylor_zeroth` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `C4.BChar.dihedral_card` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `C4.BM3.pentagonal_pentagon_area` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `C4.BS5.lf_pos_ten` | ✓ | verified | lean-4.32.2 |  |
@@ -12609,10 +12618,12 @@
 | PROVED | `CS.ladner` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `CS.master_theorem_case1` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `CS.nisan_wigderson_prg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.numE_pos_rat` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `CS.pcp_dinur` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `CS.pcp_pigeon_bound` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `CS.pcp_theorem` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `CS.pigeonhole_hash` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.pumping_regular` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `CS.recursion_theorem` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `CS.rice_extended` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `CS.rice_nontrivial` | ✓ | verified | lean-4.32.2 |  |

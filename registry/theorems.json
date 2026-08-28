@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 12345,
+    "PROVED": 12356,
     "DEFINITION": 651,
     "CONJECTURE": 40,
     "CONDITIONAL": 33,
@@ -1413,12 +1413,78 @@
       "provenance_note": null
     },
     {
+      "name": "Brockian.countMultiples_eq_div",
+      "kind": "theorem",
+      "module": "Brockian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Brockian_countMultiples_eq_div.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.count_interval_tendsto",
       "kind": "theorem",
       "module": "Brockian",
       "statement": "",
       "source": {
         "file": "Brockian/Brockian_count_interval_tendsto.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.eVariationOn_sub_le",
+      "kind": "theorem",
+      "module": "Brockian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Brockian_eVariationOn_sub_le.lean"
       },
       "register": "PROVED",
       "axioms": [
@@ -1475,12 +1541,78 @@
       "provenance_note": null
     },
     {
+      "name": "Brockian.exists_residue_not_hit",
+      "kind": "theorem",
+      "module": "Brockian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Brockian_exists_residue_not_hit.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.gwPrimes947_prime",
       "kind": "theorem",
       "module": "Brockian",
       "statement": "",
       "source": {
         "file": "Brockian/Brockian_gwPrimes947_prime.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.haar_eq_volume",
+      "kind": "theorem",
+      "module": "Brockian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Brockian_haar_eq_volume.lean"
       },
       "register": "PROVED",
       "axioms": [
@@ -125839,6 +125971,39 @@
       "quarantine": false,
       "ledger_run": "Tao-guided sieve wave; Aristotle 06a22f46, independently AXLE-verified @lean-4.32.0",
       "provenance_note": "Legendre's sieve (inclusion-exclusion / sieve of Eratosthenes): #{n in [1,x] : gcd(n,P)=1} = sum_{d|P} mu(d)*floor(x/d), an identity in Z. Foundational sieve-theory identity, not previously in Mathlib. Aristotle-proved @4.28, independently AXLE-verified @4.32 axiom-clean. Classical result (formalization contribution, not new mathematics)."
+    },
+    {
+      "name": "Brockian.LegendreThreeSquare.QF_conj",
+      "kind": "theorem",
+      "module": "Brockian.LegendreThreeSquare",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Brockian_LegendreThreeSquare_QF_conj.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.LehmerTotient.Lehmer",
@@ -358306,6 +358471,39 @@
       "provenance_note": "Reduces DeficiencyRepresentsODE for the concrete Schrodinger operator to a SINGLE named classical fact WeakSolutionRegularity (1D elliptic regularity: an L2 weak solution of y''=(V-z)y with continuous V has a twice-differentiable L2 representative; classical, Mathlib-absent). All L2-pairing + adjoint plumbing proved unconditionally. The two hypothesis-dependent results are CONDITIONAL/literature; the inner-product pairing lemmas are unconditional. Honest rung-3 conditional, NOT ex-falso."
     },
     {
+      "name": "Brockian.Weyl.DeficiencyODE.norm_subI_sq",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.DeficiencyODE",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Brockian_Weyl_DeficiencyODE_norm_subI_sq.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #1 \u2014 Gate-1 linchpin reduced to one classical regularity fact; AXLE @4.32",
+      "provenance_note": "Reduces DeficiencyRepresentsODE for the concrete Schrodinger operator to a SINGLE named classical fact WeakSolutionRegularity (1D elliptic regularity: an L2 weak solution of y''=(V-z)y with continuous V has a twice-differentiable L2 representative; classical, Mathlib-absent). All L2-pairing + adjoint plumbing proved unconditionally. The two hypothesis-dependent results are CONDITIONAL/literature; the inner-product pairing lemmas are unconditional. Honest rung-3 conditional, NOT ex-falso."
+    },
+    {
       "name": "Brockian.Weyl.DeficiencyODE.reduced_gate1_status",
       "kind": "def",
       "module": "Brockian.Weyl.DeficiencyODE",
@@ -358639,6 +358837,35 @@
       "quarantine": true,
       "ledger_run": "Weyl campaign 2026-08-01 \u2014 b\u2192\u221e radius dichotomy (pure analysis)",
       "provenance_note": "radius_tendsto_zero_iff: 1/(2c\u00b7I)\u21920 \u2194 I\u2192+\u221e under eventual positivity; monotone+unbounded\u21d2atTop; EM limit-point/limit-circle radius predicates. Radius side ONLY \u2014 does not claim IsLimitPointAtInfty for general V, nor ran(T\u00b1i) density, nor -\u0394+V ess-self-adjoint."
+    },
+    {
+      "name": "Brockian.Weyl.DichotomyTarget.radius_tendsto_zero_iff_counterexample",
+      "kind": "theorem",
+      "module": "Brockian.Weyl.DichotomyTarget",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Brockian_Weyl_DichotomyTarget_radius_tendsto_zero_iff_counterexample.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.Weyl.Disk.Acoef",
@@ -377575,6 +377802,39 @@
       "provenance_note": null
     },
     {
+      "name": "C2.BSieve3.lf_pos_eight",
+      "kind": "theorem",
+      "module": "C2.BSieve3",
+      "statement": "",
+      "source": {
+        "file": "Brockian/C2_BSieve3_lf_pos_eight.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "C2.BSpec3.P7_eigen_center",
       "kind": "theorem",
       "module": "C2.BSpec3",
@@ -378564,6 +378824,39 @@
       "statement": "",
       "source": {
         "file": "Brockian/C4_Alg5_cayley_hamilton_field.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "C4.An6.taylor_zeroth",
+      "kind": "theorem",
+      "module": "C4.An6",
+      "statement": "",
+      "source": {
+        "file": "Brockian/C4_An6_taylor_zeroth.lean"
       },
       "register": "PROVED",
       "axioms": [
@@ -380201,6 +380494,39 @@
       "provenance_note": null
     },
     {
+      "name": "CS.numE_pos_rat",
+      "kind": "theorem",
+      "module": "CS",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CS_numE_pos_rat.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "CS.pcp_dinur",
       "kind": "theorem",
       "module": "CS",
@@ -380306,6 +380632,39 @@
       "statement": "",
       "source": {
         "file": "Brockian/CS_pigeonhole_hash.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "CS.pumping_regular",
+      "kind": "theorem",
+      "module": "CS",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CS_pumping_regular.lean"
       },
       "register": "PROVED",
       "axioms": [

@@ -246,3 +246,17 @@ manual review to avoid importing the placeholder sibling into the corpus.
 - `D5_card_verified`
 - `IntMagma_op`
 - `bridge`
+
+## Repair-campaign edits held for review (2026-08-28)
+
+The type-mismatch repair lane produced these edits that EXCEED mechanical scope or are Frontier claims.
+They compile but are NOT attested — a repair that reformalizes a statement needs fidelity review.
+
+Oversized Brockian rewrites (committed d863e2bd, not attested):
+- `Brockian.DilationGenerator.symmetric_on_core` (188-line change)
+- `Brockian.DilationGenerator.conjugation_to_momentum` (72-line change)
+- `Brockian.GoldbachWheelK2_727` (127-line change)
+
+Frontier repairs (need fidelity triage before any attestation):
+- `Frontier.avila_ten_martini` (318-line reformalization L2Z->HilbertZ — heavy rewrite of a Ten Martini claim)
+- `Frontier.hairer_KPZ`, `Frontier.Spectral.quantified`, `Frontier.berry_phase_quantized`, `Frontier.clm_prod_apply`
