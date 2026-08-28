@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 651
 - **DISCHARGED**: 7
-- **PROVED**: 12228
+- **PROVED**: 12246
 
 ## Theorems
 
@@ -51,21 +51,26 @@
 | PROVED | `Brockian.SingularSeriesGaps16021610` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.SingularSeriesGaps7280` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.SingularSeriesGaps9098` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.boundary_term_vanishes` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.card_fiber_eq_card_stabilizer` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.compl_good_set` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.constLocalCount_one` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.const_of_transitive_invariant` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.constellationLocalCount_ge` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.coprime_sameParity_twentyOne_primeFactors` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.countBelow_le` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.count_interval_tendsto` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.eq_of_invariant_of_pretransitive` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.gwPrimes947_prime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.isBetrothedPair_iff_nontrivial_twoCycle` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.localCount_compl_eq` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.localCount_eq` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.localCount_filter_eq_compl` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.localCount_le` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.mellin_log_unitary` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.mem_constellation_iff_three` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.mem_unitaryDivisors` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.prime_of_mem_wheelPrimes1153` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.spectralParameter_isReal_iff` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.volume_circ_univ` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.weight_const_of_transitive` | ✓ | verified | lean-4.32.2 |  |
@@ -12454,6 +12459,7 @@
 | PROVED | `Brockian.ZumkellerNumbers.isSquare_of_factorization_even` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.not_zumkeller_prime` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.odd_of_dvd_odd` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.sum_divisors_mul_of_coprime` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.sum_range_testBit` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.two_mul_le_sigma_of_zumkeller` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.zumkeller_sigma_even` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
@@ -12583,6 +12589,7 @@
 | PROVED | `Chem.dof_count` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Chem.entropy_concave` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Chem.euler_polyhedron` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.finrank_intensiveVars` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Chem.fullerene_pentagons` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Chem.gibbs_phase_rule` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Chem.handshake_valence` | ✓ | verified | lean-4.32.2 |  |
@@ -12741,6 +12748,7 @@
 | PROVED | `NumberTheory.wilson` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `NymanBeurling.finite_distance_nonneg` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `NymanBeurling.sq_sub_sq_nonneg_of_sq_le_sq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Ordinal.aleph_fixed_point_statement` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Ordinal.epsilon0_fixed_point` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Ordinal.omega_add_omega` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Ordinal.omega_le_omega_pow` | ✓ | verified | lean-4.32.2 |  |
@@ -12748,6 +12756,7 @@
 | PROVED | `PCA.default_deny` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `PCA.escape_monotone` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `PCA.forgedWrite_not_authorized` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `PCA.in_scope_encoding_sound` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `PCA.leak_iff_escape_when_out_of_scope` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `PCA.no_clean_proved_with_escape` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `PCA.no_escape_no_leak` | ✓ | verified | lean-4.32.2 |  |
@@ -12895,6 +12904,7 @@
 | PROVED | `QPhys.noether_translation` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `QPhys.norm_sq_eq_sum_eigencoords` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `QPhys.norm_sq_eq_sum_repr_sq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.norm_toLp_two_sq` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `QPhys.parseval_fourier` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `QPhys.pauli_exclusion_antisym` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `QPhys.variational_bound` | ✓ | verified | lean-4.32.2 |  |
@@ -12902,10 +12912,17 @@
 | PROVED | `QuantumInfoII.clifford_HXH` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `RequestProject.omega_pow_one` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Riemann.det_eq_mertens_5` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.det_eq_mertens_6` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Riemann.distance_nonneg` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.euler_product_term_ne_zero` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.functional_equation` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.gram_nonneg` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Riemann.mertens_four` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Riemann.ne_zero_re_gt_one` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Riemann.psi_shadow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.rank_trace_c_general` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.simple_zero_shadow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Riemann.test_pair_nonneg` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Riemann.BaezDuarte.distance_nonneg` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Riemann.HardyZ.gram_positivity_3` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Riemann.Li.lambda1_positive` | ✓ | verified | lean-4.32.2 |  |
@@ -12953,6 +12970,7 @@
 | PROVED | `Zeta23Obstruction.subclass_obstruction_statement` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Zeta23Obstruction.tent_combination_neg_on_band` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Zeta23Redux.eigenvalue_cauchy_schwarz_count` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Zeta23Redux.qf_add` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Zeta23Redux.LinAlg.eigenvalue_cauchy_schwarz_count` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Zeta23Redux.LinAlg.integrality_shadow` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Zeta23Redux.LinAlg.quadForm_eq_complex` | ✓ | verified | lean-4.32.2 |  |
