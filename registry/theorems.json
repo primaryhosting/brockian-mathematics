@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 12365,
+    "PROVED": 12373,
     "DEFINITION": 651,
     "CONJECTURE": 40,
     "CONDITIONAL": 33,
@@ -1258,6 +1258,39 @@
       "provenance_note": null
     },
     {
+      "name": "Brockian.card_orbits",
+      "kind": "theorem",
+      "module": "Brockian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Brockian_card_orbits.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.compl_good_set",
       "kind": "theorem",
       "module": "Brockian",
@@ -1999,6 +2032,39 @@
       "provenance_note": null
     },
     {
+      "name": "Brockian.two_mul_T",
+      "kind": "theorem",
+      "module": "Brockian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Brockian_two_mul_T.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.volume_circ_univ",
       "kind": "theorem",
       "module": "Brockian",
@@ -2041,6 +2107,39 @@
       },
       "register": "PROVED",
       "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.zetaN_isPrimitiveRoot",
+      "kind": "theorem",
+      "module": "Brockian",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Brockian_zetaN_isPrimitiveRoot.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -377012,39 +377111,6 @@
       "provenance_note": "SWARM-PROVED Zumkeller numbers with GENERAL structural theorems (AXLE @4.32, axiom-clean). A number is Zumkeller if its divisors split into two equal-sum sets (half-sum characterization exists S subset divisors, 2*sum S = sigma). GENERAL: zumkeller_sigma_even (sigma is even); zumkeller_two_mul_le_sigma (flagship -- every positive Zumkeller number is perfect-or-abundant, 2n <= sigma(n)); not_zumkeller_prime (no prime is Zumkeller, via deficiency). Concrete witnesses 6,12,20,24,28,30 with explicit half-sets. OddZumkellerFrom3Structure is an unproven OPEN def (odd Zumkeller structure; smallest odd Zumkeller is 945). Zumkeller infinitude/odd-density OPEN."
     },
     {
-      "name": "Brockian.ZumkellerNumbers.sum_divisors_mul_of_coprime",
-      "kind": "theorem",
-      "module": "Brockian.ZumkellerNumbers",
-      "statement": "",
-      "source": {
-        "file": "Brockian/Brockian_ZumkellerNumbers_odd_zumkeller_div_three.lean"
-      },
-      "register": "PROVED",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.2"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "frontier swarm; AXLE @4.32",
-      "provenance_note": "SWARM-PROVED Zumkeller numbers with GENERAL structural theorems (AXLE @4.32, axiom-clean). A number is Zumkeller if its divisors split into two equal-sum sets (half-sum characterization exists S subset divisors, 2*sum S = sigma). GENERAL: zumkeller_sigma_even (sigma is even); zumkeller_two_mul_le_sigma (flagship -- every positive Zumkeller number is perfect-or-abundant, 2n <= sigma(n)); not_zumkeller_prime (no prime is Zumkeller, via deficiency). Concrete witnesses 6,12,20,24,28,30 with explicit half-sets. OddZumkellerFrom3Structure is an unproven OPEN def (odd Zumkeller structure; smallest odd Zumkeller is 945). Zumkeller infinitude/odd-density OPEN."
-    },
-    {
       "name": "Brockian.ZumkellerNumbers.sum_range_testBit",
       "kind": "theorem",
       "module": "Brockian.ZumkellerNumbers",
@@ -380238,6 +380304,39 @@
       "statement": "",
       "source": {
         "file": "Brockian/CS_dfa_complement_regular.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "CS.dijkstra_correct",
+      "kind": "theorem",
+      "module": "CS",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CS_dijkstra_correct.lean"
       },
       "register": "PROVED",
       "axioms": [
@@ -387102,6 +387201,35 @@
       "provenance_note": null
     },
     {
+      "name": "Math.pigeon_five",
+      "kind": "theorem",
+      "module": "Math",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Math_pigeon_five.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Math.primitiveRoots_two_complex",
       "kind": "theorem",
       "module": "Math",
@@ -387338,6 +387466,39 @@
       "statement": "",
       "source": {
         "file": "Brockian/Math_two_squares_113.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Math.two_squares_113_fermat",
+      "kind": "theorem",
+      "module": "Math",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Math_two_squares_113_fermat.lean"
       },
       "register": "PROVED",
       "axioms": [
@@ -388655,6 +388816,39 @@
       "statement": "",
       "source": {
         "file": "Brockian/Ordinal_epsilon0_fixed_point.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Ordinal.natCast_add",
+      "kind": "theorem",
+      "module": "Ordinal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Ordinal_natCast_add.lean"
       },
       "register": "PROVED",
       "axioms": [
@@ -391510,6 +391704,39 @@
       "provenance_note": null
     },
     {
+      "name": "QC.qftZeta_ne_zero",
+      "kind": "theorem",
+      "module": "QC",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QC_qftZeta_ne_zero.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "QC.qft_unitary",
       "kind": "theorem",
       "module": "QC",
@@ -393165,6 +393392,39 @@
       "statement": "",
       "source": {
         "file": "Brockian/QPhys_dLdq_eq_zero_of_translationInvariant.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "QPhys.ehrenfest",
+      "kind": "theorem",
+      "module": "QPhys",
+      "statement": "",
+      "source": {
+        "file": "Brockian/QPhys_ehrenfest.lean"
       },
       "register": "PROVED",
       "axioms": [

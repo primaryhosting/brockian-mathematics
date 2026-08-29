@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 651
 - **DISCHARGED**: 7
-- **PROVED**: 12365
+- **PROVED**: 12373
 
 ## Theorems
 
@@ -54,6 +54,7 @@
 | PROVED | `Brockian.SingularSeriesGaps9098` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.boundary_term_vanishes` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.card_fiber_eq_card_stabilizer` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.card_orbits` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.compl_good_set` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.constLocalCount_one` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.const_of_transitive_invariant` | ✓ | verified | lean-4.32.2 |  |
@@ -77,8 +78,10 @@
 | PROVED | `Brockian.mem_unitaryDivisors` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.prime_of_mem_wheelPrimes1153` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.spectralParameter_isReal_iff` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.two_mul_T` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.volume_circ_univ` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.weight_const_of_transitive` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.zetaN_isPrimitiveRoot` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.AbundantClosure.abundant_of_perfect_dvd` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.AbundantClosure.abundant_of_six_dvd` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.AbundantClosure.deficient_of_dvd_deficient` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
@@ -12512,7 +12515,6 @@
 | PROVED | `Brockian.ZumkellerNumbers.not_zumkeller_prime` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.not_zumkeller_prime_pow` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.odd_of_dvd_odd` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
-| PROVED | `Brockian.ZumkellerNumbers.sum_divisors_mul_of_coprime` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.sum_range_testBit` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.two_mul_le_sigma_of_zumkeller` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.zumkeller_sigma_even` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
@@ -12611,6 +12613,7 @@
 | PROVED | `CS.card_leaves_le` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `CS.computablePred_code_of_indexSet` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `CS.dfa_complement_regular` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `CS.dijkstra_correct` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `CS.euclid_gcd_correct` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `CS.halting_undecidable` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `CS.hilbert10_undecidable` | ✓ | verified | lean-4.32.2 |  |
@@ -12820,6 +12823,7 @@
 | PROVED | `Math.pell_6` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Math.pell_7` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Math.pell_8` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.pigeon_five` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Math.primitiveRoots_two_complex` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Math.quadratic_reciprocity` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Math.ramsey_3_3` | ✓ | verified | lean-4.32.2 |  |
@@ -12828,6 +12832,7 @@
 | PROVED | `Math.two_squares_101` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Math.two_squares_109` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Math.two_squares_113` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.two_squares_113_fermat` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Math.two_squares_13` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Math.two_squares_17` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Math.two_squares_29` | ✓ | verified | lean-4.32.2 |  |
@@ -12868,6 +12873,7 @@
 | PROVED | `OddZumkeller.geom_sum_mul_pred_le` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Ordinal.aleph_fixed_point_statement` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Ordinal.epsilon0_fixed_point` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Ordinal.natCast_add` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Ordinal.omega_add_omega` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Ordinal.omega_le_omega_pow` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `PCA.canAccess_mono` | ✓ | verified | lean-4.32.2 |  |
@@ -12957,6 +12963,7 @@
 | PROVED | `QC.pure_state_zero_entropy` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `QC.qftMatrix_unitary` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `QC.qftOmega_prim` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QC.qftZeta_ne_zero` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `QC.qft_unitary` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `QC.qft_unitary_2` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `QC.qft_unitary_3` | ✓ | verified | lean-4.32.2 |  |
@@ -13008,6 +13015,7 @@
 | PROVED | `QPhys.conj_expect` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `QPhys.conj_expectation` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `QPhys.dLdq_eq_zero_of_translationInvariant` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `QPhys.ehrenfest` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `QPhys.expectation_im_eq_zero` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `QPhys.expectation_real` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `QPhys.fourier_isometry_L2` | ✓ | verified | lean-4.32.2 |  |

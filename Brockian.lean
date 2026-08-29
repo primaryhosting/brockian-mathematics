@@ -1639,3 +1639,12 @@ import Brockian.OddZumkeller_geom_sum_mul_pred_le
 import Brockian.RiemannScaffold_riemannXi_apply
 import Brockian.Chem_starGraph_connected
 import Brockian.Math_ramsey_4_4
+import Brockian.Brockian_card_orbits
+import Brockian.Brockian_two_mul_T
+import Brockian.Brockian_zetaN_isPrimitiveRoot
+import Brockian.CS_dijkstra_correct
+import Brockian.Math_pigeon_five
+import Brockian.Math_two_squares_113_fermat
+import Brockian.Ordinal_natCast_add
+import Brockian.QC_qftZeta_ne_zero
+import Brockian.QPhys_ehrenfest
