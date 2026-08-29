@@ -10,7 +10,7 @@
 - **CONJECTURE**: 40
 - **DEFINITION**: 651
 - **DISCHARGED**: 7
-- **PROVED**: 12356
+- **PROVED**: 12365
 
 ## Theorems
 
@@ -29,6 +29,7 @@
 | PROVED | `Analysis.extreme_value` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Analysis.intermediate_value` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Analysis.stone_weierstrass` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `ArithmeticFunction.liouville_apply` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.AdmissibilityKTupleK4` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.ConstellationLocalCountK3` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.CosTraceNorm1279` | ✓ | verified | lean-4.32.2 |  |
@@ -12509,6 +12510,7 @@
 | PROVED | `Brockian.ZumkellerNumbers.geom_sum_lt_two_mul_pow` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.isSquare_of_factorization_even` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.not_zumkeller_prime` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerNumbers.not_zumkeller_prime_pow` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.odd_of_dvd_odd` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.sum_divisors_mul_of_coprime` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.sum_range_testBit` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
@@ -12634,6 +12636,7 @@
 | PROVED | `CS.time_hierarchy` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `CS.upren_comp` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Cardinal.continuum_eq_two_pow_aleph0` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Cardinal.exists_fixed_point_of_isNormal` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Chebyshev.psi_two_le` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Chem.C3adj_eq` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Chem.C4Adj_eq` | ✓ | verified | lean-4.32.2 |  |
@@ -12661,11 +12664,13 @@
 | PROVED | `Chem.natAbs_sub_le_walk_length` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Chem.point_group_finite_O3` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Chem.polya_isomer_count` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Chem.starGraph_connected` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Chem.wiener_path_formula` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Chem.zeta_isPrimitiveRoot` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Combinatorics.pigeonhole` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Constellation.admissible_triple` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Constellation.quadruplet_11_13_17_19` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `D5Structure.phi_squared` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Fibonacci.catalan` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Fibonacci.consecutive_coprime` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Fibonacci.dOcagne` | ✓ | verified | lean-4.32.2 |  |
@@ -12751,6 +12756,7 @@
 | PROVED | `MS.Analysis.intermediate_value` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `MS.Combinatorics.ramsey_finite` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `MS.Foundations.fundamental_theorem_of_algebra` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `MS.Inequalities.cauchy_schwarz` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `MS.LogicQuantum.schroeder_bernstein` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `MS2.Algebra2.orbit_stabilizer` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `MS2.Analysis2.squeeze` | ✓ | verified | lean-4.32.2 |  |
@@ -12817,6 +12823,7 @@
 | PROVED | `Math.primitiveRoots_two_complex` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Math.quadratic_reciprocity` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Math.ramsey_3_3` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Math.ramsey_4_4` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Math.sum_two_squares` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Math.two_squares_101` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Math.two_squares_109` | ✓ | verified | lean-4.32.2 |  |
@@ -12858,6 +12865,7 @@
 | PROVED | `NumberTheory.wilson` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `NymanBeurling.finite_distance_nonneg` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `NymanBeurling.sq_sub_sq_nonneg_of_sq_le_sq` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `OddZumkeller.geom_sum_mul_pred_le` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Ordinal.aleph_fixed_point_statement` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Ordinal.epsilon0_fixed_point` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Ordinal.omega_add_omega` | ✓ | verified | lean-4.32.2 |  |
@@ -13056,6 +13064,7 @@
 | PROVED | `Riemann.Zeta.value_at_zero` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Riemann.functional.completed_symmetry_half` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Riemann.zeta.ne_zero_re_gt_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `RiemannScaffold.riemannXi_apply` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `SetTheory.wellordering` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `SetTheory.zorn` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Topology.baire_category` | ✓ | verified | lean-4.32.2 |  |

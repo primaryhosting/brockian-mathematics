@@ -1,7 +1,7 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 12356,
+    "PROVED": 12365,
     "DEFINITION": 651,
     "CONJECTURE": 40,
     "CONDITIONAL": 33,
@@ -411,6 +411,39 @@
       "statement": "",
       "source": {
         "file": "Brockian/Analysis_stone_weierstrass.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "ArithmeticFunction.liouville_apply",
+      "kind": "theorem",
+      "module": "ArithmeticFunction",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ArithmeticFunction_liouville_apply.lean"
       },
       "register": "PROVED",
       "axioms": [
@@ -376913,6 +376946,39 @@
       "provenance_note": "SWARM-PROVED Zumkeller numbers with GENERAL structural theorems (AXLE @4.32, axiom-clean). A number is Zumkeller if its divisors split into two equal-sum sets (half-sum characterization exists S subset divisors, 2*sum S = sigma). GENERAL: zumkeller_sigma_even (sigma is even); zumkeller_two_mul_le_sigma (flagship -- every positive Zumkeller number is perfect-or-abundant, 2n <= sigma(n)); not_zumkeller_prime (no prime is Zumkeller, via deficiency). Concrete witnesses 6,12,20,24,28,30 with explicit half-sets. OddZumkellerFrom3Structure is an unproven OPEN def (odd Zumkeller structure; smallest odd Zumkeller is 945). Zumkeller infinitude/odd-density OPEN."
     },
     {
+      "name": "Brockian.ZumkellerNumbers.not_zumkeller_prime_pow",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Brockian_ZumkellerNumbers_not_zumkeller_prime_pow.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "frontier swarm; AXLE @4.32",
+      "provenance_note": "SWARM-PROVED Zumkeller numbers with GENERAL structural theorems (AXLE @4.32, axiom-clean). A number is Zumkeller if its divisors split into two equal-sum sets (half-sum characterization exists S subset divisors, 2*sum S = sigma). GENERAL: zumkeller_sigma_even (sigma is even); zumkeller_two_mul_le_sigma (flagship -- every positive Zumkeller number is perfect-or-abundant, 2n <= sigma(n)); not_zumkeller_prime (no prime is Zumkeller, via deficiency). Concrete witnesses 6,12,20,24,28,30 with explicit half-sets. OddZumkellerFrom3Structure is an unproven OPEN def (odd Zumkeller structure; smallest odd Zumkeller is 945). Zumkeller infinitude/odd-density OPEN."
+    },
+    {
       "name": "Brockian.ZumkellerNumbers.odd_of_dvd_odd",
       "kind": "theorem",
       "module": "Brockian.ZumkellerNumbers",
@@ -381020,6 +381086,39 @@
       "provenance_note": null
     },
     {
+      "name": "Cardinal.exists_fixed_point_of_isNormal",
+      "kind": "theorem",
+      "module": "Cardinal",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Cardinal_exists_fixed_point_of_isNormal.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Chebyshev.psi_two_le",
       "kind": "theorem",
       "module": "Chebyshev",
@@ -381907,6 +382006,39 @@
       "provenance_note": null
     },
     {
+      "name": "Chem.starGraph_connected",
+      "kind": "theorem",
+      "module": "Chem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Chem_starGraph_connected.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Chem.wiener_path_formula",
       "kind": "theorem",
       "module": "Chem",
@@ -382045,6 +382177,39 @@
       "statement": "",
       "source": {
         "file": "Brockian/Constellation_quadruplet_11_13_17_19.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "D5Structure.phi_squared",
+      "kind": "theorem",
+      "module": "D5Structure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/D5Structure_phi_squared.lean"
       },
       "register": "PROVED",
       "axioms": [
@@ -384843,6 +385008,39 @@
       "provenance_note": null
     },
     {
+      "name": "MS.Inequalities.cauchy_schwarz",
+      "kind": "theorem",
+      "module": "MS.Inequalities",
+      "statement": "",
+      "source": {
+        "file": "Brockian/MS_Inequalities_cauchy_schwarz.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "MS.LogicQuantum.schroeder_bernstein",
       "kind": "theorem",
       "module": "MS.LogicQuantum",
@@ -387002,6 +387200,39 @@
       "provenance_note": null
     },
     {
+      "name": "Math.ramsey_4_4",
+      "kind": "theorem",
+      "module": "Math",
+      "statement": "",
+      "source": {
+        "file": "Brockian/Math_ramsey_4_4.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Math.sum_two_squares",
       "kind": "theorem",
       "module": "Math",
@@ -388325,6 +388556,39 @@
       "statement": "",
       "source": {
         "file": "Brockian/NymanBeurling_sq_sub_sq_nonneg_of_sq_le_sq.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "OddZumkeller.geom_sum_mul_pred_le",
+      "kind": "theorem",
+      "module": "OddZumkeller",
+      "statement": "",
+      "source": {
+        "file": "Brockian/OddZumkeller_geom_sum_mul_pred_le.lean"
       },
       "register": "PROVED",
       "axioms": [
@@ -394746,6 +395010,39 @@
       "statement": "",
       "source": {
         "file": "Brockian/Riemann_zeta_ne_zero_re_gt_one.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "RiemannScaffold.riemannXi_apply",
+      "kind": "theorem",
+      "module": "RiemannScaffold",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannScaffold_riemannXi_apply.lean"
       },
       "register": "PROVED",
       "axioms": [
