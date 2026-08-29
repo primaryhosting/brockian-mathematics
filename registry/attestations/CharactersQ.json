@@ -1,49 +1,10 @@
 {
-  "module": "Brockian.FortunateNumbers",
+  "module": "Brockian.CharactersQ",
   "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.FortunateNumbers.fortunateFor_coprime",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.FortunateNumbers.fortunateFor_not_dvd_base_prime",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.FortunateNumbers.fortunateFor_odd_of_even_base",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.FortunateNumbers.fortunateFor_unique",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.FortunateNumbers.fortunate_2",
+      "name": "Brockian.CharactersQ.fourier_apply",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -54,7 +15,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.fortunate_210",
+      "name": "Brockian.CharactersQ.additive_orthogonality",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -65,7 +26,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.fortunate_30",
+      "name": "Brockian.CharactersQ.additive_orthogonality_sub",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -76,7 +37,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.fortunate_6",
+      "name": "Brockian.CharactersQ.fourier_twice",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -87,7 +48,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.fortunate_values_prime",
+      "name": "Brockian.CharactersQ.fourier_inversion",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -98,7 +59,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.primorial_2",
+      "name": "Brockian.CharactersQ.parseval",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -109,7 +70,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.primorial_3",
+      "name": "Brockian.CharactersQ.multiplicative_orthogonality",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -120,7 +81,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.primorial_5",
+      "name": "Brockian.CharactersQ.norm_fourier_le_sum_norm",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -131,7 +92,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.primorial_7",
+      "name": "Brockian.CharactersQ.norm_fourier_sq_le_card_mul_sum",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -142,5 +103,5 @@
       "axioms_ok": true
     }
   ],
-  "content_hash": "66a6b63cb72085be"
+  "content_hash": "acd8f3637531c76d"
 }

@@ -11,14 +11,18 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.GiugaNumbers.OddGiugaExists",
-      "kind": "conjecture",
+      "name": "Brockian.GiugaNumbers.giugaNumber_squarefree",
+      "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": null,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
       "axioms_ok": true
     },
     {
-      "name": "Brockian.GiugaNumbers.giugaNumber_squarefree",
+      "name": "Brockian.GiugaNumbers.giugaNumber_three_primes",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -49,6 +53,17 @@
         "Quot.sound"
       ],
       "axioms_ok": true
+    },
+    {
+      "name": "Brockian.GiugaNumbers.not_giugaNumber_prime_pow",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
     }
-  ]
+  ],
+  "content_hash": "8dd33167ba8b7562"
 }

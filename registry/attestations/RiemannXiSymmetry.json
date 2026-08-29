@@ -4,69 +4,14 @@
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.RiemannXiSymmetry.riemannXi_reflect",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.RiemannXiSymmetry.reflect_reflect",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.RiemannXiSymmetry.riemannXi_eq_zero_reflect",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.RiemannXiSymmetry.riemannXi_reflect_eq_zero_iff",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.RiemannXiSymmetry.riemannXi_eq_zero_iff_reflect",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.RiemannXiSymmetry.riemannXi_zeroSet_preimage_reflect",
+      "name": "Brockian.RiemannXiSymmetry.criticalLine_re_iff_reflect_re_eq",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [],
       "axioms_ok": true
     },
     {
-      "name": "Brockian.RiemannXiSymmetry.riemannXi_zeroSet_image_reflect",
+      "name": "Brockian.RiemannXiSymmetry.reflect_fixed_iff",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -74,24 +19,6 @@
         "Classical.choice",
         "Quot.sound"
       ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_zero",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Classical.choice",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_reflect_zero",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [],
       "axioms_ok": true
     },
     {
@@ -117,13 +44,6 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.RiemannXiSymmetry.criticalLine_re_iff_reflect_re_eq",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [],
-      "axioms_ok": true
-    },
-    {
       "name": "Brockian.RiemannXiSymmetry.reflect_re_eq_self_iff",
       "kind": "theorem",
       "axle_verdict": "verified",
@@ -135,6 +55,90 @@
       "axioms_ok": true
     },
     {
+      "name": "Brockian.RiemannXiSymmetry.reflect_reflect",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_criticalLine_even",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_eq_zero_iff_reflect",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_eq_zero_reflect",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_one_sub",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_reflect",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_reflect_eq_zero_iff",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_reflect_of_riemannXi_criticalLine_even",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
       "name": "Brockian.RiemannXiSymmetry.riemannXi_reflect_zero_and_criticalLine",
       "kind": "theorem",
       "axle_verdict": "verified",
@@ -142,7 +146,32 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.RiemannXiSymmetry.reflect_fixed_iff",
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_zeroSet_image_reflect",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_zeroSet_preimage_reflect",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_reflect_zero",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_zero_pair_of_zero",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -152,5 +181,6 @@
       ],
       "axioms_ok": true
     }
-  ]
+  ],
+  "content_hash": "43aabe51cbc6a700"
 }

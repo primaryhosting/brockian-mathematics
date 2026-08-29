@@ -4,25 +4,13 @@
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.AdmissibilityHLCriterion.Admissible",
-      "kind": "def",
-      "axle_verdict": "verified",
-      "axioms": null,
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.AdmissibilityHLCriterion.OmitsResidue",
-      "kind": "def",
-      "axle_verdict": "verified",
-      "axioms": null,
-      "axioms_ok": true
-    },
-    {
       "name": "Brockian.AdmissibilityHLCriterion.admissible_iff_card_image_lt",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [],
-      "axioms_ok": true
+      "axioms_ok": true,
+      "verification_quarantine": true,
+      "verification_quarantine_reason": "AXIOM_EVIDENCE_PENDING"
     },
     {
       "name": "Brockian.AdmissibilityHLCriterion.admissible_iff_count_pos",
@@ -61,6 +49,46 @@
       "axioms_ok": true
     },
     {
+      "name": "Brockian.AdmissibilityHLCriterion.admissible_image_add_const",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.admissible_image_affine",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.admissible_image_neg",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.admissible_of_subset",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
       "name": "Brockian.AdmissibilityHLCriterion.admissible_zero_two",
       "kind": "theorem",
       "axle_verdict": "verified",
@@ -72,6 +100,48 @@
       "axioms_ok": true
     },
     {
+      "name": "Brockian.AdmissibilityHLCriterion.firstNinePrimeOffsets_not_admissible",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.mem_residueImage_image_affine",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.not_admissible_of_all_residues_mod_seven",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.not_admissible_of_eleven_dilated_residues",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.not_admissible_of_five_consecutive_mod_five",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.not_admissible_of_thirteen_scattered_residues",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
       "name": "Brockian.AdmissibilityHLCriterion.not_admissible_zero_two_four",
       "kind": "theorem",
       "axle_verdict": "verified",
@@ -79,10 +149,54 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.AdmissibilityHLCriterion.nu",
-      "kind": "def",
+      "name": "Brockian.AdmissibilityHLCriterion.nu_eq_of_injOn_card_ge",
+      "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": null,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.nu_image_add_const",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.nu_image_mul_of_not_dvd",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.nu_image_neg",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.nu_union_le",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
       "axioms_ok": true
     },
     {
@@ -108,11 +222,16 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.AdmissibilityHLCriterion.residueImage",
-      "kind": "def",
+      "name": "Brockian.AdmissibilityHLCriterion.residueImage_subset",
+      "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": null,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
       "axioms_ok": true
     }
-  ]
+  ],
+  "content_hash": "d2970387c002c757"
 }

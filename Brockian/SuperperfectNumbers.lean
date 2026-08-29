@@ -1,4 +1,9 @@
 import Mathlib
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
 
 /-!
 # Superperfect numbers and the Mersenne connection
@@ -116,5 +121,426 @@ theorem superperfect_64 : Superperfect 64 := ⟨by norm_num, by decide⟩
 set_option maxRecDepth 8000 in
 /-- `6` is **not** superperfect: `σ(σ(6)) = σ(12) = 28 ≠ 12 = 2·6`. -/
 theorem six_not_superperfect : ¬ Superperfect 6 := by unfold Superperfect; decide
+
+
+/-- `σ(2^k) = 2^(k+1) - 1`. -/
+lemma sigma1_two_pow (k : ℕ) : sigma1 (2 ^ k) = 2 ^ (k + 1) - 1 := by
+  unfold sigma1
+  rw [Nat.sum_divisors_prime_pow Nat.prime_two]
+  induction k with
+  | zero => simp
+  | succ n ih =>
+      rw [Finset.sum_range_succ, ih]
+      have : 1 ≤ 2 ^ (n + 1) := Nat.one_le_two_pow
+      rw [pow_succ 2 (n + 1)]
+      omega
+
+
+/-- If `σ(m) = m + 1` then `m` is prime. -/
+lemma prime_of_sigma1_eq_succ {m : ℕ} (hm : sigma1 m = m + 1) : Nat.Prime m := by
+  have hm0 : m ≠ 0 := by
+    rintro rfl
+    simp [sigma1] at hm
+  have hm1 : m ≠ 1 := by
+    rintro rfl
+    simp [sigma1] at hm
+  have h2 : 2 ≤ m := by omega
+  have hmemsub : ∀ d, d ∣ m → d = 1 ∨ d = m := by
+    intro d hd
+    by_contra hcon
+    push_neg at hcon
+    obtain ⟨hd1, hdm⟩ := hcon
+    have hd0 : d ≠ 0 := by
+      rintro rfl
+      exact hm0 (Nat.eq_zero_of_zero_dvd hd)
+    have hd2 : 2 ≤ d := by omega
+    have hsub : ({1, d, m} : Finset ℕ) ⊆ m.divisors := by
+      intro x hx
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+      rcases hx with rfl | rfl | rfl
+      · exact Nat.mem_divisors.mpr ⟨one_dvd m, hm0⟩
+      · exact Nat.mem_divisors.mpr ⟨hd, hm0⟩
+      · exact Nat.mem_divisors.mpr ⟨dvd_rfl, hm0⟩
+    have hsum : ∑ x ∈ ({1, d, m} : Finset ℕ), x ≤ sigma1 m :=
+      Finset.sum_le_sum_of_subset hsub
+    have hcard : ∑ x ∈ ({1, d, m} : Finset ℕ), x = 1 + d + m := by
+      rw [Finset.sum_insert (by simp [Ne.symm hd1, Ne.symm hm1]), Finset.sum_insert (by simp [hdm]),
+        Finset.sum_singleton]
+      ring
+    omega
+  exact Nat.prime_def.mpr ⟨h2, hmemsub⟩
+
+
+theorem mersenne_prime_of_superperfect_two_pow {k : ℕ}
+    (h : Superperfect (2 ^ k)) : Nat.Prime (2 ^ (k + 1) - 1) := by
+  obtain ⟨-, h⟩ := h
+  rw [sigma1_two_pow k] at h
+  apply prime_of_sigma1_eq_succ
+  have : 1 ≤ 2 ^ (k + 1) := Nat.one_le_two_pow
+  rw [h, pow_succ 2 k]
+  omega
+
+
+/-- **Characterisation.** A power of two `2^k` is superperfect exactly when the Mersenne
+number `2^{k+1} − 1` is prime. -/
+theorem superperfect_two_pow_iff_mersenne_prime (k : ℕ) :
+    Superperfect (2 ^ k) ↔ Nat.Prime (2 ^ (k + 1) - 1) := by
+  refine ⟨mersenne_prime_of_superperfect_two_pow, fun hp => ?_⟩
+  have hk : k ≠ 0 := by
+    rintro rfl
+    norm_num at hp
+  have h2 : 2 ≤ k + 1 := by omega
+  have hm : (mersenne (k + 1)).Prime := hp
+  simpa using superperfect_two_pow_of_mersenne_prime h2 hm
+
+
+/-- Any two distinct divisors of `n` give a lower bound for `σ(n)`. -/
+lemma add_le_sigma1 {n a b : ℕ} (hn : n ≠ 0) (ha : a ∣ n) (hb : b ∣ n) (hab : a ≠ b) :
+    a + b ≤ sigma1 n := by
+  have hsub : ({a, b} : Finset ℕ) ⊆ n.divisors := by
+    intro x hx
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+    rcases hx with rfl | rfl
+    · exact Nat.mem_divisors.mpr ⟨ha, hn⟩
+    · exact Nat.mem_divisors.mpr ⟨hb, hn⟩
+  calc a + b = ∑ x ∈ ({a, b} : Finset ℕ), x := (Finset.sum_pair (f := fun x => x) hab).symm
+    _ ≤ sigma1 n := Finset.sum_le_sum_of_subset hsub
+
+
+/-- `n ≤ σ(n)`, as `n` is one of its own divisors. -/
+lemma self_le_sigma1 {n : ℕ} (hn : n ≠ 0) : n ≤ sigma1 n :=
+  Finset.single_le_sum (f := fun d => d) (fun i _ => Nat.zero_le i) (Nat.mem_divisors_self n hn)
+
+
+/-- Every divisor of an odd number is odd. -/
+lemma odd_of_dvd_odd {n d : ℕ} (hodd : Odd n) (hd : d ∣ n) : Odd d := by
+  rcases Nat.even_or_odd d with he | ho
+  · exfalso
+    have h2 : (2 : ℕ) ∣ n := he.two_dvd.trans hd
+    rw [Nat.odd_iff] at hodd
+    omega
+  · exact ho
+
+
+/-- For odd `n` which is not a perfect square, `σ(n)` is even: the involution
+`d ↦ n / d` on the divisors of `n` has no fixed point, and pairs up odd divisors. -/
+lemma even_sigma1_of_odd_of_not_isSquare {n : ℕ} (hodd : Odd n) (hn : 0 < n)
+    (hsq : ¬ IsSquare n) : Even (sigma1 n) := by
+  have hn0 : n ≠ 0 := hn.ne'
+  rw [← ZMod.natCast_eq_zero_iff_even]
+  rw [sigma1, Nat.cast_sum]
+  refine Finset.sum_involution (fun d _ => n / d) ?_ ?_ ?_ ?_
+  · intro d hd
+    obtain ⟨hdvd, -⟩ := Nat.mem_divisors.mp hd
+    have h1 : ((d : ℕ) : ZMod 2) = 1 :=
+      ZMod.natCast_eq_one_iff_odd.mpr (odd_of_dvd_odd hodd hdvd)
+    have h2 : ((n / d : ℕ) : ZMod 2) = 1 :=
+      ZMod.natCast_eq_one_iff_odd.mpr (odd_of_dvd_odd hodd (Nat.div_dvd_of_dvd hdvd))
+    rw [h1, h2]
+    decide
+  · intro d hd _
+    obtain ⟨hdvd, -⟩ := Nat.mem_divisors.mp hd
+    intro hcon
+    have hcon' : n / d = d := hcon
+    have hnd : n = d * d := by
+      conv_lhs => rw [← Nat.div_mul_cancel hdvd, hcon']
+    exact hsq ⟨d, hnd⟩
+  · intro d hd
+    obtain ⟨hdvd, -⟩ := Nat.mem_divisors.mp hd
+    exact Nat.mem_divisors.mpr ⟨Nat.div_dvd_of_dvd hdvd, hn0⟩
+  · intro d hd
+    obtain ⟨hdvd, -⟩ := Nat.mem_divisors.mp hd
+    exact Nat.div_div_self hdvd hn0
+
+
+/-- Multiplicativity of `σ` in the shape needed below: `σ(2^a·u) = (2^{a+1}−1)·σ(u)` for
+odd `u`. -/
+lemma sigma1_two_pow_mul {a u : ℕ} (hu : Odd u) :
+    sigma1 (2 ^ a * u) = (2 ^ (a + 1) - 1) * sigma1 u := by
+  have hcop : Nat.Coprime (2 ^ a) u := Nat.Coprime.pow_left _ (Nat.coprime_two_left.mpr hu)
+  have h : sigma1 (2 ^ a * u) = sigma1 (2 ^ a) * sigma1 u := by
+    simp only [sigma1, ← sigma_one_apply]
+    exact isMultiplicative_sigma.map_mul_of_coprime hcop
+  rw [h, sigma1_two_pow]
+
+
+/-- **Kanold.** An odd superperfect number must be a perfect square: no odd non-square is
+superperfect. -/
+theorem not_superperfect_odd_of_not_sq {n : ℕ} (hodd : Odd n) (hn : 0 < n)
+    (hsq : ¬ IsSquare n) : ¬ Superperfect n := by
+  rintro ⟨-, hS⟩
+  have hn0 : n ≠ 0 := hn.ne'
+  have hmpos : 0 < sigma1 n := lt_of_lt_of_le hn (self_le_sigma1 hn0)
+  have heven : Even (sigma1 n) := even_sigma1_of_odd_of_not_isSquare hodd hn hsq
+  obtain ⟨a, u, hu, hmu⟩ := Nat.exists_eq_two_pow_mul_odd hmpos.ne'
+  have hu0 : 0 < u := hu.pos
+  -- `a ≥ 1` since `σ(n)` is even and `u` is odd.
+  have ha1 : 1 ≤ a := by
+    rcases Nat.eq_zero_or_pos a with rfl | h
+    · exfalso
+      rw [pow_zero, one_mul] at hmu
+      rw [hmu, Nat.even_iff] at heven
+      rw [Nat.odd_iff] at hu
+      omega
+    · exact h
+  set d : ℕ := 2 ^ (a + 1) - 1 with hdd
+  have hpow : 2 ^ (a + 1) = 2 * 2 ^ a := by ring
+  have h2a : 2 ≤ 2 ^ a := by
+    calc (2 : ℕ) = 2 ^ 1 := (pow_one 2).symm
+      _ ≤ 2 ^ a := Nat.pow_le_pow_right (by norm_num) ha1
+  have hd1 : 1 ≤ d := by
+    have : 2 ≤ 2 ^ (a + 1) := by omega
+    omega
+  have hdodd : Odd d := by
+    have : 2 ≤ 2 ^ (a + 1) := by omega
+    rw [Nat.odd_iff, hdd]
+    have h4 : 4 ≤ 2 ^ (a + 1) := by
+      calc (4 : ℕ) = 2 * 2 := by norm_num
+        _ ≤ 2 * 2 ^ a := by omega
+        _ = 2 ^ (a + 1) := hpow.symm
+    have hev : 2 ∣ 2 ^ (a + 1) := dvd_pow_self 2 (Nat.succ_ne_zero a)
+    omega
+  -- the σ-equation, split off the 2-part
+  have hkey : d * sigma1 u = 2 * n := by
+    rw [← hS, hmu, sigma1_two_pow_mul hu]
+  -- `d ∣ n`
+  have hdn : d ∣ n := by
+    have hdvd : d ∣ 2 * n := ⟨sigma1 u, hkey.symm⟩
+    have hcop : Nat.Coprime d 2 := Nat.coprime_two_right.mpr hdodd
+    exact (Nat.Coprime.dvd_of_dvd_mul_left hcop hdvd)
+  obtain ⟨c, hc⟩ := hdn
+  have hc0 : 0 < c := by
+    rcases Nat.eq_zero_or_pos c with rfl | h
+    · simp [hc] at hn0
+    · exact h
+  -- `n` and `c = n / d` are distinct divisors of `n`, so `σ(n) ≥ n + c`
+  have hcd : c ∣ n := ⟨d, by rw [hc]; ring⟩
+  have hne : n ≠ c := by
+    intro h
+    have : d * c = 1 * c := by rw [← hc, h, one_mul]
+    have := Nat.eq_of_mul_eq_mul_right hc0 this
+    have h3 : 3 ≤ d := by
+      have : 4 ≤ 2 ^ (a + 1) := by
+        calc (4 : ℕ) = 2 * 2 := by norm_num
+          _ ≤ 2 * 2 ^ a := by omega
+          _ = 2 ^ (a + 1) := hpow.symm
+      omega
+    omega
+  have hbound : n + c ≤ sigma1 n := add_le_sigma1 hn0 dvd_rfl hcd hne
+  -- combine: `2^a * u ≥ (d+1) * c = 2^{a+1} * c`, hence `u ≥ 2c = σ(u)`
+  have hstep : 2 ^ (a + 1) * c ≤ 2 ^ a * u := by
+    have : (d + 1) * c ≤ sigma1 n := by
+      rw [add_mul, one_mul, ← hc]
+      exact hbound
+    have hd1' : d + 1 = 2 ^ (a + 1) := by
+      have : 2 ≤ 2 ^ (a + 1) := by omega
+      omega
+    rw [hd1'] at this
+    rw [← hmu]
+    exact this
+  have hu2c : 2 * c ≤ u := by
+    have h2 : 2 ^ a * (2 * c) ≤ 2 ^ a * u := by
+      calc 2 ^ a * (2 * c) = 2 ^ (a + 1) * c := by ring
+        _ ≤ 2 ^ a * u := hstep
+    exact Nat.le_of_mul_le_mul_left h2 (by omega)
+  have hsig : sigma1 u = 2 * c := by
+    have h2 : d * sigma1 u = d * (2 * c) := by
+      rw [hkey, hc]; ring
+    exact Nat.eq_of_mul_eq_mul_left (by omega) h2
+  -- but `σ(u) ≥ u`, forcing `u = 2c`, and then `u = 1` is impossible
+  have hle : u ≤ sigma1 u := self_le_sigma1 hu0.ne'
+  have hueq : u = 2 * c := by omega
+  have hu1 : u ≠ 1 := by omega
+  have : 1 + u ≤ sigma1 u := add_le_sigma1 hu0.ne' (one_dvd u) dvd_rfl (fun h => hu1 h.symm)
+  omega
+
+
+/-- An odd prime is not superperfect: it is odd, positive, and (being prime) not a
+perfect square, so `not_superperfect_odd_of_not_sq` applies. -/
+theorem not_superperfect_odd_prime {p : ℕ} (hp : p.Prime) (hne : p ≠ 2) :
+    ¬ Superperfect p := by
+  have hodd : Odd p := hp.odd_of_ne_two hne
+  have hsq : ¬ IsSquare p := by
+    rintro ⟨k, hk⟩
+    have hkd : k ∣ p := ⟨k, hk⟩
+    rcases (Nat.Prime.eq_one_or_self_of_dvd hp k hkd) with rfl | rfl
+    · simp at hk
+      exact hp.ne_one hk
+    · have h2 : k * 1 = k * k := by rw [mul_one]; exact hk
+      have := Nat.eq_of_mul_eq_mul_left hp.pos h2
+      exact hp.ne_one this.symm
+  exact not_superperfect_odd_of_not_sq hodd hp.pos hsq
+
+
+/-- If `n` is an odd superperfect number, then `σ(n)` is odd.
+
+The argument is the (Kanold) descent used in `not_superperfect_odd_of_not_sq`, run
+directly from the assumption that `σ(n)` is even: writing `σ(n) = 2^a · u` with `u` odd
+and `a ≥ 1`, the odd factor `d = 2^{a+1} − 1 ≥ 3` divides `n`, so `n` and `c = n/d` are
+distinct divisors of `n`; this forces `σ(u) = 2c ≤ u`, contradicting `1 + u ≤ σ(u)`. -/
+theorem odd_sigma1_of_superperfect_odd {n : ℕ} (hodd : Odd n) (hn : 0 < n)
+    (h : Superperfect n) : Odd (sigma1 n) := by
+  by_contra hcon
+  rw [Nat.not_odd_iff_even] at hcon
+  obtain ⟨-, hS⟩ := h
+  have hn0 : n ≠ 0 := hn.ne'
+  have hmpos : 0 < sigma1 n := lt_of_lt_of_le hn (self_le_sigma1 hn0)
+  have heven : Even (sigma1 n) := hcon
+  obtain ⟨a, u, hu, hmu⟩ := Nat.exists_eq_two_pow_mul_odd hmpos.ne'
+  have hu0 : 0 < u := hu.pos
+  have ha1 : 1 ≤ a := by
+    rcases Nat.eq_zero_or_pos a with rfl | hpos
+    · exfalso
+      rw [pow_zero, one_mul] at hmu
+      rw [hmu, Nat.even_iff] at heven
+      rw [Nat.odd_iff] at hu
+      omega
+    · exact hpos
+  set d : ℕ := 2 ^ (a + 1) - 1 with hdd
+  have hpow : 2 ^ (a + 1) = 2 * 2 ^ a := by ring
+  have h2a : 2 ≤ 2 ^ a := by
+    calc (2 : ℕ) = 2 ^ 1 := (pow_one 2).symm
+      _ ≤ 2 ^ a := Nat.pow_le_pow_right (by norm_num) ha1
+  have hd1 : 1 ≤ d := by
+    have : 2 ≤ 2 ^ (a + 1) := by omega
+    omega
+  have hdodd : Odd d := by
+    have : 2 ≤ 2 ^ (a + 1) := by omega
+    rw [Nat.odd_iff, hdd]
+    have h4 : 4 ≤ 2 ^ (a + 1) := by
+      calc (4 : ℕ) = 2 * 2 := by norm_num
+        _ ≤ 2 * 2 ^ a := by omega
+        _ = 2 ^ (a + 1) := hpow.symm
+    have hev : 2 ∣ 2 ^ (a + 1) := dvd_pow_self 2 (Nat.succ_ne_zero a)
+    omega
+  have hkey : d * sigma1 u = 2 * n := by
+    rw [← hS, hmu, sigma1_two_pow_mul hu]
+  have hdn : d ∣ n := by
+    have hdvd : d ∣ 2 * n := ⟨sigma1 u, hkey.symm⟩
+    have hcop : Nat.Coprime d 2 := Nat.coprime_two_right.mpr hdodd
+    exact (Nat.Coprime.dvd_of_dvd_mul_left hcop hdvd)
+  obtain ⟨c, hc⟩ := hdn
+  have hc0 : 0 < c := by
+    rcases Nat.eq_zero_or_pos c with rfl | hpos
+    · simp [hc] at hn0
+    · exact hpos
+  have hcd : c ∣ n := ⟨d, by rw [hc]; ring⟩
+  have hne : n ≠ c := by
+    intro heq
+    have hmul : d * c = 1 * c := by rw [← hc, heq, one_mul]
+    have := Nat.eq_of_mul_eq_mul_right hc0 hmul
+    have h3 : 3 ≤ d := by
+      have : 4 ≤ 2 ^ (a + 1) := by
+        calc (4 : ℕ) = 2 * 2 := by norm_num
+          _ ≤ 2 * 2 ^ a := by omega
+          _ = 2 ^ (a + 1) := hpow.symm
+      omega
+    omega
+  have hbound : n + c ≤ sigma1 n := add_le_sigma1 hn0 dvd_rfl hcd hne
+  have hstep : 2 ^ (a + 1) * c ≤ 2 ^ a * u := by
+    have hle' : (d + 1) * c ≤ sigma1 n := by
+      rw [add_mul, one_mul, ← hc]
+      exact hbound
+    have hd1' : d + 1 = 2 ^ (a + 1) := by
+      have : 2 ≤ 2 ^ (a + 1) := by omega
+      omega
+    rw [hd1'] at hle'
+    rw [← hmu]
+    exact hle'
+  have hu2c : 2 * c ≤ u := by
+    have h2 : 2 ^ a * (2 * c) ≤ 2 ^ a * u := by
+      calc 2 ^ a * (2 * c) = 2 ^ (a + 1) * c := by ring
+        _ ≤ 2 ^ a * u := hstep
+    exact Nat.le_of_mul_le_mul_left h2 (by omega)
+  have hsig : sigma1 u = 2 * c := by
+    have h2 : d * sigma1 u = d * (2 * c) := by
+      rw [hkey, hc]; ring
+    exact Nat.eq_of_mul_eq_mul_left (by omega) h2
+  have hle : u ≤ sigma1 u := self_le_sigma1 hu0.ne'
+  have hueq : u = 2 * c := by omega
+  have hu1 : u ≠ 1 := by omega
+  have : 1 + u ≤ sigma1 u := add_le_sigma1 hu0.ne' (one_dvd u) dvd_rfl (fun h => hu1 h.symm)
+  omega
+
+
+/-- No odd number below `100` is superperfect. By Kanold's theorem an odd superperfect
+number is a perfect square, so only `1, 9, 25, 49, 81` need checking, and each fails. -/
+theorem no_odd_superperfect_lt_hundred (n : ℕ) (hn : n < 100) (hodd : Odd n) :
+    ¬ Superperfect n := by
+  intro hS
+  have hn0 : 0 < n := hodd.pos
+  by_cases hsq : IsSquare n
+  · obtain ⟨k, hk⟩ := hsq
+    subst hk
+    have hk10 : k < 10 := by nlinarith
+    rw [Nat.odd_iff] at hodd
+    obtain ⟨-, hS2⟩ := hS
+    interval_cases k <;> revert hodd hS2 <;> decide
+  · exact not_superperfect_odd_of_not_sq hodd hn0 hsq hS
+
+
+/-- For an odd perfect square `n = k * k`, the divisor sum `σ(n)` is odd: the involution
+`d ↦ n / d` pairs up the divisors other than `k`, and every divisor is odd. -/
+lemma odd_sigma1_of_odd_isSquare {n : ℕ} (hodd : Odd n) (hn : 0 < n) (hsq : IsSquare n) :
+    Odd (sigma1 n) := by
+  obtain ⟨k, hk⟩ := hsq
+  have hn0 : n ≠ 0 := hn.ne'
+  have hk0 : k ≠ 0 := by
+    rintro rfl
+    simp [hk] at hn0
+  have hkdvd : k ∣ n := ⟨k, hk⟩
+  have hkmem : k ∈ n.divisors := Nat.mem_divisors.mpr ⟨hkdvd, hn0⟩
+  have hnk : n / k = k := by
+    rw [hk, Nat.mul_div_cancel_left _ (Nat.pos_of_ne_zero hk0)]
+  have hkodd : Odd k := odd_of_dvd_odd hodd hkdvd
+  -- the divisors other than `k` pair up under `d ↦ n / d`
+  have heven : Even (∑ d ∈ n.divisors.erase k, d) := by
+    rw [← ZMod.natCast_eq_zero_iff_even, Nat.cast_sum]
+    refine Finset.sum_involution (fun d _ => n / d) ?_ ?_ ?_ ?_
+    · intro d hd
+      obtain ⟨hdvd, -⟩ := Nat.mem_divisors.mp (Finset.mem_of_mem_erase hd)
+      have h1 : ((d : ℕ) : ZMod 2) = 1 :=
+        ZMod.natCast_eq_one_iff_odd.mpr (odd_of_dvd_odd hodd hdvd)
+      have h2 : ((n / d : ℕ) : ZMod 2) = 1 :=
+        ZMod.natCast_eq_one_iff_odd.mpr (odd_of_dvd_odd hodd (Nat.div_dvd_of_dvd hdvd))
+      rw [h1, h2]
+      decide
+    · intro d hd _
+      obtain ⟨hdvd, -⟩ := Nat.mem_divisors.mp (Finset.mem_of_mem_erase hd)
+      have hdk : d ≠ k := Finset.ne_of_mem_erase hd
+      intro hcon
+      have hcon' : n / d = d := hcon
+      have hnd : n = d * d := by
+        conv_lhs => rw [← Nat.div_mul_cancel hdvd, hcon']
+      have hdk2 : d * d = k * k := by rw [← hnd, hk]
+      exact hdk (Nat.mul_self_inj.mp hdk2)
+    · intro d hd
+      obtain ⟨hdvd, -⟩ := Nat.mem_divisors.mp (Finset.mem_of_mem_erase hd)
+      have hdk : d ≠ k := Finset.ne_of_mem_erase hd
+      refine Finset.mem_erase.mpr ⟨?_, Nat.mem_divisors.mpr ⟨Nat.div_dvd_of_dvd hdvd, hn0⟩⟩
+      intro hcon
+      have hcon' : n / d = k := hcon
+      have hdd' := Nat.div_div_self hdvd hn0
+      rw [hcon', hnk] at hdd'
+      exact hdk hdd'.symm
+    · intro d hd
+      obtain ⟨hdvd, -⟩ := Nat.mem_divisors.mp (Finset.mem_of_mem_erase hd)
+      exact Nat.div_div_self hdvd hn0
+  have hsplit : sigma1 n = k + ∑ d ∈ n.divisors.erase k, d := by
+    rw [sigma1, ← Finset.add_sum_erase _ _ hkmem]
+  rw [hsplit]
+  exact hkodd.add_even heven
+
+
+/-- **Characterisation of the parity of `σ` on odd numbers.** For odd `n > 0`, the divisor
+sum `σ(n)` is odd exactly when `n` is a perfect square. -/
+theorem odd_sigma1_iff_isSquare_of_odd {n : ℕ} (hodd : Odd n) (hn : 0 < n) :
+    Odd (sigma1 n) ↔ IsSquare n := by
+  refine ⟨fun h => ?_, fun h => odd_sigma1_of_odd_isSquare hodd hn h⟩
+  by_contra hsq
+  have := even_sigma1_of_odd_of_not_isSquare hodd hn hsq
+  rw [Nat.odd_iff] at h
+  rw [Nat.even_iff] at this
+  omega
 
 end Brockian.SuperperfectNumbers

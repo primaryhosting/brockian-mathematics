@@ -60,6 +60,9 @@ def test_axioms_in_line_per_line_parser():
     assert verify.axioms_in_line("info: 'a' does not depend on any axioms\n") == []
     assert verify.axioms_in_line(
         "info: 'b' depends on axioms: [propext, Quot.sound]\n") == ["propext", "Quot.sound"]
+    assert verify.axioms_in_line(
+        "info: 'b' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n"
+    ) == ["propext", "Classical.choice", "Quot.sound"]
     assert verify.axioms_in_line("some unrelated info line\n") is None
 
 

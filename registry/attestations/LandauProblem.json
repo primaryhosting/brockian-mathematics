@@ -1,10 +1,10 @@
 {
-  "module": "Brockian.FortunateNumbers",
+  "module": "Brockian.LandauProblem",
   "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.FortunateNumbers.fortunateFor_coprime",
+      "name": "Brockian.LandauProblem.coprime_sq_add_one",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -14,36 +14,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.fortunateFor_not_dvd_base_prime",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.FortunateNumbers.fortunateFor_odd_of_even_base",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext",
-        "Quot.sound"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.FortunateNumbers.fortunateFor_unique",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [
-        "propext"
-      ],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.FortunateNumbers.fortunate_2",
+      "name": "Brockian.LandauProblem.even_of_sq_add_one_prime",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -54,7 +25,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.fortunate_210",
+      "name": "Brockian.LandauProblem.exists_prime_mod_four_dvd_sq_add_one",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -65,7 +36,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.fortunate_30",
+      "name": "Brockian.LandauProblem.four_not_dvd_sq_add_one",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -76,7 +47,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.fortunate_6",
+      "name": "Brockian.LandauProblem.gcd_sq_add_one_succ_dvd_five",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -87,7 +58,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.fortunate_values_prime",
+      "name": "Brockian.LandauProblem.landau_iff_even_infinite",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -98,7 +69,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.primorial_2",
+      "name": "Brockian.LandauProblem.landau_iff_unbounded",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -109,7 +80,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.primorial_3",
+      "name": "Brockian.LandauProblem.not_isSquare_sq_add_one",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -120,7 +91,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.primorial_5",
+      "name": "Brockian.LandauProblem.odd_prime_dvd_sq_add_one_mod_four",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -131,7 +102,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.FortunateNumbers.primorial_7",
+      "name": "Brockian.LandauProblem.three_not_dvd_sq_add_one",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -142,5 +113,5 @@
       "axioms_ok": true
     }
   ],
-  "content_hash": "66a6b63cb72085be"
+  "content_hash": "85c60532481a9acd"
 }

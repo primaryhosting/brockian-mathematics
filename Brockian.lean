@@ -857,3 +857,7 @@ import Brockian.NonabelianHolonomy
 import Brockian.HolonomyFaithful
 import Brockian.HolonomyConjugacy
 import Brockian.FareySeparation
+import Brockian.ZumkellerStructure
+import Brockian.AliquotStructure
+import Brockian.LandauProblem
+import Brockian.CharactersQ
