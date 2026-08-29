@@ -65,6 +65,7 @@ jobs:
             tests/test_no_theater_lint.py \
             tests/test_engine_register.py \
             tests/test_engine_verify.py \
+            tests/test_check_lean_modules.py \
             tests/test_ingest_discover.py \
             tests/test_conveyor.py \
             tests/test_conveyor_paperclip.py \
@@ -117,8 +118,6 @@ jobs:
         if: steps.changes.outputs.has_lean == 'true'
         shell: bash
         run: |
-          while IFS= read -r module; do
-            echo "lake env lean $module"
-            lake env lean "$module"
-          done < /tmp/changed-lean.txt
+          mapfile -t modules < /tmp/changed-lean.txt
+          python3 scripts/check_lean_modules.py "${modules[@]}"
           lake env lean --version
