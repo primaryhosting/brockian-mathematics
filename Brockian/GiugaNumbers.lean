@@ -89,4 +89,68 @@ theorem giugaNumber_squarefree {n : ℕ} (h : GiugaNumber n) : Squarefree n := b
   rw [hsub] at h1
   exact absurd (Nat.dvd_one.mp h1) hpnat.ne_one
 
+lemma GiugaNumber.squarefree {n : ℕ} (h : GiugaNumber n) : Squarefree n := by
+  obtain ⟨hn1, -, hdvd⟩ := h
+  rw [Nat.squarefree_iff_prime_squarefree]
+  intro p hp hcon
+  have hpn : p ∣ n := dvd_trans (Dvd.intro p rfl) hcon
+  have h1 : p ∣ n / p - 1 := hdvd p hp hpn
+  obtain ⟨k, hk⟩ := hcon
+  have h2 : p ∣ n / p := ⟨k, by rw [hk, mul_assoc, Nat.mul_div_cancel_left _ hp.pos]⟩
+  have hpos : 0 < n / p := Nat.div_pos (Nat.le_of_dvd (by omega) hpn) hp.pos
+  have hone : p ∣ 1 := by
+    have := Nat.dvd_sub h2 h1
+    rwa [Nat.sub_sub_self hpos] at this
+  exact hp.one_lt.ne' (Nat.dvd_one.mp hone)
+
+theorem giugaNumber_three_primes {n : ℕ} (h : GiugaNumber n) : 3 ≤ n.primeFactors.card := by
+  have hsq := h.squarefree
+  obtain ⟨hn1, hnp, hdvd⟩ := h
+  have hprod : ∏ p ∈ n.primeFactors, p = n := Nat.prod_primeFactors_of_squarefree hsq
+  by_contra hcon
+  push_neg at hcon
+  have hne : n.primeFactors.Nonempty := Nat.nonempty_primeFactors.mpr hn1
+  have hpos : 1 ≤ n.primeFactors.card := Finset.card_pos.mpr hne
+  interval_cases hc : n.primeFactors.card
+  · -- one prime factor: n is prime
+    obtain ⟨p, hp⟩ := Finset.card_eq_one.mp hc
+    have hmem : p ∈ n.primeFactors := by rw [hp]; exact Finset.mem_singleton_self p
+    have : n = p := by rw [← hprod, hp, Finset.prod_singleton]
+    exact hnp (this ▸ (Nat.prime_of_mem_primeFactors hmem))
+  · -- two prime factors: n = p * q with p ∣ q - 1 and q ∣ p - 1
+    obtain ⟨p, q, hpq, hs⟩ := Finset.card_eq_two.mp hc
+    have hpm : p ∈ n.primeFactors := by rw [hs]; simp
+    have hqm : q ∈ n.primeFactors := by rw [hs]; simp
+    have hp : p.Prime := Nat.prime_of_mem_primeFactors hpm
+    have hq : q.Prime := Nat.prime_of_mem_primeFactors hqm
+    have hn : n = p * q := by
+      rw [← hprod, hs, Finset.prod_pair hpq]
+    have hdp : p ∣ q - 1 := by
+      have := hdvd p hp (Nat.dvd_of_mem_primeFactors hpm)
+      rwa [hn, Nat.mul_div_cancel_left _ hp.pos] at this
+    have hdq : q ∣ p - 1 := by
+      have := hdvd q hq (Nat.dvd_of_mem_primeFactors hqm)
+      rwa [hn, mul_comm, Nat.mul_div_cancel_left _ hq.pos] at this
+    have hp2 := hp.two_le
+    have hq2 := hq.two_le
+    have h1 : p ≤ q - 1 := Nat.le_of_dvd (by omega) hdp
+    have h2 : q ≤ p - 1 := Nat.le_of_dvd (by omega) hdq
+    omega
+
+theorem not_giugaNumber_prime_pow {p k : ℕ} (hp : p.Prime) : ¬ GiugaNumber (p ^ k) := by
+  rintro ⟨h1, h2, h3⟩
+  match k with
+  | 0 => simp at h1
+  | 1 => exact h2 (by simpa using hp)
+  | (m + 2) =>
+    have hd : p ∣ p ^ (m + 2) := dvd_pow_self p (by omega)
+    have hsub := h3 p hp hd
+    rw [pow_succ, Nat.mul_div_cancel _ hp.pos] at hsub
+    have h4 : p ∣ p ^ (m + 1) := dvd_pow_self p (by omega)
+    have h5 : (1 : ℕ) ≤ p ^ (m + 1) := Nat.one_le_pow _ _ hp.pos
+    have h6 : p ∣ p ^ (m + 1) - (p ^ (m + 1) - 1) := Nat.dvd_sub h4 hsub
+    have h7 : p ^ (m + 1) - (p ^ (m + 1) - 1) = 1 := by omega
+    rw [h7] at h6
+    exact Nat.Prime.one_lt hp |>.ne' (Nat.dvd_one.mp h6)
+
 end Brockian.GiugaNumbers

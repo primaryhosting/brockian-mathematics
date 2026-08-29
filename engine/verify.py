@@ -103,7 +103,9 @@ def axioms_in_line(line) -> list | None:
     s = str(line)
     if "does not depend on any axioms" in s:
         return []
-    m = re.search(r"depends on axioms:\s*\[(.*?)\]", s)
+    # AXLE/Lean may line-wrap longer dependency lists inside the brackets.  Keep
+    # unknown evidence fail-closed, but parse a complete multiline bracketed list.
+    m = re.search(r"depends on axioms:\s*\[(.*?)\]", s, re.DOTALL)
     if m:
         return [a.strip() for a in m.group(1).split(",") if a.strip()]
     return None

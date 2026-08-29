@@ -90,4 +90,85 @@ theorem primorial_5 : primorial 5 = 30 := by decide
 /-- `primorial 7 = 210`. -/
 theorem primorial_7 : primorial 7 = 210 := by decide
 
+theorem fortunateFor_coprime {P m : ℕ} (hP : 0 < P) (h : FortunateFor P m) :
+    Nat.Coprime m P := by
+  obtain ⟨hm, hp, -⟩ := h
+  have hd : Nat.gcd m P ∣ P + m :=
+    Nat.dvd_add (Nat.gcd_dvd_right m P) (Nat.gcd_dvd_left m P)
+  rcases hp.eq_one_or_self_of_dvd _ hd with h1 | h2
+  · exact h1
+  · have hle : Nat.gcd m P ≤ m := Nat.le_of_dvd (by omega) (Nat.gcd_dvd_left m P)
+    omega
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+theorem fortunateFor_unique {P m m' : ℕ} (h : FortunateFor P m) (h' : FortunateFor P m') :
+    m = m' := by
+  obtain ⟨hm, hp, hmin⟩ := h
+  obtain ⟨hm', hp', hmin'⟩ := h'
+  rcases lt_trichotomy m m' with hlt | heq | hgt
+  · exact absurd hp (hmin' m hm hlt)
+  · exact heq
+  · exact absurd hp' (hmin m' hm' hgt)
+
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+set_option autoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+theorem fortunateFor_odd_of_even_base {P m : ℕ} (hP : 0 < P) (hE : Even P)
+    (h : FortunateFor P m) : Odd m := by
+  obtain ⟨hm, hp, -⟩ := h
+  obtain ⟨t, ht⟩ := hE
+  have hodd : Odd (P + m) := hp.odd_of_ne_two (by omega)
+  obtain ⟨s, hs⟩ := hodd
+  exact ⟨s - t, by omega⟩
+
+theorem fortunateFor_not_dvd_base_prime {P m p : ℕ} (hP : 0 < P) (h : FortunateFor P m)
+    (hp : p.Prime) (hpP : p ∣ P) : ¬ p ∣ m := by
+  obtain ⟨hm, hprime, -⟩ := h
+  intro hpm
+  have hdvd : p ∣ P + m := Nat.dvd_add hpP hpm
+  have hpe : p = P + m := ((Nat.Prime.eq_one_or_self_of_dvd hprime p hdvd).resolve_left
+    hp.ne_one)
+  have hle : p ≤ m := Nat.le_of_dvd (by omega) hpm
+  omega
+
 end Brockian.FortunateNumbers

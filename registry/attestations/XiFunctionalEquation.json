@@ -4,10 +4,86 @@
   "module_verified": true,
   "declarations": [
     {
+      "name": "Brockian.XiFunctionalEquation.Gamma\u211d_conj",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.Gamma\u211d_ne_zero_of_nontrivial",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.RH_of_BrockianSystem",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.RiemannHypothesis_of_forall_xi_zero",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.RiemannScaffold.riemannXi_eq_zero_of_nontrivial_zeta_zero",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.completedRiemannZeta_conj",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.completedRiemannZeta_conj_of_one_lt_re",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
       "name": "Brockian.XiFunctionalEquation.completedRiemannZeta_functional_equation",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.completedRiemannZeta\u2080_conj",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
       "axioms_ok": true
     },
     {
@@ -22,6 +98,26 @@
       "axioms_ok": true
     },
     {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_conj",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_conj_self_of_re_eq_half",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true,
+      "verification_quarantine": true,
+      "verification_quarantine_reason": "AXIOM_EVIDENCE_PENDING"
+    },
+    {
       "name": "Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_zeta_zero_of_mem_critical_strip",
       "kind": "theorem",
       "axle_verdict": "verified",
@@ -29,7 +125,88 @@
       "axioms_ok": true
     },
     {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_eq_zero_of_nontrivial_zeta_zero",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
       "name": "Brockian.XiFunctionalEquation.riemannXi_functional_equation",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_im_eq_zero_of_re_eq_half",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_ne_zero_of_one_lt_re",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_ne_zero_of_re_lt_zero",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_zero_mem_critical_strip",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true,
+      "verification_quarantine": true,
+      "verification_quarantine_reason": "AXIOM_EVIDENCE_PENDING"
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_zero_reflect",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannZeta_conj",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannZeta_conj_of_one_lt_re",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.symmetric_eigenvalue_im_zero",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -56,6 +233,69 @@
       "axle_verdict": "verified",
       "axioms": [],
       "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.zeta_zero_quartet_of_mem_critical_strip",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_of_re_eq_one",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_of_re_eq_zero",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_ne_zero_of_re_eq_one_of_ne_one",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_one_eq_zero",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_zero_quartet",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
     }
-  ]
+  ],
+  "content_hash": "974249d13fbf197d"
 }

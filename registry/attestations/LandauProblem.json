@@ -1,17 +1,20 @@
 {
-  "module": "Brockian.AdmissibilityKTuple",
+  "module": "Brockian.LandauProblem",
   "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues",
-      "kind": "def",
+      "name": "Brockian.LandauProblem.coprime_sq_add_one",
+      "kind": "theorem",
       "axle_verdict": "verified",
-      "axioms": null,
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
       "axioms_ok": true
     },
     {
-      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_card",
+      "name": "Brockian.LandauProblem.even_of_sq_add_one_prime",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -22,44 +25,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_pair",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [],
-      "axioms_ok": true,
-      "verification_quarantine": true,
-      "verification_quarantine_reason": "AXIOM_EVIDENCE_PENDING"
-    },
-    {
-      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_triple",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_crt_card",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_crt_card_pair",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_pair_eq",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.AdmissibilityKTuple.admissible_ktuple_count_five",
+      "name": "Brockian.LandauProblem.exists_prime_mod_four_dvd_sq_add_one",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -70,7 +36,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.AdmissibilityKTuple.admissible_ktuple_count_three",
+      "name": "Brockian.LandauProblem.four_not_dvd_sq_add_one",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -81,7 +47,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.AdmissibilityKTuple.crt_filter_card",
+      "name": "Brockian.LandauProblem.gcd_sq_add_one_succ_dvd_five",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -92,7 +58,51 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.AdmissibilityKTuple.mem_admissibleTupleResidues",
+      "name": "Brockian.LandauProblem.landau_iff_even_infinite",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.LandauProblem.landau_iff_unbounded",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.LandauProblem.not_isSquare_sq_add_one",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.LandauProblem.odd_prime_dvd_sq_add_one_mod_four",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.LandauProblem.three_not_dvd_sq_add_one",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -102,6 +112,5 @@
       ],
       "axioms_ok": true
     }
-  ],
-  "content_hash": "734a7bc7463a110f"
+  ]
 }

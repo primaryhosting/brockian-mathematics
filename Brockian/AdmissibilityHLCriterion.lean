@@ -202,4 +202,265 @@ theorem not_admissible_zero_two_four : ¬ Admissible ({0, 2, 4} : Finset ℤ) :=
   have hnu3 : nu 3 ({0, 2, 4} : Finset ℤ) = 3 := by decide
   omega
 
+open scoped BigOperators
+open scoped Real
+open scoped Nat
+open scoped Classical
+open scoped Pointwise
+
+set_option maxHeartbeats 8000000
+set_option maxRecDepth 4000
+set_option synthInstance.maxHeartbeats 20000
+set_option synthInstance.maxSize 128
+
+set_option relaxedAutoImplicit false
+
+set_option pp.fullNames true
+set_option pp.structureInstances true
+set_option pp.coercions.types true
+set_option pp.funBinderTypes true
+set_option pp.letVarTypes true
+set_option pp.piBinderTypes true
+
+set_option grind.warning false
+
+/-- The nine-element offset set `{0, 1, 3, 5, 9, 11, 15, 17, 21}` is not admissible:
+it covers both residue classes mod `2`. -/
+theorem firstNinePrimeOffsets_not_admissible :
+    ¬ Admissible ({0, 1, 3, 5, 9, 11, 15, 17, 21} : Finset ℤ) := by
+  intro h
+  obtain ⟨r, hr⟩ := h 2 Nat.prime_two
+  revert hr
+  revert r
+  decide
+
+
+
+
+
+
+theorem admissible_image_add_const (S : Finset ℤ) (c : ℤ)
+    (h : Admissible S) : Admissible (S.image (· + c)) := by
+  intro p hp
+  obtain ⟨r, hr⟩ := h p hp
+  refine ⟨r + (c : ZMod p), ?_⟩
+  intro hmem
+  apply hr
+  simp only [residueImage, Finset.mem_image, Finset.image_image] at hmem ⊢
+  obtain ⟨s, hs, hs2⟩ := hmem
+  refine ⟨s, hs, ?_⟩
+  simp only [Function.comp_apply, Int.cast_add] at hs2
+  exact add_right_cancel hs2
+
+
+
+
+
+
+theorem not_admissible_of_five_consecutive_mod_five :
+    ¬ Admissible ({0, 1, 2, 3, 4} : Finset ℤ) := by
+  intro h
+  obtain ⟨r, hr⟩ := h 5 (by norm_num)
+  revert hr
+  revert r
+  decide
+
+
+
+
+
+
+/-- Negation acts as a bijection on residues mod every prime, so it preserves
+admissibility. -/
+theorem admissible_image_neg (S : Finset ℤ) (h : Admissible S) :
+    Admissible (S.image (fun x => -x)) := by
+  intro p hp
+  obtain ⟨r, hr⟩ := h p hp
+  refine ⟨-r, fun hmem => hr ?_⟩
+  simp only [residueImage, Finset.mem_image, Finset.image_image, Function.comp] at hmem ⊢
+  obtain ⟨x, hx, hxe⟩ := hmem
+  exact ⟨x, hx, by push_cast at hxe ⊢; linear_combination -hxe⟩
+
+
+
+
+
+
+theorem residueImage_subset {S T : Finset ℤ} (p : ℕ) (hT : T ⊆ S) :
+    residueImage p T ⊆ residueImage p S :=
+  Finset.image_subset_image hT
+
+theorem admissible_of_subset {S T : Finset ℤ} (h : Admissible S)
+    (hT : T ⊆ S) : Admissible T := by
+  intro p hp
+  obtain ⟨r, hr⟩ := h p hp
+  exact ⟨r, fun hmem => hr (residueImage_subset p hT hmem)⟩
+
+
+
+
+
+
+theorem not_admissible_of_all_residues_mod_seven :
+    ¬ Admissible ({0, 1, 9, 10, 11, 12, 20} : Finset ℤ) := by
+  intro h
+  obtain ⟨r, hr⟩ := h 7 (by norm_num)
+  exact hr (by revert r; decide)
+
+/-
+  Target theorem `nu_image_add_const` for the corpus module
+  `Brockian.AdmissibilityHLCriterion`.
+
+  The corpus modules themselves (`Brockian.Admissibility`, `Brockian.AdmissibilityKTuple`,
+  `Brockian.AdmissibilityCriterionScaffold`) are not part of this project, so the two
+  corpus definitions the goal is phrased in terms of (`residueImage` and `nu`) are
+  reproduced here verbatim, in their original namespace, purely so that the statement
+  elaborates.  Nothing else from the corpus is restated or re-proved.
+-/
+
+
+
+
+namespace Brockian.AdmissibilityHLCriterion
+
+/-- Translating a finite integer tuple by a constant `c` leaves the local count `ν_p`
+unchanged: reduction mod `p` turns the translation into addition of `(c : ZMod p)`,
+which is a bijection of `ZMod p`. -/
+theorem nu_image_add_const (p : ℕ) (S : Finset ℤ) (c : ℤ) :
+    nu p (S.image (fun x => x + c)) = nu p S := by
+  unfold nu residueImage
+  rw [Finset.image_image]
+  have h : (S.image ((fun n : ℤ => (n : ZMod p)) ∘ (fun x => x + c)))
+      = (S.image (fun n : ℤ => (n : ZMod p))).image (fun y => y + (c : ZMod p)) := by
+    rw [Finset.image_image]
+    apply Finset.image_congr
+    intro x _
+    simp
+  rw [h, Finset.card_image_of_injective _ (add_left_injective _)]
+
+
+
+
+
+
+
+namespace Brockian.AdmissibilityHLCriterion
+
+/-- **COMPUTATION.** The eleven-term arithmetic progression `12 · i` (`i = 0, …, 10`)
+covers every residue class mod `11` (since `12 ≡ 1 [ZMOD 11]`), so it is inadmissible. -/
+theorem not_admissible_of_eleven_dilated_residues :
+    ¬ Admissible ({0, 12, 24, 36, 48, 60, 72, 84, 96, 108, 120} : Finset ℤ) := by
+  intro h
+  obtain ⟨r, hr⟩ := h 11 (by norm_num)
+  exact hr (by revert r; decide)
+
+end Brockian.AdmissibilityHLCriterion
+
+end Brockian.AdmissibilityHLCriterion
+
+
+/-- Membership in the mod-`p` residue image of an affine image of `S`. -/
+theorem mem_residueImage_image_affine (a b : ℤ) (S : Finset ℤ) (p : ℕ) (z : ZMod p) :
+    z ∈ residueImage p (S.image (fun x => a * x + b)) ↔
+      ∃ x ∈ S, (a : ZMod p) * (x : ZMod p) + (b : ZMod p) = z := by
+  simp only [residueImage, Finset.mem_image, Finset.image_image, Function.comp_apply,
+    Int.cast_add, Int.cast_mul]
+
+
+/-- **Affine invariance of admissibility.** For any integers `a`, `b`, the affine image
+`a • S + b` of an admissible set `S` is admissible.  If `p ∤ a` the map is a bijection of
+`ZMod p`, so the omitted class is transported; if `p ∣ a` the image collapses to the
+single class of `b`, which cannot exhaust `ZMod p` since `p ≥ 2`. -/
+theorem admissible_image_affine (a b : ℤ) {S : Finset ℤ}
+    (h : Admissible S) : Admissible (S.image (fun x => a * x + b)) := by
+  intro p hp
+  haveI : Fact p.Prime := ⟨hp⟩
+  by_cases ha : (a : ZMod p) = 0
+  · refine ⟨(b : ZMod p) + 1, ?_⟩
+    rw [mem_residueImage_image_affine]
+    rintro ⟨x, -, hxe⟩
+    rw [ha, zero_mul, zero_add] at hxe
+    exact one_ne_zero (α := ZMod p) (by linear_combination -hxe)
+  · obtain ⟨r, hr⟩ := h p hp
+    refine ⟨(a : ZMod p) * r + (b : ZMod p), ?_⟩
+    rw [mem_residueImage_image_affine]
+    rintro ⟨x, hx, hxe⟩
+    refine hr ?_
+    have hrx : (x : ZMod p) = r := by
+      have : (a : ZMod p) * ((x : ZMod p) - r) = 0 := by linear_combination hxe
+      rcases mul_eq_zero.mp this with h1 | h1
+      · exact absurd h1 ha
+      · exact sub_eq_zero.mp h1
+    rw [← hrx]
+    exact Finset.mem_image_of_mem _ hx
+
+
+/-- Reflecting a finite integer tuple through the origin leaves the local count `ν_p`
+unchanged: reduction mod `p` turns `x ↦ -x` into negation on `ZMod p`, which is a
+bijection of `ZMod p`. -/
+theorem nu_image_neg (p : ℕ) (S : Finset ℤ) :
+    nu p (S.image (fun x => -x)) = nu p S := by
+  unfold nu residueImage
+  rw [Finset.image_image]
+  have h : (S.image ((fun n : ℤ => (n : ZMod p)) ∘ (fun x => -x)))
+      = (S.image (fun n : ℤ => (n : ZMod p))).image (fun y => -y) := by
+    rw [Finset.image_image]
+    apply Finset.image_congr
+    intro x _
+    simp
+  rw [h, Finset.card_image_of_injective _ (neg_injective)]
+
+
+/-- If the reduction map is injective on `S` and `S` has at least `p` elements, then
+`S` meets every residue class mod `p`, i.e. `ν_p(S) = p`. -/
+theorem nu_eq_of_injOn_card_ge (p : ℕ) [NeZero p] (S : Finset ℤ)
+    (hinj : ∀ x ∈ S, ∀ y ∈ S, ((x : ZMod p) = (y : ZMod p)) → x = y)
+    (hcard : p ≤ S.card) :
+    nu p S = p := by
+  have hcardeq : nu p S = S.card :=
+    Finset.card_image_of_injOn (fun x hx y hy hxy => hinj x hx y hy hxy)
+  have hle : nu p S ≤ p := by
+    have := Finset.card_le_univ (residueImage p S)
+    simpa [nu, ZMod.card] using this
+  omega
+
+
+/-- **COMPUTATION.** The thirteen-element set `{0, 3, 8, 12, 14, 23, 30, 35, 37, 44, 45,
+54, 59}` reduces mod `13` to the residues `0, 3, 8, 12, 1, 10, 4, 9, 11, 5, 6, 2, 7`,
+i.e. to all of `ZMod 13`, so it omits no residue class mod `13` and is inadmissible. -/
+theorem not_admissible_of_thirteen_scattered_residues :
+    ¬ Admissible ({0, 3, 8, 12, 14, 23, 30, 35, 37, 44, 45, 54, 59} : Finset ℤ) := by
+  intro h
+  obtain ⟨r, hr⟩ := h 13 (by norm_num)
+  exact hr (by revert r; decide)
+
+
+/-- Subadditivity of the local count `ν_p` under unions. -/
+theorem nu_union_le (p : ℕ) (S T : Finset ℤ) :
+    nu p (S ∪ T) ≤ nu p S + nu p T := by
+  unfold nu residueImage
+  rw [Finset.image_union]
+  exact Finset.card_union_le _ _
+
+
+/-- Dilating a finite integer tuple by an integer `a` that is not divisible by the prime
+`p` leaves the local count `ν_p` unchanged: reduction mod `p` turns the dilation into
+multiplication by the nonzero element `(a : ZMod p)` of the field `ZMod p`, which is a
+bijection of `ZMod p`. -/
+theorem nu_image_mul_of_not_dvd {p : ℕ} (hp : p.Prime) (a : ℤ)
+    (ha : ¬ ((p : ℤ) ∣ a)) (S : Finset ℤ) :
+    nu p (S.image (fun x => a * x)) = nu p S := by
+  haveI : Fact p.Prime := ⟨hp⟩
+  have ha0 : (a : ZMod p) ≠ 0 := by
+    rwa [Ne, ZMod.intCast_zmod_eq_zero_iff_dvd]
+  unfold nu residueImage
+  rw [Finset.image_image]
+  have h : (S.image ((fun n : ℤ => (n : ZMod p)) ∘ (fun x => a * x)))
+      = (S.image (fun n : ℤ => (n : ZMod p))).image (fun y => (a : ZMod p) * y) := by
+    rw [Finset.image_image]
+    apply Finset.image_congr
+    intro x _
+    simp
+  rw [h, Finset.card_image_of_injective _ (mul_right_injective₀ ha0)]
+
 end Brockian.AdmissibilityHLCriterion

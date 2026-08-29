@@ -1,0 +1,18 @@
+{
+  "payload": {
+    "wave": "wave68",
+    "statement": "A proof harvester must call attest.attest in-process and atomically merge fresh declarations by fully-qualified name; invoking the attest.py CLI for one name creates a crash window that can replace a complete module receipt with a singleton.",
+    "confidence": 0.99,
+    "tags": [
+      "mechanics",
+      "verification",
+      "integrity"
+    ],
+    "corroborating_waves": [
+      "wave66",
+      "wave67",
+      "wave68"
+    ]
+  },
+  "classification": "durable substitute plus readback; platform insight roundtrip remains monitored"
+}

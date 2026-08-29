@@ -1,9 +1,10 @@
 {
   "generated_from": "AXLE attestations",
   "summary": {
-    "PROVED": 11152,
-    "DEFINITION": 649,
-    "CONJECTURE": 40,
+    "PROVED": 11242,
+    "DEFINITION": 644,
+    "UNVERIFIED": 12,
+    "CONJECTURE": 38,
     "CONDITIONAL": 20,
     "DISCHARGED": 7
   },
@@ -342,7 +343,7 @@
       "source": {
         "file": "Brockian/AdmissibilityCRT.lean"
       },
-      "register": "PROVED",
+      "register": "UNVERIFIED",
       "axioms": [],
       "flags": {
         "native_decide": false,
@@ -355,13 +356,15 @@
         "axle": {
           "verdict": "verified",
           "environment": "lean-4.32.2"
-        }
+        },
+        "quarantine": true
       },
       "conditional_rung": null,
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "paper-audit target \u2014 CRT product |A_{q1q2}|=|A_q1|\u00b7|A_q2|; AXLE @4.32",
-      "provenance_note": "general coprime CRT admissibility count = plain product (p-2)(q-2); REFUTES Paper_BV_Final \u00a76.1's correction factor (would give non-integer 5.25 for p=3,q=5)."
+      "provenance_note": "general coprime CRT admissibility count = plain product (p-2)(q-2); REFUTES Paper_BV_Final \u00a76.1's correction factor (would give non-integer 5.25 for p=3,q=5).",
+      "verification_quarantine": true
     },
     {
       "name": "Brockian.Admissibility.CRT.admissible_count_three_five",
@@ -607,7 +610,7 @@
       "source": {
         "file": "Brockian/AdmissibilityCriterionScaffold.lean"
       },
-      "register": "PROVED",
+      "register": "UNVERIFIED",
       "axioms": [],
       "flags": {
         "native_decide": false,
@@ -620,13 +623,15 @@
         "axle": {
           "verdict": "verified",
           "environment": "lean-4.32.2"
-        }
+        },
+        "quarantine": true
       },
       "conditional_rung": null,
       "discharged_by": null,
       "quarantine": false,
       "ledger_run": null,
-      "provenance_note": null
+      "provenance_note": null,
+      "verification_quarantine": true
     },
     {
       "name": "Brockian.Admissibility.CriterionScaffold.localTupleAdmissible_iff_obstruction_lt",
@@ -781,7 +786,7 @@
       "source": {
         "file": "Brockian/AdmissibilityCRTGeneral.lean"
       },
-      "register": "PROVED",
+      "register": "UNVERIFIED",
       "axioms": [],
       "flags": {
         "native_decide": false,
@@ -794,13 +799,15 @@
         "axle": {
           "verdict": "verified",
           "environment": "lean-4.32.2"
-        }
+        },
+        "quarantine": true
       },
       "conditional_rung": null,
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #14 iterated \u2014 multi-factor CRT admissible count; AXLE @4.32",
-      "provenance_note": "Iterated multi-factor CRT admissible count prod_i (q_i - |H_i|) over pairwise-coprime moduli via ZMod.prodEquivPi; pi-count over product space; singular-series prime product prod (p_i - |H_i|) for distinct primes; concrete mod-15 = (3-2)(5-3)=2. Exact finite COUNT only. NOT proved: HL admissibility criterion, analytic singular series (infinite product/convergence/density)."
+      "provenance_note": "Iterated multi-factor CRT admissible count prod_i (q_i - |H_i|) over pairwise-coprime moduli via ZMod.prodEquivPi; pi-count over product space; singular-series prime product prod (p_i - |H_i|) for distinct primes; concrete mod-15 = (3-2)(5-3)=2. Exact finite COUNT only. NOT proved: HL admissibility criterion, analytic singular series (infinite product/convergence/density).",
+      "verification_quarantine": true
     },
     {
       "name": "Brockian.AdmissibilityCRTGeneral.admissibleTupleResidues_prodCRT_primes_card",
@@ -996,7 +1003,7 @@
       "source": {
         "file": "Brockian/AdmissibilityDiagonal.lean"
       },
-      "register": "PROVED",
+      "register": "UNVERIFIED",
       "axioms": [],
       "flags": {
         "native_decide": false,
@@ -1009,13 +1016,15 @@
         "axle": {
           "verdict": "verified",
           "environment": "lean-4.32.2"
-        }
+        },
+        "quarantine": true
       },
       "conditional_rung": null,
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence",
-      "provenance_note": "Divisible-case diagonal admissibility count (g=0 mod q -> q-1 configs). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
+      "provenance_note": "Divisible-case diagonal admissibility count (g=0 mod q -> q-1 configs). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent.",
+      "verification_quarantine": true
     },
     {
       "name": "Brockian.AdmissibilityDiagonal.admissibleResidues_zero_eq",
@@ -1179,64 +1188,6 @@
       "provenance_note": "Divisible-case diagonal admissibility count (g=0 mod q -> q-1 configs). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; re-checked through Claude's gate; backing committed to keep the registry coherent."
     },
     {
-      "name": "Brockian.AdmissibilityHLCriterion.Admissible",
-      "kind": "def",
-      "module": "Brockian.AdmissibilityHLCriterion",
-      "statement": "",
-      "source": {
-        "file": "Brockian/AdmissibilityHLCriterion.lean"
-      },
-      "register": "DEFINITION",
-      "axioms": [],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.2"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
-      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
-    },
-    {
-      "name": "Brockian.AdmissibilityHLCriterion.OmitsResidue",
-      "kind": "def",
-      "module": "Brockian.AdmissibilityHLCriterion",
-      "statement": "",
-      "source": {
-        "file": "Brockian/AdmissibilityHLCriterion.lean"
-      },
-      "register": "DEFINITION",
-      "axioms": [],
-      "flags": {
-        "native_decide": false,
-        "sorry": false,
-        "exact_search": false
-      },
-      "verification": {
-        "lake_build": "pending",
-        "axioms_ok": true,
-        "axle": {
-          "verdict": "verified",
-          "environment": "lean-4.32.2"
-        }
-      },
-      "conditional_rung": null,
-      "discharged_by": null,
-      "quarantine": true,
-      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
-      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
-    },
-    {
       "name": "Brockian.AdmissibilityHLCriterion.admissible_iff_card_image_lt",
       "kind": "theorem",
       "module": "Brockian.AdmissibilityHLCriterion",
@@ -1244,7 +1195,7 @@
       "source": {
         "file": "Brockian/AdmissibilityHLCriterion.lean"
       },
-      "register": "PROVED",
+      "register": "UNVERIFIED",
       "axioms": [],
       "flags": {
         "native_decide": false,
@@ -1257,13 +1208,15 @@
         "axle": {
           "verdict": "verified",
           "environment": "lean-4.32.2"
-        }
+        },
+        "quarantine": true
       },
       "conditional_rung": null,
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
-      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics.",
+      "verification_quarantine": true
     },
     {
       "name": "Brockian.AdmissibilityHLCriterion.admissible_iff_count_pos",
@@ -1390,6 +1343,134 @@
       "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
     },
     {
+      "name": "Brockian.AdmissibilityHLCriterion.admissible_image_add_const",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.admissible_image_affine",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.admissible_image_neg",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.admissible_of_subset",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
       "name": "Brockian.AdmissibilityHLCriterion.admissible_zero_two",
       "kind": "theorem",
       "module": "Brockian.AdmissibilityHLCriterion",
@@ -1403,6 +1484,180 @@
         "Quot.sound",
         "propext"
       ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.firstNinePrimeOffsets_not_admissible",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.mem_residueImage_image_affine",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.not_admissible_of_all_residues_mod_seven",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.not_admissible_of_eleven_dilated_residues",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.not_admissible_of_five_consecutive_mod_five",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.not_admissible_of_thirteen_scattered_residues",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -1452,15 +1707,147 @@
       "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
     },
     {
-      "name": "Brockian.AdmissibilityHLCriterion.nu",
-      "kind": "def",
+      "name": "Brockian.AdmissibilityHLCriterion.nu_eq_of_injOn_card_ge",
+      "kind": "theorem",
       "module": "Brockian.AdmissibilityHLCriterion",
       "statement": "",
       "source": {
         "file": "Brockian/AdmissibilityHLCriterion.lean"
       },
-      "register": "DEFINITION",
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.nu_image_add_const",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
       "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.nu_image_mul_of_not_dvd",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.nu_image_neg",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #11 \u2014 Hardy-Littlewood admissibility criterion; AXLE @4.32",
+      "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
+    },
+    {
+      "name": "Brockian.AdmissibilityHLCriterion.nu_union_le",
+      "kind": "theorem",
+      "module": "Brockian.AdmissibilityHLCriterion",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AdmissibilityHLCriterion.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -1547,15 +1934,19 @@
       "provenance_note": "The genuine global HL criterion: Admissible H (covers no full residue system) iff for every prime p, nu_p(H) < p; equivalently image.card < p. Includes the finiteness reduction (suffices p <= |H|) and connections to the q-nu count (admissible iff count>0). Examples {0,2} admissible, {0,2,4} inadmissible (decide COMPUTATION). NOT claimed: HL conjecture (infinitude), density/asymptotics."
     },
     {
-      "name": "Brockian.AdmissibilityHLCriterion.residueImage",
-      "kind": "def",
+      "name": "Brockian.AdmissibilityHLCriterion.residueImage_subset",
+      "kind": "theorem",
       "module": "Brockian.AdmissibilityHLCriterion",
       "statement": "",
       "source": {
         "file": "Brockian/AdmissibilityHLCriterion.lean"
       },
-      "register": "DEFINITION",
-      "axioms": [],
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -1645,7 +2036,7 @@
       "source": {
         "file": "Brockian/AdmissibilityKTuple.lean"
       },
-      "register": "PROVED",
+      "register": "UNVERIFIED",
       "axioms": [],
       "flags": {
         "native_decide": false,
@@ -1658,13 +2049,15 @@
         "axle": {
           "verdict": "verified",
           "environment": "lean-4.32.2"
-        }
+        },
+        "quarantine": true
       },
       "conditional_rung": null,
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "roadmap #14 \u2014 general admissible k-tuple configuration count; AXLE @4.32",
-      "provenance_note": "General k-tuple admissible count over ZMod q: |A_q(H)| = q - |H| for arbitrary finite offset set H (LINEAR in q; definitively refutes the paper's superseded (q-1)^{k-1} guess). k=2 recovers q-2 via universal_admissibility_count; k=3 gives q-3; composite-modulus CRT lift (q1-|H1|)(q2-|H2|). NOT proved (explicit): HL admissibility criterion, iterated multi-factor CRT, singular-series/density/asymptotics."
+      "provenance_note": "General k-tuple admissible count over ZMod q: |A_q(H)| = q - |H| for arbitrary finite offset set H (LINEAR in q; definitively refutes the paper's superseded (q-1)^{k-1} guess). k=2 recovers q-2 via universal_admissibility_count; k=3 gives q-3; composite-modulus CRT lift (q1-|H1|)(q2-|H2|). NOT proved (explicit): HL admissibility criterion, iterated multi-factor CRT, singular-series/density/asymptotics.",
+      "verification_quarantine": true
     },
     {
       "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_triple",
@@ -2578,6 +2971,268 @@
       "quarantine": true,
       "ledger_run": "paper-audit target \u2014 separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32",
       "provenance_note": "additiveAut(ZMod p)=(ZMod p)\u02e3\u2245C_{p-1} (order p-1, NOT D_p); graph Aut(C_p)\u2245D_p (order 2p); {i\u21a6\u00b1i+c} = dihedral subgroup order 2p of Aff(1,F_p). symmetry_separation (orders 4/10/10) proves additive-aut\u2260D\u2085 \u2014 retires the Papers 2&4 error with correct theorems."
+    },
+    {
+      "name": "Brockian.AliquotStructure.hyperperfect_one_iff_perfect",
+      "kind": "theorem",
+      "module": "Brockian.AliquotStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AliquotStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AliquotStructure.hyperperfect_pos_of_hyperperfect",
+      "kind": "theorem",
+      "module": "Brockian.AliquotStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AliquotStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AliquotStructure.not_quasiperfect_prime",
+      "kind": "theorem",
+      "module": "Brockian.AliquotStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AliquotStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AliquotStructure.not_semiperfect_of_aliquot_lt",
+      "kind": "theorem",
+      "module": "Brockian.AliquotStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AliquotStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AliquotStructure.quasiperfect_isSquare_or_two_mul_square",
+      "kind": "theorem",
+      "module": "Brockian.AliquotStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AliquotStructure.lean"
+      },
+      "register": "UNVERIFIED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        },
+        "quarantine": true
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null,
+      "verification_quarantine": true
+    },
+    {
+      "name": "Brockian.AliquotStructure.semiperfect_mul_right",
+      "kind": "theorem",
+      "module": "Brockian.AliquotStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AliquotStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AliquotStructure.semiperfect_of_perfect",
+      "kind": "theorem",
+      "module": "Brockian.AliquotStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AliquotStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.AliquotStructure.sigma_eq_aliquot_add_self",
+      "kind": "theorem",
+      "module": "Brockian.AliquotStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/AliquotStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     },
     {
       "name": "Brockian.AmicableNumbers.Amicable",
@@ -5813,7 +6468,7 @@
       "source": {
         "file": "Brockian/C5SpectralMultiplicities.lean"
       },
-      "register": "PROVED",
+      "register": "UNVERIFIED",
       "axioms": [],
       "flags": {
         "native_decide": false,
@@ -5826,13 +6481,15 @@
         "axle": {
           "verdict": "verified",
           "environment": "lean-4.32.2"
-        }
+        },
+        "quarantine": true
       },
       "conditional_rung": null,
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence",
-      "provenance_note": "C5 adjacency eigenvalue multiplicities. AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; verdict re-checked by Claude's gate before integration."
+      "provenance_note": "C5 adjacency eigenvalue multiplicities. AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; verdict re-checked by Claude's gate before integration.",
+      "verification_quarantine": true
     },
     {
       "name": "Brockian.C5SpectralMultiplicities.multiplicity_lap_gap",
@@ -8133,6 +8790,303 @@
       "provenance_note": "HARMONIC-PROVED moonshot (Aristotle cayley, re-queue/complete), independently AXLE-verified @lean-4.32.0, axiom-clean. Namespace Brockian.Cayley."
     },
     {
+      "name": "Brockian.CharactersQ.additive_orthogonality",
+      "kind": "theorem",
+      "module": "Brockian.CharactersQ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CharactersQ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CharactersQ.additive_orthogonality_sub",
+      "kind": "theorem",
+      "module": "Brockian.CharactersQ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CharactersQ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CharactersQ.fourier_apply",
+      "kind": "theorem",
+      "module": "Brockian.CharactersQ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CharactersQ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CharactersQ.fourier_inversion",
+      "kind": "theorem",
+      "module": "Brockian.CharactersQ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CharactersQ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CharactersQ.fourier_twice",
+      "kind": "theorem",
+      "module": "Brockian.CharactersQ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CharactersQ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CharactersQ.multiplicative_orthogonality",
+      "kind": "theorem",
+      "module": "Brockian.CharactersQ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CharactersQ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CharactersQ.norm_fourier_le_sum_norm",
+      "kind": "theorem",
+      "module": "Brockian.CharactersQ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CharactersQ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CharactersQ.norm_fourier_sq_le_card_mul_sum",
+      "kind": "theorem",
+      "module": "Brockian.CharactersQ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CharactersQ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.CharactersQ.parseval",
+      "kind": "theorem",
+      "module": "Brockian.CharactersQ",
+      "statement": "",
+      "source": {
+        "file": "Brockian/CharactersQ.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.CollatzPartial.CollatzConjecture",
       "kind": "conjecture",
       "module": "Brockian.CollatzPartial",
@@ -8227,7 +9181,7 @@
       "source": {
         "file": "Brockian/CollatzPartial.lean"
       },
-      "register": "PROVED",
+      "register": "UNVERIFIED",
       "axioms": [],
       "flags": {
         "native_decide": false,
@@ -8240,13 +9194,15 @@
         "axle": {
           "verdict": "verified",
           "environment": "lean-4.32.2"
-        }
+        },
+        "quarantine": true
       },
       "conditional_rung": null,
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "open-territory loop; AXLE @4.32",
-      "provenance_note": "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted."
+      "provenance_note": "OPEN-TERRITORY partial results toward the Collatz (3n+1) conjecture (open). Open-territory loop, AXLE @4.32, axiom-clean. collatz step + Reaches1 predicate; CollatzConjecture recorded as an unproven def (CONJECTURE register). PROVED: the trivial cycle 1->4->2->1 (trivial_cycle); FLAGSHIP powers of two reach 1 (reaches1_pow_two via collatz_two_mul: collatz(2n)=n); descent by halving (reaches1_two_mul, reaches1_mul_pow_two); and the Terras-style descent descent_mod4_one: every n=1 mod 4 (n>1) reaches a value < n in 3 steps (12m+4->6m+2->3m+1 < 4m+1). Genuine unconditional partial results; the conjecture is never asserted.",
+      "verification_quarantine": true
     },
     {
       "name": "Brockian.CollatzPartial.collatz_one",
@@ -65550,15 +66506,18 @@
       "provenance_note": null
     },
     {
-      "name": "Brockian.FortunateNumbers.FortunateFor",
-      "kind": "def",
+      "name": "Brockian.FortunateNumbers.fortunateFor_coprime",
+      "kind": "theorem",
       "module": "Brockian.FortunateNumbers",
       "statement": "",
       "source": {
         "file": "Brockian/FortunateNumbers.lean"
       },
-      "register": "DEFINITION",
-      "axioms": [],
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -65579,15 +66538,81 @@
       "provenance_note": "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
     },
     {
-      "name": "Brockian.FortunateNumbers.FortuneConjecture",
-      "kind": "conjecture",
+      "name": "Brockian.FortunateNumbers.fortunateFor_not_dvd_base_prime",
+      "kind": "theorem",
       "module": "Brockian.FortunateNumbers",
       "statement": "",
       "source": {
         "file": "Brockian/FortunateNumbers.lean"
       },
-      "register": "CONJECTURE",
-      "axioms": [],
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.FortunateNumbers.fortunateFor_odd_of_even_base",
+      "kind": "theorem",
+      "module": "Brockian.FortunateNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Fortunate numbers / Fortune's conjecture (open-territory loop, AXLE @4.32, axiom-clean). FortunateFor P m := m>1 is the smallest integer with P+m prime. CONCRETE: fortunate_{2,6,30,210} give Fortunate numbers 3,5,7,13 (bases are the primorials, tied via primorial_{2,3,5,7}); fortunate_values_prime shows all four ARE prime (illustrating Fortune's conjecture). Note Mathlib v4.32 primorial is root-namespace `primorial` not Nat.primorial. FortuneConjecture (every Fortunate number is prime) is an unproven def -- OPEN, never asserted."
+    },
+    {
+      "name": "Brockian.FortunateNumbers.fortunateFor_unique",
+      "kind": "theorem",
+      "module": "Brockian.FortunateNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/FortunateNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "propext"
+      ],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -71655,15 +72680,19 @@
       "provenance_note": "OPEN-TERRITORY Giuga numbers (open-territory loop, AXLE @4.32, axiom-clean). GiugaNumber n = composite n>1 with p|(n/p-1) for every prime p|n. CONCRETE verified: giuga_30 (30=2*3*5, flagship) and giuga_858 (858=2*3*11*13, bonus). FLAGSHIP structural necessary condition giugaNumber_squarefree: every Giuga number is squarefree (p^2|n => p|(n/p) and p|(n/p-1) => p|1). The genuinely OPEN question -- does an ODD Giuga number exist? (parallel to odd perfect numbers) -- is recorded as an unproven def OddGiugaExists; nothing asserts or denies it."
     },
     {
-      "name": "Brockian.GiugaNumbers.OddGiugaExists",
-      "kind": "conjecture",
+      "name": "Brockian.GiugaNumbers.giugaNumber_squarefree",
+      "kind": "theorem",
       "module": "Brockian.GiugaNumbers",
       "statement": "",
       "source": {
         "file": "Brockian/GiugaNumbers.lean"
       },
-      "register": "CONJECTURE",
-      "axioms": [],
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -71684,7 +72713,7 @@
       "provenance_note": "OPEN-TERRITORY Giuga numbers (open-territory loop, AXLE @4.32, axiom-clean). GiugaNumber n = composite n>1 with p|(n/p-1) for every prime p|n. CONCRETE verified: giuga_30 (30=2*3*5, flagship) and giuga_858 (858=2*3*11*13, bonus). FLAGSHIP structural necessary condition giugaNumber_squarefree: every Giuga number is squarefree (p^2|n => p|(n/p) and p|(n/p-1) => p|1). The genuinely OPEN question -- does an ODD Giuga number exist? (parallel to odd perfect numbers) -- is recorded as an unproven def OddGiugaExists; nothing asserts or denies it."
     },
     {
-      "name": "Brockian.GiugaNumbers.giugaNumber_squarefree",
+      "name": "Brockian.GiugaNumbers.giugaNumber_three_primes",
       "kind": "theorem",
       "module": "Brockian.GiugaNumbers",
       "statement": "",
@@ -71760,6 +72789,38 @@
       "register": "PROVED",
       "axioms": [
         "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY Giuga numbers (open-territory loop, AXLE @4.32, axiom-clean). GiugaNumber n = composite n>1 with p|(n/p-1) for every prime p|n. CONCRETE verified: giuga_30 (30=2*3*5, flagship) and giuga_858 (858=2*3*11*13, bonus). FLAGSHIP structural necessary condition giugaNumber_squarefree: every Giuga number is squarefree (p^2|n => p|(n/p) and p|(n/p-1) => p|1). The genuinely OPEN question -- does an ODD Giuga number exist? (parallel to odd perfect numbers) -- is recorded as an unproven def OddGiugaExists; nothing asserts or denies it."
+    },
+    {
+      "name": "Brockian.GiugaNumbers.not_giugaNumber_prime_pow",
+      "kind": "theorem",
+      "module": "Brockian.GiugaNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/GiugaNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
         "Quot.sound",
         "propext"
       ],
@@ -109820,6 +110881,335 @@
       "provenance_note": "OPEN-TERRITORY Landau's fourth problem -- primes of the form n^2+1 (open-territory loop, AXLE @4.32, axiom-clean). NSqPlusOnePrime n := (n^2+1).Prime. CONCRETE: ten instances nsq_{1,2,4,6,10,14,16,20,24,26} (witnesses 2,5,17,37,101,197,257,401,577,677). FLAGSHIP STRUCTURAL nsq_even_of_prime: for n>1, n^2+1 prime => n even (n odd => n^2+1 even >2, only even prime is 2); corollary nsq_mod_two_of_prime. Landau's 4th conjecture (infinitely many n^2+1 primes; one of the four 1912 'unattackable' problems) is an unproven def LandauFourthConjecture -- OPEN, never asserted."
     },
     {
+      "name": "Brockian.LandauProblem.coprime_sq_add_one",
+      "kind": "theorem",
+      "module": "Brockian.LandauProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.LandauProblem.even_of_sq_add_one_prime",
+      "kind": "theorem",
+      "module": "Brockian.LandauProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.LandauProblem.exists_prime_mod_four_dvd_sq_add_one",
+      "kind": "theorem",
+      "module": "Brockian.LandauProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.LandauProblem.four_not_dvd_sq_add_one",
+      "kind": "theorem",
+      "module": "Brockian.LandauProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.LandauProblem.gcd_sq_add_one_succ_dvd_five",
+      "kind": "theorem",
+      "module": "Brockian.LandauProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.LandauProblem.landau_iff_even_infinite",
+      "kind": "theorem",
+      "module": "Brockian.LandauProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.LandauProblem.landau_iff_unbounded",
+      "kind": "theorem",
+      "module": "Brockian.LandauProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.LandauProblem.not_isSquare_sq_add_one",
+      "kind": "theorem",
+      "module": "Brockian.LandauProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.LandauProblem.odd_prime_dvd_sq_add_one_mod_four",
+      "kind": "theorem",
+      "module": "Brockian.LandauProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.LandauProblem.three_not_dvd_sq_add_one",
+      "kind": "theorem",
+      "module": "Brockian.LandauProblem",
+      "statement": "",
+      "source": {
+        "file": "Brockian/LandauProblem.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.LegendreConjecture.LegendreConjecture",
       "kind": "conjecture",
       "module": "Brockian.LegendreConjecture",
@@ -135008,6 +136398,39 @@
       "provenance_note": null
     },
     {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_criticalLine_even",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
       "name": "Brockian.RiemannXiSymmetry.riemannXi_eq_zero_iff_reflect",
       "kind": "theorem",
       "module": "Brockian.RiemannXiSymmetry",
@@ -135042,6 +136465,39 @@
     },
     {
       "name": "Brockian.RiemannXiSymmetry.riemannXi_eq_zero_reflect",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_one_sub",
       "kind": "theorem",
       "module": "Brockian.RiemannXiSymmetry",
       "statement": "",
@@ -135120,6 +136576,35 @@
         "Quot.sound",
         "propext"
       ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.RiemannXiSymmetry.riemannXi_reflect_of_riemannXi_criticalLine_even",
+      "kind": "theorem",
+      "module": "Brockian.RiemannXiSymmetry",
+      "statement": "",
+      "source": {
+        "file": "Brockian/RiemannXiSymmetry.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -330224,6 +331709,394 @@
       "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
     },
     {
+      "name": "Brockian.SuperperfectNumbers.add_le_sigma1",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.even_sigma1_of_odd_of_not_isSquare",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.mersenne_prime_of_superperfect_two_pow",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.no_odd_superperfect_lt_hundred",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.not_superperfect_odd_of_not_sq",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.not_superperfect_odd_prime",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.odd_of_dvd_odd",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.odd_sigma1_iff_isSquare_of_odd",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.odd_sigma1_of_odd_isSquare",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.odd_sigma1_of_superperfect_odd",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.prime_of_sigma1_eq_succ",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.self_le_sigma1",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
       "name": "Brockian.SuperperfectNumbers.sigma1",
       "kind": "def",
       "module": "Brockian.SuperperfectNumbers",
@@ -330254,6 +332127,72 @@
     },
     {
       "name": "Brockian.SuperperfectNumbers.sigma1_prime",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.sigma1_two_pow",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.sigma1_two_pow_mul",
       "kind": "theorem",
       "module": "Brockian.SuperperfectNumbers",
       "statement": "",
@@ -330464,6 +332403,35 @@
         "Quot.sound",
         "propext"
       ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "open-territory loop; AXLE @4.32",
+      "provenance_note": "OPEN-TERRITORY superperfect numbers (open-territory loop, AXLE @4.32, axiom-clean). Superperfect n := sigma(sigma(n))=2n. CONCRETE: superperfect_{2,4,16,64}. FLAGSHIP superperfect_two_pow_of_mersenne_prime: 2^(p-1) is superperfect when 2^p-1 is a Mersenne prime (sigma(2^(p-1))=2^p-1=mersenne p, then sigma(mersenne p)=1+mersenne p=2^p=2*2^(p-1)) -- ties superperfect to Mersenne primes. Non-example six_not_superperfect. The OPEN question -- does an ODD superperfect number exist? (none known, parallel to odd perfect/odd Giuga/odd weird) -- is an unproven def OddSuperperfectExists, never asserted or denied."
+    },
+    {
+      "name": "Brockian.SuperperfectNumbers.superperfect_two_pow_iff_mersenne_prime",
+      "kind": "theorem",
+      "module": "Brockian.SuperperfectNumbers",
+      "statement": "",
+      "source": {
+        "file": "Brockian/SuperperfectNumbers.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
       "flags": {
         "native_decide": false,
         "sorry": false,
@@ -337234,7 +339202,7 @@
       "source": {
         "file": "Brockian/ConfiningSpectralShape.lean"
       },
-      "register": "PROVED",
+      "register": "UNVERIFIED",
       "axioms": [],
       "flags": {
         "native_decide": false,
@@ -337247,13 +339215,15 @@
         "axle": {
           "verdict": "verified",
           "environment": "lean-4.32.2"
-        }
+        },
+        "quarantine": true
       },
       "conditional_rung": null,
       "discharged_by": null,
       "quarantine": true,
       "ledger_run": "parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence",
-      "provenance_note": "confining spectral-shape necessary conditions (roadmap #5/#13 lane). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; verdict re-checked by Claude's gate before integration."
+      "provenance_note": "confining spectral-shape necessary conditions (roadmap #5/#13 lane). AXLE-verified @lean-4.32.0, axiom-clean, no-theater-lint clean. Authored by a concurrent tool; verdict re-checked by Claude's gate before integration.",
+      "verification_quarantine": true
     },
     {
       "name": "Brockian.Weyl.ConfiningShape.clm_bound_blocks_zeros_outside_ball",
@@ -355609,6 +357579,225 @@
       "provenance_note": "Exact archive-free Wolstenholme theorem: for prime p >= 5, p^3 divides choose(2p,p)-2 over the integers. Returned Lean 4.28 proof passed independent AXLE verification unchanged at Lean 4.32; axioms only propext/Classical.choice/Quot.sound."
     },
     {
+      "name": "Brockian.XiFunctionalEquation.Gamma\u211d_conj",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.Gamma\u211d_ne_zero_of_nontrivial",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.RH_of_BrockianSystem",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.RiemannHypothesis_of_forall_xi_zero",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.RiemannScaffold.riemannXi_eq_zero_of_nontrivial_zeta_zero",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.completedRiemannZeta_conj",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.completedRiemannZeta_conj_of_one_lt_re",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
       "name": "Brockian.XiFunctionalEquation.completedRiemannZeta_functional_equation",
       "kind": "theorem",
       "module": "Brockian.XiFunctionalEquation",
@@ -355638,7 +357827,170 @@
       "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
     },
     {
+      "name": "Brockian.XiFunctionalEquation.completedRiemannZeta\u2080_conj",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
       "name": "Brockian.XiFunctionalEquation.riemannXi_apply",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_conj",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_conj_self_of_re_eq_half",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "UNVERIFIED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        },
+        "quarantine": true
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded.",
+      "verification_quarantine": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_of_re_eq_one",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_of_re_eq_zero",
       "kind": "theorem",
       "module": "Brockian.XiFunctionalEquation",
       "statement": "",
@@ -355700,7 +358052,385 @@
       "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
     },
     {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_eq_zero_of_nontrivial_zeta_zero",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
       "name": "Brockian.XiFunctionalEquation.riemannXi_functional_equation",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_im_eq_zero_of_re_eq_half",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_ne_zero_of_one_lt_re",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_ne_zero_of_re_eq_one_of_ne_one",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_ne_zero_of_re_lt_zero",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_one_eq_zero",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_zero_mem_critical_strip",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "UNVERIFIED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        },
+        "quarantine": true
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded.",
+      "verification_quarantine": true
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_zero_quartet",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannXi_zero_reflect",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannZeta_conj",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.riemannZeta_conj_of_one_lt_re",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.symmetric_eigenvalue_im_zero",
       "kind": "theorem",
       "module": "Brockian.XiFunctionalEquation",
       "statement": "",
@@ -355767,6 +358497,35 @@
     },
     {
       "name": "Brockian.XiFunctionalEquation.zeta_zero_one_sub_of_mem_critical_strip",
+      "kind": "theorem",
+      "module": "Brockian.XiFunctionalEquation",
+      "statement": "",
+      "source": {
+        "file": "Brockian/XiFunctionalEquation.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": true,
+      "ledger_run": "roadmap #28 \u2014 xi functional equation + zeta<->xi zero correspondence; AXLE @4.32",
+      "provenance_note": "Unconditional, Mathlib-backed: completed-zeta functional equation Lambda(1-s)=Lambda(s), the Brockian xi = s(s-1)Lambda(s), xi(1-s)=xi(s); FULL zeta<->xi zero correspondence in the open critical strip (both directions, biconditional) + reflection of nontrivial zeta-zeros across s->1-s. Strengthens RiemannScaffold. RH itself, zero locations, BrockianSystem Hilbert-Polya schema remain OPEN/untouched. Boundary lines Re s in {0,1} + trivial-zero lattice deliberately excluded."
+    },
+    {
+      "name": "Brockian.XiFunctionalEquation.zeta_zero_quartet_of_mem_critical_strip",
       "kind": "theorem",
       "module": "Brockian.XiFunctionalEquation",
       "statement": "",
@@ -356903,6 +359662,328 @@
       "quarantine": true,
       "ledger_run": "frontier swarm; AXLE @4.32",
       "provenance_note": "SWARM-PROVED Zumkeller numbers with GENERAL structural theorems (AXLE @4.32, axiom-clean). A number is Zumkeller if its divisors split into two equal-sum sets (half-sum characterization exists S subset divisors, 2*sum S = sigma). GENERAL: zumkeller_sigma_even (sigma is even); zumkeller_two_mul_le_sigma (flagship -- every positive Zumkeller number is perfect-or-abundant, 2n <= sigma(n)); not_zumkeller_prime (no prime is Zumkeller, via deficiency). Concrete witnesses 6,12,20,24,28,30 with explicit half-sets. OddZumkellerFrom3Structure is an unproven OPEN def (odd Zumkeller structure; smallest odd Zumkeller is 945). Zumkeller infinitude/odd-density OPEN."
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.not_zumkeller_of_deficient",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.not_zumkeller_of_sigma_odd",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.not_zumkeller_prime_pow",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.odd_zumkeller_not_square",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.sigma_odd_iff_square_or_two_mul_square",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.zumkeller_iff_partition",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.zumkeller_mul_coprime",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.zumkeller_of_perfect",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.zumkeller_two_mul_of_odd_zumkeller",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
+    },
+    {
+      "name": "Brockian.ZumkellerStructure.zumkeller_two_pow_mul_prime",
+      "kind": "theorem",
+      "module": "Brockian.ZumkellerStructure",
+      "statement": "",
+      "source": {
+        "file": "Brockian/ZumkellerStructure.lean"
+      },
+      "register": "PROVED",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "flags": {
+        "native_decide": false,
+        "sorry": false,
+        "exact_search": false
+      },
+      "verification": {
+        "lake_build": "pending",
+        "axioms_ok": true,
+        "axle": {
+          "verdict": "verified",
+          "environment": "lean-4.32.2"
+        }
+      },
+      "conditional_rung": null,
+      "discharged_by": null,
+      "quarantine": false,
+      "ledger_run": null,
+      "provenance_note": null
     }
   ]
 }

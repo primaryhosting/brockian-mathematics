@@ -1,0 +1,86 @@
+{
+  "wave": 68,
+  "base_commit": "6a0738f53dd844225e9ebf6e9294137d205bf5e9",
+  "policy": "One unique theorem per statement; all declarations require fresh local elaboration, in-process AXLE evidence, a parsed axiom list, and a sibling-preserving canonical receipt merge.",
+  "selected": [
+    {
+      "target": "Brockian.XiFunctionalEquation.riemannXi_zero_quartet",
+      "backend": "aristotle",
+      "project_id": "ce26fd8f-7d2f-44b2-b6f4-d118593ae816",
+      "artifact_task_id": "22435f44-61ba-4568-94cb-af7d40add091",
+      "variant": "declared-gates",
+      "statement_sha256": "feecfcbda4c6b97ee47d7ed7f638967bb3c4cae6becfe79b33bd3b69fd6bce05",
+      "consumes": [
+        "Brockian.XiFunctionalEquation.riemannXi_zero_reflect",
+        "Brockian.XiFunctionalEquation.riemannXi_functional_equation"
+      ]
+    },
+    {
+      "target": "Brockian.XiFunctionalEquation.riemannXi_one_eq_zero",
+      "backend": "aristotle",
+      "project_id": "2d375a9d-6a6e-4ceb-93cf-919bc069c73d",
+      "artifact_task_id": "78ed1cfe-945f-4ab7-8e05-c8eac9fadb0e",
+      "salvaged_from_refuted_target": "riemannXi_ne_zero_of_re_eq_one"
+    },
+    {
+      "target": "Brockian.XiFunctionalEquation.riemannXi_ne_zero_of_re_eq_one_of_ne_one",
+      "backend": "aristotle",
+      "project_id": "2d375a9d-6a6e-4ceb-93cf-919bc069c73d",
+      "artifact_task_id": "78ed1cfe-945f-4ab7-8e05-c8eac9fadb0e",
+      "salvaged_from_refuted_target": "riemannXi_ne_zero_of_re_eq_one"
+    },
+    {
+      "target": "Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_of_re_eq_one",
+      "backend": "aristotle",
+      "project_id": "2d375a9d-6a6e-4ceb-93cf-919bc069c73d",
+      "artifact_task_id": "78ed1cfe-945f-4ab7-8e05-c8eac9fadb0e",
+      "salvaged_from_refuted_target": "riemannXi_ne_zero_of_re_eq_one"
+    },
+    {
+      "target": "Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_of_re_eq_zero",
+      "backend": "aristotle",
+      "project_id": "2d375a9d-6a6e-4ceb-93cf-919bc069c73d",
+      "artifact_task_id": "78ed1cfe-945f-4ab7-8e05-c8eac9fadb0e",
+      "salvaged_from_refuted_target": "riemannXi_ne_zero_of_re_eq_one"
+    },
+    {
+      "target": "Brockian.CharactersQ.norm_fourier_le_sum_norm",
+      "backend": "aristotle",
+      "project_id": "5e203044-299f-4c92-9e7c-02707919a138",
+      "artifact_task_id": "6bb84964-3941-4b63-9b5b-767c9b85ae61",
+      "corrected_target": "The stored job omitted the definition's explicit modulus argument; the assimilated statement uses fourier q f x and is treated as a new exact target."
+    },
+    {
+      "target": "Brockian.CharactersQ.norm_fourier_sq_le_card_mul_sum",
+      "backend": "aristotle",
+      "project_id": "e8c286d4-4c8f-41ac-b82d-d2b85e85b3ae",
+      "artifact_task_id": "6280a7e9-f1ba-4684-9fec-ff78dd637be5",
+      "corrected_target": "The stored job omitted the definition's explicit modulus argument; the assimilated statement uses fourier q f x and is treated as a new exact target."
+    }
+  ],
+  "excluded": [
+    {
+      "project_id": "fbbd09f6-b08b-4265-b13e-f240505d0536",
+      "reason": "duplicate ξ-quartet attempt"
+    },
+    {
+      "project_id": "7ba841be-6442-4348-a5a5-88d0c7461f64",
+      "reason": "duplicate Fourier ℓ1-bound attempt"
+    },
+    {
+      "project_ids": [
+        "347a3be0-556a-4923-b239-a7a4ba8e3c4a",
+        "2d375a9d-6a6e-4ceb-93cf-919bc069c73d"
+      ],
+      "reason": "original nonvanishing target is false at s = 1; it is not registered"
+    },
+    {
+      "target": "Brockian.XiFunctionalEquation.riemannXi_zero_mem_open_critical_strip",
+      "reason": "artifact proof depends on quarantined riemannXi_zero_mem_critical_strip"
+    },
+    {
+      "target": "Brockian.XiFunctionalEquation.not_riemannXi_ne_zero_of_re_eq_one",
+      "reason": "kept as a disproof artifact rather than counted as a PROVED corpus theorem"
+    }
+  ]
+}

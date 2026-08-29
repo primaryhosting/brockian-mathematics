@@ -42,6 +42,11 @@ def test_axioms_for_distinguishes_explicit_empty_from_unparseable():
         name,
     ) == ["propext", "Classical.choice"]
     assert attest._axioms_for(
+        [f"declaration '{name}' depends on axioms: [propext,\n"
+         " Classical.choice,\n Quot.sound]"],
+        name,
+    ) == ["propext", "Classical.choice", "Quot.sound"]
+    assert attest._axioms_for(
         [f"declaration '{name}' axioms were omitted by the service"], name) is None
     assert attest._axioms_for([], name) is None
 

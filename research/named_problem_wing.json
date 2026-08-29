@@ -1,0 +1,138 @@
+{
+  "generated": "2026-08-27T09:01:53Z",
+  "wing": "named-problem partials (tier A def + tier B partial theorem)",
+  "excluded": [
+    "Riemann Hypothesis",
+    "P vs NP",
+    "Hodge",
+    "Navier-Stokes",
+    "Yang-Mills",
+    "BSD",
+    "abc",
+    "Continuum Hypothesis",
+    "Smooth 4D Poincare",
+    "Grothendieck standard conjectures",
+    "Unique Games",
+    "ETH",
+    "Invariant Subspace",
+    "Jacobian",
+    "Schanuel",
+    "Hilbert 16th",
+    "Dixmier"
+  ],
+  "modules": [
+    {
+      "module": "Brockian.RepunitPrimes",
+      "file": "Brockian/RepunitPrimes.lean",
+      "targets": [
+        {
+          "name": "Brockian.RepunitPrimes.prime_of_repunit_prime",
+          "rank": 1,
+          "statement": "theorem prime_of_repunit_prime {n : ℕ} (h : (repunit n).Prime) :\n    Nat.Prime n",
+          "rationale": "Classical necessary condition for the repunit-primes problem: if R_n is prime then n is prime, because d | n forces R_d | R_n. Unconditional, and it is the standard first reduction of the search space (only prime indices need be tested).",
+          "tier": "B",
+          "status": "skipped: name already in registry"
+        }
+      ],
+      "tierA": "already present"
+    },
+    {
+      "module": "Brockian.PalindromicPrimes",
+      "file": "Brockian/PalindromicPrimes.lean",
+      "targets": [
+        {
+          "name": "Brockian.PalindromicPrimes.eleven_dvd_of_palindrome_even_digits",
+          "rank": 2,
+          "statement": "theorem eleven_dvd_of_palindrome_even_digits {n : ℕ}\n    (h : IsPalindrome10 n) (he : Even (Nat.digits 10 n).length) :\n    11 ∣ n",
+          "rationale": "Every base-10 palindrome with an even number of digits is divisible by 11 (pair up digits at alternating positions in the divisibility-by-11 alternating sum). Hence 11 is the ONLY even-length palindromic prime — a complete, unconditional structural constraint on the open problem's search space.",
+          "tier": "B",
+          "status": "submitted",
+          "pid": "dc88671c-169f-4c59-be82-e4f18040b3bd"
+        }
+      ],
+      "tierA": "already present"
+    },
+    {
+      "module": "Brockian.LandauProblem",
+      "file": "Brockian/LandauProblem.lean",
+      "targets": [
+        {
+          "name": "Brockian.LandauProblem.even_of_sq_add_one_prime",
+          "rank": 3,
+          "statement": "theorem even_of_sq_add_one_prime {n : ℕ} (hn : 1 < n)\n    (h : (n ^ 2 + 1).Prime) : Even n",
+          "rationale": "For n > 1, n^2 + 1 prime forces n even (odd n makes n^2+1 even and > 2). Unconditional parity constraint on Landau's problem.",
+          "tier": "B",
+          "status": "submitted",
+          "pid": "d92dfe71-d088-46fe-ac9b-2484c3e1c61b"
+        },
+        {
+          "name": "Brockian.LandauProblem.odd_prime_dvd_sq_add_one_mod_four",
+          "rank": 4,
+          "statement": "theorem odd_prime_dvd_sq_add_one_mod_four {n p : ℕ}\n    (hp : Nat.Prime p) (hodd : Odd p) (h : p ∣ n ^ 2 + 1) :\n    p % 4 = 1",
+          "rationale": "Every odd prime divisor of n^2+1 is 1 mod 4 (-1 is a quadratic residue mod p). This is the classical arithmetic law behind the Landau frontier and constrains every factorization of n^2+1.",
+          "tier": "B",
+          "status": "submitted",
+          "pid": "a64f63bb-1356-45e7-af94-7e8ec9cd9313"
+        }
+      ],
+      "tierA": "created (AXLE compiles; DEFINITION tier — metric 0)"
+    },
+    {
+      "module": "Brockian.SierpinskiCovering",
+      "file": "Brockian/SierpinskiCovering.lean",
+      "targets": [
+        {
+          "name": "Brockian.SierpinskiCovering.covering_78557",
+          "rank": 5,
+          "statement": "theorem covering_78557 (n : ℕ) :\n    3 ∣ 78557 * 2 ^ n + 1 ∨ 5 ∣ 78557 * 2 ^ n + 1 ∨\n      7 ∣ 78557 * 2 ^ n + 1 ∨ 13 ∣ 78557 * 2 ^ n + 1 ∨\n      17 ∣ 78557 * 2 ^ n + 1 ∨ 241 ∣ 78557 * 2 ^ n + 1",
+          "rationale": "The covering set {3,5,7,13,17,241} covers every exponent class: reduce n mod 24 and check the residue of 78557*2^n+1 in each class. A finite residue argument (no decide-bomb over all n), and the engine of the Sierpiński frontier.",
+          "tier": "B",
+          "status": "submitted",
+          "pid": "828047c3-a509-411c-82b3-e32523f358af"
+        }
+      ],
+      "tierA": "already present"
+    },
+    {
+      "module": "Brockian.ErdosStraus",
+      "file": "Brockian/ErdosStraus.lean",
+      "targets": [
+        {
+          "name": "Brockian.ErdosStraus.erdosStraus_of_even",
+          "rank": 6,
+          "statement": "theorem erdosStraus_of_even {n : ℕ} (hn : 2 ≤ n) (he : Even n) :\n    ErdosStrausSolvable n",
+          "rationale": "Constructive identity for the even residue classes: with n = 2m, 4/n = 2/m = 1/m + 1/(m+1) + 1/(m*(m+1)) after clearing denominators. Discharges half of all n unconditionally.",
+          "tier": "B",
+          "status": "submitted",
+          "pid": "0da8dd0e-fe7e-4abf-ab70-85f875bcd9b8"
+        },
+        {
+          "name": "Brockian.ErdosStraus.erdosStraus_of_mod_three_eq_two",
+          "rank": 7,
+          "statement": "theorem erdosStraus_of_mod_three_eq_two {n : ℕ} (hn : 2 ≤ n)\n    (h : n % 3 = 2) : ErdosStrausSolvable n",
+          "rationale": "Constructive identity for n ≡ 2 mod 3: writing n = 3k + 2, 4/n = 1/n + 1/(k+1) + 1/(n*(k+1)) is an exact witness. Together with the even case this covers the classical easy residue classes of the Erdős–Straus problem.",
+          "tier": "B",
+          "status": "submitted",
+          "pid": "3e82ee90-9cb1-4ecc-916a-2f7932023559"
+        }
+      ],
+      "tierA": "already present"
+    },
+    {
+      "module": "Brockian.LehmerTotient",
+      "file": "Brockian/LehmerTotient.lean",
+      "targets": [
+        {
+          "name": "Brockian.LehmerTotient.squarefree_of_lehmerProperty",
+          "rank": 8,
+          "statement": "theorem squarefree_of_lehmerProperty {n : ℕ} (hn : 1 < n)\n    (h : LehmerProperty n) : Squarefree n",
+          "rationale": "Classical first step of Lehmer's problem: a Lehmer number is squarefree, since p^2 | n would give p | φ(n) | n-1 and p | n, a contradiction. Unconditional and the standard reduction used by every subsequent bound.",
+          "tier": "B",
+          "status": "submitted",
+          "pid": "ca5bb2af-8ff3-4850-8f8b-de99d9fd1749"
+        }
+      ],
+      "tierA": "already present"
+    }
+  ]
+}

@@ -1,17 +1,10 @@
 {
-  "module": "Brockian.AdmissibilityKTuple",
+  "module": "Brockian.CharactersQ",
   "environment": "lean-4.32.2",
   "module_verified": true,
   "declarations": [
     {
-      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues",
-      "kind": "def",
-      "axle_verdict": "verified",
-      "axioms": null,
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_card",
+      "name": "Brockian.CharactersQ.fourier_apply",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -22,44 +15,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_pair",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [],
-      "axioms_ok": true,
-      "verification_quarantine": true,
-      "verification_quarantine_reason": "AXIOM_EVIDENCE_PENDING"
-    },
-    {
-      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_triple",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_crt_card",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_crt_card_pair",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.AdmissibilityKTuple.admissibleTupleResidues_pair_eq",
-      "kind": "theorem",
-      "axle_verdict": "verified",
-      "axioms": [],
-      "axioms_ok": true
-    },
-    {
-      "name": "Brockian.AdmissibilityKTuple.admissible_ktuple_count_five",
+      "name": "Brockian.CharactersQ.additive_orthogonality",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -70,7 +26,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.AdmissibilityKTuple.admissible_ktuple_count_three",
+      "name": "Brockian.CharactersQ.additive_orthogonality_sub",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -81,7 +37,7 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.AdmissibilityKTuple.crt_filter_card",
+      "name": "Brockian.CharactersQ.fourier_twice",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -92,7 +48,51 @@
       "axioms_ok": true
     },
     {
-      "name": "Brockian.AdmissibilityKTuple.mem_admissibleTupleResidues",
+      "name": "Brockian.CharactersQ.fourier_inversion",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CharactersQ.parseval",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CharactersQ.multiplicative_orthogonality",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CharactersQ.norm_fourier_le_sum_norm",
+      "kind": "theorem",
+      "axle_verdict": "verified",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "axioms_ok": true
+    },
+    {
+      "name": "Brockian.CharactersQ.norm_fourier_sq_le_card_mul_sum",
       "kind": "theorem",
       "axle_verdict": "verified",
       "axioms": [
@@ -103,5 +103,5 @@
       "axioms_ok": true
     }
   ],
-  "content_hash": "734a7bc7463a110f"
+  "content_hash": "acd8f3637531c76d"
 }

@@ -7,10 +7,11 @@
 ## Summary
 
 - **CONDITIONAL**: 20
-- **CONJECTURE**: 40
-- **DEFINITION**: 649
+- **CONJECTURE**: 38
+- **DEFINITION**: 644
 - **DISCHARGED**: 7
-- **PROVED**: 11152
+- **PROVED**: 11242
+- **UNVERIFIED**: 12
 
 ## Theorems
 
@@ -26,7 +27,7 @@
 | DEFINITION | `Brockian.Admissibility.admissibleResidues` | ✓ | verified | lean-4.32.2 | 74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2 |
 | PROVED | `Brockian.Admissibility.universal_admissibility_count` | ✓ | verified | lean-4.32.2 | 74 (a0ce…) / 49 / 105 (independent replications) / 119 module 2 |
 | PROVED | `Brockian.Admissibility.CRT.admissibleResidues_crt_card` | ✓ | verified | lean-4.32.2 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
-| PROVED | `Brockian.Admissibility.CRT.admissibleResidues_crt_card_two_primes` | ✓ | verified | lean-4.32.2 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
+| UNVERIFIED | `Brockian.Admissibility.CRT.admissibleResidues_crt_card_two_primes` | ✓ | verified | lean-4.32.2 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
 | PROVED | `Brockian.Admissibility.CRT.admissible_count_three_five` | ✓ | verified | lean-4.32.2 | paper-audit target — CRT product |A_{q1q2}|=|A_q1|·|A_q2|; AXLE @4.32 |
 | DEFINITION | `Brockian.Admissibility.CriterionScaffold.LocalIntegerTupleAdmissible` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.Admissibility.CriterionScaffold.LocalTupleAdmissible` | ✓ | verified | lean-4.32.2 |  |
@@ -35,41 +36,53 @@
 | DEFINITION | `Brockian.Admissibility.CriterionScaffold.localNu` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Admissibility.CriterionScaffold.localNu_eq_card_localResidueSet` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.Admissibility.CriterionScaffold.localResidueSet` | ✓ | verified | lean-4.32.2 |  |
-| PROVED | `Brockian.Admissibility.CriterionScaffold.localTupleAdmissible_iff_exists_avoids` | ✓ | verified | lean-4.32.2 |  |
+| UNVERIFIED | `Brockian.Admissibility.CriterionScaffold.localTupleAdmissible_iff_exists_avoids` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Admissibility.CriterionScaffold.localTupleAdmissible_iff_obstruction_lt` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Admissibility.CriterionScaffold.not_localTupleAdmissible_iff_modulus_le_obstruction` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Admissibility.CriterionScaffold.not_localTupleAdmissible_iff_obstruction_eq_modulus` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Admissibility.CriterionScaffold.primeLocalAdmissible_iff_every_prime_has_local_start` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Admissibility.CriterionScaffold.residueSet_card_le_modulus` | ✓ | verified | lean-4.32.2 |  |
-| PROVED | `Brockian.AdmissibilityCRTGeneral.admissibleTupleResidues_prodCRT_card` | ✓ | verified | lean-4.32.2 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
+| UNVERIFIED | `Brockian.AdmissibilityCRTGeneral.admissibleTupleResidues_prodCRT_card` | ✓ | verified | lean-4.32.2 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityCRTGeneral.admissibleTupleResidues_prodCRT_primes_card` | ✓ | verified | lean-4.32.2 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityCRTGeneral.admissibleTuple_pi_card` | ✓ | verified | lean-4.32.2 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityCRTGeneral.admissible_crt_count_fifteen` | ✓ | verified | lean-4.32.2 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityCRTGeneral.admissible_ktuple_count_fifteen_factors` | ✓ | verified | lean-4.32.2 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityCRTGeneral.neZero_prod` | ✓ | verified | lean-4.32.2 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityCRTGeneral.pairwise_coprime_of_primes` | ✓ | verified | lean-4.32.2 | roadmap #14 iterated — multi-factor CRT admissible count; AXLE @4.32 |
-| PROVED | `Brockian.AdmissibilityDiagonal.admissibility_count_dichotomy` | ✓ | verified | lean-4.32.2 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
+| UNVERIFIED | `Brockian.AdmissibilityDiagonal.admissibility_count_dichotomy` | ✓ | verified | lean-4.32.2 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.AdmissibilityDiagonal.admissibleResidues_zero_eq` | ✓ | verified | lean-4.32.2 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.AdmissibilityDiagonal.diagonal_admissibility_count` | ✓ | verified | lean-4.32.2 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.AdmissibilityDiagonal.diagonal_admissibility_count_of_eq_zero` | ✓ | verified | lean-4.32.2 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.AdmissibilityDiagonal.diagonal_count_five` | ✓ | verified | lean-4.32.2 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
 | PROVED | `Brockian.AdmissibilityDiagonal.diagonal_count_three` | ✓ | verified | lean-4.32.2 | parallel-tool (Grok) #12 divisible-case diagonal law; AXLE @4.32; committed by Claude for tip coherence |
-| DEFINITION | `Brockian.AdmissibilityHLCriterion.Admissible` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
-| DEFINITION | `Brockian.AdmissibilityHLCriterion.OmitsResidue` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
-| PROVED | `Brockian.AdmissibilityHLCriterion.admissible_iff_card_image_lt` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| UNVERIFIED | `Brockian.AdmissibilityHLCriterion.admissible_iff_card_image_lt` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityHLCriterion.admissible_iff_count_pos` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityHLCriterion.admissible_iff_exists_avoiding_start` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityHLCriterion.admissible_iff_nu_lt` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityHLCriterion.admissible_iff_nu_lt_of_le_card` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.admissible_image_add_const` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.admissible_image_affine` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.admissible_image_neg` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.admissible_of_subset` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityHLCriterion.admissible_zero_two` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.firstNinePrimeOffsets_not_admissible` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.mem_residueImage_image_affine` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.not_admissible_of_all_residues_mod_seven` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.not_admissible_of_eleven_dilated_residues` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.not_admissible_of_five_consecutive_mod_five` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.not_admissible_of_thirteen_scattered_residues` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityHLCriterion.not_admissible_zero_two_four` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
-| DEFINITION | `Brockian.AdmissibilityHLCriterion.nu` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.nu_eq_of_injOn_card_ge` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.nu_image_add_const` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.nu_image_mul_of_not_dvd` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.nu_image_neg` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.nu_union_le` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityHLCriterion.omitsResidue_iff_ne_univ` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityHLCriterion.omitsResidue_iff_nu_lt` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
-| DEFINITION | `Brockian.AdmissibilityHLCriterion.residueImage` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
+| PROVED | `Brockian.AdmissibilityHLCriterion.residueImage_subset` | ✓ | verified | lean-4.32.2 | roadmap #11 — Hardy-Littlewood admissibility criterion; AXLE @4.32 |
 | DEFINITION | `Brockian.AdmissibilityKTuple.admissibleTupleResidues` | ✓ | verified | lean-4.32.2 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_card` | ✓ | verified | lean-4.32.2 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
-| PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_pair` | ✓ | verified | lean-4.32.2 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
+| UNVERIFIED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_pair` | ✓ | verified | lean-4.32.2 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_card_triple` | ✓ | verified | lean-4.32.2 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_crt_card` | ✓ | verified | lean-4.32.2 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
 | PROVED | `Brockian.AdmissibilityKTuple.admissibleTupleResidues_crt_card_pair` | ✓ | verified | lean-4.32.2 | roadmap #14 — general admissible k-tuple configuration count; AXLE @4.32 |
@@ -99,6 +112,14 @@
 | PROVED | `Brockian.AffineSymmetry.dihedralToPerm_range_le_affineGroup` | ✓ | verified | lean-4.32.2 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
 | PROVED | `Brockian.AffineSymmetry.symmetry_separation` | ✓ | verified | lean-4.32.2 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
 | PROVED | `Brockian.AffineSymmetry.units_isCyclic` | ✓ | verified | lean-4.32.2 | paper-audit target — separates additive-aut / graph-aut / affine-dihedral; AXLE @4.32 |
+| PROVED | `Brockian.AliquotStructure.hyperperfect_one_iff_perfect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AliquotStructure.hyperperfect_pos_of_hyperperfect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AliquotStructure.not_quasiperfect_prime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AliquotStructure.not_semiperfect_of_aliquot_lt` | ✓ | verified | lean-4.32.2 |  |
+| UNVERIFIED | `Brockian.AliquotStructure.quasiperfect_isSquare_or_two_mul_square` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AliquotStructure.semiperfect_mul_right` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AliquotStructure.semiperfect_of_perfect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.AliquotStructure.sigma_eq_aliquot_add_self` | ✓ | verified | lean-4.32.2 |  |
 | DEFINITION | `Brockian.AmicableNumbers.Amicable` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | CONJECTURE | `Brockian.AmicableNumbers.AmicableInfinitude` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.AmicableNumbers.aliquot` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -201,7 +222,7 @@
 | PROVED | `Brockian.C5SpectralMultiplicities.lap_large_eq` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.C5SpectralMultiplicities.mem_c5SpectrumMultiset_iff` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.C5SpectralMultiplicities.multiplicity_connectivity_gap` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
-| PROVED | `Brockian.C5SpectralMultiplicities.multiplicity_golden_sub_one` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| UNVERIFIED | `Brockian.C5SpectralMultiplicities.multiplicity_golden_sub_one` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.C5SpectralMultiplicities.multiplicity_lap_gap` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.C5SpectralMultiplicities.multiplicity_lap_large` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.C5SpectralMultiplicities.multiplicity_lap_two_plus_phi` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
@@ -273,10 +294,19 @@
 | PROVED | `Brockian.Cayley.tree_parent_injective` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
 | DEFINITION | `Brockian.Cayley.uncut` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
 | PROVED | `Brockian.Cayley.uncut_cut` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle; AXLE @4.32 |
+| PROVED | `Brockian.CharactersQ.additive_orthogonality` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.CharactersQ.additive_orthogonality_sub` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.CharactersQ.fourier_apply` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.CharactersQ.fourier_inversion` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.CharactersQ.fourier_twice` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.CharactersQ.multiplicative_orthogonality` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.CharactersQ.norm_fourier_le_sum_norm` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.CharactersQ.norm_fourier_sq_le_card_mul_sum` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.CharactersQ.parseval` | ✓ | verified | lean-4.32.2 |  |
 | CONJECTURE | `Brockian.CollatzPartial.CollatzConjecture` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.CollatzPartial.Reaches1` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.CollatzPartial.collatz` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
-| PROVED | `Brockian.CollatzPartial.collatz_four` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| UNVERIFIED | `Brockian.CollatzPartial.collatz_four` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.CollatzPartial.collatz_one` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.CollatzPartial.collatz_two` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.CollatzPartial.collatz_two_mul` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -2174,8 +2204,10 @@
 | PROVED | `Brockian.Fin5InnerProduct.hermInner_smul_left` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Fin5InnerProduct.hermInner_smul_right` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Fin5InnerProduct.norm_omega` | ✓ | verified | lean-4.32.2 |  |
-| DEFINITION | `Brockian.FortunateNumbers.FortunateFor` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
-| CONJECTURE | `Brockian.FortunateNumbers.FortuneConjecture` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.FortunateNumbers.fortunateFor_coprime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.FortunateNumbers.fortunateFor_not_dvd_base_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.FortunateNumbers.fortunateFor_odd_of_even_base` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.FortunateNumbers.fortunateFor_unique` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.FortunateNumbers.fortunate_2` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.FortunateNumbers.fortunate_210` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.FortunateNumbers.fortunate_30` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -2366,10 +2398,11 @@
 | PROVED | `Brockian.GilbreathConjecture.gilbreath_row9_head` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.GilbreathConjecture.primes25` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.GiugaNumbers.GiugaNumber` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
-| CONJECTURE | `Brockian.GiugaNumbers.OddGiugaExists` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.GiugaNumbers.giugaNumber_squarefree` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.GiugaNumbers.giugaNumber_three_primes` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.GiugaNumbers.giuga_30` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.GiugaNumbers.giuga_858` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.GiugaNumbers.not_giugaNumber_prime_pow` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.Goldbach.CovarianceScaffold.K23` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Goldbach.CovarianceScaffold.K23_above_even_nonthree_baseline_iff` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.Goldbach.CovarianceScaffold.K23_of_not_two_dvd` | ✓ | verified | lean-4.32.2 |  |
@@ -3586,6 +3619,16 @@
 | PROVED | `Brockian.LandauNSquaredPlusOne.nsq_6` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LandauNSquaredPlusOne.nsq_even_of_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LandauNSquaredPlusOne.nsq_mod_two_of_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.LandauProblem.coprime_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.LandauProblem.even_of_sq_add_one_prime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.LandauProblem.exists_prime_mod_four_dvd_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.LandauProblem.four_not_dvd_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.LandauProblem.gcd_sq_add_one_succ_dvd_five` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.LandauProblem.landau_iff_even_infinite` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.LandauProblem.landau_iff_unbounded` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.LandauProblem.not_isSquare_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.LandauProblem.odd_prime_dvd_sq_add_one_mod_four` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.LandauProblem.three_not_dvd_sq_add_one` | ✓ | verified | lean-4.32.2 |  |
 | CONJECTURE | `Brockian.LegendreConjecture.LegendreConjecture` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.LegendreConjecture.PrimeBetweenSquares` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.LegendreConjecture.bertrand_holds` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
@@ -4368,10 +4411,13 @@
 | PROVED | `Brockian.RiemannXiSymmetry.reflect_re_eq_half_iff` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.reflect_re_eq_self_iff` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.reflect_reflect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.riemannXi_criticalLine_even` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.riemannXi_eq_zero_iff_reflect` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.riemannXi_eq_zero_reflect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.riemannXi_one_sub` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.riemannXi_reflect` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.riemannXi_reflect_eq_zero_iff` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.RiemannXiSymmetry.riemannXi_reflect_of_riemannXi_criticalLine_even` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.riemannXi_reflect_zero_and_criticalLine` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.riemannXi_zeroSet_image_reflect` | ✓ | verified | lean-4.32.2 |  |
 | PROVED | `Brockian.RiemannXiSymmetry.riemannXi_zeroSet_preimage_reflect` | ✓ | verified | lean-4.32.2 |  |
@@ -11016,14 +11062,29 @@
 | PROVED | `Brockian.StarOfDavid.star_of_david` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | CONJECTURE | `Brockian.SuperperfectNumbers.OddSuperperfectExists` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.SuperperfectNumbers.Superperfect` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SuperperfectNumbers.add_le_sigma1` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SuperperfectNumbers.even_sigma1_of_odd_of_not_isSquare` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SuperperfectNumbers.mersenne_prime_of_superperfect_two_pow` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SuperperfectNumbers.no_odd_superperfect_lt_hundred` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SuperperfectNumbers.not_superperfect_odd_of_not_sq` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SuperperfectNumbers.not_superperfect_odd_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SuperperfectNumbers.odd_of_dvd_odd` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SuperperfectNumbers.odd_sigma1_iff_isSquare_of_odd` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SuperperfectNumbers.odd_sigma1_of_odd_isSquare` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SuperperfectNumbers.odd_sigma1_of_superperfect_odd` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SuperperfectNumbers.prime_of_sigma1_eq_succ` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SuperperfectNumbers.self_le_sigma1` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | DEFINITION | `Brockian.SuperperfectNumbers.sigma1` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SuperperfectNumbers.sigma1_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SuperperfectNumbers.sigma1_two_pow` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SuperperfectNumbers.sigma1_two_pow_mul` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SuperperfectNumbers.sigma_two_pow` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SuperperfectNumbers.six_not_superperfect` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SuperperfectNumbers.superperfect_16` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SuperperfectNumbers.superperfect_2` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SuperperfectNumbers.superperfect_4` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SuperperfectNumbers.superperfect_64` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
+| PROVED | `Brockian.SuperperfectNumbers.superperfect_two_pow_iff_mersenne_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.SuperperfectNumbers.superperfect_two_pow_of_mersenne_prime` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.TotientMoebius.totient_eq_sum_moebius` | ✓ | verified | lean-4.32.2 | Tao-guided sieve wave 2; Aristotle 85669593, AXLE-verified @lean-4.32.0 |
 | PROVED | `Brockian.TotientStructure.gauss_sum_totient` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
@@ -11236,7 +11297,7 @@
 | DEFINITION | `Brockian.Weyl.ConfiningShape.DiscreteSpectrumCandidate` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | DEFINITION | `Brockian.Weyl.ConfiningShape.EigenvalueCountingAsymptotic` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | DEFINITION | `Brockian.Weyl.ConfiningShape.EigenvalueCountingMatchesNT` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
-| PROVED | `Brockian.Weyl.ConfiningShape.brockian_eigenvalue_real_of_candidate` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
+| UNVERIFIED | `Brockian.Weyl.ConfiningShape.brockian_eigenvalue_real_of_candidate` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.Weyl.ConfiningShape.clm_bound_blocks_zeros_outside_ball` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.Weyl.ConfiningShape.clm_bound_no_brockian_eigenvector` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
 | PROVED | `Brockian.Weyl.ConfiningShape.compactResolventShape_of_candidate` | ✓ | verified | lean-4.32.2 | parallel-tool (Codex/Grok) module; AXLE @4.32; integrated by Claude for tip coherence |
@@ -11844,12 +11905,37 @@
 | PROVED | `Brockian.WilsonPrimes.wilson_13` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.WilsonPrimes.wilson_5` | ✓ | verified | lean-4.32.2 | open-territory loop; AXLE @4.32 |
 | PROVED | `Brockian.Wolstenholme.wolstenholme` | ✓ | verified | lean-4.32.2 | Aristotle a056fe3c; Codex AXLE audit @ lean-4.32.0 |
+| PROVED | `Brockian.XiFunctionalEquation.Gammaℝ_conj` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.Gammaℝ_ne_zero_of_nontrivial` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.RH_of_BrockianSystem` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.RiemannHypothesis_of_forall_xi_zero` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.RiemannScaffold.riemannXi_eq_zero_of_nontrivial_zeta_zero` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.completedRiemannZeta_conj` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.completedRiemannZeta_conj_of_one_lt_re` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
 | PROVED | `Brockian.XiFunctionalEquation.completedRiemannZeta_functional_equation` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.completedRiemannZeta₀_conj` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
 | PROVED | `Brockian.XiFunctionalEquation.riemannXi_apply` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannXi_conj` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| UNVERIFIED | `Brockian.XiFunctionalEquation.riemannXi_conj_self_of_re_eq_half` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_of_re_eq_one` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_of_re_eq_zero` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
 | PROVED | `Brockian.XiFunctionalEquation.riemannXi_eq_zero_iff_zeta_zero_of_mem_critical_strip` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannXi_eq_zero_of_nontrivial_zeta_zero` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
 | PROVED | `Brockian.XiFunctionalEquation.riemannXi_functional_equation` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannXi_im_eq_zero_of_re_eq_half` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannXi_ne_zero_of_one_lt_re` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannXi_ne_zero_of_re_eq_one_of_ne_one` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannXi_ne_zero_of_re_lt_zero` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannXi_one_eq_zero` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| UNVERIFIED | `Brockian.XiFunctionalEquation.riemannXi_zero_mem_critical_strip` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannXi_zero_quartet` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannXi_zero_reflect` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannZeta_conj` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.riemannZeta_conj_of_one_lt_re` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.symmetric_eigenvalue_im_zero` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
 | PROVED | `Brockian.XiFunctionalEquation.zeta_zero_of_riemannXi_zero` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
 | PROVED | `Brockian.XiFunctionalEquation.zeta_zero_one_sub_of_mem_critical_strip` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
+| PROVED | `Brockian.XiFunctionalEquation.zeta_zero_quartet_of_mem_critical_strip` | ✓ | verified | lean-4.32.2 | roadmap #28 — xi functional equation + zeta<->xi zero correspondence; AXLE @4.32 |
 | DEFINITION | `Brockian.Zsygmondy.Phi` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.Zsygmondy.Phi_dvd` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
 | PROVED | `Brockian.Zsygmondy.Phi_pos` | ✓ | verified | lean-4.32.2 | Harmonic/Aristotle moonshot; AXLE @4.32 |
@@ -11884,3 +11970,13 @@
 | PROVED | `Brockian.ZumkellerNumbers.zumkeller_twentyeight` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.zumkeller_twentyfour` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
 | PROVED | `Brockian.ZumkellerNumbers.zumkeller_two_mul_le_sigma` | ✓ | verified | lean-4.32.2 | frontier swarm; AXLE @4.32 |
+| PROVED | `Brockian.ZumkellerStructure.not_zumkeller_of_deficient` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ZumkellerStructure.not_zumkeller_of_sigma_odd` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ZumkellerStructure.not_zumkeller_prime_pow` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ZumkellerStructure.odd_zumkeller_not_square` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ZumkellerStructure.sigma_odd_iff_square_or_two_mul_square` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ZumkellerStructure.zumkeller_iff_partition` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ZumkellerStructure.zumkeller_mul_coprime` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ZumkellerStructure.zumkeller_of_perfect` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ZumkellerStructure.zumkeller_two_mul_of_odd_zumkeller` | ✓ | verified | lean-4.32.2 |  |
+| PROVED | `Brockian.ZumkellerStructure.zumkeller_two_pow_mul_prime` | ✓ | verified | lean-4.32.2 |  |
